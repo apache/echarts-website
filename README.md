@@ -4,9 +4,9 @@
 
 1. Clone this project, alone with [echarts-www](https://github.com/ecomfe/echarts-www) and [echarts-doc](https://github.com/ecomfe/echarts-doc) under the same directory.
 
-2. Run `gulp apache` under `echarts-www` project to generate Website files into this repo.
+2. Run `gulp release-en` under `echarts-www` project to generate Website files into this repo.
 
-3. If documents are changed, run `node build.js` under `echarts-doc` and then run `gulp apache` under `echarts-www`.
+3. If documents are changed, run `sh release.sh` under `echarts-doc` and then run `gulp apache` under `echarts-www`.
 
 4. Commit and push to `asf-site` branch.
 
