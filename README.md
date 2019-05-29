@@ -1,12 +1,34 @@
 # Incubator ECharts Website
 
+## Setup
+
+Clone this project, alone with [echarts-www](https://github.com/ecomfe/echarts-www), [echarts-examples](https://github.com/ecomfe/echarts-examples), and [echarts-doc](https://github.com/ecomfe/echarts-doc) under the same directory.
+
 ## Build
 
-1. Clone this project, alone with [echarts-www](https://github.com/ecomfe/echarts-www) and [echarts-doc](https://github.com/ecomfe/echarts-doc) under the same directory.
+### Config
 
-2. Run `gulp release-en` under `echarts-www` project to generate Website files into this repo.
+Set `echarts-www/config/env.js` and `echarts-examples/config/env.js`. Change `debugHost` to be the path to local debug server and examples.
 
-3. If documents are changed, run `sh release.sh` under `echarts-doc` and then run `gulp apache` under `echarts-www`.
+For example, if you use [http-server](https://www.npmjs.com/package/http-server) to start a server `http://127.0.0.1:8080` under `incubator-echarts-website` directory, `debugHost` in the two projects should be `http://127.0.0.1:8080` and `http://127.0.0.1:8080/examples` accordingly.
+
+### Debug Locally
+
+1. Run `gulp release --debug` under `echarts-examples`.
+
+2. Run `sh release.sh` under `echarts-doc`.
+
+3. Run `gulp release --debug` under `echarts-www`.
+
+4. Run a server under `incubator-echarts-website` directory and test.
+
+### Build Release
+
+1. Run `gulp release` under `echarts-examples`.
+
+2. Run `sh release.sh` under `echarts-doc`.
+
+3. Run `gulp release` under `echarts-www`.
 
 4. Commit and push to `asf-site` branch.
 
