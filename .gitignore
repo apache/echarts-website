@@ -1,3 +1,5 @@
 _*.html
 .DS_Store
 en/_*.html
+en/documents
+zh/documents

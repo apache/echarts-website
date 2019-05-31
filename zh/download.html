@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1" user-scalable="no"><meta name="description" content="ECharts, a powerful, interactive charting and visualization library for browser"><link rel="shortcut icon" href="images/favicon.png"><link rel="stylesheet" type="text/css" href="vendors/bootstrap/css/bootstrap.min.css"><!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries--><!--[if lt IE 9]><script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script><script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]--><link rel="stylesheet" type="text/css" href="./css/main.css?_v_=1559213564053"><script>window.EC_WWW_LANG = 'zh';
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1" user-scalable="no"><meta name="description" content="ECharts, a powerful, interactive charting and visualization library for browser"><link rel="shortcut icon" href="images/favicon.png"><link rel="stylesheet" type="text/css" href="vendors/bootstrap/css/bootstrap.min.css"><!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries--><!--[if lt IE 9]><script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script><script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]--><link rel="stylesheet" type="text/css" href="./css/main.css?_v_=1559306040146"><script>window.EC_WWW_LANG = 'zh';
 </script><script type="text/javascript" src="./vendors/pace/pace.min.js"></script><script id="font-hack" type="text/javascript">if (/windows/i.test(navigator.userAgent)) {
     var el = document.createElement('style');
     el.innerHTML = ''
@@ -23,24 +23,18 @@ $('.download-echarts').click(function (e) {
         title: 'Notice',
         content: el
     });
-    ecLog({
-        page: 'download',
-        key: 'download-echarts',
-        file: $(this).attr('download'),
-        version: '4.2.1'
-    });
+    _hmt.push(['_trackEvent', 'download', 'download', '4.2.1']);
 });
 $('.download-theme').click(function () {
-    ecLog({
-        page: 'download',
-        key: 'download-theme',
-        file: $(this).attr('download'),
-        version: '4.2.1'
-    });
-});</script><script type="text/javascript">var _hmt = _hmt || [];
+    _hmt.push(['_trackEvent', 'download', 'download-theme', '4.2.1']);
+});</script><!-- Baidu Tongji--><script type="text/javascript">var _hmt = _hmt || [];
 (function() {
 var hm = document.createElement("script");
-hm.src = "//hm.baidu.com/hm.js?4bad1df23f079e0d12bdbef5e65b072f";
+hm.src = "https://hm.baidu.com/hm.js?54b918eee37cb8a7045f0fd0f0b24395";
 var s = document.getElementsByTagName("script")[0];
 s.parentNode.insertBefore(hm, s);
-})();</script></html>
+})();
+</script><!-- Google Analytics--><script type="text/javascript" async src="https://www.googletagmanager.com/gtag/js?id=UA-141228404-1"></script><script type="text/javascript">window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-141228404-1');</script></html>
