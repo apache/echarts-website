@@ -1,0 +1,5 @@
+<IfModule mod_expires.c>
+  ExpiresActive on
+
+  ExpiresDefault                          "access plus 0 seconds"
+</IfModule>
