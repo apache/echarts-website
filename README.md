@@ -31,9 +31,6 @@ Execute the following (optional) steps sequentially.
 
 ```shell
 export ECHARTS_BASE="/your/local/base/dir/path/of/these/projects"
-
-rm -r ${ECHARTS_BASE}/release
-rm ${ECHARTS_BASE}/echarts-www.zip
 ```
 
 
@@ -87,17 +84,23 @@ cd ${ECHARTS_BASE}/echarts-examples
 sh update-echarts.sh
 ```
 
+
+### If `incubator-echarts-website` needs to be built and published
+
+**Clear**
+```shell
+rm -r ${ECHARTS_BASE}/echarts-www/release
+rm ${ECHARTS_BASE}/echarts-www/echarts-www.zip
+```
+
 **Build `echarts-examples`**
 ```shell
 sh ${ECHARTS_BASE}/echarts-examples/release.sh --env asf
 # sh ${ECHARTS_BASE}/echarts-examples/release.sh --env echartsjs
 ```
 
-
-### If the `echarts-doc` needs to be updated
-
-First of all, ensure "echarts-doc" is on the correct git branch (`relase` branch).
-
+**Build `echarts-doc`**
+Ensure "echarts-doc" is on the correct git branch (`relase` branch).
 ```shell
 sh ${ECHARTS_BASE}/echarts-doc/release.sh --env asf
 # sh ${ECHARTS_BASE}/echarts-doc/release.sh --env echartsjs
@@ -106,9 +109,7 @@ ll ${ECHARTS_BASE}/echarts-www/documents/en
 ll ${ECHARTS_BASE}/echarts-www/documents/asset/
 ```
 
-
-### If `incubator-echarts-website` needs to be built and published
-
+**Build `echarts-www`**
 ```shell
 sh ${ECHARTS_BASE}/echarts-www/release.sh --env asf
 # sh ${ECHARTS_BASE}/echarts-www/release.sh --env echartsjs
