@@ -3,7 +3,7 @@
 
 ## Setup
 
-Clone this project, alone with [echarts](https://github.com/apache/incubator-echarts), [zrender](https://github.com/ecomfe/zrender), [echarts-www](https://github.com/ecomfe/echarts-www), [echarts-examples](https://github.com/ecomfe/echarts-examples), [echarts-doc](https://github.com/ecomfe/echarts-doc) under the same directory.
+Clone this project, alone with [echarts](https://github.com/apache/incubator-echarts), [echarts-www](https://github.com/ecomfe/echarts-www), [echarts-examples](https://github.com/ecomfe/echarts-examples), [echarts-doc](https://github.com/ecomfe/echarts-doc) under the same directory.
 
 
 ## Debug Locally
@@ -34,16 +34,23 @@ export ECHARTS_BASE="/your/local/base/dir/path/of/these/projects"
 ```
 
 
+
 ### If the built-in echarts dist needs to be upated
 
-**Copy echarts dist code**
+**Prepare echarts source code**
 ```shell
-cp -r ${ECHARTS_BASE}/echarts/dist/* ${ECHARTS_BASE}/echarts-www/dist
-ll ${ECHARTS_BASE}/echarts-www/dist
+cd ${ECHARTS_BASE}/echarts
+git checkout release # Make sure in `release branch`
+git pull
+git status # Make sure there is no modification in `src`.
 ```
 
-**Update the source code of `custom builder`:**
+**Copy echarts dist files and source code for `custom builder`:**
 ```shell
+# Copy dist files:
+cp -r ${ECHARTS_BASE}/echarts/dist/* ${ECHARTS_BASE}/echarts-www/dist
+ls -alF ${ECHARTS_BASE}/echarts-www/dist
+# Copy source code:
 rm -r ${ECHARTS_BASE}/echarts-www/builder/src/echarts
 rm -r ${ECHARTS_BASE}/echarts-www/builder/src/zrender
 cp -r ${ECHARTS_BASE}/echarts/src ${ECHARTS_BASE}/echarts-www/builder/src/echarts
@@ -55,11 +62,11 @@ ${ECHARTS_BASE}/echarts-www/builder/pre/removeDEV.js # remove __DEV__
 
 **Update the version number of echarts in `echarts-www`.**
 ```shell
-cd ${ECHARTS_BASE}/echarts-www/
 code ${ECHARTS_BASE}/echarts-www/config/common.js
 # Update the version manually. Then:
+cd ${ECHARTS_BASE}/echarts-www/
 ./node_modules/.bin/gulp sourceVersion
-cat builder/echarts.html | grep urlArgs
+cat builder/echarts.html | grep urlArgs # Check
 ```
 
 ### If the release download list needs to be updated
@@ -81,7 +88,7 @@ node build-example.js
 **If the built-in echarts needs to be updated**
 ```shell
 cd ${ECHARTS_BASE}/echarts-examples
-sh update-echarts.sh
+sh update-echarts.sh --only-copy-dist
 ```
 
 
@@ -104,9 +111,9 @@ Ensure "echarts-doc" is on the correct git branch (`relase` branch).
 ```shell
 sh ${ECHARTS_BASE}/echarts-doc/release.sh --env asf
 # sh ${ECHARTS_BASE}/echarts-doc/release.sh --env echartsjs
-ll ${ECHARTS_BASE}/echarts-www/documents/cn
-ll ${ECHARTS_BASE}/echarts-www/documents/en
-ll ${ECHARTS_BASE}/echarts-www/documents/asset/
+ls -alF ${ECHARTS_BASE}/echarts-www/documents/cn
+ls -alF ${ECHARTS_BASE}/echarts-www/documents/en
+ls -alF ${ECHARTS_BASE}/echarts-www/documents/asset/
 ```
 
 **Build `echarts-www`**
@@ -115,8 +122,15 @@ sh ${ECHARTS_BASE}/echarts-www/release.sh --env asf
 # sh ${ECHARTS_BASE}/echarts-www/release.sh --env echartsjs
 ```
 
+**Clear**
+```shell
+rm -r ${ECHARTS_BASE}/echarts-www/release
+rm ${ECHARTS_BASE}/echarts-www/echarts-www.zip
+```
+
 Then commit and push to `asf-site` branch.
 
 Then initiate a building job at [https://gitbox.apache.org/setup/resync.cgi](https://gitbox.apache.org/setup/resync.cgi) by searching `incubator-echarts-website`.
 
 Then wait for several minutes and Website should be generated at [https://echarts.apache.org/](https://echarts.apache.org/).
+
