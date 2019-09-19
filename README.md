@@ -60,15 +60,6 @@ cat ${ECHARTS_BASE}/echarts-www/builder/src/zrender/zrender.js | grep version
 ${ECHARTS_BASE}/echarts-www/builder/pre/removeDEV.js # remove __DEV__
 ```
 
-**Update the version number of echarts in `echarts-www`.**
-```shell
-code ${ECHARTS_BASE}/echarts-www/config/common.js
-# Update the version manually. Then:
-cd ${ECHARTS_BASE}/echarts-www/
-./node_modules/.bin/gulp sourceVersion
-cat builder/echarts.html | grep urlArgs # Check
-```
-
 ### If the release download list needs to be updated
 
 ```shell
