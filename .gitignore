@@ -3,3 +3,4 @@ _*.html
 en/_*.html
 en/documents
 zh/documents
+package-lock.json
