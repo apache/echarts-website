@@ -65,21 +65,24 @@ ${ECHARTS_BASE}/echarts-www/builder/pre/removeDEV.js # remove __DEV__
 ```shell
 code ${ECHARTS_BASE}/echarts-www/js/download.js
 # Add the new release to the download list manually.
+code ${ECHARTS_BASE}/echarts-www/gulpfile.js
+# Set the `downloadVersion` to the newest version.
 ```
 
 
 ### If `echarts-examples` needs to be updated
 
-**If any of the thumbnails need to be updated**
-```shell
-cd ${ECHARTS_BASE}/echarts-examples/tool
-node build-example.js
-```
-
 **If the built-in echarts needs to be updated**
 ```shell
 cd ${ECHARTS_BASE}/echarts-examples
 sh update-echarts.sh --only-copy-dist
+```
+
+**If any of the thumbnails need to be updated**
+```shell
+# Edit `BASE_PATH` in `build-example.js` firstly.
+cd ${ECHARTS_BASE}/echarts-examples/tool
+node build-example.js
 ```
 
 
