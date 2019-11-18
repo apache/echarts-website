@@ -48,6 +48,7 @@ export default {
       throw new Error('Invalid geoJson format\n' + e.message);
     }
 
+    fixNanhai(mapName, regions);
     each(regions, function (region) {
       var regionName = region.name;
       fixTextCoord(mapName, region);
@@ -61,7 +62,6 @@ export default {
         region.transformTo(specialArea.left, specialArea.top, specialArea.width, specialArea.height);
       }
     });
-    fixNanhai(mapName, regions);
     return inner(mapRecord).parsed = {
       regions: regions,
       boundingRect: getBoundingRect(regions)

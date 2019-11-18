@@ -22,13 +22,6 @@ import * as zrUtil from 'zrender/src/core/util';
 var GaugeSeries = SeriesModel.extend({
   type: 'series.gauge',
   getInitialData: function (option, ecModel) {
-    var dataOpt = option.data || [];
-
-    if (!zrUtil.isArray(dataOpt)) {
-      dataOpt = [dataOpt];
-    }
-
-    option.data = dataOpt;
     return createListSimply(this, ['value']);
   },
   defaultOption: {

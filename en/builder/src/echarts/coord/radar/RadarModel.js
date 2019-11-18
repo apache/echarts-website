@@ -37,6 +37,7 @@ var RadarModel = echarts.extendComponentModel({
     var scale = this.get('scale');
     var axisLine = this.get('axisLine');
     var axisTick = this.get('axisTick');
+    var axisType = this.get('axisType');
     var axisLabel = this.get('axisLabel');
     var nameTextStyle = this.get('name');
     var showName = this.get('name.show');
@@ -66,8 +67,9 @@ var RadarModel = echarts.extendComponentModel({
         scale: scale,
         axisLine: axisLine,
         axisTick: axisTick,
+        axisType: axisType,
         axisLabel: axisLabel,
-        // Competitable with 2 and use text
+        // Compatible with 2 and use text
         name: indicatorOpt.text,
         nameLocation: 'end',
         nameGap: nameGap,
@@ -122,6 +124,7 @@ var RadarModel = echarts.extendComponentModel({
     }, valueAxisDefault.axisLine),
     axisLabel: defaultsShow(valueAxisDefault.axisLabel, false),
     axisTick: defaultsShow(valueAxisDefault.axisTick, false),
+    axisType: 'interval',
     splitLine: defaultsShow(valueAxisDefault.splitLine, true),
     splitArea: defaultsShow(valueAxisDefault.splitArea, true),
     // {text, min, max}

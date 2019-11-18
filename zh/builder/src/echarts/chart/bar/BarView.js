@@ -26,6 +26,7 @@ import barItemStyle from './barItemStyle';
 import Path from 'zrender/src/graphic/Path';
 import { throttle } from '../../util/throttle';
 import { createClipPath } from '../helper/createClipPathFromCoordSys';
+import Sausage from '../../util/shape/sausage';
 var BAR_BORDER_WIDTH_QUERY = ['itemStyle', 'barBorderWidth'];
 var _eventPos = [0, 0]; // FIXME
 // Just for compatible with ec2.
@@ -108,6 +109,7 @@ export default echarts.extendChartView({
     group.removeClipPath(); // We don't use clipPath in normal mode because we needs a perfect animation
     // And don't want the label are clipped.
 
+    var roundCap = seriesModel.get('roundCap', true);
     data.diff(oldData).add(function (dataIndex) {
       if (!data.hasValue(dataIndex)) {
         return;
@@ -127,7 +129,7 @@ export default echarts.extendChartView({
         }
       }
 
-      var el = elementCreator[coord.type](data, dataIndex, itemModel, layout, isHorizontalOrRadial, animationModel);
+      var el = elementCreator[coord.type](dataIndex, layout, isHorizontalOrRadial, animationModel, false, roundCap);
       data.setItemGraphicEl(dataIndex, el);
       group.add(el);
       updateStyle(el, data, dataIndex, itemModel, layout, seriesModel, isHorizontalOrRadial, coord.type === 'polar');
@@ -156,7 +158,7 @@ export default echarts.extendChartView({
           shape: layout
         }, animationModel, newIndex);
       } else {
-        el = elementCreator[coord.type](data, newIndex, itemModel, layout, isHorizontalOrRadial, animationModel, true);
+        el = elementCreator[coord.type](newIndex, layout, isHorizontalOrRadial, animationModel, true, roundCap);
       }
 
       data.setItemGraphicEl(newIndex, el); // Add back
@@ -257,7 +259,7 @@ var clip = {
   }
 };
 var elementCreator = {
-  cartesian2d: function (data, dataIndex, itemModel, layout, isHorizontal, animationModel, isUpdate) {
+  cartesian2d: function (dataIndex, layout, isHorizontal, animationModel, isUpdate) {
     var rect = new graphic.Rect({
       shape: zrUtil.extend({}, layout)
     }); // Animation
@@ -275,13 +277,14 @@ var elementCreator = {
 
     return rect;
   },
-  polar: function (data, dataIndex, itemModel, layout, isRadial, animationModel, isUpdate) {
+  polar: function (dataIndex, layout, isRadial, animationModel, isUpdate, roundCap) {
     // Keep the same logic with bar in catesion: use end value to control
     // direction. Notice that if clockwise is true (by default), the sector
     // will always draw clockwisely, no matter whether endAngle is greater
     // or less than startAngle.
     var clockwise = layout.startAngle < layout.endAngle;
-    var sector = new graphic.Sector({
+    var ShapeClass = !isRadial && roundCap ? Sausage : graphic.Sector;
+    var sector = new ShapeClass({
       shape: zrUtil.defaults({
         clockwise: clockwise
       }, layout)

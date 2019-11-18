@@ -47,6 +47,9 @@ export default BaseBarSeries.extend({
   defaultOption: {
     // If clipped
     // Only available on cartesian2d
-    clip: true
+    clip: true,
+    // If use caps on two sides of bars
+    // Only available on tangential polar bar
+    roundCap: false
   }
 });

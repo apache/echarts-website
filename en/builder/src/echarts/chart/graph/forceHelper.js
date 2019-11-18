@@ -62,10 +62,11 @@ export function forceLayout(nodes, edges, opts) {
   // var k2 = k * k;
 
 
-  var friction = 0.6;
+  var initialFriction = opts.friction == null ? 0.6 : opts.friction;
+  var friction = initialFriction;
   return {
     warmUp: function () {
-      friction = 0.5;
+      friction = initialFriction * 0.8;
     },
     setFixed: function (idx) {
       nodes[idx].fixed = true;
@@ -86,6 +87,11 @@ export function forceLayout(nodes, edges, opts) {
 
       for (var i = 0; i < edges.length; i++) {
         var e = edges[i];
+
+        if (e.ignoreForceLayout) {
+          continue;
+        }
+
         var n1 = e.n1;
         var n2 = e.n2;
         vec2.sub(v12, n2.p, n1.p);

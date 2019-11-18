@@ -1109,12 +1109,12 @@ listProto.indexOfName = function (name) {
 
 
 listProto.indexOfRawIndex = function (rawIndex) {
-  if (!this._indices) {
-    return rawIndex;
-  }
-
   if (rawIndex >= this._rawCount || rawIndex < 0) {
     return -1;
+  }
+
+  if (!this._indices) {
+    return rawIndex;
   } // Indices are ascending
 
 

@@ -196,19 +196,22 @@ SVGPainter.prototype = {
 
 
           insertAfter(svgRoot, textSvgElement, svgElement);
-          prevSvgElement = textSvgElement || svgElement || prevSvgElement;
-          this.gradientManager.addWithoutUpdate(svgElement, displayable);
-          this.shadowManager.addWithoutUpdate(prevSvgElement, displayable);
+          prevSvgElement = textSvgElement || svgElement || prevSvgElement; // zrender.Text only create textSvgElement.
+
+          this.gradientManager.addWithoutUpdate(svgElement || textSvgElement, displayable);
+          this.shadowManager.addWithoutUpdate(svgElement || textSvgElement, displayable);
           this.clipPathManager.markUsed(displayable);
         }
       } else if (!item.removed) {
         for (var k = 0; k < item.count; k++) {
           var displayable = newVisibleList[item.indices[k]];
-          prevSvgElement = svgElement = getTextSvgElement(displayable) || getSvgElement(displayable) || prevSvgElement;
+          prevSvgElement = getTextSvgElement(displayable) || getSvgElement(displayable) || prevSvgElement;
+          var svgElement = getSvgElement(displayable);
+          var textSvgElement = getTextSvgElement(displayable);
           this.gradientManager.markUsed(displayable);
-          this.gradientManager.addWithoutUpdate(svgElement, displayable);
+          this.gradientManager.addWithoutUpdate(svgElement || textSvgElement, displayable);
           this.shadowManager.markUsed(displayable);
-          this.shadowManager.addWithoutUpdate(svgElement, displayable);
+          this.shadowManager.addWithoutUpdate(svgElement || textSvgElement, displayable);
           this.clipPathManager.markUsed(displayable);
         }
       }

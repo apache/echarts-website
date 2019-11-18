@@ -59,6 +59,7 @@ var CandlestickSeries = SeriesModel.extend({
     // yAxisIndex: 0,
     layout: null,
     // 'horizontal' or 'vertical'
+    clip: true,
     itemStyle: {
       color: '#c23531',
       // 阳线 positive

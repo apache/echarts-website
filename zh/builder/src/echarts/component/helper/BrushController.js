@@ -127,6 +127,12 @@ function BrushController(zr) {
   this._dragging;
   /**
    * @private
+   * @type {Object}
+   */
+
+  this._lastMouseMovePoint = {};
+  /**
+   * @private
    * @type {Array}
    */
 
@@ -729,7 +735,7 @@ var mouseHandlers = {
     if (this._dragging) {
       // In case some browser do not support globalOut,
       // and release mose out side the browser.
-      handleDragEnd.call(this, e);
+      handleDragEnd(this, e);
     } else if (!e.target || !e.target.draggable) {
       preventDefault(e);
       var localCursorPoint = this.group.transformCoordToLocal(e.offsetX, e.offsetY);
@@ -743,7 +749,10 @@ var mouseHandlers = {
     }
   },
   mousemove: function (e) {
-    var localCursorPoint = this.group.transformCoordToLocal(e.offsetX, e.offsetY);
+    var lastPoint = this._lastMouseMovePoint;
+    lastPoint.x = e.offsetX;
+    lastPoint.y = e.offsetY;
+    var localCursorPoint = this.group.transformCoordToLocal(lastPoint.x, lastPoint.y);
     resetCursor(this, e, localCursorPoint);
 
     if (this._dragging) {
@@ -752,23 +761,42 @@ var mouseHandlers = {
       eventParams && trigger(this, eventParams);
     }
   },
-  mouseup: handleDragEnd //,
-  // FIXME
-  // in tooltip, globalout should not be triggered.
-  // globalout: handleDragEnd
-
+  mouseup: function (e) {
+    handleDragEnd(this, e);
+  },
+  globalout: function (e) {
+    handleDragEnd(this, e, true);
+  }
 };
 
-function handleDragEnd(e) {
-  if (this._dragging) {
-    preventDefault(e);
-    var localCursorPoint = this.group.transformCoordToLocal(e.offsetX, e.offsetY);
-    var eventParams = updateCoverByMouse(this, e, localCursorPoint, true);
-    this._dragging = false;
-    this._track = [];
-    this._creatingCover = null; // trigger event shoule be at final, after procedure will be nested.
+function handleDragEnd(controller, e, isGlobalOut) {
+  if (controller._dragging) {
+    // Just be worried about bring some side effect to the world
+    // out of echarts, we do not `preventDefault` for globalout.
+    !isGlobalOut && preventDefault(e);
+    var pointerX = e.offsetX;
+    var pointerY = e.offsetY;
+    var lastPoint = controller._lastMouseMovePoint;
 
-    eventParams && trigger(this, eventParams);
+    if (isGlobalOut) {
+      pointerX = lastPoint.x;
+      pointerY = lastPoint.y;
+    }
+
+    var localCursorPoint = controller.group.transformCoordToLocal(pointerX, pointerY); // FIXME
+    // Here `e` is used only in `onIrrelevantElement` finally. And it's OK
+    // that pass the `e` of `globalout` to `onIrrelevantElement`. But it is
+    // not a good design of these interfaces. However, we do not refactor
+    // these code now because the implementation of `onIrrelevantElement`
+    // need to be discussed and probably be changed in future, becuase it
+    // slows down the performance of zrender in some cases.
+
+    var eventParams = updateCoverByMouse(controller, e, localCursorPoint, true);
+    controller._dragging = false;
+    controller._track = [];
+    controller._creatingCover = null; // trigger event shoule be at final, after procedure will be nested.
+
+    eventParams && trigger(controller, eventParams);
   }
 }
 /**

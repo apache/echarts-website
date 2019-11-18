@@ -82,19 +82,39 @@ export default AxisView.extend({
    * @private
    */
   _axisLine: function (angleAxisModel, polar, ticksAngles, radiusExtent) {
-    var lineStyleModel = angleAxisModel.getModel('axisLine.lineStyle');
-    var circle = new graphic.Circle({
-      shape: {
-        cx: polar.cx,
-        cy: polar.cy,
-        r: radiusExtent[getRadiusIdx(polar)]
-      },
-      style: lineStyleModel.getLineStyle(),
-      z2: 1,
-      silent: true
-    });
-    circle.style.fill = null;
-    this.group.add(circle);
+    var lineStyleModel = angleAxisModel.getModel('axisLine.lineStyle'); // extent id of the axis radius (r0 and r)
+
+    var rId = getRadiusIdx(polar);
+    var r0Id = rId ? 0 : 1;
+    var shape;
+
+    if (radiusExtent[r0Id] === 0) {
+      shape = new graphic.Circle({
+        shape: {
+          cx: polar.cx,
+          cy: polar.cy,
+          r: radiusExtent[rId]
+        },
+        style: lineStyleModel.getLineStyle(),
+        z2: 1,
+        silent: true
+      });
+    } else {
+      shape = new graphic.Ring({
+        shape: {
+          cx: polar.cx,
+          cy: polar.cy,
+          r: radiusExtent[rId],
+          r0: radiusExtent[r0Id]
+        },
+        style: lineStyleModel.getLineStyle(),
+        z2: 1,
+        silent: true
+      });
+    }
+
+    shape.style.fill = null;
+    this.group.add(shape);
   },
 
   /**

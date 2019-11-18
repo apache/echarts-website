@@ -95,7 +95,7 @@ var domHandlers = {
 
     event.zrByTouch = true;
     this._lastTouchMoment = new Date();
-    this.handler.processGesture(this, event, 'start'); // In touch device, trigger `mousemove`(`mouseover`) should
+    this.handler.processGesture(event, 'start'); // In touch device, trigger `mousemove`(`mouseover`) should
     // be triggered, and must before `mousedown` triggered.
 
     domHandlers.mousemove.call(this, event);
@@ -113,7 +113,7 @@ var domHandlers = {
     // mouse event in upper applicatoin.
 
     event.zrByTouch = true;
-    this.handler.processGesture(this, event, 'change'); // Mouse move should always be triggered no matter whether
+    this.handler.processGesture(event, 'change'); // Mouse move should always be triggered no matter whether
     // there is gestrue event, because mouse move and pinch may
     // be used at the same time.
 
@@ -131,7 +131,7 @@ var domHandlers = {
     // mouse event in upper applicatoin.
 
     event.zrByTouch = true;
-    this.handler.processGesture(this, event, 'end');
+    this.handler.processGesture(event, 'end');
     domHandlers.mouseup.call(this, event); // Do not trigger `mouseout` here, in spite of `mousemove`(`mouseover`) is
     // triggered in `touchstart`. This seems to be illogical, but by this mechanism,
     // we can conveniently implement "hover style" in both PC and touch device just

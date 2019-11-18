@@ -49,9 +49,9 @@ var each = zrUtil.each;
 var isFunction = zrUtil.isFunction;
 var isObject = zrUtil.isObject;
 var parseClassType = ComponentModel.parseClassType;
-export var version = '4.4.0';
+export var version = '4.5.0';
 export var dependencies = {
-  zrender: '4.1.1'
+  zrender: '4.1.2'
 };
 var TEST_FRAME_REMAIN_TIME = 1;
 var PRIORITY_PROCESSOR_FILTER = 1000;

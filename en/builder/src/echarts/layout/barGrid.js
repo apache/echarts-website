@@ -39,6 +39,7 @@ function getAxisKey(axis) {
  * @param {number} opt.count Positive interger.
  * @param {number} [opt.barWidth]
  * @param {number} [opt.barMaxWidth]
+ * @param {number} [opt.barMinWidth]
  * @param {number} [opt.barGap]
  * @param {number} [opt.barCategoryGap]
  * @return {Object} {width, offset, offsetCenter} If axis.type is not 'category', return undefined.
@@ -85,22 +86,115 @@ export function prepareLayoutBarSeries(seriesType, ecModel) {
   });
   return seriesModels;
 }
+/**
+ * Map from (baseAxis.dim + '_' + baseAxis.index) to min gap of two adjacent
+ * values.
+ * This works for time axes, value axes, and log axes.
+ * For a single time axis, return value is in the form like
+ * {'x_0': [1000000]}.
+ * The value of 1000000 is in milliseconds.
+ */
+
+function getValueAxesMinGaps(barSeries) {
+  /**
+   * Map from axis.index to values.
+   * For a single time axis, axisValues is in the form like
+   * {'x_0': [1495555200000, 1495641600000, 1495728000000]}.
+   * Items in axisValues[x], e.g. 1495555200000, are time values of all
+   * series.
+   */
+  var axisValues = {};
+  zrUtil.each(barSeries, function (seriesModel) {
+    var cartesian = seriesModel.coordinateSystem;
+    var baseAxis = cartesian.getBaseAxis();
+
+    if (baseAxis.type !== 'time' && baseAxis.type !== 'value') {
+      return;
+    }
+
+    var data = seriesModel.getData();
+    var key = baseAxis.dim + '_' + baseAxis.index;
+    var dim = data.mapDimension(baseAxis.dim);
+
+    for (var i = 0, cnt = data.count(); i < cnt; ++i) {
+      var value = data.get(dim, i);
+
+      if (!axisValues[key]) {
+        // No previous data for the axis
+        axisValues[key] = [value];
+      } else {
+        // No value in previous series
+        axisValues[key].push(value);
+      } // Ignore duplicated time values in the same axis
+
+    }
+  });
+  var axisMinGaps = [];
+
+  for (var key in axisValues) {
+    if (axisValues.hasOwnProperty(key)) {
+      var valuesInAxis = axisValues[key];
+
+      if (valuesInAxis) {
+        // Sort axis values into ascending order to calculate gaps
+        valuesInAxis.sort(function (a, b) {
+          return a - b;
+        });
+        var min = null;
+
+        for (var j = 1; j < valuesInAxis.length; ++j) {
+          var delta = valuesInAxis[j] - valuesInAxis[j - 1];
+
+          if (delta > 0) {
+            // Ignore 0 delta because they are of the same axis value
+            min = min === null ? delta : Math.min(min, delta);
+          }
+        } // Set to null if only have one data
+
+
+        axisMinGaps[key] = min;
+      }
+    }
+  }
+
+  return axisMinGaps;
+}
+
 export function makeColumnLayout(barSeries) {
+  var axisMinGaps = getValueAxesMinGaps(barSeries);
   var seriesInfoList = [];
   zrUtil.each(barSeries, function (seriesModel) {
-    var data = seriesModel.getData();
     var cartesian = seriesModel.coordinateSystem;
     var baseAxis = cartesian.getBaseAxis();
     var axisExtent = baseAxis.getExtent();
-    var bandWidth = baseAxis.type === 'category' ? baseAxis.getBandWidth() : Math.abs(axisExtent[1] - axisExtent[0]) / data.count();
+    var bandWidth;
+
+    if (baseAxis.type === 'category') {
+      bandWidth = baseAxis.getBandWidth();
+    } else if (baseAxis.type === 'value' || baseAxis.type === 'time') {
+      var key = baseAxis.dim + '_' + baseAxis.index;
+      var minGap = axisMinGaps[key];
+      var extentSpan = Math.abs(axisExtent[1] - axisExtent[0]);
+      var scale = baseAxis.scale.getExtent();
+      var scaleSpan = Math.abs(scale[1] - scale[0]);
+      bandWidth = minGap ? extentSpan / scaleSpan * minGap : extentSpan; // When there is only one data value
+    } else {
+      var data = seriesModel.getData();
+      bandWidth = Math.abs(axisExtent[1] - axisExtent[0]) / data.count();
+    }
+
     var barWidth = parsePercent(seriesModel.get('barWidth'), bandWidth);
     var barMaxWidth = parsePercent(seriesModel.get('barMaxWidth'), bandWidth);
+    var barMinWidth = parsePercent( // barMinWidth by default is 1 in cartesian. Because in value axis,
+    // the auto-calculated bar width might be less than 1.
+    seriesModel.get('barMinWidth') || 1, bandWidth);
     var barGap = seriesModel.get('barGap');
     var barCategoryGap = seriesModel.get('barCategoryGap');
     seriesInfoList.push({
       bandWidth: bandWidth,
       barWidth: barWidth,
       barMaxWidth: barMaxWidth,
+      barMinWidth: barMinWidth,
       barGap: barGap,
       barCategoryGap: barCategoryGap,
       axisKey: getAxisKey(baseAxis),
@@ -152,6 +246,8 @@ function doCalBarWidthAndOffset(seriesInfoList) {
 
     var barMaxWidth = seriesInfo.barMaxWidth;
     barMaxWidth && (stacks[stackId].maxWidth = barMaxWidth);
+    var barMinWidth = seriesInfo.barMinWidth;
+    barMinWidth && (stacks[stackId].minWidth = barMinWidth);
     var barGap = seriesInfo.barGap;
     barGap != null && (columnsOnAxis.gap = barGap);
     var barCategoryGap = seriesInfo.barCategoryGap;
@@ -169,18 +265,48 @@ function doCalBarWidthAndOffset(seriesInfoList) {
     var autoWidth = (remainedWidth - categoryGap) / (autoWidthCount + (autoWidthCount - 1) * barGapPercent);
     autoWidth = Math.max(autoWidth, 0); // Find if any auto calculated bar exceeded maxBarWidth
 
-    zrUtil.each(stacks, function (column, stack) {
+    zrUtil.each(stacks, function (column) {
       var maxWidth = column.maxWidth;
+      var minWidth = column.minWidth;
 
-      if (maxWidth && maxWidth < autoWidth) {
-        maxWidth = Math.min(maxWidth, remainedWidth);
+      if (!column.width) {
+        var finalWidth = autoWidth;
 
-        if (column.width) {
-          maxWidth = Math.min(maxWidth, column.width);
+        if (maxWidth && maxWidth < finalWidth) {
+          finalWidth = Math.min(maxWidth, remainedWidth);
+        } // `minWidth` has higher priority. `minWidth` decide that wheter the
+        // bar is able to be visible. So `minWidth` should not be restricted
+        // by `maxWidth` or `remainedWidth` (which is from `bandWidth`). In
+        // the extreme cases for `value` axis, bars are allowed to overlap
+        // with each other if `minWidth` specified.
+
+
+        if (minWidth && minWidth > finalWidth) {
+          finalWidth = minWidth;
         }
 
-        remainedWidth -= maxWidth;
-        column.width = maxWidth;
+        if (finalWidth !== autoWidth) {
+          column.width = finalWidth;
+          remainedWidth -= finalWidth;
+          autoWidthCount--;
+        }
+      } else {
+        // `barMinWidth/barMaxWidth` has higher priority than `barWidth`, as
+        // CSS does. Becuase barWidth can be a percent value, where
+        // `barMaxWidth` can be used to restrict the final width.
+        var finalWidth = column.width;
+
+        if (maxWidth) {
+          finalWidth = Math.min(finalWidth, maxWidth);
+        } // `minWidth` has higher priority, as described above
+
+
+        if (minWidth) {
+          finalWidth = Math.max(finalWidth, minWidth);
+        }
+
+        column.width = finalWidth;
+        remainedWidth -= finalWidth;
         autoWidthCount--;
       }
     }); // Recalculate width again
@@ -406,5 +532,5 @@ function isInLargeMode(seriesModel) {
 
 
 function getValueAxisStart(baseAxis, valueAxis, stacked) {
-  return valueAxis.toGlobalCoord(valueAxis.dataToCoord(0));
+  return valueAxis.toGlobalCoord(valueAxis.dataToCoord(valueAxis.type === 'log' ? 1 : 0));
 }
