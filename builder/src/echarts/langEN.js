@@ -16,7 +16,17 @@
 * specific language governing permissions and limitations
 * under the License.
 */
+
+/**
+ * Language: English.
+ */
 export default {
+  legend: {
+    selector: {
+      all: 'All',
+      inverse: 'Inv'
+    }
+  },
   toolbox: {
     brush: {
       title: {
@@ -52,6 +62,38 @@ export default {
     saveAsImage: {
       title: 'Save as Image',
       lang: ['Right Click to Save Image']
+    }
+  },
+  aria: {
+    general: {
+      withTitle: 'This is a chart about "{title}"',
+      withoutTitle: 'This is a chart'
+    },
+    series: {
+      single: {
+        prefix: '',
+        withName: ' with type {seriesType} named {seriesName}.',
+        withoutName: ' with type {seriesType}.'
+      },
+      multiple: {
+        prefix: '. It consists of {seriesCount} series count.',
+        withName: ' The {seriesId} series is a {seriesType} representing {seriesName}.',
+        withoutName: ' The {seriesId} series is a {seriesType}.',
+        separator: {
+          middle: '',
+          end: ''
+        }
+      }
+    },
+    data: {
+      allData: 'The data is as follows: ',
+      partialData: 'The first {displayCnt} items are: ',
+      withName: 'the data for {name} is {value}',
+      withoutName: '{value}',
+      separator: {
+        middle: ',',
+        end: '.'
+      }
     }
   }
 };

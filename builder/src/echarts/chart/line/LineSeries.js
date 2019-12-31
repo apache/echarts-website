@@ -23,7 +23,9 @@ export default SeriesModel.extend({
   type: 'series.line',
   dependencies: ['grid', 'polar'],
   getInitialData: function (option, ecModel) {
-    return createListFromArray(this.getSource(), this);
+    return createListFromArray(this.getSource(), this, {
+      useEncodeDefaulter: true
+    });
   },
   defaultOption: {
     zlevel: 0,
@@ -36,7 +38,7 @@ export default SeriesModel.extend({
     // yAxisIndex: 0,
     // polarIndex: 0,
     // If clip the overflow value
-    clipOverflow: true,
+    clip: true,
     // cursor: null,
     label: {
       position: 'top'

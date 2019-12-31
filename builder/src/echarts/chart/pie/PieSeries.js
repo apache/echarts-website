@@ -23,6 +23,8 @@ import * as modelUtil from '../../util/model';
 import { getPercentWithPrecision } from '../../util/number';
 import dataSelectableMixin from '../../component/helper/selectableMixin';
 import { retrieveRawAttr } from '../../data/helper/dataProvider';
+import { makeSeriesEncodeForNameBased } from '../../data/helper/sourceHelper';
+import LegendVisualProvider from '../../visual/LegendVisualProvider';
 var PieSeries = echarts.extendSeriesModel({
   type: 'series.pie',
   // Overwrite
@@ -30,10 +32,7 @@ var PieSeries = echarts.extendSeriesModel({
     PieSeries.superApply(this, 'init', arguments); // Enable legend selection for each data item
     // Use a function instead of direct access because data reference may changed
 
-    this.legendDataProvider = function () {
-      return this.getRawData();
-    };
-
+    this.legendVisualProvider = new LegendVisualProvider(zrUtil.bind(this.getData, this), zrUtil.bind(this.getRawData, this));
     this.updateSelectedMap(this._createSelectableList());
 
     this._defaultLabelLine(option);
@@ -44,7 +43,10 @@ var PieSeries = echarts.extendSeriesModel({
     this.updateSelectedMap(this._createSelectableList());
   },
   getInitialData: function (option, ecModel) {
-    return createListSimply(this, ['value']);
+    return createListSimply(this, {
+      coordDimensions: ['value'],
+      encodeDefaulter: zrUtil.curry(makeSeriesEncodeForNameBased, this)
+    });
   },
   _createSelectableList: function () {
     var data = this.getRawData();
@@ -96,6 +98,9 @@ var PieSeries = echarts.extendSeriesModel({
     startAngle: 90,
     // 最小角度改为0
     minAngle: 0,
+    // If the angle of a sector less than `minShowLabelAngle`,
+    // the label will not be displayed.
+    minShowLabelAngle: 0,
     // 选中时扇区偏移量
     selectedOffset: 10,
     // 高亮扇区偏移量
@@ -110,12 +115,27 @@ var PieSeries = echarts.extendSeriesModel({
     // If still show when all data zero.
     stillShowZeroSum: true,
     // cursor: null,
+    left: 0,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    width: null,
+    height: null,
     label: {
       // If rotate around circle
       rotate: false,
       show: true,
       // 'outer', 'inside', 'center'
-      position: 'outer' // formatter: 标签文本格式器，同Tooltip.formatter，不支持异步回调
+      position: 'outer',
+      // 'none', 'labelLine', 'edge'. Works only when position is 'outer'
+      alignTo: 'none',
+      // Closest distance between label and chart edge.
+      // Works only position is 'outer' and alignTo is 'edge'.
+      margin: '25%',
+      // Works only position is 'outer' and alignTo is not 'edge'.
+      bleedMargin: 10,
+      // Distance between text and label line.
+      distanceToLabelLine: 5 // formatter: 标签文本格式器，同Tooltip.formatter，不支持异步回调
       // 默认使用全局文本样式，详见TEXTSTYLE
       // distance: 当position为inner时有效，为label位置到圆心的距离与圆半径(环状图为内外半径和)的比例系数
 
@@ -137,8 +157,10 @@ var PieSeries = echarts.extendSeriesModel({
     itemStyle: {
       borderWidth: 1
     },
-    // Animation type canbe expansion, scale
+    // Animation type. Valid values: expansion, scale
     animationType: 'expansion',
+    // Animation type when update. Valid values: transition, expansion
+    animationTypeUpdate: 'transition',
     animationEasing: 'cubicOut'
   }
 });

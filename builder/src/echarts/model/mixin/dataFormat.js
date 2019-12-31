@@ -35,11 +35,13 @@ export default {
     var name = data.getName(dataIndex);
     var itemOpt = data.getRawDataItem(dataIndex);
     var color = data.getItemVisual(dataIndex, 'color');
+    var borderColor = data.getItemVisual(dataIndex, 'borderColor');
     var tooltipModel = this.ecModel.getComponent('tooltip');
     var renderModeOption = tooltipModel && tooltipModel.get('renderMode');
     var renderMode = getTooltipRenderMode(renderModeOption);
     var mainType = this.mainType;
     var isSeries = mainType === 'series';
+    var userOutput = data.userOutput;
     return {
       componentType: mainType,
       componentSubType: this.subType,
@@ -54,6 +56,9 @@ export default {
       dataType: dataType,
       value: rawValue,
       color: color,
+      borderColor: borderColor,
+      dimensionNames: userOutput ? userOutput.dimensionNames : null,
+      encode: userOutput ? userOutput.encode : null,
       marker: getTooltipMarker({
         color: color,
         renderMode: renderMode
@@ -68,7 +73,8 @@ export default {
    * @param {number} dataIndex
    * @param {string} [status='normal'] 'normal' or 'emphasis'
    * @param {string} [dataType]
-   * @param {number} [dimIndex]
+   * @param {number} [dimIndex] Only used in some chart that
+   *        use formatter in different dimensions, like radar.
    * @param {string} [labelProp='label']
    * @return {string} If not formatter, return null/undefined
    */
@@ -86,6 +92,7 @@ export default {
 
     if (typeof formatter === 'function') {
       params.status = status;
+      params.dimensionIndex = dimIndex;
       return formatter(params);
     } else if (typeof formatter === 'string') {
       var str = formatTpl(formatter, params); // Support 'aaa{@[3]}bbb{@product}ccc'.

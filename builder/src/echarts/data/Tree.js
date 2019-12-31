@@ -482,7 +482,7 @@ Tree.prototype = {
  * @return module:echarts/data/Tree
  */
 
-Tree.createTree = function (dataRoot, hostModel, treeOptions) {
+Tree.createTree = function (dataRoot, hostModel, treeOptions, beforeLink) {
   var tree = new Tree(hostModel, treeOptions.levels, treeOptions.leaves);
   var listData = [];
   var dimMax = 1;
@@ -519,6 +519,7 @@ Tree.createTree = function (dataRoot, hostModel, treeOptions) {
     structAttr: 'tree'
   });
   tree.update();
+  beforeLink && beforeLink(list);
   return tree;
 };
 /**

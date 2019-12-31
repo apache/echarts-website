@@ -30,6 +30,7 @@ import DataDiffer from './DataDiffer';
 import Source from './Source';
 import { defaultDimValueGetters, DefaultDataProvider } from './helper/dataProvider';
 import { summarizeDimensions } from './helper/dimensionHelper';
+import DataDimensionInfo from './DataDimensionInfo';
 var isObject = zrUtil.isObject;
 var UNDEFINED = 'undefined';
 var INDEX_NOT_FOUND = -1; // Use prefix to avoid index to be the same as otherIdList[idx],
@@ -80,13 +81,9 @@ function transferProperties(target, source) {
  * @constructor
  * @alias module:echarts/data/List
  *
- * @param {Array.<string|Object>} dimensions
+ * @param {Array.<string|Object|module:data/DataDimensionInfo>} dimensions
  *      For example, ['someDimName', {name: 'someDimName', type: 'someDimType'}, ...].
  *      Dimensions should be concrete names like x, y, z, lng, lat, angle, radius
- *      Spetial fields: {
- *          ordinalMeta: <module:echarts/data/OrdinalMeta>
- *          createInvertedIndices: <boolean>
- *      }
  * @param {module:echarts/model/Model} hostModel
  */
 
@@ -102,9 +99,11 @@ var List = function (dimensions, hostModel) {
     var dimensionInfo = dimensions[i];
 
     if (zrUtil.isString(dimensionInfo)) {
-      dimensionInfo = {
+      dimensionInfo = new DataDimensionInfo({
         name: dimensionInfo
-      };
+      });
+    } else if (!(dimensionInfo instanceof DataDimensionInfo)) {
+      dimensionInfo = new DataDimensionInfo(dimensionInfo);
     }
 
     var dimensionName = dimensionInfo.name;
@@ -285,6 +284,21 @@ var List = function (dimensions, hostModel) {
    */
 
   this._calculationInfo = {};
+  /**
+   * User output info of this data.
+   * DO NOT use it in other places!
+   *
+   * When preparing user params for user callbacks, we have
+   * to clone these inner data structures to prevent users
+   * from modifying them to effect built-in logic. And for
+   * performance consideration we make this `userOutput` to
+   * avoid clone them too many times.
+   *
+   * @type {Object}
+   * @readOnly
+   */
+
+  this.userOutput = this._dimensionsSummary.userOutput;
 };
 
 var listProto = List.prototype;
@@ -296,16 +310,30 @@ listProto.type = 'list';
 
 listProto.hasItemOption = true;
 /**
+ * The meanings of the input parameter `dim`:
+ *
+ * + If dim is a number (e.g., `1`), it means the index of the dimension.
+ *   For example, `getDimension(0)` will return 'x' or 'lng' or 'radius'.
+ * + If dim is a number-like string (e.g., `"1"`):
+ *     + If there is the same concrete dim name defined in `this.dimensions`, it means that concrete name.
+ *     + If not, it will be converted to a number, which means the index of the dimension.
+ *        (why? because of the backward compatbility. We have been tolerating number-like string in
+ *        dimension setting, although now it seems that it is not a good idea.)
+ *     For example, `visualMap[i].dimension: "1"` is the same meaning as `visualMap[i].dimension: 1`,
+ *     if no dimension name is defined as `"1"`.
+ * + If dim is a not-number-like string, it means the concrete dim name.
+ *   For example, it can be be default name `"x"`, `"y"`, `"z"`, `"lng"`, `"lat"`, `"angle"`, `"radius"`,
+ *   or customized in `dimensions` property of option like `"age"`.
+ *
  * Get dimension name
- * @param {string|number} dim
- *        Dimension can be concrete names like x, y, z, lng, lat, angle, radius
- *        Or a ordinal number. For example getDimensionInfo(0) will return 'x' or 'lng' or 'radius'
+ * @param {string|number} dim See above.
  * @return {string} Concrete dim name.
  */
 
 listProto.getDimension = function (dim) {
-  if (!isNaN(dim)) {
-    dim = this.dimensions[dim] || dim;
+  if (typeof dim === 'number' // If being a number-like string but not being defined a dimension name.
+  || !isNaN(dim) && !this._dimensionInfos.hasOwnProperty(dim)) {
+    dim = this.dimensions[dim];
   }
 
   return dim;
@@ -850,12 +878,12 @@ listProto.getValues = function (dimensions, idx
 
 listProto.hasValue = function (idx) {
   var dataDimsOnCoord = this._dimensionsSummary.dataDimsOnCoord;
-  var dimensionInfos = this._dimensionInfos;
 
   for (var i = 0, len = dataDimsOnCoord.length; i < len; i++) {
-    if ( // Ordinal type can be string or number
-    dimensionInfos[dataDimsOnCoord[i]].type !== 'ordinal' // FIXME check ordinal when using index?
-    && isNaN(this.get(dataDimsOnCoord[i], idx))) {
+    // Ordinal type originally can be string or number.
+    // But when an ordinal type is used on coord, it can
+    // not be string but only number. So we can also use isNaN.
+    if (isNaN(this.get(dataDimsOnCoord[i], idx))) {
       return false;
     }
   }
@@ -1080,12 +1108,12 @@ listProto.indexOfName = function (name) {
 
 
 listProto.indexOfRawIndex = function (rawIndex) {
-  if (!this._indices) {
-    return rawIndex;
-  }
-
   if (rawIndex >= this._rawCount || rawIndex < 0) {
     return -1;
+  }
+
+  if (!this._indices) {
+    return rawIndex;
   } // Indices are ascending
 
 
@@ -1119,7 +1147,8 @@ listProto.indexOfRawIndex = function (rawIndex) {
  * @param {string} dim
  * @param {number} value
  * @param {number} [maxDistance=Infinity]
- * @return {Array.<number>} Considere multiple points has the same value.
+ * @return {Array.<number>} If and only if multiple indices has
+ *        the same value, they are put to the result.
  */
 
 
@@ -1136,29 +1165,34 @@ listProto.indicesOfNearest = function (dim, value, maxDistance) {
     maxDistance = Infinity;
   }
 
-  var minDist = Number.MAX_VALUE;
+  var minDist = Infinity;
   var minDiff = -1;
+  var nearestIndicesLen = 0; // Check the test case of `test/ut/spec/data/List.js`.
 
   for (var i = 0, len = this.count(); i < len; i++) {
-    var diff = value - this.get(dim, i
-    /*, stack */
-    );
+    var diff = value - this.get(dim, i);
     var dist = Math.abs(diff);
 
-    if (diff <= maxDistance && dist <= minDist) {
-      // For the case of two data are same on xAxis, which has sequence data.
-      // Show the nearest index
-      // https://github.com/ecomfe/echarts/issues/2869
-      if (dist < minDist || diff >= 0 && minDiff < 0) {
+    if (dist <= maxDistance) {
+      // When the `value` is at the middle of `this.get(dim, i)` and `this.get(dim, i+1)`,
+      // we'd better not push both of them to `nearestIndices`, otherwise it is easy to
+      // get more than one item in `nearestIndices` (more specifically, in `tooltip`).
+      // So we chose the one that `diff >= 0` in this csae.
+      // But if `this.get(dim, i)` and `this.get(dim, j)` get the same value, both of them
+      // should be push to `nearestIndices`.
+      if (dist < minDist || dist === minDist && diff >= 0 && minDiff < 0) {
         minDist = dist;
         minDiff = diff;
-        nearestIndices.length = 0;
+        nearestIndicesLen = 0;
       }
 
-      nearestIndices.push(i);
+      if (diff === minDiff) {
+        nearestIndices[nearestIndicesLen++] = i;
+      }
     }
   }
 
+  nearestIndices.length = nearestIndicesLen;
   return nearestIndices;
 };
 /**

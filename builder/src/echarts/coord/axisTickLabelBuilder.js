@@ -227,20 +227,28 @@ export function calculateCategoryInterval(axis) {
   isNaN(dh) && (dh = Infinity);
   var interval = Math.max(0, Math.floor(Math.min(dw, dh)));
   var cache = inner(axis.model);
+  var axisExtent = axis.getExtent();
   var lastAutoInterval = cache.lastAutoInterval;
   var lastTickCount = cache.lastTickCount; // Use cache to keep interval stable while moving zoom window,
   // otherwise the calculated interval might jitter when the zoom
   // window size is close to the interval-changing size.
+  // For example, if all of the axis labels are `a, b, c, d, e, f, g`.
+  // The jitter will cause that sometimes the displayed labels are
+  // `a, d, g` (interval: 2) sometimes `a, c, e`(interval: 1).
 
   if (lastAutoInterval != null && lastTickCount != null && Math.abs(lastAutoInterval - interval) <= 1 && Math.abs(lastTickCount - tickCount) <= 1 // Always choose the bigger one, otherwise the critical
   // point is not the same when zooming in or zooming out.
-  && lastAutoInterval > interval) {
+  && lastAutoInterval > interval // If the axis change is caused by chart resize, the cache should not
+  // be used. Otherwise some hiden labels might not be shown again.
+  && cache.axisExtend0 === axisExtent[0] && cache.axisExtend1 === axisExtent[1]) {
     interval = lastAutoInterval;
   } // Only update cache if cache not used, otherwise the
   // changing of interval is too insensitive.
   else {
       cache.lastTickCount = tickCount;
       cache.lastAutoInterval = interval;
+      cache.axisExtend0 = axisExtent[0];
+      cache.axisExtend1 = axisExtent[1];
     }
 
   return interval;
@@ -293,7 +301,7 @@ function makeLabelsByNumericCategoryInterval(axis, categoryInterval, onlyTick) {
     addItem(tickValue);
   }
 
-  if (includeMaxLabel && tickValue !== ordinalExtent[1]) {
+  if (includeMaxLabel && tickValue - step !== ordinalExtent[1]) {
     addItem(ordinalExtent[1]);
   }
 

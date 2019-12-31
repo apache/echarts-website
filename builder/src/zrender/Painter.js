@@ -1,6 +1,6 @@
 import { devicePixelRatio } from './config';
 import * as util from './core/util';
-import log from './core/log';
+import logError from './core/log';
 import BoundingRect from './core/BoundingRect';
 import timsort from './core/timsort';
 import Layer from './Layer';
@@ -48,8 +48,8 @@ function isDisplayableCulled(el, width, height) {
 }
 
 function isClipPathChanged(clipPaths, prevClipPaths) {
+  // displayable.__clipPaths can only be `null`/`undefined` or an non-empty array.
   if (clipPaths === prevClipPaths) {
-    // Can both be null or undefined
     return false;
   }
 
@@ -62,6 +62,8 @@ function isClipPathChanged(clipPaths, prevClipPaths) {
       return true;
     }
   }
+
+  return false;
 }
 
 function doClip(clipPaths, ctx) {
@@ -77,9 +79,16 @@ function doClip(clipPaths, ctx) {
 }
 
 function createRoot(width, height) {
-  var domRoot = document.createElement('div'); // domRoot.onselectstart = returnFalse; // 避免页面选中的尴尬
+  var domRoot = document.createElement('div'); // domRoot.onselectstart = returnFalse; // Avoid page selected
 
-  domRoot.style.cssText = ['position:relative', 'overflow:hidden', 'width:' + width + 'px', 'height:' + height + 'px', 'padding:0', 'margin:0', 'border-width:0'].join(';') + ';';
+  domRoot.style.cssText = ['position:relative', // IOS13 safari probably has a compositing bug (z order of the canvas and the consequent
+  // dom does not act as expected) when some of the parent dom has
+  // `-webkit-overflow-scrolling: touch;` and the webpage is longer than one screen and
+  // the canvas is not at the top part of the page.
+  // Check `https://bugs.webkit.org/show_bug.cgi?id=203681` for more details. We remove
+  // this `overflow:hidden` to avoid the bug.
+  // 'overflow:hidden',
+  'width:' + width + 'px', 'height:' + height + 'px', 'padding:0', 'margin:0', 'border-width:0'].join(';') + ';';
   return domRoot;
 }
 /**
@@ -473,12 +482,13 @@ Painter.prototype = {
     // And setTransform with scale 0 will cause set back transform failed.
     && !(m && !m[0] && !m[3]) // Ignore culled element
     && !(el.culling && isDisplayableCulled(el, this._width, this._height))) {
-      var clipPaths = el.__clipPaths; // Optimize when clipping on group with several elements
+      var clipPaths = el.__clipPaths;
+      var prevElClipPaths = scope.prevElClipPaths; // Optimize when clipping on group with several elements
 
-      if (!scope.prevElClipPaths || isClipPathChanged(clipPaths, scope.prevElClipPaths)) {
+      if (!prevElClipPaths || isClipPathChanged(clipPaths, prevElClipPaths)) {
         // If has previous clipping state, restore from it
-        if (scope.prevElClipPaths) {
-          currentLayer.ctx.restore();
+        if (prevElClipPaths) {
+          ctx.restore();
           scope.prevElClipPaths = null; // Reset prevEl since context has been restored
 
           scope.prevEl = null;
@@ -543,13 +553,13 @@ Painter.prototype = {
     var domRoot = this._domRoot;
 
     if (layersMap[zlevel]) {
-      log('ZLevel ' + zlevel + ' has been used already');
+      logError('ZLevel ' + zlevel + ' has been used already');
       return;
     } // Check if is a valid layer
 
 
     if (!isLayerValid(layer)) {
-      log('Layer of zlevel ' + zlevel + ' is not valid');
+      logError('Layer of zlevel ' + zlevel + ' is not valid');
       return;
     }
 
@@ -681,7 +691,7 @@ Painter.prototype = {
       }
 
       if (!layer.__builtin__) {
-        log('ZLevel ' + zlevel + ' has been used by unkown layer ' + layer.id);
+        logError('ZLevel ' + zlevel + ' has been used by unkown layer ' + layer.id);
       }
 
       if (layer !== prevLayer) {

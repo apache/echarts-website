@@ -16,11 +16,6 @@
 * specific language governing permissions and limitations
 * under the License.
 */
-
-/**
- * @file  Define the themeRiver view's series model
- * @author Deqing Li(annong035@gmail.com)
- */
 import SeriesModel from '../../model/Series';
 import createDimensions from '../../data/helper/createDimensions';
 import { getDimensionTypeByAxis } from '../../data/helper/dimensionHelper';
@@ -28,6 +23,7 @@ import List from '../../data/List';
 import * as zrUtil from 'zrender/src/core/util';
 import { groupData } from '../../util/model';
 import { encodeHTML } from '../../util/format';
+import LegendVisualProvider from '../../visual/LegendVisualProvider';
 var DATA_NAME_INDEX = 2;
 var ThemeRiverSeries = SeriesModel.extend({
   type: 'series.themeRiver',
@@ -48,9 +44,7 @@ var ThemeRiverSeries = SeriesModel.extend({
     // Enable legend selection for each data item
     // Use a function instead of direct access because data reference may changed
 
-    this.legendDataProvider = function () {
-      return this.getRawData();
-    };
+    this.legendVisualProvider = new LegendVisualProvider(zrUtil.bind(this.getData, this), zrUtil.bind(this.getRawData, this));
   },
 
   /**
@@ -209,8 +203,7 @@ var ThemeRiverSeries = SeriesModel.extend({
 
   /**
    * Get data indices for show tooltip content
-   *
-   * @param {Array.<string>|string} dim  single coordinate dimension
+    * @param {Array.<string>|string} dim  single coordinate dimension
    * @param {number} value axis value
    * @param {module:echarts/coord/single/SingleAxis} baseAxis  single Axis used
    *     the themeRiver.

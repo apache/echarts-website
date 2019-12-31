@@ -20,7 +20,7 @@ var arrySlice = Array.prototype.slice;
  *        param: {string} eventType
  *        param: {string|Object} query
  *        return: {boolean}
- * @param {Function} [eventProcessor.afterTrigger] Call after all handlers called.
+ * @param {Function} [eventProcessor.afterTrigger] Called after all handlers called.
  *        param: {string} eventType
  */
 
@@ -70,8 +70,10 @@ Eventful.prototype = {
   /**
    * Unbind a event.
    *
-   * @param {string} event The event name.
+   * @param {string} [event] The event name.
+   *        If no `event` input, "off" all listeners.
    * @param {Function} [handler] The event handler.
+   *        If no `handler` input, "off" all listeners of the `event`.
    */
   off: function (event, handler) {
     var _h = this._$handlers;

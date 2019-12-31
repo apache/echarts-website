@@ -16,11 +16,6 @@
 * specific language governing permissions and limitations
 * under the License.
 */
-
-/**
- * @file  The file used to draw sankey view
- * @author  Deqing Li(annong035@gmail.com)
- */
 import * as graphic from '../../util/graphic';
 import * as echarts from '../../echarts';
 import * as zrUtil from 'zrender/src/core/util';
@@ -74,16 +69,13 @@ var SankeyShape = graphic.extendShape({
   },
   buildPath: function (ctx, shape) {
     var extent = shape.extent;
-    var orient = shape.orient;
+    ctx.moveTo(shape.x1, shape.y1);
+    ctx.bezierCurveTo(shape.cpx1, shape.cpy1, shape.cpx2, shape.cpy2, shape.x2, shape.y2);
 
-    if (orient === 'vertical') {
-      ctx.moveTo(shape.x1, shape.y1);
-      ctx.bezierCurveTo(shape.cpx1, shape.cpy1, shape.cpx2, shape.cpy2, shape.x2, shape.y2);
+    if (shape.orient === 'vertical') {
       ctx.lineTo(shape.x2 + extent, shape.y2);
       ctx.bezierCurveTo(shape.cpx2 + extent, shape.cpy2, shape.cpx1 + extent, shape.cpy1, shape.x1 + extent, shape.y1);
     } else {
-      ctx.moveTo(shape.x1, shape.y1);
-      ctx.bezierCurveTo(shape.cpx1, shape.cpy1, shape.cpx2, shape.cpy2, shape.x2, shape.y2);
       ctx.lineTo(shape.x2, shape.y2 + extent);
       ctx.bezierCurveTo(shape.cpx2, shape.cpy2 + extent, shape.cpx1, shape.cpy1 + extent, shape.x1, shape.y1 + extent);
     }
@@ -253,6 +245,8 @@ export default echarts.extendChartView({
       if (itemModel.get('focusNodeAdjacency')) {
         el.off('mouseover').on('mouseover', function () {
           if (!sankeyView._focusAdjacencyDisabled) {
+            sankeyView._clearTimer();
+
             api.dispatchAction({
               type: 'focusNodeAdjacency',
               seriesId: seriesModel.id,
@@ -262,10 +256,7 @@ export default echarts.extendChartView({
         });
         el.off('mouseout').on('mouseout', function () {
           if (!sankeyView._focusAdjacencyDisabled) {
-            api.dispatchAction({
-              type: 'unfocusNodeAdjacency',
-              seriesId: seriesModel.id
-            });
+            sankeyView._dispatchUnfocus(api);
           }
         });
       }
@@ -276,6 +267,8 @@ export default echarts.extendChartView({
       if (edgeModel.get('focusNodeAdjacency')) {
         el.off('mouseover').on('mouseover', function () {
           if (!sankeyView._focusAdjacencyDisabled) {
+            sankeyView._clearTimer();
+
             api.dispatchAction({
               type: 'focusNodeAdjacency',
               seriesId: seriesModel.id,
@@ -285,10 +278,7 @@ export default echarts.extendChartView({
         });
         el.off('mouseout').on('mouseout', function () {
           if (!sankeyView._focusAdjacencyDisabled) {
-            api.dispatchAction({
-              type: 'unfocusNodeAdjacency',
-              seriesId: seriesModel.id
-            });
+            sankeyView._dispatchUnfocus(api);
           }
         });
       }
@@ -302,7 +292,28 @@ export default echarts.extendChartView({
 
     this._data = seriesModel.getData();
   },
-  dispose: function () {},
+  dispose: function () {
+    this._clearTimer();
+  },
+  _dispatchUnfocus: function (api) {
+    var self = this;
+
+    this._clearTimer();
+
+    this._unfocusDelayTimer = setTimeout(function () {
+      self._unfocusDelayTimer = null;
+      api.dispatchAction({
+        type: 'unfocusNodeAdjacency',
+        seriesId: self._model.id
+      });
+    }, 500);
+  },
+  _clearTimer: function () {
+    if (this._unfocusDelayTimer) {
+      clearTimeout(this._unfocusDelayTimer);
+      this._unfocusDelayTimer = null;
+    }
+  },
   focusNodeAdjacency: function (seriesModel, ecModel, api, payload) {
     var data = this._model.getData();
 

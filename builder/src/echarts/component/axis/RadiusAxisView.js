@@ -21,7 +21,7 @@ import * as graphic from '../../util/graphic';
 import AxisBuilder from './AxisBuilder';
 import AxisView from './AxisView';
 var axisBuilderAttrs = ['axisLine', 'axisTickLabel', 'axisName'];
-var selfBuilderAttrs = ['splitLine', 'splitArea'];
+var selfBuilderAttrs = ['splitLine', 'splitArea', 'minorSplitLine'];
 export default AxisView.extend({
   type: 'radiusAxis',
   axisPointerClass: 'PolarAxisPointer',
@@ -36,6 +36,7 @@ export default AxisView.extend({
     var polar = radiusAxis.polar;
     var angleAxis = polar.getAngleAxis();
     var ticksCoords = radiusAxis.getTicksCoords();
+    var minorTicksCoords = radiusAxis.getMinorTicksCoords();
     var axisAngle = angleAxis.getExtent()[0];
     var radiusExtent = radiusAxis.getExtent();
     var layout = layoutAxis(polar, radiusAxisModel, axisAngle);
@@ -44,7 +45,7 @@ export default AxisView.extend({
     this.group.add(axisBuilder.getGroup());
     zrUtil.each(selfBuilderAttrs, function (name) {
       if (radiusAxisModel.get(name + '.show') && !radiusAxis.scale.isBlank()) {
-        this['_' + name](radiusAxisModel, polar, axisAngle, radiusExtent, ticksCoords);
+        this['_' + name](radiusAxisModel, polar, axisAngle, radiusExtent, ticksCoords, minorTicksCoords);
       }
     }, this);
   },
@@ -68,8 +69,7 @@ export default AxisView.extend({
           cx: polar.cx,
           cy: polar.cy,
           r: ticksCoords[i].coord
-        },
-        silent: true
+        }
       }));
     } // Simple optimization
     // Batching the lines if color are the same
@@ -84,6 +84,38 @@ export default AxisView.extend({
         silent: true
       }));
     }
+  },
+
+  /**
+   * @private
+   */
+  _minorSplitLine: function (radiusAxisModel, polar, axisAngle, radiusExtent, ticksCoords, minorTicksCoords) {
+    if (!minorTicksCoords.length) {
+      return;
+    }
+
+    var minorSplitLineModel = radiusAxisModel.getModel('minorSplitLine');
+    var lineStyleModel = minorSplitLineModel.getModel('lineStyle');
+    var lines = [];
+
+    for (var i = 0; i < minorTicksCoords.length; i++) {
+      for (var k = 0; k < minorTicksCoords[i].length; k++) {
+        lines.push(new graphic.Circle({
+          shape: {
+            cx: polar.cx,
+            cy: polar.cy,
+            r: minorTicksCoords[i][k].coord
+          }
+        }));
+      }
+    }
+
+    this.group.add(graphic.mergePath(lines, {
+      style: zrUtil.defaults({
+        fill: null
+      }, lineStyleModel.getLineStyle()),
+      silent: true
+    }));
   },
 
   /**

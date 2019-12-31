@@ -25,7 +25,7 @@ var instances = {}; // ZRender实例map索引
  * @type {string}
  */
 
-export var version = '4.0.7';
+export var version = '4.2.0';
 /**
  * Initializing a zrender instance
  * @param {HTMLElement} dom
@@ -124,7 +124,7 @@ var ZRender = function (id, dom, opts) {
   var painter = new painterCtors[rendererType](dom, storage, opts, id);
   this.storage = storage;
   this.painter = painter;
-  var handerProxy = !env.node && !env.worker ? new HandlerProxy(painter.getViewportRoot()) : null;
+  var handerProxy = !env.node && !env.worker ? new HandlerProxy(painter.getViewportRoot(), painter.root) : null;
   this.handler = new Handler(storage, painter, handerProxy, painter.root);
   /**
    * @type {module:zrender/animation/Animation}
@@ -222,13 +222,10 @@ ZRender.prototype = {
     // var start = new Date();
     // Clear needsRefresh ahead to avoid something wrong happens in refresh
     // Or it will cause zrender refreshes again and again.
-    this._needsRefresh = false;
-    this.painter.refresh();
-    /**
-     * Avoid trigger zr.refresh in Element#beforeUpdate hook
-     */
+    this._needsRefresh = this._needsRefreshHover = false;
+    this.painter.refresh(); // Avoid trigger zr.refresh in Element#beforeUpdate hook
 
-    this._needsRefresh = false; // var end = new Date();
+    this._needsRefresh = this._needsRefreshHover = false; // var end = new Date();
     // var log = document.getElementById('log');
     // if (log) {
     //     log.innerHTML = log.innerHTML + '<br>' + (end - start);

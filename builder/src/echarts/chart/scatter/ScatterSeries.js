@@ -22,7 +22,9 @@ export default SeriesModel.extend({
   type: 'series.scatter',
   dependencies: ['grid', 'polar', 'geo', 'singleAxis', 'calendar'],
   getInitialData: function (option, ecModel) {
-    return createListFromArray(this.getSource(), this);
+    return createListFromArray(this.getSource(), this, {
+      useEncodeDefaulter: true
+    });
   },
   brushSelector: 'point',
   getProgressive: function () {
@@ -76,8 +78,11 @@ export default SeriesModel.extend({
     // },
     itemStyle: {
       opacity: 0.8 // color: 各异
-      // progressive: null
 
-    }
+    },
+    // If clip the overflow graphics
+    // Works on cartesian / polar series
+    clip: true // progressive: null
+
   }
 });

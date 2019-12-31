@@ -24,12 +24,15 @@ import createListFromArray from './helper/createListFromArray';
 import { getLayoutOnAxis } from '../layout/barGrid';
 import DataDiffer from '../data/DataDiffer';
 import SeriesModel from '../model/Series';
+import Model from '../model/Model';
 import ChartView from '../view/Chart';
+import { createClipPath } from './helper/createClipPathFromCoordSys';
 import prepareCartesian2d from '../coord/cartesian/prepareCustom';
 import prepareGeo from '../coord/geo/prepareCustom';
 import prepareSingleAxis from '../coord/single/prepareCustom';
 import preparePolar from '../coord/polar/prepareCustom';
 import prepareCalendar from '../coord/calendar/prepareCustom';
+var CACHED_LABEL_STYLE_PROPERTIES = graphicUtil.CACHED_LABEL_STYLE_PROPERTIES;
 var ITEM_STYLE_NORMAL_PATH = ['itemStyle'];
 var ITEM_STYLE_EMPHASIS_PATH = ['emphasis', 'itemStyle'];
 var LABEL_NORMAL = ['label'];
@@ -68,7 +71,12 @@ SeriesModel.extend({
     zlevel: 0,
     z: 2,
     legendHoverLink: true,
-    useTransform: true // Cartesian coordinate system
+    useTransform: true,
+    // Custom series will not clip by default.
+    // Some case will use custom series to draw label
+    // For example https://echarts.apache.org/examples/en/editor.html?c=custom-gantt-flight
+    // Only works on polar and cartesian2d coordinate system.
+    clip: false // Cartesian coordinate system
     // xAxisIndex: 0,
     // yAxisIndex: 0,
     // Polar coordinate system
@@ -129,7 +137,16 @@ ChartView.extend({
     }).remove(function (oldIdx) {
       var el = oldData.getItemGraphicEl(oldIdx);
       el && group.remove(el);
-    }).execute();
+    }).execute(); // Do clipping
+
+    var clipPath = customSeries.get('clip', true) ? createClipPath(customSeries.coordinateSystem, false, customSeries) : null;
+
+    if (clipPath) {
+      group.setClipPath(clipPath);
+    } else {
+      group.removeClipPath();
+    }
+
     this._data = data;
   },
   incrementalPrepareRender: function (customSeries, ecModel, api) {
@@ -182,7 +199,8 @@ ChartView.extend({
 
 function createEl(elOption) {
   var graphicType = elOption.type;
-  var el;
+  var el; // Those graphic elements are not shapes. They should not be
+  // overwritten by users, so do them first.
 
   if (graphicType === 'path') {
     var shape = elOption.shape; // Using pathRect brings convenience to users sacle svg path.
@@ -203,8 +221,12 @@ function createEl(elOption) {
   } else if (graphicType === 'text') {
     el = new graphicUtil.Text({});
     el.__customText = elOption.style.text;
+  } else if (graphicType === 'group') {
+    el = new graphicUtil.Group();
+  } else if (graphicType === 'compoundPath') {
+    throw new Error('"compoundPath" is not supported yet.');
   } else {
-    var Clz = graphicUtil[graphicType.charAt(0).toUpperCase() + graphicType.slice(1)];
+    var Clz = graphicUtil.getShapeClass(graphicType);
     el = new Clz();
   }
 
@@ -273,18 +295,14 @@ function updateEl(el, dataIndex, elOption, animatableModel, data, isInit, isRoot
   elOption.hasOwnProperty('info') && el.attr('info', elOption.info); // If `elOption.styleEmphasis` is `false`, remove hover style. The
   // logic is ensured by `graphicUtil.setElementHoverStyle`.
 
-  var styleEmphasis = elOption.styleEmphasis;
-  var disableStyleEmphasis = styleEmphasis === false;
+  var styleEmphasis = elOption.styleEmphasis; // hoverStyle should always be set here, because if the hover style
+  // may already be changed, where the inner cache should be reset.
 
-  if (!( // Try to escapse setting hover style for performance.
-  el.__cusHasEmphStl && styleEmphasis == null || !el.__cusHasEmphStl && disableStyleEmphasis)) {
-    // Should not use graphicUtil.setHoverStyle, since the styleEmphasis
-    // should not be share by group and its descendants.
-    graphicUtil.setElementHoverStyle(el, styleEmphasis);
-    el.__cusHasEmphStl = !disableStyleEmphasis;
+  graphicUtil.setElementHoverStyle(el, styleEmphasis);
+
+  if (isRoot) {
+    graphicUtil.setAsHighDownDispatcher(el, styleEmphasis !== false);
   }
-
-  isRoot && graphicUtil.setAsHoverStyleTrigger(el, !disableStyleEmphasis);
 }
 
 function prepareStyleTransition(prop, targetStyle, elOptionStyle, oldElStyle, isInit) {
@@ -387,12 +405,13 @@ function makeRenderItem(customSeries, data, ecModel, api) {
     currVisualColor != null && (itemStyle.fill = currVisualColor);
     var opacity = data.getItemVisual(dataIndexInside, 'opacity');
     opacity != null && (itemStyle.opacity = opacity);
-    graphicUtil.setTextStyle(itemStyle, currLabelNormalModel, null, {
+    var labelModel = extra ? applyExtraBefore(extra, currLabelNormalModel) : currLabelNormalModel;
+    graphicUtil.setTextStyle(itemStyle, labelModel, null, {
       autoColor: currVisualColor,
       isRectText: true
     });
-    itemStyle.text = currLabelNormalModel.getShallow('show') ? zrUtil.retrieve2(customSeries.getFormattedLabel(dataIndexInside, 'normal'), getDefaultLabel(data, dataIndexInside)) : null;
-    extra && zrUtil.extend(itemStyle, extra);
+    itemStyle.text = labelModel.getShallow('show') ? zrUtil.retrieve2(customSeries.getFormattedLabel(dataIndexInside, 'normal'), getDefaultLabel(data, dataIndexInside)) : null;
+    extra && applyExtraAfter(itemStyle, extra);
     return itemStyle;
   }
   /**
@@ -406,11 +425,12 @@ function makeRenderItem(customSeries, data, ecModel, api) {
     dataIndexInside == null && (dataIndexInside = currDataIndexInside);
     updateCache(dataIndexInside);
     var itemStyle = currItemModel.getModel(ITEM_STYLE_EMPHASIS_PATH).getItemStyle();
-    graphicUtil.setTextStyle(itemStyle, currLabelEmphasisModel, null, {
+    var labelModel = extra ? applyExtraBefore(extra, currLabelEmphasisModel) : currLabelEmphasisModel;
+    graphicUtil.setTextStyle(itemStyle, labelModel, null, {
       isRectText: true
     }, true);
-    itemStyle.text = currLabelEmphasisModel.getShallow('show') ? zrUtil.retrieve3(customSeries.getFormattedLabel(dataIndexInside, 'emphasis'), customSeries.getFormattedLabel(dataIndexInside, 'normal'), getDefaultLabel(data, dataIndexInside)) : null;
-    extra && zrUtil.extend(itemStyle, extra);
+    itemStyle.text = labelModel.getShallow('show') ? zrUtil.retrieve3(customSeries.getFormattedLabel(dataIndexInside, 'emphasis'), customSeries.getFormattedLabel(dataIndexInside, 'normal'), getDefaultLabel(data, dataIndexInside)) : null;
+    extra && applyExtraAfter(itemStyle, extra);
     return itemStyle;
   }
   /**
@@ -429,6 +449,7 @@ function makeRenderItem(customSeries, data, ecModel, api) {
    * @param {number} opt.count Positive interger.
    * @param {number} [opt.barWidth]
    * @param {number} [opt.barMaxWidth]
+   * @param {number} [opt.barMinWidth]
    * @param {number} [opt.barGap]
    * @param {number} [opt.barCategoryGap]
    * @return {Object} {width, offset, offsetCenter} is not support, return undefined.
@@ -595,6 +616,27 @@ function processAddUpdate(newIndex, oldIndex) {
   var childOption = newIndex != null ? context.newChildren[newIndex] : null;
   var child = oldIndex != null ? context.oldChildren[oldIndex] : null;
   doCreateOrUpdate(child, context.dataIndex, childOption, context.animatableModel, context.group, context.data);
+} // `graphic#applyDefaultTextStyle` will cache
+// textFill, textStroke, textStrokeWidth.
+// We have to do this trick.
+
+
+function applyExtraBefore(extra, model) {
+  var dummyModel = new Model({}, model);
+  zrUtil.each(CACHED_LABEL_STYLE_PROPERTIES, function (stylePropName, modelPropName) {
+    if (extra.hasOwnProperty(stylePropName)) {
+      dummyModel.option[modelPropName] = extra[stylePropName];
+    }
+  });
+  return dummyModel;
+}
+
+function applyExtraAfter(itemStyle, extra) {
+  for (var key in extra) {
+    if (extra.hasOwnProperty(key) || !CACHED_LABEL_STYLE_PROPERTIES.hasOwnProperty(key)) {
+      itemStyle[key] = extra[key];
+    }
+  }
 }
 
 function processRemove(oldIndex) {

@@ -16,11 +16,6 @@
 * specific language governing permissions and limitations
 * under the License.
 */
-
-/**
- * @file This file used to draw tree view.
- * @author Deqing Li(annong035@gmail.com)
- */
 import * as zrUtil from 'zrender/src/core/util';
 import * as graphic from '../../util/graphic';
 import SymbolClz from '../helper/Symbol';
@@ -75,7 +70,7 @@ export default echarts.extendChartView({
       group.attr('position', [layoutInfo.x, layoutInfo.y]);
     }
 
-    this._updateViewCoordSys(seriesModel);
+    this._updateViewCoordSys(seriesModel, layoutInfo, layout);
 
     this._updateController(seriesModel, ecModel, api);
 
@@ -147,16 +142,20 @@ export default echarts.extendChartView({
     });
     var min = [];
     var max = [];
-    bbox.fromPoints(points, min, max); // If width or height is 0
+    bbox.fromPoints(points, min, max); // If don't Store min max when collapse the root node after roam,
+    // the root node will disappear.
+
+    var oldMin = this._min;
+    var oldMax = this._max; // If width or height is 0
 
     if (max[0] - min[0] === 0) {
-      max[0] += 1;
-      min[0] -= 1;
+      min[0] = oldMin ? oldMin[0] : min[0] - 1;
+      max[0] = oldMax ? oldMax[0] : max[0] + 1;
     }
 
     if (max[1] - min[1] === 0) {
-      max[1] += 1;
-      min[1] -= 1;
+      min[1] = oldMin ? oldMin[1] : min[1] - 1;
+      max[1] = oldMax ? oldMax[1] : max[1] + 1;
     }
 
     var viewCoordSys = seriesModel.coordinateSystem = new View();
@@ -170,6 +169,8 @@ export default echarts.extendChartView({
       scale: viewCoordSys.scale
     });
     this._viewCoordSys = viewCoordSys;
+    this._min = min;
+    this._max = max;
   },
   _updateController: function (seriesModel, ecModel, api) {
     var controller = this._controller;
@@ -342,9 +343,11 @@ function updateNode(data, dataIndex, symbolEl, group, seriesModel, seriesScope) 
     }
 
     var textPosition = isLeft ? 'left' : 'right';
+    var rotate = seriesScope.labelModel.get('rotate');
+    var labelRotateRadian = rotate * (Math.PI / 180);
     symbolPath.setStyle({
-      textPosition: textPosition,
-      textRotation: -rad,
+      textPosition: seriesScope.labelModel.get('position') || textPosition,
+      textRotation: rotate == null ? -rad : labelRotateRadian,
       textOrigin: 'center',
       verticalAlign: 'middle'
     });

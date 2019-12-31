@@ -78,30 +78,21 @@ function PiePiece(data, idx) {
   this.add(sector);
   this.add(polyline);
   this.add(text);
-  this.updateData(data, idx, true); // Hover to change label and labelLine
-
-  function onEmphasis() {
-    polyline.ignore = polyline.hoverIgnore;
-    text.ignore = text.hoverIgnore;
-  }
-
-  function onNormal() {
-    polyline.ignore = polyline.normalIgnore;
-    text.ignore = text.normalIgnore;
-  }
-
-  this.on('emphasis', onEmphasis).on('normal', onNormal).on('mouseover', onEmphasis).on('mouseout', onNormal);
+  this.updateData(data, idx, true);
 }
 
 var piePieceProto = PiePiece.prototype;
 
 piePieceProto.updateData = function (data, idx, firstCreate) {
   var sector = this.childAt(0);
+  var labelLine = this.childAt(1);
+  var labelText = this.childAt(2);
   var seriesModel = data.hostModel;
   var itemModel = data.getItemModel(idx);
   var layout = data.getItemLayout(idx);
   var sectorShape = zrUtil.extend({}, layout);
   sectorShape.label = null;
+  var animationTypeUpdate = seriesModel.getShallow('animationTypeUpdate');
 
   if (firstCreate) {
     sector.setShape(sectorShape);
@@ -124,9 +115,15 @@ piePieceProto.updateData = function (data, idx, firstCreate) {
         }, seriesModel, idx);
       }
   } else {
-    graphic.updateProps(sector, {
-      shape: sectorShape
-    }, seriesModel, idx);
+    if (animationTypeUpdate === 'expansion') {
+      // Sectors are set to be target shape and an overlaying clipPath is used for animation
+      sector.setShape(sectorShape);
+    } else {
+      // Transition animation from the old shape
+      graphic.updateProps(sector, {
+        shape: sectorShape
+      }, seriesModel, idx);
+    }
   } // Update common style
 
 
@@ -139,40 +136,39 @@ piePieceProto.updateData = function (data, idx, firstCreate) {
   var cursorStyle = itemModel.getShallow('cursor');
   cursorStyle && sector.attr('cursor', cursorStyle); // Toggle selected
 
-  toggleItemSelected(this, data.getItemLayout(idx), seriesModel.isSelected(null, idx), seriesModel.get('selectedOffset'), seriesModel.get('animation'));
+  toggleItemSelected(this, data.getItemLayout(idx), seriesModel.isSelected(null, idx), seriesModel.get('selectedOffset'), seriesModel.get('animation')); // Label and text animation should be applied only for transition type animation when update
 
-  function onEmphasis() {
-    // Sector may has animation of updating data. Force to move to the last frame
-    // Or it may stopped on the wrong shape
-    sector.stopAnimation(true);
-    sector.animateTo({
-      shape: {
-        r: layout.r + seriesModel.get('hoverOffset')
-      }
-    }, 300, 'elasticOut');
-  }
+  var withAnimation = !firstCreate && animationTypeUpdate === 'transition';
 
-  function onNormal() {
-    sector.stopAnimation(true);
-    sector.animateTo({
-      shape: {
-        r: layout.r
-      }
-    }, 300, 'elasticOut');
-  }
+  this._updateLabel(data, idx, withAnimation);
 
-  sector.off('mouseover').off('mouseout').off('emphasis').off('normal');
+  this.highDownOnUpdate = itemModel.get('hoverAnimation') && seriesModel.isAnimationEnabled() ? function (fromState, toState) {
+    if (toState === 'emphasis') {
+      labelLine.ignore = labelLine.hoverIgnore;
+      labelText.ignore = labelText.hoverIgnore; // Sector may has animation of updating data. Force to move to the last frame
+      // Or it may stopped on the wrong shape
 
-  if (itemModel.get('hoverAnimation') && seriesModel.isAnimationEnabled()) {
-    sector.on('mouseover', onEmphasis).on('mouseout', onNormal).on('emphasis', onEmphasis).on('normal', onNormal);
-  }
-
-  this._updateLabel(data, idx);
-
+      sector.stopAnimation(true);
+      sector.animateTo({
+        shape: {
+          r: layout.r + seriesModel.get('hoverOffset')
+        }
+      }, 300, 'elasticOut');
+    } else {
+      labelLine.ignore = labelLine.normalIgnore;
+      labelText.ignore = labelText.normalIgnore;
+      sector.stopAnimation(true);
+      sector.animateTo({
+        shape: {
+          r: layout.r
+        }
+      }, 300, 'elasticOut');
+    }
+  } : null;
   graphic.setHoverStyle(this);
 };
 
-piePieceProto._updateLabel = function (data, idx) {
+piePieceProto._updateLabel = function (data, idx, withAnimation) {
   var labelLine = this.childAt(1);
   var labelText = this.childAt(2);
   var seriesModel = data.hostModel;
@@ -180,17 +176,36 @@ piePieceProto._updateLabel = function (data, idx) {
   var layout = data.getItemLayout(idx);
   var labelLayout = layout.label;
   var visualColor = data.getItemVisual(idx, 'color');
-  graphic.updateProps(labelLine, {
-    shape: {
-      points: labelLayout.linePoints || [[labelLayout.x, labelLayout.y], [labelLayout.x, labelLayout.y], [labelLayout.x, labelLayout.y]]
-    }
-  }, seriesModel, idx);
-  graphic.updateProps(labelText, {
-    style: {
-      x: labelLayout.x,
-      y: labelLayout.y
-    }
-  }, seriesModel, idx);
+
+  if (!labelLayout || isNaN(labelLayout.x) || isNaN(labelLayout.y)) {
+    labelText.ignore = labelText.normalIgnore = labelText.hoverIgnore = labelLine.ignore = labelLine.normalIgnore = labelLine.hoverIgnore = true;
+    return;
+  }
+
+  var targetLineShape = {
+    points: labelLayout.linePoints || [[labelLayout.x, labelLayout.y], [labelLayout.x, labelLayout.y], [labelLayout.x, labelLayout.y]]
+  };
+  var targetTextStyle = {
+    x: labelLayout.x,
+    y: labelLayout.y
+  };
+
+  if (withAnimation) {
+    graphic.updateProps(labelLine, {
+      shape: targetLineShape
+    }, seriesModel, idx);
+    graphic.updateProps(labelText, {
+      style: targetTextStyle
+    }, seriesModel, idx);
+  } else {
+    labelLine.attr({
+      shape: targetLineShape
+    });
+    labelText.attr({
+      style: targetTextStyle
+    });
+  }
+
   labelText.attr({
     rotation: labelLayout.rotation,
     origin: [labelLayout.x, labelLayout.y],
@@ -204,7 +219,7 @@ piePieceProto._updateLabel = function (data, idx) {
   graphic.setLabelStyle(labelText.style, labelText.hoverStyle = {}, labelModel, labelHoverModel, {
     labelFetcher: data.hostModel,
     labelDataIndex: idx,
-    defaultText: data.getName(idx),
+    defaultText: labelLayout.text,
     autoColor: visualColor,
     useInsideStyle: !!labelLayout.inside
   }, {
@@ -253,6 +268,7 @@ var PieView = ChartView.extend({
     var hasAnimation = ecModel.get('animation');
     var isFirstRender = !oldData;
     var animationType = seriesModel.get('animationType');
+    var animationTypeUpdate = seriesModel.get('animationTypeUpdate');
     var onSectorClick = zrUtil.curry(updateDataSelected, this.uid, seriesModel, hasAnimation, api);
     var selectedMode = seriesModel.get('selectedMode');
     data.diff(oldData).add(function (idx) {
@@ -269,6 +285,13 @@ var PieView = ChartView.extend({
       group.add(piePiece);
     }).update(function (newIdx, oldIdx) {
       var piePiece = oldData.getItemGraphicEl(oldIdx);
+
+      if (!isFirstRender && animationTypeUpdate !== 'transition') {
+        piePiece.eachChild(function (child) {
+          child.stopAnimation(true);
+        });
+      }
+
       piePiece.updateData(data, newIdx);
       piePiece.off('click');
       selectedMode && piePiece.on('click', onSectorClick);
@@ -279,12 +302,16 @@ var PieView = ChartView.extend({
       group.remove(piePiece);
     }).execute();
 
-    if (hasAnimation && isFirstRender && data.count() > 0 // Default expansion animation
-    && animationType !== 'scale') {
+    if (hasAnimation && data.count() > 0 && (isFirstRender ? animationType !== 'scale' : animationTypeUpdate !== 'transition')) {
       var shape = data.getItemLayout(0);
+
+      for (var s = 1; isNaN(shape.startAngle) && s < data.count(); ++s) {
+        shape = data.getItemLayout(s);
+      }
+
       var r = Math.max(api.getWidth(), api.getHeight()) / 2;
       var removeClipPath = zrUtil.bind(group.removeClipPath, group);
-      group.setClipPath(this._createClipPath(shape.cx, shape.cy, r, shape.startAngle, shape.clockwise, removeClipPath, seriesModel));
+      group.setClipPath(this._createClipPath(shape.cx, shape.cy, r, shape.startAngle, shape.clockwise, removeClipPath, seriesModel, isFirstRender));
     } else {
       // clipPath is used in first-time animation, so remove it when otherwise. See: #8994
       group.removeClipPath();
@@ -293,7 +320,7 @@ var PieView = ChartView.extend({
     this._data = data;
   },
   dispose: function () {},
-  _createClipPath: function (cx, cy, r, startAngle, clockwise, cb, seriesModel) {
+  _createClipPath: function (cx, cy, r, startAngle, clockwise, cb, seriesModel, isFirstRender) {
     var clipPath = new graphic.Sector({
       shape: {
         cx: cx,
@@ -305,7 +332,8 @@ var PieView = ChartView.extend({
         clockwise: clockwise
       }
     });
-    graphic.initProps(clipPath, {
+    var initOrUpdate = isFirstRender ? graphic.initProps : graphic.updateProps;
+    initOrUpdate(clipPath, {
       shape: {
         endAngle: startAngle + (clockwise ? 1 : -1) * Math.PI * 2
       }

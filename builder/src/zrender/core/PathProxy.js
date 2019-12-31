@@ -6,6 +6,8 @@
  * @author Yi Shen (http://www.github.com/pissang)
  */
 // TODO getTotalLength, getPointAtLength
+
+/* global Float32Array */
 import * as curve from './curve';
 import * as vec2 from './vector';
 import * as bbox from './bbox';
@@ -83,9 +85,11 @@ PathProxy.prototype = {
   /**
    * @readOnly
    */
-  setScale: function (sx, sy) {
-    this._ux = mathAbs(1 / dpr / sx) || 0;
-    this._uy = mathAbs(1 / dpr / sy) || 0;
+  setScale: function (sx, sy, segmentIgnoreThreshold) {
+    // Compat. Previously there is no segmentIgnoreThreshold.
+    segmentIgnoreThreshold = segmentIgnoreThreshold || 0;
+    this._ux = mathAbs(segmentIgnoreThreshold / dpr / sx) || 0;
+    this._uy = mathAbs(segmentIgnoreThreshold / dpr / sy) || 0;
   },
   getContext: function () {
     return this._ctx;
@@ -647,9 +651,12 @@ PathProxy.prototype = {
    */
   rebuildPath: function (ctx) {
     var d = this.data;
-    var x0, y0;
-    var xi, yi;
-    var x, y;
+    var x0;
+    var y0;
+    var xi;
+    var yi;
+    var x;
+    var y;
     var ux = this._ux;
     var uy = this._uy;
     var len = this._len;

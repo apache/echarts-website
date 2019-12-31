@@ -23,15 +23,19 @@ import { defaultEmphasis } from '../../util/model';
 import Model from '../../model/Model';
 import { encodeHTML } from '../../util/format';
 import createGraphFromNodeEdge from '../helper/createGraphFromNodeEdge';
+import LegendVisualProvider from '../../visual/LegendVisualProvider';
 var GraphSeries = echarts.extendSeriesModel({
   type: 'series.graph',
   init: function (option) {
-    GraphSeries.superApply(this, 'init', arguments); // Provide data for legend select
+    GraphSeries.superApply(this, 'init', arguments);
+    var self = this;
 
-    this.legendDataProvider = function () {
-      return this._categoriesData;
-    };
+    function getCategoriesData() {
+      return self._categoriesData;
+    } // Provide data for legend select
 
+
+    this.legendVisualProvider = new LegendVisualProvider(getCategoriesData, getCategoriesData);
     this.fillDataTextStyle(option.edges || option.links);
 
     this._updateCategoriesData();
@@ -185,6 +189,8 @@ var GraphSeries = echarts.extendSeriesModel({
       // Node repulsion. Can be an array to represent range.
       repulsion: [0, 50],
       gravity: 0.1,
+      // Initial friction
+      friction: 0.6,
       // Edge length. Can be an array to represent range.
       edgeLength: 30,
       layoutAnimation: true

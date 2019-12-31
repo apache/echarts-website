@@ -61,21 +61,10 @@ if (!env.canvasSupported) {
     return (parseFloat(zlevel) || 0) * ZLEVEL_BASE + (parseFloat(z) || 0) * Z_BASE + z2;
   };
 
-  var parsePercent = function (value, maxValue) {
-    if (typeof value === 'string') {
-      if (value.lastIndexOf('%') >= 0) {
-        return parseFloat(value) / 100 * maxValue;
-      }
-
-      return parseFloat(value);
-    }
-
-    return value;
-  };
+  var parsePercent = textHelper.parsePercent;
   /***************************************************
    * PATH
    **************************************************/
-
 
   var setColorAndOpacity = function (el, color, opacity) {
     var colorArr = colorTool.parse(color);
@@ -219,7 +208,7 @@ if (!env.canvasSupported) {
     // if (style.lineCap != null) {
     //     el.endcap = style.lineCap;
     // }
-    if (style.lineDash != null) {
+    if (style.lineDash) {
       el.dashstyle = style.lineDash.join(' ');
     }
 
@@ -826,15 +815,14 @@ if (!env.canvasSupported) {
     }
 
     if (!fromTextEl) {
-      var textPosition = style.textPosition;
-      var distance = style.textDistance; // Text position represented by coord
+      var textPosition = style.textPosition; // Text position represented by coord
 
       if (textPosition instanceof Array) {
         x = rect.x + parsePercent(textPosition[0], rect.width);
         y = rect.y + parsePercent(textPosition[1], rect.height);
         align = align || 'left';
       } else {
-        var res = textContain.adjustTextPositionOnRect(textPosition, rect, distance);
+        var res = this.calculateTextPosition ? this.calculateTextPosition({}, style, rect) : textContain.calculateTextPosition({}, style, rect);
         x = res.x;
         y = res.y; // Default align and baseline when has textPosition
 
@@ -948,7 +936,8 @@ if (!env.canvasSupported) {
     updateFillAndStroke(textVmlEl, 'stroke', {
       stroke: style.textStroke,
       opacity: style.opacity,
-      lineDash: style.lineDash
+      lineDash: style.lineDash || null // style.lineDash can be `false`.
+
     }, this);
     textVmlEl.style.zIndex = getZIndex(this.zlevel, this.z, this.z2); // Attached to root
 
