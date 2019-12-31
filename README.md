@@ -88,28 +88,6 @@ node build-example.js
 
 ### If `incubator-echarts-website` needs to be built and published
 
-**Clear**
-```shell
-rm -r ${ECHARTS_BASE}/echarts-www/release
-rm ${ECHARTS_BASE}/echarts-www/echarts-www.zip
-```
-
-**Build `echarts-examples`**
-```shell
-sh ${ECHARTS_BASE}/echarts-examples/release.sh --env asf
-# sh ${ECHARTS_BASE}/echarts-examples/release.sh --env echartsjs
-```
-
-**Build `echarts-doc`**
-Ensure "echarts-doc" is on the correct git branch (`relase` branch).
-```shell
-sh ${ECHARTS_BASE}/echarts-doc/release.sh --env asf
-# sh ${ECHARTS_BASE}/echarts-doc/release.sh --env echartsjs
-ls -alF ${ECHARTS_BASE}/echarts-www/documents/cn
-ls -alF ${ECHARTS_BASE}/echarts-www/documents/en
-ls -alF ${ECHARTS_BASE}/echarts-www/documents/asset/
-```
-
 **Build `echarts-www`**
 ```shell
 sh ${ECHARTS_BASE}/echarts-www/release.sh --env asf
