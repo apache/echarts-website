@@ -1,6 +1,4 @@
 _*.html
 .DS_Store
 en/_*.html
-en/documents
-zh/documents
 package-lock.json
