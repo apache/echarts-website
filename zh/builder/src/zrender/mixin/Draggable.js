@@ -3,8 +3,11 @@
 function Draggable() {
   this.on('mousedown', this._dragStart, this);
   this.on('mousemove', this._drag, this);
-  this.on('mouseup', this._dragEnd, this);
-  this.on('globalout', this._dragEnd, this); // this._dropTarget = null;
+  this.on('mouseup', this._dragEnd, this); // `mosuemove` and `mouseup` can be continue to fire when dragging.
+  // See [Drag outside] in `Handler.js`. So we do not need to trigger
+  // `_dragEnd` when globalout. That would brings better user experience.
+  // this.on('globalout', this._dragEnd, this);
+  // this._dropTarget = null;
   // this._draggingTarget = null;
   // this._x = 0;
   // this._y = 0;

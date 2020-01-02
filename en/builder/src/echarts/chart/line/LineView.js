@@ -327,7 +327,7 @@ export default ChartView.extend({
     var step = !isCoordSysPolar && seriesModel.get('step');
     var clipShapeForSymbol;
 
-    if (coordSys && coordSys.getArea) {
+    if (coordSys && coordSys.getArea && seriesModel.get('clip', true)) {
       clipShapeForSymbol = coordSys.getArea(); // Avoid float number rounding error for symbol on the edge of axis extent.
       // See #7913 and `test/dataZoom-clip.html`.
 
@@ -340,8 +340,9 @@ export default ChartView.extend({
         clipShapeForSymbol.r0 -= 0.5;
         clipShapeForSymbol.r1 += 0.5;
       }
-    } // Initialization animation or coordinate system changed
+    }
 
+    this._clipShapeForSymbol = clipShapeForSymbol; // Initialization animation or coordinate system changed
 
     if (!(polyline && prevCoordSys.type === coordSys.type && step === this._step)) {
       showSymbol && symbolDraw.updateData(data, {
@@ -467,6 +468,11 @@ export default ChartView.extend({
 
         if (!pt) {
           // Null data
+          return;
+        } // fix #11360: should't draw symbol outside clipShapeForSymbol
+
+
+        if (this._clipShapeForSymbol && !this._clipShapeForSymbol.contain(pt[0], pt[1])) {
           return;
         }
 

@@ -356,9 +356,14 @@ var getLayout = {
   }
 };
 
+function isZeroOnPolar(layout) {
+  return layout.startAngle != null && layout.endAngle != null && layout.startAngle === layout.endAngle;
+}
+
 function updateStyle(el, data, dataIndex, itemModel, layout, seriesModel, isHorizontal, isPolar) {
   var color = data.getItemVisual(dataIndex, 'color');
   var opacity = data.getItemVisual(dataIndex, 'opacity');
+  var stroke = data.getVisual('borderColor');
   var itemStyleModel = itemModel.getModel('itemStyle');
   var hoverStyle = itemModel.getModel('emphasis.itemStyle').getBarItemStyle();
 
@@ -367,7 +372,8 @@ function updateStyle(el, data, dataIndex, itemModel, layout, seriesModel, isHori
   }
 
   el.useStyle(zrUtil.defaults({
-    fill: color,
+    stroke: isZeroOnPolar(layout) ? 'none' : stroke,
+    fill: isZeroOnPolar(layout) ? 'none' : color,
     opacity: opacity
   }, itemStyleModel.getBarItemStyle()));
   var cursorStyle = itemModel.getShallow('cursor');
@@ -376,6 +382,10 @@ function updateStyle(el, data, dataIndex, itemModel, layout, seriesModel, isHori
 
   if (!isPolar) {
     setLabel(el.style, hoverStyle, itemModel, color, seriesModel, dataIndex, labelPositionOutside);
+  }
+
+  if (isZeroOnPolar(layout)) {
+    hoverStyle.fill = hoverStyle.stroke = 'none';
   }
 
   graphic.setHoverStyle(el, hoverStyle);

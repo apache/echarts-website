@@ -219,7 +219,7 @@ piePieceProto._updateLabel = function (data, idx, withAnimation) {
   graphic.setLabelStyle(labelText.style, labelText.hoverStyle = {}, labelModel, labelHoverModel, {
     labelFetcher: data.hostModel,
     labelDataIndex: idx,
-    defaultText: data.getName(idx),
+    defaultText: labelLayout.text,
     autoColor: visualColor,
     useInsideStyle: !!labelLayout.inside
   }, {

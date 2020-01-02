@@ -22,14 +22,7 @@ import AxisBuilder from './AxisBuilder';
 import AxisView from './AxisView';
 import * as cartesianAxisHelper from '../../coord/cartesian/cartesianAxisHelper';
 var axisBuilderAttrs = ['axisLine', 'axisTickLabel', 'axisName'];
-var selfBuilderAttrs = ['splitArea', 'splitLine']; // function getAlignWithLabel(model, axisModel) {
-//     var alignWithLabel = model.get('alignWithLabel');
-//     if (alignWithLabel === 'auto') {
-//         alignWithLabel = axisModel.get('axisTick.alignWithLabel');
-//     }
-//     return alignWithLabel;
-// }
-
+var selfBuilderAttrs = ['splitArea', 'splitLine', 'minorSplitLine'];
 var CartesianAxisView = AxisView.extend({
   type: 'cartesianAxis',
   axisPointerClass: 'CartesianAxisPointer',
@@ -89,9 +82,7 @@ var CartesianAxisView = AxisView.extend({
       tickModel: splitLineModel
     });
     var p1 = [];
-    var p2 = []; // Simple optimization
-    // Batching the lines if color are the same
-
+    var p2 = [];
     var lineStyle = lineStyleModel.getLineStyle();
 
     for (var i = 0; i < ticksCoords.length; i++) {
@@ -126,6 +117,59 @@ var CartesianAxisView = AxisView.extend({
         }, lineStyle),
         silent: true
       }));
+    }
+  },
+
+  /**
+   * @param {module:echarts/coord/cartesian/AxisModel} axisModel
+   * @param {module:echarts/coord/cartesian/GridModel} gridModel
+   * @private
+   */
+  _minorSplitLine: function (axisModel, gridModel) {
+    var axis = axisModel.axis;
+    var minorSplitLineModel = axisModel.getModel('minorSplitLine');
+    var lineStyleModel = minorSplitLineModel.getModel('lineStyle');
+    var gridRect = gridModel.coordinateSystem.getRect();
+    var isHorizontal = axis.isHorizontal();
+    var minorTicksCoords = axis.getMinorTicksCoords();
+
+    if (!minorTicksCoords.length) {
+      return;
+    }
+
+    var p1 = [];
+    var p2 = [];
+    var lineStyle = lineStyleModel.getLineStyle();
+
+    for (var i = 0; i < minorTicksCoords.length; i++) {
+      for (var k = 0; k < minorTicksCoords[i].length; k++) {
+        var tickCoord = axis.toGlobalCoord(minorTicksCoords[i][k].coord);
+
+        if (isHorizontal) {
+          p1[0] = tickCoord;
+          p1[1] = gridRect.y;
+          p2[0] = tickCoord;
+          p2[1] = gridRect.y + gridRect.height;
+        } else {
+          p1[0] = gridRect.x;
+          p1[1] = tickCoord;
+          p2[0] = gridRect.x + gridRect.width;
+          p2[1] = tickCoord;
+        }
+
+        this._axisGroup.add(new graphic.Line({
+          anid: 'minor_line_' + minorTicksCoords[i][k].tickValue,
+          subPixelOptimize: true,
+          shape: {
+            x1: p1[0],
+            y1: p1[1],
+            x2: p2[0],
+            y2: p2[1]
+          },
+          style: lineStyle,
+          silent: true
+        }));
+      }
     }
   },
 

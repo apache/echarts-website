@@ -40,7 +40,21 @@ export default SeriesModel.extend({
     var leaves = option.leaves || {};
     var treeOption = {};
     treeOption.leaves = leaves;
-    var tree = Tree.createTree(root, this, treeOption);
+    var tree = Tree.createTree(root, this, treeOption, beforeLink);
+
+    function beforeLink(nodeData) {
+      nodeData.wrapMethod('getItemModel', function (model, idx) {
+        var node = tree.getNodeByDataIndex(idx);
+        var leavesModel = node.getLeavesModel();
+
+        if (!node.children.length || !node.isExpand) {
+          model.parentModel = leavesModel;
+        }
+
+        return model;
+      });
+    }
+
     var treeDepth = 0;
     tree.eachNode('preorder', function (node) {
       if (node.depth > treeDepth) {

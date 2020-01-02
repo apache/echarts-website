@@ -19,6 +19,7 @@
 import createListSimply from '../helper/createListSimply';
 import * as zrUtil from 'zrender/src/core/util';
 import { getDimensionTypeByAxis } from '../../data/helper/dimensionHelper';
+import { makeSeriesEncodeForAxisCoordSys } from '../../data/helper/sourceHelper';
 export var seriesModelMixin = {
   /**
    * @private
@@ -39,7 +40,7 @@ export var seriesModelMixin = {
     var xAxisType = xAxisModel.get('type');
     var yAxisType = yAxisModel.get('type');
     var addOrdinal; // FIXME
-    // 考虑时间轴
+    // Consider time axis.
 
     if (xAxisType === 'category') {
       option.layout = 'horizontal';
@@ -84,22 +85,24 @@ export var seriesModelMixin = {
     }
 
     var defaultValueDimensions = this.defaultValueDimensions;
+    var coordDimensions = [{
+      name: baseAxisDim,
+      type: getDimensionTypeByAxis(baseAxisType),
+      ordinalMeta: ordinalMeta,
+      otherDims: {
+        tooltip: false,
+        itemName: 0
+      },
+      dimsDef: ['base']
+    }, {
+      name: otherAxisDim,
+      type: getDimensionTypeByAxis(otherAxisType),
+      dimsDef: defaultValueDimensions.slice()
+    }];
     return createListSimply(this, {
-      coordDimensions: [{
-        name: baseAxisDim,
-        type: getDimensionTypeByAxis(baseAxisType),
-        ordinalMeta: ordinalMeta,
-        otherDims: {
-          tooltip: false,
-          itemName: 0
-        },
-        dimsDef: ['base']
-      }, {
-        name: otherAxisDim,
-        type: getDimensionTypeByAxis(otherAxisType),
-        dimsDef: defaultValueDimensions.slice()
-      }],
-      dimensionsCount: defaultValueDimensions.length + 1
+      coordDimensions: coordDimensions,
+      dimensionsCount: defaultValueDimensions.length + 1,
+      encodeDefaulter: zrUtil.curry(makeSeriesEncodeForAxisCoordSys, coordDimensions, this)
     });
   },
 

@@ -23,7 +23,9 @@ export default SeriesModel.extend({
   type: 'series.line',
   dependencies: ['grid', 'polar'],
   getInitialData: function (option, ecModel) {
-    return createListFromArray(this.getSource(), this);
+    return createListFromArray(this.getSource(), this, {
+      useEncodeDefaulter: true
+    });
   },
   defaultOption: {
     zlevel: 0,

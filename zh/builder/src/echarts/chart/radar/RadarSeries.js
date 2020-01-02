@@ -20,6 +20,7 @@ import SeriesModel from '../../model/Series';
 import createListSimply from '../helper/createListSimply';
 import * as zrUtil from 'zrender/src/core/util';
 import { encodeHTML } from '../../util/format';
+import LegendVisualProvider from '../../visual/LegendVisualProvider';
 var RadarSeries = SeriesModel.extend({
   type: 'series.radar',
   dependencies: ['radar'],
@@ -28,9 +29,7 @@ var RadarSeries = SeriesModel.extend({
     RadarSeries.superApply(this, 'init', arguments); // Enable legend selection for each data item
     // Use a function instead of direct access because data reference may changed
 
-    this.legendDataProvider = function () {
-      return this.getRawData();
-    };
+    this.legendVisualProvider = new LegendVisualProvider(zrUtil.bind(this.getData, this), zrUtil.bind(this.getRawData, this));
   },
   getInitialData: function (option, ecModel) {
     return createListSimply(this, {

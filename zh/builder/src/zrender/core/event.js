@@ -143,6 +143,19 @@ function preparePointerTransformer(markers, saved) {
   return useOld ? transformer : (saved.srcCoords = srcCoords, saved.transformer = buildTransformer(srcCoords, destCoords));
 }
 /**
+ * Find native event compat for legency IE.
+ * Should be called at the begining of a native event listener.
+ *
+ * @param {Event} [e] Mouse event or touch event or pointer event.
+ *        For lagency IE, we use `window.event` is used.
+ * @return {Event} The native event.
+ */
+
+
+export function getNativeEvent(e) {
+  return e || window.event;
+}
+/**
  * Normalize the coordinates of the input event.
  *
  * Get the `e.zrX` and `e.zrY`, which are relative to the top-left of
@@ -156,15 +169,14 @@ function preparePointerTransformer(markers, saved) {
  * between the result coords and the parameters `el` and `calculate`.
  *
  * @param {HTMLElement} el DOM element.
- * @param {Event} [e] Mouse event or touch event. For lagency IE,
- *        do not need to input it and `window.event` is used.
+ * @param {Event} [e] See `getNativeEvent`.
  * @param {boolean} [calculate=false] Whether to force calculate
  *        the coordinates but not use ones provided by browser.
+ * @return {UIEvent} The normalized native UIEvent.
  */
 
-
 export function normalizeEvent(el, e, calculate) {
-  e = e || window.event;
+  e = getNativeEvent(e);
 
   if (e.zrX != null) {
     return e;
@@ -201,9 +213,12 @@ export function normalizeEvent(el, e, calculate) {
  * @param {HTMLElement} el
  * @param {string} name
  * @param {Function} handler
+ * @param {Object|boolean} opt If boolean, means `opt.capture`
+ * @param {boolean} [opt.capture=false]
+ * @param {boolean} [opt.passive=false]
  */
 
-export function addEventListener(el, name, handler) {
+export function addEventListener(el, name, handler, opt) {
   if (isDomLevel2) {
     // Reproduct the console warning:
     // [Violation] Added non-passive event listener to a scroll-blocking <some> event.
@@ -225,14 +240,23 @@ export function addEventListener(el, name, handler) {
     //     // By default, the third param of el.addEventListener is `capture: false`.
     //     : void 0;
     // el.addEventListener(name, handler /* , opts */);
-    el.addEventListener(name, handler);
+    el.addEventListener(name, handler, opt);
   } else {
+    // For simplicity, do not implement `setCapture` for IE9-.
     el.attachEvent('on' + name, handler);
   }
 }
-export function removeEventListener(el, name, handler) {
+/**
+ * Parameter are the same as `addEventListener`.
+ *
+ * Notice that if a listener is registered twice, one with capture and one without,
+ * remove each one separately. Removal of a capturing listener does not affect a
+ * non-capturing version of the same listener, and vice versa.
+ */
+
+export function removeEventListener(el, name, handler, opt) {
   if (isDomLevel2) {
-    el.removeEventListener(name, handler);
+    el.removeEventListener(name, handler, opt);
   } else {
     el.detachEvent('on' + name, handler);
   }

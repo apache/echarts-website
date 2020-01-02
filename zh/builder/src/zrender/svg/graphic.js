@@ -241,6 +241,8 @@ svgPath.brush = function (el) {
 
   if (style.text != null) {
     svgTextDrawRectText(el, el.getBoundingRect());
+  } else {
+    removeOldTextNode(el);
   }
 };
 /***************************************************
@@ -289,6 +291,8 @@ svgImage.brush = function (el) {
 
   if (style.text != null) {
     svgTextDrawRectText(el, el.getBoundingRect());
+  } else {
+    removeOldTextNode(el);
   }
 };
 /***************************************************
@@ -483,6 +487,19 @@ function updateTextLocation(tspan, textAlign, x, y) {
   attr(tspan, 'y', y);
 }
 
+function removeOldTextNode(el) {
+  if (el && el.__textSvgEl) {
+    // textSvgEl may has no parentNode if el has been removed temporary.
+    if (el.__textSvgEl.parentNode) {
+      el.__textSvgEl.parentNode.removeChild(el.__textSvgEl);
+    }
+
+    el.__textSvgEl = null;
+    el.__tspanList = [];
+    el.__text = null;
+  }
+}
+
 svgText.drawRectText = svgTextDrawRectText;
 
 svgText.brush = function (el) {
@@ -490,5 +507,7 @@ svgText.brush = function (el) {
 
   if (style.text != null) {
     svgTextDrawRectText(el, false);
+  } else {
+    removeOldTextNode(el);
   }
 };

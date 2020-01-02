@@ -22,7 +22,9 @@ export default SeriesModel.extend({
   type: 'series.effectScatter',
   dependencies: ['grid', 'polar'],
   getInitialData: function (option, ecModel) {
-    return createListFromArray(this.getSource(), this);
+    return createListFromArray(this.getSource(), this, {
+      useEncodeDefaulter: true
+    });
   },
   brushSelector: 'point',
   defaultOption: {

@@ -233,7 +233,6 @@ function doCalBarWidthAndOffset(seriesInfoList) {
     // will be shared by series. Consider that they have default values,
     // only the attributes set on the last series will work.
     // Do not change this fact unless there will be a break change.
-    // TODO
 
     var barWidth = seriesInfo.barWidth;
 
@@ -287,7 +286,7 @@ function doCalBarWidthAndOffset(seriesInfoList) {
 
         if (finalWidth !== autoWidth) {
           column.width = finalWidth;
-          remainedWidth -= finalWidth;
+          remainedWidth -= finalWidth + barGapPercent * finalWidth;
           autoWidthCount--;
         }
       } else {
@@ -306,7 +305,7 @@ function doCalBarWidthAndOffset(seriesInfoList) {
         }
 
         column.width = finalWidth;
-        remainedWidth -= finalWidth;
+        remainedWidth -= finalWidth + barGapPercent * finalWidth;
         autoWidthCount--;
       }
     }); // Recalculate width again

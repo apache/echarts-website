@@ -127,12 +127,6 @@ function BrushController(zr) {
   this._dragging;
   /**
    * @private
-   * @type {Object}
-   */
-
-  this._lastMouseMovePoint = {};
-  /**
-   * @private
    * @type {Array}
    */
 
@@ -172,7 +166,7 @@ function BrushController(zr) {
    */
 
   this._handlers = {};
-  each(mouseHandlers, function (handler, eventName) {
+  each(pointerHandlers, function (handler, eventName) {
     this._handlers[eventName] = zrUtil.bind(handler, this);
   }, this);
 }
@@ -323,9 +317,7 @@ function doEnableBrush(controller, brushOption) {
     interactionMutex.take(zr, MUTEX_RESOURCE_KEY, controller._uid);
   }
 
-  each(controller._handlers, function (handler, eventName) {
-    zr.on(eventName, handler);
-  });
+  mountHandlers(zr, controller._handlers);
   controller._brushType = brushOption.brushType;
   controller._brushOption = zrUtil.merge(zrUtil.clone(DEFAULT_BRUSH_OPT), brushOption, true);
 }
@@ -333,10 +325,20 @@ function doEnableBrush(controller, brushOption) {
 function doDisableBrush(controller) {
   var zr = controller._zr;
   interactionMutex.release(zr, MUTEX_RESOURCE_KEY, controller._uid);
-  each(controller._handlers, function (handler, eventName) {
+  unmountHandlers(zr, controller._handlers);
+  controller._brushType = controller._brushOption = null;
+}
+
+function mountHandlers(zr, handlers) {
+  each(handlers, function (handler, eventName) {
+    zr.on(eventName, handler);
+  });
+}
+
+function unmountHandlers(zr, handlers) {
+  each(handlers, function (handler, eventName) {
     zr.off(eventName, handler);
   });
-  controller._brushType = controller._brushOption = null;
 }
 
 function createCover(controller, brushOption) {
@@ -639,8 +641,11 @@ function pointsToRect(points) {
 }
 
 function resetCursor(controller, e, localCursorPoint) {
-  // Check active
-  if (!controller._brushType) {
+  if ( // Check active
+  !controller._brushType // resetCursor should be always called when mouse is in zr area,
+  // but not called when mouse is out of zr area to avoid bad influence
+  // if `mousemove`, `mouseup` are triggered from `document` event.
+  || isOutsideZrArea(controller, e)) {
     return;
   }
 
@@ -730,7 +735,7 @@ function determineBrushType(brushType, panel) {
   return brushType;
 }
 
-var mouseHandlers = {
+var pointerHandlers = {
   mousedown: function (e) {
     if (this._dragging) {
       // In case some browser do not support globalOut,
@@ -749,10 +754,9 @@ var mouseHandlers = {
     }
   },
   mousemove: function (e) {
-    var lastPoint = this._lastMouseMovePoint;
-    lastPoint.x = e.offsetX;
-    lastPoint.y = e.offsetY;
-    var localCursorPoint = this.group.transformCoordToLocal(lastPoint.x, lastPoint.y);
+    var x = e.offsetX;
+    var y = e.offsetY;
+    var localCursorPoint = this.group.transformCoordToLocal(x, y);
     resetCursor(this, e, localCursorPoint);
 
     if (this._dragging) {
@@ -763,34 +767,15 @@ var mouseHandlers = {
   },
   mouseup: function (e) {
     handleDragEnd(this, e);
-  },
-  globalout: function (e) {
-    handleDragEnd(this, e, true);
   }
 };
 
-function handleDragEnd(controller, e, isGlobalOut) {
+function handleDragEnd(controller, e) {
   if (controller._dragging) {
-    // Just be worried about bring some side effect to the world
-    // out of echarts, we do not `preventDefault` for globalout.
-    !isGlobalOut && preventDefault(e);
-    var pointerX = e.offsetX;
-    var pointerY = e.offsetY;
-    var lastPoint = controller._lastMouseMovePoint;
-
-    if (isGlobalOut) {
-      pointerX = lastPoint.x;
-      pointerY = lastPoint.y;
-    }
-
-    var localCursorPoint = controller.group.transformCoordToLocal(pointerX, pointerY); // FIXME
-    // Here `e` is used only in `onIrrelevantElement` finally. And it's OK
-    // that pass the `e` of `globalout` to `onIrrelevantElement`. But it is
-    // not a good design of these interfaces. However, we do not refactor
-    // these code now because the implementation of `onIrrelevantElement`
-    // need to be discussed and probably be changed in future, becuase it
-    // slows down the performance of zrender in some cases.
-
+    preventDefault(e);
+    var x = e.offsetX;
+    var y = e.offsetY;
+    var localCursorPoint = controller.group.transformCoordToLocal(x, y);
     var eventParams = updateCoverByMouse(controller, e, localCursorPoint, true);
     controller._dragging = false;
     controller._track = [];
@@ -798,6 +783,11 @@ function handleDragEnd(controller, e, isGlobalOut) {
 
     eventParams && trigger(controller, eventParams);
   }
+}
+
+function isOutsideZrArea(controller, x, y) {
+  var zr = controller._zr;
+  return x < 0 || x > zr.getWidth() || y < 0 || y > zr.getHeight();
 }
 /**
  * key: brushType

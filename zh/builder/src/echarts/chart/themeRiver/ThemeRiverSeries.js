@@ -23,6 +23,7 @@ import List from '../../data/List';
 import * as zrUtil from 'zrender/src/core/util';
 import { groupData } from '../../util/model';
 import { encodeHTML } from '../../util/format';
+import LegendVisualProvider from '../../visual/LegendVisualProvider';
 var DATA_NAME_INDEX = 2;
 var ThemeRiverSeries = SeriesModel.extend({
   type: 'series.themeRiver',
@@ -43,9 +44,7 @@ var ThemeRiverSeries = SeriesModel.extend({
     // Enable legend selection for each data item
     // Use a function instead of direct access because data reference may changed
 
-    this.legendDataProvider = function () {
-      return this.getRawData();
-    };
+    this.legendVisualProvider = new LegendVisualProvider(zrUtil.bind(this.getData, this), zrUtil.bind(this.getRawData, this));
   },
 
   /**

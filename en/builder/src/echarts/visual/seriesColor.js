@@ -17,16 +17,21 @@
 * under the License.
 */
 import Gradient from 'zrender/src/graphic/Gradient';
+import { isFunction } from 'zrender/src/core/util';
 export default {
   createOnAllSeries: true,
   performRawSeries: true,
   reset: function (seriesModel, ecModel) {
     var data = seriesModel.getData();
-    var colorAccessPath = (seriesModel.visualColorAccessPath || 'itemStyle.color').split('.');
-    var color = seriesModel.get(colorAccessPath) // Set in itemStyle
-    || seriesModel.getColorFromPalette( // TODO series count changed.
-    seriesModel.name, null, ecModel.getSeriesCount()); // Default color
-    // FIXME Set color function or use the platte color
+    var colorAccessPath = (seriesModel.visualColorAccessPath || 'itemStyle.color').split('.'); // Set in itemStyle
+
+    var color = seriesModel.get(colorAccessPath);
+    var colorCallback = isFunction(color) && !(color instanceof Gradient) ? color : null; // Default color
+
+    if (!color || colorCallback) {
+      color = seriesModel.getColorFromPalette( // TODO series count changed.
+      seriesModel.name, null, ecModel.getSeriesCount());
+    }
 
     data.setVisual('color', color);
     var borderColorAccessPath = (seriesModel.visualBorderColorAccessPath || 'itemStyle.borderColor').split('.');
@@ -34,9 +39,9 @@ export default {
     data.setVisual('borderColor', borderColor); // Only visible series has each data be visual encoded
 
     if (!ecModel.isSeriesFiltered(seriesModel)) {
-      if (typeof color === 'function' && !(color instanceof Gradient)) {
+      if (colorCallback) {
         data.each(function (idx) {
-          data.setItemVisual(idx, 'color', color(seriesModel.getDataParams(idx)));
+          data.setItemVisual(idx, 'color', colorCallback(seriesModel.getDataParams(idx)));
         });
       } // itemStyle in each data item
 

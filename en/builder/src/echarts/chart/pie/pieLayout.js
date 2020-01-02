@@ -17,14 +17,24 @@
 * under the License.
 */
 import { parsePercent, linearMap } from '../../util/number';
+import * as layout from '../../util/layout';
 import labelLayout from './labelLayout';
 import * as zrUtil from 'zrender/src/core/util';
 var PI2 = Math.PI * 2;
 var RADIAN = Math.PI / 180;
+
+function getViewRect(seriesModel, api) {
+  return layout.getLayoutRect(seriesModel.getBoxLayoutParams(), {
+    width: api.getWidth(),
+    height: api.getHeight()
+  });
+}
+
 export default function (seriesType, ecModel, api, payload) {
   ecModel.eachSeriesByType(seriesType, function (seriesModel) {
     var data = seriesModel.getData();
     var valueDim = data.mapDimension('value');
+    var viewRect = getViewRect(seriesModel, api);
     var center = seriesModel.get('center');
     var radius = seriesModel.get('radius');
 
@@ -36,11 +46,11 @@ export default function (seriesType, ecModel, api, payload) {
       center = [center, center];
     }
 
-    var width = api.getWidth();
-    var height = api.getHeight();
+    var width = parsePercent(viewRect.width, api.getWidth());
+    var height = parsePercent(viewRect.height, api.getHeight());
     var size = Math.min(width, height);
-    var cx = parsePercent(center[0], width);
-    var cy = parsePercent(center[1], height);
+    var cx = parsePercent(center[0], width) + viewRect.x;
+    var cy = parsePercent(center[1], height) + viewRect.y;
     var r0 = parsePercent(radius[0], size / 2);
     var r = parsePercent(radius[1], size / 2);
     var startAngle = -seriesModel.get('startAngle') * RADIAN;
@@ -75,7 +85,8 @@ export default function (seriesType, ecModel, api, payload) {
           cx: cx,
           cy: cy,
           r0: r0,
-          r: roseType ? NaN : r
+          r: roseType ? NaN : r,
+          viewRect: viewRect
         });
         return;
       } // FIXME 兼容 2.0 但是 roseType 是 area 的时候才是这样？
@@ -103,7 +114,8 @@ export default function (seriesType, ecModel, api, payload) {
         cx: cx,
         cy: cy,
         r0: r0,
-        r: roseType ? linearMap(value, extent, [r0, r]) : r
+        r: roseType ? linearMap(value, extent, [r0, r]) : r,
+        viewRect: viewRect
       });
       currentAngle = endAngle;
     }); // Some sector is constrained by minAngle
@@ -137,6 +149,6 @@ export default function (seriesType, ecModel, api, payload) {
       }
     }
 
-    labelLayout(seriesModel, r, width, height);
+    labelLayout(seriesModel, r, viewRect.width, viewRect.height, viewRect.x, viewRect.y);
   });
 }
