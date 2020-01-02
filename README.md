@@ -65,7 +65,7 @@ ${ECHARTS_BASE}/echarts-www/builder/pre/removeDEV.js # remove __DEV__
 ```shell
 code ${ECHARTS_BASE}/echarts-www/js/download.js
 # Add the new release to the download list manually.
-code ${ECHARTS_BASE}/echarts-www/gulpfile.js
+code ${ECHARTS_BASE}/echarts-www/build.js
 # Set the `downloadVersion` to the newest version.
 ```
 
