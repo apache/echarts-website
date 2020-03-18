@@ -55,7 +55,9 @@ export default echarts.extendComponentView({
     var tooltipContent;
 
     if (this._renderMode === 'html') {
-      tooltipContent = new TooltipContent(api.getDom(), api);
+      tooltipContent = new TooltipContent(api.getDom(), api, {
+        appendToBody: tooltipModel.get('appendToBody', true)
+      });
       this._newLine = '<br/>';
     } else {
       tooltipContent = new TooltipRichContent(api);
@@ -190,7 +192,6 @@ export default echarts.extendComponentView({
         offsetX: payload.x,
         offsetY: payload.y,
         position: payload.position,
-        event: {},
         dataByCoordSys: payload.dataByCoordSys,
         tooltipOption: payload.tooltipOption
       }, dispatchAction);
@@ -208,8 +209,7 @@ export default echarts.extendComponentView({
           offsetX: cx,
           offsetY: cy,
           position: payload.position,
-          target: pointInfo.el,
-          event: {}
+          target: pointInfo.el
         }, dispatchAction);
       }
     } else if (payload.x != null && payload.y != null) {
@@ -225,8 +225,7 @@ export default echarts.extendComponentView({
         offsetX: payload.x,
         offsetY: payload.y,
         position: payload.position,
-        target: api.getZr().findHover(payload.x, payload.y).target,
-        event: {}
+        target: api.getZr().findHover(payload.x, payload.y).target
       }, dispatchAction);
     }
   },
@@ -620,7 +619,7 @@ export default echarts.extendComponentView({
       return;
     }
 
-    this._tooltipContent.hide();
+    this._tooltipContent.dispose();
 
     globalListener.unregister('itemTooltip', api);
   }

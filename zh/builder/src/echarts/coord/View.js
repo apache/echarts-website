@@ -205,6 +205,15 @@ View.prototype = {
     matrix.invert(this.invTransform, this.transform);
     this.decomposeTransform();
   },
+  getTransformInfo: function () {
+    var roamTransform = this._roamTransformable.transform;
+    var rawTransformable = this._rawTransformable;
+    return {
+      roamTransform: roamTransform ? zrUtil.slice(roamTransform) : matrix.create(),
+      rawScale: zrUtil.slice(rawTransformable.scale),
+      rawPosition: zrUtil.slice(rawTransformable.position)
+    };
+  },
 
   /**
    * @return {module:zrender/core/BoundingRect}

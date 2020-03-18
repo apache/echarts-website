@@ -25,7 +25,7 @@ var instances = {}; // ZRender实例map索引
  * @type {string}
  */
 
-export var version = '4.2.0';
+export var version = '4.3.0';
 /**
  * Initializing a zrender instance
  * @param {HTMLElement} dom

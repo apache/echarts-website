@@ -68,6 +68,8 @@ export function buildTransformer(src, dest) {
   var det = determinant(mA, 8, 0, 0, 0, detCache);
 
   if (det === 0) {
+    // can not make transformer when and only when
+    // any three of the markers are collinear.
     return;
   } // `invert(mA) * dest`, that is, `adj(mA) / det * dest`.
 

@@ -131,6 +131,18 @@ var SankeySeries = SeriesModel.extend({
       option.focusNodeAdjacency = 'allEdges';
     }
   },
+  // Override Series.getDataParams()
+  getDataParams: function (dataIndex, dataType) {
+    var params = SankeySeries.superCall(this, 'getDataParams', dataIndex, dataType);
+
+    if (params.value == null && dataType === 'node') {
+      var node = this.getGraph().getNodeByIndex(dataIndex);
+      var nodeValue = node.getLayout().value;
+      params.value = nodeValue;
+    }
+
+    return params;
+  },
   defaultOption: {
     zlevel: 0,
     z: 2,
@@ -176,7 +188,7 @@ var SankeySeries = SeriesModel.extend({
         show: true
       },
       lineStyle: {
-        opacity: 0.6
+        opacity: 0.5
       }
     },
     animationEasing: 'linear',

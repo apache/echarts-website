@@ -206,7 +206,8 @@ var GraphSeries = echarts.extendSeriesModel({
     edgeSymbol: ['none', 'none'],
     edgeSymbolSize: 10,
     edgeLabel: {
-      position: 'middle'
+      position: 'middle',
+      distance: 5
     },
     draggable: false,
     roam: false,

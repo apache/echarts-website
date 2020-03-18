@@ -28,7 +28,6 @@ export default {
   performRawSeries: true,
   reset: function (seriesModel, ecModel) {
     var data = seriesModel.getData();
-    var isLargeRender = seriesModel.pipelineContext.large;
     data.setVisual({
       legendSymbol: 'roundRect',
       colorP: getColor(1, seriesModel),
@@ -41,6 +40,7 @@ export default {
       return;
     }
 
+    var isLargeRender = seriesModel.pipelineContext.large;
     return !isLargeRender && {
       progress: progress
     };

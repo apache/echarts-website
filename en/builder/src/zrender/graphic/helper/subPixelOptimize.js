@@ -16,13 +16,11 @@ var round = Math.round;
  * @param {number} [inputShape.x2]
  * @param {number} [inputShape.y2]
  * @param {Object} [style]
- * @param {number} [style.lineWidth]
+ * @param {number} [style.lineWidth] If `null`/`undefined`/`0`, do not optimize.
  */
 
 export function subPixelOptimizeLine(outputShape, inputShape, style) {
-  var lineWidth = style && style.lineWidth;
-
-  if (!inputShape || !lineWidth) {
+  if (!inputShape) {
     return;
   }
 
@@ -30,19 +28,22 @@ export function subPixelOptimizeLine(outputShape, inputShape, style) {
   var x2 = inputShape.x2;
   var y1 = inputShape.y1;
   var y2 = inputShape.y2;
+  outputShape.x1 = x1;
+  outputShape.x2 = x2;
+  outputShape.y1 = y1;
+  outputShape.y2 = y2;
+  var lineWidth = style && style.lineWidth;
+
+  if (!lineWidth) {
+    return;
+  }
 
   if (round(x1 * 2) === round(x2 * 2)) {
     outputShape.x1 = outputShape.x2 = subPixelOptimize(x1, lineWidth, true);
-  } else {
-    outputShape.x1 = x1;
-    outputShape.x2 = x2;
   }
 
   if (round(y1 * 2) === round(y2 * 2)) {
     outputShape.y1 = outputShape.y2 = subPixelOptimize(y1, lineWidth, true);
-  } else {
-    outputShape.y1 = y1;
-    outputShape.y2 = y2;
   }
 }
 /**
@@ -58,13 +59,11 @@ export function subPixelOptimizeLine(outputShape, inputShape, style) {
  * @param {number} [inputShape.width]
  * @param {number} [inputShape.height]
  * @param {Object} [style]
- * @param {number} [style.lineWidth]
+ * @param {number} [style.lineWidth] If `null`/`undefined`/`0`, do not optimize.
  */
 
 export function subPixelOptimizeRect(outputShape, inputShape, style) {
-  var lineWidth = style && style.lineWidth;
-
-  if (!inputShape || !lineWidth) {
+  if (!inputShape) {
     return;
   }
 
@@ -72,6 +71,16 @@ export function subPixelOptimizeRect(outputShape, inputShape, style) {
   var originY = inputShape.y;
   var originWidth = inputShape.width;
   var originHeight = inputShape.height;
+  outputShape.x = originX;
+  outputShape.y = originY;
+  outputShape.width = originWidth;
+  outputShape.height = originHeight;
+  var lineWidth = style && style.lineWidth;
+
+  if (!lineWidth) {
+    return;
+  }
+
   outputShape.x = subPixelOptimize(originX, lineWidth, true);
   outputShape.y = subPixelOptimize(originY, lineWidth, true);
   outputShape.width = Math.max(subPixelOptimize(originX + originWidth, lineWidth, false) - outputShape.x, originWidth === 0 ? 0 : 1);
@@ -81,14 +90,18 @@ export function subPixelOptimizeRect(outputShape, inputShape, style) {
  * Sub pixel optimize for canvas
  *
  * @param {number} position Coordinate, such as x, y
- * @param {number} lineWidth Should be nonnegative integer.
+ * @param {number} lineWidth If `null`/`undefined`/`0`, do not optimize.
  * @param {boolean=} positiveOrNegative Default false (negative).
  * @return {number} Optimized position.
  */
 
 export function subPixelOptimize(position, lineWidth, positiveOrNegative) {
-  // Assure that (position + lineWidth / 2) is near integer edge,
+  if (!lineWidth) {
+    return position;
+  } // Assure that (position + lineWidth / 2) is near integer edge,
   // otherwise line will be fuzzy in canvas.
+
+
   var doubledPosition = round(position * 2);
   return (doubledPosition + round(lineWidth)) % 2 === 0 ? doubledPosition / 2 : (doubledPosition + (positiveOrNegative ? 1 : -1)) / 2;
 }

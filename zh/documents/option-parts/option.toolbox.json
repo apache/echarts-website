@@ -137,6 +137,7 @@
   "feature.dataZoom.emphasis.iconStyle.textBackgroundColor": "<p>文本区域填充色。</p>\n",
   "feature.dataZoom.emphasis.iconStyle.textBorderRadius": "<p>文本区域圆角大小。</p>\n",
   "feature.dataZoom.emphasis.iconStyle.textPadding": "<p>文本区域内边距。</p>\n",
+  "feature.dataZoom.filterMode": "<p>与 <a href=\"#dataZoom.filterMode\">dataZoom.filterMode</a> 含义和取值相同。</p>\n",
   "feature.dataZoom.xAxisIndex": "<p>指定哪些 <a href=\"#xAxis\">xAxis</a> 被控制。如果缺省则控制所有的x轴。如果设置为 <code class=\"codespan\">false</code> 则不控制任何x轴。如果设置成 <code class=\"codespan\">3</code> 则控制 axisIndex 为 <code class=\"codespan\">3</code> 的x轴。如果设置为 <code class=\"codespan\">[0, 3]</code> 则控制 axisIndex 为 <code class=\"codespan\">0</code> 和 <code class=\"codespan\">3</code> 的x轴。</p>\n",
   "feature.dataZoom.yAxisIndex": "<p>指定哪些 <a href=\"#yAxis\">yAxis</a> 被控制。如果缺省则控制所有的y轴。如果设置为 <code class=\"codespan\">false</code> 则不控制任何y轴。如果设置成 <code class=\"codespan\">3</code> 则控制 axisIndex 为 <code class=\"codespan\">3</code> 的y轴。如果设置为 <code class=\"codespan\">[0, 3]</code> 则控制 axisIndex 为 <code class=\"codespan\">0</code> 和 <code class=\"codespan\">3</code> 的y轴。</p>\n",
   "feature.magicType": "<p>动态类型切换\n<strong>示例：</strong></p>\n<pre><code class=\"lang-js\">feature: {\n    magicType: {\n        type: [&#39;line&#39;, &#39;bar&#39;, &#39;stack&#39;, &#39;tiled&#39;]\n    }\n}\n</code></pre>\n",

@@ -184,6 +184,9 @@
   position: relative;
   padding: 15px 0;
 }
+.doc-content-item-card.current {
+    border-top: 1px solid #b03a5b;
+}
 .doc-content-item-card .hierarchy-line {
     position: absolute;
     top: 35px;

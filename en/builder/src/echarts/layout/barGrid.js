@@ -396,12 +396,7 @@ export function layout(seriesType, ecModel) {
 
     for (var idx = 0, len = data.count(); idx < len; idx++) {
       var value = data.get(valueDim, idx);
-      var baseValue = data.get(baseDim, idx); // If dataZoom in filteMode: 'empty', the baseValue can be set as NaN in "axisProxy".
-
-      if (isNaN(value) || isNaN(baseValue)) {
-        continue;
-      }
-
+      var baseValue = data.get(baseDim, idx);
       var sign = value >= 0 ? 'p' : 'n';
       var baseCoord = valueAxisStart; // Because of the barMinHeight, we can not use the value in
       // stackResultDimension directly.
@@ -435,9 +430,12 @@ export function layout(seriesType, ecModel) {
 
         if (Math.abs(width) < barMinHeight) {
           width = (width < 0 ? -1 : 1) * barMinHeight;
-        }
+        } // Ignore stack from NaN value
 
-        stacked && (lastStackCoords[stackId][baseValue][sign] += width);
+
+        if (!isNaN(width)) {
+          stacked && (lastStackCoords[stackId][baseValue][sign] += width);
+        }
       } else {
         var coord = cartesian.dataToPoint([baseValue, value]);
         x = coord[0] + columnOffset;
@@ -448,9 +446,12 @@ export function layout(seriesType, ecModel) {
         if (Math.abs(height) < barMinHeight) {
           // Include zero to has a positive bar
           height = (height <= 0 ? -1 : 1) * barMinHeight;
-        }
+        } // Ignore stack from NaN value
 
-        stacked && (lastStackCoords[stackId][baseValue][sign] += height);
+
+        if (!isNaN(height)) {
+          stacked && (lastStackCoords[stackId][baseValue][sign] += height);
+        }
       }
 
       data.setItemLayout(idx, {
@@ -473,6 +474,7 @@ export var largeLayout = {
 
     var data = seriesModel.getData();
     var cartesian = seriesModel.coordinateSystem;
+    var coordLayout = cartesian.grid.getRect();
     var baseAxis = cartesian.getBaseAxis();
     var valueAxis = cartesian.getOtherAxis(baseAxis);
     var valueDim = data.mapDimension(valueAxis.dim);
@@ -493,6 +495,7 @@ export var largeLayout = {
     function progress(params, data) {
       var count = params.count;
       var largePoints = new LargeArr(count * 2);
+      var largeBackgroundPoints = new LargeArr(count * 2);
       var largeDataIndices = new LargeArr(count);
       var dataIndex;
       var coord = [];
@@ -505,7 +508,9 @@ export var largeLayout = {
         valuePair[1 - valueDimIdx] = data.get(baseDim, dataIndex);
         coord = cartesian.dataToPoint(valuePair, null, coord); // Data index might not be in order, depends on `progressiveChunkMode`.
 
+        largeBackgroundPoints[pointsOffset] = valueAxisHorizontal ? coordLayout.x + coordLayout.width : coord[0];
         largePoints[pointsOffset++] = coord[0];
+        largeBackgroundPoints[pointsOffset] = valueAxisHorizontal ? coord[1] : coordLayout.y + coordLayout.height;
         largePoints[pointsOffset++] = coord[1];
         largeDataIndices[idxOffset++] = dataIndex;
       }
@@ -513,8 +518,10 @@ export var largeLayout = {
       data.setLayout({
         largePoints: largePoints,
         largeDataIndices: largeDataIndices,
+        largeBackgroundPoints: largeBackgroundPoints,
         barWidth: barWidth,
         valueAxisStart: getValueAxisStart(baseAxis, valueAxis, false),
+        backgroundStart: valueAxisHorizontal ? coordLayout.x : coordLayout.y,
         valueAxisHorizontal: valueAxisHorizontal
       });
     }

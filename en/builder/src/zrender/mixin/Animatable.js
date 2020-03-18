@@ -2,7 +2,7 @@ import Animator from '../animation/Animator';
 import logError from '../core/log';
 import { isString, isFunction, isObject, isArrayLike, indexOf } from '../core/util';
 /**
- * @alias modue:zrender/mixin/Animatable
+ * @alias module:zrender/mixin/Animatable
  * @constructor
  */
 

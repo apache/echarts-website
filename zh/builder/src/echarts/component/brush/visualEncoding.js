@@ -38,10 +38,17 @@ echarts.registerLayout(PRIORITY_BRUSH, function (ecModel, api, payload) {
     payload && payload.type === 'takeGlobalCursor' && brushModel.setBrushOption(payload.key === 'brush' ? payload.brushOption : {
       brushType: false
     });
+  });
+  layoutCovers(ecModel);
+});
+export function layoutCovers(ecModel) {
+  ecModel.eachComponent({
+    mainType: 'brush'
+  }, function (brushModel) {
     var brushTargetManager = brushModel.brushTargetManager = new BrushTargetManager(brushModel.option, ecModel);
     brushTargetManager.setInputRanges(brushModel.areas, ecModel);
   });
-});
+}
 /**
  * Register the visual encoding if this modules required.
  */

@@ -433,7 +433,7 @@ var Animator = function (target, loop, getter, setter) {
 
 Animator.prototype = {
   /**
-   * 设置动画关键帧
+   * Set Animation keyframe
    * @param  {number} time 关键帧时间，单位是ms
    * @param  {Object} props 关键帧的属性值，key-value表示
    * @return {module:zrender/animation/Animator}
@@ -520,7 +520,7 @@ Animator.prototype = {
   },
 
   /**
-   * 开始执行动画
+   * Start the animation
    * @param  {string|Function} [easing]
    *         动画缓动函数，详见{@link module:zrender/animation/easing}
    * @param  {boolean} forceAnimate
@@ -584,7 +584,7 @@ Animator.prototype = {
   },
 
   /**
-   * 停止动画
+   * Stop animation
    * @param {boolean} forwardToLast If move to last frame before stop
    */
   stop: function (forwardToLast) {
@@ -606,7 +606,7 @@ Animator.prototype = {
   },
 
   /**
-   * 设置动画延迟开始的时间
+   * Set when animation delay starts
    * @param  {number} time 单位ms
    * @return {module:zrender/animation/Animator}
    */
@@ -616,7 +616,7 @@ Animator.prototype = {
   },
 
   /**
-   * 添加动画结束的回调
+   * Add callback for animation end
    * @param  {Function} cb
    * @return {module:zrender/animation/Animator}
    */

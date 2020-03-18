@@ -24,6 +24,7 @@ import { setLabel } from './helper';
 import Model from '../../model/Model';
 import barItemStyle from './barItemStyle';
 import Path from 'zrender/src/graphic/Path';
+import Group from 'zrender/src/container/Group';
 import { throttle } from '../../util/throttle';
 import { createClipPath } from '../helper/createClipPathFromCoordSys';
 import Sausage from '../../util/shape/sausage';
@@ -110,13 +111,24 @@ export default echarts.extendChartView({
     // And don't want the label are clipped.
 
     var roundCap = seriesModel.get('roundCap', true);
+    var drawBackground = seriesModel.get('showBackground', true);
+    var backgroundModel = seriesModel.getModel('backgroundStyle');
+    var bgEls = [];
+    var oldBgEls = this._backgroundEls || [];
     data.diff(oldData).add(function (dataIndex) {
+      var itemModel = data.getItemModel(dataIndex);
+      var layout = getLayout[coord.type](data, dataIndex, itemModel);
+
+      if (drawBackground) {
+        var bgEl = createBackgroundEl(coord, isHorizontalOrRadial, layout);
+        bgEl.useStyle(backgroundModel.getBarItemStyle());
+        bgEls[dataIndex] = bgEl;
+      } // If dataZoom in filteMode: 'empty', the baseValue can be set as NaN in "axisProxy".
+
+
       if (!data.hasValue(dataIndex)) {
         return;
       }
-
-      var itemModel = data.getItemModel(dataIndex);
-      var layout = getLayout[coord.type](data, dataIndex, itemModel);
 
       if (needsClip) {
         // Clip will modify the layout params.
@@ -134,15 +146,25 @@ export default echarts.extendChartView({
       group.add(el);
       updateStyle(el, data, dataIndex, itemModel, layout, seriesModel, isHorizontalOrRadial, coord.type === 'polar');
     }).update(function (newIndex, oldIndex) {
+      var itemModel = data.getItemModel(newIndex);
+      var layout = getLayout[coord.type](data, newIndex, itemModel);
+
+      if (drawBackground) {
+        var bgEl = oldBgEls[oldIndex];
+        bgEl.useStyle(backgroundModel.getBarItemStyle());
+        bgEls[newIndex] = bgEl;
+        var shape = createBackgroundShape(isHorizontalOrRadial, layout, coord);
+        graphic.updateProps(bgEl, {
+          shape: shape
+        }, animationModel, newIndex);
+      }
+
       var el = oldData.getItemGraphicEl(oldIndex);
 
       if (!data.hasValue(newIndex)) {
         group.remove(el);
         return;
       }
-
-      var itemModel = data.getItemModel(newIndex);
-      var layout = getLayout[coord.type](data, newIndex, itemModel);
 
       if (needsClip) {
         var isClipped = clip[coord.type](coordSysClipArea, layout);
@@ -174,6 +196,15 @@ export default echarts.extendChartView({
         el && removeSector(dataIndex, animationModel, el);
       }
     }).execute();
+    var bgGroup = this._backgroundGroup || (this._backgroundGroup = new Group());
+    bgGroup.removeAll();
+
+    for (var i = 0; i < bgEls.length; ++i) {
+      bgGroup.add(bgEls[i]);
+    }
+
+    group.add(bgGroup);
+    this._backgroundEls = bgEls;
     this._data = data;
   },
   _renderLarge: function (seriesModel, ecModel, api) {
@@ -190,6 +221,8 @@ export default echarts.extendChartView({
     }
   },
   _incrementalRenderLarge: function (params, seriesModel) {
+    this._removeBackground();
+
     createLarge(seriesModel, this.group, true);
   },
   dispose: zrUtil.noop,
@@ -201,6 +234,9 @@ export default echarts.extendChartView({
     var data = this._data;
 
     if (ecModel && ecModel.get('animation') && data && !this._isLargeDraw) {
+      this._removeBackground();
+
+      this._backgroundEls = [];
       data.eachItemGraphicEl(function (el) {
         if (el.type === 'sector') {
           removeSector(el.dataIndex, ecModel, el);
@@ -213,6 +249,10 @@ export default echarts.extendChartView({
     }
 
     this._data = null;
+  },
+  _removeBackground: function () {
+    this.group.remove(this._backgroundGroup);
+    this._backgroundGroup = null;
   }
 });
 var mathMax = Math.max;
@@ -261,8 +301,10 @@ var clip = {
 var elementCreator = {
   cartesian2d: function (dataIndex, layout, isHorizontal, animationModel, isUpdate) {
     var rect = new graphic.Rect({
-      shape: zrUtil.extend({}, layout)
-    }); // Animation
+      shape: zrUtil.extend({}, layout),
+      z2: 1
+    });
+    rect.name = 'item'; // Animation
 
     if (animationModel) {
       var rectShape = rect.shape;
@@ -287,8 +329,10 @@ var elementCreator = {
     var sector = new ShapeClass({
       shape: zrUtil.defaults({
         clockwise: clockwise
-      }, layout)
-    }); // Animation
+      }, layout),
+      z2: 1
+    });
+    sector.name = 'item'; // Animation
 
     if (animationModel) {
       var sectorShape = sector.shape;
@@ -393,8 +437,11 @@ function updateStyle(el, data, dataIndex, itemModel, layout, seriesModel, isHori
 
 
 function getLineWidth(itemModel, rawLayout) {
-  var lineWidth = itemModel.get(BAR_BORDER_WIDTH_QUERY) || 0;
-  return Math.min(lineWidth, Math.abs(rawLayout.width), Math.abs(rawLayout.height));
+  var lineWidth = itemModel.get(BAR_BORDER_WIDTH_QUERY) || 0; // width or height may be NaN for empty data
+
+  var width = isNaN(rawLayout.width) ? Number.MAX_VALUE : Math.abs(rawLayout.width);
+  var height = isNaN(rawLayout.height) ? Number.MAX_VALUE : Math.abs(rawLayout.height);
+  return Math.min(lineWidth, width, height);
 }
 
 var LargePath = Path.extend({
@@ -423,6 +470,31 @@ function createLarge(seriesModel, group, incremental) {
   var startPoint = [];
   var baseDimIdx = data.getLayout('valueAxisHorizontal') ? 1 : 0;
   startPoint[1 - baseDimIdx] = data.getLayout('valueAxisStart');
+  var largeDataIndices = data.getLayout('largeDataIndices');
+  var barWidth = data.getLayout('barWidth');
+  var backgroundModel = seriesModel.getModel('backgroundStyle');
+  var drawBackground = seriesModel.get('showBackground', true);
+
+  if (drawBackground) {
+    var points = data.getLayout('largeBackgroundPoints');
+    var backgroundStartPoint = [];
+    backgroundStartPoint[1 - baseDimIdx] = data.getLayout('backgroundStart');
+    var bgEl = new LargePath({
+      shape: {
+        points: points
+      },
+      incremental: !!incremental,
+      __startPoint: backgroundStartPoint,
+      __baseDimIdx: baseDimIdx,
+      __largeDataIndices: largeDataIndices,
+      __barWidth: barWidth,
+      silent: true,
+      z2: 0
+    });
+    setLargeBackgroundStyle(bgEl, backgroundModel, data);
+    group.add(bgEl);
+  }
+
   var el = new LargePath({
     shape: {
       points: data.getLayout('largePoints')
@@ -430,8 +502,8 @@ function createLarge(seriesModel, group, incremental) {
     incremental: !!incremental,
     __startPoint: startPoint,
     __baseDimIdx: baseDimIdx,
-    __largeDataIndices: data.getLayout('largeDataIndices'),
-    __barWidth: data.getLayout('barWidth')
+    __largeDataIndices: largeDataIndices,
+    __barWidth: barWidth
   });
   group.add(el);
   setLargeStyle(el, seriesModel, data); // Enable tooltip and user mouse/touch event handlers.
@@ -485,4 +557,51 @@ function setLargeStyle(el, seriesModel, data) {
   el.style.fill = null;
   el.style.stroke = borderColor;
   el.style.lineWidth = data.getLayout('barWidth');
+}
+
+function setLargeBackgroundStyle(el, backgroundModel, data) {
+  var borderColor = backgroundModel.get('borderColor') || backgroundModel.get('color');
+  var itemStyle = backgroundModel.getItemStyle(['color', 'borderColor']);
+  el.useStyle(itemStyle);
+  el.style.fill = null;
+  el.style.stroke = borderColor;
+  el.style.lineWidth = data.getLayout('barWidth');
+}
+
+function createBackgroundShape(isHorizontalOrRadial, layout, coord) {
+  var coordLayout;
+  var isPolar = coord.type === 'polar';
+
+  if (isPolar) {
+    coordLayout = coord.getArea();
+  } else {
+    coordLayout = coord.grid.getRect();
+  }
+
+  if (isPolar) {
+    return {
+      cx: coordLayout.cx,
+      cy: coordLayout.cy,
+      r0: isHorizontalOrRadial ? coordLayout.r0 : layout.r0,
+      r: isHorizontalOrRadial ? coordLayout.r : layout.r,
+      startAngle: isHorizontalOrRadial ? layout.startAngle : 0,
+      endAngle: isHorizontalOrRadial ? layout.endAngle : Math.PI * 2
+    };
+  } else {
+    return {
+      x: isHorizontalOrRadial ? layout.x : coordLayout.x,
+      y: isHorizontalOrRadial ? coordLayout.y : layout.y,
+      width: isHorizontalOrRadial ? layout.width : coordLayout.width,
+      height: isHorizontalOrRadial ? coordLayout.height : layout.height
+    };
+  }
+}
+
+function createBackgroundEl(coord, isHorizontalOrRadial, layout) {
+  var ElementClz = coord.type === 'polar' ? graphic.Sector : graphic.Rect;
+  return new ElementClz({
+    shape: createBackgroundShape(isHorizontalOrRadial, layout, coord),
+    silent: true,
+    z2: 0
+  });
 }

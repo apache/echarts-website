@@ -218,12 +218,12 @@ Radar.prototype.update = function (ecModel, api) {
 
       if (nicedSplitNumber > splitNumber) {
         interval = increaseInterval(interval);
-      } // PENDING
+      } // TODO
 
 
-      var center = Math.round((rawExtent[0] + rawExtent[1]) / 2 / interval) * interval;
-      var halfSplitNumber = Math.round(splitNumber / 2);
-      scale.setExtent(numberUtil.round(center - halfSplitNumber * interval), numberUtil.round(center + (splitNumber - halfSplitNumber) * interval));
+      var max = Math.ceil(rawExtent[1] / interval) * interval;
+      var min = numberUtil.round(max - interval * splitNumber);
+      scale.setExtent(min, max);
       scale.setInterval(interval);
     }
   });

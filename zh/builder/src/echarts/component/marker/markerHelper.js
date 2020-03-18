@@ -60,7 +60,8 @@ function markerTypeCalculatorWithExtent(mlType, data, otherDataDim, targetDataDi
   var value = numCalculate(data, calcDataDim, mlType);
   var dataIndex = data.indicesOfNearest(calcDataDim, value)[0];
   coordArr[otherCoordIndex] = data.get(otherDataDim, dataIndex);
-  coordArr[targetCoordIndex] = data.get(targetDataDim, dataIndex); // Make it simple, do not visit all stacked value to count precision.
+  coordArr[targetCoordIndex] = data.get(calcDataDim, dataIndex);
+  var coordArrValue = data.get(targetDataDim, dataIndex); // Make it simple, do not visit all stacked value to count precision.
 
   var precision = numberUtil.getPrecision(data.get(targetDataDim, dataIndex));
   precision = Math.min(precision, 20);
@@ -69,7 +70,7 @@ function markerTypeCalculatorWithExtent(mlType, data, otherDataDim, targetDataDi
     coordArr[targetCoordIndex] = +coordArr[targetCoordIndex].toFixed(precision);
   }
 
-  return coordArr;
+  return [coordArr, coordArrValue];
 }
 
 var curry = zrUtil.curry; // TODO Specified percent
@@ -126,9 +127,11 @@ export function dataTransform(seriesModel, item) {
     if (item.type && markerTypeCalculator[item.type] && axisInfo.baseAxis && axisInfo.valueAxis) {
       var otherCoordIndex = indexOf(dims, axisInfo.baseAxis.dim);
       var targetCoordIndex = indexOf(dims, axisInfo.valueAxis.dim);
-      item.coord = markerTypeCalculator[item.type](data, axisInfo.baseDataDim, axisInfo.valueDataDim, otherCoordIndex, targetCoordIndex); // Force to use the value of calculated value.
+      var coordInfo = markerTypeCalculator[item.type](data, axisInfo.baseDataDim, axisInfo.valueDataDim, otherCoordIndex, targetCoordIndex);
+      item.coord = coordInfo[0]; // Force to use the value of calculated value.
+      // let item use the value without stack.
 
-      item.value = item.coord[targetCoordIndex];
+      item.value = coordInfo[1];
     } else {
       // FIXME Only has one of xAxis and yAxis.
       var coord = [item.xAxis != null ? item.xAxis : item.radiusAxis, item.yAxis != null ? item.yAxis : item.angleAxis]; // Each coord support max, min, average

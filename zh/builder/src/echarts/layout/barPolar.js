@@ -70,11 +70,6 @@ function barLayoutPolar(seriesType, ecModel, api) {
     for (var idx = 0, len = data.count(); idx < len; idx++) {
       var value = data.get(valueDim, idx);
       var baseValue = data.get(baseDim, idx);
-
-      if (isNaN(value)) {
-        continue;
-      }
-
       var sign = value >= 0 ? 'p' : 'n';
       var baseCoord = valueAxisStart; // Because of the barMinHeight, we can not use the value in
       // stackResultDimension directly.

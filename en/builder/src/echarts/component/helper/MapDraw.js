@@ -176,14 +176,12 @@ MapDraw.prototype = {
 
     var regionsGroup = this._regionsGroup;
     var group = this.group;
-
-    if (geo._roamTransformable.transform) {
-      group.transform = geo._roamTransformable.transform.slice();
-      group.decomposeTransform();
-    }
-
-    var scale = geo._rawTransformable.scale;
-    var position = geo._rawTransformable.position;
+    var transformInfo = geo.getTransformInfo();
+    group.transform = transformInfo.roamTransform;
+    group.decomposeTransform();
+    group.dirty();
+    var scale = transformInfo.rawScale;
+    var position = transformInfo.rawPosition;
     regionsGroup.removeAll();
     var itemStyleAccessPath = ['itemStyle'];
     var hoverItemStyleAccessPath = ['emphasis', 'itemStyle'];

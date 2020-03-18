@@ -16,7 +16,7 @@
 * specific language governing permissions and limitations
 * under the License.
 */
-import { retrieve, defaults, extend, each, map } from 'zrender/src/core/util';
+import { retrieve, defaults, extend, each } from 'zrender/src/core/util';
 import * as formatUtil from '../../util/format';
 import * as graphic from '../../util/graphic';
 import Model from '../../model/Model';
