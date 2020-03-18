@@ -40,9 +40,11 @@ export ECHARTS_BASE="/your/local/base/dir/path/of/these/projects"
 **Prepare echarts source code**
 ```shell
 cd ${ECHARTS_BASE}/echarts
-git checkout release # Make sure in `release branch`
+# Make sure in `release branch`
+git checkout release
 git pull
-git status # Make sure there is no modification in `src`.
+git status
+# Make sure there is no modification in `src`.
 ```
 
 **Copy echarts dist files and source code for `custom builder`:**
