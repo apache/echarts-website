@@ -85,6 +85,8 @@ sh update-echarts.sh --only-copy-dist
 # Edit `BASE_PATH` in `build-example.js` firstly.
 cd ${ECHARTS_BASE}/echarts-examples/tool
 node build-example.js
+# if intending only make thumbnail for "public/data/foo.js" and "public/data/bar.js",
+# node build-example.js --pattern "foo,bar"
 ```
 
 
