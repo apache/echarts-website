@@ -6,6 +6,8 @@ define(function (require) {
     var rollup = require('rollup');
 
     var TOP_MODULE_NAME = 'topModuleInRequireES';
+    var RETRY_MAX = 5;
+    var RETRY_DELAY = 2000;
 
     var $log = document.getElementById('log');
 
@@ -72,11 +74,29 @@ define(function (require) {
                 if (path === TOP_MODULE_NAME) {
                     return topCode.join('\n');
                 }
-                return ajax(location.origin + path)
-                    .then(function (content) {
-                        builderLog('Loaded module: "' + path + '"');
-                        return content;
-                    });
+
+                var retryCount = 0;
+                return new Promise(function (resolve, reject) {
+                    function retryableLoad() {
+                        // When using apache CDN, might fail to loading soource.
+                        if (retryCount >= RETRY_MAX) {
+                            var log = 'Loaded module failed: "' + path
+                                + '"<br><strong style="color:red">! Please reload page to retry. !</strong>';
+                            builderLog(log);
+                            return reject(log);
+                        }
+                        ajax(location.origin + path)
+                            .then(function (content) {
+                                builderLog('Loaded module: "' + path + '"');
+                                resolve(content);
+                            })
+                            .catch(function () {
+                                retryCount++;
+                                setTimeout(retryableLoad, RETRY_DELAY);
+                            });
+                    }
+                    retryableLoad();
+                });
             }
         }]
     }).then(function (bundle) {
