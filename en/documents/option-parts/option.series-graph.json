@@ -9,6 +9,8 @@
   "geoIndex": "<p>Index of <a href=\"#geo\">geographic coordinate</a> to combine with, which is useful for multiple geographic axes in one chart.</p>\n",
   "calendarIndex": "<p>Index of <a href=\"#calendar\">calendar coordinates</a> to combine with, which is useful for multiple calendar coordinates in one chart.</p>\n",
   "hoverAnimation": "<p>Whether to enable the highlight animation effect of mousr hover node.</p>\n",
+  "center": "<p>Center of current view-port.</p>\n<p>Example:</p>\n<pre><code class=\"lang-js\">center: [115.97, 29.71]\n</code></pre>\n",
+  "zoom": "<p>Zoom rate of current view-port.</p>\n",
   "layout": "<p>Graph layout.</p>\n<p><strong>Options: </strong></p>\n<ul>\n<li><p><code class=\"codespan\">&#39;none&#39;</code> No any layout, use  <a href=\"#series-graph.data.x\">x</a>,  <a href=\"#series-graph.data.y\">y</a> provided in <a href=\"#series-graph.data\">node</a> as the position of node.</p>\n</li>\n<li><p><code class=\"codespan\">&#39;circular&#39;</code> Adopt circular layout, see the example <a href=\"https://echarts.apache.org/examples/zh/editor.html?c=graph-circular-layout\" target=\"_blank\">Les Miserables</a>.</p>\n</li>\n<li><p><code class=\"codespan\">&#39;force&#39;</code> Adopt force-directed layout, see the example <a href=\"https://echarts.apache.org/examples/zh/editor.html?c=graph-force\" target=\"_blank\">Force</a>, the detail about configrations of layout are in <a href=\"#series-graph.force\">graph.force</a></p>\n</li>\n</ul>\n",
   "circular": "<p>Configuration about circular layout.</p>\n",
   "circular.rotateLabel": "<p>Whether to rotate the label automatically.</p>\n",

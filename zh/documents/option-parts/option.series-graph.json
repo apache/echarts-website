@@ -9,6 +9,8 @@
   "geoIndex": "<p>使用的<a href=\"#geo\">地理坐标系</a>的 index，在单个图表实例中存在多个地理坐标系的时候有用。</p>\n",
   "calendarIndex": "<p>使用的<a href=\"#calendar\">日历坐标系</a>的 index，在单个图表实例中存在多个日历坐标系的时候有用。</p>\n",
   "hoverAnimation": "<p>是否开启鼠标 hover 节点的提示动画效果。</p>\n",
+  "center": "<p>当前视角的中心点</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">center: [115.97, 29.71]\n</code></pre>\n",
+  "zoom": "<p>当前视角的缩放比例。</p>\n",
   "layout": "<p>图的布局。</p>\n<p><strong>可选：</strong></p>\n<ul>\n<li><p><code class=\"codespan\">&#39;none&#39;</code> 不采用任何布局，使用<a href=\"#series-graph.data\">节点</a>中提供的 <a href=\"#series-graph.data.x\">x</a>， <a href=\"#series-graph.data.y\">y</a> 作为节点的位置。</p>\n</li>\n<li><p><code class=\"codespan\">&#39;circular&#39;</code> 采用环形布局，见示例 <a href=\"https://echarts.apache.org/examples/zh/editor.html?c=graph-circular-layout\" target=\"_blank\">Les Miserables</a>，布局相关的配置项见 <a href=\"#series-graph.circular\">graph.circular</a></p>\n</li>\n<li><p><code class=\"codespan\">&#39;force&#39;</code> 采用力引导布局，见示例 <a href=\"https://echarts.apache.org/examples/zh/editor.html?c=graph-force\" target=\"_blank\">Force</a>，布局相关的配置项见 <a href=\"#series-graph.force\">graph.force</a></p>\n</li>\n</ul>\n",
   "circular": "<p>环形布局相关配置</p>\n",
   "circular.rotateLabel": "<p>是否旋转标签，默认不旋转</p>\n",
