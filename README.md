@@ -94,8 +94,8 @@ node build-example.js
 
 **Build `echarts-www`**
 ```shell
-sh ${ECHARTS_BASE}/echarts-www/release.sh --env asf
-# sh ${ECHARTS_BASE}/echarts-www/release.sh --env echartsjs
+sh ${ECHARTS_BASE}/echarts-www/bin/release.sh --env asf
+# sh ${ECHARTS_BASE}/echarts-www/bin/release.sh --env echartsjs
 ```
 
 **Clear**
