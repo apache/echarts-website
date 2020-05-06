@@ -1,3 +1,7 @@
+Header set Access-Control-Allow-Origin "https://echarts.apache.org"
+Header set Access-Control-Allow-Methods: "*"
+Header set Access-Control-Allow-Headers: "*"
+
 <IfModule mod_expires.c>
   ExpiresActive on
 
