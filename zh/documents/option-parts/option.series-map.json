@@ -11,6 +11,7 @@
   "scaleLimit.min": "<p>最小的缩放值</p>\n",
   "scaleLimit.max": "<p>最大的缩放值</p>\n",
   "nameMap": "<p>自定义地区的名称映射，如：</p>\n<pre><code class=\"lang-js\">{\n    &#39;China&#39; : &#39;中国&#39;\n}\n</code></pre>\n",
+  "nameProperty": "<p>默认是 <code class=\"codespan\">&#39;name&#39;</code>，针对 GeoJSON 要素的自定义属性名称，作为主键用于关联数据点和 GeoJSON 地理要素。\n例如： </p>\n<pre><code class=\"lang-js\">{\n    nameProperty: &#39;NAME&#39;, // 数据点中的 name：Alabama 会关联到 GeoJSON 中 NAME 属性值为 Alabama 的地理要素{&quot;type&quot;:&quot;Feature&quot;,&quot;id&quot;:&quot;01&quot;,&quot;properties&quot;:{&quot;NAME&quot;:&quot;Alabama&quot;}, &quot;geometry&quot;: { ... }}\n    data:[\n        {name: &#39;Alabama&#39;, value: 4822023},\n        {name: &#39;Alaska&#39;, value: 731449},\n    ]\n}\n</code></pre>\n",
   "selectedMode": "<p>选中模式，表示是否支持多个选中，默认关闭，支持布尔值和字符串，字符串取值可选<code class=\"codespan\">&#39;single&#39;</code>表示单选，或者<code class=\"codespan\">&#39;multiple&#39;</code>表示多选。</p>\n",
   "label": "<p>图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等，<code class=\"codespan\">label</code>选项在 ECharts 2.x 中放置于<code class=\"codespan\">itemStyle</code>下，在 ECharts 3 中为了让整个配置项结构更扁平合理，<code class=\"codespan\">label</code> 被拿出来跟 <code class=\"codespan\">itemStyle</code> 平级，并且跟 <code class=\"codespan\">itemStyle</code> 一样拥有 <code class=\"codespan\">emphasis</code> 状态。</p>\n",
   "label.show": "<p>是否显示标签。</p>\n",
