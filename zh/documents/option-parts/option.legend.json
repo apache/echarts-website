@@ -112,6 +112,7 @@
   "pageTextStyle.textShadowOffsetY": "<p>文字本身的阴影 Y 偏移。</p>\n",
   "animation": "<p>图例翻页是否使用动画。</p>\n",
   "animationDurationUpdate": "<p>图例翻页时的动画时长。</p>\n",
+  "emphasis.selectorLabel": "<blockquote>\n<p>从 <code class=\"codespan\">v4.4.0</code> 开始支持</p>\n</blockquote>\n",
   "emphasis.selectorLabel.show": "<p>是否显示标签。</p>\n",
   "emphasis.selectorLabel.distance": "<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
   "emphasis.selectorLabel.rotate": "<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/examples/zh/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
@@ -167,8 +168,8 @@
   "emphasis.selectorLabel.rich.<style_name>.textShadowBlur": "<p>文字本身的阴影长度。</p>\n",
   "emphasis.selectorLabel.rich.<style_name>.textShadowOffsetX": "<p>文字本身的阴影 X 偏移。</p>\n",
   "emphasis.selectorLabel.rich.<style_name>.textShadowOffsetY": "<p>文字本身的阴影 Y 偏移。</p>\n",
-  "selector": "<p>图例组件中的选择器按钮，目前包括全选和反选两种功能。默认不显示，用户可手动开启，也可以手动配置每个按钮的标题。</p>\n<p>使用方式如下：</p>\n<pre><code class=\"lang-js\">selector: [\n    {\n        type: &#39;all or inverse&#39;,\n        // 可以是任意你喜欢的 title\n        title: &#39;全选&#39;\n    },\n    {\n        type: &#39;inverse&#39;,\n        title: &#39;反选&#39;\n    }\n]\n\n// 或\nselector: true\n\n// 或\nselector: [&#39;all&#39;, &#39;inverse&#39;]\n</code></pre>\n",
-  "selectorLabel": "<p>选择器按钮的文本标签样式，默认显示。</p>\n",
+  "selector": "<blockquote>\n<p>从 <code class=\"codespan\">v4.4.0</code> 开始支持</p>\n</blockquote>\n<p>图例组件中的选择器按钮，目前包括全选和反选两种功能。默认不显示，用户可手动开启，也可以手动配置每个按钮的标题。</p>\n<p>使用方式如下：</p>\n<pre><code class=\"lang-js\">selector: [\n    {\n        type: &#39;all or inverse&#39;,\n        // 可以是任意你喜欢的 title\n        title: &#39;全选&#39;\n    },\n    {\n        type: &#39;inverse&#39;,\n        title: &#39;反选&#39;\n    }\n]\n\n// 或\nselector: true\n\n// 或\nselector: [&#39;all&#39;, &#39;inverse&#39;]\n</code></pre>\n",
+  "selectorLabel": "<blockquote>\n<p>从 <code class=\"codespan\">v4.4.0</code> 开始支持</p>\n</blockquote>\n<p>选择器按钮的文本标签样式，默认显示。</p>\n",
   "selectorLabel.show": "<p>是否显示标签。</p>\n",
   "selectorLabel.distance": "<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
   "selectorLabel.rotate": "<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/examples/zh/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
@@ -224,7 +225,7 @@
   "selectorLabel.rich.<style_name>.textShadowBlur": "<p>文字本身的阴影长度。</p>\n",
   "selectorLabel.rich.<style_name>.textShadowOffsetX": "<p>文字本身的阴影 X 偏移。</p>\n",
   "selectorLabel.rich.<style_name>.textShadowOffsetY": "<p>文字本身的阴影 Y 偏移。</p>\n",
-  "selectorPosition": "<p>选择器的位置，可以放在图例的尾部或者头部，对应的值分别为 <code class=\"codespan\">&#39;end&#39;</code> 和 <code class=\"codespan\">&#39;start&#39;</code>。默认情况下，图例横向布局的时候，选择器放在图例的尾部；图例纵向布局的时候，选择器放在图例的头部。</p>\n",
-  "selectorItemGap": "<p>选择器按钮之间的间隔。</p>\n",
-  "selectorButtonGap": "<p>选择器按钮与图例组件之间的间隔。</p>\n"
+  "selectorPosition": "<blockquote>\n<p>从 <code class=\"codespan\">v4.4.0</code> 开始支持</p>\n</blockquote>\n<p>选择器的位置，可以放在图例的尾部或者头部，对应的值分别为 <code class=\"codespan\">&#39;end&#39;</code> 和 <code class=\"codespan\">&#39;start&#39;</code>。默认情况下，图例横向布局的时候，选择器放在图例的尾部；图例纵向布局的时候，选择器放在图例的头部。</p>\n",
+  "selectorItemGap": "<blockquote>\n<p>从 <code class=\"codespan\">v4.4.0</code> 开始支持</p>\n</blockquote>\n<p>选择器按钮之间的间隔。</p>\n",
+  "selectorButtonGap": "<blockquote>\n<p>从 <code class=\"codespan\">v4.4.0</code> 开始支持</p>\n</blockquote>\n<p>选择器按钮与图例组件之间的间隔。</p>\n"
 }

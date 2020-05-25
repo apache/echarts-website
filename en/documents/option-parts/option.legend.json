@@ -114,6 +114,7 @@
   "pageTextStyle.textShadowOffsetY": "<p>Shadow Y offset of the text itself.</p>\n",
   "animation": "<p>Whether to use animation when page scrolll.</p>\n",
   "animationDurationUpdate": "<p>Duration of the page scroll animation.</p>\n",
+  "emphasis.selectorLabel": "<blockquote>\n<p>Since <code class=\"codespan\">v4.4.0</code></p>\n</blockquote>\n",
   "emphasis.selectorLabel.show": "<p>Whether to show label.</p>\n",
   "emphasis.selectorLabel.distance": "<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
   "emphasis.selectorLabel.rotate": "<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/examples/zh/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
@@ -169,8 +170,8 @@
   "emphasis.selectorLabel.rich.<style_name>.textShadowBlur": "<p>Shadow blue of the text itself.</p>\n",
   "emphasis.selectorLabel.rich.<style_name>.textShadowOffsetX": "<p>Shadow X offset of the text itself.</p>\n",
   "emphasis.selectorLabel.rich.<style_name>.textShadowOffsetY": "<p>Shadow Y offset of the text itself.</p>\n",
-  "selector": "<p>The selector button in the legend component. Currently includes both a full selection and an inverse selection. The selector button doesn&#39;t display by default, the user can manually configure it.</p>\n<p>Usage:</p>\n<pre><code class=\"lang-js\">selector: [\n    {\n        type: &#39;all or inverse&#39;,\n        // can be any title you like\n        title: &#39;All&#39;\n    },\n    {\n        type: &#39;inverse&#39;,\n        title: &#39;Inv&#39;\n    }\n]\n\n// or\nselector: true\n\n// or\nselector: [&#39;all&#39;, &#39;inverse&#39;]\n</code></pre>\n",
-  "selectorLabel": "<p>The text label style of the selector button, which is displayed by default.</p>\n",
+  "selector": "<blockquote>\n<p>Since <code class=\"codespan\">v4.4.0</code></p>\n</blockquote>\n<p>The selector button in the legend component. Currently includes both a full selection and an inverse selection. The selector button doesn&#39;t display by default, the user can manually configure it.</p>\n<p>Usage:</p>\n<pre><code class=\"lang-js\">selector: [\n    {\n        type: &#39;all or inverse&#39;,\n        // can be any title you like\n        title: &#39;All&#39;\n    },\n    {\n        type: &#39;inverse&#39;,\n        title: &#39;Inv&#39;\n    }\n]\n\n// or\nselector: true\n\n// or\nselector: [&#39;all&#39;, &#39;inverse&#39;]\n</code></pre>\n",
+  "selectorLabel": "<blockquote>\n<p>Since <code class=\"codespan\">v4.4.0</code></p>\n</blockquote>\n<p>The text label style of the selector button, which is displayed by default.</p>\n",
   "selectorLabel.show": "<p>Whether to show label.</p>\n",
   "selectorLabel.distance": "<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
   "selectorLabel.rotate": "<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/examples/zh/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
@@ -226,7 +227,7 @@
   "selectorLabel.rich.<style_name>.textShadowBlur": "<p>Shadow blue of the text itself.</p>\n",
   "selectorLabel.rich.<style_name>.textShadowOffsetX": "<p>Shadow X offset of the text itself.</p>\n",
   "selectorLabel.rich.<style_name>.textShadowOffsetY": "<p>Shadow Y offset of the text itself.</p>\n",
-  "selectorPosition": "<p>The position of the selector button, which can be placed at the end or start of the legend component, the corresponding values are <code class=\"codespan\">&#39;end&#39;</code> and <code class=\"codespan\">&#39;start&#39;</code>. By default, when the legend is laid out horizontally, the selector is placed at the end of it, and when the legend is laid out vertically, the selector is placed at the start of it.</p>\n",
-  "selectorItemGap": "<p>The gap between the selector button.</p>\n",
-  "selectorButtonGap": "<p>The gap between selector button and legend component.</p>\n"
+  "selectorPosition": "<blockquote>\n<p>Since <code class=\"codespan\">v4.4.0</code></p>\n</blockquote>\n<p>The position of the selector button, which can be placed at the end or start of the legend component, the corresponding values are <code class=\"codespan\">&#39;end&#39;</code> and <code class=\"codespan\">&#39;start&#39;</code>. By default, when the legend is laid out horizontally, the selector is placed at the end of it, and when the legend is laid out vertically, the selector is placed at the start of it.</p>\n",
+  "selectorItemGap": "<blockquote>\n<p>Since <code class=\"codespan\">v4.4.0</code></p>\n</blockquote>\n<p>The gap between the selector button.</p>\n",
+  "selectorButtonGap": "<blockquote>\n<p>Since <code class=\"codespan\">v4.4.0</code></p>\n</blockquote>\n<p>The gap between selector button and legend component.</p>\n"
 }
