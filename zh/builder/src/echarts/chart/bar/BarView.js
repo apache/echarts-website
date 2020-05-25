@@ -113,6 +113,7 @@ export default echarts.extendChartView({
     var roundCap = seriesModel.get('roundCap', true);
     var drawBackground = seriesModel.get('showBackground', true);
     var backgroundModel = seriesModel.getModel('backgroundStyle');
+    var barBorderRadius = backgroundModel.get('barBorderRadius') || 0;
     var bgEls = [];
     var oldBgEls = this._backgroundEls || [];
     data.diff(oldData).add(function (dataIndex) {
@@ -120,8 +121,14 @@ export default echarts.extendChartView({
       var layout = getLayout[coord.type](data, dataIndex, itemModel);
 
       if (drawBackground) {
-        var bgEl = createBackgroundEl(coord, isHorizontalOrRadial, layout);
-        bgEl.useStyle(backgroundModel.getBarItemStyle());
+        var bgLayout = getLayout[coord.type](data, dataIndex);
+        var bgEl = createBackgroundEl(coord, isHorizontalOrRadial, bgLayout);
+        bgEl.useStyle(backgroundModel.getBarItemStyle()); // Only cartesian2d support borderRadius.
+
+        if (coord.type === 'cartesian2d') {
+          bgEl.setShape('r', barBorderRadius);
+        }
+
         bgEls[dataIndex] = bgEl;
       } // If dataZoom in filteMode: 'empty', the baseValue can be set as NaN in "axisProxy".
 
@@ -151,9 +158,15 @@ export default echarts.extendChartView({
 
       if (drawBackground) {
         var bgEl = oldBgEls[oldIndex];
-        bgEl.useStyle(backgroundModel.getBarItemStyle());
+        bgEl.useStyle(backgroundModel.getBarItemStyle()); // Only cartesian2d support borderRadius.
+
+        if (coord.type === 'cartesian2d') {
+          bgEl.setShape('r', barBorderRadius);
+        }
+
         bgEls[newIndex] = bgEl;
-        var shape = createBackgroundShape(isHorizontalOrRadial, layout, coord);
+        var bgLayout = getLayout[coord.type](data, newIndex);
+        var shape = createBackgroundShape(isHorizontalOrRadial, bgLayout, coord);
         graphic.updateProps(bgEl, {
           shape: shape
         }, animationModel, newIndex);
@@ -374,9 +387,11 @@ function removeSector(dataIndex, animationModel, el) {
 }
 
 var getLayout = {
+  // itemModel is only used to get borderWidth, which is not needed
+  // when calculating bar background layout.
   cartesian2d: function (data, dataIndex, itemModel) {
     var layout = data.getItemLayout(dataIndex);
-    var fixedLineWidth = getLineWidth(itemModel, layout); // fix layout with lineWidth
+    var fixedLineWidth = itemModel ? getLineWidth(itemModel, layout) : 0; // fix layout with lineWidth
 
     var signX = layout.width > 0 ? 1 : -1;
     var signY = layout.height > 0 ? 1 : -1;

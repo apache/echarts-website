@@ -60,7 +60,7 @@ var MapSeries = SeriesModel.extend({
       });
     }
 
-    var geoSource = geoSourceManager.load(this.getMapType(), this.option.nameMap);
+    var geoSource = geoSourceManager.load(this.getMapType(), this.option.nameMap, this.option.nameProperty);
     zrUtil.each(geoSource.regions, function (region) {
       var name = region.name;
 
@@ -221,7 +221,8 @@ var MapSeries = SeriesModel.extend({
       itemStyle: {
         areaColor: 'rgba(255,215,0,0.8)'
       }
-    }
+    },
+    nameProperty: 'name'
   }
 });
 zrUtil.mixin(MapSeries, dataSelectableMixin);

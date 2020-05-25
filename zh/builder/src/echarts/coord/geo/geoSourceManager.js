@@ -30,16 +30,17 @@ export default {
   /**
    * @param {string} mapName
    * @param {Object} nameMap
+   * @param {string} nameProperty
    * @return {Object} source {regions, regionsMap, nameCoordMap, boundingRect}
    */
-  load: function (mapName, nameMap) {
+  load: function (mapName, nameMap, nameProperty) {
     var regions = [];
     var regionsMap = createHashMap();
     var nameCoordMap = createHashMap();
     var boundingRect;
     var mapRecords = retrieveMap(mapName);
     each(mapRecords, function (record) {
-      var singleSource = loaders[record.type].load(mapName, record);
+      var singleSource = loaders[record.type].load(mapName, record, nameProperty);
       each(singleSource.regions, function (region) {
         var regionName = region.name; // Try use the alias in geoNameMap
 

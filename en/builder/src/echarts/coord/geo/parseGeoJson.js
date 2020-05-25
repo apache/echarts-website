@@ -87,11 +87,12 @@ function decodePolygon(coordinate, encodeOffsets, encodeScale) {
 /**
  * @alias module:echarts/coord/geo/parseGeoJson
  * @param {Object} geoJson
+ * @param {string} nameProperty
  * @return {module:zrender/container/Group}
  */
 
 
-export default function (geoJson) {
+export default function (geoJson, nameProperty) {
   decode(geoJson);
   return zrUtil.map(zrUtil.filter(geoJson.features, function (featureObj) {
     // Output of mapshaper may have geometry null
@@ -124,7 +125,7 @@ export default function (geoJson) {
       });
     }
 
-    var region = new Region(properties.name, geometries, properties.cp);
+    var region = new Region(properties[nameProperty || 'name'], geometries, properties.cp);
     region.properties = properties;
     return region;
   });

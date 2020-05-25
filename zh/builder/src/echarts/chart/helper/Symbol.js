@@ -236,7 +236,6 @@ symbolProto._updateCommon = function (data, idx, symbolSize, seriesScope) {
 
   var itemStyle = seriesScope && seriesScope.itemStyle;
   var hoverItemStyle = seriesScope && seriesScope.hoverItemStyle;
-  var symbolRotate = seriesScope && seriesScope.symbolRotate;
   var symbolOffset = seriesScope && seriesScope.symbolOffset;
   var labelModel = seriesScope && seriesScope.labelModel;
   var hoverLabelModel = seriesScope && seriesScope.hoverLabelModel;
@@ -249,7 +248,6 @@ symbolProto._updateCommon = function (data, idx, symbolSize, seriesScope) {
 
     itemStyle = itemModel.getModel(normalStyleAccessPath).getItemStyle(['color']);
     hoverItemStyle = itemModel.getModel(emphasisStyleAccessPath).getItemStyle();
-    symbolRotate = itemModel.getShallow('symbolRotate');
     symbolOffset = itemModel.getShallow('symbolOffset');
     labelModel = itemModel.getModel(normalLabelAccessPath);
     hoverLabelModel = itemModel.getModel(emphasisLabelAccessPath);
@@ -260,6 +258,7 @@ symbolProto._updateCommon = function (data, idx, symbolSize, seriesScope) {
   }
 
   var elStyle = symbolPath.style;
+  var symbolRotate = data.getItemVisual(idx, 'symbolRotate');
   symbolPath.attr('rotation', (symbolRotate || 0) * Math.PI / 180 || 0);
 
   if (symbolOffset) {

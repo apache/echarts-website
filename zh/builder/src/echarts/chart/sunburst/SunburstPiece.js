@@ -127,6 +127,7 @@ SunburstPieceProto.updateData = function (firstCreate, node, state, seriesModel,
 
   this._seriesModel = seriesModel || this._seriesModel;
   this._ecModel = ecModel || this._ecModel;
+  graphic.setHoverStyle(this);
 };
 
 SunburstPieceProto.onEmphasis = function (highlightPolicy) {

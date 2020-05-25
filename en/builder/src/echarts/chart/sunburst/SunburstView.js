@@ -20,6 +20,7 @@ import * as zrUtil from 'zrender/src/core/util';
 import ChartView from '../../view/Chart';
 import SunburstPiece from './SunburstPiece';
 import DataDiffer from '../../data/DataDiffer';
+import { windowOpen } from '../../util/format';
 var ROOT_TO_NODE_ACTION = 'sunburstRootToNode';
 var SunburstView = ChartView.extend({
   type: 'sunburst',
@@ -169,7 +170,7 @@ var SunburstView = ChartView.extend({
 
             if (link) {
               var linkTarget = itemModel.get('target', true) || '_blank';
-              window.open(link, linkTarget);
+              windowOpen(link, linkTarget);
             }
           }
 

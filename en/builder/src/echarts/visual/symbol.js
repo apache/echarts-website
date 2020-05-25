@@ -28,11 +28,14 @@ export default function (seriesType, defaultSymbolType, legendSymbol) {
       var symbolType = seriesModel.get('symbol');
       var symbolSize = seriesModel.get('symbolSize');
       var keepAspect = seriesModel.get('symbolKeepAspect');
+      var symbolRotate = seriesModel.get('symbolRotate');
       var hasSymbolTypeCallback = isFunction(symbolType);
       var hasSymbolSizeCallback = isFunction(symbolSize);
-      var hasCallback = hasSymbolTypeCallback || hasSymbolSizeCallback;
+      var hasSymbolRotateCallback = isFunction(symbolRotate);
+      var hasCallback = hasSymbolTypeCallback || hasSymbolSizeCallback || hasSymbolRotateCallback;
       var seriesSymbol = !hasSymbolTypeCallback && symbolType ? symbolType : defaultSymbolType;
       var seriesSymbolSize = !hasSymbolSizeCallback ? symbolSize : null;
+      var seriesSymbolRotate = !hasSymbolRotateCallback ? seriesSymbolRotate : null;
       data.setVisual({
         legendSymbol: legendSymbol || seriesSymbol,
         // If seting callback functions on `symbol` or `symbolSize`, for simplicity and avoiding
@@ -41,7 +44,8 @@ export default function (seriesType, defaultSymbolType, legendSymbol) {
         // some cases but generally it is not recommanded.
         symbol: seriesSymbol,
         symbolSize: seriesSymbolSize,
-        symbolKeepAspect: keepAspect
+        symbolKeepAspect: keepAspect,
+        symbolRotate: symbolRotate
       }); // Only visible series has each data be visual encoded
 
       if (ecModel.isSeriesFiltered(seriesModel)) {
@@ -54,12 +58,14 @@ export default function (seriesType, defaultSymbolType, legendSymbol) {
           var params = seriesModel.getDataParams(idx);
           hasSymbolTypeCallback && data.setItemVisual(idx, 'symbol', symbolType(rawValue, params));
           hasSymbolSizeCallback && data.setItemVisual(idx, 'symbolSize', symbolSize(rawValue, params));
+          hasSymbolRotateCallback && data.setItemVisual(idx, 'symbolRotate', symbolRotate(rawValue, params));
         }
 
         if (data.hasItemOption) {
           var itemModel = data.getItemModel(idx);
           var itemSymbolType = itemModel.getShallow('symbol', true);
           var itemSymbolSize = itemModel.getShallow('symbolSize', true);
+          var itemSymbolRotate = itemModel.getShallow('symbolRotate', true);
           var itemSymbolKeepAspect = itemModel.getShallow('symbolKeepAspect', true); // If has item symbol
 
           if (itemSymbolType != null) {
@@ -69,6 +75,10 @@ export default function (seriesType, defaultSymbolType, legendSymbol) {
           if (itemSymbolSize != null) {
             // PENDING Transform symbolSize ?
             data.setItemVisual(idx, 'symbolSize', itemSymbolSize);
+          }
+
+          if (itemSymbolRotate != null) {
+            data.setItemVisual(idx, 'symbolRotate', itemSymbolRotate);
           }
 
           if (itemSymbolKeepAspect != null) {

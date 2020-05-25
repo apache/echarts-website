@@ -19,7 +19,8 @@
 import * as zrUtil from 'zrender/src/core/util';
 import * as echarts from '../echarts';
 import * as graphic from '../util/graphic';
-import { getLayoutRect } from '../util/layout'; // Model
+import { getLayoutRect } from '../util/layout';
+import { windowOpen } from '../util/format'; // Model
 
 echarts.extendComponentModel({
   type: 'title',
@@ -124,13 +125,13 @@ echarts.extendComponentView({
 
     if (link) {
       textEl.on('click', function () {
-        window.open(link, '_' + titleModel.get('target'));
+        windowOpen(link, '_' + titleModel.get('target'));
       });
     }
 
     if (sublink) {
       subTextEl.on('click', function () {
-        window.open(sublink, '_' + titleModel.get('subtarget'));
+        windowOpen(link, '_' + titleModel.get('subtarget'));
       });
     }
 

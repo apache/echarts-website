@@ -176,7 +176,8 @@ effectSymbolProto.updateData = function (data, idx) {
     pos[1] = parsePercent(symbolOffset[1], symbolSize[1]);
   }
 
-  rippleGroup.rotation = (itemModel.getShallow('symbolRotate') || 0) * Math.PI / 180 || 0;
+  var symbolRotate = data.getItemVisual(idx, 'symbolRotate');
+  rippleGroup.rotation = (symbolRotate || 0) * Math.PI / 180 || 0;
   var effectCfg = {};
   effectCfg.showEffectOn = seriesModel.get('showEffectOn');
   effectCfg.rippleScale = itemModel.get('rippleEffect.scale');

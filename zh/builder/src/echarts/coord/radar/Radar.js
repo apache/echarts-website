@@ -181,7 +181,7 @@ Radar.prototype.update = function (ecModel, api) {
 
 
   zrUtil.each(indicatorAxes, function (indicatorAxis, idx) {
-    var rawExtent = getScaleExtent(indicatorAxis.scale, indicatorAxis.model);
+    var rawExtent = getScaleExtent(indicatorAxis.scale, indicatorAxis.model).extent;
     niceScaleExtent(indicatorAxis.scale, indicatorAxis.model);
     var axisModel = indicatorAxis.model;
     var scale = indicatorAxis.scale;

@@ -19,6 +19,7 @@
 import SeriesModel from '../../model/Series';
 import Tree from '../../data/Tree';
 import { encodeHTML } from '../../util/format';
+import Model from '../../model/Model';
 export default SeriesModel.extend({
   type: 'series.tree',
   layoutInfo: null,
@@ -38,14 +39,12 @@ export default SeriesModel.extend({
       children: option.data
     };
     var leaves = option.leaves || {};
-    var treeOption = {};
-    treeOption.leaves = leaves;
-    var tree = Tree.createTree(root, this, treeOption, beforeLink);
+    var leavesModel = new Model(leaves, this, this.ecModel);
+    var tree = Tree.createTree(root, this, {}, beforeLink);
 
     function beforeLink(nodeData) {
       nodeData.wrapMethod('getItemModel', function (model, idx) {
         var node = tree.getNodeByDataIndex(idx);
-        var leavesModel = node.getLeavesModel();
 
         if (!node.children.length || !node.isExpand) {
           model.parentModel = leavesModel;

@@ -387,20 +387,17 @@ var resetMethods = {
 
     thisOption.precision = precision;
     splitStep = +splitStep.toFixed(precision);
-    var index = 0;
 
     if (thisOption.minOpen) {
       pieceList.push({
-        index: index++,
         interval: [-Infinity, dataExtent[0]],
         close: [0, 0]
       });
     }
 
-    for (var curr = dataExtent[0], len = index + splitNumber; index < len; curr += splitStep) {
+    for (var index = 0, curr = dataExtent[0]; index < splitNumber; curr += splitStep, index++) {
       var max = index === splitNumber - 1 ? dataExtent[1] : curr + splitStep;
       pieceList.push({
-        index: index++,
         interval: [curr, max],
         close: [1, 1]
       });
@@ -408,14 +405,14 @@ var resetMethods = {
 
     if (thisOption.maxOpen) {
       pieceList.push({
-        index: index++,
         interval: [dataExtent[1], Infinity],
         close: [0, 0]
       });
     }
 
     reformIntervals(pieceList);
-    zrUtil.each(pieceList, function (piece) {
+    zrUtil.each(pieceList, function (piece, index) {
+      piece.index = index;
       piece.text = this.formatValueText(piece.interval);
     }, this);
   },

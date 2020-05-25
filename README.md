@@ -35,7 +35,7 @@ export ECHARTS_BASE="/your/local/base/dir/path/of/these/projects"
 
 
 
-### If the built-in echarts dist needs to be upated
+### If the built-in echarts dist needs to be updated
 
 **Prepare echarts source code**
 ```shell
@@ -67,7 +67,7 @@ ${ECHARTS_BASE}/echarts-www/builder/pre/removeDEV.js # remove __DEV__
 ```shell
 code ${ECHARTS_BASE}/echarts-www/js/download.js
 # Add the new release to the download list manually.
-code ${ECHARTS_BASE}/echarts-www/build.js
+code ${ECHARTS_BASE}/echarts-www/bin/build.js
 # Set the `downloadVersion` to the newest version.
 ```
 
@@ -83,9 +83,11 @@ sh update-echarts.sh --only-copy-dist
 **If any of the thumbnails need to be updated**
 ```shell
 # Edit `BASE_PATH` in `build-example.js` firstly.
+code ${ECHARTS_BASE}/echarts-examples/tool/build-example.js
+# Generate thumbnails:
 cd ${ECHARTS_BASE}/echarts-examples/tool
 node build-example.js
-# if intending only make thumbnail for "public/data/foo.js" and "public/data/bar.js",
+# If intending only make thumbnail for "public/data/foo.js" and "public/data/bar.js",
 # node build-example.js --pattern "foo,bar"
 ```
 

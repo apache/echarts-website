@@ -140,8 +140,8 @@ export default echarts.extendChartView({
         var point = coordSys.dataToPoint([data.get(dataDims[0], idx), data.get(dataDims[1], idx)]);
         rect = new graphic.Rect({
           shape: {
-            x: Math.floor(point[0] - width / 2),
-            y: Math.floor(point[1] - height / 2),
+            x: Math.floor(Math.round(point[0]) - width / 2),
+            y: Math.floor(Math.round(point[1]) - height / 2),
             width: Math.ceil(width),
             height: Math.ceil(height)
           },

@@ -176,7 +176,8 @@ proto.onclick = function (ecModel, api, type) {
     type: 'changeMagicType',
     currentType: type,
     newOption: newOption,
-    newTitle: newTitle
+    newTitle: newTitle,
+    featureName: 'magicType'
   });
 };
 
