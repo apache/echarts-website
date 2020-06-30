@@ -94,6 +94,7 @@ node build-example.js
 
 ### If `incubator-echarts-website` needs to be built and published
 
+
 **Build `echarts-www`**
 ```shell
 sh ${ECHARTS_BASE}/echarts-www/bin/release.sh --env asf
