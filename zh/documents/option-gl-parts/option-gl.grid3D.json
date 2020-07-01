@@ -57,7 +57,7 @@
     "desc": "<p>文字的字体大小。</p>\n"
   },
   "axisLabel.textStyle.fontWeight": {
-    "desc": "<p>文字字体的粗细。</p>\n<p><strong>可选：</strong></p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n"
+    "desc": "<p>文字字体的粗细。</p>\n<p><strong>可选：</strong></p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n<!-- Overwrite color -->"
   },
   "axisTick": {
     "desc": "<p>坐标轴刻度相关设置。</p>\n"
@@ -78,7 +78,7 @@
     "desc": "<p>线条的不透明度。</p>\n"
   },
   "axisTick.lineStyle.width": {
-    "desc": "<p>线条的宽度。</p>\n"
+    "desc": "<p>线条的宽度。</p>\n<!-- Overwrite color -->"
   },
   "splitLine": {
     "desc": "<p>坐标轴轴线相关设置。</p>\n"
@@ -174,10 +174,10 @@
     "desc": "<p>主光源的强度。</p>\n"
   },
   "light.main.shadow": {
-    "desc": "<p>主光源是否投射阴影。默认为关闭。</p>\n<p>开启阴影可以给场景带来更真实和有层次的光照效果。但是同时也会增加程序的运行开销。</p>\n<p>下图是开启阴影以及关闭阴影的区别。</p>\n<div  class=\"twentytwenty-container\" style=\"width: 700px;\">\n    <img  src=\"documents/asset/gl/img/geo-shadow.png\" width=\"100%\" title=\"Shadow\"><img />\n    <img  src=\"documents/asset/gl/img/geo-no-shadow.png\" width=\"100%\" title=\"No Shadow\"><img />\n<div />\n"
+    "desc": "<p>主光源是否投射阴影。默认为关闭。</p>\n<p>开启阴影可以给场景带来更真实和有层次的光照效果。但是同时也会增加程序的运行开销。</p>\n<p>下图是开启阴影以及关闭阴影的区别。</p>\n<div class=\"twentytwenty-container\" style=\"width: 700px;\">\n    <img src=\"documents/asset/gl/img/geo-shadow.png\" width=\"100%\" title=\"Shadow\">\n    <img src=\"documents/asset/gl/img/geo-no-shadow.png\" width=\"100%\" title=\"No Shadow\">\n</div>\n"
   },
   "light.main.shadowQuality": {
-    "desc": "<p>阴影的质量。可选<code class=\"codespan\">&#39;low&#39;</code>, <code class=\"codespan\">&#39;medium&#39;</code>, <code class=\"codespan\">&#39;high&#39;</code>, <code class=\"codespan\">&#39;ultra&#39;</code></p>\n<p>下图是低质量和高质量阴影的区别。</p>\n<div  class=\"twentytwenty-container\" style=\"width: 700px;\">\n    <img  src=\"documents/asset/gl/img/geo-shadow-low.png\" width=\"100%\" title=\"Low\"><img />\n    <img  src=\"documents/asset/gl/img/geo-shadow-high.png\" width=\"100%\" title=\"High\"><img />\n<div />\n"
+    "desc": "<p>阴影的质量。可选<code class=\"codespan\">&#39;low&#39;</code>, <code class=\"codespan\">&#39;medium&#39;</code>, <code class=\"codespan\">&#39;high&#39;</code>, <code class=\"codespan\">&#39;ultra&#39;</code></p>\n<p>下图是低质量和高质量阴影的区别。</p>\n<div class=\"twentytwenty-container\" style=\"width: 700px;\">\n    <img src=\"documents/asset/gl/img/geo-shadow-low.png\" width=\"100%\" title=\"Low\">\n    <img src=\"documents/asset/gl/img/geo-shadow-high.png\" width=\"100%\" title=\"High\">\n</div>\n"
   },
   "light.main.alpha": {
     "desc": "<p>主光源绕 x 轴，即上下旋转的角度。配合 <a href=\"#grid3D.light.main.beta\">beta</a> 控制光源的方向。</p>\n<p>如下示意图：</p>\n<p><img width=\"\" height=\"auto\" src=\"documents/asset/gl/img/light-alpha-beta.png\"></p>\n<p><a href=\"#globe\">globe</a> 组件中可以通过 <a href=\"#globe.light.main.time\">time</a> 控制日光的时间。</p>\n"
@@ -207,7 +207,7 @@
     "desc": "<p>高光反射的强度。</p>\n"
   },
   "postEffect": {
-    "desc": "<p>后处理特效的相关配置。后处理特效可以为画面添加高光、景深、环境光遮蔽（SSAO）、调色等效果。可以让整个画面更富有质感。</p>\n<p>下面分别是关闭和开启 <code class=\"codespan\">postEffect</code> 的区别。</p>\n<div  class=\"twentytwenty-container\" style=\"width: 700px;\">\n    <img  src=\"documents/asset/gl/img/globe-posteffect-disable.png\" width=\"100%\" title=\"Disable\"><img />\n    <img  src=\"documents/asset/gl/img/globe-posteffect-enable.png\" width=\"100%\" title=\"Enable\"><img />\n<div />\n\n<p>注意在开启 postEffect 的时候默认会开启 <a href=\"#grid3D.temporalSuperSampling\">temporalSuperSampling</a> 在画面静止后持续对画面增强，包括抗锯齿、景深、SSAO、阴影等。</p>\n"
+    "desc": "<p>后处理特效的相关配置。后处理特效可以为画面添加高光、景深、环境光遮蔽（SSAO）、调色等效果。可以让整个画面更富有质感。</p>\n<p>下面分别是关闭和开启 <code class=\"codespan\">postEffect</code> 的区别。</p>\n<div class=\"twentytwenty-container\" style=\"width: 700px;\">\n    <img src=\"documents/asset/gl/img/globe-posteffect-disable.png\" width=\"100%\" title=\"Disable\">\n    <img src=\"documents/asset/gl/img/globe-posteffect-enable.png\" width=\"100%\" title=\"Enable\">\n</div>\n\n<p>注意在开启 postEffect 的时候默认会开启 <a href=\"#grid3D.temporalSuperSampling\">temporalSuperSampling</a> 在画面静止后持续对画面增强，包括抗锯齿、景深、SSAO、阴影等。</p>\n"
   },
   "postEffect.enable": {
     "desc": "<p>是否开启后处理特效。默认关闭。</p>\n"
@@ -222,7 +222,7 @@
     "desc": "<p>光晕的强度，默认为 0.1</p>\n"
   },
   "postEffect.depthOfField": {
-    "desc": "<p>景深效果。景深效果是模拟摄像机的光学成像效果，在对焦的区域相对清晰，离对焦的区域越远则会逐渐模糊。</p>\n<p>景深效果可以让观察者集中注意力到对焦的区域，而且让画面的镜头感更强，大景深还能塑造出微距的模型效果。</p>\n<p>下面分别是关闭和开启景深的区别。</p>\n<div  class=\"twentytwenty-container\" style=\"width: 700px;\">\n    <img  src=\"documents/asset/gl/img/geo-no-dof.png\" width=\"100%\" title=\"Disable\"><img />\n    <img  src=\"documents/asset/gl/img/geo-dof.png\" width=\"100%\" title=\"Enable\"><img />\n<div />\n"
+    "desc": "<p>景深效果。景深效果是模拟摄像机的光学成像效果，在对焦的区域相对清晰，离对焦的区域越远则会逐渐模糊。</p>\n<p>景深效果可以让观察者集中注意力到对焦的区域，而且让画面的镜头感更强，大景深还能塑造出微距的模型效果。</p>\n<p>下面分别是关闭和开启景深的区别。</p>\n<div class=\"twentytwenty-container\" style=\"width: 700px;\">\n    <img src=\"documents/asset/gl/img/geo-no-dof.png\" width=\"100%\" title=\"Disable\">\n    <img src=\"documents/asset/gl/img/geo-dof.png\" width=\"100%\" title=\"Enable\">\n</div>\n"
   },
   "postEffect.depthOfField.enable": {
     "desc": "<p>是否开启景深。</p>\n"
@@ -237,10 +237,10 @@
     "desc": "<p>镜头的<a href=\"https://zh.wikipedia.org/wiki/%E7%84%A6%E6%AF%94\" target=\"_blank\">F值</a>，值越小景深越浅。</p>\n"
   },
   "postEffect.depthOfField.blurRadius": {
-    "desc": "<p>焦外的模糊半径</p>\n<p>不同模糊半径的区别：</p>\n<div  class=\"twentytwenty-container\" style=\"width: 700px;\">\n    <img  src=\"documents/asset/gl/img/geo-dof-small.png\" width=\"100%\" title=\"blurSize: 3\"><img />\n    <img  src=\"documents/asset/gl/img/geo-dof-large.png\" width=\"100%\" title=\"blurSize: 10\"><img />\n<div />\n"
+    "desc": "<p>焦外的模糊半径</p>\n<p>不同模糊半径的区别：</p>\n<div class=\"twentytwenty-container\" style=\"width: 700px;\">\n    <img src=\"documents/asset/gl/img/geo-dof-small.png\" width=\"100%\" title=\"blurSize: 3\">\n    <img src=\"documents/asset/gl/img/geo-dof-large.png\" width=\"100%\" title=\"blurSize: 10\">\n</div>\n"
   },
   "postEffect.screenSpaceAmbientOcclusion": {
-    "desc": "<p>屏幕空间的环境光遮蔽效果。环境光遮蔽效果可以让拐角处、洞、缝隙等大部分光无法到达的区域变暗，是传统的阴影贴图的补充，可以让整个场景更加自然，有层次。</p>\n<p>下面是无 SSAO 和有 SSAO 的效果对比：</p>\n<div  class=\"twentytwenty-container\" style=\"width: 700px;\">\n    <img  src=\"documents/asset/gl/img/geo-no-ssao.png\" width=\"100%\" title=\"No SSAO\"><img />\n    <img  src=\"documents/asset/gl/img/geo-ssao.png\" width=\"100%\" title=\"SSAO\"><img />\n<div />\n"
+    "desc": "<p>屏幕空间的环境光遮蔽效果。环境光遮蔽效果可以让拐角处、洞、缝隙等大部分光无法到达的区域变暗，是传统的阴影贴图的补充，可以让整个场景更加自然，有层次。</p>\n<p>下面是无 SSAO 和有 SSAO 的效果对比：</p>\n<div class=\"twentytwenty-container\" style=\"width: 700px;\">\n    <img src=\"documents/asset/gl/img/geo-no-ssao.png\" width=\"100%\" title=\"No SSAO\">\n    <img src=\"documents/asset/gl/img/geo-ssao.png\" width=\"100%\" title=\"SSAO\">\n</div>\n"
   },
   "postEffect.SSAO": {
     "desc": "<p>同 <a href=\"#grid3D.postEffect.screenSpaceAmbientOcclusion\">screenSpaceAmbientOcclusion</a></p>\n"
@@ -252,13 +252,13 @@
     "desc": "<p>环境光遮蔽的质量。支持<code class=\"codespan\">&#39;low&#39;</code>, <code class=\"codespan\">&#39;medium&#39;</code>, <code class=\"codespan\">&#39;high&#39;</code>, <code class=\"codespan\">&#39;ultra&#39;</code>。</p>\n"
   },
   "postEffect.SSAO.radius": {
-    "desc": "<p>环境光遮蔽的采样半径。半径越大效果越自然，但是需要设置较高的<code class=\"codespan\">&#39;quality&#39;</code>。</p>\n<p>下面是半径值较小与较大之间的区别：</p>\n<div  class=\"twentytwenty-container\" style=\"width: 700px;\">\n    <img  src=\"documents/asset/gl/img/geo-ssao-small-radius.png\" width=\"100%\" title=\"Radius: 1\"><img />\n    <img  src=\"documents/asset/gl/img/geo-ssao-large-radius.png\" width=\"100%\" title=\"Radius: 10\"><img />\n<div />\n"
+    "desc": "<p>环境光遮蔽的采样半径。半径越大效果越自然，但是需要设置较高的<code class=\"codespan\">&#39;quality&#39;</code>。</p>\n<p>下面是半径值较小与较大之间的区别：</p>\n<div class=\"twentytwenty-container\" style=\"width: 700px;\">\n    <img src=\"documents/asset/gl/img/geo-ssao-small-radius.png\" width=\"100%\" title=\"Radius: 1\">\n    <img src=\"documents/asset/gl/img/geo-ssao-large-radius.png\" width=\"100%\" title=\"Radius: 10\">\n</div>\n"
   },
   "postEffect.SSAO.intensity": {
     "desc": "<p>环境光遮蔽的强度。值越大颜色越深。</p>\n"
   },
   "postEffect.colorCorrection": {
-    "desc": "<p>颜色纠正和调整。类似 Photoshop 中的 Color Adjustments。</p>\n<p>下图同个场景调整为冷色系和暖色系的区别。</p>\n<div  class=\"twentytwenty-container\" style=\"width: 700px;\">\n    <img  src=\"documents/asset/gl/img/buildings-cold.jpg\" width=\"100%\" title=\"Cold\"><img />\n    <img  src=\"documents/asset/gl/img/buildings-warm.jpg\" width=\"100%\" title=\"Warm\"><img />\n<div />\n\n"
+    "desc": "<p>颜色纠正和调整。类似 Photoshop 中的 Color Adjustments。</p>\n<p>下图同个场景调整为冷色系和暖色系的区别。</p>\n<div class=\"twentytwenty-container\" style=\"width: 700px;\">\n    <img src=\"documents/asset/gl/img/buildings-cold.jpg\" width=\"100%\" title=\"Cold\">\n    <img src=\"documents/asset/gl/img/buildings-warm.jpg\" width=\"100%\" title=\"Warm\">\n</div>\n\n"
   },
   "postEffect.colorCorrection.enable": {
     "desc": "<p>是否开启颜色纠正。</p>\n"
@@ -285,7 +285,7 @@
     "desc": "<p>是否开启 FXAA。默认为不开启。</p>\n"
   },
   "temporalSuperSampling": {
-    "desc": "<p>分帧超采样。在开启 <a href=\"#grid3D.postEffect\">postEffect</a> 后，WebGL 默认的 MSAA 会无法使用，所以我们需要自己解决锯齿的问题。</p>\n<p>分帧超采样是用来解决锯齿问题的方法，它在画面静止后会持续分帧对一个像素多次抖动采样，从而达到抗锯齿的效果。而且在这个分帧采样的过程中，echarts-gl 也会对 <a href=\"#grid3D.postEffect\">postEffect</a> 中一些需要采样保证效果的特效，例如 <a href=\"#grid3D.postEffect.SSAO\">SSAO</a>, <a href=\"#grid3D.postEffect.depthOfField\">景深</a>，以及阴影进行渐进增强。</p>\n<p>下面是未开启和开启<code class=\"codespan\">temporalSuperSampling</code>的区别。</p>\n<div  class=\"twentytwenty-container\" style=\"width: 800px;\">\n    <img  src=\"documents/asset/gl/img/surface-no-taa.png\" width=\"100%\" title=\"No AA\"><img />\n    <img  src=\"documents/asset/gl/img/surface-taa.png\" width=\"100%\" title=\"AA\"><img />\n<div />\n"
+    "desc": "<p>分帧超采样。在开启 <a href=\"#grid3D.postEffect\">postEffect</a> 后，WebGL 默认的 MSAA 会无法使用，所以我们需要自己解决锯齿的问题。</p>\n<p>分帧超采样是用来解决锯齿问题的方法，它在画面静止后会持续分帧对一个像素多次抖动采样，从而达到抗锯齿的效果。而且在这个分帧采样的过程中，echarts-gl 也会对 <a href=\"#grid3D.postEffect\">postEffect</a> 中一些需要采样保证效果的特效，例如 <a href=\"#grid3D.postEffect.SSAO\">SSAO</a>, <a href=\"#grid3D.postEffect.depthOfField\">景深</a>，以及阴影进行渐进增强。</p>\n<p>下面是未开启和开启<code class=\"codespan\">temporalSuperSampling</code>的区别。</p>\n<div class=\"twentytwenty-container\" style=\"width: 800px;\">\n    <img src=\"documents/asset/gl/img/surface-no-taa.png\" width=\"100%\" title=\"No AA\">\n    <img src=\"documents/asset/gl/img/surface-taa.png\" width=\"100%\" title=\"AA\">\n</div>\n"
   },
   "temporalSuperSampling.enable": {
     "desc": "<p>是否开启分帧超采样。默认在开启 <a href=\"#grid3D.postEffect\">postEffect</a> 后也会同步开启。</p>\n"

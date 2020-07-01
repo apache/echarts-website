@@ -129,7 +129,7 @@
     "desc": "<p>The font size of the text.</p>\n"
   },
   "axisLabel.textStyle.fontWeight": {
-    "desc": "<p>The font thick weight of the text.</p>\n<p><strong>Optional:</strong></p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n"
+    "desc": "<p>The font thick weight of the text.</p>\n<p><strong>Optional:</strong></p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n<!-- Overwrite color -->"
   },
   "axisTick": {
     "desc": "<p>Settings related to axis tick.</p>\n"
@@ -150,7 +150,7 @@
     "desc": "<p>The opacity of the line.</p>\n"
   },
   "axisTick.lineStyle.width": {
-    "desc": "<p>The width of the line.</p>\n"
+    "desc": "<p>The width of the line.</p>\n<!-- Overwrite color -->"
   },
   "splitLine": {
     "desc": "<p>Settings related to axis line.</p>\n"
