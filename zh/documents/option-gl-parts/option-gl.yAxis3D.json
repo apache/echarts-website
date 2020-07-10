@@ -129,7 +129,7 @@
     "desc": "<p>文字的字体大小。</p>\n"
   },
   "axisLabel.textStyle.fontWeight": {
-    "desc": "<p>文字字体的粗细。</p>\n<p><strong>可选：</strong></p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n<!-- Overwrite color -->"
+    "desc": "<p>文字字体的粗细。</p>\n<p><strong>可选：</strong></p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n"
   },
   "axisTick": {
     "desc": "<p>坐标轴刻度相关设置。</p>\n"
@@ -150,7 +150,7 @@
     "desc": "<p>线条的不透明度。</p>\n"
   },
   "axisTick.lineStyle.width": {
-    "desc": "<p>线条的宽度。</p>\n<!-- Overwrite color -->"
+    "desc": "<p>线条的宽度。</p>\n"
   },
   "splitLine": {
     "desc": "<p>坐标轴轴线相关设置。</p>\n"

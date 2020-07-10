@@ -116,7 +116,7 @@
     }
   },
   "edgeForkPosition": {
-    "desc": "\n\n<p>正交布局下当边的形状是折线时，子树中折线段分叉的位置。这里的位置指的是分叉点与子树父节点的距离占整个子树高度的百分比。默认取值是 <code class=\"codespan\">&#39;50%&#39;</code>，可以是 [&#39;0&#39;, &#39;100%&#39;] 之间。</p>\n<p><strong>注意：该配置项只有在 <code class=\"codespan\">edgeShape = &#39;curve&#39;</code> 时才有效。</strong></p>\n",
+    "desc": "\n\n<p>正交布局下当边的形状是折线时，子树中折线段分叉的位置。这里的位置指的是分叉点与子树父节点的距离占整个子树高度的百分比。默认取值是 <code class=\"codespan\">&#39;50%&#39;</code>，可以是 [&#39;0&#39;, &#39;100%&#39;] 之间。</p>\n<p><strong>注意：该配置项只有在 <code class=\"codespan\">edgeShape = &#39;polyline&#39;</code> 时才有效。</strong></p>\n",
     "uiControl": {
       "type": "percent",
       "default": "50%"

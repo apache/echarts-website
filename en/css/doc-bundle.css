@@ -973,7 +973,7 @@ span.CodeMirror-selectedtext { background: none; }
 }
 #example-panel .preview-and-code {
     position: absolute;
-    top: 90px;
+    top: 75px;
     bottom: 0;
     left: 0;
     right: 0;
@@ -983,7 +983,9 @@ span.CodeMirror-selectedtext { background: none; }
     top: 0;
 }
 #example-panel .preview-main {
+    padding: 0 10px;
     background: #fefefe;
+    box-sizing: border-box;
 }
 #example-panel .example-code {
     position: relative;
@@ -1041,20 +1043,42 @@ span.CodeMirror-selectedtext { background: none; }
       width: 100%;
       height: 50%;
 }
-#example-panel.down-layout {
+#example-panel.bottom-layout {
     left: 300px;
     bottom: 0;
-    right: 0;
+    right: 10px;
 }
-#example-panel.down-layout .preview-main {
+#example-panel.bottom-layout .preview-main {
       width: 50%;
       height: 100%;
       float: left;
 }
-#example-panel.down-layout .example-code {
+#example-panel.bottom-layout .example-code {
       width: 50%;
       height: 100%;
       float: left;
+}
+#example-panel.top-layout {
+    left: 300px;
+    top: 50px;
+    right: 10px;
+}
+#example-panel.top-layout .preview-main {
+      width: 50%;
+      height: 100%;
+      float: left;
+}
+#example-panel.top-layout .example-code {
+      width: 50%;
+      height: 100%;
+      float: left;
+}
+.example-change-layout .layout-title > i {
+  font-size: 14px;
+  margin-right: 5px;
+}
+.example-change-layout .layout-mode {
+  margin-top: 10px;
 }
 
 .doc-main {
@@ -1081,6 +1105,12 @@ span.CodeMirror-selectedtext { background: none; }
 .doc-content {
   text-align: left;
   color: #4d555e;
+}
+.doc-content.option-example-actived.option-example-top-layout {
+    margin-top: 42%;
+}
+.doc-content.option-example-actived.option-example-bottom-layout {
+    margin-bottom: 42%;
 }
 .doc-content.option-example-actived.option-example-right-layout {
     margin-right: 45%;

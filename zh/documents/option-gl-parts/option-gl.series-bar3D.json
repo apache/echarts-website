@@ -15,7 +15,7 @@
     "desc": "<p>坐标轴使用的 <a href=\"#globe\">globe</a> 组件的索引。默认使用第一个 <a href=\"#globe\">globe</a> 组件。</p>\n"
   },
   "bevelSize": {
-    "desc": "<p>柱子的倒角尺寸。支持设置为从 0 到 1 的值。默认为 0，即没有倒角。</p>\n<p>下面是无倒角和有倒角的区别。</p>\n<div class=\"twentytwenty-container\" style=\"width: 700px;\">\n    <img src=\"documents/asset/gl/img/bar3D-no-bevel.png\" width=\"100%\" title=\"bevelSize: 0\">\n    <img src=\"documents/asset/gl/img/bar3D-bevel.png\" width=\"100%\" title=\"bevelSize: 0.3\">\n</div>\n"
+    "desc": "<p>柱子的倒角尺寸。支持设置为从 0 到 1 的值。默认为 0，即没有倒角。</p>\n<p>下面是无倒角和有倒角的区别。</p>\n<div  class=\"twentytwenty-container\" style=\"width: 700px;\">\n    <img  src=\"documents/asset/gl/img/bar3D-no-bevel.png\" width=\"100%\" title=\"bevelSize: 0\"><img />\n    <img  src=\"documents/asset/gl/img/bar3D-bevel.png\" width=\"100%\" title=\"bevelSize: 0.3\"><img />\n<div />\n"
   },
   "bevelSmoothness": {
     "desc": "<p>柱子倒角的光滑/圆润度，数值越大越光滑/圆润。</p>\n"
