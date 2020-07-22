@@ -24,7 +24,7 @@
     "desc": "<p>Inverses all legends.</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;legendInverseSelect&#39;\n})\n</code></pre>\n<p><strong>EVENT:</strong> <a href=\"#events.legendinverseselect\">legendinverseselect</a></p>\n"
   },
   "legend.legendScroll": {
-    "desc": "<p>Controll the scrolling of legend. It works when <a href=\"option.html#legend.type\" target=\"_blank\">legend.type</a> is <code class=\"codespan\">&#39;scroll&#39;</code>.</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;legendScroll&#39;,\n    scrollDataIndex: number,\n    legendId: string\n})\n</code></pre>\n<p><strong>EVENT:</strong> <a href=\"#events.legendscroll\">legendscroll</a></p>\n<!--============= tooltip ==========-->\n"
+    "desc": "<p>Control the scrolling of legend. It works when <a href=\"option.html#legend.type\" target=\"_blank\">legend.type</a> is <code class=\"codespan\">&#39;scroll&#39;</code>.</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;legendScroll&#39;,\n    scrollDataIndex: number,\n    legendId: string\n})\n</code></pre>\n<p><strong>EVENT:</strong> <a href=\"#events.legendscroll\">legendscroll</a></p>\n<!--============= tooltip ==========-->\n"
   },
   "tooltip": {
     "desc": "<p>Actions related to <a href=\"option.html#tooltip\" target=\"_blank\">tooltip component</a>, which should include <a href=\"option.html#tooltip\" target=\"_blank\">tooltip component</a> before use.</p>\n"

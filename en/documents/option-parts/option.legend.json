@@ -66,7 +66,7 @@
     }
   },
   "align": {
-    "desc": "<p>Legend mrker and text aligning. By default, it automatically calculates from component location and orient. When <a href=\"#legend.left\">left</a> value of this component is &#39;right&#39;, and the vertical layout (<a href=\"#legend.orient\">orient</a> is &#39;vertical&#39;), it would be aligned to &#39;right&#39;.</p>\n<p>Option:</p>\n<ul>\n<li>&#39;auto&#39;</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n</ul>\n",
+    "desc": "<p>Legend marker and text aligning. By default, it automatically calculates from component location and orientation. When <a href=\"#legend.left\">left</a> value of this component is &#39;right&#39;, and the vertical layout (<a href=\"#legend.orient\">orient</a> is &#39;vertical&#39;), it would be aligned to &#39;right&#39;.</p>\n<p>Option:</p>\n<ul>\n<li>&#39;auto&#39;</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "options": "auto,left,right",
@@ -118,7 +118,7 @@
     "desc": "<p>Formatter is used to format label of legend, which supports string template and callback function.</p>\n<p>Example:</p>\n<pre><code class=\"lang-js\">// using string template, the template variable is legend name {name}\nformatter: &#39;Legend {name}&#39;\n// using callback function\nformatter: function (name) {\n    return &#39;Legend &#39; + name;\n}\n</code></pre>\n"
   },
   "selectedMode": {
-    "desc": "<p>Selected mode of legend, which controls whether series can be toggled displaying by clicking legends. It is enabled by default, and you may set it to be <code class=\"codespan\">false</code> to disabled it.</p>\n<p>Besides, it can be set to <code class=\"codespan\">&#39;single&#39;</code> or <code class=\"codespan\">&#39;multiple&#39;</code>, for single selection and multiple selection.</p>\n",
+    "desc": "<p>Selected mode of legend, which controls whether series can be toggled displaying by clicking legends. It is enabled by default, and you may set it to be <code class=\"codespan\">false</code> to disable it.</p>\n<p>Besides, it can be set to <code class=\"codespan\">&#39;single&#39;</code> or <code class=\"codespan\">&#39;multiple&#39;</code>, for single selection and multiple selection.</p>\n",
     "uiControl": {
       "type": "boolean",
       "options": "true,false,single,multiple"
@@ -572,7 +572,7 @@
     }
   },
   "scrollDataIndex": {
-    "desc": "<p>It works when <a href=\"#legend.type\">legend.type</a> is <code class=\"codespan\">&#39;scroll&#39;</code>.</p>\n<p><code class=\"codespan\">dataIndex</code> of the left top most displayed item.</p>\n<p>Although the scrolling of legend items can be controlled by calling <code class=\"codespan\">setOption</code> and specifying this property, we suggest that do not controll legend in this way unless necessary (<code class=\"codespan\">setOption</code> might be time-consuming), but just use action <a href=\"api.html#action.legend.legendScroll\" target=\"_blank\">legendScroll</a> to do that.</p>\n<p>See <a href=\"https://echarts.apache.org/examples/zh/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">vertically scrollable legend</a> or <a href=\"https://echarts.apache.org/examples/zh/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">horizontally scrollable legend</a>.</p>\n"
+    "desc": "<p>It works when <a href=\"#legend.type\">legend.type</a> is <code class=\"codespan\">&#39;scroll&#39;</code>.</p>\n<p><code class=\"codespan\">dataIndex</code> of the left top most displayed item.</p>\n<p>Although the scrolling of legend items can be controlled by calling <code class=\"codespan\">setOption</code> and specifying this property, we suggest that do not control legend in this way unless necessary (<code class=\"codespan\">setOption</code> might be time-consuming), but just use action <a href=\"api.html#action.legend.legendScroll\" target=\"_blank\">legendScroll</a> to do that.</p>\n<p>See <a href=\"https://echarts.apache.org/examples/zh/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">vertically scrollable legend</a> or <a href=\"https://echarts.apache.org/examples/zh/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">horizontally scrollable legend</a>.</p>\n"
   },
   "pageButtonItemGap": {
     "desc": "<p>It works when <a href=\"#legend.type\">legend.type</a> is <code class=\"codespan\">&#39;scroll&#39;</code>.</p>\n<p>The gap between page buttons and page info text.</p>\n<p>See <a href=\"https://echarts.apache.org/examples/zh/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">vertically scrollable legend</a> or <a href=\"https://echarts.apache.org/examples/zh/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">horizontally scrollable legend</a>.</p>\n"
@@ -719,7 +719,7 @@
     }
   },
   "animation": {
-    "desc": "<p>Whether to use animation when page scrolll.</p>\n",
+    "desc": "<p>Whether to use animation when page scrolls.</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "true"

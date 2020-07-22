@@ -1106,12 +1106,6 @@ span.CodeMirror-selectedtext { background: none; }
   text-align: left;
   color: #4d555e;
 }
-.doc-content.option-example-actived.option-example-top-layout {
-    margin-top: 42%;
-}
-.doc-content.option-example-actived.option-example-bottom-layout {
-    margin-bottom: 42%;
-}
 .doc-content.option-example-actived.option-example-right-layout {
     margin-right: 45%;
 }

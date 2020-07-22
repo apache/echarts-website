@@ -7,6 +7,7 @@ define(function (require) {
 
     var TOP_MODULE_NAME = 'topModuleInRequireES';
     var RETRY_MAX = 5;
+    var TIMEOUT = 10000;
     var RETRY_DELAY = 2000;
 
     var $log = document.getElementById('log');
@@ -85,7 +86,7 @@ define(function (require) {
                             builderLog(log);
                             return reject(log);
                         }
-                        ajax(location.origin + path)
+                        ajax(location.origin + path, TIMEOUT)
                             .then(function (content) {
                                 builderLog('Loaded module: "' + path + '"');
                                 resolve(content);
@@ -205,7 +206,7 @@ define(function (require) {
         return moduleId;
     }
 
-    function ajax(toUrl) {
+    function ajax(toUrl, timeout) {
         toUrl += '?' + urlArgs;
 
         return new Promise(function (promiseResolve, promiseReject) {
@@ -226,6 +227,14 @@ define(function (require) {
                     xhr.onreadystatechange = new Function();
                     xhr = null;
                 }
+            };
+
+            xhr.timeout = timeout; // in ms
+            xhr.ontimeout = function () {
+                promiseReject({
+                    status: 999,
+                    content: 'timeout'
+                })
             };
 
             xhr.send(null);
