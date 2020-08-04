@@ -1,3 +1,7 @@
+RedirectMatch 404 /\.git
+RedirectMatch 404 /\.gitignore
+RedirectMatch 404 /\.htaccess
+
 Header set Access-Control-Allow-Origin "https://echarts.apache.org"
 Header set Access-Control-Allow-Methods: "*"
 Header set Access-Control-Allow-Headers: "*"
