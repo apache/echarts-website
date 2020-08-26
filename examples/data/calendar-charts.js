@@ -18,7 +18,7 @@ function getVirtulData(year) {
 
 var graphData = [
     [
-        1485878400000,
+        1485964800000,
         260
     ],
     [
