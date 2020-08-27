@@ -961,6 +961,7 @@ span.CodeMirror-selectedtext { background: none; }
     top: 0;
 }
 #example-panel .preview-main {
+    position: relative;
     padding: 0 10px;
     background: #fefefe;
     box-sizing: border-box;
@@ -1285,7 +1286,8 @@ span.CodeMirror-selectedtext { background: none; }
     width: 100%;
 }
 .el-autocomplete-suggestion.search-input-popper {
-  width: 300px !important;
+  width: auto !important;
+  min-width: 300px;
 }
 .el-autocomplete-suggestion.search-input-popper li {
     line-height: 28px;
