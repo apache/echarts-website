@@ -91,7 +91,8 @@ function assembleSeriesWithCategoryAxis(series) {
     }));
     var columns = [categoryAxis.model.getCategories()];
     zrUtil.each(group.series, function (series) {
-      columns.push(series.getRawData().mapArray(valueAxisDim, function (val) {
+      var rawData = series.getRawData();
+      columns.push(series.getRawData().mapArray(rawData.mapDimension(valueAxisDim), function (val) {
         return val;
       }));
     }); // Assemble table content
@@ -217,7 +218,15 @@ function parseListContents(str) {
   var data = [];
 
   for (var i = 0; i < lines.length; i++) {
-    var items = trim(lines[i]).split(itemSplitRegex);
+    // if line is empty, ignore it.
+    // there is a case that a user forgot to delete `\n`.
+    var line = trim(lines[i]);
+
+    if (!line) {
+      continue;
+    }
+
+    var items = line.split(itemSplitRegex);
     var name = '';
     var value;
     var hasName = false;
@@ -424,14 +433,20 @@ function tryMergeDataOption(newData, originalData) {
     var original = originalData && originalData[idx];
 
     if (zrUtil.isObject(original) && !zrUtil.isArray(original)) {
-      if (zrUtil.isObject(newVal) && !zrUtil.isArray(newVal)) {
-        newVal = newVal.value;
-      } // Original data has option
+      var newValIsObject = zrUtil.isObject(newVal) && !zrUtil.isArray(newVal);
+
+      if (!newValIsObject) {
+        newVal = {
+          value: newVal
+        };
+      } // original data has name but new data has no name
 
 
-      return zrUtil.defaults({
-        value: newVal
-      }, original);
+      var shouldDeleteName = original.name != null && newVal.name == null; // Original data has option
+
+      newVal = zrUtil.defaults(newVal, original);
+      shouldDeleteName && delete newVal.name;
+      return newVal;
     } else {
       return newVal;
     }

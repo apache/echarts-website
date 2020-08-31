@@ -26,21 +26,17 @@ export default {
   reset: function (seriesModel, ecModel, api, payload) {
     var tree = seriesModel.getData().tree;
     var root = tree.root;
-    var seriesItemStyleModel = seriesModel.getModel(ITEM_STYLE_NORMAL);
 
     if (root.isRemoved()) {
       return;
     }
 
-    var levelItemStyles = zrUtil.map(tree.levelModels, function (levelModel) {
-      return levelModel ? levelModel.get(ITEM_STYLE_NORMAL) : null;
-    });
     travelTree(root, // Visual should calculate from tree root but not view root.
-    {}, levelItemStyles, seriesItemStyleModel, seriesModel.getViewRoot().getAncestors(), seriesModel);
+    {}, seriesModel.getViewRoot().getAncestors(), seriesModel);
   }
 };
 
-function travelTree(node, designatedVisual, levelItemStyles, seriesItemStyleModel, viewRootAncestors, seriesModel) {
+function travelTree(node, designatedVisual, viewRootAncestors, seriesModel) {
   var nodeModel = node.getModel();
   var nodeLayout = node.getLayout(); // Optimize
 
@@ -49,8 +45,7 @@ function travelTree(node, designatedVisual, levelItemStyles, seriesItemStyleMode
   }
 
   var nodeItemStyleModel = node.getModel(ITEM_STYLE_NORMAL);
-  var levelItemStyle = levelItemStyles[node.depth];
-  var visuals = buildVisuals(nodeItemStyleModel, designatedVisual, levelItemStyle, seriesItemStyleModel); // calculate border color
+  var visuals = buildVisuals(nodeItemStyleModel, designatedVisual, seriesModel); // calculate border color
 
   var borderColor = nodeItemStyleModel.get('borderColor');
   var borderColorSaturation = nodeItemStyleModel.get('borderColorSaturation');
@@ -76,21 +71,20 @@ function travelTree(node, designatedVisual, levelItemStyles, seriesItemStyleMode
       // If higher than viewRoot, only ancestors of viewRoot is needed to visit.
       if (child.depth >= viewRootAncestors.length || child === viewRootAncestors[child.depth]) {
         var childVisual = mapVisual(nodeModel, visuals, child, index, mapping, seriesModel);
-        travelTree(child, childVisual, levelItemStyles, seriesItemStyleModel, viewRootAncestors, seriesModel);
+        travelTree(child, childVisual, viewRootAncestors, seriesModel);
       }
     });
   }
 }
 
-function buildVisuals(nodeItemStyleModel, designatedVisual, levelItemStyle, seriesItemStyleModel) {
+function buildVisuals(nodeItemStyleModel, designatedVisual, seriesModel) {
   var visuals = zrUtil.extend({}, designatedVisual);
+  var designatedVisualItemStyle = seriesModel.designatedVisualItemStyle;
   zrUtil.each(['color', 'colorAlpha', 'colorSaturation'], function (visualName) {
     // Priority: thisNode > thisLevel > parentNodeDesignated > seriesModel
-    var val = nodeItemStyleModel.get(visualName, true); // Ignore parent
-
-    val == null && levelItemStyle && (val = levelItemStyle[visualName]);
-    val == null && (val = designatedVisual[visualName]);
-    val == null && (val = seriesItemStyleModel.get(visualName));
+    designatedVisualItemStyle[visualName] = designatedVisual[visualName];
+    var val = nodeItemStyleModel.get(visualName);
+    designatedVisualItemStyle[visualName] = null;
     val != null && (visuals[visualName] = val);
   });
   return visuals;

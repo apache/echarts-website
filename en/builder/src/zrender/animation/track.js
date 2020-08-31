@@ -186,10 +186,6 @@ export function createTrackClip(target, propName, keyframes, easing, delay, loop
           value = interpolateNumber(kfValues[frame], kfValues[frame + 1], w);
         }
 
-        if (target.aaaa != null) {
-          console.log(target.uuid, value, propName);
-        }
-
         setter(target, propName, value);
       }
     }

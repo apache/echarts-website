@@ -105,7 +105,7 @@ export default echarts.extendComponentView({
 
     this._alwaysShowContent = tooltipModel.get('alwaysShowContent');
     var tooltipContent = this._tooltipContent;
-    tooltipContent.update();
+    tooltipContent.update(tooltipModel);
     tooltipContent.setEnterable(tooltipModel.get('enterable'));
 
     this._initGlobalListener();
@@ -309,7 +309,7 @@ export default echarts.extendComponentView({
   _showOrMove: function (tooltipModel, cb) {
     // showDelay is used in this case: tooltip.enterable is set
     // as true. User intent to move mouse into tooltip and click
-    // something. `showDelay` makes it easyer to enter the content
+    // something. `showDelay` makes it easier to enter the content
     // but tooltip do not move immediately.
     var delay = tooltipModel.get('showDelay');
     cb = zrUtil.bind(cb, this);
@@ -375,7 +375,7 @@ export default echarts.extendComponentView({
           }
         }); // Default tooltip content
         // FIXME
-        // (1) shold be the first data which has name?
+        // (1) should be the first data which has name?
         // (2) themeRiver, firstDataIndex is array, and first line is unnecessary.
 
         var firstLine = valueLabel;
@@ -465,7 +465,7 @@ export default echarts.extendComponentView({
     var subTooltipModel = new Model(tooltipOpt, this._tooltipModel, this._ecModel);
     var defaultHtml = subTooltipModel.get('content');
     var asyncTicket = Math.random(); // Do not check whether `trigger` is 'none' here, because `trigger`
-    // only works on cooridinate system. In fact, we have not found case
+    // only works on coordinate system. In fact, we have not found case
     // that requires setting `trigger` nothing on component yet.
 
     this._showOrMove(subTooltipModel, function () {

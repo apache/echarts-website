@@ -19,6 +19,7 @@
 import * as zrUtil from 'zrender/src/core/util';
 import SeriesModel from '../../model/Series';
 import Tree from '../../data/Tree';
+import Model from '../../model/Model';
 import { wrapTreePathInfo } from '../helper/treeHelper';
 export default SeriesModel.extend({
   type: 'series.sunburst',
@@ -34,14 +35,24 @@ export default SeriesModel.extend({
       children: option.data
     };
     completeTreeValue(root);
-    var levels = option.levels || []; // levels = option.levels = setDefault(levels, ecModel);
-
-    var treeOption = {};
-    treeOption.levels = levels; // Make sure always a new tree is created when setOption,
+    var levelModels = zrUtil.map(option.levels || [], function (levelDefine) {
+      return new Model(levelDefine, this, ecModel);
+    }, this); // Make sure always a new tree is created when setOption,
     // in TreemapView, we check whether oldTree === newTree
     // to choose mappings approach among old shapes and new shapes.
 
-    return Tree.createTree(root, this, treeOption).data;
+    var tree = Tree.createTree(root, this, beforeLink);
+
+    function beforeLink(nodeData) {
+      nodeData.wrapMethod('getItemModel', function (model, idx) {
+        var node = tree.getNodeByDataIndex(idx);
+        var levelModel = levelModels[node.depth];
+        levelModel && (model.parentModel = levelModel);
+        return model;
+      });
+    }
+
+    return tree.data;
   },
   optionUpdated: function () {
     this.resetViewRoot();

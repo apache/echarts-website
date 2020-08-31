@@ -22,6 +22,7 @@ import { circularLayout } from './circularLayoutHelper';
 import { linearMap } from '../../util/number';
 import * as vec2 from 'zrender/src/core/vector';
 import * as zrUtil from 'zrender/src/core/util';
+import { getCurvenessForEdge } from '../helper/multipleGraphEdgeHelper';
 export default function (ecModel) {
   ecModel.eachSeriesByType('graph', function (graphSeries) {
     var coordSys = graphSeries.coordinateSystem;
@@ -89,11 +90,12 @@ export default function (ecModel) {
         }
 
         var edgeModel = edge.getModel();
+        var curveness = zrUtil.retrieve3(edgeModel.get('lineStyle.curveness'), -getCurvenessForEdge(edge, graphSeries, idx, true), 0);
         return {
           n1: nodes[edge.node1.dataIndex],
           n2: nodes[edge.node2.dataIndex],
           d: d,
-          curveness: edgeModel.get('lineStyle.curveness') || 0,
+          curveness: curveness,
           ignoreForceLayout: edgeModel.get('ignoreForceLayout')
         };
       });

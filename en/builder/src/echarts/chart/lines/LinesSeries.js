@@ -72,8 +72,6 @@ var LinesSeries = SeriesModel.extend({
     LinesSeries.superApply(this, 'init', arguments);
   },
   mergeOption: function (option) {
-    // The input data may be null/undefined.
-    option.data = option.data || [];
     compatEc2(option);
 
     if (option.data) {

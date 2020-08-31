@@ -22,7 +22,7 @@ window.__EC_DOC_option_series_bar = {
     "desc": "<p>使用的 <a href=\"#yAxis\">y 轴</a>的 index，在单个图表实例中存在多个 y轴的时候有用。</p>\n"
   },
   "roundCap": {
-    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v4.5.0</code> 开始支持</p>\n</blockquote>\n\n\n<p>是否在环形柱条两侧使用圆弧效果。</p>\n<p>仅对极坐标系柱状图有效。</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=doc-example/polar-roundCap&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n",
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v4.5.0</code> 开始支持</p>\n</blockquote>\n\n\n<p>是否在环形柱条两侧使用圆弧效果。</p>\n<p>仅对极坐标系柱状图有效。</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=polar-roundCap&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n",
     "uiControl": {
       "type": "boolean",
       "clean": "true"

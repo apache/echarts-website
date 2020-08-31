@@ -417,7 +417,7 @@ function position(row, rowFixedLength, rect, halfGapWidth, flush) {
 
   rect[xy[idx1WhenH]] += rowOtherLength;
   rect[wh[idx1WhenH]] -= rowOtherLength;
-} // Return [containerWidth, containerHeight] as defualt.
+} // Return [containerWidth, containerHeight] as default.
 
 
 function estimateRootSize(seriesModel, targetInfo, viewRoot, containerWidth, containerHeight) {

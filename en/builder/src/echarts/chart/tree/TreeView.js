@@ -426,9 +426,9 @@ function drawEdge(seriesModel, node, virtualRoot, symbolEl, sourceOldLayout, sou
 
       graphic.updateProps(edge, {
         shape: getEdgeShape(seriesScope, sourceLayout, targetLayout),
-        style: {
+        style: zrUtil.defaults({
           opacity: 1
-        }
+        }, seriesScope.lineStyle)
       }, seriesModel);
     }
   } else if (edgeShape === 'polyline') {
@@ -462,9 +462,9 @@ function drawEdge(seriesModel, node, virtualRoot, symbolEl, sourceOldLayout, sou
             parentPoint: [targetLayout.x, targetLayout.y],
             childPoints: childPoints
           },
-          style: {
+          style: zrUtil.defaults({
             opacity: 1
-          }
+          }, seriesScope.lineStyle)
         }, seriesModel);
       }
     } else {}

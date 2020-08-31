@@ -91,10 +91,12 @@ export default MarkerView.extend({
       var itemModel = mpData.getItemModel(idx);
       var symbol = itemModel.getShallow('symbol');
       var symbolSize = itemModel.getShallow('symbolSize');
+      var symbolRotate = itemModel.getShallow('symbolRotate');
       var isFnSymbol = zrUtil.isFunction(symbol);
       var isFnSymbolSize = zrUtil.isFunction(symbolSize);
+      var isFnSymbolRotate = zrUtil.isFunction(symbolRotate);
 
-      if (isFnSymbol || isFnSymbolSize) {
+      if (isFnSymbol || isFnSymbolSize || isFnSymbolRotate) {
         var rawIdx = mpModel.getRawValue(idx);
         var dataParams = mpModel.getDataParams(idx);
 
@@ -106,11 +108,16 @@ export default MarkerView.extend({
           // FIXME 这里不兼容 ECharts 2.x，2.x 貌似参数是整个数据？
           symbolSize = symbolSize(rawIdx, dataParams);
         }
+
+        if (isFnSymbolRotate) {
+          symbolRotate = symbolRotate(rawIdx, dataParams);
+        }
       }
 
       mpData.setItemVisual(idx, {
         symbol: symbol,
         symbolSize: symbolSize,
+        symbolRotate: symbolRotate,
         color: itemModel.get('itemStyle.color') || seriesData.getVisual('color')
       });
     }); // TODO Text are wrong

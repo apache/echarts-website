@@ -153,7 +153,7 @@ function processOnAxis(axisInfo, newValue, updaters, dontSnap, outputFinder) {
   var payloadInfo = buildPayloadsBySeries(newValue, axisInfo);
   var payloadBatch = payloadInfo.payloadBatch;
   var snapToValue = payloadInfo.snapToValue; // Fill content of event obj for echarts.connect.
-  // By defualt use the first involved series data as a sample to connect.
+  // By default use the first involved series data as a sample to connect.
 
   if (payloadBatch[0] && outputFinder.seriesIndex == null) {
     zrUtil.extend(outputFinder, payloadBatch[0]);

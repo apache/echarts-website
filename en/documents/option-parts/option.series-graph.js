@@ -3033,6 +3033,9 @@ window.__EC_DOC_option_series_graph = {
       "step": "0.5"
     }
   },
+  "autoCurveness": {
+    "desc": "<p>For the situation where there are multiple links between nodes, the curveness of each link is automatically calculated.</p>\n<p>When set to <code class=\"codespan\">number</code>, it indicates the length of the edge curvenness array between two nodes, and the calculation result is given by the internal algorithm.</p>\n<p>When set to <code class=\"codespan\">Array</code>, it means that the curveness array is directly specified, and the multilateral curveness is directly selected from the array.</p>\n<p><strong>Notice：</strong> if <a href=\"#series-graph.lineStyle.curveness\">lineStyle.curveness</a> has been set, this property is invalid.</p>\n"
+  },
   "data": {
     "desc": "<p>Nodes list of graph.</p>\n<pre><code class=\"lang-js\">data: [{\n    name: &#39;1&#39;,\n    x: 10,\n    y: 10,\n    value: 10\n}, {\n    name: &#39;2&#39;,\n    x: 100,\n    y: 100,\n    value: 20,\n    symbolSize: 20,\n    itemStyle: {\n        color: &#39;red&#39;\n    }\n}]\n</code></pre>\n"
   },

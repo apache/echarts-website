@@ -921,6 +921,80 @@ window.__EC_DOC_option_toolbox = {
   "feature.dataZoom.yAxisIndex": {
     "desc": "<p>Defines which <a href=\"#yAxis\">yAxis</a> should be controlled. By default, it controls all y axes. If it is set to be <code class=\"codespan\">false</code>, then no y axis is controlled. If it is set to be then it controls axis with axisIndex of <code class=\"codespan\">3</code>. If it is set to be <code class=\"codespan\">[0, 3]</code>, it controls the x-axes with axisIndex of <code class=\"codespan\">0</code> and <code class=\"codespan\">3</code>.</p>\n"
   },
+  "feature.dataZoom.brushStyle": {
+    "desc": "<p>Style of brush rectangle.</p>\n"
+  },
+  "feature.dataZoom.brushStyle.color": {
+    "desc": "<p> color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "feature.dataZoom.brushStyle.borderColor": {
+    "desc": "<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "feature.dataZoom.brushStyle.borderWidth": {
+    "desc": "<p> border width. No border when it is set to be 0.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "value": "0",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "feature.dataZoom.brushStyle.borderType": {
+    "desc": "<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "solid",
+      "options": "solid,dashed,dotted"
+    }
+  },
+  "feature.dataZoom.brushStyle.shadowBlur": {
+    "desc": "<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "feature.dataZoom.brushStyle.shadowColor": {
+    "desc": "<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": ""
+    }
+  },
+  "feature.dataZoom.brushStyle.shadowOffsetX": {
+    "desc": "<p>Offset distance on the horizontal direction of shadow.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "0",
+      "step": "0.5"
+    }
+  },
+  "feature.dataZoom.brushStyle.shadowOffsetY": {
+    "desc": "<p>Offset distance on the vertical direction of shadow.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "0",
+      "step": "0.5"
+    }
+  },
+  "feature.dataZoom.brushStyle.opacity": {
+    "desc": "<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "1",
+      "min": "0",
+      "max": "1",
+      "step": "0.01"
+    }
+  },
   "feature.magicType": {
     "desc": "<p>Magic type switching.\n<strong>示例: </strong></p>\n<pre><code class=\"lang-js\">feature: {\n    magicType: {\n        type: [&#39;line&#39;, &#39;bar&#39;, &#39;stack&#39;, &#39;tiled&#39;]\n    }\n}\n</code></pre>\n"
   },

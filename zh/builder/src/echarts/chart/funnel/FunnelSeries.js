@@ -77,6 +77,7 @@ var FunnelSeries = echarts.extendSeriesModel({
     maxSize: '100%',
     sort: 'descending',
     // 'ascending', 'descending'
+    orient: 'vertical',
     gap: 0,
     funnelAlign: 'center',
     label: {
