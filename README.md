@@ -3,7 +3,7 @@
 
 ## Setup
 
-Clone this project, alone with [echarts](https://github.com/apache/incubator-echarts), [echarts-www](https://github.com/ecomfe/echarts-www), [echarts-examples](https://github.com/ecomfe/echarts-examples), [echarts-doc](https://github.com/ecomfe/echarts-doc) under the same directory.
+Clone this project, alone with [echarts](https://github.com/apache/incubator-echarts), [echarts-www](https://github.com/apache/incubator-echarts-www), [echarts-examples](https://github.com/apache/incubator-echarts-examples), [echarts-doc](https://github.com/apache/incubator-echarts-doc) under the same directory.
 
 
 ## Debug Locally
