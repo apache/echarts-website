@@ -4,7 +4,6 @@
     <meta charset="utf-8" />
     <script src="lib/esl.js"></script>
     <script src="lib/uglify.js"></script>
-    <script src="lib/escodegen.js"></script>
 
     <style type="text/css">
         body {
@@ -46,23 +45,22 @@
             }
         }
 
-        BUILD_CONFIG.version = +BUILD_CONFIG.version || 2;
+        BUILD_CONFIG.version = BUILD_CONFIG.version || 'latest';
 
         var postfix = BUILD_CONFIG.dev ? '-dev' : '';
 
         require.config({
             paths: {
                 'rollup': 'lib/rollup.browser',
-                'esprima': 'lib/esprima',
-                'estraverse': 'lib/estraverse'
+                'transformDev': 'lib/transform-dev-bundle'
             },
-            urlArgs: 'v=1603774175523'
+            urlArgs: 'v=1604161749206'
         });
 
         require(['build']);
 
         function parseURIValue(value) { // for XSS
-            return value.replace(/[^0-9a-zA-Z-_,]/g, '');
+            return value.replace(/[^0-9a-zA-Z-_,.]/g, '');
         }
 
     </script>

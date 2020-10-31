@@ -4,125 +4,161 @@ define(function (require) {
     // var mangleString = require('./mangleString');
     var saveAs = require('./lib/FileSaver');
     var rollup = require('rollup');
+    var transformDev = require('transformDev');
 
     var TOP_MODULE_NAME = 'topModuleInRequireES';
-    var RETRY_MAX = 5;
+    var RETRY_MAX = 2;
     var TIMEOUT = 10000;
     var RETRY_DELAY = 2000;
 
     var $log = document.getElementById('log');
 
-    var baseURL = dir(location.pathname);
-    var suffix = BUILD_CONFIG.version === 3 ? '3' : '';
-    var pathsConfig = {
-        'echarts/src': './src/echarts' + suffix,
-        'zrender/src': './src/zrender' + suffix
-    };
+    var version = BUILD_CONFIG.version;
+    var isVersion5 = (version + '').startsWith('5');
+    var jsDelivrBase = 'https://cdn.jsdelivr.net/npm';
+
     var urlArgs = '__v__=' + (+new Date());
 
-    var topCode = [
-        'import "echarts/src/config";',
-        'export * from "echarts/src/echarts";'
-    ];
+    var topCode = [`export * from "echarts/src/echarts";`];
 
     if (BUILD_CONFIG.api) {
-        topCode.push('export * from "echarts/src/export";');
+        topCode.push(`export * from "echarts/src/export";`);
     }
 
     // Including charts
     (BUILD_CONFIG.charts || '').split(',').forEach(function (chart) {
-        chart && topCode.push('import "echarts/src/chart/' + chart + '";');
+        chart && topCode.push(`import "echarts/src/chart/${chart}";`);
     });
 
-    if (topCode.indexOf('echarts/src/chart/scatter') >= 0) {
-        topCode.push('import "echarts/src/chart/effectScatter"');
+    if (topCode.indexOf(`echarts/src/chart/scatter`) >= 0) {
+        topCode.push(`import "echarts/src/chart/effectScatter"`);
     }
 
     // Including components
     (BUILD_CONFIG.components || '').split(',').forEach(function (component) {
-        component && topCode.push('import "echarts/src/component/' + component + '";');
+        component && topCode.push(`import "echarts/src/component/${component}";`);
     });
 
     if (BUILD_CONFIG.vml) {
-        topCode.push('import "zrender/src/vml/vml";');
+        topCode.push(`import "zrender/src/vml/vml";`);
     }
     if (BUILD_CONFIG.svg) {
-        topCode.push('import "zrender/src/svg/svg";');
+        topCode.push(`import "zrender/src/svg/svg";`);
     }
 
     // Always require log and time axis
     topCode.push(
-        'import "echarts/src/scale/Time";',
-        'import "echarts/src/scale/Log";'
+        `import "echarts/src/scale/Time";`,
+        `import "echarts/src/scale/Log";`
     );
 
+    var srcFolder = isVersion5 ? 'esm' : 'src';
+
+    var npmEntries = {};
+    var pathsConfig = {
+        'echarts/src': `/echarts@${version}/${srcFolder}`
+    };
+
+    function resolveNpmDependencies(package, version) {
+        return fetch(`${jsDelivrBase}/${package}@${version}/package.json`, { mode: 'cors' })
+            .then(response => response.json())
+            .then(pkgCfg => {
+                var entry = pkgCfg.module || pkgCfg.main || 'index.js';
+                if (!entry.endsWith('.js')) {
+                    entry = entry + '.js';
+                }
+                npmEntries[package] = `/${package}@${version}/${entry}`;
+
+                var promises = [];
+                for (let pkgName in pkgCfg.dependencies) {
+                    var depVersion = pkgCfg.dependencies[pkgName];
+                    pathsConfig[pkgName] = `/${pkgName}@${depVersion}`;
+                    promises.push(resolveNpmDependencies(pkgName, depVersion));
+                }
+                return Promise.all(promises);
+            });
+    }
+
+    resolveNpmDependencies('echarts', version)
+        .then(startRollup)
     // Loading scripts and build
-    rollup.rollup({
-        input: TOP_MODULE_NAME,
-        legacy: true,
-        plugins: [{
-            resolveId: function (importee, importor) {
-                if (importee === TOP_MODULE_NAME) {
-                    return importee;
-                }
-                // console.log('resolveid', importee, importor);
-                return getAbsolutePath(
-                    importee,
-                    importor !== TOP_MODULE_NAME ? importor : null
-                );
-            },
-            load: function (path) {
-                if (path === TOP_MODULE_NAME) {
-                    return topCode.join('\n');
-                }
 
-                var retryCount = 0;
-                return new Promise(function (resolve, reject) {
-                    function retryableLoad() {
-                        // When using apache CDN, might fail to loading soource.
-                        if (retryCount >= RETRY_MAX) {
-                            var log = 'Loaded module failed: "' + path
-                                + '"<br><strong style="color:red">! Please reload page to retry. !</strong>';
-                            builderLog(log);
-                            return reject(log);
-                        }
-                        ajax(location.origin + path, TIMEOUT)
-                            .then(function (content) {
-                                builderLog('Loaded module: "' + path + '"');
-                                resolve(content);
-                            })
-                            .catch(function () {
-                                retryCount++;
-                                setTimeout(retryableLoad, RETRY_DELAY);
-                            });
+    function startRollup() {
+        rollup.rollup({
+            input: TOP_MODULE_NAME,
+            legacy: true,
+            plugins: [{
+                resolveId: function (importee, importor) {
+                    if (importee === TOP_MODULE_NAME) {
+                        return importee;
                     }
-                    retryableLoad();
-                });
+                    // console.log('resolveid', importee, importor);
+                    return getAbsolutePath(
+                        importee,
+                        importor !== TOP_MODULE_NAME ? importor : null
+                    );
+                },
+                transform: function (code) {
+                    return {
+                        code: code.replace(/process.env.NODE_ENV/g, JSON.stringify(
+                            !BUILD_CONFIG.source ? 'production' : 'development'
+                        ))
+                    };
+                },
+                load: function (path) {
+                    if (path === TOP_MODULE_NAME) {
+                        return topCode.join('\n');
+                    }
+
+                    var retryCount = 0;
+                    return new Promise(function (resolve, reject) {
+                        function retryableLoad() {
+                            // When using apache CDN, might fail to loading soource.
+                            if (retryCount >= RETRY_MAX) {
+                                var log = 'Loaded module failed: "' + path
+                                    + '"<br><strong style="color:red">! Please reload page to retry. !</strong>';
+                                builderLog(log);
+                                return reject(log);
+                            }
+                            ajax(`${jsDelivrBase}/${path}`, TIMEOUT)
+                                .then(function (content) {
+                                    builderLog('Loaded module: "' + path + '"');
+                                    resolve(content);
+                                })
+                                .catch(function () {
+                                    retryCount++;
+                                    setTimeout(retryableLoad, RETRY_DELAY);
+                                });
+                        }
+                        retryableLoad();
+                    });
+                }
+            }]
+        }).then(function (bundle) {
+            return bundle.generate({
+                name: 'echarts',
+                format: 'umd',
+                legacy: true
+            });
+        }).then(function (result) {
+            var code = result.code;
+            code = transformDev.transform(code, false, !BUILD_CONFIG.source ? 'false' : 'true').code;
+
+            if (!BUILD_CONFIG.source) {
+                builderLog('<br />Compressing code...');
+                // code = mangleString(code);
+                // Otherwise uglify will throw error.
+                code = code.replace(/\t/g, '    ');
+                code = jsCompress(code);
             }
-        }]
-    }).then(function (bundle) {
-        return bundle.generate({
-            name: 'echarts',
-            format: 'umd',
-            legacy: true
+
+            download(code);
+
+            builderLog('<br />Completed');
+
+            document.getElementById('tip').innerHTML = 'OK';
         });
-    }).then(function (result) {
-        var code = result.code;
-
-        if (!BUILD_CONFIG.source) {
-            builderLog('<br />Compressing code...');
-            // code = mangleString(code);
-            // Otherwise uglify will throw error.
-            code = code.replace(/\t/g, '    ');
-            code = jsCompress(code);
-        }
-
-        download(code);
-
-        builderLog('<br />Completed');
-
-        document.getElementById('tip').innerHTML = 'OK';
-    });
+    }
 
     function download(code) {
         try {
@@ -139,9 +175,6 @@ define(function (require) {
             // return;
 
             var fileName = ['echarts'];
-            if (BUILD_CONFIG.amd) {
-                fileName.push('amd');
-            }
             if (!BUILD_CONFIG.source) {
                 fileName.push('min');
             }
@@ -177,13 +210,16 @@ define(function (require) {
 
     // Get absolute path. `basePath` can be omitted if moduleId is absolute.
     function getAbsolutePath(moduleId, basePath) {
+        if (npmEntries[moduleId]) {
+            return npmEntries[moduleId];
+        }
+
         moduleId = addExt(moduleId);
 
         for (var path in pathsConfig) {
             if (pathsConfig.hasOwnProperty(path)) {
                 if (moduleId.indexOf(path) === 0) {
-                    moduleId = moduleId.replace(path, pathsConfig[path]);
-                    return resolve(baseURL, moduleId);
+                    return moduleId.replace(path, pathsConfig[path]);
                 }
             }
         }
@@ -209,36 +245,9 @@ define(function (require) {
     function ajax(toUrl, timeout) {
         toUrl += '?' + urlArgs;
 
-        return new Promise(function (promiseResolve, promiseReject) {
-            var xhr = window.XMLHttpRequest
-                ? new XMLHttpRequest()
-                : new ActiveXObject('Microsoft.XMLHTTP');
-
-            xhr.open('GET', toUrl, true);
-
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4) {
-                    (xhr.status >= 200 && xhr.status < 300)
-                        ? promiseResolve(xhr.responseText)
-                        : promiseReject({
-                            status: xhr.status,
-                            content: xhr.responseText
-                        });
-                    xhr.onreadystatechange = new Function();
-                    xhr = null;
-                }
-            };
-
-            xhr.timeout = timeout; // in ms
-            xhr.ontimeout = function () {
-                promiseReject({
-                    status: 999,
-                    content: 'timeout'
-                })
-            };
-
-            xhr.send(null);
-        });
+        return fetch(toUrl, {
+            mode: 'cors'
+        }).then(response => response.text());
     }
 
     // Nodejs `path.resolve`.
