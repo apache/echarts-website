@@ -23,10 +23,8 @@ Header set Access-Control-Allow-Headers: "*"
 RewriteEngine On
 
 RewriteCond "%{HTTP:Accept-Language}" "^zh" [NC]
-RewriteRule "^/$" "/zh/index.html"
-RewriteRule "^/index.html" "/zh/index.html" [L,R=301]
+RewriteRule "^/(index.html)?$" "/zh/index.html" [L,R=301]
 
 RewriteCond "%{HTTP:Accept-Language}" "^en" [NC]
-RewriteRule "^/$" "/en/index.html"
-RewriteRule "^/index.html" "/en/index.html" [L,R=301]
+RewriteRule "^/(index.html)?$" "/en/index.html" [L,R=301]
 
