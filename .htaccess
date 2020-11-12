@@ -18,3 +18,15 @@ Header set Access-Control-Allow-Headers: "*"
   ExpiresByType application/json          "access plus 1 hour"
   ExpiresDefault                          "access plus 10 days"
 </IfModule>
+
+
+RewriteEngine On
+
+RewriteCond "%{HTTP:Accept-Language}" "^zh" [NC]
+RewriteRule "^/$" "/zh/index.html"
+RewriteRule "^/index.html" "/zh/index.html" [L,R=301]
+
+RewriteCond "%{HTTP:Accept-Language}" "^en" [NC]
+RewriteRule "^/$" "/en/index.html"
+RewriteRule "^/index.html" "/en/index.html" [L,R=301]
+
