@@ -28,3 +28,4 @@ RewriteRule ^/?(index[.]html)?$ "/zh/index.html" [L,R=301]
 RewriteCond "%{HTTP:Accept-Language}" ^en [NC]
 RewriteRule ^/?(index[.]html)?$ "/en/index.html" [L,R=301]
 
+RewriteRule ^/?(index[.]html)?$ "/en/index.html" [L,R=301]
