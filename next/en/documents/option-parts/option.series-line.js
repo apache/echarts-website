@@ -76,7 +76,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "stack": {
-    "desc": "<p>If stack the value. On the same category axis, the series with the same <code class=\"codespan\">stack</code> name would be put on top of each other.</p>\n<p>The effect of the below example could be seen through stack switching of <a href=\"#toolbox\">toolbox</a> on the top right corner:</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/line-stack-tiled&edit=1&reset=1\" width=\"600\" height=\"400\"><iframe />\n\n\n\n"
+    "desc": "<p>If stack the value. On the same category axis, the series with the same <code class=\"codespan\">stack</code> name would be put on top of each other.</p>\n<p>The effect of the below example could be seen through stack switching of <a href=\"#toolbox\">toolbox</a> on the top right corner:</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/line-stack-tiled&edit=1&reset=1\" width=\"600\" height=\"400\"><iframe />\n\n\n\n"
   },
   "cursor": {
     "desc": "\n\n<p>The mouse style when mouse hovers on an element, the same as <code class=\"codespan\">cursor</code> property in <code class=\"codespan\">CSS</code>.</p>\n",
@@ -100,7 +100,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "step": {
-    "desc": "\n\n<p>Whether to show as a step line. It can be <code class=\"codespan\">true</code>, <code class=\"codespan\">false</code>. Or <code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>. Which will configure the turn point of step line.</p>\n<p>See the example using different <code class=\"codespan\">step</code> options:</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=line-step&edit=1&reset=1\" width=\"600\" height=\"400\"><iframe />\n\n",
+    "desc": "\n\n<p>Whether to show as a step line. It can be <code class=\"codespan\">true</code>, <code class=\"codespan\">false</code>. Or <code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>. Which will configure the turn point of step line.</p>\n<p>See the example using different <code class=\"codespan\">step</code> options:</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=line-step&edit=1&reset=1\" width=\"600\" height=\"400\"><iframe />\n\n",
     "uiControl": {
       "type": "enum",
       "options": "start,middle,end"
@@ -117,14 +117,14 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "label.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -133,7 +133,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "label.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -284,10 +284,24 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -537,14 +551,14 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "endLabel.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "endLabel.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -553,7 +567,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "endLabel.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -704,10 +718,24 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "endLabel.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "endLabel.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "endLabel.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -1048,10 +1076,10 @@ window.__EC_DOC_option_series_line = {
     "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Unified layout configuration of labels.</p>\n<p>It provide a chance to adjust the labels&#39; <code class=\"codespan\">(x, y)</code> position, alignment based on the original layout each series provides.</p>\n<p>This option can be a callback with following parameters.</p>\n<pre><code class=\"lang-js\">// corresponding index of data\ndataIndex: number\n// corresponding type of data. Only available in graph, in which it can be &#39;node&#39; or &#39;edge&#39;\ndataType?: string\n// corresponding index of series\nseriesIndex: number\n// Displayed text of label.\ntext: string\n// Bounding rectangle of label.\nlabelRect: {x: number, y: number, width: number, height: number}\n// Horizontal alignment of label.\nalign: &#39;left&#39; | &#39;center&#39; | &#39;right&#39;\n// Vertical alignment of label.\nverticalAlign: &#39;top&#39; | &#39;middle&#39; | &#39;bottom&#39;\n// Bounding rectangle of the element corresponding to.\nrect: {x: number, y: number, width: number, height: number}\n// Default points array of labelLine. Currently only provided in pie and funnel series.\n// It&#39;s null in other series.\nlabelLinePoints?: number[][]\n</code></pre>\n<p><strong>Example:</strong></p>\n<p>Align the labels on the right. Left 10px margin to the edge.</p>\n<pre><code class=\"lang-js\">labelLayout(params) {\n    return {\n        x: params.rect.x + 10,\n        y: params.rect.y + params.rect.height / 2,\n        verticalAlign: &#39;middle&#39;,\n        align: &#39;left&#39;\n    }\n}\n</code></pre>\n<p>Set the text size based on the size of element bounding rectangle.</p>\n<pre><code class=\"lang-js\">\nlabelLayout(params) {\n    return {\n        fontSize: Math.max(params.rect.width / 10, 5)\n    };\n}\n</code></pre>\n"
   },
   "labelLayout.hideOverlap": {
-    "desc": "<p>If hide the overlapped labels.</p>\n<p>The following example shows how to hide the overlapped labels in graph automatically when zooming.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=graph-label-overlap&edit=1&reset=1\" width=\"600\" height=\"400\"><iframe />\n\n"
+    "desc": "<p>If hide the overlapped labels.</p>\n<p>The following example shows how to hide the overlapped labels in graph automatically when zooming.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=graph-label-overlap&edit=1&reset=1\" width=\"600\" height=\"400\"><iframe />\n\n"
   },
   "labelLayout.moveOverlap": {
-    "desc": "<p>If move the overlapped labels to avoid overlapping.</p>\n<p>Currently supported configurations:</p>\n<ul>\n<li><code class=\"codespan\">&#39;shiftX&#39;</code> Place the labels on horizontal direction sequencely, used when aligned horizontally.</li>\n<li><code class=\"codespan\">&#39;shiftY&#39;</code> Place the labels on vertial direction sequencely, used when aligned vertically.</li>\n</ul>\n<p>The following example shows how to use <code class=\"codespan\">moverOverlap: &#39;shiftY&#39;</code> to place the labels aligned vertically.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=scatter-label-align-right&edit=1&reset=1\" width=\"600\" height=\"400\"><iframe />\n\n"
+    "desc": "<p>If move the overlapped labels to avoid overlapping.</p>\n<p>Currently supported configurations:</p>\n<ul>\n<li><code class=\"codespan\">&#39;shiftX&#39;</code> Place the labels on horizontal direction sequencely, used when aligned horizontally.</li>\n<li><code class=\"codespan\">&#39;shiftY&#39;</code> Place the labels on vertial direction sequencely, used when aligned vertically.</li>\n</ul>\n<p>The following example shows how to use <code class=\"codespan\">moverOverlap: &#39;shiftY&#39;</code> to place the labels aligned vertically.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=scatter-label-align-right&edit=1&reset=1\" width=\"600\" height=\"400\"><iframe />\n\n"
   },
   "labelLayout.x": {
     "desc": "<p>The x position of the label. Support absolute pixel values ​​or relative values ​​such as <code class=\"codespan\">&#39;20%&#39;</code>.</p>\n"
@@ -1292,7 +1320,7 @@ window.__EC_DOC_option_series_line = {
     "desc": "<p>Whether to scale to highlight the data in emphasis state.</p>\n"
   },
   "emphasis.focus": {
-    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>When the data is highlighted, whether to fade out of other data to focus the highlighted. The following configurations are supported:</p>\n<ul>\n<li><code class=\"codespan\">&#39;none&#39;</code> Do not fade out other data, it&#39;s by default.</li>\n<li><code class=\"codespan\">&#39;self&#39;</code> Only focus (not fade out) the element of the currently highlighted data.</li>\n<li><code class=\"codespan\">&#39;series&#39;</code> Focus on all elements of the series which the currently highlighted data belongs to.</li>\n</ul>\n<p><strong>Example: </strong></p>\n<pre><code class=\"lang-js\">emphasis: {\n    focus: &#39;series&#39;,\n    blurScope: &#39;coordinateSystem&#39;\n}\n</code></pre>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=bar-y-category-stack&reset=1&edit=1\" width=\"600\" height=\"400\"><iframe />\n\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>When the data is highlighted, whether to fade out of other data to focus the highlighted. The following configurations are supported:</p>\n<ul>\n<li><code class=\"codespan\">&#39;none&#39;</code> Do not fade out other data, it&#39;s by default.</li>\n<li><code class=\"codespan\">&#39;self&#39;</code> Only focus (not fade out) the element of the currently highlighted data.</li>\n<li><code class=\"codespan\">&#39;series&#39;</code> Focus on all elements of the series which the currently highlighted data belongs to.</li>\n</ul>\n<p><strong>Example: </strong></p>\n<pre><code class=\"lang-js\">emphasis: {\n    focus: &#39;series&#39;,\n    blurScope: &#39;coordinateSystem&#39;\n}\n</code></pre>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=bar-y-category-stack&reset=1&edit=1\" width=\"600\" height=\"400\"><iframe />\n\n"
   },
   "emphasis.blurScope": {
     "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>The range of fade out when <code class=\"codespan\">focus</code> is enabled. Support the following configurations</p>\n<ul>\n<li><code class=\"codespan\">&#39;coordinateSystem&#39;</code></li>\n<li><code class=\"codespan\">&#39;series&#39;</code></li>\n<li><code class=\"codespan\">&#39;global&#39;</code></li>\n</ul>\n"
@@ -1305,14 +1333,14 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "emphasis.label.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "emphasis.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -1321,7 +1349,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "emphasis.label.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -1472,10 +1500,24 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "emphasis.label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "emphasis.label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "emphasis.label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -1983,14 +2025,14 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "emphasis.endLabel.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "emphasis.endLabel.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -1999,7 +2041,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "emphasis.endLabel.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -2150,10 +2192,24 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "emphasis.endLabel.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "emphasis.endLabel.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "emphasis.endLabel.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -2403,14 +2459,14 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "blur.label.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "blur.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -2419,7 +2475,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "blur.label.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -2570,10 +2626,24 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "blur.label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "blur.label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "blur.label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -3078,14 +3148,14 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "blur.endLabel.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "blur.endLabel.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -3094,7 +3164,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "blur.endLabel.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -3245,10 +3315,24 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "blur.endLabel.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "blur.endLabel.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "blur.endLabel.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -3498,14 +3582,14 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "select.label.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "select.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -3514,7 +3598,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "select.label.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -3665,10 +3749,24 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "select.label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "select.label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "select.label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -4173,14 +4271,14 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "select.endLabel.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "select.endLabel.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -4189,7 +4287,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "select.endLabel.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -4340,10 +4438,24 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "select.endLabel.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "select.endLabel.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "select.endLabel.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -4602,16 +4714,16 @@ window.__EC_DOC_option_series_line = {
     "desc": "<p><code class=\"codespan\">dimensions</code> can be used to define dimension info for <code class=\"codespan\">series.data</code> or <code class=\"codespan\">dataset.source</code>.</p>\n<p>Notice: if <a href=\"#dataset\">dataset</a> is used, we can definite dimensions in <a href=\"#dataset.dimensions\">dataset.dimensions</a>, or provide dimension names in the first column/row of <a href=\"#dataset.source\">dataset.source</a>, and not need to specify <code class=\"codespan\">dimensions</code> here. But if <code class=\"codespan\">dimensions</code> is specified here, it will be used despite the dimension definitions in dataset.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">option = {\n    dataset: {\n        source: [\n            // &#39;date&#39;, &#39;open&#39;, &#39;close&#39;, &#39;highest&#39;, &#39;lowest&#39;\n            [12, 44, 55, 66, 2],\n            [23, 6, 16, 23, 1],\n            ...\n        ]\n    },\n    series: {\n        type: &#39;xxx&#39;,\n        // Specify name for each dimesions, which will be displayed in tooltip.\n        dimensions: [&#39;date&#39;, &#39;open&#39;, &#39;close&#39;, &#39;highest&#39;, &#39;lowest&#39;]\n    }\n}\n</code></pre>\n<pre><code class=\"lang-js\">series: {\n    type: &#39;xxx&#39;,\n    dimensions: [\n        null,                // If you do not intent to defined this dimension, use null is fine.\n        {type: &#39;ordinal&#39;},   // Specify type of this dimension.\n                             // &#39;ordinal&#39; is always used in string.\n                             // If type is not specified, echarts will guess type by data.\n        {name: &#39;good&#39;, type: &#39;number&#39;},\n        &#39;bad&#39;                // Equals to {name: &#39;bad&#39;}.\n    ]\n}\n</code></pre>\n<p>Each data item of <code class=\"codespan\">dimensions</code> can be:</p>\n<ul>\n<li><code class=\"codespan\">string</code>, for example, <code class=\"codespan\">&#39;someName&#39;</code>, which equals to <code class=\"codespan\">{name: &#39;someName&#39;}</code>.</li>\n<li><code class=\"codespan\">Object</code>, where the attributes can be:<ul>\n<li>name: <code class=\"codespan\">string</code>.</li>\n<li>type: <code class=\"codespan\">string</code>, supports:<ul>\n<li><code class=\"codespan\">number</code></li>\n<li><code class=\"codespan\">float</code>, that is, <a href=\"https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array\" target=\"_blank\">Float64Array</a></li>\n<li><code class=\"codespan\">int</code>, that is, <a href=\"https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array\" target=\"_blank\">Int32Array</a></li>\n<li><code class=\"codespan\">ordinal</code>, discrete value, which represents string generally.</li>\n<li><code class=\"codespan\">time</code>, time value, see <a href=\"#series.data\">data</a> to check the format of time value.</li>\n</ul>\n</li>\n<li>displayName: <code class=\"codespan\">string</code>, generally used in tooltip for dimension display. If not specified, use <code class=\"codespan\">name</code> by default.</li>\n</ul>\n</li>\n</ul>\n<p>When <code class=\"codespan\">dimensions</code> is specified, the default <code class=\"codespan\">tooltip</code> will be displayed vertically, which is better to show diemsion names. Otherwise, <code class=\"codespan\">tooltip</code> will displayed only value horizontally.</p>\n"
   },
   "encode": {
-    "desc": "<p>Define what is encoded to for each dimension of <code class=\"codespan\">data</code>. For example:</p>\n<pre><code class=\"lang-js\">option = {\n    dataset: {\n        source: [\n            // Each column is called a dimension.\n            // There are five dimensions: 0, 1, 2, 3, 4.\n            [12, 44, 55, 66, 2],\n            [23, 6, 16, 23, 1],\n            ...\n        ]\n    },\n    series: {\n        type: &#39;xxx&#39;,\n        encode: {\n            x: [3, 1, 5],      // Dimension 3, 1, 5 is mapped to x axis.\n            y: 2,              // Dimension 2 is mapped to y axis.\n            tooltip: [3, 2, 4] // Dimension 3, 2, 4 will be displayed in tooltip.\n        }\n    }\n}\n</code></pre>\n<p>When <a href=\"#series.dimensions\">dimensions</a> is used to defined name for a certain dimension, <code class=\"codespan\">encode</code> can refer the name directly. For example:</p>\n<pre><code class=\"lang-js\">series: {\n    type: &#39;xxx&#39;,\n    dimensions: [&#39;date&#39;, &#39;open&#39;, &#39;close&#39;, &#39;highest&#39;, &#39;lowest&#39;],\n    encode: {\n        x: &#39;date&#39;,\n        y: [&#39;open&#39;, &#39;close&#39;, &#39;highest&#39;, &#39;lowest&#39;]\n    }\n}\n</code></pre>\n<p>The basic structure of <a href=\"option.html#series.encode\" target=\"_blank\">encode</a> is illustrated as follows, where the left part of colon is the name of axis like <code class=\"codespan\">&#39;x&#39;</code>, <code class=\"codespan\">&#39;y&#39;</code>, <code class=\"codespan\">&#39;radius&#39;</code>, <code class=\"codespan\">&#39;angle&#39;</code> or some special reserved names like &quot;tooltip&quot;, &quot;itemName&quot; etc., and the right part of the colon is the dimension names or dimension indices (based on 0). One or more dimensions can be specified. Usually not all of mappings need to be specified, only specify needed ones.</p>\n<p>The properties available in <code class=\"codespan\">encode</code> listed as follows:</p>\n<pre><code class=\"lang-js\">// In any of the series and coordinate systems,\n// these properties are available:\nencode: {\n    // Display dimension &quot;product&quot; and &quot;score&quot; in the tooltip.\n    tooltip: [&#39;product&#39;, &#39;score&#39;]\n    // Set the series name as the concat of the names of dimensions[1] and dimensions[3].\n    // (sometimes the dimension names are too long to type in series.name manually).\n    seriesName: [1, 3],\n    // Using dimensions[2] as the id of each data item. This is useful when dynamically\n    // update data by `chart.setOption()`, where the new and old data item can be\n    // corresponded by id, by which the appropriate animation can be performed when updating.\n    itemId: 2,\n    // Using dimensions[3] as the name of each data item. This is useful in charts like\n    // &#39;pie&#39;, &#39;funnel&#39;, where data item name can be displayed in legend.\n    itemName: 3\n}\n\n// These properties only work in cartesian(grid) coordinate system:\nencode: {\n    // Map dimensions[1], dimensions[5] and dimension &quot;score&quot; to the X axis.\n    x: [1, 5, &#39;score&#39;],\n    // Map dimensions[0] to the Y axis.\n    y: 0\n}\n\n// These properties only work in polar coordinate system:\nencode: {\n    radius: 3,\n    angle: 2,\n    ...\n}\n\n// These properties only work in geo coordinate system:\nencode: {\n    lng: 3,\n    lat: 2\n}\n\n// For some type of series that are not in any coordinate system,\n// like &#39;pie&#39;, &#39;funnel&#39; etc.:\nencode: {\n    value: 3\n}\n</code></pre>\n<p>This is an <a href=\"https://echarts.apache.org/next/examples/view.html?c=dataset-encode1&amp;edit=1&amp;reset=1\" target=\"_blank\">example</a> for <code class=\"codespan\">encode</code>.</p>\n<p>Specially, in [custom series(~series-custom), some property in <code class=\"codespan\">encode</code>, corresponding to axis, can be set as null to make the series not controlled by the axis, that is, the series data will not be count in the extent of the axis, and the <a href=\"#dataZoom\">dataZoom</a> on the axis will not filter the series.</p>\n<pre><code class=\"lang-js\">var option = {\n    xAxis: {},\n    yAxis: {},\n    dataZoom: [{\n        xAxisIndex: 0\n    }, {\n        yAxisIndex: 0\n    }],\n    series: {\n        type: &#39;custom&#39;,\n        renderItem: function (params, api) {\n            return {\n                type: &#39;circle&#39;,\n                shape: {\n                    cx: 100, // x position is always 100\n                    cy: api.coord([0, api.value(0)])[1],\n                    r: 30\n                },\n                style: {\n                    fill: &#39;blue&#39;\n                }\n            };\n        },\n        encode: {\n            // Then the series will not be controlled\n            // by x axis and corresponding dataZoom.\n            x: -1,\n            y: 1\n        },\n        data: [ ... ]\n    }\n};\n</code></pre>\n"
+    "desc": "<p>Define what is encoded to for each dimension of <code class=\"codespan\">data</code>. For example:</p>\n<pre><code class=\"lang-js\">option = {\n    dataset: {\n        source: [\n            // Each column is called a dimension.\n            // There are five dimensions: 0, 1, 2, 3, 4.\n            [12, 44, 55, 66, 2],\n            [23, 6, 16, 23, 1],\n            ...\n        ]\n    },\n    series: {\n        type: &#39;xxx&#39;,\n        encode: {\n            x: [3, 1, 5],      // Dimension 3, 1, 5 is mapped to x axis.\n            y: 2,              // Dimension 2 is mapped to y axis.\n            tooltip: [3, 2, 4] // Dimension 3, 2, 4 will be displayed in tooltip.\n        }\n    }\n}\n</code></pre>\n<p>When <a href=\"#series.dimensions\">dimensions</a> is used to defined name for a certain dimension, <code class=\"codespan\">encode</code> can refer the name directly. For example:</p>\n<pre><code class=\"lang-js\">series: {\n    type: &#39;xxx&#39;,\n    dimensions: [&#39;date&#39;, &#39;open&#39;, &#39;close&#39;, &#39;highest&#39;, &#39;lowest&#39;],\n    encode: {\n        x: &#39;date&#39;,\n        y: [&#39;open&#39;, &#39;close&#39;, &#39;highest&#39;, &#39;lowest&#39;]\n    }\n}\n</code></pre>\n<p>The basic structure of <a href=\"option.html#series.encode\" target=\"_blank\">encode</a> is illustrated as follows, where the left part of colon is the name of axis like <code class=\"codespan\">&#39;x&#39;</code>, <code class=\"codespan\">&#39;y&#39;</code>, <code class=\"codespan\">&#39;radius&#39;</code>, <code class=\"codespan\">&#39;angle&#39;</code> or some special reserved names like &quot;tooltip&quot;, &quot;itemName&quot; etc., and the right part of the colon is the dimension names or dimension indices (based on 0). One or more dimensions can be specified. Usually not all of mappings need to be specified, only specify needed ones.</p>\n<p>The properties available in <code class=\"codespan\">encode</code> listed as follows:</p>\n<pre><code class=\"lang-js\">// In any of the series and coordinate systems,\n// these properties are available:\nencode: {\n    // Display dimension &quot;product&quot; and &quot;score&quot; in the tooltip.\n    tooltip: [&#39;product&#39;, &#39;score&#39;]\n    // Set the series name as the concat of the names of dimensions[1] and dimensions[3].\n    // (sometimes the dimension names are too long to type in series.name manually).\n    seriesName: [1, 3],\n    // Using dimensions[2] as the id of each data item. This is useful when dynamically\n    // update data by `chart.setOption()`, where the new and old data item can be\n    // corresponded by id, by which the appropriate animation can be performed when updating.\n    itemId: 2,\n    // Using dimensions[3] as the name of each data item. This is useful in charts like\n    // &#39;pie&#39;, &#39;funnel&#39;, where data item name can be displayed in legend.\n    itemName: 3\n}\n\n// These properties only work in cartesian(grid) coordinate system:\nencode: {\n    // Map dimensions[1], dimensions[5] and dimension &quot;score&quot; to the X axis.\n    x: [1, 5, &#39;score&#39;],\n    // Map dimensions[0] to the Y axis.\n    y: 0\n}\n\n// These properties only work in polar coordinate system:\nencode: {\n    radius: 3,\n    angle: 2,\n    ...\n}\n\n// These properties only work in geo coordinate system:\nencode: {\n    lng: 3,\n    lat: 2\n}\n\n// For some type of series that are not in any coordinate system,\n// like &#39;pie&#39;, &#39;funnel&#39; etc.:\nencode: {\n    value: 3\n}\n</code></pre>\n<p>This is an <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=dataset-encode1&amp;edit=1&amp;reset=1\" target=\"_blank\">example</a> for <code class=\"codespan\">encode</code>.</p>\n<p>Specially, in [custom series(~series-custom), some property in <code class=\"codespan\">encode</code>, corresponding to axis, can be set as null to make the series not controlled by the axis, that is, the series data will not be count in the extent of the axis, and the <a href=\"#dataZoom\">dataZoom</a> on the axis will not filter the series.</p>\n<pre><code class=\"lang-js\">var option = {\n    xAxis: {},\n    yAxis: {},\n    dataZoom: [{\n        xAxisIndex: 0\n    }, {\n        yAxisIndex: 0\n    }],\n    series: {\n        type: &#39;custom&#39;,\n        renderItem: function (params, api) {\n            return {\n                type: &#39;circle&#39;,\n                shape: {\n                    cx: 100, // x position is always 100\n                    cy: api.coord([0, api.value(0)])[1],\n                    r: 30\n                },\n                style: {\n                    fill: &#39;blue&#39;\n                }\n            };\n        },\n        encode: {\n            // Then the series will not be controlled\n            // by x axis and corresponding dataZoom.\n            x: -1,\n            y: 1\n        },\n        data: [ ... ]\n    }\n};\n</code></pre>\n"
   },
   "seriesLayoutBy": {
-    "desc": "<p>When <a href=\"#dataset\">dataset</a> is used, <code class=\"codespan\">seriesLayoutBy</code> specifies whether the column or the row of <code class=\"codespan\">dataset</code> is mapped to the series, namely, the series is &quot;layout&quot; on columns or rows. Optional values:</p>\n<ul>\n<li>&#39;column&#39;: by default, the columns of <code class=\"codespan\">dataset</code> are mapped the series. In this case, each column represents a dimension.</li>\n<li>&#39;row&#39;：the rows of <code class=\"codespan\">dataset</code> are mapped to the series. In this case, each row represents a dimension.</li>\n</ul>\n<p>Check this <a href=\"https://echarts.apache.org/next/examples/editor.html?c=dataset-series-layout-by\" target=\"_blank\">example</a>.</p>\n"
+    "desc": "<p>When <a href=\"#dataset\">dataset</a> is used, <code class=\"codespan\">seriesLayoutBy</code> specifies whether the column or the row of <code class=\"codespan\">dataset</code> is mapped to the series, namely, the series is &quot;layout&quot; on columns or rows. Optional values:</p>\n<ul>\n<li>&#39;column&#39;: by default, the columns of <code class=\"codespan\">dataset</code> are mapped the series. In this case, each column represents a dimension.</li>\n<li>&#39;row&#39;：the rows of <code class=\"codespan\">dataset</code> are mapped to the series. In this case, each row represents a dimension.</li>\n</ul>\n<p>Check this <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=dataset-series-layout-by\" target=\"_blank\">example</a>.</p>\n"
   },
   "datasetIndex": {
     "desc": "<p>If <a href=\"#series.data\">series.data</a> is not specified, and <a href=\"#dataset\">dataset</a> exists, the series will use <code class=\"codespan\">dataset</code>. <code class=\"codespan\">datasetIndex</code> specifies which dataset will be used.</p>\n"
   },
   "data": {
-    "desc": "<p>Data array of series, which can be in the following forms:</p>\n<p>Notice, if no <code class=\"codespan\">data</code> specified in series, and there is <a href=\"#dataset\">dataset</a> in option, series will use the first <a href=\"#dataset\">dataset</a> as its datasource. If <code class=\"codespan\">data</code> has been specified, <a href=\"#dataset\">dataset</a> will not used.</p>\n<p><code class=\"codespan\">series.datasetIndex</code> can be used to specify other <a href=\"#dataset\">dataset</a>.</p>\n<p>Basically, data is represented by a two-dimension array, like the example below, where each column is named as a &quot;dimension&quot;.</p>\n<pre><code class=\"lang-js\">series: [{\n    data: [\n        // dimX   dimY   other dimensions ...\n        [  3.4,    4.5,   15,   43],\n        [  4.2,    2.3,   20,   91],\n        [  10.8,   9.5,   30,   18],\n        [  7.2,    8.8,   18,   57]\n    ]\n}]\n</code></pre>\n<ul>\n<li>In <a href=\"#grid\">cartesian (grid)</a>, &quot;dimX&quot; and &quot;dimY&quot; correspond to <a href=\"#xAxis\">xAxis</a> and <a href=\"#yAxis\">yAxis</a> respectively.</li>\n<li>In <a href=\"#polar\">polar</a> &quot;dimX&quot; and &quot;dimY&quot; correspond to <a href=\"#radiusAxis\">radiusAxis</a> 和 <a href=\"#anbleAxis\">angleAxis</a> respectively.</li>\n<li>Other dimensions are optional, which can be used in other places. For example:<ul>\n<li><a href=\"#visualMap\">visualMap</a> can map one or more dimensions to visual (color, symbol size ...).</li>\n<li><a href=\"#series.symbolSize\">series.symbolSize</a> can be set as a callback function, where symbol size can be calculated by values of a certain dimension.</li>\n<li>Values in other dimensions can be shown by <a href=\"#tooltip.formatter\">tooltip.formatter</a> or <a href=\"#series.label.formatter\">series.label.formatter</a>.</li>\n</ul>\n</li>\n</ul>\n<p>Especially, when there is one and only one category axis (axis.type is <code class=\"codespan\">&#39;category&#39;</code>), data can be simply be represented by a one-dimension array, like:</p>\n<pre><code class=\"lang-js\">xAxis: {\n    data: [&#39;a&#39;, &#39;b&#39;, &#39;m&#39;, &#39;n&#39;]\n},\nseries: [{\n    // Each item corresponds to each item in xAxis.data.\n    data: [23,  44,  55,  19]\n    // In fact, it is the simplification of the format below:\n    // data: [[0, 23], [1, 44], [2, 55], [3, 19]]\n}]\n</code></pre>\n<p><br>\n<strong>Relationship between &quot;value&quot; and <a href=\"#xAxis.type\">axis.type</a></strong></p>\n<ul>\n<li><p>When a dimension corresponds to a value axis (axis.type is <code class=\"codespan\">&#39;value&#39;</code> or <code class=\"codespan\">&#39;log&#39;</code>):</p>\n<p>  The value can be a <code class=\"codespan\">number</code> (like <code class=\"codespan\">12</code>) (can also be a number in a <code class=\"codespan\">string</code> format, like <code class=\"codespan\">&#39;12&#39;</code>).</p>\n</li>\n<li><p>When a dimension corresponds to a category axis (axis.type is <code class=\"codespan\">&#39;category&#39;</code>):</p>\n<p>  The value should be the ordinal of the axis.data (based on <code class=\"codespan\">0</code>), the string value of the axis.data. For example:</p>\n<pre><code class=\"lang-js\">  xAxis: {\n      type: &#39;category&#39;,\n      data: [&#39;Monday&#39;, &#39;Tuesday&#39;, &#39;Wednesday&#39;, &#39;Thursday&#39;]\n  },\n  yAxis: {\n      type: &#39;category&#39;,\n      data: [&#39;a&#39;, &#39;b&#39;, &#39;m&#39;, &#39;n&#39;, &#39;p&#39;, &#39;q&#39;]\n  },\n  series: [{\n      data: [\n          // xAxis      yAxis\n          [  0,           0,    2  ], // This point is located at xAxis: &#39;Monday&#39;, yAxis: &#39;a&#39;.\n          [  &#39;Thursday&#39;,  2,    1  ], // This point is located at xAxis: &#39;Thursday&#39;, yAxis: &#39;m&#39;.\n          [  2,          &#39;p&#39;,   2  ], // This point is located at xAxis: &#39;Wednesday&#39;, yAxis: &#39;p&#39;.\n          [  3,           3,    5  ]\n      ]\n  }]\n</code></pre>\n<p>  There is an example of double category axes: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=scatter-punchCard\" target=\"_blank\">Github Punchcard</a>.</p>\n</li>\n<li><p>When a dimension corresponds to a time axis (type is <code class=\"codespan\">&#39;time&#39;</code>), the value can be:</p>\n<ul>\n<li>a timestamp, like <code class=\"codespan\">1484141700832</code>, which represents a UTC time.</li>\n<li>a date string, in one of the formats below:<ul>\n<li>a subset of <a href=\"http://www.ecma-international.org/ecma-262/5.1/#sec-15.9.1.15\" target=\"_blank\">ISO 8601</a>, only including (all of these are treated as local time unless timezone is specified, which is consistent with <a href=\"https://momentjs.com/\" target=\"_blank\">moment</a>):<ul>\n<li>only part of year/month/date/time are specified: <code class=\"codespan\">&#39;2012-03&#39;</code>, <code class=\"codespan\">&#39;2012-03-01&#39;</code>, <code class=\"codespan\">&#39;2012-03-01 05&#39;</code>, <code class=\"codespan\">&#39;2012-03-01 05:06&#39;</code>.</li>\n<li>separated by <code class=\"codespan\">&quot;T&quot;</code> or a space: <code class=\"codespan\">&#39;2012-03-01T12:22:33.123&#39;</code>, <code class=\"codespan\">&#39;2012-03-01 12:22:33.123&#39;</code>.</li>\n<li>timezone specified: <code class=\"codespan\">&#39;2012-03-01T12:22:33Z&#39;</code>, <code class=\"codespan\">&#39;2012-03-01T12:22:33+8000&#39;</code>, <code class=\"codespan\">&#39;2012-03-01T12:22:33-05:00&#39;</code>.</li>\n</ul>\n</li>\n<li>other date string format (all of these are treated as local time):\n<code class=\"codespan\">&#39;2012&#39;</code>, <code class=\"codespan\">&#39;2012-3-1&#39;</code>, <code class=\"codespan\">&#39;2012/3/1&#39;</code>, <code class=\"codespan\">&#39;2012/03/01&#39;</code>,\n<code class=\"codespan\">&#39;2009/6/12 2:00&#39;</code>, <code class=\"codespan\">&#39;2009/6/12 2:05:08&#39;</code>, <code class=\"codespan\">&#39;2009/6/12 2:05:08.123&#39;</code>.</li>\n</ul>\n</li>\n<li>a JavaScript Date instance created by user:<ul>\n<li>Caution, when using a data string to create a Date instance, <a href=\"http://dygraphs.com/date-formats.html\" target=\"_blank\">browser differences and inconsistencies</a> should be considered.</li>\n<li>For example: In chrome, <code class=\"codespan\">new Date(&#39;2012-01-01&#39;)</code> is treated as a Jan 1st 2012 in UTC, while <code class=\"codespan\">new Date(&#39;2012-1-1&#39;)</code> and <code class=\"codespan\">new Date(&#39;2012/01/01&#39;)</code> are treated as Jan 1st 2012 in local timezone. In safari <code class=\"codespan\">new Date(&#39;2012-1-1&#39;)</code> is not supported.</li>\n<li>So if you intent to perform <code class=\"codespan\">new Date(dateString)</code>, it is strongly recommended to use a time parse library (e.g., <a href=\"https://momentjs.com/\" target=\"_blank\">moment</a>), or use <code class=\"codespan\">echarts.number.parseDate</code>, or check <a href=\"http://dygraphs.com/date-formats.html\" target=\"_blank\">this</a>.</li>\n</ul>\n</li>\n</ul>\n</li>\n</ul>\n<p><br>\n<strong>Customize a data item:</strong></p>\n<p>When needing to customize a data item, it can be set as an object, where property <code class=\"codespan\">value</code> reprensent real value. For example:</p>\n<pre><code class=\"lang-js\">[\n    12,\n    24,\n    {\n        value: [24, 32],\n        // label style, only works in this data item.\n        label: {},\n        // item style, only works in this data item.\n        itemStyle:{}\n    },\n    33\n]\n// Or\n[\n    [12, 332],\n    [24, 32],\n    {\n        value: [24, 32],\n        // label style, only works in this data item.\n        label: {},\n        // item style, only works in this data item.\n        itemStyle:{}\n    },\n    [33, 31]\n]\n</code></pre>\n<p><br>\n<strong>Empty value:</strong></p>\n<p><code class=\"codespan\">&#39;-&#39;</code> or <code class=\"codespan\">null</code> or <code class=\"codespan\">undefined</code> or <code class=\"codespan\">NaN</code> can be used to describe that a data item does not exist (ps：<em>not exist</em> does not means its value is <code class=\"codespan\">0</code>).</p>\n<p>For example, line chart can break when encounter an empty value, and scatter chart do not display graphic elements for empty values.</p>\n<p><br><br></p>\n"
+    "desc": "<p>Data array of series, which can be in the following forms:</p>\n<p>Notice, if no <code class=\"codespan\">data</code> specified in series, and there is <a href=\"#dataset\">dataset</a> in option, series will use the first <a href=\"#dataset\">dataset</a> as its datasource. If <code class=\"codespan\">data</code> has been specified, <a href=\"#dataset\">dataset</a> will not used.</p>\n<p><code class=\"codespan\">series.datasetIndex</code> can be used to specify other <a href=\"#dataset\">dataset</a>.</p>\n<p>Basically, data is represented by a two-dimension array, like the example below, where each column is named as a &quot;dimension&quot;.</p>\n<pre><code class=\"lang-js\">series: [{\n    data: [\n        // dimX   dimY   other dimensions ...\n        [  3.4,    4.5,   15,   43],\n        [  4.2,    2.3,   20,   91],\n        [  10.8,   9.5,   30,   18],\n        [  7.2,    8.8,   18,   57]\n    ]\n}]\n</code></pre>\n<ul>\n<li>In <a href=\"#grid\">cartesian (grid)</a>, &quot;dimX&quot; and &quot;dimY&quot; correspond to <a href=\"#xAxis\">xAxis</a> and <a href=\"#yAxis\">yAxis</a> respectively.</li>\n<li>In <a href=\"#polar\">polar</a> &quot;dimX&quot; and &quot;dimY&quot; correspond to <a href=\"#radiusAxis\">radiusAxis</a> 和 <a href=\"#anbleAxis\">angleAxis</a> respectively.</li>\n<li>Other dimensions are optional, which can be used in other places. For example:<ul>\n<li><a href=\"#visualMap\">visualMap</a> can map one or more dimensions to visual (color, symbol size ...).</li>\n<li><a href=\"#series.symbolSize\">series.symbolSize</a> can be set as a callback function, where symbol size can be calculated by values of a certain dimension.</li>\n<li>Values in other dimensions can be shown by <a href=\"#tooltip.formatter\">tooltip.formatter</a> or <a href=\"#series.label.formatter\">series.label.formatter</a>.</li>\n</ul>\n</li>\n</ul>\n<p>Especially, when there is one and only one category axis (axis.type is <code class=\"codespan\">&#39;category&#39;</code>), data can be simply be represented by a one-dimension array, like:</p>\n<pre><code class=\"lang-js\">xAxis: {\n    data: [&#39;a&#39;, &#39;b&#39;, &#39;m&#39;, &#39;n&#39;]\n},\nseries: [{\n    // Each item corresponds to each item in xAxis.data.\n    data: [23,  44,  55,  19]\n    // In fact, it is the simplification of the format below:\n    // data: [[0, 23], [1, 44], [2, 55], [3, 19]]\n}]\n</code></pre>\n<p><br>\n<strong>Relationship between &quot;value&quot; and <a href=\"#xAxis.type\">axis.type</a></strong></p>\n<ul>\n<li><p>When a dimension corresponds to a value axis (axis.type is <code class=\"codespan\">&#39;value&#39;</code> or <code class=\"codespan\">&#39;log&#39;</code>):</p>\n<p>  The value can be a <code class=\"codespan\">number</code> (like <code class=\"codespan\">12</code>) (can also be a number in a <code class=\"codespan\">string</code> format, like <code class=\"codespan\">&#39;12&#39;</code>).</p>\n</li>\n<li><p>When a dimension corresponds to a category axis (axis.type is <code class=\"codespan\">&#39;category&#39;</code>):</p>\n<p>  The value should be the ordinal of the axis.data (based on <code class=\"codespan\">0</code>), the string value of the axis.data. For example:</p>\n<pre><code class=\"lang-js\">  xAxis: {\n      type: &#39;category&#39;,\n      data: [&#39;Monday&#39;, &#39;Tuesday&#39;, &#39;Wednesday&#39;, &#39;Thursday&#39;]\n  },\n  yAxis: {\n      type: &#39;category&#39;,\n      data: [&#39;a&#39;, &#39;b&#39;, &#39;m&#39;, &#39;n&#39;, &#39;p&#39;, &#39;q&#39;]\n  },\n  series: [{\n      data: [\n          // xAxis      yAxis\n          [  0,           0,    2  ], // This point is located at xAxis: &#39;Monday&#39;, yAxis: &#39;a&#39;.\n          [  &#39;Thursday&#39;,  2,    1  ], // This point is located at xAxis: &#39;Thursday&#39;, yAxis: &#39;m&#39;.\n          [  2,          &#39;p&#39;,   2  ], // This point is located at xAxis: &#39;Wednesday&#39;, yAxis: &#39;p&#39;.\n          [  3,           3,    5  ]\n      ]\n  }]\n</code></pre>\n<p>  There is an example of double category axes: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=scatter-punchCard\" target=\"_blank\">Github Punchcard</a>.</p>\n</li>\n<li><p>When a dimension corresponds to a time axis (type is <code class=\"codespan\">&#39;time&#39;</code>), the value can be:</p>\n<ul>\n<li>a timestamp, like <code class=\"codespan\">1484141700832</code>, which represents a UTC time.</li>\n<li>a date string, in one of the formats below:<ul>\n<li>a subset of <a href=\"http://www.ecma-international.org/ecma-262/5.1/#sec-15.9.1.15\" target=\"_blank\">ISO 8601</a>, only including (all of these are treated as local time unless timezone is specified, which is consistent with <a href=\"https://momentjs.com/\" target=\"_blank\">moment</a>):<ul>\n<li>only part of year/month/date/time are specified: <code class=\"codespan\">&#39;2012-03&#39;</code>, <code class=\"codespan\">&#39;2012-03-01&#39;</code>, <code class=\"codespan\">&#39;2012-03-01 05&#39;</code>, <code class=\"codespan\">&#39;2012-03-01 05:06&#39;</code>.</li>\n<li>separated by <code class=\"codespan\">&quot;T&quot;</code> or a space: <code class=\"codespan\">&#39;2012-03-01T12:22:33.123&#39;</code>, <code class=\"codespan\">&#39;2012-03-01 12:22:33.123&#39;</code>.</li>\n<li>timezone specified: <code class=\"codespan\">&#39;2012-03-01T12:22:33Z&#39;</code>, <code class=\"codespan\">&#39;2012-03-01T12:22:33+8000&#39;</code>, <code class=\"codespan\">&#39;2012-03-01T12:22:33-05:00&#39;</code>.</li>\n</ul>\n</li>\n<li>other date string format (all of these are treated as local time):\n<code class=\"codespan\">&#39;2012&#39;</code>, <code class=\"codespan\">&#39;2012-3-1&#39;</code>, <code class=\"codespan\">&#39;2012/3/1&#39;</code>, <code class=\"codespan\">&#39;2012/03/01&#39;</code>,\n<code class=\"codespan\">&#39;2009/6/12 2:00&#39;</code>, <code class=\"codespan\">&#39;2009/6/12 2:05:08&#39;</code>, <code class=\"codespan\">&#39;2009/6/12 2:05:08.123&#39;</code>.</li>\n</ul>\n</li>\n<li>a JavaScript Date instance created by user:<ul>\n<li>Caution, when using a data string to create a Date instance, <a href=\"http://dygraphs.com/date-formats.html\" target=\"_blank\">browser differences and inconsistencies</a> should be considered.</li>\n<li>For example: In chrome, <code class=\"codespan\">new Date(&#39;2012-01-01&#39;)</code> is treated as a Jan 1st 2012 in UTC, while <code class=\"codespan\">new Date(&#39;2012-1-1&#39;)</code> and <code class=\"codespan\">new Date(&#39;2012/01/01&#39;)</code> are treated as Jan 1st 2012 in local timezone. In safari <code class=\"codespan\">new Date(&#39;2012-1-1&#39;)</code> is not supported.</li>\n<li>So if you intent to perform <code class=\"codespan\">new Date(dateString)</code>, it is strongly recommended to use a time parse library (e.g., <a href=\"https://momentjs.com/\" target=\"_blank\">moment</a>), or use <code class=\"codespan\">echarts.number.parseDate</code>, or check <a href=\"http://dygraphs.com/date-formats.html\" target=\"_blank\">this</a>.</li>\n</ul>\n</li>\n</ul>\n</li>\n</ul>\n<p><br>\n<strong>Customize a data item:</strong></p>\n<p>When needing to customize a data item, it can be set as an object, where property <code class=\"codespan\">value</code> reprensent real value. For example:</p>\n<pre><code class=\"lang-js\">[\n    12,\n    24,\n    {\n        value: [24, 32],\n        // label style, only works in this data item.\n        label: {},\n        // item style, only works in this data item.\n        itemStyle:{}\n    },\n    33\n]\n// Or\n[\n    [12, 332],\n    [24, 32],\n    {\n        value: [24, 32],\n        // label style, only works in this data item.\n        label: {},\n        // item style, only works in this data item.\n        itemStyle:{}\n    },\n    [33, 31]\n]\n</code></pre>\n<p><br>\n<strong>Empty value:</strong></p>\n<p><code class=\"codespan\">&#39;-&#39;</code> or <code class=\"codespan\">null</code> or <code class=\"codespan\">undefined</code> or <code class=\"codespan\">NaN</code> can be used to describe that a data item does not exist (ps：<em>not exist</em> does not means its value is <code class=\"codespan\">0</code>).</p>\n<p>For example, line chart can break when encounter an empty value, and scatter chart do not display graphic elements for empty values.</p>\n<p><br><br></p>\n"
   },
   "data.name": {
     "desc": "<p>The name of data item.</p>\n"
@@ -4668,14 +4780,14 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "data.label.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "data.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -4684,7 +4796,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "data.label.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -4832,10 +4944,24 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "data.label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "data.label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "data.label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -5254,14 +5380,14 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "data.emphasis.label.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "data.emphasis.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -5270,7 +5396,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "data.emphasis.label.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -5418,10 +5544,24 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "data.emphasis.label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "data.emphasis.label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "data.emphasis.label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -5742,14 +5882,14 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "data.blur.label.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "data.blur.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -5758,7 +5898,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "data.blur.label.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -5906,10 +6046,24 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "data.blur.label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "data.blur.label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "data.blur.label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -6230,14 +6384,14 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "data.select.label.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "data.select.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -6246,7 +6400,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "data.select.label.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -6394,10 +6548,24 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "data.select.label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "data.select.label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "data.select.label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -6795,10 +6963,24 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "data.tooltip.textStyle.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "data.tooltip.textStyle.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "data.tooltip.textStyle.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n",
@@ -6917,14 +7099,14 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markPoint.label.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "markPoint.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -6933,7 +7115,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markPoint.label.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -7084,10 +7266,24 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markPoint.label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "markPoint.label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "markPoint.label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -7411,14 +7607,14 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markPoint.emphasis.label.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "markPoint.emphasis.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -7427,7 +7623,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markPoint.emphasis.label.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -7578,10 +7774,24 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markPoint.emphasis.label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "markPoint.emphasis.label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "markPoint.emphasis.label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -7902,14 +8112,14 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markPoint.blur.label.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "markPoint.blur.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -7918,7 +8128,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markPoint.blur.label.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -8069,10 +8279,24 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markPoint.blur.label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "markPoint.blur.label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "markPoint.blur.label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -8547,14 +8771,14 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markPoint.data.label.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "markPoint.data.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -8563,7 +8787,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markPoint.data.label.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -8711,10 +8935,24 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markPoint.data.label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "markPoint.data.label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "markPoint.data.label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -8961,14 +9199,14 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markPoint.data.emphasis.label.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "markPoint.data.emphasis.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -8977,7 +9215,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markPoint.data.emphasis.label.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -9125,10 +9363,24 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markPoint.data.emphasis.label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "markPoint.data.emphasis.label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "markPoint.data.emphasis.label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -9460,7 +9712,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markPoint.animationEasing": {
-    "desc": "\n\n<p>Easing method used for the first animation. Varied easing effects can be found at <a href=\"https://echarts.apache.org/next/examples/editor.html?c=line-easing\" target=\"_blank\">easing effect example</a>.</p>\n",
+    "desc": "\n\n<p>Easing method used for the first animation. Varied easing effects can be found at <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=line-easing\" target=\"_blank\">easing effect example</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "linear,quadraticIn,quadraticOut,quadraticInOut,cubicIn,cubicOut,cubicInOut,quarticIn,quarticOut,quarticInOut,quinticIn,quinticOut,quinticInOut,sinusoidalIn,sinusoidalOut,sinusoidalInOut,exponentialIn,exponentialOut,exponentialInOut,circularIn,circularOut,circularInOut,elasticIn,elasticOut,elasticInOut,backIn,backOut,backInOut,bounceIn,bounceOut,bounceInOut",
@@ -9468,7 +9720,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markPoint.animationDelay": {
-    "desc": "<p>Delay before updating the first animation, which supports callback function for different data to have different animation effect.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">animationDelay: function (idx) {\n    // delay for later data is larger\n    return idx * 100;\n}\n</code></pre>\n<p>See <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-animation-delay\" target=\"_blank\">this example</a> for more information.</p>\n"
+    "desc": "<p>Delay before updating the first animation, which supports callback function for different data to have different animation effect.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">animationDelay: function (idx) {\n    // delay for later data is larger\n    return idx * 100;\n}\n</code></pre>\n<p>See <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-animation-delay\" target=\"_blank\">this example</a> for more information.</p>\n"
   },
   "markPoint.animationDurationUpdate": {
     "desc": "\n\n<p>Time for animation to complete, which supports callback function for different data to have different animation effect:</p>\n<pre><code class=\"lang-js\">animationDurationUpdate: function (idx) {\n    // delay for later data is larger\n    return idx * 100;\n}\n</code></pre>\n",
@@ -9487,7 +9739,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markPoint.animationDelayUpdate": {
-    "desc": "<p>Delay before updating animation, which supports callback function for different data to have different animation effects.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">animationDelayUpdate: function (idx) {\n    // delay for later data is larger\n    return idx * 100;\n}\n</code></pre>\n<p>See <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-animation-delay\" target=\"_blank\">this example</a> for more information.</p>\n"
+    "desc": "<p>Delay before updating animation, which supports callback function for different data to have different animation effects.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">animationDelayUpdate: function (idx) {\n    // delay for later data is larger\n    return idx * 100;\n}\n</code></pre>\n<p>See <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-animation-delay\" target=\"_blank\">this example</a> for more information.</p>\n"
   },
   "markLine": {
     "desc": "<p>Use a line in the chart to illustrate.</p>\n"
@@ -9514,7 +9766,7 @@ window.__EC_DOC_option_series_line = {
     "desc": "<p>Whether show label or not.</p>\n"
   },
   "markLine.label.position": {
-    "desc": "<p>Positions of labels can be:</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code> starting point of the line.</li>\n<li><code class=\"codespan\">&#39;middle&#39;</code> middle point of the line.</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> ending point of the line.</li>\n</ul>\n<p>Since version 4.7.0, more label positions are supported: <code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>, <code class=\"codespan\">&#39;insideStartTop&#39;</code>, <code class=\"codespan\">&#39;insideStartBottom&#39;</code>, <code class=\"codespan\">&#39;insideMiddleTop&#39;</code>, <code class=\"codespan\">&#39;insideMiddleBottom&#39;</code>, <code class=\"codespan\">&#39;insideEndTop&#39;</code>, <code class=\"codespan\">&#39;insideEndBottom&#39;</code>.</p>\n<p><code class=\"codespan\">&#39;insideMiddleBottom&#39;</code> is the same as <code class=\"codespan\">&#39;middle&#39;</code>. Position is as the following chart.</p>\n<p>The distance between labels and mark lines can be set with <a href=\"#series-.markLine.label.distance\">label.distance</a>.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=bar-markline&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n"
+    "desc": "<p>Positions of labels can be:</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code> starting point of the line.</li>\n<li><code class=\"codespan\">&#39;middle&#39;</code> middle point of the line.</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> ending point of the line.</li>\n</ul>\n<p>Since version 4.7.0, more label positions are supported: <code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>, <code class=\"codespan\">&#39;insideStartTop&#39;</code>, <code class=\"codespan\">&#39;insideStartBottom&#39;</code>, <code class=\"codespan\">&#39;insideMiddleTop&#39;</code>, <code class=\"codespan\">&#39;insideMiddleBottom&#39;</code>, <code class=\"codespan\">&#39;insideEndTop&#39;</code>, <code class=\"codespan\">&#39;insideEndBottom&#39;</code>.</p>\n<p><code class=\"codespan\">&#39;insideMiddleBottom&#39;</code> is the same as <code class=\"codespan\">&#39;middle&#39;</code>. Position is as the following chart.</p>\n<p>The distance between labels and mark lines can be set with <a href=\"#series-.markLine.label.distance\">label.distance</a>.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=bar-markline&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n"
   },
   "markLine.label.distance": {
     "desc": "<p>The distance between labels and mark lines. If it&#39;s an array, then the first element is the horizontal distance, and the second element is the vertical distance. If it&#39;s a number, then the horizontal and vertical distances are the same.</p>\n"
@@ -9607,7 +9859,7 @@ window.__EC_DOC_option_series_line = {
     "desc": "<p>Whether show label or not.</p>\n"
   },
   "markLine.emphasis.label.position": {
-    "desc": "<p>Positions of labels can be:</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code> starting point of the line.</li>\n<li><code class=\"codespan\">&#39;middle&#39;</code> middle point of the line.</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> ending point of the line.</li>\n</ul>\n<p>Since version 4.7.0, more label positions are supported: <code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>, <code class=\"codespan\">&#39;insideStartTop&#39;</code>, <code class=\"codespan\">&#39;insideStartBottom&#39;</code>, <code class=\"codespan\">&#39;insideMiddleTop&#39;</code>, <code class=\"codespan\">&#39;insideMiddleBottom&#39;</code>, <code class=\"codespan\">&#39;insideEndTop&#39;</code>, <code class=\"codespan\">&#39;insideEndBottom&#39;</code>.</p>\n<p><code class=\"codespan\">&#39;insideMiddleBottom&#39;</code> is the same as <code class=\"codespan\">&#39;middle&#39;</code>. Position is as the following chart.</p>\n<p>The distance between labels and mark lines can be set with <a href=\"#series-.markLine.label.distance\">label.distance</a>.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=bar-markline&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n"
+    "desc": "<p>Positions of labels can be:</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code> starting point of the line.</li>\n<li><code class=\"codespan\">&#39;middle&#39;</code> middle point of the line.</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> ending point of the line.</li>\n</ul>\n<p>Since version 4.7.0, more label positions are supported: <code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>, <code class=\"codespan\">&#39;insideStartTop&#39;</code>, <code class=\"codespan\">&#39;insideStartBottom&#39;</code>, <code class=\"codespan\">&#39;insideMiddleTop&#39;</code>, <code class=\"codespan\">&#39;insideMiddleBottom&#39;</code>, <code class=\"codespan\">&#39;insideEndTop&#39;</code>, <code class=\"codespan\">&#39;insideEndBottom&#39;</code>.</p>\n<p><code class=\"codespan\">&#39;insideMiddleBottom&#39;</code> is the same as <code class=\"codespan\">&#39;middle&#39;</code>. Position is as the following chart.</p>\n<p>The distance between labels and mark lines can be set with <a href=\"#series-.markLine.label.distance\">label.distance</a>.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=bar-markline&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n"
   },
   "markLine.emphasis.label.distance": {
     "desc": "<p>The distance between labels and mark lines. If it&#39;s an array, then the first element is the horizontal distance, and the second element is the vertical distance. If it&#39;s a number, then the horizontal and vertical distances are the same.</p>\n"
@@ -9687,7 +9939,7 @@ window.__EC_DOC_option_series_line = {
     "desc": "<p>Whether show label or not.</p>\n"
   },
   "markLine.blur.label.position": {
-    "desc": "<p>Positions of labels can be:</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code> starting point of the line.</li>\n<li><code class=\"codespan\">&#39;middle&#39;</code> middle point of the line.</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> ending point of the line.</li>\n</ul>\n<p>Since version 4.7.0, more label positions are supported: <code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>, <code class=\"codespan\">&#39;insideStartTop&#39;</code>, <code class=\"codespan\">&#39;insideStartBottom&#39;</code>, <code class=\"codespan\">&#39;insideMiddleTop&#39;</code>, <code class=\"codespan\">&#39;insideMiddleBottom&#39;</code>, <code class=\"codespan\">&#39;insideEndTop&#39;</code>, <code class=\"codespan\">&#39;insideEndBottom&#39;</code>.</p>\n<p><code class=\"codespan\">&#39;insideMiddleBottom&#39;</code> is the same as <code class=\"codespan\">&#39;middle&#39;</code>. Position is as the following chart.</p>\n<p>The distance between labels and mark lines can be set with <a href=\"#series-.markLine.label.distance\">label.distance</a>.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=bar-markline&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n"
+    "desc": "<p>Positions of labels can be:</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code> starting point of the line.</li>\n<li><code class=\"codespan\">&#39;middle&#39;</code> middle point of the line.</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> ending point of the line.</li>\n</ul>\n<p>Since version 4.7.0, more label positions are supported: <code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>, <code class=\"codespan\">&#39;insideStartTop&#39;</code>, <code class=\"codespan\">&#39;insideStartBottom&#39;</code>, <code class=\"codespan\">&#39;insideMiddleTop&#39;</code>, <code class=\"codespan\">&#39;insideMiddleBottom&#39;</code>, <code class=\"codespan\">&#39;insideEndTop&#39;</code>, <code class=\"codespan\">&#39;insideEndBottom&#39;</code>.</p>\n<p><code class=\"codespan\">&#39;insideMiddleBottom&#39;</code> is the same as <code class=\"codespan\">&#39;middle&#39;</code>. Position is as the following chart.</p>\n<p>The distance between labels and mark lines can be set with <a href=\"#series-.markLine.label.distance\">label.distance</a>.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=bar-markline&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n"
   },
   "markLine.blur.label.distance": {
     "desc": "<p>The distance between labels and mark lines. If it&#39;s an array, then the first element is the horizontal distance, and the second element is the vertical distance. If it&#39;s a number, then the horizontal and vertical distances are the same.</p>\n"
@@ -9761,7 +10013,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markLine.data": {
-    "desc": "<p>Data array of marking line. Every array item can be an array of one or two values, representing starting and ending point of the line, and every item is an object. Here are several ways to assign the positions of starting and ending point.</p>\n<ol>\n<li>Assign coordinate according to container with <a href=\"#series-line.markLine.data.0.x\">x</a>, <a href=\"#series-line.markLine.data.0.y\">y</a> attribute, in which pixel values and percentage are supported.</li>\n</ol>\n<ol start=\"2\">\n<li><p>Assign coordinate position with <a href=\"#series-line.markLine.data.0.coord\">coord</a> attribute, in which <code class=\"codespan\">&#39;min&#39;</code>, <code class=\"codespan\">&#39;max&#39;</code>, <code class=\"codespan\">&#39;average&#39;</code> are supported for each dimension.</p>\n</li>\n<li><p>Use <a href=\"#series-line.markLine.data.0.type\">type</a> attribute to mark the maximum and minimum values in the series, in which <a href=\"#series-line.markLine.data.0.valueIndex\">valueIndex</a> or <a href=\"#series-line.markLine.data.0.valueDim\">valueDim</a> can be used to assign the dimension.</p>\n</li>\n<li><p>You may also create a mark line in Cartesian coordinate at a specific position in X or Y axis by assigning <code class=\"codespan\">xAxis</code> or <code class=\"codespan\">yAxis</code>. See <a href=\"https://echarts.apache.org/next/examples/editor.html?c=scatter-weight\" target=\"_blank\">scatter-weight</a> for example.</p>\n</li>\n</ol>\n<p>When multiple attributes exist, priority is as the above order.</p>\n<p>You may also set the type of mark line through <code class=\"codespan\">type</code>, stating whether it is for the maximum value or average value. Likewise, dimensions can be assigned through <code class=\"codespan\">valueIndex</code>.</p>\n<pre><code>data: [\n\n{\n        name: &#39;average line&#39;,\n        // &#39;average&#39;, &#39;min&#39;, and &#39;max&#39; are supported\n        type: &#39;average&#39;\n    },\n    {\n        name: &#39;Horizontal line with Y value at 100&#39;,\n        yAxis: 100\n    },\n    [\n        {\n            // Use the same name with starting and ending point\n            name: &#39;Minimum to Maximum&#39;,\n            type: &#39;min&#39;\n        },\n        {\n            type: &#39;max&#39;\n        }\n    ],\n[\n        {\n            name: &#39;Markline between two points&#39;,\n            coord: [10, 20]\n        },\n        {\n            coord: [20, 30]\n        }\n    ], [{\n        // Mark line with a fixed X position in starting point. This is used to generate an arrow pointing to maximum line.\n        yAxis: &#39;max&#39;,\n        x: &#39;90%&#39;\n    }, {\n        type: &#39;max&#39;\n    }],\n[\n        {\n            name: &#39;Mark line between two points&#39;,\n            x: 100,\n            y: 100\n        },\n        {\n            x: 500,\n            y: 200\n        }\n    ]\n]\n</code></pre>"
+    "desc": "<p>Data array of marking line. Every array item can be an array of one or two values, representing starting and ending point of the line, and every item is an object. Here are several ways to assign the positions of starting and ending point.</p>\n<ol>\n<li>Assign coordinate according to container with <a href=\"#series-line.markLine.data.0.x\">x</a>, <a href=\"#series-line.markLine.data.0.y\">y</a> attribute, in which pixel values and percentage are supported.</li>\n</ol>\n<ol start=\"2\">\n<li><p>Assign coordinate position with <a href=\"#series-line.markLine.data.0.coord\">coord</a> attribute, in which <code class=\"codespan\">&#39;min&#39;</code>, <code class=\"codespan\">&#39;max&#39;</code>, <code class=\"codespan\">&#39;average&#39;</code> are supported for each dimension.</p>\n</li>\n<li><p>Use <a href=\"#series-line.markLine.data.0.type\">type</a> attribute to mark the maximum and minimum values in the series, in which <a href=\"#series-line.markLine.data.0.valueIndex\">valueIndex</a> or <a href=\"#series-line.markLine.data.0.valueDim\">valueDim</a> can be used to assign the dimension.</p>\n</li>\n<li><p>You may also create a mark line in Cartesian coordinate at a specific position in X or Y axis by assigning <code class=\"codespan\">xAxis</code> or <code class=\"codespan\">yAxis</code>. See <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=scatter-weight\" target=\"_blank\">scatter-weight</a> for example.</p>\n</li>\n</ol>\n<p>When multiple attributes exist, priority is as the above order.</p>\n<p>You may also set the type of mark line through <code class=\"codespan\">type</code>, stating whether it is for the maximum value or average value. Likewise, dimensions can be assigned through <code class=\"codespan\">valueIndex</code>.</p>\n<pre><code>data: [\n\n{\n        name: &#39;average line&#39;,\n        // &#39;average&#39;, &#39;min&#39;, and &#39;max&#39; are supported\n        type: &#39;average&#39;\n    },\n    {\n        name: &#39;Horizontal line with Y value at 100&#39;,\n        yAxis: 100\n    },\n    [\n        {\n            // Use the same name with starting and ending point\n            name: &#39;Minimum to Maximum&#39;,\n            type: &#39;min&#39;\n        },\n        {\n            type: &#39;max&#39;\n        }\n    ],\n[\n        {\n            name: &#39;Markline between two points&#39;,\n            coord: [10, 20]\n        },\n        {\n            coord: [20, 30]\n        }\n    ], [{\n        // Mark line with a fixed X position in starting point. This is used to generate an arrow pointing to maximum line.\n        yAxis: &#39;max&#39;,\n        x: &#39;90%&#39;\n    }, {\n        type: &#39;max&#39;\n    }],\n[\n        {\n            name: &#39;Mark line between two points&#39;,\n            x: 100,\n            y: 100\n        },\n        {\n            x: 500,\n            y: 200\n        }\n    ]\n]\n</code></pre>"
   },
   "markLine.data.0": {
     "desc": "<p>Data of the starting point.</p>\n"
@@ -9931,7 +10183,7 @@ window.__EC_DOC_option_series_line = {
     "desc": "<p>Whether show label or not.</p>\n"
   },
   "markLine.data.0.label.position": {
-    "desc": "<p>Positions of labels can be:</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code> starting point of the line.</li>\n<li><code class=\"codespan\">&#39;middle&#39;</code> middle point of the line.</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> ending point of the line.</li>\n</ul>\n<p>Since version 4.7.0, more label positions are supported: <code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>, <code class=\"codespan\">&#39;insideStartTop&#39;</code>, <code class=\"codespan\">&#39;insideStartBottom&#39;</code>, <code class=\"codespan\">&#39;insideMiddleTop&#39;</code>, <code class=\"codespan\">&#39;insideMiddleBottom&#39;</code>, <code class=\"codespan\">&#39;insideEndTop&#39;</code>, <code class=\"codespan\">&#39;insideEndBottom&#39;</code>.</p>\n<p><code class=\"codespan\">&#39;insideMiddleBottom&#39;</code> is the same as <code class=\"codespan\">&#39;middle&#39;</code>. Position is as the following chart.</p>\n<p>The distance between labels and mark lines can be set with <a href=\"#series-.markLine.label.distance\">label.distance</a>.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=bar-markline&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n"
+    "desc": "<p>Positions of labels can be:</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code> starting point of the line.</li>\n<li><code class=\"codespan\">&#39;middle&#39;</code> middle point of the line.</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> ending point of the line.</li>\n</ul>\n<p>Since version 4.7.0, more label positions are supported: <code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>, <code class=\"codespan\">&#39;insideStartTop&#39;</code>, <code class=\"codespan\">&#39;insideStartBottom&#39;</code>, <code class=\"codespan\">&#39;insideMiddleTop&#39;</code>, <code class=\"codespan\">&#39;insideMiddleBottom&#39;</code>, <code class=\"codespan\">&#39;insideEndTop&#39;</code>, <code class=\"codespan\">&#39;insideEndBottom&#39;</code>.</p>\n<p><code class=\"codespan\">&#39;insideMiddleBottom&#39;</code> is the same as <code class=\"codespan\">&#39;middle&#39;</code>. Position is as the following chart.</p>\n<p>The distance between labels and mark lines can be set with <a href=\"#series-.markLine.label.distance\">label.distance</a>.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=bar-markline&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n"
   },
   "markLine.data.0.label.distance": {
     "desc": "<p>The distance between labels and mark lines. If it&#39;s an array, then the first element is the horizontal distance, and the second element is the vertical distance. If it&#39;s a number, then the horizontal and vertical distances are the same.</p>\n"
@@ -10018,7 +10270,7 @@ window.__EC_DOC_option_series_line = {
     "desc": "<p>Whether show label or not.</p>\n"
   },
   "markLine.data.0.emphasis.label.position": {
-    "desc": "<p>Positions of labels can be:</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code> starting point of the line.</li>\n<li><code class=\"codespan\">&#39;middle&#39;</code> middle point of the line.</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> ending point of the line.</li>\n</ul>\n<p>Since version 4.7.0, more label positions are supported: <code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>, <code class=\"codespan\">&#39;insideStartTop&#39;</code>, <code class=\"codespan\">&#39;insideStartBottom&#39;</code>, <code class=\"codespan\">&#39;insideMiddleTop&#39;</code>, <code class=\"codespan\">&#39;insideMiddleBottom&#39;</code>, <code class=\"codespan\">&#39;insideEndTop&#39;</code>, <code class=\"codespan\">&#39;insideEndBottom&#39;</code>.</p>\n<p><code class=\"codespan\">&#39;insideMiddleBottom&#39;</code> is the same as <code class=\"codespan\">&#39;middle&#39;</code>. Position is as the following chart.</p>\n<p>The distance between labels and mark lines can be set with <a href=\"#series-.markLine.label.distance\">label.distance</a>.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=bar-markline&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n"
+    "desc": "<p>Positions of labels can be:</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code> starting point of the line.</li>\n<li><code class=\"codespan\">&#39;middle&#39;</code> middle point of the line.</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> ending point of the line.</li>\n</ul>\n<p>Since version 4.7.0, more label positions are supported: <code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>, <code class=\"codespan\">&#39;insideStartTop&#39;</code>, <code class=\"codespan\">&#39;insideStartBottom&#39;</code>, <code class=\"codespan\">&#39;insideMiddleTop&#39;</code>, <code class=\"codespan\">&#39;insideMiddleBottom&#39;</code>, <code class=\"codespan\">&#39;insideEndTop&#39;</code>, <code class=\"codespan\">&#39;insideEndBottom&#39;</code>.</p>\n<p><code class=\"codespan\">&#39;insideMiddleBottom&#39;</code> is the same as <code class=\"codespan\">&#39;middle&#39;</code>. Position is as the following chart.</p>\n<p>The distance between labels and mark lines can be set with <a href=\"#series-.markLine.label.distance\">label.distance</a>.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=bar-markline&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n"
   },
   "markLine.data.0.emphasis.label.distance": {
     "desc": "<p>The distance between labels and mark lines. If it&#39;s an array, then the first element is the horizontal distance, and the second element is the vertical distance. If it&#39;s a number, then the horizontal and vertical distances are the same.</p>\n"
@@ -10108,7 +10360,7 @@ window.__EC_DOC_option_series_line = {
     "desc": "<p>Whether show label or not.</p>\n"
   },
   "markLine.data.0.blur.label.position": {
-    "desc": "<p>Positions of labels can be:</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code> starting point of the line.</li>\n<li><code class=\"codespan\">&#39;middle&#39;</code> middle point of the line.</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> ending point of the line.</li>\n</ul>\n<p>Since version 4.7.0, more label positions are supported: <code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>, <code class=\"codespan\">&#39;insideStartTop&#39;</code>, <code class=\"codespan\">&#39;insideStartBottom&#39;</code>, <code class=\"codespan\">&#39;insideMiddleTop&#39;</code>, <code class=\"codespan\">&#39;insideMiddleBottom&#39;</code>, <code class=\"codespan\">&#39;insideEndTop&#39;</code>, <code class=\"codespan\">&#39;insideEndBottom&#39;</code>.</p>\n<p><code class=\"codespan\">&#39;insideMiddleBottom&#39;</code> is the same as <code class=\"codespan\">&#39;middle&#39;</code>. Position is as the following chart.</p>\n<p>The distance between labels and mark lines can be set with <a href=\"#series-.markLine.label.distance\">label.distance</a>.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=bar-markline&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n"
+    "desc": "<p>Positions of labels can be:</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code> starting point of the line.</li>\n<li><code class=\"codespan\">&#39;middle&#39;</code> middle point of the line.</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> ending point of the line.</li>\n</ul>\n<p>Since version 4.7.0, more label positions are supported: <code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>, <code class=\"codespan\">&#39;insideStartTop&#39;</code>, <code class=\"codespan\">&#39;insideStartBottom&#39;</code>, <code class=\"codespan\">&#39;insideMiddleTop&#39;</code>, <code class=\"codespan\">&#39;insideMiddleBottom&#39;</code>, <code class=\"codespan\">&#39;insideEndTop&#39;</code>, <code class=\"codespan\">&#39;insideEndBottom&#39;</code>.</p>\n<p><code class=\"codespan\">&#39;insideMiddleBottom&#39;</code> is the same as <code class=\"codespan\">&#39;middle&#39;</code>. Position is as the following chart.</p>\n<p>The distance between labels and mark lines can be set with <a href=\"#series-.markLine.label.distance\">label.distance</a>.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=bar-markline&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n"
   },
   "markLine.data.0.blur.label.distance": {
     "desc": "<p>The distance between labels and mark lines. If it&#39;s an array, then the first element is the horizontal distance, and the second element is the vertical distance. If it&#39;s a number, then the horizontal and vertical distances are the same.</p>\n"
@@ -10284,7 +10536,7 @@ window.__EC_DOC_option_series_line = {
     "desc": "<p>Whether show label or not.</p>\n"
   },
   "markLine.data.1.label.position": {
-    "desc": "<p>Positions of labels can be:</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code> starting point of the line.</li>\n<li><code class=\"codespan\">&#39;middle&#39;</code> middle point of the line.</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> ending point of the line.</li>\n</ul>\n<p>Since version 4.7.0, more label positions are supported: <code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>, <code class=\"codespan\">&#39;insideStartTop&#39;</code>, <code class=\"codespan\">&#39;insideStartBottom&#39;</code>, <code class=\"codespan\">&#39;insideMiddleTop&#39;</code>, <code class=\"codespan\">&#39;insideMiddleBottom&#39;</code>, <code class=\"codespan\">&#39;insideEndTop&#39;</code>, <code class=\"codespan\">&#39;insideEndBottom&#39;</code>.</p>\n<p><code class=\"codespan\">&#39;insideMiddleBottom&#39;</code> is the same as <code class=\"codespan\">&#39;middle&#39;</code>. Position is as the following chart.</p>\n<p>The distance between labels and mark lines can be set with <a href=\"#series-.markLine.label.distance\">label.distance</a>.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=bar-markline&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n"
+    "desc": "<p>Positions of labels can be:</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code> starting point of the line.</li>\n<li><code class=\"codespan\">&#39;middle&#39;</code> middle point of the line.</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> ending point of the line.</li>\n</ul>\n<p>Since version 4.7.0, more label positions are supported: <code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>, <code class=\"codespan\">&#39;insideStartTop&#39;</code>, <code class=\"codespan\">&#39;insideStartBottom&#39;</code>, <code class=\"codespan\">&#39;insideMiddleTop&#39;</code>, <code class=\"codespan\">&#39;insideMiddleBottom&#39;</code>, <code class=\"codespan\">&#39;insideEndTop&#39;</code>, <code class=\"codespan\">&#39;insideEndBottom&#39;</code>.</p>\n<p><code class=\"codespan\">&#39;insideMiddleBottom&#39;</code> is the same as <code class=\"codespan\">&#39;middle&#39;</code>. Position is as the following chart.</p>\n<p>The distance between labels and mark lines can be set with <a href=\"#series-.markLine.label.distance\">label.distance</a>.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=bar-markline&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n"
   },
   "markLine.data.1.label.distance": {
     "desc": "<p>The distance between labels and mark lines. If it&#39;s an array, then the first element is the horizontal distance, and the second element is the vertical distance. If it&#39;s a number, then the horizontal and vertical distances are the same.</p>\n"
@@ -10371,7 +10623,7 @@ window.__EC_DOC_option_series_line = {
     "desc": "<p>Whether show label or not.</p>\n"
   },
   "markLine.data.1.emphasis.label.position": {
-    "desc": "<p>Positions of labels can be:</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code> starting point of the line.</li>\n<li><code class=\"codespan\">&#39;middle&#39;</code> middle point of the line.</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> ending point of the line.</li>\n</ul>\n<p>Since version 4.7.0, more label positions are supported: <code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>, <code class=\"codespan\">&#39;insideStartTop&#39;</code>, <code class=\"codespan\">&#39;insideStartBottom&#39;</code>, <code class=\"codespan\">&#39;insideMiddleTop&#39;</code>, <code class=\"codespan\">&#39;insideMiddleBottom&#39;</code>, <code class=\"codespan\">&#39;insideEndTop&#39;</code>, <code class=\"codespan\">&#39;insideEndBottom&#39;</code>.</p>\n<p><code class=\"codespan\">&#39;insideMiddleBottom&#39;</code> is the same as <code class=\"codespan\">&#39;middle&#39;</code>. Position is as the following chart.</p>\n<p>The distance between labels and mark lines can be set with <a href=\"#series-.markLine.label.distance\">label.distance</a>.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=bar-markline&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n"
+    "desc": "<p>Positions of labels can be:</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code> starting point of the line.</li>\n<li><code class=\"codespan\">&#39;middle&#39;</code> middle point of the line.</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> ending point of the line.</li>\n</ul>\n<p>Since version 4.7.0, more label positions are supported: <code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>, <code class=\"codespan\">&#39;insideStartTop&#39;</code>, <code class=\"codespan\">&#39;insideStartBottom&#39;</code>, <code class=\"codespan\">&#39;insideMiddleTop&#39;</code>, <code class=\"codespan\">&#39;insideMiddleBottom&#39;</code>, <code class=\"codespan\">&#39;insideEndTop&#39;</code>, <code class=\"codespan\">&#39;insideEndBottom&#39;</code>.</p>\n<p><code class=\"codespan\">&#39;insideMiddleBottom&#39;</code> is the same as <code class=\"codespan\">&#39;middle&#39;</code>. Position is as the following chart.</p>\n<p>The distance between labels and mark lines can be set with <a href=\"#series-.markLine.label.distance\">label.distance</a>.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=bar-markline&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n"
   },
   "markLine.data.1.emphasis.label.distance": {
     "desc": "<p>The distance between labels and mark lines. If it&#39;s an array, then the first element is the horizontal distance, and the second element is the vertical distance. If it&#39;s a number, then the horizontal and vertical distances are the same.</p>\n"
@@ -10461,7 +10713,7 @@ window.__EC_DOC_option_series_line = {
     "desc": "<p>Whether show label or not.</p>\n"
   },
   "markLine.data.1.blur.label.position": {
-    "desc": "<p>Positions of labels can be:</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code> starting point of the line.</li>\n<li><code class=\"codespan\">&#39;middle&#39;</code> middle point of the line.</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> ending point of the line.</li>\n</ul>\n<p>Since version 4.7.0, more label positions are supported: <code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>, <code class=\"codespan\">&#39;insideStartTop&#39;</code>, <code class=\"codespan\">&#39;insideStartBottom&#39;</code>, <code class=\"codespan\">&#39;insideMiddleTop&#39;</code>, <code class=\"codespan\">&#39;insideMiddleBottom&#39;</code>, <code class=\"codespan\">&#39;insideEndTop&#39;</code>, <code class=\"codespan\">&#39;insideEndBottom&#39;</code>.</p>\n<p><code class=\"codespan\">&#39;insideMiddleBottom&#39;</code> is the same as <code class=\"codespan\">&#39;middle&#39;</code>. Position is as the following chart.</p>\n<p>The distance between labels and mark lines can be set with <a href=\"#series-.markLine.label.distance\">label.distance</a>.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=bar-markline&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n"
+    "desc": "<p>Positions of labels can be:</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code> starting point of the line.</li>\n<li><code class=\"codespan\">&#39;middle&#39;</code> middle point of the line.</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> ending point of the line.</li>\n</ul>\n<p>Since version 4.7.0, more label positions are supported: <code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>, <code class=\"codespan\">&#39;insideStartTop&#39;</code>, <code class=\"codespan\">&#39;insideStartBottom&#39;</code>, <code class=\"codespan\">&#39;insideMiddleTop&#39;</code>, <code class=\"codespan\">&#39;insideMiddleBottom&#39;</code>, <code class=\"codespan\">&#39;insideEndTop&#39;</code>, <code class=\"codespan\">&#39;insideEndBottom&#39;</code>.</p>\n<p><code class=\"codespan\">&#39;insideMiddleBottom&#39;</code> is the same as <code class=\"codespan\">&#39;middle&#39;</code>. Position is as the following chart.</p>\n<p>The distance between labels and mark lines can be set with <a href=\"#series-.markLine.label.distance\">label.distance</a>.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=bar-markline&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n"
   },
   "markLine.data.1.blur.label.distance": {
     "desc": "<p>The distance between labels and mark lines. If it&#39;s an array, then the first element is the horizontal distance, and the second element is the vertical distance. If it&#39;s a number, then the horizontal and vertical distances are the same.</p>\n"
@@ -10491,7 +10743,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markLine.animationEasing": {
-    "desc": "\n\n<p>Easing method used for the first animation. Varied easing effects can be found at <a href=\"https://echarts.apache.org/next/examples/editor.html?c=line-easing\" target=\"_blank\">easing effect example</a>.</p>\n",
+    "desc": "\n\n<p>Easing method used for the first animation. Varied easing effects can be found at <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=line-easing\" target=\"_blank\">easing effect example</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "linear,quadraticIn,quadraticOut,quadraticInOut,cubicIn,cubicOut,cubicInOut,quarticIn,quarticOut,quarticInOut,quinticIn,quinticOut,quinticInOut,sinusoidalIn,sinusoidalOut,sinusoidalInOut,exponentialIn,exponentialOut,exponentialInOut,circularIn,circularOut,circularInOut,elasticIn,elasticOut,elasticInOut,backIn,backOut,backInOut,bounceIn,bounceOut,bounceInOut",
@@ -10499,7 +10751,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markLine.animationDelay": {
-    "desc": "<p>Delay before updating the first animation, which supports callback function for different data to have different animation effect.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">animationDelay: function (idx) {\n    // delay for later data is larger\n    return idx * 100;\n}\n</code></pre>\n<p>See <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-animation-delay\" target=\"_blank\">this example</a> for more information.</p>\n"
+    "desc": "<p>Delay before updating the first animation, which supports callback function for different data to have different animation effect.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">animationDelay: function (idx) {\n    // delay for later data is larger\n    return idx * 100;\n}\n</code></pre>\n<p>See <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-animation-delay\" target=\"_blank\">this example</a> for more information.</p>\n"
   },
   "markLine.animationDurationUpdate": {
     "desc": "\n\n<p>Time for animation to complete, which supports callback function for different data to have different animation effect:</p>\n<pre><code class=\"lang-js\">animationDurationUpdate: function (idx) {\n    // delay for later data is larger\n    return idx * 100;\n}\n</code></pre>\n",
@@ -10518,7 +10770,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markLine.animationDelayUpdate": {
-    "desc": "<p>Delay before updating animation, which supports callback function for different data to have different animation effects.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">animationDelayUpdate: function (idx) {\n    // delay for later data is larger\n    return idx * 100;\n}\n</code></pre>\n<p>See <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-animation-delay\" target=\"_blank\">this example</a> for more information.</p>\n"
+    "desc": "<p>Delay before updating animation, which supports callback function for different data to have different animation effects.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">animationDelayUpdate: function (idx) {\n    // delay for later data is larger\n    return idx * 100;\n}\n</code></pre>\n<p>See <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-animation-delay\" target=\"_blank\">this example</a> for more information.</p>\n"
   },
   "markArea": {
     "desc": "<p>Used to mark an area in chart. For example, mark a time interval.</p>\n"
@@ -10540,14 +10792,14 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markArea.label.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "markArea.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -10556,7 +10808,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markArea.label.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -10704,10 +10956,24 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markArea.label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "markArea.label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "markArea.label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -11031,14 +11297,14 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markArea.emphasis.label.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "markArea.emphasis.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -11047,7 +11313,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markArea.emphasis.label.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -11195,10 +11461,24 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markArea.emphasis.label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "markArea.emphasis.label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "markArea.emphasis.label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -11519,14 +11799,14 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markArea.blur.label.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "markArea.blur.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -11535,7 +11815,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markArea.blur.label.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -11683,10 +11963,24 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markArea.blur.label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "markArea.blur.label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "markArea.blur.label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -11997,7 +12291,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markArea.data": {
-    "desc": "<p>The scope of the area is defined by <code class=\"codespan\">data</code>, which is an array with two item, representing the left-top point and the right-bottom point of rectangle area. Each item can be defined as follows:</p>\n<ol>\n<li>Specify the coordinate in screen coordinate system using <a href=\"#series-line.markArea.data.0.x\">x</a>, <a href=\"#series-line.markArea.data.0.y\">y</a>, where the unit is pixel (e.g., the value is <code class=\"codespan\">5</code>), or percent (e.g., the value is <code class=\"codespan\">&#39;35%&#39;</code>).</li>\n</ol>\n<ol start=\"2\">\n<li><p>Specify the coordinate in data coordinate system (i.e., cartesian) using\n<a href=\"#series-line.markArea.data.0.coord\">coord</a>, which can be also set as <code class=\"codespan\">&#39;min&#39;</code>, <code class=\"codespan\">&#39;max&#39;</code>, <code class=\"codespan\">&#39;average&#39;</code> (e.g, <code class=\"codespan\">coord: [23, &#39;min&#39;]</code>, or <code class=\"codespan\">coord: [&#39;average&#39;, &#39;max&#39;]</code>).</p>\n</li>\n<li><p>Locate the point on the min value or max value of <code class=\"codespan\">series.data</code> using <a href=\"#series-line.markArea.data.0.type\">type</a>, where <a href=\"#series-line.markArea.data.0.valueIndex\">valueIndex</a> or <a href=\"#series-line.markPoint.data.0.valueDim\">valueDim</a> can be used to specify the dimension on which the min, max or average are calculated.</p>\n</li>\n<li>If in cartesian, you can only specify <code class=\"codespan\">xAxis</code> or <code class=\"codespan\">yAxis</code> to define a mark area based on only X or Y axis, see sample <a href=\"https://echarts.apache.org/next/examples/editor.html?c=scatter-weight\" target=\"_blank\">scatter-weight</a></li>\n</ol>\n<p>The priority follows as above if more than one above definition used.</p>\n<pre><code>data: [\n\n\n    [\n        {\n            name: &#39;From average to max&#39;,\n            type: &#39;average&#39;\n        },\n        {\n            type: &#39;max&#39;\n        }\n    ],\n\n    [\n        {\n            name: &#39;Mark area between two points in data coordiantes&#39;,\n            coord: [10, 20]\n        },\n        {\n            coord: [20, 30]\n        }\n    ], [\n        {\n            name: &#39;From 60 to 80&#39;,\n            yAxis: 60\n        },\n        {\n            yAxis: 80\n        }\n    ], [\n        {\n            name: &#39;Mark area covers all data&#39;\n            coord: [&#39;min&#39;, &#39;min&#39;]\n        },\n        {\n            coord: [&#39;max&#39;, &#39;max&#39;]\n        }\n    ],\n[\n        {\n            name: &#39;Mark area in two screen points&#39;,\n            x: 100,\n            y: 100\n        }, {\n            x: &#39;90%&#39;,\n            y: &#39;10%&#39;\n        }\n    ]\n]\n</code></pre>"
+    "desc": "<p>The scope of the area is defined by <code class=\"codespan\">data</code>, which is an array with two item, representing the left-top point and the right-bottom point of rectangle area. Each item can be defined as follows:</p>\n<ol>\n<li>Specify the coordinate in screen coordinate system using <a href=\"#series-line.markArea.data.0.x\">x</a>, <a href=\"#series-line.markArea.data.0.y\">y</a>, where the unit is pixel (e.g., the value is <code class=\"codespan\">5</code>), or percent (e.g., the value is <code class=\"codespan\">&#39;35%&#39;</code>).</li>\n</ol>\n<ol start=\"2\">\n<li><p>Specify the coordinate in data coordinate system (i.e., cartesian) using\n<a href=\"#series-line.markArea.data.0.coord\">coord</a>, which can be also set as <code class=\"codespan\">&#39;min&#39;</code>, <code class=\"codespan\">&#39;max&#39;</code>, <code class=\"codespan\">&#39;average&#39;</code> (e.g, <code class=\"codespan\">coord: [23, &#39;min&#39;]</code>, or <code class=\"codespan\">coord: [&#39;average&#39;, &#39;max&#39;]</code>).</p>\n</li>\n<li><p>Locate the point on the min value or max value of <code class=\"codespan\">series.data</code> using <a href=\"#series-line.markArea.data.0.type\">type</a>, where <a href=\"#series-line.markArea.data.0.valueIndex\">valueIndex</a> or <a href=\"#series-line.markPoint.data.0.valueDim\">valueDim</a> can be used to specify the dimension on which the min, max or average are calculated.</p>\n</li>\n<li>If in cartesian, you can only specify <code class=\"codespan\">xAxis</code> or <code class=\"codespan\">yAxis</code> to define a mark area based on only X or Y axis, see sample <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=scatter-weight\" target=\"_blank\">scatter-weight</a></li>\n</ol>\n<p>The priority follows as above if more than one above definition used.</p>\n<pre><code>data: [\n\n\n    [\n        {\n            name: &#39;From average to max&#39;,\n            type: &#39;average&#39;\n        },\n        {\n            type: &#39;max&#39;\n        }\n    ],\n\n    [\n        {\n            name: &#39;Mark area between two points in data coordiantes&#39;,\n            coord: [10, 20]\n        },\n        {\n            coord: [20, 30]\n        }\n    ], [\n        {\n            name: &#39;From 60 to 80&#39;,\n            yAxis: 60\n        },\n        {\n            yAxis: 80\n        }\n    ], [\n        {\n            name: &#39;Mark area covers all data&#39;\n            coord: [&#39;min&#39;, &#39;min&#39;]\n        },\n        {\n            coord: [&#39;max&#39;, &#39;max&#39;]\n        }\n    ],\n[\n        {\n            name: &#39;Mark area in two screen points&#39;,\n            x: 100,\n            y: 100\n        }, {\n            x: &#39;90%&#39;,\n            y: &#39;10%&#39;\n        }\n    ]\n]\n</code></pre>"
   },
   "markArea.data.0": {
     "desc": "<p>Specify the left-top point.</p>\n"
@@ -12129,14 +12423,14 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markArea.data.0.label.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "markArea.data.0.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -12145,7 +12439,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markArea.data.0.label.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -12293,10 +12587,24 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markArea.data.0.label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "markArea.data.0.label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "markArea.data.0.label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -12614,14 +12922,14 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markArea.data.0.emphasis.label.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "markArea.data.0.emphasis.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -12630,7 +12938,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markArea.data.0.emphasis.label.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -12778,10 +13086,24 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markArea.data.0.emphasis.label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "markArea.data.0.emphasis.label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "markArea.data.0.emphasis.label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -13102,14 +13424,14 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markArea.data.0.blur.label.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "markArea.data.0.blur.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -13118,7 +13440,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markArea.data.0.blur.label.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -13266,10 +13588,24 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markArea.data.0.blur.label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "markArea.data.0.blur.label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "markArea.data.0.blur.label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -13638,14 +13974,14 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markArea.data.1.label.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "markArea.data.1.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -13654,7 +13990,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markArea.data.1.label.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -13802,10 +14138,24 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markArea.data.1.label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "markArea.data.1.label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "markArea.data.1.label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -14123,14 +14473,14 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markArea.data.1.emphasis.label.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "markArea.data.1.emphasis.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -14139,7 +14489,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markArea.data.1.emphasis.label.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -14287,10 +14637,24 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markArea.data.1.emphasis.label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "markArea.data.1.emphasis.label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "markArea.data.1.emphasis.label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -14611,14 +14975,14 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markArea.data.1.blur.label.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "markArea.data.1.blur.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -14627,7 +14991,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markArea.data.1.blur.label.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -14775,10 +15139,24 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markArea.data.1.blur.label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "markArea.data.1.blur.label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "markArea.data.1.blur.label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -15039,7 +15417,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markArea.animationEasing": {
-    "desc": "\n\n<p>Easing method used for the first animation. Varied easing effects can be found at <a href=\"https://echarts.apache.org/next/examples/editor.html?c=line-easing\" target=\"_blank\">easing effect example</a>.</p>\n",
+    "desc": "\n\n<p>Easing method used for the first animation. Varied easing effects can be found at <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=line-easing\" target=\"_blank\">easing effect example</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "linear,quadraticIn,quadraticOut,quadraticInOut,cubicIn,cubicOut,cubicInOut,quarticIn,quarticOut,quarticInOut,quinticIn,quinticOut,quinticInOut,sinusoidalIn,sinusoidalOut,sinusoidalInOut,exponentialIn,exponentialOut,exponentialInOut,circularIn,circularOut,circularInOut,elasticIn,elasticOut,elasticInOut,backIn,backOut,backInOut,bounceIn,bounceOut,bounceInOut",
@@ -15047,7 +15425,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markArea.animationDelay": {
-    "desc": "<p>Delay before updating the first animation, which supports callback function for different data to have different animation effect.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">animationDelay: function (idx) {\n    // delay for later data is larger\n    return idx * 100;\n}\n</code></pre>\n<p>See <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-animation-delay\" target=\"_blank\">this example</a> for more information.</p>\n"
+    "desc": "<p>Delay before updating the first animation, which supports callback function for different data to have different animation effect.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">animationDelay: function (idx) {\n    // delay for later data is larger\n    return idx * 100;\n}\n</code></pre>\n<p>See <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-animation-delay\" target=\"_blank\">this example</a> for more information.</p>\n"
   },
   "markArea.animationDurationUpdate": {
     "desc": "\n\n<p>Time for animation to complete, which supports callback function for different data to have different animation effect:</p>\n<pre><code class=\"lang-js\">animationDurationUpdate: function (idx) {\n    // delay for later data is larger\n    return idx * 100;\n}\n</code></pre>\n",
@@ -15066,7 +15444,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "markArea.animationDelayUpdate": {
-    "desc": "<p>Delay before updating animation, which supports callback function for different data to have different animation effects.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">animationDelayUpdate: function (idx) {\n    // delay for later data is larger\n    return idx * 100;\n}\n</code></pre>\n<p>See <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-animation-delay\" target=\"_blank\">this example</a> for more information.</p>\n"
+    "desc": "<p>Delay before updating animation, which supports callback function for different data to have different animation effects.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">animationDelayUpdate: function (idx) {\n    // delay for later data is larger\n    return idx * 100;\n}\n</code></pre>\n<p>See <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-animation-delay\" target=\"_blank\">this example</a> for more information.</p>\n"
   },
   "zlevel": {
     "desc": "<p><code class=\"codespan\">zlevel</code> value of all graphical elements in Line.</p>\n<p><code class=\"codespan\">zlevel</code> is used to make layers with Canvas. Graphical elements with different <code class=\"codespan\">zlevel</code> values will be placed in different Canvases, which is a common optimization technique. We can put those frequently changed elements (like those with animations) to a separate <code class=\"codespan\">zlevel</code>. Notice that too many Canvases will increase memory cost, and should be used carefully on mobile phones to avoid crash.</p>\n<p>Canvases with bigger <code class=\"codespan\">zlevel</code> will be placed on Canvases with smaller <code class=\"codespan\">zlevel</code>.</p>\n"
@@ -15102,7 +15480,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "animationEasing": {
-    "desc": "\n\n<p>Easing method used for the first animation. Varied easing effects can be found at <a href=\"https://echarts.apache.org/next/examples/editor.html?c=line-easing\" target=\"_blank\">easing effect example</a>.</p>\n",
+    "desc": "\n\n<p>Easing method used for the first animation. Varied easing effects can be found at <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=line-easing\" target=\"_blank\">easing effect example</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "linear,quadraticIn,quadraticOut,quadraticInOut,cubicIn,cubicOut,cubicInOut,quarticIn,quarticOut,quarticInOut,quinticIn,quinticOut,quinticInOut,sinusoidalIn,sinusoidalOut,sinusoidalInOut,exponentialIn,exponentialOut,exponentialInOut,circularIn,circularOut,circularInOut,elasticIn,elasticOut,elasticInOut,backIn,backOut,backInOut,bounceIn,bounceOut,bounceInOut",
@@ -15110,7 +15488,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "animationDelay": {
-    "desc": "<p>Delay before updating the first animation, which supports callback function for different data to have different animation effect.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">animationDelay: function (idx) {\n    // delay for later data is larger\n    return idx * 100;\n}\n</code></pre>\n<p>See <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-animation-delay\" target=\"_blank\">this example</a> for more information.</p>\n"
+    "desc": "<p>Delay before updating the first animation, which supports callback function for different data to have different animation effect.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">animationDelay: function (idx) {\n    // delay for later data is larger\n    return idx * 100;\n}\n</code></pre>\n<p>See <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-animation-delay\" target=\"_blank\">this example</a> for more information.</p>\n"
   },
   "animationDurationUpdate": {
     "desc": "\n\n<p>Time for animation to complete, which supports callback function for different data to have different animation effect:</p>\n<pre><code class=\"lang-js\">animationDurationUpdate: function (idx) {\n    // delay for later data is larger\n    return idx * 100;\n}\n</code></pre>\n",
@@ -15129,7 +15507,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "animationDelayUpdate": {
-    "desc": "<p>Delay before updating animation, which supports callback function for different data to have different animation effects.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">animationDelayUpdate: function (idx) {\n    // delay for later data is larger\n    return idx * 100;\n}\n</code></pre>\n<p>See <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-animation-delay\" target=\"_blank\">this example</a> for more information.</p>\n"
+    "desc": "<p>Delay before updating animation, which supports callback function for different data to have different animation effects.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">animationDelayUpdate: function (idx) {\n    // delay for later data is larger\n    return idx * 100;\n}\n</code></pre>\n<p>See <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-animation-delay\" target=\"_blank\">this example</a> for more information.</p>\n"
   },
   "tooltip": {
     "desc": "<p>tooltip settings in this series.</p>\n"
@@ -15219,10 +15597,24 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "tooltip.textStyle.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "tooltip.textStyle.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "tooltip.textStyle.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n",

@@ -49,10 +49,24 @@ window.__EC_DOC_option_textStyle = {
     }
   },
   "width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n",

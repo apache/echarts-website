@@ -40,14 +40,14 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "label.position": {
-    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "label.distance": {
-    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -56,7 +56,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "label.rotate": {
-    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
+    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -207,10 +207,24 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "label.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "label.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "label.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
@@ -548,10 +562,10 @@ window.__EC_DOC_option_series_pictorialBar = {
     "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>标签的统一布局配置。</p>\n<p>该配置项是在每个系列默认的标签布局基础上，统一调整标签的<code class=\"codespan\">(x, y)</code>位置，标签对齐等属性以实现想要的标签布局效果。</p>\n<p>该配置项也可以是一个有如下参数的回调函数</p>\n<pre><code class=\"lang-js\">// 标签对应数据的 dataIndex\ndataIndex: number\n// 标签对应的数据类型，只在关系图中会有 node 和 edge 数据类型的区分\ndataType?: string\n// 标签对应的系列的 index\nseriesIndex: number\n// 标签显示的文本\ntext: string\n// 默认的标签的包围盒，由系列默认的标签布局决定\nlabelRect: {x: number, y: number, width: number, height: number}\n// 默认的标签水平对齐\nalign: &#39;left&#39; | &#39;center&#39; | &#39;right&#39;\n// 默认的标签垂直对齐\nverticalAlign: &#39;top&#39; | &#39;middle&#39; | &#39;bottom&#39;\n// 标签所对应的数据图形的包围盒，可用于定位标签位置\nrect: {x: number, y: number, width: number, height: number}\n// 默认引导线的位置，目前只有饼图(pie)和漏斗图(funnel)有默认标签位置\n// 如果没有该值则为 null\nlabelLinePoints?: number[][]\n</code></pre>\n<p><strong>示例：</strong></p>\n<p>将标签显示在图形右侧 10px 的位置，并且垂直居中：</p>\n<pre><code class=\"lang-js\">labelLayout(params) {\n    return {\n        x: params.rect.x + 10,\n        y: params.rect.y + params.rect.height / 2,\n        verticalAlign: &#39;middle&#39;,\n        align: &#39;left&#39;\n    }\n}\n</code></pre>\n<p>根据图形的包围盒尺寸决定文本尺寸</p>\n<pre><code class=\"lang-js\">\nlabelLayout(params) {\n    return {\n        fontSize: Math.max(params.rect.width / 10, 5)\n    };\n}\n</code></pre>\n"
   },
   "labelLayout.hideOverlap": {
-    "desc": "<p>是否隐藏重叠的标签。</p>\n<p>下面示例演示了在关系图中开启该配置后，在缩放时可以实现自动的标签隐藏。</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=graph-label-overlap&edit=1&reset=1\" width=\"600\" height=\"400\"><iframe />\n\n"
+    "desc": "<p>是否隐藏重叠的标签。</p>\n<p>下面示例演示了在关系图中开启该配置后，在缩放时可以实现自动的标签隐藏。</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=graph-label-overlap&edit=1&reset=1\" width=\"600\" height=\"400\"><iframe />\n\n"
   },
   "labelLayout.moveOverlap": {
-    "desc": "<p>在标签重叠的时候是否挪动标签位置以防止重叠。</p>\n<p>目前支持配置为：</p>\n<ul>\n<li><code class=\"codespan\">&#39;shiftX&#39;</code> 水平方向依次位移，在水平方向对齐时使用</li>\n<li><code class=\"codespan\">&#39;shiftY&#39;</code> 垂直方向依次位移，在垂直方向对齐时使用</li>\n</ul>\n<p>下面是标签右对齐并配置垂直方向依次位移以防止重叠的示例。</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=scatter-label-align-right&edit=1&reset=1\" width=\"600\" height=\"400\"><iframe />\n\n"
+    "desc": "<p>在标签重叠的时候是否挪动标签位置以防止重叠。</p>\n<p>目前支持配置为：</p>\n<ul>\n<li><code class=\"codespan\">&#39;shiftX&#39;</code> 水平方向依次位移，在水平方向对齐时使用</li>\n<li><code class=\"codespan\">&#39;shiftY&#39;</code> 垂直方向依次位移，在垂直方向对齐时使用</li>\n</ul>\n<p>下面是标签右对齐并配置垂直方向依次位移以防止重叠的示例。</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=scatter-label-align-right&edit=1&reset=1\" width=\"600\" height=\"400\"><iframe />\n\n"
   },
   "labelLayout.x": {
     "desc": "<p>标签的 x 位置。支持绝对的像素值或者<code class=\"codespan\">&#39;20%&#39;</code>这样的相对值。</p>\n"
@@ -667,7 +681,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     "desc": "<p>高亮状态配置。</p>\n"
   },
   "emphasis.focus": {
-    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>在高亮图形时，是否淡出其它数据的图形已达到聚焦的效果。支持如下配置：</p>\n<ul>\n<li><code class=\"codespan\">&#39;none&#39;</code> 不淡出其它图形，默认使用该配置。</li>\n<li><code class=\"codespan\">&#39;self&#39;</code> 只聚焦（不淡出）当前高亮的数据的图形。</li>\n<li><code class=\"codespan\">&#39;series&#39;</code> 聚焦当前高亮的数据所在的系列的所有图形。</li>\n</ul>\n<p><strong>示例：</strong></p>\n<p>下面代码配置了柱状图在高亮一个图形的时候，淡出当前直角坐标系所有其它的系列。</p>\n<pre><code class=\"lang-js\">emphasis: {\n    focus: &#39;series&#39;,\n    blurScope: &#39;coordinateSystem&#39;\n}\n</code></pre>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=bar-y-category-stack&reset=1&edit=1\" width=\"600\" height=\"400\"><iframe />\n\n"
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>在高亮图形时，是否淡出其它数据的图形已达到聚焦的效果。支持如下配置：</p>\n<ul>\n<li><code class=\"codespan\">&#39;none&#39;</code> 不淡出其它图形，默认使用该配置。</li>\n<li><code class=\"codespan\">&#39;self&#39;</code> 只聚焦（不淡出）当前高亮的数据的图形。</li>\n<li><code class=\"codespan\">&#39;series&#39;</code> 聚焦当前高亮的数据所在的系列的所有图形。</li>\n</ul>\n<p><strong>示例：</strong></p>\n<p>下面代码配置了柱状图在高亮一个图形的时候，淡出当前直角坐标系所有其它的系列。</p>\n<pre><code class=\"lang-js\">emphasis: {\n    focus: &#39;series&#39;,\n    blurScope: &#39;coordinateSystem&#39;\n}\n</code></pre>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=bar-y-category-stack&reset=1&edit=1\" width=\"600\" height=\"400\"><iframe />\n\n"
   },
   "emphasis.blurScope": {
     "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>在开启<code class=\"codespan\">focus</code>的时候，可以通过<code class=\"codespan\">blurScope</code>配置淡出的范围。支持如下配置</p>\n<ul>\n<li><code class=\"codespan\">&#39;coordinateSystem&#39;</code> 淡出范围为坐标系，默认使用该配置。</li>\n<li><code class=\"codespan\">&#39;series&#39;</code> 淡出范围为系列。</li>\n<li><code class=\"codespan\">&#39;global&#39;</code> 淡出范围为全局。</li>\n</ul>\n"
@@ -680,14 +694,14 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "emphasis.label.position": {
-    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "emphasis.label.distance": {
-    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -696,7 +710,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "emphasis.label.rotate": {
-    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
+    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -847,10 +861,24 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "emphasis.label.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "emphasis.label.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "emphasis.label.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
@@ -1245,14 +1273,14 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "blur.label.position": {
-    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "blur.label.distance": {
-    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -1261,7 +1289,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "blur.label.rotate": {
-    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
+    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -1412,10 +1440,24 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "blur.label.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "blur.label.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "blur.label.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
@@ -1817,14 +1859,14 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "selectedMode.label.position": {
-    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "selectedMode.label.distance": {
-    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -1833,7 +1875,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "selectedMode.label.rotate": {
-    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
+    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -1984,10 +2026,24 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "selectedMode.label.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "selectedMode.label.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "selectedMode.label.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
@@ -2391,7 +2447,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "barGap": {
-    "desc": "\n\n<p>不同系列的柱间距离，为百分比（如 <code class=\"codespan\">&#39;30%&#39;</code>，表示柱子宽度的 <code class=\"codespan\">30%</code>）。</p>\n<p>如果想要两个系列的柱子重叠，可以设置 barGap 为 <code class=\"codespan\">&#39;-100%&#39;</code>。这在用柱子做背景的时候有用。</p>\n<p>在同一坐标系上，此属性会被多个 <code class=\"codespan\">&#39;pictorialBar&#39;</code> 系列共享。此属性应设置于此坐标系中最后一个 <code class=\"codespan\">&#39;pictorialBar&#39;</code> 系列上才会生效，并且是对此坐标系中所有 <code class=\"codespan\">&#39;pictorialBar&#39;</code> 系列生效。</p>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/barGrid-barGap&reset=1&edit=1\" width=\"600\" height=\"400\"><iframe />\n\n",
+    "desc": "\n\n<p>不同系列的柱间距离，为百分比（如 <code class=\"codespan\">&#39;30%&#39;</code>，表示柱子宽度的 <code class=\"codespan\">30%</code>）。</p>\n<p>如果想要两个系列的柱子重叠，可以设置 barGap 为 <code class=\"codespan\">&#39;-100%&#39;</code>。这在用柱子做背景的时候有用。</p>\n<p>在同一坐标系上，此属性会被多个 <code class=\"codespan\">&#39;pictorialBar&#39;</code> 系列共享。此属性应设置于此坐标系中最后一个 <code class=\"codespan\">&#39;pictorialBar&#39;</code> 系列上才会生效，并且是对此坐标系中所有 <code class=\"codespan\">&#39;pictorialBar&#39;</code> 系列生效。</p>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/barGrid-barGap&reset=1&edit=1\" width=\"600\" height=\"400\"><iframe />\n\n",
     "uiControl": {
       "type": "percent",
       "default": "30%"
@@ -2405,13 +2461,13 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "symbol": {
-    "desc": "\n\n<p>图形类型。</p>\n<p>ECharts 提供的标记类型包括</p>\n<p><code class=\"codespan\">&#39;circle&#39;</code>, <code class=\"codespan\">&#39;rect&#39;</code>, <code class=\"codespan\">&#39;roundRect&#39;</code>, <code class=\"codespan\">&#39;triangle&#39;</code>, <code class=\"codespan\">&#39;diamond&#39;</code>, <code class=\"codespan\">&#39;pin&#39;</code>, <code class=\"codespan\">&#39;arrow&#39;</code>, <code class=\"codespan\">&#39;none&#39;</code></p>\n<p>可以通过 <code class=\"codespan\">&#39;image://url&#39;</code> 设置为图片，其中 URL 为图片的链接，或者 <code class=\"codespan\">dataURI</code>。</p>\n<p>URL 为图片链接例如：</p>\n<pre><code>&#39;image://http://xxx.xxx.xxx/a/b.png&#39;\n</code></pre><p>URL 为 <code class=\"codespan\">dataURI</code> 例如：</p>\n<pre><code>&#39;image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7&#39;\n</code></pre><p>可以通过 <code class=\"codespan\">&#39;path://&#39;</code> 将图标设置为任意的矢量路径。这种方式相比于使用图片的方式，不用担心因为缩放而产生锯齿或模糊，而且可以设置为任意颜色。路径图形会自适应调整为合适的大小。路径的格式参见 <a href=\"http://www.w3.org/TR/SVG/paths.html#PathData\" target=\"_blank\">SVG PathData</a>。可以从 Adobe Illustrator 等工具编辑导出。</p>\n<p>例如：</p>\n<pre><code>&#39;path://M30.9,53.2C16.8,53.2,5.3,41.7,5.3,27.6S16.8,2,30.9,2C45,2,56.4,13.5,56.4,27.6S45,53.2,30.9,53.2z M30.9,3.5C17.6,3.5,6.8,14.4,6.8,27.6c0,13.3,10.8,24.1,24.101,24.1C44.2,51.7,55,40.9,55,27.6C54.9,14.4,44.1,3.5,30.9,3.5z M36.9,35.8c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H36c0.5,0,0.9,0.4,0.9,1V35.8z M27.8,35.8 c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H27c0.5,0,0.9,0.4,0.9,1L27.8,35.8L27.8,35.8z&#39;\n</code></pre><p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/pictorialBar-graphicType&reset=1&edit=1\" width=\"800\" height=\"400\"><iframe />\n\n\n\n\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbol\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbol\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbol: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbol: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbol: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n",
+    "desc": "\n\n<p>图形类型。</p>\n<p>ECharts 提供的标记类型包括</p>\n<p><code class=\"codespan\">&#39;circle&#39;</code>, <code class=\"codespan\">&#39;rect&#39;</code>, <code class=\"codespan\">&#39;roundRect&#39;</code>, <code class=\"codespan\">&#39;triangle&#39;</code>, <code class=\"codespan\">&#39;diamond&#39;</code>, <code class=\"codespan\">&#39;pin&#39;</code>, <code class=\"codespan\">&#39;arrow&#39;</code>, <code class=\"codespan\">&#39;none&#39;</code></p>\n<p>可以通过 <code class=\"codespan\">&#39;image://url&#39;</code> 设置为图片，其中 URL 为图片的链接，或者 <code class=\"codespan\">dataURI</code>。</p>\n<p>URL 为图片链接例如：</p>\n<pre><code>&#39;image://http://xxx.xxx.xxx/a/b.png&#39;\n</code></pre><p>URL 为 <code class=\"codespan\">dataURI</code> 例如：</p>\n<pre><code>&#39;image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7&#39;\n</code></pre><p>可以通过 <code class=\"codespan\">&#39;path://&#39;</code> 将图标设置为任意的矢量路径。这种方式相比于使用图片的方式，不用担心因为缩放而产生锯齿或模糊，而且可以设置为任意颜色。路径图形会自适应调整为合适的大小。路径的格式参见 <a href=\"http://www.w3.org/TR/SVG/paths.html#PathData\" target=\"_blank\">SVG PathData</a>。可以从 Adobe Illustrator 等工具编辑导出。</p>\n<p>例如：</p>\n<pre><code>&#39;path://M30.9,53.2C16.8,53.2,5.3,41.7,5.3,27.6S16.8,2,30.9,2C45,2,56.4,13.5,56.4,27.6S45,53.2,30.9,53.2z M30.9,3.5C17.6,3.5,6.8,14.4,6.8,27.6c0,13.3,10.8,24.1,24.101,24.1C44.2,51.7,55,40.9,55,27.6C54.9,14.4,44.1,3.5,30.9,3.5z M36.9,35.8c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H36c0.5,0,0.9,0.4,0.9,1V35.8z M27.8,35.8 c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H27c0.5,0,0.9,0.4,0.9,1L27.8,35.8L27.8,35.8z&#39;\n</code></pre><p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/pictorialBar-graphicType&reset=1&edit=1\" width=\"800\" height=\"400\"><iframe />\n\n\n\n\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbol\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbol\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbol: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbol: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbol: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n",
     "uiControl": {
       "type": "icon"
     }
   },
   "symbolSize": {
-    "desc": "\n\n<p>图形的大小。</p>\n<p>可以用数组分开表示宽和高，例如 <code class=\"codespan\">[20, 10]</code> 表示标记宽为<code class=\"codespan\">20</code>，高为<code class=\"codespan\">10</code>，也可以设置成诸如 <code class=\"codespan\">10</code> 这样单一的数字，表示 <code class=\"codespan\">[10, 10]</code>。</p>\n<p>可以设置成绝对值（如 <code class=\"codespan\">10</code>），也可以设置成百分比（如 <code class=\"codespan\">&#39;120%&#39;</code>、<code class=\"codespan\">[&#39;55%&#39;, 23]</code>）。</p>\n<p>当设置为百分比时，图形的大小是基于 <a href=\"#series-pictorialBar\">基准柱</a> 的尺寸计算出来的。</p>\n<p>例如，当基准柱基于 x 轴（即柱子是纵向的），<a href=\"#series-pictorialBar.symbolSize\">symbolSize</a> 设置为 <code class=\"codespan\">[&#39;30%&#39;, &#39;50%&#39;]</code>，那么最终图形的尺寸是：</p>\n<ul>\n<li>宽度：<code class=\"codespan\">基准柱的宽度 * 30%</code>。</li>\n<li>高度：<ul>\n<li>如果 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 为 <code class=\"codespan\">false</code>：<code class=\"codespan\">基准柱的高度 * 50%</code>。</li>\n<li>如果 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 为 <code class=\"codespan\">true</code>：<code class=\"codespan\">基准柱的宽度 * 50%</code>。</li>\n</ul>\n</li>\n</ul>\n<p>基准柱基于 y 轴（即柱子是横向的）的情况类似对调可得出。</p>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/pictorialBar-symbolSize&reset=1&edit=1\" width=\"800\" height=\"600\"><iframe />\n\n\n\n\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbolSize\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbolSize\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbolSize: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbolSize: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbolSize: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n",
+    "desc": "\n\n<p>图形的大小。</p>\n<p>可以用数组分开表示宽和高，例如 <code class=\"codespan\">[20, 10]</code> 表示标记宽为<code class=\"codespan\">20</code>，高为<code class=\"codespan\">10</code>，也可以设置成诸如 <code class=\"codespan\">10</code> 这样单一的数字，表示 <code class=\"codespan\">[10, 10]</code>。</p>\n<p>可以设置成绝对值（如 <code class=\"codespan\">10</code>），也可以设置成百分比（如 <code class=\"codespan\">&#39;120%&#39;</code>、<code class=\"codespan\">[&#39;55%&#39;, 23]</code>）。</p>\n<p>当设置为百分比时，图形的大小是基于 <a href=\"#series-pictorialBar\">基准柱</a> 的尺寸计算出来的。</p>\n<p>例如，当基准柱基于 x 轴（即柱子是纵向的），<a href=\"#series-pictorialBar.symbolSize\">symbolSize</a> 设置为 <code class=\"codespan\">[&#39;30%&#39;, &#39;50%&#39;]</code>，那么最终图形的尺寸是：</p>\n<ul>\n<li>宽度：<code class=\"codespan\">基准柱的宽度 * 30%</code>。</li>\n<li>高度：<ul>\n<li>如果 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 为 <code class=\"codespan\">false</code>：<code class=\"codespan\">基准柱的高度 * 50%</code>。</li>\n<li>如果 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 为 <code class=\"codespan\">true</code>：<code class=\"codespan\">基准柱的宽度 * 50%</code>。</li>\n</ul>\n</li>\n</ul>\n<p>基准柱基于 y 轴（即柱子是横向的）的情况类似对调可得出。</p>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/pictorialBar-symbolSize&reset=1&edit=1\" width=\"800\" height=\"600\"><iframe />\n\n\n\n\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbolSize\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbolSize\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbolSize: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbolSize: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbolSize: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n",
     "uiControl": {
       "type": "percent",
       "default": "100%,100%",
@@ -2419,7 +2475,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "symbolPosition": {
-    "desc": "\n\n<p>图形的定位位置。可取值：</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code>：图形边缘与柱子开始的地方内切。</li>\n<li><code class=\"codespan\">&#39;end&#39;</code>：图形边缘与柱子结束的地方内切。</li>\n<li><code class=\"codespan\">&#39;center&#39;</code>：图形在柱子里居中。</li>\n</ul>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/pictorialBar-position&reset=1&edit=1\" width=\"800\" height=\"600\"><iframe />\n\n\n\n\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbolPosition\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbolPosition\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbolPosition: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbolPosition: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbolPosition: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n",
+    "desc": "\n\n<p>图形的定位位置。可取值：</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code>：图形边缘与柱子开始的地方内切。</li>\n<li><code class=\"codespan\">&#39;end&#39;</code>：图形边缘与柱子结束的地方内切。</li>\n<li><code class=\"codespan\">&#39;center&#39;</code>：图形在柱子里居中。</li>\n</ul>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/pictorialBar-position&reset=1&edit=1\" width=\"800\" height=\"600\"><iframe />\n\n\n\n\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbolPosition\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbolPosition\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbolPosition: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbolPosition: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbolPosition: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "start,end,center",
@@ -2427,7 +2483,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "symbolOffset": {
-    "desc": "\n\n<p>图形相对于原本位置的偏移。<code class=\"codespan\">symbolOffset</code> 是图形定位中最后计算的一个步骤，可以对图形计算出来的位置进行微调。</p>\n<p>可以设置成绝对值（如 <code class=\"codespan\">10</code>），也可以设置成百分比（如 <code class=\"codespan\">&#39;120%&#39;</code>、<code class=\"codespan\">[&#39;55%&#39;, 23]</code>）。</p>\n<p>当设置为百分比时，表示相对于自身尺寸 <a href=\"#series-pictorialBar.symbolSize\">symbolSize</a> 的百分比。</p>\n<p>例如 <code class=\"codespan\">[0, &#39;-50%&#39;]</code> 就是把图形向上移动了自身尺寸的一半的位置。</p>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/pictorialBar-position&reset=1&edit=1\" width=\"800\" height=\"600\"><iframe />\n\n\n\n\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbolOffset\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbolOffset\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbolOffset: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbolOffset: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbolOffset: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n",
+    "desc": "\n\n<p>图形相对于原本位置的偏移。<code class=\"codespan\">symbolOffset</code> 是图形定位中最后计算的一个步骤，可以对图形计算出来的位置进行微调。</p>\n<p>可以设置成绝对值（如 <code class=\"codespan\">10</code>），也可以设置成百分比（如 <code class=\"codespan\">&#39;120%&#39;</code>、<code class=\"codespan\">[&#39;55%&#39;, 23]</code>）。</p>\n<p>当设置为百分比时，表示相对于自身尺寸 <a href=\"#series-pictorialBar.symbolSize\">symbolSize</a> 的百分比。</p>\n<p>例如 <code class=\"codespan\">[0, &#39;-50%&#39;]</code> 就是把图形向上移动了自身尺寸的一半的位置。</p>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/pictorialBar-position&reset=1&edit=1\" width=\"800\" height=\"600\"><iframe />\n\n\n\n\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbolOffset\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbolOffset\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbolOffset: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbolOffset: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbolOffset: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n",
     "uiControl": {
       "type": "percentvector",
       "default": "0,0",
@@ -2444,14 +2500,14 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "symbolRepeat": {
-    "desc": "\n\n<p>指定图形元素是否重复。值可为：</p>\n<ul>\n<li><code class=\"codespan\">false</code>/<code class=\"codespan\">null</code>/<code class=\"codespan\">undefined</code>：不重复，即每个数据值用一个图形元素表示。</li>\n<li><code class=\"codespan\">true</code>：使图形元素重复，即每个数据值用一组重复的图形元素表示。重复的次数依据 <a href=\"#series-pictorialBar.data\">data</a> 计算得到。</li>\n<li>a number：使图形元素重复，即每个数据值用一组重复的图形元素表示。重复的次数是给定的定值。</li>\n<li><code class=\"codespan\">&#39;fixed&#39;</code>：使图形元素重复，即每个数据值用一组重复的图形元素表示。重复的次数依据 <a href=\"#series-pictorialBar.symbolBoundingData\">symbolBoundingData</a> 计算得到，即与 <a href=\"#series-pictorialBar.data\">data</a> 无关。这在此图形被用于做背景时有用。</li>\n</ul>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/pictorialBar-repeat&reset=1&edit=1\" width=\"800\" height=\"400\"><iframe />\n\n\n\n\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbolRepeat\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbolRepeat\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbolRepeat: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbolRepeat: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbolRepeat: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n",
+    "desc": "\n\n<p>指定图形元素是否重复。值可为：</p>\n<ul>\n<li><code class=\"codespan\">false</code>/<code class=\"codespan\">null</code>/<code class=\"codespan\">undefined</code>：不重复，即每个数据值用一个图形元素表示。</li>\n<li><code class=\"codespan\">true</code>：使图形元素重复，即每个数据值用一组重复的图形元素表示。重复的次数依据 <a href=\"#series-pictorialBar.data\">data</a> 计算得到。</li>\n<li>a number：使图形元素重复，即每个数据值用一组重复的图形元素表示。重复的次数是给定的定值。</li>\n<li><code class=\"codespan\">&#39;fixed&#39;</code>：使图形元素重复，即每个数据值用一组重复的图形元素表示。重复的次数依据 <a href=\"#series-pictorialBar.symbolBoundingData\">symbolBoundingData</a> 计算得到，即与 <a href=\"#series-pictorialBar.data\">data</a> 无关。这在此图形被用于做背景时有用。</li>\n</ul>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/pictorialBar-repeat&reset=1&edit=1\" width=\"800\" height=\"400\"><iframe />\n\n\n\n\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbolRepeat\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbolRepeat\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbolRepeat: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbolRepeat: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbolRepeat: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "true,false,fixed"
     }
   },
   "symbolRepeatDirection": {
-    "desc": "\n\n<p>指定图形元素重复时，绘制的顺序。这个属性在两种情况下有用处：</p>\n<ul>\n<li><p>当 <a href=\"#series-pictorialBar.symbolMargin\">symbolMargin</a> 设置为负值时，重复的图形会互相覆盖，这是可以使用 <code class=\"codespan\">symbolRepeatDirection</code> 来指定覆盖顺序。</p>\n</li>\n<li><p>当 <a href=\"#series-pictorialBar.animationDelay\">animationDelay</a> 或 <a href=\"#series-pictorialBar.animationDelayUpdate\">animationDelayUpdate</a> 被使用时，<code class=\"codespan\">symbolRepeatDirection</code> 指定了 index 顺序。</p>\n</li>\n</ul>\n<p>这个属性的值可以是：<code class=\"codespan\">&#39;start&#39;</code> 或 <code class=\"codespan\">&#39;end&#39;</code>。</p>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/pictorialBar-repeatDirection&reset=1&edit=1\" width=\"800\" height=\"400\"><iframe />\n\n\n\n\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbolRepeatDirection\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbolRepeatDirection\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbolRepeatDirection: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbolRepeatDirection: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbolRepeatDirection: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n",
+    "desc": "\n\n<p>指定图形元素重复时，绘制的顺序。这个属性在两种情况下有用处：</p>\n<ul>\n<li><p>当 <a href=\"#series-pictorialBar.symbolMargin\">symbolMargin</a> 设置为负值时，重复的图形会互相覆盖，这是可以使用 <code class=\"codespan\">symbolRepeatDirection</code> 来指定覆盖顺序。</p>\n</li>\n<li><p>当 <a href=\"#series-pictorialBar.animationDelay\">animationDelay</a> 或 <a href=\"#series-pictorialBar.animationDelayUpdate\">animationDelayUpdate</a> 被使用时，<code class=\"codespan\">symbolRepeatDirection</code> 指定了 index 顺序。</p>\n</li>\n</ul>\n<p>这个属性的值可以是：<code class=\"codespan\">&#39;start&#39;</code> 或 <code class=\"codespan\">&#39;end&#39;</code>。</p>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/pictorialBar-repeatDirection&reset=1&edit=1\" width=\"800\" height=\"400\"><iframe />\n\n\n\n\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbolRepeatDirection\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbolRepeatDirection\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbolRepeatDirection: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbolRepeatDirection: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbolRepeatDirection: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "start,end",
@@ -2459,7 +2515,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "symbolMargin": {
-    "desc": "\n\n<p>图形的两边间隔（『两边』是指其数值轴方向的两边）。可以是绝对数值（如 <code class=\"codespan\">20</code>），或者百分比值（如 <code class=\"codespan\">&#39;-30%&#39;</code>），表示相对于自身尺寸 <a href=\"#series-pictorialBar.symbolSize\">symbolSize</a> 的百分比。只有当 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 被使用时有意义。</p>\n<p>可以是正值，表示间隔大；也可以是负数。当 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 被使用时，负数时能使图形重叠。</p>\n<p>可以在其值结尾处加一个 <code class=\"codespan\">&quot;!&quot;</code>，如 <code class=\"codespan\">&quot;30%!&quot;</code> 或 <code class=\"codespan\">25!</code>，表示第一个图形的开始和最后一个图形结尾留白，不紧贴边界。默认会紧贴边界。</p>\n<p>注意：</p>\n<ul>\n<li>当 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 为 <code class=\"codespan\">true</code>/<code class=\"codespan\">&#39;fixed&#39;</code> 的时候：\n  这里设置的 <code class=\"codespan\">symbolMargin</code> 只是个参考值，真正最后的图形间隔，是根据 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a>、<code class=\"codespan\">symbolMargin</code>、<a href=\"#series-pictorialBar.symbolBoundingData\">symbolBoundingData</a> 综合计算得到。</li>\n<li>当 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 为一个固定数值的时候：\n  这里设置的 <code class=\"codespan\">symbolMargin</code> 无效。</li>\n</ul>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/pictorialBar-repeatLayout&reset=1&edit=1\" width=\"800\" height=\"600\"><iframe />\n\n\n\n\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbolMargin\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbolMargin\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbolMargin: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbolMargin: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbolMargin: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n",
+    "desc": "\n\n<p>图形的两边间隔（『两边』是指其数值轴方向的两边）。可以是绝对数值（如 <code class=\"codespan\">20</code>），或者百分比值（如 <code class=\"codespan\">&#39;-30%&#39;</code>），表示相对于自身尺寸 <a href=\"#series-pictorialBar.symbolSize\">symbolSize</a> 的百分比。只有当 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 被使用时有意义。</p>\n<p>可以是正值，表示间隔大；也可以是负数。当 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 被使用时，负数时能使图形重叠。</p>\n<p>可以在其值结尾处加一个 <code class=\"codespan\">&quot;!&quot;</code>，如 <code class=\"codespan\">&quot;30%!&quot;</code> 或 <code class=\"codespan\">25!</code>，表示第一个图形的开始和最后一个图形结尾留白，不紧贴边界。默认会紧贴边界。</p>\n<p>注意：</p>\n<ul>\n<li>当 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 为 <code class=\"codespan\">true</code>/<code class=\"codespan\">&#39;fixed&#39;</code> 的时候：\n  这里设置的 <code class=\"codespan\">symbolMargin</code> 只是个参考值，真正最后的图形间隔，是根据 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a>、<code class=\"codespan\">symbolMargin</code>、<a href=\"#series-pictorialBar.symbolBoundingData\">symbolBoundingData</a> 综合计算得到。</li>\n<li>当 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 为一个固定数值的时候：\n  这里设置的 <code class=\"codespan\">symbolMargin</code> 无效。</li>\n</ul>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/pictorialBar-repeatLayout&reset=1&edit=1\" width=\"800\" height=\"600\"><iframe />\n\n\n\n\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbolMargin\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbolMargin\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbolMargin: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbolMargin: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbolMargin: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n",
     "uiControl": {
       "type": "percentvector",
       "default": "0,0",
@@ -2467,16 +2523,16 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "symbolClip": {
-    "desc": "\n\n<p>是否剪裁图形。</p>\n<ul>\n<li><code class=\"codespan\">false</code>/null/undefined：图形本身表示数值大小。</li>\n<li><code class=\"codespan\">true</code>：图形被剪裁后剩余的部分表示数值大小。</li>\n</ul>\n<p><code class=\"codespan\">symbolClip</code> 常在这种场景下使用：同时表达『总值』和『当前数值』。在这种场景下，可以使用两个系列，一个系列是完整的图形，当做『背景』来表达总数值，另一个系列是使用 <code class=\"codespan\">symbolClip</code> 进行剪裁过的图形，表达当前数值。</p>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/pictorialBar-clip&reset=1&edit=1\" width=\"800\" height=\"600\"><iframe />\n\n\n<p>在这个例子中：</p>\n<ul>\n<li>『背景系列』和『当前值系列』使用相同的 <a href=\"#series.pictorialBar.symbolBoundingData\">symbolBoundingData</a>，使得绘制出的图形的大小是一样的。</li>\n<li>『当前值系列』设置了比『背景系列』更高的 <a href=\"#series.pictorialBar.z\">z</a>，使得其覆盖在『背景系列』上。</li>\n</ul>\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbolClip\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbolClip\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbolClip: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbolClip: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbolClip: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n",
+    "desc": "\n\n<p>是否剪裁图形。</p>\n<ul>\n<li><code class=\"codespan\">false</code>/null/undefined：图形本身表示数值大小。</li>\n<li><code class=\"codespan\">true</code>：图形被剪裁后剩余的部分表示数值大小。</li>\n</ul>\n<p><code class=\"codespan\">symbolClip</code> 常在这种场景下使用：同时表达『总值』和『当前数值』。在这种场景下，可以使用两个系列，一个系列是完整的图形，当做『背景』来表达总数值，另一个系列是使用 <code class=\"codespan\">symbolClip</code> 进行剪裁过的图形，表达当前数值。</p>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/pictorialBar-clip&reset=1&edit=1\" width=\"800\" height=\"600\"><iframe />\n\n\n<p>在这个例子中：</p>\n<ul>\n<li>『背景系列』和『当前值系列』使用相同的 <a href=\"#series.pictorialBar.symbolBoundingData\">symbolBoundingData</a>，使得绘制出的图形的大小是一样的。</li>\n<li>『当前值系列』设置了比『背景系列』更高的 <a href=\"#series.pictorialBar.z\">z</a>，使得其覆盖在『背景系列』上。</li>\n</ul>\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbolClip\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbolClip\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbolClip: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbolClip: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbolClip: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n",
     "uiControl": {
       "type": "boolean"
     }
   },
   "symbolBoundingData": {
-    "desc": "<p>这个属性是『指定图形界限的值』。它指定了一个 data，这个 data 映射在坐标系上的位置，是图形绘制的界限。也就是说，如果设置了 <code class=\"codespan\">symbolBoundingData</code>，图形的尺寸则由 <code class=\"codespan\">symbolBoundingData</code> 决定。</p>\n<p>当柱子是水平的，symbolBoundingData 对应到 x 轴上，当柱子是竖直的，symbolBoundingData 对应到 y 轴上。</p>\n<p>规则：</p>\n<ul>\n<li><p>没有使用 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 时：</p>\n<p>  <code class=\"codespan\">symbolBoundingData</code> 缺省情况下和『参考柱』的尺寸一样。图形的尺寸由零点和 <code class=\"codespan\">symbolBoundingData</code> 决定。举例，当柱子是竖直的，柱子对应的 data 为 <code class=\"codespan\">24</code>，<code class=\"codespan\">symbolSize</code> 设置为 <code class=\"codespan\">[30, &#39;50%&#39;]</code>，<code class=\"codespan\">symbolBoundingData</code> 设置为 <code class=\"codespan\">124</code>，那么最终图形的高度为 <code class=\"codespan\">124 * 50% = 62</code>。如果 <code class=\"codespan\">symbolBoundingData</code> 不设置，那么最终图形的高度为 <code class=\"codespan\">24 * 50% = 12</code>。</p>\n</li>\n<li><p>使用了 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 时：</p>\n<p>  <code class=\"codespan\">symbolBoundingData</code> 缺省情况取当前坐标系所显示出的最值。<code class=\"codespan\">symbolBoundingData</code> 定义了一个 bounding，重复的图形在这个 bounding 中，依据 <a href=\"#series-pictorialBar.symbolMargin\">symbolMargin</a> 和 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 和 <a href=\"#series-pictorialBar.symbolSize\">symbolSize</a> 进行排布。这几个变量决定了图形的间隔大小。</p>\n</li>\n</ul>\n<p>在这些场景中，你可能会需要设置 <code class=\"codespan\">symbolBoundingData</code>：</p>\n<ul>\n<li><p>使用了 <a href=\"#series-pictorialBar.symbolClip\">symbolCilp</a> 时：</p>\n<p>  使用一个系列表达『总值』，另一个系列表达『当前值』的时候，需要两个系列画出的图形一样大。那么就把两个系列的 <code class=\"codespan\">symbolBoundingData</code> 设为一样大。</p>\n</li>\n</ul>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/pictorialBar-clip&reset=1&edit=1\" width=\"800\" height=\"600\"><iframe />\n\n\n<ul>\n<li><p>使用了 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 时：</p>\n<p>  如果需要不同柱子中的图形的间隔保持一致，那么可以把 <code class=\"codespan\">symbolBoundingData</code> 设为一致的数值。当然，不设置 <code class=\"codespan\">symbolBoundingData</code> 也是可以的，因为其缺省值就是一个定值（坐标系所显示出的最值）。</p>\n</li>\n</ul>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/pictorialBar-repeatLayout&reset=1&edit=1\" width=\"800\" height=\"600\"><iframe />\n\n\n<p><br>\n<code class=\"codespan\">symbolBoundingData</code> 可以是一个数组，例如 <code class=\"codespan\">[-40, 60]</code>，表示同时指定了正值的 <code class=\"codespan\">symbolBoundingData</code> 和负值的 <code class=\"codespan\">symbolBoundingData</code>。</p>\n<p>参见例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/pictorialBar-symbolBoundingDataArray&reset=1&edit=1\" width=\"800\" height=\"400\"><iframe />\n\n\n\n\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbolBoundingData\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbolBoundingData\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbolBoundingData: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbolBoundingData: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbolBoundingData: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n"
+    "desc": "<p>这个属性是『指定图形界限的值』。它指定了一个 data，这个 data 映射在坐标系上的位置，是图形绘制的界限。也就是说，如果设置了 <code class=\"codespan\">symbolBoundingData</code>，图形的尺寸则由 <code class=\"codespan\">symbolBoundingData</code> 决定。</p>\n<p>当柱子是水平的，symbolBoundingData 对应到 x 轴上，当柱子是竖直的，symbolBoundingData 对应到 y 轴上。</p>\n<p>规则：</p>\n<ul>\n<li><p>没有使用 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 时：</p>\n<p>  <code class=\"codespan\">symbolBoundingData</code> 缺省情况下和『参考柱』的尺寸一样。图形的尺寸由零点和 <code class=\"codespan\">symbolBoundingData</code> 决定。举例，当柱子是竖直的，柱子对应的 data 为 <code class=\"codespan\">24</code>，<code class=\"codespan\">symbolSize</code> 设置为 <code class=\"codespan\">[30, &#39;50%&#39;]</code>，<code class=\"codespan\">symbolBoundingData</code> 设置为 <code class=\"codespan\">124</code>，那么最终图形的高度为 <code class=\"codespan\">124 * 50% = 62</code>。如果 <code class=\"codespan\">symbolBoundingData</code> 不设置，那么最终图形的高度为 <code class=\"codespan\">24 * 50% = 12</code>。</p>\n</li>\n<li><p>使用了 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 时：</p>\n<p>  <code class=\"codespan\">symbolBoundingData</code> 缺省情况取当前坐标系所显示出的最值。<code class=\"codespan\">symbolBoundingData</code> 定义了一个 bounding，重复的图形在这个 bounding 中，依据 <a href=\"#series-pictorialBar.symbolMargin\">symbolMargin</a> 和 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 和 <a href=\"#series-pictorialBar.symbolSize\">symbolSize</a> 进行排布。这几个变量决定了图形的间隔大小。</p>\n</li>\n</ul>\n<p>在这些场景中，你可能会需要设置 <code class=\"codespan\">symbolBoundingData</code>：</p>\n<ul>\n<li><p>使用了 <a href=\"#series-pictorialBar.symbolClip\">symbolCilp</a> 时：</p>\n<p>  使用一个系列表达『总值』，另一个系列表达『当前值』的时候，需要两个系列画出的图形一样大。那么就把两个系列的 <code class=\"codespan\">symbolBoundingData</code> 设为一样大。</p>\n</li>\n</ul>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/pictorialBar-clip&reset=1&edit=1\" width=\"800\" height=\"600\"><iframe />\n\n\n<ul>\n<li><p>使用了 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 时：</p>\n<p>  如果需要不同柱子中的图形的间隔保持一致，那么可以把 <code class=\"codespan\">symbolBoundingData</code> 设为一致的数值。当然，不设置 <code class=\"codespan\">symbolBoundingData</code> 也是可以的，因为其缺省值就是一个定值（坐标系所显示出的最值）。</p>\n</li>\n</ul>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/pictorialBar-repeatLayout&reset=1&edit=1\" width=\"800\" height=\"600\"><iframe />\n\n\n<p><br>\n<code class=\"codespan\">symbolBoundingData</code> 可以是一个数组，例如 <code class=\"codespan\">[-40, 60]</code>，表示同时指定了正值的 <code class=\"codespan\">symbolBoundingData</code> 和负值的 <code class=\"codespan\">symbolBoundingData</code>。</p>\n<p>参见例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/pictorialBar-symbolBoundingDataArray&reset=1&edit=1\" width=\"800\" height=\"400\"><iframe />\n\n\n\n\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbolBoundingData\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbolBoundingData\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbolBoundingData: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbolBoundingData: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbolBoundingData: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n"
   },
   "symbolPatternSize": {
-    "desc": "\n\n<p>可以使用图片作为图形的 pattern。</p>\n<pre><code class=\"lang-js\">var textureImg = new Image();\ntextureImg.src = &#39;data:image/jpeg;base64,...&#39;; // dataURI\n// 或者\n// textureImg.src = &#39;http://xxx.xxx.xxx/xx.png&#39;; // URL\n...\nitemStyle: {\n    color: {\n        image: textureImg,\n        repeat: &#39;repeat&#39;\n    }\n}\n</code></pre>\n<p>这时候，<code class=\"codespan\">symbolPatternSize</code> 指定了 pattern 的缩放尺寸。比如 <code class=\"codespan\">symbolPatternSize</code> 为 400 时表示图片显示为 <code class=\"codespan\">400px * 400px</code> 的尺寸。</p>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/pictorialBar-patternSize&reset=1&edit=1\" width=\"800\" height=\"400\"><iframe />\n\n\n\n\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbolPatternSize\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbolPatternSize\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbolPatternSize: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbolPatternSize: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbolPatternSize: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n",
+    "desc": "\n\n<p>可以使用图片作为图形的 pattern。</p>\n<pre><code class=\"lang-js\">var textureImg = new Image();\ntextureImg.src = &#39;data:image/jpeg;base64,...&#39;; // dataURI\n// 或者\n// textureImg.src = &#39;http://xxx.xxx.xxx/xx.png&#39;; // URL\n...\nitemStyle: {\n    color: {\n        image: textureImg,\n        repeat: &#39;repeat&#39;\n    }\n}\n</code></pre>\n<p>这时候，<code class=\"codespan\">symbolPatternSize</code> 指定了 pattern 的缩放尺寸。比如 <code class=\"codespan\">symbolPatternSize</code> 为 400 时表示图片显示为 <code class=\"codespan\">400px * 400px</code> 的尺寸。</p>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/pictorialBar-patternSize&reset=1&edit=1\" width=\"800\" height=\"400\"><iframe />\n\n\n\n\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbolPatternSize\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbolPatternSize\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbolPatternSize: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbolPatternSize: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbolPatternSize: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "default": "400",
@@ -2512,7 +2568,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "hoverAnimation.animationEasing": {
-    "desc": "\n\n<p>初始动画的缓动效果。不同的缓动效果可以参考 <a href=\"https://echarts.apache.org/next/examples/editor.html?c=line-easing\" target=\"_blank\">缓动示例</a>。</p>\n",
+    "desc": "\n\n<p>初始动画的缓动效果。不同的缓动效果可以参考 <a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=line-easing\" target=\"_blank\">缓动示例</a>。</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "linear,quadraticIn,quadraticOut,quadraticInOut,cubicIn,cubicOut,cubicInOut,quarticIn,quarticOut,quarticInOut,quinticIn,quinticOut,quinticInOut,sinusoidalIn,sinusoidalOut,sinusoidalInOut,exponentialIn,exponentialOut,exponentialInOut,circularIn,circularOut,circularInOut,elasticIn,elasticOut,elasticInOut,backIn,backOut,backInOut,bounceIn,bounceOut,bounceInOut",
@@ -2536,19 +2592,19 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "hoverAnimation.animationDelay": {
-    "desc": "<p>动画开始之前的延迟，支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的更新动画效果。</p>\n<p>如下示例：</p>\n<pre><code class=\"lang-js\">animationDelay: function (dataIndex, params) {\n    return params.index * 30;\n}\n或者反向：\nanimationDelay: function (dataIndex, params) {\n    return (params.count - 1 - params.index) * 30;\n}\n</code></pre>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/pictorialBar-repeatDirection&reset=1&edit=1\" width=\"800\" height=\"400\"><iframe />\n\n"
+    "desc": "<p>动画开始之前的延迟，支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的更新动画效果。</p>\n<p>如下示例：</p>\n<pre><code class=\"lang-js\">animationDelay: function (dataIndex, params) {\n    return params.index * 30;\n}\n或者反向：\nanimationDelay: function (dataIndex, params) {\n    return (params.count - 1 - params.index) * 30;\n}\n</code></pre>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/pictorialBar-repeatDirection&reset=1&edit=1\" width=\"800\" height=\"400\"><iframe />\n\n"
   },
   "hoverAnimation.animationDelayUpdate": {
-    "desc": "<p>数据更新动画的延迟，支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的更新动画效果。</p>\n<p>如下示例：</p>\n<pre><code class=\"lang-js\">animationDelay: function (dataIndex, params) {\n    return params.index * 30;\n}\n或者反向：\nanimationDelay: function (dataIndex, params) {\n    return (params.count - 1 - params.index) * 30;\n}\n</code></pre>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/pictorialBar-repeatDirection&reset=1&edit=1\" width=\"800\" height=\"400\"><iframe />\n\n\n\n\n\n\n\n\n\n\n\n"
+    "desc": "<p>数据更新动画的延迟，支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的更新动画效果。</p>\n<p>如下示例：</p>\n<pre><code class=\"lang-js\">animationDelay: function (dataIndex, params) {\n    return params.index * 30;\n}\n或者反向：\nanimationDelay: function (dataIndex, params) {\n    return (params.count - 1 - params.index) * 30;\n}\n</code></pre>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/pictorialBar-repeatDirection&reset=1&edit=1\" width=\"800\" height=\"400\"><iframe />\n\n\n\n\n\n\n\n\n\n\n\n"
   },
   "dimensions": {
     "desc": "<p>使用 dimensions 定义 <code class=\"codespan\">series.data</code> 或者 <code class=\"codespan\">dataset.source</code> 的每个维度的信息。</p>\n<p>注意：如果使用了 <a href=\"#dataset\">dataset</a>，那么可以在 <a href=\"#dataset.dimensions\">dataset.dimensions</a> 中定义 dimension ，或者在 <a href=\"#dataset.source\">dataset.source</a> 的第一行/列中给出 dimension 名称。于是就不用在这里指定 dimension。但如果在这里指定了 <code class=\"codespan\">dimensions</code>，那么优先使用这里的。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">option = {\n    dataset: {\n        source: [\n            // 有了上面 dimensions 定义后，下面这五个维度的名称分别为：\n            // &#39;date&#39;, &#39;open&#39;, &#39;close&#39;, &#39;highest&#39;, &#39;lowest&#39;\n            [12, 44, 55, 66, 2],\n            [23, 6, 16, 23, 1],\n            ...\n        ]\n    },\n    series: {\n        type: &#39;xxx&#39;,\n        // 定义了每个维度的名称。这个名称会被显示到默认的 tooltip 中。\n        dimensions: [&#39;date&#39;, &#39;open&#39;, &#39;close&#39;, &#39;highest&#39;, &#39;lowest&#39;]\n    }\n}\n</code></pre>\n<pre><code class=\"lang-js\">series: {\n    type: &#39;xxx&#39;,\n    dimensions: [\n        null,                // 如果此维度不想给出定义，则使用 null 即可\n        {type: &#39;ordinal&#39;},   // 只定义此维度的类型。\n                             // &#39;ordinal&#39; 表示离散型，一般文本使用这种类型。\n                             // 如果类型没有被定义，会自动猜测类型。\n        {name: &#39;good&#39;, type: &#39;number&#39;},\n        &#39;bad&#39;                // 等同于 {name: &#39;bad&#39;}\n    ]\n}\n</code></pre>\n<p><code class=\"codespan\">dimensions</code> 数组中的每一项可以是：</p>\n<ul>\n<li><code class=\"codespan\">string</code>，如 <code class=\"codespan\">&#39;someName&#39;</code>，等同于 <code class=\"codespan\">{name: &#39;someName&#39;}</code></li>\n<li><code class=\"codespan\">Object</code>，属性可以有：<ul>\n<li>name: <code class=\"codespan\">string</code>。</li>\n<li>type: <code class=\"codespan\">string</code>，支持<ul>\n<li><code class=\"codespan\">number</code>，默认，表示普通数据。</li>\n<li><code class=\"codespan\">ordinal</code>，对于类目、文本这些 string 类型的数据，如果需要能在数轴上使用，须是 &#39;ordinal&#39; 类型。ECharts 默认会自动判断这个类型。但是自动判断也是不可能很完备的，所以使用者也可以手动强制指定。</li>\n<li><code class=\"codespan\">float</code>，即 <a href=\"https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array\" target=\"_blank\">Float64Array</a>。</li>\n<li><code class=\"codespan\">int</code>，即 <a href=\"https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array\" target=\"_blank\">Int32Array</a>。</li>\n<li><code class=\"codespan\">time</code>，表示时间类型。设置成 &#39;time&#39; 则能支持自动解析数据成时间戳（timestamp），比如该维度的数据是 &#39;2017-05-10&#39;，会自动被解析。时间类型的支持参见 <a href=\"#series.data\">data</a>。</li>\n</ul>\n</li>\n<li>displayName: 一般用于 tooltip 中维度名的展示。<code class=\"codespan\">string</code> 如果没有指定，默认使用 name 来展示。</li>\n</ul>\n</li>\n</ul>\n<p>值得一提的是，当定义了 <code class=\"codespan\">dimensions</code> 后，默认 <code class=\"codespan\">tooltip</code> 中对个维度的显示，会变为『竖排』，从而方便显示每个维度的名称。如果没有定义 <code class=\"codespan\">dimensions</code>，则默认 <code class=\"codespan\">tooltip</code> 会横排显示，且只显示数值没有维度名称可显示。</p>\n"
   },
   "encode": {
-    "desc": "<p>可以定义 <code class=\"codespan\">data</code> 的哪个维度被编码成什么。比如：</p>\n<pre><code class=\"lang-js\">option = {\n    dataset: {\n        source: [\n            // 每一列称为一个『维度』。\n            // 这里分别是维度 0、1、2、3、4。\n            [12, 44, 55, 66, 2],\n            [23, 6, 16, 23, 1],\n            ...\n        ]\n    },\n    series: {\n        type: &#39;xxx&#39;,\n        encode: {\n            x: [3, 1, 5],      // 表示维度 3、1、5 映射到 x 轴。\n            y: 2,              // 表示维度 2 映射到 y 轴。\n            tooltip: [3, 2, 4] // 表示维度 3、2、4 会在 tooltip 中显示。\n        }\n    }\n}\n</code></pre>\n<p>当使用 <a href=\"#series.dimensions\">dimensions</a> 给维度定义名称后，<code class=\"codespan\">encode</code> 中可直接引用名称，例如：</p>\n<pre><code class=\"lang-js\">series: {\n    type: &#39;xxx&#39;,\n    dimensions: [&#39;date&#39;, &#39;open&#39;, &#39;close&#39;, &#39;highest&#39;, &#39;lowest&#39;],\n    encode: {\n        x: &#39;date&#39;,\n        y: [&#39;open&#39;, &#39;close&#39;, &#39;highest&#39;, &#39;lowest&#39;]\n    }\n}\n</code></pre>\n<p><code class=\"codespan\">encode</code> 声明的基本结构如下，其中冒号左边是坐标系、标签等特定名称，如 <code class=\"codespan\">&#39;x&#39;</code>, <code class=\"codespan\">&#39;y&#39;</code>, <code class=\"codespan\">&#39;tooltip&#39;</code> 等，冒号右边是数据中的维度名（string 格式）或者维度的序号（number 格式，从 0 开始计数），可以指定一个或多个维度（使用数组）。通常情况下，下面各种信息不需要所有的都写，按需写即可。</p>\n<p>下面是 encode 支持的属性：</p>\n<pre><code class=\"lang-js\">// 在任何坐标系和系列中，都支持：\nencode: {\n    // 使用 “名为 product 的维度” 和 “名为 score 的维度” 的值在 tooltip 中显示\n    tooltip: [&#39;product&#39;, &#39;score&#39;]\n    // 使用 “维度 1” 和 “维度 3” 的维度名连起来作为系列名。（有时候名字比较长，这可以避免在 series.name 重复输入这些名字）\n    seriesName: [1, 3],\n    // 表示使用 “维度2” 中的值作为 id。这在使用 setOption 动态更新数据时有用处，可以使新老数据用 id 对应起来，从而能够产生合适的数据更新动画。\n    itemId: 2,\n    // 指定数据项的名称使用 “维度3” 在饼图等图表中有用，可以使这个名字显示在图例（legend）中。\n    itemName: 3\n}\n\n// 直角坐标系（grid/cartesian）特有的属性：\nencode: {\n    // 把 “维度1”、“维度5”、“名为 score 的维度” 映射到 X 轴：\n    x: [1, 5, &#39;score&#39;],\n    // 把“维度0”映射到 Y 轴。\n    y: 0\n}\n\n// 单轴（singleAxis）特有的属性：\nencode: {\n    single: 3\n}\n\n// 极坐标系（polar）特有的属性：\nencode: {\n    radius: 3,\n    angle: 2\n}\n\n// 地理坐标系（geo）特有的属性：\nencode: {\n    lng: 3,\n    lat: 2\n}\n\n// 对于一些没有坐标系的图表，例如饼图、漏斗图等，可以是：\nencode: {\n    value: 3\n}\n</code></pre>\n<p>这是个更丰富的 <code class=\"codespan\">encode</code> 的<a href=\"https://echarts.apache.org/next/examples/view.html?c=dataset-encode1&amp;edit=1&amp;reset=1\" target=\"_blank\">示例</a>：</p>\n<p>特殊地，在 <a href=\"#series-custom\">自定义系列（custom series）</a> 中，<code class=\"codespan\">encode</code> 中轴可以不指定或设置为 <code class=\"codespan\">null/undefined</code>，从而使系列免于受这个轴控制，也就是说，轴的范围（extent）不会受此系列数值的影响，轴被 <a href=\"#dataZoom\">dataZoom</a> 控制时也不会过滤掉这个系列：</p>\n<pre><code class=\"lang-js\">var option = {\n    xAxis: {},\n    yAxis: {},\n    dataZoom: [{\n        xAxisIndex: 0\n    }, {\n        yAxisIndex: 0\n    }],\n    series: {\n        type: &#39;custom&#39;,\n        renderItem: function (params, api) {\n            return {\n                type: &#39;circle&#39;,\n                shape: {\n                    cx: 100, // x 位置永远为 100\n                    cy: api.coord([0, api.value(0)])[1],\n                    r: 30\n                },\n                style: {\n                    fill: &#39;blue&#39;\n                }\n            };\n        },\n        encode: {\n            // 这样这个系列就不会被 x 轴以及 x\n            // 轴上的 dataZoom 控制了。\n            x: -1,\n            y: 1\n        },\n        data: [ ... ]\n    }\n};\n</code></pre>\n"
+    "desc": "<p>可以定义 <code class=\"codespan\">data</code> 的哪个维度被编码成什么。比如：</p>\n<pre><code class=\"lang-js\">option = {\n    dataset: {\n        source: [\n            // 每一列称为一个『维度』。\n            // 这里分别是维度 0、1、2、3、4。\n            [12, 44, 55, 66, 2],\n            [23, 6, 16, 23, 1],\n            ...\n        ]\n    },\n    series: {\n        type: &#39;xxx&#39;,\n        encode: {\n            x: [3, 1, 5],      // 表示维度 3、1、5 映射到 x 轴。\n            y: 2,              // 表示维度 2 映射到 y 轴。\n            tooltip: [3, 2, 4] // 表示维度 3、2、4 会在 tooltip 中显示。\n        }\n    }\n}\n</code></pre>\n<p>当使用 <a href=\"#series.dimensions\">dimensions</a> 给维度定义名称后，<code class=\"codespan\">encode</code> 中可直接引用名称，例如：</p>\n<pre><code class=\"lang-js\">series: {\n    type: &#39;xxx&#39;,\n    dimensions: [&#39;date&#39;, &#39;open&#39;, &#39;close&#39;, &#39;highest&#39;, &#39;lowest&#39;],\n    encode: {\n        x: &#39;date&#39;,\n        y: [&#39;open&#39;, &#39;close&#39;, &#39;highest&#39;, &#39;lowest&#39;]\n    }\n}\n</code></pre>\n<p><code class=\"codespan\">encode</code> 声明的基本结构如下，其中冒号左边是坐标系、标签等特定名称，如 <code class=\"codespan\">&#39;x&#39;</code>, <code class=\"codespan\">&#39;y&#39;</code>, <code class=\"codespan\">&#39;tooltip&#39;</code> 等，冒号右边是数据中的维度名（string 格式）或者维度的序号（number 格式，从 0 开始计数），可以指定一个或多个维度（使用数组）。通常情况下，下面各种信息不需要所有的都写，按需写即可。</p>\n<p>下面是 encode 支持的属性：</p>\n<pre><code class=\"lang-js\">// 在任何坐标系和系列中，都支持：\nencode: {\n    // 使用 “名为 product 的维度” 和 “名为 score 的维度” 的值在 tooltip 中显示\n    tooltip: [&#39;product&#39;, &#39;score&#39;]\n    // 使用 “维度 1” 和 “维度 3” 的维度名连起来作为系列名。（有时候名字比较长，这可以避免在 series.name 重复输入这些名字）\n    seriesName: [1, 3],\n    // 表示使用 “维度2” 中的值作为 id。这在使用 setOption 动态更新数据时有用处，可以使新老数据用 id 对应起来，从而能够产生合适的数据更新动画。\n    itemId: 2,\n    // 指定数据项的名称使用 “维度3” 在饼图等图表中有用，可以使这个名字显示在图例（legend）中。\n    itemName: 3\n}\n\n// 直角坐标系（grid/cartesian）特有的属性：\nencode: {\n    // 把 “维度1”、“维度5”、“名为 score 的维度” 映射到 X 轴：\n    x: [1, 5, &#39;score&#39;],\n    // 把“维度0”映射到 Y 轴。\n    y: 0\n}\n\n// 单轴（singleAxis）特有的属性：\nencode: {\n    single: 3\n}\n\n// 极坐标系（polar）特有的属性：\nencode: {\n    radius: 3,\n    angle: 2\n}\n\n// 地理坐标系（geo）特有的属性：\nencode: {\n    lng: 3,\n    lat: 2\n}\n\n// 对于一些没有坐标系的图表，例如饼图、漏斗图等，可以是：\nencode: {\n    value: 3\n}\n</code></pre>\n<p>这是个更丰富的 <code class=\"codespan\">encode</code> 的<a href=\"https://echarts.apache.org/next/examples/zh/view.html?c=dataset-encode1&amp;edit=1&amp;reset=1\" target=\"_blank\">示例</a>：</p>\n<p>特殊地，在 <a href=\"#series-custom\">自定义系列（custom series）</a> 中，<code class=\"codespan\">encode</code> 中轴可以不指定或设置为 <code class=\"codespan\">null/undefined</code>，从而使系列免于受这个轴控制，也就是说，轴的范围（extent）不会受此系列数值的影响，轴被 <a href=\"#dataZoom\">dataZoom</a> 控制时也不会过滤掉这个系列：</p>\n<pre><code class=\"lang-js\">var option = {\n    xAxis: {},\n    yAxis: {},\n    dataZoom: [{\n        xAxisIndex: 0\n    }, {\n        yAxisIndex: 0\n    }],\n    series: {\n        type: &#39;custom&#39;,\n        renderItem: function (params, api) {\n            return {\n                type: &#39;circle&#39;,\n                shape: {\n                    cx: 100, // x 位置永远为 100\n                    cy: api.coord([0, api.value(0)])[1],\n                    r: 30\n                },\n                style: {\n                    fill: &#39;blue&#39;\n                }\n            };\n        },\n        encode: {\n            // 这样这个系列就不会被 x 轴以及 x\n            // 轴上的 dataZoom 控制了。\n            x: -1,\n            y: 1\n        },\n        data: [ ... ]\n    }\n};\n</code></pre>\n"
   },
   "data": {
-    "desc": "<p>系列中的数据内容数组。数组项通常为具体的数据项。</p>\n<p>注意，如果系列没有指定 <code class=\"codespan\">data</code>，并且 option 有 <a href=\"#dataset\">dataset</a>，那么默认使用第一个 <a href=\"#dataset\">dataset</a>。如果指定了 <code class=\"codespan\">data</code>，则不会再使用 <a href=\"#dataset\">dataset</a>。</p>\n<p>可以使用 <code class=\"codespan\">series.datasetIndex</code> 指定其他的 <a href=\"#dataset\">dataset</a>。</p>\n<p>通常来说，数据用一个二维数组表示。如下，每一列被称为一个『维度』。</p>\n<pre><code class=\"lang-js\">series: [{\n    data: [\n        // 维度X   维度Y   其他维度 ...\n        [  3.4,    4.5,   15,   43],\n        [  4.2,    2.3,   20,   91],\n        [  10.8,   9.5,   30,   18],\n        [  7.2,    8.8,   18,   57]\n    ]\n}]\n</code></pre>\n<ul>\n<li>在 <a href=\"#grid\">直角坐标系 (grid)</a> 中『维度X』和『维度Y』会默认对应于 <a href=\"#xAxis\">xAxis</a> 和 <a href=\"#yAxis\">yAxis</a>。</li>\n<li>在 <a href=\"#polar\">极坐标系 (polar)</a> 中『维度X』和『维度Y』会默认对应于 <a href=\"#radiusAxis\">radiusAxis</a> 和 <a href=\"#anbleAxis\">angleAxis</a>。</li>\n<li>后面的其他维度是可选的，可以在别处被使用，例如：<ul>\n<li>在 <a href=\"#visualMap\">visualMap</a> 中可以将一个或多个维度映射到颜色，大小等多个图形属性上。</li>\n<li>在 <a href=\"#series.symbolSize\">series.symbolSize</a> 中可以使用回调函数，基于某个维度得到 symbolSize 值。</li>\n<li>使用 <a href=\"#tooltip.formatter\">tooltip.formatter</a> 或 <a href=\"#series.label.formatter\">series.label.formatter</a> 可以把其他维度的值展示出来。</li>\n</ul>\n</li>\n</ul>\n<p>特别地，当只有一个轴为类目轴（axis.type 为 <code class=\"codespan\">&#39;category&#39;</code>）的时候，数据可以简化用一个一维数组表示。例如：</p>\n<pre><code class=\"lang-js\">xAxis: {\n    data: [&#39;a&#39;, &#39;b&#39;, &#39;m&#39;, &#39;n&#39;]\n},\nseries: [{\n    // 与 xAxis.data 一一对应。\n    data: [23,  44,  55,  19]\n    // 它其实是下面这种形式的简化：\n    // data: [[0, 23], [1, 44], [2, 55], [3, 19]]\n}]\n</code></pre>\n<p><strong>『值』与 <a href=\"#xAxis.type\">轴类型</a> 的关系：</strong></p>\n<ul>\n<li><p>当某维度对应于数值轴（axis.type 为 <code class=\"codespan\">&#39;value&#39;</code> 或者 <code class=\"codespan\">&#39;log&#39;</code>）的时候：</p>\n<p>  其值可以为 <code class=\"codespan\">number</code>（例如 <code class=\"codespan\">12</code>）。（也可以兼容 <code class=\"codespan\">string</code> 形式的 number，例如 <code class=\"codespan\">&#39;12&#39;</code>）</p>\n</li>\n<li><p>当某维度对应于类目轴（axis.type 为 <code class=\"codespan\">&#39;category&#39;</code>）的时候：</p>\n<p>  其值须为类目的『序数』（从 <code class=\"codespan\">0</code> 开始）或者类目的『字符串值』。例如：</p>\n<pre><code class=\"lang-js\">  xAxis: {\n      type: &#39;category&#39;,\n      data: [&#39;星期一&#39;, &#39;星期二&#39;, &#39;星期三&#39;, &#39;星期四&#39;]\n  },\n  yAxis: {\n      type: &#39;category&#39;,\n      data: [&#39;a&#39;, &#39;b&#39;, &#39;m&#39;, &#39;n&#39;, &#39;p&#39;, &#39;q&#39;]\n  },\n  series: [{\n      data: [\n          // xAxis    yAxis\n          [  0,        0,    2  ], // 意思是此点位于 xAxis: &#39;星期一&#39;, yAxis: &#39;a&#39;。\n          [  &#39;星期四&#39;,  2,    1  ], // 意思是此点位于 xAxis: &#39;星期四&#39;, yAxis: &#39;m&#39;。\n          [  2,       &#39;p&#39;,   2  ], // 意思是此点位于 xAxis: &#39;星期三&#39;, yAxis: &#39;p&#39;。\n          [  3,        3,    5  ]\n      ]\n  }]\n</code></pre>\n<p>  双类目轴的示例可以参考 <a href=\"https://echarts.apache.org/next/examples/editor.html?c=scatter-punchCard\" target=\"_blank\">Github Punchcard</a> 示例。</p>\n</li>\n<li><p>当某维度对应于时间轴（type 为 <code class=\"codespan\">&#39;time&#39;</code>）的时候，值可以为：</p>\n<ul>\n<li>一个时间戳，如 <code class=\"codespan\">1484141700832</code>，表示 UTC 时间。</li>\n<li>或者字符串形式的时间描述：<ul>\n<li><a href=\"http://www.ecma-international.org/ecma-262/5.1/#sec-15.9.1.15\" target=\"_blank\">ISO 8601</a> 的子集，只包含这些形式（这几种格式，除非指明时区，否则均表示本地时间，与 <a href=\"https://momentjs.com/\" target=\"_blank\">moment</a> 一致）：<ul>\n<li>部分年月日时间: <code class=\"codespan\">&#39;2012-03&#39;</code>, <code class=\"codespan\">&#39;2012-03-01&#39;</code>, <code class=\"codespan\">&#39;2012-03-01 05&#39;</code>, <code class=\"codespan\">&#39;2012-03-01 05:06&#39;</code>.</li>\n<li>使用 <code class=\"codespan\">&#39;T&#39;</code> 或空格分割: <code class=\"codespan\">&#39;2012-03-01T12:22:33.123&#39;</code>, <code class=\"codespan\">&#39;2012-03-01 12:22:33.123&#39;</code>.</li>\n<li>时区设定: <code class=\"codespan\">&#39;2012-03-01T12:22:33Z&#39;</code>, <code class=\"codespan\">&#39;2012-03-01T12:22:33+8000&#39;</code>, <code class=\"codespan\">&#39;2012-03-01T12:22:33-05:00&#39;</code>.</li>\n</ul>\n</li>\n<li>其他的时间字符串，包括（均表示本地时间）:\n<code class=\"codespan\">&#39;2012&#39;</code>, <code class=\"codespan\">&#39;2012-3-1&#39;</code>, <code class=\"codespan\">&#39;2012/3/1&#39;</code>, <code class=\"codespan\">&#39;2012/03/01&#39;</code>,\n<code class=\"codespan\">&#39;2009/6/12 2:00&#39;</code>, <code class=\"codespan\">&#39;2009/6/12 2:05:08&#39;</code>, <code class=\"codespan\">&#39;2009/6/12 2:05:08.123&#39;</code></li>\n</ul>\n</li>\n<li>或者用户自行初始化的 Date 实例：<ul>\n<li>注意，用户自行初始化 Date 实例的时候，<a href=\"http://dygraphs.com/date-formats.html\" target=\"_blank\">浏览器的行为有差异，不同字符串的表示也不同</a>。</li>\n<li>例如：在 chrome 中，<code class=\"codespan\">new Date(&#39;2012-01-01&#39;)</code> 表示 UTC 时间的 2012 年 1 月 1 日，而 <code class=\"codespan\">new Date(&#39;2012-1-1&#39;)</code> 和 <code class=\"codespan\">new Date(&#39;2012/01/01&#39;)</code> 表示本地时间的 2012 年 1 月 1 日。在 safari 中，不支持 <code class=\"codespan\">new Date(&#39;2012-1-1&#39;)</code> 这种表示方法。</li>\n<li>所以，使用 <code class=\"codespan\">new Date(dataString)</code> 时，可使用第三方库解析（如 <a href=\"https://momentjs.com/\" target=\"_blank\">moment</a>），或者使用 <code class=\"codespan\">echarts.number.parseDate</code>，或者参见 <a href=\"http://dygraphs.com/date-formats.html\" target=\"_blank\">这里</a>。</li>\n</ul>\n</li>\n</ul>\n</li>\n</ul>\n<p><strong>当需要对个别数据进行个性化定义时：</strong></p>\n<p>数组项可用对象，其中的 <code class=\"codespan\">value</code> 像表示具体的数值，如：</p>\n<pre><code class=\"lang-js\">[\n    12,\n    34,\n    {\n        value : 56,\n        //自定义标签样式，仅对该数据项有效\n        label: {},\n        //自定义特殊 itemStyle，仅对该数据项有效\n        itemStyle:{}\n    },\n    10\n]\n// 或\n[\n    [12, 33],\n    [34, 313],\n    {\n        value: [56, 44],\n        label: {},\n        itemStyle:{}\n    },\n    [10, 33]\n]\n</code></pre>\n<p><strong>空值：</strong></p>\n<p>当某数据不存在时（ps：<em>不存在</em>不代表值为 0），可以用 <code class=\"codespan\">&#39;-&#39;</code> 或者 <code class=\"codespan\">null</code> 或者 <code class=\"codespan\">undefined</code> 或者 <code class=\"codespan\">NaN</code> 表示。</p>\n<p>例如，无数据在折线图中可表现为该点是断开的，在其它图中可表示为图形不存在。</p>\n"
+    "desc": "<p>系列中的数据内容数组。数组项通常为具体的数据项。</p>\n<p>注意，如果系列没有指定 <code class=\"codespan\">data</code>，并且 option 有 <a href=\"#dataset\">dataset</a>，那么默认使用第一个 <a href=\"#dataset\">dataset</a>。如果指定了 <code class=\"codespan\">data</code>，则不会再使用 <a href=\"#dataset\">dataset</a>。</p>\n<p>可以使用 <code class=\"codespan\">series.datasetIndex</code> 指定其他的 <a href=\"#dataset\">dataset</a>。</p>\n<p>通常来说，数据用一个二维数组表示。如下，每一列被称为一个『维度』。</p>\n<pre><code class=\"lang-js\">series: [{\n    data: [\n        // 维度X   维度Y   其他维度 ...\n        [  3.4,    4.5,   15,   43],\n        [  4.2,    2.3,   20,   91],\n        [  10.8,   9.5,   30,   18],\n        [  7.2,    8.8,   18,   57]\n    ]\n}]\n</code></pre>\n<ul>\n<li>在 <a href=\"#grid\">直角坐标系 (grid)</a> 中『维度X』和『维度Y』会默认对应于 <a href=\"#xAxis\">xAxis</a> 和 <a href=\"#yAxis\">yAxis</a>。</li>\n<li>在 <a href=\"#polar\">极坐标系 (polar)</a> 中『维度X』和『维度Y』会默认对应于 <a href=\"#radiusAxis\">radiusAxis</a> 和 <a href=\"#anbleAxis\">angleAxis</a>。</li>\n<li>后面的其他维度是可选的，可以在别处被使用，例如：<ul>\n<li>在 <a href=\"#visualMap\">visualMap</a> 中可以将一个或多个维度映射到颜色，大小等多个图形属性上。</li>\n<li>在 <a href=\"#series.symbolSize\">series.symbolSize</a> 中可以使用回调函数，基于某个维度得到 symbolSize 值。</li>\n<li>使用 <a href=\"#tooltip.formatter\">tooltip.formatter</a> 或 <a href=\"#series.label.formatter\">series.label.formatter</a> 可以把其他维度的值展示出来。</li>\n</ul>\n</li>\n</ul>\n<p>特别地，当只有一个轴为类目轴（axis.type 为 <code class=\"codespan\">&#39;category&#39;</code>）的时候，数据可以简化用一个一维数组表示。例如：</p>\n<pre><code class=\"lang-js\">xAxis: {\n    data: [&#39;a&#39;, &#39;b&#39;, &#39;m&#39;, &#39;n&#39;]\n},\nseries: [{\n    // 与 xAxis.data 一一对应。\n    data: [23,  44,  55,  19]\n    // 它其实是下面这种形式的简化：\n    // data: [[0, 23], [1, 44], [2, 55], [3, 19]]\n}]\n</code></pre>\n<p><strong>『值』与 <a href=\"#xAxis.type\">轴类型</a> 的关系：</strong></p>\n<ul>\n<li><p>当某维度对应于数值轴（axis.type 为 <code class=\"codespan\">&#39;value&#39;</code> 或者 <code class=\"codespan\">&#39;log&#39;</code>）的时候：</p>\n<p>  其值可以为 <code class=\"codespan\">number</code>（例如 <code class=\"codespan\">12</code>）。（也可以兼容 <code class=\"codespan\">string</code> 形式的 number，例如 <code class=\"codespan\">&#39;12&#39;</code>）</p>\n</li>\n<li><p>当某维度对应于类目轴（axis.type 为 <code class=\"codespan\">&#39;category&#39;</code>）的时候：</p>\n<p>  其值须为类目的『序数』（从 <code class=\"codespan\">0</code> 开始）或者类目的『字符串值』。例如：</p>\n<pre><code class=\"lang-js\">  xAxis: {\n      type: &#39;category&#39;,\n      data: [&#39;星期一&#39;, &#39;星期二&#39;, &#39;星期三&#39;, &#39;星期四&#39;]\n  },\n  yAxis: {\n      type: &#39;category&#39;,\n      data: [&#39;a&#39;, &#39;b&#39;, &#39;m&#39;, &#39;n&#39;, &#39;p&#39;, &#39;q&#39;]\n  },\n  series: [{\n      data: [\n          // xAxis    yAxis\n          [  0,        0,    2  ], // 意思是此点位于 xAxis: &#39;星期一&#39;, yAxis: &#39;a&#39;。\n          [  &#39;星期四&#39;,  2,    1  ], // 意思是此点位于 xAxis: &#39;星期四&#39;, yAxis: &#39;m&#39;。\n          [  2,       &#39;p&#39;,   2  ], // 意思是此点位于 xAxis: &#39;星期三&#39;, yAxis: &#39;p&#39;。\n          [  3,        3,    5  ]\n      ]\n  }]\n</code></pre>\n<p>  双类目轴的示例可以参考 <a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=scatter-punchCard\" target=\"_blank\">Github Punchcard</a> 示例。</p>\n</li>\n<li><p>当某维度对应于时间轴（type 为 <code class=\"codespan\">&#39;time&#39;</code>）的时候，值可以为：</p>\n<ul>\n<li>一个时间戳，如 <code class=\"codespan\">1484141700832</code>，表示 UTC 时间。</li>\n<li>或者字符串形式的时间描述：<ul>\n<li><a href=\"http://www.ecma-international.org/ecma-262/5.1/#sec-15.9.1.15\" target=\"_blank\">ISO 8601</a> 的子集，只包含这些形式（这几种格式，除非指明时区，否则均表示本地时间，与 <a href=\"https://momentjs.com/\" target=\"_blank\">moment</a> 一致）：<ul>\n<li>部分年月日时间: <code class=\"codespan\">&#39;2012-03&#39;</code>, <code class=\"codespan\">&#39;2012-03-01&#39;</code>, <code class=\"codespan\">&#39;2012-03-01 05&#39;</code>, <code class=\"codespan\">&#39;2012-03-01 05:06&#39;</code>.</li>\n<li>使用 <code class=\"codespan\">&#39;T&#39;</code> 或空格分割: <code class=\"codespan\">&#39;2012-03-01T12:22:33.123&#39;</code>, <code class=\"codespan\">&#39;2012-03-01 12:22:33.123&#39;</code>.</li>\n<li>时区设定: <code class=\"codespan\">&#39;2012-03-01T12:22:33Z&#39;</code>, <code class=\"codespan\">&#39;2012-03-01T12:22:33+8000&#39;</code>, <code class=\"codespan\">&#39;2012-03-01T12:22:33-05:00&#39;</code>.</li>\n</ul>\n</li>\n<li>其他的时间字符串，包括（均表示本地时间）:\n<code class=\"codespan\">&#39;2012&#39;</code>, <code class=\"codespan\">&#39;2012-3-1&#39;</code>, <code class=\"codespan\">&#39;2012/3/1&#39;</code>, <code class=\"codespan\">&#39;2012/03/01&#39;</code>,\n<code class=\"codespan\">&#39;2009/6/12 2:00&#39;</code>, <code class=\"codespan\">&#39;2009/6/12 2:05:08&#39;</code>, <code class=\"codespan\">&#39;2009/6/12 2:05:08.123&#39;</code></li>\n</ul>\n</li>\n<li>或者用户自行初始化的 Date 实例：<ul>\n<li>注意，用户自行初始化 Date 实例的时候，<a href=\"http://dygraphs.com/date-formats.html\" target=\"_blank\">浏览器的行为有差异，不同字符串的表示也不同</a>。</li>\n<li>例如：在 chrome 中，<code class=\"codespan\">new Date(&#39;2012-01-01&#39;)</code> 表示 UTC 时间的 2012 年 1 月 1 日，而 <code class=\"codespan\">new Date(&#39;2012-1-1&#39;)</code> 和 <code class=\"codespan\">new Date(&#39;2012/01/01&#39;)</code> 表示本地时间的 2012 年 1 月 1 日。在 safari 中，不支持 <code class=\"codespan\">new Date(&#39;2012-1-1&#39;)</code> 这种表示方法。</li>\n<li>所以，使用 <code class=\"codespan\">new Date(dataString)</code> 时，可使用第三方库解析（如 <a href=\"https://momentjs.com/\" target=\"_blank\">moment</a>），或者使用 <code class=\"codespan\">echarts.number.parseDate</code>，或者参见 <a href=\"http://dygraphs.com/date-formats.html\" target=\"_blank\">这里</a>。</li>\n</ul>\n</li>\n</ul>\n</li>\n</ul>\n<p><strong>当需要对个别数据进行个性化定义时：</strong></p>\n<p>数组项可用对象，其中的 <code class=\"codespan\">value</code> 像表示具体的数值，如：</p>\n<pre><code class=\"lang-js\">[\n    12,\n    34,\n    {\n        value : 56,\n        //自定义标签样式，仅对该数据项有效\n        label: {},\n        //自定义特殊 itemStyle，仅对该数据项有效\n        itemStyle:{}\n    },\n    10\n]\n// 或\n[\n    [12, 33],\n    [34, 313],\n    {\n        value: [56, 44],\n        label: {},\n        itemStyle:{}\n    },\n    [10, 33]\n]\n</code></pre>\n<p><strong>空值：</strong></p>\n<p>当某数据不存在时（ps：<em>不存在</em>不代表值为 0），可以用 <code class=\"codespan\">&#39;-&#39;</code> 或者 <code class=\"codespan\">null</code> 或者 <code class=\"codespan\">undefined</code> 或者 <code class=\"codespan\">NaN</code> 表示。</p>\n<p>例如，无数据在折线图中可表现为该点是断开的，在其它图中可表示为图形不存在。</p>\n"
   },
   "data.name": {
     "desc": "<p>数据项名称。</p>\n"
@@ -2557,13 +2613,13 @@ window.__EC_DOC_option_series_pictorialBar = {
     "desc": "<p>单个数据项的数值。</p>\n"
   },
   "data.symbol": {
-    "desc": "\n\n<p>图形类型。</p>\n<p>ECharts 提供的标记类型包括</p>\n<p><code class=\"codespan\">&#39;circle&#39;</code>, <code class=\"codespan\">&#39;rect&#39;</code>, <code class=\"codespan\">&#39;roundRect&#39;</code>, <code class=\"codespan\">&#39;triangle&#39;</code>, <code class=\"codespan\">&#39;diamond&#39;</code>, <code class=\"codespan\">&#39;pin&#39;</code>, <code class=\"codespan\">&#39;arrow&#39;</code>, <code class=\"codespan\">&#39;none&#39;</code></p>\n<p>可以通过 <code class=\"codespan\">&#39;image://url&#39;</code> 设置为图片，其中 URL 为图片的链接，或者 <code class=\"codespan\">dataURI</code>。</p>\n<p>URL 为图片链接例如：</p>\n<pre><code>&#39;image://http://xxx.xxx.xxx/a/b.png&#39;\n</code></pre><p>URL 为 <code class=\"codespan\">dataURI</code> 例如：</p>\n<pre><code>&#39;image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7&#39;\n</code></pre><p>可以通过 <code class=\"codespan\">&#39;path://&#39;</code> 将图标设置为任意的矢量路径。这种方式相比于使用图片的方式，不用担心因为缩放而产生锯齿或模糊，而且可以设置为任意颜色。路径图形会自适应调整为合适的大小。路径的格式参见 <a href=\"http://www.w3.org/TR/SVG/paths.html#PathData\" target=\"_blank\">SVG PathData</a>。可以从 Adobe Illustrator 等工具编辑导出。</p>\n<p>例如：</p>\n<pre><code>&#39;path://M30.9,53.2C16.8,53.2,5.3,41.7,5.3,27.6S16.8,2,30.9,2C45,2,56.4,13.5,56.4,27.6S45,53.2,30.9,53.2z M30.9,3.5C17.6,3.5,6.8,14.4,6.8,27.6c0,13.3,10.8,24.1,24.101,24.1C44.2,51.7,55,40.9,55,27.6C54.9,14.4,44.1,3.5,30.9,3.5z M36.9,35.8c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H36c0.5,0,0.9,0.4,0.9,1V35.8z M27.8,35.8 c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H27c0.5,0,0.9,0.4,0.9,1L27.8,35.8L27.8,35.8z&#39;\n</code></pre><p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/pictorialBar-graphicType&reset=1&edit=1\" width=\"800\" height=\"400\"><iframe />\n\n\n\n\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbol\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbol\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbol: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbol: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbol: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n",
+    "desc": "\n\n<p>图形类型。</p>\n<p>ECharts 提供的标记类型包括</p>\n<p><code class=\"codespan\">&#39;circle&#39;</code>, <code class=\"codespan\">&#39;rect&#39;</code>, <code class=\"codespan\">&#39;roundRect&#39;</code>, <code class=\"codespan\">&#39;triangle&#39;</code>, <code class=\"codespan\">&#39;diamond&#39;</code>, <code class=\"codespan\">&#39;pin&#39;</code>, <code class=\"codespan\">&#39;arrow&#39;</code>, <code class=\"codespan\">&#39;none&#39;</code></p>\n<p>可以通过 <code class=\"codespan\">&#39;image://url&#39;</code> 设置为图片，其中 URL 为图片的链接，或者 <code class=\"codespan\">dataURI</code>。</p>\n<p>URL 为图片链接例如：</p>\n<pre><code>&#39;image://http://xxx.xxx.xxx/a/b.png&#39;\n</code></pre><p>URL 为 <code class=\"codespan\">dataURI</code> 例如：</p>\n<pre><code>&#39;image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7&#39;\n</code></pre><p>可以通过 <code class=\"codespan\">&#39;path://&#39;</code> 将图标设置为任意的矢量路径。这种方式相比于使用图片的方式，不用担心因为缩放而产生锯齿或模糊，而且可以设置为任意颜色。路径图形会自适应调整为合适的大小。路径的格式参见 <a href=\"http://www.w3.org/TR/SVG/paths.html#PathData\" target=\"_blank\">SVG PathData</a>。可以从 Adobe Illustrator 等工具编辑导出。</p>\n<p>例如：</p>\n<pre><code>&#39;path://M30.9,53.2C16.8,53.2,5.3,41.7,5.3,27.6S16.8,2,30.9,2C45,2,56.4,13.5,56.4,27.6S45,53.2,30.9,53.2z M30.9,3.5C17.6,3.5,6.8,14.4,6.8,27.6c0,13.3,10.8,24.1,24.101,24.1C44.2,51.7,55,40.9,55,27.6C54.9,14.4,44.1,3.5,30.9,3.5z M36.9,35.8c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H36c0.5,0,0.9,0.4,0.9,1V35.8z M27.8,35.8 c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H27c0.5,0,0.9,0.4,0.9,1L27.8,35.8L27.8,35.8z&#39;\n</code></pre><p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/pictorialBar-graphicType&reset=1&edit=1\" width=\"800\" height=\"400\"><iframe />\n\n\n\n\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbol\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbol\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbol: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbol: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbol: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n",
     "uiControl": {
       "type": "icon"
     }
   },
   "data.symbolSize": {
-    "desc": "\n\n<p>图形的大小。</p>\n<p>可以用数组分开表示宽和高，例如 <code class=\"codespan\">[20, 10]</code> 表示标记宽为<code class=\"codespan\">20</code>，高为<code class=\"codespan\">10</code>，也可以设置成诸如 <code class=\"codespan\">10</code> 这样单一的数字，表示 <code class=\"codespan\">[10, 10]</code>。</p>\n<p>可以设置成绝对值（如 <code class=\"codespan\">10</code>），也可以设置成百分比（如 <code class=\"codespan\">&#39;120%&#39;</code>、<code class=\"codespan\">[&#39;55%&#39;, 23]</code>）。</p>\n<p>当设置为百分比时，图形的大小是基于 <a href=\"#series-pictorialBar\">基准柱</a> 的尺寸计算出来的。</p>\n<p>例如，当基准柱基于 x 轴（即柱子是纵向的），<a href=\"#series-pictorialBar.symbolSize\">symbolSize</a> 设置为 <code class=\"codespan\">[&#39;30%&#39;, &#39;50%&#39;]</code>，那么最终图形的尺寸是：</p>\n<ul>\n<li>宽度：<code class=\"codespan\">基准柱的宽度 * 30%</code>。</li>\n<li>高度：<ul>\n<li>如果 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 为 <code class=\"codespan\">false</code>：<code class=\"codespan\">基准柱的高度 * 50%</code>。</li>\n<li>如果 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 为 <code class=\"codespan\">true</code>：<code class=\"codespan\">基准柱的宽度 * 50%</code>。</li>\n</ul>\n</li>\n</ul>\n<p>基准柱基于 y 轴（即柱子是横向的）的情况类似对调可得出。</p>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/pictorialBar-symbolSize&reset=1&edit=1\" width=\"800\" height=\"600\"><iframe />\n\n\n\n\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbolSize\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbolSize\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbolSize: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbolSize: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbolSize: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n",
+    "desc": "\n\n<p>图形的大小。</p>\n<p>可以用数组分开表示宽和高，例如 <code class=\"codespan\">[20, 10]</code> 表示标记宽为<code class=\"codespan\">20</code>，高为<code class=\"codespan\">10</code>，也可以设置成诸如 <code class=\"codespan\">10</code> 这样单一的数字，表示 <code class=\"codespan\">[10, 10]</code>。</p>\n<p>可以设置成绝对值（如 <code class=\"codespan\">10</code>），也可以设置成百分比（如 <code class=\"codespan\">&#39;120%&#39;</code>、<code class=\"codespan\">[&#39;55%&#39;, 23]</code>）。</p>\n<p>当设置为百分比时，图形的大小是基于 <a href=\"#series-pictorialBar\">基准柱</a> 的尺寸计算出来的。</p>\n<p>例如，当基准柱基于 x 轴（即柱子是纵向的），<a href=\"#series-pictorialBar.symbolSize\">symbolSize</a> 设置为 <code class=\"codespan\">[&#39;30%&#39;, &#39;50%&#39;]</code>，那么最终图形的尺寸是：</p>\n<ul>\n<li>宽度：<code class=\"codespan\">基准柱的宽度 * 30%</code>。</li>\n<li>高度：<ul>\n<li>如果 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 为 <code class=\"codespan\">false</code>：<code class=\"codespan\">基准柱的高度 * 50%</code>。</li>\n<li>如果 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 为 <code class=\"codespan\">true</code>：<code class=\"codespan\">基准柱的宽度 * 50%</code>。</li>\n</ul>\n</li>\n</ul>\n<p>基准柱基于 y 轴（即柱子是横向的）的情况类似对调可得出。</p>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/pictorialBar-symbolSize&reset=1&edit=1\" width=\"800\" height=\"600\"><iframe />\n\n\n\n\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbolSize\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbolSize\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbolSize: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbolSize: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbolSize: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n",
     "uiControl": {
       "type": "percent",
       "default": "100%,100%",
@@ -2571,7 +2627,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "data.symbolPosition": {
-    "desc": "\n\n<p>图形的定位位置。可取值：</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code>：图形边缘与柱子开始的地方内切。</li>\n<li><code class=\"codespan\">&#39;end&#39;</code>：图形边缘与柱子结束的地方内切。</li>\n<li><code class=\"codespan\">&#39;center&#39;</code>：图形在柱子里居中。</li>\n</ul>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/pictorialBar-position&reset=1&edit=1\" width=\"800\" height=\"600\"><iframe />\n\n\n\n\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbolPosition\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbolPosition\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbolPosition: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbolPosition: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbolPosition: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n",
+    "desc": "\n\n<p>图形的定位位置。可取值：</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code>：图形边缘与柱子开始的地方内切。</li>\n<li><code class=\"codespan\">&#39;end&#39;</code>：图形边缘与柱子结束的地方内切。</li>\n<li><code class=\"codespan\">&#39;center&#39;</code>：图形在柱子里居中。</li>\n</ul>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/pictorialBar-position&reset=1&edit=1\" width=\"800\" height=\"600\"><iframe />\n\n\n\n\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbolPosition\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbolPosition\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbolPosition: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbolPosition: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbolPosition: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "start,end,center",
@@ -2579,7 +2635,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "data.symbolOffset": {
-    "desc": "\n\n<p>图形相对于原本位置的偏移。<code class=\"codespan\">symbolOffset</code> 是图形定位中最后计算的一个步骤，可以对图形计算出来的位置进行微调。</p>\n<p>可以设置成绝对值（如 <code class=\"codespan\">10</code>），也可以设置成百分比（如 <code class=\"codespan\">&#39;120%&#39;</code>、<code class=\"codespan\">[&#39;55%&#39;, 23]</code>）。</p>\n<p>当设置为百分比时，表示相对于自身尺寸 <a href=\"#series-pictorialBar.symbolSize\">symbolSize</a> 的百分比。</p>\n<p>例如 <code class=\"codespan\">[0, &#39;-50%&#39;]</code> 就是把图形向上移动了自身尺寸的一半的位置。</p>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/pictorialBar-position&reset=1&edit=1\" width=\"800\" height=\"600\"><iframe />\n\n\n\n\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbolOffset\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbolOffset\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbolOffset: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbolOffset: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbolOffset: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n",
+    "desc": "\n\n<p>图形相对于原本位置的偏移。<code class=\"codespan\">symbolOffset</code> 是图形定位中最后计算的一个步骤，可以对图形计算出来的位置进行微调。</p>\n<p>可以设置成绝对值（如 <code class=\"codespan\">10</code>），也可以设置成百分比（如 <code class=\"codespan\">&#39;120%&#39;</code>、<code class=\"codespan\">[&#39;55%&#39;, 23]</code>）。</p>\n<p>当设置为百分比时，表示相对于自身尺寸 <a href=\"#series-pictorialBar.symbolSize\">symbolSize</a> 的百分比。</p>\n<p>例如 <code class=\"codespan\">[0, &#39;-50%&#39;]</code> 就是把图形向上移动了自身尺寸的一半的位置。</p>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/pictorialBar-position&reset=1&edit=1\" width=\"800\" height=\"600\"><iframe />\n\n\n\n\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbolOffset\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbolOffset\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbolOffset: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbolOffset: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbolOffset: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n",
     "uiControl": {
       "type": "percentvector",
       "default": "0,0",
@@ -2596,14 +2652,14 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "data.symbolRepeat": {
-    "desc": "\n\n<p>指定图形元素是否重复。值可为：</p>\n<ul>\n<li><code class=\"codespan\">false</code>/<code class=\"codespan\">null</code>/<code class=\"codespan\">undefined</code>：不重复，即每个数据值用一个图形元素表示。</li>\n<li><code class=\"codespan\">true</code>：使图形元素重复，即每个数据值用一组重复的图形元素表示。重复的次数依据 <a href=\"#series-pictorialBar.data\">data</a> 计算得到。</li>\n<li>a number：使图形元素重复，即每个数据值用一组重复的图形元素表示。重复的次数是给定的定值。</li>\n<li><code class=\"codespan\">&#39;fixed&#39;</code>：使图形元素重复，即每个数据值用一组重复的图形元素表示。重复的次数依据 <a href=\"#series-pictorialBar.symbolBoundingData\">symbolBoundingData</a> 计算得到，即与 <a href=\"#series-pictorialBar.data\">data</a> 无关。这在此图形被用于做背景时有用。</li>\n</ul>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/pictorialBar-repeat&reset=1&edit=1\" width=\"800\" height=\"400\"><iframe />\n\n\n\n\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbolRepeat\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbolRepeat\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbolRepeat: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbolRepeat: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbolRepeat: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n",
+    "desc": "\n\n<p>指定图形元素是否重复。值可为：</p>\n<ul>\n<li><code class=\"codespan\">false</code>/<code class=\"codespan\">null</code>/<code class=\"codespan\">undefined</code>：不重复，即每个数据值用一个图形元素表示。</li>\n<li><code class=\"codespan\">true</code>：使图形元素重复，即每个数据值用一组重复的图形元素表示。重复的次数依据 <a href=\"#series-pictorialBar.data\">data</a> 计算得到。</li>\n<li>a number：使图形元素重复，即每个数据值用一组重复的图形元素表示。重复的次数是给定的定值。</li>\n<li><code class=\"codespan\">&#39;fixed&#39;</code>：使图形元素重复，即每个数据值用一组重复的图形元素表示。重复的次数依据 <a href=\"#series-pictorialBar.symbolBoundingData\">symbolBoundingData</a> 计算得到，即与 <a href=\"#series-pictorialBar.data\">data</a> 无关。这在此图形被用于做背景时有用。</li>\n</ul>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/pictorialBar-repeat&reset=1&edit=1\" width=\"800\" height=\"400\"><iframe />\n\n\n\n\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbolRepeat\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbolRepeat\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbolRepeat: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbolRepeat: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbolRepeat: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "true,false,fixed"
     }
   },
   "data.symbolRepeatDirection": {
-    "desc": "\n\n<p>指定图形元素重复时，绘制的顺序。这个属性在两种情况下有用处：</p>\n<ul>\n<li><p>当 <a href=\"#series-pictorialBar.symbolMargin\">symbolMargin</a> 设置为负值时，重复的图形会互相覆盖，这是可以使用 <code class=\"codespan\">symbolRepeatDirection</code> 来指定覆盖顺序。</p>\n</li>\n<li><p>当 <a href=\"#series-pictorialBar.animationDelay\">animationDelay</a> 或 <a href=\"#series-pictorialBar.animationDelayUpdate\">animationDelayUpdate</a> 被使用时，<code class=\"codespan\">symbolRepeatDirection</code> 指定了 index 顺序。</p>\n</li>\n</ul>\n<p>这个属性的值可以是：<code class=\"codespan\">&#39;start&#39;</code> 或 <code class=\"codespan\">&#39;end&#39;</code>。</p>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/pictorialBar-repeatDirection&reset=1&edit=1\" width=\"800\" height=\"400\"><iframe />\n\n\n\n\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbolRepeatDirection\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbolRepeatDirection\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbolRepeatDirection: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbolRepeatDirection: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbolRepeatDirection: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n",
+    "desc": "\n\n<p>指定图形元素重复时，绘制的顺序。这个属性在两种情况下有用处：</p>\n<ul>\n<li><p>当 <a href=\"#series-pictorialBar.symbolMargin\">symbolMargin</a> 设置为负值时，重复的图形会互相覆盖，这是可以使用 <code class=\"codespan\">symbolRepeatDirection</code> 来指定覆盖顺序。</p>\n</li>\n<li><p>当 <a href=\"#series-pictorialBar.animationDelay\">animationDelay</a> 或 <a href=\"#series-pictorialBar.animationDelayUpdate\">animationDelayUpdate</a> 被使用时，<code class=\"codespan\">symbolRepeatDirection</code> 指定了 index 顺序。</p>\n</li>\n</ul>\n<p>这个属性的值可以是：<code class=\"codespan\">&#39;start&#39;</code> 或 <code class=\"codespan\">&#39;end&#39;</code>。</p>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/pictorialBar-repeatDirection&reset=1&edit=1\" width=\"800\" height=\"400\"><iframe />\n\n\n\n\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbolRepeatDirection\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbolRepeatDirection\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbolRepeatDirection: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbolRepeatDirection: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbolRepeatDirection: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "start,end",
@@ -2611,7 +2667,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "data.symbolMargin": {
-    "desc": "\n\n<p>图形的两边间隔（『两边』是指其数值轴方向的两边）。可以是绝对数值（如 <code class=\"codespan\">20</code>），或者百分比值（如 <code class=\"codespan\">&#39;-30%&#39;</code>），表示相对于自身尺寸 <a href=\"#series-pictorialBar.symbolSize\">symbolSize</a> 的百分比。只有当 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 被使用时有意义。</p>\n<p>可以是正值，表示间隔大；也可以是负数。当 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 被使用时，负数时能使图形重叠。</p>\n<p>可以在其值结尾处加一个 <code class=\"codespan\">&quot;!&quot;</code>，如 <code class=\"codespan\">&quot;30%!&quot;</code> 或 <code class=\"codespan\">25!</code>，表示第一个图形的开始和最后一个图形结尾留白，不紧贴边界。默认会紧贴边界。</p>\n<p>注意：</p>\n<ul>\n<li>当 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 为 <code class=\"codespan\">true</code>/<code class=\"codespan\">&#39;fixed&#39;</code> 的时候：\n  这里设置的 <code class=\"codespan\">symbolMargin</code> 只是个参考值，真正最后的图形间隔，是根据 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a>、<code class=\"codespan\">symbolMargin</code>、<a href=\"#series-pictorialBar.symbolBoundingData\">symbolBoundingData</a> 综合计算得到。</li>\n<li>当 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 为一个固定数值的时候：\n  这里设置的 <code class=\"codespan\">symbolMargin</code> 无效。</li>\n</ul>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/pictorialBar-repeatLayout&reset=1&edit=1\" width=\"800\" height=\"600\"><iframe />\n\n\n\n\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbolMargin\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbolMargin\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbolMargin: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbolMargin: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbolMargin: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n",
+    "desc": "\n\n<p>图形的两边间隔（『两边』是指其数值轴方向的两边）。可以是绝对数值（如 <code class=\"codespan\">20</code>），或者百分比值（如 <code class=\"codespan\">&#39;-30%&#39;</code>），表示相对于自身尺寸 <a href=\"#series-pictorialBar.symbolSize\">symbolSize</a> 的百分比。只有当 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 被使用时有意义。</p>\n<p>可以是正值，表示间隔大；也可以是负数。当 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 被使用时，负数时能使图形重叠。</p>\n<p>可以在其值结尾处加一个 <code class=\"codespan\">&quot;!&quot;</code>，如 <code class=\"codespan\">&quot;30%!&quot;</code> 或 <code class=\"codespan\">25!</code>，表示第一个图形的开始和最后一个图形结尾留白，不紧贴边界。默认会紧贴边界。</p>\n<p>注意：</p>\n<ul>\n<li>当 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 为 <code class=\"codespan\">true</code>/<code class=\"codespan\">&#39;fixed&#39;</code> 的时候：\n  这里设置的 <code class=\"codespan\">symbolMargin</code> 只是个参考值，真正最后的图形间隔，是根据 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a>、<code class=\"codespan\">symbolMargin</code>、<a href=\"#series-pictorialBar.symbolBoundingData\">symbolBoundingData</a> 综合计算得到。</li>\n<li>当 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 为一个固定数值的时候：\n  这里设置的 <code class=\"codespan\">symbolMargin</code> 无效。</li>\n</ul>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/pictorialBar-repeatLayout&reset=1&edit=1\" width=\"800\" height=\"600\"><iframe />\n\n\n\n\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbolMargin\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbolMargin\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbolMargin: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbolMargin: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbolMargin: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n",
     "uiControl": {
       "type": "percentvector",
       "default": "0,0",
@@ -2619,16 +2675,16 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "data.symbolClip": {
-    "desc": "\n\n<p>是否剪裁图形。</p>\n<ul>\n<li><code class=\"codespan\">false</code>/null/undefined：图形本身表示数值大小。</li>\n<li><code class=\"codespan\">true</code>：图形被剪裁后剩余的部分表示数值大小。</li>\n</ul>\n<p><code class=\"codespan\">symbolClip</code> 常在这种场景下使用：同时表达『总值』和『当前数值』。在这种场景下，可以使用两个系列，一个系列是完整的图形，当做『背景』来表达总数值，另一个系列是使用 <code class=\"codespan\">symbolClip</code> 进行剪裁过的图形，表达当前数值。</p>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/pictorialBar-clip&reset=1&edit=1\" width=\"800\" height=\"600\"><iframe />\n\n\n<p>在这个例子中：</p>\n<ul>\n<li>『背景系列』和『当前值系列』使用相同的 <a href=\"#series.pictorialBar.symbolBoundingData\">symbolBoundingData</a>，使得绘制出的图形的大小是一样的。</li>\n<li>『当前值系列』设置了比『背景系列』更高的 <a href=\"#series.pictorialBar.z\">z</a>，使得其覆盖在『背景系列』上。</li>\n</ul>\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbolClip\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbolClip\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbolClip: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbolClip: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbolClip: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n",
+    "desc": "\n\n<p>是否剪裁图形。</p>\n<ul>\n<li><code class=\"codespan\">false</code>/null/undefined：图形本身表示数值大小。</li>\n<li><code class=\"codespan\">true</code>：图形被剪裁后剩余的部分表示数值大小。</li>\n</ul>\n<p><code class=\"codespan\">symbolClip</code> 常在这种场景下使用：同时表达『总值』和『当前数值』。在这种场景下，可以使用两个系列，一个系列是完整的图形，当做『背景』来表达总数值，另一个系列是使用 <code class=\"codespan\">symbolClip</code> 进行剪裁过的图形，表达当前数值。</p>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/pictorialBar-clip&reset=1&edit=1\" width=\"800\" height=\"600\"><iframe />\n\n\n<p>在这个例子中：</p>\n<ul>\n<li>『背景系列』和『当前值系列』使用相同的 <a href=\"#series.pictorialBar.symbolBoundingData\">symbolBoundingData</a>，使得绘制出的图形的大小是一样的。</li>\n<li>『当前值系列』设置了比『背景系列』更高的 <a href=\"#series.pictorialBar.z\">z</a>，使得其覆盖在『背景系列』上。</li>\n</ul>\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbolClip\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbolClip\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbolClip: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbolClip: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbolClip: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n",
     "uiControl": {
       "type": "boolean"
     }
   },
   "data.symbolBoundingData": {
-    "desc": "<p>这个属性是『指定图形界限的值』。它指定了一个 data，这个 data 映射在坐标系上的位置，是图形绘制的界限。也就是说，如果设置了 <code class=\"codespan\">symbolBoundingData</code>，图形的尺寸则由 <code class=\"codespan\">symbolBoundingData</code> 决定。</p>\n<p>当柱子是水平的，symbolBoundingData 对应到 x 轴上，当柱子是竖直的，symbolBoundingData 对应到 y 轴上。</p>\n<p>规则：</p>\n<ul>\n<li><p>没有使用 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 时：</p>\n<p>  <code class=\"codespan\">symbolBoundingData</code> 缺省情况下和『参考柱』的尺寸一样。图形的尺寸由零点和 <code class=\"codespan\">symbolBoundingData</code> 决定。举例，当柱子是竖直的，柱子对应的 data 为 <code class=\"codespan\">24</code>，<code class=\"codespan\">symbolSize</code> 设置为 <code class=\"codespan\">[30, &#39;50%&#39;]</code>，<code class=\"codespan\">symbolBoundingData</code> 设置为 <code class=\"codespan\">124</code>，那么最终图形的高度为 <code class=\"codespan\">124 * 50% = 62</code>。如果 <code class=\"codespan\">symbolBoundingData</code> 不设置，那么最终图形的高度为 <code class=\"codespan\">24 * 50% = 12</code>。</p>\n</li>\n<li><p>使用了 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 时：</p>\n<p>  <code class=\"codespan\">symbolBoundingData</code> 缺省情况取当前坐标系所显示出的最值。<code class=\"codespan\">symbolBoundingData</code> 定义了一个 bounding，重复的图形在这个 bounding 中，依据 <a href=\"#series-pictorialBar.symbolMargin\">symbolMargin</a> 和 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 和 <a href=\"#series-pictorialBar.symbolSize\">symbolSize</a> 进行排布。这几个变量决定了图形的间隔大小。</p>\n</li>\n</ul>\n<p>在这些场景中，你可能会需要设置 <code class=\"codespan\">symbolBoundingData</code>：</p>\n<ul>\n<li><p>使用了 <a href=\"#series-pictorialBar.symbolClip\">symbolCilp</a> 时：</p>\n<p>  使用一个系列表达『总值』，另一个系列表达『当前值』的时候，需要两个系列画出的图形一样大。那么就把两个系列的 <code class=\"codespan\">symbolBoundingData</code> 设为一样大。</p>\n</li>\n</ul>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/pictorialBar-clip&reset=1&edit=1\" width=\"800\" height=\"600\"><iframe />\n\n\n<ul>\n<li><p>使用了 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 时：</p>\n<p>  如果需要不同柱子中的图形的间隔保持一致，那么可以把 <code class=\"codespan\">symbolBoundingData</code> 设为一致的数值。当然，不设置 <code class=\"codespan\">symbolBoundingData</code> 也是可以的，因为其缺省值就是一个定值（坐标系所显示出的最值）。</p>\n</li>\n</ul>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/pictorialBar-repeatLayout&reset=1&edit=1\" width=\"800\" height=\"600\"><iframe />\n\n\n<p><br>\n<code class=\"codespan\">symbolBoundingData</code> 可以是一个数组，例如 <code class=\"codespan\">[-40, 60]</code>，表示同时指定了正值的 <code class=\"codespan\">symbolBoundingData</code> 和负值的 <code class=\"codespan\">symbolBoundingData</code>。</p>\n<p>参见例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/pictorialBar-symbolBoundingDataArray&reset=1&edit=1\" width=\"800\" height=\"400\"><iframe />\n\n\n\n\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbolBoundingData\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbolBoundingData\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbolBoundingData: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbolBoundingData: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbolBoundingData: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n"
+    "desc": "<p>这个属性是『指定图形界限的值』。它指定了一个 data，这个 data 映射在坐标系上的位置，是图形绘制的界限。也就是说，如果设置了 <code class=\"codespan\">symbolBoundingData</code>，图形的尺寸则由 <code class=\"codespan\">symbolBoundingData</code> 决定。</p>\n<p>当柱子是水平的，symbolBoundingData 对应到 x 轴上，当柱子是竖直的，symbolBoundingData 对应到 y 轴上。</p>\n<p>规则：</p>\n<ul>\n<li><p>没有使用 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 时：</p>\n<p>  <code class=\"codespan\">symbolBoundingData</code> 缺省情况下和『参考柱』的尺寸一样。图形的尺寸由零点和 <code class=\"codespan\">symbolBoundingData</code> 决定。举例，当柱子是竖直的，柱子对应的 data 为 <code class=\"codespan\">24</code>，<code class=\"codespan\">symbolSize</code> 设置为 <code class=\"codespan\">[30, &#39;50%&#39;]</code>，<code class=\"codespan\">symbolBoundingData</code> 设置为 <code class=\"codespan\">124</code>，那么最终图形的高度为 <code class=\"codespan\">124 * 50% = 62</code>。如果 <code class=\"codespan\">symbolBoundingData</code> 不设置，那么最终图形的高度为 <code class=\"codespan\">24 * 50% = 12</code>。</p>\n</li>\n<li><p>使用了 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 时：</p>\n<p>  <code class=\"codespan\">symbolBoundingData</code> 缺省情况取当前坐标系所显示出的最值。<code class=\"codespan\">symbolBoundingData</code> 定义了一个 bounding，重复的图形在这个 bounding 中，依据 <a href=\"#series-pictorialBar.symbolMargin\">symbolMargin</a> 和 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 和 <a href=\"#series-pictorialBar.symbolSize\">symbolSize</a> 进行排布。这几个变量决定了图形的间隔大小。</p>\n</li>\n</ul>\n<p>在这些场景中，你可能会需要设置 <code class=\"codespan\">symbolBoundingData</code>：</p>\n<ul>\n<li><p>使用了 <a href=\"#series-pictorialBar.symbolClip\">symbolCilp</a> 时：</p>\n<p>  使用一个系列表达『总值』，另一个系列表达『当前值』的时候，需要两个系列画出的图形一样大。那么就把两个系列的 <code class=\"codespan\">symbolBoundingData</code> 设为一样大。</p>\n</li>\n</ul>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/pictorialBar-clip&reset=1&edit=1\" width=\"800\" height=\"600\"><iframe />\n\n\n<ul>\n<li><p>使用了 <a href=\"#series-pictorialBar.symbolRepeat\">symbolRepeat</a> 时：</p>\n<p>  如果需要不同柱子中的图形的间隔保持一致，那么可以把 <code class=\"codespan\">symbolBoundingData</code> 设为一致的数值。当然，不设置 <code class=\"codespan\">symbolBoundingData</code> 也是可以的，因为其缺省值就是一个定值（坐标系所显示出的最值）。</p>\n</li>\n</ul>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/pictorialBar-repeatLayout&reset=1&edit=1\" width=\"800\" height=\"600\"><iframe />\n\n\n<p><br>\n<code class=\"codespan\">symbolBoundingData</code> 可以是一个数组，例如 <code class=\"codespan\">[-40, 60]</code>，表示同时指定了正值的 <code class=\"codespan\">symbolBoundingData</code> 和负值的 <code class=\"codespan\">symbolBoundingData</code>。</p>\n<p>参见例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/pictorialBar-symbolBoundingDataArray&reset=1&edit=1\" width=\"800\" height=\"400\"><iframe />\n\n\n\n\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbolBoundingData\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbolBoundingData\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbolBoundingData: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbolBoundingData: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbolBoundingData: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n"
   },
   "data.symbolPatternSize": {
-    "desc": "\n\n<p>可以使用图片作为图形的 pattern。</p>\n<pre><code class=\"lang-js\">var textureImg = new Image();\ntextureImg.src = &#39;data:image/jpeg;base64,...&#39;; // dataURI\n// 或者\n// textureImg.src = &#39;http://xxx.xxx.xxx/xx.png&#39;; // URL\n...\nitemStyle: {\n    color: {\n        image: textureImg,\n        repeat: &#39;repeat&#39;\n    }\n}\n</code></pre>\n<p>这时候，<code class=\"codespan\">symbolPatternSize</code> 指定了 pattern 的缩放尺寸。比如 <code class=\"codespan\">symbolPatternSize</code> 为 400 时表示图片显示为 <code class=\"codespan\">400px * 400px</code> 的尺寸。</p>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/pictorialBar-patternSize&reset=1&edit=1\" width=\"800\" height=\"400\"><iframe />\n\n\n\n\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbolPatternSize\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbolPatternSize\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbolPatternSize: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbolPatternSize: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbolPatternSize: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n",
+    "desc": "\n\n<p>可以使用图片作为图形的 pattern。</p>\n<pre><code class=\"lang-js\">var textureImg = new Image();\ntextureImg.src = &#39;data:image/jpeg;base64,...&#39;; // dataURI\n// 或者\n// textureImg.src = &#39;http://xxx.xxx.xxx/xx.png&#39;; // URL\n...\nitemStyle: {\n    color: {\n        image: textureImg,\n        repeat: &#39;repeat&#39;\n    }\n}\n</code></pre>\n<p>这时候，<code class=\"codespan\">symbolPatternSize</code> 指定了 pattern 的缩放尺寸。比如 <code class=\"codespan\">symbolPatternSize</code> 为 400 时表示图片显示为 <code class=\"codespan\">400px * 400px</code> 的尺寸。</p>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/pictorialBar-patternSize&reset=1&edit=1\" width=\"800\" height=\"400\"><iframe />\n\n\n\n\n<p>此属性可以被设置在系列的 <a href=\"#series-pictorialBar.symbolPatternSize\">根部</a>，表示对此系列中所有数据都生效；也可以被设置在 <a href=\"series-pictorialBar.data\" target=\"_blank\">data</a> 中的 <a href=\"#series-pictorialBar.data.symbolPatternSize\">每个数据项中</a>，表示只对此数据项生效。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">series: [{\n    symbolPatternSize: ... // 对 data 中所有数据项生效。\n    data: [23, 56]\n}]\n或者\nseries: [{\n    data: [{\n        value: 23\n        symbolPatternSize: ... // 只对此数据项生效\n    }, {\n        value: 56\n        symbolPatternSize: ... // 只对此数据项生效\n    }]\n}]\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "default": "400",
@@ -2667,7 +2723,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "data.animationEasing": {
-    "desc": "\n\n<p>初始动画的缓动效果。不同的缓动效果可以参考 <a href=\"https://echarts.apache.org/next/examples/editor.html?c=line-easing\" target=\"_blank\">缓动示例</a>。</p>\n",
+    "desc": "\n\n<p>初始动画的缓动效果。不同的缓动效果可以参考 <a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=line-easing\" target=\"_blank\">缓动示例</a>。</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "linear,quadraticIn,quadraticOut,quadraticInOut,cubicIn,cubicOut,cubicInOut,quarticIn,quarticOut,quarticInOut,quinticIn,quinticOut,quinticInOut,sinusoidalIn,sinusoidalOut,sinusoidalInOut,exponentialIn,exponentialOut,exponentialInOut,circularIn,circularOut,circularInOut,elasticIn,elasticOut,elasticInOut,backIn,backOut,backInOut,bounceIn,bounceOut,bounceInOut",
@@ -2691,10 +2747,10 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "data.animationDelay": {
-    "desc": "<p>动画开始之前的延迟，支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的更新动画效果。</p>\n<p>如下示例：</p>\n<pre><code class=\"lang-js\">animationDelay: function (dataIndex, params) {\n    return params.index * 30;\n}\n或者反向：\nanimationDelay: function (dataIndex, params) {\n    return (params.count - 1 - params.index) * 30;\n}\n</code></pre>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/pictorialBar-repeatDirection&reset=1&edit=1\" width=\"800\" height=\"400\"><iframe />\n\n"
+    "desc": "<p>动画开始之前的延迟，支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的更新动画效果。</p>\n<p>如下示例：</p>\n<pre><code class=\"lang-js\">animationDelay: function (dataIndex, params) {\n    return params.index * 30;\n}\n或者反向：\nanimationDelay: function (dataIndex, params) {\n    return (params.count - 1 - params.index) * 30;\n}\n</code></pre>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/pictorialBar-repeatDirection&reset=1&edit=1\" width=\"800\" height=\"400\"><iframe />\n\n"
   },
   "data.animationDelayUpdate": {
-    "desc": "<p>数据更新动画的延迟，支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的更新动画效果。</p>\n<p>如下示例：</p>\n<pre><code class=\"lang-js\">animationDelay: function (dataIndex, params) {\n    return params.index * 30;\n}\n或者反向：\nanimationDelay: function (dataIndex, params) {\n    return (params.count - 1 - params.index) * 30;\n}\n</code></pre>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/pictorialBar-repeatDirection&reset=1&edit=1\" width=\"800\" height=\"400\"><iframe />\n\n\n\n\n\n\n\n\n\n"
+    "desc": "<p>数据更新动画的延迟，支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的更新动画效果。</p>\n<p>如下示例：</p>\n<pre><code class=\"lang-js\">animationDelay: function (dataIndex, params) {\n    return params.index * 30;\n}\n或者反向：\nanimationDelay: function (dataIndex, params) {\n    return (params.count - 1 - params.index) * 30;\n}\n</code></pre>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/pictorialBar-repeatDirection&reset=1&edit=1\" width=\"800\" height=\"400\"><iframe />\n\n\n\n\n\n\n\n\n\n"
   },
   "data.label": {
     "desc": "<p>单个柱条文本的样式设置。</p>\n"
@@ -2707,14 +2763,14 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "data.label.position": {
-    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "data.label.distance": {
-    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -2723,7 +2779,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "data.label.rotate": {
-    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
+    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -2871,10 +2927,24 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "data.label.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "data.label.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "data.label.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
@@ -3293,14 +3363,14 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "data.emphasis.label.position": {
-    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "data.emphasis.label.distance": {
-    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -3309,7 +3379,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "data.emphasis.label.rotate": {
-    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
+    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -3457,10 +3527,24 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "data.emphasis.label.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "data.emphasis.label.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "data.emphasis.label.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
@@ -3870,14 +3954,14 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "data.blur.label.position": {
-    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "data.blur.label.distance": {
-    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -3886,7 +3970,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "data.blur.label.rotate": {
-    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
+    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -4034,10 +4118,24 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "data.blur.label.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "data.blur.label.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "data.blur.label.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
@@ -4447,14 +4545,14 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "data.select.label.position": {
-    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "data.select.label.distance": {
-    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -4463,7 +4561,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "data.select.label.rotate": {
-    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
+    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -4611,10 +4709,24 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "data.select.label.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "data.select.label.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "data.select.label.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
@@ -5098,10 +5210,24 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "data.tooltip.textStyle.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "data.tooltip.textStyle.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "data.tooltip.textStyle.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n",
@@ -5220,14 +5346,14 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markPoint.label.position": {
-    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "markPoint.label.distance": {
-    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -5236,7 +5362,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markPoint.label.rotate": {
-    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
+    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -5387,10 +5513,24 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markPoint.label.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "markPoint.label.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "markPoint.label.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
@@ -5714,14 +5854,14 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markPoint.emphasis.label.position": {
-    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "markPoint.emphasis.label.distance": {
-    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -5730,7 +5870,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markPoint.emphasis.label.rotate": {
-    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
+    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -5881,10 +6021,24 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markPoint.emphasis.label.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "markPoint.emphasis.label.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "markPoint.emphasis.label.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
@@ -6205,14 +6359,14 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markPoint.blur.label.position": {
-    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "markPoint.blur.label.distance": {
-    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -6221,7 +6375,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markPoint.blur.label.rotate": {
-    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
+    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -6372,10 +6526,24 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markPoint.blur.label.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "markPoint.blur.label.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "markPoint.blur.label.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
@@ -6850,14 +7018,14 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markPoint.data.label.position": {
-    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "markPoint.data.label.distance": {
-    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -6866,7 +7034,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markPoint.data.label.rotate": {
-    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
+    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -7014,10 +7182,24 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markPoint.data.label.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "markPoint.data.label.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "markPoint.data.label.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
@@ -7264,14 +7446,14 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markPoint.data.emphasis.label.position": {
-    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "markPoint.data.emphasis.label.distance": {
-    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -7280,7 +7462,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markPoint.data.emphasis.label.rotate": {
-    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
+    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -7428,10 +7610,24 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markPoint.data.emphasis.label.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "markPoint.data.emphasis.label.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "markPoint.data.emphasis.label.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
@@ -7763,7 +7959,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markPoint.animationEasing": {
-    "desc": "\n\n<p>初始动画的缓动效果。不同的缓动效果可以参考 <a href=\"https://echarts.apache.org/next/examples/editor.html?c=line-easing\" target=\"_blank\">缓动示例</a>。</p>\n",
+    "desc": "\n\n<p>初始动画的缓动效果。不同的缓动效果可以参考 <a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=line-easing\" target=\"_blank\">缓动示例</a>。</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "linear,quadraticIn,quadraticOut,quadraticInOut,cubicIn,cubicOut,cubicInOut,quarticIn,quarticOut,quarticInOut,quinticIn,quinticOut,quinticInOut,sinusoidalIn,sinusoidalOut,sinusoidalInOut,exponentialIn,exponentialOut,exponentialInOut,circularIn,circularOut,circularInOut,elasticIn,elasticOut,elasticInOut,backIn,backOut,backInOut,bounceIn,bounceOut,bounceInOut",
@@ -7771,7 +7967,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markPoint.animationDelay": {
-    "desc": "<p>初始动画的延迟，支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的初始动画效果。</p>\n<p>如下示例：</p>\n<pre><code class=\"lang-js\">animationDelay: function (idx) {\n    // 越往后的数据延迟越大\n    return idx * 100;\n}\n</code></pre>\n<p>也可以看<a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-animation-delay\" target=\"_blank\">该示例</a></p>\n"
+    "desc": "<p>初始动画的延迟，支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的初始动画效果。</p>\n<p>如下示例：</p>\n<pre><code class=\"lang-js\">animationDelay: function (idx) {\n    // 越往后的数据延迟越大\n    return idx * 100;\n}\n</code></pre>\n<p>也可以看<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=bar-animation-delay\" target=\"_blank\">该示例</a></p>\n"
   },
   "markPoint.animationDurationUpdate": {
     "desc": "\n\n<p>数据更新动画的时长。</p>\n<p>支持回调函数，可以通过每个数据返回不同的时长实现更戏剧的更新动画效果：</p>\n<pre><code class=\"lang-js\">animationDurationUpdate: function (idx) {\n    // 越往后的数据时长越大\n    return idx * 100;\n}\n</code></pre>\n",
@@ -7790,7 +7986,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markPoint.animationDelayUpdate": {
-    "desc": "<p>数据更新动画的延迟，支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的更新动画效果。</p>\n<p>如下示例：</p>\n<pre><code class=\"lang-js\">animationDelayUpdate: function (idx) {\n    // 越往后的数据延迟越大\n    return idx * 100;\n}\n</code></pre>\n<p>也可以看<a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-animation-delay\" target=\"_blank\">该示例</a></p>\n"
+    "desc": "<p>数据更新动画的延迟，支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的更新动画效果。</p>\n<p>如下示例：</p>\n<pre><code class=\"lang-js\">animationDelayUpdate: function (idx) {\n    // 越往后的数据延迟越大\n    return idx * 100;\n}\n</code></pre>\n<p>也可以看<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=bar-animation-delay\" target=\"_blank\">该示例</a></p>\n"
   },
   "markLine": {
     "desc": "<p>图表标线。</p>\n"
@@ -7817,7 +8013,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     "desc": "<p>是否显示标签。</p>\n"
   },
   "markLine.label.position": {
-    "desc": "<p>标签位置，可选：</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code> 线的起始点。</li>\n<li><code class=\"codespan\">&#39;middle&#39;</code> 线的中点。</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> 线的结束点。</li>\n</ul>\n<p>4.7.0 版本起，支持更多标签位置：<code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>, <code class=\"codespan\">&#39;insideStartTop&#39;</code>, <code class=\"codespan\">&#39;insideStartBottom&#39;</code>, <code class=\"codespan\">&#39;insideMiddleTop&#39;</code>, <code class=\"codespan\">&#39;insideMiddleBottom&#39;</code>, <code class=\"codespan\">&#39;insideEndTop&#39;</code>, <code class=\"codespan\">&#39;insideEndBottom&#39;</code>。</p>\n<p>其中，<code class=\"codespan\">&#39;insideMiddleBottom&#39;</code> 等同于 <code class=\"codespan\">&#39;middle&#39;</code>。具体位置参见下图。</p>\n<p>文字与线的间距可以通过 <a href=\"#series-.markLine.label.distance\">label.distance</a> 调整。</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=bar-markline&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n"
+    "desc": "<p>标签位置，可选：</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code> 线的起始点。</li>\n<li><code class=\"codespan\">&#39;middle&#39;</code> 线的中点。</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> 线的结束点。</li>\n</ul>\n<p>4.7.0 版本起，支持更多标签位置：<code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>, <code class=\"codespan\">&#39;insideStartTop&#39;</code>, <code class=\"codespan\">&#39;insideStartBottom&#39;</code>, <code class=\"codespan\">&#39;insideMiddleTop&#39;</code>, <code class=\"codespan\">&#39;insideMiddleBottom&#39;</code>, <code class=\"codespan\">&#39;insideEndTop&#39;</code>, <code class=\"codespan\">&#39;insideEndBottom&#39;</code>。</p>\n<p>其中，<code class=\"codespan\">&#39;insideMiddleBottom&#39;</code> 等同于 <code class=\"codespan\">&#39;middle&#39;</code>。具体位置参见下图。</p>\n<p>文字与线的间距可以通过 <a href=\"#series-.markLine.label.distance\">label.distance</a> 调整。</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=bar-markline&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n"
   },
   "markLine.label.distance": {
     "desc": "<p>标签与线之间的间距。如果是数组，第一项为横向间距，第二项为纵向间距。如果是数字，则表示横向纵向使用相同的间距。</p>\n"
@@ -7910,7 +8106,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     "desc": "<p>是否显示标签。</p>\n"
   },
   "markLine.emphasis.label.position": {
-    "desc": "<p>标签位置，可选：</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code> 线的起始点。</li>\n<li><code class=\"codespan\">&#39;middle&#39;</code> 线的中点。</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> 线的结束点。</li>\n</ul>\n<p>4.7.0 版本起，支持更多标签位置：<code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>, <code class=\"codespan\">&#39;insideStartTop&#39;</code>, <code class=\"codespan\">&#39;insideStartBottom&#39;</code>, <code class=\"codespan\">&#39;insideMiddleTop&#39;</code>, <code class=\"codespan\">&#39;insideMiddleBottom&#39;</code>, <code class=\"codespan\">&#39;insideEndTop&#39;</code>, <code class=\"codespan\">&#39;insideEndBottom&#39;</code>。</p>\n<p>其中，<code class=\"codespan\">&#39;insideMiddleBottom&#39;</code> 等同于 <code class=\"codespan\">&#39;middle&#39;</code>。具体位置参见下图。</p>\n<p>文字与线的间距可以通过 <a href=\"#series-.markLine.label.distance\">label.distance</a> 调整。</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=bar-markline&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n"
+    "desc": "<p>标签位置，可选：</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code> 线的起始点。</li>\n<li><code class=\"codespan\">&#39;middle&#39;</code> 线的中点。</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> 线的结束点。</li>\n</ul>\n<p>4.7.0 版本起，支持更多标签位置：<code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>, <code class=\"codespan\">&#39;insideStartTop&#39;</code>, <code class=\"codespan\">&#39;insideStartBottom&#39;</code>, <code class=\"codespan\">&#39;insideMiddleTop&#39;</code>, <code class=\"codespan\">&#39;insideMiddleBottom&#39;</code>, <code class=\"codespan\">&#39;insideEndTop&#39;</code>, <code class=\"codespan\">&#39;insideEndBottom&#39;</code>。</p>\n<p>其中，<code class=\"codespan\">&#39;insideMiddleBottom&#39;</code> 等同于 <code class=\"codespan\">&#39;middle&#39;</code>。具体位置参见下图。</p>\n<p>文字与线的间距可以通过 <a href=\"#series-.markLine.label.distance\">label.distance</a> 调整。</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=bar-markline&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n"
   },
   "markLine.emphasis.label.distance": {
     "desc": "<p>标签与线之间的间距。如果是数组，第一项为横向间距，第二项为纵向间距。如果是数字，则表示横向纵向使用相同的间距。</p>\n"
@@ -7990,7 +8186,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     "desc": "<p>是否显示标签。</p>\n"
   },
   "markLine.blur.label.position": {
-    "desc": "<p>标签位置，可选：</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code> 线的起始点。</li>\n<li><code class=\"codespan\">&#39;middle&#39;</code> 线的中点。</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> 线的结束点。</li>\n</ul>\n<p>4.7.0 版本起，支持更多标签位置：<code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>, <code class=\"codespan\">&#39;insideStartTop&#39;</code>, <code class=\"codespan\">&#39;insideStartBottom&#39;</code>, <code class=\"codespan\">&#39;insideMiddleTop&#39;</code>, <code class=\"codespan\">&#39;insideMiddleBottom&#39;</code>, <code class=\"codespan\">&#39;insideEndTop&#39;</code>, <code class=\"codespan\">&#39;insideEndBottom&#39;</code>。</p>\n<p>其中，<code class=\"codespan\">&#39;insideMiddleBottom&#39;</code> 等同于 <code class=\"codespan\">&#39;middle&#39;</code>。具体位置参见下图。</p>\n<p>文字与线的间距可以通过 <a href=\"#series-.markLine.label.distance\">label.distance</a> 调整。</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=bar-markline&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n"
+    "desc": "<p>标签位置，可选：</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code> 线的起始点。</li>\n<li><code class=\"codespan\">&#39;middle&#39;</code> 线的中点。</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> 线的结束点。</li>\n</ul>\n<p>4.7.0 版本起，支持更多标签位置：<code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>, <code class=\"codespan\">&#39;insideStartTop&#39;</code>, <code class=\"codespan\">&#39;insideStartBottom&#39;</code>, <code class=\"codespan\">&#39;insideMiddleTop&#39;</code>, <code class=\"codespan\">&#39;insideMiddleBottom&#39;</code>, <code class=\"codespan\">&#39;insideEndTop&#39;</code>, <code class=\"codespan\">&#39;insideEndBottom&#39;</code>。</p>\n<p>其中，<code class=\"codespan\">&#39;insideMiddleBottom&#39;</code> 等同于 <code class=\"codespan\">&#39;middle&#39;</code>。具体位置参见下图。</p>\n<p>文字与线的间距可以通过 <a href=\"#series-.markLine.label.distance\">label.distance</a> 调整。</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=bar-markline&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n"
   },
   "markLine.blur.label.distance": {
     "desc": "<p>标签与线之间的间距。如果是数组，第一项为横向间距，第二项为纵向间距。如果是数字，则表示横向纵向使用相同的间距。</p>\n"
@@ -8064,7 +8260,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markLine.data": {
-    "desc": "<p>标线的数据数组。每个数组项可以是一个两个值的数组，分别表示线的起点和终点，每一项是一个对象，有下面几种方式指定起点或终点的位置。</p>\n<ol>\n<li>通过 <a href=\"#series-pictorialBar.markLine.data.0.x\">x</a>, <a href=\"#series-pictorialBar.markLine.data.0.y\">y</a> 属性指定相对容器的屏幕坐标，单位像素，支持百分比。</li>\n</ol>\n<ol start=\"2\">\n<li><p>用 <a href=\"#series-pictorialBar.markLine.data.0.coord\">coord</a> 属性指定数据在相应坐标系上的坐标位置，单个维度支持设置 <code class=\"codespan\">&#39;min&#39;</code>, <code class=\"codespan\">&#39;max&#39;</code>, <code class=\"codespan\">&#39;average&#39;</code>。</p>\n</li>\n<li><p>直接用 <a href=\"#series-pictorialBar.markLine.data.0.type\">type</a> 属性标注系列中的最大值，最小值。这时候可以使用 <a href=\"#series-pictorialBar.markLine.data.0.valueIndex\">valueIndex</a> 或者 <a href=\"#series-pictorialBar.markLine.data.0.valueDim\">valueDim</a> 指定是在哪个维度上的最大值、最小值、平均值。</p>\n</li>\n<li><p>如果是笛卡尔坐标系的话，也可以通过只指定 <code class=\"codespan\">xAxis</code> 或者 <code class=\"codespan\">yAxis</code> 来实现 X 轴或者 Y 轴为某值的标线，见示例 <a href=\"https://echarts.apache.org/next/examples/editor.html?c=scatter-weight\" target=\"_blank\">scatter-weight</a></p>\n</li>\n</ol>\n<p>当多个属性同时存在时，优先级按上述的顺序。</p>\n<p>也可以是直接通过 <code class=\"codespan\">type</code> 设置该标线的类型，是最大值的线还是平均线。同样的，这时候可以通过使用 <code class=\"codespan\">valueIndex</code> 指定维度。</p>\n<pre><code>data: [\n\n{\n        name: &#39;平均线&#39;,\n        // 支持 &#39;average&#39;, &#39;min&#39;, &#39;max&#39;\n        type: &#39;average&#39;\n    },\n    {\n        name: &#39;Y 轴值为 100 的水平线&#39;,\n        yAxis: 100\n    },\n    [\n        {\n            // 起点和终点的项会共用一个 name\n            name: &#39;最小值到最大值&#39;,\n            type: &#39;min&#39;\n        },\n        {\n            type: &#39;max&#39;\n        }\n    ],\n[\n        {\n            name: &#39;两个坐标之间的标线&#39;,\n            coord: [10, 20]\n        },\n        {\n            coord: [20, 30]\n        }\n    ], [{\n        // 固定起点的 x 像素位置，用于模拟一条指向最大值的水平线\n        yAxis: &#39;max&#39;,\n        x: &#39;90%&#39;\n    }, {\n        type: &#39;max&#39;\n    }],\n[\n        {\n            name: &#39;两个屏幕坐标之间的标线&#39;,\n            x: 100,\n            y: 100\n        },\n        {\n            x: 500,\n            y: 200\n        }\n    ]\n]\n</code></pre>"
+    "desc": "<p>标线的数据数组。每个数组项可以是一个两个值的数组，分别表示线的起点和终点，每一项是一个对象，有下面几种方式指定起点或终点的位置。</p>\n<ol>\n<li>通过 <a href=\"#series-pictorialBar.markLine.data.0.x\">x</a>, <a href=\"#series-pictorialBar.markLine.data.0.y\">y</a> 属性指定相对容器的屏幕坐标，单位像素，支持百分比。</li>\n</ol>\n<ol start=\"2\">\n<li><p>用 <a href=\"#series-pictorialBar.markLine.data.0.coord\">coord</a> 属性指定数据在相应坐标系上的坐标位置，单个维度支持设置 <code class=\"codespan\">&#39;min&#39;</code>, <code class=\"codespan\">&#39;max&#39;</code>, <code class=\"codespan\">&#39;average&#39;</code>。</p>\n</li>\n<li><p>直接用 <a href=\"#series-pictorialBar.markLine.data.0.type\">type</a> 属性标注系列中的最大值，最小值。这时候可以使用 <a href=\"#series-pictorialBar.markLine.data.0.valueIndex\">valueIndex</a> 或者 <a href=\"#series-pictorialBar.markLine.data.0.valueDim\">valueDim</a> 指定是在哪个维度上的最大值、最小值、平均值。</p>\n</li>\n<li><p>如果是笛卡尔坐标系的话，也可以通过只指定 <code class=\"codespan\">xAxis</code> 或者 <code class=\"codespan\">yAxis</code> 来实现 X 轴或者 Y 轴为某值的标线，见示例 <a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=scatter-weight\" target=\"_blank\">scatter-weight</a></p>\n</li>\n</ol>\n<p>当多个属性同时存在时，优先级按上述的顺序。</p>\n<p>也可以是直接通过 <code class=\"codespan\">type</code> 设置该标线的类型，是最大值的线还是平均线。同样的，这时候可以通过使用 <code class=\"codespan\">valueIndex</code> 指定维度。</p>\n<pre><code>data: [\n\n{\n        name: &#39;平均线&#39;,\n        // 支持 &#39;average&#39;, &#39;min&#39;, &#39;max&#39;\n        type: &#39;average&#39;\n    },\n    {\n        name: &#39;Y 轴值为 100 的水平线&#39;,\n        yAxis: 100\n    },\n    [\n        {\n            // 起点和终点的项会共用一个 name\n            name: &#39;最小值到最大值&#39;,\n            type: &#39;min&#39;\n        },\n        {\n            type: &#39;max&#39;\n        }\n    ],\n[\n        {\n            name: &#39;两个坐标之间的标线&#39;,\n            coord: [10, 20]\n        },\n        {\n            coord: [20, 30]\n        }\n    ], [{\n        // 固定起点的 x 像素位置，用于模拟一条指向最大值的水平线\n        yAxis: &#39;max&#39;,\n        x: &#39;90%&#39;\n    }, {\n        type: &#39;max&#39;\n    }],\n[\n        {\n            name: &#39;两个屏幕坐标之间的标线&#39;,\n            x: 100,\n            y: 100\n        },\n        {\n            x: 500,\n            y: 200\n        }\n    ]\n]\n</code></pre>"
   },
   "markLine.data.0": {
     "desc": "<p>起点的数据。</p>\n"
@@ -8234,7 +8430,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     "desc": "<p>是否显示标签。</p>\n"
   },
   "markLine.data.0.label.position": {
-    "desc": "<p>标签位置，可选：</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code> 线的起始点。</li>\n<li><code class=\"codespan\">&#39;middle&#39;</code> 线的中点。</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> 线的结束点。</li>\n</ul>\n<p>4.7.0 版本起，支持更多标签位置：<code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>, <code class=\"codespan\">&#39;insideStartTop&#39;</code>, <code class=\"codespan\">&#39;insideStartBottom&#39;</code>, <code class=\"codespan\">&#39;insideMiddleTop&#39;</code>, <code class=\"codespan\">&#39;insideMiddleBottom&#39;</code>, <code class=\"codespan\">&#39;insideEndTop&#39;</code>, <code class=\"codespan\">&#39;insideEndBottom&#39;</code>。</p>\n<p>其中，<code class=\"codespan\">&#39;insideMiddleBottom&#39;</code> 等同于 <code class=\"codespan\">&#39;middle&#39;</code>。具体位置参见下图。</p>\n<p>文字与线的间距可以通过 <a href=\"#series-.markLine.label.distance\">label.distance</a> 调整。</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=bar-markline&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n"
+    "desc": "<p>标签位置，可选：</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code> 线的起始点。</li>\n<li><code class=\"codespan\">&#39;middle&#39;</code> 线的中点。</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> 线的结束点。</li>\n</ul>\n<p>4.7.0 版本起，支持更多标签位置：<code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>, <code class=\"codespan\">&#39;insideStartTop&#39;</code>, <code class=\"codespan\">&#39;insideStartBottom&#39;</code>, <code class=\"codespan\">&#39;insideMiddleTop&#39;</code>, <code class=\"codespan\">&#39;insideMiddleBottom&#39;</code>, <code class=\"codespan\">&#39;insideEndTop&#39;</code>, <code class=\"codespan\">&#39;insideEndBottom&#39;</code>。</p>\n<p>其中，<code class=\"codespan\">&#39;insideMiddleBottom&#39;</code> 等同于 <code class=\"codespan\">&#39;middle&#39;</code>。具体位置参见下图。</p>\n<p>文字与线的间距可以通过 <a href=\"#series-.markLine.label.distance\">label.distance</a> 调整。</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=bar-markline&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n"
   },
   "markLine.data.0.label.distance": {
     "desc": "<p>标签与线之间的间距。如果是数组，第一项为横向间距，第二项为纵向间距。如果是数字，则表示横向纵向使用相同的间距。</p>\n"
@@ -8321,7 +8517,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     "desc": "<p>是否显示标签。</p>\n"
   },
   "markLine.data.0.emphasis.label.position": {
-    "desc": "<p>标签位置，可选：</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code> 线的起始点。</li>\n<li><code class=\"codespan\">&#39;middle&#39;</code> 线的中点。</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> 线的结束点。</li>\n</ul>\n<p>4.7.0 版本起，支持更多标签位置：<code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>, <code class=\"codespan\">&#39;insideStartTop&#39;</code>, <code class=\"codespan\">&#39;insideStartBottom&#39;</code>, <code class=\"codespan\">&#39;insideMiddleTop&#39;</code>, <code class=\"codespan\">&#39;insideMiddleBottom&#39;</code>, <code class=\"codespan\">&#39;insideEndTop&#39;</code>, <code class=\"codespan\">&#39;insideEndBottom&#39;</code>。</p>\n<p>其中，<code class=\"codespan\">&#39;insideMiddleBottom&#39;</code> 等同于 <code class=\"codespan\">&#39;middle&#39;</code>。具体位置参见下图。</p>\n<p>文字与线的间距可以通过 <a href=\"#series-.markLine.label.distance\">label.distance</a> 调整。</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=bar-markline&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n"
+    "desc": "<p>标签位置，可选：</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code> 线的起始点。</li>\n<li><code class=\"codespan\">&#39;middle&#39;</code> 线的中点。</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> 线的结束点。</li>\n</ul>\n<p>4.7.0 版本起，支持更多标签位置：<code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>, <code class=\"codespan\">&#39;insideStartTop&#39;</code>, <code class=\"codespan\">&#39;insideStartBottom&#39;</code>, <code class=\"codespan\">&#39;insideMiddleTop&#39;</code>, <code class=\"codespan\">&#39;insideMiddleBottom&#39;</code>, <code class=\"codespan\">&#39;insideEndTop&#39;</code>, <code class=\"codespan\">&#39;insideEndBottom&#39;</code>。</p>\n<p>其中，<code class=\"codespan\">&#39;insideMiddleBottom&#39;</code> 等同于 <code class=\"codespan\">&#39;middle&#39;</code>。具体位置参见下图。</p>\n<p>文字与线的间距可以通过 <a href=\"#series-.markLine.label.distance\">label.distance</a> 调整。</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=bar-markline&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n"
   },
   "markLine.data.0.emphasis.label.distance": {
     "desc": "<p>标签与线之间的间距。如果是数组，第一项为横向间距，第二项为纵向间距。如果是数字，则表示横向纵向使用相同的间距。</p>\n"
@@ -8411,7 +8607,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     "desc": "<p>是否显示标签。</p>\n"
   },
   "markLine.data.0.blur.label.position": {
-    "desc": "<p>标签位置，可选：</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code> 线的起始点。</li>\n<li><code class=\"codespan\">&#39;middle&#39;</code> 线的中点。</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> 线的结束点。</li>\n</ul>\n<p>4.7.0 版本起，支持更多标签位置：<code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>, <code class=\"codespan\">&#39;insideStartTop&#39;</code>, <code class=\"codespan\">&#39;insideStartBottom&#39;</code>, <code class=\"codespan\">&#39;insideMiddleTop&#39;</code>, <code class=\"codespan\">&#39;insideMiddleBottom&#39;</code>, <code class=\"codespan\">&#39;insideEndTop&#39;</code>, <code class=\"codespan\">&#39;insideEndBottom&#39;</code>。</p>\n<p>其中，<code class=\"codespan\">&#39;insideMiddleBottom&#39;</code> 等同于 <code class=\"codespan\">&#39;middle&#39;</code>。具体位置参见下图。</p>\n<p>文字与线的间距可以通过 <a href=\"#series-.markLine.label.distance\">label.distance</a> 调整。</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=bar-markline&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n"
+    "desc": "<p>标签位置，可选：</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code> 线的起始点。</li>\n<li><code class=\"codespan\">&#39;middle&#39;</code> 线的中点。</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> 线的结束点。</li>\n</ul>\n<p>4.7.0 版本起，支持更多标签位置：<code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>, <code class=\"codespan\">&#39;insideStartTop&#39;</code>, <code class=\"codespan\">&#39;insideStartBottom&#39;</code>, <code class=\"codespan\">&#39;insideMiddleTop&#39;</code>, <code class=\"codespan\">&#39;insideMiddleBottom&#39;</code>, <code class=\"codespan\">&#39;insideEndTop&#39;</code>, <code class=\"codespan\">&#39;insideEndBottom&#39;</code>。</p>\n<p>其中，<code class=\"codespan\">&#39;insideMiddleBottom&#39;</code> 等同于 <code class=\"codespan\">&#39;middle&#39;</code>。具体位置参见下图。</p>\n<p>文字与线的间距可以通过 <a href=\"#series-.markLine.label.distance\">label.distance</a> 调整。</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=bar-markline&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n"
   },
   "markLine.data.0.blur.label.distance": {
     "desc": "<p>标签与线之间的间距。如果是数组，第一项为横向间距，第二项为纵向间距。如果是数字，则表示横向纵向使用相同的间距。</p>\n"
@@ -8587,7 +8783,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     "desc": "<p>是否显示标签。</p>\n"
   },
   "markLine.data.1.label.position": {
-    "desc": "<p>标签位置，可选：</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code> 线的起始点。</li>\n<li><code class=\"codespan\">&#39;middle&#39;</code> 线的中点。</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> 线的结束点。</li>\n</ul>\n<p>4.7.0 版本起，支持更多标签位置：<code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>, <code class=\"codespan\">&#39;insideStartTop&#39;</code>, <code class=\"codespan\">&#39;insideStartBottom&#39;</code>, <code class=\"codespan\">&#39;insideMiddleTop&#39;</code>, <code class=\"codespan\">&#39;insideMiddleBottom&#39;</code>, <code class=\"codespan\">&#39;insideEndTop&#39;</code>, <code class=\"codespan\">&#39;insideEndBottom&#39;</code>。</p>\n<p>其中，<code class=\"codespan\">&#39;insideMiddleBottom&#39;</code> 等同于 <code class=\"codespan\">&#39;middle&#39;</code>。具体位置参见下图。</p>\n<p>文字与线的间距可以通过 <a href=\"#series-.markLine.label.distance\">label.distance</a> 调整。</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=bar-markline&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n"
+    "desc": "<p>标签位置，可选：</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code> 线的起始点。</li>\n<li><code class=\"codespan\">&#39;middle&#39;</code> 线的中点。</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> 线的结束点。</li>\n</ul>\n<p>4.7.0 版本起，支持更多标签位置：<code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>, <code class=\"codespan\">&#39;insideStartTop&#39;</code>, <code class=\"codespan\">&#39;insideStartBottom&#39;</code>, <code class=\"codespan\">&#39;insideMiddleTop&#39;</code>, <code class=\"codespan\">&#39;insideMiddleBottom&#39;</code>, <code class=\"codespan\">&#39;insideEndTop&#39;</code>, <code class=\"codespan\">&#39;insideEndBottom&#39;</code>。</p>\n<p>其中，<code class=\"codespan\">&#39;insideMiddleBottom&#39;</code> 等同于 <code class=\"codespan\">&#39;middle&#39;</code>。具体位置参见下图。</p>\n<p>文字与线的间距可以通过 <a href=\"#series-.markLine.label.distance\">label.distance</a> 调整。</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=bar-markline&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n"
   },
   "markLine.data.1.label.distance": {
     "desc": "<p>标签与线之间的间距。如果是数组，第一项为横向间距，第二项为纵向间距。如果是数字，则表示横向纵向使用相同的间距。</p>\n"
@@ -8674,7 +8870,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     "desc": "<p>是否显示标签。</p>\n"
   },
   "markLine.data.1.emphasis.label.position": {
-    "desc": "<p>标签位置，可选：</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code> 线的起始点。</li>\n<li><code class=\"codespan\">&#39;middle&#39;</code> 线的中点。</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> 线的结束点。</li>\n</ul>\n<p>4.7.0 版本起，支持更多标签位置：<code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>, <code class=\"codespan\">&#39;insideStartTop&#39;</code>, <code class=\"codespan\">&#39;insideStartBottom&#39;</code>, <code class=\"codespan\">&#39;insideMiddleTop&#39;</code>, <code class=\"codespan\">&#39;insideMiddleBottom&#39;</code>, <code class=\"codespan\">&#39;insideEndTop&#39;</code>, <code class=\"codespan\">&#39;insideEndBottom&#39;</code>。</p>\n<p>其中，<code class=\"codespan\">&#39;insideMiddleBottom&#39;</code> 等同于 <code class=\"codespan\">&#39;middle&#39;</code>。具体位置参见下图。</p>\n<p>文字与线的间距可以通过 <a href=\"#series-.markLine.label.distance\">label.distance</a> 调整。</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=bar-markline&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n"
+    "desc": "<p>标签位置，可选：</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code> 线的起始点。</li>\n<li><code class=\"codespan\">&#39;middle&#39;</code> 线的中点。</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> 线的结束点。</li>\n</ul>\n<p>4.7.0 版本起，支持更多标签位置：<code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>, <code class=\"codespan\">&#39;insideStartTop&#39;</code>, <code class=\"codespan\">&#39;insideStartBottom&#39;</code>, <code class=\"codespan\">&#39;insideMiddleTop&#39;</code>, <code class=\"codespan\">&#39;insideMiddleBottom&#39;</code>, <code class=\"codespan\">&#39;insideEndTop&#39;</code>, <code class=\"codespan\">&#39;insideEndBottom&#39;</code>。</p>\n<p>其中，<code class=\"codespan\">&#39;insideMiddleBottom&#39;</code> 等同于 <code class=\"codespan\">&#39;middle&#39;</code>。具体位置参见下图。</p>\n<p>文字与线的间距可以通过 <a href=\"#series-.markLine.label.distance\">label.distance</a> 调整。</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=bar-markline&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n"
   },
   "markLine.data.1.emphasis.label.distance": {
     "desc": "<p>标签与线之间的间距。如果是数组，第一项为横向间距，第二项为纵向间距。如果是数字，则表示横向纵向使用相同的间距。</p>\n"
@@ -8764,7 +8960,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     "desc": "<p>是否显示标签。</p>\n"
   },
   "markLine.data.1.blur.label.position": {
-    "desc": "<p>标签位置，可选：</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code> 线的起始点。</li>\n<li><code class=\"codespan\">&#39;middle&#39;</code> 线的中点。</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> 线的结束点。</li>\n</ul>\n<p>4.7.0 版本起，支持更多标签位置：<code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>, <code class=\"codespan\">&#39;insideStartTop&#39;</code>, <code class=\"codespan\">&#39;insideStartBottom&#39;</code>, <code class=\"codespan\">&#39;insideMiddleTop&#39;</code>, <code class=\"codespan\">&#39;insideMiddleBottom&#39;</code>, <code class=\"codespan\">&#39;insideEndTop&#39;</code>, <code class=\"codespan\">&#39;insideEndBottom&#39;</code>。</p>\n<p>其中，<code class=\"codespan\">&#39;insideMiddleBottom&#39;</code> 等同于 <code class=\"codespan\">&#39;middle&#39;</code>。具体位置参见下图。</p>\n<p>文字与线的间距可以通过 <a href=\"#series-.markLine.label.distance\">label.distance</a> 调整。</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=bar-markline&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n"
+    "desc": "<p>标签位置，可选：</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code> 线的起始点。</li>\n<li><code class=\"codespan\">&#39;middle&#39;</code> 线的中点。</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> 线的结束点。</li>\n</ul>\n<p>4.7.0 版本起，支持更多标签位置：<code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>, <code class=\"codespan\">&#39;insideStartTop&#39;</code>, <code class=\"codespan\">&#39;insideStartBottom&#39;</code>, <code class=\"codespan\">&#39;insideMiddleTop&#39;</code>, <code class=\"codespan\">&#39;insideMiddleBottom&#39;</code>, <code class=\"codespan\">&#39;insideEndTop&#39;</code>, <code class=\"codespan\">&#39;insideEndBottom&#39;</code>。</p>\n<p>其中，<code class=\"codespan\">&#39;insideMiddleBottom&#39;</code> 等同于 <code class=\"codespan\">&#39;middle&#39;</code>。具体位置参见下图。</p>\n<p>文字与线的间距可以通过 <a href=\"#series-.markLine.label.distance\">label.distance</a> 调整。</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=bar-markline&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n"
   },
   "markLine.data.1.blur.label.distance": {
     "desc": "<p>标签与线之间的间距。如果是数组，第一项为横向间距，第二项为纵向间距。如果是数字，则表示横向纵向使用相同的间距。</p>\n"
@@ -8794,7 +8990,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markLine.animationEasing": {
-    "desc": "\n\n<p>初始动画的缓动效果。不同的缓动效果可以参考 <a href=\"https://echarts.apache.org/next/examples/editor.html?c=line-easing\" target=\"_blank\">缓动示例</a>。</p>\n",
+    "desc": "\n\n<p>初始动画的缓动效果。不同的缓动效果可以参考 <a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=line-easing\" target=\"_blank\">缓动示例</a>。</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "linear,quadraticIn,quadraticOut,quadraticInOut,cubicIn,cubicOut,cubicInOut,quarticIn,quarticOut,quarticInOut,quinticIn,quinticOut,quinticInOut,sinusoidalIn,sinusoidalOut,sinusoidalInOut,exponentialIn,exponentialOut,exponentialInOut,circularIn,circularOut,circularInOut,elasticIn,elasticOut,elasticInOut,backIn,backOut,backInOut,bounceIn,bounceOut,bounceInOut",
@@ -8802,7 +8998,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markLine.animationDelay": {
-    "desc": "<p>初始动画的延迟，支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的初始动画效果。</p>\n<p>如下示例：</p>\n<pre><code class=\"lang-js\">animationDelay: function (idx) {\n    // 越往后的数据延迟越大\n    return idx * 100;\n}\n</code></pre>\n<p>也可以看<a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-animation-delay\" target=\"_blank\">该示例</a></p>\n"
+    "desc": "<p>初始动画的延迟，支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的初始动画效果。</p>\n<p>如下示例：</p>\n<pre><code class=\"lang-js\">animationDelay: function (idx) {\n    // 越往后的数据延迟越大\n    return idx * 100;\n}\n</code></pre>\n<p>也可以看<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=bar-animation-delay\" target=\"_blank\">该示例</a></p>\n"
   },
   "markLine.animationDurationUpdate": {
     "desc": "\n\n<p>数据更新动画的时长。</p>\n<p>支持回调函数，可以通过每个数据返回不同的时长实现更戏剧的更新动画效果：</p>\n<pre><code class=\"lang-js\">animationDurationUpdate: function (idx) {\n    // 越往后的数据时长越大\n    return idx * 100;\n}\n</code></pre>\n",
@@ -8821,7 +9017,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markLine.animationDelayUpdate": {
-    "desc": "<p>数据更新动画的延迟，支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的更新动画效果。</p>\n<p>如下示例：</p>\n<pre><code class=\"lang-js\">animationDelayUpdate: function (idx) {\n    // 越往后的数据延迟越大\n    return idx * 100;\n}\n</code></pre>\n<p>也可以看<a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-animation-delay\" target=\"_blank\">该示例</a></p>\n"
+    "desc": "<p>数据更新动画的延迟，支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的更新动画效果。</p>\n<p>如下示例：</p>\n<pre><code class=\"lang-js\">animationDelayUpdate: function (idx) {\n    // 越往后的数据延迟越大\n    return idx * 100;\n}\n</code></pre>\n<p>也可以看<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=bar-animation-delay\" target=\"_blank\">该示例</a></p>\n"
   },
   "markArea": {
     "desc": "<p>图表标域，常用于标记图表中某个范围的数据，例如标出某段时间投放了广告。</p>\n"
@@ -8843,14 +9039,14 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markArea.label.position": {
-    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "markArea.label.distance": {
-    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -8859,7 +9055,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markArea.label.rotate": {
-    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
+    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -9007,10 +9203,24 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markArea.label.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "markArea.label.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "markArea.label.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
@@ -9334,14 +9544,14 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markArea.emphasis.label.position": {
-    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "markArea.emphasis.label.distance": {
-    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -9350,7 +9560,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markArea.emphasis.label.rotate": {
-    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
+    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -9498,10 +9708,24 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markArea.emphasis.label.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "markArea.emphasis.label.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "markArea.emphasis.label.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
@@ -9822,14 +10046,14 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markArea.blur.label.position": {
-    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "markArea.blur.label.distance": {
-    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -9838,7 +10062,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markArea.blur.label.rotate": {
-    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
+    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -9986,10 +10210,24 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markArea.blur.label.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "markArea.blur.label.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "markArea.blur.label.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
@@ -10300,7 +10538,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markArea.data": {
-    "desc": "<p>标域的数据数组。每个数组项是一个两个项的数组，分别表示标域左上角和右下角的位置，每个项支持通过下面几种方式指定自己的位置</p>\n<ol>\n<li>通过 <a href=\"#series-pictorialBar.markArea.data.0.x\">x</a>, <a href=\"#series-pictorialBar.markArea.data.0.y\">y</a> 属性指定相对容器的屏幕坐标，单位像素，支持百分比。</li>\n</ol>\n<ol start=\"2\">\n<li><p>用 <a href=\"#series-pictorialBar.markArea.data.0.coord\">coord</a> 属性指定数据在相应坐标系上的坐标位置，单个维度支持设置 <code class=\"codespan\">&#39;min&#39;</code>, <code class=\"codespan\">&#39;max&#39;</code>, <code class=\"codespan\">&#39;average&#39;</code>。</p>\n</li>\n<li><p>直接用 <a href=\"#series-pictorialBar.markArea.data.0.type\">type</a> 属性标注系列中的最大值，最小值。这时候可以使用 <a href=\"#series-pictorialBar.markArea.data.0.valueIndex\">valueIndex</a> 或者 <a href=\"#series-pictorialBar.markPoint.data.0.valueDim\">valueDim</a> 指定是在哪个维度上的最大值、最小值、平均值。</p>\n</li>\n<li><p>如果是笛卡尔坐标系的话，也可以通过只指定 <code class=\"codespan\">xAxis</code> 或者 <code class=\"codespan\">yAxis</code> 来实现 X 轴或者 Y 轴为某值的标域，见示例 <a href=\"https://echarts.apache.org/next/examples/editor.html?c=scatter-weight\" target=\"_blank\">scatter-weight</a></p>\n</li>\n</ol>\n<p>当多个属性同时存在时，优先级按上述的顺序。</p>\n<pre><code>data: [\n\n\n    [\n        {\n            name: &#39;平均值到最大值&#39;,\n            type: &#39;average&#39;\n        },\n        {\n            type: &#39;max&#39;\n        }\n    ],\n\n    [\n        {\n            name: &#39;两个坐标之间的标域&#39;,\n            coord: [10, 20]\n        },\n        {\n            coord: [20, 30]\n        }\n    ], [\n        {\n            name: &#39;60分到80分&#39;,\n            yAxis: 60\n        },\n        {\n            yAxis: 80\n        }\n    ], [\n        {\n            name: &#39;所有数据范围区间&#39;,\n            coord: [&#39;min&#39;, &#39;min&#39;]\n        },\n        {\n            coord: [&#39;max&#39;, &#39;max&#39;]\n        }\n    ],\n[\n        {\n            name: &#39;两个屏幕坐标之间的标域&#39;,\n            x: 100,\n            y: 100\n        }, {\n            x: &#39;90%&#39;,\n            y: &#39;10%&#39;\n        }\n    ]\n]\n</code></pre>"
+    "desc": "<p>标域的数据数组。每个数组项是一个两个项的数组，分别表示标域左上角和右下角的位置，每个项支持通过下面几种方式指定自己的位置</p>\n<ol>\n<li>通过 <a href=\"#series-pictorialBar.markArea.data.0.x\">x</a>, <a href=\"#series-pictorialBar.markArea.data.0.y\">y</a> 属性指定相对容器的屏幕坐标，单位像素，支持百分比。</li>\n</ol>\n<ol start=\"2\">\n<li><p>用 <a href=\"#series-pictorialBar.markArea.data.0.coord\">coord</a> 属性指定数据在相应坐标系上的坐标位置，单个维度支持设置 <code class=\"codespan\">&#39;min&#39;</code>, <code class=\"codespan\">&#39;max&#39;</code>, <code class=\"codespan\">&#39;average&#39;</code>。</p>\n</li>\n<li><p>直接用 <a href=\"#series-pictorialBar.markArea.data.0.type\">type</a> 属性标注系列中的最大值，最小值。这时候可以使用 <a href=\"#series-pictorialBar.markArea.data.0.valueIndex\">valueIndex</a> 或者 <a href=\"#series-pictorialBar.markPoint.data.0.valueDim\">valueDim</a> 指定是在哪个维度上的最大值、最小值、平均值。</p>\n</li>\n<li><p>如果是笛卡尔坐标系的话，也可以通过只指定 <code class=\"codespan\">xAxis</code> 或者 <code class=\"codespan\">yAxis</code> 来实现 X 轴或者 Y 轴为某值的标域，见示例 <a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=scatter-weight\" target=\"_blank\">scatter-weight</a></p>\n</li>\n</ol>\n<p>当多个属性同时存在时，优先级按上述的顺序。</p>\n<pre><code>data: [\n\n\n    [\n        {\n            name: &#39;平均值到最大值&#39;,\n            type: &#39;average&#39;\n        },\n        {\n            type: &#39;max&#39;\n        }\n    ],\n\n    [\n        {\n            name: &#39;两个坐标之间的标域&#39;,\n            coord: [10, 20]\n        },\n        {\n            coord: [20, 30]\n        }\n    ], [\n        {\n            name: &#39;60分到80分&#39;,\n            yAxis: 60\n        },\n        {\n            yAxis: 80\n        }\n    ], [\n        {\n            name: &#39;所有数据范围区间&#39;,\n            coord: [&#39;min&#39;, &#39;min&#39;]\n        },\n        {\n            coord: [&#39;max&#39;, &#39;max&#39;]\n        }\n    ],\n[\n        {\n            name: &#39;两个屏幕坐标之间的标域&#39;,\n            x: 100,\n            y: 100\n        }, {\n            x: &#39;90%&#39;,\n            y: &#39;10%&#39;\n        }\n    ]\n]\n</code></pre>"
   },
   "markArea.data.0": {
     "desc": "<p>标域左上角的数据</p>\n"
@@ -10432,14 +10670,14 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markArea.data.0.label.position": {
-    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "markArea.data.0.label.distance": {
-    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -10448,7 +10686,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markArea.data.0.label.rotate": {
-    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
+    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -10596,10 +10834,24 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markArea.data.0.label.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "markArea.data.0.label.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "markArea.data.0.label.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
@@ -10917,14 +11169,14 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markArea.data.0.emphasis.label.position": {
-    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "markArea.data.0.emphasis.label.distance": {
-    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -10933,7 +11185,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markArea.data.0.emphasis.label.rotate": {
-    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
+    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -11081,10 +11333,24 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markArea.data.0.emphasis.label.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "markArea.data.0.emphasis.label.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "markArea.data.0.emphasis.label.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
@@ -11405,14 +11671,14 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markArea.data.0.blur.label.position": {
-    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "markArea.data.0.blur.label.distance": {
-    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -11421,7 +11687,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markArea.data.0.blur.label.rotate": {
-    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
+    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -11569,10 +11835,24 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markArea.data.0.blur.label.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "markArea.data.0.blur.label.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "markArea.data.0.blur.label.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
@@ -11941,14 +12221,14 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markArea.data.1.label.position": {
-    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "markArea.data.1.label.distance": {
-    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -11957,7 +12237,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markArea.data.1.label.rotate": {
-    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
+    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -12105,10 +12385,24 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markArea.data.1.label.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "markArea.data.1.label.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "markArea.data.1.label.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
@@ -12426,14 +12720,14 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markArea.data.1.emphasis.label.position": {
-    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "markArea.data.1.emphasis.label.distance": {
-    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -12442,7 +12736,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markArea.data.1.emphasis.label.rotate": {
-    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
+    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -12590,10 +12884,24 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markArea.data.1.emphasis.label.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "markArea.data.1.emphasis.label.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "markArea.data.1.emphasis.label.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
@@ -12914,14 +13222,14 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markArea.data.1.blur.label.position": {
-    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n\n\n<p>标签的位置。</p>\n<ul>\n<li><p>可以通过内置的语义声明位置：</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  position: &#39;top&#39;\n</code></pre>\n<p>  支持：<code class=\"codespan\">top</code> / <code class=\"codespan\">left</code> / <code class=\"codespan\">right</code> / <code class=\"codespan\">bottom</code> / <code class=\"codespan\">inside</code> / <code class=\"codespan\">insideLeft</code> / <code class=\"codespan\">insideRight</code> / <code class=\"codespan\">insideTop</code> / <code class=\"codespan\">insideBottom</code> / <code class=\"codespan\">insideTopLeft</code> / <code class=\"codespan\">insideBottomLeft</code> / <code class=\"codespan\">insideTopRight</code> / <code class=\"codespan\">insideBottomRight</code></p>\n</li>\n<li><p>也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。</p>\n<p>  示例：</p>\n<pre><code class=\"lang-js\">  // 绝对的像素值\n  position: [10, 10],\n  // 相对的百分比\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n</ul>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "markArea.data.1.blur.label.distance": {
-    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -12930,7 +13238,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markArea.data.1.blur.label.rotate": {
-    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
+    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -13078,10 +13386,24 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markArea.data.1.blur.label.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "markArea.data.1.blur.label.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "markArea.data.1.blur.label.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
@@ -13342,7 +13664,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markArea.animationEasing": {
-    "desc": "\n\n<p>初始动画的缓动效果。不同的缓动效果可以参考 <a href=\"https://echarts.apache.org/next/examples/editor.html?c=line-easing\" target=\"_blank\">缓动示例</a>。</p>\n",
+    "desc": "\n\n<p>初始动画的缓动效果。不同的缓动效果可以参考 <a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=line-easing\" target=\"_blank\">缓动示例</a>。</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "linear,quadraticIn,quadraticOut,quadraticInOut,cubicIn,cubicOut,cubicInOut,quarticIn,quarticOut,quarticInOut,quinticIn,quinticOut,quinticInOut,sinusoidalIn,sinusoidalOut,sinusoidalInOut,exponentialIn,exponentialOut,exponentialInOut,circularIn,circularOut,circularInOut,elasticIn,elasticOut,elasticInOut,backIn,backOut,backInOut,bounceIn,bounceOut,bounceInOut",
@@ -13350,7 +13672,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markArea.animationDelay": {
-    "desc": "<p>初始动画的延迟，支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的初始动画效果。</p>\n<p>如下示例：</p>\n<pre><code class=\"lang-js\">animationDelay: function (idx) {\n    // 越往后的数据延迟越大\n    return idx * 100;\n}\n</code></pre>\n<p>也可以看<a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-animation-delay\" target=\"_blank\">该示例</a></p>\n"
+    "desc": "<p>初始动画的延迟，支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的初始动画效果。</p>\n<p>如下示例：</p>\n<pre><code class=\"lang-js\">animationDelay: function (idx) {\n    // 越往后的数据延迟越大\n    return idx * 100;\n}\n</code></pre>\n<p>也可以看<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=bar-animation-delay\" target=\"_blank\">该示例</a></p>\n"
   },
   "markArea.animationDurationUpdate": {
     "desc": "\n\n<p>数据更新动画的时长。</p>\n<p>支持回调函数，可以通过每个数据返回不同的时长实现更戏剧的更新动画效果：</p>\n<pre><code class=\"lang-js\">animationDurationUpdate: function (idx) {\n    // 越往后的数据时长越大\n    return idx * 100;\n}\n</code></pre>\n",
@@ -13369,7 +13691,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "markArea.animationDelayUpdate": {
-    "desc": "<p>数据更新动画的延迟，支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的更新动画效果。</p>\n<p>如下示例：</p>\n<pre><code class=\"lang-js\">animationDelayUpdate: function (idx) {\n    // 越往后的数据延迟越大\n    return idx * 100;\n}\n</code></pre>\n<p>也可以看<a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-animation-delay\" target=\"_blank\">该示例</a></p>\n"
+    "desc": "<p>数据更新动画的延迟，支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的更新动画效果。</p>\n<p>如下示例：</p>\n<pre><code class=\"lang-js\">animationDelayUpdate: function (idx) {\n    // 越往后的数据延迟越大\n    return idx * 100;\n}\n</code></pre>\n<p>也可以看<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=bar-animation-delay\" target=\"_blank\">该示例</a></p>\n"
   },
   "zlevel": {
     "desc": "<p>象形柱图所有图形的 zlevel 值。</p>\n<p><code class=\"codespan\">zlevel</code>用于 Canvas 分层，不同<code class=\"codespan\">zlevel</code>值的图形会放置在不同的 Canvas 中，Canvas 分层是一种常见的优化手段。我们可以把一些图形变化频繁（例如有动画）的组件设置成一个单独的<code class=\"codespan\">zlevel</code>。需要注意的是过多的 Canvas 会引起内存开销的增大，在手机端上需要谨慎使用以防崩溃。</p>\n<p><code class=\"codespan\">zlevel</code> 大的 Canvas 会放在 <code class=\"codespan\">zlevel</code> 小的 Canvas 的上面。</p>\n"
@@ -13405,7 +13727,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "animationEasing": {
-    "desc": "\n\n<p>初始动画的缓动效果。不同的缓动效果可以参考 <a href=\"https://echarts.apache.org/next/examples/editor.html?c=line-easing\" target=\"_blank\">缓动示例</a>。</p>\n",
+    "desc": "\n\n<p>初始动画的缓动效果。不同的缓动效果可以参考 <a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=line-easing\" target=\"_blank\">缓动示例</a>。</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "linear,quadraticIn,quadraticOut,quadraticInOut,cubicIn,cubicOut,cubicInOut,quarticIn,quarticOut,quarticInOut,quinticIn,quinticOut,quinticInOut,sinusoidalIn,sinusoidalOut,sinusoidalInOut,exponentialIn,exponentialOut,exponentialInOut,circularIn,circularOut,circularInOut,elasticIn,elasticOut,elasticInOut,backIn,backOut,backInOut,bounceIn,bounceOut,bounceInOut",
@@ -13429,10 +13751,10 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "animationEasingUpdate.animationDelay": {
-    "desc": "<p>动画开始之前的延迟，支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的更新动画效果。</p>\n<p>如下示例：</p>\n<pre><code class=\"lang-js\">animationDelay: function (dataIndex, params) {\n    return params.index * 30;\n}\n或者反向：\nanimationDelay: function (dataIndex, params) {\n    return (params.count - 1 - params.index) * 30;\n}\n</code></pre>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/pictorialBar-repeatDirection&reset=1&edit=1\" width=\"800\" height=\"400\"><iframe />\n\n"
+    "desc": "<p>动画开始之前的延迟，支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的更新动画效果。</p>\n<p>如下示例：</p>\n<pre><code class=\"lang-js\">animationDelay: function (dataIndex, params) {\n    return params.index * 30;\n}\n或者反向：\nanimationDelay: function (dataIndex, params) {\n    return (params.count - 1 - params.index) * 30;\n}\n</code></pre>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/pictorialBar-repeatDirection&reset=1&edit=1\" width=\"800\" height=\"400\"><iframe />\n\n"
   },
   "animationEasingUpdate.animationDelayUpdate": {
-    "desc": "<p>数据更新动画的延迟，支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的更新动画效果。</p>\n<p>如下示例：</p>\n<pre><code class=\"lang-js\">animationDelay: function (dataIndex, params) {\n    return params.index * 30;\n}\n或者反向：\nanimationDelay: function (dataIndex, params) {\n    return (params.count - 1 - params.index) * 30;\n}\n</code></pre>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/pictorialBar-repeatDirection&reset=1&edit=1\" width=\"800\" height=\"400\"><iframe />\n\n\n\n\n\n\n\n"
+    "desc": "<p>数据更新动画的延迟，支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的更新动画效果。</p>\n<p>如下示例：</p>\n<pre><code class=\"lang-js\">animationDelay: function (dataIndex, params) {\n    return params.index * 30;\n}\n或者反向：\nanimationDelay: function (dataIndex, params) {\n    return (params.count - 1 - params.index) * 30;\n}\n</code></pre>\n<p>例子：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/pictorialBar-repeatDirection&reset=1&edit=1\" width=\"800\" height=\"400\"><iframe />\n\n\n\n\n\n\n\n"
   },
   "tooltip": {
     "desc": "<p>本系列特定的 tooltip 设定。</p>\n"
@@ -13522,10 +13844,24 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "tooltip.textStyle.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "tooltip.textStyle.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "tooltip.textStyle.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n",

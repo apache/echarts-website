@@ -384,10 +384,24 @@ window.__EC_DOC_option_timeline = {
     }
   },
   "label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n",
@@ -829,7 +843,7 @@ window.__EC_DOC_option_timeline = {
     }
   },
   "checkpointStyle.animationEasing": {
-    "desc": "\n\n<p>The easing effect of animation of <code class=\"codespan\">checkpoint</code> in <code class=\"codespan\">timeline</code> component. Refers to <a href=\"https://echarts.apache.org/next/examples/view.html?c=line-easing\" target=\"_blank\">easing sample</a> for different easing effects.</p>\n",
+    "desc": "\n\n<p>The easing effect of animation of <code class=\"codespan\">checkpoint</code> in <code class=\"codespan\">timeline</code> component. Refers to <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=line-easing\" target=\"_blank\">easing sample</a> for different easing effects.</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "quinticInOut",
@@ -1272,10 +1286,24 @@ window.__EC_DOC_option_timeline = {
     }
   },
   "progress.label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "progress.label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "progress.label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n",
@@ -1660,10 +1688,24 @@ window.__EC_DOC_option_timeline = {
     }
   },
   "emphasis.label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "emphasis.label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "emphasis.label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n",

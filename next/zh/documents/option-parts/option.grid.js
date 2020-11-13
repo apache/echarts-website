@@ -136,7 +136,7 @@ window.__EC_DOC_option_grid = {
     }
   },
   "tooltip.axisPointer": {
-    "desc": "<p>坐标轴指示器配置项。</p>\n<p><code class=\"codespan\">tooltip.axisPointer</code> 是配置坐标轴指示器的快捷方式。实际上坐标轴指示器的全部功能，都可以通过轴上的 axisPointer 配置项完成（例如 <a href=\"#xAxis.axisPointer\">xAxis.axisPointer</a> 或 <a href=\"#angleAxis.axisPointer\">angleAxis.axisPointer</a>）。但是使用 <code class=\"codespan\">tooltip.axisPointer</code> 在简单场景下会更方便一些。</p>\n<blockquote>\n<p><strong>注意：</strong> <code class=\"codespan\">tooltip.axisPointer</code> 中诸配置项的优先级低于轴上的 axisPointer 的配置项。</p>\n</blockquote>\n<hr>\n<p>坐标轴指示器是指示坐标轴当前刻度的工具。</p>\n<p>如下例，鼠标悬浮到图上，可以出现标线和刻度文本。</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/candlestick-axisPointer&edit=1&reset=1\" width=\"600\" height=\"450\"><iframe />\n\n\n<p>上例中，使用了 <a href=\"#axisPointer.link\">axisPointer.link</a> 来关联不同的坐标系中的 axisPointer。</p>\n<p>坐标轴指示器也有适合触屏的交互方式，如下：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=line-tooltip-touch&edit=1&reset=1\" width=\"600\" height=\"400\"><iframe />\n\n\n<p>坐标轴指示器在多轴的场景能起到辅助作用：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=multiple-y-axis&edit=1&reset=1\" width=\"600\" height=\"300\"><iframe />\n\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=multiple-x-axis&edit=1&reset=1\" width=\"600\" height=\"300\"><iframe />\n\n\n\n\n<hr>\n<blockquote>\n<p><strong>注意：</strong>\n一般来说，axisPointer 的具体配置项会配置在各个轴中（如 <a href=\"#xAxis.axisPointer\">xAxis.axisPointer</a>）或者 <code class=\"codespan\">tooltip</code> 中（如 <a href=\"#tooltip.axisPointer\">tooltip.axisPointer</a>）。</p>\n</blockquote>\n<blockquote>\n<p>但是这几个选项只能配置在全局的 axisPointer 中：<a href=\"#axisPointer.triggerOn\">axisPointer.triggerOn</a>、<a href=\"#axisPointer.link\">axisPointer.link</a>。</p>\n</blockquote>\n<hr>\n<p><strong>如何显示 axisPointer：</strong></p>\n<p>直角坐标系 <a href=\"#grid\">grid</a>、极坐标系 <a href=\"#polar\">polar</a>、单轴坐标系 <a href=\"#single\">single</a> 中的每个轴都自己的 axisPointer。</p>\n<p>他们的 axisPointer 默认不显示。有两种方法可以让他们显示：</p>\n<ul>\n<li><p>设置轴上的 <code class=\"codespan\">axisPointer.show</code>（例如 <a href=\"#xAxis.axisPointer.show\">xAxis.axisPointer.show</a>）为 <code class=\"codespan\">true</code>，则显示此轴的 axisPointer。</p>\n</li>\n<li><p>设置 <a href=\"#tooltip.trigger\">tooltip.trigger</a> 设置为 <code class=\"codespan\">&#39;axis&#39;</code> 或者 <a href=\"#tooltip.axisPointer.type\">tooltip.axisPointer.type</a> 设置为 <code class=\"codespan\">&#39;cross&#39;</code>，则此时坐标系会自动选择显示哪个轴的 axisPointer，也可以使用 <a href=\"#tooltip.axisPointer.axis\">tooltip.axisPointer.axis</a> 改变这种选择。注意，轴上如果设置了 axisPointer，会覆盖此设置。</p>\n</li>\n</ul>\n<hr>\n<p><strong>如何显示 axisPointer 的 label：</strong></p>\n<p>axisPointer 的 label 默认不显示（也就是默认只显示指示线），除非：</p>\n<ul>\n<li><p>设置轴上的 <code class=\"codespan\">axisPointer.label.show</code>（例如 <a href=\"#xAxis.axisPointer.show\">xAxis.axisPointer.label.show</a>）为 <code class=\"codespan\">true</code>，则显示此轴的 axisPointer 的 label。</p>\n</li>\n<li><p>设置 <a href=\"#tooltip.axisPointer.type\">tooltip.axisPointer.type</a> 为 <code class=\"codespan\">&#39;cross&#39;</code> 时会自动显示 axisPointer 的 label。</p>\n</li>\n</ul>\n<hr>\n<p><strong>关于触屏的 axisPointer 的设置</strong></p>\n<p>设置轴上的 <code class=\"codespan\">axisPointer.handle.show</code>（例如 <a href=\"#xAxis.axisPointer.handle.show\">xAxis.axisPointer.handle.show</a> 为 <code class=\"codespan\">true</code> 则会显示出此 axisPointer 的拖拽按钮。（polar 坐标系暂不支持此功能）。</p>\n<p><strong>注意：</strong>\n如果发现此时 tooltip 效果不良好，可设置 <a href=\"#tooltip.triggerOn\">tooltip.triggerOn</a> 为 <code class=\"codespan\">&#39;none&#39;</code>（于是效果为：手指按住按钮则显示 tooltip，松开按钮则隐藏 tooltip），或者 <a href=\"#tooltip.alwaysShowContent\">tooltip.alwaysShowContent</a> 为 <code class=\"codespan\">true</code>（效果为 tooltip 一直显示）。</p>\n<p>参见<a href=\"https://echarts.apache.org/next/examples/editor.html?c=line-tooltip-touch&amp;edit=1&amp;reset=1\" target=\"_blank\">例子</a>。</p>\n<hr>\n<p><strong>自动吸附到数据（snap）</strong></p>\n<p>对于数值轴、时间轴，如果开启了 <a href=\"#xAxis.axisPointer.snap\">snap</a>，则 axisPointer 会自动吸附到最近的点上。</p>\n<hr>\n"
+    "desc": "<p>坐标轴指示器配置项。</p>\n<p><code class=\"codespan\">tooltip.axisPointer</code> 是配置坐标轴指示器的快捷方式。实际上坐标轴指示器的全部功能，都可以通过轴上的 axisPointer 配置项完成（例如 <a href=\"#xAxis.axisPointer\">xAxis.axisPointer</a> 或 <a href=\"#angleAxis.axisPointer\">angleAxis.axisPointer</a>）。但是使用 <code class=\"codespan\">tooltip.axisPointer</code> 在简单场景下会更方便一些。</p>\n<blockquote>\n<p><strong>注意：</strong> <code class=\"codespan\">tooltip.axisPointer</code> 中诸配置项的优先级低于轴上的 axisPointer 的配置项。</p>\n</blockquote>\n<hr>\n<p>坐标轴指示器是指示坐标轴当前刻度的工具。</p>\n<p>如下例，鼠标悬浮到图上，可以出现标线和刻度文本。</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/candlestick-axisPointer&edit=1&reset=1\" width=\"600\" height=\"450\"><iframe />\n\n\n<p>上例中，使用了 <a href=\"#axisPointer.link\">axisPointer.link</a> 来关联不同的坐标系中的 axisPointer。</p>\n<p>坐标轴指示器也有适合触屏的交互方式，如下：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=line-tooltip-touch&edit=1&reset=1\" width=\"600\" height=\"400\"><iframe />\n\n\n<p>坐标轴指示器在多轴的场景能起到辅助作用：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=multiple-y-axis&edit=1&reset=1\" width=\"600\" height=\"300\"><iframe />\n\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=multiple-x-axis&edit=1&reset=1\" width=\"600\" height=\"300\"><iframe />\n\n\n\n\n<hr>\n<blockquote>\n<p><strong>注意：</strong>\n一般来说，axisPointer 的具体配置项会配置在各个轴中（如 <a href=\"#xAxis.axisPointer\">xAxis.axisPointer</a>）或者 <code class=\"codespan\">tooltip</code> 中（如 <a href=\"#tooltip.axisPointer\">tooltip.axisPointer</a>）。</p>\n</blockquote>\n<blockquote>\n<p>但是这几个选项只能配置在全局的 axisPointer 中：<a href=\"#axisPointer.triggerOn\">axisPointer.triggerOn</a>、<a href=\"#axisPointer.link\">axisPointer.link</a>。</p>\n</blockquote>\n<hr>\n<p><strong>如何显示 axisPointer：</strong></p>\n<p>直角坐标系 <a href=\"#grid\">grid</a>、极坐标系 <a href=\"#polar\">polar</a>、单轴坐标系 <a href=\"#single\">single</a> 中的每个轴都自己的 axisPointer。</p>\n<p>他们的 axisPointer 默认不显示。有两种方法可以让他们显示：</p>\n<ul>\n<li><p>设置轴上的 <code class=\"codespan\">axisPointer.show</code>（例如 <a href=\"#xAxis.axisPointer.show\">xAxis.axisPointer.show</a>）为 <code class=\"codespan\">true</code>，则显示此轴的 axisPointer。</p>\n</li>\n<li><p>设置 <a href=\"#tooltip.trigger\">tooltip.trigger</a> 设置为 <code class=\"codespan\">&#39;axis&#39;</code> 或者 <a href=\"#tooltip.axisPointer.type\">tooltip.axisPointer.type</a> 设置为 <code class=\"codespan\">&#39;cross&#39;</code>，则此时坐标系会自动选择显示哪个轴的 axisPointer，也可以使用 <a href=\"#tooltip.axisPointer.axis\">tooltip.axisPointer.axis</a> 改变这种选择。注意，轴上如果设置了 axisPointer，会覆盖此设置。</p>\n</li>\n</ul>\n<hr>\n<p><strong>如何显示 axisPointer 的 label：</strong></p>\n<p>axisPointer 的 label 默认不显示（也就是默认只显示指示线），除非：</p>\n<ul>\n<li><p>设置轴上的 <code class=\"codespan\">axisPointer.label.show</code>（例如 <a href=\"#xAxis.axisPointer.show\">xAxis.axisPointer.label.show</a>）为 <code class=\"codespan\">true</code>，则显示此轴的 axisPointer 的 label。</p>\n</li>\n<li><p>设置 <a href=\"#tooltip.axisPointer.type\">tooltip.axisPointer.type</a> 为 <code class=\"codespan\">&#39;cross&#39;</code> 时会自动显示 axisPointer 的 label。</p>\n</li>\n</ul>\n<hr>\n<p><strong>关于触屏的 axisPointer 的设置</strong></p>\n<p>设置轴上的 <code class=\"codespan\">axisPointer.handle.show</code>（例如 <a href=\"#xAxis.axisPointer.handle.show\">xAxis.axisPointer.handle.show</a> 为 <code class=\"codespan\">true</code> 则会显示出此 axisPointer 的拖拽按钮。（polar 坐标系暂不支持此功能）。</p>\n<p><strong>注意：</strong>\n如果发现此时 tooltip 效果不良好，可设置 <a href=\"#tooltip.triggerOn\">tooltip.triggerOn</a> 为 <code class=\"codespan\">&#39;none&#39;</code>（于是效果为：手指按住按钮则显示 tooltip，松开按钮则隐藏 tooltip），或者 <a href=\"#tooltip.alwaysShowContent\">tooltip.alwaysShowContent</a> 为 <code class=\"codespan\">true</code>（效果为 tooltip 一直显示）。</p>\n<p>参见<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=line-tooltip-touch&amp;edit=1&amp;reset=1\" target=\"_blank\">例子</a>。</p>\n<hr>\n<p><strong>自动吸附到数据（snap）</strong></p>\n<p>对于数值轴、时间轴，如果开启了 <a href=\"#xAxis.axisPointer.snap\">snap</a>，则 axisPointer 会自动吸附到最近的点上。</p>\n<hr>\n"
   },
   "tooltip.axisPointer.type": {
     "desc": "\n\n<p>指示器类型。</p>\n<p>可选</p>\n<ul>\n<li><p><code class=\"codespan\">&#39;line&#39;</code> 直线指示器</p>\n</li>\n<li><p><code class=\"codespan\">&#39;shadow&#39;</code> 阴影指示器</p>\n</li>\n<li><p><code class=\"codespan\">&#39;none&#39;</code> 无指示器</p>\n</li>\n<li><p><code class=\"codespan\">&#39;cross&#39;</code> 十字准星指示器。其实是种简写，表示启用两个正交的轴的 axisPointer。</p>\n</li>\n</ul>\n",
@@ -219,10 +219,24 @@ window.__EC_DOC_option_grid = {
     }
   },
   "tooltip.axisPointer.label.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "tooltip.axisPointer.label.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "tooltip.axisPointer.label.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n",
@@ -538,7 +552,7 @@ window.__EC_DOC_option_grid = {
     }
   },
   "tooltip.axisPointer.animationEasing": {
-    "desc": "\n\n<p>初始动画的缓动效果。不同的缓动效果可以参考 <a href=\"https://echarts.apache.org/next/examples/editor.html?c=line-easing\" target=\"_blank\">缓动示例</a>。</p>\n",
+    "desc": "\n\n<p>初始动画的缓动效果。不同的缓动效果可以参考 <a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=line-easing\" target=\"_blank\">缓动示例</a>。</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "linear,quadraticIn,quadraticOut,quadraticInOut,cubicIn,cubicOut,cubicInOut,quarticIn,quarticOut,quarticInOut,quinticIn,quinticOut,quinticInOut,sinusoidalIn,sinusoidalOut,sinusoidalInOut,exponentialIn,exponentialOut,exponentialInOut,circularIn,circularOut,circularInOut,elasticIn,elasticOut,elasticInOut,backIn,backOut,backInOut,bounceIn,bounceOut,bounceInOut",
@@ -546,7 +560,7 @@ window.__EC_DOC_option_grid = {
     }
   },
   "tooltip.axisPointer.animationDelay": {
-    "desc": "<p>初始动画的延迟，支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的初始动画效果。</p>\n<p>如下示例：</p>\n<pre><code class=\"lang-js\">animationDelay: function (idx) {\n    // 越往后的数据延迟越大\n    return idx * 100;\n}\n</code></pre>\n<p>也可以看<a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-animation-delay\" target=\"_blank\">该示例</a></p>\n"
+    "desc": "<p>初始动画的延迟，支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的初始动画效果。</p>\n<p>如下示例：</p>\n<pre><code class=\"lang-js\">animationDelay: function (idx) {\n    // 越往后的数据延迟越大\n    return idx * 100;\n}\n</code></pre>\n<p>也可以看<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=bar-animation-delay\" target=\"_blank\">该示例</a></p>\n"
   },
   "tooltip.axisPointer.animationDurationUpdate": {
     "desc": "\n\n<p>数据更新动画的时长。</p>\n<p>支持回调函数，可以通过每个数据返回不同的时长实现更戏剧的更新动画效果：</p>\n<pre><code class=\"lang-js\">animationDurationUpdate: function (idx) {\n    // 越往后的数据时长越大\n    return idx * 100;\n}\n</code></pre>\n",
@@ -565,7 +579,7 @@ window.__EC_DOC_option_grid = {
     }
   },
   "tooltip.axisPointer.animationDelayUpdate": {
-    "desc": "<p>数据更新动画的延迟，支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的更新动画效果。</p>\n<p>如下示例：</p>\n<pre><code class=\"lang-js\">animationDelayUpdate: function (idx) {\n    // 越往后的数据延迟越大\n    return idx * 100;\n}\n</code></pre>\n<p>也可以看<a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-animation-delay\" target=\"_blank\">该示例</a></p>\n"
+    "desc": "<p>数据更新动画的延迟，支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的更新动画效果。</p>\n<p>如下示例：</p>\n<pre><code class=\"lang-js\">animationDelayUpdate: function (idx) {\n    // 越往后的数据延迟越大\n    return idx * 100;\n}\n</code></pre>\n<p>也可以看<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=bar-animation-delay\" target=\"_blank\">该示例</a></p>\n"
   },
   "tooltip.position": {
     "desc": "<p>提示框浮层的位置，默认不设置时位置会跟随鼠标的位置。</p>\n<p>可选：</p>\n<ul>\n<li><p><code class=\"codespan\">Array</code></p>\n<p>  通过数组表示提示框浮层的位置，支持数字设置绝对位置，百分比设置相对位置。</p>\n<p>  示例:</p>\n<pre><code class=\"lang-js\">  // 绝对位置，相对于容器左侧 10px, 上侧 10 px\n  position: [10, 10]\n  // 相对位置，放置在容器正中间\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p><code class=\"codespan\">Function</code></p>\n<p>  回调函数，格式如下：</p>\n<pre><code class=\"lang-js\">  (point: Array, params: Object|Array.&lt;Object&gt;, dom: HTMLDomElement, rect: Object, size: Object) =&gt; Array\n</code></pre>\n<p>  <strong>参数：</strong><br>\n  point: 鼠标位置，如 [20, 40]。<br>\n  params: 同 formatter 的参数相同。<br>\n  dom: tooltip 的 dom 对象。<br>\n  rect: 只有鼠标在图形上时有效，是一个用<code class=\"codespan\">x</code>, <code class=\"codespan\">y</code>, <code class=\"codespan\">width</code>, <code class=\"codespan\">height</code>四个属性表达的图形包围盒。<br>\n  size: 包括 dom 的尺寸和 echarts 容器的当前尺寸，例如：<code class=\"codespan\">{contentSize: [width, height], viewSize: [width, height]}</code>。<br></p>\n<p>  <strong>返回值：</strong><br>\n  可以是一个表示 tooltip 位置的数组，数组值可以是绝对的像素值，也可以是相  百分比。<br>\n  也可以是一个对象，如：<code class=\"codespan\">{left: 10, top: 30}</code>，或者 <code class=\"codespan\">{right: &#39;20%&#39;, bottom: 40}</code>。<br></p>\n<p>  如下示例：</p>\n<pre><code class=\"lang-js\">  position: function (point, params, dom, rect, size) {\n      // 固定在顶部\n      return [point[0], &#39;10%&#39;];\n  }\n</code></pre>\n<p>  或者：</p>\n<pre><code class=\"lang-js\">  position: function (pos, params, dom, rect, size) {\n      // 鼠标在左侧时 tooltip 显示到右侧，鼠标在右侧时 tooltip 显示到左侧。\n      var obj = {top: 60};\n      obj[[&#39;left&#39;, &#39;right&#39;][+(pos[0] &lt; size.viewSize[0] / 2)]] = 5;\n      return obj;\n  }\n</code></pre>\n</li>\n</ul>\n<ul>\n<li><p><code class=\"codespan\">&#39;inside&#39;</code></p>\n<p>  鼠标所在图形的内部中心位置，只在 <a href=\"#tooltip.trigger\">trigger</a> 为<code class=\"codespan\">&#39;item&#39;</code>的时候有效。</p>\n</li>\n<li><p><code class=\"codespan\">&#39;top&#39;</code></p>\n<p>  鼠标所在图形上侧，只在 <a href=\"#tooltip.trigger\">trigger</a> 为<code class=\"codespan\">&#39;item&#39;</code>的时候有效。</p>\n</li>\n<li><p><code class=\"codespan\">&#39;left&#39;</code></p>\n<p>  鼠标所在图形左侧，只在 <a href=\"#tooltip.trigger\">trigger</a> 为<code class=\"codespan\">&#39;item&#39;</code>的时候有效。</p>\n</li>\n<li><p><code class=\"codespan\">&#39;right&#39;</code></p>\n<p>  鼠标所在图形右侧，只在 <a href=\"#tooltip.trigger\">trigger</a> 为<code class=\"codespan\">&#39;item&#39;</code>的时候有效。</p>\n</li>\n<li><p><code class=\"codespan\">&#39;bottom&#39;</code></p>\n<p>  鼠标所在图形底侧，只在 <a href=\"#tooltip.trigger\">trigger</a> 为<code class=\"codespan\">&#39;item&#39;</code>的时候有效。</p>\n</li>\n</ul>\n"
@@ -652,10 +666,24 @@ window.__EC_DOC_option_grid = {
     }
   },
   "tooltip.textStyle.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "tooltip.textStyle.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "tooltip.textStyle.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n",

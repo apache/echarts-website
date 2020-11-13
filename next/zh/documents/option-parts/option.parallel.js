@@ -96,7 +96,7 @@ window.__EC_DOC_option_parallel = {
     }
   },
   "parallelAxisDefault": {
-    "desc": "<p>配置多个 <a href=\"#parallelAxis\">parallelAxis</a> 时，有些值一样的属性，如果书写多遍则比较繁琐，那么可以放置在 <a href=\"#parallel.parallelAxisDefault\">parallel.parallelAxisDefault</a> 里。在坐标轴初始化前，<a href=\"#parallel.parallelAxisDefault\">parallel.parallelAxisDefault</a> 里的配置项，会分别融合进 <a href=\"#parallelAxis\">parallelAxis</a>，形成最终的坐标轴的配置。</p>\n<p><a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/parallel-all&amp;edit=1&amp;reset=1\" target=\"_blank\">参见示例</a></p>\n<p><br></p>\n"
+    "desc": "<p>配置多个 <a href=\"#parallelAxis\">parallelAxis</a> 时，有些值一样的属性，如果书写多遍则比较繁琐，那么可以放置在 <a href=\"#parallel.parallelAxisDefault\">parallel.parallelAxisDefault</a> 里。在坐标轴初始化前，<a href=\"#parallel.parallelAxisDefault\">parallel.parallelAxisDefault</a> 里的配置项，会分别融合进 <a href=\"#parallelAxis\">parallelAxis</a>，形成最终的坐标轴的配置。</p>\n<p><a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=doc-example/parallel-all&amp;edit=1&amp;reset=1\" target=\"_blank\">参见示例</a></p>\n<p><br></p>\n"
   },
   "parallelAxisDefault.type": {
     "desc": "<p>坐标轴类型。</p>\n<p>可选：</p>\n<ul>\n<li><p><code class=\"codespan\">&#39;value&#39;</code>\n  数值轴，适用于连续数据。</p>\n</li>\n<li><p><code class=\"codespan\">&#39;category&#39;</code>\n  类目轴，适用于离散的类目数据。为该类型时类目数据可自动从 <a href=\"#series.data\">series.data</a> 或 <a href=\"#dataset.source\">dataset.source</a> 中取，或者可通过 <a href=\"#parallelAxis.data\">parallelAxis.data</a> 设置类目数据。</p>\n</li>\n<li><p><code class=\"codespan\">&#39;time&#39;</code>\n  时间轴，适用于连续的时序数据，与数值轴相比时间轴带有时间的格式化，在刻度计算上也有所不同，例如会根据跨度的范围来决定使用月，星期，日还是小时范围的刻度。</p>\n</li>\n<li><p><code class=\"codespan\">&#39;log&#39;</code>\n  对数轴。适用于对数数据。</p>\n</li>\n</ul>\n"
@@ -247,10 +247,24 @@ window.__EC_DOC_option_parallel = {
     }
   },
   "parallelAxisDefault.nameTextStyle.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "parallelAxisDefault.nameTextStyle.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "parallelAxisDefault.nameTextStyle.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n",
@@ -778,7 +792,7 @@ window.__EC_DOC_option_parallel = {
     }
   },
   "parallelAxisDefault.minorTick": {
-    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v4.6.0</code> 开始支持</p>\n</blockquote>\n<p>坐标轴次刻度线相关设置。</p>\n<p>注意：次刻度线无法在类目轴（<a href=\"#parallelAxis.type\">type</a>: <code class=\"codespan\">&#39;category&#39;</code>）中使用。</p>\n<p>示例：</p>\n<p>1) 函数绘图中使用次刻度线</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=line-function&edit=1&reset=1\" width=\"600\" height=\"350\"><iframe />\n\n\n<p>2) 在对数轴中使用次刻度线</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=line-log&edit=1&reset=1\" width=\"600\" height=\"350\"><iframe />\n\n"
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v4.6.0</code> 开始支持</p>\n</blockquote>\n<p>坐标轴次刻度线相关设置。</p>\n<p>注意：次刻度线无法在类目轴（<a href=\"#parallelAxis.type\">type</a>: <code class=\"codespan\">&#39;category&#39;</code>）中使用。</p>\n<p>示例：</p>\n<p>1) 函数绘图中使用次刻度线</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=line-function&edit=1&reset=1\" width=\"600\" height=\"350\"><iframe />\n\n\n<p>2) 在对数轴中使用次刻度线</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=line-log&edit=1&reset=1\" width=\"600\" height=\"350\"><iframe />\n\n"
   },
   "parallelAxisDefault.minorTick.show": {
     "desc": "\n\n<p>是否显示次刻度线。</p>\n",
@@ -1055,10 +1069,24 @@ window.__EC_DOC_option_parallel = {
     }
   },
   "parallelAxisDefault.axisLabel.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "parallelAxisDefault.axisLabel.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "parallelAxisDefault.axisLabel.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n",
@@ -1436,10 +1464,24 @@ window.__EC_DOC_option_parallel = {
     }
   },
   "parallelAxisDefault.data.textStyle.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "parallelAxisDefault.data.textStyle.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "parallelAxisDefault.data.textStyle.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n",

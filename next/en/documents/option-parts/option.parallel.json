@@ -59,7 +59,7 @@
     }
   },
   "axisExpandable": {
-    "desc": "\n\n\n\n<p>When dimension number is extremely large, say, more than 50 dimensions, there will be more than 50 axes, which may hardly display in a page.</p>\n<p>In this case, you may use <a href=\"#parallel.axisExpandable\">parallel.axisExpandable</a> to improve the display. See this example:</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=map-parallel-prices&edit=1&reset=1\" width=\"600\" height=\"460\"><iframe />\n\n\n\n\n\n\n<p>Whether to enable toggling axis on clicking.</p>\n",
+    "desc": "\n\n\n\n<p>When dimension number is extremely large, say, more than 50 dimensions, there will be more than 50 axes, which may hardly display in a page.</p>\n<p>In this case, you may use <a href=\"#parallel.axisExpandable\">parallel.axisExpandable</a> to improve the display. See this example:</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=map-parallel-prices&edit=1&reset=1\" width=\"600\" height=\"460\"><iframe />\n\n\n\n\n\n\n<p>Whether to enable toggling axis on clicking.</p>\n",
     "uiControl": {
       "type": "boolean"
     }
@@ -96,7 +96,7 @@
     }
   },
   "parallelAxisDefault": {
-    "desc": "<p>When configuring multiple <a href=\"#parallelAxis\">parallelAxis</a>, there might be some common attributes in each axis configuration. To avoid writing them repeatly, they can be put under <a href=\"#parallel.parallelAxisDefault\">parallel.parallelAxisDefault</a>. Before initializing axis, configurations in <a href=\"#parallel.parallelAxisDefault\">parallel.parallelAxisDefault</a> will be merged into <a href=\"#parallelAxis\">parallelAxis</a> to generate the final axis configuration.</p>\n<p><a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/parallel-all&amp;edit=1&amp;reset=1\" target=\"_blank\">See the sample</a>.</p>\n<p><br></p>\n"
+    "desc": "<p>When configuring multiple <a href=\"#parallelAxis\">parallelAxis</a>, there might be some common attributes in each axis configuration. To avoid writing them repeatly, they can be put under <a href=\"#parallel.parallelAxisDefault\">parallel.parallelAxisDefault</a>. Before initializing axis, configurations in <a href=\"#parallel.parallelAxisDefault\">parallel.parallelAxisDefault</a> will be merged into <a href=\"#parallelAxis\">parallelAxis</a> to generate the final axis configuration.</p>\n<p><a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/parallel-all&amp;edit=1&amp;reset=1\" target=\"_blank\">See the sample</a>.</p>\n<p><br></p>\n"
   },
   "parallelAxisDefault.type": {
     "desc": "<p>Type of axis.</p>\n<p>Option:</p>\n<ul>\n<li><p><code class=\"codespan\">&#39;value&#39;</code>\n  Numerical axis, suitable for continuous data.</p>\n</li>\n<li><p><code class=\"codespan\">&#39;category&#39;</code>\n  Category axis, suitable for discrete category data. Category data can be auto retrieved from <a href=\"#series.data\">series.data</a> or <a href=\"#dataset.source\">dataset.source</a>, or can be specified via <a href=\"#parallelAxis.data\">parallelAxis.data</a>.</p>\n</li>\n<li><p><code class=\"codespan\">&#39;time&#39;</code>\n  Time axis, suitable for continuous time series data. As compared to value axis, it has a better formatting for time and a different tick calculation method. For example, it decides to use month, week, day or hour for tick based on the range of span.</p>\n</li>\n<li><p><code class=\"codespan\">&#39;log&#39;</code>\n  Log axis, suitable for log data.</p>\n</li>\n</ul>\n"
@@ -247,10 +247,24 @@
     }
   },
   "parallelAxisDefault.nameTextStyle.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "parallelAxisDefault.nameTextStyle.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "parallelAxisDefault.nameTextStyle.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n",
@@ -778,7 +792,7 @@
     }
   },
   "parallelAxisDefault.minorTick": {
-    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v4.6.0</code></p>\n</blockquote>\n<p>Settings related minor ticks.</p>\n<p>Note: <code class=\"codespan\">minorTick</code> is not available in the <code class=\"codespan\">category</code> type axis.</p>\n<p>Examples:</p>\n<p>1) Using minor ticks in function plotting.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=line-function&edit=1&reset=1\" width=\"600\" height=\"350\"><iframe />\n\n\n<p>2) Using minor ticks in log axis.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=line-log&edit=1&reset=1\" width=\"600\" height=\"350\"><iframe />\n\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v4.6.0</code></p>\n</blockquote>\n<p>Settings related minor ticks.</p>\n<p>Note: <code class=\"codespan\">minorTick</code> is not available in the <code class=\"codespan\">category</code> type axis.</p>\n<p>Examples:</p>\n<p>1) Using minor ticks in function plotting.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=line-function&edit=1&reset=1\" width=\"600\" height=\"350\"><iframe />\n\n\n<p>2) Using minor ticks in log axis.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=line-log&edit=1&reset=1\" width=\"600\" height=\"350\"><iframe />\n\n"
   },
   "parallelAxisDefault.minorTick.show": {
     "desc": "\n\n<p>If show minor ticks.</p>\n",
@@ -1055,10 +1069,24 @@
     }
   },
   "parallelAxisDefault.axisLabel.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "parallelAxisDefault.axisLabel.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "parallelAxisDefault.axisLabel.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n",
@@ -1436,10 +1464,24 @@
     }
   },
   "parallelAxisDefault.data.textStyle.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "parallelAxisDefault.data.textStyle.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "parallelAxisDefault.data.textStyle.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n",

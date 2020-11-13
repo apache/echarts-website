@@ -14,7 +14,7 @@
     }
   },
   "axisPointer": {
-    "desc": "<p>Configuration item for axisPointer.</p>\n<p><code class=\"codespan\">tooltip.axisPointer</code> is like syntactic sugar of axisPointer settings on axes (for example, <a href=\"#xAxis.axisPointer\">xAxis.axisPointer</a> or <a href=\"#angleAxis.axisPointer\">angleAxis.axisPointer</a>). More detailed features can be configured on <code class=\"codespan\">someAxis.axisPointer</code>. But in common cases, using <code class=\"codespan\">tooltip.axisPointer</code> is more convenient.</p>\n<blockquote>\n<p><strong>Notice:</strong> configurations of <code class=\"codespan\">tooltip.axisPointer</code> has lower priority than that of <code class=\"codespan\">someAxis.axisPointer</code>.</p>\n</blockquote>\n<hr>\n<p><code class=\"codespan\">axisPointer</code> is a tool for displaying reference line and axis value under mouse pointer.</p>\n<p>For example:</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/candlestick-axisPointer&edit=1&reset=1\" width=\"600\" height=\"450\"><iframe />\n\n\n<p>In the demo above, <a href=\"#axisPointer.link\">axisPointer.link</a> is used to link axisPointer from different coordinate systems.</p>\n<p><code class=\"codespan\">axisPointer</code> can also be used on touch device, where user can drag the button to move the reference line and label.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=line-tooltip-touch&edit=1&reset=1\" width=\"600\" height=\"400\"><iframe />\n\n\n<p>In the cases that more than one axis exist, axisPointer helps to look inside the data.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=multiple-y-axis&edit=1&reset=1\" width=\"600\" height=\"300\"><iframe />\n\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=multiple-x-axis&edit=1&reset=1\" width=\"600\" height=\"300\"><iframe />\n\n\n\n<hr>\n<blockquote>\n<p><strong>Notice:</strong>\nGenerally, axisPointers is configured in each axes who need them (for example <a href=\"#xAxis.axisPointer\">xAxis.axisPointer</a>), or configured in <code class=\"codespan\">tooltip</code> (for example <a href=\"#tooltip.axisPointer\">tooltip.axisPointer</a>).</p>\n</blockquote>\n<blockquote>\n<p>But these configurations can only be configured in global axisPointer:\n<a href=\"#axisPointer.triggerOn\">axisPointer.triggerOn</a>, <a href=\"#axisPointer.link\">axisPointer.link</a>.</p>\n</blockquote>\n<hr>\n<hr>\n<p><strong>How to display axisPointer:</strong></p>\n<p>In <a href=\"#grid\">cartesian (grid)</a> and <a href=\"#single\">polar](~polar) and (single axis</a>, each axis has its own axisPointer.</p>\n<p>Those axisPointer will not be displayed by default, utill configured as follows:</p>\n<ul>\n<li><p>Set <code class=\"codespan\">someAxis.axisPointer.show</code> (like <a href=\"#xAxis.axisPointer.show\">xAxis.axisPointer.show</a>) as <code class=\"codespan\">true</code>. Then axisPointer of this axis will be displayed.</p>\n</li>\n<li><p>Set <a href=\"#tooltip.trigger\">tooltip.trigger</a> as <code class=\"codespan\">&#39;axis&#39;</code>, or set <a href=\"#tooltip.axisPointer.type\">tooltip.axisPointer.type</a> as <code class=\"codespan\">&#39;cross&#39;</code>. Then coordinate system will automatically chose the axes who will display their axisPointers. (<a href=\"#tooltip.axisPointer.axis\">tooltip.axisPointer.axis</a> can be used to change the choice.) Notice, <code class=\"codespan\">axis.axisPointer</code> will override <code class=\"codespan\">tooltip.axisPointer</code> settings.</p>\n</li>\n</ul>\n<hr>\n<p><strong>How to display the label of axisPointer:</strong></p>\n<p>The label of axisPointer will not be displayed by default(namely, only reference line will be displayed by default), utill configured as follows:</p>\n<ul>\n<li><p>Set <code class=\"codespan\">someAxis.axisPointer.label.show</code> (for example <a href=\"#xAxis.axisPointer.show\">xAxis.axisPointer.label.show</a>) as <code class=\"codespan\">true</code>. Then the label of the axisPointer will be displayed.</p>\n</li>\n<li><p>Set <a href=\"#tooltip.axisPointer.type\">tooltip.axisPointer.type</a> as  <code class=\"codespan\">&#39;cross&#39;</code>. Then the label of the crossed axisPointers will be displayed.</p>\n</li>\n</ul>\n<hr>\n<p><strong>How to configure axisPointer on touch device:</strong></p>\n<p>Set <code class=\"codespan\">someAxis.axisPointer.handle.show</code> (for example <a href=\"#xAxis.axisPointer.handle.show\">xAxis.axisPointer.handle.show</a> as <code class=\"codespan\">true</code>. Then the button for dragging will be displayed. (This feature is not supported on polar).</p>\n<p><strong>Notice:</strong>\nIf tooltip does not work well in this case, try to set<a href=\"#tooltip.triggerOn\">tooltip.triggerOn</a> as <code class=\"codespan\">&#39;none&#39;</code> (for the effect: show tooltip when finger holding on the button, and hide tooltip after finger left the button), or set <a href=\"#tooltip.alwaysShowContent\">tooltip.alwaysShowContent</a> as <code class=\"codespan\">true</code> (then tooltip will always be displayed).</p>\n<p>See the <a href=\"https://echarts.apache.org/next/examples/editor.html?c=line-tooltip-touch&amp;edit=1&amp;reset=1\" target=\"_blank\">example</a>.</p>\n<hr>\n<p><strong>Snap to point</strong></p>\n<p>In value axis and time axis, if <a href=\"#xAxis.axisPointer.snap\">snap</a> is set as true, axisPointer will snap to point automatically.</p>\n<hr>\n"
+    "desc": "<p>Configuration item for axisPointer.</p>\n<p><code class=\"codespan\">tooltip.axisPointer</code> is like syntactic sugar of axisPointer settings on axes (for example, <a href=\"#xAxis.axisPointer\">xAxis.axisPointer</a> or <a href=\"#angleAxis.axisPointer\">angleAxis.axisPointer</a>). More detailed features can be configured on <code class=\"codespan\">someAxis.axisPointer</code>. But in common cases, using <code class=\"codespan\">tooltip.axisPointer</code> is more convenient.</p>\n<blockquote>\n<p><strong>Notice:</strong> configurations of <code class=\"codespan\">tooltip.axisPointer</code> has lower priority than that of <code class=\"codespan\">someAxis.axisPointer</code>.</p>\n</blockquote>\n<hr>\n<p><code class=\"codespan\">axisPointer</code> is a tool for displaying reference line and axis value under mouse pointer.</p>\n<p>For example:</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/candlestick-axisPointer&edit=1&reset=1\" width=\"600\" height=\"450\"><iframe />\n\n\n<p>In the demo above, <a href=\"#axisPointer.link\">axisPointer.link</a> is used to link axisPointer from different coordinate systems.</p>\n<p><code class=\"codespan\">axisPointer</code> can also be used on touch device, where user can drag the button to move the reference line and label.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=line-tooltip-touch&edit=1&reset=1\" width=\"600\" height=\"400\"><iframe />\n\n\n<p>In the cases that more than one axis exist, axisPointer helps to look inside the data.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=multiple-y-axis&edit=1&reset=1\" width=\"600\" height=\"300\"><iframe />\n\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=multiple-x-axis&edit=1&reset=1\" width=\"600\" height=\"300\"><iframe />\n\n\n\n<hr>\n<blockquote>\n<p><strong>Notice:</strong>\nGenerally, axisPointers is configured in each axes who need them (for example <a href=\"#xAxis.axisPointer\">xAxis.axisPointer</a>), or configured in <code class=\"codespan\">tooltip</code> (for example <a href=\"#tooltip.axisPointer\">tooltip.axisPointer</a>).</p>\n</blockquote>\n<blockquote>\n<p>But these configurations can only be configured in global axisPointer:\n<a href=\"#axisPointer.triggerOn\">axisPointer.triggerOn</a>, <a href=\"#axisPointer.link\">axisPointer.link</a>.</p>\n</blockquote>\n<hr>\n<hr>\n<p><strong>How to display axisPointer:</strong></p>\n<p>In <a href=\"#grid\">cartesian (grid)</a> and <a href=\"#single\">polar](~polar) and (single axis</a>, each axis has its own axisPointer.</p>\n<p>Those axisPointer will not be displayed by default, utill configured as follows:</p>\n<ul>\n<li><p>Set <code class=\"codespan\">someAxis.axisPointer.show</code> (like <a href=\"#xAxis.axisPointer.show\">xAxis.axisPointer.show</a>) as <code class=\"codespan\">true</code>. Then axisPointer of this axis will be displayed.</p>\n</li>\n<li><p>Set <a href=\"#tooltip.trigger\">tooltip.trigger</a> as <code class=\"codespan\">&#39;axis&#39;</code>, or set <a href=\"#tooltip.axisPointer.type\">tooltip.axisPointer.type</a> as <code class=\"codespan\">&#39;cross&#39;</code>. Then coordinate system will automatically chose the axes who will display their axisPointers. (<a href=\"#tooltip.axisPointer.axis\">tooltip.axisPointer.axis</a> can be used to change the choice.) Notice, <code class=\"codespan\">axis.axisPointer</code> will override <code class=\"codespan\">tooltip.axisPointer</code> settings.</p>\n</li>\n</ul>\n<hr>\n<p><strong>How to display the label of axisPointer:</strong></p>\n<p>The label of axisPointer will not be displayed by default(namely, only reference line will be displayed by default), utill configured as follows:</p>\n<ul>\n<li><p>Set <code class=\"codespan\">someAxis.axisPointer.label.show</code> (for example <a href=\"#xAxis.axisPointer.show\">xAxis.axisPointer.label.show</a>) as <code class=\"codespan\">true</code>. Then the label of the axisPointer will be displayed.</p>\n</li>\n<li><p>Set <a href=\"#tooltip.axisPointer.type\">tooltip.axisPointer.type</a> as  <code class=\"codespan\">&#39;cross&#39;</code>. Then the label of the crossed axisPointers will be displayed.</p>\n</li>\n</ul>\n<hr>\n<p><strong>How to configure axisPointer on touch device:</strong></p>\n<p>Set <code class=\"codespan\">someAxis.axisPointer.handle.show</code> (for example <a href=\"#xAxis.axisPointer.handle.show\">xAxis.axisPointer.handle.show</a> as <code class=\"codespan\">true</code>. Then the button for dragging will be displayed. (This feature is not supported on polar).</p>\n<p><strong>Notice:</strong>\nIf tooltip does not work well in this case, try to set<a href=\"#tooltip.triggerOn\">tooltip.triggerOn</a> as <code class=\"codespan\">&#39;none&#39;</code> (for the effect: show tooltip when finger holding on the button, and hide tooltip after finger left the button), or set <a href=\"#tooltip.alwaysShowContent\">tooltip.alwaysShowContent</a> as <code class=\"codespan\">true</code> (then tooltip will always be displayed).</p>\n<p>See the <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=line-tooltip-touch&amp;edit=1&amp;reset=1\" target=\"_blank\">example</a>.</p>\n<hr>\n<p><strong>Snap to point</strong></p>\n<p>In value axis and time axis, if <a href=\"#xAxis.axisPointer.snap\">snap</a> is set as true, axisPointer will snap to point automatically.</p>\n<hr>\n"
   },
   "axisPointer.type": {
     "desc": "\n\n<p>Indicator type.</p>\n<p>Options:</p>\n<ul>\n<li><p><code class=\"codespan\">&#39;line&#39;</code> line indicator.</p>\n</li>\n<li><p><code class=\"codespan\">&#39;shadow&#39;</code> shadow crosshair indicator.</p>\n</li>\n<li><p><code class=\"codespan\">&#39;none&#39;</code> no indicator displayed.</p>\n</li>\n<li><p><code class=\"codespan\">&#39;cross&#39;</code> crosshair indicator, which is actually the shortcut of enable two axisPointers of two orthometric axes.</p>\n</li>\n</ul>\n",
@@ -97,10 +97,24 @@
     }
   },
   "axisPointer.label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "axisPointer.label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "axisPointer.label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n",
@@ -416,7 +430,7 @@
     }
   },
   "axisPointer.animationEasing": {
-    "desc": "\n\n<p>Easing method used for the first animation. Varied easing effects can be found at <a href=\"https://echarts.apache.org/next/examples/editor.html?c=line-easing\" target=\"_blank\">easing effect example</a>.</p>\n",
+    "desc": "\n\n<p>Easing method used for the first animation. Varied easing effects can be found at <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=line-easing\" target=\"_blank\">easing effect example</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "linear,quadraticIn,quadraticOut,quadraticInOut,cubicIn,cubicOut,cubicInOut,quarticIn,quarticOut,quarticInOut,quinticIn,quinticOut,quinticInOut,sinusoidalIn,sinusoidalOut,sinusoidalInOut,exponentialIn,exponentialOut,exponentialInOut,circularIn,circularOut,circularInOut,elasticIn,elasticOut,elasticInOut,backIn,backOut,backInOut,bounceIn,bounceOut,bounceInOut",
@@ -424,7 +438,7 @@
     }
   },
   "axisPointer.animationDelay": {
-    "desc": "<p>Delay before updating the first animation, which supports callback function for different data to have different animation effect.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">animationDelay: function (idx) {\n    // delay for later data is larger\n    return idx * 100;\n}\n</code></pre>\n<p>See <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-animation-delay\" target=\"_blank\">this example</a> for more information.</p>\n"
+    "desc": "<p>Delay before updating the first animation, which supports callback function for different data to have different animation effect.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">animationDelay: function (idx) {\n    // delay for later data is larger\n    return idx * 100;\n}\n</code></pre>\n<p>See <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-animation-delay\" target=\"_blank\">this example</a> for more information.</p>\n"
   },
   "axisPointer.animationDurationUpdate": {
     "desc": "\n\n<p>Time for animation to complete, which supports callback function for different data to have different animation effect:</p>\n<pre><code class=\"lang-js\">animationDurationUpdate: function (idx) {\n    // delay for later data is larger\n    return idx * 100;\n}\n</code></pre>\n",
@@ -443,7 +457,7 @@
     }
   },
   "axisPointer.animationDelayUpdate": {
-    "desc": "<p>Delay before updating animation, which supports callback function for different data to have different animation effects.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">animationDelayUpdate: function (idx) {\n    // delay for later data is larger\n    return idx * 100;\n}\n</code></pre>\n<p>See <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-animation-delay\" target=\"_blank\">this example</a> for more information.</p>\n"
+    "desc": "<p>Delay before updating animation, which supports callback function for different data to have different animation effects.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">animationDelayUpdate: function (idx) {\n    // delay for later data is larger\n    return idx * 100;\n}\n</code></pre>\n<p>See <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-animation-delay\" target=\"_blank\">this example</a> for more information.</p>\n"
   },
   "showContent": {
     "desc": "\n\n<p>Whether to show the tooltip floating layer, whose default value is true. It should be configurated to be <code class=\"codespan\">false</code>, if you only need tooltip to trigger the event or show the axisPointer without content.</p>\n",
@@ -606,10 +620,24 @@
     }
   },
   "textStyle.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "textStyle.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "textStyle.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n",

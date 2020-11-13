@@ -1,6 +1,6 @@
 window.__EC_DOC_option_legend = {
   "type": {
-    "desc": "\n\n<p>图例的类型。可选值：</p>\n<ul>\n<li><code class=\"codespan\">&#39;plain&#39;</code>：普通图例。缺省就是普通图例。</li>\n<li><code class=\"codespan\">&#39;scroll&#39;</code>：可滚动翻页的图例。当图例数量较多时可以使用。</li>\n</ul>\n<p>参见 <a href=\"https://echarts.apache.org/next/examples/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（垂直）</a> 或 <a href=\"https://echarts.apache.org/next/examples/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（水平）</a>。</p>\n<p>当使用 <code class=\"codespan\">&#39;scroll&#39;</code> 时，使用这些设置进行细节配置：</p>\n<ul>\n<li><a href=\"#legend.scrollDataIndex\">legend.scrollDataIndex</a></li>\n<li><a href=\"#legend.pageButtonItemGap\">legend.pageButtonItemGap</a></li>\n<li><a href=\"#legend.pageButtonGap\">legend.pageButtonGap</a></li>\n<li><a href=\"#legend.pageButtonPosition\">legend.pageButtonPosition</a></li>\n<li><a href=\"#legend.pageFormatter\">legend.pageFormatter</a></li>\n<li><a href=\"#legend.pageIcons\">legend.pageIcons</a></li>\n<li><a href=\"#legend.pageIconColor\">legend.pageIconColor</a></li>\n<li><a href=\"#legend.pageIconInactiveColor\">legend.pageIconInactiveColor</a></li>\n<li><a href=\"#legend.pageIconSize\">legend.pageIconSize</a></li>\n<li><a href=\"#legend.pageTextStyle\">legend.pageTextStyle</a></li>\n<li><a href=\"#legend.animation\">legend.animation</a></li>\n<li><a href=\"#legend.animationDurationUpdate\">legend.animationDurationUpdate</a></li>\n</ul>\n",
+    "desc": "\n\n<p>图例的类型。可选值：</p>\n<ul>\n<li><code class=\"codespan\">&#39;plain&#39;</code>：普通图例。缺省就是普通图例。</li>\n<li><code class=\"codespan\">&#39;scroll&#39;</code>：可滚动翻页的图例。当图例数量较多时可以使用。</li>\n</ul>\n<p>参见 <a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（垂直）</a> 或 <a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（水平）</a>。</p>\n<p>当使用 <code class=\"codespan\">&#39;scroll&#39;</code> 时，使用这些设置进行细节配置：</p>\n<ul>\n<li><a href=\"#legend.scrollDataIndex\">legend.scrollDataIndex</a></li>\n<li><a href=\"#legend.pageButtonItemGap\">legend.pageButtonItemGap</a></li>\n<li><a href=\"#legend.pageButtonGap\">legend.pageButtonGap</a></li>\n<li><a href=\"#legend.pageButtonPosition\">legend.pageButtonPosition</a></li>\n<li><a href=\"#legend.pageFormatter\">legend.pageFormatter</a></li>\n<li><a href=\"#legend.pageIcons\">legend.pageIcons</a></li>\n<li><a href=\"#legend.pageIconColor\">legend.pageIconColor</a></li>\n<li><a href=\"#legend.pageIconInactiveColor\">legend.pageIconInactiveColor</a></li>\n<li><a href=\"#legend.pageIconSize\">legend.pageIconSize</a></li>\n<li><a href=\"#legend.pageTextStyle\">legend.pageTextStyle</a></li>\n<li><a href=\"#legend.animation\">legend.animation</a></li>\n<li><a href=\"#legend.animationDurationUpdate\">legend.animationDurationUpdate</a></li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "options": "plain,scroll"
@@ -260,10 +260,24 @@ window.__EC_DOC_option_legend = {
     }
   },
   "textStyle.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "textStyle.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "textStyle.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n",
@@ -586,45 +600,45 @@ window.__EC_DOC_option_legend = {
     }
   },
   "scrollDataIndex": {
-    "desc": "<p><a href=\"#legend.type\">legend.type</a> 为 <code class=\"codespan\">&#39;scroll&#39;</code> 时有效。</p>\n<p>图例当前最左上显示项的 <code class=\"codespan\">dataIndex</code>。</p>\n<p><code class=\"codespan\">setOption</code> 时指定此项的话，可决定当前图例滚动到哪里。</p>\n<p>但是，如果仅仅想改变图例翻页，一般并不调用 <code class=\"codespan\">setOption</code>（因为这太重量了），仅仅使用 action <a href=\"api.html#action.legend.legendScroll\" target=\"_blank\">legendScroll</a> 即可。</p>\n<p>参见 <a href=\"https://echarts.apache.org/next/examples/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（垂直）</a> 或 <a href=\"https://echarts.apache.org/next/examples/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（水平）</a>。</p>\n"
+    "desc": "<p><a href=\"#legend.type\">legend.type</a> 为 <code class=\"codespan\">&#39;scroll&#39;</code> 时有效。</p>\n<p>图例当前最左上显示项的 <code class=\"codespan\">dataIndex</code>。</p>\n<p><code class=\"codespan\">setOption</code> 时指定此项的话，可决定当前图例滚动到哪里。</p>\n<p>但是，如果仅仅想改变图例翻页，一般并不调用 <code class=\"codespan\">setOption</code>（因为这太重量了），仅仅使用 action <a href=\"api.html#action.legend.legendScroll\" target=\"_blank\">legendScroll</a> 即可。</p>\n<p>参见 <a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（垂直）</a> 或 <a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（水平）</a>。</p>\n"
   },
   "pageButtonItemGap": {
-    "desc": "<p><a href=\"#legend.type\">legend.type</a> 为 <code class=\"codespan\">&#39;scroll&#39;</code> 时有效。</p>\n<p>图例控制块中，按钮和页信息之间的间隔。</p>\n<p>参见 <a href=\"https://echarts.apache.org/next/examples/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（垂直）</a> 或 <a href=\"https://echarts.apache.org/next/examples/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（水平）</a>。</p>\n"
+    "desc": "<p><a href=\"#legend.type\">legend.type</a> 为 <code class=\"codespan\">&#39;scroll&#39;</code> 时有效。</p>\n<p>图例控制块中，按钮和页信息之间的间隔。</p>\n<p>参见 <a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（垂直）</a> 或 <a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（水平）</a>。</p>\n"
   },
   "pageButtonGap": {
-    "desc": "<p><a href=\"#legend.type\">legend.type</a> 为 <code class=\"codespan\">&#39;scroll&#39;</code> 时有效。</p>\n<p>图例控制块和图例项之间的间隔。</p>\n<p>参见 <a href=\"https://echarts.apache.org/next/examples/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（垂直）</a> 或 <a href=\"https://echarts.apache.org/next/examples/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（水平）</a>。</p>\n"
+    "desc": "<p><a href=\"#legend.type\">legend.type</a> 为 <code class=\"codespan\">&#39;scroll&#39;</code> 时有效。</p>\n<p>图例控制块和图例项之间的间隔。</p>\n<p>参见 <a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（垂直）</a> 或 <a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（水平）</a>。</p>\n"
   },
   "pageButtonPosition": {
-    "desc": "<p><a href=\"#legend.type\">legend.type</a> 为 <code class=\"codespan\">&#39;scroll&#39;</code> 时有效。</p>\n<p>图例控制块的位置。可选值为：</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code>：控制块在左或上。</li>\n<li><code class=\"codespan\">&#39;end&#39;</code>：控制块在右或下。</li>\n</ul>\n<p>参见 <a href=\"https://echarts.apache.org/next/examples/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（垂直）</a> 或 <a href=\"https://echarts.apache.org/next/examples/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（水平）</a>。</p>\n"
+    "desc": "<p><a href=\"#legend.type\">legend.type</a> 为 <code class=\"codespan\">&#39;scroll&#39;</code> 时有效。</p>\n<p>图例控制块的位置。可选值为：</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code>：控制块在左或上。</li>\n<li><code class=\"codespan\">&#39;end&#39;</code>：控制块在右或下。</li>\n</ul>\n<p>参见 <a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（垂直）</a> 或 <a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（水平）</a>。</p>\n"
   },
   "pageFormatter": {
-    "desc": "<p><a href=\"#legend.type\">legend.type</a> 为 <code class=\"codespan\">&#39;scroll&#39;</code> 时有效。</p>\n<p>图例控制块中，页信息的显示格式。默认为 <code class=\"codespan\">&#39;{current}/{total}&#39;</code>，其中 <code class=\"codespan\">{current}</code> 是当前页号（从 1 开始计数），<code class=\"codespan\">{total}</code> 是总页数。</p>\n<p>如果 <code class=\"codespan\">pageFormatter</code> 使用函数，须返回字符串，参数为：</p>\n<pre><code class=\"lang-js\">{\n    current: number\n    total: number\n}\n</code></pre>\n<p>参见 <a href=\"https://echarts.apache.org/next/examples/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（垂直）</a> 或 <a href=\"https://echarts.apache.org/next/examples/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（水平）</a>。</p>\n"
+    "desc": "<p><a href=\"#legend.type\">legend.type</a> 为 <code class=\"codespan\">&#39;scroll&#39;</code> 时有效。</p>\n<p>图例控制块中，页信息的显示格式。默认为 <code class=\"codespan\">&#39;{current}/{total}&#39;</code>，其中 <code class=\"codespan\">{current}</code> 是当前页号（从 1 开始计数），<code class=\"codespan\">{total}</code> 是总页数。</p>\n<p>如果 <code class=\"codespan\">pageFormatter</code> 使用函数，须返回字符串，参数为：</p>\n<pre><code class=\"lang-js\">{\n    current: number\n    total: number\n}\n</code></pre>\n<p>参见 <a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（垂直）</a> 或 <a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（水平）</a>。</p>\n"
   },
   "pageIcons": {
     "desc": "<p><a href=\"#legend.type\">legend.type</a> 为 <code class=\"codespan\">&#39;scroll&#39;</code> 时有效。</p>\n<p>图例控制块的图标。</p>\n"
   },
   "pageIcons.horizontal": {
-    "desc": "<p><a href=\"#legend.orient\">legend.orient</a> 为 <code class=\"codespan\">&#39;horizontal&#39;</code> 时的翻页按钮图标。</p>\n<p>是一个数组，表示 <code class=\"codespan\">[previous page button, next page button]</code>。默认值为 <code class=\"codespan\">[&#39;M0,0L12,-10L12,10z&#39;, &#39;M0,0L-12,-10L-12,10z&#39;]</code>，。</p>\n<p>数组中每项，</p>\n<p>可以通过 <code class=\"codespan\">&#39;image://url&#39;</code> 设置为图片，其中 URL 为图片的链接，或者 <code class=\"codespan\">dataURI</code>。</p>\n<p>URL 为图片链接例如：</p>\n<pre><code>&#39;image://http://xxx.xxx.xxx/a/b.png&#39;\n</code></pre><p>URL 为 <code class=\"codespan\">dataURI</code> 例如：</p>\n<pre><code>&#39;image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7&#39;\n</code></pre><p>可以通过 <code class=\"codespan\">&#39;path://&#39;</code> 将图标设置为任意的矢量路径。这种方式相比于使用图片的方式，不用担心因为缩放而产生锯齿或模糊，而且可以设置为任意颜色。路径图形会自适应调整为合适的大小。路径的格式参见 <a href=\"http://www.w3.org/TR/SVG/paths.html#PathData\" target=\"_blank\">SVG PathData</a>。可以从 Adobe Illustrator 等工具编辑导出。</p>\n<p>例如：</p>\n<pre><code>&#39;path://M30.9,53.2C16.8,53.2,5.3,41.7,5.3,27.6S16.8,2,30.9,2C45,2,56.4,13.5,56.4,27.6S45,53.2,30.9,53.2z M30.9,3.5C17.6,3.5,6.8,14.4,6.8,27.6c0,13.3,10.8,24.1,24.101,24.1C44.2,51.7,55,40.9,55,27.6C54.9,14.4,44.1,3.5,30.9,3.5z M36.9,35.8c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H36c0.5,0,0.9,0.4,0.9,1V35.8z M27.8,35.8 c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H27c0.5,0,0.9,0.4,0.9,1L27.8,35.8L27.8,35.8z&#39;\n</code></pre><p>参见 <a href=\"https://echarts.apache.org/next/examples/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（垂直）</a> 或 <a href=\"https://echarts.apache.org/next/examples/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（水平）</a>。</p>\n"
+    "desc": "<p><a href=\"#legend.orient\">legend.orient</a> 为 <code class=\"codespan\">&#39;horizontal&#39;</code> 时的翻页按钮图标。</p>\n<p>是一个数组，表示 <code class=\"codespan\">[previous page button, next page button]</code>。默认值为 <code class=\"codespan\">[&#39;M0,0L12,-10L12,10z&#39;, &#39;M0,0L-12,-10L-12,10z&#39;]</code>，。</p>\n<p>数组中每项，</p>\n<p>可以通过 <code class=\"codespan\">&#39;image://url&#39;</code> 设置为图片，其中 URL 为图片的链接，或者 <code class=\"codespan\">dataURI</code>。</p>\n<p>URL 为图片链接例如：</p>\n<pre><code>&#39;image://http://xxx.xxx.xxx/a/b.png&#39;\n</code></pre><p>URL 为 <code class=\"codespan\">dataURI</code> 例如：</p>\n<pre><code>&#39;image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7&#39;\n</code></pre><p>可以通过 <code class=\"codespan\">&#39;path://&#39;</code> 将图标设置为任意的矢量路径。这种方式相比于使用图片的方式，不用担心因为缩放而产生锯齿或模糊，而且可以设置为任意颜色。路径图形会自适应调整为合适的大小。路径的格式参见 <a href=\"http://www.w3.org/TR/SVG/paths.html#PathData\" target=\"_blank\">SVG PathData</a>。可以从 Adobe Illustrator 等工具编辑导出。</p>\n<p>例如：</p>\n<pre><code>&#39;path://M30.9,53.2C16.8,53.2,5.3,41.7,5.3,27.6S16.8,2,30.9,2C45,2,56.4,13.5,56.4,27.6S45,53.2,30.9,53.2z M30.9,3.5C17.6,3.5,6.8,14.4,6.8,27.6c0,13.3,10.8,24.1,24.101,24.1C44.2,51.7,55,40.9,55,27.6C54.9,14.4,44.1,3.5,30.9,3.5z M36.9,35.8c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H36c0.5,0,0.9,0.4,0.9,1V35.8z M27.8,35.8 c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H27c0.5,0,0.9,0.4,0.9,1L27.8,35.8L27.8,35.8z&#39;\n</code></pre><p>参见 <a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（垂直）</a> 或 <a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（水平）</a>。</p>\n"
   },
   "pageIcons.vertical": {
-    "desc": "<p><a href=\"#legend.orient\">legend.orient</a> 为 <code class=\"codespan\">&#39;vertical&#39;</code> 时的翻页按钮图标。</p>\n<p>是一个数组，表示 <code class=\"codespan\">[previous page button, next page button]</code>。默认值为 <code class=\"codespan\">[&#39;M0,0L20,0L10,-20z&#39;, &#39;M0,0L20,0L10,20z&#39;]</code>，。</p>\n<p>数组中每项，</p>\n<p>可以通过 <code class=\"codespan\">&#39;image://url&#39;</code> 设置为图片，其中 URL 为图片的链接，或者 <code class=\"codespan\">dataURI</code>。</p>\n<p>URL 为图片链接例如：</p>\n<pre><code>&#39;image://http://xxx.xxx.xxx/a/b.png&#39;\n</code></pre><p>URL 为 <code class=\"codespan\">dataURI</code> 例如：</p>\n<pre><code>&#39;image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7&#39;\n</code></pre><p>可以通过 <code class=\"codespan\">&#39;path://&#39;</code> 将图标设置为任意的矢量路径。这种方式相比于使用图片的方式，不用担心因为缩放而产生锯齿或模糊，而且可以设置为任意颜色。路径图形会自适应调整为合适的大小。路径的格式参见 <a href=\"http://www.w3.org/TR/SVG/paths.html#PathData\" target=\"_blank\">SVG PathData</a>。可以从 Adobe Illustrator 等工具编辑导出。</p>\n<p>例如：</p>\n<pre><code>&#39;path://M30.9,53.2C16.8,53.2,5.3,41.7,5.3,27.6S16.8,2,30.9,2C45,2,56.4,13.5,56.4,27.6S45,53.2,30.9,53.2z M30.9,3.5C17.6,3.5,6.8,14.4,6.8,27.6c0,13.3,10.8,24.1,24.101,24.1C44.2,51.7,55,40.9,55,27.6C54.9,14.4,44.1,3.5,30.9,3.5z M36.9,35.8c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H36c0.5,0,0.9,0.4,0.9,1V35.8z M27.8,35.8 c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H27c0.5,0,0.9,0.4,0.9,1L27.8,35.8L27.8,35.8z&#39;\n</code></pre><p>参见 <a href=\"https://echarts.apache.org/next/examples/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（垂直）</a> 或 <a href=\"https://echarts.apache.org/next/examples/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（水平）</a>。</p>\n"
+    "desc": "<p><a href=\"#legend.orient\">legend.orient</a> 为 <code class=\"codespan\">&#39;vertical&#39;</code> 时的翻页按钮图标。</p>\n<p>是一个数组，表示 <code class=\"codespan\">[previous page button, next page button]</code>。默认值为 <code class=\"codespan\">[&#39;M0,0L20,0L10,-20z&#39;, &#39;M0,0L20,0L10,20z&#39;]</code>，。</p>\n<p>数组中每项，</p>\n<p>可以通过 <code class=\"codespan\">&#39;image://url&#39;</code> 设置为图片，其中 URL 为图片的链接，或者 <code class=\"codespan\">dataURI</code>。</p>\n<p>URL 为图片链接例如：</p>\n<pre><code>&#39;image://http://xxx.xxx.xxx/a/b.png&#39;\n</code></pre><p>URL 为 <code class=\"codespan\">dataURI</code> 例如：</p>\n<pre><code>&#39;image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7&#39;\n</code></pre><p>可以通过 <code class=\"codespan\">&#39;path://&#39;</code> 将图标设置为任意的矢量路径。这种方式相比于使用图片的方式，不用担心因为缩放而产生锯齿或模糊，而且可以设置为任意颜色。路径图形会自适应调整为合适的大小。路径的格式参见 <a href=\"http://www.w3.org/TR/SVG/paths.html#PathData\" target=\"_blank\">SVG PathData</a>。可以从 Adobe Illustrator 等工具编辑导出。</p>\n<p>例如：</p>\n<pre><code>&#39;path://M30.9,53.2C16.8,53.2,5.3,41.7,5.3,27.6S16.8,2,30.9,2C45,2,56.4,13.5,56.4,27.6S45,53.2,30.9,53.2z M30.9,3.5C17.6,3.5,6.8,14.4,6.8,27.6c0,13.3,10.8,24.1,24.101,24.1C44.2,51.7,55,40.9,55,27.6C54.9,14.4,44.1,3.5,30.9,3.5z M36.9,35.8c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H36c0.5,0,0.9,0.4,0.9,1V35.8z M27.8,35.8 c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H27c0.5,0,0.9,0.4,0.9,1L27.8,35.8L27.8,35.8z&#39;\n</code></pre><p>参见 <a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（垂直）</a> 或 <a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（水平）</a>。</p>\n"
   },
   "pageIconColor": {
-    "desc": "\n\n<p><a href=\"#legend.type\">legend.type</a> 为 <code class=\"codespan\">&#39;scroll&#39;</code> 时有效。</p>\n<p>翻页按钮的颜色。</p>\n<p>参见 <a href=\"https://echarts.apache.org/next/examples/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（垂直）</a> 或 <a href=\"https://echarts.apache.org/next/examples/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（水平）</a>。</p>\n",
+    "desc": "\n\n<p><a href=\"#legend.type\">legend.type</a> 为 <code class=\"codespan\">&#39;scroll&#39;</code> 时有效。</p>\n<p>翻页按钮的颜色。</p>\n<p>参见 <a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（垂直）</a> 或 <a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（水平）</a>。</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#2f4554"
     }
   },
   "pageIconInactiveColor": {
-    "desc": "\n\n<p><a href=\"#legend.type\">legend.type</a> 为 <code class=\"codespan\">&#39;scroll&#39;</code> 时有效。</p>\n<p>翻页按钮不激活时（即翻页到头时）的颜色。</p>\n<p>参见 <a href=\"https://echarts.apache.org/next/examples/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（垂直）</a> 或 <a href=\"https://echarts.apache.org/next/examples/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（水平）</a>。</p>\n",
+    "desc": "\n\n<p><a href=\"#legend.type\">legend.type</a> 为 <code class=\"codespan\">&#39;scroll&#39;</code> 时有效。</p>\n<p>翻页按钮不激活时（即翻页到头时）的颜色。</p>\n<p>参见 <a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（垂直）</a> 或 <a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（水平）</a>。</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#aaa"
     }
   },
   "pageIconSize": {
-    "desc": "\n\n<p><a href=\"#legend.type\">legend.type</a> 为 <code class=\"codespan\">&#39;scroll&#39;</code> 时有效。</p>\n<p>翻页按钮的大小。可以是数字，也可以是数组，如 <code class=\"codespan\">[10, 3]</code>，表示 <code class=\"codespan\">[宽，高]</code>。</p>\n<p>参见 <a href=\"https://echarts.apache.org/next/examples/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（垂直）</a> 或 <a href=\"https://echarts.apache.org/next/examples/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（水平）</a>。</p>\n",
+    "desc": "\n\n<p><a href=\"#legend.type\">legend.type</a> 为 <code class=\"codespan\">&#39;scroll&#39;</code> 时有效。</p>\n<p>翻页按钮的大小。可以是数字，也可以是数组，如 <code class=\"codespan\">[10, 3]</code>，表示 <code class=\"codespan\">[宽，高]</code>。</p>\n<p>参见 <a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（垂直）</a> 或 <a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">滚动图例（水平）</a>。</p>\n",
     "uiControl": {
       "type": "vector",
       "default": "15,15",
@@ -684,10 +698,24 @@ window.__EC_DOC_option_legend = {
     }
   },
   "pageTextStyle.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "pageTextStyle.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "pageTextStyle.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n",
@@ -772,7 +800,7 @@ window.__EC_DOC_option_legend = {
     }
   },
   "emphasis.selectorLabel.distance": {
-    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -781,7 +809,7 @@ window.__EC_DOC_option_legend = {
     }
   },
   "emphasis.selectorLabel.rotate": {
-    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
+    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -929,10 +957,24 @@ window.__EC_DOC_option_legend = {
     }
   },
   "emphasis.selectorLabel.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "emphasis.selectorLabel.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "emphasis.selectorLabel.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
@@ -1185,7 +1227,7 @@ window.__EC_DOC_option_legend = {
     }
   },
   "selectorLabel.distance": {
-    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -1194,7 +1236,7 @@ window.__EC_DOC_option_legend = {
     }
   },
   "selectorLabel.rotate": {
-    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
+    "desc": "\n\n<p>标签旋转。从 -90 度到 90 度。正值是逆时针。</p>\n<p>参见：<a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>。</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -1342,10 +1384,24 @@ window.__EC_DOC_option_legend = {
     }
   },
   "selectorLabel.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "selectorLabel.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "selectorLabel.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",

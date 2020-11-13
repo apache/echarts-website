@@ -182,10 +182,24 @@ window.__EC_DOC_option_xAxis = {
     }
   },
   "nameTextStyle.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "nameTextStyle.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "nameTextStyle.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n",
@@ -723,7 +737,7 @@ window.__EC_DOC_option_xAxis = {
     }
   },
   "minorTick": {
-    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v4.6.0</code> 开始支持</p>\n</blockquote>\n<p>坐标轴次刻度线相关设置。</p>\n<p>注意：次刻度线无法在类目轴（<a href=\"#xAxis.type\">type</a>: <code class=\"codespan\">&#39;category&#39;</code>）中使用。</p>\n<p>示例：</p>\n<p>1) 函数绘图中使用次刻度线</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=line-function&edit=1&reset=1\" width=\"600\" height=\"350\"><iframe />\n\n\n<p>2) 在对数轴中使用次刻度线</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=line-log&edit=1&reset=1\" width=\"600\" height=\"350\"><iframe />\n\n"
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v4.6.0</code> 开始支持</p>\n</blockquote>\n<p>坐标轴次刻度线相关设置。</p>\n<p>注意：次刻度线无法在类目轴（<a href=\"#xAxis.type\">type</a>: <code class=\"codespan\">&#39;category&#39;</code>）中使用。</p>\n<p>示例：</p>\n<p>1) 函数绘图中使用次刻度线</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=line-function&edit=1&reset=1\" width=\"600\" height=\"350\"><iframe />\n\n\n<p>2) 在对数轴中使用次刻度线</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=line-log&edit=1&reset=1\" width=\"600\" height=\"350\"><iframe />\n\n"
   },
   "minorTick.show": {
     "desc": "\n\n<p>是否显示次刻度线。</p>\n",
@@ -1000,10 +1014,24 @@ window.__EC_DOC_option_xAxis = {
     }
   },
   "axisLabel.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "axisLabel.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "axisLabel.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n",
@@ -1605,10 +1633,24 @@ window.__EC_DOC_option_xAxis = {
     }
   },
   "data.textStyle.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "data.textStyle.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "data.textStyle.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n",
@@ -1934,10 +1976,24 @@ window.__EC_DOC_option_xAxis = {
     }
   },
   "axisPointer.label.width": {
-    "desc": "<p>文本显示宽度。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "axisPointer.label.height": {
-    "desc": "<p>文本显示高度。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "axisPointer.label.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n",
@@ -2181,7 +2237,7 @@ window.__EC_DOC_option_xAxis = {
     }
   },
   "axisPointer.handle": {
-    "desc": "<p>拖拽手柄，适用于触屏的环境。参见 <a href=\"https://echarts.apache.org/next/examples/editor.html?c=line-tooltip-touch&amp;edit=1&amp;reset=1\" target=\"_blank\">例子</a>。</p>\n"
+    "desc": "<p>拖拽手柄，适用于触屏的环境。参见 <a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=line-tooltip-touch&amp;edit=1&amp;reset=1\" target=\"_blank\">例子</a>。</p>\n"
   },
   "axisPointer.handle.show": {
     "desc": "\n\n<p>当 show 设为 <code class=\"codespan\">true</code> 时开启，这时显示手柄，并且 axisPointer 会一直显示。</p>\n",
@@ -2190,7 +2246,7 @@ window.__EC_DOC_option_xAxis = {
     }
   },
   "axisPointer.handle.icon": {
-    "desc": "\n\n<p>手柄的图标。</p>\n<p>可以通过 <code class=\"codespan\">&#39;image://url&#39;</code> 设置为图片，其中 URL 为图片的链接，或者 <code class=\"codespan\">dataURI</code>。</p>\n<p>URL 为图片链接例如：</p>\n<pre><code>&#39;image://http://xxx.xxx.xxx/a/b.png&#39;\n</code></pre><p>URL 为 <code class=\"codespan\">dataURI</code> 例如：</p>\n<pre><code>&#39;image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7&#39;\n</code></pre><p>可以通过 <code class=\"codespan\">&#39;path://&#39;</code> 将图标设置为任意的矢量路径。这种方式相比于使用图片的方式，不用担心因为缩放而产生锯齿或模糊，而且可以设置为任意颜色。路径图形会自适应调整为合适的大小。路径的格式参见 <a href=\"http://www.w3.org/TR/SVG/paths.html#PathData\" target=\"_blank\">SVG PathData</a>。可以从 Adobe Illustrator 等工具编辑导出。</p>\n<p>例如：</p>\n<pre><code>&#39;path://M30.9,53.2C16.8,53.2,5.3,41.7,5.3,27.6S16.8,2,30.9,2C45,2,56.4,13.5,56.4,27.6S45,53.2,30.9,53.2z M30.9,3.5C17.6,3.5,6.8,14.4,6.8,27.6c0,13.3,10.8,24.1,24.101,24.1C44.2,51.7,55,40.9,55,27.6C54.9,14.4,44.1,3.5,30.9,3.5z M36.9,35.8c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H36c0.5,0,0.9,0.4,0.9,1V35.8z M27.8,35.8 c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H27c0.5,0,0.9,0.4,0.9,1L27.8,35.8L27.8,35.8z&#39;\n</code></pre><p>参见 <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/axisPointer-handle-image&amp;edit=1&amp;reset=1\" target=\"_blank\">使用图片的例子</a></p>\n",
+    "desc": "\n\n<p>手柄的图标。</p>\n<p>可以通过 <code class=\"codespan\">&#39;image://url&#39;</code> 设置为图片，其中 URL 为图片的链接，或者 <code class=\"codespan\">dataURI</code>。</p>\n<p>URL 为图片链接例如：</p>\n<pre><code>&#39;image://http://xxx.xxx.xxx/a/b.png&#39;\n</code></pre><p>URL 为 <code class=\"codespan\">dataURI</code> 例如：</p>\n<pre><code>&#39;image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7&#39;\n</code></pre><p>可以通过 <code class=\"codespan\">&#39;path://&#39;</code> 将图标设置为任意的矢量路径。这种方式相比于使用图片的方式，不用担心因为缩放而产生锯齿或模糊，而且可以设置为任意颜色。路径图形会自适应调整为合适的大小。路径的格式参见 <a href=\"http://www.w3.org/TR/SVG/paths.html#PathData\" target=\"_blank\">SVG PathData</a>。可以从 Adobe Illustrator 等工具编辑导出。</p>\n<p>例如：</p>\n<pre><code>&#39;path://M30.9,53.2C16.8,53.2,5.3,41.7,5.3,27.6S16.8,2,30.9,2C45,2,56.4,13.5,56.4,27.6S45,53.2,30.9,53.2z M30.9,3.5C17.6,3.5,6.8,14.4,6.8,27.6c0,13.3,10.8,24.1,24.101,24.1C44.2,51.7,55,40.9,55,27.6C54.9,14.4,44.1,3.5,30.9,3.5z M36.9,35.8c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H36c0.5,0,0.9,0.4,0.9,1V35.8z M27.8,35.8 c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H27c0.5,0,0.9,0.4,0.9,1L27.8,35.8L27.8,35.8z&#39;\n</code></pre><p>参见 <a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=doc-example/axisPointer-handle-image&amp;edit=1&amp;reset=1\" target=\"_blank\">使用图片的例子</a></p>\n",
     "uiControl": {
       "type": "icon",
       "clean": "true"

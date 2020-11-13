@@ -1,6 +1,6 @@
 window.__EC_DOC_option_legend = {
   "type": {
-    "desc": "\n\n<p>Type of legend. Optional values:</p>\n<ul>\n<li><code class=\"codespan\">&#39;plain&#39;</code>: Simple legend. (default)</li>\n<li><code class=\"codespan\">&#39;scroll&#39;</code>: Scrollable legend. It helps when too many legend items needed to be shown.</li>\n</ul>\n<p>See <a href=\"https://echarts.apache.org/next/examples/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">vertically scrollable legend</a> or <a href=\"https://echarts.apache.org/next/examples/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">horizontally scrollable legend</a>.</p>\n<p>When <code class=\"codespan\">&#39;scroll&#39;</code> used, these options below can be used for detailed configuration:</p>\n<ul>\n<li><a href=\"#legend.scrollDataIndex\">legend.scrollDataIndex</a></li>\n<li><a href=\"#legend.pageButtonItemGap\">legend.pageButtonItemGap</a></li>\n<li><a href=\"#legend.pageButtonGap\">legend.pageButtonGap</a></li>\n<li><a href=\"#legend.pageButtonPosition\">legend.pageButtonPosition</a></li>\n<li><a href=\"#legend.pageFormatter\">legend.pageFormatter</a></li>\n<li><a href=\"#legend.pageIcons\">legend.pageIcons</a></li>\n<li><a href=\"#legend.pageIconColor\">legend.pageIconColor</a></li>\n<li><a href=\"#legend.pageIconInactiveColor\">legend.pageIconInactiveColor</a></li>\n<li><a href=\"#legend.pageIconSize\">legend.pageIconSize</a></li>\n<li><a href=\"#legend.pageTextStyle\">legend.pageTextStyle</a></li>\n<li><a href=\"#legend.animation\">legend.animation</a></li>\n<li><a href=\"#legend.animationDurationUpdate\">legend.animationDurationUpdate</a></li>\n</ul>\n",
+    "desc": "\n\n<p>Type of legend. Optional values:</p>\n<ul>\n<li><code class=\"codespan\">&#39;plain&#39;</code>: Simple legend. (default)</li>\n<li><code class=\"codespan\">&#39;scroll&#39;</code>: Scrollable legend. It helps when too many legend items needed to be shown.</li>\n</ul>\n<p>See <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">vertically scrollable legend</a> or <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">horizontally scrollable legend</a>.</p>\n<p>When <code class=\"codespan\">&#39;scroll&#39;</code> used, these options below can be used for detailed configuration:</p>\n<ul>\n<li><a href=\"#legend.scrollDataIndex\">legend.scrollDataIndex</a></li>\n<li><a href=\"#legend.pageButtonItemGap\">legend.pageButtonItemGap</a></li>\n<li><a href=\"#legend.pageButtonGap\">legend.pageButtonGap</a></li>\n<li><a href=\"#legend.pageButtonPosition\">legend.pageButtonPosition</a></li>\n<li><a href=\"#legend.pageFormatter\">legend.pageFormatter</a></li>\n<li><a href=\"#legend.pageIcons\">legend.pageIcons</a></li>\n<li><a href=\"#legend.pageIconColor\">legend.pageIconColor</a></li>\n<li><a href=\"#legend.pageIconInactiveColor\">legend.pageIconInactiveColor</a></li>\n<li><a href=\"#legend.pageIconSize\">legend.pageIconSize</a></li>\n<li><a href=\"#legend.pageTextStyle\">legend.pageTextStyle</a></li>\n<li><a href=\"#legend.animation\">legend.animation</a></li>\n<li><a href=\"#legend.animationDurationUpdate\">legend.animationDurationUpdate</a></li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "options": "plain,scroll"
@@ -260,10 +260,24 @@ window.__EC_DOC_option_legend = {
     }
   },
   "textStyle.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "textStyle.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "textStyle.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n",
@@ -586,45 +600,45 @@ window.__EC_DOC_option_legend = {
     }
   },
   "scrollDataIndex": {
-    "desc": "<p>It works when <a href=\"#legend.type\">legend.type</a> is <code class=\"codespan\">&#39;scroll&#39;</code>.</p>\n<p><code class=\"codespan\">dataIndex</code> of the left top most displayed item.</p>\n<p>Although the scrolling of legend items can be controlled by calling <code class=\"codespan\">setOption</code> and specifying this property, we suggest that do not control legend in this way unless necessary (<code class=\"codespan\">setOption</code> might be time-consuming), but just use action <a href=\"api.html#action.legend.legendScroll\" target=\"_blank\">legendScroll</a> to do that.</p>\n<p>See <a href=\"https://echarts.apache.org/next/examples/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">vertically scrollable legend</a> or <a href=\"https://echarts.apache.org/next/examples/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">horizontally scrollable legend</a>.</p>\n"
+    "desc": "<p>It works when <a href=\"#legend.type\">legend.type</a> is <code class=\"codespan\">&#39;scroll&#39;</code>.</p>\n<p><code class=\"codespan\">dataIndex</code> of the left top most displayed item.</p>\n<p>Although the scrolling of legend items can be controlled by calling <code class=\"codespan\">setOption</code> and specifying this property, we suggest that do not control legend in this way unless necessary (<code class=\"codespan\">setOption</code> might be time-consuming), but just use action <a href=\"api.html#action.legend.legendScroll\" target=\"_blank\">legendScroll</a> to do that.</p>\n<p>See <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">vertically scrollable legend</a> or <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">horizontally scrollable legend</a>.</p>\n"
   },
   "pageButtonItemGap": {
-    "desc": "<p>It works when <a href=\"#legend.type\">legend.type</a> is <code class=\"codespan\">&#39;scroll&#39;</code>.</p>\n<p>The gap between page buttons and page info text.</p>\n<p>See <a href=\"https://echarts.apache.org/next/examples/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">vertically scrollable legend</a> or <a href=\"https://echarts.apache.org/next/examples/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">horizontally scrollable legend</a>.</p>\n"
+    "desc": "<p>It works when <a href=\"#legend.type\">legend.type</a> is <code class=\"codespan\">&#39;scroll&#39;</code>.</p>\n<p>The gap between page buttons and page info text.</p>\n<p>See <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">vertically scrollable legend</a> or <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">horizontally scrollable legend</a>.</p>\n"
   },
   "pageButtonGap": {
-    "desc": "<p>It works when <a href=\"#legend.type\">legend.type</a> is <code class=\"codespan\">&#39;scroll&#39;</code>.</p>\n<p>The gap between page buttons and legend items.</p>\n<p>See <a href=\"https://echarts.apache.org/next/examples/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">vertically scrollable legend</a> or <a href=\"https://echarts.apache.org/next/examples/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">horizontally scrollable legend</a>.</p>\n"
+    "desc": "<p>It works when <a href=\"#legend.type\">legend.type</a> is <code class=\"codespan\">&#39;scroll&#39;</code>.</p>\n<p>The gap between page buttons and legend items.</p>\n<p>See <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">vertically scrollable legend</a> or <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">horizontally scrollable legend</a>.</p>\n"
   },
   "pageButtonPosition": {
-    "desc": "<p>It works when <a href=\"#legend.type\">legend.type</a> is <code class=\"codespan\">&#39;scroll&#39;</code>.</p>\n<p>The position of page buttons and page info. Optional values:</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code>: on the left or top.</li>\n<li><code class=\"codespan\">&#39;end&#39;</code>: on the right or bottom.</li>\n</ul>\n<p>See <a href=\"https://echarts.apache.org/next/examples/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">vertically scrollable legend</a> or <a href=\"https://echarts.apache.org/next/examples/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">horizontally scrollable legend</a>.</p>\n"
+    "desc": "<p>It works when <a href=\"#legend.type\">legend.type</a> is <code class=\"codespan\">&#39;scroll&#39;</code>.</p>\n<p>The position of page buttons and page info. Optional values:</p>\n<ul>\n<li><code class=\"codespan\">&#39;start&#39;</code>: on the left or top.</li>\n<li><code class=\"codespan\">&#39;end&#39;</code>: on the right or bottom.</li>\n</ul>\n<p>See <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">vertically scrollable legend</a> or <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">horizontally scrollable legend</a>.</p>\n"
   },
   "pageFormatter": {
-    "desc": "<p>It works when <a href=\"#legend.type\">legend.type</a> is <code class=\"codespan\">&#39;scroll&#39;</code>.</p>\n<p>Page info formatter. It is <code class=\"codespan\">&#39;{current}/{total}&#39;</code> by default, where <code class=\"codespan\">{current}</code> is current page number (start from 1), and <code class=\"codespan\">{total}</code> is the total page number.</p>\n<p>If <code class=\"codespan\">pageFormatter</code> is a function, it should return a string. The parameters is:</p>\n<pre><code class=\"lang-js\">{\n    current: number\n    total: number\n}\n</code></pre>\n<p>See <a href=\"https://echarts.apache.org/next/examples/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">vertically scrollable legend</a> or <a href=\"https://echarts.apache.org/next/examples/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">horizontally scrollable legend</a>.</p>\n"
+    "desc": "<p>It works when <a href=\"#legend.type\">legend.type</a> is <code class=\"codespan\">&#39;scroll&#39;</code>.</p>\n<p>Page info formatter. It is <code class=\"codespan\">&#39;{current}/{total}&#39;</code> by default, where <code class=\"codespan\">{current}</code> is current page number (start from 1), and <code class=\"codespan\">{total}</code> is the total page number.</p>\n<p>If <code class=\"codespan\">pageFormatter</code> is a function, it should return a string. The parameters is:</p>\n<pre><code class=\"lang-js\">{\n    current: number\n    total: number\n}\n</code></pre>\n<p>See <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">vertically scrollable legend</a> or <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">horizontally scrollable legend</a>.</p>\n"
   },
   "pageIcons": {
     "desc": "<p>It works when <a href=\"#legend.type\">legend.type</a> is <code class=\"codespan\">&#39;scroll&#39;</code>.</p>\n<p>The icons of page buttons.</p>\n"
   },
   "pageIcons.horizontal": {
-    "desc": "<p>The icons of page buttons when <a href=\"#legend.orient\">legend.orient</a> is <code class=\"codespan\">&#39;horizontal&#39;</code>.</p>\n<p>It should be an array, <code class=\"codespan\">[previous page button, next page button]</code>, <code class=\"codespan\">[&#39;M0,0L12,-10L12,10z&#39;, &#39;M0,0L-12,-10L-12,10z&#39;]</code> by default.</p>\n<p>For the each item of the array,</p>\n<p>It can be set to an image with <code class=\"codespan\">&#39;image://url&#39;</code> , in which URL is the link to an image, or <code class=\"codespan\">dataURI</code> of an image.</p>\n<p>An image URL example:</p>\n<pre><code>&#39;image://http://xxx.xxx.xxx/a/b.png&#39;\n</code></pre><p>A <code class=\"codespan\">dataURI</code> example:</p>\n<pre><code>&#39;image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7&#39;\n</code></pre><p>Icons can be set to arbitrary vector path via <code class=\"codespan\">&#39;path://&#39;</code> in ECharts. As compared with a raster image, vector paths prevent jagging and blurring when scaled, and have better control over changing colors. The size of the vector icon will be adapted automatically. Refer to <a href=\"http://www.w3.org/TR/SVG/paths.html#PathData\" target=\"_blank\">SVG PathData</a> for more information about the format of the path. You may export vector paths from tools like Adobe </p>\n<p>For example:</p>\n<pre><code>&#39;path://M30.9,53.2C16.8,53.2,5.3,41.7,5.3,27.6S16.8,2,30.9,2C45,2,56.4,13.5,56.4,27.6S45,53.2,30.9,53.2z M30.9,3.5C17.6,3.5,6.8,14.4,6.8,27.6c0,13.3,10.8,24.1,24.101,24.1C44.2,51.7,55,40.9,55,27.6C54.9,14.4,44.1,3.5,30.9,3.5z M36.9,35.8c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H36c0.5,0,0.9,0.4,0.9,1V35.8z M27.8,35.8 c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H27c0.5,0,0.9,0.4,0.9,1L27.8,35.8L27.8,35.8z&#39;\n</code></pre><p>See <a href=\"https://echarts.apache.org/next/examples/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">vertically scrollable legend</a> or <a href=\"https://echarts.apache.org/next/examples/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">horizontally scrollable legend</a>.</p>\n"
+    "desc": "<p>The icons of page buttons when <a href=\"#legend.orient\">legend.orient</a> is <code class=\"codespan\">&#39;horizontal&#39;</code>.</p>\n<p>It should be an array, <code class=\"codespan\">[previous page button, next page button]</code>, <code class=\"codespan\">[&#39;M0,0L12,-10L12,10z&#39;, &#39;M0,0L-12,-10L-12,10z&#39;]</code> by default.</p>\n<p>For the each item of the array,</p>\n<p>It can be set to an image with <code class=\"codespan\">&#39;image://url&#39;</code> , in which URL is the link to an image, or <code class=\"codespan\">dataURI</code> of an image.</p>\n<p>An image URL example:</p>\n<pre><code>&#39;image://http://xxx.xxx.xxx/a/b.png&#39;\n</code></pre><p>A <code class=\"codespan\">dataURI</code> example:</p>\n<pre><code>&#39;image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7&#39;\n</code></pre><p>Icons can be set to arbitrary vector path via <code class=\"codespan\">&#39;path://&#39;</code> in ECharts. As compared with a raster image, vector paths prevent jagging and blurring when scaled, and have better control over changing colors. The size of the vector icon will be adapted automatically. Refer to <a href=\"http://www.w3.org/TR/SVG/paths.html#PathData\" target=\"_blank\">SVG PathData</a> for more information about the format of the path. You may export vector paths from tools like Adobe </p>\n<p>For example:</p>\n<pre><code>&#39;path://M30.9,53.2C16.8,53.2,5.3,41.7,5.3,27.6S16.8,2,30.9,2C45,2,56.4,13.5,56.4,27.6S45,53.2,30.9,53.2z M30.9,3.5C17.6,3.5,6.8,14.4,6.8,27.6c0,13.3,10.8,24.1,24.101,24.1C44.2,51.7,55,40.9,55,27.6C54.9,14.4,44.1,3.5,30.9,3.5z M36.9,35.8c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H36c0.5,0,0.9,0.4,0.9,1V35.8z M27.8,35.8 c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H27c0.5,0,0.9,0.4,0.9,1L27.8,35.8L27.8,35.8z&#39;\n</code></pre><p>See <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">vertically scrollable legend</a> or <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">horizontally scrollable legend</a>.</p>\n"
   },
   "pageIcons.vertical": {
-    "desc": "<p>The icons of page buttons when <a href=\"#legend.orient\">legend.orient</a> is <code class=\"codespan\">&#39;vertical&#39;</code>.</p>\n<p>It should be an array, <code class=\"codespan\">[previous page button, next page button]</code>, <code class=\"codespan\">[&#39;M0,0L20,0L10,-20z&#39;, &#39;M0,0L20,0L10,20z&#39;]</code> by default.</p>\n<p>For the each item of the array,</p>\n<p>It can be set to an image with <code class=\"codespan\">&#39;image://url&#39;</code> , in which URL is the link to an image, or <code class=\"codespan\">dataURI</code> of an image.</p>\n<p>An image URL example:</p>\n<pre><code>&#39;image://http://xxx.xxx.xxx/a/b.png&#39;\n</code></pre><p>A <code class=\"codespan\">dataURI</code> example:</p>\n<pre><code>&#39;image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7&#39;\n</code></pre><p>Icons can be set to arbitrary vector path via <code class=\"codespan\">&#39;path://&#39;</code> in ECharts. As compared with a raster image, vector paths prevent jagging and blurring when scaled, and have better control over changing colors. The size of the vector icon will be adapted automatically. Refer to <a href=\"http://www.w3.org/TR/SVG/paths.html#PathData\" target=\"_blank\">SVG PathData</a> for more information about the format of the path. You may export vector paths from tools like Adobe </p>\n<p>For example:</p>\n<pre><code>&#39;path://M30.9,53.2C16.8,53.2,5.3,41.7,5.3,27.6S16.8,2,30.9,2C45,2,56.4,13.5,56.4,27.6S45,53.2,30.9,53.2z M30.9,3.5C17.6,3.5,6.8,14.4,6.8,27.6c0,13.3,10.8,24.1,24.101,24.1C44.2,51.7,55,40.9,55,27.6C54.9,14.4,44.1,3.5,30.9,3.5z M36.9,35.8c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H36c0.5,0,0.9,0.4,0.9,1V35.8z M27.8,35.8 c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H27c0.5,0,0.9,0.4,0.9,1L27.8,35.8L27.8,35.8z&#39;\n</code></pre><p>See <a href=\"https://echarts.apache.org/next/examples/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">vertically scrollable legend</a> or <a href=\"https://echarts.apache.org/next/examples/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">horizontally scrollable legend</a>.</p>\n"
+    "desc": "<p>The icons of page buttons when <a href=\"#legend.orient\">legend.orient</a> is <code class=\"codespan\">&#39;vertical&#39;</code>.</p>\n<p>It should be an array, <code class=\"codespan\">[previous page button, next page button]</code>, <code class=\"codespan\">[&#39;M0,0L20,0L10,-20z&#39;, &#39;M0,0L20,0L10,20z&#39;]</code> by default.</p>\n<p>For the each item of the array,</p>\n<p>It can be set to an image with <code class=\"codespan\">&#39;image://url&#39;</code> , in which URL is the link to an image, or <code class=\"codespan\">dataURI</code> of an image.</p>\n<p>An image URL example:</p>\n<pre><code>&#39;image://http://xxx.xxx.xxx/a/b.png&#39;\n</code></pre><p>A <code class=\"codespan\">dataURI</code> example:</p>\n<pre><code>&#39;image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7&#39;\n</code></pre><p>Icons can be set to arbitrary vector path via <code class=\"codespan\">&#39;path://&#39;</code> in ECharts. As compared with a raster image, vector paths prevent jagging and blurring when scaled, and have better control over changing colors. The size of the vector icon will be adapted automatically. Refer to <a href=\"http://www.w3.org/TR/SVG/paths.html#PathData\" target=\"_blank\">SVG PathData</a> for more information about the format of the path. You may export vector paths from tools like Adobe </p>\n<p>For example:</p>\n<pre><code>&#39;path://M30.9,53.2C16.8,53.2,5.3,41.7,5.3,27.6S16.8,2,30.9,2C45,2,56.4,13.5,56.4,27.6S45,53.2,30.9,53.2z M30.9,3.5C17.6,3.5,6.8,14.4,6.8,27.6c0,13.3,10.8,24.1,24.101,24.1C44.2,51.7,55,40.9,55,27.6C54.9,14.4,44.1,3.5,30.9,3.5z M36.9,35.8c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H36c0.5,0,0.9,0.4,0.9,1V35.8z M27.8,35.8 c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H27c0.5,0,0.9,0.4,0.9,1L27.8,35.8L27.8,35.8z&#39;\n</code></pre><p>See <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">vertically scrollable legend</a> or <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">horizontally scrollable legend</a>.</p>\n"
   },
   "pageIconColor": {
-    "desc": "\n\n<p>It works when <a href=\"#legend.type\">legend.type</a> is <code class=\"codespan\">&#39;scroll&#39;</code>.</p>\n<p>The color of page buttons.</p>\n<p>See <a href=\"https://echarts.apache.org/next/examples/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">vertically scrollable legend</a> or <a href=\"https://echarts.apache.org/next/examples/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">horizontally scrollable legend</a>.</p>\n",
+    "desc": "\n\n<p>It works when <a href=\"#legend.type\">legend.type</a> is <code class=\"codespan\">&#39;scroll&#39;</code>.</p>\n<p>The color of page buttons.</p>\n<p>See <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">vertically scrollable legend</a> or <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">horizontally scrollable legend</a>.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#2f4554"
     }
   },
   "pageIconInactiveColor": {
-    "desc": "\n\n<p>It works when <a href=\"#legend.type\">legend.type</a> is <code class=\"codespan\">&#39;scroll&#39;</code>.</p>\n<p>The color of page buttons when they are inactive.</p>\n<p>See <a href=\"https://echarts.apache.org/next/examples/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">vertically scrollable legend</a> or <a href=\"https://echarts.apache.org/next/examples/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">horizontally scrollable legend</a>.</p>\n",
+    "desc": "\n\n<p>It works when <a href=\"#legend.type\">legend.type</a> is <code class=\"codespan\">&#39;scroll&#39;</code>.</p>\n<p>The color of page buttons when they are inactive.</p>\n<p>See <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">vertically scrollable legend</a> or <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">horizontally scrollable legend</a>.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#aaa"
     }
   },
   "pageIconSize": {
-    "desc": "\n\n<p>It works when <a href=\"#legend.type\">legend.type</a> is <code class=\"codespan\">&#39;scroll&#39;</code>.</p>\n<p>The size of page buttons. It can be a number, or an array, like <code class=\"codespan\">[10, 3]</code>, represents <code class=\"codespan\">[width, height]</code>.</p>\n<p>See <a href=\"https://echarts.apache.org/next/examples/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">vertically scrollable legend</a> or <a href=\"https://echarts.apache.org/next/examples/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">horizontally scrollable legend</a>.</p>\n",
+    "desc": "\n\n<p>It works when <a href=\"#legend.type\">legend.type</a> is <code class=\"codespan\">&#39;scroll&#39;</code>.</p>\n<p>The size of page buttons. It can be a number, or an array, like <code class=\"codespan\">[10, 3]</code>, represents <code class=\"codespan\">[width, height]</code>.</p>\n<p>See <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=pie-legend&amp;edit=1&amp;reset=1\" target=\"_blank\">vertically scrollable legend</a> or <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=radar2&amp;edit=1&amp;reset=1\" target=\"_blank\">horizontally scrollable legend</a>.</p>\n",
     "uiControl": {
       "type": "vector",
       "default": "15,15",
@@ -684,10 +698,24 @@ window.__EC_DOC_option_legend = {
     }
   },
   "pageTextStyle.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "pageTextStyle.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "pageTextStyle.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n",
@@ -772,7 +800,7 @@ window.__EC_DOC_option_legend = {
     }
   },
   "emphasis.selectorLabel.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -781,7 +809,7 @@ window.__EC_DOC_option_legend = {
     }
   },
   "emphasis.selectorLabel.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -929,10 +957,24 @@ window.__EC_DOC_option_legend = {
     }
   },
   "emphasis.selectorLabel.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "emphasis.selectorLabel.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "emphasis.selectorLabel.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -1185,7 +1227,7 @@ window.__EC_DOC_option_legend = {
     }
   },
   "selectorLabel.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -1194,7 +1236,7 @@ window.__EC_DOC_option_legend = {
     }
   },
   "selectorLabel.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -1342,10 +1384,24 @@ window.__EC_DOC_option_legend = {
     }
   },
   "selectorLabel.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "selectorLabel.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "selectorLabel.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",

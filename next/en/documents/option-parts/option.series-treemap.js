@@ -63,7 +63,7 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "leafDepth": {
-    "desc": "\n\n<p>When <code class=\"codespan\">leafDepth</code> is set, the feature &quot;drill down&quot; is enabled, which means when clicking a tree node, this node will be set as root and its children will be shown.</p>\n<p><code class=\"codespan\">leafDepth</code> represents how many levels are shown at most. For example, when <code class=\"codespan\">leafDepth</code> is set to <code class=\"codespan\">1</code>, only one level will be shown.</p>\n<p><code class=\"codespan\">leafDepth</code> is <code class=\"codespan\">null</code>/<code class=\"codespan\">undefined</code> by default, which means that &quot;drill down&quot; is disabled.</p>\n<p><strong>An example about drill down:</strong></p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=treemap-drill-down&edit=1&reset=1\" width=\"800\" height=\"500\"><iframe />\n\n",
+    "desc": "\n\n<p>When <code class=\"codespan\">leafDepth</code> is set, the feature &quot;drill down&quot; is enabled, which means when clicking a tree node, this node will be set as root and its children will be shown.</p>\n<p><code class=\"codespan\">leafDepth</code> represents how many levels are shown at most. For example, when <code class=\"codespan\">leafDepth</code> is set to <code class=\"codespan\">1</code>, only one level will be shown.</p>\n<p><code class=\"codespan\">leafDepth</code> is <code class=\"codespan\">null</code>/<code class=\"codespan\">undefined</code> by default, which means that &quot;drill down&quot; is disabled.</p>\n<p><strong>An example about drill down:</strong></p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=treemap-drill-down&edit=1&reset=1\" width=\"800\" height=\"500\"><iframe />\n\n",
     "uiControl": {
       "type": "number",
       "min": "1",
@@ -116,7 +116,7 @@ window.__EC_DOC_option_series_treemap = {
     "desc": "<p>It indicates the range of saturation (color alpha) for nodes  of the series.</p>\n<p>The range of values is 0 ~ 1.</p>\n<p>For example, <code class=\"codespan\">colorSaturation</code> can be <code class=\"codespan\">[0.3, 1]</code>.</p>\n<p>About visual encoding, see details in <a href=\"#series-treemap.levels\">series-treemap.levels</a>.</p>\n<blockquote>\n<p>Tps: In treemap, <code class=\"codespan\">colorSaturation</code> attribute could appear in more than one places:</p>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in <a href=\"#series-treemap\">sereis-treemap</a>, indicating the unified setting of the series.</li>\n</ul>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in each array element of  <a href=\"#series-treemap.levels\">series-treemap.levels</a>, indicating the unified setting of each level of the tree.</li>\n</ul>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in each node of <a href=\"#series-treemap.data\">series-treemap.data</a>, indicating the particular setting of each node.</li>\n</ul>\n</blockquote>\n"
   },
   "colorMappingBy": {
-    "desc": "\n\n<p>Specify the rule according to which each node obtain color from <a href=\"#series-treemap.levels.color\">color list</a>. Optional values:</p>\n<ul>\n<li><code class=\"codespan\">&#39;value&#39;</code>:</li>\n</ul>\n<p>Map <a href=\"#series-treemap.data.value\">series-treemap.data.value</a> to color.</p>\n<p>In this way, the color of each node indicate its value.</p>\n<p><a href=\"#series-treemap.levels.visualDimension\">visualDimension</a> can be used to specify which dimension of <a href=\"#series-treemap.data\">data</a> is used to perform visual mapping.</p>\n<ul>\n<li><code class=\"codespan\">&#39;index&#39;</code>:</li>\n</ul>\n<p>Map the <code class=\"codespan\">index</code> (ordinal number) of nodes to color. Namely, in a level, the first node is mapped to the first color of <a href=\"#series-treemap.levels.color\">color list</a>, and the second node gets the second color.</p>\n<p>In this way, adjacent nodes are distinguished by color.</p>\n<ul>\n<li><code class=\"codespan\">&#39;id&#39;</code>:</li>\n</ul>\n<p>Map <a href=\"#series-treemap.data.id\">series-treemap.data.id</a> to color.</p>\n<p>Since <code class=\"codespan\">id</code> is used to identify node, if user call <code class=\"codespan\">setOption</code> to modify the tree, each node will remain the original color before and after <code class=\"codespan\">setOption</code> called. See this <a href=\"https://echarts.apache.org/next/examples/editor.html?c=treemap-obama&amp;edit=1&amp;reset=1\" target=\"_blank\">example</a>.</p>\n<p>About visual encoding, see details in <a href=\"#series-treemap.levels\">series-treemap.levels</a>.</p>\n<blockquote>\n<p>Tps: In treemap, <code class=\"codespan\">colorMappingBy</code> attribute could appear in more than one places:</p>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in <a href=\"#series-treemap\">sereis-treemap</a>, indicating the unified setting of the series.</li>\n</ul>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in each array element of  <a href=\"#series-treemap.levels\">series-treemap.levels</a>, indicating the unified setting of each level of the tree.</li>\n</ul>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in each node of <a href=\"#series-treemap.data\">series-treemap.data</a>, indicating the particular setting of each node.</li>\n</ul>\n</blockquote>\n",
+    "desc": "\n\n<p>Specify the rule according to which each node obtain color from <a href=\"#series-treemap.levels.color\">color list</a>. Optional values:</p>\n<ul>\n<li><code class=\"codespan\">&#39;value&#39;</code>:</li>\n</ul>\n<p>Map <a href=\"#series-treemap.data.value\">series-treemap.data.value</a> to color.</p>\n<p>In this way, the color of each node indicate its value.</p>\n<p><a href=\"#series-treemap.levels.visualDimension\">visualDimension</a> can be used to specify which dimension of <a href=\"#series-treemap.data\">data</a> is used to perform visual mapping.</p>\n<ul>\n<li><code class=\"codespan\">&#39;index&#39;</code>:</li>\n</ul>\n<p>Map the <code class=\"codespan\">index</code> (ordinal number) of nodes to color. Namely, in a level, the first node is mapped to the first color of <a href=\"#series-treemap.levels.color\">color list</a>, and the second node gets the second color.</p>\n<p>In this way, adjacent nodes are distinguished by color.</p>\n<ul>\n<li><code class=\"codespan\">&#39;id&#39;</code>:</li>\n</ul>\n<p>Map <a href=\"#series-treemap.data.id\">series-treemap.data.id</a> to color.</p>\n<p>Since <code class=\"codespan\">id</code> is used to identify node, if user call <code class=\"codespan\">setOption</code> to modify the tree, each node will remain the original color before and after <code class=\"codespan\">setOption</code> called. See this <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=treemap-obama&amp;edit=1&amp;reset=1\" target=\"_blank\">example</a>.</p>\n<p>About visual encoding, see details in <a href=\"#series-treemap.levels\">series-treemap.levels</a>.</p>\n<blockquote>\n<p>Tps: In treemap, <code class=\"codespan\">colorMappingBy</code> attribute could appear in more than one places:</p>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in <a href=\"#series-treemap\">sereis-treemap</a>, indicating the unified setting of the series.</li>\n</ul>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in each array element of  <a href=\"#series-treemap.levels\">series-treemap.levels</a>, indicating the unified setting of each level of the tree.</li>\n</ul>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in each node of <a href=\"#series-treemap.data\">series-treemap.data</a>, indicating the particular setting of each node.</li>\n</ul>\n</blockquote>\n",
     "uiControl": {
       "type": "enum",
       "options": "index,value,id"
@@ -150,14 +150,14 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "label.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -166,7 +166,7 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "label.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -317,10 +317,24 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -560,7 +574,7 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "upperLabel": {
-    "desc": "<p><code class=\"codespan\">upperLabel</code> is used to specify whether show label when the node has children. When <a href=\"#series-treemap.upperLabel.show\">upperLabel.show</a> is set as <code class=\"codespan\">true</code>, the feature that &quot;show parent label&quot; is enabled.</p>\n<p>The same as <a href=\"#series-treemap.label\">series-treemap.label</a>, the option <code class=\"codespan\">upperLabel</code> can be placed at the root of <a href=\"#series-treemap\">series-treemap</a> directly, or in <a href=\"#series-treemap.level\">series-treemap.level</a>, or in each item of <a href=\"#series-treemap.data\">series-treemap.data</a>.</p>\n<p>Specifically, <a href=\"#series-treemap.label\">series-treemap.label</a> specifies the style when a node is a leaf, while <code class=\"codespan\">upperLabel</code> specifies the style when a node has children, in which case the label is displayed in the inner top of the node.</p>\n<p>See:</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=treemap-show-parent&edit=1&reset=1\" width=\"700\" height=\"500\"><iframe />\n\n\n\n\n<blockquote>\n<p>Tps: In treemap, <code class=\"codespan\">label</code> attribute could appear in more than one places:</p>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in <a href=\"#series-treemap\">sereis-treemap</a>, indicating the unified setting of the series.</li>\n</ul>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in each array element of  <a href=\"#series-treemap.levels\">series-treemap.levels</a>, indicating the unified setting of each level of the tree.</li>\n</ul>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in each node of <a href=\"#series-treemap.data\">series-treemap.data</a>, indicating the particular setting of each node.</li>\n</ul>\n</blockquote>\n"
+    "desc": "<p><code class=\"codespan\">upperLabel</code> is used to specify whether show label when the node has children. When <a href=\"#series-treemap.upperLabel.show\">upperLabel.show</a> is set as <code class=\"codespan\">true</code>, the feature that &quot;show parent label&quot; is enabled.</p>\n<p>The same as <a href=\"#series-treemap.label\">series-treemap.label</a>, the option <code class=\"codespan\">upperLabel</code> can be placed at the root of <a href=\"#series-treemap\">series-treemap</a> directly, or in <a href=\"#series-treemap.level\">series-treemap.level</a>, or in each item of <a href=\"#series-treemap.data\">series-treemap.data</a>.</p>\n<p>Specifically, <a href=\"#series-treemap.label\">series-treemap.label</a> specifies the style when a node is a leaf, while <code class=\"codespan\">upperLabel</code> specifies the style when a node has children, in which case the label is displayed in the inner top of the node.</p>\n<p>See:</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=treemap-show-parent&edit=1&reset=1\" width=\"700\" height=\"500\"><iframe />\n\n\n\n\n<blockquote>\n<p>Tps: In treemap, <code class=\"codespan\">label</code> attribute could appear in more than one places:</p>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in <a href=\"#series-treemap\">sereis-treemap</a>, indicating the unified setting of the series.</li>\n</ul>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in each array element of  <a href=\"#series-treemap.levels\">series-treemap.levels</a>, indicating the unified setting of each level of the tree.</li>\n</ul>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in each node of <a href=\"#series-treemap.data\">series-treemap.data</a>, indicating the particular setting of each node.</li>\n</ul>\n</blockquote>\n"
   },
   "upperLabel.show": {
     "desc": "\n\n<p>Whether to show label.</p>\n",
@@ -570,14 +584,14 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "upperLabel.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "upperLabel.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -586,7 +600,7 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "upperLabel.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -737,7 +751,14 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "upperLabel.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "upperLabel.height": {
     "desc": "\n\n<p>Height of label area.</p>\n",
@@ -1047,7 +1068,7 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "itemStyle.borderColorSaturation": {
-    "desc": "\n\n<p>The color saturation of a border or gap. The value range is between 0 ~ 1.</p>\n<p>Tips:</p>\n<p>When <code class=\"codespan\">borderColorSaturation</code> is set, the <code class=\"codespan\">borderColor</code> is disabled, and, instead, the final border color is calculated based on the color of this node (this color could be sepcified explicitly or inherited from its parent node) and mixing with <code class=\"codespan\">borderColorSaturation</code>.</p>\n<p>In this way, a effect can be implemented: different sections have different hue of gap color repectively, which makes users easy to distinguish both sections and levels.</p>\n<p><strong>How to avoid confusion by setting border/gap of node</strong></p>\n<p>If all of the border/gaps are set with the same color, confusion might occur when rectangulars in different levels display at the same time.</p>\n<p>See the <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/treemap-borderColor&amp;edit=1&amp;reset=1\" target=\"_blank\">example</a>. Notice that the child rectangles in the red area are in the deeper level than rectangles that are saparated by white gap. So in the red area, basically we set gap color with red, and use <code class=\"codespan\">borderColorSaturation</code> to lift the saturation.</p>\n",
+    "desc": "\n\n<p>The color saturation of a border or gap. The value range is between 0 ~ 1.</p>\n<p>Tips:</p>\n<p>When <code class=\"codespan\">borderColorSaturation</code> is set, the <code class=\"codespan\">borderColor</code> is disabled, and, instead, the final border color is calculated based on the color of this node (this color could be sepcified explicitly or inherited from its parent node) and mixing with <code class=\"codespan\">borderColorSaturation</code>.</p>\n<p>In this way, a effect can be implemented: different sections have different hue of gap color repectively, which makes users easy to distinguish both sections and levels.</p>\n<p><strong>How to avoid confusion by setting border/gap of node</strong></p>\n<p>If all of the border/gaps are set with the same color, confusion might occur when rectangulars in different levels display at the same time.</p>\n<p>See the <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/treemap-borderColor&amp;edit=1&amp;reset=1\" target=\"_blank\">example</a>. Notice that the child rectangles in the red area are in the deeper level than rectangles that are saparated by white gap. So in the red area, basically we set gap color with red, and use <code class=\"codespan\">borderColorSaturation</code> to lift the saturation.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.01",
@@ -1102,7 +1123,7 @@ window.__EC_DOC_option_series_treemap = {
     "desc": "<p>Emphasis state.</p>\n"
   },
   "emphasis.focus": {
-    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>When the data is highlighted, whether to fade out of other data to focus the highlighted. The following configurations are supported:</p>\n<ul>\n<li><code class=\"codespan\">&#39;none&#39;</code> Do not fade out other data, it&#39;s by default.</li>\n<li><code class=\"codespan\">&#39;self&#39;</code> Only focus (not fade out) the element of the currently highlighted data.</li>\n<li><code class=\"codespan\">&#39;series&#39;</code> Focus on all elements of the series which the currently highlighted data belongs to.</li>\n</ul>\n<ul>\n<li><code class=\"codespan\">&#39;ancestor&#39;</code> Focus on all ancestor nodes.</li>\n<li><code class=\"codespan\">&#39;descendant&#39;</code> Focus on all descendants nodes.</li>\n</ul>\n<p><strong>Example: </strong></p>\n<pre><code class=\"lang-js\">emphasis: {\n    focus: &#39;series&#39;,\n    blurScope: &#39;coordinateSystem&#39;\n}\n</code></pre>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=bar-y-category-stack&reset=1&edit=1\" width=\"600\" height=\"400\"><iframe />\n\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>When the data is highlighted, whether to fade out of other data to focus the highlighted. The following configurations are supported:</p>\n<ul>\n<li><code class=\"codespan\">&#39;none&#39;</code> Do not fade out other data, it&#39;s by default.</li>\n<li><code class=\"codespan\">&#39;self&#39;</code> Only focus (not fade out) the element of the currently highlighted data.</li>\n<li><code class=\"codespan\">&#39;series&#39;</code> Focus on all elements of the series which the currently highlighted data belongs to.</li>\n</ul>\n<ul>\n<li><code class=\"codespan\">&#39;ancestor&#39;</code> Focus on all ancestor nodes.</li>\n<li><code class=\"codespan\">&#39;descendant&#39;</code> Focus on all descendants nodes.</li>\n</ul>\n<p><strong>Example: </strong></p>\n<pre><code class=\"lang-js\">emphasis: {\n    focus: &#39;series&#39;,\n    blurScope: &#39;coordinateSystem&#39;\n}\n</code></pre>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=bar-y-category-stack&reset=1&edit=1\" width=\"600\" height=\"400\"><iframe />\n\n"
   },
   "emphasis.blurScope": {
     "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>The range of fade out when <code class=\"codespan\">focus</code> is enabled. Support the following configurations</p>\n<ul>\n<li><code class=\"codespan\">&#39;coordinateSystem&#39;</code></li>\n<li><code class=\"codespan\">&#39;series&#39;</code></li>\n<li><code class=\"codespan\">&#39;global&#39;</code></li>\n</ul>\n"
@@ -1115,14 +1136,14 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "emphasis.label.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "emphasis.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -1131,7 +1152,7 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "emphasis.label.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -1282,10 +1303,24 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "emphasis.label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "emphasis.label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "emphasis.label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -1606,14 +1641,14 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "emphasis.upperLabel.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "emphasis.upperLabel.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -1622,7 +1657,7 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "emphasis.upperLabel.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -1773,10 +1808,24 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "emphasis.upperLabel.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "emphasis.upperLabel.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "emphasis.upperLabel.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -2032,14 +2081,14 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "blur.label.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "blur.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -2048,7 +2097,7 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "blur.label.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -2199,10 +2248,24 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "blur.label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "blur.label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "blur.label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -2523,14 +2586,14 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "blur.upperLabel.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "blur.upperLabel.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -2539,7 +2602,7 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "blur.upperLabel.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -2690,10 +2753,24 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "blur.upperLabel.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "blur.upperLabel.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "blur.upperLabel.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -2949,14 +3026,14 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "select.label.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "select.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -2965,7 +3042,7 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "select.label.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -3116,10 +3193,24 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "select.label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "select.label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "select.label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -3440,14 +3531,14 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "select.upperLabel.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "select.upperLabel.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -3456,7 +3547,7 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "select.upperLabel.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -3607,10 +3698,24 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "select.upperLabel.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "select.upperLabel.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "select.upperLabel.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -4122,10 +4227,24 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "breadcrumb.itemStyle.textStyle.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "breadcrumb.itemStyle.textStyle.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "breadcrumb.itemStyle.textStyle.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n",
@@ -4565,10 +4684,24 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "breadcrumb.emphasis.itemStyle.textStyle.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "breadcrumb.emphasis.itemStyle.textStyle.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "breadcrumb.emphasis.itemStyle.textStyle.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n",
@@ -4906,10 +5039,10 @@ window.__EC_DOC_option_series_treemap = {
     "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Unified layout configuration of labels.</p>\n<p>It provide a chance to adjust the labels&#39; <code class=\"codespan\">(x, y)</code> position, alignment based on the original layout each series provides.</p>\n<p>This option can be a callback with following parameters.</p>\n<pre><code class=\"lang-js\">// corresponding index of data\ndataIndex: number\n// corresponding type of data. Only available in graph, in which it can be &#39;node&#39; or &#39;edge&#39;\ndataType?: string\n// corresponding index of series\nseriesIndex: number\n// Displayed text of label.\ntext: string\n// Bounding rectangle of label.\nlabelRect: {x: number, y: number, width: number, height: number}\n// Horizontal alignment of label.\nalign: &#39;left&#39; | &#39;center&#39; | &#39;right&#39;\n// Vertical alignment of label.\nverticalAlign: &#39;top&#39; | &#39;middle&#39; | &#39;bottom&#39;\n// Bounding rectangle of the element corresponding to.\nrect: {x: number, y: number, width: number, height: number}\n// Default points array of labelLine. Currently only provided in pie and funnel series.\n// It&#39;s null in other series.\nlabelLinePoints?: number[][]\n</code></pre>\n<p><strong>Example:</strong></p>\n<p>Align the labels on the right. Left 10px margin to the edge.</p>\n<pre><code class=\"lang-js\">labelLayout(params) {\n    return {\n        x: params.rect.x + 10,\n        y: params.rect.y + params.rect.height / 2,\n        verticalAlign: &#39;middle&#39;,\n        align: &#39;left&#39;\n    }\n}\n</code></pre>\n<p>Set the text size based on the size of element bounding rectangle.</p>\n<pre><code class=\"lang-js\">\nlabelLayout(params) {\n    return {\n        fontSize: Math.max(params.rect.width / 10, 5)\n    };\n}\n</code></pre>\n"
   },
   "labelLayout.hideOverlap": {
-    "desc": "<p>If hide the overlapped labels.</p>\n<p>The following example shows how to hide the overlapped labels in graph automatically when zooming.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=graph-label-overlap&edit=1&reset=1\" width=\"600\" height=\"400\"><iframe />\n\n"
+    "desc": "<p>If hide the overlapped labels.</p>\n<p>The following example shows how to hide the overlapped labels in graph automatically when zooming.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=graph-label-overlap&edit=1&reset=1\" width=\"600\" height=\"400\"><iframe />\n\n"
   },
   "labelLayout.moveOverlap": {
-    "desc": "<p>If move the overlapped labels to avoid overlapping.</p>\n<p>Currently supported configurations:</p>\n<ul>\n<li><code class=\"codespan\">&#39;shiftX&#39;</code> Place the labels on horizontal direction sequencely, used when aligned horizontally.</li>\n<li><code class=\"codespan\">&#39;shiftY&#39;</code> Place the labels on vertial direction sequencely, used when aligned vertically.</li>\n</ul>\n<p>The following example shows how to use <code class=\"codespan\">moverOverlap: &#39;shiftY&#39;</code> to place the labels aligned vertically.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=scatter-label-align-right&edit=1&reset=1\" width=\"600\" height=\"400\"><iframe />\n\n"
+    "desc": "<p>If move the overlapped labels to avoid overlapping.</p>\n<p>Currently supported configurations:</p>\n<ul>\n<li><code class=\"codespan\">&#39;shiftX&#39;</code> Place the labels on horizontal direction sequencely, used when aligned horizontally.</li>\n<li><code class=\"codespan\">&#39;shiftY&#39;</code> Place the labels on vertial direction sequencely, used when aligned vertically.</li>\n</ul>\n<p>The following example shows how to use <code class=\"codespan\">moverOverlap: &#39;shiftY&#39;</code> to place the labels aligned vertically.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=scatter-label-align-right&edit=1&reset=1\" width=\"600\" height=\"400\"><iframe />\n\n"
   },
   "labelLayout.x": {
     "desc": "<p>The x position of the label. Support absolute pixel values ​​or relative values ​​such as <code class=\"codespan\">&#39;20%&#39;</code>.</p>\n"
@@ -4948,7 +5081,7 @@ window.__EC_DOC_option_series_treemap = {
     "desc": "<p>The array of the three points of the label guide line. The format is:</p>\n<pre><code class=\"lang-js\">[[x, y], [x, y], [x, y]]\n</code></pre>\n<p>It is often used in pie charts to fine-tune the guide line that has been calculated. Usually not recommended to set it in other situations.</p>\n"
   },
   "levels": {
-    "desc": "<p><strong>Multiple Levels Configuration</strong></p>\n<p>treemap adopts 4-level configuration:</p>\n<pre><code>&quot;each node&quot; --&gt; &quot;each level&quot; --&gt; &quot;each series&quot;.\n</code></pre><p>That is, we can configurate each node, can also configurate each level of the tree, or set overall configurations on each series. The highest priority is node configuration.</p>\n<p><code class=\"codespan\">levels</code> is configurations on each levels, which is used most.</p>\n<p>For example:</p>\n<pre><code class=\"lang-javascript\">// Notice that in fact the data structure is not &quot;tree&quot;, but is &quot;forest&quot;.\ndata: [\n    {\n        name: &#39;nodeA&#39;,\n        children: [\n            {name: &#39;nodeAA&#39;},\n            {name: &#39;nodeAB&#39;},\n        ]\n    },\n    {\n        name: &#39;nodeB&#39;,\n        children: [\n            {name: &#39;nodeBA&#39;}\n        ]\n    }\n],\nlevels: [\n    {...}, // configurations of the top level of the data structure &quot;forest&quot;\n        // (the level that contains &#39;nodeA&#39;, &#39;nodeB&#39; shown above).\n    {...}, // configurations of the next level\n        // (the level that contains &#39;nodeAA&#39;, &#39;nodeAB&#39;, &#39;nodeBA&#39; shown above)\n    {...}, // configurations of the next level\n    ...\n]\n</code></pre>\n<p><strong>The Rules about Visual Mapping</strong></p>\n<p>When designing a treemap, we primarily focus on how to visually distinguish &quot;different levels&quot;, &quot;different categories in the same level&quot;, which requires appropriate settings of &quot;rectangular color&quot;, &quot;border thickness&quot;, &quot;border color&quot; and even &quot;color saturation of rectangular&quot; and so on on each level.</p>\n<p>See <a href=\"https://echarts.apache.org/next/examples/editor.html?c=treemap-disk&amp;edit=1&amp;reset=1\" target=\"_blank\">example</a>. The top level is divided into several parts by colors &quot;red&quot;, &quot;green&quot;, &quot;blue&quot;, and etc ... In each color block, <code class=\"codespan\">colorSaturation</code> is used to distinguish nodes in sublevel. The border color of the top level is &quot;white&quot;, while the border color of the sublevel is the color that based on the current block color and processed by <code class=\"codespan\">borderColorSaturation</code>.</p>\n<p><code class=\"codespan\">treemap</code> uses this rule of visual configuration: each level computes its visual value based on the configurations (<code class=\"codespan\">color</code>, <code class=\"codespan\">colorSaturation</code>, <code class=\"codespan\">borderColor</code>, <code class=\"codespan\">borderColorSaturation</code>) on this level. If there is no certain configuration in a node, it inherits the configuration from its parent.</p>\n<p>In this way, this effect can be configured: set a <code class=\"codespan\">color</code> list on the parent level, and set <code class=\"codespan\">colorSaturation</code> on the child level, and then each node in the parent level would obtain a color from the <code class=\"codespan\">color</code> list, and each node in the child level would obtain a value from <code class=\"codespan\">colorSaturation</code> and compound it with the color inherited from its parent node to get its final color.</p>\n<p><strong>Dimensions and &quot;Extra Visual Mapping&quot;</strong></p>\n<p>See the example below: every <code class=\"codespan\">value</code> field is set as an Array, in which each item in the array represents a dimension respectively.</p>\n<pre><code class=\"lang-javascript\">[\n    {\n        value: [434, 6969, 8382],\n        children: [\n            {\n                value: [1212, 4943, 5453],\n                id: &#39;someid-1&#39;,\n                name: &#39;description of this node&#39;,\n                children: [...]\n            },\n            {\n                value: [4545, 192, 439],\n                id: &#39;someid-2&#39;,\n                name: &#39;description of this node&#39;,\n                children: [...]\n            },\n            ...\n        ]\n    },\n    {\n        value: [23, 59, 12],\n        children: [...]\n    },\n    ...\n]\n</code></pre>\n<p><code class=\"codespan\">treemap</code> will map the first dimension (the first item of the array) to &quot;area&quot;. If we want to express more information, we could map another dimension (specified by <a href=\"#series-treemap.viusalDimension\">series-treemap.visualDimension</a>) to another visual types, such as <code class=\"codespan\">colorSaturation</code> and so on. See the <a href=\"https://echarts.apache.org/next/examples/editor.html?c=treemap-obama&amp;edit=1&amp;reset=1\" target=\"_blank\">example</a> and select the legend &#39;Growth&#39;.</p>\n<p><strong>How to avoid confusion by setting border/gap of node</strong></p>\n<p>If all of the border/gaps are set with the same color, confusion might occur when rectangulars in different levels display at the same time.</p>\n<p>See the <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/treemap-borderColor&amp;edit=1&amp;reset=1\" target=\"_blank\">example</a>. Notice that the child rectangles in the red area are in the deeper level than rectangles that are saparated by white gap. So in the red area, basically we set gap color with red, and use <code class=\"codespan\">borderColorSaturation</code> to lift the saturation.</p>\n<p><strong>Explanation about borderWidth, gapWidth, borderColor</strong></p>\n<p><img width=\"500\" height=\"auto\" src=\"documents/asset/img/treemap-border-gap.png\"></p>\n"
+    "desc": "<p><strong>Multiple Levels Configuration</strong></p>\n<p>treemap adopts 4-level configuration:</p>\n<pre><code>&quot;each node&quot; --&gt; &quot;each level&quot; --&gt; &quot;each series&quot;.\n</code></pre><p>That is, we can configurate each node, can also configurate each level of the tree, or set overall configurations on each series. The highest priority is node configuration.</p>\n<p><code class=\"codespan\">levels</code> is configurations on each levels, which is used most.</p>\n<p>For example:</p>\n<pre><code class=\"lang-javascript\">// Notice that in fact the data structure is not &quot;tree&quot;, but is &quot;forest&quot;.\ndata: [\n    {\n        name: &#39;nodeA&#39;,\n        children: [\n            {name: &#39;nodeAA&#39;},\n            {name: &#39;nodeAB&#39;},\n        ]\n    },\n    {\n        name: &#39;nodeB&#39;,\n        children: [\n            {name: &#39;nodeBA&#39;}\n        ]\n    }\n],\nlevels: [\n    {...}, // configurations of the top level of the data structure &quot;forest&quot;\n        // (the level that contains &#39;nodeA&#39;, &#39;nodeB&#39; shown above).\n    {...}, // configurations of the next level\n        // (the level that contains &#39;nodeAA&#39;, &#39;nodeAB&#39;, &#39;nodeBA&#39; shown above)\n    {...}, // configurations of the next level\n    ...\n]\n</code></pre>\n<p><strong>The Rules about Visual Mapping</strong></p>\n<p>When designing a treemap, we primarily focus on how to visually distinguish &quot;different levels&quot;, &quot;different categories in the same level&quot;, which requires appropriate settings of &quot;rectangular color&quot;, &quot;border thickness&quot;, &quot;border color&quot; and even &quot;color saturation of rectangular&quot; and so on on each level.</p>\n<p>See <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=treemap-disk&amp;edit=1&amp;reset=1\" target=\"_blank\">example</a>. The top level is divided into several parts by colors &quot;red&quot;, &quot;green&quot;, &quot;blue&quot;, and etc ... In each color block, <code class=\"codespan\">colorSaturation</code> is used to distinguish nodes in sublevel. The border color of the top level is &quot;white&quot;, while the border color of the sublevel is the color that based on the current block color and processed by <code class=\"codespan\">borderColorSaturation</code>.</p>\n<p><code class=\"codespan\">treemap</code> uses this rule of visual configuration: each level computes its visual value based on the configurations (<code class=\"codespan\">color</code>, <code class=\"codespan\">colorSaturation</code>, <code class=\"codespan\">borderColor</code>, <code class=\"codespan\">borderColorSaturation</code>) on this level. If there is no certain configuration in a node, it inherits the configuration from its parent.</p>\n<p>In this way, this effect can be configured: set a <code class=\"codespan\">color</code> list on the parent level, and set <code class=\"codespan\">colorSaturation</code> on the child level, and then each node in the parent level would obtain a color from the <code class=\"codespan\">color</code> list, and each node in the child level would obtain a value from <code class=\"codespan\">colorSaturation</code> and compound it with the color inherited from its parent node to get its final color.</p>\n<p><strong>Dimensions and &quot;Extra Visual Mapping&quot;</strong></p>\n<p>See the example below: every <code class=\"codespan\">value</code> field is set as an Array, in which each item in the array represents a dimension respectively.</p>\n<pre><code class=\"lang-javascript\">[\n    {\n        value: [434, 6969, 8382],\n        children: [\n            {\n                value: [1212, 4943, 5453],\n                id: &#39;someid-1&#39;,\n                name: &#39;description of this node&#39;,\n                children: [...]\n            },\n            {\n                value: [4545, 192, 439],\n                id: &#39;someid-2&#39;,\n                name: &#39;description of this node&#39;,\n                children: [...]\n            },\n            ...\n        ]\n    },\n    {\n        value: [23, 59, 12],\n        children: [...]\n    },\n    ...\n]\n</code></pre>\n<p><code class=\"codespan\">treemap</code> will map the first dimension (the first item of the array) to &quot;area&quot;. If we want to express more information, we could map another dimension (specified by <a href=\"#series-treemap.viusalDimension\">series-treemap.visualDimension</a>) to another visual types, such as <code class=\"codespan\">colorSaturation</code> and so on. See the <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=treemap-obama&amp;edit=1&amp;reset=1\" target=\"_blank\">example</a> and select the legend &#39;Growth&#39;.</p>\n<p><strong>How to avoid confusion by setting border/gap of node</strong></p>\n<p>If all of the border/gaps are set with the same color, confusion might occur when rectangulars in different levels display at the same time.</p>\n<p>See the <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/treemap-borderColor&amp;edit=1&amp;reset=1\" target=\"_blank\">example</a>. Notice that the child rectangles in the red area are in the deeper level than rectangles that are saparated by white gap. So in the red area, basically we set gap color with red, and use <code class=\"codespan\">borderColorSaturation</code> to lift the saturation.</p>\n<p><strong>Explanation about borderWidth, gapWidth, borderColor</strong></p>\n<p><img width=\"500\" height=\"auto\" src=\"documents/asset/img/treemap-border-gap.png\"></p>\n"
   },
   "levels.visualDimension": {
     "desc": "<p><code class=\"codespan\">treemap</code> is able to map any dimensions of data to visual.</p>\n<p>The value of <a href=\"#series-treemap.data\">series-treemap.data</a> can be an array. And each item of the array represents a &quot;dimension&quot;. <code class=\"codespan\">visualDimension</code> specifies the dimension on which visual mapping will be performed.</p>\n<p>About visual encoding, see details in <a href=\"#series-treemap.levels\">series-treemap.levels</a>.</p>\n<blockquote>\n<p>Tps: In treemap, <code class=\"codespan\">visualDimension</code> attribute could appear in more than one places:</p>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in <a href=\"#series-treemap\">sereis-treemap</a>, indicating the unified setting of the series.</li>\n</ul>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in each array element of  <a href=\"#series-treemap.levels\">series-treemap.levels</a>, indicating the unified setting of each level of the tree.</li>\n</ul>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in each node of <a href=\"#series-treemap.data\">series-treemap.data</a>, indicating the particular setting of each node.</li>\n</ul>\n</blockquote>\n"
@@ -4977,7 +5110,7 @@ window.__EC_DOC_option_series_treemap = {
     "desc": "<p>It indicates the range of saturation (color alpha) for nodes in a level.</p>\n<p>The range of values is 0 ~ 1.</p>\n<p>For example, <code class=\"codespan\">colorSaturation</code> can be <code class=\"codespan\">[0.3, 1]</code>.</p>\n<p>About visual encoding, see details in <a href=\"#series-treemap.levels\">series-treemap.levels</a>.</p>\n<blockquote>\n<p>Tps: In treemap, <code class=\"codespan\">colorSaturation</code> attribute could appear in more than one places:</p>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in <a href=\"#series-treemap\">sereis-treemap</a>, indicating the unified setting of the series.</li>\n</ul>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in each array element of  <a href=\"#series-treemap.levels\">series-treemap.levels</a>, indicating the unified setting of each level of the tree.</li>\n</ul>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in each node of <a href=\"#series-treemap.data\">series-treemap.data</a>, indicating the particular setting of each node.</li>\n</ul>\n</blockquote>\n"
   },
   "levels.colorMappingBy": {
-    "desc": "\n\n<p>Specify the rule according to which each node obtain color from <a href=\"#series-treemap.levels.color\">color list</a>. Optional values:</p>\n<ul>\n<li><code class=\"codespan\">&#39;value&#39;</code>:</li>\n</ul>\n<p>Map <a href=\"#series-treemap.data.value\">series-treemap.data.value</a> to color.</p>\n<p>In this way, the color of each node indicate its value.</p>\n<p><a href=\"#series-treemap.levels.visualDimension\">visualDimension</a> can be used to specify which dimension of <a href=\"#series-treemap.data\">data</a> is used to perform visual mapping.</p>\n<ul>\n<li><code class=\"codespan\">&#39;index&#39;</code>:</li>\n</ul>\n<p>Map the <code class=\"codespan\">index</code> (ordinal number) of nodes to color. Namely, in a level, the first node is mapped to the first color of <a href=\"#series-treemap.levels.color\">color list</a>, and the second node gets the second color.</p>\n<p>In this way, adjacent nodes are distinguished by color.</p>\n<ul>\n<li><code class=\"codespan\">&#39;id&#39;</code>:</li>\n</ul>\n<p>Map <a href=\"#series-treemap.data.id\">series-treemap.data.id</a> to color.</p>\n<p>Since <code class=\"codespan\">id</code> is used to identify node, if user call <code class=\"codespan\">setOption</code> to modify the tree, each node will remain the original color before and after <code class=\"codespan\">setOption</code> called. See this <a href=\"https://echarts.apache.org/next/examples/editor.html?c=treemap-obama&amp;edit=1&amp;reset=1\" target=\"_blank\">example</a>.</p>\n<p>About visual encoding, see details in <a href=\"#series-treemap.levels\">series-treemap.levels</a>.</p>\n<blockquote>\n<p>Tps: In treemap, <code class=\"codespan\">colorMappingBy</code> attribute could appear in more than one places:</p>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in <a href=\"#series-treemap\">sereis-treemap</a>, indicating the unified setting of the series.</li>\n</ul>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in each array element of  <a href=\"#series-treemap.levels\">series-treemap.levels</a>, indicating the unified setting of each level of the tree.</li>\n</ul>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in each node of <a href=\"#series-treemap.data\">series-treemap.data</a>, indicating the particular setting of each node.</li>\n</ul>\n</blockquote>\n",
+    "desc": "\n\n<p>Specify the rule according to which each node obtain color from <a href=\"#series-treemap.levels.color\">color list</a>. Optional values:</p>\n<ul>\n<li><code class=\"codespan\">&#39;value&#39;</code>:</li>\n</ul>\n<p>Map <a href=\"#series-treemap.data.value\">series-treemap.data.value</a> to color.</p>\n<p>In this way, the color of each node indicate its value.</p>\n<p><a href=\"#series-treemap.levels.visualDimension\">visualDimension</a> can be used to specify which dimension of <a href=\"#series-treemap.data\">data</a> is used to perform visual mapping.</p>\n<ul>\n<li><code class=\"codespan\">&#39;index&#39;</code>:</li>\n</ul>\n<p>Map the <code class=\"codespan\">index</code> (ordinal number) of nodes to color. Namely, in a level, the first node is mapped to the first color of <a href=\"#series-treemap.levels.color\">color list</a>, and the second node gets the second color.</p>\n<p>In this way, adjacent nodes are distinguished by color.</p>\n<ul>\n<li><code class=\"codespan\">&#39;id&#39;</code>:</li>\n</ul>\n<p>Map <a href=\"#series-treemap.data.id\">series-treemap.data.id</a> to color.</p>\n<p>Since <code class=\"codespan\">id</code> is used to identify node, if user call <code class=\"codespan\">setOption</code> to modify the tree, each node will remain the original color before and after <code class=\"codespan\">setOption</code> called. See this <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=treemap-obama&amp;edit=1&amp;reset=1\" target=\"_blank\">example</a>.</p>\n<p>About visual encoding, see details in <a href=\"#series-treemap.levels\">series-treemap.levels</a>.</p>\n<blockquote>\n<p>Tps: In treemap, <code class=\"codespan\">colorMappingBy</code> attribute could appear in more than one places:</p>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in <a href=\"#series-treemap\">sereis-treemap</a>, indicating the unified setting of the series.</li>\n</ul>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in each array element of  <a href=\"#series-treemap.levels\">series-treemap.levels</a>, indicating the unified setting of each level of the tree.</li>\n</ul>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in each node of <a href=\"#series-treemap.data\">series-treemap.data</a>, indicating the particular setting of each node.</li>\n</ul>\n</blockquote>\n",
     "uiControl": {
       "type": "enum",
       "options": "index,value,id"
@@ -5011,14 +5144,14 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "levels.label.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "levels.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -5027,7 +5160,7 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "levels.label.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -5178,10 +5311,24 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "levels.label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "levels.label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "levels.label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -5421,7 +5568,7 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "levels.upperLabel": {
-    "desc": "<p><code class=\"codespan\">upperLabel</code> is used to specify whether show label when the node has children. When <a href=\"#series-treemap.upperLabel.show\">upperLabel.show</a> is set as <code class=\"codespan\">true</code>, the feature that &quot;show parent label&quot; is enabled.</p>\n<p>The same as <a href=\"#series-treemap.label\">series-treemap.label</a>, the option <code class=\"codespan\">upperLabel</code> can be placed at the root of <a href=\"#series-treemap\">series-treemap</a> directly, or in <a href=\"#series-treemap.level\">series-treemap.level</a>, or in each item of <a href=\"#series-treemap.data\">series-treemap.data</a>.</p>\n<p>Specifically, <a href=\"#series-treemap.label\">series-treemap.label</a> specifies the style when a node is a leaf, while <code class=\"codespan\">upperLabel</code> specifies the style when a node has children, in which case the label is displayed in the inner top of the node.</p>\n<p>See:</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=treemap-show-parent&edit=1&reset=1\" width=\"700\" height=\"500\"><iframe />\n\n\n\n\n<blockquote>\n<p>Tps: In treemap, <code class=\"codespan\">label</code> attribute could appear in more than one places:</p>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in <a href=\"#series-treemap\">sereis-treemap</a>, indicating the unified setting of the series.</li>\n</ul>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in each array element of  <a href=\"#series-treemap.levels\">series-treemap.levels</a>, indicating the unified setting of each level of the tree.</li>\n</ul>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in each node of <a href=\"#series-treemap.data\">series-treemap.data</a>, indicating the particular setting of each node.</li>\n</ul>\n</blockquote>\n"
+    "desc": "<p><code class=\"codespan\">upperLabel</code> is used to specify whether show label when the node has children. When <a href=\"#series-treemap.upperLabel.show\">upperLabel.show</a> is set as <code class=\"codespan\">true</code>, the feature that &quot;show parent label&quot; is enabled.</p>\n<p>The same as <a href=\"#series-treemap.label\">series-treemap.label</a>, the option <code class=\"codespan\">upperLabel</code> can be placed at the root of <a href=\"#series-treemap\">series-treemap</a> directly, or in <a href=\"#series-treemap.level\">series-treemap.level</a>, or in each item of <a href=\"#series-treemap.data\">series-treemap.data</a>.</p>\n<p>Specifically, <a href=\"#series-treemap.label\">series-treemap.label</a> specifies the style when a node is a leaf, while <code class=\"codespan\">upperLabel</code> specifies the style when a node has children, in which case the label is displayed in the inner top of the node.</p>\n<p>See:</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=treemap-show-parent&edit=1&reset=1\" width=\"700\" height=\"500\"><iframe />\n\n\n\n\n<blockquote>\n<p>Tps: In treemap, <code class=\"codespan\">label</code> attribute could appear in more than one places:</p>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in <a href=\"#series-treemap\">sereis-treemap</a>, indicating the unified setting of the series.</li>\n</ul>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in each array element of  <a href=\"#series-treemap.levels\">series-treemap.levels</a>, indicating the unified setting of each level of the tree.</li>\n</ul>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in each node of <a href=\"#series-treemap.data\">series-treemap.data</a>, indicating the particular setting of each node.</li>\n</ul>\n</blockquote>\n"
   },
   "levels.upperLabel.show": {
     "desc": "\n\n<p>Whether to show label.</p>\n",
@@ -5431,14 +5578,14 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "levels.upperLabel.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "levels.upperLabel.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -5447,7 +5594,7 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "levels.upperLabel.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -5598,7 +5745,14 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "levels.upperLabel.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "levels.upperLabel.height": {
     "desc": "\n\n<p>Height of label area.</p>\n",
@@ -5908,7 +6062,7 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "levels.itemStyle.borderColorSaturation": {
-    "desc": "\n\n<p>The color saturation of a border or gap. The value range is between 0 ~ 1.</p>\n<p>Tips:</p>\n<p>When <code class=\"codespan\">borderColorSaturation</code> is set, the <code class=\"codespan\">borderColor</code> is disabled, and, instead, the final border color is calculated based on the color of this node (this color could be sepcified explicitly or inherited from its parent node) and mixing with <code class=\"codespan\">borderColorSaturation</code>.</p>\n<p>In this way, a effect can be implemented: different sections have different hue of gap color repectively, which makes users easy to distinguish both sections and levels.</p>\n<p><strong>How to avoid confusion by setting border/gap of node</strong></p>\n<p>If all of the border/gaps are set with the same color, confusion might occur when rectangulars in different levels display at the same time.</p>\n<p>See the <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/treemap-borderColor&amp;edit=1&amp;reset=1\" target=\"_blank\">example</a>. Notice that the child rectangles in the red area are in the deeper level than rectangles that are saparated by white gap. So in the red area, basically we set gap color with red, and use <code class=\"codespan\">borderColorSaturation</code> to lift the saturation.</p>\n",
+    "desc": "\n\n<p>The color saturation of a border or gap. The value range is between 0 ~ 1.</p>\n<p>Tips:</p>\n<p>When <code class=\"codespan\">borderColorSaturation</code> is set, the <code class=\"codespan\">borderColor</code> is disabled, and, instead, the final border color is calculated based on the color of this node (this color could be sepcified explicitly or inherited from its parent node) and mixing with <code class=\"codespan\">borderColorSaturation</code>.</p>\n<p>In this way, a effect can be implemented: different sections have different hue of gap color repectively, which makes users easy to distinguish both sections and levels.</p>\n<p><strong>How to avoid confusion by setting border/gap of node</strong></p>\n<p>If all of the border/gaps are set with the same color, confusion might occur when rectangulars in different levels display at the same time.</p>\n<p>See the <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/treemap-borderColor&amp;edit=1&amp;reset=1\" target=\"_blank\">example</a>. Notice that the child rectangles in the red area are in the deeper level than rectangles that are saparated by white gap. So in the red area, basically we set gap color with red, and use <code class=\"codespan\">borderColorSaturation</code> to lift the saturation.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.01",
@@ -5970,14 +6124,14 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "levels.emphasis.label.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "levels.emphasis.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -5986,7 +6140,7 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "levels.emphasis.label.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -6137,10 +6291,24 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "levels.emphasis.label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "levels.emphasis.label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "levels.emphasis.label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -6461,14 +6629,14 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "levels.emphasis.upperLabel.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "levels.emphasis.upperLabel.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -6477,7 +6645,7 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "levels.emphasis.upperLabel.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -6628,10 +6796,24 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "levels.emphasis.upperLabel.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "levels.emphasis.upperLabel.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "levels.emphasis.upperLabel.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -6887,14 +7069,14 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "levels.blur.label.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "levels.blur.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -6903,7 +7085,7 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "levels.blur.label.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -7054,10 +7236,24 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "levels.blur.label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "levels.blur.label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "levels.blur.label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -7378,14 +7574,14 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "levels.blur.upperLabel.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "levels.blur.upperLabel.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -7394,7 +7590,7 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "levels.blur.upperLabel.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -7545,10 +7741,24 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "levels.blur.upperLabel.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "levels.blur.upperLabel.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "levels.blur.upperLabel.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -7804,14 +8014,14 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "levels.select.label.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "levels.select.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -7820,7 +8030,7 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "levels.select.label.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -7971,10 +8181,24 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "levels.select.label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "levels.select.label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "levels.select.label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -8295,14 +8519,14 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "levels.select.upperLabel.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "levels.select.upperLabel.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -8311,7 +8535,7 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "levels.select.upperLabel.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -8462,10 +8686,24 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "levels.select.upperLabel.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "levels.select.upperLabel.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "levels.select.upperLabel.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -8749,7 +8987,7 @@ window.__EC_DOC_option_series_treemap = {
     "desc": "<p>It indicates the range of saturation (color alpha) for nodes in a level.</p>\n<p>The range of values is 0 ~ 1.</p>\n<p>For example, <code class=\"codespan\">colorSaturation</code> can be <code class=\"codespan\">[0.3, 1]</code>.</p>\n<p>About visual encoding, see details in <a href=\"#series-treemap.levels\">series-treemap.levels</a>.</p>\n<blockquote>\n<p>Tps: In treemap, <code class=\"codespan\">colorSaturation</code> attribute could appear in more than one places:</p>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in <a href=\"#series-treemap\">sereis-treemap</a>, indicating the unified setting of the series.</li>\n</ul>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in each array element of  <a href=\"#series-treemap.levels\">series-treemap.levels</a>, indicating the unified setting of each level of the tree.</li>\n</ul>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in each node of <a href=\"#series-treemap.data\">series-treemap.data</a>, indicating the particular setting of each node.</li>\n</ul>\n</blockquote>\n"
   },
   "data.colorMappingBy": {
-    "desc": "\n\n<p>Specify the rule according to which each node obtain color from <a href=\"#series-treemap.levels.color\">color list</a>. Optional values:</p>\n<ul>\n<li><code class=\"codespan\">&#39;value&#39;</code>:</li>\n</ul>\n<p>Map <a href=\"#series-treemap.data.value\">series-treemap.data.value</a> to color.</p>\n<p>In this way, the color of each node indicate its value.</p>\n<p><a href=\"#series-treemap.levels.visualDimension\">visualDimension</a> can be used to specify which dimension of <a href=\"#series-treemap.data\">data</a> is used to perform visual mapping.</p>\n<ul>\n<li><code class=\"codespan\">&#39;index&#39;</code>:</li>\n</ul>\n<p>Map the <code class=\"codespan\">index</code> (ordinal number) of nodes to color. Namely, in a level, the first node is mapped to the first color of <a href=\"#series-treemap.levels.color\">color list</a>, and the second node gets the second color.</p>\n<p>In this way, adjacent nodes are distinguished by color.</p>\n<ul>\n<li><code class=\"codespan\">&#39;id&#39;</code>:</li>\n</ul>\n<p>Map <a href=\"#series-treemap.data.id\">series-treemap.data.id</a> to color.</p>\n<p>Since <code class=\"codespan\">id</code> is used to identify node, if user call <code class=\"codespan\">setOption</code> to modify the tree, each node will remain the original color before and after <code class=\"codespan\">setOption</code> called. See this <a href=\"https://echarts.apache.org/next/examples/editor.html?c=treemap-obama&amp;edit=1&amp;reset=1\" target=\"_blank\">example</a>.</p>\n<p>About visual encoding, see details in <a href=\"#series-treemap.levels\">series-treemap.levels</a>.</p>\n<blockquote>\n<p>Tps: In treemap, <code class=\"codespan\">colorMappingBy</code> attribute could appear in more than one places:</p>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in <a href=\"#series-treemap\">sereis-treemap</a>, indicating the unified setting of the series.</li>\n</ul>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in each array element of  <a href=\"#series-treemap.levels\">series-treemap.levels</a>, indicating the unified setting of each level of the tree.</li>\n</ul>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in each node of <a href=\"#series-treemap.data\">series-treemap.data</a>, indicating the particular setting of each node.</li>\n</ul>\n</blockquote>\n",
+    "desc": "\n\n<p>Specify the rule according to which each node obtain color from <a href=\"#series-treemap.levels.color\">color list</a>. Optional values:</p>\n<ul>\n<li><code class=\"codespan\">&#39;value&#39;</code>:</li>\n</ul>\n<p>Map <a href=\"#series-treemap.data.value\">series-treemap.data.value</a> to color.</p>\n<p>In this way, the color of each node indicate its value.</p>\n<p><a href=\"#series-treemap.levels.visualDimension\">visualDimension</a> can be used to specify which dimension of <a href=\"#series-treemap.data\">data</a> is used to perform visual mapping.</p>\n<ul>\n<li><code class=\"codespan\">&#39;index&#39;</code>:</li>\n</ul>\n<p>Map the <code class=\"codespan\">index</code> (ordinal number) of nodes to color. Namely, in a level, the first node is mapped to the first color of <a href=\"#series-treemap.levels.color\">color list</a>, and the second node gets the second color.</p>\n<p>In this way, adjacent nodes are distinguished by color.</p>\n<ul>\n<li><code class=\"codespan\">&#39;id&#39;</code>:</li>\n</ul>\n<p>Map <a href=\"#series-treemap.data.id\">series-treemap.data.id</a> to color.</p>\n<p>Since <code class=\"codespan\">id</code> is used to identify node, if user call <code class=\"codespan\">setOption</code> to modify the tree, each node will remain the original color before and after <code class=\"codespan\">setOption</code> called. See this <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=treemap-obama&amp;edit=1&amp;reset=1\" target=\"_blank\">example</a>.</p>\n<p>About visual encoding, see details in <a href=\"#series-treemap.levels\">series-treemap.levels</a>.</p>\n<blockquote>\n<p>Tps: In treemap, <code class=\"codespan\">colorMappingBy</code> attribute could appear in more than one places:</p>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in <a href=\"#series-treemap\">sereis-treemap</a>, indicating the unified setting of the series.</li>\n</ul>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in each array element of  <a href=\"#series-treemap.levels\">series-treemap.levels</a>, indicating the unified setting of each level of the tree.</li>\n</ul>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in each node of <a href=\"#series-treemap.data\">series-treemap.data</a>, indicating the particular setting of each node.</li>\n</ul>\n</blockquote>\n",
     "uiControl": {
       "type": "enum",
       "options": "index,value,id"
@@ -8783,14 +9021,14 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "data.label.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "data.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -8799,7 +9037,7 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "data.label.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -8950,10 +9188,24 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "data.label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "data.label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "data.label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -9193,7 +9445,7 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "data.upperLabel": {
-    "desc": "<p><code class=\"codespan\">upperLabel</code> is used to specify whether show label when the node has children. When <a href=\"#series-treemap.upperLabel.show\">upperLabel.show</a> is set as <code class=\"codespan\">true</code>, the feature that &quot;show parent label&quot; is enabled.</p>\n<p>The same as <a href=\"#series-treemap.label\">series-treemap.label</a>, the option <code class=\"codespan\">upperLabel</code> can be placed at the root of <a href=\"#series-treemap\">series-treemap</a> directly, or in <a href=\"#series-treemap.level\">series-treemap.level</a>, or in each item of <a href=\"#series-treemap.data\">series-treemap.data</a>.</p>\n<p>Specifically, <a href=\"#series-treemap.label\">series-treemap.label</a> specifies the style when a node is a leaf, while <code class=\"codespan\">upperLabel</code> specifies the style when a node has children, in which case the label is displayed in the inner top of the node.</p>\n<p>See:</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/view.html?c=treemap-show-parent&edit=1&reset=1\" width=\"700\" height=\"500\"><iframe />\n\n\n\n\n<blockquote>\n<p>Tps: In treemap, <code class=\"codespan\">label</code> attribute could appear in more than one places:</p>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in <a href=\"#series-treemap\">sereis-treemap</a>, indicating the unified setting of the series.</li>\n</ul>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in each array element of  <a href=\"#series-treemap.levels\">series-treemap.levels</a>, indicating the unified setting of each level of the tree.</li>\n</ul>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in each node of <a href=\"#series-treemap.data\">series-treemap.data</a>, indicating the particular setting of each node.</li>\n</ul>\n</blockquote>\n"
+    "desc": "<p><code class=\"codespan\">upperLabel</code> is used to specify whether show label when the node has children. When <a href=\"#series-treemap.upperLabel.show\">upperLabel.show</a> is set as <code class=\"codespan\">true</code>, the feature that &quot;show parent label&quot; is enabled.</p>\n<p>The same as <a href=\"#series-treemap.label\">series-treemap.label</a>, the option <code class=\"codespan\">upperLabel</code> can be placed at the root of <a href=\"#series-treemap\">series-treemap</a> directly, or in <a href=\"#series-treemap.level\">series-treemap.level</a>, or in each item of <a href=\"#series-treemap.data\">series-treemap.data</a>.</p>\n<p>Specifically, <a href=\"#series-treemap.label\">series-treemap.label</a> specifies the style when a node is a leaf, while <code class=\"codespan\">upperLabel</code> specifies the style when a node has children, in which case the label is displayed in the inner top of the node.</p>\n<p>See:</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=treemap-show-parent&edit=1&reset=1\" width=\"700\" height=\"500\"><iframe />\n\n\n\n\n<blockquote>\n<p>Tps: In treemap, <code class=\"codespan\">label</code> attribute could appear in more than one places:</p>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in <a href=\"#series-treemap\">sereis-treemap</a>, indicating the unified setting of the series.</li>\n</ul>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in each array element of  <a href=\"#series-treemap.levels\">series-treemap.levels</a>, indicating the unified setting of each level of the tree.</li>\n</ul>\n</blockquote>\n<blockquote>\n<ul>\n<li>It could appear in each node of <a href=\"#series-treemap.data\">series-treemap.data</a>, indicating the particular setting of each node.</li>\n</ul>\n</blockquote>\n"
   },
   "data.upperLabel.show": {
     "desc": "\n\n<p>Whether to show label.</p>\n",
@@ -9203,14 +9455,14 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "data.upperLabel.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "data.upperLabel.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -9219,7 +9471,7 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "data.upperLabel.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -9370,7 +9622,14 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "data.upperLabel.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "data.upperLabel.height": {
     "desc": "\n\n<p>Height of label area.</p>\n",
@@ -9680,7 +9939,7 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "data.itemStyle.borderColorSaturation": {
-    "desc": "\n\n<p>The color saturation of a border or gap. The value range is between 0 ~ 1.</p>\n<p>Tips:</p>\n<p>When <code class=\"codespan\">borderColorSaturation</code> is set, the <code class=\"codespan\">borderColor</code> is disabled, and, instead, the final border color is calculated based on the color of this node (this color could be sepcified explicitly or inherited from its parent node) and mixing with <code class=\"codespan\">borderColorSaturation</code>.</p>\n<p>In this way, a effect can be implemented: different sections have different hue of gap color repectively, which makes users easy to distinguish both sections and levels.</p>\n<p><strong>How to avoid confusion by setting border/gap of node</strong></p>\n<p>If all of the border/gaps are set with the same color, confusion might occur when rectangulars in different levels display at the same time.</p>\n<p>See the <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/treemap-borderColor&amp;edit=1&amp;reset=1\" target=\"_blank\">example</a>. Notice that the child rectangles in the red area are in the deeper level than rectangles that are saparated by white gap. So in the red area, basically we set gap color with red, and use <code class=\"codespan\">borderColorSaturation</code> to lift the saturation.</p>\n",
+    "desc": "\n\n<p>The color saturation of a border or gap. The value range is between 0 ~ 1.</p>\n<p>Tips:</p>\n<p>When <code class=\"codespan\">borderColorSaturation</code> is set, the <code class=\"codespan\">borderColor</code> is disabled, and, instead, the final border color is calculated based on the color of this node (this color could be sepcified explicitly or inherited from its parent node) and mixing with <code class=\"codespan\">borderColorSaturation</code>.</p>\n<p>In this way, a effect can be implemented: different sections have different hue of gap color repectively, which makes users easy to distinguish both sections and levels.</p>\n<p><strong>How to avoid confusion by setting border/gap of node</strong></p>\n<p>If all of the border/gaps are set with the same color, confusion might occur when rectangulars in different levels display at the same time.</p>\n<p>See the <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/treemap-borderColor&amp;edit=1&amp;reset=1\" target=\"_blank\">example</a>. Notice that the child rectangles in the red area are in the deeper level than rectangles that are saparated by white gap. So in the red area, basically we set gap color with red, and use <code class=\"codespan\">borderColorSaturation</code> to lift the saturation.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.01",
@@ -9742,14 +10001,14 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "data.emphasis.label.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "data.emphasis.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -9758,7 +10017,7 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "data.emphasis.label.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -9909,10 +10168,24 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "data.emphasis.label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "data.emphasis.label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "data.emphasis.label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -10233,14 +10506,14 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "data.emphasis.upperLabel.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "data.emphasis.upperLabel.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -10249,7 +10522,7 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "data.emphasis.upperLabel.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -10400,10 +10673,24 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "data.emphasis.upperLabel.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "data.emphasis.upperLabel.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "data.emphasis.upperLabel.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -10659,14 +10946,14 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "data.blur.label.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "data.blur.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -10675,7 +10962,7 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "data.blur.label.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -10826,10 +11113,24 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "data.blur.label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "data.blur.label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "data.blur.label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -11150,14 +11451,14 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "data.blur.upperLabel.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "data.blur.upperLabel.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -11166,7 +11467,7 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "data.blur.upperLabel.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -11317,10 +11618,24 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "data.blur.upperLabel.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "data.blur.upperLabel.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "data.blur.upperLabel.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -11576,14 +11891,14 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "data.select.label.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "data.select.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -11592,7 +11907,7 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "data.select.label.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -11743,10 +12058,24 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "data.select.label.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "data.select.label.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "data.select.label.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -12067,14 +12396,14 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "data.select.upperLabel.position": {
-    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "data.select.upperLabel.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -12083,7 +12412,7 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "data.select.upperLabel.rotate": {
-    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
+    "desc": "\n\n<p>Rotate label, from -90 degree to 90, positive value represents rotate anti-clockwise.</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation\" target=\"_blank\">label rotation</a>.</p>\n",
     "uiControl": {
       "type": "angle",
       "default": "0",
@@ -12234,10 +12563,24 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "data.select.upperLabel.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "data.select.upperLabel.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "data.select.upperLabel.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
@@ -12579,10 +12922,24 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "data.tooltip.textStyle.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "data.tooltip.textStyle.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "data.tooltip.textStyle.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n",
@@ -12660,7 +13017,7 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "animationEasing": {
-    "desc": "\n\n<p>Easing method used for the first animation. Varied easing effects can be found at <a href=\"https://echarts.apache.org/next/examples/editor.html?c=line-easing\" target=\"_blank\">easing effect example</a>.</p>\n",
+    "desc": "\n\n<p>Easing method used for the first animation. Varied easing effects can be found at <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=line-easing\" target=\"_blank\">easing effect example</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "linear,quadraticIn,quadraticOut,quadraticInOut,cubicIn,cubicOut,cubicInOut,quarticIn,quarticOut,quarticInOut,quinticIn,quinticOut,quinticInOut,sinusoidalIn,sinusoidalOut,sinusoidalInOut,exponentialIn,exponentialOut,exponentialInOut,circularIn,circularOut,circularInOut,elasticIn,elasticOut,elasticInOut,backIn,backOut,backInOut,bounceIn,bounceOut,bounceInOut",
@@ -12668,7 +13025,7 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "animationDelay": {
-    "desc": "<p>Delay before updating the first animation, which supports callback function for different data to have different animation effect.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">animationDelay: function (idx) {\n    // delay for later data is larger\n    return idx * 100;\n}\n</code></pre>\n<p>See <a href=\"https://echarts.apache.org/next/examples/editor.html?c=bar-animation-delay\" target=\"_blank\">this example</a> for more information.</p>\n"
+    "desc": "<p>Delay before updating the first animation, which supports callback function for different data to have different animation effect.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">animationDelay: function (idx) {\n    // delay for later data is larger\n    return idx * 100;\n}\n</code></pre>\n<p>See <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=bar-animation-delay\" target=\"_blank\">this example</a> for more information.</p>\n"
   },
   "tooltip": {
     "desc": "<p>tooltip settings in this series.</p>\n"
@@ -12758,10 +13115,24 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "tooltip.textStyle.width": {
-    "desc": "<p>Width of text block.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "tooltip.textStyle.height": {
-    "desc": "<p>Height of text block.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "tooltip.textStyle.textBorderColor": {
     "desc": "\n\n<p>Storke color of the text.</p>\n",
