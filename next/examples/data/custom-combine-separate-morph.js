@@ -6,7 +6,6 @@ difficulty: 11
 */
 
 
-
 var PIE_COLORS = [
     '#e06343', '#37a354', '#b55dba', '#b5bd48', '#8378EA', '#96BFFF'
 ];
@@ -14,8 +13,15 @@ var CLUSTER_COLORS = [
     '#cc5664', '#9bd6ec', '#ea946e', '#8acaaa', '#f1ec64', '#ee8686', '#a48dc1', '#5da6bc', '#b9dcae'
 ];
 var Z_TAG_COLORS = [
-    '#c23531', '#2f4554', '#61a0a8', '#d48265', '#91c7ae', '#749f83',
-    '#ca8622', '#bda29a', '#6e7074', '#546570', '#c4ccd3'
+    '#5470c6',
+    '#91cc75',
+    '#fac858',
+    '#ee6666',
+    '#73c0de',
+    '#3ba272',
+    '#fc8452',
+    '#9a60b4',
+    '#ea7ccc'
 ];
 var Z_TAG_COLORS_2 = [
     '#51689b', '#ce5c5c', '#fbc357', '#8fbf8f', '#659d84', '#fb8e6a', '#c77288', '#786090',
@@ -86,7 +92,7 @@ var baseOption = {
         fromDatasetId: 'raw',
         transform: {
             type: 'ecStat:clustering',
-            print: true,
+            // print: true,
             config: {
                 clusterCount: 4,
                 dimensions: ['ATA', 'STE'],
@@ -108,7 +114,7 @@ var baseOption = {
         fromDatasetId: 'rawClusters',
         transform: {
             type: 'myTransform:aggregate',
-            print: true,
+            // print: true,
             config: {
                 resultDimensions: [
                     { name: 'COUNT', from: 'ATA', method: 'count' },
@@ -221,7 +227,7 @@ var optionCreators = {
             ]);
             var zTagVal = api.value('Z_TAG');
             var color1 = getFromPalette(zTagVal, Z_TAG_COLORS);
-            var color2 = getFromPalette(zTagVal, Z_TAG_COLORS_2);
+            var color2 = '#aaa';
             return {
                 type: 'group',
                 x: pos[0],
@@ -231,9 +237,9 @@ var optionCreators = {
                     morph: true,
                     shape: {
                         points: [
-                            [-40, -2],
-                            [40, -2],
-                            [0, -35]
+                            [-25, -1],
+                            [25, -1],
+                            [0, -20]
                         ]
                     },
                     style: {
@@ -244,13 +250,15 @@ var optionCreators = {
                     type: 'rect',
                     morph: true,
                     shape: {
-                        x: -20,
+                        x: -15,
                         y: 0,
-                        width: 40,
-                        height: 30
+                        width: 30,
+                        height: 20
                     },
                     style: {
-                        fill: color2
+                        fill: color2,
+                        stroke: '#fff',
+                        lineWidth: 1
                     },
                     transition: ['shape', 'style']
                 }]
@@ -451,23 +459,20 @@ console.log(app.config);
 
 
 
-var _global = {};
-$.get(ROOT_PATH + '/data/asset/js/myTransform.js', function (aggregateJS) {
-    (new Function(aggregateJS)).call(_global);
-
-    $.get(ROOT_PATH + '/data/asset/js/transitionPlayer.js', function (transitionPlayerJS) {
-        (new Function(transitionPlayerJS)).call(_global);
-
-        run();
-    });
+$.when(
+    $.getScript(ROOT_PATH + '/data/asset/js/myTransform.js'),
+    $.getScript(ROOT_PATH + '/data/asset/js/transitionPlayer.js'),
+).done(function () {
+    run();
 });
+
 
 function run() {
 
-    echarts.registerTransform(_global.myTransform.aggregate);
+    echarts.registerTransform(myTransform.aggregate);
     echarts.registerTransform(ecStat.transform.clustering);
 
-    _player = _global.transitionPlayer.create({
+    _player = transitionPlayer.create({
         chart: function () {
             return myChart;
         },
@@ -500,6 +505,4 @@ function run() {
     _player.go('Glyph');
 
 }
-
-
 

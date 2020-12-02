@@ -5,30 +5,25 @@ titleCN: 极简场景变换示例
 difficulty: 11
 */
 
-const _global = {};
-$.get(ROOT_PATH + '/data/asset/js/myTransform.js', function (aggregateJS) {
-    (new Function(aggregateJS)).call(_global);
-
-    $.get(ROOT_PATH + '/data/asset/data/life-expectancy-table.json', function (_rawData) {
-        run(_rawData);
-    });
+$.when(
+    $.get(ROOT_PATH + '/data/asset/data/life-expectancy-table.json'),
+    $.getScript(ROOT_PATH + '/data/asset/js/myTransform.js')
+).done(function (res) {
+    run(res[0]);
 });
 
 let _optionList;
 
 function run(_rawData) {
-    echarts.registerTransform(_global.myTransform.aggregate);
-    echarts.registerTransform(_global.myTransform.id);
+    echarts.registerTransform(myTransform.aggregate);
+    echarts.registerTransform(myTransform.id);
 
 
-    const COLORS = [
-        '#37A2DA', '#e06343', '#37a354', '#b55dba', '#b5bd48', '#8378EA', '#96BFFF'
-    ];
     const COUNTRY_A = 'Germany';
     const COUNTRY_B = 'France';
     const CONTENT_COLORS = {
-        [COUNTRY_A]: '#37a354',
-        [COUNTRY_B]: '#e06343'
+        [COUNTRY_A]: '#5470c6',
+        [COUNTRY_B]: '#91cc75'
     };
     const Z2 = {
         [COUNTRY_A]: 1,

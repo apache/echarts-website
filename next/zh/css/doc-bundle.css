@@ -313,7 +313,7 @@
 }
 .doc-content-item-card h4 .current-flag {
       color: #434343;
-      font-size: 16px;
+      font-size: 20px;
 }
 .doc-content-item-card h4 .default-value {
       color: #434343;
@@ -357,6 +357,9 @@
 .doc-content-item-card.level-2 > h4 .path-base {
     font-size: 16px;
 }
+.doc-content-item-card.level-2 > h4 .current-flag {
+    font-size: 16px;
+}
 .doc-content-item-card.level-3 > h4 .anchor {
     font-size: 16px;
 }
@@ -364,6 +367,9 @@
     font-size: 13px;
 }
 .doc-content-item-card.level-3 > h4 .path-base {
+    font-size: 16px;
+}
+.doc-content-item-card.level-3 > h4 .current-flag {
     font-size: 16px;
 }
 .doc-content-item-card.level-2 {
@@ -1254,6 +1260,14 @@ span.CodeMirror-selectedtext { background: none; }
 }
 .doc-content .item-description a {
       font-family: 'Source Code Pro', STHeiti, "Microsoft Yahei", "WenQuanYi Micro Hei", sans-serif;
+}
+.doc-content table {
+    border: 1px solid #ddd;
+    border-collapse: collapse;
+}
+.doc-content th, .doc-content td {
+    padding: 10px;
+    border: 1px solid #eee;
 }
 .ec-doc-tutorial .page-description h2 {
   font-weight: normal;

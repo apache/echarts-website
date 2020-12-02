@@ -132,7 +132,8 @@ window.__EC_DOC_option_grid = {
     "desc": "\n\n<p>Type of triggering.</p>\n<p>Options:</p>\n<ul>\n<li><p><code class=\"codespan\">&#39;item&#39;</code></p>\n<p>  Triggered by data item, which is mainly used for charts that don&#39;t have a category axis like scatter charts or pie charts.</p>\n</li>\n<li><p><code class=\"codespan\">&#39;axis&#39;</code></p>\n<p>  Triggered by axes, which is mainly used for charts that have category axes, like bar charts or line charts.</p>\n<p> ECharts 2.x only supports axis trigger for category axis. In ECharts 3, it is supported for all types of axes in <a href=\"#grid\">grid</a> or <a href=\"#polar\">polar</a>. Also, you may assign axis with <a href=\"#tooltip.axisPointer.axis\">axisPointer.axis</a>.</p>\n</li>\n<li><p><code class=\"codespan\">&#39;none&#39;</code></p>\n<p>  Trigger nothing.</p>\n</li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
-      "default": "item,axis,none"
+      "options": "item,axis,none",
+      "default": "item"
     }
   },
   "tooltip.axisPointer": {
@@ -142,7 +143,8 @@ window.__EC_DOC_option_grid = {
     "desc": "\n\n<p>Indicator type.</p>\n<p>Options:</p>\n<ul>\n<li><p><code class=\"codespan\">&#39;line&#39;</code> line indicator.</p>\n</li>\n<li><p><code class=\"codespan\">&#39;shadow&#39;</code> shadow crosshair indicator.</p>\n</li>\n<li><p><code class=\"codespan\">&#39;none&#39;</code> no indicator displayed.</p>\n</li>\n<li><p><code class=\"codespan\">&#39;cross&#39;</code> crosshair indicator, which is actually the shortcut of enable two axisPointers of two orthometric axes.</p>\n</li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
-      "default": "none,line,shadow,cross"
+      "options": "none,line,shadow,cross",
+      "default": "line"
     }
   },
   "tooltip.axisPointer.axis": {

@@ -10,7 +10,8 @@ window.__EC_DOC_option_tooltip = {
     "desc": "\n\n<p>触发类型。</p>\n<p>可选：</p>\n<ul>\n<li><p><code class=\"codespan\">&#39;item&#39;</code></p>\n<p>  数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。</p>\n</li>\n<li><p><code class=\"codespan\">&#39;axis&#39;</code></p>\n<p>  坐标轴触发，主要在柱状图，折线图等会使用类目轴的图表中使用。</p>\n<p>  在 ECharts 2.x 中只支持类目轴上使用 axis trigger，在 ECharts 3 中支持在<a href=\"#grid\">直角坐标系</a>和<a href=\"#polar\">极坐标系</a>上的所有类型的轴。并且可以通过 <a href=\"#tooltip.axisPointer.axis\">axisPointer.axis</a> 指定坐标轴。</p>\n</li>\n<li><p><code class=\"codespan\">&#39;none&#39;</code></p>\n<p>  什么都不触发。</p>\n</li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
-      "default": "item,axis,none"
+      "options": "item,axis,none",
+      "default": "item"
     }
   },
   "axisPointer": {
@@ -20,7 +21,8 @@ window.__EC_DOC_option_tooltip = {
     "desc": "\n\n<p>指示器类型。</p>\n<p>可选</p>\n<ul>\n<li><p><code class=\"codespan\">&#39;line&#39;</code> 直线指示器</p>\n</li>\n<li><p><code class=\"codespan\">&#39;shadow&#39;</code> 阴影指示器</p>\n</li>\n<li><p><code class=\"codespan\">&#39;none&#39;</code> 无指示器</p>\n</li>\n<li><p><code class=\"codespan\">&#39;cross&#39;</code> 十字准星指示器。其实是种简写，表示启用两个正交的轴的 axisPointer。</p>\n</li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
-      "default": "none,line,shadow,cross"
+      "options": "none,line,shadow,cross",
+      "default": "line"
     }
   },
   "axisPointer.axis": {
