@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1" user-scalable="no"><meta name="description" content="ECharts, a powerful, interactive charting and visualization library for browser"><link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/apache/incubator-echarts-website@asf-site/zh/images/favicon.png?_v_=20200710_1"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"><!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries--><!--[if lt IE 9]><script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script><script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]--><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/apache/incubator-echarts-website@asf-site/zh/css/main.css?_v_=1606924722238"><script>window.EC_WWW_LANG = 'zh';
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1" user-scalable="no"><meta name="description" content="ECharts, a powerful, interactive charting and visualization library for browser"><link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/apache/incubator-echarts-website@asf-site/zh/images/favicon.png?_v_=20200710_1"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"><!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries--><!--[if lt IE 9]><script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script><script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]--><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/apache/incubator-echarts-website@asf-site/zh/css/main.css?_v_=1607079955944"><script>window.EC_WWW_LANG = 'zh';
 </script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pace-progressbar@1.0.2/pace.min.js"></script><script id="font-hack" type="text/javascript">if (/windows/i.test(navigator.userAgent)) {
     var el = document.createElement('style');
     el.innerHTML = ''
@@ -7,7 +7,299 @@
     document.head.insertBefore(el, document.getElementById('font-hack'));
 }
 </script><title>版本记录 - Apache ECharts (incubating)</title><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script></head><!--[if lte IE 8]><body class="lower-ie"><div id="lowie-main"><img src="https://cdn.jsdelivr.net/gh/apache/incubator-echarts-website@asf-site/zh/images/forie.png?_v_=20200710_1" alt="ie tip"></div></body><![endif]-->
-<!--[if (gt IE 8)|!(IE)]><body class="undefined"></body><![endif]--><div id="apache-banner"><div class="txt"><p>Apache ECharts 是一个正在由 Apache 孵化器赞助的 Apache 开源基金会孵化的项目。</p><p>我们正在处理将本站跳转到 <a href="https://echarts.apache.org" target="_blank">https://echarts.apache.org</a> 的迁移工作。您可以现在就前往我们的 Apache 官网。</p></div><a href="https://echarts.apache.org" target="_blank" onclick="logApache()" class="btn btn-main"><div>访问官网</div></a><a href="javascript:;" onclick="closeApacheBanner(true)" class="close-btn">x</a></div><div id="main"><nav role="navigation" class="navbar navbar-default navbar-fixed-top"><div class="container-fluid"><div class="navbar-header"><button type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="https://echarts.apache.org/zh/index.html" class="navbar-brand"><img src="https://cdn.jsdelivr.net/gh/apache/incubator-echarts-website@asf-site/zh/images/logo.png?_v_=undefined" alt="echarts logo" class="navbar-logo"></a></div><div id="navbar-collapse" class="collapse navbar-collapse"><ul class="nav navbar-nav navbar-left"><li id="nav-index"><a href="https://echarts.apache.org/zh/index.html">首页</a></li><li id="nav-doc" class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">文档<b class="caret"></b></a><ul class="dropdown-menu"><li><a href="https://echarts.apache.org/zh/feature.html">特性</a></li><li><a href="https://echarts.apache.org/zh/tutorial.html">教程 v4.9</a></li><li><a href="https://echarts.apache.org/zh/api.html">API v4.9</a></li><li><a href="https://echarts.apache.org/zh/option.html">配置项手册 v4.9</a></li><li><a href="https://echarts.apache.org/next/zh/tutorial.html">教程 v5.x</a></li><li><a href="https://echarts.apache.org/next/zh/api.html">API v5.x</a></li><li><a href="https://echarts.apache.org/next/zh/option.html">配置项手册 v5.x</a></li><li><a href="https://echarts.apache.org/zh/changelog.html">版本记录</a></li><li><a href="https://echarts.apache.org/zh/faq.html">常见问题</a></li></ul></li><li id="nav-download" class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">下载<b class="caret"></b></a><ul class="dropdown-menu"><li><a href="https://echarts.apache.org/zh/download.html">下载</a></li><li><a href="https://echarts.apache.org/zh/download-theme.html">主题下载</a></li><li><a href="https://echarts.apache.org/zh/download-extension.html">扩展下载</a></li></ul></li><li id="nav-examples"><a href="#" data-toggle="dropdown" class="dropdown-toggle">实例<b class="caret"></b></a><ul class="dropdown-menu"><li><a href="https://echarts.apache.org/examples/zh/index.html">实例 v4.9</a></li><li><a href="https://echarts.apache.org/next/examples/zh/index.html">实例 v5.x</a></li></ul></li><li id="nav-resources"><a href="#" data-toggle="dropdown" class="dropdown-toggle">资源<b class="caret"></b></a><ul class="dropdown-menu"><li><a href="https://echarts.apache.org/zh/spreadsheet.html">表格工具</a></li><li><a href="https://echarts.apache.org/zh/theme-builder.html">主题构建工具</a></li><li><a href="https://echarts.apache.org/zh/cheat-sheet.html">术语速查手册</a></li><li><a href="https://echarts.apache.org/zh/resources.html">更多资源</a></li></ul></li><li id="nav-contribute"><a href="#" data-toggle="dropdown" class="dropdown-toggle">社区<b class="caret"></b></a><ul class="dropdown-menu"><li><a href="https://echarts.apache.org/zh/committers.html">贡献者列表</a></li><li><a href="https://echarts.apache.org/zh/maillist.html">邮件列表</a></li><li><a href="https://echarts.apache.org/zh/contributing.html">如何贡献</a></li><li><a href="https://echarts.apache.org/zh/dependencies.html">依赖项</a></li><li><a href="https://echarts.apache.org/zh/coding-standard.html">代码规范</a></li><li><a href="https://github.com/apache/incubator-echarts" target="_blank">源码（GitHub）<svg width="15px" height="15px" viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="icon-external-link"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li><a href="https://github.com/apache/incubator-echarts/issues" target="_blank">Issues（GitHub）<svg width="15px" height="15px" viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="icon-external-link"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></li><li id="nav-others"><a href="#" data-toggle="dropdown" class="dropdown-toggle">其他<b class="caret"></b></a><ul class="dropdown-menu"><li><a href="https://www.apache.org/" target="_blank">Apache Software Foundation<svg width="15px" height="15px" viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="icon-external-link"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li><a href="https://echarts.apache.org/zh/security.html">安全</a></li><li><a href="https://www.apache.org/licenses/" target="_blank">版权<svg width="15px" height="15px" viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="icon-external-link"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li><a href="https://www.apache.org/events/current-event" target="_blank">活动<svg width="15px" height="15px" viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="icon-external-link"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li><a href="https://www.apache.org/foundation/sponsorship.html" target="_blank">捐赠<svg width="15px" height="15px" viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="icon-external-link"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li><a href="https://www.apache.org/foundation/thanks.html" target="_blank">鸣谢<svg width="15px" height="15px" viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="icon-external-link"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></li></ul><ul class="nav navbar-nav navbar-right"><li id="nav-homeen"><a href="javascript:;" onclick="changeLang('en')">EN</a></li><li id="nav-apache"><a href="https://www.apache.org/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/apache/incubator-echarts-website@asf-site/zh/images/apache-incubator-white.png?_v_=undefined" width="18"></a></li></ul></div></div></nav><div class="page-main"><div class="page-info"><h1>版本记录</h1><p class="page-info-echarts">Apache ECharts (incubating)<sup>TM</sup></p></div><div class="page-content single-page"><div class="page-nav"><a class="slide-btn">收起目录</a><h4>版本记录</h4><ul></ul></div><div class="page-detail"><h2 id="v4-9-0">v4.9.0</h2>
+<!--[if (gt IE 8)|!(IE)]><body class="undefined"></body><![endif]--><div id="apache-banner"><div class="txt"><p>Apache ECharts 是一个正在由 Apache 孵化器赞助的 Apache 开源基金会孵化的项目。</p><p>我们正在处理将本站跳转到 <a href="https://echarts.apache.org" target="_blank">https://echarts.apache.org</a> 的迁移工作。您可以现在就前往我们的 Apache 官网。</p></div><a href="https://echarts.apache.org" target="_blank" onclick="logApache()" class="btn btn-main"><div>访问官网</div></a><a href="javascript:;" onclick="closeApacheBanner(true)" class="close-btn">x</a></div><div id="main"><nav role="navigation" class="navbar navbar-default navbar-fixed-top"><div class="container-fluid"><div class="navbar-header"><button type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="https://echarts.apache.org/zh/index.html" class="navbar-brand"><img src="https://cdn.jsdelivr.net/gh/apache/incubator-echarts-website@asf-site/zh/images/logo.png?_v_=undefined" alt="echarts logo" class="navbar-logo"></a></div><div id="navbar-collapse" class="collapse navbar-collapse"><ul class="nav navbar-nav navbar-left"><li id="nav-index"><a href="https://echarts.apache.org/zh/index.html">首页</a></li><li id="nav-doc" class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">文档<b class="caret"></b></a><ul class="dropdown-menu"><li><a href="https://echarts.apache.org/zh/feature.html">特性</a></li><li><a href="https://echarts.apache.org/zh/tutorial.html">教程</a></li><li><a href="https://echarts.apache.org/zh/api.html">API</a></li><li><a href="https://echarts.apache.org/zh/option.html">配置项手册</a></li><li><a href="https://echarts.apache.org/zh/changelog.html">版本记录</a></li><li><a href="https://echarts.apache.org/zh/faq.html">常见问题</a></li></ul></li><li id="nav-download" class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">下载<b class="caret"></b></a><ul class="dropdown-menu"><li><a href="https://echarts.apache.org/zh/download.html">下载</a></li><li><a href="https://echarts.apache.org/zh/download-theme.html">主题下载</a></li><li><a href="https://echarts.apache.org/zh/download-extension.html">扩展下载</a></li></ul></li><li id="nav-examples"><a href="https://echarts.apache.org/examples/zh/index.html">实例</a></li><li id="nav-resources"><a href="#" data-toggle="dropdown" class="dropdown-toggle">资源<b class="caret"></b></a><ul class="dropdown-menu"><li><a href="https://echarts.apache.org/zh/spreadsheet.html">表格工具</a></li><li><a href="https://echarts.apache.org/zh/theme-builder.html">主题构建工具</a></li><li><a href="https://echarts.apache.org/zh/cheat-sheet.html">术语速查手册</a></li><li><a href="https://echarts.apache.org/zh/resources.html">更多资源</a></li></ul></li><li id="nav-contribute"><a href="#" data-toggle="dropdown" class="dropdown-toggle">社区<b class="caret"></b></a><ul class="dropdown-menu"><li><a href="https://echarts.apache.org/zh/committers.html">贡献者列表</a></li><li><a href="https://echarts.apache.org/zh/maillist.html">邮件列表</a></li><li><a href="https://echarts.apache.org/zh/contributing.html">如何贡献</a></li><li><a href="https://echarts.apache.org/zh/dependencies.html">依赖项</a></li><li><a href="https://echarts.apache.org/zh/coding-standard.html">代码规范</a></li><li><a href="https://github.com/apache/incubator-echarts" target="_blank">源码（GitHub）<svg width="15px" height="15px" viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="icon-external-link"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li><a href="https://github.com/apache/incubator-echarts/issues" target="_blank">Issues（GitHub）<svg width="15px" height="15px" viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="icon-external-link"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></li><li id="nav-others"><a href="#" data-toggle="dropdown" class="dropdown-toggle">其他<b class="caret"></b></a><ul class="dropdown-menu"><li><a href="https://www.apache.org/" target="_blank">Apache Software Foundation<svg width="15px" height="15px" viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="icon-external-link"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li><a href="https://echarts.apache.org/zh/security.html">安全</a></li><li><a href="https://www.apache.org/licenses/" target="_blank">版权<svg width="15px" height="15px" viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="icon-external-link"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li><a href="https://www.apache.org/events/current-event" target="_blank">活动<svg width="15px" height="15px" viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="icon-external-link"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li><a href="https://www.apache.org/foundation/sponsorship.html" target="_blank">捐赠<svg width="15px" height="15px" viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="icon-external-link"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li><a href="https://www.apache.org/foundation/thanks.html" target="_blank">鸣谢<svg width="15px" height="15px" viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="icon-external-link"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></li><li id="nav-ec5"><a href="#" data-toggle="dropdown" class="dropdown-toggle">ECharts 5<span class="new">new</span><b class="caret"></b></a><ul class="dropdown-menu"><li><a href="https://echarts.apache.org/next/zh/tutorial.html">教程</a></li><li><a href="https://echarts.apache.org/next/zh/api.html">API</a></li><li><a href="https://echarts.apache.org/next/zh/option.html">配置项手册</a></li><li><a href="https://echarts.apache.org/next/examples/zh/index.html">实例</a></li></ul></li></ul><ul class="nav navbar-nav navbar-right"><li id="nav-homeen"><a href="javascript:;" onclick="changeLang('en')">EN</a></li><li id="nav-apache"><a href="https://www.apache.org/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/apache/incubator-echarts-website@asf-site/zh/images/apache-incubator-white.png?_v_=undefined" width="18"></a></li></ul></div></div></nav><div class="page-main"><div class="page-info"><h1>版本记录</h1><p class="page-info-echarts">Apache ECharts (incubating)<sup>TM</sup></p></div><div class="page-content single-page"><div class="page-nav"><a class="slide-btn">收起目录</a><h4>版本记录</h4><ul></ul></div><div class="page-detail"><h2 id="v5-0-0">v5.0.0</h2>
+<div class="time">2020-12-03</div>
+
+<ul>
+<li>代码库迁移为 TypeScript：<ul>
+<li>全体代码迁移为 TypeScript。</li>
+<li>对于使用 TS 的上层应用，提供了 <code>types/dist/echarts.d.ts</code> 作为类型声明。最低支持到 TS 3.4。</li>
+<li>更多的信息参见 <a href="https://github.com/apache/incubator-echarts/pull/13563">#13563</a>。</li>
+</ul>
+</li>
+<li>[Feature] 状态增强：<ul>
+<li>支持了状态切换时的过渡动画。这能提供更好的视觉效果，尤其比如当常见的部分图形元素因为被“高亮/淡出”时。</li>
+<li>对于所有系列，新增了状态 <code>select</code> 和 <code>blur</code>。它们的配置，同我们已有的 <code>emphasis</code> 状态一样。<code>blur</code> 状态一般可以用于这样的场景：当部分图形元素被关注时，其他图形元素的淡出样式设置。<code>select</code> 状态一般可用于鼠标、触摸或 API 选中图形元素而导致样式改变的场景。</li>
+<li>广泛支持了淡出效果，即，当某一部分图形元素被关注时（通过鼠标、触摸或 API），其他图形元素淡出，以突出被关注的图形元素。可看这些例子： <a href="https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation">bar-label-rotation</a>、<a href="https://echarts.apache.org/next/examples/en/editor.html?c=bar-polar-stack">bar-polar-stack</a>、<a href="https://echarts.apache.org/next/examples/en/editor.html?c=bar-stack">bar-stack</a>、<a href="https://echarts.apache.org/next/examples/en/editor.html?c=area-stack">area-stack</a>、<a href="https://echarts.apache.org/next/examples/en/editor.html?c=dataset-link">dataset-link</a>、<a href="https://echarts.apache.org/next/examples/en/editor.html?c=scatter-weight">scatter-weight</a>、<a href="https://echarts.apache.org/next/examples/en/editor.html?c=tree-basic">tree-basic</a>。</li>
+<li>原先在不同系列中，形式不一样但是功能类似的配置项：<code>highlightPolicy</code>、<code>focusNodeAdjacency</code>、<code>hoverOffset</code>，被统一为：<code>focus</code>、<code>blurScope</code> 和 <code>scale</code>。参见示例 <a href="https://echarts.apache.org/next/examples/en/editor.html?c=sankey-energy">sankey-energy</a>、<a href="https://echarts.apache.org/next/examples/en/editor.html?c=graph">graph</a>、<a href="https://echarts.apache.org/next/examples/en/editor.html?c=sunburst-drink">sunburst-drink</a>。</li>
+<li>更多细节可见 <a href="https://github.com/apache/incubator-echarts/pull/12925">#12925</a> 和 <a href="https://github.com/apache/incubator-echarts/pull/12911">#12911</a>。</li>
+</ul>
+</li>
+<li>[Feature] 标签增强：<ul>
+<li>采用一些策略优化了标签显示效果：<ul>
+<li>根据背景颜色，智能计算标签文本的颜色，从而使他们更有区分度。</li>
+<li>在饼图（pie chart）上，优化了标签的排布算法，尤其针对标签非常多的时候，避免咋算。详情见 <a href="https://github.com/apache/incubator-echarts/issues/6050">#6050</a>。</li>
+<li>针对文本超出（overflow）区域的场景，提供了多种配置策略。</li>
+</ul>
+</li>
+<li>提供一组配置项 <code>labelLayout</code>，能够在标签由图表初始定位后，调整其布局。通过 <code>labelLayout</code> 中的选项，开发者可以：<ul>
+<li>避免标签重叠（参见<a href="https://echarts.apache.org/next/examples/en/editor.html?c=graph-label-overlap">scatter-label-align-right</a>）。</li>
+<li>实现特殊的标签对齐方式，以及调整标签位置等。参见示例 <a href="https://echarts.apache.org/next/examples/en/editor.html?c=pie-alignTo">pie-alignTo</a>、<a href="https://echarts.apache.org/next/examples/en/editor.html?c=pie-labelLine-adjust">pie-label-line-adjust</a>、<a href="https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/pie-label-distanceToLabelLine">pie-label-distanceToLabelLine</a>、<a href="https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/pie-label-bleedMargin">pie-label-bleedMargin</a>。</li>
+<li>支持标签拖动。</li>
+</ul>
+</li>
+<li>在所有系列中都支持 <code>labelLine</code> 配置。当标签不得不离图形元素比较远时，<code>labelLine</code> 能够视觉关联图形元素和其标签。参见示例 <a href="https://echarts.apache.org/next/examples/en/editor.html?c=scatter-label-align-right">scatter-label-align-right</a>、<a href="https://echarts.apache.org/next/examples/en/editor.html?c=scatter-label-align-top">scatter-label-align-top</a>。更多详情请见 <a href="https://github.com/apache/incubator-echarts/issues/11534">#11534</a>、<a href="https://github.com/apache/incubator-echarts/issues/12971">#12971</a>。</li>
+<li>在折线图中支持 <code>series.endLabel</code>。这样标签可以显示在折线的一端。比较清晰得指示这条折线的含义。</li>
+<li>支持标签文本动画，也就是，标签文本数字变化时的过渡动画。通过 <code>series.label.valueAnimation</code>, <code>series.endLabel.valueAnimation</code> 可以开关它。其他细节参见 <a href="https://github.com/apache/incubator-echarts/pull/13246">#13246</a> 和 <a href="https://github.com/apache/incubator-echarts/pull/13045">#13045</a>。</li>
+<li>更多详情请参见 <a href="https://github.com/apache/incubator-echarts/pull/12911">#12911</a>。</li>
+</ul>
+</li>
+<li>[Feature] 支持柱状图的动态排序。其开关是 <code>series.realtimeSort</code>。参见示例 <a href="https://echarts.apache.org/next/examples/en/editor.html?c=bar-race">bar-race</a>，以及原始的 PR <a href="https://github.com/apache/incubator-echarts/pull/12484">#12484</a>。</li>
+<li>[Feature] 支持数据转换插件。<ul>
+<li>数据转换是一套新的配置和API，以声明的方式，实现基于 <code>dataset</code> 的数据转换。内置或第三方的数据变换器可以作为插件来提供各种转换算法。开发者可以在 <code>option</code> 中配置这些转换器。</li>
+<li>参见示例 <a href="https://echarts.apache.org/next/examples/en/editor.html?c=data-transform-filter">data-transform-filter</a>、<a href="https://echarts.apache.org/next/examples/en/editor.html?c=data-transform-sort-bar">data-transform-sort-bar</a>、<a href="https://echarts.apache.org/next/examples/en/editor.html?c=data-transform-multiple-pie">data-transform-multiple-pie</a>、<a href="https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/data-transform-multiple-sort-bar">doc-example/data-transform-multiple-sort-bar</a>、<a href="https://echarts.apache.org/next/examples/en/editor.html?c=boxplot-light-velocity">boxplot-light-velocity</a>、<a href="https://echarts.apache.org/next/examples/en/editor.html?c=bar-histogram">bar-histogram</a>、<a href="https://echarts.apache.org/next/examples/en/editor.html?c=scatter-clustering">scatter-clustering</a>、<a href="https://echarts.apache.org/next/examples/en/editor.html?c=scatter-exponential-regression">scatter-exponential-regression</a>、<a href="https://echarts.apache.org/next/examples/en/editor.html?c=scatter-linear-regression">scatter-linear-regression</a>、<a href="https://echarts.apache.org/next/examples/en/editor.html?c=scatter-logarithmic-regression">scatter-logarithmic-regression</a>、<a href="https://echarts.apache.org/next/examples/en/editor.html?c=scatter-polynomial-regression">scatter-polynomial-regression</a>。其他细节见 <a href="https://github.com/apache/incubator-echarts/pull/13065">#13065</a>、<a href="https://github.com/apache/incubator-echarts/pull/13127">#13127</a>。</li>
+</ul>
+</li>
+<li>[Feature] 时间轴标签和刻度排列优化。<ul>
+<li>查看更多细节在 <a href="https://github.com/apache/incubator-echarts/pull/12859">#12859</a>。</li>
+</ul>
+</li>
+<li>[Feature] 支持贴画纹理（decal）。<ul>
+<li>贴画纹理提供了一种新的视觉类型，它不仅增强了无障碍访问（aria)场景，还提供了颜色以外的视觉编码方式，来区分数据。</li>
+<li>更多细节见 <a href="https://github.com/apache/incubator-echarts/pull/13304">#13304</a>。</li>
+</ul>
+</li>
+<li>[Feature] 支持自定义系列的过渡动画。<ul>
+<li>通过设置变换相关属性、样式属性和形状属性的 <code>transition</code> 属性，可以自动执行过渡动画。参见 <a href="https://echarts.apache.org/next/examples/en/editor.html?c=custom-gauge">custom-gauge</a>。</li>
+<li>通过对元素定义设置属性<code>morph</code>，支持变形/合并/分离。参见示例 <a href="https://echarts.apache.org/next/examples/en/editor.html?c=custom-combine-separate-morph">custom-combine-separate-morph</a>、<a href="https://echarts.apache.org/next/examples/en/editor.html?c=custom-one-to-one-morph">custom-one-to-one-morph</a>、<a href="https://echarts.apache.org/next/examples/en/editor.html?c=custom-story-transition">custom-story-transition</a>、<a href="https://echarts.apache.org/next/examples/en/editor.html?c=custom-spiral-race">custom-spiral-race</a>。</li>
+<li>通过回调 <code>during</code> 支持自定义过渡动画。参见示例 <a href="https://echarts.apache.org/next/examples/en/editor.html?c=custom-spiral-race">custom-spiral-race</a>，并参见 <a href="https://github.com/apache/incubator-echarts/pull/12775">#12775</a> 中的更多细节。</li>
+<li>详见 <a href="https://github.com/apache/incubator-echarts/pull/12775">#12775</a>、<a href="https://github.com/apache/incubator-echarts/pull/13468">#13468</a>、<a href="https://github.com/apache/incubator-echarts/pull/13271">#13271</a>。</li>
+</ul>
+</li>
+<li>[Feature] 提供了更强大的仪表。<ul>
+<li>请参见示例 <a href="https://echarts.apache.org/next/examples/en/editor.html?c=gauge-barometer">gauge-barometer</a>、<a href="https://echarts.apache.org/next/examples/en/editor.html?c=gauge-clock">gauge-clock</a>、<a href="https://echarts.apache.org/next/examples/en/editor.html?c=gauge-multi-title">gauge-multi-title</a>、<a href="https://echarts.apache.org/next/examples/en/editor.html?c=gauge-progress">gauge-progress</a>、<a href="https://echarts.apache.org/next/examples/en/editor.html?c=gauge-ring">gauge-ring</a>、<a href="https://echarts.apache.org/next/examples/en/editor.html?c=gauge-grade">gauge-grade</a>、<a href="https://echarts.apache.org/next/examples/en/editor.html?c=gauge-simple">gauge-simple</a>、<a href="https://echarts.apache.org/next/examples/en/editor.html?c=gauge-temperature">gauge-temperature</a>。</li>
+<li>更多细节见 <a href="https://github.com/apache/incubator-echarts/pull/13416">#13416</a>。</li>
+</ul>
+</li>
+<li>[Feature] 改进了默认的主题和交互方式。其中，为样式和交互，提供了一些新的设定选项。<ul>
+<li>tooltip 样式增强。参见 <a href="https://github.com/apache/incubator-echarts/pull/12947">#12947</a>、<a href="https://github.com/apache/incubator-echarts/pull/13398">#13398</a>、<a href="https://github.com/apache/incubator-echarts/pull/13242">#13242</a>。</li>
+<li>提供可配置的仪表盘样式。参见 <a href="https://github.com/apache/incubator-echarts/pull/12961">#12961</a>。</li>
+<li>指针的样式增强。参见 <a href="https://github.com/apache/incubator-echarts/pull/13046">#13046</a>。</li>
+<li>DataZoom 同时支持刷选和拖拽。参见 <a href="https://github.com/apache/incubator-echarts/pull/13025">#13025</a>。</li>
+<li>支持了 <code>darkMode</code>。参见 <a href="https://github.com/apache/incubator-echarts/pull/12911">12911</a>。</li>
+<li>resize 和 DataZoom 动画进行了改善。参见 <a href="https://github.com/apache/incubator-echarts/pull/12965">#12965</a>。</li>
+<li>柱状图消失时的动画改善。参见 <a href="https://github.com/apache/incubator-echarts/issues/12543">#12543</a>。</li>
+<li>改进了饼图动画。参见 <a href="https://github.com/apache/incubator-echarts/issues/12553">#12553</a>。</li>
+<li>其他组件样式增强。<a href="https://github.com/apache/incubator-echarts/pull/13008">#13008</a>、<a href="https://github.com/apache/incubator-echarts/pull/13013">#13013</a>。</li>
+</ul>
+</li>
+<li>[Feature] 增强 i18n，使其可运行时注册，并改进其构建方式。<ul>
+<li>构建方式改进。参见 <a href="https://github.com/apache/incubator-echarts/pull/13038">#13038</a>。</li>
+<li>Japanese：<a href="https://github.com/apache/incubator-echarts/pull/13470">#13470</a>。</li>
+<li>German：<a href="https://github.com/apache/incubator-echarts/pull/13315">#13315</a>。</li>
+<li>French：<a href="">#13056</a>: <a href="https://github.com/apache/incubator-echarts/pull/13056">#13056</a>。</li>
+<li>FI/ES/TH：<a href="https://github.com/apache/incubator-echarts/pull/13055">#13055</a>。</li>
+</ul>
+</li>
+<li>[Feature] 在饼图和旭日图上，支持圆角。<ul>
+<li>参见 <a href="https://github.com/apache/incubator-echarts/pull/13390">#13390</a> 和 <a href="https://github.com/apache/incubator-echarts/pull/13378">#13378</a>。</li>
+</ul>
+</li>
+<li>[Feature] 增强 tooltip 的配置能力。<ul>
+<li>支持为 tooltip 添加 CSS 类。参见 <a href="https://github.com/apache/incubator-echarts/pull/13383">#13383</a>.支持在tooltip中添加CSS类。</li>
+<li>支持在 tooltip formatter 中返回 DOM。参见 <a href="https://github.com/apache/incubator-echarts/pull/13469">#13469</a>。</li>
+</ul>
+</li>
+<li>[Feature] 支持部分删除组件或替换组件（ replaceMerge ）。<ul>
+<li>详情见 <a href="https://github.com/apache/incubator-echarts/pull/12987">#12987</a>。</li>
+</ul>
+</li>
+<li>[Enhancement] 提升一些常见场景下的性能。<ul>
+<li>大数据折线图的性能大幅提升。支持了 largest-triangle-three-buckets 采样算法。<ul>
+<li>更多细节参见 <a href="https://github.com/apache/incubator-echarts/pull/13314">#13314</a>、<a href="https://github.com/apache/incubator-echarts/pull/13317">#13317</a>、<a href="https://github.com/apache/incubator-echarts/pull/13337">#13337</a>。</li>
+<li>修正问题 <a href="https://github.com/apache/incubator-echarts/issues/12249">#12249</a>、<a href="https://github.com/apache/incubator-echarts/issues/10200">#10200</a>、<a href="https://github.com/apache/incubator-echarts/issues/4556">#4556</a>。</li>
+</ul>
+</li>
+<li>支持了脏矩形渲染。参见 <a href="https://github.com/apache/incubator-echarts/pull/13170">#13170</a>。</li>
+<li>其他：<a href="https://github.com/apache/incubator-echarts/pull/13339">#13339</a>。</li>
+</ul>
+</li>
+<li>其他功能、改进和问题修复。<ul>
+<li>[Feature] 改进了 <code>parseDate</code>。参见 <a href="https://github.com/apache/incubator-echarts/pull/13044">#13044</a>。</li>
+<li>[Feature] 当线处于 emphasis 状态时，加租。参见 <a href="https://github.com/apache/incubator-echarts/pull/13013">#13013</a>。</li>
+<li>[Feature] 桑吉图 （<code>sankey</code>）支持了 <code>lineStyle: {color: &#39;gradient&#39;}</code>。</li>
+<li>[Feature] <code>markPoint.data.type</code> 和 <code>markArea.data.type</code> 支持了值 <code>&#39;median&#39;</code>。</li>
+<li>[Feature] 在一些特定情况下，坐标轴支持了过滤数据。参见 <a href="https://github.com/apache/incubator-echarts/pull/12832">#12832</a>。</li>
+<li>[Enhancement] 当不再进行绘制时，暂停 <code>requestAnimationFrame</code> 的循环。</li>
+<li>[Fix] 修正 bmap 布局问题：如果容器的布局是 flex 或 grid layout，bmap 首次布局有可能不正确。参见 <a href="https://github.com/apache/incubator-echarts/pull/13432">#13432</a>。</li>
+<li>[Fix] 当鼠标离开图表时，隐藏 tooltip。参见 <a href="https://github.com/apache/incubator-echarts/pull/13382">#13382</a>。</li>
+<li>[Fix] 修正 bmap 自定义 style 不起作用的问题。参见 <a href="https://github.com/apache/incubator-echarts/pull/13214">#13214</a>。</li>
+<li>[Fix] 修正 toolbox 中点击 stack 按钮时标题覆盖问题。参见 <a href="https://github.com/apache/incubator-echarts/pull/13372">#13372</a>。</li>
+<li>[Fix] 修正 ECharts 在 worker 中大数据量时持续空白绘制的问题。参见 <a href="https://github.com/apache/incubator-echarts/pull/13283">#13283</a>。</li>
+<li>[Fix] 使 <code>contentToOption</code> 完全可选。参见 <a href="https://github.com/apache/incubator-echarts/pull/13139">#13139</a>。</li>
+<li>[Fix] 当刷新时，保持 tooltip 。参见 <a href="https://github.com/apache/incubator-echarts/pull/13100">#13100</a>。</li>
+<li>[Fix] 当 heatmap 超出坐标系区域时，不渲染。参见 <a href="https://github.com/apache/incubator-echarts/pull/12991">#12991</a>。</li>
+</ul>
+</li>
+<li>[Break] 相比于 v4.9 的 Breaking changes：<ul>
+<li>默认的主题颜色被修改了。如果仍打算使用 v4.9 之前版本的主题，请设置 <code>option.color = [&#39;#c23531&#39;, &#39;#2f4554&#39;, &#39;#61a0a8&#39;, &#39;#d48265&#39;, &#39;#91c7ae&#39;, &#39;#749f83&#39;, &#39;#ca8622&#39;, &#39;#bda29a&#39;, &#39;#6e7074&#39;, &#39;#546570&#39;, &#39;#c4ccd3&#39;];</code>。</li>
+<li>移除了内置地图 geoJSON。参见 <a href="https://github.com/apache/incubator-echarts/pull/13565">#13565</a>。</li>
+<li>放弃了对 IE8 的支持。以前的 <code>VML</code> 渲染器（IE8 所须）没有针对 v5.0 进行更新。除非后续有人提出了强需求。</li>
+<li><code>&#39;echarts/lib/export.js&#39;</code> 中声明的模块，不再默认挂载到 <code>&#39;echarts/lib/echarts.js&#39;</code> 中。如果上层应用之前使用了 <code>import echarts from &#39;echarts/lib/echarts&#39;</code> 并使用了 <code>&#39;echarts/lib/export.js&#39;</code> 中的任何一个模块，请将代码改为 <code>import echarts from &#39;echarts/index.blank&#39;</code>，在这里，<code>&#39;echarts/lib/export.js&#39;</code> 中的模块，才被默认挂载。</li>
+<li>如果上层应用之前引用了 <code>src/echarts.js</code>、<code>src/chart/*.js</code>、<code>src/component/*.js</code>，则不再能这么引用了。因为 <code>/src</code> 文件夹中的所有文件都被迁移为 <code>*.ts</code>。上层应用程序可以改为引用 <code>esm/echarts.js</code>、<code>esm/chart/*.js</code>、<code>esm/component/*.js</code>。</li>
+<li>颠倒了 <code>visualMap</code> 和 <code>itemStyle</code>|<code>lineStyle</code>|<code>areaStyle</code> 的优先级。也就是说，以前，由<code>visualMap</code> 组件生成的视觉效果（即颜色、符号、符号大小等）具有最高优先级，将覆盖 <code>itemStyle</code>|<code>lineStyle</code>|<code>areaStyle</code> 中指定的相同视觉效果。这种设定带来了一些麻烦，比如给一些特定的数据项指定特定的样式时。从 v5.0 开始，<code>itemStyle</code>|<code>lineStyle</code>|<code>areaStyle</code> 中指定的视觉效果具有了最高优先级。</li>
+<li>改变了 <code>rich.?.padding</code> 的行为。以前的 <code>rich.?.padding: [11, 22, 33, 44]</code> 表示 padding-top 是 <code>33</code>，padding-bottom 是 <code>11</code>，这是一个有问题的实现，因为它与 CSS 的做法不同。从 v5.0 开始，我们对它进行了修复。<code>rich.?.padding: [11, 22, 33, 44]</code> 表示 padding-top <code>11</code>，padding-bottom 是<code>33</code>。</li>
+<li><code>aria</code> 从 v5.0 开始不再包含在 <code>dist/echarts.simple(.min).js</code> 中。但它仍然包含在 <code>dist/echarts.common(.min).js</code> 和 <code>dist/echarts(.min).js</code> 中。</li>
+</ul>
+</li>
+<li>[Deprecated] 从 v5.0 开始已不推荐使用做法：<ul>
+<li>图形元素 transform 相关的属性被改变了：<ul>
+<li>变更点：<ul>
+<li><code>position: [number, number]</code> 改为 <code>x: number</code>/<code>y: number</code>。</li>
+<li><code>scale: [number, number]</code> 改为 <code>scaleX: number</code>/<code>scaleY: number</code>。</li>
+<li><code>origin: [number, number]</code> 改为 <code>originX: number</code>/<code>originY: number</code>。</li>
+</ul>
+</li>
+<li><code>position</code>、<code>scale</code> 和 <code>origin</code> 仍然支持，但已不推荐使用。</li>
+<li>它影响到这些地方：<ul>
+<li>在<code>graphic</code>组件中：每个元素的声明。</li>
+<li>在 <code>custom series</code> 中：<code>renderItem</code> 返回的每个元素的声明。</li>
+<li>直接使用 zrender 图形元素时。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Text 相关的属性被改变：<ul>
+<li>变更点：<ul>
+<li>图形元素附带的文本的声明方式被改变：<ul>
+<li>除了 <code>Text</code> 元素之外，其他元素中的属性 <code>style.text</code> 都不推荐使用了。取而代之的是新属性 <code>textContent</code> 和 <code>textConfig</code>，他们能带来更丰富的功能。</li>
+<li>其中，下面左边部分的这些属性已不推荐使用或废弃。请使用下面的右边部分的属性：<ul>
+<li>textPosition =&gt; textConfig.position</li>
+<li>textOffset =&gt; textConfig.offset</li>
+<li>textRotation =&gt; textConfig.rotation</li>
+<li>textDistance =&gt; textConfig.distance</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>下面左边部分的属性在 <code>style</code> 和 <code>style.rich.?</code> 中已不推荐使用或废弃。请使用下面右边的属性：<ul>
+<li>textFill =&gt; fill</li>
+<li>textStroke =&gt; stroke</li>
+<li>textFont =&gt; font</li>
+<li>textStrokeWidth =&gt; lineWidth</li>
+<li>textAlign =&gt; align</li>
+<li>textVerticalAlign =&gt; verticalAlign</li>
+<li>textLineHeight =&gt;</li>
+<li>textWidth =&gt; width</li>
+<li>textHeight =&gt; hight</li>
+<li>textBackgroundColor =&gt; backgroundColor</li>
+<li>textPadding =&gt; padding</li>
+<li>textBorderColor =&gt; borderColor</li>
+<li>textBorderWidth =&gt; borderWidth</li>
+<li>textBorderRadius =&gt; borderRadius</li>
+<li>textBoxShadowColor =&gt; shadowColor</li>
+<li>textBoxShadowBlur =&gt; shadowBlur</li>
+<li>textBoxShadowOffsetX =&gt; shadowOffsetX</li>
+<li>textBoxShadowOffsetY =&gt; shadowOffsetY</li>
+</ul>
+</li>
+<li>注：这些属性并没有变化：<ul>
+<li>textShadowColor</li>
+<li>textShadowBlur</li>
+<li>textShadowOffsetX</li>
+<li>textShadowOffsetY</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>它影响到这些地方：<ul>
+<li>在 <code>graphic</code> 组件中：每个元素的声明。（原来的写法仍兼容，但在一些很复杂的情况下，可能效果不完全一致。）</li>
+<li>在自定义系列（<code>custom series</code>）中：<code>renderItem</code> 返回中的每个元素的声明。（原来的写法仍兼容，但在一些很复杂的情况下，可能效果不完全一致。）</li>
+<li>直接使用 zrender API 创建图形元素。（不再兼容，原写法被废弃。）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>图表实例上的 API：<ul>
+<li><code>chart.one(...)</code> 已不推荐使用。</li>
+</ul>
+</li>
+<li><code>label</code>。<ul>
+<li>属性 <code>color</code>、<code>textBorderColor</code>、<code>backgroundColor</code>、<code>borderColor</code> 中，值 <code>auto</code> 已不推荐使用，而推荐使用 <code>&#39;inherit&#39;</code> 代替。</li>
+</ul>
+</li>
+<li><code>hoverAnimation</code>:<ul>
+<li>选项 <code>series.hoverAnimation</code> 已不推荐使用，使用 <code>series.phasis.scale</code> 代替之。</li>
+</ul>
+</li>
+<li>折线图（<code>line series</code>）：<ul>
+<li>选项 <code>series.clipOverflow</code> 已不推荐使用，使用 <code>series.clip</code> 代替之。</li>
+</ul>
+</li>
+<li>自定义系列（<code>custom series</code>）。<ul>
+<li>在 <code>renderItem</code> 中，<code>api.style(...)</code> 和 <code>api.styleEmphasis(...)</code> 已不推荐使用。因为这两个接口其实并不真正必要，也很难保证向后兼容。用户可以通过 <code>api.visual(...)</code> 获取系统自动分配的视觉信息。</li>
+</ul>
+</li>
+<li>旭日图（<code>sunburst</code>）：
+  +动作类型<code>highlight</code>已被废弃，使用<code>sunburstHigh</code>。使用<code>sunburstHighlight</code>代替。<ul>
+<li>动作类型 &quot;downplay &quot;已被弃用，请使用 &quot;sunburstUniversity &quot;代替。使用<code>sunburstUnhighlight</code>代替。
++选项<code>series.downplay</code>已被弃用，请使用<code>series.blush</code>代替。使用<code>series.blur</code>代替。
++选项<code>series.highlightPolicy</code>已不适用。使用<code>series.emphasis.focus</code>代替。</li>
+</ul>
+</li>
+<li>饼图（<code>pie</code>）：<ul>
+<li>下面左边部分的 action 名已经不推荐使用。请使用右边的 action 名。<ul>
+<li><code>pieToggleSelect</code> =&gt; <code>toggleSelect</code>。</li>
+<li><code>pieSelect</code> =&gt; <code>select</code>。</li>
+<li><code>pieUnSelect</code> =&gt; <code>unselect</code>。</li>
+</ul>
+</li>
+<li>下面左边部分的事件名已经不推荐使用。请使用右边的事件名。<ul>
+<li><code>pieselectchanged</code> =&gt; <code>selectchanged</code>。</li>
+<li><code>pieselected</code> =&gt; <code>selected</code>。</li>
+<li><code>pieunselected</code> =&gt; <code>unselected</code>。</li>
+</ul>
+</li>
+<li>选项 <code>series.label.margin</code> 已经不推荐使用。使用 <code>series.label.edgeDistance</code> 代替。</li>
+<li>选项 <code>series.clockWise</code> 已经不推荐使用。使用 <code>series.clockwise</code> 代替。</li>
+<li>选项 <code>series.hoverOffset</code> 已经不推荐使用。使用 <code>series.phasis.scaleSize</code> 代替。</li>
+</ul>
+</li>
+<li>地图（<code>map series</code>）：<ul>
+<li>下文左边部分的 action 名已经不推荐使用。请使用右边的 action 名。<ul>
+<li><code>mapToggleSelect</code> =&gt; <code>toggleSelect</code>。</li>
+<li><code>mapSelect</code> =&gt; <code>select</code>。</li>
+<li><code>mapUnSelect</code> =&gt; <code>unselect</code>。</li>
+</ul>
+</li>
+<li>下面左边部分的事件名已经不推荐使用。请使用右边的事件名。<ul>
+<li><code>mapselectchanged</code> =&gt; <code>selectchanged</code>。</li>
+<li><code>mapselected</code> =&gt; <code>selected</code>。</li>
+<li><code>mapunselected</code> =&gt; <code>unselected</code>。</li>
+</ul>
+</li>
+<li>选项 <code>series.mapType</code> 已经不推荐使用。使用 <code>series.map</code> 代替。</li>
+<li>选项 <code>series.mapLocation</code> 已经不推荐使用。</li>
+</ul>
+</li>
+<li>关系图（<code>graph series</code>）：<ul>
+<li>选项 <code>series.focusNodeAdjacency</code> 已经不推荐使用。使用 <code>series.emphasis: { focus: &#39;adjacency&#39;}</code> 代替。</li>
+</ul>
+</li>
+<li>仪表盘（<code>gauge series</code>）：<ul>
+<li>选项 <code>series.clockWise</code> 已经不推荐使用。使用 <code>series.clockwise</code> 代替。</li>
+<li>选项 <code>series.hoverOffset</code> 已经不推荐使用。使用 <code>series.phasis.scaleSize</code> 代替。</li>
+</ul>
+</li>
+<li><code>dataZoom</code> 组件：<ul>
+<li>选项 <code>dataZoom.handleIcon</code> 如果使用 <code>SVGPath</code>，需要前缀 <code>path://</code>。</li>
+</ul>
+</li>
+<li>雷达图（<code>radar</code>）：<ul>
+<li>选项 <code>radar.name</code> 已经不推荐使用。使用 <code>radar.axisName</code> 代替。</li>
+<li>选项 <code>radar.nameGap</code> 已经不推荐使用。使用 <code>radar.axisNameGap</code> 代替。</li>
+</ul>
+</li>
+<li>Parse and format：<ul>
+<li><code>echarts.format.formatTime</code> 已经不推荐使用。使用 <code>echarts.time.format</code> 代替。</li>
+<li><code>echarts.number.parseDate</code> 已经不推荐使用。使用 <code>echarts.time.parse</code> 代替。</li>
+<li><code>echarts.format.getTextRect</code> 已经不推荐使用。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="v4-9-0">v4.9.0</h2>
 <div class="time">2020-08-06</div>
 
 <ul>
@@ -1806,7 +2098,7 @@ Fix that the line label can not be returned to its original opacity after <code>
 <ul>
 <li>The new echarts</li>
 </ul>
-<footer class="inner-footer"><div class="container"><div class="row"><div class="col-md-8"><p>Apache ECharts is an effort undergoing incubation at The Apache Software Foundation (ASF), sponsored by the Apache Incubator. Incubation is required of all newly accepted projects until a further review indicates that the infrastructure, communications, and decision making process have stabilized in a manner consistent with other successful ASF projects. While incubation status is not necessarily a reflection of the completeness or stability of the code, it does indicate that the project has yet to be fully endorsed by the ASF.</p><p>Copyright © 2017-2020, The Apache Software Foundation Apache ECharts, ECharts, Apache, the Apache feather, and the Apache ECharts project logo are either registered trademarks or trademarks of the Apache Software Foundation.</p></div><div id="footer-icon-panel" class="col-md-4"><a href="https://www.apache.org"><img src="https://cdn.jsdelivr.net/gh/apache/incubator-echarts-website@asf-site/zh/images/asf_logo.svg?_v_=20200710_1" class="footer-apache-logo"></a></div></div></div></footer></div></div></div></div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/gh/apache/incubator-echarts-website@asf-site/zh/js/common.js?_v_=1606924722238"></script><script type="text/javascript">document.getElementById('nav-doc').className = 'active';</script><!-- Baidu Tongji--><script type="text/javascript">var _hmt = _hmt || [];
+<footer class="inner-footer"><div class="container"><div class="row"><div class="col-md-8"><p>Apache ECharts is an effort undergoing incubation at The Apache Software Foundation (ASF), sponsored by the Apache Incubator. Incubation is required of all newly accepted projects until a further review indicates that the infrastructure, communications, and decision making process have stabilized in a manner consistent with other successful ASF projects. While incubation status is not necessarily a reflection of the completeness or stability of the code, it does indicate that the project has yet to be fully endorsed by the ASF.</p><p>Copyright © 2017-2020, The Apache Software Foundation Apache ECharts, ECharts, Apache, the Apache feather, and the Apache ECharts project logo are either registered trademarks or trademarks of the Apache Software Foundation.</p></div><div id="footer-icon-panel" class="col-md-4"><a href="https://www.apache.org"><img src="https://cdn.jsdelivr.net/gh/apache/incubator-echarts-website@asf-site/zh/images/asf_logo.svg?_v_=20200710_1" class="footer-apache-logo"></a></div></div></div></footer></div></div></div></div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/gh/apache/incubator-echarts-website@asf-site/zh/js/common.js?_v_=1607079955944"></script><script type="text/javascript">document.getElementById('nav-doc').className = 'active';</script><!-- Baidu Tongji--><script type="text/javascript">var _hmt = _hmt || [];
 (function() {
 var hm = document.createElement("script");
 

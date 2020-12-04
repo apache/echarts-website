@@ -175,7 +175,7 @@ window.__EC_DOC_option_graphic = {
     "desc": "<p>Whether use progressive render to improve performance. Usually used when number of element is too large.</p>\n"
   },
   "elements-image.style.image": {
-    "desc": "<p>Specify contant of the image, can be a URL, or <a href=\"https://tools.ietf.org/html/rfc2397\" target=\"_blank\">dataURI</a>.</p>\n"
+    "desc": "<p>Specify content of the image, can be a URL, or <a href=\"https://tools.ietf.org/html/rfc2397\" target=\"_blank\">dataURI</a>.</p>\n"
   },
   "elements-image.style.x": {
     "desc": "<p>The x value of the left-top corner of the element in the coordinate system of its parent.</p>\n"
@@ -773,7 +773,7 @@ window.__EC_DOC_option_graphic = {
     "desc": "<p>start angle, in radian.</p>\n"
   },
   "elements-sector.shape.endAngle": {
-    "desc": "<p>end anble, in radian.</p>\n"
+    "desc": "<p>end angle, in radian.</p>\n"
   },
   "elements-sector.shape.clockwise": {
     "desc": "<p>Whether draw clockwise.</p>\n"
@@ -898,7 +898,7 @@ window.__EC_DOC_option_graphic = {
     "desc": "<p>start angle, in radian.</p>\n"
   },
   "elements-arc.shape.endAngle": {
-    "desc": "<p>end anble, in radian.</p>\n"
+    "desc": "<p>end angle, in radian.</p>\n"
   },
   "elements-arc.shape.clockwise": {
     "desc": "<p>Whether draw clockwise.</p>\n"
