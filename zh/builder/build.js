@@ -20,6 +20,7 @@ define(function (require) {
     var urlArgs = '__v__=' + (+new Date());
 
     var topCode = [`export * from "echarts/src/echarts";`];
+    var srcFolder = isVersion5 ? 'esm' : 'src';
 
     if (BUILD_CONFIG.api) {
         topCode.push(`export * from "echarts/src/export";`);
@@ -39,11 +40,11 @@ define(function (require) {
         component && topCode.push(`import "echarts/src/component/${component}";`);
     });
 
-    if (BUILD_CONFIG.vml) {
-        topCode.push(`import "zrender/src/vml/vml";`);
+    if (BUILD_CONFIG.vml && !isVersion5) {
+        topCode.push(`import "zrender/${srcFolder}/vml/vml";`);
     }
     if (BUILD_CONFIG.svg) {
-        topCode.push(`import "zrender/src/svg/svg";`);
+        topCode.push(`import "zrender/${srcFolder}/svg/svg";`);
     }
 
     // Always require log and time axis
@@ -51,8 +52,6 @@ define(function (require) {
         `import "echarts/src/scale/Time";`,
         `import "echarts/src/scale/Log";`
     );
-
-    var srcFolder = isVersion5 ? 'esm' : 'src';
 
     var npmEntries = {};
     var pathsConfig = {
