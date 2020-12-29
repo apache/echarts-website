@@ -699,7 +699,7 @@ window.__EC_DOC_option_radiusAxis = {
     }
   },
   "minorTick": {
-    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v4.6.0</code> 开始支持</p>\n</blockquote>\n<p>坐标轴次刻度线相关设置。</p>\n<p>注意：次刻度线无法在类目轴（<a href=\"#radiusAxis.type\">type</a>: <code class=\"codespan\">&#39;category&#39;</code>）中使用。</p>\n<p>示例：</p>\n<p>1) 函数绘图中使用次刻度线</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=line-function&edit=1&reset=1\" width=\"600\" height=\"350\"><iframe />\n\n\n<p>2) 在对数轴中使用次刻度线</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=line-log&edit=1&reset=1\" width=\"600\" height=\"350\"><iframe />\n\n"
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v4.6.0</code> 开始支持</p>\n</blockquote>\n<p>坐标轴次刻度线相关设置。</p>\n<p>注意：次刻度线无法在类目轴（<a href=\"#radiusAxis.type\">type</a>: <code class=\"codespan\">&#39;category&#39;</code>）中使用。</p>\n<p>示例：</p>\n<p>1) 函数绘图中使用次刻度线</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=line-function&edit=1&reset=1\" width=\"600\" height=\"350\"></iframe>\n\n\n<p>2) 在对数轴中使用次刻度线</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=line-log&edit=1&reset=1\" width=\"600\" height=\"350\"></iframe>\n\n"
   },
   "minorTick.show": {
     "desc": "\n\n<p>是否显示次刻度线。</p>\n",

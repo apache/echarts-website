@@ -6,7 +6,7 @@ window.__EC_DOC_option_angleAxis = {
     "desc": "<p>The index of angle axis in Polar Coordinate. The first axis is used by default.</p>\n"
   },
   "startAngle": {
-    "desc": "\n\n<p>Starting angle of axis. 90 degrees by default, standing for top position of center. 0 degree stands for right position of center.</p>\n<p>The following shows an example with startAngle of 45 deg.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/polar-start-angle&edit=1&reset=1\" width=\"400\" height=\"400\"><iframe />\n\n",
+    "desc": "\n\n<p>Starting angle of axis. 90 degrees by default, standing for top position of center. 0 degree stands for right position of center.</p>\n<p>The following shows an example with startAngle of 45 deg.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/polar-start-angle&edit=1&reset=1\" width=\"400\" height=\"400\"></iframe>\n\n",
     "uiControl": {
       "type": "angle",
       "default": "90",
@@ -16,7 +16,7 @@ window.__EC_DOC_option_angleAxis = {
     }
   },
   "clockwise": {
-    "desc": "\n\n<p>Whether the positive position of axis is clockwise. True for clockwise by default.</p>\n<p>The following shows an example with clockwise as <code class=\"codespan\">false</code>.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/polar-anticlockwise&edit=1&reset=1\" width=\"400\" height=\"400\"><iframe />\n\n\n\n",
+    "desc": "\n\n<p>Whether the positive position of axis is clockwise. True for clockwise by default.</p>\n<p>The following shows an example with clockwise as <code class=\"codespan\">false</code>.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/polar-anticlockwise&edit=1&reset=1\" width=\"400\" height=\"400\"></iframe>\n\n\n\n",
     "uiControl": {
       "type": "boolean",
       "default": "true"
@@ -291,7 +291,7 @@ window.__EC_DOC_option_angleAxis = {
     }
   },
   "minorTick": {
-    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v4.6.0</code></p>\n</blockquote>\n<p>Settings related minor ticks.</p>\n<p>Note: <code class=\"codespan\">minorTick</code> is not available in the <code class=\"codespan\">category</code> type axis.</p>\n<p>Examples:</p>\n<p>1) Using minor ticks in function plotting.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=line-function&edit=1&reset=1\" width=\"600\" height=\"350\"><iframe />\n\n\n<p>2) Using minor ticks in log axis.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=line-log&edit=1&reset=1\" width=\"600\" height=\"350\"><iframe />\n\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v4.6.0</code></p>\n</blockquote>\n<p>Settings related minor ticks.</p>\n<p>Note: <code class=\"codespan\">minorTick</code> is not available in the <code class=\"codespan\">category</code> type axis.</p>\n<p>Examples:</p>\n<p>1) Using minor ticks in function plotting.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=line-function&edit=1&reset=1\" width=\"600\" height=\"350\"></iframe>\n\n\n<p>2) Using minor ticks in log axis.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=line-log&edit=1&reset=1\" width=\"600\" height=\"350\"></iframe>\n\n"
   },
   "minorTick.show": {
     "desc": "\n\n<p>If show minor ticks.</p>\n",

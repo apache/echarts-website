@@ -800,7 +800,7 @@ window.__EC_DOC_option_legend = {
     }
   },
   "emphasis.selectorLabel.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -1227,7 +1227,7 @@ window.__EC_DOC_option_legend = {
     }
   },
   "selectorLabel.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",

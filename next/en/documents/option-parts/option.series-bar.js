@@ -22,21 +22,21 @@ window.__EC_DOC_option_series_bar = {
     "desc": "<p>Index of <a href=\"#yAxis\">y axis</a> to combine with, which is  useful for multiple y axes in one chart.</p>\n"
   },
   "roundCap": {
-    "desc": "\n\n\n\n<blockquote>\n<p>Since <code class=\"codespan\">v4.5.0</code></p>\n</blockquote>\n\n\n<p>Whether to add round caps at the end of the bar sectors. Valid only for bar series on polar coordinates.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=polar-roundCap&reset=1&edit=1\" width=\"800\" height=\"500\"><iframe />\n\n",
+    "desc": "\n\n\n\n<blockquote>\n<p>Since <code class=\"codespan\">v4.5.0</code></p>\n</blockquote>\n\n\n<p>Whether to add round caps at the end of the bar sectors. Valid only for bar series on polar coordinates.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=polar-roundCap&reset=1&edit=1\" width=\"800\" height=\"500\"></iframe>\n\n",
     "uiControl": {
       "type": "boolean",
       "clean": "true"
     }
   },
   "showBackground": {
-    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v4.7.0</code></p>\n</blockquote>\n\n\n<p>Whether to show background behind each bar. Use <a href=\"#series-bar.backgroundStyle\">backgroundStyle</a> to set background style.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=bar-background&reset=1&edit=1\" width=\"800\" height=\"400\"><iframe />\n\n",
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v4.7.0</code></p>\n</blockquote>\n\n\n<p>Whether to show background behind each bar. Use <a href=\"#series-bar.backgroundStyle\">backgroundStyle</a> to set background style.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=bar-background&reset=1&edit=1\" width=\"800\" height=\"400\"></iframe>\n\n",
     "uiControl": {
       "type": "boolean",
       "clean": "true"
     }
   },
   "backgroundStyle": {
-    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v4.7.0</code></p>\n</blockquote>\n<p>Background style of each bar if <a href=\"#series-bar.showBackground\">showBackground</a> is set to be <code class=\"codespan\">true</code>.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=bar-background&reset=1&edit=1\" width=\"800\" height=\"400\"><iframe />\n\n\n\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v4.7.0</code></p>\n</blockquote>\n<p>Background style of each bar if <a href=\"#series-bar.showBackground\">showBackground</a> is set to be <code class=\"codespan\">true</code>.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=bar-background&reset=1&edit=1\" width=\"800\" height=\"400\"></iframe>\n\n\n\n"
   },
   "backgroundStyle.color": {
     "desc": "\n\n<p>Bar color. </p>\n",
@@ -136,7 +136,7 @@ window.__EC_DOC_option_series_bar = {
     }
   },
   "label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element.</p>\n<p>It is valid only when <code class=\"codespan\">position</code> is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -730,14 +730,47 @@ window.__EC_DOC_option_series_bar = {
       "step": "0.01"
     }
   },
+  "itemStyle.decal(Object | 'none')": {
+    "desc": "<p>The style of the decal pattern. It works only if <a href=\"#aria.enabled\">aria.enabled</a> and <a href=\"#aria.decal.show\">aria.decal.show</a> are both set to be <code class=\"codespan\">true</code>.</p>\n<p>If it is set to be <code class=\"codespan\">&#39;none&#39;</code>, no decal will be used.</p>\n"
+  },
+  "itemStyle.decal(Object | 'none').symbol(string|string[]) = 'rect'": {
+    "desc": "<p>The symbol type of the decal. If it is in the type of <code class=\"codespan\">string[]</code>, it means the symbols are used one by one.</p>\n<p>Icon types provided by ECharts includes</p>\n<p><code class=\"codespan\">&#39;circle&#39;</code>, <code class=\"codespan\">&#39;rect&#39;</code>, <code class=\"codespan\">&#39;roundRect&#39;</code>, <code class=\"codespan\">&#39;triangle&#39;</code>, <code class=\"codespan\">&#39;diamond&#39;</code>, <code class=\"codespan\">&#39;pin&#39;</code>, <code class=\"codespan\">&#39;arrow&#39;</code>, <code class=\"codespan\">&#39;none&#39;</code></p>\n<p>It can be set to an image with <code class=\"codespan\">&#39;image://url&#39;</code> , in which URL is the link to an image, or <code class=\"codespan\">dataURI</code> of an image.</p>\n<p>An image URL example:</p>\n<pre><code>&#39;image://http://xxx.xxx.xxx/a/b.png&#39;\n</code></pre><p>A <code class=\"codespan\">dataURI</code> example:</p>\n<pre><code>&#39;image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7&#39;\n</code></pre><p>Icons can be set to arbitrary vector path via <code class=\"codespan\">&#39;path://&#39;</code> in ECharts. As compared with a raster image, vector paths prevent jagging and blurring when scaled, and have better control over changing colors. The size of the vector icon will be adapted automatically. Refer to <a href=\"http://www.w3.org/TR/SVG/paths.html#PathData\" target=\"_blank\">SVG PathData</a> for more information about the format of the path. You may export vector paths from tools like Adobe </p>\n<p>For example:</p>\n<pre><code>&#39;path://M30.9,53.2C16.8,53.2,5.3,41.7,5.3,27.6S16.8,2,30.9,2C45,2,56.4,13.5,56.4,27.6S45,53.2,30.9,53.2z M30.9,3.5C17.6,3.5,6.8,14.4,6.8,27.6c0,13.3,10.8,24.1,24.101,24.1C44.2,51.7,55,40.9,55,27.6C54.9,14.4,44.1,3.5,30.9,3.5z M36.9,35.8c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H36c0.5,0,0.9,0.4,0.9,1V35.8z M27.8,35.8 c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H27c0.5,0,0.9,0.4,0.9,1L27.8,35.8L27.8,35.8z&#39;\n</code></pre>"
+  },
+  "itemStyle.decal(Object | 'none').symbolSize": {
+    "desc": "<p>Range of values: <code class=\"codespan\">0</code> to <code class=\"codespan\">1</code>, representing the size of symbol relative to decal.</p>\n"
+  },
+  "itemStyle.decal(Object | 'none').symbolKeepAspect": {
+    "desc": "<p>Whether or not to keep the aspect ratio of the pattern.</p>\n"
+  },
+  "itemStyle.decal(Object | 'none').color": {
+    "desc": "<p>For the color of the decal pattern, it is recommended to use a translucent color, which can be superimposed on the color of the series itself.</p>\n"
+  },
+  "itemStyle.decal(Object | 'none').backgroundColor": {
+    "desc": "<p>The background color of the decal will be over the color of the series itself, under the decal pattern.</p>\n"
+  },
+  "itemStyle.decal(Object | 'none').dashArrayX(number | number[] | (number | number[])[]) = 5": {
+    "desc": "<p>The basic pattern of the decal pattern is an infinite loop in the form of <code class=\"codespan\">Pattern - Blank - Pattern - Blank - Pattern - Blank</code> both horizontally and vertically, respectively. By setting the length of each pattern and blank, complex pattern effects can be achieved.</p>\n<p><code class=\"codespan\">dashArrayX</code> controls the horizontal pattern pattern. When its value is of type <code class=\"codespan\">number</code> or <code class=\"codespan\">number[]</code>, it is similar to <a href=\"https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray\" target=\"_blank\">SVG stroke-dasharray</a>.</p>\n<ul>\n<li><p>If it is of type <code class=\"codespan\">number</code>, it means that the pattern and the blank space are of this value respectively. For example, <code class=\"codespan\">5</code> means the pattern with width 5 is displayed first, then 5 pixels empty, then the pattern with width 5 is displayed...</p>\n</li>\n<li><p>In the case of <code class=\"codespan\">number[]</code> type, it means that the pattern and empty space are loops of an array of values. For example: <code class=\"codespan\">[5, 10, 2, 6]</code> means the pattern is 5 pixels wide, then 10 pixels empty, then the pattern is 2 pixels wide, then 6 pixels empty, then the pattern is 5 pixels wide...</p>\n</li>\n<li><p>If of type <code class=\"codespan\">(number | number[])[]</code>, it means that each row is a loop with an array of values for the pattern and blank space. For example: <code class=\"codespan\">[10, [2, 5]]</code> means that the first line will be 10 pixels by 10 pixels and empty space, the second line will be 2 pixels by 2 pixels and empty space, and the third line will be 10 pixels by 10 pixels and empty space...</p>\n</li>\n</ul>\n<p>This interface can be better understood with the following examples.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/aria-decal&edit=1&reset=1\" width=\"700\" height=\"300\"></iframe>\n\n"
+  },
+  "itemStyle.decal(Object | 'none').dashArrayY(number | number[]) = 5": {
+    "desc": "<p>The basic pattern of the decal pattern is an infinite loop in the form of <code class=\"codespan\">Pattern - Blank - Pattern - Blank - Pattern - Blank</code> both horizontally and vertically, respectively. By setting the length of each pattern and blank, complex pattern effects can be achieved.</p>\n<p><code class=\"codespan\">dashArrayY</code> controls the horizontal pattern pattern. Similar to <a href=\"https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray\" target=\"_blank\">SVG stroke-dasharray</a>.</p>\n<ul>\n<li><p>If it is a <code class=\"codespan\">number</code> type, it means the pattern and the blank are each of this value. For example, <code class=\"codespan\">5</code> means that the pattern with a height of 5 is displayed first, then 5 pixels empty, then the pattern with a height of 5 is displayed...</p>\n</li>\n<li><p>In the case of <code class=\"codespan\">number[]</code> type, it means that the pattern and empty space are loops of sequential array values. For example: <code class=\"codespan\">[5, 10, 2, 6]</code> means the pattern is 5 pixels high, then 10 pixels empty, then the pattern is 2 pixels high, then 6 pixels empty, then the pattern is 5 pixels high...</p>\n</li>\n</ul>\n<p>This interface can be better understood with the following examples.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/aria-decal&edit=1&reset=1\" width=\"700\" height=\"300\"></iframe>\n\n"
+  },
+  "itemStyle.decal(Object | 'none').rotation": {
+    "desc": "<p>The overall rotation angle (in radians) of the pattern, in the range from `-Math.</p>\n"
+  },
+  "itemStyle.decal(Object | 'none').maxTileWidth": {
+    "desc": "<p>The upper limit of the width of the generated pattern before it is duplicated. Usually this value is not necessary, but you can try to increase it if you notice discontinuous seams in the pattern when it repeats.</p>\n"
+  },
+  "itemStyle.decal(Object | 'none').maxTileHeight": {
+    "desc": "<p>The upper limit of the height of the generated pattern before it repeats. This value is usually not necessary to set, but you can try to increase it if you find that the pattern has discontinuous seams when it is repeated.</p>\n"
+  },
   "labelLayout": {
     "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Unified layout configuration of labels.</p>\n<p>It provide a chance to adjust the labels&#39; <code class=\"codespan\">(x, y)</code> position, alignment based on the original layout each series provides.</p>\n<p>This option can be a callback with following parameters.</p>\n<pre><code class=\"lang-js\">// corresponding index of data\ndataIndex: number\n// corresponding type of data. Only available in graph, in which it can be &#39;node&#39; or &#39;edge&#39;\ndataType?: string\n// corresponding index of series\nseriesIndex: number\n// Displayed text of label.\ntext: string\n// Bounding rectangle of label.\nlabelRect: {x: number, y: number, width: number, height: number}\n// Horizontal alignment of label.\nalign: &#39;left&#39; | &#39;center&#39; | &#39;right&#39;\n// Vertical alignment of label.\nverticalAlign: &#39;top&#39; | &#39;middle&#39; | &#39;bottom&#39;\n// Bounding rectangle of the element corresponding to.\nrect: {x: number, y: number, width: number, height: number}\n// Default points array of labelLine. Currently only provided in pie and funnel series.\n// It&#39;s null in other series.\nlabelLinePoints?: number[][]\n</code></pre>\n<p><strong>Example:</strong></p>\n<p>Align the labels on the right. Left 10px margin to the edge.</p>\n<pre><code class=\"lang-js\">labelLayout(params) {\n    return {\n        x: params.rect.x + 10,\n        y: params.rect.y + params.rect.height / 2,\n        verticalAlign: &#39;middle&#39;,\n        align: &#39;left&#39;\n    }\n}\n</code></pre>\n<p>Set the text size based on the size of element bounding rectangle.</p>\n<pre><code class=\"lang-js\">\nlabelLayout(params) {\n    return {\n        fontSize: Math.max(params.rect.width / 10, 5)\n    };\n}\n</code></pre>\n"
   },
   "labelLayout.hideOverlap": {
-    "desc": "<p>If hide the overlapped labels.</p>\n<p>The following example shows how to hide the overlapped labels in graph automatically when zooming.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=graph-label-overlap&edit=1&reset=1\" width=\"600\" height=\"400\"><iframe />\n\n"
+    "desc": "<p>If hide the overlapped labels.</p>\n<p>The following example shows how to hide the overlapped labels in graph automatically when zooming.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=graph-label-overlap&edit=1&reset=1\" width=\"600\" height=\"400\"></iframe>\n\n"
   },
   "labelLayout.moveOverlap": {
-    "desc": "<p>If move the overlapped labels to avoid overlapping.</p>\n<p>Currently supported configurations:</p>\n<ul>\n<li><code class=\"codespan\">&#39;shiftX&#39;</code> Place the labels on horizontal direction sequencely, used when aligned horizontally.</li>\n<li><code class=\"codespan\">&#39;shiftY&#39;</code> Place the labels on vertial direction sequencely, used when aligned vertically.</li>\n</ul>\n<p>The following example shows how to use <code class=\"codespan\">moverOverlap: &#39;shiftY&#39;</code> to place the labels aligned vertically.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=scatter-label-align-right&edit=1&reset=1\" width=\"600\" height=\"400\"><iframe />\n\n"
+    "desc": "<p>If move the overlapped labels to avoid overlapping.</p>\n<p>Currently supported configurations:</p>\n<ul>\n<li><code class=\"codespan\">&#39;shiftX&#39;</code> Place the labels on horizontal direction sequencely, used when aligned horizontally.</li>\n<li><code class=\"codespan\">&#39;shiftY&#39;</code> Place the labels on vertial direction sequencely, used when aligned vertically.</li>\n</ul>\n<p>The following example shows how to use <code class=\"codespan\">moverOverlap: &#39;shiftY&#39;</code> to place the labels aligned vertically.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=scatter-label-align-right&edit=1&reset=1\" width=\"600\" height=\"400\"></iframe>\n\n"
   },
   "labelLayout.x": {
     "desc": "<p>The x position of the label. Support absolute pixel values ​​or relative values ​​such as <code class=\"codespan\">&#39;20%&#39;</code>.</p>\n"
@@ -779,7 +812,7 @@ window.__EC_DOC_option_series_bar = {
     "desc": "<p>Configurations of emphasis state.</p>\n"
   },
   "emphasis.focus": {
-    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>When the data is highlighted, whether to fade out of other data to focus the highlighted. The following configurations are supported:</p>\n<ul>\n<li><code class=\"codespan\">&#39;none&#39;</code> Do not fade out other data, it&#39;s by default.</li>\n<li><code class=\"codespan\">&#39;self&#39;</code> Only focus (not fade out) the element of the currently highlighted data.</li>\n<li><code class=\"codespan\">&#39;series&#39;</code> Focus on all elements of the series which the currently highlighted data belongs to.</li>\n</ul>\n<p><strong>Example: </strong></p>\n<pre><code class=\"lang-js\">emphasis: {\n    focus: &#39;series&#39;,\n    blurScope: &#39;coordinateSystem&#39;\n}\n</code></pre>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=bar-y-category-stack&reset=1&edit=1\" width=\"600\" height=\"400\"><iframe />\n\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>When the data is highlighted, whether to fade out of other data to focus the highlighted. The following configurations are supported:</p>\n<ul>\n<li><code class=\"codespan\">&#39;none&#39;</code> Do not fade out other data, it&#39;s by default.</li>\n<li><code class=\"codespan\">&#39;self&#39;</code> Only focus (not fade out) the element of the currently highlighted data.</li>\n<li><code class=\"codespan\">&#39;series&#39;</code> Focus on all elements of the series which the currently highlighted data belongs to.</li>\n</ul>\n<p><strong>Example: </strong></p>\n<pre><code class=\"lang-js\">emphasis: {\n    focus: &#39;series&#39;,\n    blurScope: &#39;coordinateSystem&#39;\n}\n</code></pre>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=bar-y-category-stack&reset=1&edit=1\" width=\"600\" height=\"400\"></iframe>\n\n"
   },
   "emphasis.blurScope": {
     "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>The range of fade out when <code class=\"codespan\">focus</code> is enabled. Support the following configurations</p>\n<ul>\n<li><code class=\"codespan\">&#39;coordinateSystem&#39;</code></li>\n<li><code class=\"codespan\">&#39;series&#39;</code></li>\n<li><code class=\"codespan\">&#39;global&#39;</code></li>\n</ul>\n"
@@ -802,7 +835,7 @@ window.__EC_DOC_option_series_bar = {
     }
   },
   "emphasis.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element.</p>\n<p>It is valid only when <code class=\"codespan\">position</code> is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -1396,7 +1429,7 @@ window.__EC_DOC_option_series_bar = {
     }
   },
   "blur.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element.</p>\n<p>It is valid only when <code class=\"codespan\">position</code> is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -1990,7 +2023,7 @@ window.__EC_DOC_option_series_bar = {
     }
   },
   "select.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element.</p>\n<p>It is valid only when <code class=\"codespan\">position</code> is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -2604,7 +2637,7 @@ window.__EC_DOC_option_series_bar = {
     }
   },
   "barGap": {
-    "desc": "<p>The gap between bars between different series, is a percent value like <code class=\"codespan\">&#39;30%&#39;</code>, which means <code class=\"codespan\">30%</code> of the bar width.</p>\n<p>Set barGap as <code class=\"codespan\">&#39;-100%&#39;</code> can overlap bars that belong to different series, which is useful when making a series of bar be background.</p>\n<p>In a single coodinate system, this attribute is shared by multiple <code class=\"codespan\">&#39;bar&#39;</code> series. This attribute should be set on the last <code class=\"codespan\">&#39;bar&#39;</code> series in the coodinate system, then it will be adopted by all <code class=\"codespan\">&#39;bar&#39;</code> series in the coordinate system.</p>\n<p>For example:</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/barGrid-barGap&reset=1&edit=1\" width=\"600\" height=\"400\"><iframe />\n\n",
+    "desc": "<p>The gap between bars between different series, is a percent value like <code class=\"codespan\">&#39;30%&#39;</code>, which means <code class=\"codespan\">30%</code> of the bar width.</p>\n<p>Set barGap as <code class=\"codespan\">&#39;-100%&#39;</code> can overlap bars that belong to different series, which is useful when making a series of bar be background.</p>\n<p>In a single coodinate system, this attribute is shared by multiple <code class=\"codespan\">&#39;bar&#39;</code> series. This attribute should be set on the last <code class=\"codespan\">&#39;bar&#39;</code> series in the coodinate system, then it will be adopted by all <code class=\"codespan\">&#39;bar&#39;</code> series in the coordinate system.</p>\n<p>For example:</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/barGrid-barGap&reset=1&edit=1\" width=\"600\" height=\"400\"></iframe>\n\n",
     "uiControl": {
       "type": "percent",
       "default": "30%"
@@ -2679,7 +2712,7 @@ window.__EC_DOC_option_series_bar = {
     }
   },
   "data.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element.</p>\n<p>It is valid only when <code class=\"codespan\">position</code> is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -3270,6 +3303,39 @@ window.__EC_DOC_option_series_bar = {
       "step": "0.01"
     }
   },
+  "data.itemStyle.decal(Object | 'none')": {
+    "desc": "<p>The style of the decal pattern. It works only if <a href=\"#aria.enabled\">aria.enabled</a> and <a href=\"#aria.decal.show\">aria.decal.show</a> are both set to be <code class=\"codespan\">true</code>.</p>\n<p>If it is set to be <code class=\"codespan\">&#39;none&#39;</code>, no decal will be used.</p>\n"
+  },
+  "data.itemStyle.decal(Object | 'none').symbol(string|string[]) = 'rect'": {
+    "desc": "<p>The symbol type of the decal. If it is in the type of <code class=\"codespan\">string[]</code>, it means the symbols are used one by one.</p>\n<p>Icon types provided by ECharts includes</p>\n<p><code class=\"codespan\">&#39;circle&#39;</code>, <code class=\"codespan\">&#39;rect&#39;</code>, <code class=\"codespan\">&#39;roundRect&#39;</code>, <code class=\"codespan\">&#39;triangle&#39;</code>, <code class=\"codespan\">&#39;diamond&#39;</code>, <code class=\"codespan\">&#39;pin&#39;</code>, <code class=\"codespan\">&#39;arrow&#39;</code>, <code class=\"codespan\">&#39;none&#39;</code></p>\n<p>It can be set to an image with <code class=\"codespan\">&#39;image://url&#39;</code> , in which URL is the link to an image, or <code class=\"codespan\">dataURI</code> of an image.</p>\n<p>An image URL example:</p>\n<pre><code>&#39;image://http://xxx.xxx.xxx/a/b.png&#39;\n</code></pre><p>A <code class=\"codespan\">dataURI</code> example:</p>\n<pre><code>&#39;image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7&#39;\n</code></pre><p>Icons can be set to arbitrary vector path via <code class=\"codespan\">&#39;path://&#39;</code> in ECharts. As compared with a raster image, vector paths prevent jagging and blurring when scaled, and have better control over changing colors. The size of the vector icon will be adapted automatically. Refer to <a href=\"http://www.w3.org/TR/SVG/paths.html#PathData\" target=\"_blank\">SVG PathData</a> for more information about the format of the path. You may export vector paths from tools like Adobe </p>\n<p>For example:</p>\n<pre><code>&#39;path://M30.9,53.2C16.8,53.2,5.3,41.7,5.3,27.6S16.8,2,30.9,2C45,2,56.4,13.5,56.4,27.6S45,53.2,30.9,53.2z M30.9,3.5C17.6,3.5,6.8,14.4,6.8,27.6c0,13.3,10.8,24.1,24.101,24.1C44.2,51.7,55,40.9,55,27.6C54.9,14.4,44.1,3.5,30.9,3.5z M36.9,35.8c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H36c0.5,0,0.9,0.4,0.9,1V35.8z M27.8,35.8 c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H27c0.5,0,0.9,0.4,0.9,1L27.8,35.8L27.8,35.8z&#39;\n</code></pre>"
+  },
+  "data.itemStyle.decal(Object | 'none').symbolSize": {
+    "desc": "<p>Range of values: <code class=\"codespan\">0</code> to <code class=\"codespan\">1</code>, representing the size of symbol relative to decal.</p>\n"
+  },
+  "data.itemStyle.decal(Object | 'none').symbolKeepAspect": {
+    "desc": "<p>Whether or not to keep the aspect ratio of the pattern.</p>\n"
+  },
+  "data.itemStyle.decal(Object | 'none').color": {
+    "desc": "<p>For the color of the decal pattern, it is recommended to use a translucent color, which can be superimposed on the color of the series itself.</p>\n"
+  },
+  "data.itemStyle.decal(Object | 'none').backgroundColor": {
+    "desc": "<p>The background color of the decal will be over the color of the series itself, under the decal pattern.</p>\n"
+  },
+  "data.itemStyle.decal(Object | 'none').dashArrayX(number | number[] | (number | number[])[]) = 5": {
+    "desc": "<p>The basic pattern of the decal pattern is an infinite loop in the form of <code class=\"codespan\">Pattern - Blank - Pattern - Blank - Pattern - Blank</code> both horizontally and vertically, respectively. By setting the length of each pattern and blank, complex pattern effects can be achieved.</p>\n<p><code class=\"codespan\">dashArrayX</code> controls the horizontal pattern pattern. When its value is of type <code class=\"codespan\">number</code> or <code class=\"codespan\">number[]</code>, it is similar to <a href=\"https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray\" target=\"_blank\">SVG stroke-dasharray</a>.</p>\n<ul>\n<li><p>If it is of type <code class=\"codespan\">number</code>, it means that the pattern and the blank space are of this value respectively. For example, <code class=\"codespan\">5</code> means the pattern with width 5 is displayed first, then 5 pixels empty, then the pattern with width 5 is displayed...</p>\n</li>\n<li><p>In the case of <code class=\"codespan\">number[]</code> type, it means that the pattern and empty space are loops of an array of values. For example: <code class=\"codespan\">[5, 10, 2, 6]</code> means the pattern is 5 pixels wide, then 10 pixels empty, then the pattern is 2 pixels wide, then 6 pixels empty, then the pattern is 5 pixels wide...</p>\n</li>\n<li><p>If of type <code class=\"codespan\">(number | number[])[]</code>, it means that each row is a loop with an array of values for the pattern and blank space. For example: <code class=\"codespan\">[10, [2, 5]]</code> means that the first line will be 10 pixels by 10 pixels and empty space, the second line will be 2 pixels by 2 pixels and empty space, and the third line will be 10 pixels by 10 pixels and empty space...</p>\n</li>\n</ul>\n<p>This interface can be better understood with the following examples.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/aria-decal&edit=1&reset=1\" width=\"700\" height=\"300\"></iframe>\n\n"
+  },
+  "data.itemStyle.decal(Object | 'none').dashArrayY(number | number[]) = 5": {
+    "desc": "<p>The basic pattern of the decal pattern is an infinite loop in the form of <code class=\"codespan\">Pattern - Blank - Pattern - Blank - Pattern - Blank</code> both horizontally and vertically, respectively. By setting the length of each pattern and blank, complex pattern effects can be achieved.</p>\n<p><code class=\"codespan\">dashArrayY</code> controls the horizontal pattern pattern. Similar to <a href=\"https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray\" target=\"_blank\">SVG stroke-dasharray</a>.</p>\n<ul>\n<li><p>If it is a <code class=\"codespan\">number</code> type, it means the pattern and the blank are each of this value. For example, <code class=\"codespan\">5</code> means that the pattern with a height of 5 is displayed first, then 5 pixels empty, then the pattern with a height of 5 is displayed...</p>\n</li>\n<li><p>In the case of <code class=\"codespan\">number[]</code> type, it means that the pattern and empty space are loops of sequential array values. For example: <code class=\"codespan\">[5, 10, 2, 6]</code> means the pattern is 5 pixels high, then 10 pixels empty, then the pattern is 2 pixels high, then 6 pixels empty, then the pattern is 5 pixels high...</p>\n</li>\n</ul>\n<p>This interface can be better understood with the following examples.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/aria-decal&edit=1&reset=1\" width=\"700\" height=\"300\"></iframe>\n\n"
+  },
+  "data.itemStyle.decal(Object | 'none').rotation": {
+    "desc": "<p>The overall rotation angle (in radians) of the pattern, in the range from `-Math.</p>\n"
+  },
+  "data.itemStyle.decal(Object | 'none').maxTileWidth": {
+    "desc": "<p>The upper limit of the width of the generated pattern before it is duplicated. Usually this value is not necessary, but you can try to increase it if you notice discontinuous seams in the pattern when it repeats.</p>\n"
+  },
+  "data.itemStyle.decal(Object | 'none').maxTileHeight": {
+    "desc": "<p>The upper limit of the height of the generated pattern before it repeats. This value is usually not necessary to set, but you can try to increase it if you find that the pattern has discontinuous seams when it is repeated.</p>\n"
+  },
   "data.emphasis": {
     "desc": "<p>Emphasis state of single data.</p>\n"
   },
@@ -3291,7 +3357,7 @@ window.__EC_DOC_option_series_bar = {
     }
   },
   "data.emphasis.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element.</p>\n<p>It is valid only when <code class=\"codespan\">position</code> is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -3882,7 +3948,7 @@ window.__EC_DOC_option_series_bar = {
     }
   },
   "data.blur.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element.</p>\n<p>It is valid only when <code class=\"codespan\">position</code> is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -4473,7 +4539,7 @@ window.__EC_DOC_option_series_bar = {
     }
   },
   "data.select.label.distance": {
-    "desc": "\n\n<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element.</p>\n<p>It is valid only when <code class=\"codespan\">position</code> is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/next/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",

@@ -55,6 +55,9 @@ window.__EC_DOC_option_timeline = {
       "default": "true"
     }
   },
+  "replaceMerge": {
+    "desc": "<p>初始化的时候，对应于当前时间的那个 <code class=\"codespan\">switchableOption</code> 会被合并（merge）到 <code class=\"codespan\">baseOption</code>，形成 <code class=\"codespan\">finalOption</code>。而每当时间变化时，对应于新时间的 <code class=\"codespan\">switchableOption</code> 会被合并（merge）到<code class=\"codespan\">finalOption</code>。</p>\n<p>有两种合并（merge）策略：</p>\n<ul>\n<li>默认使用 <code class=\"codespan\">NORMAL_MERGE</code>。</li>\n<li>如果 <a href=\"#option.html#timeline.replaceMerge\">timeline.replaceMerge</a> 被指定了，则使用 <code class=\"codespan\">REPLACE_MERGE</code>。如果要知道 <code class=\"codespan\">REPLACE_MERGE</code> 更多信息，可以参见 <a href=\"#api.html#echartsInstance.setOption\">setOption</a> 中 <code class=\"codespan\">REPLACE_MERGE</code> 一节。\n。</li>\n</ul>\n<p><br></p>\n<p><code class=\"codespan\">replaceMerge</code> 的值可以是一个组件的 <code class=\"codespan\">mainType</code>，例如 <code class=\"codespan\">replaceMerge: &#39;xAxis&#39;</code>。也可以是 <code class=\"codespan\">mainType</code> 数组，例如 <code class=\"codespan\">replaceMerge: [&#39;xAxis&#39;, &#39;series&#39;]</code>。</p>\n<p>常见需要使用 <code class=\"codespan\">replaceMerge</code> 的地方是，如果需要下一个时间刻度的 series 完全替换上一个时间刻度的 series 而不进行任何 merge ，可以设置 <code class=\"codespan\">replaceMerge: &#39;series&#39;</code>，并且两个时间刻度的 series id 不相同或者没有 id 。</p>\n<p>参见这个 <a href=\"https://echarts.apache.org/next/examples/zh/editor.html?c=doc-example/timeline-dynamic-series&amp;edit=1&amp;reset=1\" target=\"_blank\">示例</a>。</p>\n"
+  },
   "controlPosition": {
     "desc": "\n\n<p>表示『播放』按钮的位置。可选值：<code class=\"codespan\">&#39;left&#39;</code>、<code class=\"codespan\">&#39;right&#39;</code>。</p>\n",
     "uiControl": {

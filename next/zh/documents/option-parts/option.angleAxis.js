@@ -6,7 +6,7 @@ window.__EC_DOC_option_angleAxis = {
     "desc": "<p>角度轴所在的极坐标系的索引，默认使用第一个极坐标系。</p>\n"
   },
   "startAngle": {
-    "desc": "\n\n<p>起始刻度的角度，默认为 90 度，即圆心的正上方。0 度为圆心的正右方。</p>\n<p>如下示例是 startAngle 为 45 的效果：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/polar-start-angle&edit=1&reset=1\" width=\"400\" height=\"400\"><iframe />\n\n",
+    "desc": "\n\n<p>起始刻度的角度，默认为 90 度，即圆心的正上方。0 度为圆心的正右方。</p>\n<p>如下示例是 startAngle 为 45 的效果：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/polar-start-angle&edit=1&reset=1\" width=\"400\" height=\"400\"></iframe>\n\n",
     "uiControl": {
       "type": "angle",
       "default": "90",
@@ -16,7 +16,7 @@ window.__EC_DOC_option_angleAxis = {
     }
   },
   "clockwise": {
-    "desc": "\n\n<p>刻度增长是否按顺时针，默认顺时针。</p>\n<p>如下示例是 clockwise 为 <code class=\"codespan\">false</code> （逆时针）的效果：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/polar-anticlockwise&edit=1&reset=1\" width=\"400\" height=\"400\"><iframe />\n\n\n\n",
+    "desc": "\n\n<p>刻度增长是否按顺时针，默认顺时针。</p>\n<p>如下示例是 clockwise 为 <code class=\"codespan\">false</code> （逆时针）的效果：</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=doc-example/polar-anticlockwise&edit=1&reset=1\" width=\"400\" height=\"400\"></iframe>\n\n\n\n",
     "uiControl": {
       "type": "boolean",
       "default": "true"
@@ -291,7 +291,7 @@ window.__EC_DOC_option_angleAxis = {
     }
   },
   "minorTick": {
-    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v4.6.0</code> 开始支持</p>\n</blockquote>\n<p>坐标轴次刻度线相关设置。</p>\n<p>注意：次刻度线无法在类目轴（<a href=\"#angleAxis.type\">type</a>: <code class=\"codespan\">&#39;category&#39;</code>）中使用。</p>\n<p>示例：</p>\n<p>1) 函数绘图中使用次刻度线</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=line-function&edit=1&reset=1\" width=\"600\" height=\"350\"><iframe />\n\n\n<p>2) 在对数轴中使用次刻度线</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=line-log&edit=1&reset=1\" width=\"600\" height=\"350\"><iframe />\n\n"
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v4.6.0</code> 开始支持</p>\n</blockquote>\n<p>坐标轴次刻度线相关设置。</p>\n<p>注意：次刻度线无法在类目轴（<a href=\"#angleAxis.type\">type</a>: <code class=\"codespan\">&#39;category&#39;</code>）中使用。</p>\n<p>示例：</p>\n<p>1) 函数绘图中使用次刻度线</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=line-function&edit=1&reset=1\" width=\"600\" height=\"350\"></iframe>\n\n\n<p>2) 在对数轴中使用次刻度线</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/zh/view.html?c=line-log&edit=1&reset=1\" width=\"600\" height=\"350\"></iframe>\n\n"
   },
   "minorTick.show": {
     "desc": "\n\n<p>是否显示次刻度线。</p>\n",
