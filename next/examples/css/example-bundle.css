@@ -3,7 +3,12 @@
   font-size: 12px;
   line-height: 18px;
   padding: 10px;
-  height: 100%;
+  
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
 }
 
 #chart-panel {
@@ -100,14 +105,22 @@
   font-size: 12px;
   padding: 0;
   overflow-y: hidden;
-  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
 }
 
 .full-code-preview {
   font-family: 'Source Code Pro', 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
   font-size: 12px;
   line-height: 18px;
-  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
 }
 
 .object-visualizer {
@@ -259,7 +272,11 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 #option-outline {
-  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
   font-size: 13px;
   font-family: 'Source Code Pro', 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
 }
