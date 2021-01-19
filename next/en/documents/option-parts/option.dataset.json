@@ -12,22 +12,22 @@
     "desc": "<p>Whether the first row/column of <code class=\"codespan\">dataset.source</code> represents <a href=\"dataset.dimensions\" target=\"_blank\">dimension names</a>. Optional values:</p>\n<ul>\n<li><code class=\"codespan\">null/undefine</code>: means auto detect whether the first row/column is dimension names or data.</li>\n<li><code class=\"codespan\">true</code>: the first row/column is dimension names.</li>\n<li><code class=\"codespan\">false</code>: data start from the first row/column.</li>\n</ul>\n<p>Note: &quot;the first row/column&quot; means that if <a href=\"#series.seriesLayoutBy\">series.seriesLayoutBy</a> is set as <code class=\"codespan\">&#39;column&#39;</code>, pick the first row, otherwise, if it is set as <code class=\"codespan\">&#39;row&#39;</code>, pick the first column.</p>\n"
   },
   "transform": {
-    "desc": "<p>See the tutorial of <a href=\"tutorial.html#Data%20Transform\" target=\"_blank\">datat transform</a>.</p>\n"
+    "desc": "<p>See the tutorial of <a href=\"tutorial.html#Data%20Transform\" target=\"_blank\">data transform</a>.</p>\n"
   },
   "transform-filter.config": {
-    "desc": "<p>The condition of transform &quot;filter&quot;.</p>\n<p>See the tutorial of <a href=\"tutorial.html#Data%20Transform\" target=\"_blank\">datat transform</a>.</p>\n"
+    "desc": "<p>The condition of transform &quot;filter&quot;.</p>\n<p>See the tutorial of <a href=\"tutorial.html#Data%20Transform\" target=\"_blank\">data transform</a>.</p>\n"
   },
   "transform-filter.print": {
     "desc": "<p>When using data transform, we might run into the trouble that the final chart do not display correctly but we do not know where the config is wrong. There is a property <code class=\"codespan\">transform.print</code> might help in such case. (<code class=\"codespan\">transform.print</code> is only available in dev environment).</p>\n<pre><code class=\"lang-js\">option = {\n    dataset: [{\n        source: [ ... ]\n    }, {\n        transform: {\n            type: &#39;filter&#39;,\n            config: { ... }\n            // The result of this transform will be printed\n            // in dev tool via `console.log`.\n            print: true\n        }\n    }],\n    ...\n}\n</code></pre>\n"
   },
   "transform-sort.config": {
-    "desc": "<p>The condition of transform &quot;sort&quot;.</p>\n<p>See the tutorial of <a href=\"tutorial.html#Data%20Transform\" target=\"_blank\">datat transform</a>.</p>\n"
+    "desc": "<p>The condition of transform &quot;sort&quot;.</p>\n<p>See the tutorial of <a href=\"tutorial.html#Data%20Transform\" target=\"_blank\">data transform</a>.</p>\n"
   },
   "transform-sort.print": {
     "desc": "<p>When using data transform, we might run into the trouble that the final chart do not display correctly but we do not know where the config is wrong. There is a property <code class=\"codespan\">transform.print</code> might help in such case. (<code class=\"codespan\">transform.print</code> is only available in dev environment).</p>\n<pre><code class=\"lang-js\">option = {\n    dataset: [{\n        source: [ ... ]\n    }, {\n        transform: {\n            type: &#39;filter&#39;,\n            config: { ... }\n            // The result of this transform will be printed\n            // in dev tool via `console.log`.\n            print: true\n        }\n    }],\n    ...\n}\n</code></pre>\n"
   },
   "transform-xxx:xxx": {
-    "desc": "<p>Besides built-in transforms (like &#39;filter&#39;, &#39;sort&#39;), we can also use external transforms to provide more powerful functionalities.</p>\n<p>See the tutorial of <a href=\"tutorial.html#Data%20Transform\" target=\"_blank\">datat transform</a>.</p>\n"
+    "desc": "<p>Besides built-in transforms (like &#39;filter&#39;, &#39;sort&#39;), we can also use external transforms to provide more powerful functionalities.</p>\n<p>See the tutorial of <a href=\"tutorial.html#Data%20Transform\" target=\"_blank\">data transform</a>.</p>\n"
   },
   "transform-xxx:xxx.type": {
     "desc": "<p>Built-in transform has no namespace (like <code class=\"codespan\">type: &#39;filter&#39;</code>, <code class=\"codespan\">type: &#39;sort&#39;</code>).</p>\n<p>External transform has namespace (like <code class=\"codespan\">type: &#39;ecStat:regression&#39;</code>).</p>\n"
@@ -39,12 +39,12 @@
     "desc": "<p>When using data transform, we might run into the trouble that the final chart do not display correctly but we do not know where the config is wrong. There is a property <code class=\"codespan\">transform.print</code> might help in such case. (<code class=\"codespan\">transform.print</code> is only available in dev environment).</p>\n<pre><code class=\"lang-js\">option = {\n    dataset: [{\n        source: [ ... ]\n    }, {\n        transform: {\n            type: &#39;filter&#39;,\n            config: { ... }\n            // The result of this transform will be printed\n            // in dev tool via `console.log`.\n            print: true\n        }\n    }],\n    ...\n}\n</code></pre>\n"
   },
   "fromDatasetIndex": {
-    "desc": "<p>Specify the input dataset for <a href=\"#dataset.transform\">dataset.transform</a>.\nIf <a href=\"#dataset.transform\">dataset.transform</a> specified but both <code class=\"codespan\">fromDatasetIndex</code> and <code class=\"codespan\">fromDatasetId</code> are not specified, <code class=\"codespan\">fromDatasetIndex: 0</code> will be used by default.</p>\n<p>See the tutorial of <a href=\"tutorial.html#Data%20Transform\" target=\"_blank\">datat transform</a>.</p>\n"
+    "desc": "<p>Specify the input dataset for <a href=\"#dataset.transform\">dataset.transform</a>.\nIf <a href=\"#dataset.transform\">dataset.transform</a> specified but both <code class=\"codespan\">fromDatasetIndex</code> and <code class=\"codespan\">fromDatasetId</code> are not specified, <code class=\"codespan\">fromDatasetIndex: 0</code> will be used by default.</p>\n<p>See the tutorial of <a href=\"tutorial.html#Data%20Transform\" target=\"_blank\">data transform</a>.</p>\n"
   },
   "fromDatasetId": {
-    "desc": "<p>Specify the input dataset for <a href=\"#dataset.transform\">dataset.transform</a>.</p>\n<p>See the tutorial of <a href=\"tutorial.html#Data%20Transform\" target=\"_blank\">datat transform</a>.</p>\n"
+    "desc": "<p>Specify the input dataset for <a href=\"#dataset.transform\">dataset.transform</a>.</p>\n<p>See the tutorial of <a href=\"tutorial.html#Data%20Transform\" target=\"_blank\">data transform</a>.</p>\n"
   },
   "fromTransformResult": {
-    "desc": "<p>If a <a href=\"#dataset.transform\">dataset.transform</a> produces more than one result, we can use <code class=\"codespan\">fromTransformResult</code> to retrieve some certain result.</p>\n<p>In most cases, <code class=\"codespan\">fromTransformResult</code> do not need to be specified because most transforms only produce one result. If <code class=\"codespan\">fromTransformResult</code> is not specified, we use <code class=\"codespan\">fromTransformResult: 0</code> by default.</p>\n<p>See the tutorial of <a href=\"tutorial.html#Data%20Transform\" target=\"_blank\">datat transform</a>.</p>\n"
+    "desc": "<p>If a <a href=\"#dataset.transform\">dataset.transform</a> produces more than one result, we can use <code class=\"codespan\">fromTransformResult</code> to retrieve some certain result.</p>\n<p>In most cases, <code class=\"codespan\">fromTransformResult</code> do not need to be specified because most transforms only produce one result. If <code class=\"codespan\">fromTransformResult</code> is not specified, we use <code class=\"codespan\">fromTransformResult: 0</code> by default.</p>\n<p>See the tutorial of <a href=\"tutorial.html#Data%20Transform\" target=\"_blank\">data transform</a>.</p>\n"
   }
 }

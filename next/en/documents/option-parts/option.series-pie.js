@@ -540,14 +540,14 @@ window.__EC_DOC_option_series_pie = {
     }
   },
   "label.alignTo": {
-    "desc": "\n\n<p>Label aligning policy. Valid only when <code class=\"codespan\">position</code> is <code class=\"codespan\">&#39;outer&#39;</code>.</p>\n<p>Since ECharts v4.6.0, we provide <code class=\"codespan\">&#39;labelLine&#39;</code> and <code class=\"codespan\">&#39;edge&#39;</code> two extra valid <code class=\"codespan\">alignTo</code> values.</p>\n<ul>\n<li><code class=\"codespan\">&#39;none&#39;</code> (default): label lines have fixed length as <a href=\"#series-pie.labelLine.length\">labelLine.length</a> and <a href=\"#series-pie.labelLine.length2\">labelLine.length2</a>.</li>\n<li><code class=\"codespan\">&#39;labelLine&#39;</code>: aligning to the end of label lines and the length of the shortest horizontal label lines is configured by <a href=\"#series-pie.labelLine.length2\">labelLine.length2</a>.</li>\n<li><code class=\"codespan\">&#39;edge&#39;</code>: aligning to text and the distance between the edges of text and the viewport is configured by <a href=\"#series-pie.label.margin\">label.margin</a>.</li>\n</ul>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=pie-alignTo&reset=1&edit=1\" width=\"900\" height=\"250\"></iframe>\n\n",
+    "desc": "\n\n<p>Label aligning policy. Valid only when <code class=\"codespan\">position</code> is <code class=\"codespan\">&#39;outer&#39;</code>.</p>\n<p>Since ECharts v4.6.0, we provide <code class=\"codespan\">&#39;labelLine&#39;</code> and <code class=\"codespan\">&#39;edge&#39;</code> two extra valid <code class=\"codespan\">alignTo</code> values.</p>\n<ul>\n<li><code class=\"codespan\">&#39;none&#39;</code> (default): label lines have fixed length as <a href=\"#series-pie.labelLine.length\">labelLine.length</a> and <a href=\"#series-pie.labelLine.length2\">labelLine.length2</a>.</li>\n<li><code class=\"codespan\">&#39;labelLine&#39;</code>: aligning to the end of label lines and the length of the shortest horizontal label lines is configured by <a href=\"#series-pie.labelLine.length2\">labelLine.length2</a>.</li>\n<li><code class=\"codespan\">&#39;edge&#39;</code>: aligning to text and the distance between the edges of text and the viewport is configured by <a href=\"#series-pie.label.edgeDistance\">label.edgeDistance</a>.</li>\n</ul>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=pie-alignTo&reset=1&edit=1\" width=\"900\" height=\"250\"></iframe>\n\n",
     "uiControl": {
       "type": "enum",
       "options": "labelLine,edge"
     }
   },
-  "label.margin": {
-    "desc": "\n\n<p>The horizontal distance between text edges and viewport when <a href=\"#series-pie.label.position\">label.position</a> is <code class=\"codespan\">&#39;outer&#39;</code> and <a href=\"#series-pie.label.alignTo\">label.alignTo</a> is <code class=\"codespan\">&#39;edge&#39;</code>.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/pie-label-margin&edit=1&reset=1\" width=\"900\" height=\"250\"></iframe>\n\n\n<p>In most cases, you need a small <code class=\"codespan\">margin</code> value like <code class=\"codespan\">10</code> for mobile devices to make sure more text can be shown instead of being <code class=\"codespan\">...</code>. But on larger resolutions, a percentage value should be applied so that the label lines won&#39;t be too long. If your chart is used in varied resolutions, it is advised to set <a href=\"tutorial.html#Responsive%20Mobile-End\" target=\"_blank\">responsive design</a> for different resolutions.</p>\n",
+  "label.edgeDistance": {
+    "desc": "\n\n<p>The horizontal distance between text edges and viewport when <a href=\"#series-pie.label.position\">label.position</a> is <code class=\"codespan\">&#39;outer&#39;</code> and <a href=\"#series-pie.label.alignTo\">label.alignTo</a> is <code class=\"codespan\">&#39;edge&#39;</code>.</p>\n<iframe  data-src=\"https://echarts.apache.org/next/examples/en/view.html?c=doc-example/pie-label-margin&edit=1&reset=1\" width=\"900\" height=\"250\"></iframe>\n\n\n<p>In most cases, you need a small <code class=\"codespan\">edgeDistance</code> value like <code class=\"codespan\">10</code> for mobile devices to make sure more text can be shown instead of being <code class=\"codespan\">...</code>. But on larger resolutions, a percentage value should be applied so that the label lines won&#39;t be too long. If your chart is used in varied resolutions, it is advised to set <a href=\"tutorial.html#Responsive%20Mobile-End\" target=\"_blank\">responsive design</a> for different resolutions.</p>\n",
     "uiControl": {
       "type": "percent",
       "default": "20%"
@@ -7053,6 +7053,378 @@ window.__EC_DOC_option_series_pie = {
   "markLine.label.formatter": {
     "desc": "<p>Data label formatter, which supports string template and callback function. In either form, <code class=\"codespan\">\\n</code> is supported to represent a new line.</p>\n<p><strong>String template</strong></p>\n<p>Model variation includes:</p>\n<ul>\n<li><code class=\"codespan\">{a}</code>: series name.</li>\n<li><code class=\"codespan\">{b}</code>: the name of a data item.</li>\n<li><code class=\"codespan\">{c}</code>: the value of a data item.</li>\n<li><code class=\"codespan\">{d}</code>: the percent.</li>\n<li><code class=\"codespan\">{@xxx}: the value of a dimension named</code>&#39;xxx&#39;<code class=\"codespan\">, for example,</code>{@product}<code class=\"codespan\">refers the value of</code>&#39;product&#39;` dimension.</li>\n<li><code class=\"codespan\">{@[n]}: the value of a dimension at the index of</code>n<code class=\"codespan\">, for example,</code>{@[3]}` refers the value at dimensions[3].</li>\n</ul>\n<p><strong>example: </strong></p>\n<pre><code class=\"lang-js\">formatter: &#39;{b}: {d}&#39;\n</code></pre>\n<p><strong>Callback function</strong></p>\n<p>Callback function is in form of:</p>\n<pre><code class=\"lang-js\">(params: Object|Array) =&gt; string\n</code></pre>\n<p>where <code class=\"codespan\">params</code> is the single dataset needed by formatter, which is formed as:</p>\n<pre><code class=\"lang-js\">{\n    componentType: &#39;series&#39;,\n    // Series type\n    seriesType: string,\n    // Series index in option.series\n    seriesIndex: number,\n    // Series name\n    seriesName: string,\n    // Data name, or category name\n    name: string,\n    // Data index in input data array\n    dataIndex: number,\n    // Original data as input\n    data: Object,\n    // Value of data. In most series it is the same as data.\n    // But in some series it is some part of the data (e.g., in map, radar)\n    value: number|Array|Object,\n    // encoding info of coordinate system\n    // Key: coord, like (&#39;x&#39; &#39;y&#39; &#39;radius&#39; &#39;angle&#39;)\n    // value: Must be an array, not null/undefined. Contain dimension indices, like:\n    // {\n    //     x: [2] // values on dimension index 2 are mapped to x axis.\n    //     y: [0] // values on dimension index 0 are mapped to y axis.\n    // }\n    encode: Object,\n    // dimension names list\n    dimensionNames: Array&lt;String&gt;,\n    // data dimension index, for example 0 or 1 or 2 ...\n    // Only work in `radar` series.\n    dimensionIndex: number,\n    // Color of data\n    color: string,\n\n\n\n}\n</code></pre>\n<p>Note: the usage of encode and dimensionNames can be:</p>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    source: [\n        [&#39;Matcha Latte&#39;, 43.3, 85.8, 93.7],\n        [&#39;Milk Tea&#39;, 83.1, 73.4, 55.1],\n        [&#39;Cheese Cocoa&#39;, 86.4, 65.2, 82.5],\n        [&#39;Walnut Brownie&#39;, 72.4, 53.9, 39.1]\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.encode.y[0]]\n</code></pre>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    dimensions: [&#39;product&#39;, &#39;2015&#39;, &#39;2016&#39;, &#39;2017&#39;],\n    source: [\n        {product: &#39;Matcha Latte&#39;, &#39;2015&#39;: 43.3, &#39;2016&#39;: 85.8, &#39;2017&#39;: 93.7},\n        {product: &#39;Milk Tea&#39;, &#39;2015&#39;: 83.1, &#39;2016&#39;: 73.4, &#39;2017&#39;: 55.1},\n        {product: &#39;Cheese Cocoa&#39;, &#39;2015&#39;: 86.4, &#39;2016&#39;: 65.2, &#39;2017&#39;: 82.5},\n        {product: &#39;Walnut Brownie&#39;, &#39;2015&#39;: 72.4, &#39;2016&#39;: 53.9, &#39;2017&#39;: 39.1}\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.dimensionNames[params.encode.y[0]]]\n</code></pre>\n"
   },
+  "markLine.label.color": {
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "null"
+    }
+  },
+  "markLine.label.fontStyle": {
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,italic,oblique"
+    }
+  },
+  "markLine.label.fontWeight": {
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,bold,bolder,lighter"
+    }
+  },
+  "markLine.label.fontFamily": {
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "sans-serif",
+      "options": "sans-serif,serif,monospace,Arial,Courier New"
+    }
+  },
+  "markLine.label.fontSize": {
+    "desc": "\n\n<p> font size.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "12",
+      "min": "1",
+      "step": "1"
+    }
+  },
+  "markLine.label.lineHeight": {
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "1",
+      "default": "12"
+    }
+  },
+  "markLine.label.backgroundColor": {
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "markLine.label.borderColor": {
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "markLine.label.borderWidth": {
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.label.borderRadius": {
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "LT,RT, RB, LB"
+    }
+  },
+  "markLine.label.padding": {
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "T,R,B,L"
+    }
+  },
+  "markLine.label.shadowColor": {
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "markLine.label.shadowBlur": {
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.label.shadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.label.shadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.label.width": {
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
+  },
+  "markLine.label.height": {
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
+  },
+  "markLine.label.textBorderColor": {
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "markLine.label.textBorderWidth": {
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.label.textShadowColor": {
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#000"
+    }
+  },
+  "markLine.label.textShadowBlur": {
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.label.textShadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.label.textShadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.label.overflow": {
+    "desc": "\n\n<p>Determine how to display the text when it&#39;s overflow. Available when <code class=\"codespan\">width</code> is set.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the text and trailing with <code class=\"codespan\">ellipsis</code>.</li>\n<li><code class=\"codespan\">&#39;break&#39;</code> Break by word</li>\n<li><code class=\"codespan\">&#39;breakAll&#39;</code> Break by character.</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "truncate,break,breakAll"
+    }
+  },
+  "markLine.label.ellipsis": {
+    "desc": "<p>Ellipsis to be displayed when <code class=\"codespan\">overflow</code> is set to <code class=\"codespan\">truncate</code>.</p>\n"
+  },
+  "markLine.label.lineOverflow": {
+    "desc": "<p>Determine how to display the text when it&#39;s overflow on height.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the overflow lines.</li>\n</ul>\n"
+  },
+  "markLine.label.rich": {
+    "desc": "<p>&quot;Rich text styles&quot; can be defined in this <code class=\"codespan\">rich</code> property. For example:</p>\n<pre><code class=\"lang-js\">label: {\n    // Styles defined in &#39;rich&#39; can be applied to some fragments\n    // of text by adding some markers to those fragment, like\n    // `{styleName|text content text content}`.\n    // `&#39;\\n&#39;` is the newline character.\n    formatter: [\n        &#39;{a|Style &quot;a&quot; is applied to this snippet}&#39;\n        &#39;{b|Style &quot;b&quot; is applied to this snippet}This snippet use default style{x|use style &quot;x&quot;}&#39;\n    ].join(&#39;\\n&#39;),\n\n    rich: {\n        a: {\n            color: &#39;red&#39;,\n            lineHeight: 10\n        },\n        b: {\n            backgroundColor: {\n                image: &#39;xxx/xxx.jpg&#39;\n            },\n            height: 40\n        },\n        x: {\n            fontSize: 18,\n            fontFamily: &#39;Microsoft YaHei&#39;,\n            borderColor: &#39;#449933&#39;,\n            borderRadius: 4\n        },\n        ...\n    }\n}\n</code></pre>\n<p>For more details, see <a href=\"tutorial.html#Rich%20Text\" target=\"_blank\">Rich Text</a> please.</p>\n"
+  },
+  "markLine.label.rich.<style_name>.color": {
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "null"
+    }
+  },
+  "markLine.label.rich.<style_name>.fontStyle": {
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,italic,oblique"
+    }
+  },
+  "markLine.label.rich.<style_name>.fontWeight": {
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,bold,bolder,lighter"
+    }
+  },
+  "markLine.label.rich.<style_name>.fontFamily": {
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "sans-serif",
+      "options": "sans-serif,serif,monospace,Arial,Courier New"
+    }
+  },
+  "markLine.label.rich.<style_name>.fontSize": {
+    "desc": "\n\n<p> font size.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "12",
+      "min": "1",
+      "step": "1"
+    }
+  },
+  "markLine.label.rich.<style_name>.align": {
+    "desc": "\n\n<p>Horizontal alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;left&#39;</code></li>\n<li><code class=\"codespan\">&#39;center&#39;</code></li>\n<li><code class=\"codespan\">&#39;right&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">align</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">align</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    align: right,\n    rich: {\n        a: {\n            // `align` is not set, then it will be right\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "left,center,right"
+    }
+  },
+  "markLine.label.rich.<style_name>.verticalAlign": {
+    "desc": "\n\n<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "top,middle,bottom"
+    }
+  },
+  "markLine.label.rich.<style_name>.lineHeight": {
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "1",
+      "default": "12"
+    }
+  },
+  "markLine.label.rich.<style_name>.backgroundColor": {
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "markLine.label.rich.<style_name>.borderColor": {
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "markLine.label.rich.<style_name>.borderWidth": {
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.label.rich.<style_name>.borderRadius": {
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "LT,RT, RB, LB"
+    }
+  },
+  "markLine.label.rich.<style_name>.padding": {
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "T,R,B,L"
+    }
+  },
+  "markLine.label.rich.<style_name>.shadowColor": {
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "markLine.label.rich.<style_name>.shadowBlur": {
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.label.rich.<style_name>.shadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.label.rich.<style_name>.shadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.label.rich.<style_name>.width": {
+    "desc": "<p>Width of the text block. It is the width of the text by default. In most cases, there is no need to specify it. You may want to use it in some cases like make simple table or using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p><code class=\"codespan\">width</code> can also be percent string, like <code class=\"codespan\">&#39;100%&#39;</code>, which represents the percent of <code class=\"codespan\">contentWidth</code> (that is, the width without <code class=\"codespan\">padding</code>) of its container box. It is based on <code class=\"codespan\">contentWidth</code> because that each text fragment is layout based on the <code class=\"codespan\">content box</code>, where it makes no sense that calculating width based on <code class=\"codespan\">outerWith</code> in prectice.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+  },
+  "markLine.label.rich.<style_name>.height": {
+    "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+  },
+  "markLine.label.rich.<style_name>.textBorderColor": {
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "markLine.label.rich.<style_name>.textBorderWidth": {
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.label.rich.<style_name>.textShadowColor": {
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#000"
+    }
+  },
+  "markLine.label.rich.<style_name>.textShadowBlur": {
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.label.rich.<style_name>.textShadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.label.rich.<style_name>.textShadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
   "markLine.lineStyle": {
     "desc": "<p>Mark line style.</p>\n"
   },
@@ -7146,6 +7518,378 @@ window.__EC_DOC_option_series_pie = {
   "markLine.emphasis.label.formatter": {
     "desc": "<p>Data label formatter, which supports string template and callback function. In either form, <code class=\"codespan\">\\n</code> is supported to represent a new line.</p>\n<p><strong>String template</strong></p>\n<p>Model variation includes:</p>\n<ul>\n<li><code class=\"codespan\">{a}</code>: series name.</li>\n<li><code class=\"codespan\">{b}</code>: the name of a data item.</li>\n<li><code class=\"codespan\">{c}</code>: the value of a data item.</li>\n<li><code class=\"codespan\">{d}</code>: the percent.</li>\n<li><code class=\"codespan\">{@xxx}: the value of a dimension named</code>&#39;xxx&#39;<code class=\"codespan\">, for example,</code>{@product}<code class=\"codespan\">refers the value of</code>&#39;product&#39;` dimension.</li>\n<li><code class=\"codespan\">{@[n]}: the value of a dimension at the index of</code>n<code class=\"codespan\">, for example,</code>{@[3]}` refers the value at dimensions[3].</li>\n</ul>\n<p><strong>example: </strong></p>\n<pre><code class=\"lang-js\">formatter: &#39;{b}: {d}&#39;\n</code></pre>\n<p><strong>Callback function</strong></p>\n<p>Callback function is in form of:</p>\n<pre><code class=\"lang-js\">(params: Object|Array) =&gt; string\n</code></pre>\n<p>where <code class=\"codespan\">params</code> is the single dataset needed by formatter, which is formed as:</p>\n<pre><code class=\"lang-js\">{\n    componentType: &#39;series&#39;,\n    // Series type\n    seriesType: string,\n    // Series index in option.series\n    seriesIndex: number,\n    // Series name\n    seriesName: string,\n    // Data name, or category name\n    name: string,\n    // Data index in input data array\n    dataIndex: number,\n    // Original data as input\n    data: Object,\n    // Value of data. In most series it is the same as data.\n    // But in some series it is some part of the data (e.g., in map, radar)\n    value: number|Array|Object,\n    // encoding info of coordinate system\n    // Key: coord, like (&#39;x&#39; &#39;y&#39; &#39;radius&#39; &#39;angle&#39;)\n    // value: Must be an array, not null/undefined. Contain dimension indices, like:\n    // {\n    //     x: [2] // values on dimension index 2 are mapped to x axis.\n    //     y: [0] // values on dimension index 0 are mapped to y axis.\n    // }\n    encode: Object,\n    // dimension names list\n    dimensionNames: Array&lt;String&gt;,\n    // data dimension index, for example 0 or 1 or 2 ...\n    // Only work in `radar` series.\n    dimensionIndex: number,\n    // Color of data\n    color: string,\n\n\n\n}\n</code></pre>\n<p>Note: the usage of encode and dimensionNames can be:</p>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    source: [\n        [&#39;Matcha Latte&#39;, 43.3, 85.8, 93.7],\n        [&#39;Milk Tea&#39;, 83.1, 73.4, 55.1],\n        [&#39;Cheese Cocoa&#39;, 86.4, 65.2, 82.5],\n        [&#39;Walnut Brownie&#39;, 72.4, 53.9, 39.1]\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.encode.y[0]]\n</code></pre>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    dimensions: [&#39;product&#39;, &#39;2015&#39;, &#39;2016&#39;, &#39;2017&#39;],\n    source: [\n        {product: &#39;Matcha Latte&#39;, &#39;2015&#39;: 43.3, &#39;2016&#39;: 85.8, &#39;2017&#39;: 93.7},\n        {product: &#39;Milk Tea&#39;, &#39;2015&#39;: 83.1, &#39;2016&#39;: 73.4, &#39;2017&#39;: 55.1},\n        {product: &#39;Cheese Cocoa&#39;, &#39;2015&#39;: 86.4, &#39;2016&#39;: 65.2, &#39;2017&#39;: 82.5},\n        {product: &#39;Walnut Brownie&#39;, &#39;2015&#39;: 72.4, &#39;2016&#39;: 53.9, &#39;2017&#39;: 39.1}\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.dimensionNames[params.encode.y[0]]]\n</code></pre>\n"
   },
+  "markLine.emphasis.label.color": {
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "null"
+    }
+  },
+  "markLine.emphasis.label.fontStyle": {
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,italic,oblique"
+    }
+  },
+  "markLine.emphasis.label.fontWeight": {
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,bold,bolder,lighter"
+    }
+  },
+  "markLine.emphasis.label.fontFamily": {
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "sans-serif",
+      "options": "sans-serif,serif,monospace,Arial,Courier New"
+    }
+  },
+  "markLine.emphasis.label.fontSize": {
+    "desc": "\n\n<p> font size.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "12",
+      "min": "1",
+      "step": "1"
+    }
+  },
+  "markLine.emphasis.label.lineHeight": {
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "1",
+      "default": "12"
+    }
+  },
+  "markLine.emphasis.label.backgroundColor": {
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "markLine.emphasis.label.borderColor": {
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "markLine.emphasis.label.borderWidth": {
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.emphasis.label.borderRadius": {
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "LT,RT, RB, LB"
+    }
+  },
+  "markLine.emphasis.label.padding": {
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "T,R,B,L"
+    }
+  },
+  "markLine.emphasis.label.shadowColor": {
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "markLine.emphasis.label.shadowBlur": {
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.emphasis.label.shadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.emphasis.label.shadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.emphasis.label.width": {
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
+  },
+  "markLine.emphasis.label.height": {
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
+  },
+  "markLine.emphasis.label.textBorderColor": {
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "markLine.emphasis.label.textBorderWidth": {
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.emphasis.label.textShadowColor": {
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#000"
+    }
+  },
+  "markLine.emphasis.label.textShadowBlur": {
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.emphasis.label.textShadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.emphasis.label.textShadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.emphasis.label.overflow": {
+    "desc": "\n\n<p>Determine how to display the text when it&#39;s overflow. Available when <code class=\"codespan\">width</code> is set.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the text and trailing with <code class=\"codespan\">ellipsis</code>.</li>\n<li><code class=\"codespan\">&#39;break&#39;</code> Break by word</li>\n<li><code class=\"codespan\">&#39;breakAll&#39;</code> Break by character.</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "truncate,break,breakAll"
+    }
+  },
+  "markLine.emphasis.label.ellipsis": {
+    "desc": "<p>Ellipsis to be displayed when <code class=\"codespan\">overflow</code> is set to <code class=\"codespan\">truncate</code>.</p>\n"
+  },
+  "markLine.emphasis.label.lineOverflow": {
+    "desc": "<p>Determine how to display the text when it&#39;s overflow on height.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the overflow lines.</li>\n</ul>\n"
+  },
+  "markLine.emphasis.label.rich": {
+    "desc": "<p>&quot;Rich text styles&quot; can be defined in this <code class=\"codespan\">rich</code> property. For example:</p>\n<pre><code class=\"lang-js\">label: {\n    // Styles defined in &#39;rich&#39; can be applied to some fragments\n    // of text by adding some markers to those fragment, like\n    // `{styleName|text content text content}`.\n    // `&#39;\\n&#39;` is the newline character.\n    formatter: [\n        &#39;{a|Style &quot;a&quot; is applied to this snippet}&#39;\n        &#39;{b|Style &quot;b&quot; is applied to this snippet}This snippet use default style{x|use style &quot;x&quot;}&#39;\n    ].join(&#39;\\n&#39;),\n\n    rich: {\n        a: {\n            color: &#39;red&#39;,\n            lineHeight: 10\n        },\n        b: {\n            backgroundColor: {\n                image: &#39;xxx/xxx.jpg&#39;\n            },\n            height: 40\n        },\n        x: {\n            fontSize: 18,\n            fontFamily: &#39;Microsoft YaHei&#39;,\n            borderColor: &#39;#449933&#39;,\n            borderRadius: 4\n        },\n        ...\n    }\n}\n</code></pre>\n<p>For more details, see <a href=\"tutorial.html#Rich%20Text\" target=\"_blank\">Rich Text</a> please.</p>\n"
+  },
+  "markLine.emphasis.label.rich.<style_name>.color": {
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "null"
+    }
+  },
+  "markLine.emphasis.label.rich.<style_name>.fontStyle": {
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,italic,oblique"
+    }
+  },
+  "markLine.emphasis.label.rich.<style_name>.fontWeight": {
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,bold,bolder,lighter"
+    }
+  },
+  "markLine.emphasis.label.rich.<style_name>.fontFamily": {
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "sans-serif",
+      "options": "sans-serif,serif,monospace,Arial,Courier New"
+    }
+  },
+  "markLine.emphasis.label.rich.<style_name>.fontSize": {
+    "desc": "\n\n<p> font size.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "12",
+      "min": "1",
+      "step": "1"
+    }
+  },
+  "markLine.emphasis.label.rich.<style_name>.align": {
+    "desc": "\n\n<p>Horizontal alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;left&#39;</code></li>\n<li><code class=\"codespan\">&#39;center&#39;</code></li>\n<li><code class=\"codespan\">&#39;right&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">align</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">align</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    align: right,\n    rich: {\n        a: {\n            // `align` is not set, then it will be right\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "left,center,right"
+    }
+  },
+  "markLine.emphasis.label.rich.<style_name>.verticalAlign": {
+    "desc": "\n\n<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "top,middle,bottom"
+    }
+  },
+  "markLine.emphasis.label.rich.<style_name>.lineHeight": {
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "1",
+      "default": "12"
+    }
+  },
+  "markLine.emphasis.label.rich.<style_name>.backgroundColor": {
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "markLine.emphasis.label.rich.<style_name>.borderColor": {
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "markLine.emphasis.label.rich.<style_name>.borderWidth": {
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.emphasis.label.rich.<style_name>.borderRadius": {
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "LT,RT, RB, LB"
+    }
+  },
+  "markLine.emphasis.label.rich.<style_name>.padding": {
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "T,R,B,L"
+    }
+  },
+  "markLine.emphasis.label.rich.<style_name>.shadowColor": {
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "markLine.emphasis.label.rich.<style_name>.shadowBlur": {
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.emphasis.label.rich.<style_name>.shadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.emphasis.label.rich.<style_name>.shadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.emphasis.label.rich.<style_name>.width": {
+    "desc": "<p>Width of the text block. It is the width of the text by default. In most cases, there is no need to specify it. You may want to use it in some cases like make simple table or using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p><code class=\"codespan\">width</code> can also be percent string, like <code class=\"codespan\">&#39;100%&#39;</code>, which represents the percent of <code class=\"codespan\">contentWidth</code> (that is, the width without <code class=\"codespan\">padding</code>) of its container box. It is based on <code class=\"codespan\">contentWidth</code> because that each text fragment is layout based on the <code class=\"codespan\">content box</code>, where it makes no sense that calculating width based on <code class=\"codespan\">outerWith</code> in prectice.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+  },
+  "markLine.emphasis.label.rich.<style_name>.height": {
+    "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+  },
+  "markLine.emphasis.label.rich.<style_name>.textBorderColor": {
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "markLine.emphasis.label.rich.<style_name>.textBorderWidth": {
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.emphasis.label.rich.<style_name>.textShadowColor": {
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#000"
+    }
+  },
+  "markLine.emphasis.label.rich.<style_name>.textShadowBlur": {
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.emphasis.label.rich.<style_name>.textShadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.emphasis.label.rich.<style_name>.textShadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
   "markLine.emphasis.lineStyle.color": {
     "desc": "\n\n<p>Line color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
     "uiControl": {
@@ -7225,6 +7969,378 @@ window.__EC_DOC_option_series_pie = {
   },
   "markLine.blur.label.formatter": {
     "desc": "<p>Data label formatter, which supports string template and callback function. In either form, <code class=\"codespan\">\\n</code> is supported to represent a new line.</p>\n<p><strong>String template</strong></p>\n<p>Model variation includes:</p>\n<ul>\n<li><code class=\"codespan\">{a}</code>: series name.</li>\n<li><code class=\"codespan\">{b}</code>: the name of a data item.</li>\n<li><code class=\"codespan\">{c}</code>: the value of a data item.</li>\n<li><code class=\"codespan\">{d}</code>: the percent.</li>\n<li><code class=\"codespan\">{@xxx}: the value of a dimension named</code>&#39;xxx&#39;<code class=\"codespan\">, for example,</code>{@product}<code class=\"codespan\">refers the value of</code>&#39;product&#39;` dimension.</li>\n<li><code class=\"codespan\">{@[n]}: the value of a dimension at the index of</code>n<code class=\"codespan\">, for example,</code>{@[3]}` refers the value at dimensions[3].</li>\n</ul>\n<p><strong>example: </strong></p>\n<pre><code class=\"lang-js\">formatter: &#39;{b}: {d}&#39;\n</code></pre>\n<p><strong>Callback function</strong></p>\n<p>Callback function is in form of:</p>\n<pre><code class=\"lang-js\">(params: Object|Array) =&gt; string\n</code></pre>\n<p>where <code class=\"codespan\">params</code> is the single dataset needed by formatter, which is formed as:</p>\n<pre><code class=\"lang-js\">{\n    componentType: &#39;series&#39;,\n    // Series type\n    seriesType: string,\n    // Series index in option.series\n    seriesIndex: number,\n    // Series name\n    seriesName: string,\n    // Data name, or category name\n    name: string,\n    // Data index in input data array\n    dataIndex: number,\n    // Original data as input\n    data: Object,\n    // Value of data. In most series it is the same as data.\n    // But in some series it is some part of the data (e.g., in map, radar)\n    value: number|Array|Object,\n    // encoding info of coordinate system\n    // Key: coord, like (&#39;x&#39; &#39;y&#39; &#39;radius&#39; &#39;angle&#39;)\n    // value: Must be an array, not null/undefined. Contain dimension indices, like:\n    // {\n    //     x: [2] // values on dimension index 2 are mapped to x axis.\n    //     y: [0] // values on dimension index 0 are mapped to y axis.\n    // }\n    encode: Object,\n    // dimension names list\n    dimensionNames: Array&lt;String&gt;,\n    // data dimension index, for example 0 or 1 or 2 ...\n    // Only work in `radar` series.\n    dimensionIndex: number,\n    // Color of data\n    color: string,\n\n\n\n}\n</code></pre>\n<p>Note: the usage of encode and dimensionNames can be:</p>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    source: [\n        [&#39;Matcha Latte&#39;, 43.3, 85.8, 93.7],\n        [&#39;Milk Tea&#39;, 83.1, 73.4, 55.1],\n        [&#39;Cheese Cocoa&#39;, 86.4, 65.2, 82.5],\n        [&#39;Walnut Brownie&#39;, 72.4, 53.9, 39.1]\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.encode.y[0]]\n</code></pre>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    dimensions: [&#39;product&#39;, &#39;2015&#39;, &#39;2016&#39;, &#39;2017&#39;],\n    source: [\n        {product: &#39;Matcha Latte&#39;, &#39;2015&#39;: 43.3, &#39;2016&#39;: 85.8, &#39;2017&#39;: 93.7},\n        {product: &#39;Milk Tea&#39;, &#39;2015&#39;: 83.1, &#39;2016&#39;: 73.4, &#39;2017&#39;: 55.1},\n        {product: &#39;Cheese Cocoa&#39;, &#39;2015&#39;: 86.4, &#39;2016&#39;: 65.2, &#39;2017&#39;: 82.5},\n        {product: &#39;Walnut Brownie&#39;, &#39;2015&#39;: 72.4, &#39;2016&#39;: 53.9, &#39;2017&#39;: 39.1}\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.dimensionNames[params.encode.y[0]]]\n</code></pre>\n"
+  },
+  "markLine.blur.label.color": {
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "null"
+    }
+  },
+  "markLine.blur.label.fontStyle": {
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,italic,oblique"
+    }
+  },
+  "markLine.blur.label.fontWeight": {
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,bold,bolder,lighter"
+    }
+  },
+  "markLine.blur.label.fontFamily": {
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "sans-serif",
+      "options": "sans-serif,serif,monospace,Arial,Courier New"
+    }
+  },
+  "markLine.blur.label.fontSize": {
+    "desc": "\n\n<p> font size.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "12",
+      "min": "1",
+      "step": "1"
+    }
+  },
+  "markLine.blur.label.lineHeight": {
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "1",
+      "default": "12"
+    }
+  },
+  "markLine.blur.label.backgroundColor": {
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "markLine.blur.label.borderColor": {
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "markLine.blur.label.borderWidth": {
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.blur.label.borderRadius": {
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "LT,RT, RB, LB"
+    }
+  },
+  "markLine.blur.label.padding": {
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "T,R,B,L"
+    }
+  },
+  "markLine.blur.label.shadowColor": {
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "markLine.blur.label.shadowBlur": {
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.blur.label.shadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.blur.label.shadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.blur.label.width": {
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
+  },
+  "markLine.blur.label.height": {
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
+  },
+  "markLine.blur.label.textBorderColor": {
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "markLine.blur.label.textBorderWidth": {
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.blur.label.textShadowColor": {
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#000"
+    }
+  },
+  "markLine.blur.label.textShadowBlur": {
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.blur.label.textShadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.blur.label.textShadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.blur.label.overflow": {
+    "desc": "\n\n<p>Determine how to display the text when it&#39;s overflow. Available when <code class=\"codespan\">width</code> is set.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the text and trailing with <code class=\"codespan\">ellipsis</code>.</li>\n<li><code class=\"codespan\">&#39;break&#39;</code> Break by word</li>\n<li><code class=\"codespan\">&#39;breakAll&#39;</code> Break by character.</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "truncate,break,breakAll"
+    }
+  },
+  "markLine.blur.label.ellipsis": {
+    "desc": "<p>Ellipsis to be displayed when <code class=\"codespan\">overflow</code> is set to <code class=\"codespan\">truncate</code>.</p>\n"
+  },
+  "markLine.blur.label.lineOverflow": {
+    "desc": "<p>Determine how to display the text when it&#39;s overflow on height.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the overflow lines.</li>\n</ul>\n"
+  },
+  "markLine.blur.label.rich": {
+    "desc": "<p>&quot;Rich text styles&quot; can be defined in this <code class=\"codespan\">rich</code> property. For example:</p>\n<pre><code class=\"lang-js\">label: {\n    // Styles defined in &#39;rich&#39; can be applied to some fragments\n    // of text by adding some markers to those fragment, like\n    // `{styleName|text content text content}`.\n    // `&#39;\\n&#39;` is the newline character.\n    formatter: [\n        &#39;{a|Style &quot;a&quot; is applied to this snippet}&#39;\n        &#39;{b|Style &quot;b&quot; is applied to this snippet}This snippet use default style{x|use style &quot;x&quot;}&#39;\n    ].join(&#39;\\n&#39;),\n\n    rich: {\n        a: {\n            color: &#39;red&#39;,\n            lineHeight: 10\n        },\n        b: {\n            backgroundColor: {\n                image: &#39;xxx/xxx.jpg&#39;\n            },\n            height: 40\n        },\n        x: {\n            fontSize: 18,\n            fontFamily: &#39;Microsoft YaHei&#39;,\n            borderColor: &#39;#449933&#39;,\n            borderRadius: 4\n        },\n        ...\n    }\n}\n</code></pre>\n<p>For more details, see <a href=\"tutorial.html#Rich%20Text\" target=\"_blank\">Rich Text</a> please.</p>\n"
+  },
+  "markLine.blur.label.rich.<style_name>.color": {
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "null"
+    }
+  },
+  "markLine.blur.label.rich.<style_name>.fontStyle": {
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,italic,oblique"
+    }
+  },
+  "markLine.blur.label.rich.<style_name>.fontWeight": {
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,bold,bolder,lighter"
+    }
+  },
+  "markLine.blur.label.rich.<style_name>.fontFamily": {
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "sans-serif",
+      "options": "sans-serif,serif,monospace,Arial,Courier New"
+    }
+  },
+  "markLine.blur.label.rich.<style_name>.fontSize": {
+    "desc": "\n\n<p> font size.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "12",
+      "min": "1",
+      "step": "1"
+    }
+  },
+  "markLine.blur.label.rich.<style_name>.align": {
+    "desc": "\n\n<p>Horizontal alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;left&#39;</code></li>\n<li><code class=\"codespan\">&#39;center&#39;</code></li>\n<li><code class=\"codespan\">&#39;right&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">align</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">align</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    align: right,\n    rich: {\n        a: {\n            // `align` is not set, then it will be right\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "left,center,right"
+    }
+  },
+  "markLine.blur.label.rich.<style_name>.verticalAlign": {
+    "desc": "\n\n<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "top,middle,bottom"
+    }
+  },
+  "markLine.blur.label.rich.<style_name>.lineHeight": {
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "1",
+      "default": "12"
+    }
+  },
+  "markLine.blur.label.rich.<style_name>.backgroundColor": {
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "markLine.blur.label.rich.<style_name>.borderColor": {
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "markLine.blur.label.rich.<style_name>.borderWidth": {
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.blur.label.rich.<style_name>.borderRadius": {
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "LT,RT, RB, LB"
+    }
+  },
+  "markLine.blur.label.rich.<style_name>.padding": {
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "T,R,B,L"
+    }
+  },
+  "markLine.blur.label.rich.<style_name>.shadowColor": {
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "markLine.blur.label.rich.<style_name>.shadowBlur": {
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.blur.label.rich.<style_name>.shadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.blur.label.rich.<style_name>.shadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.blur.label.rich.<style_name>.width": {
+    "desc": "<p>Width of the text block. It is the width of the text by default. In most cases, there is no need to specify it. You may want to use it in some cases like make simple table or using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p><code class=\"codespan\">width</code> can also be percent string, like <code class=\"codespan\">&#39;100%&#39;</code>, which represents the percent of <code class=\"codespan\">contentWidth</code> (that is, the width without <code class=\"codespan\">padding</code>) of its container box. It is based on <code class=\"codespan\">contentWidth</code> because that each text fragment is layout based on the <code class=\"codespan\">content box</code>, where it makes no sense that calculating width based on <code class=\"codespan\">outerWith</code> in prectice.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+  },
+  "markLine.blur.label.rich.<style_name>.height": {
+    "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+  },
+  "markLine.blur.label.rich.<style_name>.textBorderColor": {
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "markLine.blur.label.rich.<style_name>.textBorderWidth": {
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.blur.label.rich.<style_name>.textShadowColor": {
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#000"
+    }
+  },
+  "markLine.blur.label.rich.<style_name>.textShadowBlur": {
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.blur.label.rich.<style_name>.textShadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.blur.label.rich.<style_name>.textShadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
   },
   "markLine.blur.lineStyle.color": {
     "desc": "\n\n<p>Line color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
@@ -7448,6 +8564,378 @@ window.__EC_DOC_option_series_pie = {
   "markLine.data.0.label.formatter": {
     "desc": "<p>Data label formatter, which supports string template and callback function. In either form, <code class=\"codespan\">\\n</code> is supported to represent a new line.</p>\n<p><strong>String template</strong></p>\n<p>Model variation includes:</p>\n<ul>\n<li><code class=\"codespan\">{a}</code>: series name.</li>\n<li><code class=\"codespan\">{b}</code>: the name of a data item.</li>\n<li><code class=\"codespan\">{c}</code>: the value of a data item.</li>\n<li><code class=\"codespan\">{d}</code>: the percent.</li>\n<li><code class=\"codespan\">{@xxx}: the value of a dimension named</code>&#39;xxx&#39;<code class=\"codespan\">, for example,</code>{@product}<code class=\"codespan\">refers the value of</code>&#39;product&#39;` dimension.</li>\n<li><code class=\"codespan\">{@[n]}: the value of a dimension at the index of</code>n<code class=\"codespan\">, for example,</code>{@[3]}` refers the value at dimensions[3].</li>\n</ul>\n<p><strong>example: </strong></p>\n<pre><code class=\"lang-js\">formatter: &#39;{b}: {d}&#39;\n</code></pre>\n<p><strong>Callback function</strong></p>\n<p>Callback function is in form of:</p>\n<pre><code class=\"lang-js\">(params: Object|Array) =&gt; string\n</code></pre>\n<p>where <code class=\"codespan\">params</code> is the single dataset needed by formatter, which is formed as:</p>\n<pre><code class=\"lang-js\">{\n    componentType: &#39;series&#39;,\n    // Series type\n    seriesType: string,\n    // Series index in option.series\n    seriesIndex: number,\n    // Series name\n    seriesName: string,\n    // Data name, or category name\n    name: string,\n    // Data index in input data array\n    dataIndex: number,\n    // Original data as input\n    data: Object,\n    // Value of data. In most series it is the same as data.\n    // But in some series it is some part of the data (e.g., in map, radar)\n    value: number|Array|Object,\n    // encoding info of coordinate system\n    // Key: coord, like (&#39;x&#39; &#39;y&#39; &#39;radius&#39; &#39;angle&#39;)\n    // value: Must be an array, not null/undefined. Contain dimension indices, like:\n    // {\n    //     x: [2] // values on dimension index 2 are mapped to x axis.\n    //     y: [0] // values on dimension index 0 are mapped to y axis.\n    // }\n    encode: Object,\n    // dimension names list\n    dimensionNames: Array&lt;String&gt;,\n    // data dimension index, for example 0 or 1 or 2 ...\n    // Only work in `radar` series.\n    dimensionIndex: number,\n    // Color of data\n    color: string,\n\n\n\n}\n</code></pre>\n<p>Note: the usage of encode and dimensionNames can be:</p>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    source: [\n        [&#39;Matcha Latte&#39;, 43.3, 85.8, 93.7],\n        [&#39;Milk Tea&#39;, 83.1, 73.4, 55.1],\n        [&#39;Cheese Cocoa&#39;, 86.4, 65.2, 82.5],\n        [&#39;Walnut Brownie&#39;, 72.4, 53.9, 39.1]\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.encode.y[0]]\n</code></pre>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    dimensions: [&#39;product&#39;, &#39;2015&#39;, &#39;2016&#39;, &#39;2017&#39;],\n    source: [\n        {product: &#39;Matcha Latte&#39;, &#39;2015&#39;: 43.3, &#39;2016&#39;: 85.8, &#39;2017&#39;: 93.7},\n        {product: &#39;Milk Tea&#39;, &#39;2015&#39;: 83.1, &#39;2016&#39;: 73.4, &#39;2017&#39;: 55.1},\n        {product: &#39;Cheese Cocoa&#39;, &#39;2015&#39;: 86.4, &#39;2016&#39;: 65.2, &#39;2017&#39;: 82.5},\n        {product: &#39;Walnut Brownie&#39;, &#39;2015&#39;: 72.4, &#39;2016&#39;: 53.9, &#39;2017&#39;: 39.1}\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.dimensionNames[params.encode.y[0]]]\n</code></pre>\n"
   },
+  "markLine.data.0.label.color": {
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "null"
+    }
+  },
+  "markLine.data.0.label.fontStyle": {
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,italic,oblique"
+    }
+  },
+  "markLine.data.0.label.fontWeight": {
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,bold,bolder,lighter"
+    }
+  },
+  "markLine.data.0.label.fontFamily": {
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "sans-serif",
+      "options": "sans-serif,serif,monospace,Arial,Courier New"
+    }
+  },
+  "markLine.data.0.label.fontSize": {
+    "desc": "\n\n<p> font size.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "12",
+      "min": "1",
+      "step": "1"
+    }
+  },
+  "markLine.data.0.label.lineHeight": {
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "1",
+      "default": "12"
+    }
+  },
+  "markLine.data.0.label.backgroundColor": {
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "markLine.data.0.label.borderColor": {
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "markLine.data.0.label.borderWidth": {
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.label.borderRadius": {
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "LT,RT, RB, LB"
+    }
+  },
+  "markLine.data.0.label.padding": {
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "T,R,B,L"
+    }
+  },
+  "markLine.data.0.label.shadowColor": {
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "markLine.data.0.label.shadowBlur": {
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.label.shadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.label.shadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.label.width": {
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
+  },
+  "markLine.data.0.label.height": {
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
+  },
+  "markLine.data.0.label.textBorderColor": {
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "markLine.data.0.label.textBorderWidth": {
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.label.textShadowColor": {
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#000"
+    }
+  },
+  "markLine.data.0.label.textShadowBlur": {
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.label.textShadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.label.textShadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.label.overflow": {
+    "desc": "\n\n<p>Determine how to display the text when it&#39;s overflow. Available when <code class=\"codespan\">width</code> is set.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the text and trailing with <code class=\"codespan\">ellipsis</code>.</li>\n<li><code class=\"codespan\">&#39;break&#39;</code> Break by word</li>\n<li><code class=\"codespan\">&#39;breakAll&#39;</code> Break by character.</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "truncate,break,breakAll"
+    }
+  },
+  "markLine.data.0.label.ellipsis": {
+    "desc": "<p>Ellipsis to be displayed when <code class=\"codespan\">overflow</code> is set to <code class=\"codespan\">truncate</code>.</p>\n"
+  },
+  "markLine.data.0.label.lineOverflow": {
+    "desc": "<p>Determine how to display the text when it&#39;s overflow on height.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the overflow lines.</li>\n</ul>\n"
+  },
+  "markLine.data.0.label.rich": {
+    "desc": "<p>&quot;Rich text styles&quot; can be defined in this <code class=\"codespan\">rich</code> property. For example:</p>\n<pre><code class=\"lang-js\">label: {\n    // Styles defined in &#39;rich&#39; can be applied to some fragments\n    // of text by adding some markers to those fragment, like\n    // `{styleName|text content text content}`.\n    // `&#39;\\n&#39;` is the newline character.\n    formatter: [\n        &#39;{a|Style &quot;a&quot; is applied to this snippet}&#39;\n        &#39;{b|Style &quot;b&quot; is applied to this snippet}This snippet use default style{x|use style &quot;x&quot;}&#39;\n    ].join(&#39;\\n&#39;),\n\n    rich: {\n        a: {\n            color: &#39;red&#39;,\n            lineHeight: 10\n        },\n        b: {\n            backgroundColor: {\n                image: &#39;xxx/xxx.jpg&#39;\n            },\n            height: 40\n        },\n        x: {\n            fontSize: 18,\n            fontFamily: &#39;Microsoft YaHei&#39;,\n            borderColor: &#39;#449933&#39;,\n            borderRadius: 4\n        },\n        ...\n    }\n}\n</code></pre>\n<p>For more details, see <a href=\"tutorial.html#Rich%20Text\" target=\"_blank\">Rich Text</a> please.</p>\n"
+  },
+  "markLine.data.0.label.rich.<style_name>.color": {
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "null"
+    }
+  },
+  "markLine.data.0.label.rich.<style_name>.fontStyle": {
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,italic,oblique"
+    }
+  },
+  "markLine.data.0.label.rich.<style_name>.fontWeight": {
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,bold,bolder,lighter"
+    }
+  },
+  "markLine.data.0.label.rich.<style_name>.fontFamily": {
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "sans-serif",
+      "options": "sans-serif,serif,monospace,Arial,Courier New"
+    }
+  },
+  "markLine.data.0.label.rich.<style_name>.fontSize": {
+    "desc": "\n\n<p> font size.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "12",
+      "min": "1",
+      "step": "1"
+    }
+  },
+  "markLine.data.0.label.rich.<style_name>.align": {
+    "desc": "\n\n<p>Horizontal alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;left&#39;</code></li>\n<li><code class=\"codespan\">&#39;center&#39;</code></li>\n<li><code class=\"codespan\">&#39;right&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">align</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">align</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    align: right,\n    rich: {\n        a: {\n            // `align` is not set, then it will be right\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "left,center,right"
+    }
+  },
+  "markLine.data.0.label.rich.<style_name>.verticalAlign": {
+    "desc": "\n\n<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "top,middle,bottom"
+    }
+  },
+  "markLine.data.0.label.rich.<style_name>.lineHeight": {
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "1",
+      "default": "12"
+    }
+  },
+  "markLine.data.0.label.rich.<style_name>.backgroundColor": {
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "markLine.data.0.label.rich.<style_name>.borderColor": {
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "markLine.data.0.label.rich.<style_name>.borderWidth": {
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.label.rich.<style_name>.borderRadius": {
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "LT,RT, RB, LB"
+    }
+  },
+  "markLine.data.0.label.rich.<style_name>.padding": {
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "T,R,B,L"
+    }
+  },
+  "markLine.data.0.label.rich.<style_name>.shadowColor": {
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "markLine.data.0.label.rich.<style_name>.shadowBlur": {
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.label.rich.<style_name>.shadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.label.rich.<style_name>.shadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.label.rich.<style_name>.width": {
+    "desc": "<p>Width of the text block. It is the width of the text by default. In most cases, there is no need to specify it. You may want to use it in some cases like make simple table or using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p><code class=\"codespan\">width</code> can also be percent string, like <code class=\"codespan\">&#39;100%&#39;</code>, which represents the percent of <code class=\"codespan\">contentWidth</code> (that is, the width without <code class=\"codespan\">padding</code>) of its container box. It is based on <code class=\"codespan\">contentWidth</code> because that each text fragment is layout based on the <code class=\"codespan\">content box</code>, where it makes no sense that calculating width based on <code class=\"codespan\">outerWith</code> in prectice.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+  },
+  "markLine.data.0.label.rich.<style_name>.height": {
+    "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+  },
+  "markLine.data.0.label.rich.<style_name>.textBorderColor": {
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "markLine.data.0.label.rich.<style_name>.textBorderWidth": {
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.label.rich.<style_name>.textShadowColor": {
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#000"
+    }
+  },
+  "markLine.data.0.label.rich.<style_name>.textShadowBlur": {
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.label.rich.<style_name>.textShadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.label.rich.<style_name>.textShadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
   "markLine.data.0.emphasis.lineStyle.color": {
     "desc": "\n\n<p>Line color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
     "uiControl": {
@@ -7534,6 +9022,378 @@ window.__EC_DOC_option_series_pie = {
   },
   "markLine.data.0.emphasis.label.formatter": {
     "desc": "<p>Data label formatter, which supports string template and callback function. In either form, <code class=\"codespan\">\\n</code> is supported to represent a new line.</p>\n<p><strong>String template</strong></p>\n<p>Model variation includes:</p>\n<ul>\n<li><code class=\"codespan\">{a}</code>: series name.</li>\n<li><code class=\"codespan\">{b}</code>: the name of a data item.</li>\n<li><code class=\"codespan\">{c}</code>: the value of a data item.</li>\n<li><code class=\"codespan\">{d}</code>: the percent.</li>\n<li><code class=\"codespan\">{@xxx}: the value of a dimension named</code>&#39;xxx&#39;<code class=\"codespan\">, for example,</code>{@product}<code class=\"codespan\">refers the value of</code>&#39;product&#39;` dimension.</li>\n<li><code class=\"codespan\">{@[n]}: the value of a dimension at the index of</code>n<code class=\"codespan\">, for example,</code>{@[3]}` refers the value at dimensions[3].</li>\n</ul>\n<p><strong>example: </strong></p>\n<pre><code class=\"lang-js\">formatter: &#39;{b}: {d}&#39;\n</code></pre>\n<p><strong>Callback function</strong></p>\n<p>Callback function is in form of:</p>\n<pre><code class=\"lang-js\">(params: Object|Array) =&gt; string\n</code></pre>\n<p>where <code class=\"codespan\">params</code> is the single dataset needed by formatter, which is formed as:</p>\n<pre><code class=\"lang-js\">{\n    componentType: &#39;series&#39;,\n    // Series type\n    seriesType: string,\n    // Series index in option.series\n    seriesIndex: number,\n    // Series name\n    seriesName: string,\n    // Data name, or category name\n    name: string,\n    // Data index in input data array\n    dataIndex: number,\n    // Original data as input\n    data: Object,\n    // Value of data. In most series it is the same as data.\n    // But in some series it is some part of the data (e.g., in map, radar)\n    value: number|Array|Object,\n    // encoding info of coordinate system\n    // Key: coord, like (&#39;x&#39; &#39;y&#39; &#39;radius&#39; &#39;angle&#39;)\n    // value: Must be an array, not null/undefined. Contain dimension indices, like:\n    // {\n    //     x: [2] // values on dimension index 2 are mapped to x axis.\n    //     y: [0] // values on dimension index 0 are mapped to y axis.\n    // }\n    encode: Object,\n    // dimension names list\n    dimensionNames: Array&lt;String&gt;,\n    // data dimension index, for example 0 or 1 or 2 ...\n    // Only work in `radar` series.\n    dimensionIndex: number,\n    // Color of data\n    color: string,\n\n\n\n}\n</code></pre>\n<p>Note: the usage of encode and dimensionNames can be:</p>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    source: [\n        [&#39;Matcha Latte&#39;, 43.3, 85.8, 93.7],\n        [&#39;Milk Tea&#39;, 83.1, 73.4, 55.1],\n        [&#39;Cheese Cocoa&#39;, 86.4, 65.2, 82.5],\n        [&#39;Walnut Brownie&#39;, 72.4, 53.9, 39.1]\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.encode.y[0]]\n</code></pre>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    dimensions: [&#39;product&#39;, &#39;2015&#39;, &#39;2016&#39;, &#39;2017&#39;],\n    source: [\n        {product: &#39;Matcha Latte&#39;, &#39;2015&#39;: 43.3, &#39;2016&#39;: 85.8, &#39;2017&#39;: 93.7},\n        {product: &#39;Milk Tea&#39;, &#39;2015&#39;: 83.1, &#39;2016&#39;: 73.4, &#39;2017&#39;: 55.1},\n        {product: &#39;Cheese Cocoa&#39;, &#39;2015&#39;: 86.4, &#39;2016&#39;: 65.2, &#39;2017&#39;: 82.5},\n        {product: &#39;Walnut Brownie&#39;, &#39;2015&#39;: 72.4, &#39;2016&#39;: 53.9, &#39;2017&#39;: 39.1}\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.dimensionNames[params.encode.y[0]]]\n</code></pre>\n"
+  },
+  "markLine.data.0.emphasis.label.color": {
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "null"
+    }
+  },
+  "markLine.data.0.emphasis.label.fontStyle": {
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,italic,oblique"
+    }
+  },
+  "markLine.data.0.emphasis.label.fontWeight": {
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,bold,bolder,lighter"
+    }
+  },
+  "markLine.data.0.emphasis.label.fontFamily": {
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "sans-serif",
+      "options": "sans-serif,serif,monospace,Arial,Courier New"
+    }
+  },
+  "markLine.data.0.emphasis.label.fontSize": {
+    "desc": "\n\n<p> font size.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "12",
+      "min": "1",
+      "step": "1"
+    }
+  },
+  "markLine.data.0.emphasis.label.lineHeight": {
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "1",
+      "default": "12"
+    }
+  },
+  "markLine.data.0.emphasis.label.backgroundColor": {
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "markLine.data.0.emphasis.label.borderColor": {
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "markLine.data.0.emphasis.label.borderWidth": {
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.emphasis.label.borderRadius": {
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "LT,RT, RB, LB"
+    }
+  },
+  "markLine.data.0.emphasis.label.padding": {
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "T,R,B,L"
+    }
+  },
+  "markLine.data.0.emphasis.label.shadowColor": {
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "markLine.data.0.emphasis.label.shadowBlur": {
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.emphasis.label.shadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.emphasis.label.shadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.emphasis.label.width": {
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
+  },
+  "markLine.data.0.emphasis.label.height": {
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
+  },
+  "markLine.data.0.emphasis.label.textBorderColor": {
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "markLine.data.0.emphasis.label.textBorderWidth": {
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.emphasis.label.textShadowColor": {
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#000"
+    }
+  },
+  "markLine.data.0.emphasis.label.textShadowBlur": {
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.emphasis.label.textShadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.emphasis.label.textShadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.emphasis.label.overflow": {
+    "desc": "\n\n<p>Determine how to display the text when it&#39;s overflow. Available when <code class=\"codespan\">width</code> is set.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the text and trailing with <code class=\"codespan\">ellipsis</code>.</li>\n<li><code class=\"codespan\">&#39;break&#39;</code> Break by word</li>\n<li><code class=\"codespan\">&#39;breakAll&#39;</code> Break by character.</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "truncate,break,breakAll"
+    }
+  },
+  "markLine.data.0.emphasis.label.ellipsis": {
+    "desc": "<p>Ellipsis to be displayed when <code class=\"codespan\">overflow</code> is set to <code class=\"codespan\">truncate</code>.</p>\n"
+  },
+  "markLine.data.0.emphasis.label.lineOverflow": {
+    "desc": "<p>Determine how to display the text when it&#39;s overflow on height.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the overflow lines.</li>\n</ul>\n"
+  },
+  "markLine.data.0.emphasis.label.rich": {
+    "desc": "<p>&quot;Rich text styles&quot; can be defined in this <code class=\"codespan\">rich</code> property. For example:</p>\n<pre><code class=\"lang-js\">label: {\n    // Styles defined in &#39;rich&#39; can be applied to some fragments\n    // of text by adding some markers to those fragment, like\n    // `{styleName|text content text content}`.\n    // `&#39;\\n&#39;` is the newline character.\n    formatter: [\n        &#39;{a|Style &quot;a&quot; is applied to this snippet}&#39;\n        &#39;{b|Style &quot;b&quot; is applied to this snippet}This snippet use default style{x|use style &quot;x&quot;}&#39;\n    ].join(&#39;\\n&#39;),\n\n    rich: {\n        a: {\n            color: &#39;red&#39;,\n            lineHeight: 10\n        },\n        b: {\n            backgroundColor: {\n                image: &#39;xxx/xxx.jpg&#39;\n            },\n            height: 40\n        },\n        x: {\n            fontSize: 18,\n            fontFamily: &#39;Microsoft YaHei&#39;,\n            borderColor: &#39;#449933&#39;,\n            borderRadius: 4\n        },\n        ...\n    }\n}\n</code></pre>\n<p>For more details, see <a href=\"tutorial.html#Rich%20Text\" target=\"_blank\">Rich Text</a> please.</p>\n"
+  },
+  "markLine.data.0.emphasis.label.rich.<style_name>.color": {
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "null"
+    }
+  },
+  "markLine.data.0.emphasis.label.rich.<style_name>.fontStyle": {
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,italic,oblique"
+    }
+  },
+  "markLine.data.0.emphasis.label.rich.<style_name>.fontWeight": {
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,bold,bolder,lighter"
+    }
+  },
+  "markLine.data.0.emphasis.label.rich.<style_name>.fontFamily": {
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "sans-serif",
+      "options": "sans-serif,serif,monospace,Arial,Courier New"
+    }
+  },
+  "markLine.data.0.emphasis.label.rich.<style_name>.fontSize": {
+    "desc": "\n\n<p> font size.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "12",
+      "min": "1",
+      "step": "1"
+    }
+  },
+  "markLine.data.0.emphasis.label.rich.<style_name>.align": {
+    "desc": "\n\n<p>Horizontal alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;left&#39;</code></li>\n<li><code class=\"codespan\">&#39;center&#39;</code></li>\n<li><code class=\"codespan\">&#39;right&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">align</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">align</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    align: right,\n    rich: {\n        a: {\n            // `align` is not set, then it will be right\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "left,center,right"
+    }
+  },
+  "markLine.data.0.emphasis.label.rich.<style_name>.verticalAlign": {
+    "desc": "\n\n<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "top,middle,bottom"
+    }
+  },
+  "markLine.data.0.emphasis.label.rich.<style_name>.lineHeight": {
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "1",
+      "default": "12"
+    }
+  },
+  "markLine.data.0.emphasis.label.rich.<style_name>.backgroundColor": {
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "markLine.data.0.emphasis.label.rich.<style_name>.borderColor": {
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "markLine.data.0.emphasis.label.rich.<style_name>.borderWidth": {
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.emphasis.label.rich.<style_name>.borderRadius": {
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "LT,RT, RB, LB"
+    }
+  },
+  "markLine.data.0.emphasis.label.rich.<style_name>.padding": {
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "T,R,B,L"
+    }
+  },
+  "markLine.data.0.emphasis.label.rich.<style_name>.shadowColor": {
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "markLine.data.0.emphasis.label.rich.<style_name>.shadowBlur": {
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.emphasis.label.rich.<style_name>.shadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.emphasis.label.rich.<style_name>.shadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.emphasis.label.rich.<style_name>.width": {
+    "desc": "<p>Width of the text block. It is the width of the text by default. In most cases, there is no need to specify it. You may want to use it in some cases like make simple table or using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p><code class=\"codespan\">width</code> can also be percent string, like <code class=\"codespan\">&#39;100%&#39;</code>, which represents the percent of <code class=\"codespan\">contentWidth</code> (that is, the width without <code class=\"codespan\">padding</code>) of its container box. It is based on <code class=\"codespan\">contentWidth</code> because that each text fragment is layout based on the <code class=\"codespan\">content box</code>, where it makes no sense that calculating width based on <code class=\"codespan\">outerWith</code> in prectice.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+  },
+  "markLine.data.0.emphasis.label.rich.<style_name>.height": {
+    "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+  },
+  "markLine.data.0.emphasis.label.rich.<style_name>.textBorderColor": {
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "markLine.data.0.emphasis.label.rich.<style_name>.textBorderWidth": {
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.emphasis.label.rich.<style_name>.textShadowColor": {
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#000"
+    }
+  },
+  "markLine.data.0.emphasis.label.rich.<style_name>.textShadowBlur": {
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.emphasis.label.rich.<style_name>.textShadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.emphasis.label.rich.<style_name>.textShadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
   },
   "markLine.data.0.blur": {
     "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n"
@@ -7624,6 +9484,378 @@ window.__EC_DOC_option_series_pie = {
   },
   "markLine.data.0.blur.label.formatter": {
     "desc": "<p>Data label formatter, which supports string template and callback function. In either form, <code class=\"codespan\">\\n</code> is supported to represent a new line.</p>\n<p><strong>String template</strong></p>\n<p>Model variation includes:</p>\n<ul>\n<li><code class=\"codespan\">{a}</code>: series name.</li>\n<li><code class=\"codespan\">{b}</code>: the name of a data item.</li>\n<li><code class=\"codespan\">{c}</code>: the value of a data item.</li>\n<li><code class=\"codespan\">{d}</code>: the percent.</li>\n<li><code class=\"codespan\">{@xxx}: the value of a dimension named</code>&#39;xxx&#39;<code class=\"codespan\">, for example,</code>{@product}<code class=\"codespan\">refers the value of</code>&#39;product&#39;` dimension.</li>\n<li><code class=\"codespan\">{@[n]}: the value of a dimension at the index of</code>n<code class=\"codespan\">, for example,</code>{@[3]}` refers the value at dimensions[3].</li>\n</ul>\n<p><strong>example: </strong></p>\n<pre><code class=\"lang-js\">formatter: &#39;{b}: {d}&#39;\n</code></pre>\n<p><strong>Callback function</strong></p>\n<p>Callback function is in form of:</p>\n<pre><code class=\"lang-js\">(params: Object|Array) =&gt; string\n</code></pre>\n<p>where <code class=\"codespan\">params</code> is the single dataset needed by formatter, which is formed as:</p>\n<pre><code class=\"lang-js\">{\n    componentType: &#39;series&#39;,\n    // Series type\n    seriesType: string,\n    // Series index in option.series\n    seriesIndex: number,\n    // Series name\n    seriesName: string,\n    // Data name, or category name\n    name: string,\n    // Data index in input data array\n    dataIndex: number,\n    // Original data as input\n    data: Object,\n    // Value of data. In most series it is the same as data.\n    // But in some series it is some part of the data (e.g., in map, radar)\n    value: number|Array|Object,\n    // encoding info of coordinate system\n    // Key: coord, like (&#39;x&#39; &#39;y&#39; &#39;radius&#39; &#39;angle&#39;)\n    // value: Must be an array, not null/undefined. Contain dimension indices, like:\n    // {\n    //     x: [2] // values on dimension index 2 are mapped to x axis.\n    //     y: [0] // values on dimension index 0 are mapped to y axis.\n    // }\n    encode: Object,\n    // dimension names list\n    dimensionNames: Array&lt;String&gt;,\n    // data dimension index, for example 0 or 1 or 2 ...\n    // Only work in `radar` series.\n    dimensionIndex: number,\n    // Color of data\n    color: string,\n\n\n\n}\n</code></pre>\n<p>Note: the usage of encode and dimensionNames can be:</p>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    source: [\n        [&#39;Matcha Latte&#39;, 43.3, 85.8, 93.7],\n        [&#39;Milk Tea&#39;, 83.1, 73.4, 55.1],\n        [&#39;Cheese Cocoa&#39;, 86.4, 65.2, 82.5],\n        [&#39;Walnut Brownie&#39;, 72.4, 53.9, 39.1]\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.encode.y[0]]\n</code></pre>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    dimensions: [&#39;product&#39;, &#39;2015&#39;, &#39;2016&#39;, &#39;2017&#39;],\n    source: [\n        {product: &#39;Matcha Latte&#39;, &#39;2015&#39;: 43.3, &#39;2016&#39;: 85.8, &#39;2017&#39;: 93.7},\n        {product: &#39;Milk Tea&#39;, &#39;2015&#39;: 83.1, &#39;2016&#39;: 73.4, &#39;2017&#39;: 55.1},\n        {product: &#39;Cheese Cocoa&#39;, &#39;2015&#39;: 86.4, &#39;2016&#39;: 65.2, &#39;2017&#39;: 82.5},\n        {product: &#39;Walnut Brownie&#39;, &#39;2015&#39;: 72.4, &#39;2016&#39;: 53.9, &#39;2017&#39;: 39.1}\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.dimensionNames[params.encode.y[0]]]\n</code></pre>\n"
+  },
+  "markLine.data.0.blur.label.color": {
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "null"
+    }
+  },
+  "markLine.data.0.blur.label.fontStyle": {
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,italic,oblique"
+    }
+  },
+  "markLine.data.0.blur.label.fontWeight": {
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,bold,bolder,lighter"
+    }
+  },
+  "markLine.data.0.blur.label.fontFamily": {
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "sans-serif",
+      "options": "sans-serif,serif,monospace,Arial,Courier New"
+    }
+  },
+  "markLine.data.0.blur.label.fontSize": {
+    "desc": "\n\n<p> font size.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "12",
+      "min": "1",
+      "step": "1"
+    }
+  },
+  "markLine.data.0.blur.label.lineHeight": {
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "1",
+      "default": "12"
+    }
+  },
+  "markLine.data.0.blur.label.backgroundColor": {
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "markLine.data.0.blur.label.borderColor": {
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "markLine.data.0.blur.label.borderWidth": {
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.blur.label.borderRadius": {
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "LT,RT, RB, LB"
+    }
+  },
+  "markLine.data.0.blur.label.padding": {
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "T,R,B,L"
+    }
+  },
+  "markLine.data.0.blur.label.shadowColor": {
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "markLine.data.0.blur.label.shadowBlur": {
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.blur.label.shadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.blur.label.shadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.blur.label.width": {
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
+  },
+  "markLine.data.0.blur.label.height": {
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
+  },
+  "markLine.data.0.blur.label.textBorderColor": {
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "markLine.data.0.blur.label.textBorderWidth": {
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.blur.label.textShadowColor": {
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#000"
+    }
+  },
+  "markLine.data.0.blur.label.textShadowBlur": {
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.blur.label.textShadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.blur.label.textShadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.blur.label.overflow": {
+    "desc": "\n\n<p>Determine how to display the text when it&#39;s overflow. Available when <code class=\"codespan\">width</code> is set.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the text and trailing with <code class=\"codespan\">ellipsis</code>.</li>\n<li><code class=\"codespan\">&#39;break&#39;</code> Break by word</li>\n<li><code class=\"codespan\">&#39;breakAll&#39;</code> Break by character.</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "truncate,break,breakAll"
+    }
+  },
+  "markLine.data.0.blur.label.ellipsis": {
+    "desc": "<p>Ellipsis to be displayed when <code class=\"codespan\">overflow</code> is set to <code class=\"codespan\">truncate</code>.</p>\n"
+  },
+  "markLine.data.0.blur.label.lineOverflow": {
+    "desc": "<p>Determine how to display the text when it&#39;s overflow on height.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the overflow lines.</li>\n</ul>\n"
+  },
+  "markLine.data.0.blur.label.rich": {
+    "desc": "<p>&quot;Rich text styles&quot; can be defined in this <code class=\"codespan\">rich</code> property. For example:</p>\n<pre><code class=\"lang-js\">label: {\n    // Styles defined in &#39;rich&#39; can be applied to some fragments\n    // of text by adding some markers to those fragment, like\n    // `{styleName|text content text content}`.\n    // `&#39;\\n&#39;` is the newline character.\n    formatter: [\n        &#39;{a|Style &quot;a&quot; is applied to this snippet}&#39;\n        &#39;{b|Style &quot;b&quot; is applied to this snippet}This snippet use default style{x|use style &quot;x&quot;}&#39;\n    ].join(&#39;\\n&#39;),\n\n    rich: {\n        a: {\n            color: &#39;red&#39;,\n            lineHeight: 10\n        },\n        b: {\n            backgroundColor: {\n                image: &#39;xxx/xxx.jpg&#39;\n            },\n            height: 40\n        },\n        x: {\n            fontSize: 18,\n            fontFamily: &#39;Microsoft YaHei&#39;,\n            borderColor: &#39;#449933&#39;,\n            borderRadius: 4\n        },\n        ...\n    }\n}\n</code></pre>\n<p>For more details, see <a href=\"tutorial.html#Rich%20Text\" target=\"_blank\">Rich Text</a> please.</p>\n"
+  },
+  "markLine.data.0.blur.label.rich.<style_name>.color": {
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "null"
+    }
+  },
+  "markLine.data.0.blur.label.rich.<style_name>.fontStyle": {
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,italic,oblique"
+    }
+  },
+  "markLine.data.0.blur.label.rich.<style_name>.fontWeight": {
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,bold,bolder,lighter"
+    }
+  },
+  "markLine.data.0.blur.label.rich.<style_name>.fontFamily": {
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "sans-serif",
+      "options": "sans-serif,serif,monospace,Arial,Courier New"
+    }
+  },
+  "markLine.data.0.blur.label.rich.<style_name>.fontSize": {
+    "desc": "\n\n<p> font size.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "12",
+      "min": "1",
+      "step": "1"
+    }
+  },
+  "markLine.data.0.blur.label.rich.<style_name>.align": {
+    "desc": "\n\n<p>Horizontal alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;left&#39;</code></li>\n<li><code class=\"codespan\">&#39;center&#39;</code></li>\n<li><code class=\"codespan\">&#39;right&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">align</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">align</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    align: right,\n    rich: {\n        a: {\n            // `align` is not set, then it will be right\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "left,center,right"
+    }
+  },
+  "markLine.data.0.blur.label.rich.<style_name>.verticalAlign": {
+    "desc": "\n\n<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "top,middle,bottom"
+    }
+  },
+  "markLine.data.0.blur.label.rich.<style_name>.lineHeight": {
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "1",
+      "default": "12"
+    }
+  },
+  "markLine.data.0.blur.label.rich.<style_name>.backgroundColor": {
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "markLine.data.0.blur.label.rich.<style_name>.borderColor": {
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "markLine.data.0.blur.label.rich.<style_name>.borderWidth": {
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.blur.label.rich.<style_name>.borderRadius": {
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "LT,RT, RB, LB"
+    }
+  },
+  "markLine.data.0.blur.label.rich.<style_name>.padding": {
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "T,R,B,L"
+    }
+  },
+  "markLine.data.0.blur.label.rich.<style_name>.shadowColor": {
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "markLine.data.0.blur.label.rich.<style_name>.shadowBlur": {
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.blur.label.rich.<style_name>.shadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.blur.label.rich.<style_name>.shadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.blur.label.rich.<style_name>.width": {
+    "desc": "<p>Width of the text block. It is the width of the text by default. In most cases, there is no need to specify it. You may want to use it in some cases like make simple table or using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p><code class=\"codespan\">width</code> can also be percent string, like <code class=\"codespan\">&#39;100%&#39;</code>, which represents the percent of <code class=\"codespan\">contentWidth</code> (that is, the width without <code class=\"codespan\">padding</code>) of its container box. It is based on <code class=\"codespan\">contentWidth</code> because that each text fragment is layout based on the <code class=\"codespan\">content box</code>, where it makes no sense that calculating width based on <code class=\"codespan\">outerWith</code> in prectice.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+  },
+  "markLine.data.0.blur.label.rich.<style_name>.height": {
+    "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+  },
+  "markLine.data.0.blur.label.rich.<style_name>.textBorderColor": {
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "markLine.data.0.blur.label.rich.<style_name>.textBorderWidth": {
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.blur.label.rich.<style_name>.textShadowColor": {
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#000"
+    }
+  },
+  "markLine.data.0.blur.label.rich.<style_name>.textShadowBlur": {
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.blur.label.rich.<style_name>.textShadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.0.blur.label.rich.<style_name>.textShadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
   },
   "markLine.data.1": {
     "desc": "<p>Data of the ending point.</p>\n"
@@ -7779,6 +10011,378 @@ window.__EC_DOC_option_series_pie = {
   "markLine.data.1.label.formatter": {
     "desc": "<p>Data label formatter, which supports string template and callback function. In either form, <code class=\"codespan\">\\n</code> is supported to represent a new line.</p>\n<p><strong>String template</strong></p>\n<p>Model variation includes:</p>\n<ul>\n<li><code class=\"codespan\">{a}</code>: series name.</li>\n<li><code class=\"codespan\">{b}</code>: the name of a data item.</li>\n<li><code class=\"codespan\">{c}</code>: the value of a data item.</li>\n<li><code class=\"codespan\">{d}</code>: the percent.</li>\n<li><code class=\"codespan\">{@xxx}: the value of a dimension named</code>&#39;xxx&#39;<code class=\"codespan\">, for example,</code>{@product}<code class=\"codespan\">refers the value of</code>&#39;product&#39;` dimension.</li>\n<li><code class=\"codespan\">{@[n]}: the value of a dimension at the index of</code>n<code class=\"codespan\">, for example,</code>{@[3]}` refers the value at dimensions[3].</li>\n</ul>\n<p><strong>example: </strong></p>\n<pre><code class=\"lang-js\">formatter: &#39;{b}: {d}&#39;\n</code></pre>\n<p><strong>Callback function</strong></p>\n<p>Callback function is in form of:</p>\n<pre><code class=\"lang-js\">(params: Object|Array) =&gt; string\n</code></pre>\n<p>where <code class=\"codespan\">params</code> is the single dataset needed by formatter, which is formed as:</p>\n<pre><code class=\"lang-js\">{\n    componentType: &#39;series&#39;,\n    // Series type\n    seriesType: string,\n    // Series index in option.series\n    seriesIndex: number,\n    // Series name\n    seriesName: string,\n    // Data name, or category name\n    name: string,\n    // Data index in input data array\n    dataIndex: number,\n    // Original data as input\n    data: Object,\n    // Value of data. In most series it is the same as data.\n    // But in some series it is some part of the data (e.g., in map, radar)\n    value: number|Array|Object,\n    // encoding info of coordinate system\n    // Key: coord, like (&#39;x&#39; &#39;y&#39; &#39;radius&#39; &#39;angle&#39;)\n    // value: Must be an array, not null/undefined. Contain dimension indices, like:\n    // {\n    //     x: [2] // values on dimension index 2 are mapped to x axis.\n    //     y: [0] // values on dimension index 0 are mapped to y axis.\n    // }\n    encode: Object,\n    // dimension names list\n    dimensionNames: Array&lt;String&gt;,\n    // data dimension index, for example 0 or 1 or 2 ...\n    // Only work in `radar` series.\n    dimensionIndex: number,\n    // Color of data\n    color: string,\n\n\n\n}\n</code></pre>\n<p>Note: the usage of encode and dimensionNames can be:</p>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    source: [\n        [&#39;Matcha Latte&#39;, 43.3, 85.8, 93.7],\n        [&#39;Milk Tea&#39;, 83.1, 73.4, 55.1],\n        [&#39;Cheese Cocoa&#39;, 86.4, 65.2, 82.5],\n        [&#39;Walnut Brownie&#39;, 72.4, 53.9, 39.1]\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.encode.y[0]]\n</code></pre>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    dimensions: [&#39;product&#39;, &#39;2015&#39;, &#39;2016&#39;, &#39;2017&#39;],\n    source: [\n        {product: &#39;Matcha Latte&#39;, &#39;2015&#39;: 43.3, &#39;2016&#39;: 85.8, &#39;2017&#39;: 93.7},\n        {product: &#39;Milk Tea&#39;, &#39;2015&#39;: 83.1, &#39;2016&#39;: 73.4, &#39;2017&#39;: 55.1},\n        {product: &#39;Cheese Cocoa&#39;, &#39;2015&#39;: 86.4, &#39;2016&#39;: 65.2, &#39;2017&#39;: 82.5},\n        {product: &#39;Walnut Brownie&#39;, &#39;2015&#39;: 72.4, &#39;2016&#39;: 53.9, &#39;2017&#39;: 39.1}\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.dimensionNames[params.encode.y[0]]]\n</code></pre>\n"
   },
+  "markLine.data.1.label.color": {
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "null"
+    }
+  },
+  "markLine.data.1.label.fontStyle": {
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,italic,oblique"
+    }
+  },
+  "markLine.data.1.label.fontWeight": {
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,bold,bolder,lighter"
+    }
+  },
+  "markLine.data.1.label.fontFamily": {
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "sans-serif",
+      "options": "sans-serif,serif,monospace,Arial,Courier New"
+    }
+  },
+  "markLine.data.1.label.fontSize": {
+    "desc": "\n\n<p> font size.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "12",
+      "min": "1",
+      "step": "1"
+    }
+  },
+  "markLine.data.1.label.lineHeight": {
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "1",
+      "default": "12"
+    }
+  },
+  "markLine.data.1.label.backgroundColor": {
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "markLine.data.1.label.borderColor": {
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "markLine.data.1.label.borderWidth": {
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.label.borderRadius": {
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "LT,RT, RB, LB"
+    }
+  },
+  "markLine.data.1.label.padding": {
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "T,R,B,L"
+    }
+  },
+  "markLine.data.1.label.shadowColor": {
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "markLine.data.1.label.shadowBlur": {
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.label.shadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.label.shadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.label.width": {
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
+  },
+  "markLine.data.1.label.height": {
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
+  },
+  "markLine.data.1.label.textBorderColor": {
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "markLine.data.1.label.textBorderWidth": {
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.label.textShadowColor": {
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#000"
+    }
+  },
+  "markLine.data.1.label.textShadowBlur": {
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.label.textShadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.label.textShadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.label.overflow": {
+    "desc": "\n\n<p>Determine how to display the text when it&#39;s overflow. Available when <code class=\"codespan\">width</code> is set.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the text and trailing with <code class=\"codespan\">ellipsis</code>.</li>\n<li><code class=\"codespan\">&#39;break&#39;</code> Break by word</li>\n<li><code class=\"codespan\">&#39;breakAll&#39;</code> Break by character.</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "truncate,break,breakAll"
+    }
+  },
+  "markLine.data.1.label.ellipsis": {
+    "desc": "<p>Ellipsis to be displayed when <code class=\"codespan\">overflow</code> is set to <code class=\"codespan\">truncate</code>.</p>\n"
+  },
+  "markLine.data.1.label.lineOverflow": {
+    "desc": "<p>Determine how to display the text when it&#39;s overflow on height.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the overflow lines.</li>\n</ul>\n"
+  },
+  "markLine.data.1.label.rich": {
+    "desc": "<p>&quot;Rich text styles&quot; can be defined in this <code class=\"codespan\">rich</code> property. For example:</p>\n<pre><code class=\"lang-js\">label: {\n    // Styles defined in &#39;rich&#39; can be applied to some fragments\n    // of text by adding some markers to those fragment, like\n    // `{styleName|text content text content}`.\n    // `&#39;\\n&#39;` is the newline character.\n    formatter: [\n        &#39;{a|Style &quot;a&quot; is applied to this snippet}&#39;\n        &#39;{b|Style &quot;b&quot; is applied to this snippet}This snippet use default style{x|use style &quot;x&quot;}&#39;\n    ].join(&#39;\\n&#39;),\n\n    rich: {\n        a: {\n            color: &#39;red&#39;,\n            lineHeight: 10\n        },\n        b: {\n            backgroundColor: {\n                image: &#39;xxx/xxx.jpg&#39;\n            },\n            height: 40\n        },\n        x: {\n            fontSize: 18,\n            fontFamily: &#39;Microsoft YaHei&#39;,\n            borderColor: &#39;#449933&#39;,\n            borderRadius: 4\n        },\n        ...\n    }\n}\n</code></pre>\n<p>For more details, see <a href=\"tutorial.html#Rich%20Text\" target=\"_blank\">Rich Text</a> please.</p>\n"
+  },
+  "markLine.data.1.label.rich.<style_name>.color": {
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "null"
+    }
+  },
+  "markLine.data.1.label.rich.<style_name>.fontStyle": {
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,italic,oblique"
+    }
+  },
+  "markLine.data.1.label.rich.<style_name>.fontWeight": {
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,bold,bolder,lighter"
+    }
+  },
+  "markLine.data.1.label.rich.<style_name>.fontFamily": {
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "sans-serif",
+      "options": "sans-serif,serif,monospace,Arial,Courier New"
+    }
+  },
+  "markLine.data.1.label.rich.<style_name>.fontSize": {
+    "desc": "\n\n<p> font size.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "12",
+      "min": "1",
+      "step": "1"
+    }
+  },
+  "markLine.data.1.label.rich.<style_name>.align": {
+    "desc": "\n\n<p>Horizontal alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;left&#39;</code></li>\n<li><code class=\"codespan\">&#39;center&#39;</code></li>\n<li><code class=\"codespan\">&#39;right&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">align</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">align</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    align: right,\n    rich: {\n        a: {\n            // `align` is not set, then it will be right\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "left,center,right"
+    }
+  },
+  "markLine.data.1.label.rich.<style_name>.verticalAlign": {
+    "desc": "\n\n<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "top,middle,bottom"
+    }
+  },
+  "markLine.data.1.label.rich.<style_name>.lineHeight": {
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "1",
+      "default": "12"
+    }
+  },
+  "markLine.data.1.label.rich.<style_name>.backgroundColor": {
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "markLine.data.1.label.rich.<style_name>.borderColor": {
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "markLine.data.1.label.rich.<style_name>.borderWidth": {
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.label.rich.<style_name>.borderRadius": {
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "LT,RT, RB, LB"
+    }
+  },
+  "markLine.data.1.label.rich.<style_name>.padding": {
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "T,R,B,L"
+    }
+  },
+  "markLine.data.1.label.rich.<style_name>.shadowColor": {
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "markLine.data.1.label.rich.<style_name>.shadowBlur": {
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.label.rich.<style_name>.shadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.label.rich.<style_name>.shadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.label.rich.<style_name>.width": {
+    "desc": "<p>Width of the text block. It is the width of the text by default. In most cases, there is no need to specify it. You may want to use it in some cases like make simple table or using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p><code class=\"codespan\">width</code> can also be percent string, like <code class=\"codespan\">&#39;100%&#39;</code>, which represents the percent of <code class=\"codespan\">contentWidth</code> (that is, the width without <code class=\"codespan\">padding</code>) of its container box. It is based on <code class=\"codespan\">contentWidth</code> because that each text fragment is layout based on the <code class=\"codespan\">content box</code>, where it makes no sense that calculating width based on <code class=\"codespan\">outerWith</code> in prectice.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+  },
+  "markLine.data.1.label.rich.<style_name>.height": {
+    "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+  },
+  "markLine.data.1.label.rich.<style_name>.textBorderColor": {
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "markLine.data.1.label.rich.<style_name>.textBorderWidth": {
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.label.rich.<style_name>.textShadowColor": {
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#000"
+    }
+  },
+  "markLine.data.1.label.rich.<style_name>.textShadowBlur": {
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.label.rich.<style_name>.textShadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.label.rich.<style_name>.textShadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
   "markLine.data.1.emphasis.lineStyle.color": {
     "desc": "\n\n<p>Line color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
     "uiControl": {
@@ -7865,6 +10469,378 @@ window.__EC_DOC_option_series_pie = {
   },
   "markLine.data.1.emphasis.label.formatter": {
     "desc": "<p>Data label formatter, which supports string template and callback function. In either form, <code class=\"codespan\">\\n</code> is supported to represent a new line.</p>\n<p><strong>String template</strong></p>\n<p>Model variation includes:</p>\n<ul>\n<li><code class=\"codespan\">{a}</code>: series name.</li>\n<li><code class=\"codespan\">{b}</code>: the name of a data item.</li>\n<li><code class=\"codespan\">{c}</code>: the value of a data item.</li>\n<li><code class=\"codespan\">{d}</code>: the percent.</li>\n<li><code class=\"codespan\">{@xxx}: the value of a dimension named</code>&#39;xxx&#39;<code class=\"codespan\">, for example,</code>{@product}<code class=\"codespan\">refers the value of</code>&#39;product&#39;` dimension.</li>\n<li><code class=\"codespan\">{@[n]}: the value of a dimension at the index of</code>n<code class=\"codespan\">, for example,</code>{@[3]}` refers the value at dimensions[3].</li>\n</ul>\n<p><strong>example: </strong></p>\n<pre><code class=\"lang-js\">formatter: &#39;{b}: {d}&#39;\n</code></pre>\n<p><strong>Callback function</strong></p>\n<p>Callback function is in form of:</p>\n<pre><code class=\"lang-js\">(params: Object|Array) =&gt; string\n</code></pre>\n<p>where <code class=\"codespan\">params</code> is the single dataset needed by formatter, which is formed as:</p>\n<pre><code class=\"lang-js\">{\n    componentType: &#39;series&#39;,\n    // Series type\n    seriesType: string,\n    // Series index in option.series\n    seriesIndex: number,\n    // Series name\n    seriesName: string,\n    // Data name, or category name\n    name: string,\n    // Data index in input data array\n    dataIndex: number,\n    // Original data as input\n    data: Object,\n    // Value of data. In most series it is the same as data.\n    // But in some series it is some part of the data (e.g., in map, radar)\n    value: number|Array|Object,\n    // encoding info of coordinate system\n    // Key: coord, like (&#39;x&#39; &#39;y&#39; &#39;radius&#39; &#39;angle&#39;)\n    // value: Must be an array, not null/undefined. Contain dimension indices, like:\n    // {\n    //     x: [2] // values on dimension index 2 are mapped to x axis.\n    //     y: [0] // values on dimension index 0 are mapped to y axis.\n    // }\n    encode: Object,\n    // dimension names list\n    dimensionNames: Array&lt;String&gt;,\n    // data dimension index, for example 0 or 1 or 2 ...\n    // Only work in `radar` series.\n    dimensionIndex: number,\n    // Color of data\n    color: string,\n\n\n\n}\n</code></pre>\n<p>Note: the usage of encode and dimensionNames can be:</p>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    source: [\n        [&#39;Matcha Latte&#39;, 43.3, 85.8, 93.7],\n        [&#39;Milk Tea&#39;, 83.1, 73.4, 55.1],\n        [&#39;Cheese Cocoa&#39;, 86.4, 65.2, 82.5],\n        [&#39;Walnut Brownie&#39;, 72.4, 53.9, 39.1]\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.encode.y[0]]\n</code></pre>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    dimensions: [&#39;product&#39;, &#39;2015&#39;, &#39;2016&#39;, &#39;2017&#39;],\n    source: [\n        {product: &#39;Matcha Latte&#39;, &#39;2015&#39;: 43.3, &#39;2016&#39;: 85.8, &#39;2017&#39;: 93.7},\n        {product: &#39;Milk Tea&#39;, &#39;2015&#39;: 83.1, &#39;2016&#39;: 73.4, &#39;2017&#39;: 55.1},\n        {product: &#39;Cheese Cocoa&#39;, &#39;2015&#39;: 86.4, &#39;2016&#39;: 65.2, &#39;2017&#39;: 82.5},\n        {product: &#39;Walnut Brownie&#39;, &#39;2015&#39;: 72.4, &#39;2016&#39;: 53.9, &#39;2017&#39;: 39.1}\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.dimensionNames[params.encode.y[0]]]\n</code></pre>\n"
+  },
+  "markLine.data.1.emphasis.label.color": {
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "null"
+    }
+  },
+  "markLine.data.1.emphasis.label.fontStyle": {
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,italic,oblique"
+    }
+  },
+  "markLine.data.1.emphasis.label.fontWeight": {
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,bold,bolder,lighter"
+    }
+  },
+  "markLine.data.1.emphasis.label.fontFamily": {
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "sans-serif",
+      "options": "sans-serif,serif,monospace,Arial,Courier New"
+    }
+  },
+  "markLine.data.1.emphasis.label.fontSize": {
+    "desc": "\n\n<p> font size.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "12",
+      "min": "1",
+      "step": "1"
+    }
+  },
+  "markLine.data.1.emphasis.label.lineHeight": {
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "1",
+      "default": "12"
+    }
+  },
+  "markLine.data.1.emphasis.label.backgroundColor": {
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "markLine.data.1.emphasis.label.borderColor": {
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "markLine.data.1.emphasis.label.borderWidth": {
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.emphasis.label.borderRadius": {
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "LT,RT, RB, LB"
+    }
+  },
+  "markLine.data.1.emphasis.label.padding": {
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "T,R,B,L"
+    }
+  },
+  "markLine.data.1.emphasis.label.shadowColor": {
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "markLine.data.1.emphasis.label.shadowBlur": {
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.emphasis.label.shadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.emphasis.label.shadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.emphasis.label.width": {
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
+  },
+  "markLine.data.1.emphasis.label.height": {
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
+  },
+  "markLine.data.1.emphasis.label.textBorderColor": {
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "markLine.data.1.emphasis.label.textBorderWidth": {
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.emphasis.label.textShadowColor": {
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#000"
+    }
+  },
+  "markLine.data.1.emphasis.label.textShadowBlur": {
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.emphasis.label.textShadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.emphasis.label.textShadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.emphasis.label.overflow": {
+    "desc": "\n\n<p>Determine how to display the text when it&#39;s overflow. Available when <code class=\"codespan\">width</code> is set.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the text and trailing with <code class=\"codespan\">ellipsis</code>.</li>\n<li><code class=\"codespan\">&#39;break&#39;</code> Break by word</li>\n<li><code class=\"codespan\">&#39;breakAll&#39;</code> Break by character.</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "truncate,break,breakAll"
+    }
+  },
+  "markLine.data.1.emphasis.label.ellipsis": {
+    "desc": "<p>Ellipsis to be displayed when <code class=\"codespan\">overflow</code> is set to <code class=\"codespan\">truncate</code>.</p>\n"
+  },
+  "markLine.data.1.emphasis.label.lineOverflow": {
+    "desc": "<p>Determine how to display the text when it&#39;s overflow on height.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the overflow lines.</li>\n</ul>\n"
+  },
+  "markLine.data.1.emphasis.label.rich": {
+    "desc": "<p>&quot;Rich text styles&quot; can be defined in this <code class=\"codespan\">rich</code> property. For example:</p>\n<pre><code class=\"lang-js\">label: {\n    // Styles defined in &#39;rich&#39; can be applied to some fragments\n    // of text by adding some markers to those fragment, like\n    // `{styleName|text content text content}`.\n    // `&#39;\\n&#39;` is the newline character.\n    formatter: [\n        &#39;{a|Style &quot;a&quot; is applied to this snippet}&#39;\n        &#39;{b|Style &quot;b&quot; is applied to this snippet}This snippet use default style{x|use style &quot;x&quot;}&#39;\n    ].join(&#39;\\n&#39;),\n\n    rich: {\n        a: {\n            color: &#39;red&#39;,\n            lineHeight: 10\n        },\n        b: {\n            backgroundColor: {\n                image: &#39;xxx/xxx.jpg&#39;\n            },\n            height: 40\n        },\n        x: {\n            fontSize: 18,\n            fontFamily: &#39;Microsoft YaHei&#39;,\n            borderColor: &#39;#449933&#39;,\n            borderRadius: 4\n        },\n        ...\n    }\n}\n</code></pre>\n<p>For more details, see <a href=\"tutorial.html#Rich%20Text\" target=\"_blank\">Rich Text</a> please.</p>\n"
+  },
+  "markLine.data.1.emphasis.label.rich.<style_name>.color": {
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "null"
+    }
+  },
+  "markLine.data.1.emphasis.label.rich.<style_name>.fontStyle": {
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,italic,oblique"
+    }
+  },
+  "markLine.data.1.emphasis.label.rich.<style_name>.fontWeight": {
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,bold,bolder,lighter"
+    }
+  },
+  "markLine.data.1.emphasis.label.rich.<style_name>.fontFamily": {
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "sans-serif",
+      "options": "sans-serif,serif,monospace,Arial,Courier New"
+    }
+  },
+  "markLine.data.1.emphasis.label.rich.<style_name>.fontSize": {
+    "desc": "\n\n<p> font size.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "12",
+      "min": "1",
+      "step": "1"
+    }
+  },
+  "markLine.data.1.emphasis.label.rich.<style_name>.align": {
+    "desc": "\n\n<p>Horizontal alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;left&#39;</code></li>\n<li><code class=\"codespan\">&#39;center&#39;</code></li>\n<li><code class=\"codespan\">&#39;right&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">align</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">align</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    align: right,\n    rich: {\n        a: {\n            // `align` is not set, then it will be right\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "left,center,right"
+    }
+  },
+  "markLine.data.1.emphasis.label.rich.<style_name>.verticalAlign": {
+    "desc": "\n\n<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "top,middle,bottom"
+    }
+  },
+  "markLine.data.1.emphasis.label.rich.<style_name>.lineHeight": {
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "1",
+      "default": "12"
+    }
+  },
+  "markLine.data.1.emphasis.label.rich.<style_name>.backgroundColor": {
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "markLine.data.1.emphasis.label.rich.<style_name>.borderColor": {
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "markLine.data.1.emphasis.label.rich.<style_name>.borderWidth": {
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.emphasis.label.rich.<style_name>.borderRadius": {
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "LT,RT, RB, LB"
+    }
+  },
+  "markLine.data.1.emphasis.label.rich.<style_name>.padding": {
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "T,R,B,L"
+    }
+  },
+  "markLine.data.1.emphasis.label.rich.<style_name>.shadowColor": {
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "markLine.data.1.emphasis.label.rich.<style_name>.shadowBlur": {
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.emphasis.label.rich.<style_name>.shadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.emphasis.label.rich.<style_name>.shadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.emphasis.label.rich.<style_name>.width": {
+    "desc": "<p>Width of the text block. It is the width of the text by default. In most cases, there is no need to specify it. You may want to use it in some cases like make simple table or using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p><code class=\"codespan\">width</code> can also be percent string, like <code class=\"codespan\">&#39;100%&#39;</code>, which represents the percent of <code class=\"codespan\">contentWidth</code> (that is, the width without <code class=\"codespan\">padding</code>) of its container box. It is based on <code class=\"codespan\">contentWidth</code> because that each text fragment is layout based on the <code class=\"codespan\">content box</code>, where it makes no sense that calculating width based on <code class=\"codespan\">outerWith</code> in prectice.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+  },
+  "markLine.data.1.emphasis.label.rich.<style_name>.height": {
+    "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+  },
+  "markLine.data.1.emphasis.label.rich.<style_name>.textBorderColor": {
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "markLine.data.1.emphasis.label.rich.<style_name>.textBorderWidth": {
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.emphasis.label.rich.<style_name>.textShadowColor": {
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#000"
+    }
+  },
+  "markLine.data.1.emphasis.label.rich.<style_name>.textShadowBlur": {
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.emphasis.label.rich.<style_name>.textShadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.emphasis.label.rich.<style_name>.textShadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
   },
   "markLine.data.1.blur": {
     "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n"
@@ -7955,6 +10931,378 @@ window.__EC_DOC_option_series_pie = {
   },
   "markLine.data.1.blur.label.formatter": {
     "desc": "<p>Data label formatter, which supports string template and callback function. In either form, <code class=\"codespan\">\\n</code> is supported to represent a new line.</p>\n<p><strong>String template</strong></p>\n<p>Model variation includes:</p>\n<ul>\n<li><code class=\"codespan\">{a}</code>: series name.</li>\n<li><code class=\"codespan\">{b}</code>: the name of a data item.</li>\n<li><code class=\"codespan\">{c}</code>: the value of a data item.</li>\n<li><code class=\"codespan\">{d}</code>: the percent.</li>\n<li><code class=\"codespan\">{@xxx}: the value of a dimension named</code>&#39;xxx&#39;<code class=\"codespan\">, for example,</code>{@product}<code class=\"codespan\">refers the value of</code>&#39;product&#39;` dimension.</li>\n<li><code class=\"codespan\">{@[n]}: the value of a dimension at the index of</code>n<code class=\"codespan\">, for example,</code>{@[3]}` refers the value at dimensions[3].</li>\n</ul>\n<p><strong>example: </strong></p>\n<pre><code class=\"lang-js\">formatter: &#39;{b}: {d}&#39;\n</code></pre>\n<p><strong>Callback function</strong></p>\n<p>Callback function is in form of:</p>\n<pre><code class=\"lang-js\">(params: Object|Array) =&gt; string\n</code></pre>\n<p>where <code class=\"codespan\">params</code> is the single dataset needed by formatter, which is formed as:</p>\n<pre><code class=\"lang-js\">{\n    componentType: &#39;series&#39;,\n    // Series type\n    seriesType: string,\n    // Series index in option.series\n    seriesIndex: number,\n    // Series name\n    seriesName: string,\n    // Data name, or category name\n    name: string,\n    // Data index in input data array\n    dataIndex: number,\n    // Original data as input\n    data: Object,\n    // Value of data. In most series it is the same as data.\n    // But in some series it is some part of the data (e.g., in map, radar)\n    value: number|Array|Object,\n    // encoding info of coordinate system\n    // Key: coord, like (&#39;x&#39; &#39;y&#39; &#39;radius&#39; &#39;angle&#39;)\n    // value: Must be an array, not null/undefined. Contain dimension indices, like:\n    // {\n    //     x: [2] // values on dimension index 2 are mapped to x axis.\n    //     y: [0] // values on dimension index 0 are mapped to y axis.\n    // }\n    encode: Object,\n    // dimension names list\n    dimensionNames: Array&lt;String&gt;,\n    // data dimension index, for example 0 or 1 or 2 ...\n    // Only work in `radar` series.\n    dimensionIndex: number,\n    // Color of data\n    color: string,\n\n\n\n}\n</code></pre>\n<p>Note: the usage of encode and dimensionNames can be:</p>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    source: [\n        [&#39;Matcha Latte&#39;, 43.3, 85.8, 93.7],\n        [&#39;Milk Tea&#39;, 83.1, 73.4, 55.1],\n        [&#39;Cheese Cocoa&#39;, 86.4, 65.2, 82.5],\n        [&#39;Walnut Brownie&#39;, 72.4, 53.9, 39.1]\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.encode.y[0]]\n</code></pre>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    dimensions: [&#39;product&#39;, &#39;2015&#39;, &#39;2016&#39;, &#39;2017&#39;],\n    source: [\n        {product: &#39;Matcha Latte&#39;, &#39;2015&#39;: 43.3, &#39;2016&#39;: 85.8, &#39;2017&#39;: 93.7},\n        {product: &#39;Milk Tea&#39;, &#39;2015&#39;: 83.1, &#39;2016&#39;: 73.4, &#39;2017&#39;: 55.1},\n        {product: &#39;Cheese Cocoa&#39;, &#39;2015&#39;: 86.4, &#39;2016&#39;: 65.2, &#39;2017&#39;: 82.5},\n        {product: &#39;Walnut Brownie&#39;, &#39;2015&#39;: 72.4, &#39;2016&#39;: 53.9, &#39;2017&#39;: 39.1}\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.dimensionNames[params.encode.y[0]]]\n</code></pre>\n"
+  },
+  "markLine.data.1.blur.label.color": {
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "null"
+    }
+  },
+  "markLine.data.1.blur.label.fontStyle": {
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,italic,oblique"
+    }
+  },
+  "markLine.data.1.blur.label.fontWeight": {
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,bold,bolder,lighter"
+    }
+  },
+  "markLine.data.1.blur.label.fontFamily": {
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "sans-serif",
+      "options": "sans-serif,serif,monospace,Arial,Courier New"
+    }
+  },
+  "markLine.data.1.blur.label.fontSize": {
+    "desc": "\n\n<p> font size.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "12",
+      "min": "1",
+      "step": "1"
+    }
+  },
+  "markLine.data.1.blur.label.lineHeight": {
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "1",
+      "default": "12"
+    }
+  },
+  "markLine.data.1.blur.label.backgroundColor": {
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "markLine.data.1.blur.label.borderColor": {
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "markLine.data.1.blur.label.borderWidth": {
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.blur.label.borderRadius": {
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "LT,RT, RB, LB"
+    }
+  },
+  "markLine.data.1.blur.label.padding": {
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "T,R,B,L"
+    }
+  },
+  "markLine.data.1.blur.label.shadowColor": {
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "markLine.data.1.blur.label.shadowBlur": {
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.blur.label.shadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.blur.label.shadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.blur.label.width": {
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
+  },
+  "markLine.data.1.blur.label.height": {
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
+  },
+  "markLine.data.1.blur.label.textBorderColor": {
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "markLine.data.1.blur.label.textBorderWidth": {
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.blur.label.textShadowColor": {
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#000"
+    }
+  },
+  "markLine.data.1.blur.label.textShadowBlur": {
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.blur.label.textShadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.blur.label.textShadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.blur.label.overflow": {
+    "desc": "\n\n<p>Determine how to display the text when it&#39;s overflow. Available when <code class=\"codespan\">width</code> is set.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the text and trailing with <code class=\"codespan\">ellipsis</code>.</li>\n<li><code class=\"codespan\">&#39;break&#39;</code> Break by word</li>\n<li><code class=\"codespan\">&#39;breakAll&#39;</code> Break by character.</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "truncate,break,breakAll"
+    }
+  },
+  "markLine.data.1.blur.label.ellipsis": {
+    "desc": "<p>Ellipsis to be displayed when <code class=\"codespan\">overflow</code> is set to <code class=\"codespan\">truncate</code>.</p>\n"
+  },
+  "markLine.data.1.blur.label.lineOverflow": {
+    "desc": "<p>Determine how to display the text when it&#39;s overflow on height.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the overflow lines.</li>\n</ul>\n"
+  },
+  "markLine.data.1.blur.label.rich": {
+    "desc": "<p>&quot;Rich text styles&quot; can be defined in this <code class=\"codespan\">rich</code> property. For example:</p>\n<pre><code class=\"lang-js\">label: {\n    // Styles defined in &#39;rich&#39; can be applied to some fragments\n    // of text by adding some markers to those fragment, like\n    // `{styleName|text content text content}`.\n    // `&#39;\\n&#39;` is the newline character.\n    formatter: [\n        &#39;{a|Style &quot;a&quot; is applied to this snippet}&#39;\n        &#39;{b|Style &quot;b&quot; is applied to this snippet}This snippet use default style{x|use style &quot;x&quot;}&#39;\n    ].join(&#39;\\n&#39;),\n\n    rich: {\n        a: {\n            color: &#39;red&#39;,\n            lineHeight: 10\n        },\n        b: {\n            backgroundColor: {\n                image: &#39;xxx/xxx.jpg&#39;\n            },\n            height: 40\n        },\n        x: {\n            fontSize: 18,\n            fontFamily: &#39;Microsoft YaHei&#39;,\n            borderColor: &#39;#449933&#39;,\n            borderRadius: 4\n        },\n        ...\n    }\n}\n</code></pre>\n<p>For more details, see <a href=\"tutorial.html#Rich%20Text\" target=\"_blank\">Rich Text</a> please.</p>\n"
+  },
+  "markLine.data.1.blur.label.rich.<style_name>.color": {
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "null"
+    }
+  },
+  "markLine.data.1.blur.label.rich.<style_name>.fontStyle": {
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,italic,oblique"
+    }
+  },
+  "markLine.data.1.blur.label.rich.<style_name>.fontWeight": {
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,bold,bolder,lighter"
+    }
+  },
+  "markLine.data.1.blur.label.rich.<style_name>.fontFamily": {
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "sans-serif",
+      "options": "sans-serif,serif,monospace,Arial,Courier New"
+    }
+  },
+  "markLine.data.1.blur.label.rich.<style_name>.fontSize": {
+    "desc": "\n\n<p> font size.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "12",
+      "min": "1",
+      "step": "1"
+    }
+  },
+  "markLine.data.1.blur.label.rich.<style_name>.align": {
+    "desc": "\n\n<p>Horizontal alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;left&#39;</code></li>\n<li><code class=\"codespan\">&#39;center&#39;</code></li>\n<li><code class=\"codespan\">&#39;right&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">align</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">align</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    align: right,\n    rich: {\n        a: {\n            // `align` is not set, then it will be right\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "left,center,right"
+    }
+  },
+  "markLine.data.1.blur.label.rich.<style_name>.verticalAlign": {
+    "desc": "\n\n<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "top,middle,bottom"
+    }
+  },
+  "markLine.data.1.blur.label.rich.<style_name>.lineHeight": {
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "1",
+      "default": "12"
+    }
+  },
+  "markLine.data.1.blur.label.rich.<style_name>.backgroundColor": {
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "markLine.data.1.blur.label.rich.<style_name>.borderColor": {
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "markLine.data.1.blur.label.rich.<style_name>.borderWidth": {
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.blur.label.rich.<style_name>.borderRadius": {
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "LT,RT, RB, LB"
+    }
+  },
+  "markLine.data.1.blur.label.rich.<style_name>.padding": {
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "T,R,B,L"
+    }
+  },
+  "markLine.data.1.blur.label.rich.<style_name>.shadowColor": {
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "markLine.data.1.blur.label.rich.<style_name>.shadowBlur": {
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.blur.label.rich.<style_name>.shadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.blur.label.rich.<style_name>.shadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.blur.label.rich.<style_name>.width": {
+    "desc": "<p>Width of the text block. It is the width of the text by default. In most cases, there is no need to specify it. You may want to use it in some cases like make simple table or using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p><code class=\"codespan\">width</code> can also be percent string, like <code class=\"codespan\">&#39;100%&#39;</code>, which represents the percent of <code class=\"codespan\">contentWidth</code> (that is, the width without <code class=\"codespan\">padding</code>) of its container box. It is based on <code class=\"codespan\">contentWidth</code> because that each text fragment is layout based on the <code class=\"codespan\">content box</code>, where it makes no sense that calculating width based on <code class=\"codespan\">outerWith</code> in prectice.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+  },
+  "markLine.data.1.blur.label.rich.<style_name>.height": {
+    "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+  },
+  "markLine.data.1.blur.label.rich.<style_name>.textBorderColor": {
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "markLine.data.1.blur.label.rich.<style_name>.textBorderWidth": {
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.blur.label.rich.<style_name>.textShadowColor": {
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#000"
+    }
+  },
+  "markLine.data.1.blur.label.rich.<style_name>.textShadowBlur": {
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.blur.label.rich.<style_name>.textShadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "markLine.data.1.blur.label.rich.<style_name>.textShadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
   },
   "markLine.animation": {
     "desc": "\n\n<p>Whether to enable animation.</p>\n",

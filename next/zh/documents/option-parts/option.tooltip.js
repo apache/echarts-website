@@ -528,6 +528,12 @@ window.__EC_DOC_option_tooltip = {
       "default": "false"
     }
   },
+  "className": {
+    "desc": "\n\n\n\n<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>指定 tooltip 的 DOM 节点的 CSS 类。（只在 <a href=\"#tooltip.renderMode\"><code class=\"codespan\">html</code></a> 模式下生效）。</p>\n<p>Example:</p>\n<pre><code class=\"lang-js\">className: &#39;echarts-tooltip echarts-tooltip-dark&#39;\n</code></pre>\n",
+    "uiControl": {
+      "type": "text"
+    }
+  },
   "transitionDuration": {
     "desc": "\n\n<p>提示框浮层的移动动画过渡时间，单位是 s，设置为 0 的时候会紧跟着鼠标移动。</p>\n",
     "uiControl": {
@@ -699,5 +705,13 @@ window.__EC_DOC_option_tooltip = {
   },
   "extraCssText": {
     "desc": "<p>额外附加到浮层的 css 样式。如下为浮层添加阴影的示例：</p>\n<pre><code class=\"lang-js\">extraCssText: &#39;box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);&#39;\n</code></pre>\n"
+  },
+  "order": {
+    "desc": "\n\n\n\n<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>多系列提示框浮层排列顺序。默认值为 <code class=\"codespan\">&#39;seriesAsc&#39;</code></p>\n<p>提示框排列顺序可选值:</p>\n<ul>\n<li><p><code class=\"codespan\">&#39;seriesAsc&#39;</code></p>\n<p>  根据系列声明, 升序排列。</p>\n</li>\n<li><p><code class=\"codespan\">&#39;seriesDesc&#39;</code></p>\n<p>  根据系列声明, 降序排列。</p>\n</li>\n<li><p><code class=\"codespan\">&#39;valueAsc&#39;</code></p>\n<p>  根据数据值, 升序排列。</p>\n</li>\n<li><p><code class=\"codespan\">&#39;valueDesc&#39;</code></p>\n<p>  根据数据值, 降序排列。</p>\n</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "seriesAsc,seriesDesc,valueAsc,valueDesc",
+      "default": "seriesAsc"
+    }
   }
 }

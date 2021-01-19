@@ -107,7 +107,7 @@ window.__EC_DOC_option_series_graph = {
     }
   },
   "force.friction": {
-    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v4.5.0</code></p>\n</blockquote>\n<p>It will slow down the nodes&#39; movement. The value range is from 0 to 1.</p>\n<p>But it is still an experimental option, see <a href=\"https://github.com/apache/incubator-echarts/issues/11024\" target=\"_blank\">#11024</a>.</p>\n",
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v4.5.0</code></p>\n</blockquote>\n<p>It will slow down the nodes&#39; movement. The value range is from 0 to 1.</p>\n<p>But it is still an experimental option, see <a href=\"https://github.com/apache/echarts/issues/11024\" target=\"_blank\">#11024</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",

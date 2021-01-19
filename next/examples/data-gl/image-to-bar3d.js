@@ -2,7 +2,6 @@
 title: Image to Bar3D
 category: bar3D
 titleCN: Image to Bar3D
-scripts: 'http://echarts.baidu.com/resource/echarts-gl-latest/dist/echarts-gl.min.js'
 */
 
 var img = new Image();
@@ -43,8 +42,8 @@ img.onload = function () {
         },
         grid3D: {
             viewControl: {
-                alpha: 70,
-                beta: 0
+                alpha: 20,
+                beta: -30
             },
             postEffect: {
                 enable: true,

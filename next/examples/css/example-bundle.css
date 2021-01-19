@@ -3,7 +3,6 @@
   font-size: 12px;
   line-height: 18px;
   padding: 10px;
-  
   position: absolute;
   left: 0;
   top: 0;
@@ -1031,8 +1030,30 @@ td.visible-xxxl {
   left: 0;
   overflow-y: auto;
 }
+#example-explore ::-webkit-scrollbar {
+    height: 4px;
+    width: 4px;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    border-radius: 2px;
+    background: #fff;
+}
+#example-explore ::-webkit-scrollbar-button {
+    display: none;
+}
+#example-explore ::-webkit-scrollbar-thumb {
+    width: 4px;
+    min-height: 15px;
+    background: rgba(50, 50, 50, 0.2) !important;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    border-radius: 2px;
+}
+#example-explore ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.5) !important;
+}
 #explore-container {
-  margin-left: 190px;
+  margin-left: 220px;
   padding: 10px 10px;
 }
 .example-list-panel {
@@ -1041,52 +1062,48 @@ td.visible-xxxl {
 .example-list-panel h3 {
     margin-bottom: 20px;
     padding-bottom: 10px;
-    border-bottom: 1px solid #ccd3e8;
+    border-bottom: 1px solid #E1E5F2;
     font-weight: normal;
-    color: #252839;
+    color: #464646;
+    font-size: 20px;
 }
 .example-list-panel .chart-type-head span {
-    font-size: 18px;
+    font-size: 16px;
     padding-left: 5px;
-    color: #999;
+    color: #949CB1;
     font-weight: 200;
 }
 #left-container {
-  position: fixed;
-  top: 10px;
-  bottom: 10px;
-  left: 10px;
-  width: 170px;
-}
-#left-toolbar {
-  position: absolute;
+  position: sticky;
   left: 0;
-  right: 0;
-  height: 30px;
   top: 0;
-  background-color: #fff;
-  border-radius: 10px;
+  float: left;
+  height: calc(100%);
+  width: 200px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding-left: 5px;
-  padding-top: 4px;
+  overflow-y: auto;
 }
-#left-toolbar .el-switch__label * {
+#toolbar {
+  position: fixed;
+  right: 30px;
+  top: 20px;
+  height: 30px;
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 4px 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+#toolbar .el-switch__label * {
     font-size: 12px;
     text-transform: uppercase;
 }
-#left-toolbar .el-switch__label.is-active {
+#toolbar .el-switch__label.is-active {
     color: #181432;
 }
 #left-chart-nav {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 40px;
-  background-color: #252839;
+  background-color: #fff;
   overflow-y: hidden;
-  border-radius: 10px;
-  color: #fff;
+  color: #111;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 #left-chart-nav:hover {
@@ -1096,16 +1113,14 @@ td.visible-xxxl {
       text-decoration: none;
 }
 #left-chart-nav li {
-    transition: 0.5s;
     cursor: pointer;
 }
 #left-chart-nav li a {
       height: 45px;
-      padding: 10px 0 10px 10px;
+      padding: 10px 0 10px 20px;
       display: block;
-      transition: 0.5s;
       text-decoration: none;
-      color: inherit;
+      color: #6E7079;
 }
 #left-chart-nav li a .chart-name {
         display: inline-block;
@@ -1115,21 +1130,30 @@ td.visible-xxxl {
 }
 #left-chart-nav li a .chart-icon {
         content: '';
+        width: 20px;
         display: inline-block;
-        width: 25px;
-        height: 25px;
-        background-image: url(../asset/chart-icon.png);
-        background-size: 25px;
-        background-repeat: no-repeat;
         border-radius: 50%;
-        border: 1px solid #fff;
         vertical-align: middle;
 }
+#left-chart-nav li a .chart-icon svg {
+          width: 100% !important;
+          height: auto !important;
+}
 #left-chart-nav li a.active {
-        background-color: #e43c59;
+        background-color: #5470C6;
+        color: #fff;
+}
+#left-chart-nav li a.active .chart-icon * {
+          fill: #fff;
+}
+#left-chart-nav li a.active:hover {
+        color: #fff;
 }
 #left-chart-nav li:hover {
-      background-color: #11121a;
+      border-right: 4px solid #5470C6;
+}
+#left-chart-nav li:hover a {
+        color: #464646;
 }
 @media (max-width: 768px) {
 #left-container {
@@ -1138,149 +1162,5 @@ td.visible-xxxl {
 #explore-container {
     margin-left: 0;
 }
-}
-#left-chart-nav-line .chart-icon {
-  background-position-x: -1px;
-  background-position-y: -1px;
-}
-#left-chart-nav-bar .chart-icon {
-  background-position-x: -1px;
-  background-position-y: -26px;
-}
-#left-chart-nav-scatter .chart-icon {
-  background-position-x: -1px;
-  background-position-y: -51px;
-}
-#left-chart-nav-pie .chart-icon {
-  background-position-x: -1px;
-  background-position-y: -101px;
-}
-#left-chart-nav-radar .chart-icon {
-  background-position-x: -1px;
-  background-position-y: -126px;
-}
-#left-chart-nav-funnel .chart-icon {
-  background-position-x: -1px;
-  background-position-y: -251px;
-}
-#left-chart-nav-gauge .chart-icon {
-  background-position-x: -1px;
-  background-position-y: -226px;
-}
-#left-chart-nav-map .chart-icon {
-  background-position-x: -1px;
-  background-position-y: -201px;
-}
-#left-chart-nav-graph .chart-icon {
-  background-position-x: -1px;
-  background-position-y: -176px;
-}
-#left-chart-nav-treemap .chart-icon {
-  background-position-x: -1px;
-  background-position-y: -376px;
-}
-#left-chart-nav-parallel .chart-icon {
-  background-position-x: -1px;
-  background-position-y: -401px;
-}
-#left-chart-nav-sankey .chart-icon {
-  background-position-x: -1px;
-  background-position-y: -426px;
-}
-#left-chart-nav-candlestick .chart-icon {
-  background-position-x: -1px;
-  background-position-y: -76px;
-}
-#left-chart-nav-boxplot .chart-icon {
-  background-position-x: -1px;
-  background-position-y: -451px;
-}
-#left-chart-nav-heatmap .chart-icon {
-  background-position-x: -1px;
-  background-position-y: -276px;
-}
-#left-chart-nav-pictorialBar .chart-icon {
-  background-position-x: -1px;
-  background-position-y: -601px;
-}
-#left-chart-nav-themeRiver .chart-icon {
-  background-position-x: -1px;
-  background-position-y: -626px;
-}
-#left-chart-nav-calendar .chart-icon {
-  background-position-x: -1px;
-  background-position-y: -651px;
-}
-#left-chart-nav-custom .chart-icon {
-  background-position-x: -1px;
-  background-position-y: -676px;
-}
-#left-chart-nav-sunburst .chart-icon {
-  background-position-x: -1px;
-  background-position-y: -701px;
-}
-#left-chart-nav-tree .chart-icon {
-  background-position-x: -1px;
-  background-position-y: -351px;
-}
-#left-chart-nav-globe .chart-icon {
-  background-position-x: -1px;
-  background-position-y: -726px;
-}
-#left-chart-nav-bar3D .chart-icon {
-  background-position-x: -1px;
-  background-position-y: -726px;
-}
-#left-chart-nav-scatter3D .chart-icon {
-  background-position-x: -1px;
-  background-position-y: -726px;
-}
-#left-chart-nav-surface .chart-icon {
-  background-position-x: -1px;
-  background-position-y: -726px;
-}
-#left-chart-nav-map3D .chart-icon {
-  background-position-x: -1px;
-  background-position-y: -726px;
-}
-#left-chart-nav-lines3D .chart-icon {
-  background-position-x: -1px;
-  background-position-y: -726px;
-}
-#left-chart-nav-line3D .chart-icon {
-  background-position-x: -1px;
-  background-position-y: -726px;
-}
-#left-chart-nav-scatterGL .chart-icon {
-  background-position-x: -1px;
-  background-position-y: -726px;
-}
-#left-chart-nav-linesGL .chart-icon {
-  background-position-x: -1px;
-  background-position-y: -726px;
-}
-#left-chart-nav-flowGL .chart-icon {
-  background-position-x: -1px;
-  background-position-y: -726px;
-}
-#left-chart-nav-graphGL .chart-icon {
-  background-position-x: -1px;
-  background-position-y: -726px;
-}
-#left-chart-nav-geo3D .chart-icon {
-  background-position-x: -1px;
-  background-position-y: -726px;
-}
-#left-chart-nav-geo .chart-icon {
-  background-position-x: -1px;
-  background-position-y: -201px;
-}
-#left-chart-nav-lines .chart-icon {
-  background-position-x: -1px;
-  background-position-y: -501px;
-}
-#left-chart-nav-dataset .chart-icon {
-  background-position-x: -1px;
-  background-position-y: -551px;
 }
 

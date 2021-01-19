@@ -12,22 +12,22 @@
     "desc": "<p><code class=\"codespan\">dataset.source</code> 第一行/列是否是 <a href=\"dataset.dimensions\" target=\"_blank\">维度名</a> 信息。可选值：</p>\n<ul>\n<li><code class=\"codespan\">null/undefine</code>：默认，自动探测。</li>\n<li><code class=\"codespan\">true</code>：第一行/列是维度名信息。</li>\n<li><code class=\"codespan\">false</code>：第一行/列直接开始是数据。</li>\n</ul>\n<p>注意：“第一行/列” 的意思是，如果 <a href=\"#series.seriesLayoutBy\">series.seriesLayoutBy</a> 设置为 <code class=\"codespan\">&#39;column&#39;</code>（默认值），则取第一行，如果 <code class=\"codespan\">series.seriesLayoutBy</code> 设置为 <code class=\"codespan\">&#39;row&#39;</code>，则取第一列。</p>\n"
   },
   "transform": {
-    "desc": "<p>参见这个教程： <a href=\"tutorial.html#%E4%BD%BF%E7%94%A8%20transform%20%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2\" target=\"_blank\">datat transform</a>.</p>\n"
+    "desc": "<p>参见这个教程： <a href=\"tutorial.html#%E4%BD%BF%E7%94%A8%20transform%20%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2\" target=\"_blank\">data transform</a>.</p>\n"
   },
   "transform-filter.config": {
-    "desc": "<p>&quot;sort&quot; 数据转换器的“条件”。</p>\n<p>参见这个教程： <a href=\"tutorial.html#%E4%BD%BF%E7%94%A8%20transform%20%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2\" target=\"_blank\">datat transform</a>.</p>\n"
+    "desc": "<p>&quot;sort&quot; 数据转换器的“条件”。</p>\n<p>参见这个教程： <a href=\"tutorial.html#%E4%BD%BF%E7%94%A8%20transform%20%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2\" target=\"_blank\">data transform</a>.</p>\n"
   },
   "transform-filter.print": {
     "desc": "<p>使用 transform 时，有时候我们会配不对，显示不出来结果，并且不知道哪里错了。所以，这里提供了一个配置项 <code class=\"codespan\">transform.print</code> 方便 debug 。这个配置项只在开发环境中生效。如下例：</p>\n<pre><code class=\"lang-js\">option = {\n    dataset: [{\n        source: [ ... ]\n    }, {\n        transform: {\n            type: &#39;filter&#39;,\n            config: { ... }\n            // 配置为 `true` 后， transform 的结果\n            // 会被 console.log 打印出来。\n            print: true\n        }\n    }],\n    ...\n}\n</code></pre>\n"
   },
   "transform-sort.config": {
-    "desc": "<p>&quot;sort&quot; 数据转换器的“条件”。</p>\n<p>参见这个教程： <a href=\"tutorial.html#%E4%BD%BF%E7%94%A8%20transform%20%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2\" target=\"_blank\">datat transform</a>.</p>\n"
+    "desc": "<p>&quot;sort&quot; 数据转换器的“条件”。</p>\n<p>参见这个教程： <a href=\"tutorial.html#%E4%BD%BF%E7%94%A8%20transform%20%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2\" target=\"_blank\">data transform</a>.</p>\n"
   },
   "transform-sort.print": {
     "desc": "<p>使用 transform 时，有时候我们会配不对，显示不出来结果，并且不知道哪里错了。所以，这里提供了一个配置项 <code class=\"codespan\">transform.print</code> 方便 debug 。这个配置项只在开发环境中生效。如下例：</p>\n<pre><code class=\"lang-js\">option = {\n    dataset: [{\n        source: [ ... ]\n    }, {\n        transform: {\n            type: &#39;filter&#39;,\n            config: { ... }\n            // 配置为 `true` 后， transform 的结果\n            // 会被 console.log 打印出来。\n            print: true\n        }\n    }],\n    ...\n}\n</code></pre>\n"
   },
   "transform-xxx:xxx": {
-    "desc": "<p>除了上述的内置的数据转换器外，我们也可以使用外部的数据转换器。外部数据转换器能提供或自己定制更丰富的功能。</p>\n<p>参见这个教程： <a href=\"tutorial.html#%E4%BD%BF%E7%94%A8%20transform%20%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2\" target=\"_blank\">datat transform</a>.</p>\n"
+    "desc": "<p>除了上述的内置的数据转换器外，我们也可以使用外部的数据转换器。外部数据转换器能提供或自己定制更丰富的功能。</p>\n<p>参见这个教程： <a href=\"tutorial.html#%E4%BD%BF%E7%94%A8%20transform%20%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2\" target=\"_blank\">data transform</a>.</p>\n"
   },
   "transform-xxx:xxx.type": {
     "desc": "<p>内置数据转换器没有名空间（如 <code class=\"codespan\">type: &#39;filter&#39;</code>, <code class=\"codespan\">type: &#39;sort&#39;</code>）。</p>\n<p>外部数据转换器须有名空间（如 <code class=\"codespan\">type: &#39;ecStat:regression&#39;</code>）。</p>\n"
@@ -39,12 +39,12 @@
     "desc": "<p>使用 transform 时，有时候我们会配不对，显示不出来结果，并且不知道哪里错了。所以，这里提供了一个配置项 <code class=\"codespan\">transform.print</code> 方便 debug 。这个配置项只在开发环境中生效。如下例：</p>\n<pre><code class=\"lang-js\">option = {\n    dataset: [{\n        source: [ ... ]\n    }, {\n        transform: {\n            type: &#39;filter&#39;,\n            config: { ... }\n            // 配置为 `true` 后， transform 的结果\n            // 会被 console.log 打印出来。\n            print: true\n        }\n    }],\n    ...\n}\n</code></pre>\n"
   },
   "fromDatasetIndex": {
-    "desc": "<p>指定 <a href=\"#dataset.transform\">dataset.transform</a> 以哪个 dataset 作为输入。如果 <a href=\"#dataset.transform\">dataset.transform</a> 被指定了，但是 <code class=\"codespan\">fromDatasetIndex</code> 和 <code class=\"codespan\">fromDatasetId</code> 都没有被指定，那么默认会使用 <code class=\"codespan\">fromDatasetIndex: 0</code>.</p>\n<p>参见这个教程： <a href=\"tutorial.html#%E4%BD%BF%E7%94%A8%20transform%20%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2\" target=\"_blank\">datat transform</a>.</p>\n"
+    "desc": "<p>指定 <a href=\"#dataset.transform\">dataset.transform</a> 以哪个 dataset 作为输入。如果 <a href=\"#dataset.transform\">dataset.transform</a> 被指定了，但是 <code class=\"codespan\">fromDatasetIndex</code> 和 <code class=\"codespan\">fromDatasetId</code> 都没有被指定，那么默认会使用 <code class=\"codespan\">fromDatasetIndex: 0</code>.</p>\n<p>参见这个教程： <a href=\"tutorial.html#%E4%BD%BF%E7%94%A8%20transform%20%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2\" target=\"_blank\">data transform</a>.</p>\n"
   },
   "fromDatasetId": {
-    "desc": "<p>指定 <a href=\"#dataset.transform\">dataset.transform</a> 以哪个 dataset 作为输入。</p>\n<p>参见这个教程： <a href=\"tutorial.html#%E4%BD%BF%E7%94%A8%20transform%20%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2\" target=\"_blank\">datat transform</a>.</p>\n"
+    "desc": "<p>指定 <a href=\"#dataset.transform\">dataset.transform</a> 以哪个 dataset 作为输入。</p>\n<p>参见这个教程： <a href=\"tutorial.html#%E4%BD%BF%E7%94%A8%20transform%20%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2\" target=\"_blank\">data transform</a>.</p>\n"
   },
   "fromTransformResult": {
-    "desc": "<p>如果一个 <a href=\"#dataset.transform\">dataset.transform</a> 会产出多个结果 data ，我们可以使用 <code class=\"codespan\">fromTransformResult</code> 获得特定的结果。</p>\n<p>大多数场景下，transform 只会产出一个结果，所以大多数情况下 <code class=\"codespan\">fromTransformResult</code> 并不需要指定。当不指定 <code class=\"codespan\">fromTransformResult</code> 时，默认使用 <code class=\"codespan\">fromTransformResult: 0</code>。</p>\n<p>参见这个教程： <a href=\"tutorial.html#%E4%BD%BF%E7%94%A8%20transform%20%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2\" target=\"_blank\">datat transform</a>.</p>\n"
+    "desc": "<p>如果一个 <a href=\"#dataset.transform\">dataset.transform</a> 会产出多个结果 data ，我们可以使用 <code class=\"codespan\">fromTransformResult</code> 获得特定的结果。</p>\n<p>大多数场景下，transform 只会产出一个结果，所以大多数情况下 <code class=\"codespan\">fromTransformResult</code> 并不需要指定。当不指定 <code class=\"codespan\">fromTransformResult</code> 时，默认使用 <code class=\"codespan\">fromTransformResult: 0</code>。</p>\n<p>参见这个教程： <a href=\"tutorial.html#%E4%BD%BF%E7%94%A8%20transform%20%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2\" target=\"_blank\">data transform</a>.</p>\n"
   }
 }

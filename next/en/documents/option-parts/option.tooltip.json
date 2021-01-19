@@ -528,6 +528,12 @@
       "default": "false"
     }
   },
+  "className": {
+    "desc": "\n\n\n\n<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Specify the classes for the tooltip root DOM. (Only works in <a href=\"#tooltip.renderMode\"><code class=\"codespan\">html</code></a> render mode).</p>\n<p>Example:</p>\n<pre><code class=\"lang-js\">className: &#39;echarts-tooltip echarts-tooltip-dark&#39;\n</code></pre>\n",
+    "uiControl": {
+      "type": "text"
+    }
+  },
   "transitionDuration": {
     "desc": "\n\n<p>The transition duration of tooltip&#39;s animation, in seconds. When it is set to be 0, it would move closely with the mouse.</p>\n",
     "uiControl": {
@@ -699,5 +705,13 @@
   },
   "extraCssText": {
     "desc": "<p>Extra CSS style for floating layer. The following is an example for adding shadow.</p>\n<pre><code class=\"lang-js\">extraCssText: &#39;box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);&#39;\n</code></pre>\n"
+  },
+  "order": {
+    "desc": "\n\n\n\n\n<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Tooltip order for multiple series. Defaults is <code class=\"codespan\">&#39;seriesAsc&#39;</code>.</p>\n<p>Conditions to order tooltip. Options:</p>\n<ul>\n<li><p><code class=\"codespan\">&#39;seriesAsc&#39;</code></p>\n<p>  Base on series declaration, ascending order tooltip.</p>\n</li>\n<li><p><code class=\"codespan\">&#39;seriesDesc&#39;</code></p>\n<p>  Base on series declaration, descending order tooltip.</p>\n</li>\n<li><p><code class=\"codespan\">&#39;valueAsc&#39;</code></p>\n<p>  Base on value, ascending order tooltip, only for numberic value.</p>\n</li>\n<li><p><code class=\"codespan\">&#39;valueDesc&#39;</code></p>\n<p>  Base on value, descending order tooltip, only for numberic value.</p>\n</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "seriesAsc,seriesDesc,valueAsc,valueDesc",
+      "default": "seriesAsc"
+    }
   }
 }

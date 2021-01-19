@@ -2,7 +2,6 @@
 title: Bar3D - Punch Card
 category: bar3D
 titleCN: Bar3D - Punch Card
-scripts: 'http://echarts.baidu.com/resource/echarts-gl-latest/dist/echarts-gl.min.js'
 */
 
 
@@ -59,18 +58,14 @@ option = {
         shading: 'lambert',
 
         label: {
-            textStyle: {
-                fontSize: 16,
-                borderWidth: 1
-            }
+            fontSize: 16,
+            borderWidth: 1
         },
 
         emphasis: {
             label: {
-                textStyle: {
-                    fontSize: 20,
-                    color: '#900'
-                }
+                fontSize: 20,
+                color: '#900'
             },
             itemStyle: {
                 color: '#900'

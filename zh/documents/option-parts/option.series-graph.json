@@ -107,7 +107,7 @@
     }
   },
   "force.friction": {
-    "desc": "\n\n\n\n<blockquote>\n<p>从 <code class=\"codespan\">v4.5.0</code> 开始支持</p>\n</blockquote>\n<p>这个参数能减缓节点的移动速度。取值范围 0 到 1。</p>\n<p>但是仍然是个试验性的参数，参见 <a href=\"https://github.com/apache/incubator-echarts/issues/11024\" target=\"_blank\">#11024</a>。</p>\n",
+    "desc": "\n\n\n\n<blockquote>\n<p>从 <code class=\"codespan\">v4.5.0</code> 开始支持</p>\n</blockquote>\n<p>这个参数能减缓节点的移动速度。取值范围 0 到 1。</p>\n<p>但是仍然是个试验性的参数，参见 <a href=\"https://github.com/apache/echarts/issues/11024\" target=\"_blank\">#11024</a>。</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
