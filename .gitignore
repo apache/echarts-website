@@ -2,3 +2,5 @@ _*.html
 .DS_Store
 en/_*.html
 package-lock.json
+/examples/data/option
+/examples/data-gl/option
