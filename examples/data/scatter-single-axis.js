@@ -1,3 +1,10 @@
+/*
+title: Scatter on Single Axis
+category: scatter
+titleCN: 单轴散点图
+difficulty: 3
+*/
+
 var hours = ['12a', '1a', '2a', '3a', '4a', '5a', '6a',
         '7a', '8a', '9a','10a','11a',
         '12p', '1p', '2p', '3p', '4p', '5p',
@@ -16,7 +23,7 @@ option = {
     series: []
 };
 
-echarts.util.each(days, function (day, idx) {
+days.forEach(function (day, idx) {
     option.title.push({
         textBaseline: 'middle',
         top: (idx + 0.5) * 100 / 7 + '%',
@@ -44,6 +51,6 @@ echarts.util.each(days, function (day, idx) {
     });
 });
 
-echarts.util.each(data, function (dataItem) {
+data.forEach(function (dataItem) {
     option.series[dataItem[0]].data.push([dataItem[1], dataItem[2]]);
 });

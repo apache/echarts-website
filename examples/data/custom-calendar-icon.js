@@ -1,3 +1,10 @@
+/*
+title: Custom Calendar Icon
+category: 'custom, calendar'
+titleCN: 日历图自定义图标
+difficulty: 7
+*/
+
 
 var layouts = [
     [[0, 0]],
@@ -49,7 +56,7 @@ function renderItem(params, api) {
 
     var group = {
         type: 'group',
-        children: echarts.util.map(layouts[events.length - 1], function (itemLayout, index) {
+        children: (layouts[events.length - 1] || []).map(function (itemLayout, index) {
             return {
                 type: 'path',
                 shape: {

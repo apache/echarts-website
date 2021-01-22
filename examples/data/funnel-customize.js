@@ -1,3 +1,9 @@
+/*
+title: Customized Funnel
+category: funnel
+titleCN: 漏斗图
+*/
+
 option = {
     title: {
         text: '漏斗图',
@@ -74,7 +80,9 @@ option = {
                 {value: 5, name: '订单'},
                 {value: 50, name: '点击'},
                 {value: 80, name: '展现'}
-            ]
+            ],
+            // Ensure outer shape will not be over inner shape when hover.
+            z: 100
         }
     ]
 };

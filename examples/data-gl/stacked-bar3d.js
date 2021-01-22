@@ -1,4 +1,10 @@
-$.getScript(ROOT_PATH + '/vendors/simplex.js').done(function () {
+/*
+title: Stacked Bar3D
+category: bar3D
+titleCN: Stacked Bar3D
+*/
+
+$.getScript('https://cdn.jsdelivr.net/npm/simplex-noise@2.4.0/simplex-noise.js').done(function () {
 
 
 function generateData() {

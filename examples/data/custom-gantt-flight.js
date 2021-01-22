@@ -1,3 +1,10 @@
+/*
+title: Gantt Chart of Airport Flights
+category: 'custom, dataZoom, drag'
+titleCN: 机场航班甘特图
+difficulty: 4
+*/
+
 var HEIGHT_RATIO = 0.6;
 var DIM_CATEGORY_INDEX = 0;
 var DIM_TIME_ARRIVAL = 1;
@@ -56,7 +63,7 @@ function makeOption() {
             bottom: 0,
             start: 0,
             end: 26,
-            handleIcon: 'M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+            handleIcon: 'path://M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
             handleSize: '80%',
             showDetail: false
         }, {
@@ -148,7 +155,7 @@ function makeOption() {
                 x: -1, // Then this series will not controlled by x.
                 y: 0
             },
-            data: echarts.util.map(_rawData.parkingApron.data, function (item, index) {
+            data: _rawData.parkingApron.data.map(function (item, index) {
                 return [index].concat(item);
             })
         }]

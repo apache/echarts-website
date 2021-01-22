@@ -1,3 +1,10 @@
+/*
+title: Proportion of Browsers
+category: radar
+titleCN: 浏览器占比变化
+difficulty: 3
+*/
+
 option = {
     title: {
         text: '浏览器占比变化',
@@ -6,8 +13,7 @@ option = {
         left: 10
     },
     tooltip: {
-        trigger: 'item',
-        backgroundColor: 'rgba(0,0,250,0.2)'
+        trigger: 'item'
     },
     legend: {
         type: 'scroll',

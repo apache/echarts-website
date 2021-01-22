@@ -1,3 +1,10 @@
+/*
+title: Calendar Pie
+category: 'calendar, pie'
+titleCN: 日历饼图
+difficulty: 6
+*/
+
 var cellSize = [80, 80];
 var pieRadius = 30;
 
@@ -16,7 +23,7 @@ function getVirtulData() {
 }
 
 function getPieSeries(scatterData, chart) {
-    return echarts.util.map(scatterData, function (item, index) {
+    return scatterData.map(function (item, index) {
         var center = chart.convertToPixel('calendar', item);
         return {
             id: index + 'pie',
@@ -39,7 +46,7 @@ function getPieSeries(scatterData, chart) {
 }
 
 function getPieSeriesUpdate(scatterData, chart) {
-    return echarts.util.map(scatterData, function (item, index) {
+    return scatterData.map(function (item, index) {
         var center = chart.convertToPixel('calendar', item);
         return {
             id: index + 'pie',
@@ -63,9 +70,7 @@ option = {
         cellSize: cellSize,
         yearLabel: {
             show: false,
-            textStyle: {
-                fontSize: 30
-            }
+            fontSize: 30
         },
         dayLabel: {
             margin: 20,
@@ -83,17 +88,12 @@ option = {
         coordinateSystem: 'calendar',
         symbolSize: 1,
         label: {
-            normal: {
-                show: true,
-                formatter: function (params) {
-                    return echarts.format.formatTime('dd', params.value[0]);
-                },
-                offset: [-cellSize[0] / 2 + 10, -cellSize[1] / 2 + 10],
-                textStyle: {
-                    color: '#000',
-                    fontSize: 14
-                }
-            }
+            show: true,
+            formatter: function (params) {
+                return echarts.format.formatTime('dd', params.value[0]);
+            },
+            offset: [-cellSize[0] / 2 + 10, -cellSize[1] / 2 + 10],
+            fontSize: 14
         },
         data: scatterData
     }]

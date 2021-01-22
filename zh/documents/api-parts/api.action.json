@@ -3,7 +3,16 @@
     "desc": "<p>高亮指定的数据图形。</p>\n<p>通过<code class=\"codespan\">seriesName</code>或者<code class=\"codespan\">seriesIndex</code>指定系列。如果要再指定某个数据可以再指定<code class=\"codespan\">dataIndex</code>或者<code class=\"codespan\">name</code>。</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;highlight&#39;,\n    // 可选，系列 index，可以是一个数组指定多个系列\n    seriesIndex?: number|Array,\n    // 可选，系列名称，可以是一个数组指定多个系列\n    seriesName?: string|Array,\n    // 可选，数据的 index\n    dataIndex?: number,\n    // 可选，数据的 名称\n    name?: string\n})\n</code></pre>\n"
   },
   "downplay": {
-    "desc": "<p>取消高亮指定的数据图形。</p>\n<p>通过<code class=\"codespan\">seriesName</code>或者<code class=\"codespan\">seriesIndex</code>指定系列。如果要指定某个数据可以再指定<code class=\"codespan\">dataIndex</code>或者<code class=\"codespan\">name</code>。</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;downplay&#39;,\n    // 可选，系列 index，可以是一个数组指定多个系列\n    seriesIndex?: number|Array,\n    // 可选，系列名称，可以是一个数组指定多个系列\n    seriesName?: string|Array,\n    // 可选，数据的 index\n    dataIndex?: number,\n    // 可选，数据的 名称\n    name?: string\n})\n</code></pre>\n<!--============= legend ==========-->"
+    "desc": "<p>取消高亮指定的数据图形。</p>\n<p>通过<code class=\"codespan\">seriesName</code>或者<code class=\"codespan\">seriesIndex</code>指定系列。如果要指定某个数据可以再指定<code class=\"codespan\">dataIndex</code>或者<code class=\"codespan\">name</code>。</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;downplay&#39;,\n    // 可选，系列 index，可以是一个数组指定多个系列\n    seriesIndex?: number|Array,\n    // 可选，系列名称，可以是一个数组指定多个系列\n    seriesName?: string|Array,\n    // 可选，数据的 index\n    dataIndex?: number,\n    // 可选，数据的 名称\n    name?: string\n})\n</code></pre>\n"
+  },
+  "select": {
+    "desc": "<p>选中指定的数据。选中数据会使用 <a href=\"option.html#series-bar.select\" target=\"_blank\">select</a> 配置的样式。</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;select&#39;,\n    // 图例名称\n    // 可选，系列 index，可以是一个数组指定多个系列\n    seriesIndex?: number|Array,\n    // 可选，系列名称，可以是一个数组指定多个系列\n    seriesName?: string|Array,\n    // 数据的 index，如果不指定也可以通过 name 属性根据名称指定数据\n    dataIndex?: number,\n    // 可选，数据名称，在有 dataIndex 的时候忽略\n    name?: string\n})\n</code></pre>\n"
+  },
+  "unselect": {
+    "desc": "<p>取消选中指定的数据。</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;unselect&#39;,\n    // 图例名称\n    // 可选，系列 index，可以是一个数组指定多个系列\n    seriesIndex?: number|Array,\n    // 可选，系列名称，可以是一个数组指定多个系列\n    seriesName?: string|Array,\n    // 数据的 index，如果不指定也可以通过 name 属性根据名称指定数据\n    dataIndex?: number,\n    // 可选，数据名称，在有 dataIndex 的时候忽略\n    name?: string\n})\n</code></pre>\n"
+  },
+  "toggleSelected": {
+    "desc": "<p>切换选中状态</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;toggleSelected&#39;,\n    // 图例名称\n    // 可选，系列 index，可以是一个数组指定多个系列\n    seriesIndex?: number|Array,\n    // 可选，系列名称，可以是一个数组指定多个系列\n    seriesName?: string|Array,\n    // 数据的 index，如果不指定也可以通过 name 属性根据名称指定数据\n    dataIndex?: number,\n    // 可选，数据名称，在有 dataIndex 的时候忽略\n    name?: string\n})\n</code></pre>\n"
   },
   "legend": {
     "desc": "<p><a href=\"option.html#legend\" target=\"_blank\">图例组件</a>相关的行为，必须引入<a href=\"option.html#legend\" target=\"_blank\">图例组件</a>后才能使用。</p>\n"
@@ -24,7 +33,7 @@
     "desc": "<p>将图例反选。</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;legendInverseSelect&#39;\n})\n</code></pre>\n<p><strong>EVENT:</strong> <a href=\"#events.legendinverseselect\">legendinverseselect</a></p>\n"
   },
   "legend.legendScroll": {
-    "desc": "<p>控制图例的滚动。当 <a href=\"option.html#legend.type\" target=\"_blank\">legend.type</a> 为 <code class=\"codespan\">&#39;scroll&#39;</code> 时有效。</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;legendScroll&#39;,\n    scrollDataIndex: number,\n    legendId: string\n})\n</code></pre>\n<p><strong>EVENT:</strong> <a href=\"#events.legendscroll\">legendscroll</a></p>\n<!--============= tooltip ==========-->"
+    "desc": "<p>控制图例的滚动。当 <a href=\"option.html#legend.type\" target=\"_blank\">legend.type</a> 为 <code class=\"codespan\">&#39;scroll&#39;</code> 时有效。</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;legendScroll&#39;,\n    scrollDataIndex: number,\n    legendId: string\n})\n</code></pre>\n<p><strong>EVENT:</strong> <a href=\"#events.legendscroll\">legendscroll</a></p>\n"
   },
   "tooltip": {
     "desc": "<p><a href=\"option.html#tooltip\" target=\"_blank\">提示框组件</a>相关的行为，必须引入<a href=\"option.html#tooltip\" target=\"_blank\">提示框组件</a>后才能使用。</p>\n"
@@ -33,7 +42,7 @@
     "desc": "<p>显示提示框。</p>\n<p>有下面两种使用方式。</p>\n<p>1 指定在相对容器的位置处显示提示框，如果指定的位置无法显示则无效。</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;showTip&#39;,\n    // 屏幕上的 x 坐标\n    x: number,\n    // 屏幕上的 y 坐标\n    y: number,\n    // 本次显示 tooltip 的位置。只在本次 action 中生效。\n    // 缺省则使用 option 中定义的 tooltip 位置。\n    position: Array.&lt;number&gt;|string|Function\n})\n</code></pre>\n<p>2 指定数据图形，根据 tooltip 的配置项显示提示框。</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;showTip&#39;,\n    // 系列的 index，在 tooltip 的 trigger 为 axis 的时候可选。\n    seriesIndex?: number,\n    // 数据的 index，如果不指定也可以通过 name 属性根据名称指定数据\n    dataIndex?: number,\n    // 可选，数据名称，在有 dataIndex 的时候忽略\n    name?: string,\n    // 本次显示 tooltip 的位置。只在本次 action 中生效。\n    // 缺省则使用 option 中定义的 tooltip 位置。\n    position: Array.&lt;number&gt;|string|Function,\n})\n</code></pre>\n<p>参数<code class=\"codespan\">position</code>同<a href=\"option.html#tooltip.position\" target=\"_blank\">tooltip.position</a>相同。</p>\n"
   },
   "tooltip.hideTip": {
-    "desc": "<p>隐藏提示框。</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;hideTip&#39;\n})\n</code></pre>\n<!--============= dataZoom ==========-->"
+    "desc": "<p>隐藏提示框。</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;hideTip&#39;\n})\n</code></pre>\n"
   },
   "dataZoom": {
     "desc": "<p><a href=\"option.html#dataZoom\" target=\"_blank\">数据区域缩放组件</a>相关的行为，必须引入<a href=\"option.html#dataZoom\" target=\"_blank\">数据区域缩放组件</a>后才能使用。</p>\n"
@@ -42,13 +51,13 @@
     "desc": "<p>数据区域缩放。</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;dataZoom&#39;,\n    // 可选，dataZoom 组件的 index，多个 dataZoom 组件时有用，默认为 0\n    dataZoomIndex: number,\n    // 开始位置的百分比，0 - 100\n    start: number,\n    // 结束位置的百分比，0 - 100\n    end: number,\n    // 开始位置的数值\n    startValue: number,\n    // 结束位置的数值\n    endValue: number\n})\n</code></pre>\n<p><strong>EVENT:</strong> <a href=\"#events.datazoom\">datazoom</a></p>\n"
   },
   "dataZoom.takeGlobalCursor": {
-    "desc": "<p>启动或关闭 <code class=\"codespan\">toolbox</code> 中 <code class=\"codespan\">dataZoom</code> 的刷选状态。</p>\n<pre><code class=\"lang-js\">myChart.dispatchAction({\n    type: &#39;takeGlobalCursor&#39;,\n    key: &#39;dataZoomSelect&#39;,\n    // 启动或关闭\n    dataZoomSelectActive: true\n});\n</code></pre>\n<!--============= visualMap ==========-->"
+    "desc": "<p>启动或关闭 <code class=\"codespan\">toolbox</code> 中 <code class=\"codespan\">dataZoom</code> 的刷选状态。</p>\n<pre><code class=\"lang-js\">myChart.dispatchAction({\n    type: &#39;takeGlobalCursor&#39;,\n    key: &#39;dataZoomSelect&#39;,\n    // 启动或关闭\n    dataZoomSelectActive: true\n});\n</code></pre>\n"
   },
   "visualMap": {
     "desc": "<p><a href=\"option.html#visualMap\" target=\"_blank\">视觉映射组件</a>相关的行为，必须引入<a href=\"option.html#visualMap\" target=\"_blank\">视觉映射组件</a>后才能使用。</p>\n"
   },
   "visualMap.selectDataRange": {
-    "desc": "<p>选取映射的数值范围。</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;selectDataRange&#39;,\n    // 可选，visualMap 组件的 index，多个 visualMap 组件时有用，默认为 0\n    visualMapIndex: number,\n    // 连续型 visualMap 和 离散型 visualMap 不一样\n    // 连续型的是一个表示数值范围的数组。\n    // 离散型的是一个对象，键值是类目或者分段的索引。值是 `true`, `false`\n    selected: Object|Array\n})\n</code></pre>\n<p>å\n<strong>示例：</strong></p>\n<pre><code class=\"lang-js\">myChart.dispatchAction({\n    type: &#39;selectDataRange&#39;,\n    // 选取 20 到 40 的值范围\n    selected: [20, 40],\n    // 取消选中第二段\n    selected: { 1: false },\n    // 取消选中类目 `优`\n    selected: { &#39;优&#39;: false }\n});\n\n</code></pre>\n<p><strong>EVENT:</strong> <a href=\"#events.datarangeselected\">datarangeselected</a></p>\n<!--============= timeline ==========-->"
+    "desc": "<p>选取映射的数值范围。</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;selectDataRange&#39;,\n    // 可选，visualMap 组件的 index，多个 visualMap 组件时有用，默认为 0\n    visualMapIndex: number,\n    // 连续型 visualMap 和 离散型 visualMap 不一样\n    // 连续型的是一个表示数值范围的数组。\n    // 离散型的是一个对象，键值是类目或者分段的索引。值是 `true`, `false`\n    selected: Object|Array\n})\n</code></pre>\n<p>å\n<strong>示例：</strong></p>\n<pre><code class=\"lang-js\">myChart.dispatchAction({\n    type: &#39;selectDataRange&#39;,\n    // 选取 20 到 40 的值范围\n    selected: [20, 40],\n    // 取消选中第二段\n    selected: { 1: false },\n    // 取消选中类目 `优`\n    selected: { &#39;优&#39;: false }\n});\n\n</code></pre>\n<p><strong>EVENT:</strong> <a href=\"#events.datarangeselected\">datarangeselected</a></p>\n"
   },
   "timeline": {
     "desc": "<p><a href=\"option.html#timeline\" target=\"_blank\">时间轴组件</a>相关的行为，必须引入<a href=\"option.html#timeline\" target=\"_blank\">时间轴组件</a>后才能使用。</p>\n"
@@ -57,25 +66,13 @@
     "desc": "<p>设置当前的时间点。</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;timelineChange&#39;,\n    // 时间点的 index\n    currentIndex: number\n})\n</code></pre>\n<p><strong>EVENT:</strong> <a href=\"#events.timelinechanged\">timelinechanged</a></p>\n"
   },
   "timeline.timelinePlayChange": {
-    "desc": "<p>切换时间轴的播放状态。</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;timelinePlayChange&#39;,\n    // 播放状态，true 为自动播放\n    playState: boolean\n})\n</code></pre>\n<p><strong>EVENT:</strong> <a href=\"#events.timelineplaychanged\">timelineplaychanged</a></p>\n<!--============= toolbox ==========-->"
+    "desc": "<p>切换时间轴的播放状态。</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;timelinePlayChange&#39;,\n    // 播放状态，true 为自动播放\n    playState: boolean\n})\n</code></pre>\n<p><strong>EVENT:</strong> <a href=\"#events.timelineplaychanged\">timelineplaychanged</a></p>\n"
   },
   "toolbox": {
     "desc": "<p><a href=\"option.html#toolbox\" target=\"_blank\">工具栏组件</a>相关的行为，必须引入<a href=\"option.html#toolbox\" target=\"_blank\">工具栏组件</a>后才能使用。</p>\n"
   },
   "toolbox.restore": {
-    "desc": "<p>重置 option。</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;restore&#39;\n})\n</code></pre>\n<p><strong>EVENT:</strong> <a href=\"#events.restore\">restore</a>\n<!--============= pie ==========--></p>\n"
-  },
-  "pie": {
-    "desc": "<p><a href=\"option.html#series-pie\" target=\"_blank\">饼图</a>相关的行为，必须引入<a href=\"option.html#series-pie\" target=\"_blank\">饼图</a>后才能使用。</p>\n"
-  },
-  "pie.pieSelect": {
-    "desc": "<p>选中指定的饼图扇形。</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;pieSelect&#39;,\n    // 可选，系列 index，可以是一个数组指定多个系列\n    seriesIndex?: number|Array,\n    // 可选，系列名称，可以是一个数组指定多个系列\n    seriesName?: string|Array,\n    // 数据的 index，如果不指定也可以通过 name 属性根据名称指定数据\n    dataIndex?: number,\n    // 可选，数据名称，在有 dataIndex 的时候忽略\n    name?: string\n})\n</code></pre>\n<p><strong>EVENT:</strong> <a href=\"#events.pieselected\">pieselected</a></p>\n"
-  },
-  "pie.pieUnSelect": {
-    "desc": "<p>取消选中指定的饼图扇形。</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;pieUnSelect&#39;,\n    // 可选，系列 index，可以是一个数组指定多个系列\n    seriesIndex?: number|Array,\n    // 可选，系列名称，可以是一个数组指定多个系列\n    seriesName?: string|Array,\n    // 数据的 index，如果不指定也可以通过 name 属性根据名称指定数据\n    dataIndex?: number,\n    // 可选，数据名称，在有 dataIndex 的时候忽略\n    name?: string\n})\n</code></pre>\n<p><strong>EVENT:</strong> <a href=\"#events.pieunselected\">pieunselected</a></p>\n"
-  },
-  "pie.pieToggleSelect": {
-    "desc": "<p>切换指定的饼图扇形选中状态。</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;pieToggleSelect&#39;,\n    // 可选，系列 index，可以是一个数组指定多个系列\n    seriesIndex?: number|Array,\n    // 可选，系列名称，可以是一个数组指定多个系列\n    seriesName?: string|Array,\n    // 数据的 index，如果不指定也可以通过 name 属性根据名称指定数据\n    dataIndex?: number,\n    // 可选，数据名称，在有 dataIndex 的时候忽略\n    name?: string\n})\n</code></pre>\n<p><strong>EVENT:</strong> <a href=\"#events.pieselectchanged\">pieselectchanged</a></p>\n<!--============= geo ==========-->"
+    "desc": "<p>重置 option。</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;restore&#39;\n})\n</code></pre>\n<p><strong>EVENT:</strong> <a href=\"#events.restore\">restore</a></p>\n"
   },
   "geo": {
     "desc": "<p><a href=\"option.html#series-geo\" target=\"_blank\">地图组件</a>相关的行为，必须引入<a href=\"option.html#geo\" target=\"_blank\">地图组件</a>后才能使用。</p>\n"
@@ -87,28 +84,7 @@
     "desc": "<p>取消选中指定的地图区域。</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;geoUnSelect&#39;,\n    // 可选，系列 index，可以是一个数组指定多个系列\n    seriesIndex?: number|Array,\n    // 可选，系列名称，可以是一个数组指定多个系列\n    seriesName?: string|Array,\n    // 数据的 index，如果不指定也可以通过 name 属性根据名称指定数据\n    dataIndex?: number,\n    // 可选，数据名称，在有 dataIndex 的时候忽略\n    name?: string\n})\n</code></pre>\n<p><strong>EVENT:</strong> <a href=\"#events.geounselected\">geounselected</a></p>\n"
   },
   "geo.geoToggleSelect": {
-    "desc": "<p>切换指定的地图区域选中状态。</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;geoToggleSelect&#39;,\n    // 可选，系列 index，可以是一个数组指定多个系列\n    seriesIndex?: number|Array,\n    // 可选，系列名称，可以是一个数组指定多个系列\n    seriesName?: string|Array,\n    // 数据的 index，如果不指定也可以通过 name 属性根据名称指定数据\n    dataIndex?: number,\n    // 可选，数据名称，在有 dataIndex 的时候忽略\n    name?: string\n})\n</code></pre>\n<p><strong>EVENT:</strong> <a href=\"#events.geoselectchanged\">geoselectchanged</a></p>\n<!--============= map ==========-->"
-  },
-  "map": {
-    "desc": "<p><a href=\"option.html#series-map\" target=\"_blank\">地图图表</a>相关的行为，必须引入<a href=\"option.html#series-map\" target=\"_blank\">地图图表</a>后才能使用。</p>\n"
-  },
-  "map.mapSelect": {
-    "desc": "<p>选中指定的地图区域。</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;mapSelect&#39;,\n    // 可选，系列 index，可以是一个数组指定多个系列\n    seriesIndex?: number|Array,\n    // 可选，系列名称，可以是一个数组指定多个系列\n    seriesName?: string|Array,\n    // 数据的 index，如果不指定也可以通过 name 属性根据名称指定数据\n    dataIndex?: number,\n    // 可选，数据名称，在有 dataIndex 的时候忽略\n    name?: string\n})\n</code></pre>\n<p><strong>EVENT:</strong> <a href=\"#events.mapselected\">mapselected</a></p>\n"
-  },
-  "map.mapUnSelect": {
-    "desc": "<p>取消选中指定的地图区域。</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;mapUnSelect&#39;,\n    // 可选，系列 index，可以是一个数组指定多个系列\n    seriesIndex?: number|Array,\n    // 可选，系列名称，可以是一个数组指定多个系列\n    seriesName?: string|Array,\n    // 数据的 index，如果不指定也可以通过 name 属性根据名称指定数据\n    dataIndex?: number,\n    // 可选，数据名称，在有 dataIndex 的时候忽略\n    name?: string\n})\n</code></pre>\n<p><strong>EVENT:</strong> <a href=\"#events.mapunselected\">mapunselected</a></p>\n"
-  },
-  "map.mapToggleSelect": {
-    "desc": "<p>切换指定的地图区域选中状态。</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;mapToggleSelect&#39;,\n    // 可选，系列 index，可以是一个数组指定多个系列\n    seriesIndex?: number|Array,\n    // 可选，系列名称，可以是一个数组指定多个系列\n    seriesName?: string|Array,\n    // 数据的 index，如果不指定也可以通过 name 属性根据名称指定数据\n    dataIndex?: number,\n    // 可选，数据名称，在有 dataIndex 的时候忽略\n    name?: string\n})\n</code></pre>\n<p><strong>EVENT:</strong> <a href=\"#events.mapselectchanged\">mapselectchanged</a></p>\n<!--============= graph ==========-->"
-  },
-  "graph": {
-    "desc": "<p><a href=\"option.html#series-graph\" target=\"_blank\">关系图</a> 相关的行为，必须引入 <a href=\"option.html#series-graph\" target=\"_blank\">关系图</a> 后才能使用。</p>\n"
-  },
-  "graph.focusNodeAdjacency": {
-    "desc": "<p>将指定的节点以及其所有邻接节点高亮。</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;focusNodeAdjacency&#39;,\n\n    // 使用 seriesId 或 seriesIndex 或 seriesName 来指定 series.\n    seriesId: &#39;xxx&#39;,\n    seriesIndex: 0,\n    seriesName: &#39;nnn&#39;,\n\n    // 使用 dataIndex 来指定目标节点，或者使用 edgeDataIndex 来指定目标边。\n    dataIndex: 12,\n    edgeDataIndex: 5\n})\n</code></pre>\n<p>最后会抛出 <a href=\"#event.focusNodeAdjacency\">focusNodeAdjacency</a> 事件。</p>\n"
-  },
-  "graph.unfocusNodeAdjacency": {
-    "desc": "<p>将指定的节点以及其所有邻接节点高亮。</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;unfocusNodeAdjacency&#39;,\n\n    // 使用 seriesId 或 seriesIndex 或 seriesName 来定位 series.\n    seriesId: &#39;xxx&#39;,\n    seriesIndex: 0,\n    seriesName: &#39;nnn&#39;\n})\n</code></pre>\n<p>最后会抛出 <a href=\"#event.unfocusNodeAdjacency\">unfocusNodeAdjacency</a> 事件。</p>\n<!--============= brush ==========-->"
+    "desc": "<p>切换指定的地图区域选中状态。</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;geoToggleSelect&#39;,\n    // 可选，系列 index，可以是一个数组指定多个系列\n    seriesIndex?: number|Array,\n    // 可选，系列名称，可以是一个数组指定多个系列\n    seriesName?: string|Array,\n    // 数据的 index，如果不指定也可以通过 name 属性根据名称指定数据\n    dataIndex?: number,\n    // 可选，数据名称，在有 dataIndex 的时候忽略\n    name?: string\n})\n</code></pre>\n<p><strong>EVENT:</strong> <a href=\"#events.geoselectchanged\">geoselectchanged</a></p>\n"
   },
   "brush": {
     "desc": "<p><a href=\"option.html#brush\" target=\"_blank\">区域选择</a>相关的行为。</p>\n"

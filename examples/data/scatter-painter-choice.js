@@ -1,3 +1,10 @@
+/*
+title: Master Painter Color Choices Throughout History
+category: scatter
+titleCN: Master Painter Color Choices Throughout History
+difficulty: 9
+*/
+
 myChart.showLoading();
 
 $.get(ROOT_PATH + '/data/asset/data/masterPainterColorChoice.json', function (json) {
@@ -12,12 +19,6 @@ $.get(ROOT_PATH + '/data/asset/data/masterPainterColorChoice.json', function (js
             text: 'Master Painter Color Choices Throughout History',
             subtext: 'Data From Plot.ly',
             left: 'right'
-        },
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'cross'
-            }
         },
         xAxis: {
             type: 'value',

@@ -97,7 +97,7 @@
       font-size: 12px;
 }
 .property-popup-desc iframe {
-    border: 1px solid #ccc;
+    border: none;
     display: block;
     margin-top: 5px;
     max-width: 100%;
@@ -136,6 +136,7 @@
     font-size: 14px;
 }
 .property-popup-desc ol li {
+    margin: 1em 0;
     list-style: decimal;
     font-size: 14px;
 }
@@ -247,17 +248,14 @@
   position: relative;
   padding: 15px 0;
 }
-.doc-content-item-card.current {
-    border-top: 1px solid #b03a5b;
-}
 .doc-content-item-card .hierarchy-line {
     position: absolute;
     top: 35px;
     bottom: 0px;
     left: -14px;
     width: 10px;
-    border-left: 1px solid #C592A0;
-    border-bottom: 1px solid #C592A0;
+    border-left: 1px solid #E0E6F1;
+    border-bottom: 1px solid #E0E6F1;
 }
 .doc-content-item-card h4 {
     margin: 0;
@@ -268,15 +266,13 @@
       vertical-align: bottom;
       display: inline-block;
 }
-.doc-content-item-card h4 .el-button {
-      padding: 2px;
-      font-size: 12px;
+.doc-content-item-card h4 .expand-toggle {
+      font-size: 18px;
       margin-left: -23px;
-      color: #C592A0;
-      border-color: #C592A0;
-      border-radius: 4px;
-      background: #fff;
+      color: #9aadd1;
+      cursor: pointer;
       position: relative;
+      background-color: #fff;
 }
 .doc-content-item-card h4 .anchor {
       color: #C592A0;
@@ -314,6 +310,10 @@
 }
 .doc-content-item-card h4 .path-parent a:hover, .doc-content-item-card h4 .path-base a:hover {
         text-decoration: underline;
+}
+.doc-content-item-card h4 .current-flag {
+      color: #434343;
+      font-size: 20px;
 }
 .doc-content-item-card h4 .default-value {
       color: #434343;
@@ -357,6 +357,9 @@
 .doc-content-item-card.level-2 > h4 .path-base {
     font-size: 16px;
 }
+.doc-content-item-card.level-2 > h4 .current-flag {
+    font-size: 16px;
+}
 .doc-content-item-card.level-3 > h4 .anchor {
     font-size: 16px;
 }
@@ -364,6 +367,9 @@
     font-size: 13px;
 }
 .doc-content-item-card.level-3 > h4 .path-base {
+    font-size: 16px;
+}
+.doc-content-item-card.level-3 > h4 .current-flag {
     font-size: 16px;
 }
 .doc-content-item-card.level-2 {
@@ -375,7 +381,7 @@
       width: 28px;
       margin-left: -39px;
       margin-right: 2px;
-      border-top: 1px solid #C592A0;
+      border-top: 1px solid #E0E6F1;
       position: relative;
 }
 .doc-content-item-card.level-3 {
@@ -387,7 +393,7 @@
       width: 28px;
       margin-left: -39px;
       margin-right: 2px;
-      border-top: 1px solid #C592A0;
+      border-top: 1px solid #E0E6F1;
       position: relative;
 }
 .doc-content-item-card.level-4 {
@@ -399,7 +405,7 @@
       width: 28px;
       margin-left: -39px;
       margin-right: 2px;
-      border-top: 1px solid #C592A0;
+      border-top: 1px solid #E0E6F1;
       position: relative;
 }
 .doc-content-item-card.level-5 {
@@ -411,7 +417,7 @@
       width: 28px;
       margin-left: -39px;
       margin-right: 2px;
-      border-top: 1px solid #C592A0;
+      border-top: 1px solid #E0E6F1;
       position: relative;
 }
 .doc-content-item-card.level-6 {
@@ -423,7 +429,7 @@
       width: 28px;
       margin-left: -39px;
       margin-right: 2px;
-      border-top: 1px solid #C592A0;
+      border-top: 1px solid #E0E6F1;
       position: relative;
 }
 .doc-content-item-card.level-7 {
@@ -435,7 +441,7 @@
       width: 28px;
       margin-left: -39px;
       margin-right: 2px;
-      border-top: 1px solid #C592A0;
+      border-top: 1px solid #E0E6F1;
       position: relative;
 }
 .doc-content-item-card.level-8 {
@@ -447,7 +453,7 @@
       width: 28px;
       margin-left: -39px;
       margin-right: 2px;
-      border-top: 1px solid #C592A0;
+      border-top: 1px solid #E0E6F1;
       position: relative;
 }
 .doc-content-item-card.level-9 {
@@ -459,7 +465,7 @@
       width: 28px;
       margin-left: -39px;
       margin-right: 2px;
-      border-top: 1px solid #C592A0;
+      border-top: 1px solid #E0E6F1;
       position: relative;
 }
 .doc-content-item-card.level-10 {
@@ -471,7 +477,7 @@
       width: 28px;
       margin-left: -39px;
       margin-right: 2px;
-      border-top: 1px solid #C592A0;
+      border-top: 1px solid #E0E6F1;
       position: relative;
 }
 .doc-content-item-card.level-11 {
@@ -483,7 +489,7 @@
       width: 28px;
       margin-left: -39px;
       margin-right: 2px;
-      border-top: 1px solid #C592A0;
+      border-top: 1px solid #E0E6F1;
       position: relative;
 }
 .doc-content-item-card .prop-types {
@@ -1095,6 +1101,7 @@ span.CodeMirror-selectedtext { background: none; }
     height: 45px;
     line-height: 45px;
     margin: 0;
+    margin-left: 15px;
     font-weight: normal;
     box-sizing: content-box;
 }
@@ -1102,10 +1109,11 @@ span.CodeMirror-selectedtext { background: none; }
     font-weight: normal;
     color: #969696;
     font-size: 28px;
-    margin: 20px 0px 20px 20px;
+    margin: 20px 0px 20px 15px;
 }
 .doc-content .page-description {
     padding: 5px 0;
+    margin-left: 15px;
 }
 .doc-content .page-description .hljs {
       background: transparent;
@@ -1132,7 +1140,7 @@ span.CodeMirror-selectedtext { background: none; }
         font-size: 12px;
 }
 .doc-content .page-description iframe {
-      border: 1px solid #ccc;
+      border: none;
       display: block;
       margin-top: 5px;
       max-width: 100%;
@@ -1171,6 +1179,7 @@ span.CodeMirror-selectedtext { background: none; }
       font-size: 14px;
 }
 .doc-content .page-description ol li {
+      margin: 1em 0;
       list-style: decimal;
       font-size: 14px;
 }
@@ -1206,7 +1215,7 @@ span.CodeMirror-selectedtext { background: none; }
         font-size: 12px;
 }
 .doc-content .item-description iframe {
-      border: 1px solid #ccc;
+      border: none;
       display: block;
       margin-top: 5px;
       max-width: 100%;
@@ -1245,11 +1254,20 @@ span.CodeMirror-selectedtext { background: none; }
       font-size: 14px;
 }
 .doc-content .item-description ol li {
+      margin: 1em 0;
       list-style: decimal;
       font-size: 14px;
 }
 .doc-content .item-description a {
       font-family: 'Source Code Pro', STHeiti, "Microsoft Yahei", "WenQuanYi Micro Hei", sans-serif;
+}
+.doc-content table {
+    border: 1px solid #ddd;
+    border-collapse: collapse;
+}
+.doc-content th, .doc-content td {
+    padding: 10px;
+    border: 1px solid #eee;
 }
 .ec-doc-tutorial .page-description h2 {
   font-weight: normal;
@@ -1366,7 +1384,7 @@ span.CodeMirror-selectedtext { background: none; }
       font-size: 12px;
 }
 .doc-search-result-item-card iframe {
-    border: 1px solid #ccc;
+    border: none;
     display: block;
     margin-top: 5px;
     max-width: 100%;
@@ -1405,6 +1423,7 @@ span.CodeMirror-selectedtext { background: none; }
     font-size: 14px;
 }
 .doc-search-result-item-card ol li {
+    margin: 1em 0;
     list-style: decimal;
     font-size: 14px;
 }

@@ -1,3 +1,9 @@
+/*
+title: Simple Surface
+category: surface
+titleCN: Simple Surface
+*/
+
 option = {
     tooltip: {},
     backgroundColor: '#fff',

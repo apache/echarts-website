@@ -1,3 +1,10 @@
+/*
+title: Log Axis
+category: line
+titleCN: 对数轴示例
+difficulty: 7
+*/
+
 option = {
     title: {
         text: '对数轴示例',
@@ -26,9 +33,6 @@ option = {
     yAxis: {
         type: 'log',
         name: 'y',
-        minorTick: {
-            show: true
-        },
         minorSplitLine: {
             show: true
         }

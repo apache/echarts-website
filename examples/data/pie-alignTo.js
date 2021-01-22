@@ -1,3 +1,10 @@
+/*
+title: Pie Label Align
+category: pie
+titleCN: 饼图标签对齐
+difficulty: 3
+*/
+
 var data = [{
     name: 'Apples',
     value: 70
@@ -23,7 +30,8 @@ var data = [{
 
 option = {
     title: [{
-        text: 'Pie label alignTo'
+        text: 'Pie label alignTo',
+        left: 'center',
     }, {
         subtext: 'alignTo: "none" (default)',
         left: '16.67%',
@@ -45,7 +53,6 @@ option = {
         radius: '25%',
         center: ['50%', '50%'],
         data: data,
-        animation: false,
         label: {
             position: 'outer',
             alignTo: 'none',
@@ -60,7 +67,6 @@ option = {
         radius: '25%',
         center: ['50%', '50%'],
         data: data,
-        animation: false,
         label: {
             position: 'outer',
             alignTo: 'labelLine',
@@ -75,7 +81,6 @@ option = {
         radius: '25%',
         center: ['50%', '50%'],
         data: data,
-        animation: false,
         label: {
             position: 'outer',
             alignTo: 'edge',

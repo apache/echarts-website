@@ -1,3 +1,10 @@
+/*
+title: Smoothed Line Chart
+category: line
+titleCN: 基础平滑折线图
+difficulty: 0
+*/
+
 option = {
     xAxis: {
         type: 'category',

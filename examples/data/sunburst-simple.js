@@ -1,3 +1,10 @@
+/*
+title: Basic Sunburst
+category: sunburst
+titleCN: 基础旭日图
+difficulty: 1
+*/
+
 var data = [{
     name: 'Grandpa',
     children: [{
@@ -45,7 +52,9 @@ var data = [{
 option = {
     series: {
         type: 'sunburst',
-        // highlightPolicy: 'ancestor',
+        // emphasis: {
+        //     focus: 'ancestor'
+        // },
         data: data,
         radius: [0, '90%'],
         label: {

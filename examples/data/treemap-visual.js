@@ -1,3 +1,9 @@
+/*
+title: Gradient Mapping
+category: treemap
+titleCN: 映射为渐变色
+*/
+
 myChart.showLoading();
 
 var household_america_2012 = 113616229;

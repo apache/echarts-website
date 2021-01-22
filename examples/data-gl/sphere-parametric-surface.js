@@ -1,3 +1,9 @@
+/*
+title: Sphere Parametric Surface
+category: surface
+titleCN: Sphere Parametric Surface
+*/
+
 option = {
     tooltip: {},
     visualMap: {

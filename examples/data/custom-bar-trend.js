@@ -1,3 +1,10 @@
+/*
+title: Custom Bar Trend
+category: custom
+titleCN: 使用自定义系列添加柱状图趋势
+difficulty: 3
+*/
+
 
 var yearCount = 7;
 var categoryCount = 30;
@@ -94,7 +101,7 @@ option = {
         },
         data: customData,
         z: 100
-    }].concat(echarts.util.map(dataList, function (data, index) {
+    }].concat(dataList.map(function (data, index) {
         return {
             type: 'bar',
             animation: false,

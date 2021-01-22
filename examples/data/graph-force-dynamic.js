@@ -1,3 +1,10 @@
+/*
+title: Graph Dynamic
+category: graph
+shotDelay: 5000
+titleCN: 动态增加图节点
+difficulty: 6
+*/
 
 var data = [{
     fixed: true,
@@ -47,4 +54,4 @@ setInterval(function () {
 
     // console.log('nodes: ' + data.length);
     // console.log('links: ' + data.length);
-}, 500);
+}, 200);

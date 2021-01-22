@@ -1,3 +1,10 @@
+/*
+title: Sunburst VisualMap
+category: sunburst
+titleCN: 旭日图使用视觉编码
+difficulty: 4
+*/
+
 var data = [{
     name: 'Grandpa',
     children: [{
@@ -73,7 +80,7 @@ option = {
         min: 0,
         max: 10,
         inRange: {
-            color: ['#2D5F73', '#538EA6', '#F2D1B3', '#F2B8A2', '#F28C8C']
+            color: ['#2F93C8', '#AEC48F', '#FFDB5C', '#F98862']
         }
     },
     series: {

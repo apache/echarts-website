@@ -15,7 +15,7 @@ window.__EC_DOC_option_gl_series_bar3D = {
     "desc": "<p>The index of the <a href=\"#globe\">globe</a> component used by the axis.The first <a href=\"#globe\">globe</a> component is used by default.</p>\n"
   },
   "bevelSize": {
-    "desc": "<p>The size of the bevel.\nSupport for setting values from 0 to 1. The default is 0, which means there is no bevel.</p>\n<p>Below are the differences between beveling and no beveling.</p>\n<div  class=\"twentytwenty-container\" style=\"width: 700px;\">\n    <img  src=\"documents/asset/gl/img/bar3D-no-bevel.png\" width=\"100%\" title=\"bevelSize: 0\"><img />\n    <img  src=\"documents/asset/gl/img/bar3D-bevel.png\" width=\"100%\" title=\"bevelSize: 0.3\"><img />\n<div />\n"
+    "desc": "<p>The size of the bevel.\nSupport for setting values from 0 to 1. The default is 0, which means there is no bevel.</p>\n<p>Below are the differences between beveling and no beveling.</p>\n<div  class=\"twentytwenty-container\" style=\"width: 700px;\">\n    <img  src=\"documents/asset/gl/img/bar3D-no-bevel.png\" width=\"100%\" title=\"bevelSize: 0\"></img>\n    <img  src=\"documents/asset/gl/img/bar3D-bevel.png\" width=\"100%\" title=\"bevelSize: 0.3\"></img>\n</div>\n"
   },
   "bevelSmoothness": {
     "desc": "<p>The smoothness of the bevel, the larger the value, the smoother.</p>\n"

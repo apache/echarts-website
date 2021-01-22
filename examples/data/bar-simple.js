@@ -1,3 +1,10 @@
+/*
+title: Basic Bar
+category: bar
+titleCN: 基础柱状图
+difficulty: 0
+*/
+
 option = {
     xAxis: {
         type: 'category',

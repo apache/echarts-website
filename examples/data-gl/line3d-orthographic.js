@@ -1,3 +1,9 @@
+/*
+title: 三维折线图正交投影
+category: line3D
+titleCN: 三维折线图正交投影
+*/
+
 var data = [];
 // Parametric curve
 for (var t = 0; t < 25; t += 0.001) {

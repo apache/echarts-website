@@ -1,3 +1,10 @@
+/*
+title: Simple Encode
+category: 'dataset, bar'
+titleCN: 指定数据到坐标轴的映射
+difficulty: 1
+*/
+
 option = {
     dataset: {
         source: [
@@ -25,7 +32,7 @@ option = {
         // Map the score column to color
         dimension: 0,
         inRange: {
-            color: ['#D7DA8B', '#E15457']
+            color: ['#65B581', '#FFCE34', '#FD665F']
         }
     },
     series: [

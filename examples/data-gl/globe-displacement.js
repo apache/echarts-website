@@ -1,3 +1,9 @@
+/*
+title: Globe Displacement
+category: globe
+titleCN: Globe Displacement
+*/
+
 option = {
     globe: {
         displacementTexture: ROOT_PATH + '/data-gl/asset/bathymetry_bw_composite_4k.jpg',

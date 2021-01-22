@@ -1,3 +1,10 @@
+/*
+title: Function Plot
+category: line
+titleCN: 函数绘图
+difficulty: 5
+*/
+
 function func(x) {
     x /= 10;
     return Math.sin(x) * Math.cos(x * 2 + 1) * Math.sin(x * 3 + 2) * 50;
@@ -24,16 +31,8 @@ option = {
         minorTick: {
             show: true
         },
-        splitLine: {
-            lineStyle: {
-                color: '#999'
-            }
-        },
         minorSplitLine: {
-            show: true,
-            lineStyle: {
-                color: '#ddd'
-            }
+            show: true
         }
     },
     yAxis: {
@@ -43,16 +42,8 @@ option = {
         minorTick: {
             show: true
         },
-        splitLine: {
-            lineStyle: {
-                color: '#999'
-            }
-        },
         minorSplitLine: {
-            show: true,
-            lineStyle: {
-                color: '#ddd'
-            }
+            show: true
         }
     },
     dataZoom: [{

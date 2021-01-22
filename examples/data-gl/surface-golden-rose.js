@@ -1,3 +1,9 @@
+/*
+title: Golden Rose
+category: surface
+titleCN: Golden Rose
+*/
+
 
 var sin = Math.sin;
 var cos = Math.cos;

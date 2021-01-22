@@ -1,3 +1,10 @@
+/*
+title: Scatter Aqi Color
+category: scatter
+titleCN: AQI 气泡图
+difficulty: 7
+*/
+
 var dataBJ = [
     [1,55,9,56,0.46,18,6,"良"],
     [2,25,11,21,0.65,34,9,"优"],
@@ -116,11 +123,10 @@ var itemStyle = {
     shadowBlur: 10,
     shadowOffsetX: 0,
     shadowOffsetY: 0,
-    shadowColor: 'rgba(0, 0, 0, 0.5)'
+    shadowColor: 'rgba(0,0,0,0.3)'
 };
 
 option = {
-    backgroundColor: '#404a59',
     color: [
         '#dd4444', '#fec42c', '#80F1BE'
     ],
@@ -128,7 +134,6 @@ option = {
         top: 10,
         data: ['北京', '上海', '广州'],
         textStyle: {
-            color: '#fff',
             fontSize: 16
         }
     },
@@ -139,10 +144,7 @@ option = {
         bottom: '10%'
     },
     tooltip: {
-        padding: 10,
-        backgroundColor: '#222',
-        borderColor: '#777',
-        borderWidth: 1,
+         backgroundColor: ['rgba(255,255,255,0.7)'],
         formatter: function (obj) {
             var value = obj.value;
             return '<div style="border-bottom: 1px solid rgba(255,255,255,.3); font-size: 18px;padding-bottom: 7px;margin-bottom: 7px">'
@@ -162,18 +164,12 @@ option = {
         name: '日期',
         nameGap: 16,
         nameTextStyle: {
-            color: '#fff',
-            fontSize: 14
+            fontSize: 16
         },
         max: 31,
         splitLine: {
             show: false
         },
-        axisLine: {
-            lineStyle: {
-                color: '#eee'
-            }
-        }
     },
     yAxis: {
         type: 'value',
@@ -181,13 +177,7 @@ option = {
         nameLocation: 'end',
         nameGap: 20,
         nameTextStyle: {
-            color: '#fff',
             fontSize: 16
-        },
-        axisLine: {
-            lineStyle: {
-                color: '#eee'
-            }
         },
         splitLine: {
             show: false
@@ -206,22 +196,19 @@ option = {
             precision: 0.1,
             text: ['圆形大小：PM2.5'],
             textGap: 30,
-            textStyle: {
-                color: '#fff'
-            },
             inRange: {
                 symbolSize: [10, 70]
             },
             outOfRange: {
                 symbolSize: [10, 70],
-                color: ['rgba(255,255,255,.2)']
+                color: ['rgba(255,255,255,0.4)']
             },
             controller: {
                 inRange: {
                     color: ['#c23531']
                 },
                 outOfRange: {
-                    color: ['#444']
+                    color: ['#999']
                 }
             }
         },
@@ -232,25 +219,21 @@ option = {
             min: 0,
             max: 50,
             itemHeight: 120,
-
-            precision: 0.1,
+            precision: 'auto',
             text: ['明暗：二氧化硫'],
             textGap: 30,
-            textStyle: {
-                color: '#fff'
-            },
             inRange: {
-                colorLightness: [1, 0.5]
+                colorLightness: [0.9, 0.5]
             },
             outOfRange: {
-                color: ['rgba(255,255,255,.2)']
+                color: ['rgba(255,255,255,0.4)']
             },
             controller: {
                 inRange: {
                     color: ['#c23531']
                 },
                 outOfRange: {
-                    color: ['#444']
+                    color: ['#999']
                 }
             }
         }

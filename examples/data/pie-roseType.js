@@ -1,3 +1,10 @@
+/*
+title: Nightingale's Rose Diagram
+category: pie
+titleCN: 南丁格尔玫瑰图
+difficulty: 2
+*/
+
 option = {
     title: {
         text: '南丁格尔玫瑰图',
@@ -18,10 +25,6 @@ option = {
         feature: {
             mark: {show: true},
             dataView: {show: true, readOnly: false},
-            magicType: {
-                show: true,
-                type: ['pie', 'funnel']
-            },
             restore: {show: true},
             saveAsImage: {show: true}
         }
@@ -30,9 +33,12 @@ option = {
         {
             name: '半径模式',
             type: 'pie',
-            radius: [20, 110],
+            radius: [20, 140],
             center: ['25%', '50%'],
             roseType: 'radius',
+            itemStyle: {
+                borderRadius: 5
+            },
             label: {
                 show: false
             },
@@ -42,31 +48,34 @@ option = {
                 }
             },
             data: [
-                {value: 10, name: 'rose1'},
-                {value: 5, name: 'rose2'},
-                {value: 15, name: 'rose3'},
-                {value: 25, name: 'rose4'},
-                {value: 20, name: 'rose5'},
-                {value: 35, name: 'rose6'},
-                {value: 30, name: 'rose7'},
-                {value: 40, name: 'rose8'}
+                {value: 40, name: 'rose 1'},
+                {value: 33, name: 'rose 2'},
+                {value: 28, name: 'rose 3'},
+                {value: 22, name: 'rose 4'},
+                {value: 20, name: 'rose 5'},
+                {value: 15, name: 'rose 6'},
+                {value: 12, name: 'rose 7'},
+                {value: 10, name: 'rose 8'}
             ]
         },
         {
             name: '面积模式',
             type: 'pie',
-            radius: [30, 110],
+            radius: [20, 140],
             center: ['75%', '50%'],
             roseType: 'area',
+            itemStyle: {
+                borderRadius: 5
+            },
             data: [
-                {value: 10, name: 'rose1'},
-                {value: 5, name: 'rose2'},
-                {value: 15, name: 'rose3'},
-                {value: 25, name: 'rose4'},
-                {value: 20, name: 'rose5'},
-                {value: 35, name: 'rose6'},
-                {value: 30, name: 'rose7'},
-                {value: 40, name: 'rose8'}
+                {value: 30, name: 'rose 1'},
+                {value: 28, name: 'rose 2'},
+                {value: 26, name: 'rose 3'},
+                {value: 24, name: 'rose 4'},
+                {value: 22, name: 'rose 5'},
+                {value: 20, name: 'rose 6'},
+                {value: 18, name: 'rose 7'},
+                {value: 16, name: 'rose 8'}
             ]
         }
     ]

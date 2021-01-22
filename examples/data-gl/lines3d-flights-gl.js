@@ -1,3 +1,9 @@
+/*
+title: Flights GL
+category: lines3D
+titleCN: Flights GL
+*/
+
 var uploadedDataURL = ROOT_PATH + "/data-gl/asset/data/flights.json";
 
 myChart.showLoading();
@@ -50,7 +56,7 @@ $.getJSON(uploadedDataURL, function(data) {
             },
 
             itemStyle: {
-                areaColor: '#000'
+                color: '#000'
             },
 
             regionHeight: 0.5

@@ -1,0 +1,7778 @@
+{
+  "animation": false,
+  "darkMode": true,
+  "color": [
+    "#4992ff",
+    "#7cffb2",
+    "#fddd60",
+    "#ff6e76",
+    "#58d9f9",
+    "#05c091",
+    "#ff8a45",
+    "#8d48e3",
+    "#dd79ff"
+  ],
+  "backgroundColor": "#100C2A",
+  "textStyle": {
+    "color": "#B9B8CE",
+    "fontFamily": "sans-serif",
+    "fontSize": 12,
+    "fontStyle": "normal",
+    "fontWeight": "normal"
+  },
+  "timeAxis": {
+    "axisLine": {
+      "lineStyle": {
+        "color": "#B9B8CE"
+      }
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#484753"
+      }
+    },
+    "splitArea": {
+      "areaStyle": {
+        "color": [
+          "rgba(255,255,255,0.02)",
+          "rgba(255,255,255,0.05)"
+        ]
+      }
+    },
+    "minorSplitLine": {
+      "lineStyle": {
+        "color": "#20203B"
+      }
+    }
+  },
+  "logAxis": {
+    "axisLine": {
+      "lineStyle": {
+        "color": "#B9B8CE"
+      }
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#484753"
+      }
+    },
+    "splitArea": {
+      "areaStyle": {
+        "color": [
+          "rgba(255,255,255,0.02)",
+          "rgba(255,255,255,0.05)"
+        ]
+      }
+    },
+    "minorSplitLine": {
+      "lineStyle": {
+        "color": "#20203B"
+      }
+    }
+  },
+  "valueAxis": {
+    "axisLine": {
+      "lineStyle": {
+        "color": "#B9B8CE"
+      }
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#484753"
+      }
+    },
+    "splitArea": {
+      "areaStyle": {
+        "color": [
+          "rgba(255,255,255,0.02)",
+          "rgba(255,255,255,0.05)"
+        ]
+      }
+    },
+    "minorSplitLine": {
+      "lineStyle": {
+        "color": "#20203B"
+      }
+    }
+  },
+  "categoryAxis": {
+    "axisLine": {
+      "lineStyle": {
+        "color": "#B9B8CE"
+      }
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#484753"
+      },
+      "show": false
+    },
+    "splitArea": {
+      "areaStyle": {
+        "color": [
+          "rgba(255,255,255,0.02)",
+          "rgba(255,255,255,0.05)"
+        ]
+      }
+    },
+    "minorSplitLine": {
+      "lineStyle": {
+        "color": "#20203B"
+      }
+    }
+  },
+  "line": {
+    "symbol": "circle"
+  },
+  "graph": {
+    "color": [
+      "#4992ff",
+      "#7cffb2",
+      "#fddd60",
+      "#ff6e76",
+      "#58d9f9",
+      "#05c091",
+      "#ff8a45",
+      "#8d48e3",
+      "#dd79ff"
+    ]
+  },
+  "gauge": {
+    "title": {
+      "color": "#B9B8CE"
+    },
+    "axisLine": {
+      "lineStyle": {
+        "color": [
+          [
+            1,
+            "rgba(207,212,219,0.2)"
+          ]
+        ]
+      }
+    },
+    "axisLabel": {
+      "color": "#B9B8CE"
+    },
+    "detail": {
+      "color": "#EEF1FA"
+    }
+  },
+  "candlestick": {
+    "itemStyle": {
+      "color": "#FD1050",
+      "color0": "#0CF49B",
+      "borderColor": "#FD1050",
+      "borderColor0": "#0CF49B"
+    }
+  },
+  "gradientColor": [
+    "#f6efa6",
+    "#d88273",
+    "#bf444c"
+  ],
+  "aria": {
+    "decal": {
+      "decals": [
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "dashArrayX": [
+            1,
+            0
+          ],
+          "dashArrayY": [
+            2,
+            5
+          ],
+          "symbolSize": 1,
+          "rotation": 0.5235987755982988
+        },
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "symbol": "circle",
+          "dashArrayX": [
+            [
+              8,
+              8
+            ],
+            [
+              0,
+              8,
+              8,
+              0
+            ]
+          ],
+          "dashArrayY": [
+            6,
+            0
+          ],
+          "symbolSize": 0.8
+        },
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "dashArrayX": [
+            1,
+            0
+          ],
+          "dashArrayY": [
+            4,
+            3
+          ],
+          "dashLineOffset": 0,
+          "rotation": -0.7853981633974483
+        },
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "dashArrayX": [
+            [
+              6,
+              6
+            ],
+            [
+              0,
+              6,
+              6,
+              0
+            ]
+          ],
+          "dashArrayY": [
+            6,
+            0
+          ]
+        },
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "dashArrayX": [
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              6
+            ]
+          ],
+          "dashArrayY": [
+            1,
+            0,
+            6,
+            0
+          ],
+          "rotation": 0.7853981633974483
+        },
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "symbol": "triangle",
+          "dashArrayX": [
+            [
+              9,
+              9
+            ],
+            [
+              0,
+              9,
+              9,
+              0
+            ]
+          ],
+          "dashArrayY": [
+            7,
+            2
+          ],
+          "symbolSize": 0.75
+        }
+      ]
+    }
+  },
+  "stateAnimation": {
+    "duration": 300,
+    "easing": "cubicOut"
+  },
+  "animationDuration": 1000,
+  "animationDurationUpdate": 500,
+  "animationEasing": "cubicInOut",
+  "animationEasingUpdate": "cubicInOut",
+  "animationThreshold": 2000,
+  "progressiveThreshold": 3000,
+  "progressive": 400,
+  "hoverLayerThreshold": 3000,
+  "useUTC": false,
+  "title": [
+    {
+      "text": "动态数据 + 时间坐标轴",
+      "padding": 15,
+      "textStyle": {
+        "color": "#EEF1FA",
+        "fontSize": 18,
+        "fontWeight": "bold"
+      },
+      "subtextStyle": {
+        "color": "#B9B8CE",
+        "fontSize": 12
+      },
+      "zlevel": 0,
+      "z": 6,
+      "show": true,
+      "target": "blank",
+      "subtext": "",
+      "subtarget": "blank",
+      "left": 0,
+      "top": 0,
+      "backgroundColor": "rgba(0,0,0,0)",
+      "borderColor": "#ccc",
+      "borderWidth": 0,
+      "itemGap": 10
+    }
+  ],
+  "axisPointer": [
+    {
+      "lineStyle": {
+        "color": "#817f91",
+        "width": 1,
+        "type": "dashed"
+      },
+      "crossStyle": {
+        "color": "#817f91"
+      },
+      "label": {
+        "color": "#fff",
+        "show": true,
+        "formatter": null,
+        "precision": "auto",
+        "margin": 3,
+        "padding": [
+          5,
+          7,
+          5,
+          7
+        ],
+        "backgroundColor": "auto",
+        "borderColor": null,
+        "borderWidth": 0,
+        "borderRadius": 3
+      },
+      "show": "auto",
+      "zlevel": 0,
+      "z": 50,
+      "type": "line",
+      "snap": false,
+      "triggerTooltip": true,
+      "value": null,
+      "status": null,
+      "link": [],
+      "animation": null,
+      "animationDurationUpdate": 200,
+      "shadowStyle": {
+        "color": "rgba(210,219,238,0.2)"
+      },
+      "handle": {
+        "show": false,
+        "icon": "M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7v-1.2h6.6z M13.3,22H6.7v-1.2h6.6z M13.3,19.6H6.7v-1.2h6.6z",
+        "size": 45,
+        "margin": 50,
+        "color": "#333",
+        "shadowBlur": 3,
+        "shadowColor": "#aaa",
+        "shadowOffsetX": 0,
+        "shadowOffsetY": 2,
+        "throttle": 40
+      }
+    }
+  ],
+  "tooltip": [
+    {
+      "trigger": "axis",
+      "formatter": {},
+      "axisPointer": {
+        "animation": false,
+        "type": "line",
+        "axis": "auto",
+        "animationDurationUpdate": 200,
+        "animationEasingUpdate": "exponentialOut",
+        "crossStyle": {
+          "color": "#999",
+          "width": 1,
+          "type": "dashed",
+          "textStyle": {}
+        }
+      },
+      "zlevel": 0,
+      "z": 60,
+      "show": true,
+      "showContent": true,
+      "triggerOn": "mousemove|click",
+      "alwaysShowContent": false,
+      "displayMode": "single",
+      "renderMode": "auto",
+      "confine": null,
+      "showDelay": 0,
+      "hideDelay": 100,
+      "transitionDuration": 0.4,
+      "enterable": false,
+      "backgroundColor": "#fff",
+      "shadowBlur": 10,
+      "shadowColor": "rgba(0, 0, 0, .2)",
+      "shadowOffsetX": 1,
+      "shadowOffsetY": 2,
+      "borderColor": "#333",
+      "borderRadius": 4,
+      "borderWidth": 1,
+      "padding": null,
+      "extraCssText": "",
+      "textStyle": {
+        "color": "#666",
+        "fontSize": 14
+      }
+    }
+  ],
+  "yAxis": [
+    {
+      "type": "value",
+      "boundaryGap": [
+        0,
+        "100%"
+      ],
+      "splitLine": {
+        "show": false,
+        "lineStyle": {
+          "color": "#484753",
+          "width": 1,
+          "type": "solid"
+        }
+      },
+      "axisLine": {
+        "lineStyle": {
+          "color": "#B9B8CE",
+          "width": 1,
+          "type": "solid"
+        },
+        "show": "auto",
+        "onZero": true,
+        "onZeroAxisIndex": null,
+        "symbol": [
+          "none",
+          "none"
+        ],
+        "symbolSize": [
+          10,
+          15
+        ]
+      },
+      "splitArea": {
+        "areaStyle": {
+          "color": [
+            "rgba(255,255,255,0.02)",
+            "rgba(255,255,255,0.05)"
+          ]
+        },
+        "show": false
+      },
+      "minorSplitLine": {
+        "lineStyle": {
+          "color": "#20203B",
+          "width": 1
+        },
+        "show": false
+      },
+      "axisTick": {
+        "show": "auto",
+        "inside": false,
+        "length": 5,
+        "lineStyle": {
+          "width": 1
+        }
+      },
+      "splitNumber": 5,
+      "minorTick": {
+        "show": false,
+        "splitNumber": 5,
+        "length": 3,
+        "lineStyle": {}
+      },
+      "show": true,
+      "zlevel": 0,
+      "z": 0,
+      "inverse": false,
+      "name": "",
+      "nameLocation": "end",
+      "nameRotate": null,
+      "nameTruncate": {
+        "maxWidth": null,
+        "ellipsis": "...",
+        "placeholder": "."
+      },
+      "nameTextStyle": {},
+      "nameGap": 15,
+      "silent": false,
+      "triggerEvent": false,
+      "tooltip": {
+        "show": false
+      },
+      "axisPointer": {},
+      "axisLabel": {
+        "show": true,
+        "inside": false,
+        "rotate": 0,
+        "showMinLabel": null,
+        "showMaxLabel": null,
+        "margin": 8,
+        "fontSize": 12
+      },
+      "offset": 0,
+      "categorySortInfo": []
+    }
+  ],
+  "xAxis": [
+    {
+      "type": "time",
+      "splitLine": {
+        "show": false,
+        "lineStyle": {
+          "color": "#484753",
+          "width": 1,
+          "type": "solid"
+        }
+      },
+      "axisLine": {
+        "lineStyle": {
+          "color": "#B9B8CE",
+          "width": 1,
+          "type": "solid"
+        },
+        "show": "auto",
+        "onZero": true,
+        "onZeroAxisIndex": null,
+        "symbol": [
+          "none",
+          "none"
+        ],
+        "symbolSize": [
+          10,
+          15
+        ]
+      },
+      "splitArea": {
+        "areaStyle": {
+          "color": [
+            "rgba(255,255,255,0.02)",
+            "rgba(255,255,255,0.05)"
+          ]
+        },
+        "show": false
+      },
+      "minorSplitLine": {
+        "lineStyle": {
+          "color": "#20203B",
+          "width": 1
+        },
+        "show": false
+      },
+      "scale": true,
+      "splitNumber": 6,
+      "axisLabel": {
+        "showMinLabel": false,
+        "showMaxLabel": false,
+        "rich": {
+          "primary": {
+            "fontWeight": "bold"
+          }
+        },
+        "show": true,
+        "inside": false,
+        "rotate": 0,
+        "margin": 8,
+        "fontSize": 12
+      },
+      "boundaryGap": [
+        0,
+        0
+      ],
+      "axisTick": {
+        "show": "auto",
+        "inside": false,
+        "length": 5,
+        "lineStyle": {
+          "width": 1
+        }
+      },
+      "minorTick": {
+        "show": false,
+        "splitNumber": 5,
+        "length": 3,
+        "lineStyle": {}
+      },
+      "show": true,
+      "zlevel": 0,
+      "z": 0,
+      "inverse": false,
+      "name": "",
+      "nameLocation": "end",
+      "nameRotate": null,
+      "nameTruncate": {
+        "maxWidth": null,
+        "ellipsis": "...",
+        "placeholder": "."
+      },
+      "nameTextStyle": {},
+      "nameGap": 15,
+      "silent": false,
+      "triggerEvent": false,
+      "tooltip": {
+        "show": false
+      },
+      "axisPointer": {
+        "status": "hide",
+        "value": 962208000000
+      },
+      "offset": 0,
+      "categorySortInfo": []
+    }
+  ],
+  "grid": [
+    {
+      "show": false,
+      "zlevel": 0,
+      "z": 0,
+      "left": "10%",
+      "top": 60,
+      "right": "10%",
+      "bottom": 70,
+      "containLabel": false,
+      "backgroundColor": "rgba(0,0,0,0)",
+      "borderWidth": 1,
+      "borderColor": "#ccc"
+    }
+  ],
+  "series": [
+    {
+      "name": "模拟数据",
+      "type": "line",
+      "showSymbol": false,
+      "hoverAnimation": false,
+      "data": [
+        {
+          "name": "Tue Oct 14 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/10/14",
+            498
+          ]
+        },
+        {
+          "name": "Wed Oct 15 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/10/15",
+            491
+          ]
+        },
+        {
+          "name": "Thu Oct 16 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/10/16",
+            491
+          ]
+        },
+        {
+          "name": "Fri Oct 17 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/10/17",
+            498
+          ]
+        },
+        {
+          "name": "Sat Oct 18 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/10/18",
+            501
+          ]
+        },
+        {
+          "name": "Sun Oct 19 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/10/19",
+            492
+          ]
+        },
+        {
+          "name": "Mon Oct 20 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/10/20",
+            498
+          ]
+        },
+        {
+          "name": "Tue Oct 21 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/10/21",
+            494
+          ]
+        },
+        {
+          "name": "Wed Oct 22 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/10/22",
+            485
+          ]
+        },
+        {
+          "name": "Thu Oct 23 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/10/23",
+            489
+          ]
+        },
+        {
+          "name": "Fri Oct 24 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/10/24",
+            494
+          ]
+        },
+        {
+          "name": "Sat Oct 25 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/10/25",
+            487
+          ]
+        },
+        {
+          "name": "Sun Oct 26 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/10/26",
+            481
+          ]
+        },
+        {
+          "name": "Mon Oct 27 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/10/27",
+            489
+          ]
+        },
+        {
+          "name": "Tue Oct 28 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/10/28",
+            485
+          ]
+        },
+        {
+          "name": "Wed Oct 29 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/10/29",
+            480
+          ]
+        },
+        {
+          "name": "Thu Oct 30 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/10/30",
+            490
+          ]
+        },
+        {
+          "name": "Fri Oct 31 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/10/31",
+            482
+          ]
+        },
+        {
+          "name": "Sat Nov 01 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/11/1",
+            482
+          ]
+        },
+        {
+          "name": "Sun Nov 02 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/11/2",
+            475
+          ]
+        },
+        {
+          "name": "Mon Nov 03 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/11/3",
+            480
+          ]
+        },
+        {
+          "name": "Tue Nov 04 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/11/4",
+            481
+          ]
+        },
+        {
+          "name": "Wed Nov 05 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/11/5",
+            480
+          ]
+        },
+        {
+          "name": "Thu Nov 06 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/11/6",
+            475
+          ]
+        },
+        {
+          "name": "Fri Nov 07 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/11/7",
+            474
+          ]
+        },
+        {
+          "name": "Sat Nov 08 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/11/8",
+            477
+          ]
+        },
+        {
+          "name": "Sun Nov 09 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/11/9",
+            473
+          ]
+        },
+        {
+          "name": "Mon Nov 10 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/11/10",
+            474
+          ]
+        },
+        {
+          "name": "Tue Nov 11 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/11/11",
+            482
+          ]
+        },
+        {
+          "name": "Wed Nov 12 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/11/12",
+            482
+          ]
+        },
+        {
+          "name": "Thu Nov 13 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/11/13",
+            483
+          ]
+        },
+        {
+          "name": "Fri Nov 14 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/11/14",
+            492
+          ]
+        },
+        {
+          "name": "Sat Nov 15 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/11/15",
+            496
+          ]
+        },
+        {
+          "name": "Sun Nov 16 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/11/16",
+            506
+          ]
+        },
+        {
+          "name": "Mon Nov 17 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/11/17",
+            506
+          ]
+        },
+        {
+          "name": "Tue Nov 18 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/11/18",
+            508
+          ]
+        },
+        {
+          "name": "Wed Nov 19 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/11/19",
+            517
+          ]
+        },
+        {
+          "name": "Thu Nov 20 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/11/20",
+            518
+          ]
+        },
+        {
+          "name": "Fri Nov 21 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/11/21",
+            524
+          ]
+        },
+        {
+          "name": "Sat Nov 22 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/11/22",
+            526
+          ]
+        },
+        {
+          "name": "Sun Nov 23 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/11/23",
+            526
+          ]
+        },
+        {
+          "name": "Mon Nov 24 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/11/24",
+            534
+          ]
+        },
+        {
+          "name": "Tue Nov 25 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/11/25",
+            539
+          ]
+        },
+        {
+          "name": "Wed Nov 26 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/11/26",
+            529
+          ]
+        },
+        {
+          "name": "Thu Nov 27 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/11/27",
+            538
+          ]
+        },
+        {
+          "name": "Fri Nov 28 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/11/28",
+            532
+          ]
+        },
+        {
+          "name": "Sat Nov 29 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/11/29",
+            529
+          ]
+        },
+        {
+          "name": "Sun Nov 30 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/11/30",
+            523
+          ]
+        },
+        {
+          "name": "Mon Dec 01 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/12/1",
+            533
+          ]
+        },
+        {
+          "name": "Tue Dec 02 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/12/2",
+            543
+          ]
+        },
+        {
+          "name": "Wed Dec 03 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/12/3",
+            539
+          ]
+        },
+        {
+          "name": "Thu Dec 04 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/12/4",
+            548
+          ]
+        },
+        {
+          "name": "Fri Dec 05 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/12/5",
+            557
+          ]
+        },
+        {
+          "name": "Sat Dec 06 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/12/6",
+            553
+          ]
+        },
+        {
+          "name": "Sun Dec 07 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/12/7",
+            558
+          ]
+        },
+        {
+          "name": "Mon Dec 08 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/12/8",
+            564
+          ]
+        },
+        {
+          "name": "Tue Dec 09 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/12/9",
+            574
+          ]
+        },
+        {
+          "name": "Wed Dec 10 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/12/10",
+            584
+          ]
+        },
+        {
+          "name": "Thu Dec 11 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/12/11",
+            580
+          ]
+        },
+        {
+          "name": "Fri Dec 12 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/12/12",
+            578
+          ]
+        },
+        {
+          "name": "Sat Dec 13 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/12/13",
+            579
+          ]
+        },
+        {
+          "name": "Sun Dec 14 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/12/14",
+            579
+          ]
+        },
+        {
+          "name": "Mon Dec 15 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/12/15",
+            588
+          ]
+        },
+        {
+          "name": "Tue Dec 16 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/12/16",
+            599
+          ]
+        },
+        {
+          "name": "Wed Dec 17 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/12/17",
+            603
+          ]
+        },
+        {
+          "name": "Thu Dec 18 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/12/18",
+            604
+          ]
+        },
+        {
+          "name": "Fri Dec 19 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/12/19",
+            610
+          ]
+        },
+        {
+          "name": "Sat Dec 20 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/12/20",
+            605
+          ]
+        },
+        {
+          "name": "Sun Dec 21 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/12/21",
+            604
+          ]
+        },
+        {
+          "name": "Mon Dec 22 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/12/22",
+            604
+          ]
+        },
+        {
+          "name": "Tue Dec 23 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/12/23",
+            610
+          ]
+        },
+        {
+          "name": "Wed Dec 24 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/12/24",
+            607
+          ]
+        },
+        {
+          "name": "Thu Dec 25 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/12/25",
+            606
+          ]
+        },
+        {
+          "name": "Fri Dec 26 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/12/26",
+            596
+          ]
+        },
+        {
+          "name": "Sat Dec 27 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/12/27",
+            605
+          ]
+        },
+        {
+          "name": "Sun Dec 28 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/12/28",
+            600
+          ]
+        },
+        {
+          "name": "Mon Dec 29 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/12/29",
+            594
+          ]
+        },
+        {
+          "name": "Tue Dec 30 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/12/30",
+            597
+          ]
+        },
+        {
+          "name": "Wed Dec 31 1997 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1997/12/31",
+            594
+          ]
+        },
+        {
+          "name": "Thu Jan 01 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/1/1",
+            597
+          ]
+        },
+        {
+          "name": "Fri Jan 02 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/1/2",
+            596
+          ]
+        },
+        {
+          "name": "Sat Jan 03 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/1/3",
+            588
+          ]
+        },
+        {
+          "name": "Sun Jan 04 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/1/4",
+            589
+          ]
+        },
+        {
+          "name": "Mon Jan 05 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/1/5",
+            589
+          ]
+        },
+        {
+          "name": "Tue Jan 06 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/1/6",
+            599
+          ]
+        },
+        {
+          "name": "Wed Jan 07 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/1/7",
+            591
+          ]
+        },
+        {
+          "name": "Thu Jan 08 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/1/8",
+            599
+          ]
+        },
+        {
+          "name": "Fri Jan 09 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/1/9",
+            610
+          ]
+        },
+        {
+          "name": "Sat Jan 10 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/1/10",
+            603
+          ]
+        },
+        {
+          "name": "Sun Jan 11 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/1/11",
+            613
+          ]
+        },
+        {
+          "name": "Mon Jan 12 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/1/12",
+            612
+          ]
+        },
+        {
+          "name": "Tue Jan 13 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/1/13",
+            610
+          ]
+        },
+        {
+          "name": "Wed Jan 14 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/1/14",
+            614
+          ]
+        },
+        {
+          "name": "Thu Jan 15 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/1/15",
+            621
+          ]
+        },
+        {
+          "name": "Fri Jan 16 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/1/16",
+            611
+          ]
+        },
+        {
+          "name": "Sat Jan 17 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/1/17",
+            604
+          ]
+        },
+        {
+          "name": "Sun Jan 18 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/1/18",
+            604
+          ]
+        },
+        {
+          "name": "Mon Jan 19 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/1/19",
+            596
+          ]
+        },
+        {
+          "name": "Tue Jan 20 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/1/20",
+            599
+          ]
+        },
+        {
+          "name": "Wed Jan 21 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/1/21",
+            604
+          ]
+        },
+        {
+          "name": "Thu Jan 22 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/1/22",
+            596
+          ]
+        },
+        {
+          "name": "Fri Jan 23 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/1/23",
+            600
+          ]
+        },
+        {
+          "name": "Sat Jan 24 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/1/24",
+            594
+          ]
+        },
+        {
+          "name": "Sun Jan 25 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/1/25",
+            593
+          ]
+        },
+        {
+          "name": "Mon Jan 26 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/1/26",
+            591
+          ]
+        },
+        {
+          "name": "Tue Jan 27 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/1/27",
+            599
+          ]
+        },
+        {
+          "name": "Wed Jan 28 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/1/28",
+            595
+          ]
+        },
+        {
+          "name": "Thu Jan 29 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/1/29",
+            592
+          ]
+        },
+        {
+          "name": "Fri Jan 30 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/1/30",
+            582
+          ]
+        },
+        {
+          "name": "Sat Jan 31 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/1/31",
+            580
+          ]
+        },
+        {
+          "name": "Sun Feb 01 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/2/1",
+            577
+          ]
+        },
+        {
+          "name": "Mon Feb 02 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/2/2",
+            569
+          ]
+        },
+        {
+          "name": "Tue Feb 03 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/2/3",
+            565
+          ]
+        },
+        {
+          "name": "Wed Feb 04 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/2/4",
+            560
+          ]
+        },
+        {
+          "name": "Thu Feb 05 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/2/5",
+            563
+          ]
+        },
+        {
+          "name": "Fri Feb 06 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/2/6",
+            571
+          ]
+        },
+        {
+          "name": "Sat Feb 07 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/2/7",
+            579
+          ]
+        },
+        {
+          "name": "Sun Feb 08 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/2/8",
+            587
+          ]
+        },
+        {
+          "name": "Mon Feb 09 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/2/9",
+            580
+          ]
+        },
+        {
+          "name": "Tue Feb 10 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/2/10",
+            586
+          ]
+        },
+        {
+          "name": "Wed Feb 11 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/2/11",
+            587
+          ]
+        },
+        {
+          "name": "Thu Feb 12 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/2/12",
+            587
+          ]
+        },
+        {
+          "name": "Fri Feb 13 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/2/13",
+            579
+          ]
+        },
+        {
+          "name": "Sat Feb 14 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/2/14",
+            579
+          ]
+        },
+        {
+          "name": "Sun Feb 15 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/2/15",
+            573
+          ]
+        },
+        {
+          "name": "Mon Feb 16 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/2/16",
+            584
+          ]
+        },
+        {
+          "name": "Tue Feb 17 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/2/17",
+            576
+          ]
+        },
+        {
+          "name": "Wed Feb 18 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/2/18",
+            567
+          ]
+        },
+        {
+          "name": "Thu Feb 19 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/2/19",
+            566
+          ]
+        },
+        {
+          "name": "Fri Feb 20 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/2/20",
+            565
+          ]
+        },
+        {
+          "name": "Sat Feb 21 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/2/21",
+            565
+          ]
+        },
+        {
+          "name": "Sun Feb 22 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/2/22",
+            574
+          ]
+        },
+        {
+          "name": "Mon Feb 23 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/2/23",
+            570
+          ]
+        },
+        {
+          "name": "Tue Feb 24 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/2/24",
+            564
+          ]
+        },
+        {
+          "name": "Wed Feb 25 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/2/25",
+            559
+          ]
+        },
+        {
+          "name": "Thu Feb 26 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/2/26",
+            550
+          ]
+        },
+        {
+          "name": "Fri Feb 27 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/2/27",
+            547
+          ]
+        },
+        {
+          "name": "Sat Feb 28 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/2/28",
+            554
+          ]
+        },
+        {
+          "name": "Sun Mar 01 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/3/1",
+            564
+          ]
+        },
+        {
+          "name": "Mon Mar 02 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/3/2",
+            566
+          ]
+        },
+        {
+          "name": "Tue Mar 03 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/3/3",
+            574
+          ]
+        },
+        {
+          "name": "Wed Mar 04 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/3/4",
+            570
+          ]
+        },
+        {
+          "name": "Thu Mar 05 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/3/5",
+            569
+          ]
+        },
+        {
+          "name": "Fri Mar 06 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/3/6",
+            563
+          ]
+        },
+        {
+          "name": "Sat Mar 07 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/3/7",
+            555
+          ]
+        },
+        {
+          "name": "Sun Mar 08 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/3/8",
+            552
+          ]
+        },
+        {
+          "name": "Mon Mar 09 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/3/9",
+            548
+          ]
+        },
+        {
+          "name": "Tue Mar 10 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/3/10",
+            558
+          ]
+        },
+        {
+          "name": "Wed Mar 11 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/3/11",
+            569
+          ]
+        },
+        {
+          "name": "Thu Mar 12 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/3/12",
+            573
+          ]
+        },
+        {
+          "name": "Fri Mar 13 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/3/13",
+            577
+          ]
+        },
+        {
+          "name": "Sat Mar 14 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/3/14",
+            585
+          ]
+        },
+        {
+          "name": "Sun Mar 15 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/3/15",
+            591
+          ]
+        },
+        {
+          "name": "Mon Mar 16 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/3/16",
+            587
+          ]
+        },
+        {
+          "name": "Tue Mar 17 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/3/17",
+            596
+          ]
+        },
+        {
+          "name": "Wed Mar 18 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/3/18",
+            594
+          ]
+        },
+        {
+          "name": "Thu Mar 19 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/3/19",
+            604
+          ]
+        },
+        {
+          "name": "Fri Mar 20 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/3/20",
+            607
+          ]
+        },
+        {
+          "name": "Sat Mar 21 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/3/21",
+            609
+          ]
+        },
+        {
+          "name": "Sun Mar 22 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/3/22",
+            603
+          ]
+        },
+        {
+          "name": "Mon Mar 23 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/3/23",
+            609
+          ]
+        },
+        {
+          "name": "Tue Mar 24 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/3/24",
+            607
+          ]
+        },
+        {
+          "name": "Wed Mar 25 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/3/25",
+            606
+          ]
+        },
+        {
+          "name": "Thu Mar 26 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/3/26",
+            608
+          ]
+        },
+        {
+          "name": "Fri Mar 27 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/3/27",
+            599
+          ]
+        },
+        {
+          "name": "Sat Mar 28 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/3/28",
+            604
+          ]
+        },
+        {
+          "name": "Sun Mar 29 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/3/29",
+            596
+          ]
+        },
+        {
+          "name": "Mon Mar 30 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/3/30",
+            594
+          ]
+        },
+        {
+          "name": "Tue Mar 31 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/3/31",
+            600
+          ]
+        },
+        {
+          "name": "Wed Apr 01 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/4/1",
+            606
+          ]
+        },
+        {
+          "name": "Thu Apr 02 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/4/2",
+            606
+          ]
+        },
+        {
+          "name": "Fri Apr 03 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/4/3",
+            612
+          ]
+        },
+        {
+          "name": "Sat Apr 04 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/4/4",
+            620
+          ]
+        },
+        {
+          "name": "Sun Apr 05 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/4/5",
+            620
+          ]
+        },
+        {
+          "name": "Mon Apr 06 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/4/6",
+            616
+          ]
+        },
+        {
+          "name": "Tue Apr 07 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/4/7",
+            619
+          ]
+        },
+        {
+          "name": "Wed Apr 08 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/4/8",
+            613
+          ]
+        },
+        {
+          "name": "Thu Apr 09 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/4/9",
+            613
+          ]
+        },
+        {
+          "name": "Fri Apr 10 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/4/10",
+            605
+          ]
+        },
+        {
+          "name": "Sat Apr 11 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/4/11",
+            602
+          ]
+        },
+        {
+          "name": "Sun Apr 12 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/4/12",
+            609
+          ]
+        },
+        {
+          "name": "Mon Apr 13 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/4/13",
+            600
+          ]
+        },
+        {
+          "name": "Tue Apr 14 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/4/14",
+            601
+          ]
+        },
+        {
+          "name": "Wed Apr 15 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/4/15",
+            594
+          ]
+        },
+        {
+          "name": "Thu Apr 16 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/4/16",
+            585
+          ]
+        },
+        {
+          "name": "Fri Apr 17 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/4/17",
+            579
+          ]
+        },
+        {
+          "name": "Sat Apr 18 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/4/18",
+            586
+          ]
+        },
+        {
+          "name": "Sun Apr 19 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/4/19",
+            587
+          ]
+        },
+        {
+          "name": "Mon Apr 20 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/4/20",
+            589
+          ]
+        },
+        {
+          "name": "Tue Apr 21 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/4/21",
+            587
+          ]
+        },
+        {
+          "name": "Wed Apr 22 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/4/22",
+            586
+          ]
+        },
+        {
+          "name": "Thu Apr 23 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/4/23",
+            590
+          ]
+        },
+        {
+          "name": "Fri Apr 24 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/4/24",
+            598
+          ]
+        },
+        {
+          "name": "Sat Apr 25 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/4/25",
+            590
+          ]
+        },
+        {
+          "name": "Sun Apr 26 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/4/26",
+            584
+          ]
+        },
+        {
+          "name": "Mon Apr 27 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/4/27",
+            580
+          ]
+        },
+        {
+          "name": "Tue Apr 28 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/4/28",
+            584
+          ]
+        },
+        {
+          "name": "Wed Apr 29 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/4/29",
+            577
+          ]
+        },
+        {
+          "name": "Thu Apr 30 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/4/30",
+            585
+          ]
+        },
+        {
+          "name": "Fri May 01 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/5/1",
+            575
+          ]
+        },
+        {
+          "name": "Sat May 02 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/5/2",
+            567
+          ]
+        },
+        {
+          "name": "Sun May 03 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/5/3",
+            559
+          ]
+        },
+        {
+          "name": "Mon May 04 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/5/4",
+            558
+          ]
+        },
+        {
+          "name": "Tue May 05 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/5/5",
+            559
+          ]
+        },
+        {
+          "name": "Wed May 06 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/5/6",
+            550
+          ]
+        },
+        {
+          "name": "Thu May 07 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/5/7",
+            541
+          ]
+        },
+        {
+          "name": "Fri May 08 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/5/8",
+            539
+          ]
+        },
+        {
+          "name": "Sat May 09 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/5/9",
+            541
+          ]
+        },
+        {
+          "name": "Sun May 10 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/5/10",
+            533
+          ]
+        },
+        {
+          "name": "Mon May 11 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/5/11",
+            525
+          ]
+        },
+        {
+          "name": "Tue May 12 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/5/12",
+            526
+          ]
+        },
+        {
+          "name": "Wed May 13 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/5/13",
+            534
+          ]
+        },
+        {
+          "name": "Thu May 14 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/5/14",
+            536
+          ]
+        },
+        {
+          "name": "Fri May 15 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/5/15",
+            531
+          ]
+        },
+        {
+          "name": "Sat May 16 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/5/16",
+            537
+          ]
+        },
+        {
+          "name": "Sun May 17 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/5/17",
+            546
+          ]
+        },
+        {
+          "name": "Mon May 18 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/5/18",
+            538
+          ]
+        },
+        {
+          "name": "Tue May 19 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/5/19",
+            535
+          ]
+        },
+        {
+          "name": "Wed May 20 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/5/20",
+            542
+          ]
+        },
+        {
+          "name": "Thu May 21 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/5/21",
+            538
+          ]
+        },
+        {
+          "name": "Fri May 22 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/5/22",
+            534
+          ]
+        },
+        {
+          "name": "Sat May 23 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/5/23",
+            528
+          ]
+        },
+        {
+          "name": "Sun May 24 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/5/24",
+            525
+          ]
+        },
+        {
+          "name": "Mon May 25 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/5/25",
+            534
+          ]
+        },
+        {
+          "name": "Tue May 26 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/5/26",
+            540
+          ]
+        },
+        {
+          "name": "Wed May 27 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/5/27",
+            535
+          ]
+        },
+        {
+          "name": "Thu May 28 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/5/28",
+            543
+          ]
+        },
+        {
+          "name": "Fri May 29 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/5/29",
+            549
+          ]
+        },
+        {
+          "name": "Sat May 30 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/5/30",
+            542
+          ]
+        },
+        {
+          "name": "Sun May 31 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/5/31",
+            534
+          ]
+        },
+        {
+          "name": "Mon Jun 01 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/6/1",
+            540
+          ]
+        },
+        {
+          "name": "Tue Jun 02 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/6/2",
+            538
+          ]
+        },
+        {
+          "name": "Wed Jun 03 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/6/3",
+            541
+          ]
+        },
+        {
+          "name": "Thu Jun 04 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/6/4",
+            544
+          ]
+        },
+        {
+          "name": "Fri Jun 05 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/6/5",
+            541
+          ]
+        },
+        {
+          "name": "Sat Jun 06 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/6/6",
+            543
+          ]
+        },
+        {
+          "name": "Sun Jun 07 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/6/7",
+            553
+          ]
+        },
+        {
+          "name": "Mon Jun 08 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/6/8",
+            548
+          ]
+        },
+        {
+          "name": "Tue Jun 09 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/6/9",
+            548
+          ]
+        },
+        {
+          "name": "Wed Jun 10 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/6/10",
+            541
+          ]
+        },
+        {
+          "name": "Thu Jun 11 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/6/11",
+            535
+          ]
+        },
+        {
+          "name": "Fri Jun 12 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/6/12",
+            540
+          ]
+        },
+        {
+          "name": "Sat Jun 13 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/6/13",
+            551
+          ]
+        },
+        {
+          "name": "Sun Jun 14 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/6/14",
+            545
+          ]
+        },
+        {
+          "name": "Mon Jun 15 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/6/15",
+            546
+          ]
+        },
+        {
+          "name": "Tue Jun 16 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/6/16",
+            545
+          ]
+        },
+        {
+          "name": "Wed Jun 17 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/6/17",
+            548
+          ]
+        },
+        {
+          "name": "Thu Jun 18 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/6/18",
+            558
+          ]
+        },
+        {
+          "name": "Fri Jun 19 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/6/19",
+            566
+          ]
+        },
+        {
+          "name": "Sat Jun 20 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/6/20",
+            567
+          ]
+        },
+        {
+          "name": "Sun Jun 21 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/6/21",
+            569
+          ]
+        },
+        {
+          "name": "Mon Jun 22 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/6/22",
+            580
+          ]
+        },
+        {
+          "name": "Tue Jun 23 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/6/23",
+            577
+          ]
+        },
+        {
+          "name": "Wed Jun 24 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/6/24",
+            588
+          ]
+        },
+        {
+          "name": "Thu Jun 25 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/6/25",
+            584
+          ]
+        },
+        {
+          "name": "Fri Jun 26 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/6/26",
+            592
+          ]
+        },
+        {
+          "name": "Sat Jun 27 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/6/27",
+            590
+          ]
+        },
+        {
+          "name": "Sun Jun 28 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/6/28",
+            584
+          ]
+        },
+        {
+          "name": "Mon Jun 29 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/6/29",
+            580
+          ]
+        },
+        {
+          "name": "Tue Jun 30 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/6/30",
+            571
+          ]
+        },
+        {
+          "name": "Wed Jul 01 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/7/1",
+            564
+          ]
+        },
+        {
+          "name": "Thu Jul 02 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/7/2",
+            565
+          ]
+        },
+        {
+          "name": "Fri Jul 03 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/7/3",
+            566
+          ]
+        },
+        {
+          "name": "Sat Jul 04 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/7/4",
+            559
+          ]
+        },
+        {
+          "name": "Sun Jul 05 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/7/5",
+            555
+          ]
+        },
+        {
+          "name": "Mon Jul 06 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/7/6",
+            554
+          ]
+        },
+        {
+          "name": "Tue Jul 07 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/7/7",
+            563
+          ]
+        },
+        {
+          "name": "Wed Jul 08 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/7/8",
+            568
+          ]
+        },
+        {
+          "name": "Thu Jul 09 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/7/9",
+            562
+          ]
+        },
+        {
+          "name": "Fri Jul 10 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/7/10",
+            568
+          ]
+        },
+        {
+          "name": "Sat Jul 11 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/7/11",
+            571
+          ]
+        },
+        {
+          "name": "Sun Jul 12 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/7/12",
+            574
+          ]
+        },
+        {
+          "name": "Mon Jul 13 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/7/13",
+            574
+          ]
+        },
+        {
+          "name": "Tue Jul 14 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/7/14",
+            567
+          ]
+        },
+        {
+          "name": "Wed Jul 15 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/7/15",
+            576
+          ]
+        },
+        {
+          "name": "Thu Jul 16 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/7/16",
+            579
+          ]
+        },
+        {
+          "name": "Fri Jul 17 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/7/17",
+            588
+          ]
+        },
+        {
+          "name": "Sat Jul 18 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/7/18",
+            596
+          ]
+        },
+        {
+          "name": "Sun Jul 19 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/7/19",
+            597
+          ]
+        },
+        {
+          "name": "Mon Jul 20 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/7/20",
+            591
+          ]
+        },
+        {
+          "name": "Tue Jul 21 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/7/21",
+            597
+          ]
+        },
+        {
+          "name": "Wed Jul 22 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/7/22",
+            600
+          ]
+        },
+        {
+          "name": "Thu Jul 23 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/7/23",
+            603
+          ]
+        },
+        {
+          "name": "Fri Jul 24 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/7/24",
+            596
+          ]
+        },
+        {
+          "name": "Sat Jul 25 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/7/25",
+            590
+          ]
+        },
+        {
+          "name": "Sun Jul 26 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/7/26",
+            588
+          ]
+        },
+        {
+          "name": "Mon Jul 27 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/7/27",
+            583
+          ]
+        },
+        {
+          "name": "Tue Jul 28 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/7/28",
+            585
+          ]
+        },
+        {
+          "name": "Wed Jul 29 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/7/29",
+            587
+          ]
+        },
+        {
+          "name": "Thu Jul 30 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/7/30",
+            588
+          ]
+        },
+        {
+          "name": "Fri Jul 31 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/7/31",
+            592
+          ]
+        },
+        {
+          "name": "Sat Aug 01 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/8/1",
+            587
+          ]
+        },
+        {
+          "name": "Sun Aug 02 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/8/2",
+            585
+          ]
+        },
+        {
+          "name": "Mon Aug 03 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/8/3",
+            577
+          ]
+        },
+        {
+          "name": "Tue Aug 04 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/8/4",
+            574
+          ]
+        },
+        {
+          "name": "Wed Aug 05 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/8/5",
+            573
+          ]
+        },
+        {
+          "name": "Thu Aug 06 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/8/6",
+            583
+          ]
+        },
+        {
+          "name": "Fri Aug 07 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/8/7",
+            588
+          ]
+        },
+        {
+          "name": "Sat Aug 08 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/8/8",
+            598
+          ]
+        },
+        {
+          "name": "Sun Aug 09 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/8/9",
+            608
+          ]
+        },
+        {
+          "name": "Mon Aug 10 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/8/10",
+            600
+          ]
+        },
+        {
+          "name": "Tue Aug 11 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/8/11",
+            602
+          ]
+        },
+        {
+          "name": "Wed Aug 12 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/8/12",
+            596
+          ]
+        },
+        {
+          "name": "Thu Aug 13 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/8/13",
+            587
+          ]
+        },
+        {
+          "name": "Fri Aug 14 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/8/14",
+            596
+          ]
+        },
+        {
+          "name": "Sat Aug 15 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/8/15",
+            605
+          ]
+        },
+        {
+          "name": "Sun Aug 16 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/8/16",
+            603
+          ]
+        },
+        {
+          "name": "Mon Aug 17 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/8/17",
+            605
+          ]
+        },
+        {
+          "name": "Tue Aug 18 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/8/18",
+            607
+          ]
+        },
+        {
+          "name": "Wed Aug 19 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/8/19",
+            603
+          ]
+        },
+        {
+          "name": "Thu Aug 20 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/8/20",
+            597
+          ]
+        },
+        {
+          "name": "Fri Aug 21 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/8/21",
+            599
+          ]
+        },
+        {
+          "name": "Sat Aug 22 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/8/22",
+            595
+          ]
+        },
+        {
+          "name": "Sun Aug 23 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/8/23",
+            591
+          ]
+        },
+        {
+          "name": "Mon Aug 24 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/8/24",
+            585
+          ]
+        },
+        {
+          "name": "Tue Aug 25 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/8/25",
+            594
+          ]
+        },
+        {
+          "name": "Wed Aug 26 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/8/26",
+            592
+          ]
+        },
+        {
+          "name": "Thu Aug 27 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/8/27",
+            586
+          ]
+        },
+        {
+          "name": "Fri Aug 28 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/8/28",
+            592
+          ]
+        },
+        {
+          "name": "Sat Aug 29 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/8/29",
+            592
+          ]
+        },
+        {
+          "name": "Sun Aug 30 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/8/30",
+            594
+          ]
+        },
+        {
+          "name": "Mon Aug 31 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/8/31",
+            591
+          ]
+        },
+        {
+          "name": "Tue Sep 01 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/9/1",
+            594
+          ]
+        },
+        {
+          "name": "Wed Sep 02 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/9/2",
+            598
+          ]
+        },
+        {
+          "name": "Thu Sep 03 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/9/3",
+            600
+          ]
+        },
+        {
+          "name": "Fri Sep 04 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/9/4",
+            595
+          ]
+        },
+        {
+          "name": "Sat Sep 05 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/9/5",
+            605
+          ]
+        },
+        {
+          "name": "Sun Sep 06 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/9/6",
+            596
+          ]
+        },
+        {
+          "name": "Mon Sep 07 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/9/7",
+            591
+          ]
+        },
+        {
+          "name": "Tue Sep 08 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/9/8",
+            586
+          ]
+        },
+        {
+          "name": "Wed Sep 09 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/9/9",
+            596
+          ]
+        },
+        {
+          "name": "Thu Sep 10 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/9/10",
+            594
+          ]
+        },
+        {
+          "name": "Fri Sep 11 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/9/11",
+            598
+          ]
+        },
+        {
+          "name": "Sat Sep 12 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/9/12",
+            597
+          ]
+        },
+        {
+          "name": "Sun Sep 13 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/9/13",
+            601
+          ]
+        },
+        {
+          "name": "Mon Sep 14 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/9/14",
+            609
+          ]
+        },
+        {
+          "name": "Tue Sep 15 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/9/15",
+            609
+          ]
+        },
+        {
+          "name": "Wed Sep 16 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/9/16",
+            602
+          ]
+        },
+        {
+          "name": "Thu Sep 17 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/9/17",
+            610
+          ]
+        },
+        {
+          "name": "Fri Sep 18 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/9/18",
+            600
+          ]
+        },
+        {
+          "name": "Sat Sep 19 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/9/19",
+            592
+          ]
+        },
+        {
+          "name": "Sun Sep 20 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/9/20",
+            583
+          ]
+        },
+        {
+          "name": "Mon Sep 21 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/9/21",
+            593
+          ]
+        },
+        {
+          "name": "Tue Sep 22 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/9/22",
+            585
+          ]
+        },
+        {
+          "name": "Wed Sep 23 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/9/23",
+            582
+          ]
+        },
+        {
+          "name": "Thu Sep 24 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/9/24",
+            592
+          ]
+        },
+        {
+          "name": "Fri Sep 25 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/9/25",
+            590
+          ]
+        },
+        {
+          "name": "Sat Sep 26 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/9/26",
+            598
+          ]
+        },
+        {
+          "name": "Sun Sep 27 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/9/27",
+            590
+          ]
+        },
+        {
+          "name": "Mon Sep 28 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/9/28",
+            587
+          ]
+        },
+        {
+          "name": "Tue Sep 29 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/9/29",
+            579
+          ]
+        },
+        {
+          "name": "Wed Sep 30 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/9/30",
+            588
+          ]
+        },
+        {
+          "name": "Thu Oct 01 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/10/1",
+            597
+          ]
+        },
+        {
+          "name": "Fri Oct 02 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/10/2",
+            597
+          ]
+        },
+        {
+          "name": "Sat Oct 03 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/10/3",
+            592
+          ]
+        },
+        {
+          "name": "Sun Oct 04 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/10/4",
+            598
+          ]
+        },
+        {
+          "name": "Mon Oct 05 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/10/5",
+            607
+          ]
+        },
+        {
+          "name": "Tue Oct 06 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/10/6",
+            612
+          ]
+        },
+        {
+          "name": "Wed Oct 07 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/10/7",
+            611
+          ]
+        },
+        {
+          "name": "Thu Oct 08 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/10/8",
+            611
+          ]
+        },
+        {
+          "name": "Fri Oct 09 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/10/9",
+            616
+          ]
+        },
+        {
+          "name": "Sat Oct 10 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/10/10",
+            609
+          ]
+        },
+        {
+          "name": "Sun Oct 11 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/10/11",
+            607
+          ]
+        },
+        {
+          "name": "Mon Oct 12 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/10/12",
+            610
+          ]
+        },
+        {
+          "name": "Tue Oct 13 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/10/13",
+            604
+          ]
+        },
+        {
+          "name": "Wed Oct 14 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/10/14",
+            614
+          ]
+        },
+        {
+          "name": "Thu Oct 15 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/10/15",
+            619
+          ]
+        },
+        {
+          "name": "Fri Oct 16 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/10/16",
+            617
+          ]
+        },
+        {
+          "name": "Sat Oct 17 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/10/17",
+            616
+          ]
+        },
+        {
+          "name": "Sun Oct 18 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/10/18",
+            624
+          ]
+        },
+        {
+          "name": "Mon Oct 19 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/10/19",
+            635
+          ]
+        },
+        {
+          "name": "Tue Oct 20 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/10/20",
+            627
+          ]
+        },
+        {
+          "name": "Wed Oct 21 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/10/21",
+            621
+          ]
+        },
+        {
+          "name": "Thu Oct 22 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/10/22",
+            612
+          ]
+        },
+        {
+          "name": "Fri Oct 23 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/10/23",
+            610
+          ]
+        },
+        {
+          "name": "Sat Oct 24 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/10/24",
+            609
+          ]
+        },
+        {
+          "name": "Sun Oct 25 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/10/25",
+            607
+          ]
+        },
+        {
+          "name": "Mon Oct 26 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/10/26",
+            607
+          ]
+        },
+        {
+          "name": "Tue Oct 27 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/10/27",
+            597
+          ]
+        },
+        {
+          "name": "Wed Oct 28 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/10/28",
+            600
+          ]
+        },
+        {
+          "name": "Thu Oct 29 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/10/29",
+            608
+          ]
+        },
+        {
+          "name": "Fri Oct 30 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/10/30",
+            606
+          ]
+        },
+        {
+          "name": "Sat Oct 31 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/10/31",
+            614
+          ]
+        },
+        {
+          "name": "Sun Nov 01 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/11/1",
+            612
+          ]
+        },
+        {
+          "name": "Mon Nov 02 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/11/2",
+            609
+          ]
+        },
+        {
+          "name": "Tue Nov 03 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/11/3",
+            609
+          ]
+        },
+        {
+          "name": "Wed Nov 04 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/11/4",
+            611
+          ]
+        },
+        {
+          "name": "Thu Nov 05 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/11/5",
+            617
+          ]
+        },
+        {
+          "name": "Fri Nov 06 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/11/6",
+            620
+          ]
+        },
+        {
+          "name": "Sat Nov 07 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/11/7",
+            626
+          ]
+        },
+        {
+          "name": "Sun Nov 08 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/11/8",
+            625
+          ]
+        },
+        {
+          "name": "Mon Nov 09 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/11/9",
+            621
+          ]
+        },
+        {
+          "name": "Tue Nov 10 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/11/10",
+            623
+          ]
+        },
+        {
+          "name": "Wed Nov 11 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/11/11",
+            622
+          ]
+        },
+        {
+          "name": "Thu Nov 12 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/11/12",
+            616
+          ]
+        },
+        {
+          "name": "Fri Nov 13 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/11/13",
+            619
+          ]
+        },
+        {
+          "name": "Sat Nov 14 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/11/14",
+            614
+          ]
+        },
+        {
+          "name": "Sun Nov 15 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/11/15",
+            614
+          ]
+        },
+        {
+          "name": "Mon Nov 16 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/11/16",
+            617
+          ]
+        },
+        {
+          "name": "Tue Nov 17 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/11/17",
+            627
+          ]
+        },
+        {
+          "name": "Wed Nov 18 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/11/18",
+            635
+          ]
+        },
+        {
+          "name": "Thu Nov 19 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/11/19",
+            632
+          ]
+        },
+        {
+          "name": "Fri Nov 20 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/11/20",
+            626
+          ]
+        },
+        {
+          "name": "Sat Nov 21 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/11/21",
+            619
+          ]
+        },
+        {
+          "name": "Sun Nov 22 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/11/22",
+            628
+          ]
+        },
+        {
+          "name": "Mon Nov 23 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/11/23",
+            624
+          ]
+        },
+        {
+          "name": "Tue Nov 24 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/11/24",
+            630
+          ]
+        },
+        {
+          "name": "Wed Nov 25 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/11/25",
+            622
+          ]
+        },
+        {
+          "name": "Thu Nov 26 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/11/26",
+            625
+          ]
+        },
+        {
+          "name": "Fri Nov 27 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/11/27",
+            621
+          ]
+        },
+        {
+          "name": "Sat Nov 28 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/11/28",
+            617
+          ]
+        },
+        {
+          "name": "Sun Nov 29 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/11/29",
+            616
+          ]
+        },
+        {
+          "name": "Mon Nov 30 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/11/30",
+            622
+          ]
+        },
+        {
+          "name": "Tue Dec 01 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/12/1",
+            628
+          ]
+        },
+        {
+          "name": "Wed Dec 02 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/12/2",
+            629
+          ]
+        },
+        {
+          "name": "Thu Dec 03 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/12/3",
+            631
+          ]
+        },
+        {
+          "name": "Fri Dec 04 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/12/4",
+            623
+          ]
+        },
+        {
+          "name": "Sat Dec 05 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/12/5",
+            618
+          ]
+        },
+        {
+          "name": "Sun Dec 06 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/12/6",
+            608
+          ]
+        },
+        {
+          "name": "Mon Dec 07 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/12/7",
+            613
+          ]
+        },
+        {
+          "name": "Tue Dec 08 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/12/8",
+            613
+          ]
+        },
+        {
+          "name": "Wed Dec 09 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/12/9",
+            622
+          ]
+        },
+        {
+          "name": "Thu Dec 10 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/12/10",
+            626
+          ]
+        },
+        {
+          "name": "Fri Dec 11 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/12/11",
+            631
+          ]
+        },
+        {
+          "name": "Sat Dec 12 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/12/12",
+            627
+          ]
+        },
+        {
+          "name": "Sun Dec 13 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/12/13",
+            626
+          ]
+        },
+        {
+          "name": "Mon Dec 14 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/12/14",
+            629
+          ]
+        },
+        {
+          "name": "Tue Dec 15 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/12/15",
+            637
+          ]
+        },
+        {
+          "name": "Wed Dec 16 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/12/16",
+            644
+          ]
+        },
+        {
+          "name": "Thu Dec 17 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/12/17",
+            651
+          ]
+        },
+        {
+          "name": "Fri Dec 18 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/12/18",
+            659
+          ]
+        },
+        {
+          "name": "Sat Dec 19 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/12/19",
+            659
+          ]
+        },
+        {
+          "name": "Sun Dec 20 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/12/20",
+            659
+          ]
+        },
+        {
+          "name": "Mon Dec 21 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/12/21",
+            663
+          ]
+        },
+        {
+          "name": "Tue Dec 22 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/12/22",
+            669
+          ]
+        },
+        {
+          "name": "Wed Dec 23 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/12/23",
+            665
+          ]
+        },
+        {
+          "name": "Thu Dec 24 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/12/24",
+            672
+          ]
+        },
+        {
+          "name": "Fri Dec 25 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/12/25",
+            681
+          ]
+        },
+        {
+          "name": "Sat Dec 26 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/12/26",
+            684
+          ]
+        },
+        {
+          "name": "Sun Dec 27 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/12/27",
+            684
+          ]
+        },
+        {
+          "name": "Mon Dec 28 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/12/28",
+            688
+          ]
+        },
+        {
+          "name": "Tue Dec 29 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/12/29",
+            692
+          ]
+        },
+        {
+          "name": "Wed Dec 30 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/12/30",
+            683
+          ]
+        },
+        {
+          "name": "Thu Dec 31 1998 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1998/12/31",
+            680
+          ]
+        },
+        {
+          "name": "Fri Jan 01 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/1/1",
+            682
+          ]
+        },
+        {
+          "name": "Sat Jan 02 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/1/2",
+            676
+          ]
+        },
+        {
+          "name": "Sun Jan 03 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/1/3",
+            685
+          ]
+        },
+        {
+          "name": "Mon Jan 04 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/1/4",
+            692
+          ]
+        },
+        {
+          "name": "Tue Jan 05 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/1/5",
+            683
+          ]
+        },
+        {
+          "name": "Wed Jan 06 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/1/6",
+            673
+          ]
+        },
+        {
+          "name": "Thu Jan 07 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/1/7",
+            680
+          ]
+        },
+        {
+          "name": "Fri Jan 08 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/1/8",
+            670
+          ]
+        },
+        {
+          "name": "Sat Jan 09 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/1/9",
+            660
+          ]
+        },
+        {
+          "name": "Sun Jan 10 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/1/10",
+            663
+          ]
+        },
+        {
+          "name": "Mon Jan 11 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/1/11",
+            669
+          ]
+        },
+        {
+          "name": "Tue Jan 12 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/1/12",
+            663
+          ]
+        },
+        {
+          "name": "Wed Jan 13 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/1/13",
+            656
+          ]
+        },
+        {
+          "name": "Thu Jan 14 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/1/14",
+            647
+          ]
+        },
+        {
+          "name": "Fri Jan 15 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/1/15",
+            644
+          ]
+        },
+        {
+          "name": "Sat Jan 16 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/1/16",
+            637
+          ]
+        },
+        {
+          "name": "Sun Jan 17 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/1/17",
+            644
+          ]
+        },
+        {
+          "name": "Mon Jan 18 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/1/18",
+            655
+          ]
+        },
+        {
+          "name": "Tue Jan 19 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/1/19",
+            650
+          ]
+        },
+        {
+          "name": "Wed Jan 20 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/1/20",
+            654
+          ]
+        },
+        {
+          "name": "Thu Jan 21 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/1/21",
+            657
+          ]
+        },
+        {
+          "name": "Fri Jan 22 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/1/22",
+            664
+          ]
+        },
+        {
+          "name": "Sat Jan 23 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/1/23",
+            674
+          ]
+        },
+        {
+          "name": "Sun Jan 24 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/1/24",
+            682
+          ]
+        },
+        {
+          "name": "Mon Jan 25 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/1/25",
+            674
+          ]
+        },
+        {
+          "name": "Tue Jan 26 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/1/26",
+            665
+          ]
+        },
+        {
+          "name": "Wed Jan 27 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/1/27",
+            673
+          ]
+        },
+        {
+          "name": "Thu Jan 28 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/1/28",
+            670
+          ]
+        },
+        {
+          "name": "Fri Jan 29 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/1/29",
+            674
+          ]
+        },
+        {
+          "name": "Sat Jan 30 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/1/30",
+            670
+          ]
+        },
+        {
+          "name": "Sun Jan 31 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/1/31",
+            663
+          ]
+        },
+        {
+          "name": "Mon Feb 01 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/2/1",
+            656
+          ]
+        },
+        {
+          "name": "Tue Feb 02 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/2/2",
+            656
+          ]
+        },
+        {
+          "name": "Wed Feb 03 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/2/3",
+            658
+          ]
+        },
+        {
+          "name": "Thu Feb 04 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/2/4",
+            664
+          ]
+        },
+        {
+          "name": "Fri Feb 05 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/2/5",
+            673
+          ]
+        },
+        {
+          "name": "Sat Feb 06 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/2/6",
+            664
+          ]
+        },
+        {
+          "name": "Sun Feb 07 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/2/7",
+            675
+          ]
+        },
+        {
+          "name": "Mon Feb 08 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/2/8",
+            683
+          ]
+        },
+        {
+          "name": "Tue Feb 09 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/2/9",
+            685
+          ]
+        },
+        {
+          "name": "Wed Feb 10 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/2/10",
+            677
+          ]
+        },
+        {
+          "name": "Thu Feb 11 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/2/11",
+            679
+          ]
+        },
+        {
+          "name": "Fri Feb 12 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/2/12",
+            676
+          ]
+        },
+        {
+          "name": "Sat Feb 13 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/2/13",
+            675
+          ]
+        },
+        {
+          "name": "Sun Feb 14 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/2/14",
+            681
+          ]
+        },
+        {
+          "name": "Mon Feb 15 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/2/15",
+            685
+          ]
+        },
+        {
+          "name": "Tue Feb 16 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/2/16",
+            688
+          ]
+        },
+        {
+          "name": "Wed Feb 17 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/2/17",
+            681
+          ]
+        },
+        {
+          "name": "Thu Feb 18 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/2/18",
+            679
+          ]
+        },
+        {
+          "name": "Fri Feb 19 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/2/19",
+            677
+          ]
+        },
+        {
+          "name": "Sat Feb 20 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/2/20",
+            668
+          ]
+        },
+        {
+          "name": "Sun Feb 21 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/2/21",
+            672
+          ]
+        },
+        {
+          "name": "Mon Feb 22 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/2/22",
+            675
+          ]
+        },
+        {
+          "name": "Tue Feb 23 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/2/23",
+            674
+          ]
+        },
+        {
+          "name": "Wed Feb 24 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/2/24",
+            678
+          ]
+        },
+        {
+          "name": "Thu Feb 25 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/2/25",
+            671
+          ]
+        },
+        {
+          "name": "Fri Feb 26 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/2/26",
+            665
+          ]
+        },
+        {
+          "name": "Sat Feb 27 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/2/27",
+            675
+          ]
+        },
+        {
+          "name": "Sun Feb 28 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/2/28",
+            683
+          ]
+        },
+        {
+          "name": "Mon Mar 01 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/3/1",
+            690
+          ]
+        },
+        {
+          "name": "Tue Mar 02 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/3/2",
+            692
+          ]
+        },
+        {
+          "name": "Wed Mar 03 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/3/3",
+            686
+          ]
+        },
+        {
+          "name": "Thu Mar 04 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/3/4",
+            687
+          ]
+        },
+        {
+          "name": "Fri Mar 05 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/3/5",
+            680
+          ]
+        },
+        {
+          "name": "Sat Mar 06 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/3/6",
+            671
+          ]
+        },
+        {
+          "name": "Sun Mar 07 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/3/7",
+            682
+          ]
+        },
+        {
+          "name": "Mon Mar 08 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/3/8",
+            680
+          ]
+        },
+        {
+          "name": "Tue Mar 09 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/3/9",
+            677
+          ]
+        },
+        {
+          "name": "Wed Mar 10 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/3/10",
+            674
+          ]
+        },
+        {
+          "name": "Thu Mar 11 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/3/11",
+            672
+          ]
+        },
+        {
+          "name": "Fri Mar 12 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/3/12",
+            670
+          ]
+        },
+        {
+          "name": "Sat Mar 13 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/3/13",
+            676
+          ]
+        },
+        {
+          "name": "Sun Mar 14 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/3/14",
+            685
+          ]
+        },
+        {
+          "name": "Mon Mar 15 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/3/15",
+            683
+          ]
+        },
+        {
+          "name": "Tue Mar 16 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/3/16",
+            675
+          ]
+        },
+        {
+          "name": "Wed Mar 17 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/3/17",
+            682
+          ]
+        },
+        {
+          "name": "Thu Mar 18 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/3/18",
+            675
+          ]
+        },
+        {
+          "name": "Fri Mar 19 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/3/19",
+            679
+          ]
+        },
+        {
+          "name": "Sat Mar 20 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/3/20",
+            671
+          ]
+        },
+        {
+          "name": "Sun Mar 21 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/3/21",
+            674
+          ]
+        },
+        {
+          "name": "Mon Mar 22 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/3/22",
+            680
+          ]
+        },
+        {
+          "name": "Tue Mar 23 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/3/23",
+            676
+          ]
+        },
+        {
+          "name": "Wed Mar 24 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/3/24",
+            678
+          ]
+        },
+        {
+          "name": "Thu Mar 25 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/3/25",
+            671
+          ]
+        },
+        {
+          "name": "Fri Mar 26 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/3/26",
+            674
+          ]
+        },
+        {
+          "name": "Sat Mar 27 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/3/27",
+            673
+          ]
+        },
+        {
+          "name": "Sun Mar 28 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/3/28",
+            680
+          ]
+        },
+        {
+          "name": "Mon Mar 29 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/3/29",
+            673
+          ]
+        },
+        {
+          "name": "Tue Mar 30 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/3/30",
+            678
+          ]
+        },
+        {
+          "name": "Wed Mar 31 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/3/31",
+            682
+          ]
+        },
+        {
+          "name": "Thu Apr 01 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/4/1",
+            688
+          ]
+        },
+        {
+          "name": "Fri Apr 02 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/4/2",
+            680
+          ]
+        },
+        {
+          "name": "Sat Apr 03 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/4/3",
+            688
+          ]
+        },
+        {
+          "name": "Sun Apr 04 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/4/4",
+            680
+          ]
+        },
+        {
+          "name": "Mon Apr 05 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/4/5",
+            679
+          ]
+        },
+        {
+          "name": "Tue Apr 06 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/4/6",
+            681
+          ]
+        },
+        {
+          "name": "Wed Apr 07 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/4/7",
+            680
+          ]
+        },
+        {
+          "name": "Thu Apr 08 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/4/8",
+            684
+          ]
+        },
+        {
+          "name": "Fri Apr 09 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/4/9",
+            677
+          ]
+        },
+        {
+          "name": "Sat Apr 10 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/4/10",
+            667
+          ]
+        },
+        {
+          "name": "Sun Apr 11 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/4/11",
+            665
+          ]
+        },
+        {
+          "name": "Mon Apr 12 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/4/12",
+            664
+          ]
+        },
+        {
+          "name": "Tue Apr 13 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/4/13",
+            656
+          ]
+        },
+        {
+          "name": "Wed Apr 14 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/4/14",
+            648
+          ]
+        },
+        {
+          "name": "Thu Apr 15 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/4/15",
+            650
+          ]
+        },
+        {
+          "name": "Fri Apr 16 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/4/16",
+            656
+          ]
+        },
+        {
+          "name": "Sat Apr 17 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/4/17",
+            659
+          ]
+        },
+        {
+          "name": "Sun Apr 18 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/4/18",
+            669
+          ]
+        },
+        {
+          "name": "Mon Apr 19 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/4/19",
+            660
+          ]
+        },
+        {
+          "name": "Tue Apr 20 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/4/20",
+            667
+          ]
+        },
+        {
+          "name": "Wed Apr 21 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/4/21",
+            664
+          ]
+        },
+        {
+          "name": "Thu Apr 22 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/4/22",
+            654
+          ]
+        },
+        {
+          "name": "Fri Apr 23 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/4/23",
+            654
+          ]
+        },
+        {
+          "name": "Sat Apr 24 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/4/24",
+            653
+          ]
+        },
+        {
+          "name": "Sun Apr 25 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/4/25",
+            663
+          ]
+        },
+        {
+          "name": "Mon Apr 26 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/4/26",
+            658
+          ]
+        },
+        {
+          "name": "Tue Apr 27 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/4/27",
+            653
+          ]
+        },
+        {
+          "name": "Wed Apr 28 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/4/28",
+            660
+          ]
+        },
+        {
+          "name": "Thu Apr 29 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/4/29",
+            667
+          ]
+        },
+        {
+          "name": "Fri Apr 30 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/4/30",
+            670
+          ]
+        },
+        {
+          "name": "Sat May 01 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/5/1",
+            675
+          ]
+        },
+        {
+          "name": "Sun May 02 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/5/2",
+            666
+          ]
+        },
+        {
+          "name": "Mon May 03 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/5/3",
+            657
+          ]
+        },
+        {
+          "name": "Tue May 04 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/5/4",
+            650
+          ]
+        },
+        {
+          "name": "Wed May 05 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/5/5",
+            653
+          ]
+        },
+        {
+          "name": "Thu May 06 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/5/6",
+            662
+          ]
+        },
+        {
+          "name": "Fri May 07 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/5/7",
+            664
+          ]
+        },
+        {
+          "name": "Sat May 08 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/5/8",
+            664
+          ]
+        },
+        {
+          "name": "Sun May 09 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/5/9",
+            671
+          ]
+        },
+        {
+          "name": "Mon May 10 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/5/10",
+            677
+          ]
+        },
+        {
+          "name": "Tue May 11 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/5/11",
+            686
+          ]
+        },
+        {
+          "name": "Wed May 12 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/5/12",
+            678
+          ]
+        },
+        {
+          "name": "Thu May 13 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/5/13",
+            686
+          ]
+        },
+        {
+          "name": "Fri May 14 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/5/14",
+            679
+          ]
+        },
+        {
+          "name": "Sat May 15 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/5/15",
+            686
+          ]
+        },
+        {
+          "name": "Sun May 16 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/5/16",
+            676
+          ]
+        },
+        {
+          "name": "Mon May 17 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/5/17",
+            687
+          ]
+        },
+        {
+          "name": "Tue May 18 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/5/18",
+            693
+          ]
+        },
+        {
+          "name": "Wed May 19 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/5/19",
+            688
+          ]
+        },
+        {
+          "name": "Thu May 20 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/5/20",
+            698
+          ]
+        },
+        {
+          "name": "Fri May 21 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/5/21",
+            702
+          ]
+        },
+        {
+          "name": "Sat May 22 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/5/22",
+            705
+          ]
+        },
+        {
+          "name": "Sun May 23 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/5/23",
+            702
+          ]
+        },
+        {
+          "name": "Mon May 24 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/5/24",
+            699
+          ]
+        },
+        {
+          "name": "Tue May 25 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/5/25",
+            701
+          ]
+        },
+        {
+          "name": "Wed May 26 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/5/26",
+            702
+          ]
+        },
+        {
+          "name": "Thu May 27 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/5/27",
+            707
+          ]
+        },
+        {
+          "name": "Fri May 28 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/5/28",
+            703
+          ]
+        },
+        {
+          "name": "Sat May 29 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/5/29",
+            712
+          ]
+        },
+        {
+          "name": "Sun May 30 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/5/30",
+            707
+          ]
+        },
+        {
+          "name": "Mon May 31 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/5/31",
+            715
+          ]
+        },
+        {
+          "name": "Tue Jun 01 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/6/1",
+            719
+          ]
+        },
+        {
+          "name": "Wed Jun 02 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/6/2",
+            727
+          ]
+        },
+        {
+          "name": "Thu Jun 03 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/6/3",
+            722
+          ]
+        },
+        {
+          "name": "Fri Jun 04 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/6/4",
+            720
+          ]
+        },
+        {
+          "name": "Sat Jun 05 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/6/5",
+            730
+          ]
+        },
+        {
+          "name": "Sun Jun 06 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/6/6",
+            729
+          ]
+        },
+        {
+          "name": "Mon Jun 07 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/6/7",
+            727
+          ]
+        },
+        {
+          "name": "Tue Jun 08 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/6/8",
+            722
+          ]
+        },
+        {
+          "name": "Wed Jun 09 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/6/9",
+            717
+          ]
+        },
+        {
+          "name": "Thu Jun 10 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/6/10",
+            718
+          ]
+        },
+        {
+          "name": "Fri Jun 11 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/6/11",
+            723
+          ]
+        },
+        {
+          "name": "Sat Jun 12 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/6/12",
+            719
+          ]
+        },
+        {
+          "name": "Sun Jun 13 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/6/13",
+            725
+          ]
+        },
+        {
+          "name": "Mon Jun 14 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/6/14",
+            730
+          ]
+        },
+        {
+          "name": "Tue Jun 15 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/6/15",
+            741
+          ]
+        },
+        {
+          "name": "Wed Jun 16 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/6/16",
+            739
+          ]
+        },
+        {
+          "name": "Thu Jun 17 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/6/17",
+            747
+          ]
+        },
+        {
+          "name": "Fri Jun 18 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/6/18",
+            748
+          ]
+        },
+        {
+          "name": "Sat Jun 19 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/6/19",
+            745
+          ]
+        },
+        {
+          "name": "Sun Jun 20 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/6/20",
+            739
+          ]
+        },
+        {
+          "name": "Mon Jun 21 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/6/21",
+            736
+          ]
+        },
+        {
+          "name": "Tue Jun 22 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/6/22",
+            746
+          ]
+        },
+        {
+          "name": "Wed Jun 23 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/6/23",
+            744
+          ]
+        },
+        {
+          "name": "Thu Jun 24 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/6/24",
+            751
+          ]
+        },
+        {
+          "name": "Fri Jun 25 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/6/25",
+            760
+          ]
+        },
+        {
+          "name": "Sat Jun 26 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/6/26",
+            771
+          ]
+        },
+        {
+          "name": "Sun Jun 27 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/6/27",
+            767
+          ]
+        },
+        {
+          "name": "Mon Jun 28 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/6/28",
+            771
+          ]
+        },
+        {
+          "name": "Tue Jun 29 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/6/29",
+            768
+          ]
+        },
+        {
+          "name": "Wed Jun 30 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/6/30",
+            759
+          ]
+        },
+        {
+          "name": "Thu Jul 01 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/7/1",
+            751
+          ]
+        },
+        {
+          "name": "Fri Jul 02 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/7/2",
+            753
+          ]
+        },
+        {
+          "name": "Sat Jul 03 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/7/3",
+            749
+          ]
+        },
+        {
+          "name": "Sun Jul 04 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/7/4",
+            752
+          ]
+        },
+        {
+          "name": "Mon Jul 05 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/7/5",
+            760
+          ]
+        },
+        {
+          "name": "Tue Jul 06 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/7/6",
+            752
+          ]
+        },
+        {
+          "name": "Wed Jul 07 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/7/7",
+            748
+          ]
+        },
+        {
+          "name": "Thu Jul 08 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/7/8",
+            750
+          ]
+        },
+        {
+          "name": "Fri Jul 09 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/7/9",
+            748
+          ]
+        },
+        {
+          "name": "Sat Jul 10 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/7/10",
+            748
+          ]
+        },
+        {
+          "name": "Sun Jul 11 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/7/11",
+            753
+          ]
+        },
+        {
+          "name": "Mon Jul 12 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/7/12",
+            744
+          ]
+        },
+        {
+          "name": "Tue Jul 13 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/7/13",
+            745
+          ]
+        },
+        {
+          "name": "Wed Jul 14 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/7/14",
+            745
+          ]
+        },
+        {
+          "name": "Thu Jul 15 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/7/15",
+            756
+          ]
+        },
+        {
+          "name": "Fri Jul 16 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/7/16",
+            763
+          ]
+        },
+        {
+          "name": "Sat Jul 17 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/7/17",
+            770
+          ]
+        },
+        {
+          "name": "Sun Jul 18 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/7/18",
+            778
+          ]
+        },
+        {
+          "name": "Mon Jul 19 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/7/19",
+            781
+          ]
+        },
+        {
+          "name": "Tue Jul 20 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/7/20",
+            772
+          ]
+        },
+        {
+          "name": "Wed Jul 21 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/7/21",
+            778
+          ]
+        },
+        {
+          "name": "Thu Jul 22 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/7/22",
+            776
+          ]
+        },
+        {
+          "name": "Fri Jul 23 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/7/23",
+            777
+          ]
+        },
+        {
+          "name": "Sat Jul 24 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/7/24",
+            770
+          ]
+        },
+        {
+          "name": "Sun Jul 25 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/7/25",
+            768
+          ]
+        },
+        {
+          "name": "Mon Jul 26 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/7/26",
+            773
+          ]
+        },
+        {
+          "name": "Tue Jul 27 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/7/27",
+            774
+          ]
+        },
+        {
+          "name": "Wed Jul 28 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/7/28",
+            785
+          ]
+        },
+        {
+          "name": "Thu Jul 29 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/7/29",
+            785
+          ]
+        },
+        {
+          "name": "Fri Jul 30 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/7/30",
+            786
+          ]
+        },
+        {
+          "name": "Sat Jul 31 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/7/31",
+            790
+          ]
+        },
+        {
+          "name": "Sun Aug 01 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/8/1",
+            786
+          ]
+        },
+        {
+          "name": "Mon Aug 02 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/8/2",
+            778
+          ]
+        },
+        {
+          "name": "Tue Aug 03 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/8/3",
+            786
+          ]
+        },
+        {
+          "name": "Wed Aug 04 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/8/4",
+            788
+          ]
+        },
+        {
+          "name": "Thu Aug 05 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/8/5",
+            787
+          ]
+        },
+        {
+          "name": "Fri Aug 06 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/8/6",
+            779
+          ]
+        },
+        {
+          "name": "Sat Aug 07 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/8/7",
+            788
+          ]
+        },
+        {
+          "name": "Sun Aug 08 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/8/8",
+            778
+          ]
+        },
+        {
+          "name": "Mon Aug 09 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/8/9",
+            772
+          ]
+        },
+        {
+          "name": "Tue Aug 10 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/8/10",
+            766
+          ]
+        },
+        {
+          "name": "Wed Aug 11 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/8/11",
+            767
+          ]
+        },
+        {
+          "name": "Thu Aug 12 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/8/12",
+            761
+          ]
+        },
+        {
+          "name": "Fri Aug 13 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/8/13",
+            763
+          ]
+        },
+        {
+          "name": "Sat Aug 14 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/8/14",
+            773
+          ]
+        },
+        {
+          "name": "Sun Aug 15 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/8/15",
+            781
+          ]
+        },
+        {
+          "name": "Mon Aug 16 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/8/16",
+            787
+          ]
+        },
+        {
+          "name": "Tue Aug 17 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/8/17",
+            791
+          ]
+        },
+        {
+          "name": "Wed Aug 18 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/8/18",
+            789
+          ]
+        },
+        {
+          "name": "Thu Aug 19 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/8/19",
+            800
+          ]
+        },
+        {
+          "name": "Fri Aug 20 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/8/20",
+            808
+          ]
+        },
+        {
+          "name": "Sat Aug 21 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/8/21",
+            812
+          ]
+        },
+        {
+          "name": "Sun Aug 22 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/8/22",
+            808
+          ]
+        },
+        {
+          "name": "Mon Aug 23 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/8/23",
+            807
+          ]
+        },
+        {
+          "name": "Tue Aug 24 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/8/24",
+            804
+          ]
+        },
+        {
+          "name": "Wed Aug 25 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/8/25",
+            813
+          ]
+        },
+        {
+          "name": "Thu Aug 26 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/8/26",
+            823
+          ]
+        },
+        {
+          "name": "Fri Aug 27 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/8/27",
+            824
+          ]
+        },
+        {
+          "name": "Sat Aug 28 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/8/28",
+            831
+          ]
+        },
+        {
+          "name": "Sun Aug 29 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/8/29",
+            841
+          ]
+        },
+        {
+          "name": "Mon Aug 30 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/8/30",
+            846
+          ]
+        },
+        {
+          "name": "Tue Aug 31 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/8/31",
+            837
+          ]
+        },
+        {
+          "name": "Wed Sep 01 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/9/1",
+            840
+          ]
+        },
+        {
+          "name": "Thu Sep 02 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/9/2",
+            837
+          ]
+        },
+        {
+          "name": "Fri Sep 03 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/9/3",
+            841
+          ]
+        },
+        {
+          "name": "Sat Sep 04 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/9/4",
+            844
+          ]
+        },
+        {
+          "name": "Sun Sep 05 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/9/5",
+            846
+          ]
+        },
+        {
+          "name": "Mon Sep 06 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/9/6",
+            843
+          ]
+        },
+        {
+          "name": "Tue Sep 07 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/9/7",
+            852
+          ]
+        },
+        {
+          "name": "Wed Sep 08 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/9/8",
+            842
+          ]
+        },
+        {
+          "name": "Thu Sep 09 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/9/9",
+            838
+          ]
+        },
+        {
+          "name": "Fri Sep 10 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/9/10",
+            836
+          ]
+        },
+        {
+          "name": "Sat Sep 11 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/9/11",
+            833
+          ]
+        },
+        {
+          "name": "Sun Sep 12 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/9/12",
+            827
+          ]
+        },
+        {
+          "name": "Mon Sep 13 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/9/13",
+            826
+          ]
+        },
+        {
+          "name": "Tue Sep 14 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/9/14",
+            824
+          ]
+        },
+        {
+          "name": "Wed Sep 15 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/9/15",
+            824
+          ]
+        },
+        {
+          "name": "Thu Sep 16 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/9/16",
+            820
+          ]
+        },
+        {
+          "name": "Fri Sep 17 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/9/17",
+            819
+          ]
+        },
+        {
+          "name": "Sat Sep 18 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/9/18",
+            819
+          ]
+        },
+        {
+          "name": "Sun Sep 19 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/9/19",
+            821
+          ]
+        },
+        {
+          "name": "Mon Sep 20 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/9/20",
+            832
+          ]
+        },
+        {
+          "name": "Tue Sep 21 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/9/21",
+            836
+          ]
+        },
+        {
+          "name": "Wed Sep 22 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/9/22",
+            845
+          ]
+        },
+        {
+          "name": "Thu Sep 23 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/9/23",
+            853
+          ]
+        },
+        {
+          "name": "Fri Sep 24 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/9/24",
+            848
+          ]
+        },
+        {
+          "name": "Sat Sep 25 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/9/25",
+            843
+          ]
+        },
+        {
+          "name": "Sun Sep 26 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/9/26",
+            842
+          ]
+        },
+        {
+          "name": "Mon Sep 27 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/9/27",
+            852
+          ]
+        },
+        {
+          "name": "Tue Sep 28 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/9/28",
+            863
+          ]
+        },
+        {
+          "name": "Wed Sep 29 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/9/29",
+            857
+          ]
+        },
+        {
+          "name": "Thu Sep 30 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/9/30",
+            865
+          ]
+        },
+        {
+          "name": "Fri Oct 01 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/10/1",
+            857
+          ]
+        },
+        {
+          "name": "Sat Oct 02 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/10/2",
+            867
+          ]
+        },
+        {
+          "name": "Sun Oct 03 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/10/3",
+            873
+          ]
+        },
+        {
+          "name": "Mon Oct 04 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/10/4",
+            878
+          ]
+        },
+        {
+          "name": "Tue Oct 05 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/10/5",
+            871
+          ]
+        },
+        {
+          "name": "Wed Oct 06 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/10/6",
+            862
+          ]
+        },
+        {
+          "name": "Thu Oct 07 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/10/7",
+            872
+          ]
+        },
+        {
+          "name": "Fri Oct 08 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/10/8",
+            869
+          ]
+        },
+        {
+          "name": "Sat Oct 09 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/10/9",
+            875
+          ]
+        },
+        {
+          "name": "Sun Oct 10 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/10/10",
+            882
+          ]
+        },
+        {
+          "name": "Mon Oct 11 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/10/11",
+            875
+          ]
+        },
+        {
+          "name": "Tue Oct 12 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/10/12",
+            885
+          ]
+        },
+        {
+          "name": "Wed Oct 13 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/10/13",
+            885
+          ]
+        },
+        {
+          "name": "Thu Oct 14 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/10/14",
+            895
+          ]
+        },
+        {
+          "name": "Fri Oct 15 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/10/15",
+            898
+          ]
+        },
+        {
+          "name": "Sat Oct 16 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/10/16",
+            889
+          ]
+        },
+        {
+          "name": "Sun Oct 17 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/10/17",
+            886
+          ]
+        },
+        {
+          "name": "Mon Oct 18 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/10/18",
+            887
+          ]
+        },
+        {
+          "name": "Tue Oct 19 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/10/19",
+            881
+          ]
+        },
+        {
+          "name": "Wed Oct 20 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/10/20",
+            883
+          ]
+        },
+        {
+          "name": "Thu Oct 21 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/10/21",
+            881
+          ]
+        },
+        {
+          "name": "Fri Oct 22 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/10/22",
+            873
+          ]
+        },
+        {
+          "name": "Sat Oct 23 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/10/23",
+            864
+          ]
+        },
+        {
+          "name": "Sun Oct 24 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/10/24",
+            870
+          ]
+        },
+        {
+          "name": "Mon Oct 25 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/10/25",
+            873
+          ]
+        },
+        {
+          "name": "Tue Oct 26 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/10/26",
+            869
+          ]
+        },
+        {
+          "name": "Wed Oct 27 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/10/27",
+            880
+          ]
+        },
+        {
+          "name": "Thu Oct 28 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/10/28",
+            873
+          ]
+        },
+        {
+          "name": "Fri Oct 29 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/10/29",
+            871
+          ]
+        },
+        {
+          "name": "Sat Oct 30 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/10/30",
+            873
+          ]
+        },
+        {
+          "name": "Sun Oct 31 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/10/31",
+            866
+          ]
+        },
+        {
+          "name": "Mon Nov 01 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/11/1",
+            868
+          ]
+        },
+        {
+          "name": "Tue Nov 02 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/11/2",
+            870
+          ]
+        },
+        {
+          "name": "Wed Nov 03 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/11/3",
+            870
+          ]
+        },
+        {
+          "name": "Thu Nov 04 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/11/4",
+            880
+          ]
+        },
+        {
+          "name": "Fri Nov 05 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/11/5",
+            872
+          ]
+        },
+        {
+          "name": "Sat Nov 06 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/11/6",
+            866
+          ]
+        },
+        {
+          "name": "Sun Nov 07 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/11/7",
+            876
+          ]
+        },
+        {
+          "name": "Mon Nov 08 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/11/8",
+            885
+          ]
+        },
+        {
+          "name": "Tue Nov 09 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/11/9",
+            876
+          ]
+        },
+        {
+          "name": "Wed Nov 10 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/11/10",
+            877
+          ]
+        },
+        {
+          "name": "Thu Nov 11 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/11/11",
+            887
+          ]
+        },
+        {
+          "name": "Fri Nov 12 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/11/12",
+            885
+          ]
+        },
+        {
+          "name": "Sat Nov 13 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/11/13",
+            894
+          ]
+        },
+        {
+          "name": "Sun Nov 14 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/11/14",
+            884
+          ]
+        },
+        {
+          "name": "Mon Nov 15 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/11/15",
+            891
+          ]
+        },
+        {
+          "name": "Tue Nov 16 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/11/16",
+            884
+          ]
+        },
+        {
+          "name": "Wed Nov 17 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/11/17",
+            889
+          ]
+        },
+        {
+          "name": "Thu Nov 18 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/11/18",
+            895
+          ]
+        },
+        {
+          "name": "Fri Nov 19 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/11/19",
+            897
+          ]
+        },
+        {
+          "name": "Sat Nov 20 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/11/20",
+            891
+          ]
+        },
+        {
+          "name": "Sun Nov 21 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/11/21",
+            892
+          ]
+        },
+        {
+          "name": "Mon Nov 22 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/11/22",
+            898
+          ]
+        },
+        {
+          "name": "Tue Nov 23 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/11/23",
+            903
+          ]
+        },
+        {
+          "name": "Wed Nov 24 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/11/24",
+            912
+          ]
+        },
+        {
+          "name": "Thu Nov 25 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/11/25",
+            922
+          ]
+        },
+        {
+          "name": "Fri Nov 26 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/11/26",
+            917
+          ]
+        },
+        {
+          "name": "Sat Nov 27 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/11/27",
+            907
+          ]
+        },
+        {
+          "name": "Sun Nov 28 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/11/28",
+            908
+          ]
+        },
+        {
+          "name": "Mon Nov 29 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/11/29",
+            904
+          ]
+        },
+        {
+          "name": "Tue Nov 30 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/11/30",
+            912
+          ]
+        },
+        {
+          "name": "Wed Dec 01 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/12/1",
+            913
+          ]
+        },
+        {
+          "name": "Thu Dec 02 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/12/2",
+            904
+          ]
+        },
+        {
+          "name": "Fri Dec 03 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/12/3",
+            895
+          ]
+        },
+        {
+          "name": "Sat Dec 04 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/12/4",
+            894
+          ]
+        },
+        {
+          "name": "Sun Dec 05 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/12/5",
+            898
+          ]
+        },
+        {
+          "name": "Mon Dec 06 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/12/6",
+            907
+          ]
+        },
+        {
+          "name": "Tue Dec 07 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/12/7",
+            910
+          ]
+        },
+        {
+          "name": "Wed Dec 08 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/12/8",
+            912
+          ]
+        },
+        {
+          "name": "Thu Dec 09 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/12/9",
+            910
+          ]
+        },
+        {
+          "name": "Fri Dec 10 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/12/10",
+            911
+          ]
+        },
+        {
+          "name": "Sat Dec 11 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/12/11",
+            909
+          ]
+        },
+        {
+          "name": "Sun Dec 12 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/12/12",
+            918
+          ]
+        },
+        {
+          "name": "Mon Dec 13 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/12/13",
+            917
+          ]
+        },
+        {
+          "name": "Tue Dec 14 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/12/14",
+            910
+          ]
+        },
+        {
+          "name": "Wed Dec 15 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/12/15",
+            910
+          ]
+        },
+        {
+          "name": "Thu Dec 16 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/12/16",
+            913
+          ]
+        },
+        {
+          "name": "Fri Dec 17 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/12/17",
+            921
+          ]
+        },
+        {
+          "name": "Sat Dec 18 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/12/18",
+            922
+          ]
+        },
+        {
+          "name": "Sun Dec 19 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/12/19",
+            919
+          ]
+        },
+        {
+          "name": "Mon Dec 20 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/12/20",
+            920
+          ]
+        },
+        {
+          "name": "Tue Dec 21 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/12/21",
+            923
+          ]
+        },
+        {
+          "name": "Wed Dec 22 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/12/22",
+            931
+          ]
+        },
+        {
+          "name": "Thu Dec 23 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/12/23",
+            927
+          ]
+        },
+        {
+          "name": "Fri Dec 24 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/12/24",
+            933
+          ]
+        },
+        {
+          "name": "Sat Dec 25 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/12/25",
+            936
+          ]
+        },
+        {
+          "name": "Sun Dec 26 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/12/26",
+            934
+          ]
+        },
+        {
+          "name": "Mon Dec 27 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/12/27",
+            942
+          ]
+        },
+        {
+          "name": "Tue Dec 28 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/12/28",
+            939
+          ]
+        },
+        {
+          "name": "Wed Dec 29 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/12/29",
+            937
+          ]
+        },
+        {
+          "name": "Thu Dec 30 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/12/30",
+            942
+          ]
+        },
+        {
+          "name": "Fri Dec 31 1999 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "1999/12/31",
+            938
+          ]
+        },
+        {
+          "name": "Sat Jan 01 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/1/1",
+            940
+          ]
+        },
+        {
+          "name": "Sun Jan 02 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/1/2",
+            935
+          ]
+        },
+        {
+          "name": "Mon Jan 03 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/1/3",
+            925
+          ]
+        },
+        {
+          "name": "Tue Jan 04 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/1/4",
+            932
+          ]
+        },
+        {
+          "name": "Wed Jan 05 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/1/5",
+            930
+          ]
+        },
+        {
+          "name": "Thu Jan 06 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/1/6",
+            927
+          ]
+        },
+        {
+          "name": "Fri Jan 07 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/1/7",
+            937
+          ]
+        },
+        {
+          "name": "Sat Jan 08 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/1/8",
+            946
+          ]
+        },
+        {
+          "name": "Sun Jan 09 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/1/9",
+            945
+          ]
+        },
+        {
+          "name": "Mon Jan 10 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/1/10",
+            946
+          ]
+        },
+        {
+          "name": "Tue Jan 11 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/1/11",
+            939
+          ]
+        },
+        {
+          "name": "Wed Jan 12 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/1/12",
+            932
+          ]
+        },
+        {
+          "name": "Thu Jan 13 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/1/13",
+            936
+          ]
+        },
+        {
+          "name": "Fri Jan 14 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/1/14",
+            930
+          ]
+        },
+        {
+          "name": "Sat Jan 15 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/1/15",
+            933
+          ]
+        },
+        {
+          "name": "Sun Jan 16 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/1/16",
+            923
+          ]
+        },
+        {
+          "name": "Mon Jan 17 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/1/17",
+            918
+          ]
+        },
+        {
+          "name": "Tue Jan 18 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/1/18",
+            914
+          ]
+        },
+        {
+          "name": "Wed Jan 19 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/1/19",
+            914
+          ]
+        },
+        {
+          "name": "Thu Jan 20 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/1/20",
+            920
+          ]
+        },
+        {
+          "name": "Fri Jan 21 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/1/21",
+            920
+          ]
+        },
+        {
+          "name": "Sat Jan 22 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/1/22",
+            921
+          ]
+        },
+        {
+          "name": "Sun Jan 23 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/1/23",
+            912
+          ]
+        },
+        {
+          "name": "Mon Jan 24 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/1/24",
+            904
+          ]
+        },
+        {
+          "name": "Tue Jan 25 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/1/25",
+            902
+          ]
+        },
+        {
+          "name": "Wed Jan 26 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/1/26",
+            908
+          ]
+        },
+        {
+          "name": "Thu Jan 27 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/1/27",
+            911
+          ]
+        },
+        {
+          "name": "Fri Jan 28 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/1/28",
+            914
+          ]
+        },
+        {
+          "name": "Sat Jan 29 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/1/29",
+            910
+          ]
+        },
+        {
+          "name": "Sun Jan 30 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/1/30",
+            902
+          ]
+        },
+        {
+          "name": "Mon Jan 31 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/1/31",
+            894
+          ]
+        },
+        {
+          "name": "Tue Feb 01 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/2/1",
+            884
+          ]
+        },
+        {
+          "name": "Wed Feb 02 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/2/2",
+            878
+          ]
+        },
+        {
+          "name": "Thu Feb 03 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/2/3",
+            881
+          ]
+        },
+        {
+          "name": "Fri Feb 04 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/2/4",
+            871
+          ]
+        },
+        {
+          "name": "Sat Feb 05 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/2/5",
+            877
+          ]
+        },
+        {
+          "name": "Sun Feb 06 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/2/6",
+            867
+          ]
+        },
+        {
+          "name": "Mon Feb 07 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/2/7",
+            875
+          ]
+        },
+        {
+          "name": "Tue Feb 08 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/2/8",
+            868
+          ]
+        },
+        {
+          "name": "Wed Feb 09 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/2/9",
+            868
+          ]
+        },
+        {
+          "name": "Thu Feb 10 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/2/10",
+            864
+          ]
+        },
+        {
+          "name": "Fri Feb 11 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/2/11",
+            855
+          ]
+        },
+        {
+          "name": "Sat Feb 12 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/2/12",
+            862
+          ]
+        },
+        {
+          "name": "Sun Feb 13 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/2/13",
+            863
+          ]
+        },
+        {
+          "name": "Mon Feb 14 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/2/14",
+            871
+          ]
+        },
+        {
+          "name": "Tue Feb 15 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/2/15",
+            874
+          ]
+        },
+        {
+          "name": "Wed Feb 16 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/2/16",
+            875
+          ]
+        },
+        {
+          "name": "Thu Feb 17 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/2/17",
+            884
+          ]
+        },
+        {
+          "name": "Fri Feb 18 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/2/18",
+            888
+          ]
+        },
+        {
+          "name": "Sat Feb 19 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/2/19",
+            897
+          ]
+        },
+        {
+          "name": "Sun Feb 20 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/2/20",
+            903
+          ]
+        },
+        {
+          "name": "Mon Feb 21 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/2/21",
+            905
+          ]
+        },
+        {
+          "name": "Tue Feb 22 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/2/22",
+            911
+          ]
+        },
+        {
+          "name": "Wed Feb 23 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/2/23",
+            918
+          ]
+        },
+        {
+          "name": "Thu Feb 24 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/2/24",
+            909
+          ]
+        },
+        {
+          "name": "Fri Feb 25 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/2/25",
+            910
+          ]
+        },
+        {
+          "name": "Sat Feb 26 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/2/26",
+            908
+          ]
+        },
+        {
+          "name": "Sun Feb 27 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/2/27",
+            902
+          ]
+        },
+        {
+          "name": "Mon Feb 28 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/2/28",
+            905
+          ]
+        },
+        {
+          "name": "Tue Feb 29 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/2/29",
+            912
+          ]
+        },
+        {
+          "name": "Wed Mar 01 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/3/1",
+            917
+          ]
+        },
+        {
+          "name": "Thu Mar 02 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/3/2",
+            924
+          ]
+        },
+        {
+          "name": "Fri Mar 03 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/3/3",
+            916
+          ]
+        },
+        {
+          "name": "Sat Mar 04 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/3/4",
+            911
+          ]
+        },
+        {
+          "name": "Sun Mar 05 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/3/5",
+            907
+          ]
+        },
+        {
+          "name": "Mon Mar 06 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/3/6",
+            899
+          ]
+        },
+        {
+          "name": "Tue Mar 07 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/3/7",
+            896
+          ]
+        },
+        {
+          "name": "Wed Mar 08 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/3/8",
+            902
+          ]
+        },
+        {
+          "name": "Thu Mar 09 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/3/9",
+            911
+          ]
+        },
+        {
+          "name": "Fri Mar 10 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/3/10",
+            922
+          ]
+        },
+        {
+          "name": "Sat Mar 11 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/3/11",
+            932
+          ]
+        },
+        {
+          "name": "Sun Mar 12 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/3/12",
+            930
+          ]
+        },
+        {
+          "name": "Mon Mar 13 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/3/13",
+            936
+          ]
+        },
+        {
+          "name": "Tue Mar 14 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/3/14",
+            937
+          ]
+        },
+        {
+          "name": "Wed Mar 15 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/3/15",
+            939
+          ]
+        },
+        {
+          "name": "Thu Mar 16 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/3/16",
+            933
+          ]
+        },
+        {
+          "name": "Fri Mar 17 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/3/17",
+            926
+          ]
+        },
+        {
+          "name": "Sat Mar 18 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/3/18",
+            918
+          ]
+        },
+        {
+          "name": "Sun Mar 19 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/3/19",
+            920
+          ]
+        },
+        {
+          "name": "Mon Mar 20 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/3/20",
+            913
+          ]
+        },
+        {
+          "name": "Tue Mar 21 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/3/21",
+            919
+          ]
+        },
+        {
+          "name": "Wed Mar 22 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/3/22",
+            930
+          ]
+        },
+        {
+          "name": "Thu Mar 23 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/3/23",
+            926
+          ]
+        },
+        {
+          "name": "Fri Mar 24 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/3/24",
+            926
+          ]
+        },
+        {
+          "name": "Sat Mar 25 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/3/25",
+            916
+          ]
+        },
+        {
+          "name": "Sun Mar 26 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/3/26",
+            915
+          ]
+        },
+        {
+          "name": "Mon Mar 27 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/3/27",
+            907
+          ]
+        },
+        {
+          "name": "Tue Mar 28 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/3/28",
+            910
+          ]
+        },
+        {
+          "name": "Wed Mar 29 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/3/29",
+            913
+          ]
+        },
+        {
+          "name": "Thu Mar 30 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/3/30",
+            914
+          ]
+        },
+        {
+          "name": "Fri Mar 31 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/3/31",
+            919
+          ]
+        },
+        {
+          "name": "Sat Apr 01 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/4/1",
+            916
+          ]
+        },
+        {
+          "name": "Sun Apr 02 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/4/2",
+            908
+          ]
+        },
+        {
+          "name": "Mon Apr 03 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/4/3",
+            915
+          ]
+        },
+        {
+          "name": "Tue Apr 04 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/4/4",
+            924
+          ]
+        },
+        {
+          "name": "Wed Apr 05 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/4/5",
+            931
+          ]
+        },
+        {
+          "name": "Thu Apr 06 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/4/6",
+            927
+          ]
+        },
+        {
+          "name": "Fri Apr 07 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/4/7",
+            927
+          ]
+        },
+        {
+          "name": "Sat Apr 08 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/4/8",
+            925
+          ]
+        },
+        {
+          "name": "Sun Apr 09 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/4/9",
+            920
+          ]
+        },
+        {
+          "name": "Mon Apr 10 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/4/10",
+            920
+          ]
+        },
+        {
+          "name": "Tue Apr 11 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/4/11",
+            921
+          ]
+        },
+        {
+          "name": "Wed Apr 12 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/4/12",
+            931
+          ]
+        },
+        {
+          "name": "Thu Apr 13 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/4/13",
+            926
+          ]
+        },
+        {
+          "name": "Fri Apr 14 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/4/14",
+            916
+          ]
+        },
+        {
+          "name": "Sat Apr 15 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/4/15",
+            913
+          ]
+        },
+        {
+          "name": "Sun Apr 16 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/4/16",
+            916
+          ]
+        },
+        {
+          "name": "Mon Apr 17 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/4/17",
+            921
+          ]
+        },
+        {
+          "name": "Tue Apr 18 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/4/18",
+            927
+          ]
+        },
+        {
+          "name": "Wed Apr 19 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/4/19",
+            929
+          ]
+        },
+        {
+          "name": "Thu Apr 20 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/4/20",
+            931
+          ]
+        },
+        {
+          "name": "Fri Apr 21 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/4/21",
+            926
+          ]
+        },
+        {
+          "name": "Sat Apr 22 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/4/22",
+            924
+          ]
+        },
+        {
+          "name": "Sun Apr 23 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/4/23",
+            915
+          ]
+        },
+        {
+          "name": "Mon Apr 24 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/4/24",
+            910
+          ]
+        },
+        {
+          "name": "Tue Apr 25 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/4/25",
+            918
+          ]
+        },
+        {
+          "name": "Wed Apr 26 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/4/26",
+            920
+          ]
+        },
+        {
+          "name": "Thu Apr 27 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/4/27",
+            922
+          ]
+        },
+        {
+          "name": "Fri Apr 28 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/4/28",
+            926
+          ]
+        },
+        {
+          "name": "Sat Apr 29 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/4/29",
+            929
+          ]
+        },
+        {
+          "name": "Sun Apr 30 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/4/30",
+            937
+          ]
+        },
+        {
+          "name": "Mon May 01 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/5/1",
+            938
+          ]
+        },
+        {
+          "name": "Tue May 02 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/5/2",
+            933
+          ]
+        },
+        {
+          "name": "Wed May 03 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/5/3",
+            924
+          ]
+        },
+        {
+          "name": "Thu May 04 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/5/4",
+            930
+          ]
+        },
+        {
+          "name": "Fri May 05 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/5/5",
+            924
+          ]
+        },
+        {
+          "name": "Sat May 06 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/5/6",
+            919
+          ]
+        },
+        {
+          "name": "Sun May 07 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/5/7",
+            920
+          ]
+        },
+        {
+          "name": "Mon May 08 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/5/8",
+            919
+          ]
+        },
+        {
+          "name": "Tue May 09 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/5/9",
+            914
+          ]
+        },
+        {
+          "name": "Wed May 10 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/5/10",
+            914
+          ]
+        },
+        {
+          "name": "Thu May 11 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/5/11",
+            921
+          ]
+        },
+        {
+          "name": "Fri May 12 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/5/12",
+            915
+          ]
+        },
+        {
+          "name": "Sat May 13 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/5/13",
+            914
+          ]
+        },
+        {
+          "name": "Sun May 14 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/5/14",
+            909
+          ]
+        },
+        {
+          "name": "Mon May 15 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/5/15",
+            900
+          ]
+        },
+        {
+          "name": "Tue May 16 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/5/16",
+            902
+          ]
+        },
+        {
+          "name": "Wed May 17 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/5/17",
+            901
+          ]
+        },
+        {
+          "name": "Thu May 18 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/5/18",
+            902
+          ]
+        },
+        {
+          "name": "Fri May 19 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/5/19",
+            893
+          ]
+        },
+        {
+          "name": "Sat May 20 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/5/20",
+            889
+          ]
+        },
+        {
+          "name": "Sun May 21 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/5/21",
+            892
+          ]
+        },
+        {
+          "name": "Mon May 22 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/5/22",
+            886
+          ]
+        },
+        {
+          "name": "Tue May 23 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/5/23",
+            893
+          ]
+        },
+        {
+          "name": "Wed May 24 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/5/24",
+            897
+          ]
+        },
+        {
+          "name": "Thu May 25 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/5/25",
+            908
+          ]
+        },
+        {
+          "name": "Fri May 26 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/5/26",
+            904
+          ]
+        },
+        {
+          "name": "Sat May 27 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/5/27",
+            914
+          ]
+        },
+        {
+          "name": "Sun May 28 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/5/28",
+            907
+          ]
+        },
+        {
+          "name": "Mon May 29 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/5/29",
+            904
+          ]
+        },
+        {
+          "name": "Tue May 30 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/5/30",
+            907
+          ]
+        },
+        {
+          "name": "Wed May 31 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/5/31",
+            901
+          ]
+        },
+        {
+          "name": "Thu Jun 01 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/6/1",
+            892
+          ]
+        },
+        {
+          "name": "Fri Jun 02 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/6/2",
+            884
+          ]
+        },
+        {
+          "name": "Sat Jun 03 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/6/3",
+            894
+          ]
+        },
+        {
+          "name": "Sun Jun 04 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/6/4",
+            887
+          ]
+        },
+        {
+          "name": "Mon Jun 05 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/6/5",
+            889
+          ]
+        },
+        {
+          "name": "Tue Jun 06 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/6/6",
+            885
+          ]
+        },
+        {
+          "name": "Wed Jun 07 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/6/7",
+            877
+          ]
+        },
+        {
+          "name": "Thu Jun 08 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/6/8",
+            867
+          ]
+        },
+        {
+          "name": "Fri Jun 09 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/6/9",
+            869
+          ]
+        },
+        {
+          "name": "Sat Jun 10 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/6/10",
+            869
+          ]
+        },
+        {
+          "name": "Sun Jun 11 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/6/11",
+            863
+          ]
+        },
+        {
+          "name": "Mon Jun 12 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/6/12",
+            866
+          ]
+        },
+        {
+          "name": "Tue Jun 13 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/6/13",
+            859
+          ]
+        },
+        {
+          "name": "Wed Jun 14 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/6/14",
+            869
+          ]
+        },
+        {
+          "name": "Thu Jun 15 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/6/15",
+            867
+          ]
+        },
+        {
+          "name": "Fri Jun 16 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/6/16",
+            863
+          ]
+        },
+        {
+          "name": "Sat Jun 17 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/6/17",
+            868
+          ]
+        },
+        {
+          "name": "Sun Jun 18 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/6/18",
+            869
+          ]
+        },
+        {
+          "name": "Mon Jun 19 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/6/19",
+            871
+          ]
+        },
+        {
+          "name": "Tue Jun 20 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/6/20",
+            880
+          ]
+        },
+        {
+          "name": "Wed Jun 21 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/6/21",
+            879
+          ]
+        },
+        {
+          "name": "Thu Jun 22 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/6/22",
+            887
+          ]
+        },
+        {
+          "name": "Fri Jun 23 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/6/23",
+            886
+          ]
+        },
+        {
+          "name": "Sat Jun 24 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/6/24",
+            883
+          ]
+        },
+        {
+          "name": "Sun Jun 25 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/6/25",
+            877
+          ]
+        },
+        {
+          "name": "Mon Jun 26 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/6/26",
+            882
+          ]
+        },
+        {
+          "name": "Tue Jun 27 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/6/27",
+            893
+          ]
+        },
+        {
+          "name": "Wed Jun 28 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/6/28",
+            900
+          ]
+        },
+        {
+          "name": "Thu Jun 29 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/6/29",
+            904
+          ]
+        },
+        {
+          "name": "Fri Jun 30 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/6/30",
+            910
+          ]
+        },
+        {
+          "name": "Sat Jul 01 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/7/1",
+            910
+          ]
+        },
+        {
+          "name": "Sun Jul 02 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/7/2",
+            905
+          ]
+        },
+        {
+          "name": "Mon Jul 03 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/7/3",
+            916
+          ]
+        },
+        {
+          "name": "Tue Jul 04 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/7/4",
+            916
+          ]
+        },
+        {
+          "name": "Wed Jul 05 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/7/5",
+            911
+          ]
+        },
+        {
+          "name": "Thu Jul 06 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/7/6",
+            917
+          ]
+        },
+        {
+          "name": "Fri Jul 07 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/7/7",
+            914
+          ]
+        },
+        {
+          "name": "Sat Jul 08 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/7/8",
+            916
+          ]
+        },
+        {
+          "name": "Sun Jul 09 2000 00:00:00 GMT+0800 (China Standard Time)",
+          "value": [
+            "2000/7/9",
+            911
+          ]
+        }
+      ],
+      "emphasis": {
+        "scale": false,
+        "lineStyle": {
+          "width": "bolder"
+        },
+        "label": {}
+      },
+      "progressive": 100000,
+      "animation": false,
+      "symbol": "circle",
+      "zlevel": 0,
+      "z": 3,
+      "coordinateSystem": "cartesian2d",
+      "legendHoverLink": true,
+      "clip": true,
+      "label": {
+        "position": "top"
+      },
+      "endLabel": {
+        "show": false,
+        "valueAnimation": true,
+        "distance": 8
+      },
+      "lineStyle": {
+        "width": 2,
+        "type": "solid"
+      },
+      "step": false,
+      "smooth": false,
+      "smoothMonotone": null,
+      "symbolSize": 4,
+      "symbolRotate": null,
+      "showAllSymbol": "auto",
+      "connectNulls": false,
+      "sampling": "none",
+      "animationEasing": "linear",
+      "hoverLayerThreshold": null
+    }
+  ],
+  "visualMap": [],
+  "legend": [],
+  "markArea": [
+    {
+      "zlevel": 0,
+      "z": 1,
+      "tooltip": {
+        "trigger": "item"
+      },
+      "animation": false,
+      "label": {
+        "show": true,
+        "position": "top"
+      },
+      "itemStyle": {
+        "borderWidth": 0
+      },
+      "emphasis": {
+        "label": {
+          "show": true,
+          "position": "top"
+        }
+      }
+    }
+  ],
+  "markLine": [
+    {
+      "zlevel": 0,
+      "z": 5,
+      "symbol": [
+        "circle",
+        "arrow"
+      ],
+      "symbolSize": [
+        8,
+        16
+      ],
+      "precision": 2,
+      "tooltip": {
+        "trigger": "item"
+      },
+      "label": {
+        "show": true,
+        "position": "end",
+        "distance": 5
+      },
+      "lineStyle": {
+        "type": "dashed"
+      },
+      "emphasis": {
+        "label": {
+          "show": true
+        },
+        "lineStyle": {
+          "width": 3
+        }
+      },
+      "animationEasing": "linear"
+    }
+  ],
+  "markPoint": [
+    {
+      "zlevel": 0,
+      "z": 5,
+      "symbol": "pin",
+      "symbolSize": 50,
+      "tooltip": {
+        "trigger": "item"
+      },
+      "label": {
+        "show": true,
+        "position": "inside"
+      },
+      "itemStyle": {
+        "borderWidth": 2
+      },
+      "emphasis": {
+        "label": {
+          "show": true
+        }
+      }
+    }
+  ],
+  "brush": [],
+  "dataZoom": []
+}

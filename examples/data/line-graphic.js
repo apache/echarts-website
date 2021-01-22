@@ -1,5 +1,11 @@
+/*
+title: Custom Graphic Component
+titleCN: 自定义图形组件
+category: line
+difficulty: 9
+*/
+
 option = {
-    color: ['#8EC9EB'],
     legend: {
         data:['高度(km)与气温(°C)变化关系']
     },
@@ -15,9 +21,6 @@ option = {
     },
     xAxis: {
         type: 'value',
-        splitLine: {
-            show: false
-        },
         axisLabel: {
             formatter: '{value} °C'
         }
@@ -32,21 +35,6 @@ option = {
         data: ['0', '10', '20', '30', '40', '50', '60', '70', '80']
     },
     graphic: [
-        {
-            type: 'image',
-            id: 'logo',
-            right: 20,
-            top: 20,
-            z: -10,
-            bounding: 'raw',
-            origin: [75, 75],
-            style: {
-                image: 'http://echarts.baidu.com/images/favicon.png',
-                width: 150,
-                height: 150,
-                opacity: 0.4
-            }
-        },
         {
             type: 'group',
             rotation: Math.PI / 4,
@@ -75,8 +63,8 @@ option = {
                     z: 100,
                     style: {
                         fill: '#fff',
-                        text: 'ECHARTS BAR CHART',
-                        font: 'bold 26px Microsoft YaHei'
+                        text: 'ECHARTS LINE CHART',
+                        font: 'bold 26px sans-serif'
                     }
                 }
             ]
@@ -98,11 +86,11 @@ option = {
                     style: {
                         fill: '#fff',
                         stroke: '#555',
-                        lineWidth: 2,
+                        lineWidth: 1,
                         shadowBlur: 8,
                         shadowOffsetX: 3,
                         shadowOffsetY: 3,
-                        shadowColor: 'rgba(0,0,0,0.3)'
+                        shadowColor: 'rgba(0,0,0,0.2)'
                     }
                 },
                 {
@@ -113,8 +101,8 @@ option = {
                     style: {
                         fill: '#333',
                         text: [
-                            '横轴表示温度，单位是°C',
-                            '纵轴表示高度，单位是km',
+                            '横轴表示温度，单位是 °C',
+                            '纵轴表示高度，单位是 km',
                             '右上角有一个图片做的水印',
                             '这个文本块可以放在图中各',
                             '种位置'
@@ -128,26 +116,10 @@ option = {
     series: [
         {
             name: '高度(km)与气温(°C)变化关系',
-            type: 'bar',
+            type: 'line',
             smooth: true,
             barCategoryGap: 25,
-            lineStyle: {
-                width: 3,
-                shadowColor: 'rgba(0,0,0,0.4)',
-                shadowBlur: 10,
-                shadowOffsetY: 10
-            },
             data:[15, -50, -56.5, -46.5, -22.1, -2.5, -27.7, -55.7, -76.5]
         }
     ]
 };
-
-var rotation = 0;
-setInterval(function () {
-    myChart.setOption({
-        graphic: {
-            id: 'logo',
-            rotation: (rotation += Math.PI / 360) % (Math.PI * 2)
-        }
-    });
-}, 30);

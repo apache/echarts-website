@@ -1,3 +1,9 @@
+/*
+title: 10 million Bulk GPS points
+titleCN: 1 千万 GPS 点可视化
+category: scatterGL
+*/
+
 
 var dataCount = 0;
 var CHUNK_COUNT = 230;
@@ -35,7 +41,7 @@ option = {
     backgroundColor: '#000',
     title: {
         text: '10000000 GPS Points',
-            left: 'center',
+        left: 'center',
         textStyle: {
             color: '#fff'
         }

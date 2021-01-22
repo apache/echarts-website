@@ -1,3 +1,10 @@
+/*
+title: Anscomb's quartet
+category: scatter
+titleCN: Anscomb's quartet
+difficulty: 1
+*/
+
 var dataAll = [
     [
         [10.0, 8.04],
@@ -81,10 +88,10 @@ option = {
         top: 0
     },
     grid: [
-        {x: '7%', y: '7%', width: '38%', height: '38%'},
-        {x2: '7%', y: '7%', width: '38%', height: '38%'},
-        {x: '7%', y2: '7%', width: '38%', height: '38%'},
-        {x2: '7%', y2: '7%', width: '38%', height: '38%'}
+        {left: '7%', top: '7%', width: '38%', height: '38%'},
+        {right: '7%', top: '7%', width: '38%', height: '38%'},
+        {left: '7%', bottom: '7%', width: '38%', height: '38%'},
+        {right: '7%', bottom: '7%', width: '38%', height: '38%'}
     ],
     tooltip: {
         formatter: 'Group {a}: ({c})'

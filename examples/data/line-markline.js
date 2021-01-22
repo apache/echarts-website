@@ -1,3 +1,10 @@
+/*
+title: Line with Marklines
+titleCN: 折线图的标记线
+category: line
+difficulty: 6
+*/
+
 var markLine = [];
 var positions = [
     'start', 'middle', 'end',
@@ -58,12 +65,12 @@ var option = {
         markLine: {
             data: markLine,
             label: {
-                distance: [10, 8]
+                distance: [20, 8]
             }
         }
     }],
     grid: {
-        top: 20,
+        top: 30,
         left: 60,
         right: 60,
         bottom: 40

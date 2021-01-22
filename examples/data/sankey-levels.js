@@ -1,3 +1,10 @@
+/*
+title: Sankey with Levels Setting
+category: sankey
+titleCN: 桑基图层级自定义样式
+difficulty: 2
+*/
+
 myChart.showLoading();
 $.get(ROOT_PATH + '/data/asset/data/product.json', function (data) {
     myChart.hideLoading();
@@ -15,7 +22,9 @@ $.get(ROOT_PATH + '/data/asset/data/product.json', function (data) {
                 type: 'sankey',
                 data: data.nodes,
                 links: data.links,
-                focusNodeAdjacency: true,
+                emphasis: {
+                    focus: 'adjacency'
+                },
                 levels: [{
                     depth: 0,
                     itemStyle: {

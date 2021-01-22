@@ -1,4 +1,11 @@
-$.getScript(ROOT_PATH + '/vendors/simplex.js').done(function () {
+/*
+title: Bar3D - Simplex Noise
+category: bar3D
+titleCN: Bar3D - Simplex Noise
+theme: dark
+*/
+
+$.getScript('https://cdn.jsdelivr.net/npm/simplex-noise@2.4.0/simplex-noise.js').done(function () {
 
 
 var noise = new SimplexNoise(Math.random);

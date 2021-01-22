@@ -1,3 +1,10 @@
+/*
+title: Basic Line Chart
+category: line
+titleCN: 基础折线图
+difficulty: 0
+*/
+
 option = {
     xAxis: {
         type: 'category',
@@ -7,7 +14,7 @@ option = {
         type: 'value'
     },
     series: [{
-        data: [820, 932, 901, 934, 1290, 1330, 1320],
+        data: [150, 230, 224, 218, 135, 147, 260],
         type: 'line'
     }]
 };

@@ -1,0 +1,619 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1" user-scalable="no"><meta name="description" content="ECharts, a powerful, interactive charting and visualization library for browser"><link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/apache/echarts-website@asf-site/v4/zh/images/favicon.png?_v_=20200710_1"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"><!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries--><!--[if lt IE 9]><script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script><script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]--><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/apache/echarts-website@asf-site/v4/zh/css/main.css?_v_=584cb5bfc6"><script>window.EC_WWW_LANG = 'zh';
+</script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pace-progressbar@1.0.2/pace.min.js"></script><script id="font-hack" type="text/javascript">if (/windows/i.test(navigator.userAgent)) {
+    var el = document.createElement('style');
+    el.innerHTML = ''
+        + '@font-face {font-family:"noto-thin";src:local("Microsoft Yahei");}'
+        + '@font-face {font-family:"noto-light";src:local("Microsoft Yahei");}';
+    document.head.insertBefore(el, document.getElementById('font-hack'));
+}
+</script><title>代码规范 - Apache ECharts</title><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/apache/echarts-website@asf-site/v4/zh/vendors/prettify/prettify.css?_v_=20200710_1"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/code-prettify@0.1.0/src/prettify.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/code-prettify@0.1.0/src/lang-css.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script></head><!--[if lte IE 8]><body class="lower-ie"><div id="lowie-main"><img src="https://cdn.jsdelivr.net/gh/apache/echarts-website@asf-site/v4/zh/images/forie.png?_v_=20200710_1" alt="ie tip"></div></body><![endif]-->
+<!--[if (gt IE 8)|!(IE)]><body class="undefined"></body><![endif]--><div id="apache-banner"><div class="txt"><p>请访问 Apache ECharts 的官网 &nbsp;</p><a id="a1" href="https://echarts.apache.org/zh/index.html">https://echarts.apache.org</a></div><a href="https://echarts.apache.org" target="_blank" onclick="logApache()" class="btn btn-main"><div>访问官网</div></a><a href="javascript:;" onclick="closeApacheBanner(true)" class="close-btn">x</a></div><div id="v5-link" class="alert alert-warning alert-dismissible"><span>返回 <a href="https://echarts.apache.org/zh/index.html">最新的官网</a></span><button type="button" data-dismiss="alert" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button></div><div id="main"><nav class="navbar navbar-default navbar-fixed-top"><div class="container-fluid"><div class="navbar-header"><button type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="https://echarts.apache.org/v4/zh/index.html" class="navbar-brand"><img src="https://cdn.jsdelivr.net/gh/apache/echarts-website@asf-site/v4/zh/images/logo.png?_v_=20200710_1" alt="echarts logo" class="navbar-logo"></a></div><div id="navbar-collapse" class="collapse navbar-collapse"><ul class="nav navbar-nav navbar-left"><li id="nav-index"><a href="https://echarts.apache.org/v4/zh/index.html">首页</a></li><li id="nav-doc" class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">文档<b class="caret"></b></a><ul class="dropdown-menu"><li><a href="https://echarts.apache.org/v4/zh/feature.html">特性</a></li><li><a href="https://echarts.apache.org/v4/zh/tutorial.html">教程</a></li><li><a href="https://echarts.apache.org/v4/zh/api.html">API</a></li><li><a href="https://echarts.apache.org/v4/zh/option.html">配置项手册</a></li><li><a href="https://echarts.apache.org/v4/zh/changelog.html">版本记录</a></li><li><a href="https://echarts.apache.org/v4/zh/faq.html">常见问题</a></li></ul></li><li id="nav-download" class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">下载<b class="caret"></b></a><ul class="dropdown-menu"><li><a href="https://echarts.apache.org/v4/zh/download.html">下载</a></li><li><a href="https://echarts.apache.org/v4/zh/download-theme.html">主题下载</a></li><li><a href="https://echarts.apache.org/v4/zh/download-extension.html">扩展下载</a></li></ul></li><li id="nav-examples"><a href="https://echarts.apache.org/v4/examples/zh/index.html">实例</a></li><li id="nav-resources"><a href="#" data-toggle="dropdown" class="dropdown-toggle">资源<b class="caret"></b></a><ul class="dropdown-menu"><li><a href="https://echarts.apache.org/v4/zh/spreadsheet.html">表格工具</a></li><li><a href="https://echarts.apache.org/v4/zh/theme-builder.html">主题构建工具</a></li><li><a href="https://echarts.apache.org/v4/zh/cheat-sheet.html">术语速查手册</a></li><li><a href="https://echarts.apache.org/v4/zh/resources.html">更多资源</a></li></ul></li><li id="nav-contribute"><a href="#" data-toggle="dropdown" class="dropdown-toggle">社区<b class="caret"></b></a><ul class="dropdown-menu"><li><a href="https://echarts.apache.org/v4/zh/events.html">活动</a></li><li><a href="https://echarts.apache.org/v4/zh/committers.html">贡献者列表</a></li><li><a href="https://echarts.apache.org/v4/zh/maillist.html">邮件列表</a></li><li><a href="https://echarts.apache.org/v4/zh/contributing.html">如何贡献</a></li><li><a href="https://echarts.apache.org/v4/zh/dependencies.html">依赖项</a></li><li><a href="https://echarts.apache.org/v4/zh/coding-standard.html">代码规范</a></li><li><a href="https://github.com/apache/echarts" target="_blank">源码（GitHub）<svg width="15px" height="15px" viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="icon-external-link"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li><a href="https://github.com/apache/echarts/issues" target="_blank">Issues（GitHub）<svg width="15px" height="15px" viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="icon-external-link"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></li><li id="nav-others"><a href="#" data-toggle="dropdown" class="dropdown-toggle">其他<b class="caret"></b></a><ul class="dropdown-menu"><li><a href="https://www.apache.org/" target="_blank">Apache Software Foundation<svg width="15px" height="15px" viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="icon-external-link"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li><a href="https://echarts.apache.org/v4/zh/security.html">安全</a></li><li><a href="https://www.apache.org/licenses/" target="_blank">版权<svg width="15px" height="15px" viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="icon-external-link"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li><a href="https://www.apache.org/events/current-event" target="_blank">活动<svg width="15px" height="15px" viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="icon-external-link"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li><a href="https://www.apache.org/foundation/sponsorship.html" target="_blank">捐赠<svg width="15px" height="15px" viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="icon-external-link"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li><a href="https://www.apache.org/foundation/thanks.html" target="_blank">鸣谢<svg width="15px" height="15px" viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="icon-external-link"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></li></ul><ul class="nav navbar-nav navbar-right"><li id="nav-homeen"><a href="javascript:;" onclick="changeLang('en')">EN</a></li><li id="nav-apache"><a href="https://www.apache.org/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/apache/echarts-website@asf-site/v4/zh/images/asf_logo_white.png?_v_=20200710_1"></a></li></ul></div></div></nav><div class="page-main"><div class="page-info"><h1>代码规范</h1><p>如果你想要为 ECharts 贡献代码，请遵从以下代码规范。</p><p class="page-info-echarts">Apache ECharts<sup>TM</sup></p></div><div class="page-content single-page"><div class="page-nav"><ul id="standard-nav"></ul></div><div class="page-detail"><h2 id="代码规范">代码规范</h2>
+<h3 id="源文件">源文件</h3>
+<p><strong>[强制]</strong> JavaScript源文件必须以无BOM的UTF-8编码。</p>
+<h3 id="缩进">缩进</h3>
+<p><strong>[强制]</strong> 必须采用4个空格缩进，不允许以Tab制表符或2个空格代替。</p>
+<p><strong>[强制]</strong> <code>switch</code> 中的 <code>case</code> 和 <code>default</code> 必须保持缩进。</p>
+<pre><code class="lang-js">// 正例
+switch (variable) {
+    case &#39;1&#39;:
+        // do...
+        break;
+    case &#39;2&#39;:
+        // do...
+        break;
+    default:
+        // do...
+}
+
+// 反例
+switch (variable) {
+case &#39;1&#39;:
+    // do...
+    break;
+case &#39;2&#39;:
+    // do...
+    break;
+default:
+    // do...
+}
+</code></pre>
+<h3 id="空格">空格</h3>
+<p><strong>[强制]</strong> 二元运算符两个操作数之间必须使用空格，但一元运算符与其操作数间不能有空格。 </p>
+<pre><code class="lang-js">var a = !arr.length;
+a++;
+a = b + c;
+</code></pre>
+<p><strong>[强制]</strong> 在 <code>{</code> 前必须有1个空格。</p>
+<pre><code class="lang-js">// 正例
+
+if (condition) {
+}
+
+set(&#39;attr&#39;, {
+    some: &#39;xxx&#39;,
+    any: &#39;yyy&#39;
+});
+
+function funcName() {
+}
+
+
+// 反例
+
+if (condition){
+}
+
+set(&#39;attr&#39;,{
+    some: &#39;xxx&#39;,
+    any: &#39;yyy&#39;
+});
+
+function funcName(){
+}
+</code></pre>
+<p><strong>[强制]</strong> <code>if</code> / <code>else</code> / <code>for</code> / <code>while</code> / <code>function</code> / <code>switch</code> / <code>do</code> / <code>try</code> / <code>catch</code> / <code>finally</code> 等关键字与括号之间都必须加一个空格。</p>
+<pre><code class="lang-js">// 正例
+
+if (condition) {
+}
+
+while (condition) {
+}
+
+(function () {
+})();
+
+
+// 反例
+
+if(condition) {
+}
+
+while(condition) {
+}
+
+(function() {
+})();
+</code></pre>
+<p><strong>[强制]</strong> 在创建对象的语句中，<code>:</code> 后必须加一个空格，<code>:</code> 前不能有空格。</p>
+<pre><code class="lang-js">// 正例
+var obj = {
+    a: 1,
+    b: 2,
+    c: 3
+};
+
+// 反例
+var obj = {
+    a : 1,
+    b:2,
+    c :3
+};
+</code></pre>
+<p><strong>[强制]</strong> 在函数声明、命名函数表达式和函数调用时，函数名称和 <code>(</code> 间不能有空格。</p>
+<pre><code class="lang-js">// 正例
+
+function funcName() {
+}
+
+var funcName = function funcName() {
+};
+
+funcName();
+
+
+// 反例
+
+function funcName () {
+}
+
+var funcName = function funcName () {
+};
+
+funcName ();
+</code></pre>
+<p><strong>[强制]</strong> <code>,</code> 和 <code>;</code> 前不能有空格。</p>
+<pre><code class="lang-js">// 正例
+callFunc(a, b);
+
+// 反例
+callFunc(a , b) ;
+</code></pre>
+<p><strong>[强制]</strong> <code>(</code> 和 <code>[</code> 之后、 <code>)</code> 和 <code>]</code> 之前不能有空格。</p>
+<pre><code class="lang-js">// 正例
+
+callFunc(param1, param2, param3);
+
+save(this.list[this.indexes[i]]);
+
+needIncream &amp;&amp; (variable += increament);
+
+if (num &gt; list.length) {
+}
+
+while (len--) {
+}
+
+
+// 反例
+
+callFunc( param1, param2, param3 );
+
+save( this.list[ this.indexes[ i ] ] );
+
+needIncreament &amp;&amp; ( variable += increament );
+
+if ( num &gt; list.length ) {
+}
+
+while ( len-- ) {
+}
+
+
+// 正例
+var arr1 = [];
+var arr2 = [1, 2, 3];
+var obj1 = {};
+var obj2 = {name: &#39;obj&#39;};
+var obj3 = {
+    name: &#39;obj&#39;,
+    age: 20,
+    sex: 1
+};
+
+// 反例
+var arr1 = [ ];
+var arr2 = [ 1, 2, 3 ];
+var obj1 = { };
+var obj2 = { name: &#39;obj&#39; };
+var obj3 = {name: &#39;obj&#39;, age: 20, sex: 1};
+</code></pre>
+<p><strong>[强制]</strong> 每行代码后不能有尾随空格。</p>
+<h3 id="换行">换行</h3>
+<p><strong>[强制]</strong> 必须在语句的结尾换行。</p>
+<p><strong>[强制]</strong> 单行字符数不能超过120个，超出则需要换行。</p>
+<p><strong>[强制]</strong> 如果需要换行，运算符必须放在新行的开头。</p>
+<pre><code class="lang-js">// 正例
+if (user.isAuthenticated()
+    &amp;&amp; user.isInRole(&#39;admin&#39;)
+    &amp;&amp; user.hasAuthority(&#39;add-admin&#39;)
+    || user.hasAuthority(&#39;delete-admin&#39;)
+) {
+    // Code
+}
+
+var result = number1 + number2 + number3
+    + number4 + number5;
+
+
+// 反例
+if (user.isAuthenticated() &amp;&amp;
+    user.isInRole(&#39;admin&#39;) &amp;&amp;
+    user.hasAuthority(&#39;add-admin&#39;) ||
+    user.hasAuthority(&#39;delete-admin&#39;)) {
+    // Code
+}
+
+var result = number1 + number2 + number3 +
+    number4 + number5;
+</code></pre>
+<p><strong>[强制]</strong> 如果括号中的内容有多行，必须为 <code>)</code>、 <code>]</code>、 <code>}</code> 另开一个新行，并使新行与 <code>(</code>、 <code>[</code>、 <code>{</code> 所在行的缩进相对应。</p>
+<pre><code class="lang-js">// 正例
+if (product) {
+    product.load();
+    if (user.isAuthenticated()
+        &amp;&amp; user.isInRole(&#39;admin&#39;)
+        &amp;&amp; user.hasAuthority(&#39;add-admin&#39;)
+    ) {
+        sendProduct(user, product);
+    }
+}
+var arr = [
+    &#39;candy&#39;, &#39;sugar&#39;
+];
+
+// 反例
+if (product) {
+    product.load();
+    if (user.isAuthenticated()
+        &amp;&amp; user.isInRole(&#39;admin&#39;)
+        &amp;&amp; user.hasAuthority(&#39;add-admin&#39;)) {
+        sendProduct(user, product);
+    }
+}
+var arr = [
+        &#39;candy&#39;, &#39;sugar&#39;
+    ];
+</code></pre>
+<p><strong>[强制]</strong> <code>,</code> 或 <code>;</code> 前不能有换行。 </p>
+<pre><code class="lang-js">// 正例
+var obj = {
+    a: 1,
+    b: 2,
+    c: 3
+};
+
+foo(
+    aVeryVeryLongArgument,
+    anotherVeryLongArgument,
+    callback
+);
+
+
+// 反例
+var obj = {
+    a: 1
+    , b: 2
+    , c: 3
+};
+
+foo(
+    aVeryVeryLongArgument
+    , anotherVeryLongArgument
+    , callback
+);
+</code></pre>
+<p><strong>[推荐]</strong> 建议换行和缩进遵循如下风格：</p>
+<pre><code class="lang-js">if (user.isAuthenticated()
+    &amp;&amp; user.isInRole(&#39;admin&#39;)
+    &amp;&amp; user.hasAuthority(&#39;add-admin&#39;)
+) {
+    // Code
+}
+
+foo(
+    aVeryVeryLongArgument,
+    anotherVeryLongArgument,
+    callback
+);
+
+baidu.format(
+    dateFormatTemplate,
+    year, month, date, hour, minute, second
+);
+
+$(&#39;#items&#39;)
+    .find(&#39;.selected&#39;)
+    .highlight()
+    .end();
+
+var result = thisIsAVeryVeryLongCondition
+    ? resultA : resultB;
+
+var result = condition
+    ? thisIsAVeryVeryLongResult
+    : resultB;
+</code></pre>
+<p><strong>[强制]</strong> 如果使用多行代码块，<code>else</code> 和 <code>catch</code> 必须另开一个新行。</p>
+<pre><code class="lang-js">// 正例
+
+if (condition) {
+    // some statements;
+}
+else {
+    // some statements;
+}
+
+try {
+    // some statements;
+}
+catch (ex) {
+    // some statements;
+}
+
+
+// 反例
+
+if (condition) {
+    // some statements;
+} else {
+    // some statements;
+}
+
+try {
+    // some statements;
+} catch (ex) {
+    // some statements;
+}
+</code></pre>
+<h3 id="语句">语句</h3>
+<p><strong>[强制]</strong> 语句必须以 <code>;</code> 结尾。</p>
+<p><strong>[强制]</strong> 如果只有一行，<code>{}</code> 不能被省略。</p>
+<pre><code class="lang-js">// 正例
+if (condition) {
+    callFunc();
+}
+
+// 反例
+if (condition) callFunc();
+if (condition)
+    callFunc();
+</code></pre>
+<p><strong>[强制]</strong> 函数定义的末尾不能有分号 <code>;</code>。</p>
+<pre><code class="lang-js">// 正例
+function funcName() {
+}
+
+// 反例
+function funcName() {
+};
+
+// 对于函数表达式，不能忽略分号
+var funcName = function () {
+};
+</code></pre>
+<p><strong>[强制]</strong> 对象和数组的声明中不能有尾随逗号。</p>
+<pre><code class="lang-js">// 正例
+
+var obj = {
+    attr1: &#39;xxx&#39;,
+    attr2: &#39;yyy&#39;
+};
+
+var arr = [
+    &#39;xxx&#39;,
+    &#39;yyy&#39;
+];
+
+
+// 反例
+
+var obj = {
+    attr1: &#39;xxx&#39;,
+    attr2: &#39;yyy&#39;,
+};
+
+var arr = [
+    &#39;xxx&#39;,
+    &#39;yyy&#39;,
+];
+</code></pre>
+<h3 id="命名规约">命名规约</h3>
+<p><strong>[强制]</strong> 变量名、属性名及函数名的命名必须遵循 lowerCamelCase（小骆驼拼写法）。</p>
+<pre><code class="lang-js">var loadingModules = {};
+function loadProduct() {
+}
+</code></pre>
+<p><strong>[强制]</strong> class类的命名必须遵循 UpperCamelCase (Pascal)，即大骆驼拼写法（帕斯卡拼写法）。</p>
+<pre><code class="lang-js">function Element(options) {
+}
+</code></pre>
+<p><strong>[推荐]</strong> 缩略词的所有字符应当一并大写或一并小写。</p>
+<pre><code class="lang-js">function parseSVG() {
+}
+var svgParser;
+</code></pre>
+<h2 id="语法特性">语法特性</h2>
+<h3 id="兼容性">兼容性</h3>
+<p><strong>[强制]</strong> ECharts的JavaScript源代码应基于 <code>ECMAScript Language Specification Edition 3 (ES3)</code>，不能使用ES3不支持的语法特性（即不能使用ES5、ES6或更高版本的语法特性）。</p>
+<p>但允许使用ES Module。</p>
+<p>语法特性可以通过一些工具方法进行弥补，但不能通过修改内置JavaScript对象的原型来实现。</p>
+<pre><code class="lang-js">// 正例
+
+import * as zrUtil from &#39;zrender/src/core/util&#39;;
+
+zrUtil.each(array, function (val, index) {
+    sum += val;
+});
+
+var result = zrUtil.map(array, function (val) {
+    return parse(val);
+});
+
+var pos = zrUtil.indexOf(array, val);
+
+var obj2 = zrUtil.extend({}, obj1);
+
+function Element() {
+    // ...
+}
+
+
+// 反例
+
+array.forEach(function (val, index) {
+    sum += val;
+});
+
+let result = array.map(function (val) {
+    return parse(val);
+});
+
+const pos = array.indexOf(val);
+
+var obj2 = Object.assign({}, obj1);
+
+class Element {
+    // ...
+}
+
+String.prototype.trim = function () {
+};
+</code></pre>
+<h3 id="变量">变量</h3>
+<p><strong>[强制]</strong> 变量必须用 <code>var</code> 声明，且一个 <code>var</code> 不能同时声明多个变量。</p>
+<pre><code class="lang-js">// 正例
+var name = &#39;MyName&#39;;
+var hangModules = [];
+var missModules = [];
+var visited = {};
+
+// 反例
+name = &#39;MyName&#39;;
+var hangModules = [],
+    missModules = [],
+    visited = {};
+</code></pre>
+<h3 id="条件判断">条件判断</h3>
+<p><strong>[强制]</strong> 对于相等运算符，<code>==</code> 只能用于检查是否为 <code>null</code> 或者 <code>undefined</code>，其余情况必须使用 <code>===</code>。</p>
+<pre><code class="lang-js">// 正例
+if (age === 30) {
+    // ...
+}
+if (type == null) {
+    // ...
+}
+
+// 反例
+if (age == 30) {
+    // ......
+}
+</code></pre>
+<p><strong>[推荐]</strong> 建议使用 <code>xxx == null</code> 来判断 <code>null</code> 或 <code>undefined</code>。</p>
+<p><strong>[推荐]</strong> 尽量让 <code>null</code> 和 <code>undefined</code> 的含义相同。也就是说，不要让用户或开发者去区分变量是 <code>null</code> 还是 <code>undefined</code>。</p>
+<p><strong>[推荐]</strong> 函数表达式或者函数声明不应该放在循环体中。</p>
+<pre><code class="lang-js">// 正例
+function clicker() {
+    // ......
+}
+
+for (var i = 0, len = elements.length; i &lt; len; i++) {
+    var element = elements[i];
+    addListener(element, &#39;click&#39;, clicker);
+}
+
+
+// 反例
+for (var i = 0, len = elements.length; i &lt; len; i++) {
+    var element = elements[i];
+    addListener(element, &#39;click&#39;, function () {});
+}
+</code></pre>
+<h3 id="类型转换">类型转换</h3>
+<p><strong>[推荐]</strong> 建议使用 <code>+ &#39;&#39;</code> 将值转为字符串。</p>
+<pre><code class="lang-js">// 正例
+num + &#39;&#39;;
+
+// 反例
+new String(num);
+num.toString();
+String(num);
+</code></pre>
+<p><strong>[推荐]</strong> 建议使用 <code>+</code> 将值转为数值。</p>
+<pre><code class="lang-js">// 正例
++str;
+
+// 反例
+Number(str);
+</code></pre>
+<p><strong>[强制]</strong> 在使用 <code>parseInt</code> 时，必须传入第二个参数。</p>
+<pre><code class="lang-js">// 正例
+parseInt(str, 10);
+
+// 反例
+parseInt(str);
+</code></pre>
+<h3 id="字符串-对象-数组">字符串，对象，数组</h3>
+<p><strong>[强制]</strong> 必须使用 <code>&#39;</code> 而不是 <code>&quot;</code> 定义字符串。</p>
+<p><strong>[强制]</strong> 必须使用对象字面量 <code>{}</code> 来创建简单对象。</p>
+<pre><code class="lang-js">// 正例
+var obj = {};
+
+// 反例
+var obj = new Object();
+</code></pre>
+<p><strong>[强制]</strong> 如果一个对象字面量的所有属性都不需要引号，引号必须省略。如果需要加引号，须使用 <code>&#39;</code> 而不是 <code>&quot;</code>。</p>
+<pre><code class="lang-js">// 正例
+var info = {
+    name: &#39;someone&#39;,
+    age: 28
+};
+
+// 反例
+var info = {
+    &#39;name&#39;: &#39;someone&#39;,
+    &#39;age&#39;: 28
+};
+var info2 = {
+    &quot;age&quot;: 40
+};
+</code></pre>
+<p><strong>[强制]</strong> 禁止修改内置对象的原型。</p>
+<pre><code class="lang-js">// 禁止
+String.prototype.trim = function () {
+};
+</code></pre>
+<p><strong>[推荐]</strong> 尽可能使用 <code>.</code> 而不是 <code>[]</code> 访问对象的属性。</p>
+<p><strong>[推荐]</strong> 使用 <code>for ... in ...</code> 时，应当注意使用 <code>hasOwnProperty</code> 以防 <code>Object</code> 的原型在某些运行时环境中被添加一些额外属性的情况。</p>
+<pre><code class="lang-js">var newInfo = {};
+for (var key in info) {
+    if (info.hasOwnProperty(key)) {
+        newInfo[key] = info[key];
+    }
+}
+</code></pre>
+<p><strong>[强制]</strong> 除非需要创建指定长度的数组，否则必须使用数组字面量 <code>[]</code> 创建数组。</p>
+<pre><code class="lang-js">// 正例
+var arr = [];
+var arr2 = new Array(1e4);
+
+// 反例
+var arr = new Array();
+</code></pre>
+<p><strong>[强制]</strong> 不要使用 <code>for in</code> 语句对数组进行遍历。</p>
+<h3 id="其他">其他</h3>
+<p><strong>[强制]</strong> 不要使用 <code>eval</code> 和 <code>with</code>。允许使用<code>new Function</code>。</p>
+<footer class="inner-footer"><div class="container"><div class="row"><div class="col-md-8"><p>Copyright © 2017-2020, The Apache Software Foundation Apache ECharts, ECharts, Apache, the Apache feather, and the Apache ECharts project logo are either registered trademarks or trademarks of the Apache Software Foundation.</p></div><div id="footer-icon-panel" class="col-md-4"><a href="https://www.apache.org"><img src="https://cdn.jsdelivr.net/gh/apache/echarts-website@asf-site/v4/zh/images/asf_logo.svg?_v_=20200710_1" class="footer-apache-logo"></a></div></div></div></footer></div></div></div></div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/gh/apache/echarts-website@asf-site/v4/zh/js/common.js?_v_=b5b8944fb9"></script><script type="text/javascript">document.getElementById('nav-contribute').className = 'active';
+
+var $list = $('#standard-nav');
+$('.page-detail h2, .page-detail h3, .page-detail h4')
+    .each(function () {
+        var $this = $(this);
+        var text = $this.text();
+        var anchor = text.toLowerCase().replace(/[^\w\u4e00-\u9fa5]+/g, '-');
+        var tagName = $this.prop('tagName').toLowerCase();
+
+        if (tagName === 'h2') {
+            $list.append('<li><a href="#' + anchor + '"><h4 class="inner">' + text + '</h4></a></li>');
+        }
+        else {
+            $list.append('<li><a href="#' + anchor + '">' + text + '</a></li>');
+        }
+    });
+
+$('.page-nav a').click(function () {
+    $('.page-nav a').removeClass('active');
+    $(this).addClass('active');
+});
+
+// Fix scroll position covered by nav
+window.addEventListener('hashchange', function() {
+    scrollBy(0, -50);
+});
+
+$('.page-detail pre code').each(function (index, el) {
+    $(el).addClass('prettyprint');
+});
+prettyPrint();</script><!-- Baidu Tongji--><script type="text/javascript">var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+
+hm.src = "https://hm.baidu.com/hm.js?54b918eee37cb8a7045f0fd0f0b24395";
+
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script><!-- Google Analytics--><script type="text/javascript" async src="https://www.googletagmanager.com/gtag/js?id=UA-141228404-1"></script><script type="text/javascript">window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-141228404-1');</script></html>

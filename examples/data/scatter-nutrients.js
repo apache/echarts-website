@@ -1,3 +1,10 @@
+/*
+title: Scatter Nutrients
+category: scatter
+titleCN: 营养分布散点图
+difficulty: 7
+*/
+
 var indices = {
     name: 0,
     group: 1,
@@ -79,48 +86,14 @@ function normalizeData(originData) {
 }
 
 function getOption(data) {
-
     return {
-        backgroundColor: '#2c343c',
-        tooltip: {
-            padding: 10,
-            backgroundColor: '#222',
-            borderColor: '#777',
-            borderWidth: 1
-        },
         xAxis: {
             name: 'protein',
             splitLine: {show: false},
-            axisLine: {
-                lineStyle: {
-                    color: '#fff'
-                }
-            },
-            axisLabel: {
-                color: '#fff'
-            },
-            axisTick: {
-                lineStyle: {
-                    color: '#fff'
-                }
-            }
         },
         yAxis: {
             name: 'calcium',
             splitLine: {show: false},
-            axisLine: {
-                lineStyle: {
-                    color: '#fff'
-                }
-            },
-            axisLabel: {
-                color: '#fff'
-            },
-            axisTick: {
-                lineStyle: {
-                    color: '#fff'
-                }
-            }
         },
         visualMap: [{
             show: false,
@@ -128,10 +101,10 @@ function getOption(data) {
             categories: groupCategories,
             dimension: 2,
             inRange: {
-                color: groupColors //['#d94e5d','#eac736','#50a3ba']
+                color: groupColors
             },
             outOfRange: {
-                color: ['#ccc'] //['#d94e5d','#eac736','#50a3ba']
+                color: ['#ccc']
             },
             top: 20,
             textStyle: {
@@ -141,7 +114,7 @@ function getOption(data) {
         }, {
             show: false,
             dimension: 3,
-            max: 1000,
+            max: 100,
             inRange: {
                 colorLightness: [0.15, 0.6]
             }

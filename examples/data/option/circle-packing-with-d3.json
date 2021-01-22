@@ -1,0 +1,3795 @@
+{
+  "hoverLayerThreshold": null,
+  "animation": false,
+  "darkMode": true,
+  "color": [
+    "#4992ff",
+    "#7cffb2",
+    "#fddd60",
+    "#ff6e76",
+    "#58d9f9",
+    "#05c091",
+    "#ff8a45",
+    "#8d48e3",
+    "#dd79ff"
+  ],
+  "backgroundColor": "#100C2A",
+  "textStyle": {
+    "color": "#B9B8CE",
+    "fontFamily": "sans-serif",
+    "fontSize": 12,
+    "fontStyle": "normal",
+    "fontWeight": "normal"
+  },
+  "timeAxis": {
+    "axisLine": {
+      "lineStyle": {
+        "color": "#B9B8CE"
+      }
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#484753"
+      }
+    },
+    "splitArea": {
+      "areaStyle": {
+        "color": [
+          "rgba(255,255,255,0.02)",
+          "rgba(255,255,255,0.05)"
+        ]
+      }
+    },
+    "minorSplitLine": {
+      "lineStyle": {
+        "color": "#20203B"
+      }
+    }
+  },
+  "logAxis": {
+    "axisLine": {
+      "lineStyle": {
+        "color": "#B9B8CE"
+      }
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#484753"
+      }
+    },
+    "splitArea": {
+      "areaStyle": {
+        "color": [
+          "rgba(255,255,255,0.02)",
+          "rgba(255,255,255,0.05)"
+        ]
+      }
+    },
+    "minorSplitLine": {
+      "lineStyle": {
+        "color": "#20203B"
+      }
+    }
+  },
+  "valueAxis": {
+    "axisLine": {
+      "lineStyle": {
+        "color": "#B9B8CE"
+      }
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#484753"
+      }
+    },
+    "splitArea": {
+      "areaStyle": {
+        "color": [
+          "rgba(255,255,255,0.02)",
+          "rgba(255,255,255,0.05)"
+        ]
+      }
+    },
+    "minorSplitLine": {
+      "lineStyle": {
+        "color": "#20203B"
+      }
+    }
+  },
+  "categoryAxis": {
+    "axisLine": {
+      "lineStyle": {
+        "color": "#B9B8CE"
+      }
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#484753"
+      },
+      "show": false
+    },
+    "splitArea": {
+      "areaStyle": {
+        "color": [
+          "rgba(255,255,255,0.02)",
+          "rgba(255,255,255,0.05)"
+        ]
+      }
+    },
+    "minorSplitLine": {
+      "lineStyle": {
+        "color": "#20203B"
+      }
+    }
+  },
+  "line": {
+    "symbol": "circle"
+  },
+  "graph": {
+    "color": [
+      "#4992ff",
+      "#7cffb2",
+      "#fddd60",
+      "#ff6e76",
+      "#58d9f9",
+      "#05c091",
+      "#ff8a45",
+      "#8d48e3",
+      "#dd79ff"
+    ]
+  },
+  "gauge": {
+    "title": {
+      "color": "#B9B8CE"
+    },
+    "axisLine": {
+      "lineStyle": {
+        "color": [
+          [
+            1,
+            "rgba(207,212,219,0.2)"
+          ]
+        ]
+      }
+    },
+    "axisLabel": {
+      "color": "#B9B8CE"
+    },
+    "detail": {
+      "color": "#EEF1FA"
+    }
+  },
+  "candlestick": {
+    "itemStyle": {
+      "color": "#FD1050",
+      "color0": "#0CF49B",
+      "borderColor": "#FD1050",
+      "borderColor0": "#0CF49B"
+    }
+  },
+  "gradientColor": [
+    "#f6efa6",
+    "#d88273",
+    "#bf444c"
+  ],
+  "aria": {
+    "decal": {
+      "decals": [
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "dashArrayX": [
+            1,
+            0
+          ],
+          "dashArrayY": [
+            2,
+            5
+          ],
+          "symbolSize": 1,
+          "rotation": 0.5235987755982988
+        },
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "symbol": "circle",
+          "dashArrayX": [
+            [
+              8,
+              8
+            ],
+            [
+              0,
+              8,
+              8,
+              0
+            ]
+          ],
+          "dashArrayY": [
+            6,
+            0
+          ],
+          "symbolSize": 0.8
+        },
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "dashArrayX": [
+            1,
+            0
+          ],
+          "dashArrayY": [
+            4,
+            3
+          ],
+          "dashLineOffset": 0,
+          "rotation": -0.7853981633974483
+        },
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "dashArrayX": [
+            [
+              6,
+              6
+            ],
+            [
+              0,
+              6,
+              6,
+              0
+            ]
+          ],
+          "dashArrayY": [
+            6,
+            0
+          ]
+        },
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "dashArrayX": [
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              6
+            ]
+          ],
+          "dashArrayY": [
+            1,
+            0,
+            6,
+            0
+          ],
+          "rotation": 0.7853981633974483
+        },
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "symbol": "triangle",
+          "dashArrayX": [
+            [
+              9,
+              9
+            ],
+            [
+              0,
+              9,
+              9,
+              0
+            ]
+          ],
+          "dashArrayY": [
+            7,
+            2
+          ],
+          "symbolSize": 0.75
+        }
+      ]
+    }
+  },
+  "stateAnimation": {
+    "duration": 300,
+    "easing": "cubicOut"
+  },
+  "animationDuration": 1000,
+  "animationDurationUpdate": 500,
+  "animationEasing": "cubicInOut",
+  "animationEasingUpdate": "cubicInOut",
+  "animationThreshold": 2000,
+  "progressiveThreshold": 3000,
+  "progressive": 400,
+  "useUTC": false,
+  "dataset": [
+    {
+      "source": [
+        {
+          "id": "option",
+          "depth": 0,
+          "index": 0
+        },
+        {
+          "id": "option.dataZoom",
+          "value": 6229,
+          "depth": 1,
+          "index": 1
+        },
+        {
+          "id": "option.legend",
+          "value": 9273,
+          "depth": 1,
+          "index": 2
+        },
+        {
+          "id": "option.legend.align",
+          "value": 942,
+          "depth": 2,
+          "index": 3
+        },
+        {
+          "id": "option.legend.right",
+          "value": 634,
+          "depth": 2,
+          "index": 4
+        },
+        {
+          "id": "option.legend.z",
+          "value": 567,
+          "depth": 2,
+          "index": 5
+        },
+        {
+          "id": "option.legend.orient",
+          "value": 1356,
+          "depth": 2,
+          "index": 6
+        },
+        {
+          "id": "option.legend.show",
+          "value": 1181,
+          "depth": 2,
+          "index": 7
+        },
+        {
+          "id": "option.legend.zlevel",
+          "value": 634,
+          "depth": 2,
+          "index": 8
+        },
+        {
+          "id": "option.legend.left",
+          "value": 1137,
+          "depth": 2,
+          "index": 9
+        },
+        {
+          "id": "option.legend.itemHeight",
+          "value": 455,
+          "depth": 2,
+          "index": 10
+        },
+        {
+          "id": "option.legend.bottom",
+          "value": 788,
+          "depth": 2,
+          "index": 11
+        },
+        {
+          "id": "option.legend.itemGap",
+          "value": 761,
+          "depth": 2,
+          "index": 12
+        },
+        {
+          "id": "option.legend.formatter",
+          "value": 935,
+          "depth": 2,
+          "index": 13
+        },
+        {
+          "id": "option.legend.selectedMode",
+          "value": 937,
+          "depth": 2,
+          "index": 14
+        },
+        {
+          "id": "option.legend.selected",
+          "value": 1038,
+          "depth": 2,
+          "index": 15
+        },
+        {
+          "id": "option.legend.shadowBlur",
+          "value": 199,
+          "depth": 2,
+          "index": 16
+        },
+        {
+          "id": "option.legend.shadowColor",
+          "value": 189,
+          "depth": 2,
+          "index": 17
+        },
+        {
+          "id": "option.legend.shadowOffsetX",
+          "value": 180,
+          "depth": 2,
+          "index": 18
+        },
+        {
+          "id": "option.legend.shadowOffsetY",
+          "value": 142,
+          "depth": 2,
+          "index": 19
+        },
+        {
+          "id": "option.legend.backgroundColor",
+          "value": 471,
+          "depth": 2,
+          "index": 20
+        },
+        {
+          "id": "option.legend.data",
+          "value": 1430,
+          "depth": 2,
+          "index": 21
+        },
+        {
+          "id": "option.legend.data.icon",
+          "value": 882,
+          "depth": 3,
+          "index": 22
+        },
+        {
+          "id": "option.legend.data.name",
+          "value": 660,
+          "depth": 3,
+          "index": 23
+        },
+        {
+          "id": "option.legend.data.textStyle",
+          "value": 798,
+          "depth": 3,
+          "index": 24
+        },
+        {
+          "id": "option.legend.top",
+          "value": 831,
+          "depth": 2,
+          "index": 25
+        },
+        {
+          "id": "option.legend.padding",
+          "value": 706,
+          "depth": 2,
+          "index": 26
+        },
+        {
+          "id": "option.legend.itemWidth",
+          "value": 603,
+          "depth": 2,
+          "index": 27
+        },
+        {
+          "id": "option.legend.textStyle",
+          "value": 849,
+          "depth": 2,
+          "index": 28
+        },
+        {
+          "id": "option.legend.textStyle.fontSize",
+          "value": 150,
+          "depth": 3,
+          "index": 29
+        },
+        {
+          "id": "option.legend.textStyle.color",
+          "value": 237,
+          "depth": 3,
+          "index": 30
+        },
+        {
+          "id": "option.legend.textStyle.fontStyle",
+          "value": 113,
+          "depth": 3,
+          "index": 31
+        },
+        {
+          "id": "option.legend.textStyle.fontWeight",
+          "value": 101,
+          "depth": 3,
+          "index": 32
+        },
+        {
+          "id": "option.legend.textStyle.fontFamily",
+          "value": 91,
+          "depth": 3,
+          "index": 33
+        },
+        {
+          "id": "option.legend.borderColor",
+          "value": 318,
+          "depth": 2,
+          "index": 34
+        },
+        {
+          "id": "option.legend.borderWidth",
+          "value": 233,
+          "depth": 2,
+          "index": 35
+        },
+        {
+          "id": "option.legend.height",
+          "value": 64,
+          "depth": 2,
+          "index": 36
+        },
+        {
+          "id": "option.legend.width",
+          "value": 83,
+          "depth": 2,
+          "index": 37
+        },
+        {
+          "id": "option.dataZoom-inside",
+          "value": 1250,
+          "depth": 1,
+          "index": 38
+        },
+        {
+          "id": "option.dataZoom-inside.yAxisIndex",
+          "value": 221,
+          "depth": 2,
+          "index": 39
+        },
+        {
+          "id": "option.dataZoom-inside.startValue",
+          "value": 264,
+          "depth": 2,
+          "index": 40
+        },
+        {
+          "id": "option.dataZoom-inside.endValue",
+          "value": 136,
+          "depth": 2,
+          "index": 41
+        },
+        {
+          "id": "option.dataZoom-inside.xAxisIndex",
+          "value": 388,
+          "depth": 2,
+          "index": 42
+        },
+        {
+          "id": "option.dataZoom-inside.angleAxisIndex",
+          "value": 161,
+          "depth": 2,
+          "index": 43
+        },
+        {
+          "id": "option.dataZoom-inside.filterMode",
+          "value": 288,
+          "depth": 2,
+          "index": 44
+        },
+        {
+          "id": "option.dataZoom-inside.type",
+          "value": 639,
+          "depth": 2,
+          "index": 45
+        },
+        {
+          "id": "option.dataZoom-inside.start",
+          "value": 449,
+          "depth": 2,
+          "index": 46
+        },
+        {
+          "id": "option.dataZoom-inside.orient",
+          "value": 210,
+          "depth": 2,
+          "index": 47
+        },
+        {
+          "id": "option.dataZoom-inside.radiusAxisIndex",
+          "value": 141,
+          "depth": 2,
+          "index": 48
+        },
+        {
+          "id": "option.dataZoom-inside.throttle",
+          "value": 171,
+          "depth": 2,
+          "index": 49
+        },
+        {
+          "id": "option.dataZoom-inside.end",
+          "value": 191,
+          "depth": 2,
+          "index": 50
+        },
+        {
+          "id": "option.dataZoom-inside.zoomLock",
+          "value": 168,
+          "depth": 2,
+          "index": 51
+        },
+        {
+          "id": "option.xAxis",
+          "value": 10643,
+          "depth": 1,
+          "index": 52
+        },
+        {
+          "id": "option.xAxis.gridIndex",
+          "value": 1840,
+          "depth": 2,
+          "index": 53
+        },
+        {
+          "id": "option.xAxis.splitLine",
+          "value": 1235,
+          "depth": 2,
+          "index": 54
+        },
+        {
+          "id": "option.xAxis.splitLine.show",
+          "value": 156,
+          "depth": 3,
+          "index": 55
+        },
+        {
+          "id": "option.xAxis.splitLine.lineTyle",
+          "value": 17,
+          "depth": 3,
+          "index": 56
+        },
+        {
+          "id": "option.xAxis.splitLine.lineTyle.shadowBlur",
+          "value": 8,
+          "depth": 4,
+          "index": 57
+        },
+        {
+          "id": "option.xAxis.splitLine.lineTyle.shadowColor",
+          "value": 7,
+          "depth": 4,
+          "index": 58
+        },
+        {
+          "id": "option.xAxis.splitLine.lineTyle.shadowOffsetX",
+          "value": 6,
+          "depth": 4,
+          "index": 59
+        },
+        {
+          "id": "option.xAxis.splitLine.lineTyle.opacity",
+          "value": 7,
+          "depth": 4,
+          "index": 60
+        },
+        {
+          "id": "option.xAxis.splitLine.lineTyle.width",
+          "value": 9,
+          "depth": 4,
+          "index": 61
+        },
+        {
+          "id": "option.xAxis.splitLine.lineTyle.color",
+          "value": 11,
+          "depth": 4,
+          "index": 62
+        },
+        {
+          "id": "option.xAxis.splitLine.lineTyle.shadowOffsetY",
+          "value": 5,
+          "depth": 4,
+          "index": 63
+        },
+        {
+          "id": "option.xAxis.splitLine.lineTyle.type",
+          "value": 12,
+          "depth": 4,
+          "index": 64
+        },
+        {
+          "id": "option.xAxis.splitLine.interval",
+          "value": 198,
+          "depth": 3,
+          "index": 65
+        },
+        {
+          "id": "option.xAxis.splitLine.lineStyle",
+          "value": 185,
+          "depth": 3,
+          "index": 66
+        },
+        {
+          "id": "option.xAxis.splitLine.lineStyle.color",
+          "value": 81,
+          "depth": 4,
+          "index": 67
+        },
+        {
+          "id": "option.xAxis.splitLine.lineStyle.type",
+          "value": 49,
+          "depth": 4,
+          "index": 68
+        },
+        {
+          "id": "option.xAxis.splitLine.lineStyle.width",
+          "value": 33,
+          "depth": 4,
+          "index": 69
+        },
+        {
+          "id": "option.xAxis.splitLine.lineStyle.shadowBlur",
+          "value": 28,
+          "depth": 4,
+          "index": 70
+        },
+        {
+          "id": "option.xAxis.splitLine.lineStyle.opacity",
+          "value": 29,
+          "depth": 4,
+          "index": 71
+        },
+        {
+          "id": "option.xAxis.splitLine.lineStyle.shadowColor",
+          "value": 27,
+          "depth": 4,
+          "index": 72
+        },
+        {
+          "id": "option.xAxis.splitLine.lineStyle.shadowOffsetX",
+          "value": 16,
+          "depth": 4,
+          "index": 73
+        },
+        {
+          "id": "option.xAxis.splitLine.lineStyle.shadowOffsetY",
+          "value": 14,
+          "depth": 4,
+          "index": 74
+        },
+        {
+          "id": "option.xAxis.axisTick",
+          "value": 1461,
+          "depth": 2,
+          "index": 75
+        },
+        {
+          "id": "option.xAxis.axisTick.interval",
+          "value": 345,
+          "depth": 3,
+          "index": 76
+        },
+        {
+          "id": "option.xAxis.axisTick.inside",
+          "value": 195,
+          "depth": 3,
+          "index": 77
+        },
+        {
+          "id": "option.xAxis.axisTick.show",
+          "value": 250,
+          "depth": 3,
+          "index": 78
+        },
+        {
+          "id": "option.xAxis.axisTick.length",
+          "value": 211,
+          "depth": 3,
+          "index": 79
+        },
+        {
+          "id": "option.xAxis.axisTick.lineStyle",
+          "value": 249,
+          "depth": 3,
+          "index": 80
+        },
+        {
+          "id": "option.xAxis.axisTick.lineStyle.color",
+          "value": 87,
+          "depth": 4,
+          "index": 81
+        },
+        {
+          "id": "option.xAxis.axisTick.lineStyle.shadowColor",
+          "value": 38,
+          "depth": 4,
+          "index": 82
+        },
+        {
+          "id": "option.xAxis.axisTick.lineStyle.width",
+          "value": 42,
+          "depth": 4,
+          "index": 83
+        },
+        {
+          "id": "option.xAxis.axisTick.lineStyle.type",
+          "value": 50,
+          "depth": 4,
+          "index": 84
+        },
+        {
+          "id": "option.xAxis.axisTick.lineStyle.opacity",
+          "value": 29,
+          "depth": 4,
+          "index": 85
+        },
+        {
+          "id": "option.xAxis.axisTick.lineStyle.shadowBlur",
+          "value": 39,
+          "depth": 4,
+          "index": 86
+        },
+        {
+          "id": "option.xAxis.axisTick.lineStyle.shadowOffsetX",
+          "value": 26,
+          "depth": 4,
+          "index": 87
+        },
+        {
+          "id": "option.xAxis.axisTick.lineStyle.shadowOffsetY",
+          "value": 19,
+          "depth": 4,
+          "index": 88
+        },
+        {
+          "id": "option.xAxis.type",
+          "value": 2888,
+          "depth": 2,
+          "index": 89
+        },
+        {
+          "id": "option.xAxis.axisLabel",
+          "value": 1980,
+          "depth": 2,
+          "index": 90
+        },
+        {
+          "id": "option.xAxis.axisLabel.interval",
+          "value": 695,
+          "depth": 3,
+          "index": 91
+        },
+        {
+          "id": "option.xAxis.axisLabel.rotate",
+          "value": 399,
+          "depth": 3,
+          "index": 92
+        },
+        {
+          "id": "option.xAxis.axisLabel.show",
+          "value": 343,
+          "depth": 3,
+          "index": 93
+        },
+        {
+          "id": "option.xAxis.axisLabel.inside",
+          "value": 303,
+          "depth": 3,
+          "index": 94
+        },
+        {
+          "id": "option.xAxis.axisLabel.margin",
+          "value": 337,
+          "depth": 3,
+          "index": 95
+        },
+        {
+          "id": "option.xAxis.axisLabel.formatter",
+          "value": 836,
+          "depth": 3,
+          "index": 96
+        },
+        {
+          "id": "option.xAxis.axisLabel.textStyle",
+          "value": 417,
+          "depth": 3,
+          "index": 97
+        },
+        {
+          "id": "option.xAxis.axisLabel.textStyle.fontSize",
+          "value": 97,
+          "depth": 4,
+          "index": 98
+        },
+        {
+          "id": "option.xAxis.axisLabel.textStyle.color",
+          "value": 136,
+          "depth": 4,
+          "index": 99
+        },
+        {
+          "id": "option.xAxis.axisLabel.textStyle.fontStyle",
+          "value": 84,
+          "depth": 4,
+          "index": 100
+        },
+        {
+          "id": "option.xAxis.axisLabel.textStyle.fontWeight",
+          "value": 68,
+          "depth": 4,
+          "index": 101
+        },
+        {
+          "id": "option.xAxis.axisLabel.textStyle.fontFamily",
+          "value": 55,
+          "depth": 4,
+          "index": 102
+        },
+        {
+          "id": "option.xAxis.position",
+          "value": 1812,
+          "depth": 2,
+          "index": 103
+        },
+        {
+          "id": "option.xAxis.nameTextStyle",
+          "value": 1593,
+          "depth": 2,
+          "index": 104
+        },
+        {
+          "id": "option.xAxis.nameTextStyle.fontStyle",
+          "value": 192,
+          "depth": 3,
+          "index": 105
+        },
+        {
+          "id": "option.xAxis.nameTextStyle.color",
+          "value": 329,
+          "depth": 3,
+          "index": 106
+        },
+        {
+          "id": "option.xAxis.nameTextStyle.fontFamily",
+          "value": 143,
+          "depth": 3,
+          "index": 107
+        },
+        {
+          "id": "option.xAxis.nameTextStyle.fontWeight",
+          "value": 138,
+          "depth": 3,
+          "index": 108
+        },
+        {
+          "id": "option.xAxis.nameTextStyle.fontSize",
+          "value": 194,
+          "depth": 3,
+          "index": 109
+        },
+        {
+          "id": "option.xAxis.nameGap",
+          "value": 1258,
+          "depth": 2,
+          "index": 110
+        },
+        {
+          "id": "option.xAxis.interval",
+          "value": 1363,
+          "depth": 2,
+          "index": 111
+        },
+        {
+          "id": "option.xAxis.boundaryGap",
+          "value": 1812,
+          "depth": 2,
+          "index": 112
+        },
+        {
+          "id": "option.xAxis.scale",
+          "value": 1195,
+          "depth": 2,
+          "index": 113
+        },
+        {
+          "id": "option.xAxis.inverse",
+          "value": 1017,
+          "depth": 2,
+          "index": 114
+        },
+        {
+          "id": "option.xAxis.data",
+          "value": 1546,
+          "depth": 2,
+          "index": 115
+        },
+        {
+          "id": "option.xAxis.data.textStyle",
+          "value": 429,
+          "depth": 3,
+          "index": 116
+        },
+        {
+          "id": "option.xAxis.data.textStyle.baseline",
+          "value": 155,
+          "depth": 4,
+          "index": 117
+        },
+        {
+          "id": "option.xAxis.data.textStyle.color",
+          "value": 161,
+          "depth": 4,
+          "index": 118
+        },
+        {
+          "id": "option.xAxis.data.textStyle.align",
+          "value": 147,
+          "depth": 4,
+          "index": 119
+        },
+        {
+          "id": "option.xAxis.data.textStyle.fontStyle",
+          "value": 97,
+          "depth": 4,
+          "index": 120
+        },
+        {
+          "id": "option.xAxis.data.textStyle.fontWeight",
+          "value": 74,
+          "depth": 4,
+          "index": 121
+        },
+        {
+          "id": "option.xAxis.data.textStyle.fontFamily",
+          "value": 65,
+          "depth": 4,
+          "index": 122
+        },
+        {
+          "id": "option.xAxis.data.textStyle.fontSize",
+          "value": 76,
+          "depth": 4,
+          "index": 123
+        },
+        {
+          "id": "option.xAxis.data.value",
+          "value": 715,
+          "depth": 3,
+          "index": 124
+        },
+        {
+          "id": "option.xAxis.nameLocation",
+          "value": 1310,
+          "depth": 2,
+          "index": 125
+        },
+        {
+          "id": "option.xAxis.name",
+          "value": 1396,
+          "depth": 2,
+          "index": 126
+        },
+        {
+          "id": "option.xAxis.splitNumber",
+          "value": 1367,
+          "depth": 2,
+          "index": 127
+        },
+        {
+          "id": "option.xAxis.min",
+          "value": 1112,
+          "depth": 2,
+          "index": 128
+        },
+        {
+          "id": "option.xAxis.axisLine",
+          "value": 1822,
+          "depth": 2,
+          "index": 129
+        },
+        {
+          "id": "option.xAxis.axisLine.lineStyle",
+          "value": 563,
+          "depth": 3,
+          "index": 130
+        },
+        {
+          "id": "option.xAxis.axisLine.lineStyle.type",
+          "value": 156,
+          "depth": 4,
+          "index": 131
+        },
+        {
+          "id": "option.xAxis.axisLine.lineStyle.color",
+          "value": 257,
+          "depth": 4,
+          "index": 132
+        },
+        {
+          "id": "option.xAxis.axisLine.lineStyle.shadowColor",
+          "value": 113,
+          "depth": 4,
+          "index": 133
+        },
+        {
+          "id": "option.xAxis.axisLine.lineStyle.shadowBlur",
+          "value": 124,
+          "depth": 4,
+          "index": 134
+        },
+        {
+          "id": "option.xAxis.axisLine.lineStyle.shadowOffsetX",
+          "value": 70,
+          "depth": 4,
+          "index": 135
+        },
+        {
+          "id": "option.xAxis.axisLine.lineStyle.width",
+          "value": 138,
+          "depth": 4,
+          "index": 136
+        },
+        {
+          "id": "option.xAxis.axisLine.lineStyle.opacity",
+          "value": 104,
+          "depth": 4,
+          "index": 137
+        },
+        {
+          "id": "option.xAxis.axisLine.lineStyle.shadowOffsetY",
+          "value": 56,
+          "depth": 4,
+          "index": 138
+        },
+        {
+          "id": "option.xAxis.axisLine.show",
+          "value": 449,
+          "depth": 3,
+          "index": 139
+        },
+        {
+          "id": "option.xAxis.axisLine.onZero",
+          "value": 394,
+          "depth": 3,
+          "index": 140
+        },
+        {
+          "id": "option.xAxis.splitArea",
+          "value": 795,
+          "depth": 2,
+          "index": 141
+        },
+        {
+          "id": "option.xAxis.splitArea.show",
+          "value": 95,
+          "depth": 3,
+          "index": 142
+        },
+        {
+          "id": "option.xAxis.splitArea.interval",
+          "value": 152,
+          "depth": 3,
+          "index": 143
+        },
+        {
+          "id": "option.xAxis.splitArea.areaStyle",
+          "value": 187,
+          "depth": 3,
+          "index": 144
+        },
+        {
+          "id": "option.xAxis.splitArea.areaStyle.color",
+          "value": 150,
+          "depth": 4,
+          "index": 145
+        },
+        {
+          "id": "option.xAxis.splitArea.areaStyle.shadowBlur",
+          "value": 57,
+          "depth": 4,
+          "index": 146
+        },
+        {
+          "id": "option.xAxis.splitArea.areaStyle.shadowColor",
+          "value": 52,
+          "depth": 4,
+          "index": 147
+        },
+        {
+          "id": "option.xAxis.splitArea.areaStyle.shadowOffsetX",
+          "value": 30,
+          "depth": 4,
+          "index": 148
+        },
+        {
+          "id": "option.xAxis.splitArea.areaStyle.opacity",
+          "value": 39,
+          "depth": 4,
+          "index": 149
+        },
+        {
+          "id": "option.xAxis.splitArea.areaStyle.shadowOffsetY",
+          "value": 19,
+          "depth": 4,
+          "index": 150
+        },
+        {
+          "id": "option.xAxis.max",
+          "value": 707,
+          "depth": 2,
+          "index": 151
+        },
+        {
+          "id": "option.radiusAxis",
+          "value": 4587,
+          "depth": 1,
+          "index": 152
+        },
+        {
+          "id": "option.radiusAxis.data",
+          "value": 64,
+          "depth": 2,
+          "index": 153
+        },
+        {
+          "id": "option.radiusAxis.data.value",
+          "value": 16,
+          "depth": 3,
+          "index": 154
+        },
+        {
+          "id": "option.radiusAxis.data.textStyle",
+          "value": 15,
+          "depth": 3,
+          "index": 155
+        },
+        {
+          "id": "option.radiusAxis.data.textStyle.color",
+          "value": 3,
+          "depth": 4,
+          "index": 156
+        },
+        {
+          "id": "option.radiusAxis.data.textStyle.baseline",
+          "value": 2,
+          "depth": 4,
+          "index": 157
+        },
+        {
+          "id": "option.radiusAxis.interval",
+          "value": 33,
+          "depth": 2,
+          "index": 158
+        },
+        {
+          "id": "option.radiusAxis.min",
+          "value": 43,
+          "depth": 2,
+          "index": 159
+        },
+        {
+          "id": "option.radiusAxis.axisLabel",
+          "value": 53,
+          "depth": 2,
+          "index": 160
+        },
+        {
+          "id": "option.radiusAxis.axisLabel.formatter",
+          "value": 63,
+          "depth": 3,
+          "index": 161
+        },
+        {
+          "id": "option.radiusAxis.axisLabel.show",
+          "value": 10,
+          "depth": 3,
+          "index": 162
+        },
+        {
+          "id": "option.radiusAxis.axisLabel.interval",
+          "value": 9,
+          "depth": 3,
+          "index": 163
+        },
+        {
+          "id": "option.radiusAxis.axisLabel.inside",
+          "value": 5,
+          "depth": 3,
+          "index": 164
+        },
+        {
+          "id": "option.radiusAxis.axisLabel.rotate",
+          "value": 8,
+          "depth": 3,
+          "index": 165
+        },
+        {
+          "id": "option.radiusAxis.axisLabel.margin",
+          "value": 6,
+          "depth": 3,
+          "index": 166
+        },
+        {
+          "id": "option.radiusAxis.axisLabel.textStyle",
+          "value": 10,
+          "depth": 3,
+          "index": 167
+        },
+        {
+          "id": "option.radiusAxis.axisLabel.textStyle.color",
+          "value": 5,
+          "depth": 4,
+          "index": 168
+        },
+        {
+          "id": "option.radiusAxis.axisLabel.textStyle.fontStyle",
+          "value": 1,
+          "depth": 4,
+          "index": 169
+        },
+        {
+          "id": "option.radiusAxis.axisLabel.textStyle.fontWeight",
+          "value": 1,
+          "depth": 4,
+          "index": 170
+        },
+        {
+          "id": "option.radiusAxis.axisLabel.textStyle.fontSize",
+          "value": 1,
+          "depth": 4,
+          "index": 171
+        },
+        {
+          "id": "option.radiusAxis.axisLabel.textStyle.fontFamily",
+          "value": 1,
+          "depth": 4,
+          "index": 172
+        },
+        {
+          "id": "option.radiusAxis.splitArea",
+          "value": 36,
+          "depth": 2,
+          "index": 173
+        },
+        {
+          "id": "option.radiusAxis.splitArea.areaStyle",
+          "value": 13,
+          "depth": 3,
+          "index": 174
+        },
+        {
+          "id": "option.radiusAxis.splitArea.areaStyle.color",
+          "value": 12,
+          "depth": 4,
+          "index": 175
+        },
+        {
+          "id": "option.radiusAxis.splitArea.areaStyle.shadowColor",
+          "value": 2,
+          "depth": 4,
+          "index": 176
+        },
+        {
+          "id": "option.radiusAxis.splitArea.show",
+          "value": 4,
+          "depth": 3,
+          "index": 177
+        },
+        {
+          "id": "option.radiusAxis.splitArea.interval",
+          "value": 3,
+          "depth": 3,
+          "index": 178
+        },
+        {
+          "id": "option.radiusAxis.polarIndex",
+          "value": 139,
+          "depth": 2,
+          "index": 179
+        },
+        {
+          "id": "option.radiusAxis.type",
+          "value": 104,
+          "depth": 2,
+          "index": 180
+        },
+        {
+          "id": "option.radiusAxis.name",
+          "value": 65,
+          "depth": 2,
+          "index": 181
+        },
+        {
+          "id": "option.radiusAxis.nameLocation",
+          "value": 62,
+          "depth": 2,
+          "index": 182
+        },
+        {
+          "id": "option.radiusAxis.nameTextStyle",
+          "value": 50,
+          "depth": 2,
+          "index": 183
+        },
+        {
+          "id": "option.radiusAxis.nameTextStyle.color",
+          "value": 18,
+          "depth": 3,
+          "index": 184
+        },
+        {
+          "id": "option.radiusAxis.nameTextStyle.fontStyle",
+          "value": 4,
+          "depth": 3,
+          "index": 185
+        },
+        {
+          "id": "option.radiusAxis.nameTextStyle.fontSize",
+          "value": 3,
+          "depth": 3,
+          "index": 186
+        },
+        {
+          "id": "option.radiusAxis.nameTextStyle.fontWeight",
+          "value": 4,
+          "depth": 3,
+          "index": 187
+        },
+        {
+          "id": "option.radiusAxis.nameTextStyle.fontFamily",
+          "value": 2,
+          "depth": 3,
+          "index": 188
+        },
+        {
+          "id": "option.radiusAxis.nameGap",
+          "value": 32,
+          "depth": 2,
+          "index": 189
+        },
+        {
+          "id": "option.radiusAxis.inverse",
+          "value": 29,
+          "depth": 2,
+          "index": 190
+        },
+        {
+          "id": "option.radiusAxis.max",
+          "value": 40,
+          "depth": 2,
+          "index": 191
+        },
+        {
+          "id": "option.radiusAxis.axisLine",
+          "value": 45,
+          "depth": 2,
+          "index": 192
+        },
+        {
+          "id": "option.radiusAxis.axisLine.show",
+          "value": 12,
+          "depth": 3,
+          "index": 193
+        },
+        {
+          "id": "option.radiusAxis.axisLine.lineStyle",
+          "value": 10,
+          "depth": 3,
+          "index": 194
+        },
+        {
+          "id": "option.radiusAxis.axisLine.lineStyle.color",
+          "value": 19,
+          "depth": 4,
+          "index": 195
+        },
+        {
+          "id": "option.radiusAxis.axisLine.lineStyle.width",
+          "value": 7,
+          "depth": 4,
+          "index": 196
+        },
+        {
+          "id": "option.radiusAxis.axisLine.lineStyle.shadowBlur",
+          "value": 7,
+          "depth": 4,
+          "index": 197
+        },
+        {
+          "id": "option.radiusAxis.axisLine.lineStyle.shadowColor",
+          "value": 5,
+          "depth": 4,
+          "index": 198
+        },
+        {
+          "id": "option.radiusAxis.axisLine.lineStyle.shadowOffsetX",
+          "value": 2,
+          "depth": 4,
+          "index": 199
+        },
+        {
+          "id": "option.radiusAxis.axisLine.lineStyle.type",
+          "value": 8,
+          "depth": 4,
+          "index": 200
+        },
+        {
+          "id": "option.radiusAxis.axisLine.lineStyle.opacity",
+          "value": 5,
+          "depth": 4,
+          "index": 201
+        },
+        {
+          "id": "option.radiusAxis.axisLine.lineStyle.shadowOffsetY",
+          "value": 2,
+          "depth": 4,
+          "index": 202
+        },
+        {
+          "id": "option.radiusAxis.splitLine",
+          "value": 44,
+          "depth": 2,
+          "index": 203
+        },
+        {
+          "id": "option.radiusAxis.splitLine.lineStyle",
+          "value": 8,
+          "depth": 3,
+          "index": 204
+        },
+        {
+          "id": "option.radiusAxis.splitLine.lineStyle.type",
+          "value": 1,
+          "depth": 4,
+          "index": 205
+        },
+        {
+          "id": "option.radiusAxis.splitLine.lineStyle.width",
+          "value": 1,
+          "depth": 4,
+          "index": 206
+        },
+        {
+          "id": "option.radiusAxis.splitLine.lineStyle.color",
+          "value": 6,
+          "depth": 4,
+          "index": 207
+        },
+        {
+          "id": "option.radiusAxis.splitLine.lineStyle.shadowColor",
+          "value": 3,
+          "depth": 4,
+          "index": 208
+        },
+        {
+          "id": "option.radiusAxis.splitLine.lineStyle.shadowBlur",
+          "value": 1,
+          "depth": 4,
+          "index": 209
+        },
+        {
+          "id": "option.radiusAxis.splitLine.interval",
+          "value": 4,
+          "depth": 3,
+          "index": 210
+        },
+        {
+          "id": "option.radiusAxis.splitLine.show",
+          "value": 4,
+          "depth": 3,
+          "index": 211
+        },
+        {
+          "id": "option.radiusAxis.splitNumber",
+          "value": 42,
+          "depth": 2,
+          "index": 212
+        },
+        {
+          "id": "option.radiusAxis.boundaryGap",
+          "value": 51,
+          "depth": 2,
+          "index": 213
+        },
+        {
+          "id": "option.radiusAxis.scale",
+          "value": 40,
+          "depth": 2,
+          "index": 214
+        },
+        {
+          "id": "option.radiusAxis.axisTick",
+          "value": 34,
+          "depth": 2,
+          "index": 215
+        },
+        {
+          "id": "option.radiusAxis.axisTick.interval",
+          "value": 5,
+          "depth": 3,
+          "index": 216
+        },
+        {
+          "id": "option.radiusAxis.axisTick.inside",
+          "value": 3,
+          "depth": 3,
+          "index": 217
+        },
+        {
+          "id": "option.radiusAxis.axisTick.lineStyle",
+          "value": 7,
+          "depth": 3,
+          "index": 218
+        },
+        {
+          "id": "option.radiusAxis.axisTick.lineStyle.type",
+          "value": 1,
+          "depth": 4,
+          "index": 219
+        },
+        {
+          "id": "option.radiusAxis.axisTick.lineStyle.color",
+          "value": 2,
+          "depth": 4,
+          "index": 220
+        },
+        {
+          "id": "option.radiusAxis.axisTick.length",
+          "value": 2,
+          "depth": 3,
+          "index": 221
+        },
+        {
+          "id": "option.radiusAxis.axisTick.show",
+          "value": 2,
+          "depth": 3,
+          "index": 222
+        },
+        {
+          "id": "option.yAxis",
+          "value": 7115,
+          "depth": 1,
+          "index": 223
+        },
+        {
+          "id": "option.yAxis.splitNumber",
+          "value": 1005,
+          "depth": 2,
+          "index": 224
+        },
+        {
+          "id": "option.yAxis.gridIndex",
+          "value": 1161,
+          "depth": 2,
+          "index": 225
+        },
+        {
+          "id": "option.yAxis.axisLabel",
+          "value": 1068,
+          "depth": 2,
+          "index": 226
+        },
+        {
+          "id": "option.yAxis.axisLabel.textStyle",
+          "value": 186,
+          "depth": 3,
+          "index": 227
+        },
+        {
+          "id": "option.yAxis.axisLabel.textStyle.fontFamily",
+          "value": 30,
+          "depth": 4,
+          "index": 228
+        },
+        {
+          "id": "option.yAxis.axisLabel.textStyle.fontWeight",
+          "value": 34,
+          "depth": 4,
+          "index": 229
+        },
+        {
+          "id": "option.yAxis.axisLabel.textStyle.color",
+          "value": 63,
+          "depth": 4,
+          "index": 230
+        },
+        {
+          "id": "option.yAxis.axisLabel.textStyle.fontSize",
+          "value": 39,
+          "depth": 4,
+          "index": 231
+        },
+        {
+          "id": "option.yAxis.axisLabel.textStyle.fontStyle",
+          "value": 33,
+          "depth": 4,
+          "index": 232
+        },
+        {
+          "id": "option.yAxis.axisLabel.inside",
+          "value": 161,
+          "depth": 3,
+          "index": 233
+        },
+        {
+          "id": "option.yAxis.axisLabel.formatter",
+          "value": 519,
+          "depth": 3,
+          "index": 234
+        },
+        {
+          "id": "option.yAxis.axisLabel.interval",
+          "value": 255,
+          "depth": 3,
+          "index": 235
+        },
+        {
+          "id": "option.yAxis.axisLabel.margin",
+          "value": 166,
+          "depth": 3,
+          "index": 236
+        },
+        {
+          "id": "option.yAxis.axisLabel.rotate",
+          "value": 137,
+          "depth": 3,
+          "index": 237
+        },
+        {
+          "id": "option.yAxis.axisLabel.show",
+          "value": 164,
+          "depth": 3,
+          "index": 238
+        },
+        {
+          "id": "option.yAxis.nameTextStyle",
+          "value": 970,
+          "depth": 2,
+          "index": 239
+        },
+        {
+          "id": "option.yAxis.nameTextStyle.color",
+          "value": 139,
+          "depth": 3,
+          "index": 240
+        },
+        {
+          "id": "option.yAxis.nameTextStyle.fontStyle",
+          "value": 85,
+          "depth": 3,
+          "index": 241
+        },
+        {
+          "id": "option.yAxis.nameTextStyle.fontSize",
+          "value": 91,
+          "depth": 3,
+          "index": 242
+        },
+        {
+          "id": "option.yAxis.nameTextStyle.fontFamily",
+          "value": 57,
+          "depth": 3,
+          "index": 243
+        },
+        {
+          "id": "option.yAxis.nameTextStyle.fontWeight",
+          "value": 61,
+          "depth": 3,
+          "index": 244
+        },
+        {
+          "id": "option.yAxis.nameLocation",
+          "value": 886,
+          "depth": 2,
+          "index": 245
+        },
+        {
+          "id": "option.yAxis.axisTick",
+          "value": 710,
+          "depth": 2,
+          "index": 246
+        },
+        {
+          "id": "option.yAxis.axisTick.inside",
+          "value": 73,
+          "depth": 3,
+          "index": 247
+        },
+        {
+          "id": "option.yAxis.axisTick.interval",
+          "value": 124,
+          "depth": 3,
+          "index": 248
+        },
+        {
+          "id": "option.yAxis.axisTick.length",
+          "value": 83,
+          "depth": 3,
+          "index": 249
+        },
+        {
+          "id": "option.yAxis.axisTick.lineStyle",
+          "value": 91,
+          "depth": 3,
+          "index": 250
+        },
+        {
+          "id": "option.yAxis.axisTick.lineStyle.color",
+          "value": 31,
+          "depth": 4,
+          "index": 251
+        },
+        {
+          "id": "option.yAxis.axisTick.lineStyle.shadowColor",
+          "value": 12,
+          "depth": 4,
+          "index": 252
+        },
+        {
+          "id": "option.yAxis.axisTick.lineStyle.opacity",
+          "value": 12,
+          "depth": 4,
+          "index": 253
+        },
+        {
+          "id": "option.yAxis.axisTick.lineStyle.width",
+          "value": 16,
+          "depth": 4,
+          "index": 254
+        },
+        {
+          "id": "option.yAxis.axisTick.lineStyle.type",
+          "value": 17,
+          "depth": 4,
+          "index": 255
+        },
+        {
+          "id": "option.yAxis.axisTick.lineStyle.shadowBlur",
+          "value": 8,
+          "depth": 4,
+          "index": 256
+        },
+        {
+          "id": "option.yAxis.axisTick.lineStyle.shadowOffsetX",
+          "value": 11,
+          "depth": 4,
+          "index": 257
+        },
+        {
+          "id": "option.yAxis.axisTick.lineStyle.shadowOffsetY",
+          "value": 11,
+          "depth": 4,
+          "index": 258
+        },
+        {
+          "id": "option.yAxis.axisTick.show",
+          "value": 108,
+          "depth": 3,
+          "index": 259
+        },
+        {
+          "id": "option.yAxis.data",
+          "value": 757,
+          "depth": 2,
+          "index": 260
+        },
+        {
+          "id": "option.yAxis.data.value",
+          "value": 327,
+          "depth": 3,
+          "index": 261
+        },
+        {
+          "id": "option.yAxis.data.textStyle",
+          "value": 215,
+          "depth": 3,
+          "index": 262
+        },
+        {
+          "id": "option.yAxis.data.textStyle.align",
+          "value": 67,
+          "depth": 4,
+          "index": 263
+        },
+        {
+          "id": "option.yAxis.data.textStyle.fontWeight",
+          "value": 22,
+          "depth": 4,
+          "index": 264
+        },
+        {
+          "id": "option.yAxis.data.textStyle.baseline",
+          "value": 57,
+          "depth": 4,
+          "index": 265
+        },
+        {
+          "id": "option.yAxis.data.textStyle.fontSize",
+          "value": 31,
+          "depth": 4,
+          "index": 266
+        },
+        {
+          "id": "option.yAxis.data.textStyle.fontStyle",
+          "value": 29,
+          "depth": 4,
+          "index": 267
+        },
+        {
+          "id": "option.yAxis.data.textStyle.color",
+          "value": 57,
+          "depth": 4,
+          "index": 268
+        },
+        {
+          "id": "option.yAxis.data.textStyle.fontFamily",
+          "value": 16,
+          "depth": 4,
+          "index": 269
+        },
+        {
+          "id": "option.yAxis.axisLine",
+          "value": 999,
+          "depth": 2,
+          "index": 270
+        },
+        {
+          "id": "option.yAxis.axisLine.lineStyle",
+          "value": 233,
+          "depth": 3,
+          "index": 271
+        },
+        {
+          "id": "option.yAxis.axisLine.lineStyle.color",
+          "value": 104,
+          "depth": 4,
+          "index": 272
+        },
+        {
+          "id": "option.yAxis.axisLine.lineStyle.width",
+          "value": 46,
+          "depth": 4,
+          "index": 273
+        },
+        {
+          "id": "option.yAxis.axisLine.lineStyle.shadowBlur",
+          "value": 43,
+          "depth": 4,
+          "index": 274
+        },
+        {
+          "id": "option.yAxis.axisLine.lineStyle.opacity",
+          "value": 37,
+          "depth": 4,
+          "index": 275
+        },
+        {
+          "id": "option.yAxis.axisLine.lineStyle.type",
+          "value": 46,
+          "depth": 4,
+          "index": 276
+        },
+        {
+          "id": "option.yAxis.axisLine.lineStyle.shadowColor",
+          "value": 38,
+          "depth": 4,
+          "index": 277
+        },
+        {
+          "id": "option.yAxis.axisLine.lineStyle.shadowOffsetX",
+          "value": 20,
+          "depth": 4,
+          "index": 278
+        },
+        {
+          "id": "option.yAxis.axisLine.lineStyle.shadowOffsetY",
+          "value": 14,
+          "depth": 4,
+          "index": 279
+        },
+        {
+          "id": "option.yAxis.axisLine.onZero",
+          "value": 187,
+          "depth": 3,
+          "index": 280
+        },
+        {
+          "id": "option.yAxis.axisLine.show",
+          "value": 231,
+          "depth": 3,
+          "index": 281
+        },
+        {
+          "id": "option.yAxis.type",
+          "value": 1527,
+          "depth": 2,
+          "index": 282
+        },
+        {
+          "id": "option.yAxis.min",
+          "value": 845,
+          "depth": 2,
+          "index": 283
+        },
+        {
+          "id": "option.yAxis.interval",
+          "value": 904,
+          "depth": 2,
+          "index": 284
+        },
+        {
+          "id": "option.yAxis.name",
+          "value": 924,
+          "depth": 2,
+          "index": 285
+        },
+        {
+          "id": "option.yAxis.inverse",
+          "value": 727,
+          "depth": 2,
+          "index": 286
+        },
+        {
+          "id": "option.yAxis.boundaryGap",
+          "value": 971,
+          "depth": 2,
+          "index": 287
+        },
+        {
+          "id": "option.yAxis.scale",
+          "value": 892,
+          "depth": 2,
+          "index": 288
+        },
+        {
+          "id": "option.yAxis.max",
+          "value": 667,
+          "depth": 2,
+          "index": 289
+        },
+        {
+          "id": "option.yAxis.position",
+          "value": 1257,
+          "depth": 2,
+          "index": 290
+        },
+        {
+          "id": "option.yAxis.nameGap",
+          "value": 808,
+          "depth": 2,
+          "index": 291
+        },
+        {
+          "id": "option.yAxis.splitArea",
+          "value": 427,
+          "depth": 2,
+          "index": 292
+        },
+        {
+          "id": "option.yAxis.splitArea.interval",
+          "value": 104,
+          "depth": 3,
+          "index": 293
+        },
+        {
+          "id": "option.yAxis.splitArea.show",
+          "value": 56,
+          "depth": 3,
+          "index": 294
+        },
+        {
+          "id": "option.yAxis.splitArea.areaStyle",
+          "value": 79,
+          "depth": 3,
+          "index": 295
+        },
+        {
+          "id": "option.yAxis.splitArea.areaStyle.shadowOffsetX",
+          "value": 11,
+          "depth": 4,
+          "index": 296
+        },
+        {
+          "id": "option.yAxis.splitArea.areaStyle.shadowOffsetY",
+          "value": 11,
+          "depth": 4,
+          "index": 297
+        },
+        {
+          "id": "option.yAxis.splitArea.areaStyle.shadowColor",
+          "value": 14,
+          "depth": 4,
+          "index": 298
+        },
+        {
+          "id": "option.yAxis.splitArea.areaStyle.shadowBlur",
+          "value": 16,
+          "depth": 4,
+          "index": 299
+        },
+        {
+          "id": "option.yAxis.splitArea.areaStyle.color",
+          "value": 68,
+          "depth": 4,
+          "index": 300
+        },
+        {
+          "id": "option.yAxis.splitArea.areaStyle.opacity",
+          "value": 17,
+          "depth": 4,
+          "index": 301
+        },
+        {
+          "id": "option.yAxis.splitLine",
+          "value": 625,
+          "depth": 2,
+          "index": 302
+        },
+        {
+          "id": "option.yAxis.splitLine.lineTyle",
+          "value": 8,
+          "depth": 3,
+          "index": 303
+        },
+        {
+          "id": "option.yAxis.splitLine.lineTyle.type",
+          "value": 7,
+          "depth": 4,
+          "index": 304
+        },
+        {
+          "id": "option.yAxis.splitLine.lineTyle.color",
+          "value": 4,
+          "depth": 4,
+          "index": 305
+        },
+        {
+          "id": "option.yAxis.splitLine.lineTyle.opacity",
+          "value": 1,
+          "depth": 4,
+          "index": 306
+        },
+        {
+          "id": "option.yAxis.splitLine.lineTyle.shadowOffsetX",
+          "value": 1,
+          "depth": 4,
+          "index": 307
+        },
+        {
+          "id": "option.yAxis.splitLine.lineTyle.shadowOffsetY",
+          "value": 1,
+          "depth": 4,
+          "index": 308
+        },
+        {
+          "id": "option.yAxis.splitLine.lineTyle.shadowColor",
+          "value": 1,
+          "depth": 4,
+          "index": 309
+        },
+        {
+          "id": "option.yAxis.splitLine.lineTyle.shadowBlur",
+          "value": 1,
+          "depth": 4,
+          "index": 310
+        },
+        {
+          "id": "option.yAxis.splitLine.lineTyle.width",
+          "value": 3,
+          "depth": 4,
+          "index": 311
+        },
+        {
+          "id": "option.yAxis.splitLine.show",
+          "value": 104,
+          "depth": 3,
+          "index": 312
+        },
+        {
+          "id": "option.yAxis.splitLine.interval",
+          "value": 102,
+          "depth": 3,
+          "index": 313
+        },
+        {
+          "id": "option.yAxis.splitLine.lineStyle",
+          "value": 106,
+          "depth": 3,
+          "index": 314
+        },
+        {
+          "id": "option.yAxis.splitLine.lineStyle.color",
+          "value": 43,
+          "depth": 4,
+          "index": 315
+        },
+        {
+          "id": "option.yAxis.splitLine.lineStyle.opacity",
+          "value": 16,
+          "depth": 4,
+          "index": 316
+        },
+        {
+          "id": "option.yAxis.splitLine.lineStyle.shadowOffsetY",
+          "value": 9,
+          "depth": 4,
+          "index": 317
+        },
+        {
+          "id": "option.yAxis.splitLine.lineStyle.shadowOffsetX",
+          "value": 11,
+          "depth": 4,
+          "index": 318
+        },
+        {
+          "id": "option.yAxis.splitLine.lineStyle.shadowColor",
+          "value": 24,
+          "depth": 4,
+          "index": 319
+        },
+        {
+          "id": "option.yAxis.splitLine.lineStyle.shadowBlur",
+          "value": 21,
+          "depth": 4,
+          "index": 320
+        },
+        {
+          "id": "option.yAxis.splitLine.lineStyle.width",
+          "value": 17,
+          "depth": 4,
+          "index": 321
+        },
+        {
+          "id": "option.yAxis.splitLine.lineStyle.type",
+          "value": 37,
+          "depth": 4,
+          "index": 322
+        },
+        {
+          "id": "option.parallel",
+          "value": 3187,
+          "depth": 1,
+          "index": 323
+        },
+        {
+          "id": "option.parallel.layout: 'horizontal'",
+          "value": 32,
+          "depth": 2,
+          "index": 324
+        },
+        {
+          "id": "option.parallel.zlevel",
+          "value": 44,
+          "depth": 2,
+          "index": 325
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault",
+          "value": 41,
+          "depth": 2,
+          "index": 326
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.inverse",
+          "value": 6,
+          "depth": 3,
+          "index": 327
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.axisLabel",
+          "value": 11,
+          "depth": 3,
+          "index": 328
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.axisLabel.show",
+          "value": 4,
+          "depth": 4,
+          "index": 329
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.axisLabel.formatter",
+          "value": 18,
+          "depth": 4,
+          "index": 330
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.axisLabel.rotate",
+          "value": 4,
+          "depth": 4,
+          "index": 331
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.axisLabel.textStyle",
+          "value": 2,
+          "depth": 4,
+          "index": 332
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.axisLabel.textStyle.color",
+          "value": 2,
+          "depth": 5,
+          "index": 333
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.axisLabel.textStyle.fontStyle",
+          "value": 1,
+          "depth": 5,
+          "index": 334
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.axisLabel.inside",
+          "value": 1,
+          "depth": 4,
+          "index": 335
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.axisLabel.margin",
+          "value": 2,
+          "depth": 4,
+          "index": 336
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.nameTextStyle",
+          "value": 5,
+          "depth": 3,
+          "index": 337
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.nameTextStyle.color",
+          "value": 4,
+          "depth": 4,
+          "index": 338
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.nameTextStyle.fontSize",
+          "value": 2,
+          "depth": 4,
+          "index": 339
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.nameTextStyle.fontStyle",
+          "value": 3,
+          "depth": 4,
+          "index": 340
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.nameTextStyle.fontFamily",
+          "value": 3,
+          "depth": 4,
+          "index": 341
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.axisLine",
+          "value": 6,
+          "depth": 3,
+          "index": 342
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.axisLine.show",
+          "value": 3,
+          "depth": 4,
+          "index": 343
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.axisLine.lineStyle",
+          "value": 2,
+          "depth": 4,
+          "index": 344
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.axisLine.lineStyle.color",
+          "value": 2,
+          "depth": 5,
+          "index": 345
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.axisLine.lineStyle.shadowBlur",
+          "value": 1,
+          "depth": 5,
+          "index": 346
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.axisLine.lineStyle.type",
+          "value": 1,
+          "depth": 5,
+          "index": 347
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.nameLocation",
+          "value": 6,
+          "depth": 3,
+          "index": 348
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.data",
+          "value": 10,
+          "depth": 3,
+          "index": 349
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.data.textStyle",
+          "value": 1,
+          "depth": 4,
+          "index": 350
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.data.textStyle.align",
+          "value": 2,
+          "depth": 5,
+          "index": 351
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.data.textStyle.color",
+          "value": 2,
+          "depth": 5,
+          "index": 352
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.data.textStyle.baseline",
+          "value": 1,
+          "depth": 5,
+          "index": 353
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.data.textStyle.fontStyle",
+          "value": 1,
+          "depth": 5,
+          "index": 354
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.data.value",
+          "value": 5,
+          "depth": 4,
+          "index": 355
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.type",
+          "value": 6,
+          "depth": 3,
+          "index": 356
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.name",
+          "value": 5,
+          "depth": 3,
+          "index": 357
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.nameGap",
+          "value": 4,
+          "depth": 3,
+          "index": 358
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.boundaryGap",
+          "value": 6,
+          "depth": 3,
+          "index": 359
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.scale",
+          "value": 5,
+          "depth": 3,
+          "index": 360
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.splitNumber",
+          "value": 3,
+          "depth": 3,
+          "index": 361
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.interval",
+          "value": 7,
+          "depth": 3,
+          "index": 362
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.axisTick",
+          "value": 4,
+          "depth": 3,
+          "index": 363
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.axisTick.length",
+          "value": 3,
+          "depth": 4,
+          "index": 364
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.axisTick.lineStyle",
+          "value": 2,
+          "depth": 4,
+          "index": 365
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.axisTick.lineStyle.color",
+          "value": 2,
+          "depth": 5,
+          "index": 366
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.axisTick.lineStyle.type",
+          "value": 1,
+          "depth": 5,
+          "index": 367
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.axisTick.show",
+          "value": 2,
+          "depth": 4,
+          "index": 368
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.axisTick.interval",
+          "value": 2,
+          "depth": 4,
+          "index": 369
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.axisTick.inside",
+          "value": 2,
+          "depth": 4,
+          "index": 370
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.max",
+          "value": 4,
+          "depth": 3,
+          "index": 371
+        },
+        {
+          "id": "option.parallel.parallelAxisDefault.min",
+          "value": 2,
+          "depth": 3,
+          "index": 372
+        },
+        {
+          "id": "option.parallel.height",
+          "value": 17,
+          "depth": 2,
+          "index": 373
+        },
+        {
+          "id": "option.parallel.width",
+          "value": 13,
+          "depth": 2,
+          "index": 374
+        },
+        {
+          "id": "option.parallel.z",
+          "value": 12,
+          "depth": 2,
+          "index": 375
+        },
+        {
+          "id": "option.parallel.top",
+          "value": 12,
+          "depth": 2,
+          "index": 376
+        },
+        {
+          "id": "option.parallel.left",
+          "value": 12,
+          "depth": 2,
+          "index": 377
+        },
+        {
+          "id": "option.parallel.bottom",
+          "value": 14,
+          "depth": 2,
+          "index": 378
+        },
+        {
+          "id": "option.parallel.right",
+          "value": 10,
+          "depth": 2,
+          "index": 379
+        },
+        {
+          "id": "option.tooltip",
+          "value": 8112,
+          "depth": 1,
+          "index": 380
+        },
+        {
+          "id": "option.tooltip.trigger",
+          "value": 2127,
+          "depth": 2,
+          "index": 381
+        },
+        {
+          "id": "option.tooltip.triggerOn",
+          "value": 1027,
+          "depth": 2,
+          "index": 382
+        },
+        {
+          "id": "option.tooltip.showContent",
+          "value": 1075,
+          "depth": 2,
+          "index": 383
+        },
+        {
+          "id": "option.tooltip.axisPointer",
+          "value": 1098,
+          "depth": 2,
+          "index": 384
+        },
+        {
+          "id": "option.tooltip.axisPointer.type",
+          "value": 355,
+          "depth": 3,
+          "index": 385
+        },
+        {
+          "id": "option.tooltip.axisPointer.lineStyle",
+          "value": 167,
+          "depth": 3,
+          "index": 386
+        },
+        {
+          "id": "option.tooltip.axisPointer.lineStyle.color",
+          "value": 54,
+          "depth": 4,
+          "index": 387
+        },
+        {
+          "id": "option.tooltip.axisPointer.lineStyle.shadowColor",
+          "value": 15,
+          "depth": 4,
+          "index": 388
+        },
+        {
+          "id": "option.tooltip.axisPointer.lineStyle.type",
+          "value": 47,
+          "depth": 4,
+          "index": 389
+        },
+        {
+          "id": "option.tooltip.axisPointer.lineStyle.opacity",
+          "value": 25,
+          "depth": 4,
+          "index": 390
+        },
+        {
+          "id": "option.tooltip.axisPointer.lineStyle.shadowBlur",
+          "value": 29,
+          "depth": 4,
+          "index": 391
+        },
+        {
+          "id": "option.tooltip.axisPointer.lineStyle.width",
+          "value": 27,
+          "depth": 4,
+          "index": 392
+        },
+        {
+          "id": "option.tooltip.axisPointer.lineStyle.shadowOffsetY",
+          "value": 11,
+          "depth": 4,
+          "index": 393
+        },
+        {
+          "id": "option.tooltip.axisPointer.lineStyle.shadowOffsetX",
+          "value": 10,
+          "depth": 4,
+          "index": 394
+        },
+        {
+          "id": "option.tooltip.axisPointer.shadowStyle",
+          "value": 81,
+          "depth": 3,
+          "index": 395
+        },
+        {
+          "id": "option.tooltip.axisPointer.shadowStyle.opacity",
+          "value": 20,
+          "depth": 4,
+          "index": 396
+        },
+        {
+          "id": "option.tooltip.axisPointer.shadowStyle.color",
+          "value": 31,
+          "depth": 4,
+          "index": 397
+        },
+        {
+          "id": "option.tooltip.axisPointer.shadowStyle.shadowBlur",
+          "value": 22,
+          "depth": 4,
+          "index": 398
+        },
+        {
+          "id": "option.tooltip.axisPointer.shadowStyle.shadowColor",
+          "value": 18,
+          "depth": 4,
+          "index": 399
+        },
+        {
+          "id": "option.tooltip.axisPointer.shadowStyle.shadowOffsetY",
+          "value": 13,
+          "depth": 4,
+          "index": 400
+        },
+        {
+          "id": "option.tooltip.axisPointer.shadowStyle.shadowOffsetX",
+          "value": 16,
+          "depth": 4,
+          "index": 401
+        },
+        {
+          "id": "option.tooltip.axisPointer.axis",
+          "value": 266,
+          "depth": 3,
+          "index": 402
+        },
+        {
+          "id": "option.tooltip.axisPointer.animation",
+          "value": 178,
+          "depth": 3,
+          "index": 403
+        },
+        {
+          "id": "option.tooltip.axisPointer.animationDuration",
+          "value": 92,
+          "depth": 3,
+          "index": 404
+        },
+        {
+          "id": "option.tooltip.axisPointer.animationEasing",
+          "value": 82,
+          "depth": 3,
+          "index": 405
+        },
+        {
+          "id": "option.tooltip.axisPointer.animationDurationUpdate",
+          "value": 69,
+          "depth": 3,
+          "index": 406
+        },
+        {
+          "id": "option.tooltip.axisPointer.animationEasingUpdate",
+          "value": 75,
+          "depth": 3,
+          "index": 407
+        },
+        {
+          "id": "option.tooltip.axisPointer.crossStyle",
+          "value": 130,
+          "depth": 3,
+          "index": 408
+        },
+        {
+          "id": "option.tooltip.axisPointer.crossStyle.textStyle",
+          "value": 33,
+          "depth": 4,
+          "index": 409
+        },
+        {
+          "id": "option.tooltip.axisPointer.crossStyle.textStyle.color",
+          "value": 9,
+          "depth": 5,
+          "index": 410
+        },
+        {
+          "id": "option.tooltip.axisPointer.crossStyle.textStyle.fontSize",
+          "value": 4,
+          "depth": 5,
+          "index": 411
+        },
+        {
+          "id": "option.tooltip.axisPointer.crossStyle.textStyle.fontStyle",
+          "value": 10,
+          "depth": 5,
+          "index": 412
+        },
+        {
+          "id": "option.tooltip.axisPointer.crossStyle.textStyle.fontWeight",
+          "value": 8,
+          "depth": 5,
+          "index": 413
+        },
+        {
+          "id": "option.tooltip.axisPointer.crossStyle.textStyle.fontFamily",
+          "value": 9,
+          "depth": 5,
+          "index": 414
+        },
+        {
+          "id": "option.tooltip.axisPointer.crossStyle.shadowOffsetX",
+          "value": 20,
+          "depth": 4,
+          "index": 415
+        },
+        {
+          "id": "option.tooltip.axisPointer.crossStyle.shadowBlur",
+          "value": 21,
+          "depth": 4,
+          "index": 416
+        },
+        {
+          "id": "option.tooltip.axisPointer.crossStyle.opacity",
+          "value": 32,
+          "depth": 4,
+          "index": 417
+        },
+        {
+          "id": "option.tooltip.axisPointer.crossStyle.color",
+          "value": 30,
+          "depth": 4,
+          "index": 418
+        },
+        {
+          "id": "option.tooltip.axisPointer.crossStyle.shadowColor",
+          "value": 18,
+          "depth": 4,
+          "index": 419
+        },
+        {
+          "id": "option.tooltip.axisPointer.crossStyle.width",
+          "value": 21,
+          "depth": 4,
+          "index": 420
+        },
+        {
+          "id": "option.tooltip.axisPointer.crossStyle.type",
+          "value": 34,
+          "depth": 4,
+          "index": 421
+        },
+        {
+          "id": "option.tooltip.axisPointer.crossStyle.shadowOffsetY",
+          "value": 13,
+          "depth": 4,
+          "index": 422
+        },
+        {
+          "id": "option.tooltip.formatter",
+          "value": 2620,
+          "depth": 2,
+          "index": 423
+        },
+        {
+          "id": "option.tooltip.show",
+          "value": 1334,
+          "depth": 2,
+          "index": 424
+        },
+        {
+          "id": "option.tooltip.backgroundColor",
+          "value": 479,
+          "depth": 2,
+          "index": 425
+        },
+        {
+          "id": "option.tooltip.textStyle",
+          "value": 519,
+          "depth": 2,
+          "index": 426
+        },
+        {
+          "id": "option.tooltip.textStyle.color",
+          "value": 94,
+          "depth": 3,
+          "index": 427
+        },
+        {
+          "id": "option.tooltip.textStyle.fontStyle",
+          "value": 68,
+          "depth": 3,
+          "index": 428
+        },
+        {
+          "id": "option.tooltip.textStyle.fontWeight",
+          "value": 52,
+          "depth": 3,
+          "index": 429
+        },
+        {
+          "id": "option.tooltip.textStyle.fontSize",
+          "value": 72,
+          "depth": 3,
+          "index": 430
+        },
+        {
+          "id": "option.tooltip.textStyle.fontFamily",
+          "value": 48,
+          "depth": 3,
+          "index": 431
+        },
+        {
+          "id": "option.tooltip.borderColor",
+          "value": 331,
+          "depth": 2,
+          "index": 432
+        },
+        {
+          "id": "option.tooltip.alwaysShowContent",
+          "value": 760,
+          "depth": 2,
+          "index": 433
+        },
+        {
+          "id": "option.tooltip.hideDelay",
+          "value": 565,
+          "depth": 2,
+          "index": 434
+        },
+        {
+          "id": "option.tooltip.enterable",
+          "value": 586,
+          "depth": 2,
+          "index": 435
+        },
+        {
+          "id": "option.tooltip.position",
+          "value": 956,
+          "depth": 2,
+          "index": 436
+        },
+        {
+          "id": "option.tooltip.transitionDuration",
+          "value": 584,
+          "depth": 2,
+          "index": 437
+        },
+        {
+          "id": "option.tooltip.borderWidth",
+          "value": 303,
+          "depth": 2,
+          "index": 438
+        },
+        {
+          "id": "option.tooltip.padding",
+          "value": 358,
+          "depth": 2,
+          "index": 439
+        },
+        {
+          "id": "option.visualMap",
+          "value": 5807,
+          "depth": 1,
+          "index": 440
+        },
+        {
+          "id": "option.visualMap-continuous",
+          "value": 1010,
+          "depth": 1,
+          "index": 441
+        },
+        {
+          "id": "option.visualMap-continuous.dimension",
+          "value": 250,
+          "depth": 2,
+          "index": 442
+        },
+        {
+          "id": "option.visualMap-continuous.outOfRange",
+          "value": 230,
+          "depth": 2,
+          "index": 443
+        },
+        {
+          "id": "option.visualMap-continuous.inRange",
+          "value": 503,
+          "depth": 2,
+          "index": 444
+        },
+        {
+          "id": "option.visualMap-continuous.type",
+          "value": 496,
+          "depth": 2,
+          "index": 445
+        },
+        {
+          "id": "option.visualMap-continuous.min",
+          "value": 234,
+          "depth": 2,
+          "index": 446
+        },
+        {
+          "id": "option.visualMap-continuous.max",
+          "value": 157,
+          "depth": 2,
+          "index": 447
+        },
+        {
+          "id": "option.visualMap-continuous.calculable",
+          "value": 572,
+          "depth": 2,
+          "index": 448
+        },
+        {
+          "id": "option.visualMap-continuous.realtime",
+          "value": 185,
+          "depth": 2,
+          "index": 449
+        },
+        {
+          "id": "option.visualMap-continuous.inverse",
+          "value": 207,
+          "depth": 2,
+          "index": 450
+        },
+        {
+          "id": "option.visualMap-continuous.precision",
+          "value": 181,
+          "depth": 2,
+          "index": 451
+        },
+        {
+          "id": "option.visualMap-continuous.itemWidth",
+          "value": 151,
+          "depth": 2,
+          "index": 452
+        },
+        {
+          "id": "option.visualMap-continuous.itemHeight",
+          "value": 112,
+          "depth": 2,
+          "index": 453
+        },
+        {
+          "id": "option.visualMap-continuous.align: 'auto'",
+          "value": 121,
+          "depth": 2,
+          "index": 454
+        },
+        {
+          "id": "option.visualMap-continuous.text",
+          "value": 119,
+          "depth": 2,
+          "index": 455
+        },
+        {
+          "id": "option.visualMap-continuous.textGap",
+          "value": 116,
+          "depth": 2,
+          "index": 456
+        },
+        {
+          "id": "option.visualMap-continuous.handlePosition",
+          "value": 148,
+          "depth": 2,
+          "index": 457
+        },
+        {
+          "id": "option.visualMap-continuous.show",
+          "value": 124,
+          "depth": 2,
+          "index": 458
+        },
+        {
+          "id": "option.visualMap-continuous.seriesIndex",
+          "value": 290,
+          "depth": 2,
+          "index": 459
+        },
+        {
+          "id": "option.visualMap-continuous.zlevel",
+          "value": 86,
+          "depth": 2,
+          "index": 460
+        },
+        {
+          "id": "option.visualMap-continuous.z",
+          "value": 59,
+          "depth": 2,
+          "index": 461
+        },
+        {
+          "id": "option.visualMap-continuous.left",
+          "value": 116,
+          "depth": 2,
+          "index": 462
+        },
+        {
+          "id": "option.visualMap-continuous.top",
+          "value": 69,
+          "depth": 2,
+          "index": 463
+        },
+        {
+          "id": "option.visualMap-continuous.right",
+          "value": 54,
+          "depth": 2,
+          "index": 464
+        },
+        {
+          "id": "option.visualMap-continuous.bottom",
+          "value": 57,
+          "depth": 2,
+          "index": 465
+        },
+        {
+          "id": "option.visualMap-continuous.orient",
+          "value": 122,
+          "depth": 2,
+          "index": 466
+        },
+        {
+          "id": "option.visualMap-continuous.color",
+          "value": 235,
+          "depth": 2,
+          "index": 467
+        },
+        {
+          "id": "option.visualMap-continuous.formatter",
+          "value": 171,
+          "depth": 2,
+          "index": 468
+        },
+        {
+          "id": "option.visualMap-continuous.padding",
+          "value": 71,
+          "depth": 2,
+          "index": 469
+        },
+        {
+          "id": "option.visualMap-continuous.textStyle",
+          "value": 88,
+          "depth": 2,
+          "index": 470
+        },
+        {
+          "id": "option.visualMap-continuous.textStyle.color",
+          "value": 17,
+          "depth": 3,
+          "index": 471
+        },
+        {
+          "id": "option.visualMap-continuous.textStyle.fontStyle",
+          "value": 6,
+          "depth": 3,
+          "index": 472
+        },
+        {
+          "id": "option.visualMap-continuous.textStyle.fontWeight",
+          "value": 5,
+          "depth": 3,
+          "index": 473
+        },
+        {
+          "id": "option.visualMap-continuous.textStyle.fontFamily",
+          "value": 5,
+          "depth": 3,
+          "index": 474
+        },
+        {
+          "id": "option.visualMap-continuous.textStyle.fontSize",
+          "value": 5,
+          "depth": 3,
+          "index": 475
+        },
+        {
+          "id": "option.visualMap-continuous.backgroundColor",
+          "value": 102,
+          "depth": 2,
+          "index": 476
+        },
+        {
+          "id": "option.visualMap-continuous.borderColor",
+          "value": 60,
+          "depth": 2,
+          "index": 477
+        },
+        {
+          "id": "option.visualMap-continuous.borderWidth",
+          "value": 56,
+          "depth": 2,
+          "index": 478
+        },
+        {
+          "id": "option.visualMap-piecewise",
+          "value": 755,
+          "depth": 1,
+          "index": 479
+        },
+        {
+          "id": "option.visualMap-piecewise.align: 'auto'",
+          "value": 46,
+          "depth": 2,
+          "index": 480
+        },
+        {
+          "id": "option.visualMap-piecewise.itemSymbol",
+          "value": 183,
+          "depth": 2,
+          "index": 481
+        },
+        {
+          "id": "option.visualMap-piecewise.itemGap = 10",
+          "value": 48,
+          "depth": 2,
+          "index": 482
+        },
+        {
+          "id": "option.visualMap-piecewise.pieces",
+          "value": 274,
+          "depth": 2,
+          "index": 483
+        },
+        {
+          "id": "option.visualMap-piecewise.splitNumber",
+          "value": 216,
+          "depth": 2,
+          "index": 484
+        },
+        {
+          "id": "option.visualMap-piecewise.type",
+          "value": 317,
+          "depth": 2,
+          "index": 485
+        },
+        {
+          "id": "option.visualMap-piecewise.inRange",
+          "value": 154,
+          "depth": 2,
+          "index": 486
+        },
+        {
+          "id": "option.visualMap-piecewise.dimension",
+          "value": 80,
+          "depth": 2,
+          "index": 487
+        },
+        {
+          "id": "option.visualMap-piecewise.categories",
+          "value": 260,
+          "depth": 2,
+          "index": 488
+        },
+        {
+          "id": "option.visualMap-piecewise.seriesIndex",
+          "value": 64,
+          "depth": 2,
+          "index": 489
+        },
+        {
+          "id": "option.visualMap-piecewise.color",
+          "value": 81,
+          "depth": 2,
+          "index": 490
+        },
+        {
+          "id": "option.visualMap-piecewise.precision",
+          "value": 72,
+          "depth": 2,
+          "index": 491
+        },
+        {
+          "id": "option.visualMap-piecewise.formatter",
+          "value": 86,
+          "depth": 2,
+          "index": 492
+        },
+        {
+          "id": "option.visualMap-piecewise.textStyle",
+          "value": 39,
+          "depth": 2,
+          "index": 493
+        },
+        {
+          "id": "option.visualMap-piecewise.textStyle.color",
+          "value": 13,
+          "depth": 3,
+          "index": 494
+        },
+        {
+          "id": "option.visualMap-piecewise.textStyle.fontStyle",
+          "value": 8,
+          "depth": 3,
+          "index": 495
+        },
+        {
+          "id": "option.visualMap-piecewise.textStyle.fontWeight",
+          "value": 8,
+          "depth": 3,
+          "index": 496
+        },
+        {
+          "id": "option.visualMap-piecewise.textStyle.fontFamily",
+          "value": 7,
+          "depth": 3,
+          "index": 497
+        },
+        {
+          "id": "option.visualMap-piecewise.textStyle.fontSize",
+          "value": 9,
+          "depth": 3,
+          "index": 498
+        },
+        {
+          "id": "option.visualMap-piecewise.outOfRange",
+          "value": 66,
+          "depth": 2,
+          "index": 499
+        },
+        {
+          "id": "option.visualMap-piecewise.itemWidth",
+          "value": 51,
+          "depth": 2,
+          "index": 500
+        },
+        {
+          "id": "option.visualMap-piecewise.inverse",
+          "value": 50,
+          "depth": 2,
+          "index": 501
+        },
+        {
+          "id": "option.visualMap-piecewise.selectedMode",
+          "value": 120,
+          "depth": 2,
+          "index": 502
+        },
+        {
+          "id": "option.visualMap-piecewise.min",
+          "value": 69,
+          "depth": 2,
+          "index": 503
+        },
+        {
+          "id": "option.visualMap-piecewise.backgroundColor",
+          "value": 26,
+          "depth": 2,
+          "index": 504
+        },
+        {
+          "id": "option.visualMap-piecewise.left",
+          "value": 23,
+          "depth": 2,
+          "index": 505
+        },
+        {
+          "id": "option.visualMap-piecewise.itemHeight",
+          "value": 41,
+          "depth": 2,
+          "index": 506
+        },
+        {
+          "id": "option.visualMap-piecewise.max",
+          "value": 43,
+          "depth": 2,
+          "index": 507
+        },
+        {
+          "id": "option.visualMap-piecewise.text",
+          "value": 39,
+          "depth": 2,
+          "index": 508
+        },
+        {
+          "id": "option.visualMap-piecewise.textGap",
+          "value": 40,
+          "depth": 2,
+          "index": 509
+        },
+        {
+          "id": "option.visualMap-piecewise.show",
+          "value": 46,
+          "depth": 2,
+          "index": 510
+        },
+        {
+          "id": "option.visualMap-piecewise.zlevel",
+          "value": 24,
+          "depth": 2,
+          "index": 511
+        },
+        {
+          "id": "option.visualMap-piecewise.z",
+          "value": 13,
+          "depth": 2,
+          "index": 512
+        },
+        {
+          "id": "option.visualMap-piecewise.top",
+          "value": 18,
+          "depth": 2,
+          "index": 513
+        },
+        {
+          "id": "option.visualMap-piecewise.right",
+          "value": 18,
+          "depth": 2,
+          "index": 514
+        },
+        {
+          "id": "option.visualMap-piecewise.bottom",
+          "value": 12,
+          "depth": 2,
+          "index": 515
+        },
+        {
+          "id": "option.visualMap-piecewise.orient",
+          "value": 26,
+          "depth": 2,
+          "index": 516
+        },
+        {
+          "id": "option.visualMap-piecewise.padding",
+          "value": 21,
+          "depth": 2,
+          "index": 517
+        },
+        {
+          "id": "option.visualMap-piecewise.borderColor",
+          "value": 15,
+          "depth": 2,
+          "index": 518
+        },
+        {
+          "id": "option.visualMap-piecewise.borderWidth",
+          "value": 16,
+          "depth": 2,
+          "index": 519
+        },
+        {
+          "id": "option.toolbox",
+          "value": 5744,
+          "depth": 1,
+          "index": 520
+        },
+        {
+          "id": "option.toolbox.feature",
+          "value": 849,
+          "depth": 2,
+          "index": 521
+        },
+        {
+          "id": "option.toolbox.feature.dataView",
+          "value": 561,
+          "depth": 3,
+          "index": 522
+        },
+        {
+          "id": "option.toolbox.feature.dataView.textareaColor = '#fff'",
+          "value": 39,
+          "depth": 4,
+          "index": 523
+        },
+        {
+          "id": "option.toolbox.feature.dataView.iconStyle",
+          "value": 78,
+          "depth": 4,
+          "index": 524
+        },
+        {
+          "id": "option.toolbox.feature.dataView.iconStyle.normal",
+          "value": 33,
+          "depth": 5,
+          "index": 525
+        },
+        {
+          "id": "option.toolbox.feature.dataView.iconStyle.normal.color",
+          "value": 9,
+          "depth": 6,
+          "index": 526
+        }
+      ],
+      "seriesLayoutBy": "column"
+    }
+  ],
+  "bmap": [],
+  "timeline": [],
+  "title": [],
+  "toolbox": [],
+  "graphic": [],
+  "calendar": [],
+  "geo": [],
+  "radiusAxis": [],
+  "angleAxis": [],
+  "polar": [],
+  "axisPointer": [
+    {
+      "lineStyle": {
+        "color": "#817f91",
+        "width": 1,
+        "type": "dashed"
+      },
+      "crossStyle": {
+        "color": "#817f91"
+      },
+      "label": {
+        "color": "#fff",
+        "show": true,
+        "formatter": null,
+        "precision": "auto",
+        "margin": 3,
+        "padding": [
+          5,
+          7,
+          5,
+          7
+        ],
+        "backgroundColor": "auto",
+        "borderColor": null,
+        "borderWidth": 0,
+        "borderRadius": 3
+      },
+      "show": "auto",
+      "zlevel": 0,
+      "z": 50,
+      "type": "line",
+      "snap": false,
+      "triggerTooltip": true,
+      "value": null,
+      "status": null,
+      "link": [],
+      "animation": null,
+      "animationDurationUpdate": 200,
+      "shadowStyle": {
+        "color": "rgba(210,219,238,0.2)"
+      },
+      "handle": {
+        "show": false,
+        "icon": "M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7v-1.2h6.6z M13.3,22H6.7v-1.2h6.6z M13.3,19.6H6.7v-1.2h6.6z",
+        "size": 45,
+        "margin": 50,
+        "color": "#333",
+        "shadowBlur": 3,
+        "shadowColor": "#aaa",
+        "shadowOffsetX": 0,
+        "shadowOffsetY": 2,
+        "throttle": 40
+      }
+    }
+  ],
+  "tooltip": [
+    {
+      "zlevel": 0,
+      "z": 60,
+      "show": true,
+      "showContent": true,
+      "trigger": "item",
+      "triggerOn": "mousemove|click",
+      "alwaysShowContent": false,
+      "displayMode": "single",
+      "renderMode": "auto",
+      "confine": null,
+      "showDelay": 0,
+      "hideDelay": 100,
+      "transitionDuration": 0.4,
+      "enterable": false,
+      "backgroundColor": "#fff",
+      "shadowBlur": 10,
+      "shadowColor": "rgba(0, 0, 0, .2)",
+      "shadowOffsetX": 1,
+      "shadowOffsetY": 2,
+      "borderColor": "#333",
+      "borderRadius": 4,
+      "borderWidth": 1,
+      "padding": null,
+      "extraCssText": "",
+      "axisPointer": {
+        "type": "line",
+        "axis": "auto",
+        "animation": "auto",
+        "animationDurationUpdate": 200,
+        "animationEasingUpdate": "exponentialOut",
+        "crossStyle": {
+          "color": "#999",
+          "width": 1,
+          "type": "dashed",
+          "textStyle": {}
+        }
+      },
+      "textStyle": {
+        "color": "#666",
+        "fontSize": 14
+      }
+    }
+  ],
+  "singleAxis": [],
+  "parallelAxis": [],
+  "parallel": [],
+  "component": [],
+  "radar": [],
+  "yAxis": [],
+  "xAxis": [],
+  "grid": [],
+  "series": [
+    {
+      "type": "custom",
+      "renderItem": {},
+      "progressive": 100000,
+      "coordinateSystem": "none",
+      "encode": {
+        "tooltip": "value",
+        "itemName": "id"
+      },
+      "animation": false,
+      "zlevel": 0,
+      "z": 2,
+      "legendHoverLink": true,
+      "clip": false,
+      "label": {},
+      "emphasis": {
+        "label": {}
+      }
+    }
+  ],
+  "visualMap": [
+    {
+      "show": false,
+      "min": 0,
+      "max": 6,
+      "dimension": "depth",
+      "inRange": {
+        "color": [
+          "#006edd",
+          "#e0ffff"
+        ]
+      },
+      "textStyle": {
+        "color": "#B9B8CE"
+      },
+      "zlevel": 0,
+      "z": 4,
+      "seriesIndex": "all",
+      "left": 0,
+      "right": null,
+      "top": null,
+      "bottom": 0,
+      "itemWidth": null,
+      "itemHeight": null,
+      "inverse": false,
+      "orient": "vertical",
+      "backgroundColor": "rgba(0,0,0,0)",
+      "borderColor": "#ccc",
+      "contentColor": "#5793f3",
+      "inactiveColor": "#aaa",
+      "borderWidth": 0,
+      "padding": 5,
+      "textGap": 10,
+      "precision": 0,
+      "align": "auto",
+      "calculable": false,
+      "hoverLink": true,
+      "realtime": true,
+      "handleIcon": "path://M-11.39,9.77h0a3.5,3.5,0,0,1-3.5,3.5h-22a3.5,3.5,0,0,1-3.5-3.5h0a3.5,3.5,0,0,1,3.5-3.5h22A3.5,3.5,0,0,1-11.39,9.77Z",
+      "handleSize": "120%",
+      "handleStyle": {
+        "borderColor": "#fff",
+        "borderWidth": 1
+      },
+      "indicatorIcon": "circle",
+      "indicatorSize": "50%",
+      "indicatorStyle": {
+        "borderColor": "#fff",
+        "borderWidth": 2,
+        "shadowBlur": 2,
+        "shadowOffsetX": 1,
+        "shadowOffsetY": 1,
+        "shadowColor": "rgba(0,0,0,0.2)"
+      },
+      "target": {
+        "inRange": {
+          "color": [
+            "#006edd",
+            "#e0ffff"
+          ]
+        },
+        "outOfRange": {
+          "color": [
+            "rgba(0,0,0,0)"
+          ],
+          "opacity": [
+            0,
+            0
+          ]
+        }
+      },
+      "controller": {
+        "inRange": {
+          "color": [
+            "#006edd",
+            "#e0ffff"
+          ],
+          "symbol": [
+            "roundRect"
+          ],
+          "symbolSize": [
+            20,
+            20
+          ]
+        },
+        "outOfRange": {
+          "color": [
+            "#aaa"
+          ],
+          "symbol": [
+            "roundRect"
+          ],
+          "symbolSize": [
+            20,
+            20
+          ]
+        }
+      },
+      "range": [
+        0,
+        6
+      ]
+    }
+  ],
+  "legend": [],
+  "markArea": [
+    {
+      "zlevel": 0,
+      "z": 1,
+      "tooltip": {
+        "trigger": "item"
+      },
+      "animation": false,
+      "label": {
+        "show": true,
+        "position": "top"
+      },
+      "itemStyle": {
+        "borderWidth": 0
+      },
+      "emphasis": {
+        "label": {
+          "show": true,
+          "position": "top"
+        }
+      }
+    }
+  ],
+  "markLine": [
+    {
+      "zlevel": 0,
+      "z": 5,
+      "symbol": [
+        "circle",
+        "arrow"
+      ],
+      "symbolSize": [
+        8,
+        16
+      ],
+      "precision": 2,
+      "tooltip": {
+        "trigger": "item"
+      },
+      "label": {
+        "show": true,
+        "position": "end",
+        "distance": 5
+      },
+      "lineStyle": {
+        "type": "dashed"
+      },
+      "emphasis": {
+        "label": {
+          "show": true
+        },
+        "lineStyle": {
+          "width": 3
+        }
+      },
+      "animationEasing": "linear"
+    }
+  ],
+  "markPoint": [
+    {
+      "zlevel": 0,
+      "z": 5,
+      "symbol": "pin",
+      "symbolSize": 50,
+      "tooltip": {
+        "trigger": "item"
+      },
+      "label": {
+        "show": true,
+        "position": "inside"
+      },
+      "itemStyle": {
+        "borderWidth": 2
+      },
+      "emphasis": {
+        "label": {
+          "show": true
+        }
+      }
+    }
+  ],
+  "brush": [],
+  "dataZoom": []
+}

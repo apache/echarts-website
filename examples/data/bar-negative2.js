@@ -1,3 +1,10 @@
+/*
+title: Bar Chart with Negative Value
+titleCN: 交错正负轴标签
+category: bar
+difficulty: 2
+*/
+
 var labelRight = {
     position: 'right'
 };

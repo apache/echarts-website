@@ -1,3 +1,12 @@
+/*
+title: GraphGL - Large Internet
+category: graphGL
+theme: dark
+titleCN: GraphGL - Large Internet
+shotDelay: 10000
+shotWidth: 1920
+*/
+
 
 $.getJSON(ROOT_PATH + '/data-gl/asset/data/internet.graph.json', function (graph) {
     var edges = graph.edges.map(function (edge) {

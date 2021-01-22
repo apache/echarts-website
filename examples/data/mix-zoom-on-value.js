@@ -1,3 +1,10 @@
+/*
+title: Mix Zoom On Value
+category: bar
+titleCN: 多数值轴轴缩放
+difficulty: 4
+*/
+
 myChart.showLoading();
 
 $.get(ROOT_PATH + '/data/asset/data/obama_budget_proposal_2012.list.json', function (obama_budget_2012) {

@@ -1,3 +1,10 @@
+/*
+title: Tooltip and DataZoom on Mobile
+category: 'line, dataZoom'
+titleCN: 移动端上的 dataZoom 和 tooltip
+difficulty: 10
+*/
+
 var base = +new Date(2016, 9, 3);
 var oneDay = 24 * 3600 * 1000;
 var valueBase = Math.random() * 300;
@@ -19,7 +26,6 @@ for (var i = 1; i < 10; i++) {
 }
 
 option = {
-    animation: false,
     title: {
         left: 'center',
         text: '触屏 tooltip 和 dataZoom 示例',
@@ -53,8 +59,7 @@ option = {
             value: '2016-10-7',
             snap: true,
             lineStyle: {
-                color: '#004E52',
-                opacity: 0.5,
+                color: '#7581BD',
                 width: 2
             },
             label: {
@@ -62,11 +67,11 @@ option = {
                 formatter: function (params) {
                     return echarts.format.formatTime('yyyy-MM-dd', params.value);
                 },
-                backgroundColor: '#004E52'
+                backgroundColor: '#7581BD'
             },
             handle: {
                 show: true,
-                color: '#004E52'
+                color: '#7581BD'
             }
         },
         splitLine: {
@@ -106,16 +111,16 @@ option = {
             symbolSize: 5,
             sampling: 'average',
             itemStyle: {
-                color: '#8ec6ad'
+                color: '#0770FF'
             },
             stack: 'a',
             areaStyle: {
                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                     offset: 0,
-                    color: '#8ec6ad'
+                    color: 'rgba(58,77,233,0.8)'
                 }, {
                     offset: 1,
-                    color: '#ffe'
+                    color: 'rgba(58,77,233,0.3)'
                 }])
             },
             data: data
@@ -129,19 +134,18 @@ option = {
             symbolSize: 5,
             sampling: 'average',
             itemStyle: {
-                color: '#d68262'
+                color: '#F2597F'
             },
             areaStyle: {
                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                     offset: 0,
-                    color: '#d68262'
+                    color: 'rgba(213,72,120,0.8)'
                 }, {
                     offset: 1,
-                    color: '#ffe'
+                    color: 'rgba(213,72,120,0.3)'
                 }])
             },
             data: data2
         }
-
     ]
 };

@@ -1,3 +1,9 @@
+/*
+title: Disk Usage
+category: treemap
+titleCN: 磁盘占用
+*/
+
 myChart.showLoading();
 
 $.get(ROOT_PATH + '/data/asset/data/disk.tree.json', function (diskData) {

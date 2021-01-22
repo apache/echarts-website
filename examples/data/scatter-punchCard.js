@@ -1,3 +1,10 @@
+/*
+title: Punch Card of Github
+category: scatter
+titleCN: GitHub 打卡气泡图
+difficulty: 3
+*/
+
 
 var hours = ['12a', '1a', '2a', '3a', '4a', '5a', '6a',
         '7a', '8a', '9a','10a','11a',
@@ -13,8 +20,7 @@ data = data.map(function (item) {
 
 option = {
     title: {
-        text: 'Punch Card of Github',
-        link: 'https://github.com/pissang/echarts-next/graphs/punch-card'
+        text: 'Punch Card of Github'
     },
     legend: {
         data: ['Punch Card'],
@@ -37,11 +43,7 @@ option = {
         data: hours,
         boundaryGap: false,
         splitLine: {
-            show: true,
-            lineStyle: {
-                color: '#999',
-                type: 'dashed'
-            }
+            show: true
         },
         axisLine: {
             show: false

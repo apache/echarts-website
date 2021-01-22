@@ -1,3 +1,9 @@
+/*
+title: Buildings
+category: map3D
+titleCN: Buildings
+*/
+
 
 $.getJSON(ROOT_PATH + '/data-gl/asset/data/buildings.json', function (buildingsGeoJSON) {
 
@@ -87,9 +93,7 @@ $.getJSON(ROOT_PATH + '/data-gl/asset/data/buildings.json', function (buildingsG
             },
 
             label: {
-                textStyle: {
-                    color: 'white'
-                }
+                color: 'white'
             },
 
             silent: true,

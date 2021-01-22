@@ -1,0 +1,1512 @@
+{
+  "backgroundColor": "#cdcfd5",
+  "animation": false,
+  "darkMode": true,
+  "color": [
+    "#4992ff",
+    "#7cffb2",
+    "#fddd60",
+    "#ff6e76",
+    "#58d9f9",
+    "#05c091",
+    "#ff8a45",
+    "#8d48e3",
+    "#dd79ff"
+  ],
+  "textStyle": {
+    "color": "#B9B8CE",
+    "fontFamily": "sans-serif",
+    "fontSize": 12,
+    "fontStyle": "normal",
+    "fontWeight": "normal"
+  },
+  "timeAxis": {
+    "axisLine": {
+      "lineStyle": {
+        "color": "#B9B8CE"
+      }
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#484753"
+      }
+    },
+    "splitArea": {
+      "areaStyle": {
+        "color": [
+          "rgba(255,255,255,0.02)",
+          "rgba(255,255,255,0.05)"
+        ]
+      }
+    },
+    "minorSplitLine": {
+      "lineStyle": {
+        "color": "#20203B"
+      }
+    }
+  },
+  "logAxis": {
+    "axisLine": {
+      "lineStyle": {
+        "color": "#B9B8CE"
+      }
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#484753"
+      }
+    },
+    "splitArea": {
+      "areaStyle": {
+        "color": [
+          "rgba(255,255,255,0.02)",
+          "rgba(255,255,255,0.05)"
+        ]
+      }
+    },
+    "minorSplitLine": {
+      "lineStyle": {
+        "color": "#20203B"
+      }
+    }
+  },
+  "valueAxis": {
+    "axisLine": {
+      "lineStyle": {
+        "color": "#B9B8CE"
+      }
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#484753"
+      }
+    },
+    "splitArea": {
+      "areaStyle": {
+        "color": [
+          "rgba(255,255,255,0.02)",
+          "rgba(255,255,255,0.05)"
+        ]
+      }
+    },
+    "minorSplitLine": {
+      "lineStyle": {
+        "color": "#20203B"
+      }
+    }
+  },
+  "categoryAxis": {
+    "axisLine": {
+      "lineStyle": {
+        "color": "#B9B8CE"
+      }
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#484753"
+      },
+      "show": false
+    },
+    "splitArea": {
+      "areaStyle": {
+        "color": [
+          "rgba(255,255,255,0.02)",
+          "rgba(255,255,255,0.05)"
+        ]
+      }
+    },
+    "minorSplitLine": {
+      "lineStyle": {
+        "color": "#20203B"
+      }
+    }
+  },
+  "line": {
+    "symbol": "circle"
+  },
+  "graph": {
+    "color": [
+      "#4992ff",
+      "#7cffb2",
+      "#fddd60",
+      "#ff6e76",
+      "#58d9f9",
+      "#05c091",
+      "#ff8a45",
+      "#8d48e3",
+      "#dd79ff"
+    ]
+  },
+  "gauge": {
+    "title": {
+      "color": "#B9B8CE"
+    },
+    "axisLine": {
+      "lineStyle": {
+        "color": [
+          [
+            1,
+            "rgba(207,212,219,0.2)"
+          ]
+        ]
+      }
+    },
+    "axisLabel": {
+      "color": "#B9B8CE"
+    },
+    "detail": {
+      "color": "#EEF1FA"
+    }
+  },
+  "candlestick": {
+    "itemStyle": {
+      "color": "#f64e56",
+      "color0": "#54ea92",
+      "borderColor": "#f64e56",
+      "borderColor0": "#54ea92"
+    }
+  },
+  "gradientColor": [
+    "#f6efa6",
+    "#d88273",
+    "#bf444c"
+  ],
+  "aria": {
+    "decal": {
+      "decals": [
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "dashArrayX": [
+            1,
+            0
+          ],
+          "dashArrayY": [
+            2,
+            5
+          ],
+          "symbolSize": 1,
+          "rotation": 0.5235987755982988
+        },
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "symbol": "circle",
+          "dashArrayX": [
+            [
+              8,
+              8
+            ],
+            [
+              0,
+              8,
+              8,
+              0
+            ]
+          ],
+          "dashArrayY": [
+            6,
+            0
+          ],
+          "symbolSize": 0.8
+        },
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "dashArrayX": [
+            1,
+            0
+          ],
+          "dashArrayY": [
+            4,
+            3
+          ],
+          "rotation": -0.7853981633974483
+        },
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "dashArrayX": [
+            [
+              6,
+              6
+            ],
+            [
+              0,
+              6,
+              6,
+              0
+            ]
+          ],
+          "dashArrayY": [
+            6,
+            0
+          ]
+        },
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "dashArrayX": [
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              6
+            ]
+          ],
+          "dashArrayY": [
+            1,
+            0,
+            6,
+            0
+          ],
+          "rotation": 0.7853981633974483
+        },
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "symbol": "triangle",
+          "dashArrayX": [
+            [
+              9,
+              9
+            ],
+            [
+              0,
+              9,
+              9,
+              0
+            ]
+          ],
+          "dashArrayY": [
+            7,
+            2
+          ],
+          "symbolSize": 0.75
+        }
+      ]
+    }
+  },
+  "stateAnimation": {
+    "duration": 300,
+    "easing": "cubicOut"
+  },
+  "animationDuration": 1000,
+  "animationDurationUpdate": 500,
+  "animationEasing": "cubicInOut",
+  "animationEasingUpdate": "cubicInOut",
+  "animationThreshold": 2000,
+  "progressiveThreshold": 3000,
+  "progressive": 400,
+  "hoverLayerThreshold": 3000,
+  "useUTC": false,
+  "geo3D": [
+    {
+      "map": "world",
+      "shading": "lambert",
+      "lambertMaterial": {
+        "detailTexture": "http://localhost:3323/public/data-gl/asset/woods.jpg",
+        "textureTiling": 20,
+        "textureOffset": 0
+      },
+      "postEffect": {
+        "enable": true,
+        "SSAO": {
+          "enable": true,
+          "radius": 3,
+          "quality": "high"
+        },
+        "bloom": {
+          "enable": true,
+          "intensity": 0.1
+        },
+        "depthOfField": {
+          "enable": false,
+          "focalRange": 20,
+          "focalDistance": 50,
+          "blurRadius": 10,
+          "fstop": 2.8,
+          "quality": "medium"
+        },
+        "screenSpaceAmbientOcclusion": {
+          "enable": false,
+          "radius": 2,
+          "quality": "medium",
+          "intensity": 1
+        },
+        "screenSpaceReflection": {
+          "enable": false,
+          "quality": "medium",
+          "maxRoughness": 0.8
+        },
+        "colorCorrection": {
+          "enable": true,
+          "exposure": 0,
+          "brightness": 0,
+          "contrast": 1,
+          "saturation": 1,
+          "lookupTexture": ""
+        },
+        "edge": {
+          "enable": false
+        },
+        "FXAA": {
+          "enable": false
+        }
+      },
+      "groundPlane": {
+        "show": true,
+        "color": "#aaa"
+      },
+      "light": {
+        "main": {
+          "intensity": 1,
+          "shadow": true,
+          "shadowQuality": "high",
+          "alpha": 30,
+          "beta": 30,
+          "color": "#fff"
+        },
+        "ambient": {
+          "intensity": 0,
+          "color": "#fff"
+        },
+        "ambientCubemap": {
+          "texture": "http://localhost:3323/public/data-gl/asset/canyon.hdr",
+          "exposure": 2,
+          "diffuseIntensity": 0.3,
+          "specularIntensity": 0.5
+        }
+      },
+      "viewControl": {
+        "distance": 50,
+        "alpha": 40,
+        "beta": 0,
+        "orthographicSize": 60,
+        "minAlpha": 5,
+        "minBeta": -80,
+        "maxBeta": 80,
+        "projection": "perspective",
+        "autoRotate": false,
+        "autoRotateDirection": "cw",
+        "autoRotateSpeed": 10,
+        "autoRotateAfterStill": 3,
+        "damping": 0.8,
+        "rotateSensitivity": 1,
+        "zoomSensitivity": 1,
+        "panSensitivity": 1,
+        "panMouseButton": "middle",
+        "rotateMouseButton": "left",
+        "minDistance": 40,
+        "maxDistance": 400,
+        "maxOrthographicSize": 400,
+        "minOrthographicSize": 20,
+        "center": [
+          0,
+          0,
+          0
+        ],
+        "maxAlpha": 90
+      },
+      "regionHeight": 0.5,
+      "regions": [
+        {
+          "name": "Afghanistan",
+          "height": 2.155220830944212
+        },
+        {
+          "name": "Angola",
+          "height": 2.073690306072152
+        },
+        {
+          "name": "Albania",
+          "height": 1.6750832300777274
+        },
+        {
+          "name": "United Arab Emirates",
+          "height": 1.8903214287619723
+        },
+        {
+          "name": "Argentina",
+          "height": 2.232056206472748
+        },
+        {
+          "name": "Armenia",
+          "height": 1.6617463728597972
+        },
+        {
+          "name": "French Southern and Antarctic Lands",
+          "height": 1.1370571145427835
+        },
+        {
+          "name": "Australia",
+          "height": 2.1034591070209676
+        },
+        {
+          "name": "Austria",
+          "height": 1.8892943482369544
+        },
+        {
+          "name": "Azerbaijan",
+          "height": 1.9065954526839746
+        },
+        {
+          "name": "Burundi",
+          "height": 1.9098846671046514
+        },
+        {
+          "name": "Belgium",
+          "height": 1.9469586992690013
+        },
+        {
+          "name": "Benin",
+          "height": 1.9163404741860095
+        },
+        {
+          "name": "Burkina Faso",
+          "height": 2.023578476744538
+        },
+        {
+          "name": "Bangladesh",
+          "height": 2.520269855421176
+        },
+        {
+          "name": "Bulgaria",
+          "height": 1.8612475512282756
+        },
+        {
+          "name": "The Bahamas",
+          "height": 2.3406976750359267
+        },
+        {
+          "name": "Bosnia and Herzegovina",
+          "height": 1.7186601733298907
+        },
+        {
+          "name": "Belarus",
+          "height": 1.915910031437837
+        },
+        {
+          "name": "Belize",
+          "height": 1.1678018473297584
+        },
+        {
+          "name": "Bermuda",
+          "height": 0.8275148999289265
+        },
+        {
+          "name": "Bolivia",
+          "height": 1.3518683638555766
+        },
+        {
+          "name": "Brazil",
+          "height": 2.576161898708792
+        },
+        {
+          "name": "Brunei",
+          "height": 0.6376379203135458
+        },
+        {
+          "name": "Bhutan",
+          "height": 1.3518683638555766
+        },
+        {
+          "name": "Botswana",
+          "height": 1.572510231343379
+        },
+        {
+          "name": "Central African Republic",
+          "height": 1.7455492108878512
+        },
+        {
+          "name": "Canada",
+          "height": 2.1953449267696845
+        },
+        {
+          "name": "Switzerland",
+          "height": 1.8739154538963856
+        },
+        {
+          "name": "Chile",
+          "height": 2.0451099854177057
+        },
+        {
+          "name": "China",
+          "height": 3
+        },
+        {
+          "name": "Ivory Coast",
+          "height": 2.320403526697615
+        },
+        {
+          "name": "Cameroon",
+          "height": 2.0853814940656816
+        },
+        {
+          "name": "Democratic Republic of the Congo",
+          "height": 2.3263911254844327
+        },
+        {
+          "name": "Republic of the Congo",
+          "height": 1.7025884603563672
+        },
+        {
+          "name": "Colombia",
+          "height": 2.2626421187317245
+        },
+        {
+          "name": "Costa Rica",
+          "height": 1.7610381382574107
+        },
+        {
+          "name": "Cuba",
+          "height": 1.9536501318305732
+        },
+        {
+          "name": "Northern Cyprus",
+          "height": 0
+        },
+        {
+          "name": "Cyprus",
+          "height": 1.4460717833733672
+        },
+        {
+          "name": "Czech Republic",
+          "height": 1.9390832317503655
+        },
+        {
+          "name": "Germany",
+          "height": 2.3894608174510896
+        },
+        {
+          "name": "Djibouti",
+          "height": 1.3849026924612116
+        },
+        {
+          "name": "Denmark",
+          "height": 1.7987875129726572
+        },
+        {
+          "name": "Dominican Republic",
+          "height": 1.9276821048854944
+        },
+        {
+          "name": "Algeria",
+          "height": 2.213369806962775
+        },
+        {
+          "name": "Ecuador",
+          "height": 2.015867424273276
+        },
+        {
+          "name": "Egypt",
+          "height": 2.3760599502687265
+        },
+        {
+          "name": "Eritrea",
+          "height": 1.806144050855912
+        },
+        {
+          "name": "Spain",
+          "height": 2.2614032625741034
+        },
+        {
+          "name": "Estonia",
+          "height": 1.4815724068566745
+        },
+        {
+          "name": "Ethiopia",
+          "height": 2.399931570718243
+        },
+        {
+          "name": "Finland",
+          "height": 1.7914567199037412
+        },
+        {
+          "name": "Fiji",
+          "height": 1.391738494645682
+        },
+        {
+          "name": "Falkland Islands",
+          "height": 0.7685529296299252
+        },
+        {
+          "name": "France",
+          "height": 2.3300114171506725
+        },
+        {
+          "name": "Gabon",
+          "height": 1.5211007008324593
+        },
+        {
+          "name": "United Kingdom",
+          "height": 2.325952465868614
+        },
+        {
+          "name": "Georgia",
+          "height": 1.7474859176035293
+        },
+        {
+          "name": "Ghana",
+          "height": 2.120859367812757
+        },
+        {
+          "name": "Guinea",
+          "height": 1.9456524954095284
+        },
+        {
+          "name": "Gambia",
+          "height": 1.5378953273066793
+        },
+        {
+          "name": "Guinea Bissau",
+          "height": 1.9456524954095284
+        },
+        {
+          "name": "Equatorial Guinea",
+          "height": 1.3454484063745158
+        },
+        {
+          "name": "Greece",
+          "height": 1.9502999973948576
+        },
+        {
+          "name": "Greenland",
+          "height": 0.7972552639960784
+        },
+        {
+          "name": "Guatemala",
+          "height": 2.006050322304877
+        },
+        {
+          "name": "French Guiana",
+          "height": 1.1047226996699209
+        },
+        {
+          "name": "Guyana",
+          "height": 1.3719848000881762
+        },
+        {
+          "name": "Honduras",
+          "height": 1.8679987749535614
+        },
+        {
+          "name": "Croatia",
+          "height": 1.744951338787351
+        },
+        {
+          "name": "Haiti",
+          "height": 1.9250416590543478
+        },
+        {
+          "name": "Hungary",
+          "height": 1.9276349265516244
+        },
+        {
+          "name": "Indonesia",
+          "height": 2.6218808414117243
+        },
+        {
+          "name": "India",
+          "height": 2.9737195007430977
+        },
+        {
+          "name": "Ireland",
+          "height": 1.7513760563405778
+        },
+        {
+          "name": "Iran",
+          "height": 2.6218808414117243
+        },
+        {
+          "name": "Iraq",
+          "height": 2.174100163889765
+        },
+        {
+          "name": "Iceland",
+          "height": 1.174386124143438
+        },
+        {
+          "name": "Israel",
+          "height": 1.8621673936304557
+        },
+        {
+          "name": "Italy",
+          "height": 2.320403526697615
+        },
+        {
+          "name": "Jamaica",
+          "height": 1.6447429262703297
+        },
+        {
+          "name": "Jordan",
+          "height": 1.8317190862117063
+        },
+        {
+          "name": "Japan",
+          "height": 2.4828982565905307
+        },
+        {
+          "name": "Kazakhstan",
+          "height": 2.0288651965139426
+        },
+        {
+          "name": "Kenya",
+          "height": 2.2349304994694434
+        },
+        {
+          "name": "Kyrgyzstan",
+          "height": 1.7900909017351792
+        },
+        {
+          "name": "Cambodia",
+          "height": 2.00640562369906
+        },
+        {
+          "name": "South Korea",
+          "height": 2.285000074190104
+        },
+        {
+          "name": "Kosovo",
+          "height": 0.9167592870723434
+        },
+        {
+          "name": "Kuwait",
+          "height": 1.6638059220575405
+        },
+        {
+          "name": "Laos",
+          "height": 1.8297193706610733
+        },
+        {
+          "name": "Lebanon",
+          "height": 1.745105562853403
+        },
+        {
+          "name": "Liberia",
+          "height": 1.7249316366784642
+        },
+        {
+          "name": "Libya",
+          "height": 1.8172462479064222
+        },
+        {
+          "name": "Sri Lanka",
+          "height": 2.086800195975887
+        },
+        {
+          "name": "Lesotho",
+          "height": 1.5768552738908326
+        },
+        {
+          "name": "Lithuania",
+          "height": 1.6693463300301616
+        },
+        {
+          "name": "Luxembourg",
+          "height": 1.2765928757731713
+        },
+        {
+          "name": "Latvia",
+          "height": 1.5855490737874116
+        },
+        {
+          "name": "Morocco",
+          "height": 2.17884371186176
+        },
+        {
+          "name": "Moldova",
+          "height": 0.9295067831086861
+        },
+        {
+          "name": "Madagascar",
+          "height": 2.090148326551877
+        },
+        {
+          "name": "Mexico",
+          "height": 2.4660323627336576
+        },
+        {
+          "name": "Macedonia",
+          "height": 1.2765928757731713
+        },
+        {
+          "name": "Mali",
+          "height": 2.00056766164488
+        },
+        {
+          "name": "Myanmar",
+          "height": 2.2870229751207063
+        },
+        {
+          "name": "Montenegro",
+          "height": 1.320174818300924
+        },
+        {
+          "name": "Mongolia",
+          "height": 1.642441161412891
+        },
+        {
+          "name": "Mozambique",
+          "height": 2.118182411428263
+        },
+        {
+          "name": "Mauritania",
+          "height": 1.704801465483861
+        },
+        {
+          "name": "Malawi",
+          "height": 2.016051074104955
+        },
+        {
+          "name": "Malaysia",
+          "height": 2.1542809025861733
+        },
+        {
+          "name": "Namibia",
+          "height": 1.5945974751801397
+        },
+        {
+          "name": "New Caledonia",
+          "height": 1.118636840596948
+        },
+        {
+          "name": "Niger",
+          "height": 2.028489344818546
+        },
+        {
+          "name": "Nigeria",
+          "height": 2.5323308788434993
+        },
+        {
+          "name": "Nicaragua",
+          "height": 1.8092051195755179
+        },
+        {
+          "name": "Netherlands",
+          "height": 2.03818327041868
+        },
+        {
+          "name": "Norway",
+          "height": 1.7711604046739875
+        },
+        {
+          "name": "Nepal",
+          "height": 2.1429503263118135
+        },
+        {
+          "name": "New Zealand",
+          "height": 1.7464616573642928
+        },
+        {
+          "name": "Oman",
+          "height": 1.6495703115327172
+        },
+        {
+          "name": "Pakistan",
+          "height": 2.5499759861467624
+        },
+        {
+          "name": "Panama",
+          "height": 1.7089189885654104
+        },
+        {
+          "name": "Peru",
+          "height": 2.161772856001427
+        },
+        {
+          "name": "Philippines",
+          "height": 2.4152958457622313
+        },
+        {
+          "name": "Papua New Guinea",
+          "height": 1.8449881469363243
+        },
+        {
+          "name": "Poland",
+          "height": 2.2199616988835644
+        },
+        {
+          "name": "Puerto Rico",
+          "height": 1.7107835979211217
+        },
+        {
+          "name": "North Korea",
+          "height": 0
+        },
+        {
+          "name": "Portugal",
+          "height": 1.939828684114004
+        },
+        {
+          "name": "Paraguay",
+          "height": 1.8318938155167737
+        },
+        {
+          "name": "Qatar",
+          "height": 1.5466901179558463
+        },
+        {
+          "name": "Romania",
+          "height": 2.0981016514102144
+        },
+        {
+          "name": "Russia",
+          "height": 2.0981016514102144
+        },
+        {
+          "name": "Rwanda",
+          "height": 1.9448620238693648
+        },
+        {
+          "name": "Western Sahara",
+          "height": 1.2794813312822682
+        },
+        {
+          "name": "Saudi Arabia",
+          "height": 2.146278923266218
+        },
+        {
+          "name": "Sudan",
+          "height": 2.204895584789709
+        },
+        {
+          "name": "South Sudan",
+          "height": 1.926021956273273
+        },
+        {
+          "name": "Senegal",
+          "height": 1.983772791199577
+        },
+        {
+          "name": "Solomon Islands",
+          "height": 1.2844309384337609
+        },
+        {
+          "name": "Sierra Leone",
+          "height": 1.8065550734964768
+        },
+        {
+          "name": "El Salvador",
+          "height": 1.8235730005811703
+        },
+        {
+          "name": "Somaliland",
+          "height": 1.9192230940442432
+        },
+        {
+          "name": "Somalia",
+          "height": 1.9192230940442432
+        },
+        {
+          "name": "Republic of Serbia",
+          "height": 1.7025884603563672
+        },
+        {
+          "name": "Suriname",
+          "height": 1.2838132951986823
+        },
+        {
+          "name": "Slovakia",
+          "height": 1.7941149317509693
+        },
+        {
+          "name": "Slovenia",
+          "height": 1.5817255745209473
+        },
+        {
+          "name": "Sweden",
+          "height": 1.913393085859464
+        },
+        {
+          "name": "Swaziland",
+          "height": 1.4630906685223208
+        },
+        {
+          "name": "Syria",
+          "height": 1.8739154538963856
+        },
+        {
+          "name": "Chad",
+          "height": 1.9619860117636005
+        },
+        {
+          "name": "Togo",
+          "height": 1.8266352643357013
+        },
+        {
+          "name": "Thailand",
+          "height": 2.3406976750359267
+        },
+        {
+          "name": "Tajikistan",
+          "height": 1.868174107550393
+        },
+        {
+          "name": "Turkmenistan",
+          "height": 1.777788358620158
+        },
+        {
+          "name": "East Timor",
+          "height": 1.9276821048854944
+        },
+        {
+          "name": "Trinidad and Tobago",
+          "height": 1.4864877164399248
+        },
+        {
+          "name": "Tunisia",
+          "height": 1.9406937741987633
+        },
+        {
+          "name": "Turkey",
+          "height": 2.35878697087045
+        },
+        {
+          "name": "United Republic of Tanzania",
+          "height": 2.255612151457355
+        },
+        {
+          "name": "Uganda",
+          "height": 2.1944535441697357
+        },
+        {
+          "name": "Ukraine",
+          "height": 2.260779111865663
+        },
+        {
+          "name": "Uruguay",
+          "height": 1.6899430531664241
+        },
+        {
+          "name": "United States",
+          "height": 2.6787282030716932
+        },
+        {
+          "name": "Uzbekistan",
+          "height": 2.150333543687667
+        },
+        {
+          "name": "Venezuela",
+          "height": 1.10951539925934
+        },
+        {
+          "name": "Vietnam",
+          "height": 2.4047716904237832
+        },
+        {
+          "name": "Vanuatu",
+          "height": 1.10951539925934
+        },
+        {
+          "name": "West Bank",
+          "height": 0.48553708360641457
+        },
+        {
+          "name": "Yemen",
+          "height": 2.106925627651628
+        },
+        {
+          "name": "South Africa",
+          "height": 2.285000074190104
+        },
+        {
+          "name": "Zambia",
+          "height": 1.9882192851936928
+        },
+        {
+          "name": "Zimbabwe",
+          "height": 1.9858938989342698
+        },
+        {
+          "name": "Liechtenstein"
+        },
+        {
+          "name": "W. Sahara"
+        },
+        {
+          "name": "Serbia"
+        },
+        {
+          "name": "Aland"
+        },
+        {
+          "name": "Andorra"
+        },
+        {
+          "name": "American Samoa"
+        },
+        {
+          "name": "Fr. S. Antarctic Lands"
+        },
+        {
+          "name": "Antigua and Barb."
+        },
+        {
+          "name": "Bahrain"
+        },
+        {
+          "name": "Bahamas"
+        },
+        {
+          "name": "Bosnia and Herz."
+        },
+        {
+          "name": "Barbados"
+        },
+        {
+          "name": "Central African Rep."
+        },
+        {
+          "name": "Côte d'Ivoire"
+        },
+        {
+          "name": "Dem. Rep. Congo"
+        },
+        {
+          "name": "Congo"
+        },
+        {
+          "name": "Comoros"
+        },
+        {
+          "name": "Cape Verde"
+        },
+        {
+          "name": "Curaçao"
+        },
+        {
+          "name": "Cayman Is."
+        },
+        {
+          "name": "N. Cyprus"
+        },
+        {
+          "name": "Czech Rep."
+        },
+        {
+          "name": "Dominica"
+        },
+        {
+          "name": "Dominican Rep."
+        },
+        {
+          "name": "Falkland Is."
+        },
+        {
+          "name": "Faeroe Is."
+        },
+        {
+          "name": "Micronesia"
+        },
+        {
+          "name": "Guinea-Bissau"
+        },
+        {
+          "name": "Eq. Guinea"
+        },
+        {
+          "name": "Grenada"
+        },
+        {
+          "name": "Guam"
+        },
+        {
+          "name": "Heard I. and McDonald Is."
+        },
+        {
+          "name": "Isle of Man"
+        },
+        {
+          "name": "Br. Indian Ocean Ter."
+        },
+        {
+          "name": "Jersey"
+        },
+        {
+          "name": "Siachen Glacier"
+        },
+        {
+          "name": "Kiribati"
+        },
+        {
+          "name": "Korea"
+        },
+        {
+          "name": "Lao PDR"
+        },
+        {
+          "name": "Saint Lucia"
+        },
+        {
+          "name": "Malta"
+        },
+        {
+          "name": "N. Mariana Is."
+        },
+        {
+          "name": "Montserrat"
+        },
+        {
+          "name": "Mauritius"
+        },
+        {
+          "name": "Niue"
+        },
+        {
+          "name": "Palau"
+        },
+        {
+          "name": "Dem. Rep. Korea"
+        },
+        {
+          "name": "Palestine"
+        },
+        {
+          "name": "Fr. Polynesia"
+        },
+        {
+          "name": "S. Sudan"
+        },
+        {
+          "name": "Singapore"
+        },
+        {
+          "name": "S. Geo. and S. Sandw. Is."
+        },
+        {
+          "name": "Saint Helena"
+        },
+        {
+          "name": "Solomon Is."
+        },
+        {
+          "name": "St. Pierre and Miquelon"
+        },
+        {
+          "name": "São Tomé and Principe"
+        },
+        {
+          "name": "Seychelles"
+        },
+        {
+          "name": "Turks and Caicos Is."
+        },
+        {
+          "name": "Timor-Leste"
+        },
+        {
+          "name": "Tonga"
+        },
+        {
+          "name": "Tanzania"
+        },
+        {
+          "name": "St. Vin. and Gren."
+        },
+        {
+          "name": "U.S. Virgin Is."
+        },
+        {
+          "name": "Samoa"
+        },
+        {
+          "name": ""
+        },
+        {
+          "name": ""
+        }
+      ],
+      "show": true,
+      "zlevel": -10,
+      "left": 0,
+      "top": 0,
+      "width": "100%",
+      "height": "100%",
+      "boxWidth": 100,
+      "boxHeight": 10,
+      "boxDepth": "auto",
+      "environment": "auto",
+      "label": {
+        "show": false,
+        "distance": 2,
+        "textStyle": {
+          "fontSize": 20,
+          "color": "#000",
+          "backgroundColor": "rgba(255,255,255,0.7)",
+          "padding": 3,
+          "borderRadius": 4
+        }
+      },
+      "itemStyle": {
+        "color": "#fff",
+        "borderWidth": 0,
+        "borderColor": "#333"
+      },
+      "emphasis": {
+        "itemStyle": {
+          "color": "#639fc0"
+        },
+        "label": {
+          "show": true
+        }
+      },
+      "temporalSuperSampling": {
+        "enable": "auto"
+      },
+      "realisticMaterial": {
+        "textureTiling": 1,
+        "textureOffset": 0,
+        "detailTexture": null
+      },
+      "colorMaterial": {
+        "textureTiling": 1,
+        "textureOffset": 0,
+        "detailTexture": null
+      },
+      "hatchingMaterial": {
+        "textureTiling": 1,
+        "textureOffset": 0,
+        "paperColor": "#fff"
+      }
+    }
+  ],
+  "axisPointer": [
+    {
+      "lineStyle": {
+        "color": "#817f91",
+        "width": 1,
+        "type": "dashed"
+      },
+      "crossStyle": {
+        "color": "#817f91"
+      },
+      "label": {
+        "color": "#fff",
+        "show": true,
+        "formatter": null,
+        "precision": "auto",
+        "margin": 3,
+        "padding": [
+          5,
+          7,
+          5,
+          7
+        ],
+        "backgroundColor": "auto",
+        "borderColor": null,
+        "borderWidth": 0,
+        "borderRadius": 3
+      },
+      "show": "auto",
+      "zlevel": 0,
+      "z": 50,
+      "type": "line",
+      "snap": false,
+      "triggerTooltip": true,
+      "value": null,
+      "status": null,
+      "link": [],
+      "animation": null,
+      "animationDurationUpdate": 200,
+      "shadowStyle": {
+        "color": "rgba(210,219,238,0.2)"
+      },
+      "handle": {
+        "show": false,
+        "icon": "M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7v-1.2h6.6z M13.3,22H6.7v-1.2h6.6z M13.3,19.6H6.7v-1.2h6.6z",
+        "size": 45,
+        "margin": 50,
+        "color": "#333",
+        "shadowBlur": 3,
+        "shadowColor": "#aaa",
+        "shadowOffsetX": 0,
+        "shadowOffsetY": 2,
+        "throttle": 40
+      }
+    }
+  ],
+  "tooltip": [],
+  "series": [],
+  "visualMap": [],
+  "legend": [],
+  "markArea": [
+    {
+      "zlevel": 0,
+      "z": 1,
+      "tooltip": {
+        "trigger": "item"
+      },
+      "animation": false,
+      "label": {
+        "show": true,
+        "position": "top"
+      },
+      "itemStyle": {
+        "borderWidth": 0
+      },
+      "emphasis": {
+        "label": {
+          "show": true,
+          "position": "top"
+        }
+      }
+    }
+  ],
+  "markLine": [
+    {
+      "zlevel": 0,
+      "z": 5,
+      "symbol": [
+        "circle",
+        "arrow"
+      ],
+      "symbolSize": [
+        8,
+        16
+      ],
+      "precision": 2,
+      "tooltip": {
+        "trigger": "item"
+      },
+      "label": {
+        "show": true,
+        "position": "end",
+        "distance": 5
+      },
+      "lineStyle": {
+        "type": "dashed"
+      },
+      "emphasis": {
+        "label": {
+          "show": true
+        },
+        "lineStyle": {
+          "width": 3
+        }
+      },
+      "animationEasing": "linear"
+    }
+  ],
+  "markPoint": [
+    {
+      "zlevel": 0,
+      "z": 5,
+      "symbol": "pin",
+      "symbolSize": 50,
+      "tooltip": {
+        "trigger": "item"
+      },
+      "label": {
+        "show": true,
+        "position": "inside"
+      },
+      "itemStyle": {
+        "borderWidth": 2
+      },
+      "emphasis": {
+        "label": {
+          "show": true
+        }
+      }
+    }
+  ],
+  "brush": [],
+  "dataZoom": []
+}

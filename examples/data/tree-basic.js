@@ -1,8 +1,14 @@
+/*
+title: From Left to Right Tree
+category: tree
+titleCN: 从左到右树状图
+*/
+
 myChart.showLoading();
 $.get(ROOT_PATH + '/data/asset/data/flare.json', function (data) {
     myChart.hideLoading();
 
-    echarts.util.each(data.children, function (datum, index) {
+    data.children.forEach(function (datum, index) {
         index % 2 === 0 && (datum.collapsed = true);
     });
 
@@ -37,6 +43,10 @@ $.get(ROOT_PATH + '/data/asset/data/flare.json', function (data) {
                         verticalAlign: 'middle',
                         align: 'left'
                     }
+                },
+
+                emphasis: {
+                    focus: 'descendant'
                 },
 
                 expandAndCollapse: true,

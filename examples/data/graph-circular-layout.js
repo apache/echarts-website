@@ -1,25 +1,21 @@
+/*
+title: Les Miserables
+category: graph
+titleCN: 悲惨世界人物关系图(环形布局)
+shotWidth: 900
+difficulty: 5
+*/
+
 myChart.showLoading();
-$.get(ROOT_PATH + '/data/asset/data/les-miserables.gexf', function (xml) {
+$.getJSON(ROOT_PATH + '/data/asset/data/les-miserables.json', function (graph) {
     myChart.hideLoading();
 
-    var graph = echarts.dataTool.gexf.parse(xml);
-    var categories = [];
-    for (var i = 0; i < 9; i++) {
-        categories[i] = {
-            name: '类目' + i
-        };
-    }
     graph.nodes.forEach(function (node) {
-        node.itemStyle = null;
-        node.value = node.symbolSize;
-        node.symbolSize /= 1.5;
         node.label = {
-            normal: {
-                show: node.symbolSize > 10
-            }
+            show: node.symbolSize > 30
         };
-        node.category = node.attributes.modularity_class;
     });
+
     option = {
         title: {
             text: 'Les Miserables',
@@ -29,7 +25,7 @@ $.get(ROOT_PATH + '/data/asset/data/les-miserables.gexf', function (xml) {
         },
         tooltip: {},
         legend: [{
-            data: categories.map(function (a) {
+            data: graph.categories.map(function (a) {
                 return a.name;
             })
         }],
@@ -45,7 +41,7 @@ $.get(ROOT_PATH + '/data/asset/data/les-miserables.gexf', function (xml) {
                 },
                 data: graph.nodes,
                 links: graph.links,
-                categories: categories,
+                categories: graph.categories,
                 roam: true,
                 label: {
                     position: 'right',
@@ -60,4 +56,4 @@ $.get(ROOT_PATH + '/data/asset/data/les-miserables.gexf', function (xml) {
     };
 
     myChart.setOption(option);
-}, 'xml');
+});

@@ -1,3 +1,10 @@
+/*
+title: Visual interaction with stream
+category: scatter
+titleCN: 流式渲染和视觉映射操作
+difficulty: 5
+*/
+
 // Thanks to: 若怀冰
 // http://gallery.echartsjs.com/explore.html?u=bd-16906679
 // http://gallery.echartsjs.com/editor.html?c=xHJw-hVqjW

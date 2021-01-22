@@ -1,3 +1,10 @@
+/*
+title: Distribution of Electricity
+category: line
+titleCN: 一天用电量分布
+difficulty: 3
+*/
+
 option = {
     title: {
         text: '一天用电量分布',
@@ -59,6 +66,9 @@ option = {
             smooth: true,
             data: [300, 280, 250, 260, 270, 300, 550, 500, 400, 390, 380, 390, 400, 500, 600, 750, 800, 700, 600, 400],
             markArea: {
+                itemStyle: {
+                    color: 'rgba(255, 173, 177, 0.4)'
+                },
                 data: [ [{
                     name: '早高峰',
                     xAxis: '07:30'

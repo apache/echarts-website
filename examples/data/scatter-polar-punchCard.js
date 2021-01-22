@@ -1,3 +1,10 @@
+/*
+title: Punch Card of Github
+category: scatter
+titleCN: GitHub 打卡气泡图（极坐标）
+difficulty: 8
+*/
+
 
 var hours = ['12a', '1a', '2a', '3a', '4a', '5a', '6a',
         '7a', '8a', '9a','10a','11a',
@@ -10,8 +17,7 @@ var data = [[0,0,5],[0,1,1],[0,2,0],[0,3,0],[0,4,0],[0,5,0],[0,6,0],[0,7,0],[0,8
 
 option = {
     title: {
-        text: 'Punch Card of Github',
-        link: 'https://github.com/pissang/echarts-next/graphs/punch-card'
+        text: 'Punch Card of Github'
     },
     legend: {
         data: ['Punch Card'],
@@ -28,11 +34,7 @@ option = {
         data: hours,
         boundaryGap: false,
         splitLine: {
-            show: true,
-            lineStyle: {
-                color: '#999',
-                type: 'dashed'
-            }
+            show: true
         },
         axisLine: {
             show: false

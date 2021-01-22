@@ -1,3 +1,9 @@
+/*
+title: Scatter3D - Globe Population
+category: scatter3D
+titleCN: Scatter3D - Globe Population
+*/
+
 
 $.getJSON(ROOT_PATH + '/data-gl/asset/data/population.json', function (data) {
 

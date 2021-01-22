@@ -1,3 +1,9 @@
+/*
+title: 皮革材质
+category: surface
+titleCN: 皮革材质
+*/
+
 var TILING = [4, 2];
 
 var heightImg = new Image();

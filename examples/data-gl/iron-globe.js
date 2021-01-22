@@ -1,3 +1,9 @@
+/*
+title: Iron globe
+category: globe
+titleCN: Iron globe
+*/
+
 
 option = {
     backgroundColor: '#000',

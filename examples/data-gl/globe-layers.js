@@ -1,3 +1,9 @@
+/*
+title: Globe Layers
+category: globe
+titleCN: Globe Layers
+*/
+
 option = {
     backgroundColor: '#000',
     globe: {

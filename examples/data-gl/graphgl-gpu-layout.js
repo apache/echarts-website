@@ -1,3 +1,12 @@
+/*
+title: GraphGL GPU Layout
+category: graphGL
+theme: dark
+titleCN: GraphGL GPU Layout
+shotDelay: 5000
+shotWidth: 1280
+*/
+
 
 function createNodes(widthCount, heightCount) {
     var nodes = [];

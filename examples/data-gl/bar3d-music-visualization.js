@@ -1,3 +1,9 @@
+/*
+title: Music Visualization
+category: bar3D
+titleCN: Music Visualization
+*/
+
 var UPDATE_DURATION = 100;
 
 window.AudioContext = window.AudioContext || window.webkitAudioContext;

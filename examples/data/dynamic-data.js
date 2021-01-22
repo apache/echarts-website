@@ -1,3 +1,10 @@
+/*
+title: Dynamic Data
+category: bar
+titleCN: 动态数据
+difficulty: 6
+*/
+
 option = {
     title: {
         text: '动态数据',

@@ -1,3 +1,9 @@
+/*
+title: Theme Roses
+category: surface
+titleCN: Theme Roses
+*/
+
 
 var sin = Math.sin;
 var cos = Math.cos;

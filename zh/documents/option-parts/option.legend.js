@@ -260,10 +260,24 @@ window.__EC_DOC_option_legend = {
     }
   },
   "textStyle.width": {
-    "desc": "<p>文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 <code class=\"codespan\">backgroundColor</code>）时，可能会使用它。</p>\n<p>注意，文字块的 <code class=\"codespan\">width</code> 和 <code class=\"codespan\">height</code> 指定的是内容高宽，不包含 <code class=\"codespan\">padding</code>。</p>\n<p><code class=\"codespan\">width</code> 也可以是百分比字符串，如 <code class=\"codespan\">&#39;100%&#39;</code>。表示的是所在文本块的 <code class=\"codespan\">contentWidth</code>（即不包含文本块的 <code class=\"codespan\">padding</code>）的百分之多少。之所以以 <code class=\"codespan\">contentWidth</code> 做基数，因为每个文本片段只能基于 <code class=\"codespan\">content box</code> 布局。如果以 <code class=\"codespan\">outerWidth</code> 做基数，则百分比的计算在实用中不具有意义，可能会超出。</p>\n<p>注意，如果不定义 <code class=\"codespan\">rich</code> 属性，则不能指定 <code class=\"codespan\">width</code> 和 <code class=\"codespan\">height</code>。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "textStyle.height": {
-    "desc": "<p>文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 <code class=\"codespan\">backgroundColor</code>）时，可能会使用它。</p>\n<p>注意，文字块的 <code class=\"codespan\">width</code> 和 <code class=\"codespan\">height</code> 指定的是内容高宽，不包含 <code class=\"codespan\">padding</code>。</p>\n<p>注意，如果不定义 <code class=\"codespan\">rich</code> 属性，则不能指定 <code class=\"codespan\">width</code> 和 <code class=\"codespan\">height</code>。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "textStyle.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n",
@@ -307,6 +321,19 @@ window.__EC_DOC_option_legend = {
       "type": "number",
       "step": "0.5"
     }
+  },
+  "textStyle.overflow": {
+    "desc": "\n\n<p>文字超出宽度是否截断或者换行。配置<code class=\"codespan\">width</code>时有效</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> 截断，并在末尾显示<code class=\"codespan\">ellipsis</code>配置的文本，默认为<code class=\"codespan\">...</code></li>\n<li><code class=\"codespan\">&#39;break&#39;</code> 换行</li>\n<li><code class=\"codespan\">&#39;breakAll&#39;</code> 换行，跟<code class=\"codespan\">&#39;break&#39;</code>不同的是，在英语等拉丁文中，<code class=\"codespan\">&#39;breakAll&#39;</code>还会强制单词内换行</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "truncate,break,breakAll"
+    }
+  },
+  "textStyle.ellipsis": {
+    "desc": "<p>在<code class=\"codespan\">overflow</code>配置为<code class=\"codespan\">&#39;truncate&#39;</code>的时候，可以通过该属性配置末尾显示的文本。</p>\n"
+  },
+  "textStyle.lineOverflow": {
+    "desc": "<p>文本超出高度部分是否截断，配置<code class=\"codespan\">height</code>时有效。</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> 在文本行数超出高度部分截断。</li>\n</ul>\n"
   },
   "textStyle.rich": {
     "desc": "<p>在 <code class=\"codespan\">rich</code> 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">label: {\n    // 在文本中，可以对部分文本采用 rich 中定义样式。\n    // 这里需要在文本中使用标记符号：\n    // `{styleName|text content text content}` 标记样式名。\n    // 注意，换行仍是使用 &#39;\\n&#39;。\n    formatter: [\n        &#39;{a|这段文本采用样式a}&#39;,\n        &#39;{b|这段文本采用样式b}这段用默认样式{x|这段用样式x}&#39;\n    ].join(&#39;\\n&#39;),\n\n    rich: {\n        a: {\n            color: &#39;red&#39;,\n            lineHeight: 10\n        },\n        b: {\n            backgroundColor: {\n                image: &#39;xxx/xxx.jpg&#39;\n            },\n            height: 40\n        },\n        x: {\n            fontSize: 18,\n            fontFamily: &#39;Microsoft YaHei&#39;,\n            borderColor: &#39;#449933&#39;,\n            borderRadius: 4\n        },\n        ...\n    }\n}\n</code></pre>\n<p>详情参见教程：<a href=\"tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE\" target=\"_blank\">富文本标签</a></p>\n"
@@ -493,7 +520,7 @@ window.__EC_DOC_option_legend = {
     "desc": "<p>图例的 tooltip 配置，配置项同 <a href=\"#tooltip\">tooltip</a>。默认不显示，可以在 legend 文字很多的时候对文字做裁剪并且开启 tooltip，如下示例：</p>\n<pre><code class=\"lang-js\">legend: {\n    formatter: function (name) {\n        return echarts.format.truncateText(name, 40, &#39;14px Microsoft Yahei&#39;, &#39;…&#39;);\n    },\n    tooltip: {\n        show: true\n    }\n}\n</code></pre>\n"
   },
   "icon": {
-    "desc": "\n\n<p>图例项的 icon。</p>\n<p>ECharts 提供的标记类型包括 \n<code class=\"codespan\">&#39;circle&#39;</code>, <code class=\"codespan\">&#39;rect&#39;</code>, <code class=\"codespan\">&#39;roundRect&#39;</code>, <code class=\"codespan\">&#39;triangle&#39;</code>, <code class=\"codespan\">&#39;diamond&#39;</code>, <code class=\"codespan\">&#39;pin&#39;</code>, <code class=\"codespan\">&#39;arrow&#39;</code>, <code class=\"codespan\">&#39;none&#39;</code></p>\n<p>可以通过 <code class=\"codespan\">&#39;image://url&#39;</code> 设置为图片，其中 URL 为图片的链接，或者 <code class=\"codespan\">dataURI</code>。</p>\n<p>URL 为图片链接例如：</p>\n<pre><code>&#39;image://http://xxx.xxx.xxx/a/b.png&#39;\n</code></pre><p>URL 为 <code class=\"codespan\">dataURI</code> 例如：</p>\n<pre><code>&#39;image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7&#39;\n</code></pre><p>可以通过 <code class=\"codespan\">&#39;path://&#39;</code> 将图标设置为任意的矢量路径。这种方式相比于使用图片的方式，不用担心因为缩放而产生锯齿或模糊，而且可以设置为任意颜色。路径图形会自适应调整为合适的大小。路径的格式参见 <a href=\"http://www.w3.org/TR/SVG/paths.html#PathData\" target=\"_blank\">SVG PathData</a>。可以从 Adobe Illustrator 等工具编辑导出。</p>\n<p>例如：</p>\n<pre><code>&#39;path://M30.9,53.2C16.8,53.2,5.3,41.7,5.3,27.6S16.8,2,30.9,2C45,2,56.4,13.5,56.4,27.6S45,53.2,30.9,53.2z M30.9,3.5C17.6,3.5,6.8,14.4,6.8,27.6c0,13.3,10.8,24.1,24.101,24.1C44.2,51.7,55,40.9,55,27.6C54.9,14.4,44.1,3.5,30.9,3.5z M36.9,35.8c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H36c0.5,0,0.9,0.4,0.9,1V35.8z M27.8,35.8 c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H27c0.5,0,0.9,0.4,0.9,1L27.8,35.8L27.8,35.8z&#39;\n</code></pre>",
+    "desc": "\n\n<p>图例项的 icon。</p>\n<p>ECharts 提供的标记类型包括</p>\n<p><code class=\"codespan\">&#39;circle&#39;</code>, <code class=\"codespan\">&#39;rect&#39;</code>, <code class=\"codespan\">&#39;roundRect&#39;</code>, <code class=\"codespan\">&#39;triangle&#39;</code>, <code class=\"codespan\">&#39;diamond&#39;</code>, <code class=\"codespan\">&#39;pin&#39;</code>, <code class=\"codespan\">&#39;arrow&#39;</code>, <code class=\"codespan\">&#39;none&#39;</code></p>\n<p>可以通过 <code class=\"codespan\">&#39;image://url&#39;</code> 设置为图片，其中 URL 为图片的链接，或者 <code class=\"codespan\">dataURI</code>。</p>\n<p>URL 为图片链接例如：</p>\n<pre><code>&#39;image://http://xxx.xxx.xxx/a/b.png&#39;\n</code></pre><p>URL 为 <code class=\"codespan\">dataURI</code> 例如：</p>\n<pre><code>&#39;image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7&#39;\n</code></pre><p>可以通过 <code class=\"codespan\">&#39;path://&#39;</code> 将图标设置为任意的矢量路径。这种方式相比于使用图片的方式，不用担心因为缩放而产生锯齿或模糊，而且可以设置为任意颜色。路径图形会自适应调整为合适的大小。路径的格式参见 <a href=\"http://www.w3.org/TR/SVG/paths.html#PathData\" target=\"_blank\">SVG PathData</a>。可以从 Adobe Illustrator 等工具编辑导出。</p>\n<p>例如：</p>\n<pre><code>&#39;path://M30.9,53.2C16.8,53.2,5.3,41.7,5.3,27.6S16.8,2,30.9,2C45,2,56.4,13.5,56.4,27.6S45,53.2,30.9,53.2z M30.9,3.5C17.6,3.5,6.8,14.4,6.8,27.6c0,13.3,10.8,24.1,24.101,24.1C44.2,51.7,55,40.9,55,27.6C54.9,14.4,44.1,3.5,30.9,3.5z M36.9,35.8c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H36c0.5,0,0.9,0.4,0.9,1V35.8z M27.8,35.8 c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H27c0.5,0,0.9,0.4,0.9,1L27.8,35.8L27.8,35.8z&#39;\n</code></pre>",
     "uiControl": {
       "type": "icon"
     }
@@ -505,7 +532,7 @@ window.__EC_DOC_option_legend = {
     "desc": "<p>图例项的名称，应等于某系列的<code class=\"codespan\">name</code>值（如果是饼图，也可以是饼图单个数据的 <code class=\"codespan\">name</code>）。</p>\n"
   },
   "data.icon": {
-    "desc": "<p>图例项的 icon。</p>\n<p>ECharts 提供的标记类型包括 \n<code class=\"codespan\">&#39;circle&#39;</code>, <code class=\"codespan\">&#39;rect&#39;</code>, <code class=\"codespan\">&#39;roundRect&#39;</code>, <code class=\"codespan\">&#39;triangle&#39;</code>, <code class=\"codespan\">&#39;diamond&#39;</code>, <code class=\"codespan\">&#39;pin&#39;</code>, <code class=\"codespan\">&#39;arrow&#39;</code>, <code class=\"codespan\">&#39;none&#39;</code></p>\n<p>可以通过 <code class=\"codespan\">&#39;image://url&#39;</code> 设置为图片，其中 URL 为图片的链接，或者 <code class=\"codespan\">dataURI</code>。</p>\n<p>URL 为图片链接例如：</p>\n<pre><code>&#39;image://http://xxx.xxx.xxx/a/b.png&#39;\n</code></pre><p>URL 为 <code class=\"codespan\">dataURI</code> 例如：</p>\n<pre><code>&#39;image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7&#39;\n</code></pre><p>可以通过 <code class=\"codespan\">&#39;path://&#39;</code> 将图标设置为任意的矢量路径。这种方式相比于使用图片的方式，不用担心因为缩放而产生锯齿或模糊，而且可以设置为任意颜色。路径图形会自适应调整为合适的大小。路径的格式参见 <a href=\"http://www.w3.org/TR/SVG/paths.html#PathData\" target=\"_blank\">SVG PathData</a>。可以从 Adobe Illustrator 等工具编辑导出。</p>\n<p>例如：</p>\n<pre><code>&#39;path://M30.9,53.2C16.8,53.2,5.3,41.7,5.3,27.6S16.8,2,30.9,2C45,2,56.4,13.5,56.4,27.6S45,53.2,30.9,53.2z M30.9,3.5C17.6,3.5,6.8,14.4,6.8,27.6c0,13.3,10.8,24.1,24.101,24.1C44.2,51.7,55,40.9,55,27.6C54.9,14.4,44.1,3.5,30.9,3.5z M36.9,35.8c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H36c0.5,0,0.9,0.4,0.9,1V35.8z M27.8,35.8 c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H27c0.5,0,0.9,0.4,0.9,1L27.8,35.8L27.8,35.8z&#39;\n</code></pre>"
+    "desc": "<p>图例项的 icon。</p>\n<p>ECharts 提供的标记类型包括</p>\n<p><code class=\"codespan\">&#39;circle&#39;</code>, <code class=\"codespan\">&#39;rect&#39;</code>, <code class=\"codespan\">&#39;roundRect&#39;</code>, <code class=\"codespan\">&#39;triangle&#39;</code>, <code class=\"codespan\">&#39;diamond&#39;</code>, <code class=\"codespan\">&#39;pin&#39;</code>, <code class=\"codespan\">&#39;arrow&#39;</code>, <code class=\"codespan\">&#39;none&#39;</code></p>\n<p>可以通过 <code class=\"codespan\">&#39;image://url&#39;</code> 设置为图片，其中 URL 为图片的链接，或者 <code class=\"codespan\">dataURI</code>。</p>\n<p>URL 为图片链接例如：</p>\n<pre><code>&#39;image://http://xxx.xxx.xxx/a/b.png&#39;\n</code></pre><p>URL 为 <code class=\"codespan\">dataURI</code> 例如：</p>\n<pre><code>&#39;image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7&#39;\n</code></pre><p>可以通过 <code class=\"codespan\">&#39;path://&#39;</code> 将图标设置为任意的矢量路径。这种方式相比于使用图片的方式，不用担心因为缩放而产生锯齿或模糊，而且可以设置为任意颜色。路径图形会自适应调整为合适的大小。路径的格式参见 <a href=\"http://www.w3.org/TR/SVG/paths.html#PathData\" target=\"_blank\">SVG PathData</a>。可以从 Adobe Illustrator 等工具编辑导出。</p>\n<p>例如：</p>\n<pre><code>&#39;path://M30.9,53.2C16.8,53.2,5.3,41.7,5.3,27.6S16.8,2,30.9,2C45,2,56.4,13.5,56.4,27.6S45,53.2,30.9,53.2z M30.9,3.5C17.6,3.5,6.8,14.4,6.8,27.6c0,13.3,10.8,24.1,24.101,24.1C44.2,51.7,55,40.9,55,27.6C54.9,14.4,44.1,3.5,30.9,3.5z M36.9,35.8c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H36c0.5,0,0.9,0.4,0.9,1V35.8z M27.8,35.8 c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H27c0.5,0,0.9,0.4,0.9,1L27.8,35.8L27.8,35.8z&#39;\n</code></pre>"
   },
   "data.textStyle": {
     "desc": "<p>图例项的文本样式。</p>\n"
@@ -671,10 +698,24 @@ window.__EC_DOC_option_legend = {
     }
   },
   "pageTextStyle.width": {
-    "desc": "<p>文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 <code class=\"codespan\">backgroundColor</code>）时，可能会使用它。</p>\n<p>注意，文字块的 <code class=\"codespan\">width</code> 和 <code class=\"codespan\">height</code> 指定的是内容高宽，不包含 <code class=\"codespan\">padding</code>。</p>\n<p><code class=\"codespan\">width</code> 也可以是百分比字符串，如 <code class=\"codespan\">&#39;100%&#39;</code>。表示的是所在文本块的 <code class=\"codespan\">contentWidth</code>（即不包含文本块的 <code class=\"codespan\">padding</code>）的百分之多少。之所以以 <code class=\"codespan\">contentWidth</code> 做基数，因为每个文本片段只能基于 <code class=\"codespan\">content box</code> 布局。如果以 <code class=\"codespan\">outerWidth</code> 做基数，则百分比的计算在实用中不具有意义，可能会超出。</p>\n<p>注意，如果不定义 <code class=\"codespan\">rich</code> 属性，则不能指定 <code class=\"codespan\">width</code> 和 <code class=\"codespan\">height</code>。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "pageTextStyle.height": {
-    "desc": "<p>文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 <code class=\"codespan\">backgroundColor</code>）时，可能会使用它。</p>\n<p>注意，文字块的 <code class=\"codespan\">width</code> 和 <code class=\"codespan\">height</code> 指定的是内容高宽，不包含 <code class=\"codespan\">padding</code>。</p>\n<p>注意，如果不定义 <code class=\"codespan\">rich</code> 属性，则不能指定 <code class=\"codespan\">width</code> 和 <code class=\"codespan\">height</code>。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "pageTextStyle.textBorderColor": {
     "desc": "\n\n<p>文字本身的描边颜色。</p>\n",
@@ -719,6 +760,19 @@ window.__EC_DOC_option_legend = {
       "step": "0.5"
     }
   },
+  "pageTextStyle.overflow": {
+    "desc": "\n\n<p>文字超出宽度是否截断或者换行。配置<code class=\"codespan\">width</code>时有效</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> 截断，并在末尾显示<code class=\"codespan\">ellipsis</code>配置的文本，默认为<code class=\"codespan\">...</code></li>\n<li><code class=\"codespan\">&#39;break&#39;</code> 换行</li>\n<li><code class=\"codespan\">&#39;breakAll&#39;</code> 换行，跟<code class=\"codespan\">&#39;break&#39;</code>不同的是，在英语等拉丁文中，<code class=\"codespan\">&#39;breakAll&#39;</code>还会强制单词内换行</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "truncate,break,breakAll"
+    }
+  },
+  "pageTextStyle.ellipsis": {
+    "desc": "<p>在<code class=\"codespan\">overflow</code>配置为<code class=\"codespan\">&#39;truncate&#39;</code>的时候，可以通过该属性配置末尾显示的文本。</p>\n"
+  },
+  "pageTextStyle.lineOverflow": {
+    "desc": "<p>文本超出高度部分是否截断，配置<code class=\"codespan\">height</code>时有效。</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> 在文本行数超出高度部分截断。</li>\n</ul>\n"
+  },
   "animation": {
     "desc": "\n\n<p>图例翻页是否使用动画。</p>\n",
     "uiControl": {
@@ -746,7 +800,7 @@ window.__EC_DOC_option_legend = {
     }
   },
   "emphasis.selectorLabel.distance": {
-    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n<p>距离图形元素的距离。</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -774,7 +828,7 @@ window.__EC_DOC_option_legend = {
     }
   },
   "emphasis.selectorLabel.color": {
-    "desc": "\n\n<p>文字的颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
+    "desc": "\n\n<p>文字的颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;inherit&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
     "uiControl": {
       "type": "color",
       "default": "null"
@@ -837,14 +891,14 @@ window.__EC_DOC_option_legend = {
     }
   },
   "emphasis.selectorLabel.backgroundColor": {
-    "desc": "\n\n<p>文字块背景色。</p>\n<p>可以使用颜色值，例如：<code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>。</p>\n<p>也可以直接使用图片，例如：</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // 这里可以是图片的 URL，\n    // 或者图片的 dataURI，\n    // 或者 HTMLImageElement 对象，\n    // 或者 HTMLCanvasElement 对象。\n}\n</code></pre>\n<p>当使用图片的时候，可以使用 <code class=\"codespan\">width</code> 或 <code class=\"codespan\">height</code> 指定高宽，也可以不指定自适应。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
+    "desc": "\n\n<p>文字块背景色。</p>\n<p>可以使用颜色值，例如：<code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>。</p>\n<p>也可以直接使用图片，例如：</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // 这里可以是图片的 URL，\n    // 或者图片的 dataURI，\n    // 或者 HTMLImageElement 对象，\n    // 或者 HTMLCanvasElement 对象。\n}\n</code></pre>\n<p>当使用图片的时候，可以使用 <code class=\"codespan\">width</code> 或 <code class=\"codespan\">height</code> 指定高宽，也可以不指定自适应。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;inherit&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
   "emphasis.selectorLabel.borderColor": {
-    "desc": "\n\n<p>文字块边框颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
+    "desc": "\n\n<p>文字块边框颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;inherit&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
@@ -903,13 +957,27 @@ window.__EC_DOC_option_legend = {
     }
   },
   "emphasis.selectorLabel.width": {
-    "desc": "<p>文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 <code class=\"codespan\">backgroundColor</code>）时，可能会使用它。</p>\n<p>注意，文字块的 <code class=\"codespan\">width</code> 和 <code class=\"codespan\">height</code> 指定的是内容高宽，不包含 <code class=\"codespan\">padding</code>。</p>\n<p><code class=\"codespan\">width</code> 也可以是百分比字符串，如 <code class=\"codespan\">&#39;100%&#39;</code>。表示的是所在文本块的 <code class=\"codespan\">contentWidth</code>（即不包含文本块的 <code class=\"codespan\">padding</code>）的百分之多少。之所以以 <code class=\"codespan\">contentWidth</code> 做基数，因为每个文本片段只能基于 <code class=\"codespan\">content box</code> 布局。如果以 <code class=\"codespan\">outerWidth</code> 做基数，则百分比的计算在实用中不具有意义，可能会超出。</p>\n<p>注意，如果不定义 <code class=\"codespan\">rich</code> 属性，则不能指定 <code class=\"codespan\">width</code> 和 <code class=\"codespan\">height</code>。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "emphasis.selectorLabel.height": {
-    "desc": "<p>文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 <code class=\"codespan\">backgroundColor</code>）时，可能会使用它。</p>\n<p>注意，文字块的 <code class=\"codespan\">width</code> 和 <code class=\"codespan\">height</code> 指定的是内容高宽，不包含 <code class=\"codespan\">padding</code>。</p>\n<p>注意，如果不定义 <code class=\"codespan\">rich</code> 属性，则不能指定 <code class=\"codespan\">width</code> 和 <code class=\"codespan\">height</code>。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "emphasis.selectorLabel.textBorderColor": {
-    "desc": "\n\n<p>文字本身的描边颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
+    "desc": "\n\n<p>文字本身的描边颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;inherit&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
     "uiControl": {
       "type": "color"
     }
@@ -951,11 +1019,24 @@ window.__EC_DOC_option_legend = {
       "step": "0.5"
     }
   },
+  "emphasis.selectorLabel.overflow": {
+    "desc": "\n\n<p>文字超出宽度是否截断或者换行。配置<code class=\"codespan\">width</code>时有效</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> 截断，并在末尾显示<code class=\"codespan\">ellipsis</code>配置的文本，默认为<code class=\"codespan\">...</code></li>\n<li><code class=\"codespan\">&#39;break&#39;</code> 换行</li>\n<li><code class=\"codespan\">&#39;breakAll&#39;</code> 换行，跟<code class=\"codespan\">&#39;break&#39;</code>不同的是，在英语等拉丁文中，<code class=\"codespan\">&#39;breakAll&#39;</code>还会强制单词内换行</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "truncate,break,breakAll"
+    }
+  },
+  "emphasis.selectorLabel.ellipsis": {
+    "desc": "<p>在<code class=\"codespan\">overflow</code>配置为<code class=\"codespan\">&#39;truncate&#39;</code>的时候，可以通过该属性配置末尾显示的文本。</p>\n"
+  },
+  "emphasis.selectorLabel.lineOverflow": {
+    "desc": "<p>文本超出高度部分是否截断，配置<code class=\"codespan\">height</code>时有效。</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> 在文本行数超出高度部分截断。</li>\n</ul>\n"
+  },
   "emphasis.selectorLabel.rich": {
     "desc": "<p>在 <code class=\"codespan\">rich</code> 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">label: {\n    // 在文本中，可以对部分文本采用 rich 中定义样式。\n    // 这里需要在文本中使用标记符号：\n    // `{styleName|text content text content}` 标记样式名。\n    // 注意，换行仍是使用 &#39;\\n&#39;。\n    formatter: [\n        &#39;{a|这段文本采用样式a}&#39;,\n        &#39;{b|这段文本采用样式b}这段用默认样式{x|这段用样式x}&#39;\n    ].join(&#39;\\n&#39;),\n\n    rich: {\n        a: {\n            color: &#39;red&#39;,\n            lineHeight: 10\n        },\n        b: {\n            backgroundColor: {\n                image: &#39;xxx/xxx.jpg&#39;\n            },\n            height: 40\n        },\n        x: {\n            fontSize: 18,\n            fontFamily: &#39;Microsoft YaHei&#39;,\n            borderColor: &#39;#449933&#39;,\n            borderRadius: 4\n        },\n        ...\n    }\n}\n</code></pre>\n<p>详情参见教程：<a href=\"tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE\" target=\"_blank\">富文本标签</a></p>\n"
   },
   "emphasis.selectorLabel.rich.<style_name>.color": {
-    "desc": "\n\n<p>文字的颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
+    "desc": "\n\n<p>文字的颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;inherit&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
     "uiControl": {
       "type": "color",
       "default": "null"
@@ -1018,14 +1099,14 @@ window.__EC_DOC_option_legend = {
     }
   },
   "emphasis.selectorLabel.rich.<style_name>.backgroundColor": {
-    "desc": "\n\n<p>文字块背景色。</p>\n<p>可以使用颜色值，例如：<code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>。</p>\n<p>也可以直接使用图片，例如：</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // 这里可以是图片的 URL，\n    // 或者图片的 dataURI，\n    // 或者 HTMLImageElement 对象，\n    // 或者 HTMLCanvasElement 对象。\n}\n</code></pre>\n<p>当使用图片的时候，可以使用 <code class=\"codespan\">width</code> 或 <code class=\"codespan\">height</code> 指定高宽，也可以不指定自适应。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
+    "desc": "\n\n<p>文字块背景色。</p>\n<p>可以使用颜色值，例如：<code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>。</p>\n<p>也可以直接使用图片，例如：</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // 这里可以是图片的 URL，\n    // 或者图片的 dataURI，\n    // 或者 HTMLImageElement 对象，\n    // 或者 HTMLCanvasElement 对象。\n}\n</code></pre>\n<p>当使用图片的时候，可以使用 <code class=\"codespan\">width</code> 或 <code class=\"codespan\">height</code> 指定高宽，也可以不指定自适应。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;inherit&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
   "emphasis.selectorLabel.rich.<style_name>.borderColor": {
-    "desc": "\n\n<p>文字块边框颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
+    "desc": "\n\n<p>文字块边框颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;inherit&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
@@ -1090,7 +1171,7 @@ window.__EC_DOC_option_legend = {
     "desc": "<p>文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 <code class=\"codespan\">backgroundColor</code>）时，可能会使用它。</p>\n<p>注意，文字块的 <code class=\"codespan\">width</code> 和 <code class=\"codespan\">height</code> 指定的是内容高宽，不包含 <code class=\"codespan\">padding</code>。</p>\n<p>注意，如果不定义 <code class=\"codespan\">rich</code> 属性，则不能指定 <code class=\"codespan\">width</code> 和 <code class=\"codespan\">height</code>。</p>\n"
   },
   "emphasis.selectorLabel.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>文字本身的描边颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
+    "desc": "\n\n<p>文字本身的描边颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;inherit&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
     "uiControl": {
       "type": "color"
     }
@@ -1146,7 +1227,7 @@ window.__EC_DOC_option_legend = {
     }
   },
   "selectorLabel.distance": {
-    "desc": "\n\n<p>距离图形元素的距离。当 position 为字符描述值（如 <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>）时候有效。</p>\n<p>参见：<a href=\"https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>。</p>\n",
+    "desc": "\n\n<p>距离图形元素的距离。</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -1174,7 +1255,7 @@ window.__EC_DOC_option_legend = {
     }
   },
   "selectorLabel.color": {
-    "desc": "\n\n<p>文字的颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
+    "desc": "\n\n<p>文字的颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;inherit&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
     "uiControl": {
       "type": "color",
       "default": "null"
@@ -1237,14 +1318,14 @@ window.__EC_DOC_option_legend = {
     }
   },
   "selectorLabel.backgroundColor": {
-    "desc": "\n\n<p>文字块背景色。</p>\n<p>可以使用颜色值，例如：<code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>。</p>\n<p>也可以直接使用图片，例如：</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // 这里可以是图片的 URL，\n    // 或者图片的 dataURI，\n    // 或者 HTMLImageElement 对象，\n    // 或者 HTMLCanvasElement 对象。\n}\n</code></pre>\n<p>当使用图片的时候，可以使用 <code class=\"codespan\">width</code> 或 <code class=\"codespan\">height</code> 指定高宽，也可以不指定自适应。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
+    "desc": "\n\n<p>文字块背景色。</p>\n<p>可以使用颜色值，例如：<code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>。</p>\n<p>也可以直接使用图片，例如：</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // 这里可以是图片的 URL，\n    // 或者图片的 dataURI，\n    // 或者 HTMLImageElement 对象，\n    // 或者 HTMLCanvasElement 对象。\n}\n</code></pre>\n<p>当使用图片的时候，可以使用 <code class=\"codespan\">width</code> 或 <code class=\"codespan\">height</code> 指定高宽，也可以不指定自适应。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;inherit&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
   "selectorLabel.borderColor": {
-    "desc": "\n\n<p>文字块边框颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
+    "desc": "\n\n<p>文字块边框颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;inherit&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
@@ -1303,13 +1384,27 @@ window.__EC_DOC_option_legend = {
     }
   },
   "selectorLabel.width": {
-    "desc": "<p>文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 <code class=\"codespan\">backgroundColor</code>）时，可能会使用它。</p>\n<p>注意，文字块的 <code class=\"codespan\">width</code> 和 <code class=\"codespan\">height</code> 指定的是内容高宽，不包含 <code class=\"codespan\">padding</code>。</p>\n<p><code class=\"codespan\">width</code> 也可以是百分比字符串，如 <code class=\"codespan\">&#39;100%&#39;</code>。表示的是所在文本块的 <code class=\"codespan\">contentWidth</code>（即不包含文本块的 <code class=\"codespan\">padding</code>）的百分之多少。之所以以 <code class=\"codespan\">contentWidth</code> 做基数，因为每个文本片段只能基于 <code class=\"codespan\">content box</code> 布局。如果以 <code class=\"codespan\">outerWidth</code> 做基数，则百分比的计算在实用中不具有意义，可能会超出。</p>\n<p>注意，如果不定义 <code class=\"codespan\">rich</code> 属性，则不能指定 <code class=\"codespan\">width</code> 和 <code class=\"codespan\">height</code>。</p>\n"
+    "desc": "\n\n<p>文本显示宽度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "100",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "selectorLabel.height": {
-    "desc": "<p>文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 <code class=\"codespan\">backgroundColor</code>）时，可能会使用它。</p>\n<p>注意，文字块的 <code class=\"codespan\">width</code> 和 <code class=\"codespan\">height</code> 指定的是内容高宽，不包含 <code class=\"codespan\">padding</code>。</p>\n<p>注意，如果不定义 <code class=\"codespan\">rich</code> 属性，则不能指定 <code class=\"codespan\">width</code> 和 <code class=\"codespan\">height</code>。</p>\n"
+    "desc": "\n\n<p>文本显示高度。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "500",
+      "step": "1"
+    }
   },
   "selectorLabel.textBorderColor": {
-    "desc": "\n\n<p>文字本身的描边颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
+    "desc": "\n\n<p>文字本身的描边颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;inherit&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
     "uiControl": {
       "type": "color"
     }
@@ -1351,11 +1446,24 @@ window.__EC_DOC_option_legend = {
       "step": "0.5"
     }
   },
+  "selectorLabel.overflow": {
+    "desc": "\n\n<p>文字超出宽度是否截断或者换行。配置<code class=\"codespan\">width</code>时有效</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> 截断，并在末尾显示<code class=\"codespan\">ellipsis</code>配置的文本，默认为<code class=\"codespan\">...</code></li>\n<li><code class=\"codespan\">&#39;break&#39;</code> 换行</li>\n<li><code class=\"codespan\">&#39;breakAll&#39;</code> 换行，跟<code class=\"codespan\">&#39;break&#39;</code>不同的是，在英语等拉丁文中，<code class=\"codespan\">&#39;breakAll&#39;</code>还会强制单词内换行</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "truncate,break,breakAll"
+    }
+  },
+  "selectorLabel.ellipsis": {
+    "desc": "<p>在<code class=\"codespan\">overflow</code>配置为<code class=\"codespan\">&#39;truncate&#39;</code>的时候，可以通过该属性配置末尾显示的文本。</p>\n"
+  },
+  "selectorLabel.lineOverflow": {
+    "desc": "<p>文本超出高度部分是否截断，配置<code class=\"codespan\">height</code>时有效。</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> 在文本行数超出高度部分截断。</li>\n</ul>\n"
+  },
   "selectorLabel.rich": {
     "desc": "<p>在 <code class=\"codespan\">rich</code> 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">label: {\n    // 在文本中，可以对部分文本采用 rich 中定义样式。\n    // 这里需要在文本中使用标记符号：\n    // `{styleName|text content text content}` 标记样式名。\n    // 注意，换行仍是使用 &#39;\\n&#39;。\n    formatter: [\n        &#39;{a|这段文本采用样式a}&#39;,\n        &#39;{b|这段文本采用样式b}这段用默认样式{x|这段用样式x}&#39;\n    ].join(&#39;\\n&#39;),\n\n    rich: {\n        a: {\n            color: &#39;red&#39;,\n            lineHeight: 10\n        },\n        b: {\n            backgroundColor: {\n                image: &#39;xxx/xxx.jpg&#39;\n            },\n            height: 40\n        },\n        x: {\n            fontSize: 18,\n            fontFamily: &#39;Microsoft YaHei&#39;,\n            borderColor: &#39;#449933&#39;,\n            borderRadius: 4\n        },\n        ...\n    }\n}\n</code></pre>\n<p>详情参见教程：<a href=\"tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE\" target=\"_blank\">富文本标签</a></p>\n"
   },
   "selectorLabel.rich.<style_name>.color": {
-    "desc": "\n\n<p>文字的颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
+    "desc": "\n\n<p>文字的颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;inherit&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
     "uiControl": {
       "type": "color",
       "default": "null"
@@ -1418,14 +1526,14 @@ window.__EC_DOC_option_legend = {
     }
   },
   "selectorLabel.rich.<style_name>.backgroundColor": {
-    "desc": "\n\n<p>文字块背景色。</p>\n<p>可以使用颜色值，例如：<code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>。</p>\n<p>也可以直接使用图片，例如：</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // 这里可以是图片的 URL，\n    // 或者图片的 dataURI，\n    // 或者 HTMLImageElement 对象，\n    // 或者 HTMLCanvasElement 对象。\n}\n</code></pre>\n<p>当使用图片的时候，可以使用 <code class=\"codespan\">width</code> 或 <code class=\"codespan\">height</code> 指定高宽，也可以不指定自适应。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
+    "desc": "\n\n<p>文字块背景色。</p>\n<p>可以使用颜色值，例如：<code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>。</p>\n<p>也可以直接使用图片，例如：</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // 这里可以是图片的 URL，\n    // 或者图片的 dataURI，\n    // 或者 HTMLImageElement 对象，\n    // 或者 HTMLCanvasElement 对象。\n}\n</code></pre>\n<p>当使用图片的时候，可以使用 <code class=\"codespan\">width</code> 或 <code class=\"codespan\">height</code> 指定高宽，也可以不指定自适应。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;inherit&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
   "selectorLabel.rich.<style_name>.borderColor": {
-    "desc": "\n\n<p>文字块边框颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
+    "desc": "\n\n<p>文字块边框颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;inherit&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
@@ -1490,7 +1598,7 @@ window.__EC_DOC_option_legend = {
     "desc": "<p>文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 <code class=\"codespan\">backgroundColor</code>）时，可能会使用它。</p>\n<p>注意，文字块的 <code class=\"codespan\">width</code> 和 <code class=\"codespan\">height</code> 指定的是内容高宽，不包含 <code class=\"codespan\">padding</code>。</p>\n<p>注意，如果不定义 <code class=\"codespan\">rich</code> 属性，则不能指定 <code class=\"codespan\">width</code> 和 <code class=\"codespan\">height</code>。</p>\n"
   },
   "selectorLabel.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>文字本身的描边颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;auto&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
+    "desc": "\n\n<p>文字本身的描边颜色。</p>\n<p>如果设置为 <code class=\"codespan\">&#39;inherit&#39;</code>，则为视觉映射得到的颜色，如系列色。</p>\n",
     "uiControl": {
       "type": "color"
     }

@@ -1,3 +1,10 @@
+/*
+title: Brush Select on Column Chart
+titleCN: 柱状图框选
+category: bar
+difficulty: 4
+*/
+
 var xAxisData = [];
 var data1 = [];
 var data2 = [];
@@ -7,26 +14,22 @@ var data4 = [];
 for (var i = 0; i < 10; i++) {
     xAxisData.push('Class' + i);
     data1.push((Math.random() * 2).toFixed(2));
-    data2.push(-Math.random().toFixed(2));
-    data3.push((Math.random() * 5).toFixed(2));
-    data4.push((Math.random() + 0.3).toFixed(2));
+    data2.push((Math.random() * 5).toFixed(2));
+    data3.push((Math.random() + 0.3).toFixed(2));
+    data4.push(-Math.random().toFixed(2));
 }
 
 var emphasisStyle = {
     itemStyle: {
-        barBorderWidth: 1,
         shadowBlur: 10,
-        shadowOffsetX: 0,
-        shadowOffsetY: 0,
-        shadowColor: 'rgba(0,0,0,0.5)'
+        shadowColor: 'rgba(0,0,0,0.3)'
     }
 };
 
 option = {
-    backgroundColor: '#eee',
     legend: {
         data: ['bar', 'bar2', 'bar3', 'bar4'],
-        left: 10
+        left: '10%'
     },
     brush: {
         toolbox: ['rect', 'polygon', 'lineX', 'lineY', 'keep', 'clear'],
@@ -48,35 +51,9 @@ option = {
         splitLine: {show: false},
         splitArea: {show: false}
     },
-    yAxis: {
-        inverse: true,
-        splitArea: {show: false}
-    },
+    yAxis: {},
     grid: {
-        left: 100
-    },
-    visualMap: {
-        type: 'continuous',
-        dimension: 1,
-        text: ['High', 'Low'],
-        inverse: true,
-        itemHeight: 200,
-        calculable: true,
-        min: -2,
-        max: 6,
-        top: 60,
-        left: 10,
-        inRange: {
-            colorLightness: [0.4, 0.8]
-        },
-        outOfRange: {
-            color: '#bbb'
-        },
-        controller: {
-            inRange: {
-                color: '#2f4554'
-            }
-        }
+        bottom: 100
     },
     series: [
         {
@@ -126,7 +103,7 @@ function renderBrushed(params) {
             backgroundColor: '#333',
             text: 'SELECTED DATA INDICES: \n' + brushed.join('\n'),
             bottom: 0,
-            right: 0,
+            right:'10%',
             width: 100,
             textStyle: {
                 fontSize: 12,

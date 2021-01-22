@@ -1,3 +1,10 @@
+/*
+title: Area Pieces
+titleCN: 折线图区域高亮
+category: 'line, visualMap'
+difficulty: 3
+*/
+
 
 option = {
     xAxis: {
@@ -16,11 +23,11 @@ option = {
         pieces: [{
             gt: 1,
             lt: 3,
-            color: 'rgba(0, 180, 0, 0.5)'
+            color: 'rgba(0, 0, 180, 0.4)'
         }, {
             gt: 5,
             lt: 7,
-            color: 'rgba(0, 180, 0, 0.5)'
+            color: 'rgba(0, 0, 180, 0.4)'
         }]
     },
     series: [
@@ -29,7 +36,7 @@ option = {
             smooth: 0.6,
             symbol: 'none',
             lineStyle: {
-                color: 'green',
+                color: '#5470C6',
                 width: 5
             },
             markLine: {
@@ -45,9 +52,9 @@ option = {
             areaStyle: {},
             data: [
                 ['2019-10-10', 200],
-                ['2019-10-11', 400],
-                ['2019-10-12', 650],
-                ['2019-10-13', 500],
+                ['2019-10-11', 560],
+                ['2019-10-12', 750],
+                ['2019-10-13', 580],
                 ['2019-10-14', 250],
                 ['2019-10-15', 300],
                 ['2019-10-16', 450],

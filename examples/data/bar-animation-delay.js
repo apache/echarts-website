@@ -1,3 +1,10 @@
+/*
+title: Animation Delay
+titleCN: 柱状图动画延迟
+category: bar
+difficulty: 5
+*/
+
 var xAxisData = [];
 var data1 = [];
 var data2 = [];
@@ -39,6 +46,9 @@ option = {
         name: 'bar',
         type: 'bar',
         data: data1,
+        emphasis: {
+            focus: 'series'
+        },
         animationDelay: function (idx) {
             return idx * 10;
         }
@@ -46,6 +56,9 @@ option = {
         name: 'bar2',
         type: 'bar',
         data: data2,
+        emphasis: {
+            focus: 'series'
+        },
         animationDelay: function (idx) {
             return idx * 10 + 100;
         }

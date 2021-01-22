@@ -1,3 +1,11 @@
+/*
+title: Drink Flavors
+category: sunburst
+titleCN: Drink Flavors
+shotWidth: 1000
+difficulty: 5
+*/
+
 var data = [{
     name: 'Flora',
     itemStyle: {
@@ -675,10 +683,15 @@ option = {
     },
     series: {
         type: 'sunburst',
-        highlightPolicy: 'ancestor',
+
         data: data,
         radius: [0, '95%'],
         sort: null,
+
+        emphasis: {
+            focus: 'ancestor'
+        },
+
         levels: [{}, {
             r0: '15%',
             r: '35%',

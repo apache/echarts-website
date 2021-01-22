@@ -1,3 +1,10 @@
+/*
+title: Rainfall
+titleCN: 雨量流量关系图
+category: line
+difficulty: 5
+*/
+
 option = {
     title: {
         text: '雨量流量关系图',
@@ -127,13 +134,18 @@ option = {
         {
             name: '流量',
             type: 'line',
-            animation: false,
             areaStyle: {},
             lineStyle: {
                 width: 1
             },
+            emphasis: {
+                focus: 'series'
+            },
             markArea: {
                 silent: true,
+                itemStyle: {
+                    opacity: 0.3
+                },
                 data: [[{
                     xAxis: '2009/9/12\n7:00'
                 }, {
@@ -148,13 +160,18 @@ option = {
             name: '降雨量',
             type: 'line',
             yAxisIndex: 1,
-            animation: false,
             areaStyle: {},
             lineStyle: {
                 width: 1
             },
+            emphasis: {
+                focus: 'series'
+            },
             markArea: {
                 silent: true,
+                itemStyle: {
+                    opacity: 0.3
+                },
                 data: [
                     [{
                         xAxis: '2009/9/10\n7:00'

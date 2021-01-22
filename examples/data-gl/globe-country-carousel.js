@@ -1,3 +1,9 @@
+/*
+title: Country Carousel
+category: globe
+titleCN: Country Carousel
+*/
+
 var canvas = document.createElement('canvas');
 var mapChart = echarts.init(canvas, null, {
     width: 2048,
@@ -16,17 +22,11 @@ mapChart.setOption({
         boundingCoords: [[-180, 90], [180, -90]],
         silent: true,
         itemStyle: {
-            normal: {
-                borderColor: '#000'
-            }
+            borderColor: '#000'
         },
         label: {
-            normal: {
-                textStyle: {
-                    color: '#fff',
-                    fontSize: 40
-                }
-            }
+            color: '#fff',
+            fontSize: 40
         }
     }
 });

@@ -1,3 +1,10 @@
+/*
+title: Air Quality
+category: scatter
+titleCN: 全国主要城市空气质量
+difficulty: 2
+*/
+
 var data = [
      {name: '海门', value: 9},
      {name: '鄂尔多斯', value: 12},

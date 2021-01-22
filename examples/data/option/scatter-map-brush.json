@@ -1,0 +1,2753 @@
+{
+  "backgroundColor": "#404a59",
+  "animation": false,
+  "animationDuration": 1000,
+  "animationEasing": "cubicInOut",
+  "animationDurationUpdate": 1000,
+  "animationEasingUpdate": "cubicInOut",
+  "darkMode": true,
+  "color": [
+    "#4992ff",
+    "#7cffb2",
+    "#fddd60",
+    "#ff6e76",
+    "#58d9f9",
+    "#05c091",
+    "#ff8a45",
+    "#8d48e3",
+    "#dd79ff"
+  ],
+  "textStyle": {
+    "color": "#B9B8CE",
+    "fontFamily": "sans-serif",
+    "fontSize": 12,
+    "fontStyle": "normal",
+    "fontWeight": "normal"
+  },
+  "timeAxis": {
+    "axisLine": {
+      "lineStyle": {
+        "color": "#B9B8CE"
+      }
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#484753"
+      }
+    },
+    "splitArea": {
+      "areaStyle": {
+        "color": [
+          "rgba(255,255,255,0.02)",
+          "rgba(255,255,255,0.05)"
+        ]
+      }
+    },
+    "minorSplitLine": {
+      "lineStyle": {
+        "color": "#20203B"
+      }
+    }
+  },
+  "logAxis": {
+    "axisLine": {
+      "lineStyle": {
+        "color": "#B9B8CE"
+      }
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#484753"
+      }
+    },
+    "splitArea": {
+      "areaStyle": {
+        "color": [
+          "rgba(255,255,255,0.02)",
+          "rgba(255,255,255,0.05)"
+        ]
+      }
+    },
+    "minorSplitLine": {
+      "lineStyle": {
+        "color": "#20203B"
+      }
+    }
+  },
+  "valueAxis": {
+    "axisLine": {
+      "lineStyle": {
+        "color": "#B9B8CE"
+      }
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#484753"
+      }
+    },
+    "splitArea": {
+      "areaStyle": {
+        "color": [
+          "rgba(255,255,255,0.02)",
+          "rgba(255,255,255,0.05)"
+        ]
+      }
+    },
+    "minorSplitLine": {
+      "lineStyle": {
+        "color": "#20203B"
+      }
+    }
+  },
+  "categoryAxis": {
+    "axisLine": {
+      "lineStyle": {
+        "color": "#B9B8CE"
+      }
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#484753"
+      },
+      "show": false
+    },
+    "splitArea": {
+      "areaStyle": {
+        "color": [
+          "rgba(255,255,255,0.02)",
+          "rgba(255,255,255,0.05)"
+        ]
+      }
+    },
+    "minorSplitLine": {
+      "lineStyle": {
+        "color": "#20203B"
+      }
+    }
+  },
+  "line": {
+    "symbol": "circle"
+  },
+  "graph": {
+    "color": [
+      "#4992ff",
+      "#7cffb2",
+      "#fddd60",
+      "#ff6e76",
+      "#58d9f9",
+      "#05c091",
+      "#ff8a45",
+      "#8d48e3",
+      "#dd79ff"
+    ]
+  },
+  "gauge": {
+    "title": {
+      "color": "#B9B8CE"
+    },
+    "axisLine": {
+      "lineStyle": {
+        "color": [
+          [
+            1,
+            "rgba(207,212,219,0.2)"
+          ]
+        ]
+      }
+    },
+    "axisLabel": {
+      "color": "#B9B8CE"
+    },
+    "detail": {
+      "color": "#EEF1FA"
+    }
+  },
+  "candlestick": {
+    "itemStyle": {
+      "color": "#FD1050",
+      "color0": "#0CF49B",
+      "borderColor": "#FD1050",
+      "borderColor0": "#0CF49B"
+    }
+  },
+  "gradientColor": [
+    "#f6efa6",
+    "#d88273",
+    "#bf444c"
+  ],
+  "aria": {
+    "decal": {
+      "decals": [
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "dashArrayX": [
+            1,
+            0
+          ],
+          "dashArrayY": [
+            2,
+            5
+          ],
+          "symbolSize": 1,
+          "rotation": 0.5235987755982988
+        },
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "symbol": "circle",
+          "dashArrayX": [
+            [
+              8,
+              8
+            ],
+            [
+              0,
+              8,
+              8,
+              0
+            ]
+          ],
+          "dashArrayY": [
+            6,
+            0
+          ],
+          "symbolSize": 0.8
+        },
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "dashArrayX": [
+            1,
+            0
+          ],
+          "dashArrayY": [
+            4,
+            3
+          ],
+          "dashLineOffset": 0,
+          "rotation": -0.7853981633974483
+        },
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "dashArrayX": [
+            [
+              6,
+              6
+            ],
+            [
+              0,
+              6,
+              6,
+              0
+            ]
+          ],
+          "dashArrayY": [
+            6,
+            0
+          ]
+        },
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "dashArrayX": [
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              6
+            ]
+          ],
+          "dashArrayY": [
+            1,
+            0,
+            6,
+            0
+          ],
+          "rotation": 0.7853981633974483
+        },
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "symbol": "triangle",
+          "dashArrayX": [
+            [
+              9,
+              9
+            ],
+            [
+              0,
+              9,
+              9,
+              0
+            ]
+          ],
+          "dashArrayY": [
+            7,
+            2
+          ],
+          "symbolSize": 0.75
+        }
+      ]
+    }
+  },
+  "stateAnimation": {
+    "duration": 300,
+    "easing": "cubicOut"
+  },
+  "animationThreshold": 2000,
+  "progressiveThreshold": 3000,
+  "progressive": 400,
+  "hoverLayerThreshold": 3000,
+  "useUTC": false,
+  "title": [
+    {
+      "text": "全国主要城市 PM 2.5",
+      "subtext": "data from PM25.in",
+      "sublink": "http://www.pm25.in",
+      "left": "center",
+      "textStyle": {
+        "color": "#fff",
+        "fontSize": 18,
+        "fontWeight": "bold"
+      },
+      "padding": 15,
+      "subtextStyle": {
+        "color": "#B9B8CE",
+        "fontSize": 12
+      },
+      "zlevel": 0,
+      "z": 6,
+      "show": true,
+      "target": "blank",
+      "subtarget": "blank",
+      "top": 0,
+      "backgroundColor": "rgba(0,0,0,0)",
+      "borderColor": "#ccc",
+      "borderWidth": 0,
+      "itemGap": 10,
+      "right": null
+    },
+    {
+      "id": "statistic",
+      "right": 120,
+      "top": 40,
+      "width": 100,
+      "textStyle": {
+        "color": "#fff",
+        "fontSize": 16,
+        "fontWeight": "bold"
+      },
+      "padding": 15,
+      "subtextStyle": {
+        "color": "#B9B8CE",
+        "fontSize": 12
+      },
+      "zlevel": 0,
+      "z": 6,
+      "show": true,
+      "text": "平均: 63.5750",
+      "target": "blank",
+      "subtext": "",
+      "subtarget": "blank",
+      "left": null,
+      "backgroundColor": "rgba(0,0,0,0)",
+      "borderColor": "#ccc",
+      "borderWidth": 0,
+      "itemGap": 10,
+      "bottom": null
+    }
+  ],
+  "toolbox": [
+    {
+      "iconStyle": {
+        "borderColor": "#fff",
+        "color": "none"
+      },
+      "emphasis": {
+        "iconStyle": {
+          "borderColor": "#b1e4ff"
+        }
+      },
+      "feature": {
+        "brush": {
+          "type": [
+            "rect",
+            "polygon",
+            "keep",
+            "clear"
+          ],
+          "show": true,
+          "icon": {
+            "rect": "M7.3,34.7 M0.4,10V-0.2h9.8 M89.6,10V-0.2h-9.8 M0.4,60v10.2h9.8 M89.6,60v10.2h-9.8 M12.3,22.4V10.5h13.1 M33.6,10.5h7.8 M49.1,10.5h7.8 M77.5,22.4V10.5h-13 M12.3,31.1v8.2 M77.7,31.1v8.2 M12.3,47.6v11.9h13.1 M33.6,59.5h7.6 M49.1,59.5 h7.7 M77.5,47.6v11.9h-13",
+            "polygon": "M55.2,34.9c1.7,0,3.1,1.4,3.1,3.1s-1.4,3.1-3.1,3.1 s-3.1-1.4-3.1-3.1S53.5,34.9,55.2,34.9z M50.4,51c1.7,0,3.1,1.4,3.1,3.1c0,1.7-1.4,3.1-3.1,3.1c-1.7,0-3.1-1.4-3.1-3.1 C47.3,52.4,48.7,51,50.4,51z M55.6,37.1l1.5-7.8 M60.1,13.5l1.6-8.7l-7.8,4 M59,19l-1,5.3 M24,16.1l6.4,4.9l6.4-3.3 M48.5,11.6 l-5.9,3.1 M19.1,12.8L9.7,5.1l1.1,7.7 M13.4,29.8l1,7.3l6.6,1.6 M11.6,18.4l1,6.1 M32.8,41.9 M26.6,40.4 M27.3,40.2l6.1,1.6 M49.9,52.1l-5.6-7.6l-4.9-1.2",
+            "lineX": "M15.2,30 M19.7,15.6V1.9H29 M34.8,1.9H40.4 M55.3,15.6V1.9H45.9 M19.7,44.4V58.1H29 M34.8,58.1H40.4 M55.3,44.4 V58.1H45.9 M12.5,20.3l-9.4,9.6l9.6,9.8 M3.1,29.9h16.5 M62.5,20.3l9.4,9.6L62.3,39.7 M71.9,29.9H55.4",
+            "lineY": "M38.8,7.7 M52.7,12h13.2v9 M65.9,26.6V32 M52.7,46.3h13.2v-9 M24.9,12H11.8v9 M11.8,26.6V32 M24.9,46.3H11.8v-9 M48.2,5.1l-9.3-9l-9.4,9.2 M38.9-3.9V12 M48.2,53.3l-9.3,9l-9.4-9.2 M38.9,62.3V46.4",
+            "keep": "M4,10.5V1h10.3 M20.7,1h6.1 M33,1h6.1 M55.4,10.5V1H45.2 M4,17.3v6.6 M55.6,17.3v6.6 M4,30.5V40h10.3 M20.7,40 h6.1 M33,40h6.1 M55.4,30.5V40H45.2 M21,18.9h62.9v48.6H21V18.9z",
+            "clear": "M22,14.7l30.9,31 M52.9,14.7L22,45.7 M4.7,16.8V4.2h13.1 M26,4.2h7.8 M41.6,4.2h7.8 M70.3,16.8V4.2H57.2 M4.7,25.9v8.6 M70.3,25.9v8.6 M4.7,43.2v12.6h13.1 M26,55.8h7.8 M41.6,55.8h7.8 M70.3,43.2v12.6H57.2"
+          },
+          "title": {
+            "rect": "Box Select",
+            "polygon": "Lasso Select",
+            "lineX": "Horizontally Select",
+            "lineY": "Vertically Select",
+            "keep": "Keep Selections",
+            "clear": "Clear Selections"
+          },
+          "iconStatus": {
+            "rect": "normal",
+            "polygon": "normal",
+            "keep": "normal",
+            "clear": "emphasis"
+          }
+        }
+      },
+      "padding": 15,
+      "show": true,
+      "z": 6,
+      "zlevel": 0,
+      "orient": "horizontal",
+      "left": "right",
+      "top": "top",
+      "backgroundColor": "transparent",
+      "borderColor": "#ccc",
+      "borderRadius": 0,
+      "borderWidth": 0,
+      "itemSize": 15,
+      "itemGap": 8,
+      "showTitle": true,
+      "tooltip": {
+        "show": false
+      }
+    }
+  ],
+  "geo": [
+    {
+      "map": "china",
+      "left": "10",
+      "right": "35%",
+      "center": [
+        117.98561551896913,
+        31.205000490896193
+      ],
+      "zoom": 2.5,
+      "label": {
+        "emphasis": {
+          "show": false
+        },
+        "show": false,
+        "color": "#000"
+      },
+      "roam": true,
+      "itemStyle": {
+        "areaColor": "#323c48",
+        "borderColor": "#111",
+        "borderWidth": 0.5,
+        "color": "#eee"
+      },
+      "emphasis": {
+        "itemStyle": {
+          "areaColor": "#2a333d",
+          "color": "rgba(255,215,0,0.8)"
+        },
+        "label": {
+          "show": false,
+          "color": "rgb(100,0,0)"
+        }
+      },
+      "zlevel": 0,
+      "z": 0,
+      "show": true,
+      "top": "center",
+      "aspectScale": null,
+      "silent": false,
+      "boundingCoords": null,
+      "scaleLimit": null,
+      "select": {
+        "label": {
+          "show": true,
+          "color": "rgb(100,0,0)"
+        },
+        "itemStyle": {
+          "color": "rgba(255,215,0,0.8)"
+        }
+      },
+      "regions": [
+        {
+          "name": "台湾"
+        },
+        {
+          "name": "河北"
+        },
+        {
+          "name": "山西"
+        },
+        {
+          "name": "内蒙古"
+        },
+        {
+          "name": "辽宁"
+        },
+        {
+          "name": "吉林"
+        },
+        {
+          "name": "黑龙江"
+        },
+        {
+          "name": "江苏"
+        },
+        {
+          "name": "浙江"
+        },
+        {
+          "name": "安徽"
+        },
+        {
+          "name": "福建"
+        },
+        {
+          "name": "江西"
+        },
+        {
+          "name": "山东"
+        },
+        {
+          "name": "河南"
+        },
+        {
+          "name": "湖北"
+        },
+        {
+          "name": "湖南"
+        },
+        {
+          "name": "广东"
+        },
+        {
+          "name": "广西"
+        },
+        {
+          "name": "海南"
+        },
+        {
+          "name": "四川"
+        },
+        {
+          "name": "贵州"
+        },
+        {
+          "name": "云南"
+        },
+        {
+          "name": "西藏"
+        },
+        {
+          "name": "陕西"
+        },
+        {
+          "name": "甘肃"
+        },
+        {
+          "name": "青海"
+        },
+        {
+          "name": "宁夏"
+        },
+        {
+          "name": "新疆"
+        },
+        {
+          "name": "北京"
+        },
+        {
+          "name": "天津"
+        },
+        {
+          "name": "上海"
+        },
+        {
+          "name": "重庆"
+        },
+        {
+          "name": "香港"
+        },
+        {
+          "name": "澳门"
+        },
+        {
+          "name": "南海诸岛"
+        }
+      ],
+      "selectedMap": {}
+    }
+  ],
+  "axisPointer": [
+    {
+      "lineStyle": {
+        "color": "#817f91",
+        "width": 1,
+        "type": "dashed"
+      },
+      "crossStyle": {
+        "color": "#817f91"
+      },
+      "label": {
+        "color": "#fff",
+        "show": true,
+        "formatter": null,
+        "precision": "auto",
+        "margin": 3,
+        "padding": [
+          5,
+          7,
+          5,
+          7
+        ],
+        "backgroundColor": "auto",
+        "borderColor": null,
+        "borderWidth": 0,
+        "borderRadius": 3
+      },
+      "show": "auto",
+      "zlevel": 0,
+      "z": 50,
+      "type": "line",
+      "snap": false,
+      "triggerTooltip": true,
+      "value": null,
+      "status": null,
+      "link": [],
+      "animation": null,
+      "animationDurationUpdate": 200,
+      "shadowStyle": {
+        "color": "rgba(210,219,238,0.2)"
+      },
+      "handle": {
+        "show": false,
+        "icon": "M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7v-1.2h6.6z M13.3,22H6.7v-1.2h6.6z M13.3,19.6H6.7v-1.2h6.6z",
+        "size": 45,
+        "margin": 50,
+        "color": "#333",
+        "shadowBlur": 3,
+        "shadowColor": "#aaa",
+        "shadowOffsetX": 0,
+        "shadowOffsetY": 2,
+        "throttle": 40
+      }
+    }
+  ],
+  "tooltip": [
+    {
+      "trigger": "item",
+      "zlevel": 0,
+      "z": 60,
+      "show": true,
+      "showContent": true,
+      "triggerOn": "mousemove|click",
+      "alwaysShowContent": false,
+      "displayMode": "single",
+      "renderMode": "auto",
+      "confine": null,
+      "showDelay": 0,
+      "hideDelay": 100,
+      "transitionDuration": 0.4,
+      "enterable": false,
+      "backgroundColor": "#fff",
+      "shadowBlur": 10,
+      "shadowColor": "rgba(0, 0, 0, .2)",
+      "shadowOffsetX": 1,
+      "shadowOffsetY": 2,
+      "borderColor": "#333",
+      "borderRadius": 4,
+      "borderWidth": 1,
+      "padding": null,
+      "extraCssText": "",
+      "axisPointer": {
+        "type": "line",
+        "axis": "auto",
+        "animation": "auto",
+        "animationDurationUpdate": 200,
+        "animationEasingUpdate": "exponentialOut",
+        "crossStyle": {
+          "color": "#999",
+          "width": 1,
+          "type": "dashed",
+          "textStyle": {}
+        }
+      },
+      "textStyle": {
+        "color": "#666",
+        "fontSize": 14
+      }
+    }
+  ],
+  "yAxis": [
+    {
+      "type": "category",
+      "name": "TOP 20",
+      "nameGap": 16,
+      "axisLine": {
+        "show": false,
+        "lineStyle": {
+          "color": "#ddd",
+          "width": 1,
+          "type": "solid"
+        },
+        "onZero": true,
+        "onZeroAxisIndex": null,
+        "symbol": [
+          "none",
+          "none"
+        ],
+        "symbolSize": [
+          10,
+          15
+        ]
+      },
+      "axisTick": {
+        "show": false,
+        "lineStyle": {
+          "color": "#ddd",
+          "width": 1
+        },
+        "alignWithLabel": false,
+        "interval": "auto",
+        "inside": false,
+        "length": 5
+      },
+      "axisLabel": {
+        "interval": 0,
+        "textStyle": {
+          "color": "#ddd"
+        },
+        "color": "#ddd",
+        "show": true,
+        "inside": false,
+        "rotate": 0,
+        "showMinLabel": null,
+        "showMaxLabel": null,
+        "margin": 8,
+        "fontSize": 12
+      },
+      "data": [
+        "海门",
+        "舟山",
+        "盐城",
+        "南通",
+        "上海",
+        "太仓",
+        "湖州",
+        "昆山",
+        "宁波",
+        "连云港",
+        "常熟",
+        "淮安",
+        "泰州",
+        "江阴",
+        "宿迁",
+        "吴江",
+        "苏州",
+        "嘉兴",
+        "张家港",
+        "镇江",
+        "宜兴",
+        "金坛",
+        "绍兴",
+        "扬州",
+        "常州",
+        "台州",
+        "南京",
+        "无锡",
+        "句容",
+        "徐州"
+      ],
+      "splitLine": {
+        "lineStyle": {
+          "color": "#484753",
+          "width": 1,
+          "type": "solid"
+        },
+        "show": false
+      },
+      "splitArea": {
+        "areaStyle": {
+          "color": [
+            "rgba(255,255,255,0.02)",
+            "rgba(255,255,255,0.05)"
+          ]
+        },
+        "show": false
+      },
+      "minorSplitLine": {
+        "lineStyle": {
+          "color": "#20203B"
+        }
+      },
+      "boundaryGap": true,
+      "deduplication": null,
+      "show": true,
+      "zlevel": 0,
+      "z": 0,
+      "inverse": false,
+      "nameLocation": "end",
+      "nameRotate": null,
+      "nameTruncate": {
+        "maxWidth": null,
+        "ellipsis": "...",
+        "placeholder": "."
+      },
+      "nameTextStyle": {},
+      "silent": false,
+      "triggerEvent": false,
+      "tooltip": {
+        "show": false
+      },
+      "axisPointer": {},
+      "offset": 0,
+      "categorySortInfo": []
+    }
+  ],
+  "xAxis": [
+    {
+      "type": "value",
+      "scale": true,
+      "position": "top",
+      "boundaryGap": false,
+      "splitLine": {
+        "show": false,
+        "lineStyle": {
+          "color": "#484753",
+          "width": 1,
+          "type": "solid"
+        }
+      },
+      "axisLine": {
+        "show": false,
+        "lineStyle": {
+          "color": "#B9B8CE",
+          "width": 1,
+          "type": "solid"
+        },
+        "onZero": true,
+        "onZeroAxisIndex": null,
+        "symbol": [
+          "none",
+          "none"
+        ],
+        "symbolSize": [
+          10,
+          15
+        ]
+      },
+      "axisTick": {
+        "show": false,
+        "inside": false,
+        "length": 5,
+        "lineStyle": {
+          "width": 1
+        }
+      },
+      "axisLabel": {
+        "margin": 2,
+        "textStyle": {
+          "color": "#aaa"
+        },
+        "color": "#aaa",
+        "show": true,
+        "inside": false,
+        "rotate": 0,
+        "showMinLabel": null,
+        "showMaxLabel": null,
+        "fontSize": 12
+      },
+      "splitArea": {
+        "areaStyle": {
+          "color": [
+            "rgba(255,255,255,0.02)",
+            "rgba(255,255,255,0.05)"
+          ]
+        },
+        "show": false
+      },
+      "minorSplitLine": {
+        "lineStyle": {
+          "color": "#20203B",
+          "width": 1
+        },
+        "show": false
+      },
+      "splitNumber": 5,
+      "minorTick": {
+        "show": false,
+        "splitNumber": 5,
+        "length": 3,
+        "lineStyle": {}
+      },
+      "show": true,
+      "zlevel": 0,
+      "z": 0,
+      "inverse": false,
+      "name": "",
+      "nameLocation": "end",
+      "nameRotate": null,
+      "nameTruncate": {
+        "maxWidth": null,
+        "ellipsis": "...",
+        "placeholder": "."
+      },
+      "nameTextStyle": {},
+      "nameGap": 15,
+      "silent": false,
+      "triggerEvent": false,
+      "tooltip": {
+        "show": false
+      },
+      "axisPointer": {},
+      "offset": 0,
+      "categorySortInfo": []
+    }
+  ],
+  "grid": [
+    {
+      "right": 40,
+      "top": 100,
+      "bottom": 40,
+      "width": "30%",
+      "show": false,
+      "zlevel": 0,
+      "z": 0,
+      "containLabel": false,
+      "backgroundColor": "rgba(0,0,0,0)",
+      "borderWidth": 1,
+      "borderColor": "#ccc"
+    }
+  ],
+  "series": [
+    {
+      "name": "pm2.5",
+      "type": "scatter",
+      "coordinateSystem": "geo",
+      "data": [
+        {
+          "name": "海门",
+          "value": [
+            121.15,
+            31.89,
+            9
+          ]
+        },
+        {
+          "name": "鄂尔多斯",
+          "value": [
+            109.781327,
+            39.608266,
+            12
+          ]
+        },
+        {
+          "name": "招远",
+          "value": [
+            120.38,
+            37.35,
+            12
+          ]
+        },
+        {
+          "name": "舟山",
+          "value": [
+            122.207216,
+            29.985295,
+            12
+          ]
+        },
+        {
+          "name": "齐齐哈尔",
+          "value": [
+            123.97,
+            47.33,
+            14
+          ]
+        },
+        {
+          "name": "盐城",
+          "value": [
+            120.13,
+            33.38,
+            15
+          ]
+        },
+        {
+          "name": "赤峰",
+          "value": [
+            118.87,
+            42.28,
+            16
+          ]
+        },
+        {
+          "name": "青岛",
+          "value": [
+            120.33,
+            36.07,
+            18
+          ]
+        },
+        {
+          "name": "乳山",
+          "value": [
+            121.52,
+            36.89,
+            18
+          ]
+        },
+        {
+          "name": "金昌",
+          "value": [
+            102.188043,
+            38.520089,
+            19
+          ]
+        },
+        {
+          "name": "泉州",
+          "value": [
+            118.58,
+            24.93,
+            21
+          ]
+        },
+        {
+          "name": "莱西",
+          "value": [
+            120.53,
+            36.86,
+            21
+          ]
+        },
+        {
+          "name": "日照",
+          "value": [
+            119.46,
+            35.42,
+            21
+          ]
+        },
+        {
+          "name": "胶南",
+          "value": [
+            119.97,
+            35.88,
+            22
+          ]
+        },
+        {
+          "name": "南通",
+          "value": [
+            121.05,
+            32.08,
+            23
+          ]
+        },
+        {
+          "name": "拉萨",
+          "value": [
+            91.11,
+            29.97,
+            24
+          ]
+        },
+        {
+          "name": "云浮",
+          "value": [
+            112.02,
+            22.93,
+            24
+          ]
+        },
+        {
+          "name": "梅州",
+          "value": [
+            116.1,
+            24.55,
+            25
+          ]
+        },
+        {
+          "name": "文登",
+          "value": [
+            122.05,
+            37.2,
+            25
+          ]
+        },
+        {
+          "name": "上海",
+          "value": [
+            121.48,
+            31.22,
+            25
+          ]
+        },
+        {
+          "name": "攀枝花",
+          "value": [
+            101.718637,
+            26.582347,
+            25
+          ]
+        },
+        {
+          "name": "威海",
+          "value": [
+            122.1,
+            37.5,
+            25
+          ]
+        },
+        {
+          "name": "承德",
+          "value": [
+            117.93,
+            40.97,
+            25
+          ]
+        },
+        {
+          "name": "厦门",
+          "value": [
+            118.1,
+            24.46,
+            26
+          ]
+        },
+        {
+          "name": "汕尾",
+          "value": [
+            115.375279,
+            22.786211,
+            26
+          ]
+        },
+        {
+          "name": "潮州",
+          "value": [
+            116.63,
+            23.68,
+            26
+          ]
+        },
+        {
+          "name": "丹东",
+          "value": [
+            124.37,
+            40.13,
+            27
+          ]
+        },
+        {
+          "name": "太仓",
+          "value": [
+            121.1,
+            31.45,
+            27
+          ]
+        },
+        {
+          "name": "曲靖",
+          "value": [
+            103.79,
+            25.51,
+            27
+          ]
+        },
+        {
+          "name": "烟台",
+          "value": [
+            121.39,
+            37.52,
+            28
+          ]
+        },
+        {
+          "name": "福州",
+          "value": [
+            119.3,
+            26.08,
+            29
+          ]
+        },
+        {
+          "name": "瓦房店",
+          "value": [
+            121.979603,
+            39.627114,
+            30
+          ]
+        },
+        {
+          "name": "即墨",
+          "value": [
+            120.45,
+            36.38,
+            30
+          ]
+        },
+        {
+          "name": "抚顺",
+          "value": [
+            123.97,
+            41.97,
+            31
+          ]
+        },
+        {
+          "name": "玉溪",
+          "value": [
+            102.52,
+            24.35,
+            31
+          ]
+        },
+        {
+          "name": "张家口",
+          "value": [
+            114.87,
+            40.82,
+            31
+          ]
+        },
+        {
+          "name": "阳泉",
+          "value": [
+            113.57,
+            37.85,
+            31
+          ]
+        },
+        {
+          "name": "莱州",
+          "value": [
+            119.942327,
+            37.177017,
+            32
+          ]
+        },
+        {
+          "name": "湖州",
+          "value": [
+            120.1,
+            30.86,
+            32
+          ]
+        },
+        {
+          "name": "汕头",
+          "value": [
+            116.69,
+            23.39,
+            32
+          ]
+        },
+        {
+          "name": "昆山",
+          "value": [
+            120.95,
+            31.39,
+            33
+          ]
+        },
+        {
+          "name": "宁波",
+          "value": [
+            121.56,
+            29.86,
+            33
+          ]
+        },
+        {
+          "name": "湛江",
+          "value": [
+            110.359377,
+            21.270708,
+            33
+          ]
+        },
+        {
+          "name": "揭阳",
+          "value": [
+            116.35,
+            23.55,
+            34
+          ]
+        },
+        {
+          "name": "荣成",
+          "value": [
+            122.41,
+            37.16,
+            34
+          ]
+        },
+        {
+          "name": "连云港",
+          "value": [
+            119.16,
+            34.59,
+            35
+          ]
+        },
+        {
+          "name": "葫芦岛",
+          "value": [
+            120.836932,
+            40.711052,
+            35
+          ]
+        },
+        {
+          "name": "常熟",
+          "value": [
+            120.74,
+            31.64,
+            36
+          ]
+        },
+        {
+          "name": "东莞",
+          "value": [
+            113.75,
+            23.04,
+            36
+          ]
+        },
+        {
+          "name": "河源",
+          "value": [
+            114.68,
+            23.73,
+            36
+          ]
+        },
+        {
+          "name": "淮安",
+          "value": [
+            119.15,
+            33.5,
+            36
+          ]
+        },
+        {
+          "name": "泰州",
+          "value": [
+            119.9,
+            32.49,
+            36
+          ]
+        },
+        {
+          "name": "南宁",
+          "value": [
+            108.33,
+            22.84,
+            37
+          ]
+        },
+        {
+          "name": "营口",
+          "value": [
+            122.18,
+            40.65,
+            37
+          ]
+        },
+        {
+          "name": "惠州",
+          "value": [
+            114.4,
+            23.09,
+            37
+          ]
+        },
+        {
+          "name": "江阴",
+          "value": [
+            120.26,
+            31.91,
+            37
+          ]
+        },
+        {
+          "name": "蓬莱",
+          "value": [
+            120.75,
+            37.8,
+            37
+          ]
+        },
+        {
+          "name": "韶关",
+          "value": [
+            113.62,
+            24.84,
+            38
+          ]
+        },
+        {
+          "name": "嘉峪关",
+          "value": [
+            98.289152,
+            39.77313,
+            38
+          ]
+        },
+        {
+          "name": "广州",
+          "value": [
+            113.23,
+            23.16,
+            38
+          ]
+        },
+        {
+          "name": "延安",
+          "value": [
+            109.47,
+            36.6,
+            38
+          ]
+        },
+        {
+          "name": "太原",
+          "value": [
+            112.53,
+            37.87,
+            39
+          ]
+        },
+        {
+          "name": "清远",
+          "value": [
+            113.01,
+            23.7,
+            39
+          ]
+        },
+        {
+          "name": "中山",
+          "value": [
+            113.38,
+            22.52,
+            39
+          ]
+        },
+        {
+          "name": "昆明",
+          "value": [
+            102.73,
+            25.04,
+            39
+          ]
+        },
+        {
+          "name": "寿光",
+          "value": [
+            118.73,
+            36.86,
+            40
+          ]
+        },
+        {
+          "name": "盘锦",
+          "value": [
+            122.070714,
+            41.119997,
+            40
+          ]
+        },
+        {
+          "name": "长治",
+          "value": [
+            113.08,
+            36.18,
+            41
+          ]
+        },
+        {
+          "name": "深圳",
+          "value": [
+            114.07,
+            22.62,
+            41
+          ]
+        },
+        {
+          "name": "珠海",
+          "value": [
+            113.52,
+            22.3,
+            42
+          ]
+        },
+        {
+          "name": "宿迁",
+          "value": [
+            118.3,
+            33.96,
+            43
+          ]
+        },
+        {
+          "name": "咸阳",
+          "value": [
+            108.72,
+            34.36,
+            43
+          ]
+        },
+        {
+          "name": "铜川",
+          "value": [
+            109.11,
+            35.09,
+            44
+          ]
+        },
+        {
+          "name": "平度",
+          "value": [
+            119.97,
+            36.77,
+            44
+          ]
+        },
+        {
+          "name": "佛山",
+          "value": [
+            113.11,
+            23.05,
+            44
+          ]
+        },
+        {
+          "name": "海口",
+          "value": [
+            110.35,
+            20.02,
+            44
+          ]
+        },
+        {
+          "name": "江门",
+          "value": [
+            113.06,
+            22.61,
+            45
+          ]
+        },
+        {
+          "name": "章丘",
+          "value": [
+            117.53,
+            36.72,
+            45
+          ]
+        },
+        {
+          "name": "肇庆",
+          "value": [
+            112.44,
+            23.05,
+            46
+          ]
+        },
+        {
+          "name": "大连",
+          "value": [
+            121.62,
+            38.92,
+            47
+          ]
+        },
+        {
+          "name": "临汾",
+          "value": [
+            111.5,
+            36.08,
+            47
+          ]
+        },
+        {
+          "name": "吴江",
+          "value": [
+            120.63,
+            31.16,
+            47
+          ]
+        },
+        {
+          "name": "石嘴山",
+          "value": [
+            106.39,
+            39.04,
+            49
+          ]
+        },
+        {
+          "name": "沈阳",
+          "value": [
+            123.38,
+            41.8,
+            50
+          ]
+        },
+        {
+          "name": "苏州",
+          "value": [
+            120.62,
+            31.32,
+            50
+          ]
+        },
+        {
+          "name": "茂名",
+          "value": [
+            110.88,
+            21.68,
+            50
+          ]
+        },
+        {
+          "name": "嘉兴",
+          "value": [
+            120.76,
+            30.77,
+            51
+          ]
+        },
+        {
+          "name": "长春",
+          "value": [
+            125.35,
+            43.88,
+            51
+          ]
+        },
+        {
+          "name": "胶州",
+          "value": [
+            120.03336,
+            36.264622,
+            52
+          ]
+        },
+        {
+          "name": "银川",
+          "value": [
+            106.27,
+            38.47,
+            52
+          ]
+        },
+        {
+          "name": "张家港",
+          "value": [
+            120.555821,
+            31.875428,
+            52
+          ]
+        },
+        {
+          "name": "三门峡",
+          "value": [
+            111.19,
+            34.76,
+            53
+          ]
+        },
+        {
+          "name": "锦州",
+          "value": [
+            121.15,
+            41.13,
+            54
+          ]
+        },
+        {
+          "name": "南昌",
+          "value": [
+            115.89,
+            28.68,
+            54
+          ]
+        },
+        {
+          "name": "柳州",
+          "value": [
+            109.4,
+            24.33,
+            54
+          ]
+        },
+        {
+          "name": "三亚",
+          "value": [
+            109.511909,
+            18.252847,
+            54
+          ]
+        },
+        {
+          "name": "自贡",
+          "value": [
+            104.778442,
+            29.33903,
+            56
+          ]
+        },
+        {
+          "name": "吉林",
+          "value": [
+            126.57,
+            43.87,
+            56
+          ]
+        },
+        {
+          "name": "阳江",
+          "value": [
+            111.95,
+            21.85,
+            57
+          ]
+        },
+        {
+          "name": "泸州",
+          "value": [
+            105.39,
+            28.91,
+            57
+          ]
+        },
+        {
+          "name": "西宁",
+          "value": [
+            101.74,
+            36.56,
+            57
+          ]
+        },
+        {
+          "name": "宜宾",
+          "value": [
+            104.56,
+            29.77,
+            58
+          ]
+        },
+        {
+          "name": "呼和浩特",
+          "value": [
+            111.65,
+            40.82,
+            58
+          ]
+        },
+        {
+          "name": "成都",
+          "value": [
+            104.06,
+            30.67,
+            58
+          ]
+        },
+        {
+          "name": "大同",
+          "value": [
+            113.3,
+            40.12,
+            58
+          ]
+        },
+        {
+          "name": "镇江",
+          "value": [
+            119.44,
+            32.2,
+            59
+          ]
+        },
+        {
+          "name": "桂林",
+          "value": [
+            110.28,
+            25.29,
+            59
+          ]
+        },
+        {
+          "name": "张家界",
+          "value": [
+            110.479191,
+            29.117096,
+            59
+          ]
+        },
+        {
+          "name": "宜兴",
+          "value": [
+            119.82,
+            31.36,
+            59
+          ]
+        },
+        {
+          "name": "北海",
+          "value": [
+            109.12,
+            21.49,
+            60
+          ]
+        },
+        {
+          "name": "西安",
+          "value": [
+            108.95,
+            34.27,
+            61
+          ]
+        },
+        {
+          "name": "金坛",
+          "value": [
+            119.56,
+            31.74,
+            62
+          ]
+        },
+        {
+          "name": "东营",
+          "value": [
+            118.49,
+            37.46,
+            62
+          ]
+        },
+        {
+          "name": "牡丹江",
+          "value": [
+            129.58,
+            44.6,
+            63
+          ]
+        },
+        {
+          "name": "遵义",
+          "value": [
+            106.9,
+            27.7,
+            63
+          ]
+        },
+        {
+          "name": "绍兴",
+          "value": [
+            120.58,
+            30.01,
+            63
+          ]
+        },
+        {
+          "name": "扬州",
+          "value": [
+            119.42,
+            32.39,
+            64
+          ]
+        },
+        {
+          "name": "常州",
+          "value": [
+            119.95,
+            31.79,
+            64
+          ]
+        },
+        {
+          "name": "潍坊",
+          "value": [
+            119.1,
+            36.62,
+            65
+          ]
+        },
+        {
+          "name": "重庆",
+          "value": [
+            106.54,
+            29.59,
+            66
+          ]
+        },
+        {
+          "name": "台州",
+          "value": [
+            121.420757,
+            28.656386,
+            67
+          ]
+        },
+        {
+          "name": "南京",
+          "value": [
+            118.78,
+            32.04,
+            67
+          ]
+        },
+        {
+          "name": "滨州",
+          "value": [
+            118.03,
+            37.36,
+            70
+          ]
+        },
+        {
+          "name": "贵阳",
+          "value": [
+            106.71,
+            26.57,
+            71
+          ]
+        },
+        {
+          "name": "无锡",
+          "value": [
+            120.29,
+            31.59,
+            71
+          ]
+        },
+        {
+          "name": "本溪",
+          "value": [
+            123.73,
+            41.3,
+            71
+          ]
+        },
+        {
+          "name": "克拉玛依",
+          "value": [
+            84.77,
+            45.59,
+            72
+          ]
+        },
+        {
+          "name": "渭南",
+          "value": [
+            109.5,
+            34.52,
+            72
+          ]
+        },
+        {
+          "name": "马鞍山",
+          "value": [
+            118.48,
+            31.56,
+            72
+          ]
+        },
+        {
+          "name": "宝鸡",
+          "value": [
+            107.15,
+            34.38,
+            72
+          ]
+        },
+        {
+          "name": "焦作",
+          "value": [
+            113.21,
+            35.24,
+            75
+          ]
+        },
+        {
+          "name": "句容",
+          "value": [
+            119.16,
+            31.95,
+            75
+          ]
+        },
+        {
+          "name": "北京",
+          "value": [
+            116.46,
+            39.92,
+            79
+          ]
+        },
+        {
+          "name": "徐州",
+          "value": [
+            117.2,
+            34.26,
+            79
+          ]
+        },
+        {
+          "name": "衡水",
+          "value": [
+            115.72,
+            37.72,
+            80
+          ]
+        },
+        {
+          "name": "包头",
+          "value": [
+            110,
+            40.58,
+            80
+          ]
+        },
+        {
+          "name": "绵阳",
+          "value": [
+            104.73,
+            31.48,
+            80
+          ]
+        },
+        {
+          "name": "乌鲁木齐",
+          "value": [
+            87.68,
+            43.77,
+            84
+          ]
+        },
+        {
+          "name": "枣庄",
+          "value": [
+            117.57,
+            34.86,
+            84
+          ]
+        },
+        {
+          "name": "杭州",
+          "value": [
+            120.19,
+            30.26,
+            84
+          ]
+        },
+        {
+          "name": "淄博",
+          "value": [
+            118.05,
+            36.78,
+            85
+          ]
+        },
+        {
+          "name": "鞍山",
+          "value": [
+            122.85,
+            41.12,
+            86
+          ]
+        },
+        {
+          "name": "溧阳",
+          "value": [
+            119.48,
+            31.43,
+            86
+          ]
+        },
+        {
+          "name": "库尔勒",
+          "value": [
+            86.06,
+            41.68,
+            86
+          ]
+        },
+        {
+          "name": "安阳",
+          "value": [
+            114.35,
+            36.1,
+            90
+          ]
+        },
+        {
+          "name": "开封",
+          "value": [
+            114.35,
+            34.79,
+            90
+          ]
+        },
+        {
+          "name": "济南",
+          "value": [
+            117,
+            36.65,
+            92
+          ]
+        },
+        {
+          "name": "德阳",
+          "value": [
+            104.37,
+            31.13,
+            93
+          ]
+        },
+        {
+          "name": "温州",
+          "value": [
+            120.65,
+            28.01,
+            95
+          ]
+        },
+        {
+          "name": "九江",
+          "value": [
+            115.97,
+            29.71,
+            96
+          ]
+        },
+        {
+          "name": "邯郸",
+          "value": [
+            114.47,
+            36.6,
+            98
+          ]
+        },
+        {
+          "name": "临安",
+          "value": [
+            119.72,
+            30.23,
+            99
+          ]
+        },
+        {
+          "name": "兰州",
+          "value": [
+            103.73,
+            36.03,
+            99
+          ]
+        },
+        {
+          "name": "沧州",
+          "value": [
+            116.83,
+            38.33,
+            100
+          ]
+        },
+        {
+          "name": "临沂",
+          "value": [
+            118.35,
+            35.05,
+            103
+          ]
+        },
+        {
+          "name": "南充",
+          "value": [
+            106.110698,
+            30.837793,
+            104
+          ]
+        },
+        {
+          "name": "天津",
+          "value": [
+            117.2,
+            39.13,
+            105
+          ]
+        },
+        {
+          "name": "富阳",
+          "value": [
+            119.95,
+            30.07,
+            106
+          ]
+        },
+        {
+          "name": "泰安",
+          "value": [
+            117.13,
+            36.18,
+            112
+          ]
+        },
+        {
+          "name": "诸暨",
+          "value": [
+            120.23,
+            29.71,
+            112
+          ]
+        },
+        {
+          "name": "郑州",
+          "value": [
+            113.65,
+            34.76,
+            113
+          ]
+        },
+        {
+          "name": "哈尔滨",
+          "value": [
+            126.63,
+            45.75,
+            114
+          ]
+        },
+        {
+          "name": "聊城",
+          "value": [
+            115.97,
+            36.45,
+            116
+          ]
+        },
+        {
+          "name": "芜湖",
+          "value": [
+            118.38,
+            31.33,
+            117
+          ]
+        },
+        {
+          "name": "唐山",
+          "value": [
+            118.02,
+            39.63,
+            119
+          ]
+        },
+        {
+          "name": "平顶山",
+          "value": [
+            113.29,
+            33.75,
+            119
+          ]
+        },
+        {
+          "name": "邢台",
+          "value": [
+            114.48,
+            37.05,
+            119
+          ]
+        },
+        {
+          "name": "德州",
+          "value": [
+            116.29,
+            37.45,
+            120
+          ]
+        },
+        {
+          "name": "济宁",
+          "value": [
+            116.59,
+            35.38,
+            120
+          ]
+        },
+        {
+          "name": "荆州",
+          "value": [
+            112.239741,
+            30.335165,
+            127
+          ]
+        },
+        {
+          "name": "宜昌",
+          "value": [
+            111.3,
+            30.7,
+            130
+          ]
+        },
+        {
+          "name": "义乌",
+          "value": [
+            120.06,
+            29.32,
+            132
+          ]
+        },
+        {
+          "name": "丽水",
+          "value": [
+            119.92,
+            28.45,
+            133
+          ]
+        },
+        {
+          "name": "洛阳",
+          "value": [
+            112.44,
+            34.7,
+            134
+          ]
+        },
+        {
+          "name": "秦皇岛",
+          "value": [
+            119.57,
+            39.95,
+            136
+          ]
+        },
+        {
+          "name": "株洲",
+          "value": [
+            113.16,
+            27.83,
+            143
+          ]
+        },
+        {
+          "name": "石家庄",
+          "value": [
+            114.48,
+            38.03,
+            147
+          ]
+        },
+        {
+          "name": "莱芜",
+          "value": [
+            117.67,
+            36.19,
+            148
+          ]
+        },
+        {
+          "name": "常德",
+          "value": [
+            111.69,
+            29.05,
+            152
+          ]
+        },
+        {
+          "name": "保定",
+          "value": [
+            115.48,
+            38.85,
+            153
+          ]
+        },
+        {
+          "name": "湘潭",
+          "value": [
+            112.91,
+            27.87,
+            154
+          ]
+        },
+        {
+          "name": "金华",
+          "value": [
+            119.64,
+            29.12,
+            157
+          ]
+        },
+        {
+          "name": "岳阳",
+          "value": [
+            113.09,
+            29.37,
+            169
+          ]
+        },
+        {
+          "name": "长沙",
+          "value": [
+            113,
+            28.21,
+            175
+          ]
+        },
+        {
+          "name": "衢州",
+          "value": [
+            118.88,
+            28.97,
+            177
+          ]
+        },
+        {
+          "name": "廊坊",
+          "value": [
+            116.7,
+            39.53,
+            193
+          ]
+        },
+        {
+          "name": "菏泽",
+          "value": [
+            115.480656,
+            35.23375,
+            194
+          ]
+        },
+        {
+          "name": "合肥",
+          "value": [
+            117.27,
+            31.86,
+            229
+          ]
+        },
+        {
+          "name": "武汉",
+          "value": [
+            114.31,
+            30.52,
+            273
+          ]
+        },
+        {
+          "name": "大庆",
+          "value": [
+            125.03,
+            46.58,
+            279
+          ]
+        }
+      ],
+      "symbolSize": {},
+      "label": {
+        "formatter": "{b}",
+        "position": "right",
+        "show": false
+      },
+      "itemStyle": {
+        "color": "#ddb926",
+        "opacity": 0.8
+      },
+      "emphasis": {
+        "label": {
+          "show": true
+        },
+        "scale": true
+      },
+      "progressive": 100000,
+      "animation": false,
+      "zlevel": 0,
+      "z": 2,
+      "legendHoverLink": true,
+      "large": false,
+      "largeThreshold": 2000,
+      "clip": true,
+      "select": {
+        "itemStyle": {
+          "borderColor": "#212121"
+        }
+      }
+    },
+    {
+      "name": "Top 5",
+      "type": "effectScatter",
+      "coordinateSystem": "geo",
+      "data": [
+        {
+          "name": "大庆",
+          "value": [
+            125.03,
+            46.58,
+            279
+          ]
+        },
+        {
+          "name": "武汉",
+          "value": [
+            114.31,
+            30.52,
+            273
+          ]
+        },
+        {
+          "name": "合肥",
+          "value": [
+            117.27,
+            31.86,
+            229
+          ]
+        },
+        {
+          "name": "菏泽",
+          "value": [
+            115.480656,
+            35.23375,
+            194
+          ]
+        },
+        {
+          "name": "廊坊",
+          "value": [
+            116.7,
+            39.53,
+            193
+          ]
+        },
+        {
+          "name": "衢州",
+          "value": [
+            118.88,
+            28.97,
+            177
+          ]
+        }
+      ],
+      "symbolSize": {},
+      "showEffectOn": "emphasis",
+      "rippleEffect": {
+        "brushType": "stroke",
+        "period": 4,
+        "scale": 2.5
+      },
+      "hoverAnimation": true,
+      "label": {
+        "formatter": "{b}",
+        "position": "right",
+        "show": true
+      },
+      "itemStyle": {
+        "color": "#f4e925",
+        "shadowBlur": 10,
+        "shadowColor": "#333"
+      },
+      "zlevel": 1,
+      "emphasis": {
+        "scale": true,
+        "label": {
+          "show": true
+        }
+      },
+      "progressive": 100000,
+      "animation": false,
+      "z": 2,
+      "legendHoverLink": true,
+      "effectType": "ripple"
+    },
+    {
+      "id": "bar",
+      "zlevel": 2,
+      "type": "bar",
+      "symbol": "none",
+      "itemStyle": {
+        "color": "#ddb926"
+      },
+      "data": [
+        9,
+        12,
+        15,
+        23,
+        25,
+        27,
+        32,
+        33,
+        33,
+        35,
+        36,
+        36,
+        36,
+        37,
+        43,
+        47,
+        50,
+        51,
+        52,
+        59,
+        59,
+        62,
+        63,
+        64,
+        64,
+        67,
+        67,
+        71,
+        75,
+        79
+      ],
+      "progressive": 100000,
+      "animation": false,
+      "z": 2,
+      "coordinateSystem": "cartesian2d",
+      "legendHoverLink": true,
+      "barMinHeight": 0,
+      "barMinAngle": 0,
+      "large": false,
+      "largeThreshold": 400,
+      "progressiveChunkMode": "mod",
+      "clip": true,
+      "roundCap": false,
+      "showBackground": false,
+      "backgroundStyle": {
+        "color": "rgba(180, 180, 180, 0.2)",
+        "borderColor": null,
+        "borderWidth": 0,
+        "borderType": "solid",
+        "borderRadius": 0,
+        "shadowBlur": 0,
+        "shadowColor": null,
+        "shadowOffsetX": 0,
+        "shadowOffsetY": 0,
+        "opacity": 1
+      },
+      "select": {
+        "itemStyle": {
+          "borderColor": "#212121"
+        }
+      },
+      "realtimeSort": false,
+      "label": {},
+      "emphasis": {
+        "label": {}
+      }
+    }
+  ],
+  "visualMap": [],
+  "legend": [],
+  "markArea": [
+    {
+      "zlevel": 0,
+      "z": 1,
+      "tooltip": {
+        "trigger": "item"
+      },
+      "animation": false,
+      "label": {
+        "show": true,
+        "position": "top"
+      },
+      "itemStyle": {
+        "borderWidth": 0
+      },
+      "emphasis": {
+        "label": {
+          "show": true,
+          "position": "top"
+        }
+      }
+    }
+  ],
+  "markLine": [
+    {
+      "zlevel": 0,
+      "z": 5,
+      "symbol": [
+        "circle",
+        "arrow"
+      ],
+      "symbolSize": [
+        8,
+        16
+      ],
+      "precision": 2,
+      "tooltip": {
+        "trigger": "item"
+      },
+      "label": {
+        "show": true,
+        "position": "end",
+        "distance": 5
+      },
+      "lineStyle": {
+        "type": "dashed"
+      },
+      "emphasis": {
+        "label": {
+          "show": true
+        },
+        "lineStyle": {
+          "width": 3
+        }
+      },
+      "animationEasing": "linear"
+    }
+  ],
+  "markPoint": [
+    {
+      "zlevel": 0,
+      "z": 5,
+      "symbol": "pin",
+      "symbolSize": 50,
+      "tooltip": {
+        "trigger": "item"
+      },
+      "label": {
+        "show": true,
+        "position": "inside"
+      },
+      "itemStyle": {
+        "borderWidth": 2
+      },
+      "emphasis": {
+        "label": {
+          "show": true
+        }
+      }
+    }
+  ],
+  "brush": [
+    {
+      "outOfBrush": {
+        "color": "#abc"
+      },
+      "brushStyle": {
+        "borderWidth": 2,
+        "color": "rgba(0,0,0,0.2)",
+        "borderColor": "rgba(0,0,0,0.5)"
+      },
+      "seriesIndex": [
+        0,
+        1
+      ],
+      "throttleType": "debounce",
+      "throttleDelay": 300,
+      "geoIndex": 0,
+      "brushType": "rect",
+      "brushMode": "single",
+      "transformable": true,
+      "removeOnClick": true,
+      "z": 10000,
+      "inBrush": {
+        "liftZ": 5
+      }
+    }
+  ],
+  "dataZoom": []
+}

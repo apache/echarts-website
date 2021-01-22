@@ -1,3 +1,10 @@
+/*
+title: Step Line
+category: line
+titleCN: 阶梯折线图
+difficulty: 7
+*/
+
 option = {
     title: {
         text: 'Step Line'

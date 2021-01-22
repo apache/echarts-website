@@ -1,3 +1,9 @@
+/*
+title: Surface Wave
+category: surface
+titleCN: Surface Wave
+*/
+
 option = {
     tooltip: {},
     backgroundColor: '#fff',

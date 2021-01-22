@@ -1,3 +1,10 @@
+/*
+title: Effect Scatter Chart
+category: scatter
+titleCN: 涟漪特效散点图
+difficulty: 2
+*/
+
 option = {
     xAxis: {
         scale: true

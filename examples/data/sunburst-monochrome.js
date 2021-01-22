@@ -1,3 +1,10 @@
+/*
+title: Monochrome Sunburst
+category: sunburst
+titleCN: Monochrome Sunburst
+difficulty: 3
+*/
+
 var item1 = {
     color: '#F54F4A'
 };
@@ -152,7 +159,9 @@ option = {
         radius: ['15%', '80%'],
         type: 'sunburst',
         sort: null,
-        highlightPolicy: 'ancestor',
+        emphasis: {
+            focus: 'ancestor'
+        },
         data: data,
         label: {
             rotate: 'radial'

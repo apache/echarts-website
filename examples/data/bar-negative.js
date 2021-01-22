@@ -1,3 +1,10 @@
+/*
+title: Bar Chart with Negative Value
+titleCN: 正负条形图
+category: bar
+difficulty: 4
+*/
+
 option = {
     tooltip: {
         trigger: 'axis',
@@ -36,6 +43,9 @@ option = {
                 show: true,
                 position: 'inside'
             },
+            emphasis: {
+                focus: 'series'
+            },
             data: [200, 170, 240, 244, 200, 220, 210]
         },
         {
@@ -44,6 +54,9 @@ option = {
             stack: '总量',
             label: {
                 show: true
+            },
+            emphasis: {
+                focus: 'series'
             },
             data: [320, 302, 341, 374, 390, 450, 420]
         },
@@ -54,6 +67,9 @@ option = {
             label: {
                 show: true,
                 position: 'left'
+            },
+            emphasis: {
+                focus: 'series'
             },
             data: [-120, -132, -101, -134, -190, -230, -210]
         }

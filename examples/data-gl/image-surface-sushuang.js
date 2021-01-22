@@ -1,3 +1,9 @@
+/*
+title: Image Surface Sushuang
+category: surface
+titleCN: Image Surface Sushuang
+*/
+
 var img = new Image();
 var canvas = document.createElement('canvas');
 var ctx = canvas.getContext('2d');

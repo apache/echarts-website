@@ -1,3 +1,10 @@
+/*
+title: Calendar Heatmap
+category: 'calendar, heatmap'
+titleCN: 日历热力图
+difficulty: 1
+*/
+
 function getVirtulData(year) {
     year = year || '2017';
     var date = +echarts.number.parseDate(year + '-01-01');
@@ -26,10 +33,7 @@ option = {
         type: 'piecewise',
         orient: 'horizontal',
         left: 'center',
-        top: 65,
-        textStyle: {
-            color: '#000'
-        }
+        top: 65
     },
     calendar: {
         top: 120,

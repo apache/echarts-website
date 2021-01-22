@@ -1,3 +1,10 @@
+/*
+title: Line Y Category
+category: line
+titleCN: 垂直折线图（Y轴为类目轴）
+difficulty: 8
+*/
+
 option = {
     legend: {
         data: ['高度(km)与气温(°C)变化关系']
@@ -31,12 +38,14 @@ option = {
         {
             name: '高度(km)与气温(°C)变化关系',
             type: 'line',
+            symbolSize: 10,
+            symbol: 'circle',
             smooth: true,
             lineStyle: {
                 width: 3,
-                shadowColor: 'rgba(0,0,0,0.4)',
+                shadowColor: 'rgba(0,0,0,0.3)',
                 shadowBlur: 10,
-                shadowOffsetY: 10
+                shadowOffsetY: 8
             },
             data:[15, -50, -56.5, -46.5, -22.1, -2.5, -27.7, -55.7, -76.5]
         }

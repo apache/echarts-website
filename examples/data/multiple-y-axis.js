@@ -1,4 +1,11 @@
-var colors = ['#5793f3', '#d14a61', '#675bba'];
+/*
+title: Multiple Y Axes
+category: bar
+titleCN: 多 Y 轴示例
+difficulty: 4
+*/
+
+var colors = ['#5470C6', '#91CC75', '#EE6666'];
 
 option = {
     color: colors,
@@ -39,6 +46,7 @@ option = {
             max: 250,
             position: 'right',
             axisLine: {
+                show: true,
                 lineStyle: {
                     color: colors[0]
                 }
@@ -55,6 +63,7 @@ option = {
             position: 'right',
             offset: 80,
             axisLine: {
+                show: true,
                 lineStyle: {
                     color: colors[1]
                 }
@@ -70,6 +79,7 @@ option = {
             max: 25,
             position: 'left',
             axisLine: {
+                show: true,
                 lineStyle: {
                     color: colors[2]
                 }

@@ -1,3 +1,10 @@
+/*
+title: Error Bar on Catesian
+category: custom
+titleCN: 使用自定系列给柱状图添加误差范围
+difficulty: 3
+*/
+
 
 var categoryData = [];
 var errorData = [];
@@ -28,6 +35,7 @@ function renderItem(params, api) {
         type: 'group',
         children: [{
             type: 'line',
+            transition: ['shape'],
             shape: {
                 x1: highPoint[0] - halfWidth, y1: highPoint[1],
                 x2: highPoint[0] + halfWidth, y2: highPoint[1]
@@ -35,6 +43,7 @@ function renderItem(params, api) {
             style: style
         }, {
             type: 'line',
+            transition: ['shape'],
             shape: {
                 x1: highPoint[0], y1: highPoint[1],
                 x2: lowPoint[0], y2: lowPoint[1]
@@ -42,6 +51,7 @@ function renderItem(params, api) {
             style: style
         }, {
             type: 'line',
+            transition: ['shape'],
             shape: {
                 x1: lowPoint[0] - halfWidth, y1: lowPoint[1],
                 x2: lowPoint[0] + halfWidth, y2: lowPoint[1]

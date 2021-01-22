@@ -2,6 +2,15 @@ window.__EC_DOC_api_events = {
   "鼠标事件": {
     "desc": "<p>鼠标事件的事件参数是事件对象的数据的各个属性，对于图表的点击事件，基本参数如下，其它图表诸如饼图可能会有部分附加参数。例如饼图会有<code class=\"codespan\">percent</code>属性表示百分比，具体见各个图表类型的 label formatter 回调函数的 <code class=\"codespan\">params</code>。</p>\n<pre><code class=\"lang-js\">{\n    // 当前点击的图形元素所属的组件名称，\n    // 其值如 &#39;series&#39;、&#39;markLine&#39;、&#39;markPoint&#39;、&#39;timeLine&#39; 等。\n    componentType: string,\n    // 系列类型。值可能为：&#39;line&#39;、&#39;bar&#39;、&#39;pie&#39; 等。当 componentType 为 &#39;series&#39; 时有意义。\n    seriesType: string,\n    // 系列在传入的 option.series 中的 index。当 componentType 为 &#39;series&#39; 时有意义。\n    seriesIndex: number,\n    // 系列名称。当 componentType 为 &#39;series&#39; 时有意义。\n    seriesName: string,\n    // 数据名，类目名\n    name: string,\n    // 数据在传入的 data 数组中的 index\n    dataIndex: number,\n    // 传入的原始数据项\n    data: Object,\n    // sankey、graph 等图表同时含有 nodeData 和 edgeData 两种 data，\n    // dataType 的值会是 &#39;node&#39; 或者 &#39;edge&#39;，表示当前点击在 node 还是 edge 上。\n    // 其他大部分图表中只有一种 data，dataType 无意义。\n    dataType: string,\n    // 传入的数据值\n    value: number|Array,\n    // 数据图形的颜色。当 componentType 为 &#39;series&#39; 时有意义。\n    color: string,\n    // 用户自定义的数据。只在 graphic component 和自定义系列（custom series）\n    // 中生效，如果节点定义上设置了如：{type: &#39;circle&#39;, info: {some: 123}}。\n    info: *\n}\n</code></pre>\n<p>鼠标事件包括 <code class=\"codespan\">&#39;click&#39;</code>、<code class=\"codespan\">&#39;dblclick&#39;</code>、<code class=\"codespan\">&#39;mousedown&#39;</code>、<code class=\"codespan\">&#39;mousemove&#39;</code>、<code class=\"codespan\">&#39;mouseup&#39;</code>、<code class=\"codespan\">&#39;mouseover&#39;</code>、<code class=\"codespan\">&#39;mouseout&#39;</code>、<code class=\"codespan\">&#39;globalout&#39;</code>、<code class=\"codespan\">&#39;contextmenu&#39;</code>。</p>\n<p>参见 <a href=\"tutorial.html#ECharts%20%E4%B8%AD%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%92%8C%E8%A1%8C%E4%B8%BA\" target=\"_blank\">ECharts 中的事件和行为</a></p>\n"
   },
+  "highlight": {
+    "desc": "<p><strong>ACTION:</strong> <a href=\"#action.highlight\">highlight</a></p>\n<p>高亮事件。</p>\n"
+  },
+  "downplay": {
+    "desc": "<p><strong>ACTION:</strong> <a href=\"#action.downplay\">downplay</a></p>\n<p>取消高亮事件。</p>\n"
+  },
+  "selectchanged": {
+    "desc": "<p><strong>ACTION:</strong> <a href=\"#action.toggleSelected\">toggleSelected</a>, <a href=\"#action.select\">select</a>, <a href=\"#action.unselect\">unselect</a></p>\n<p>在数据选中状态发生变化时触发的事件</p>\n<pre><code class=\"lang-js\">{\n    type: &#39;selectchanged&#39;,\n    fromAction: &#39;select&#39; | &#39;toggleSelected&#39; | &#39;unselect&#39;,\n    // 按系列分组的选中项列表\n    selected: ({\n        dataIndex: number[], seriesIndex: number\n    })[]\n}\n</code></pre>\n"
+  },
   "legendselectchanged": {
     "desc": "<p><strong>ACTION:</strong> <a href=\"#action.legend.legendToggleSelect\">legendToggleSelect</a>\n切换图例选中状态后的事件。</p>\n<p><strong>注：</strong>图例组件用户切换图例开关会触发该事件。</p>\n<pre><code class=\"lang-js\">{\n    type: &#39;legendselectchanged&#39;,\n    // 切换的图例名称\n    name: string\n    // 所有图例的选中状态表\n    selected: Object\n}\n</code></pre>\n"
   },
@@ -49,24 +58,6 @@ window.__EC_DOC_api_events = {
   },
   "geounselected": {
     "desc": "<p><strong>ACTION:</strong> <a href=\"#action.geo.geoUnSelect\">geoUnSelect</a></p>\n<p><a href=\"option.html#geo\" target=\"_blank\">geo</a> 中地图区域取消选中后的事件。</p>\n<p>使用<code class=\"codespan\">dispatchAction</code>可触发此事件，用户点击不会触发此事件（用户点击事件请使用 <a href=\"#events.geoselectchanged\">geoselectchanged</a>）。</p>\n<pre><code class=\"lang-js\">{\n    type: &#39;geounselected&#39;,\n    // 系列 ID，可以在 option 中传入\n    seriesId: string\n    // 数据名称\n    name: name,\n    // 所有数据的选中状态表。\n    selected: Object\n}\n</code></pre>\n"
-  },
-  "pieselectchanged": {
-    "desc": "<p><strong>ACTION:</strong> <a href=\"#action.pie.pieToggleSelect\">pieToggleSelect</a></p>\n<p><a href=\"option.html#series-pie\" target=\"_blank\">series-pie</a> 中饼图扇形切换选中状态的事件。</p>\n<p>用户点击选中会触发该事件。</p>\n<pre><code class=\"lang-js\">{\n    type: &#39;pieselectchanged&#39;,\n    // 系列 ID，可以在 option 中传入\n    seriesId: string\n    // 数据名称\n    name: name,\n    // 所有数据的选中状态表。\n    selected: Object\n}\n</code></pre>\n<p><strong>注：</strong> 该事件同 ECharts 2 中的 <code class=\"codespan\">pieSelected</code> 事件相同。</p>\n"
-  },
-  "pieselected": {
-    "desc": "<p><strong>ACTION:</strong> <a href=\"#action.pie.pieSelect\">pieSelect</a></p>\n<p><a href=\"option.html#{componentTypeFull}\" target=\"_blank\">series-pie</a> 中饼图扇形选中后的事件。</p>\n<p>使用<code class=\"codespan\">dispatchAction</code>可触发此事件，用户点击不会触发此事件（用户点击事件请使用 <a href=\"#events.pieselectchanged\">pieselectchanged</a>）。</p>\n<pre><code class=\"lang-js\">{\n    type: &#39;pieselected&#39;,\n    // 系列 ID，可以在 option 中传入\n    seriesId: string\n    // 数据名称\n    name: name,\n    // 所有数据的选中状态表。\n    selected: Object\n}\n</code></pre>\n<p><strong>注：</strong> ECharts 2.x 中用户开关图例对应的事件从 <code class=\"codespan\">pieselected</code> 改为 <a href=\"#events.pieselectchanged\">pieselectchanged</a>。</p>\n"
-  },
-  "pieunselected": {
-    "desc": "<p><strong>ACTION:</strong> <a href=\"#action.pie.pieUnSelect\">pieUnSelect</a></p>\n<p><a href=\"option.html#series-pie\" target=\"_blank\">series-pie</a> 中饼图扇形取消选中后的事件。</p>\n<p>使用<code class=\"codespan\">dispatchAction</code>可触发此事件，用户点击不会触发此事件（用户点击事件请使用 <a href=\"#events.pieselectchanged\">pieselectchanged</a>）。</p>\n<pre><code class=\"lang-js\">{\n    type: &#39;pieunselected&#39;,\n    // 系列 ID，可以在 option 中传入\n    seriesId: string\n    // 数据名称\n    name: name,\n    // 所有数据的选中状态表。\n    selected: Object\n}\n</code></pre>\n"
-  },
-  "mapselectchanged": {
-    "desc": "<p><strong>ACTION:</strong> <a href=\"#action.map.mapToggleSelect\">mapToggleSelect</a></p>\n<p><a href=\"option.html#series-map\" target=\"_blank\">series-map</a> 中地图区域切换选中状态的事件。</p>\n<p>用户点击选中会触发该事件。</p>\n<pre><code class=\"lang-js\">{\n    type: &#39;mapselectchanged&#39;,\n    // 系列 ID，可以在 option 中传入\n    seriesId: string\n    // 数据名称\n    name: name,\n    // 所有数据的选中状态表。\n    selected: Object\n}\n</code></pre>\n<p><strong>注：</strong> 该事件同 ECharts 2 中的 <code class=\"codespan\">mapSelected</code> 事件相同。</p>\n"
-  },
-  "mapselected": {
-    "desc": "<p><strong>ACTION:</strong> <a href=\"#action.map.mapSelect\">mapSelect</a></p>\n<p><a href=\"option.html#{componentTypeFull}\" target=\"_blank\">series-map</a> 中地图区域选中后的事件。</p>\n<p>使用<code class=\"codespan\">dispatchAction</code>可触发此事件，用户点击不会触发此事件（用户点击事件请使用 <a href=\"#events.mapselectchanged\">mapselectchanged</a>）。</p>\n<pre><code class=\"lang-js\">{\n    type: &#39;mapselected&#39;,\n    // 系列 ID，可以在 option 中传入\n    seriesId: string\n    // 数据名称\n    name: name,\n    // 所有数据的选中状态表。\n    selected: Object\n}\n</code></pre>\n<p><strong>注：</strong> ECharts 2.x 中用户开关图例对应的事件从 <code class=\"codespan\">mapselected</code> 改为 <a href=\"#events.mapselectchanged\">mapselectchanged</a>。</p>\n"
-  },
-  "mapunselected": {
-    "desc": "<p><strong>ACTION:</strong> <a href=\"#action.map.mapUnSelect\">mapUnSelect</a></p>\n<p><a href=\"option.html#series-map\" target=\"_blank\">series-map</a> 中地图区域取消选中后的事件。</p>\n<p>使用<code class=\"codespan\">dispatchAction</code>可触发此事件，用户点击不会触发此事件（用户点击事件请使用 <a href=\"#events.mapselectchanged\">mapselectchanged</a>）。</p>\n<pre><code class=\"lang-js\">{\n    type: &#39;mapunselected&#39;,\n    // 系列 ID，可以在 option 中传入\n    seriesId: string\n    // 数据名称\n    name: name,\n    // 所有数据的选中状态表。\n    selected: Object\n}\n</code></pre>\n"
   },
   "axisareaselected": {
     "desc": "<p><a href=\"option.html#parallelAxis\" target=\"_blank\">平行坐标轴 (Parallel)</a>范围选取事件。</p>\n<p>当进行坐标轴范围选取时，可以用如下方式获取当前高亮的线所对应的 data indices\n（即 <code class=\"codespan\">series</code> 的 <code class=\"codespan\">data</code> 中的序号列表）。</p>\n<pre><code class=\"lang-javascript\">chart.on(&#39;axisareaselected&#39;, function () {\n    var series0 = chart.getModel().getSeries()[0];\n    var series1 = chart.getModel().getSeries()[1];\n    var indices0 = series0.getRawIndicesByActiveState(&#39;active&#39;);\n    var indices1 = series1.getRawIndicesByActiveState(&#39;active&#39;);\n    console.log(indices0, indices1);\n});\n</code></pre>\n"

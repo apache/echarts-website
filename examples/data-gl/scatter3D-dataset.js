@@ -1,3 +1,9 @@
+/*
+title: 3D Scatter with Dataset
+category: scatter3D
+titleCN: 使用 dataset 为三维散点图设置数据
+*/
+
 $.get(ROOT_PATH + '/data/asset/data/life-expectancy-table.json', function (data) {
     var symbolSize = 2.5;
     option = {

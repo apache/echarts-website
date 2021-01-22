@@ -1,3 +1,10 @@
+/*
+title: Customized Pie
+category: pie
+titleCN: 饼图自定义样式
+difficulty: 2
+*/
+
 option = {
     backgroundColor: '#2c343c',
 
@@ -11,8 +18,7 @@ option = {
     },
 
     tooltip: {
-        trigger: 'item',
-        formatter: '{a} <br/>{b} : {c} ({d}%)'
+        trigger: 'item'
     },
 
     visualMap: {

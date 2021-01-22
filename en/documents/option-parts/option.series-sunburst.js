@@ -12,14 +12,14 @@ window.__EC_DOC_option_series_sunburst = {
     "desc": "<p><code class=\"codespan\">z</code> value of all graphical elements in , which controls order of drawing graphical components. Components with smaller <code class=\"codespan\">z</code> values may be overwritten by those with larger <code class=\"codespan\">z</code> values.</p>\n<p><code class=\"codespan\">z</code> has a lower priority to <code class=\"codespan\">zlevel</code>, and will not create new Canvas.</p>\n"
   },
   "center": {
-    "desc": "<p>Center position of Sunburst chart, the first of which is the horizontal position, and the second is the vertical position.</p>\n<p>Percentage is supported. When set in percentage, the item is relative to the container width, and the second item to the height.</p>\n<p><strong>Example: </strong></p>\n<pre><code>// Set to absolute pixel values\ncenter: [400, 300]\n// Set to relative percent\ncenter: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>",
+    "desc": "\n\n<p>Center position of Sunburst chart, the first of which is the horizontal position, and the second is the vertical position.</p>\n<p>Percentage is supported. When set in percentage, the item is relative to the container width, and the second item to the height.</p>\n<p><strong>Example: </strong></p>\n<pre><code>// Set to absolute pixel values\ncenter: [400, 300]\n// Set to relative percent\ncenter: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>",
     "uiControl": {
       "type": "percentvector",
       "dims": "x,y"
     }
   },
   "radius": {
-    "desc": "<p>Radius of Sunburst chart. Value can be:</p>\n<ul>\n<li><code class=\"codespan\">number</code>: Specify outside radius directly.</li>\n<li><p><code class=\"codespan\">string</code>: For example, <code class=\"codespan\">&#39;20%&#39;</code>, means that the outside radius is 20% of the viewport size (the little one between width and height of the chart container).</p>\n</li>\n<li><p><code class=\"codespan\">Array.&lt;number|string&gt;</code>: The first item specifies the inside radius, and the second item specifies the outside radius. Each item follows the definitions above.</p>\n</li>\n</ul>\n",
+    "desc": "\n\n<p>Radius of Sunburst chart. Value can be:</p>\n<ul>\n<li><code class=\"codespan\">number</code>: Specify outside radius directly.</li>\n<li><code class=\"codespan\">string</code>: For example, <code class=\"codespan\">&#39;20%&#39;</code>, means that the outside radius is 20% of the viewport size (the little one between width and height of the chart container).</li>\n</ul>\n<ul>\n<li><code class=\"codespan\">Array.&lt;number|string&gt;</code>: The first item specifies the inside radius, and the second item specifies the outside radius. Each item follows the definitions above.</li>\n</ul>\n",
     "uiControl": {
       "type": "percentvector",
       "dims": "inner,outer",
@@ -42,10 +42,10 @@ window.__EC_DOC_option_series_sunburst = {
     "desc": "<p>Like <code class=\"codespan\">target</code> attribute of HTML <code class=\"codespan\">&lt;a&gt;</code>, which can either be <code class=\"codespan\">&#39;blank&#39;</code> or <code class=\"codespan\">&#39;self&#39;</code>. See <a href=\"#series-sunburst.data.link\">series-sunburst.data.link</a>.</p>\n"
   },
   "data.label": {
-    "desc": "<p><code class=\"codespan\">label</code> sets the text style for every sectors.</p>\n<p><strong>Priority: <a href=\"#series-sunburst.data.label\">series.data.label</a> &gt; <a href=\"#series-sunburst.levels.label\">series.levels.label</a> &gt; <a href=\"#series-sunburst.label\">series.label</a>.</strong></p>\n<p>Text label of , to explain some data information about graphic item like value, name and so on. <code class=\"codespan\">label</code> is placed under <code class=\"codespan\">itemStyle</code> in ECharts 2.x. In ECharts 3, to make the configuration structure flatter, <code class=\"codespan\">label</code>is taken to be at the same level with <code class=\"codespan\">itemStyle</code>, and has <code class=\"codespan\">emphasis</code> as <code class=\"codespan\">itemStyle</code> does.</p>\n"
+    "desc": "<p><code class=\"codespan\">label</code> 描述了每个扇形块中，文本标签的样式。</p>\n<p><strong>优先级：<a href=\"#series-sunburst.data.label\">series.data.label</a> &gt; <a href=\"#series-sunburst.levels.label\">series.levels.label</a> &gt; <a href=\"#series-sunburst.label\">series.label</a>。</strong></p>\n<p>Text label of , to explain some data information about graphic item like value, name and so on. <code class=\"codespan\">label</code> is placed under <code class=\"codespan\">itemStyle</code> in ECharts 2.x. In ECharts 3, to make the configuration structure flatter, <code class=\"codespan\">label</code>is taken to be at the same level with <code class=\"codespan\">itemStyle</code>, and has <code class=\"codespan\">emphasis</code> as <code class=\"codespan\">itemStyle</code> does.</p>\n"
   },
   "data.label.rotate": {
-    "desc": "<p>If it is <code class=\"codespan\">number</code> type, then is stands for rotation, from -90 degrees to 90 degrees, and positive values stand for counterclockwise.</p>\n<p>Besides, it can be string <code class=\"codespan\">&#39;radial&#39;</code>, standing for radial rotation; or <code class=\"codespan\">&#39;tangential&#39;</code>, standing for tangential rotation.</p>\n<p>By default, it is <code class=\"codespan\">&#39;radial&#39;</code>. If no rotation is wanted, it can be set to <code class=\"codespan\">0</code>.</p>\n<p>The following example shows different <code class=\"codespan\">rotate</code> settings:</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=sunburst-label-rotate&edit=1&reset=1\" width=\"700\" height=\"400\"><iframe />\n\n",
+    "desc": "\n\n\n<p>同 <a href=\"#sunburst.label.rotate\">label.rotate</a></p>\n",
     "uiControl": {
       "type": "enum",
       "options": "radial,tangential",
@@ -53,7 +53,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "data.label.align": {
-    "desc": "<p>Align of text, which can be <code class=\"codespan\">&#39;left&#39;</code>, <code class=\"codespan\">&#39;center&#39;</code>, or <code class=\"codespan\">&#39;right&#39;</code>. Note that <code class=\"codespan\">&#39;left&#39;</code> stands for inner side, and <code class=\"codespan\">&#39;right&#39;</code> stands for outer side.</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=doc-example/sunburst-label-align&edit=1&reset=1\" width=\"700\" height=\"400\"><iframe />\n\n",
+    "desc": "\n\n<p>Align of text, which can be <code class=\"codespan\">&#39;left&#39;</code>, <code class=\"codespan\">&#39;center&#39;</code>, or <code class=\"codespan\">&#39;right&#39;</code>. Note that <code class=\"codespan\">&#39;left&#39;</code> stands for inner side, and <code class=\"codespan\">&#39;right&#39;</code> stands for outer side.</p>\n<p>Same to <a href=\"#sunburst.label.align\">label.align</a></p>\n",
     "uiControl": {
       "type": "enum",
       "options": "left,center,right",
@@ -61,7 +61,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "data.label.minAngle": {
-    "desc": "<p>If angle of data piece is smaller than this value (in degrees), then text is not displayed. This is used for hiding text for small piece of data.</p>\n",
+    "desc": "\n\n<p>If angle of data piece is smaller than this value (in degrees), then text is not displayed. This is used for hiding text for small piece of data.</p>\n",
     "uiControl": {
       "type": "angle",
       "min": "0",
@@ -70,21 +70,21 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "data.label.show": {
-    "desc": "<p>Whether to show label.</p>\n",
+    "desc": "\n\n<p>Whether to show label.</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "true"
     }
   },
   "data.label.position": {
-    "desc": "<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/examples/zh/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "data.label.distance": {
-    "desc": "<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element.</p>\n<p>It is valid only when <code class=\"codespan\">position</code> is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -93,7 +93,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "data.label.offset": {
-    "desc": "<p>Whether to move text slightly. For example: <code class=\"codespan\">[30, 40]</code> means move <code class=\"codespan\">30</code> horizontally and move <code class=\"codespan\">40</code> vertically.</p>\n",
+    "desc": "\n\n<p>Whether to move text slightly. For example: <code class=\"codespan\">[30, 40]</code> means move <code class=\"codespan\">30</code> horizontally and move <code class=\"codespan\">40</code> vertically.</p>\n",
     "uiControl": {
       "type": "vector",
       "dims": "x,y",
@@ -102,17 +102,17 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "data.label.formatter": {
-    "desc": "<p>Data label formatter, which supports string template and callback function. In either form, <code class=\"codespan\">\\n</code> is supported to represent a new line.</p>\n<p><strong>String template</strong></p>\n<p>Model variation includes:</p>\n<ul>\n<li><code class=\"codespan\">{a}</code>: series name.</li>\n<li><code class=\"codespan\">{b}</code>: the name of a data item.</li>\n<li><code class=\"codespan\">{c}</code>: the value of a data item.</li>\n<li><code class=\"codespan\">{@xxx}: the value of a dimension named</code>&#39;xxx&#39;<code class=\"codespan\">, for example,</code>{@product}<code class=\"codespan\">refers the value of</code>&#39;product&#39;` dimension.</li>\n<li><code class=\"codespan\">{@[n]}: the value of a dimension at the index of</code>n<code class=\"codespan\">, for example,</code>{@[3]}` refers the value at dimensions[3].</li>\n</ul>\n<p><strong>example: </strong></p>\n<pre><code class=\"lang-js\">formatter: &#39;{b}: {@score}&#39;\n</code></pre>\n<p><strong>Callback function</strong></p>\n<p>Callback function is in form of:</p>\n<pre><code class=\"lang-js\">(params: Object|Array) =&gt; string\n</code></pre>\n<p>where <code class=\"codespan\">params</code> is the single dataset needed by formatter, which is formed as:</p>\n<pre><code class=\"lang-js\">{\n    componentType: &#39;series&#39;,\n    // Series type\n    seriesType: string,\n    // Series index in option.series\n    seriesIndex: number,\n    // Series name\n    seriesName: string,\n    // Data name, or category name\n    name: string,\n    // Data index in input data array\n    dataIndex: number,\n    // Original data as input\n    data: Object,\n    // Value of data. In most series it is the same as data.\n    // But in some series it is some part of the data (e.g., in map, radar)\n    value: number|Array|Object,\n    // encoding info of coordinate system\n    // Key: coord, like (&#39;x&#39; &#39;y&#39; &#39;radius&#39; &#39;angle&#39;)\n    // value: Must be an array, not null/undefined. Contain dimension indices, like:\n    // {\n    //     x: [2] // values on dimension index 2 are mapped to x axis.\n    //     y: [0] // values on dimension index 0 are mapped to y axis.\n    // }\n    encode: Object,\n    // dimension names list\n    dimensionNames: Array&lt;String&gt;,\n    // data dimension index, for example 0 or 1 or 2 ...\n    // Only work in `radar` series.\n    dimensionIndex: number,\n    // Color of data\n    color: string,\n\n}\n</code></pre>\n<p>Note: the usage of encode and dimensionNames can be:</p>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    source: [\n        [&#39;Matcha Latte&#39;, 43.3, 85.8, 93.7],\n        [&#39;Milk Tea&#39;, 83.1, 73.4, 55.1],\n        [&#39;Cheese Cocoa&#39;, 86.4, 65.2, 82.5],\n        [&#39;Walnut Brownie&#39;, 72.4, 53.9, 39.1]\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.encode.y[0]]\n</code></pre>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    dimensions: [&#39;product&#39;, &#39;2015&#39;, &#39;2016&#39;, &#39;2017&#39;],\n    source: [\n        {product: &#39;Matcha Latte&#39;, &#39;2015&#39;: 43.3, &#39;2016&#39;: 85.8, &#39;2017&#39;: 93.7},\n        {product: &#39;Milk Tea&#39;, &#39;2015&#39;: 83.1, &#39;2016&#39;: 73.4, &#39;2017&#39;: 55.1},\n        {product: &#39;Cheese Cocoa&#39;, &#39;2015&#39;: 86.4, &#39;2016&#39;: 65.2, &#39;2017&#39;: 82.5},\n        {product: &#39;Walnut Brownie&#39;, &#39;2015&#39;: 72.4, &#39;2016&#39;: 53.9, &#39;2017&#39;: 39.1}\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.dimensionNames[params.encode.y[0]]]\n</code></pre>\n"
+    "desc": "<p>Data label formatter, which supports string template and callback function. In either form, <code class=\"codespan\">\\n</code> is supported to represent a new line.</p>\n<p><strong>String template</strong></p>\n<p>Model variation includes:</p>\n<ul>\n<li><code class=\"codespan\">{a}</code>: series name.</li>\n<li><code class=\"codespan\">{b}</code>: the name of a data item.</li>\n<li><code class=\"codespan\">{c}</code>: the value of a data item.</li>\n<li><code class=\"codespan\">{@xxx}: the value of a dimension named</code>&#39;xxx&#39;<code class=\"codespan\">, for example,</code>{@product}<code class=\"codespan\">refers the value of</code>&#39;product&#39;` dimension.</li>\n<li><code class=\"codespan\">{@[n]}: the value of a dimension at the index of</code>n<code class=\"codespan\">, for example,</code>{@[3]}` refers the value at dimensions[3].</li>\n</ul>\n<p><strong>example: </strong></p>\n<pre><code class=\"lang-js\">formatter: &#39;{b}: {@score}&#39;\n</code></pre>\n<p><strong>Callback function</strong></p>\n<p>Callback function is in form of:</p>\n<pre><code class=\"lang-js\">(params: Object|Array) =&gt; string\n</code></pre>\n<p>where <code class=\"codespan\">params</code> is the single dataset needed by formatter, which is formed as:</p>\n<pre><code class=\"lang-js\">{\n    componentType: &#39;series&#39;,\n    // Series type\n    seriesType: string,\n    // Series index in option.series\n    seriesIndex: number,\n    // Series name\n    seriesName: string,\n    // Data name, or category name\n    name: string,\n    // Data index in input data array\n    dataIndex: number,\n    // Original data as input\n    data: Object,\n    // Value of data. In most series it is the same as data.\n    // But in some series it is some part of the data (e.g., in map, radar)\n    value: number|Array|Object,\n    // encoding info of coordinate system\n    // Key: coord, like (&#39;x&#39; &#39;y&#39; &#39;radius&#39; &#39;angle&#39;)\n    // value: Must be an array, not null/undefined. Contain dimension indices, like:\n    // {\n    //     x: [2] // values on dimension index 2 are mapped to x axis.\n    //     y: [0] // values on dimension index 0 are mapped to y axis.\n    // }\n    encode: Object,\n    // dimension names list\n    dimensionNames: Array&lt;String&gt;,\n    // data dimension index, for example 0 or 1 or 2 ...\n    // Only work in `radar` series.\n    dimensionIndex: number,\n    // Color of data\n    color: string,\n\n\n\n}\n</code></pre>\n<p>Note: the usage of encode and dimensionNames can be:</p>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    source: [\n        [&#39;Matcha Latte&#39;, 43.3, 85.8, 93.7],\n        [&#39;Milk Tea&#39;, 83.1, 73.4, 55.1],\n        [&#39;Cheese Cocoa&#39;, 86.4, 65.2, 82.5],\n        [&#39;Walnut Brownie&#39;, 72.4, 53.9, 39.1]\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.encode.y[0]]\n</code></pre>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    dimensions: [&#39;product&#39;, &#39;2015&#39;, &#39;2016&#39;, &#39;2017&#39;],\n    source: [\n        {product: &#39;Matcha Latte&#39;, &#39;2015&#39;: 43.3, &#39;2016&#39;: 85.8, &#39;2017&#39;: 93.7},\n        {product: &#39;Milk Tea&#39;, &#39;2015&#39;: 83.1, &#39;2016&#39;: 73.4, &#39;2017&#39;: 55.1},\n        {product: &#39;Cheese Cocoa&#39;, &#39;2015&#39;: 86.4, &#39;2016&#39;: 65.2, &#39;2017&#39;: 82.5},\n        {product: &#39;Walnut Brownie&#39;, &#39;2015&#39;: 72.4, &#39;2016&#39;: 53.9, &#39;2017&#39;: 39.1}\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.dimensionNames[params.encode.y[0]]]\n</code></pre>\n"
   },
   "data.label.color": {
-    "desc": "<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "null"
     }
   },
   "data.label.fontStyle": {
-    "desc": "<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
@@ -120,7 +120,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "data.label.fontWeight": {
-    "desc": "<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
@@ -128,7 +128,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "data.label.fontFamily": {
-    "desc": "<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "sans-serif",
@@ -136,7 +136,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "data.label.fontSize": {
-    "desc": "<p> font size.</p>\n",
+    "desc": "\n\n<p> font size.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "12",
@@ -145,14 +145,14 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "data.label.verticalAlign": {
-    "desc": "<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,middle,bottom"
     }
   },
   "data.label.lineHeight": {
-    "desc": "<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -161,21 +161,21 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "data.label.backgroundColor": {
-    "desc": "<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
   "data.label.borderColor": {
-    "desc": "<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
   "data.label.borderWidth": {
-    "desc": "<p>Border width of the text fragment.</p>\n",
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -183,7 +183,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "data.label.borderRadius": {
-    "desc": "<p>Border radius of the text fragment.</p>\n",
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
@@ -191,7 +191,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "data.label.padding": {
-    "desc": "<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
@@ -199,13 +199,13 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "data.label.shadowColor": {
-    "desc": "<p>Shadow color of the text block.</p>\n",
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "data.label.shadowBlur": {
-    "desc": "<p>Show blur of the text block.</p>\n",
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -213,33 +213,47 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "data.label.shadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text block.</p>\n",
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
   "data.label.shadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text block.</p>\n",
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
   "data.label.width": {
-    "desc": "<p>Width of the text block. It is the width of the text by default. In most cases, there is no need to specify it. You may want to use it in some cases like make simple table or using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p><code class=\"codespan\">width</code> can also be percent string, like <code class=\"codespan\">&#39;100%&#39;</code>, which represents the percent of <code class=\"codespan\">contentWidth</code> (that is, the width without <code class=\"codespan\">padding</code>) of its container box. It is based on <code class=\"codespan\">contentWidth</code> because that each text fragment is layout based on the <code class=\"codespan\">content box</code>, where it makes no sense that calculating width based on <code class=\"codespan\">outerWith</code> in prectice.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "data.label.height": {
-    "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "data.label.textBorderColor": {
-    "desc": "<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "data.label.textBorderWidth": {
-    "desc": "<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -247,14 +261,14 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "data.label.textShadowColor": {
-    "desc": "<p>Shadow color of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#000"
     }
   },
   "data.label.textShadowBlur": {
-    "desc": "<p>Shadow blue of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -262,31 +276,44 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "data.label.textShadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
   "data.label.textShadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
+  "data.label.overflow": {
+    "desc": "\n\n<p>Determine how to display the text when it&#39;s overflow. Available when <code class=\"codespan\">width</code> is set.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the text and trailing with <code class=\"codespan\">ellipsis</code>.</li>\n<li><code class=\"codespan\">&#39;break&#39;</code> Break by word</li>\n<li><code class=\"codespan\">&#39;breakAll&#39;</code> Break by character.</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "truncate,break,breakAll"
+    }
+  },
+  "data.label.ellipsis": {
+    "desc": "<p>Ellipsis to be displayed when <code class=\"codespan\">overflow</code> is set to <code class=\"codespan\">truncate</code>.</p>\n"
+  },
+  "data.label.lineOverflow": {
+    "desc": "<p>Determine how to display the text when it&#39;s overflow on height.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the overflow lines.</li>\n</ul>\n"
+  },
   "data.label.rich": {
     "desc": "<p>&quot;Rich text styles&quot; can be defined in this <code class=\"codespan\">rich</code> property. For example:</p>\n<pre><code class=\"lang-js\">label: {\n    // Styles defined in &#39;rich&#39; can be applied to some fragments\n    // of text by adding some markers to those fragment, like\n    // `{styleName|text content text content}`.\n    // `&#39;\\n&#39;` is the newline character.\n    formatter: [\n        &#39;{a|Style &quot;a&quot; is applied to this snippet}&#39;\n        &#39;{b|Style &quot;b&quot; is applied to this snippet}This snippet use default style{x|use style &quot;x&quot;}&#39;\n    ].join(&#39;\\n&#39;),\n\n    rich: {\n        a: {\n            color: &#39;red&#39;,\n            lineHeight: 10\n        },\n        b: {\n            backgroundColor: {\n                image: &#39;xxx/xxx.jpg&#39;\n            },\n            height: 40\n        },\n        x: {\n            fontSize: 18,\n            fontFamily: &#39;Microsoft YaHei&#39;,\n            borderColor: &#39;#449933&#39;,\n            borderRadius: 4\n        },\n        ...\n    }\n}\n</code></pre>\n<p>For more details, see <a href=\"tutorial.html#Rich%20Text\" target=\"_blank\">Rich Text</a> please.</p>\n"
   },
   "data.label.rich.<style_name>.color": {
-    "desc": "<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "null"
     }
   },
   "data.label.rich.<style_name>.fontStyle": {
-    "desc": "<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
@@ -294,7 +321,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "data.label.rich.<style_name>.fontWeight": {
-    "desc": "<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
@@ -302,7 +329,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "data.label.rich.<style_name>.fontFamily": {
-    "desc": "<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "sans-serif",
@@ -310,7 +337,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "data.label.rich.<style_name>.fontSize": {
-    "desc": "<p> font size.</p>\n",
+    "desc": "\n\n<p> font size.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "12",
@@ -319,21 +346,21 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "data.label.rich.<style_name>.align": {
-    "desc": "<p>Horizontal alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;left&#39;</code></li>\n<li><code class=\"codespan\">&#39;center&#39;</code></li>\n<li><code class=\"codespan\">&#39;right&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">align</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">align</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    align: right,\n    rich: {\n        a: {\n            // `align` is not set, then it will be right\n        }\n    }\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Horizontal alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;left&#39;</code></li>\n<li><code class=\"codespan\">&#39;center&#39;</code></li>\n<li><code class=\"codespan\">&#39;right&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">align</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">align</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    align: right,\n    rich: {\n        a: {\n            // `align` is not set, then it will be right\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "left,center,right"
     }
   },
   "data.label.rich.<style_name>.verticalAlign": {
-    "desc": "<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,middle,bottom"
     }
   },
   "data.label.rich.<style_name>.lineHeight": {
-    "desc": "<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -342,21 +369,21 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "data.label.rich.<style_name>.backgroundColor": {
-    "desc": "<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
   "data.label.rich.<style_name>.borderColor": {
-    "desc": "<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
   "data.label.rich.<style_name>.borderWidth": {
-    "desc": "<p>Border width of the text fragment.</p>\n",
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -364,7 +391,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "data.label.rich.<style_name>.borderRadius": {
-    "desc": "<p>Border radius of the text fragment.</p>\n",
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
@@ -372,7 +399,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "data.label.rich.<style_name>.padding": {
-    "desc": "<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
@@ -380,13 +407,13 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "data.label.rich.<style_name>.shadowColor": {
-    "desc": "<p>Shadow color of the text block.</p>\n",
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "data.label.rich.<style_name>.shadowBlur": {
-    "desc": "<p>Show blur of the text block.</p>\n",
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -394,14 +421,14 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "data.label.rich.<style_name>.shadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text block.</p>\n",
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
   "data.label.rich.<style_name>.shadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text block.</p>\n",
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
@@ -414,13 +441,13 @@ window.__EC_DOC_option_series_sunburst = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "data.label.rich.<style_name>.textBorderColor": {
-    "desc": "<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "data.label.rich.<style_name>.textBorderWidth": {
-    "desc": "<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -428,14 +455,14 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "data.label.rich.<style_name>.textShadowColor": {
-    "desc": "<p>Shadow color of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#000"
     }
   },
   "data.label.rich.<style_name>.textShadowBlur": {
-    "desc": "<p>Shadow blue of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -443,36 +470,131 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "data.label.rich.<style_name>.textShadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
   "data.label.rich.<style_name>.textShadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
+  "data.labelLine": {
+    "desc": "<p>Configuration of label guide line.</p>\n"
+  },
+  "data.labelLine.show": {
+    "desc": "\n\n<p>Whether to show the label guide line.</p>\n",
+    "uiControl": {
+      "type": "boolean"
+    }
+  },
+  "data.labelLine.showAbove": {
+    "desc": "<p>Whether to show the label guide line above the corresponding element.</p>\n"
+  },
+  "data.labelLine.length2": {
+    "desc": "\n\n<p>The length of the second segment of guide line.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "15",
+      "min": "0",
+      "step": "1"
+    }
+  },
+  "data.labelLine.smooth": {
+    "desc": "\n\n<p>Whether to smooth the guide line. It defaults to be <code class=\"codespan\">false</code> and can be set as <code class=\"codespan\">true</code> or the values from 0 to 1 which indicating the smoothness.</p>\n",
+    "uiControl": {
+      "type": "boolean"
+    }
+  },
+  "data.labelLine.minTurnAngle": {
+    "desc": "<p>Minimum turn angle between two segments of guide line to prevent unaesthetic display when angle is too small.</p>\n<p>Can be 0 - 180 degree.</p>\n"
+  },
+  "data.labelLine.lineStyle.color": {
+    "desc": "\n\n<p>Line color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "data.labelLine.lineStyle.width": {
+    "desc": "\n\n<p> line width.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "value": "1",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "data.labelLine.lineStyle.type": {
+    "desc": "\n\n<p> line type.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;solid&#39;</code></li>\n<li><code class=\"codespan\">&#39;dashed&#39;</code></li>\n<li><code class=\"codespan\">&#39;dotted&#39;</code></li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "solid",
+      "options": "solid,dashed,dotted"
+    }
+  },
+  "data.labelLine.lineStyle.shadowBlur": {
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "data.labelLine.lineStyle.shadowColor": {
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": ""
+    }
+  },
+  "data.labelLine.lineStyle.shadowOffsetX": {
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "0",
+      "step": "0.5"
+    }
+  },
+  "data.labelLine.lineStyle.shadowOffsetY": {
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "0",
+      "step": "0.5"
+    }
+  },
+  "data.labelLine.lineStyle.opacity": {
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "1",
+      "min": "0",
+      "max": "1",
+      "step": "0.01"
+    }
+  },
   "data.itemStyle": {
-    "desc": "<p>Style of Sunburst sectors.</p>\n<p>Style can be set in <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> for sectors of this series, or <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> for the whole level, or<a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> for single sector. If <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> is defined, it will cover the setting of <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> and <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a>.</p>\n<p><strong>Priority: <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> &gt; <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> &gt; <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a>.</strong></p>\n<p>In ECharts, <em>emphasis</em> is for styles when mouse hovers. For Sunburst charts, there are two extra states: <em>highlight</em> for highlighting items that relates to the emphasized one, and <em>downplay</em> for others when emphasizing an item. See <a href=\"#series-sunburst.highlightPolicy\">highlightPolicy</a>.</p>\n"
+    "desc": "<p>旭日图扇形块的样式。</p>\n<p>可以在 <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> 定义所有扇形块的样式，也可以在 <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> 定义每一层扇形块的样式，还可以在 <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> 定义每个扇形块单独的样式，这三者的优先级从低到高。也就是说，如果定义了 <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a>，将会覆盖 <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> 和 <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a>。</p>\n<p><strong>优先级：<a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> &gt; <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> &gt; <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a>。</strong></p>\n"
   },
   "data.itemStyle.color": {
-    "desc": "<p> color.  Color is taken from <a href=\"#color\">option.color Palette</a> by default. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
+    "desc": "\n\n<p> color.  Color is taken from <a href=\"#color\">option.color Palette</a> by default. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "data.itemStyle.borderColor": {
-    "desc": "<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
+    "desc": "\n\n<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "data.itemStyle.borderWidth": {
-    "desc": "<p> border width. No border when it is set to be 0.</p>\n",
+    "desc": "\n\n<p> border width. No border when it is set to be 0.</p>\n",
     "uiControl": {
       "type": "number",
       "value": "1",
@@ -481,7 +603,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "data.itemStyle.borderType": {
-    "desc": "<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
+    "desc": "\n\n<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "solid",
@@ -489,7 +611,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "data.itemStyle.shadowBlur": {
-    "desc": "<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "default": "",
@@ -498,14 +620,14 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "data.itemStyle.shadowColor": {
-    "desc": "<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color",
       "default": ""
     }
   },
   "data.itemStyle.shadowOffsetX": {
-    "desc": "<p>Offset distance on the horizontal direction of shadow.</p>\n",
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
@@ -513,7 +635,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "data.itemStyle.shadowOffsetY": {
-    "desc": "<p>Offset distance on the vertical direction of shadow.</p>\n",
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
@@ -521,7 +643,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "data.itemStyle.opacity": {
-    "desc": "<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "1",
@@ -530,30 +652,108 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "0.01"
     }
   },
-  "data.emphasis": {
-    "desc": "<p>Item style when mouse is hovering. See <a href=\"#series-sunburst.highlightPolicy\">highlightPolicy</a>.</p>\n"
+  "data.itemStyle.decal(Object | 'none')": {
+    "desc": "<p>The style of the decal pattern. It works only if <a href=\"#aria.enabled\">aria.enabled</a> and <a href=\"#aria.decal.show\">aria.decal.show</a> are both set to be <code class=\"codespan\">true</code>.</p>\n<p>If it is set to be <code class=\"codespan\">&#39;none&#39;</code>, no decal will be used.</p>\n"
   },
-  "data.emphasis.label": {
-    "desc": "<p><code class=\"codespan\">label</code> sets the text style for every sectors.</p>\n<p><strong>Priority: <a href=\"#series-sunburst.data.label\">series.data.label</a> &gt; <a href=\"#series-sunburst.levels.label\">series.levels.label</a> &gt; <a href=\"#series-sunburst.label\">series.label</a>.</strong></p>\n<p>Text label of , to explain some data information about graphic item like value, name and so on. <code class=\"codespan\">label</code> is placed under <code class=\"codespan\">itemStyle</code> in ECharts 2.x. In ECharts 3, to make the configuration structure flatter, <code class=\"codespan\">label</code>is taken to be at the same level with <code class=\"codespan\">itemStyle</code>, and has <code class=\"codespan\">emphasis</code> as <code class=\"codespan\">itemStyle</code> does.</p>\n"
+  "data.itemStyle.decal(Object | 'none').symbol(string|string[]) = 'rect'": {
+    "desc": "<p>The symbol type of the decal. If it is in the type of <code class=\"codespan\">string[]</code>, it means the symbols are used one by one.</p>\n<p>Icon types provided by ECharts includes</p>\n<p><code class=\"codespan\">&#39;circle&#39;</code>, <code class=\"codespan\">&#39;rect&#39;</code>, <code class=\"codespan\">&#39;roundRect&#39;</code>, <code class=\"codespan\">&#39;triangle&#39;</code>, <code class=\"codespan\">&#39;diamond&#39;</code>, <code class=\"codespan\">&#39;pin&#39;</code>, <code class=\"codespan\">&#39;arrow&#39;</code>, <code class=\"codespan\">&#39;none&#39;</code></p>\n<p>It can be set to an image with <code class=\"codespan\">&#39;image://url&#39;</code> , in which URL is the link to an image, or <code class=\"codespan\">dataURI</code> of an image.</p>\n<p>An image URL example:</p>\n<pre><code>&#39;image://http://xxx.xxx.xxx/a/b.png&#39;\n</code></pre><p>A <code class=\"codespan\">dataURI</code> example:</p>\n<pre><code>&#39;image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7&#39;\n</code></pre><p>Icons can be set to arbitrary vector path via <code class=\"codespan\">&#39;path://&#39;</code> in ECharts. As compared with a raster image, vector paths prevent jagging and blurring when scaled, and have better control over changing colors. The size of the vector icon will be adapted automatically. Refer to <a href=\"http://www.w3.org/TR/SVG/paths.html#PathData\" target=\"_blank\">SVG PathData</a> for more information about the format of the path. You may export vector paths from tools like Adobe </p>\n<p>For example:</p>\n<pre><code>&#39;path://M30.9,53.2C16.8,53.2,5.3,41.7,5.3,27.6S16.8,2,30.9,2C45,2,56.4,13.5,56.4,27.6S45,53.2,30.9,53.2z M30.9,3.5C17.6,3.5,6.8,14.4,6.8,27.6c0,13.3,10.8,24.1,24.101,24.1C44.2,51.7,55,40.9,55,27.6C54.9,14.4,44.1,3.5,30.9,3.5z M36.9,35.8c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H36c0.5,0,0.9,0.4,0.9,1V35.8z M27.8,35.8 c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H27c0.5,0,0.9,0.4,0.9,1L27.8,35.8L27.8,35.8z&#39;\n</code></pre>"
   },
-  "data.emphasis.label.rotate": {
-    "desc": "<p>If it is <code class=\"codespan\">number</code> type, then is stands for rotation, from -90 degrees to 90 degrees, and positive values stand for counterclockwise.</p>\n<p>Besides, it can be string <code class=\"codespan\">&#39;radial&#39;</code>, standing for radial rotation; or <code class=\"codespan\">&#39;tangential&#39;</code>, standing for tangential rotation.</p>\n<p>By default, it is <code class=\"codespan\">&#39;radial&#39;</code>. If no rotation is wanted, it can be set to <code class=\"codespan\">0</code>.</p>\n<p>The following example shows different <code class=\"codespan\">rotate</code> settings:</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=sunburst-label-rotate&edit=1&reset=1\" width=\"700\" height=\"400\"><iframe />\n\n",
+  "data.itemStyle.decal(Object | 'none').symbolSize": {
+    "desc": "<p>Range of values: <code class=\"codespan\">0</code> to <code class=\"codespan\">1</code>, representing the size of symbol relative to decal.</p>\n"
+  },
+  "data.itemStyle.decal(Object | 'none').symbolKeepAspect": {
+    "desc": "<p>Whether or not to keep the aspect ratio of the pattern.</p>\n"
+  },
+  "data.itemStyle.decal(Object | 'none').color": {
+    "desc": "<p>For the color of the decal pattern, it is recommended to use a translucent color, which can be superimposed on the color of the series itself.</p>\n"
+  },
+  "data.itemStyle.decal(Object | 'none').backgroundColor": {
+    "desc": "<p>The background color of the decal will be over the color of the series itself, under the decal pattern.</p>\n"
+  },
+  "data.itemStyle.decal(Object | 'none').dashArrayX(number | number[] | (number | number[])[]) = 5": {
+    "desc": "<p>The basic pattern of the decal pattern is an infinite loop in the form of <code class=\"codespan\">Pattern - Blank - Pattern - Blank - Pattern - Blank</code> both horizontally and vertically, respectively. By setting the length of each pattern and blank, complex pattern effects can be achieved.</p>\n<p><code class=\"codespan\">dashArrayX</code> controls the horizontal pattern pattern. When its value is of type <code class=\"codespan\">number</code> or <code class=\"codespan\">number[]</code>, it is similar to <a href=\"https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray\" target=\"_blank\">SVG stroke-dasharray</a>.</p>\n<ul>\n<li><p>If it is of type <code class=\"codespan\">number</code>, it means that the pattern and the blank space are of this value respectively. For example, <code class=\"codespan\">5</code> means the pattern with width 5 is displayed first, then 5 pixels empty, then the pattern with width 5 is displayed...</p>\n</li>\n<li><p>In the case of <code class=\"codespan\">number[]</code> type, it means that the pattern and empty space are loops of an array of values. For example: <code class=\"codespan\">[5, 10, 2, 6]</code> means the pattern is 5 pixels wide, then 10 pixels empty, then the pattern is 2 pixels wide, then 6 pixels empty, then the pattern is 5 pixels wide...</p>\n</li>\n<li><p>If of type <code class=\"codespan\">(number | number[])[]</code>, it means that each row is a loop with an array of values for the pattern and blank space. For example: <code class=\"codespan\">[10, [2, 5]]</code> means that the first line will be 10 pixels by 10 pixels and empty space, the second line will be 2 pixels by 2 pixels and empty space, and the third line will be 10 pixels by 10 pixels and empty space...</p>\n</li>\n</ul>\n<p>This interface can be better understood with the following examples.</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/en/view.html?c=doc-example/aria-decal&edit=1&reset=1\" width=\"700\" height=\"300\"></iframe>\n\n"
+  },
+  "data.itemStyle.decal(Object | 'none').dashArrayY(number | number[]) = 5": {
+    "desc": "<p>The basic pattern of the decal pattern is an infinite loop in the form of <code class=\"codespan\">Pattern - Blank - Pattern - Blank - Pattern - Blank</code> both horizontally and vertically, respectively. By setting the length of each pattern and blank, complex pattern effects can be achieved.</p>\n<p><code class=\"codespan\">dashArrayY</code> controls the horizontal pattern pattern. Similar to <a href=\"https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray\" target=\"_blank\">SVG stroke-dasharray</a>.</p>\n<ul>\n<li><p>If it is a <code class=\"codespan\">number</code> type, it means the pattern and the blank are each of this value. For example, <code class=\"codespan\">5</code> means that the pattern with a height of 5 is displayed first, then 5 pixels empty, then the pattern with a height of 5 is displayed...</p>\n</li>\n<li><p>In the case of <code class=\"codespan\">number[]</code> type, it means that the pattern and empty space are loops of sequential array values. For example: <code class=\"codespan\">[5, 10, 2, 6]</code> means the pattern is 5 pixels high, then 10 pixels empty, then the pattern is 2 pixels high, then 6 pixels empty, then the pattern is 5 pixels high...</p>\n</li>\n</ul>\n<p>This interface can be better understood with the following examples.</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/en/view.html?c=doc-example/aria-decal&edit=1&reset=1\" width=\"700\" height=\"300\"></iframe>\n\n"
+  },
+  "data.itemStyle.decal(Object | 'none').rotation": {
+    "desc": "<p>The overall rotation angle (in radians) of the pattern, in the range from `-Math.</p>\n"
+  },
+  "data.itemStyle.decal(Object | 'none').maxTileWidth": {
+    "desc": "<p>The upper limit of the width of the generated pattern before it is duplicated. Usually this value is not necessary, but you can try to increase it if you notice discontinuous seams in the pattern when it repeats.</p>\n"
+  },
+  "data.itemStyle.decal(Object | 'none').maxTileHeight": {
+    "desc": "<p>The upper limit of the height of the generated pattern before it repeats. This value is usually not necessary to set, but you can try to increase it if you find that the pattern has discontinuous seams when it is repeated.</p>\n"
+  },
+  "labelLayout": {
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Unified layout configuration of labels.</p>\n<p>It provide a chance to adjust the labels&#39; <code class=\"codespan\">(x, y)</code> position, alignment based on the original layout each series provides.</p>\n<p>This option can be a callback with following parameters.</p>\n<pre><code class=\"lang-js\">// corresponding index of data\ndataIndex: number\n// corresponding type of data. Only available in graph, in which it can be &#39;node&#39; or &#39;edge&#39;\ndataType?: string\n// corresponding index of series\nseriesIndex: number\n// Displayed text of label.\ntext: string\n// Bounding rectangle of label.\nlabelRect: {x: number, y: number, width: number, height: number}\n// Horizontal alignment of label.\nalign: &#39;left&#39; | &#39;center&#39; | &#39;right&#39;\n// Vertical alignment of label.\nverticalAlign: &#39;top&#39; | &#39;middle&#39; | &#39;bottom&#39;\n// Bounding rectangle of the element corresponding to.\nrect: {x: number, y: number, width: number, height: number}\n// Default points array of labelLine. Currently only provided in pie and funnel series.\n// It&#39;s null in other series.\nlabelLinePoints?: number[][]\n</code></pre>\n<p><strong>Example:</strong></p>\n<p>Align the labels on the right. Left 10px margin to the edge.</p>\n<pre><code class=\"lang-js\">labelLayout(params) {\n    return {\n        x: params.rect.x + 10,\n        y: params.rect.y + params.rect.height / 2,\n        verticalAlign: &#39;middle&#39;,\n        align: &#39;left&#39;\n    }\n}\n</code></pre>\n<p>Set the text size based on the size of element bounding rectangle.</p>\n<pre><code class=\"lang-js\">\nlabelLayout(params) {\n    return {\n        fontSize: Math.max(params.rect.width / 10, 5)\n    };\n}\n</code></pre>\n"
+  },
+  "labelLayout.hideOverlap": {
+    "desc": "<p>If hide the overlapped labels.</p>\n<p>The following example shows how to hide the overlapped labels in graph automatically when zooming.</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/en/view.html?c=graph-label-overlap&edit=1&reset=1\" width=\"600\" height=\"400\"></iframe>\n\n"
+  },
+  "labelLayout.moveOverlap": {
+    "desc": "<p>If move the overlapped labels to avoid overlapping.</p>\n<p>Currently supported configurations:</p>\n<ul>\n<li><code class=\"codespan\">&#39;shiftX&#39;</code> Place the labels on horizontal direction sequencely, used when aligned horizontally.</li>\n<li><code class=\"codespan\">&#39;shiftY&#39;</code> Place the labels on vertial direction sequencely, used when aligned vertically.</li>\n</ul>\n<p>The following example shows how to use <code class=\"codespan\">moverOverlap: &#39;shiftY&#39;</code> to place the labels aligned vertically.</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/en/view.html?c=scatter-label-align-right&edit=1&reset=1\" width=\"600\" height=\"400\"></iframe>\n\n"
+  },
+  "labelLayout.x": {
+    "desc": "<p>The x position of the label. Support absolute pixel values ​​or relative values ​​such as <code class=\"codespan\">&#39;20%&#39;</code>.</p>\n"
+  },
+  "labelLayout.y": {
+    "desc": "<p>The y position of the label. Support absolute pixel values ​​or relative values ​​such as <code class=\"codespan\">&#39;20%&#39;</code>.</p>\n"
+  },
+  "labelLayout.dx": {
+    "desc": "<p>The pixel offset of the label in the x direction. Can be used with <code class=\"codespan\">x</code>.</p>\n"
+  },
+  "labelLayout.dy": {
+    "desc": "<p>The pixel offset of the label in the y direction. Can be used with <code class=\"codespan\">y</code></p>\n"
+  },
+  "labelLayout.rotate": {
+    "desc": "<p>Label rotation angle.</p>\n"
+  },
+  "labelLayout.width": {
+    "desc": "<p>The width of displayed label. Can be used with <code class=\"codespan\">overflow</code> to constraint the label in a fixed width</p>\n"
+  },
+  "labelLayout.height": {
+    "desc": "<p>The height of displayed label. Can be used with <code class=\"codespan\">lineOverflow</code> to constraint the label in a fixed height.</p>\n"
+  },
+  "labelLayout.align": {
+    "desc": "<p>The horizontal alignment of the label. Can be <code class=\"codespan\">&#39;left&#39;</code>, <code class=\"codespan\">&#39;center&#39;</code>, <code class=\"codespan\">&#39;right&#39;</code>.</p>\n"
+  },
+  "labelLayout.verticalAlign": {
+    "desc": "<p>The vertical alignment of the label. Can be <code class=\"codespan\">&#39;top&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;bottom&#39;</code>.</p>\n"
+  },
+  "labelLayout.fontSize": {
+    "desc": "<p>The text size of the label.</p>\n"
+  },
+  "labelLayout.draggable": {
+    "desc": "<p>Whether to allow the user to adjust the position by dragging.</p>\n"
+  },
+  "labelLayout.labelLinePoints": {
+    "desc": "<p>The array of the three points of the label guide line. The format is:</p>\n<pre><code class=\"lang-js\">[[x, y], [x, y], [x, y]]\n</code></pre>\n<p>It is often used in pie charts to fine-tune the guide line that has been calculated. Usually not recommended to set it in other situations.</p>\n"
+  },
+  "labelLayout.emphasis": {
+    "desc": "<p>Emphasis state.</p>\n"
+  },
+  "labelLayout.emphasis.label": {
+    "desc": "<p><code class=\"codespan\">label</code> 描述了每个扇形块中，文本标签的样式。</p>\n<p><strong>优先级：<a href=\"#series-sunburst.data.label\">series.data.label</a> &gt; <a href=\"#series-sunburst.levels.label\">series.levels.label</a> &gt; <a href=\"#series-sunburst.label\">series.label</a>。</strong></p>\n<p>Text label of , to explain some data information about graphic item like value, name and so on. <code class=\"codespan\">label</code> is placed under <code class=\"codespan\">itemStyle</code> in ECharts 2.x. In ECharts 3, to make the configuration structure flatter, <code class=\"codespan\">label</code>is taken to be at the same level with <code class=\"codespan\">itemStyle</code>, and has <code class=\"codespan\">emphasis</code> as <code class=\"codespan\">itemStyle</code> does.</p>\n"
+  },
+  "labelLayout.emphasis.label.rotate": {
+    "desc": "\n\n\n<p>同 <a href=\"#sunburst.label.rotate\">label.rotate</a></p>\n",
     "uiControl": {
       "type": "enum",
       "options": "radial,tangential",
       "default": "radial"
     }
   },
-  "data.emphasis.label.align": {
-    "desc": "<p>Align of text, which can be <code class=\"codespan\">&#39;left&#39;</code>, <code class=\"codespan\">&#39;center&#39;</code>, or <code class=\"codespan\">&#39;right&#39;</code>. Note that <code class=\"codespan\">&#39;left&#39;</code> stands for inner side, and <code class=\"codespan\">&#39;right&#39;</code> stands for outer side.</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=doc-example/sunburst-label-align&edit=1&reset=1\" width=\"700\" height=\"400\"><iframe />\n\n",
+  "labelLayout.emphasis.label.align": {
+    "desc": "\n\n<p>Align of text, which can be <code class=\"codespan\">&#39;left&#39;</code>, <code class=\"codespan\">&#39;center&#39;</code>, or <code class=\"codespan\">&#39;right&#39;</code>. Note that <code class=\"codespan\">&#39;left&#39;</code> stands for inner side, and <code class=\"codespan\">&#39;right&#39;</code> stands for outer side.</p>\n<p>Same to <a href=\"#sunburst.label.align\">label.align</a></p>\n",
     "uiControl": {
       "type": "enum",
       "options": "left,center,right",
       "default": "center"
     }
   },
-  "data.emphasis.label.minAngle": {
-    "desc": "<p>If angle of data piece is smaller than this value (in degrees), then text is not displayed. This is used for hiding text for small piece of data.</p>\n",
+  "labelLayout.emphasis.label.minAngle": {
+    "desc": "\n\n<p>If angle of data piece is smaller than this value (in degrees), then text is not displayed. This is used for hiding text for small piece of data.</p>\n",
     "uiControl": {
       "type": "angle",
       "min": "0",
@@ -561,22 +761,22 @@ window.__EC_DOC_option_series_sunburst = {
       "max": "360"
     }
   },
-  "data.emphasis.label.show": {
-    "desc": "<p>Whether to show label.</p>\n",
+  "labelLayout.emphasis.label.show": {
+    "desc": "\n\n<p>Whether to show label.</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "true"
     }
   },
-  "data.emphasis.label.position": {
-    "desc": "<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/examples/zh/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+  "labelLayout.emphasis.label.position": {
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
-  "data.emphasis.label.distance": {
-    "desc": "<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+  "labelLayout.emphasis.label.distance": {
+    "desc": "\n\n<p>Distance to the host graphic element.</p>\n<p>It is valid only when <code class=\"codespan\">position</code> is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -584,8 +784,8 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "0.5"
     }
   },
-  "data.emphasis.label.offset": {
-    "desc": "<p>Whether to move text slightly. For example: <code class=\"codespan\">[30, 40]</code> means move <code class=\"codespan\">30</code> horizontally and move <code class=\"codespan\">40</code> vertically.</p>\n",
+  "labelLayout.emphasis.label.offset": {
+    "desc": "\n\n<p>Whether to move text slightly. For example: <code class=\"codespan\">[30, 40]</code> means move <code class=\"codespan\">30</code> horizontally and move <code class=\"codespan\">40</code> vertically.</p>\n",
     "uiControl": {
       "type": "vector",
       "dims": "x,y",
@@ -593,42 +793,42 @@ window.__EC_DOC_option_series_sunburst = {
       "separate": "true"
     }
   },
-  "data.emphasis.label.formatter": {
-    "desc": "<p>Data label formatter, which supports string template and callback function. In either form, <code class=\"codespan\">\\n</code> is supported to represent a new line.</p>\n<p><strong>String template</strong></p>\n<p>Model variation includes:</p>\n<ul>\n<li><code class=\"codespan\">{a}</code>: series name.</li>\n<li><code class=\"codespan\">{b}</code>: the name of a data item.</li>\n<li><code class=\"codespan\">{c}</code>: the value of a data item.</li>\n<li><code class=\"codespan\">{@xxx}: the value of a dimension named</code>&#39;xxx&#39;<code class=\"codespan\">, for example,</code>{@product}<code class=\"codespan\">refers the value of</code>&#39;product&#39;` dimension.</li>\n<li><code class=\"codespan\">{@[n]}: the value of a dimension at the index of</code>n<code class=\"codespan\">, for example,</code>{@[3]}` refers the value at dimensions[3].</li>\n</ul>\n<p><strong>example: </strong></p>\n<pre><code class=\"lang-js\">formatter: &#39;{b}: {@score}&#39;\n</code></pre>\n<p><strong>Callback function</strong></p>\n<p>Callback function is in form of:</p>\n<pre><code class=\"lang-js\">(params: Object|Array) =&gt; string\n</code></pre>\n<p>where <code class=\"codespan\">params</code> is the single dataset needed by formatter, which is formed as:</p>\n<pre><code class=\"lang-js\">{\n    componentType: &#39;series&#39;,\n    // Series type\n    seriesType: string,\n    // Series index in option.series\n    seriesIndex: number,\n    // Series name\n    seriesName: string,\n    // Data name, or category name\n    name: string,\n    // Data index in input data array\n    dataIndex: number,\n    // Original data as input\n    data: Object,\n    // Value of data. In most series it is the same as data.\n    // But in some series it is some part of the data (e.g., in map, radar)\n    value: number|Array|Object,\n    // encoding info of coordinate system\n    // Key: coord, like (&#39;x&#39; &#39;y&#39; &#39;radius&#39; &#39;angle&#39;)\n    // value: Must be an array, not null/undefined. Contain dimension indices, like:\n    // {\n    //     x: [2] // values on dimension index 2 are mapped to x axis.\n    //     y: [0] // values on dimension index 0 are mapped to y axis.\n    // }\n    encode: Object,\n    // dimension names list\n    dimensionNames: Array&lt;String&gt;,\n    // data dimension index, for example 0 or 1 or 2 ...\n    // Only work in `radar` series.\n    dimensionIndex: number,\n    // Color of data\n    color: string,\n\n}\n</code></pre>\n<p>Note: the usage of encode and dimensionNames can be:</p>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    source: [\n        [&#39;Matcha Latte&#39;, 43.3, 85.8, 93.7],\n        [&#39;Milk Tea&#39;, 83.1, 73.4, 55.1],\n        [&#39;Cheese Cocoa&#39;, 86.4, 65.2, 82.5],\n        [&#39;Walnut Brownie&#39;, 72.4, 53.9, 39.1]\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.encode.y[0]]\n</code></pre>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    dimensions: [&#39;product&#39;, &#39;2015&#39;, &#39;2016&#39;, &#39;2017&#39;],\n    source: [\n        {product: &#39;Matcha Latte&#39;, &#39;2015&#39;: 43.3, &#39;2016&#39;: 85.8, &#39;2017&#39;: 93.7},\n        {product: &#39;Milk Tea&#39;, &#39;2015&#39;: 83.1, &#39;2016&#39;: 73.4, &#39;2017&#39;: 55.1},\n        {product: &#39;Cheese Cocoa&#39;, &#39;2015&#39;: 86.4, &#39;2016&#39;: 65.2, &#39;2017&#39;: 82.5},\n        {product: &#39;Walnut Brownie&#39;, &#39;2015&#39;: 72.4, &#39;2016&#39;: 53.9, &#39;2017&#39;: 39.1}\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.dimensionNames[params.encode.y[0]]]\n</code></pre>\n"
+  "labelLayout.emphasis.label.formatter": {
+    "desc": "<p>Data label formatter, which supports string template and callback function. In either form, <code class=\"codespan\">\\n</code> is supported to represent a new line.</p>\n<p><strong>String template</strong></p>\n<p>Model variation includes:</p>\n<ul>\n<li><code class=\"codespan\">{a}</code>: series name.</li>\n<li><code class=\"codespan\">{b}</code>: the name of a data item.</li>\n<li><code class=\"codespan\">{c}</code>: the value of a data item.</li>\n<li><code class=\"codespan\">{@xxx}: the value of a dimension named</code>&#39;xxx&#39;<code class=\"codespan\">, for example,</code>{@product}<code class=\"codespan\">refers the value of</code>&#39;product&#39;` dimension.</li>\n<li><code class=\"codespan\">{@[n]}: the value of a dimension at the index of</code>n<code class=\"codespan\">, for example,</code>{@[3]}` refers the value at dimensions[3].</li>\n</ul>\n<p><strong>example: </strong></p>\n<pre><code class=\"lang-js\">formatter: &#39;{b}: {@score}&#39;\n</code></pre>\n<p><strong>Callback function</strong></p>\n<p>Callback function is in form of:</p>\n<pre><code class=\"lang-js\">(params: Object|Array) =&gt; string\n</code></pre>\n<p>where <code class=\"codespan\">params</code> is the single dataset needed by formatter, which is formed as:</p>\n<pre><code class=\"lang-js\">{\n    componentType: &#39;series&#39;,\n    // Series type\n    seriesType: string,\n    // Series index in option.series\n    seriesIndex: number,\n    // Series name\n    seriesName: string,\n    // Data name, or category name\n    name: string,\n    // Data index in input data array\n    dataIndex: number,\n    // Original data as input\n    data: Object,\n    // Value of data. In most series it is the same as data.\n    // But in some series it is some part of the data (e.g., in map, radar)\n    value: number|Array|Object,\n    // encoding info of coordinate system\n    // Key: coord, like (&#39;x&#39; &#39;y&#39; &#39;radius&#39; &#39;angle&#39;)\n    // value: Must be an array, not null/undefined. Contain dimension indices, like:\n    // {\n    //     x: [2] // values on dimension index 2 are mapped to x axis.\n    //     y: [0] // values on dimension index 0 are mapped to y axis.\n    // }\n    encode: Object,\n    // dimension names list\n    dimensionNames: Array&lt;String&gt;,\n    // data dimension index, for example 0 or 1 or 2 ...\n    // Only work in `radar` series.\n    dimensionIndex: number,\n    // Color of data\n    color: string,\n\n\n\n}\n</code></pre>\n<p>Note: the usage of encode and dimensionNames can be:</p>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    source: [\n        [&#39;Matcha Latte&#39;, 43.3, 85.8, 93.7],\n        [&#39;Milk Tea&#39;, 83.1, 73.4, 55.1],\n        [&#39;Cheese Cocoa&#39;, 86.4, 65.2, 82.5],\n        [&#39;Walnut Brownie&#39;, 72.4, 53.9, 39.1]\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.encode.y[0]]\n</code></pre>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    dimensions: [&#39;product&#39;, &#39;2015&#39;, &#39;2016&#39;, &#39;2017&#39;],\n    source: [\n        {product: &#39;Matcha Latte&#39;, &#39;2015&#39;: 43.3, &#39;2016&#39;: 85.8, &#39;2017&#39;: 93.7},\n        {product: &#39;Milk Tea&#39;, &#39;2015&#39;: 83.1, &#39;2016&#39;: 73.4, &#39;2017&#39;: 55.1},\n        {product: &#39;Cheese Cocoa&#39;, &#39;2015&#39;: 86.4, &#39;2016&#39;: 65.2, &#39;2017&#39;: 82.5},\n        {product: &#39;Walnut Brownie&#39;, &#39;2015&#39;: 72.4, &#39;2016&#39;: 53.9, &#39;2017&#39;: 39.1}\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.dimensionNames[params.encode.y[0]]]\n</code></pre>\n"
   },
-  "data.emphasis.label.color": {
-    "desc": "<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "labelLayout.emphasis.label.color": {
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "null"
     }
   },
-  "data.emphasis.label.fontStyle": {
-    "desc": "<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+  "labelLayout.emphasis.label.fontStyle": {
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
       "options": "normal,italic,oblique"
     }
   },
-  "data.emphasis.label.fontWeight": {
-    "desc": "<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+  "labelLayout.emphasis.label.fontWeight": {
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
       "options": "normal,bold,bolder,lighter"
     }
   },
-  "data.emphasis.label.fontFamily": {
-    "desc": "<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+  "labelLayout.emphasis.label.fontFamily": {
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "sans-serif",
       "options": "sans-serif,serif,monospace,Arial,Courier New"
     }
   },
-  "data.emphasis.label.fontSize": {
-    "desc": "<p> font size.</p>\n",
+  "labelLayout.emphasis.label.fontSize": {
+    "desc": "\n\n<p> font size.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "12",
@@ -636,15 +836,15 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "1"
     }
   },
-  "data.emphasis.label.verticalAlign": {
-    "desc": "<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
+  "labelLayout.emphasis.label.verticalAlign": {
+    "desc": "\n\n<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,middle,bottom"
     }
   },
-  "data.emphasis.label.lineHeight": {
-    "desc": "<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+  "labelLayout.emphasis.label.lineHeight": {
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -652,157 +852,184 @@ window.__EC_DOC_option_series_sunburst = {
       "default": "12"
     }
   },
-  "data.emphasis.label.backgroundColor": {
-    "desc": "<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "labelLayout.emphasis.label.backgroundColor": {
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
-  "data.emphasis.label.borderColor": {
-    "desc": "<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "labelLayout.emphasis.label.borderColor": {
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
-  "data.emphasis.label.borderWidth": {
-    "desc": "<p>Border width of the text fragment.</p>\n",
+  "labelLayout.emphasis.label.borderWidth": {
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "data.emphasis.label.borderRadius": {
-    "desc": "<p>Border radius of the text fragment.</p>\n",
+  "labelLayout.emphasis.label.borderRadius": {
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
       "dims": "LT,RT, RB, LB"
     }
   },
-  "data.emphasis.label.padding": {
-    "desc": "<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+  "labelLayout.emphasis.label.padding": {
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
       "dims": "T,R,B,L"
     }
   },
-  "data.emphasis.label.shadowColor": {
-    "desc": "<p>Shadow color of the text block.</p>\n",
+  "labelLayout.emphasis.label.shadowColor": {
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
-  "data.emphasis.label.shadowBlur": {
-    "desc": "<p>Show blur of the text block.</p>\n",
+  "labelLayout.emphasis.label.shadowBlur": {
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "data.emphasis.label.shadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text block.</p>\n",
+  "labelLayout.emphasis.label.shadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "data.emphasis.label.shadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text block.</p>\n",
+  "labelLayout.emphasis.label.shadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "data.emphasis.label.width": {
-    "desc": "<p>Width of the text block. It is the width of the text by default. In most cases, there is no need to specify it. You may want to use it in some cases like make simple table or using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p><code class=\"codespan\">width</code> can also be percent string, like <code class=\"codespan\">&#39;100%&#39;</code>, which represents the percent of <code class=\"codespan\">contentWidth</code> (that is, the width without <code class=\"codespan\">padding</code>) of its container box. It is based on <code class=\"codespan\">contentWidth</code> because that each text fragment is layout based on the <code class=\"codespan\">content box</code>, where it makes no sense that calculating width based on <code class=\"codespan\">outerWith</code> in prectice.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+  "labelLayout.emphasis.label.width": {
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
-  "data.emphasis.label.height": {
-    "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+  "labelLayout.emphasis.label.height": {
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
-  "data.emphasis.label.textBorderColor": {
-    "desc": "<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "labelLayout.emphasis.label.textBorderColor": {
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
-  "data.emphasis.label.textBorderWidth": {
-    "desc": "<p>Storke line width of the text.</p>\n",
+  "labelLayout.emphasis.label.textBorderWidth": {
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "data.emphasis.label.textShadowColor": {
-    "desc": "<p>Shadow color of the text itself.</p>\n",
+  "labelLayout.emphasis.label.textShadowColor": {
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#000"
     }
   },
-  "data.emphasis.label.textShadowBlur": {
-    "desc": "<p>Shadow blue of the text itself.</p>\n",
+  "labelLayout.emphasis.label.textShadowBlur": {
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "data.emphasis.label.textShadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text itself.</p>\n",
+  "labelLayout.emphasis.label.textShadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "data.emphasis.label.textShadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text itself.</p>\n",
+  "labelLayout.emphasis.label.textShadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "data.emphasis.label.rich": {
+  "labelLayout.emphasis.label.overflow": {
+    "desc": "\n\n<p>Determine how to display the text when it&#39;s overflow. Available when <code class=\"codespan\">width</code> is set.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the text and trailing with <code class=\"codespan\">ellipsis</code>.</li>\n<li><code class=\"codespan\">&#39;break&#39;</code> Break by word</li>\n<li><code class=\"codespan\">&#39;breakAll&#39;</code> Break by character.</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "truncate,break,breakAll"
+    }
+  },
+  "labelLayout.emphasis.label.ellipsis": {
+    "desc": "<p>Ellipsis to be displayed when <code class=\"codespan\">overflow</code> is set to <code class=\"codespan\">truncate</code>.</p>\n"
+  },
+  "labelLayout.emphasis.label.lineOverflow": {
+    "desc": "<p>Determine how to display the text when it&#39;s overflow on height.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the overflow lines.</li>\n</ul>\n"
+  },
+  "labelLayout.emphasis.label.rich": {
     "desc": "<p>&quot;Rich text styles&quot; can be defined in this <code class=\"codespan\">rich</code> property. For example:</p>\n<pre><code class=\"lang-js\">label: {\n    // Styles defined in &#39;rich&#39; can be applied to some fragments\n    // of text by adding some markers to those fragment, like\n    // `{styleName|text content text content}`.\n    // `&#39;\\n&#39;` is the newline character.\n    formatter: [\n        &#39;{a|Style &quot;a&quot; is applied to this snippet}&#39;\n        &#39;{b|Style &quot;b&quot; is applied to this snippet}This snippet use default style{x|use style &quot;x&quot;}&#39;\n    ].join(&#39;\\n&#39;),\n\n    rich: {\n        a: {\n            color: &#39;red&#39;,\n            lineHeight: 10\n        },\n        b: {\n            backgroundColor: {\n                image: &#39;xxx/xxx.jpg&#39;\n            },\n            height: 40\n        },\n        x: {\n            fontSize: 18,\n            fontFamily: &#39;Microsoft YaHei&#39;,\n            borderColor: &#39;#449933&#39;,\n            borderRadius: 4\n        },\n        ...\n    }\n}\n</code></pre>\n<p>For more details, see <a href=\"tutorial.html#Rich%20Text\" target=\"_blank\">Rich Text</a> please.</p>\n"
   },
-  "data.emphasis.label.rich.<style_name>.color": {
-    "desc": "<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "labelLayout.emphasis.label.rich.<style_name>.color": {
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "null"
     }
   },
-  "data.emphasis.label.rich.<style_name>.fontStyle": {
-    "desc": "<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+  "labelLayout.emphasis.label.rich.<style_name>.fontStyle": {
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
       "options": "normal,italic,oblique"
     }
   },
-  "data.emphasis.label.rich.<style_name>.fontWeight": {
-    "desc": "<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+  "labelLayout.emphasis.label.rich.<style_name>.fontWeight": {
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
       "options": "normal,bold,bolder,lighter"
     }
   },
-  "data.emphasis.label.rich.<style_name>.fontFamily": {
-    "desc": "<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+  "labelLayout.emphasis.label.rich.<style_name>.fontFamily": {
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "sans-serif",
       "options": "sans-serif,serif,monospace,Arial,Courier New"
     }
   },
-  "data.emphasis.label.rich.<style_name>.fontSize": {
-    "desc": "<p> font size.</p>\n",
+  "labelLayout.emphasis.label.rich.<style_name>.fontSize": {
+    "desc": "\n\n<p> font size.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "12",
@@ -810,22 +1037,22 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "1"
     }
   },
-  "data.emphasis.label.rich.<style_name>.align": {
-    "desc": "<p>Horizontal alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;left&#39;</code></li>\n<li><code class=\"codespan\">&#39;center&#39;</code></li>\n<li><code class=\"codespan\">&#39;right&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">align</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">align</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    align: right,\n    rich: {\n        a: {\n            // `align` is not set, then it will be right\n        }\n    }\n}\n</code></pre>\n",
+  "labelLayout.emphasis.label.rich.<style_name>.align": {
+    "desc": "\n\n<p>Horizontal alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;left&#39;</code></li>\n<li><code class=\"codespan\">&#39;center&#39;</code></li>\n<li><code class=\"codespan\">&#39;right&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">align</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">align</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    align: right,\n    rich: {\n        a: {\n            // `align` is not set, then it will be right\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "left,center,right"
     }
   },
-  "data.emphasis.label.rich.<style_name>.verticalAlign": {
-    "desc": "<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
+  "labelLayout.emphasis.label.rich.<style_name>.verticalAlign": {
+    "desc": "\n\n<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,middle,bottom"
     }
   },
-  "data.emphasis.label.rich.<style_name>.lineHeight": {
-    "desc": "<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+  "labelLayout.emphasis.label.rich.<style_name>.lineHeight": {
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -833,138 +1060,138 @@ window.__EC_DOC_option_series_sunburst = {
       "default": "12"
     }
   },
-  "data.emphasis.label.rich.<style_name>.backgroundColor": {
-    "desc": "<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "labelLayout.emphasis.label.rich.<style_name>.backgroundColor": {
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
-  "data.emphasis.label.rich.<style_name>.borderColor": {
-    "desc": "<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "labelLayout.emphasis.label.rich.<style_name>.borderColor": {
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
-  "data.emphasis.label.rich.<style_name>.borderWidth": {
-    "desc": "<p>Border width of the text fragment.</p>\n",
+  "labelLayout.emphasis.label.rich.<style_name>.borderWidth": {
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "data.emphasis.label.rich.<style_name>.borderRadius": {
-    "desc": "<p>Border radius of the text fragment.</p>\n",
+  "labelLayout.emphasis.label.rich.<style_name>.borderRadius": {
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
       "dims": "LT,RT, RB, LB"
     }
   },
-  "data.emphasis.label.rich.<style_name>.padding": {
-    "desc": "<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+  "labelLayout.emphasis.label.rich.<style_name>.padding": {
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
       "dims": "T,R,B,L"
     }
   },
-  "data.emphasis.label.rich.<style_name>.shadowColor": {
-    "desc": "<p>Shadow color of the text block.</p>\n",
+  "labelLayout.emphasis.label.rich.<style_name>.shadowColor": {
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
-  "data.emphasis.label.rich.<style_name>.shadowBlur": {
-    "desc": "<p>Show blur of the text block.</p>\n",
+  "labelLayout.emphasis.label.rich.<style_name>.shadowBlur": {
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "data.emphasis.label.rich.<style_name>.shadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text block.</p>\n",
+  "labelLayout.emphasis.label.rich.<style_name>.shadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "data.emphasis.label.rich.<style_name>.shadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text block.</p>\n",
+  "labelLayout.emphasis.label.rich.<style_name>.shadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "data.emphasis.label.rich.<style_name>.width": {
+  "labelLayout.emphasis.label.rich.<style_name>.width": {
     "desc": "<p>Width of the text block. It is the width of the text by default. In most cases, there is no need to specify it. You may want to use it in some cases like make simple table or using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p><code class=\"codespan\">width</code> can also be percent string, like <code class=\"codespan\">&#39;100%&#39;</code>, which represents the percent of <code class=\"codespan\">contentWidth</code> (that is, the width without <code class=\"codespan\">padding</code>) of its container box. It is based on <code class=\"codespan\">contentWidth</code> because that each text fragment is layout based on the <code class=\"codespan\">content box</code>, where it makes no sense that calculating width based on <code class=\"codespan\">outerWith</code> in prectice.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
-  "data.emphasis.label.rich.<style_name>.height": {
+  "labelLayout.emphasis.label.rich.<style_name>.height": {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
-  "data.emphasis.label.rich.<style_name>.textBorderColor": {
-    "desc": "<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "labelLayout.emphasis.label.rich.<style_name>.textBorderColor": {
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
-  "data.emphasis.label.rich.<style_name>.textBorderWidth": {
-    "desc": "<p>Storke line width of the text.</p>\n",
+  "labelLayout.emphasis.label.rich.<style_name>.textBorderWidth": {
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "data.emphasis.label.rich.<style_name>.textShadowColor": {
-    "desc": "<p>Shadow color of the text itself.</p>\n",
+  "labelLayout.emphasis.label.rich.<style_name>.textShadowColor": {
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#000"
     }
   },
-  "data.emphasis.label.rich.<style_name>.textShadowBlur": {
-    "desc": "<p>Shadow blue of the text itself.</p>\n",
+  "labelLayout.emphasis.label.rich.<style_name>.textShadowBlur": {
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "data.emphasis.label.rich.<style_name>.textShadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text itself.</p>\n",
+  "labelLayout.emphasis.label.rich.<style_name>.textShadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "data.emphasis.label.rich.<style_name>.textShadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text itself.</p>\n",
+  "labelLayout.emphasis.label.rich.<style_name>.textShadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "data.emphasis.itemStyle": {
-    "desc": "<p>Style of Sunburst sectors.</p>\n<p>Style can be set in <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> for sectors of this series, or <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> for the whole level, or<a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> for single sector. If <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> is defined, it will cover the setting of <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> and <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a>.</p>\n<p><strong>Priority: <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> &gt; <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> &gt; <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a>.</strong></p>\n<p>In ECharts, <em>emphasis</em> is for styles when mouse hovers. For Sunburst charts, there are two extra states: <em>highlight</em> for highlighting items that relates to the emphasized one, and <em>downplay</em> for others when emphasizing an item. See <a href=\"#series-sunburst.highlightPolicy\">highlightPolicy</a>.</p>\n"
+  "labelLayout.emphasis.labelLine": {
+    "desc": "<p>Configuration of label guide line.</p>\n"
   },
-  "data.emphasis.itemStyle.color": {
-    "desc": "<p> color.  Color is taken from <a href=\"#color\">option.color Palette</a> by default. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
+  "labelLayout.emphasis.labelLine.show": {
+    "desc": "\n\n<p>Whether to show the label guide line.</p>\n",
+    "uiControl": {
+      "type": "boolean"
+    }
+  },
+  "labelLayout.emphasis.labelLine.lineStyle.color": {
+    "desc": "\n\n<p>Line color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
     "uiControl": {
       "type": "color"
     }
   },
-  "data.emphasis.itemStyle.borderColor": {
-    "desc": "<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
-    "uiControl": {
-      "type": "color"
-    }
-  },
-  "data.emphasis.itemStyle.borderWidth": {
-    "desc": "<p> border width. No border when it is set to be 0.</p>\n",
+  "labelLayout.emphasis.labelLine.lineStyle.width": {
+    "desc": "\n\n<p> line width.</p>\n",
     "uiControl": {
       "type": "number",
       "value": "1",
@@ -972,16 +1199,16 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "0.5"
     }
   },
-  "data.emphasis.itemStyle.borderType": {
-    "desc": "<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
+  "labelLayout.emphasis.labelLine.lineStyle.type": {
+    "desc": "\n\n<p> line type.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;solid&#39;</code></li>\n<li><code class=\"codespan\">&#39;dashed&#39;</code></li>\n<li><code class=\"codespan\">&#39;dotted&#39;</code></li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "solid",
       "options": "solid,dashed,dotted"
     }
   },
-  "data.emphasis.itemStyle.shadowBlur": {
-    "desc": "<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+  "labelLayout.emphasis.labelLine.lineStyle.shadowBlur": {
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "default": "",
@@ -989,31 +1216,31 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "0.5"
     }
   },
-  "data.emphasis.itemStyle.shadowColor": {
-    "desc": "<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+  "labelLayout.emphasis.labelLine.lineStyle.shadowColor": {
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color",
       "default": ""
     }
   },
-  "data.emphasis.itemStyle.shadowOffsetX": {
-    "desc": "<p>Offset distance on the horizontal direction of shadow.</p>\n",
+  "labelLayout.emphasis.labelLine.lineStyle.shadowOffsetX": {
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
       "step": "0.5"
     }
   },
-  "data.emphasis.itemStyle.shadowOffsetY": {
-    "desc": "<p>Offset distance on the vertical direction of shadow.</p>\n",
+  "labelLayout.emphasis.labelLine.lineStyle.shadowOffsetY": {
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
       "step": "0.5"
     }
   },
-  "data.emphasis.itemStyle.opacity": {
-    "desc": "<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+  "labelLayout.emphasis.labelLine.lineStyle.opacity": {
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "1",
@@ -1022,30 +1249,104 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "0.01"
     }
   },
-  "data.highlight": {
-    "desc": "<p>Item style when mouse is hovering related items. See <a href=\"#series-sunburst.highlightPolicy\">highlightPolicy</a>.</p>\n"
+  "labelLayout.emphasis.itemStyle": {
+    "desc": "<p>旭日图扇形块的样式。</p>\n<p>可以在 <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> 定义所有扇形块的样式，也可以在 <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> 定义每一层扇形块的样式，还可以在 <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> 定义每个扇形块单独的样式，这三者的优先级从低到高。也就是说，如果定义了 <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a>，将会覆盖 <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> 和 <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a>。</p>\n<p><strong>优先级：<a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> &gt; <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> &gt; <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a>。</strong></p>\n"
   },
-  "data.highlight.label": {
-    "desc": "<p><code class=\"codespan\">label</code> sets the text style for every sectors.</p>\n<p><strong>Priority: <a href=\"#series-sunburst.data.label\">series.data.label</a> &gt; <a href=\"#series-sunburst.levels.label\">series.levels.label</a> &gt; <a href=\"#series-sunburst.label\">series.label</a>.</strong></p>\n<p>Text label of , to explain some data information about graphic item like value, name and so on. <code class=\"codespan\">label</code> is placed under <code class=\"codespan\">itemStyle</code> in ECharts 2.x. In ECharts 3, to make the configuration structure flatter, <code class=\"codespan\">label</code>is taken to be at the same level with <code class=\"codespan\">itemStyle</code>, and has <code class=\"codespan\">emphasis</code> as <code class=\"codespan\">itemStyle</code> does.</p>\n"
+  "labelLayout.emphasis.itemStyle.color": {
+    "desc": "\n\n<p> color.  Color is taken from <a href=\"#color\">option.color Palette</a> by default. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
+    "uiControl": {
+      "type": "color"
+    }
   },
-  "data.highlight.label.rotate": {
-    "desc": "<p>If it is <code class=\"codespan\">number</code> type, then is stands for rotation, from -90 degrees to 90 degrees, and positive values stand for counterclockwise.</p>\n<p>Besides, it can be string <code class=\"codespan\">&#39;radial&#39;</code>, standing for radial rotation; or <code class=\"codespan\">&#39;tangential&#39;</code>, standing for tangential rotation.</p>\n<p>By default, it is <code class=\"codespan\">&#39;radial&#39;</code>. If no rotation is wanted, it can be set to <code class=\"codespan\">0</code>.</p>\n<p>The following example shows different <code class=\"codespan\">rotate</code> settings:</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=sunburst-label-rotate&edit=1&reset=1\" width=\"700\" height=\"400\"><iframe />\n\n",
+  "labelLayout.emphasis.itemStyle.borderColor": {
+    "desc": "\n\n<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "labelLayout.emphasis.itemStyle.borderWidth": {
+    "desc": "\n\n<p> border width. No border when it is set to be 0.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "value": "1",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "labelLayout.emphasis.itemStyle.borderType": {
+    "desc": "\n\n<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "solid",
+      "options": "solid,dashed,dotted"
+    }
+  },
+  "labelLayout.emphasis.itemStyle.shadowBlur": {
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "labelLayout.emphasis.itemStyle.shadowColor": {
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": ""
+    }
+  },
+  "labelLayout.emphasis.itemStyle.shadowOffsetX": {
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "0",
+      "step": "0.5"
+    }
+  },
+  "labelLayout.emphasis.itemStyle.shadowOffsetY": {
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "0",
+      "step": "0.5"
+    }
+  },
+  "labelLayout.emphasis.itemStyle.opacity": {
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "1",
+      "min": "0",
+      "max": "1",
+      "step": "0.01"
+    }
+  },
+  "labelLayout.blur": {
+    "desc": "<p>Blur state.</p>\n"
+  },
+  "labelLayout.blur.label": {
+    "desc": "<p><code class=\"codespan\">label</code> 描述了每个扇形块中，文本标签的样式。</p>\n<p><strong>优先级：<a href=\"#series-sunburst.data.label\">series.data.label</a> &gt; <a href=\"#series-sunburst.levels.label\">series.levels.label</a> &gt; <a href=\"#series-sunburst.label\">series.label</a>。</strong></p>\n<p>Text label of , to explain some data information about graphic item like value, name and so on. <code class=\"codespan\">label</code> is placed under <code class=\"codespan\">itemStyle</code> in ECharts 2.x. In ECharts 3, to make the configuration structure flatter, <code class=\"codespan\">label</code>is taken to be at the same level with <code class=\"codespan\">itemStyle</code>, and has <code class=\"codespan\">emphasis</code> as <code class=\"codespan\">itemStyle</code> does.</p>\n"
+  },
+  "labelLayout.blur.label.rotate": {
+    "desc": "\n\n\n<p>同 <a href=\"#sunburst.label.rotate\">label.rotate</a></p>\n",
     "uiControl": {
       "type": "enum",
       "options": "radial,tangential",
       "default": "radial"
     }
   },
-  "data.highlight.label.align": {
-    "desc": "<p>Align of text, which can be <code class=\"codespan\">&#39;left&#39;</code>, <code class=\"codespan\">&#39;center&#39;</code>, or <code class=\"codespan\">&#39;right&#39;</code>. Note that <code class=\"codespan\">&#39;left&#39;</code> stands for inner side, and <code class=\"codespan\">&#39;right&#39;</code> stands for outer side.</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=doc-example/sunburst-label-align&edit=1&reset=1\" width=\"700\" height=\"400\"><iframe />\n\n",
+  "labelLayout.blur.label.align": {
+    "desc": "\n\n<p>Align of text, which can be <code class=\"codespan\">&#39;left&#39;</code>, <code class=\"codespan\">&#39;center&#39;</code>, or <code class=\"codespan\">&#39;right&#39;</code>. Note that <code class=\"codespan\">&#39;left&#39;</code> stands for inner side, and <code class=\"codespan\">&#39;right&#39;</code> stands for outer side.</p>\n<p>Same to <a href=\"#sunburst.label.align\">label.align</a></p>\n",
     "uiControl": {
       "type": "enum",
       "options": "left,center,right",
       "default": "center"
     }
   },
-  "data.highlight.label.minAngle": {
-    "desc": "<p>If angle of data piece is smaller than this value (in degrees), then text is not displayed. This is used for hiding text for small piece of data.</p>\n",
+  "labelLayout.blur.label.minAngle": {
+    "desc": "\n\n<p>If angle of data piece is smaller than this value (in degrees), then text is not displayed. This is used for hiding text for small piece of data.</p>\n",
     "uiControl": {
       "type": "angle",
       "min": "0",
@@ -1053,22 +1354,22 @@ window.__EC_DOC_option_series_sunburst = {
       "max": "360"
     }
   },
-  "data.highlight.label.show": {
-    "desc": "<p>Whether to show label.</p>\n",
+  "labelLayout.blur.label.show": {
+    "desc": "\n\n<p>Whether to show label.</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "true"
     }
   },
-  "data.highlight.label.position": {
-    "desc": "<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/examples/zh/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+  "labelLayout.blur.label.position": {
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
-  "data.highlight.label.distance": {
-    "desc": "<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+  "labelLayout.blur.label.distance": {
+    "desc": "\n\n<p>Distance to the host graphic element.</p>\n<p>It is valid only when <code class=\"codespan\">position</code> is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -1076,8 +1377,8 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "0.5"
     }
   },
-  "data.highlight.label.offset": {
-    "desc": "<p>Whether to move text slightly. For example: <code class=\"codespan\">[30, 40]</code> means move <code class=\"codespan\">30</code> horizontally and move <code class=\"codespan\">40</code> vertically.</p>\n",
+  "labelLayout.blur.label.offset": {
+    "desc": "\n\n<p>Whether to move text slightly. For example: <code class=\"codespan\">[30, 40]</code> means move <code class=\"codespan\">30</code> horizontally and move <code class=\"codespan\">40</code> vertically.</p>\n",
     "uiControl": {
       "type": "vector",
       "dims": "x,y",
@@ -1085,42 +1386,42 @@ window.__EC_DOC_option_series_sunburst = {
       "separate": "true"
     }
   },
-  "data.highlight.label.formatter": {
-    "desc": "<p>Data label formatter, which supports string template and callback function. In either form, <code class=\"codespan\">\\n</code> is supported to represent a new line.</p>\n<p><strong>String template</strong></p>\n<p>Model variation includes:</p>\n<ul>\n<li><code class=\"codespan\">{a}</code>: series name.</li>\n<li><code class=\"codespan\">{b}</code>: the name of a data item.</li>\n<li><code class=\"codespan\">{c}</code>: the value of a data item.</li>\n<li><code class=\"codespan\">{@xxx}: the value of a dimension named</code>&#39;xxx&#39;<code class=\"codespan\">, for example,</code>{@product}<code class=\"codespan\">refers the value of</code>&#39;product&#39;` dimension.</li>\n<li><code class=\"codespan\">{@[n]}: the value of a dimension at the index of</code>n<code class=\"codespan\">, for example,</code>{@[3]}` refers the value at dimensions[3].</li>\n</ul>\n<p><strong>example: </strong></p>\n<pre><code class=\"lang-js\">formatter: &#39;{b}: {@score}&#39;\n</code></pre>\n<p><strong>Callback function</strong></p>\n<p>Callback function is in form of:</p>\n<pre><code class=\"lang-js\">(params: Object|Array) =&gt; string\n</code></pre>\n<p>where <code class=\"codespan\">params</code> is the single dataset needed by formatter, which is formed as:</p>\n<pre><code class=\"lang-js\">{\n    componentType: &#39;series&#39;,\n    // Series type\n    seriesType: string,\n    // Series index in option.series\n    seriesIndex: number,\n    // Series name\n    seriesName: string,\n    // Data name, or category name\n    name: string,\n    // Data index in input data array\n    dataIndex: number,\n    // Original data as input\n    data: Object,\n    // Value of data. In most series it is the same as data.\n    // But in some series it is some part of the data (e.g., in map, radar)\n    value: number|Array|Object,\n    // encoding info of coordinate system\n    // Key: coord, like (&#39;x&#39; &#39;y&#39; &#39;radius&#39; &#39;angle&#39;)\n    // value: Must be an array, not null/undefined. Contain dimension indices, like:\n    // {\n    //     x: [2] // values on dimension index 2 are mapped to x axis.\n    //     y: [0] // values on dimension index 0 are mapped to y axis.\n    // }\n    encode: Object,\n    // dimension names list\n    dimensionNames: Array&lt;String&gt;,\n    // data dimension index, for example 0 or 1 or 2 ...\n    // Only work in `radar` series.\n    dimensionIndex: number,\n    // Color of data\n    color: string,\n\n}\n</code></pre>\n<p>Note: the usage of encode and dimensionNames can be:</p>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    source: [\n        [&#39;Matcha Latte&#39;, 43.3, 85.8, 93.7],\n        [&#39;Milk Tea&#39;, 83.1, 73.4, 55.1],\n        [&#39;Cheese Cocoa&#39;, 86.4, 65.2, 82.5],\n        [&#39;Walnut Brownie&#39;, 72.4, 53.9, 39.1]\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.encode.y[0]]\n</code></pre>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    dimensions: [&#39;product&#39;, &#39;2015&#39;, &#39;2016&#39;, &#39;2017&#39;],\n    source: [\n        {product: &#39;Matcha Latte&#39;, &#39;2015&#39;: 43.3, &#39;2016&#39;: 85.8, &#39;2017&#39;: 93.7},\n        {product: &#39;Milk Tea&#39;, &#39;2015&#39;: 83.1, &#39;2016&#39;: 73.4, &#39;2017&#39;: 55.1},\n        {product: &#39;Cheese Cocoa&#39;, &#39;2015&#39;: 86.4, &#39;2016&#39;: 65.2, &#39;2017&#39;: 82.5},\n        {product: &#39;Walnut Brownie&#39;, &#39;2015&#39;: 72.4, &#39;2016&#39;: 53.9, &#39;2017&#39;: 39.1}\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.dimensionNames[params.encode.y[0]]]\n</code></pre>\n"
+  "labelLayout.blur.label.formatter": {
+    "desc": "<p>Data label formatter, which supports string template and callback function. In either form, <code class=\"codespan\">\\n</code> is supported to represent a new line.</p>\n<p><strong>String template</strong></p>\n<p>Model variation includes:</p>\n<ul>\n<li><code class=\"codespan\">{a}</code>: series name.</li>\n<li><code class=\"codespan\">{b}</code>: the name of a data item.</li>\n<li><code class=\"codespan\">{c}</code>: the value of a data item.</li>\n<li><code class=\"codespan\">{@xxx}: the value of a dimension named</code>&#39;xxx&#39;<code class=\"codespan\">, for example,</code>{@product}<code class=\"codespan\">refers the value of</code>&#39;product&#39;` dimension.</li>\n<li><code class=\"codespan\">{@[n]}: the value of a dimension at the index of</code>n<code class=\"codespan\">, for example,</code>{@[3]}` refers the value at dimensions[3].</li>\n</ul>\n<p><strong>example: </strong></p>\n<pre><code class=\"lang-js\">formatter: &#39;{b}: {@score}&#39;\n</code></pre>\n<p><strong>Callback function</strong></p>\n<p>Callback function is in form of:</p>\n<pre><code class=\"lang-js\">(params: Object|Array) =&gt; string\n</code></pre>\n<p>where <code class=\"codespan\">params</code> is the single dataset needed by formatter, which is formed as:</p>\n<pre><code class=\"lang-js\">{\n    componentType: &#39;series&#39;,\n    // Series type\n    seriesType: string,\n    // Series index in option.series\n    seriesIndex: number,\n    // Series name\n    seriesName: string,\n    // Data name, or category name\n    name: string,\n    // Data index in input data array\n    dataIndex: number,\n    // Original data as input\n    data: Object,\n    // Value of data. In most series it is the same as data.\n    // But in some series it is some part of the data (e.g., in map, radar)\n    value: number|Array|Object,\n    // encoding info of coordinate system\n    // Key: coord, like (&#39;x&#39; &#39;y&#39; &#39;radius&#39; &#39;angle&#39;)\n    // value: Must be an array, not null/undefined. Contain dimension indices, like:\n    // {\n    //     x: [2] // values on dimension index 2 are mapped to x axis.\n    //     y: [0] // values on dimension index 0 are mapped to y axis.\n    // }\n    encode: Object,\n    // dimension names list\n    dimensionNames: Array&lt;String&gt;,\n    // data dimension index, for example 0 or 1 or 2 ...\n    // Only work in `radar` series.\n    dimensionIndex: number,\n    // Color of data\n    color: string,\n\n\n\n}\n</code></pre>\n<p>Note: the usage of encode and dimensionNames can be:</p>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    source: [\n        [&#39;Matcha Latte&#39;, 43.3, 85.8, 93.7],\n        [&#39;Milk Tea&#39;, 83.1, 73.4, 55.1],\n        [&#39;Cheese Cocoa&#39;, 86.4, 65.2, 82.5],\n        [&#39;Walnut Brownie&#39;, 72.4, 53.9, 39.1]\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.encode.y[0]]\n</code></pre>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    dimensions: [&#39;product&#39;, &#39;2015&#39;, &#39;2016&#39;, &#39;2017&#39;],\n    source: [\n        {product: &#39;Matcha Latte&#39;, &#39;2015&#39;: 43.3, &#39;2016&#39;: 85.8, &#39;2017&#39;: 93.7},\n        {product: &#39;Milk Tea&#39;, &#39;2015&#39;: 83.1, &#39;2016&#39;: 73.4, &#39;2017&#39;: 55.1},\n        {product: &#39;Cheese Cocoa&#39;, &#39;2015&#39;: 86.4, &#39;2016&#39;: 65.2, &#39;2017&#39;: 82.5},\n        {product: &#39;Walnut Brownie&#39;, &#39;2015&#39;: 72.4, &#39;2016&#39;: 53.9, &#39;2017&#39;: 39.1}\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.dimensionNames[params.encode.y[0]]]\n</code></pre>\n"
   },
-  "data.highlight.label.color": {
-    "desc": "<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "labelLayout.blur.label.color": {
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "null"
     }
   },
-  "data.highlight.label.fontStyle": {
-    "desc": "<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+  "labelLayout.blur.label.fontStyle": {
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
       "options": "normal,italic,oblique"
     }
   },
-  "data.highlight.label.fontWeight": {
-    "desc": "<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+  "labelLayout.blur.label.fontWeight": {
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
       "options": "normal,bold,bolder,lighter"
     }
   },
-  "data.highlight.label.fontFamily": {
-    "desc": "<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+  "labelLayout.blur.label.fontFamily": {
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "sans-serif",
       "options": "sans-serif,serif,monospace,Arial,Courier New"
     }
   },
-  "data.highlight.label.fontSize": {
-    "desc": "<p> font size.</p>\n",
+  "labelLayout.blur.label.fontSize": {
+    "desc": "\n\n<p> font size.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "12",
@@ -1128,15 +1429,15 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "1"
     }
   },
-  "data.highlight.label.verticalAlign": {
-    "desc": "<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
+  "labelLayout.blur.label.verticalAlign": {
+    "desc": "\n\n<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,middle,bottom"
     }
   },
-  "data.highlight.label.lineHeight": {
-    "desc": "<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+  "labelLayout.blur.label.lineHeight": {
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -1144,157 +1445,184 @@ window.__EC_DOC_option_series_sunburst = {
       "default": "12"
     }
   },
-  "data.highlight.label.backgroundColor": {
-    "desc": "<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "labelLayout.blur.label.backgroundColor": {
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
-  "data.highlight.label.borderColor": {
-    "desc": "<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "labelLayout.blur.label.borderColor": {
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
-  "data.highlight.label.borderWidth": {
-    "desc": "<p>Border width of the text fragment.</p>\n",
+  "labelLayout.blur.label.borderWidth": {
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "data.highlight.label.borderRadius": {
-    "desc": "<p>Border radius of the text fragment.</p>\n",
+  "labelLayout.blur.label.borderRadius": {
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
       "dims": "LT,RT, RB, LB"
     }
   },
-  "data.highlight.label.padding": {
-    "desc": "<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+  "labelLayout.blur.label.padding": {
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
       "dims": "T,R,B,L"
     }
   },
-  "data.highlight.label.shadowColor": {
-    "desc": "<p>Shadow color of the text block.</p>\n",
+  "labelLayout.blur.label.shadowColor": {
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
-  "data.highlight.label.shadowBlur": {
-    "desc": "<p>Show blur of the text block.</p>\n",
+  "labelLayout.blur.label.shadowBlur": {
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "data.highlight.label.shadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text block.</p>\n",
+  "labelLayout.blur.label.shadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "data.highlight.label.shadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text block.</p>\n",
+  "labelLayout.blur.label.shadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "data.highlight.label.width": {
-    "desc": "<p>Width of the text block. It is the width of the text by default. In most cases, there is no need to specify it. You may want to use it in some cases like make simple table or using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p><code class=\"codespan\">width</code> can also be percent string, like <code class=\"codespan\">&#39;100%&#39;</code>, which represents the percent of <code class=\"codespan\">contentWidth</code> (that is, the width without <code class=\"codespan\">padding</code>) of its container box. It is based on <code class=\"codespan\">contentWidth</code> because that each text fragment is layout based on the <code class=\"codespan\">content box</code>, where it makes no sense that calculating width based on <code class=\"codespan\">outerWith</code> in prectice.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+  "labelLayout.blur.label.width": {
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
-  "data.highlight.label.height": {
-    "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+  "labelLayout.blur.label.height": {
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
-  "data.highlight.label.textBorderColor": {
-    "desc": "<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "labelLayout.blur.label.textBorderColor": {
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
-  "data.highlight.label.textBorderWidth": {
-    "desc": "<p>Storke line width of the text.</p>\n",
+  "labelLayout.blur.label.textBorderWidth": {
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "data.highlight.label.textShadowColor": {
-    "desc": "<p>Shadow color of the text itself.</p>\n",
+  "labelLayout.blur.label.textShadowColor": {
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#000"
     }
   },
-  "data.highlight.label.textShadowBlur": {
-    "desc": "<p>Shadow blue of the text itself.</p>\n",
+  "labelLayout.blur.label.textShadowBlur": {
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "data.highlight.label.textShadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text itself.</p>\n",
+  "labelLayout.blur.label.textShadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "data.highlight.label.textShadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text itself.</p>\n",
+  "labelLayout.blur.label.textShadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "data.highlight.label.rich": {
+  "labelLayout.blur.label.overflow": {
+    "desc": "\n\n<p>Determine how to display the text when it&#39;s overflow. Available when <code class=\"codespan\">width</code> is set.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the text and trailing with <code class=\"codespan\">ellipsis</code>.</li>\n<li><code class=\"codespan\">&#39;break&#39;</code> Break by word</li>\n<li><code class=\"codespan\">&#39;breakAll&#39;</code> Break by character.</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "truncate,break,breakAll"
+    }
+  },
+  "labelLayout.blur.label.ellipsis": {
+    "desc": "<p>Ellipsis to be displayed when <code class=\"codespan\">overflow</code> is set to <code class=\"codespan\">truncate</code>.</p>\n"
+  },
+  "labelLayout.blur.label.lineOverflow": {
+    "desc": "<p>Determine how to display the text when it&#39;s overflow on height.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the overflow lines.</li>\n</ul>\n"
+  },
+  "labelLayout.blur.label.rich": {
     "desc": "<p>&quot;Rich text styles&quot; can be defined in this <code class=\"codespan\">rich</code> property. For example:</p>\n<pre><code class=\"lang-js\">label: {\n    // Styles defined in &#39;rich&#39; can be applied to some fragments\n    // of text by adding some markers to those fragment, like\n    // `{styleName|text content text content}`.\n    // `&#39;\\n&#39;` is the newline character.\n    formatter: [\n        &#39;{a|Style &quot;a&quot; is applied to this snippet}&#39;\n        &#39;{b|Style &quot;b&quot; is applied to this snippet}This snippet use default style{x|use style &quot;x&quot;}&#39;\n    ].join(&#39;\\n&#39;),\n\n    rich: {\n        a: {\n            color: &#39;red&#39;,\n            lineHeight: 10\n        },\n        b: {\n            backgroundColor: {\n                image: &#39;xxx/xxx.jpg&#39;\n            },\n            height: 40\n        },\n        x: {\n            fontSize: 18,\n            fontFamily: &#39;Microsoft YaHei&#39;,\n            borderColor: &#39;#449933&#39;,\n            borderRadius: 4\n        },\n        ...\n    }\n}\n</code></pre>\n<p>For more details, see <a href=\"tutorial.html#Rich%20Text\" target=\"_blank\">Rich Text</a> please.</p>\n"
   },
-  "data.highlight.label.rich.<style_name>.color": {
-    "desc": "<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "labelLayout.blur.label.rich.<style_name>.color": {
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "null"
     }
   },
-  "data.highlight.label.rich.<style_name>.fontStyle": {
-    "desc": "<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+  "labelLayout.blur.label.rich.<style_name>.fontStyle": {
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
       "options": "normal,italic,oblique"
     }
   },
-  "data.highlight.label.rich.<style_name>.fontWeight": {
-    "desc": "<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+  "labelLayout.blur.label.rich.<style_name>.fontWeight": {
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
       "options": "normal,bold,bolder,lighter"
     }
   },
-  "data.highlight.label.rich.<style_name>.fontFamily": {
-    "desc": "<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+  "labelLayout.blur.label.rich.<style_name>.fontFamily": {
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "sans-serif",
       "options": "sans-serif,serif,monospace,Arial,Courier New"
     }
   },
-  "data.highlight.label.rich.<style_name>.fontSize": {
-    "desc": "<p> font size.</p>\n",
+  "labelLayout.blur.label.rich.<style_name>.fontSize": {
+    "desc": "\n\n<p> font size.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "12",
@@ -1302,22 +1630,22 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "1"
     }
   },
-  "data.highlight.label.rich.<style_name>.align": {
-    "desc": "<p>Horizontal alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;left&#39;</code></li>\n<li><code class=\"codespan\">&#39;center&#39;</code></li>\n<li><code class=\"codespan\">&#39;right&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">align</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">align</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    align: right,\n    rich: {\n        a: {\n            // `align` is not set, then it will be right\n        }\n    }\n}\n</code></pre>\n",
+  "labelLayout.blur.label.rich.<style_name>.align": {
+    "desc": "\n\n<p>Horizontal alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;left&#39;</code></li>\n<li><code class=\"codespan\">&#39;center&#39;</code></li>\n<li><code class=\"codespan\">&#39;right&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">align</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">align</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    align: right,\n    rich: {\n        a: {\n            // `align` is not set, then it will be right\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "left,center,right"
     }
   },
-  "data.highlight.label.rich.<style_name>.verticalAlign": {
-    "desc": "<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
+  "labelLayout.blur.label.rich.<style_name>.verticalAlign": {
+    "desc": "\n\n<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,middle,bottom"
     }
   },
-  "data.highlight.label.rich.<style_name>.lineHeight": {
-    "desc": "<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+  "labelLayout.blur.label.rich.<style_name>.lineHeight": {
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -1325,138 +1653,138 @@ window.__EC_DOC_option_series_sunburst = {
       "default": "12"
     }
   },
-  "data.highlight.label.rich.<style_name>.backgroundColor": {
-    "desc": "<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "labelLayout.blur.label.rich.<style_name>.backgroundColor": {
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
-  "data.highlight.label.rich.<style_name>.borderColor": {
-    "desc": "<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "labelLayout.blur.label.rich.<style_name>.borderColor": {
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
-  "data.highlight.label.rich.<style_name>.borderWidth": {
-    "desc": "<p>Border width of the text fragment.</p>\n",
+  "labelLayout.blur.label.rich.<style_name>.borderWidth": {
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "data.highlight.label.rich.<style_name>.borderRadius": {
-    "desc": "<p>Border radius of the text fragment.</p>\n",
+  "labelLayout.blur.label.rich.<style_name>.borderRadius": {
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
       "dims": "LT,RT, RB, LB"
     }
   },
-  "data.highlight.label.rich.<style_name>.padding": {
-    "desc": "<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+  "labelLayout.blur.label.rich.<style_name>.padding": {
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
       "dims": "T,R,B,L"
     }
   },
-  "data.highlight.label.rich.<style_name>.shadowColor": {
-    "desc": "<p>Shadow color of the text block.</p>\n",
+  "labelLayout.blur.label.rich.<style_name>.shadowColor": {
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
-  "data.highlight.label.rich.<style_name>.shadowBlur": {
-    "desc": "<p>Show blur of the text block.</p>\n",
+  "labelLayout.blur.label.rich.<style_name>.shadowBlur": {
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "data.highlight.label.rich.<style_name>.shadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text block.</p>\n",
+  "labelLayout.blur.label.rich.<style_name>.shadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "data.highlight.label.rich.<style_name>.shadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text block.</p>\n",
+  "labelLayout.blur.label.rich.<style_name>.shadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "data.highlight.label.rich.<style_name>.width": {
+  "labelLayout.blur.label.rich.<style_name>.width": {
     "desc": "<p>Width of the text block. It is the width of the text by default. In most cases, there is no need to specify it. You may want to use it in some cases like make simple table or using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p><code class=\"codespan\">width</code> can also be percent string, like <code class=\"codespan\">&#39;100%&#39;</code>, which represents the percent of <code class=\"codespan\">contentWidth</code> (that is, the width without <code class=\"codespan\">padding</code>) of its container box. It is based on <code class=\"codespan\">contentWidth</code> because that each text fragment is layout based on the <code class=\"codespan\">content box</code>, where it makes no sense that calculating width based on <code class=\"codespan\">outerWith</code> in prectice.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
-  "data.highlight.label.rich.<style_name>.height": {
+  "labelLayout.blur.label.rich.<style_name>.height": {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
-  "data.highlight.label.rich.<style_name>.textBorderColor": {
-    "desc": "<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "labelLayout.blur.label.rich.<style_name>.textBorderColor": {
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
-  "data.highlight.label.rich.<style_name>.textBorderWidth": {
-    "desc": "<p>Storke line width of the text.</p>\n",
+  "labelLayout.blur.label.rich.<style_name>.textBorderWidth": {
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "data.highlight.label.rich.<style_name>.textShadowColor": {
-    "desc": "<p>Shadow color of the text itself.</p>\n",
+  "labelLayout.blur.label.rich.<style_name>.textShadowColor": {
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#000"
     }
   },
-  "data.highlight.label.rich.<style_name>.textShadowBlur": {
-    "desc": "<p>Shadow blue of the text itself.</p>\n",
+  "labelLayout.blur.label.rich.<style_name>.textShadowBlur": {
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "data.highlight.label.rich.<style_name>.textShadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text itself.</p>\n",
+  "labelLayout.blur.label.rich.<style_name>.textShadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "data.highlight.label.rich.<style_name>.textShadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text itself.</p>\n",
+  "labelLayout.blur.label.rich.<style_name>.textShadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "data.highlight.itemStyle": {
-    "desc": "<p>Style of Sunburst sectors.</p>\n<p>Style can be set in <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> for sectors of this series, or <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> for the whole level, or<a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> for single sector. If <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> is defined, it will cover the setting of <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> and <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a>.</p>\n<p><strong>Priority: <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> &gt; <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> &gt; <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a>.</strong></p>\n<p>In ECharts, <em>emphasis</em> is for styles when mouse hovers. For Sunburst charts, there are two extra states: <em>highlight</em> for highlighting items that relates to the emphasized one, and <em>downplay</em> for others when emphasizing an item. See <a href=\"#series-sunburst.highlightPolicy\">highlightPolicy</a>.</p>\n"
+  "labelLayout.blur.labelLine": {
+    "desc": "<p>Configuration of label guide line.</p>\n"
   },
-  "data.highlight.itemStyle.color": {
-    "desc": "<p> color.  Color is taken from <a href=\"#color\">option.color Palette</a> by default. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
+  "labelLayout.blur.labelLine.show": {
+    "desc": "\n\n<p>Whether to show the label guide line.</p>\n",
+    "uiControl": {
+      "type": "boolean"
+    }
+  },
+  "labelLayout.blur.labelLine.lineStyle.color": {
+    "desc": "\n\n<p>Line color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
     "uiControl": {
       "type": "color"
     }
   },
-  "data.highlight.itemStyle.borderColor": {
-    "desc": "<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
-    "uiControl": {
-      "type": "color"
-    }
-  },
-  "data.highlight.itemStyle.borderWidth": {
-    "desc": "<p> border width. No border when it is set to be 0.</p>\n",
+  "labelLayout.blur.labelLine.lineStyle.width": {
+    "desc": "\n\n<p> line width.</p>\n",
     "uiControl": {
       "type": "number",
       "value": "1",
@@ -1464,16 +1792,16 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "0.5"
     }
   },
-  "data.highlight.itemStyle.borderType": {
-    "desc": "<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
+  "labelLayout.blur.labelLine.lineStyle.type": {
+    "desc": "\n\n<p> line type.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;solid&#39;</code></li>\n<li><code class=\"codespan\">&#39;dashed&#39;</code></li>\n<li><code class=\"codespan\">&#39;dotted&#39;</code></li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "solid",
       "options": "solid,dashed,dotted"
     }
   },
-  "data.highlight.itemStyle.shadowBlur": {
-    "desc": "<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+  "labelLayout.blur.labelLine.lineStyle.shadowBlur": {
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "default": "",
@@ -1481,31 +1809,31 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "0.5"
     }
   },
-  "data.highlight.itemStyle.shadowColor": {
-    "desc": "<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+  "labelLayout.blur.labelLine.lineStyle.shadowColor": {
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color",
       "default": ""
     }
   },
-  "data.highlight.itemStyle.shadowOffsetX": {
-    "desc": "<p>Offset distance on the horizontal direction of shadow.</p>\n",
+  "labelLayout.blur.labelLine.lineStyle.shadowOffsetX": {
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
       "step": "0.5"
     }
   },
-  "data.highlight.itemStyle.shadowOffsetY": {
-    "desc": "<p>Offset distance on the vertical direction of shadow.</p>\n",
+  "labelLayout.blur.labelLine.lineStyle.shadowOffsetY": {
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
       "step": "0.5"
     }
   },
-  "data.highlight.itemStyle.opacity": {
-    "desc": "<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+  "labelLayout.blur.labelLine.lineStyle.opacity": {
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "1",
@@ -1514,30 +1842,104 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "0.01"
     }
   },
-  "data.downplay": {
-    "desc": "<p>Item style when mouse is hovering unrelated items. See <a href=\"#series-sunburst.highlightPolicy\">highlightPolicy</a>.</p>\n"
+  "labelLayout.blur.itemStyle": {
+    "desc": "<p>旭日图扇形块的样式。</p>\n<p>可以在 <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> 定义所有扇形块的样式，也可以在 <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> 定义每一层扇形块的样式，还可以在 <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> 定义每个扇形块单独的样式，这三者的优先级从低到高。也就是说，如果定义了 <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a>，将会覆盖 <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> 和 <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a>。</p>\n<p><strong>优先级：<a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> &gt; <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> &gt; <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a>。</strong></p>\n"
   },
-  "data.downplay.label": {
-    "desc": "<p><code class=\"codespan\">label</code> sets the text style for every sectors.</p>\n<p><strong>Priority: <a href=\"#series-sunburst.data.label\">series.data.label</a> &gt; <a href=\"#series-sunburst.levels.label\">series.levels.label</a> &gt; <a href=\"#series-sunburst.label\">series.label</a>.</strong></p>\n<p>Text label of , to explain some data information about graphic item like value, name and so on. <code class=\"codespan\">label</code> is placed under <code class=\"codespan\">itemStyle</code> in ECharts 2.x. In ECharts 3, to make the configuration structure flatter, <code class=\"codespan\">label</code>is taken to be at the same level with <code class=\"codespan\">itemStyle</code>, and has <code class=\"codespan\">emphasis</code> as <code class=\"codespan\">itemStyle</code> does.</p>\n"
+  "labelLayout.blur.itemStyle.color": {
+    "desc": "\n\n<p> color.  Color is taken from <a href=\"#color\">option.color Palette</a> by default. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
+    "uiControl": {
+      "type": "color"
+    }
   },
-  "data.downplay.label.rotate": {
-    "desc": "<p>If it is <code class=\"codespan\">number</code> type, then is stands for rotation, from -90 degrees to 90 degrees, and positive values stand for counterclockwise.</p>\n<p>Besides, it can be string <code class=\"codespan\">&#39;radial&#39;</code>, standing for radial rotation; or <code class=\"codespan\">&#39;tangential&#39;</code>, standing for tangential rotation.</p>\n<p>By default, it is <code class=\"codespan\">&#39;radial&#39;</code>. If no rotation is wanted, it can be set to <code class=\"codespan\">0</code>.</p>\n<p>The following example shows different <code class=\"codespan\">rotate</code> settings:</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=sunburst-label-rotate&edit=1&reset=1\" width=\"700\" height=\"400\"><iframe />\n\n",
+  "labelLayout.blur.itemStyle.borderColor": {
+    "desc": "\n\n<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "labelLayout.blur.itemStyle.borderWidth": {
+    "desc": "\n\n<p> border width. No border when it is set to be 0.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "value": "1",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "labelLayout.blur.itemStyle.borderType": {
+    "desc": "\n\n<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "solid",
+      "options": "solid,dashed,dotted"
+    }
+  },
+  "labelLayout.blur.itemStyle.shadowBlur": {
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "labelLayout.blur.itemStyle.shadowColor": {
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": ""
+    }
+  },
+  "labelLayout.blur.itemStyle.shadowOffsetX": {
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "0",
+      "step": "0.5"
+    }
+  },
+  "labelLayout.blur.itemStyle.shadowOffsetY": {
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "0",
+      "step": "0.5"
+    }
+  },
+  "labelLayout.blur.itemStyle.opacity": {
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "1",
+      "min": "0",
+      "max": "1",
+      "step": "0.01"
+    }
+  },
+  "labelLayout.select": {
+    "desc": "<p>Select state.</p>\n"
+  },
+  "labelLayout.select.label": {
+    "desc": "<p><code class=\"codespan\">label</code> 描述了每个扇形块中，文本标签的样式。</p>\n<p><strong>优先级：<a href=\"#series-sunburst.data.label\">series.data.label</a> &gt; <a href=\"#series-sunburst.levels.label\">series.levels.label</a> &gt; <a href=\"#series-sunburst.label\">series.label</a>。</strong></p>\n<p>Text label of , to explain some data information about graphic item like value, name and so on. <code class=\"codespan\">label</code> is placed under <code class=\"codespan\">itemStyle</code> in ECharts 2.x. In ECharts 3, to make the configuration structure flatter, <code class=\"codespan\">label</code>is taken to be at the same level with <code class=\"codespan\">itemStyle</code>, and has <code class=\"codespan\">emphasis</code> as <code class=\"codespan\">itemStyle</code> does.</p>\n"
+  },
+  "labelLayout.select.label.rotate": {
+    "desc": "\n\n\n<p>同 <a href=\"#sunburst.label.rotate\">label.rotate</a></p>\n",
     "uiControl": {
       "type": "enum",
       "options": "radial,tangential",
       "default": "radial"
     }
   },
-  "data.downplay.label.align": {
-    "desc": "<p>Align of text, which can be <code class=\"codespan\">&#39;left&#39;</code>, <code class=\"codespan\">&#39;center&#39;</code>, or <code class=\"codespan\">&#39;right&#39;</code>. Note that <code class=\"codespan\">&#39;left&#39;</code> stands for inner side, and <code class=\"codespan\">&#39;right&#39;</code> stands for outer side.</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=doc-example/sunburst-label-align&edit=1&reset=1\" width=\"700\" height=\"400\"><iframe />\n\n",
+  "labelLayout.select.label.align": {
+    "desc": "\n\n<p>Align of text, which can be <code class=\"codespan\">&#39;left&#39;</code>, <code class=\"codespan\">&#39;center&#39;</code>, or <code class=\"codespan\">&#39;right&#39;</code>. Note that <code class=\"codespan\">&#39;left&#39;</code> stands for inner side, and <code class=\"codespan\">&#39;right&#39;</code> stands for outer side.</p>\n<p>Same to <a href=\"#sunburst.label.align\">label.align</a></p>\n",
     "uiControl": {
       "type": "enum",
       "options": "left,center,right",
       "default": "center"
     }
   },
-  "data.downplay.label.minAngle": {
-    "desc": "<p>If angle of data piece is smaller than this value (in degrees), then text is not displayed. This is used for hiding text for small piece of data.</p>\n",
+  "labelLayout.select.label.minAngle": {
+    "desc": "\n\n<p>If angle of data piece is smaller than this value (in degrees), then text is not displayed. This is used for hiding text for small piece of data.</p>\n",
     "uiControl": {
       "type": "angle",
       "min": "0",
@@ -1545,22 +1947,22 @@ window.__EC_DOC_option_series_sunburst = {
       "max": "360"
     }
   },
-  "data.downplay.label.show": {
-    "desc": "<p>Whether to show label.</p>\n",
+  "labelLayout.select.label.show": {
+    "desc": "\n\n<p>Whether to show label.</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "true"
     }
   },
-  "data.downplay.label.position": {
-    "desc": "<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/examples/zh/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+  "labelLayout.select.label.position": {
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
-  "data.downplay.label.distance": {
-    "desc": "<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+  "labelLayout.select.label.distance": {
+    "desc": "\n\n<p>Distance to the host graphic element.</p>\n<p>It is valid only when <code class=\"codespan\">position</code> is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -1568,8 +1970,8 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "0.5"
     }
   },
-  "data.downplay.label.offset": {
-    "desc": "<p>Whether to move text slightly. For example: <code class=\"codespan\">[30, 40]</code> means move <code class=\"codespan\">30</code> horizontally and move <code class=\"codespan\">40</code> vertically.</p>\n",
+  "labelLayout.select.label.offset": {
+    "desc": "\n\n<p>Whether to move text slightly. For example: <code class=\"codespan\">[30, 40]</code> means move <code class=\"codespan\">30</code> horizontally and move <code class=\"codespan\">40</code> vertically.</p>\n",
     "uiControl": {
       "type": "vector",
       "dims": "x,y",
@@ -1577,42 +1979,42 @@ window.__EC_DOC_option_series_sunburst = {
       "separate": "true"
     }
   },
-  "data.downplay.label.formatter": {
-    "desc": "<p>Data label formatter, which supports string template and callback function. In either form, <code class=\"codespan\">\\n</code> is supported to represent a new line.</p>\n<p><strong>String template</strong></p>\n<p>Model variation includes:</p>\n<ul>\n<li><code class=\"codespan\">{a}</code>: series name.</li>\n<li><code class=\"codespan\">{b}</code>: the name of a data item.</li>\n<li><code class=\"codespan\">{c}</code>: the value of a data item.</li>\n<li><code class=\"codespan\">{@xxx}: the value of a dimension named</code>&#39;xxx&#39;<code class=\"codespan\">, for example,</code>{@product}<code class=\"codespan\">refers the value of</code>&#39;product&#39;` dimension.</li>\n<li><code class=\"codespan\">{@[n]}: the value of a dimension at the index of</code>n<code class=\"codespan\">, for example,</code>{@[3]}` refers the value at dimensions[3].</li>\n</ul>\n<p><strong>example: </strong></p>\n<pre><code class=\"lang-js\">formatter: &#39;{b}: {@score}&#39;\n</code></pre>\n<p><strong>Callback function</strong></p>\n<p>Callback function is in form of:</p>\n<pre><code class=\"lang-js\">(params: Object|Array) =&gt; string\n</code></pre>\n<p>where <code class=\"codespan\">params</code> is the single dataset needed by formatter, which is formed as:</p>\n<pre><code class=\"lang-js\">{\n    componentType: &#39;series&#39;,\n    // Series type\n    seriesType: string,\n    // Series index in option.series\n    seriesIndex: number,\n    // Series name\n    seriesName: string,\n    // Data name, or category name\n    name: string,\n    // Data index in input data array\n    dataIndex: number,\n    // Original data as input\n    data: Object,\n    // Value of data. In most series it is the same as data.\n    // But in some series it is some part of the data (e.g., in map, radar)\n    value: number|Array|Object,\n    // encoding info of coordinate system\n    // Key: coord, like (&#39;x&#39; &#39;y&#39; &#39;radius&#39; &#39;angle&#39;)\n    // value: Must be an array, not null/undefined. Contain dimension indices, like:\n    // {\n    //     x: [2] // values on dimension index 2 are mapped to x axis.\n    //     y: [0] // values on dimension index 0 are mapped to y axis.\n    // }\n    encode: Object,\n    // dimension names list\n    dimensionNames: Array&lt;String&gt;,\n    // data dimension index, for example 0 or 1 or 2 ...\n    // Only work in `radar` series.\n    dimensionIndex: number,\n    // Color of data\n    color: string,\n\n}\n</code></pre>\n<p>Note: the usage of encode and dimensionNames can be:</p>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    source: [\n        [&#39;Matcha Latte&#39;, 43.3, 85.8, 93.7],\n        [&#39;Milk Tea&#39;, 83.1, 73.4, 55.1],\n        [&#39;Cheese Cocoa&#39;, 86.4, 65.2, 82.5],\n        [&#39;Walnut Brownie&#39;, 72.4, 53.9, 39.1]\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.encode.y[0]]\n</code></pre>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    dimensions: [&#39;product&#39;, &#39;2015&#39;, &#39;2016&#39;, &#39;2017&#39;],\n    source: [\n        {product: &#39;Matcha Latte&#39;, &#39;2015&#39;: 43.3, &#39;2016&#39;: 85.8, &#39;2017&#39;: 93.7},\n        {product: &#39;Milk Tea&#39;, &#39;2015&#39;: 83.1, &#39;2016&#39;: 73.4, &#39;2017&#39;: 55.1},\n        {product: &#39;Cheese Cocoa&#39;, &#39;2015&#39;: 86.4, &#39;2016&#39;: 65.2, &#39;2017&#39;: 82.5},\n        {product: &#39;Walnut Brownie&#39;, &#39;2015&#39;: 72.4, &#39;2016&#39;: 53.9, &#39;2017&#39;: 39.1}\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.dimensionNames[params.encode.y[0]]]\n</code></pre>\n"
+  "labelLayout.select.label.formatter": {
+    "desc": "<p>Data label formatter, which supports string template and callback function. In either form, <code class=\"codespan\">\\n</code> is supported to represent a new line.</p>\n<p><strong>String template</strong></p>\n<p>Model variation includes:</p>\n<ul>\n<li><code class=\"codespan\">{a}</code>: series name.</li>\n<li><code class=\"codespan\">{b}</code>: the name of a data item.</li>\n<li><code class=\"codespan\">{c}</code>: the value of a data item.</li>\n<li><code class=\"codespan\">{@xxx}: the value of a dimension named</code>&#39;xxx&#39;<code class=\"codespan\">, for example,</code>{@product}<code class=\"codespan\">refers the value of</code>&#39;product&#39;` dimension.</li>\n<li><code class=\"codespan\">{@[n]}: the value of a dimension at the index of</code>n<code class=\"codespan\">, for example,</code>{@[3]}` refers the value at dimensions[3].</li>\n</ul>\n<p><strong>example: </strong></p>\n<pre><code class=\"lang-js\">formatter: &#39;{b}: {@score}&#39;\n</code></pre>\n<p><strong>Callback function</strong></p>\n<p>Callback function is in form of:</p>\n<pre><code class=\"lang-js\">(params: Object|Array) =&gt; string\n</code></pre>\n<p>where <code class=\"codespan\">params</code> is the single dataset needed by formatter, which is formed as:</p>\n<pre><code class=\"lang-js\">{\n    componentType: &#39;series&#39;,\n    // Series type\n    seriesType: string,\n    // Series index in option.series\n    seriesIndex: number,\n    // Series name\n    seriesName: string,\n    // Data name, or category name\n    name: string,\n    // Data index in input data array\n    dataIndex: number,\n    // Original data as input\n    data: Object,\n    // Value of data. In most series it is the same as data.\n    // But in some series it is some part of the data (e.g., in map, radar)\n    value: number|Array|Object,\n    // encoding info of coordinate system\n    // Key: coord, like (&#39;x&#39; &#39;y&#39; &#39;radius&#39; &#39;angle&#39;)\n    // value: Must be an array, not null/undefined. Contain dimension indices, like:\n    // {\n    //     x: [2] // values on dimension index 2 are mapped to x axis.\n    //     y: [0] // values on dimension index 0 are mapped to y axis.\n    // }\n    encode: Object,\n    // dimension names list\n    dimensionNames: Array&lt;String&gt;,\n    // data dimension index, for example 0 or 1 or 2 ...\n    // Only work in `radar` series.\n    dimensionIndex: number,\n    // Color of data\n    color: string,\n\n\n\n}\n</code></pre>\n<p>Note: the usage of encode and dimensionNames can be:</p>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    source: [\n        [&#39;Matcha Latte&#39;, 43.3, 85.8, 93.7],\n        [&#39;Milk Tea&#39;, 83.1, 73.4, 55.1],\n        [&#39;Cheese Cocoa&#39;, 86.4, 65.2, 82.5],\n        [&#39;Walnut Brownie&#39;, 72.4, 53.9, 39.1]\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.encode.y[0]]\n</code></pre>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    dimensions: [&#39;product&#39;, &#39;2015&#39;, &#39;2016&#39;, &#39;2017&#39;],\n    source: [\n        {product: &#39;Matcha Latte&#39;, &#39;2015&#39;: 43.3, &#39;2016&#39;: 85.8, &#39;2017&#39;: 93.7},\n        {product: &#39;Milk Tea&#39;, &#39;2015&#39;: 83.1, &#39;2016&#39;: 73.4, &#39;2017&#39;: 55.1},\n        {product: &#39;Cheese Cocoa&#39;, &#39;2015&#39;: 86.4, &#39;2016&#39;: 65.2, &#39;2017&#39;: 82.5},\n        {product: &#39;Walnut Brownie&#39;, &#39;2015&#39;: 72.4, &#39;2016&#39;: 53.9, &#39;2017&#39;: 39.1}\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.dimensionNames[params.encode.y[0]]]\n</code></pre>\n"
   },
-  "data.downplay.label.color": {
-    "desc": "<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "labelLayout.select.label.color": {
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "null"
     }
   },
-  "data.downplay.label.fontStyle": {
-    "desc": "<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+  "labelLayout.select.label.fontStyle": {
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
       "options": "normal,italic,oblique"
     }
   },
-  "data.downplay.label.fontWeight": {
-    "desc": "<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+  "labelLayout.select.label.fontWeight": {
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
       "options": "normal,bold,bolder,lighter"
     }
   },
-  "data.downplay.label.fontFamily": {
-    "desc": "<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+  "labelLayout.select.label.fontFamily": {
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "sans-serif",
       "options": "sans-serif,serif,monospace,Arial,Courier New"
     }
   },
-  "data.downplay.label.fontSize": {
-    "desc": "<p> font size.</p>\n",
+  "labelLayout.select.label.fontSize": {
+    "desc": "\n\n<p> font size.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "12",
@@ -1620,15 +2022,15 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "1"
     }
   },
-  "data.downplay.label.verticalAlign": {
-    "desc": "<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
+  "labelLayout.select.label.verticalAlign": {
+    "desc": "\n\n<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,middle,bottom"
     }
   },
-  "data.downplay.label.lineHeight": {
-    "desc": "<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+  "labelLayout.select.label.lineHeight": {
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -1636,157 +2038,184 @@ window.__EC_DOC_option_series_sunburst = {
       "default": "12"
     }
   },
-  "data.downplay.label.backgroundColor": {
-    "desc": "<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "labelLayout.select.label.backgroundColor": {
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
-  "data.downplay.label.borderColor": {
-    "desc": "<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "labelLayout.select.label.borderColor": {
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
-  "data.downplay.label.borderWidth": {
-    "desc": "<p>Border width of the text fragment.</p>\n",
+  "labelLayout.select.label.borderWidth": {
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "data.downplay.label.borderRadius": {
-    "desc": "<p>Border radius of the text fragment.</p>\n",
+  "labelLayout.select.label.borderRadius": {
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
       "dims": "LT,RT, RB, LB"
     }
   },
-  "data.downplay.label.padding": {
-    "desc": "<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+  "labelLayout.select.label.padding": {
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
       "dims": "T,R,B,L"
     }
   },
-  "data.downplay.label.shadowColor": {
-    "desc": "<p>Shadow color of the text block.</p>\n",
+  "labelLayout.select.label.shadowColor": {
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
-  "data.downplay.label.shadowBlur": {
-    "desc": "<p>Show blur of the text block.</p>\n",
+  "labelLayout.select.label.shadowBlur": {
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "data.downplay.label.shadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text block.</p>\n",
+  "labelLayout.select.label.shadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "data.downplay.label.shadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text block.</p>\n",
+  "labelLayout.select.label.shadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "data.downplay.label.width": {
-    "desc": "<p>Width of the text block. It is the width of the text by default. In most cases, there is no need to specify it. You may want to use it in some cases like make simple table or using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p><code class=\"codespan\">width</code> can also be percent string, like <code class=\"codespan\">&#39;100%&#39;</code>, which represents the percent of <code class=\"codespan\">contentWidth</code> (that is, the width without <code class=\"codespan\">padding</code>) of its container box. It is based on <code class=\"codespan\">contentWidth</code> because that each text fragment is layout based on the <code class=\"codespan\">content box</code>, where it makes no sense that calculating width based on <code class=\"codespan\">outerWith</code> in prectice.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+  "labelLayout.select.label.width": {
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
-  "data.downplay.label.height": {
-    "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+  "labelLayout.select.label.height": {
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
-  "data.downplay.label.textBorderColor": {
-    "desc": "<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "labelLayout.select.label.textBorderColor": {
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
-  "data.downplay.label.textBorderWidth": {
-    "desc": "<p>Storke line width of the text.</p>\n",
+  "labelLayout.select.label.textBorderWidth": {
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "data.downplay.label.textShadowColor": {
-    "desc": "<p>Shadow color of the text itself.</p>\n",
+  "labelLayout.select.label.textShadowColor": {
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#000"
     }
   },
-  "data.downplay.label.textShadowBlur": {
-    "desc": "<p>Shadow blue of the text itself.</p>\n",
+  "labelLayout.select.label.textShadowBlur": {
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "data.downplay.label.textShadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text itself.</p>\n",
+  "labelLayout.select.label.textShadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "data.downplay.label.textShadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text itself.</p>\n",
+  "labelLayout.select.label.textShadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "data.downplay.label.rich": {
+  "labelLayout.select.label.overflow": {
+    "desc": "\n\n<p>Determine how to display the text when it&#39;s overflow. Available when <code class=\"codespan\">width</code> is set.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the text and trailing with <code class=\"codespan\">ellipsis</code>.</li>\n<li><code class=\"codespan\">&#39;break&#39;</code> Break by word</li>\n<li><code class=\"codespan\">&#39;breakAll&#39;</code> Break by character.</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "truncate,break,breakAll"
+    }
+  },
+  "labelLayout.select.label.ellipsis": {
+    "desc": "<p>Ellipsis to be displayed when <code class=\"codespan\">overflow</code> is set to <code class=\"codespan\">truncate</code>.</p>\n"
+  },
+  "labelLayout.select.label.lineOverflow": {
+    "desc": "<p>Determine how to display the text when it&#39;s overflow on height.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the overflow lines.</li>\n</ul>\n"
+  },
+  "labelLayout.select.label.rich": {
     "desc": "<p>&quot;Rich text styles&quot; can be defined in this <code class=\"codespan\">rich</code> property. For example:</p>\n<pre><code class=\"lang-js\">label: {\n    // Styles defined in &#39;rich&#39; can be applied to some fragments\n    // of text by adding some markers to those fragment, like\n    // `{styleName|text content text content}`.\n    // `&#39;\\n&#39;` is the newline character.\n    formatter: [\n        &#39;{a|Style &quot;a&quot; is applied to this snippet}&#39;\n        &#39;{b|Style &quot;b&quot; is applied to this snippet}This snippet use default style{x|use style &quot;x&quot;}&#39;\n    ].join(&#39;\\n&#39;),\n\n    rich: {\n        a: {\n            color: &#39;red&#39;,\n            lineHeight: 10\n        },\n        b: {\n            backgroundColor: {\n                image: &#39;xxx/xxx.jpg&#39;\n            },\n            height: 40\n        },\n        x: {\n            fontSize: 18,\n            fontFamily: &#39;Microsoft YaHei&#39;,\n            borderColor: &#39;#449933&#39;,\n            borderRadius: 4\n        },\n        ...\n    }\n}\n</code></pre>\n<p>For more details, see <a href=\"tutorial.html#Rich%20Text\" target=\"_blank\">Rich Text</a> please.</p>\n"
   },
-  "data.downplay.label.rich.<style_name>.color": {
-    "desc": "<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "labelLayout.select.label.rich.<style_name>.color": {
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "null"
     }
   },
-  "data.downplay.label.rich.<style_name>.fontStyle": {
-    "desc": "<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+  "labelLayout.select.label.rich.<style_name>.fontStyle": {
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
       "options": "normal,italic,oblique"
     }
   },
-  "data.downplay.label.rich.<style_name>.fontWeight": {
-    "desc": "<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+  "labelLayout.select.label.rich.<style_name>.fontWeight": {
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
       "options": "normal,bold,bolder,lighter"
     }
   },
-  "data.downplay.label.rich.<style_name>.fontFamily": {
-    "desc": "<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+  "labelLayout.select.label.rich.<style_name>.fontFamily": {
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "sans-serif",
       "options": "sans-serif,serif,monospace,Arial,Courier New"
     }
   },
-  "data.downplay.label.rich.<style_name>.fontSize": {
-    "desc": "<p> font size.</p>\n",
+  "labelLayout.select.label.rich.<style_name>.fontSize": {
+    "desc": "\n\n<p> font size.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "12",
@@ -1794,22 +2223,22 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "1"
     }
   },
-  "data.downplay.label.rich.<style_name>.align": {
-    "desc": "<p>Horizontal alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;left&#39;</code></li>\n<li><code class=\"codespan\">&#39;center&#39;</code></li>\n<li><code class=\"codespan\">&#39;right&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">align</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">align</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    align: right,\n    rich: {\n        a: {\n            // `align` is not set, then it will be right\n        }\n    }\n}\n</code></pre>\n",
+  "labelLayout.select.label.rich.<style_name>.align": {
+    "desc": "\n\n<p>Horizontal alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;left&#39;</code></li>\n<li><code class=\"codespan\">&#39;center&#39;</code></li>\n<li><code class=\"codespan\">&#39;right&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">align</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">align</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    align: right,\n    rich: {\n        a: {\n            // `align` is not set, then it will be right\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "left,center,right"
     }
   },
-  "data.downplay.label.rich.<style_name>.verticalAlign": {
-    "desc": "<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
+  "labelLayout.select.label.rich.<style_name>.verticalAlign": {
+    "desc": "\n\n<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,middle,bottom"
     }
   },
-  "data.downplay.label.rich.<style_name>.lineHeight": {
-    "desc": "<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+  "labelLayout.select.label.rich.<style_name>.lineHeight": {
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -1817,138 +2246,138 @@ window.__EC_DOC_option_series_sunburst = {
       "default": "12"
     }
   },
-  "data.downplay.label.rich.<style_name>.backgroundColor": {
-    "desc": "<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "labelLayout.select.label.rich.<style_name>.backgroundColor": {
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
-  "data.downplay.label.rich.<style_name>.borderColor": {
-    "desc": "<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "labelLayout.select.label.rich.<style_name>.borderColor": {
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
-  "data.downplay.label.rich.<style_name>.borderWidth": {
-    "desc": "<p>Border width of the text fragment.</p>\n",
+  "labelLayout.select.label.rich.<style_name>.borderWidth": {
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "data.downplay.label.rich.<style_name>.borderRadius": {
-    "desc": "<p>Border radius of the text fragment.</p>\n",
+  "labelLayout.select.label.rich.<style_name>.borderRadius": {
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
       "dims": "LT,RT, RB, LB"
     }
   },
-  "data.downplay.label.rich.<style_name>.padding": {
-    "desc": "<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+  "labelLayout.select.label.rich.<style_name>.padding": {
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
       "dims": "T,R,B,L"
     }
   },
-  "data.downplay.label.rich.<style_name>.shadowColor": {
-    "desc": "<p>Shadow color of the text block.</p>\n",
+  "labelLayout.select.label.rich.<style_name>.shadowColor": {
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
-  "data.downplay.label.rich.<style_name>.shadowBlur": {
-    "desc": "<p>Show blur of the text block.</p>\n",
+  "labelLayout.select.label.rich.<style_name>.shadowBlur": {
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "data.downplay.label.rich.<style_name>.shadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text block.</p>\n",
+  "labelLayout.select.label.rich.<style_name>.shadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "data.downplay.label.rich.<style_name>.shadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text block.</p>\n",
+  "labelLayout.select.label.rich.<style_name>.shadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "data.downplay.label.rich.<style_name>.width": {
+  "labelLayout.select.label.rich.<style_name>.width": {
     "desc": "<p>Width of the text block. It is the width of the text by default. In most cases, there is no need to specify it. You may want to use it in some cases like make simple table or using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p><code class=\"codespan\">width</code> can also be percent string, like <code class=\"codespan\">&#39;100%&#39;</code>, which represents the percent of <code class=\"codespan\">contentWidth</code> (that is, the width without <code class=\"codespan\">padding</code>) of its container box. It is based on <code class=\"codespan\">contentWidth</code> because that each text fragment is layout based on the <code class=\"codespan\">content box</code>, where it makes no sense that calculating width based on <code class=\"codespan\">outerWith</code> in prectice.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
-  "data.downplay.label.rich.<style_name>.height": {
+  "labelLayout.select.label.rich.<style_name>.height": {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
-  "data.downplay.label.rich.<style_name>.textBorderColor": {
-    "desc": "<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "labelLayout.select.label.rich.<style_name>.textBorderColor": {
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
-  "data.downplay.label.rich.<style_name>.textBorderWidth": {
-    "desc": "<p>Storke line width of the text.</p>\n",
+  "labelLayout.select.label.rich.<style_name>.textBorderWidth": {
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "data.downplay.label.rich.<style_name>.textShadowColor": {
-    "desc": "<p>Shadow color of the text itself.</p>\n",
+  "labelLayout.select.label.rich.<style_name>.textShadowColor": {
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#000"
     }
   },
-  "data.downplay.label.rich.<style_name>.textShadowBlur": {
-    "desc": "<p>Shadow blue of the text itself.</p>\n",
+  "labelLayout.select.label.rich.<style_name>.textShadowBlur": {
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "data.downplay.label.rich.<style_name>.textShadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text itself.</p>\n",
+  "labelLayout.select.label.rich.<style_name>.textShadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "data.downplay.label.rich.<style_name>.textShadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text itself.</p>\n",
+  "labelLayout.select.label.rich.<style_name>.textShadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "data.downplay.itemStyle": {
-    "desc": "<p>Style of Sunburst sectors.</p>\n<p>Style can be set in <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> for sectors of this series, or <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> for the whole level, or<a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> for single sector. If <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> is defined, it will cover the setting of <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> and <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a>.</p>\n<p><strong>Priority: <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> &gt; <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> &gt; <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a>.</strong></p>\n<p>In ECharts, <em>emphasis</em> is for styles when mouse hovers. For Sunburst charts, there are two extra states: <em>highlight</em> for highlighting items that relates to the emphasized one, and <em>downplay</em> for others when emphasizing an item. See <a href=\"#series-sunburst.highlightPolicy\">highlightPolicy</a>.</p>\n"
+  "labelLayout.select.labelLine": {
+    "desc": "<p>Configuration of label guide line.</p>\n"
   },
-  "data.downplay.itemStyle.color": {
-    "desc": "<p> color.  Color is taken from <a href=\"#color\">option.color Palette</a> by default. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
+  "labelLayout.select.labelLine.show": {
+    "desc": "\n\n<p>Whether to show the label guide line.</p>\n",
+    "uiControl": {
+      "type": "boolean"
+    }
+  },
+  "labelLayout.select.labelLine.lineStyle.color": {
+    "desc": "\n\n<p>Line color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
     "uiControl": {
       "type": "color"
     }
   },
-  "data.downplay.itemStyle.borderColor": {
-    "desc": "<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
-    "uiControl": {
-      "type": "color"
-    }
-  },
-  "data.downplay.itemStyle.borderWidth": {
-    "desc": "<p> border width. No border when it is set to be 0.</p>\n",
+  "labelLayout.select.labelLine.lineStyle.width": {
+    "desc": "\n\n<p> line width.</p>\n",
     "uiControl": {
       "type": "number",
       "value": "1",
@@ -1956,16 +2385,16 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "0.5"
     }
   },
-  "data.downplay.itemStyle.borderType": {
-    "desc": "<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
+  "labelLayout.select.labelLine.lineStyle.type": {
+    "desc": "\n\n<p> line type.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;solid&#39;</code></li>\n<li><code class=\"codespan\">&#39;dashed&#39;</code></li>\n<li><code class=\"codespan\">&#39;dotted&#39;</code></li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "solid",
       "options": "solid,dashed,dotted"
     }
   },
-  "data.downplay.itemStyle.shadowBlur": {
-    "desc": "<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+  "labelLayout.select.labelLine.lineStyle.shadowBlur": {
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "default": "",
@@ -1973,31 +2402,31 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "0.5"
     }
   },
-  "data.downplay.itemStyle.shadowColor": {
-    "desc": "<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+  "labelLayout.select.labelLine.lineStyle.shadowColor": {
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color",
       "default": ""
     }
   },
-  "data.downplay.itemStyle.shadowOffsetX": {
-    "desc": "<p>Offset distance on the horizontal direction of shadow.</p>\n",
+  "labelLayout.select.labelLine.lineStyle.shadowOffsetX": {
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
       "step": "0.5"
     }
   },
-  "data.downplay.itemStyle.shadowOffsetY": {
-    "desc": "<p>Offset distance on the vertical direction of shadow.</p>\n",
+  "labelLayout.select.labelLine.lineStyle.shadowOffsetY": {
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
       "step": "0.5"
     }
   },
-  "data.downplay.itemStyle.opacity": {
-    "desc": "<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+  "labelLayout.select.labelLine.lineStyle.opacity": {
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "1",
@@ -2006,14 +2435,110 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "0.01"
     }
   },
-  "data.children": {
-    "desc": "<p>Children nodes, which is recursively defined. In the same format to <a href=\"#series-sunburst.data\">series-sunburst.data</a>.</p>\n"
+  "labelLayout.select.itemStyle": {
+    "desc": "<p>旭日图扇形块的样式。</p>\n<p>可以在 <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> 定义所有扇形块的样式，也可以在 <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> 定义每一层扇形块的样式，还可以在 <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> 定义每个扇形块单独的样式，这三者的优先级从低到高。也就是说，如果定义了 <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a>，将会覆盖 <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> 和 <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a>。</p>\n<p><strong>优先级：<a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> &gt; <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> &gt; <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a>。</strong></p>\n"
+  },
+  "labelLayout.select.itemStyle.color": {
+    "desc": "\n\n<p> color.  Color is taken from <a href=\"#color\">option.color Palette</a> by default. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "labelLayout.select.itemStyle.borderColor": {
+    "desc": "\n\n<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "labelLayout.select.itemStyle.borderWidth": {
+    "desc": "\n\n<p> border width. No border when it is set to be 0.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "value": "1",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "labelLayout.select.itemStyle.borderType": {
+    "desc": "\n\n<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "solid",
+      "options": "solid,dashed,dotted"
+    }
+  },
+  "labelLayout.select.itemStyle.shadowBlur": {
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "labelLayout.select.itemStyle.shadowColor": {
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": ""
+    }
+  },
+  "labelLayout.select.itemStyle.shadowOffsetX": {
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "0",
+      "step": "0.5"
+    }
+  },
+  "labelLayout.select.itemStyle.shadowOffsetY": {
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "0",
+      "step": "0.5"
+    }
+  },
+  "labelLayout.select.itemStyle.opacity": {
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "1",
+      "min": "0",
+      "max": "1",
+      "step": "0.01"
+    }
+  },
+  "labelLayout.children": {
+    "desc": "<p>子节点，递归定义，格式同 <a href=\"#series-sunburst.data\">series-sunburst.data</a>。</p>\n"
+  },
+  "nodeClick": {
+    "desc": "\n\n<p>The action of clicking a sector, which can be:</p>\n<ul>\n<li><code class=\"codespan\">false</code>: nothing happens.</li>\n<li><code class=\"codespan\">&#39;rootToNode&#39;</code>: use the clicked sector as root.</li>\n<li><code class=\"codespan\">&#39;link&#39;</code>：if <a href=\"#series-sunburst.data.link\">link</a> is set, the page will redirect to it.</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "rootToNode",
+      "options": "rootToNode,link"
+    }
+  },
+  "sort": {
+    "desc": "\n\n<p>Sorting method that sectors use based on <a href=\"#series-sunburst.data.value\"><code class=\"codespan\">value</code></a>, which is the sum of children when not set. The default value <code class=\"codespan\">&#39;desc&#39;</code> states for descending order, while it can also be set to be <code class=\"codespan\">&#39;asc&#39;</code> for ascending order, or <code class=\"codespan\">null</code> for not sorting, or callback function like:</p>\n<pre><code class=\"lang-js\">function(nodeA, nodeB) {\n    return nodeA.getValue() - nodeB.getValue();\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "desc",
+      "options": "desc,asc"
+    }
+  },
+  "renderLabelForZeroData": {
+    "desc": "\n\n<p>If there is no <code class=\"codespan\">name</code>, whether need to render it.</p>\n",
+    "uiControl": {
+      "type": "boolean"
+    }
   },
   "label": {
-    "desc": "<p><code class=\"codespan\">label</code> sets the text style for every sectors.</p>\n<p><strong>Priority: <a href=\"#series-sunburst.data.label\">series.data.label</a> &gt; <a href=\"#series-sunburst.levels.label\">series.levels.label</a> &gt; <a href=\"#series-sunburst.label\">series.label</a>.</strong></p>\n<p>Text label of , to explain some data information about graphic item like value, name and so on. <code class=\"codespan\">label</code> is placed under <code class=\"codespan\">itemStyle</code> in ECharts 2.x. In ECharts 3, to make the configuration structure flatter, <code class=\"codespan\">label</code>is taken to be at the same level with <code class=\"codespan\">itemStyle</code>, and has <code class=\"codespan\">emphasis</code> as <code class=\"codespan\">itemStyle</code> does.</p>\n"
+    "desc": "<p><code class=\"codespan\">label</code> 描述了每个扇形块中，文本标签的样式。</p>\n<p><strong>优先级：<a href=\"#series-sunburst.data.label\">series.data.label</a> &gt; <a href=\"#series-sunburst.levels.label\">series.levels.label</a> &gt; <a href=\"#series-sunburst.label\">series.label</a>。</strong></p>\n<p>Text label of , to explain some data information about graphic item like value, name and so on. <code class=\"codespan\">label</code> is placed under <code class=\"codespan\">itemStyle</code> in ECharts 2.x. In ECharts 3, to make the configuration structure flatter, <code class=\"codespan\">label</code>is taken to be at the same level with <code class=\"codespan\">itemStyle</code>, and has <code class=\"codespan\">emphasis</code> as <code class=\"codespan\">itemStyle</code> does.</p>\n"
   },
   "label.rotate": {
-    "desc": "<p>If it is <code class=\"codespan\">number</code> type, then is stands for rotation, from -90 degrees to 90 degrees, and positive values stand for counterclockwise.</p>\n<p>Besides, it can be string <code class=\"codespan\">&#39;radial&#39;</code>, standing for radial rotation; or <code class=\"codespan\">&#39;tangential&#39;</code>, standing for tangential rotation.</p>\n<p>By default, it is <code class=\"codespan\">&#39;radial&#39;</code>. If no rotation is wanted, it can be set to <code class=\"codespan\">0</code>.</p>\n<p>The following example shows different <code class=\"codespan\">rotate</code> settings:</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=sunburst-label-rotate&edit=1&reset=1\" width=\"700\" height=\"400\"><iframe />\n\n",
+    "desc": "\n\n\n<p>If it is <code class=\"codespan\">number</code> type, then is stands for rotation, from -90 degrees to 90 degrees, and positive values stand for counterclockwise.</p>\n<p>Besides, it can be string <code class=\"codespan\">&#39;radial&#39;</code>, standing for radial rotation; or <code class=\"codespan\">&#39;tangential&#39;</code>, standing for tangential rotation.</p>\n<p>By default, it is <code class=\"codespan\">&#39;radial&#39;</code>. If no rotation is wanted, it can be set to <code class=\"codespan\">0</code>.</p>\n<p>The following example shows different <code class=\"codespan\">rotate</code> settings:</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/en/view.html?c=sunburst-label-rotate&edit=1&reset=1\" width=\"700\" height=\"400\"></iframe>\n\n\n<p>Same to <a href=\"#sunburst.label.rotate\">label.rotate</a></p>\n",
     "uiControl": {
       "type": "enum",
       "options": "radial,tangential",
@@ -2021,7 +2546,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "label.align": {
-    "desc": "<p>Align of text, which can be <code class=\"codespan\">&#39;left&#39;</code>, <code class=\"codespan\">&#39;center&#39;</code>, or <code class=\"codespan\">&#39;right&#39;</code>. Note that <code class=\"codespan\">&#39;left&#39;</code> stands for inner side, and <code class=\"codespan\">&#39;right&#39;</code> stands for outer side.</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=doc-example/sunburst-label-align&edit=1&reset=1\" width=\"700\" height=\"400\"><iframe />\n\n",
+    "desc": "\n\n<p>Align of text, which can be <code class=\"codespan\">&#39;left&#39;</code>, <code class=\"codespan\">&#39;center&#39;</code>, or <code class=\"codespan\">&#39;right&#39;</code>. Note that <code class=\"codespan\">&#39;left&#39;</code> stands for inner side, and <code class=\"codespan\">&#39;right&#39;</code> stands for outer side.</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/en/view.html?c=doc-example/sunburst-label-align&edit=1&reset=1\" width=\"700\" height=\"400\"></iframe>\n\n\n",
     "uiControl": {
       "type": "enum",
       "options": "left,center,right",
@@ -2029,7 +2554,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "label.minAngle": {
-    "desc": "<p>If angle of data piece is smaller than this value (in degrees), then text is not displayed. This is used for hiding text for small piece of data.</p>\n",
+    "desc": "\n\n<p>If angle of data piece is smaller than this value (in degrees), then text is not displayed. This is used for hiding text for small piece of data.</p>\n",
     "uiControl": {
       "type": "angle",
       "min": "0",
@@ -2038,21 +2563,21 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "label.show": {
-    "desc": "<p>Whether to show label.</p>\n",
+    "desc": "\n\n<p>Whether to show label.</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "true"
     }
   },
   "label.position": {
-    "desc": "<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/examples/zh/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "label.distance": {
-    "desc": "<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element.</p>\n<p>It is valid only when <code class=\"codespan\">position</code> is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -2061,7 +2586,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "label.offset": {
-    "desc": "<p>Whether to move text slightly. For example: <code class=\"codespan\">[30, 40]</code> means move <code class=\"codespan\">30</code> horizontally and move <code class=\"codespan\">40</code> vertically.</p>\n",
+    "desc": "\n\n<p>Whether to move text slightly. For example: <code class=\"codespan\">[30, 40]</code> means move <code class=\"codespan\">30</code> horizontally and move <code class=\"codespan\">40</code> vertically.</p>\n",
     "uiControl": {
       "type": "vector",
       "dims": "x,y",
@@ -2070,17 +2595,17 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "label.formatter": {
-    "desc": "<p>Data label formatter, which supports string template and callback function. In either form, <code class=\"codespan\">\\n</code> is supported to represent a new line.</p>\n<p><strong>String template</strong></p>\n<p>Model variation includes:</p>\n<ul>\n<li><code class=\"codespan\">{a}</code>: series name.</li>\n<li><code class=\"codespan\">{b}</code>: the name of a data item.</li>\n<li><code class=\"codespan\">{c}</code>: the value of a data item.</li>\n<li><code class=\"codespan\">{@xxx}: the value of a dimension named</code>&#39;xxx&#39;<code class=\"codespan\">, for example,</code>{@product}<code class=\"codespan\">refers the value of</code>&#39;product&#39;` dimension.</li>\n<li><code class=\"codespan\">{@[n]}: the value of a dimension at the index of</code>n<code class=\"codespan\">, for example,</code>{@[3]}` refers the value at dimensions[3].</li>\n</ul>\n<p><strong>example: </strong></p>\n<pre><code class=\"lang-js\">formatter: &#39;{b}: {@score}&#39;\n</code></pre>\n<p><strong>Callback function</strong></p>\n<p>Callback function is in form of:</p>\n<pre><code class=\"lang-js\">(params: Object|Array) =&gt; string\n</code></pre>\n<p>where <code class=\"codespan\">params</code> is the single dataset needed by formatter, which is formed as:</p>\n<pre><code class=\"lang-js\">{\n    componentType: &#39;series&#39;,\n    // Series type\n    seriesType: string,\n    // Series index in option.series\n    seriesIndex: number,\n    // Series name\n    seriesName: string,\n    // Data name, or category name\n    name: string,\n    // Data index in input data array\n    dataIndex: number,\n    // Original data as input\n    data: Object,\n    // Value of data. In most series it is the same as data.\n    // But in some series it is some part of the data (e.g., in map, radar)\n    value: number|Array|Object,\n    // encoding info of coordinate system\n    // Key: coord, like (&#39;x&#39; &#39;y&#39; &#39;radius&#39; &#39;angle&#39;)\n    // value: Must be an array, not null/undefined. Contain dimension indices, like:\n    // {\n    //     x: [2] // values on dimension index 2 are mapped to x axis.\n    //     y: [0] // values on dimension index 0 are mapped to y axis.\n    // }\n    encode: Object,\n    // dimension names list\n    dimensionNames: Array&lt;String&gt;,\n    // data dimension index, for example 0 or 1 or 2 ...\n    // Only work in `radar` series.\n    dimensionIndex: number,\n    // Color of data\n    color: string,\n\n}\n</code></pre>\n<p>Note: the usage of encode and dimensionNames can be:</p>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    source: [\n        [&#39;Matcha Latte&#39;, 43.3, 85.8, 93.7],\n        [&#39;Milk Tea&#39;, 83.1, 73.4, 55.1],\n        [&#39;Cheese Cocoa&#39;, 86.4, 65.2, 82.5],\n        [&#39;Walnut Brownie&#39;, 72.4, 53.9, 39.1]\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.encode.y[0]]\n</code></pre>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    dimensions: [&#39;product&#39;, &#39;2015&#39;, &#39;2016&#39;, &#39;2017&#39;],\n    source: [\n        {product: &#39;Matcha Latte&#39;, &#39;2015&#39;: 43.3, &#39;2016&#39;: 85.8, &#39;2017&#39;: 93.7},\n        {product: &#39;Milk Tea&#39;, &#39;2015&#39;: 83.1, &#39;2016&#39;: 73.4, &#39;2017&#39;: 55.1},\n        {product: &#39;Cheese Cocoa&#39;, &#39;2015&#39;: 86.4, &#39;2016&#39;: 65.2, &#39;2017&#39;: 82.5},\n        {product: &#39;Walnut Brownie&#39;, &#39;2015&#39;: 72.4, &#39;2016&#39;: 53.9, &#39;2017&#39;: 39.1}\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.dimensionNames[params.encode.y[0]]]\n</code></pre>\n"
+    "desc": "<p>Data label formatter, which supports string template and callback function. In either form, <code class=\"codespan\">\\n</code> is supported to represent a new line.</p>\n<p><strong>String template</strong></p>\n<p>Model variation includes:</p>\n<ul>\n<li><code class=\"codespan\">{a}</code>: series name.</li>\n<li><code class=\"codespan\">{b}</code>: the name of a data item.</li>\n<li><code class=\"codespan\">{c}</code>: the value of a data item.</li>\n<li><code class=\"codespan\">{@xxx}: the value of a dimension named</code>&#39;xxx&#39;<code class=\"codespan\">, for example,</code>{@product}<code class=\"codespan\">refers the value of</code>&#39;product&#39;` dimension.</li>\n<li><code class=\"codespan\">{@[n]}: the value of a dimension at the index of</code>n<code class=\"codespan\">, for example,</code>{@[3]}` refers the value at dimensions[3].</li>\n</ul>\n<p><strong>example: </strong></p>\n<pre><code class=\"lang-js\">formatter: &#39;{b}: {@score}&#39;\n</code></pre>\n<p><strong>Callback function</strong></p>\n<p>Callback function is in form of:</p>\n<pre><code class=\"lang-js\">(params: Object|Array) =&gt; string\n</code></pre>\n<p>where <code class=\"codespan\">params</code> is the single dataset needed by formatter, which is formed as:</p>\n<pre><code class=\"lang-js\">{\n    componentType: &#39;series&#39;,\n    // Series type\n    seriesType: string,\n    // Series index in option.series\n    seriesIndex: number,\n    // Series name\n    seriesName: string,\n    // Data name, or category name\n    name: string,\n    // Data index in input data array\n    dataIndex: number,\n    // Original data as input\n    data: Object,\n    // Value of data. In most series it is the same as data.\n    // But in some series it is some part of the data (e.g., in map, radar)\n    value: number|Array|Object,\n    // encoding info of coordinate system\n    // Key: coord, like (&#39;x&#39; &#39;y&#39; &#39;radius&#39; &#39;angle&#39;)\n    // value: Must be an array, not null/undefined. Contain dimension indices, like:\n    // {\n    //     x: [2] // values on dimension index 2 are mapped to x axis.\n    //     y: [0] // values on dimension index 0 are mapped to y axis.\n    // }\n    encode: Object,\n    // dimension names list\n    dimensionNames: Array&lt;String&gt;,\n    // data dimension index, for example 0 or 1 or 2 ...\n    // Only work in `radar` series.\n    dimensionIndex: number,\n    // Color of data\n    color: string,\n\n\n\n}\n</code></pre>\n<p>Note: the usage of encode and dimensionNames can be:</p>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    source: [\n        [&#39;Matcha Latte&#39;, 43.3, 85.8, 93.7],\n        [&#39;Milk Tea&#39;, 83.1, 73.4, 55.1],\n        [&#39;Cheese Cocoa&#39;, 86.4, 65.2, 82.5],\n        [&#39;Walnut Brownie&#39;, 72.4, 53.9, 39.1]\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.encode.y[0]]\n</code></pre>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    dimensions: [&#39;product&#39;, &#39;2015&#39;, &#39;2016&#39;, &#39;2017&#39;],\n    source: [\n        {product: &#39;Matcha Latte&#39;, &#39;2015&#39;: 43.3, &#39;2016&#39;: 85.8, &#39;2017&#39;: 93.7},\n        {product: &#39;Milk Tea&#39;, &#39;2015&#39;: 83.1, &#39;2016&#39;: 73.4, &#39;2017&#39;: 55.1},\n        {product: &#39;Cheese Cocoa&#39;, &#39;2015&#39;: 86.4, &#39;2016&#39;: 65.2, &#39;2017&#39;: 82.5},\n        {product: &#39;Walnut Brownie&#39;, &#39;2015&#39;: 72.4, &#39;2016&#39;: 53.9, &#39;2017&#39;: 39.1}\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.dimensionNames[params.encode.y[0]]]\n</code></pre>\n"
   },
   "label.color": {
-    "desc": "<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "null"
     }
   },
   "label.fontStyle": {
-    "desc": "<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
@@ -2088,7 +2613,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "label.fontWeight": {
-    "desc": "<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
@@ -2096,7 +2621,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "label.fontFamily": {
-    "desc": "<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "sans-serif",
@@ -2104,7 +2629,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "label.fontSize": {
-    "desc": "<p> font size.</p>\n",
+    "desc": "\n\n<p> font size.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "12",
@@ -2113,14 +2638,14 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "label.verticalAlign": {
-    "desc": "<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,middle,bottom"
     }
   },
   "label.lineHeight": {
-    "desc": "<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -2129,21 +2654,21 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "label.backgroundColor": {
-    "desc": "<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
   "label.borderColor": {
-    "desc": "<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
   "label.borderWidth": {
-    "desc": "<p>Border width of the text fragment.</p>\n",
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -2151,7 +2676,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "label.borderRadius": {
-    "desc": "<p>Border radius of the text fragment.</p>\n",
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
@@ -2159,7 +2684,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "label.padding": {
-    "desc": "<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
@@ -2167,13 +2692,13 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "label.shadowColor": {
-    "desc": "<p>Shadow color of the text block.</p>\n",
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "label.shadowBlur": {
-    "desc": "<p>Show blur of the text block.</p>\n",
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -2181,33 +2706,47 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "label.shadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text block.</p>\n",
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
   "label.shadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text block.</p>\n",
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
   "label.width": {
-    "desc": "<p>Width of the text block. It is the width of the text by default. In most cases, there is no need to specify it. You may want to use it in some cases like make simple table or using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p><code class=\"codespan\">width</code> can also be percent string, like <code class=\"codespan\">&#39;100%&#39;</code>, which represents the percent of <code class=\"codespan\">contentWidth</code> (that is, the width without <code class=\"codespan\">padding</code>) of its container box. It is based on <code class=\"codespan\">contentWidth</code> because that each text fragment is layout based on the <code class=\"codespan\">content box</code>, where it makes no sense that calculating width based on <code class=\"codespan\">outerWith</code> in prectice.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "label.height": {
-    "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "label.textBorderColor": {
-    "desc": "<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "label.textBorderWidth": {
-    "desc": "<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -2215,14 +2754,14 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "label.textShadowColor": {
-    "desc": "<p>Shadow color of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#000"
     }
   },
   "label.textShadowBlur": {
-    "desc": "<p>Shadow blue of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -2230,31 +2769,44 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "label.textShadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
   "label.textShadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
+  "label.overflow": {
+    "desc": "\n\n<p>Determine how to display the text when it&#39;s overflow. Available when <code class=\"codespan\">width</code> is set.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the text and trailing with <code class=\"codespan\">ellipsis</code>.</li>\n<li><code class=\"codespan\">&#39;break&#39;</code> Break by word</li>\n<li><code class=\"codespan\">&#39;breakAll&#39;</code> Break by character.</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "truncate,break,breakAll"
+    }
+  },
+  "label.ellipsis": {
+    "desc": "<p>Ellipsis to be displayed when <code class=\"codespan\">overflow</code> is set to <code class=\"codespan\">truncate</code>.</p>\n"
+  },
+  "label.lineOverflow": {
+    "desc": "<p>Determine how to display the text when it&#39;s overflow on height.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the overflow lines.</li>\n</ul>\n"
+  },
   "label.rich": {
     "desc": "<p>&quot;Rich text styles&quot; can be defined in this <code class=\"codespan\">rich</code> property. For example:</p>\n<pre><code class=\"lang-js\">label: {\n    // Styles defined in &#39;rich&#39; can be applied to some fragments\n    // of text by adding some markers to those fragment, like\n    // `{styleName|text content text content}`.\n    // `&#39;\\n&#39;` is the newline character.\n    formatter: [\n        &#39;{a|Style &quot;a&quot; is applied to this snippet}&#39;\n        &#39;{b|Style &quot;b&quot; is applied to this snippet}This snippet use default style{x|use style &quot;x&quot;}&#39;\n    ].join(&#39;\\n&#39;),\n\n    rich: {\n        a: {\n            color: &#39;red&#39;,\n            lineHeight: 10\n        },\n        b: {\n            backgroundColor: {\n                image: &#39;xxx/xxx.jpg&#39;\n            },\n            height: 40\n        },\n        x: {\n            fontSize: 18,\n            fontFamily: &#39;Microsoft YaHei&#39;,\n            borderColor: &#39;#449933&#39;,\n            borderRadius: 4\n        },\n        ...\n    }\n}\n</code></pre>\n<p>For more details, see <a href=\"tutorial.html#Rich%20Text\" target=\"_blank\">Rich Text</a> please.</p>\n"
   },
   "label.rich.<style_name>.color": {
-    "desc": "<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "null"
     }
   },
   "label.rich.<style_name>.fontStyle": {
-    "desc": "<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
@@ -2262,7 +2814,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "label.rich.<style_name>.fontWeight": {
-    "desc": "<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
@@ -2270,7 +2822,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "label.rich.<style_name>.fontFamily": {
-    "desc": "<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "sans-serif",
@@ -2278,7 +2830,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "label.rich.<style_name>.fontSize": {
-    "desc": "<p> font size.</p>\n",
+    "desc": "\n\n<p> font size.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "12",
@@ -2287,21 +2839,21 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "label.rich.<style_name>.align": {
-    "desc": "<p>Horizontal alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;left&#39;</code></li>\n<li><code class=\"codespan\">&#39;center&#39;</code></li>\n<li><code class=\"codespan\">&#39;right&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">align</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">align</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    align: right,\n    rich: {\n        a: {\n            // `align` is not set, then it will be right\n        }\n    }\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Horizontal alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;left&#39;</code></li>\n<li><code class=\"codespan\">&#39;center&#39;</code></li>\n<li><code class=\"codespan\">&#39;right&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">align</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">align</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    align: right,\n    rich: {\n        a: {\n            // `align` is not set, then it will be right\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "left,center,right"
     }
   },
   "label.rich.<style_name>.verticalAlign": {
-    "desc": "<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,middle,bottom"
     }
   },
   "label.rich.<style_name>.lineHeight": {
-    "desc": "<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -2310,21 +2862,21 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "label.rich.<style_name>.backgroundColor": {
-    "desc": "<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
   "label.rich.<style_name>.borderColor": {
-    "desc": "<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
   "label.rich.<style_name>.borderWidth": {
-    "desc": "<p>Border width of the text fragment.</p>\n",
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -2332,7 +2884,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "label.rich.<style_name>.borderRadius": {
-    "desc": "<p>Border radius of the text fragment.</p>\n",
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
@@ -2340,7 +2892,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "label.rich.<style_name>.padding": {
-    "desc": "<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
@@ -2348,13 +2900,13 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "label.rich.<style_name>.shadowColor": {
-    "desc": "<p>Shadow color of the text block.</p>\n",
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "label.rich.<style_name>.shadowBlur": {
-    "desc": "<p>Show blur of the text block.</p>\n",
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -2362,14 +2914,14 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "label.rich.<style_name>.shadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text block.</p>\n",
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
   "label.rich.<style_name>.shadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text block.</p>\n",
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
@@ -2382,13 +2934,13 @@ window.__EC_DOC_option_series_sunburst = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "label.rich.<style_name>.textBorderColor": {
-    "desc": "<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "label.rich.<style_name>.textBorderWidth": {
-    "desc": "<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -2396,14 +2948,14 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "label.rich.<style_name>.textShadowColor": {
-    "desc": "<p>Shadow color of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#000"
     }
   },
   "label.rich.<style_name>.textShadowBlur": {
-    "desc": "<p>Shadow blue of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -2411,36 +2963,57 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "label.rich.<style_name>.textShadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
   "label.rich.<style_name>.textShadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "itemStyle": {
-    "desc": "<p>Style of Sunburst sectors.</p>\n<p>Style can be set in <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> for sectors of this series, or <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> for the whole level, or<a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> for single sector. If <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> is defined, it will cover the setting of <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> and <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a>.</p>\n<p><strong>Priority: <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> &gt; <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> &gt; <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a>.</strong></p>\n<p>In ECharts, <em>emphasis</em> is for styles when mouse hovers. For Sunburst charts, there are two extra states: <em>highlight</em> for highlighting items that relates to the emphasized one, and <em>downplay</em> for others when emphasizing an item. See <a href=\"#series-sunburst.highlightPolicy\">highlightPolicy</a>.</p>\n"
+  "labelLine": {
+    "desc": "<p>Configuration of label guide line.</p>\n"
   },
-  "itemStyle.color": {
-    "desc": "<p> color.  Color is taken from <a href=\"#color\">option.color Palette</a> by default. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
+  "labelLine.show": {
+    "desc": "\n\n<p>Whether to show the label guide line.</p>\n",
+    "uiControl": {
+      "type": "boolean"
+    }
+  },
+  "labelLine.showAbove": {
+    "desc": "<p>Whether to show the label guide line above the corresponding element.</p>\n"
+  },
+  "labelLine.length2": {
+    "desc": "\n\n<p>The length of the second segment of guide line.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "15",
+      "min": "0",
+      "step": "1"
+    }
+  },
+  "labelLine.smooth": {
+    "desc": "\n\n<p>Whether to smooth the guide line. It defaults to be <code class=\"codespan\">false</code> and can be set as <code class=\"codespan\">true</code> or the values from 0 to 1 which indicating the smoothness.</p>\n",
+    "uiControl": {
+      "type": "boolean"
+    }
+  },
+  "labelLine.minTurnAngle": {
+    "desc": "<p>Minimum turn angle between two segments of guide line to prevent unaesthetic display when angle is too small.</p>\n<p>Can be 0 - 180 degree.</p>\n"
+  },
+  "labelLine.lineStyle.color": {
+    "desc": "\n\n<p>Line color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
     "uiControl": {
       "type": "color"
     }
   },
-  "itemStyle.borderColor": {
-    "desc": "<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
-    "uiControl": {
-      "type": "color"
-    }
-  },
-  "itemStyle.borderWidth": {
-    "desc": "<p> border width. No border when it is set to be 0.</p>\n",
+  "labelLine.lineStyle.width": {
+    "desc": "\n\n<p> line width.</p>\n",
     "uiControl": {
       "type": "number",
       "value": "1",
@@ -2448,16 +3021,16 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "0.5"
     }
   },
-  "itemStyle.borderType": {
-    "desc": "<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
+  "labelLine.lineStyle.type": {
+    "desc": "\n\n<p> line type.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;solid&#39;</code></li>\n<li><code class=\"codespan\">&#39;dashed&#39;</code></li>\n<li><code class=\"codespan\">&#39;dotted&#39;</code></li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "solid",
       "options": "solid,dashed,dotted"
     }
   },
-  "itemStyle.shadowBlur": {
-    "desc": "<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+  "labelLine.lineStyle.shadowBlur": {
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "default": "",
@@ -2465,31 +3038,31 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "0.5"
     }
   },
-  "itemStyle.shadowColor": {
-    "desc": "<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+  "labelLine.lineStyle.shadowColor": {
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color",
       "default": ""
     }
   },
-  "itemStyle.shadowOffsetX": {
-    "desc": "<p>Offset distance on the horizontal direction of shadow.</p>\n",
+  "labelLine.lineStyle.shadowOffsetX": {
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
       "step": "0.5"
     }
   },
-  "itemStyle.shadowOffsetY": {
-    "desc": "<p>Offset distance on the vertical direction of shadow.</p>\n",
+  "labelLine.lineStyle.shadowOffsetY": {
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
       "step": "0.5"
     }
   },
-  "itemStyle.opacity": {
-    "desc": "<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+  "labelLine.lineStyle.opacity": {
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "1",
@@ -2498,44 +3071,94 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "0.01"
     }
   },
-  "highlightPolicy": {
-    "desc": "<p>When mouse hovers a sector, the sector is emphasized. <strong>If <code class=\"codespan\">highlightPolicy</code> is set to be <code class=\"codespan\">&#39;descendant&#39;</code>, then the sector and its descendant will be <em>highlighted</em>, and others will be <em>downplayed</em>. If <code class=\"codespan\">highlightPolicy</code> is <code class=\"codespan\">&#39;ancestor&#39;</code>, then the sector and its ancestors will be highlighted. If it is set to be <code class=\"codespan\">&#39;self&#39;</code>, then the sector will be highlighted and others downplayed. If it is set to be <code class=\"codespan\">&#39;none&#39;</code>, then others will not be downplayed.</strong></p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=doc-example/sunburst-highlight-descendant&edit=1&reset=1\" width=\"700\" height=\"350\"><iframe />\n\n\n<p>The <code class=\"codespan\">highlightPolicy</code> value above is the default value <code class=\"codespan\">&#39;descendant&#39;</code>. We use <code class=\"codespan\">dispatchAction</code> to highlight certain sector. Target sector will use the style of <code class=\"codespan\">emphasis</code>, and related sectors decided by <code class=\"codespan\">highlightPolicy</code> uses the style of <code class=\"codespan\">highlight</code>, and others use <code class=\"codespan\">downplay</code>.</p>\n<pre><code class=\"lang-js\">itemStyle: {\n    color: &#39;yellow&#39;,\n    borderWidth: 2,\n    emphasis: {\n        color: &#39;red&#39;\n    },\n    highlight: {\n        color: &#39;orange&#39;\n    },\n    downplay: {\n        color: &#39;#ccc&#39;\n    }\n}\n</code></pre>\n<p>If <code class=\"codespan\">highlightPolicy</code> is set to be <code class=\"codespan\">&#39;ancestor&#39;</code>, then the result looks like:</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=doc-example/sunburst-highlight-ancestor&edit=1&reset=1\" width=\"700\" height=\"350\"><iframe />\n\n\n\n",
+  "itemStyle": {
+    "desc": "<p>旭日图扇形块的样式。</p>\n<p>可以在 <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> 定义所有扇形块的样式，也可以在 <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> 定义每一层扇形块的样式，还可以在 <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> 定义每个扇形块单独的样式，这三者的优先级从低到高。也就是说，如果定义了 <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a>，将会覆盖 <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> 和 <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a>。</p>\n<p><strong>优先级：<a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> &gt; <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> &gt; <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a>。</strong></p>\n"
+  },
+  "itemStyle.color": {
+    "desc": "\n\n<p> color.  Color is taken from <a href=\"#color\">option.color Palette</a> by default. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
     "uiControl": {
-      "type": "enum",
-      "default": "descendant",
-      "options": "descendant,ancestor,none"
+      "type": "color"
     }
   },
-  "nodeClick": {
-    "desc": "<p>The action of clicking a sector, which can be:</p>\n<ul>\n<li><code class=\"codespan\">false</code>: nothing happens.</li>\n<li><code class=\"codespan\">&#39;rootToNode&#39;</code>: use the clicked sector as root.</li>\n<li><code class=\"codespan\">&#39;link&#39;</code>：if <a href=\"#series-sunburst.data.link\">link</a> is set, the page will redirect to it.</li>\n</ul>\n",
+  "itemStyle.borderColor": {
+    "desc": "\n\n<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
-      "type": "enum",
-      "default": "rootToNode",
-      "options": "rootToNode,link"
+      "type": "color"
     }
   },
-  "sort": {
-    "desc": "<p>Sorting method that sectors use based on <a href=\"#series-sunburst.data.value\"><code class=\"codespan\">value</code></a>, which is the sum of children when not set. The default value <code class=\"codespan\">&#39;desc&#39;</code> states for descending order, while it can also be set to be <code class=\"codespan\">&#39;asc&#39;</code> for ascending order, or <code class=\"codespan\">null</code> for not sorting, or callback function like:</p>\n<pre><code class=\"lang-js\">function(nodeA, nodeB) {\n    return nodeA.getValue() - nodeB.getValue();\n}\n</code></pre>\n",
+  "itemStyle.borderWidth": {
+    "desc": "\n\n<p> border width. No border when it is set to be 0.</p>\n",
     "uiControl": {
-      "type": "enum",
-      "default": "desc",
-      "options": "desc,asc"
+      "type": "number",
+      "value": "1",
+      "min": "0",
+      "step": "0.5"
     }
   },
-  "renderLabelForZeroData": {
-    "desc": "<p>If there is no <code class=\"codespan\">name</code>, whether need to render it.</p>\n",
+  "itemStyle.borderType": {
+    "desc": "\n\n<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
     "uiControl": {
-      "type": "boolean"
+      "type": "enum",
+      "default": "solid",
+      "options": "solid,dashed,dotted"
+    }
+  },
+  "itemStyle.shadowBlur": {
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "itemStyle.shadowColor": {
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": ""
+    }
+  },
+  "itemStyle.shadowOffsetX": {
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "0",
+      "step": "0.5"
+    }
+  },
+  "itemStyle.shadowOffsetY": {
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "0",
+      "step": "0.5"
+    }
+  },
+  "itemStyle.opacity": {
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "1",
+      "min": "0",
+      "max": "1",
+      "step": "0.01"
     }
   },
   "emphasis": {
-    "desc": "<p>Item style when mouse is hovering. See <a href=\"#series-sunburst.highlightPolicy\">highlightPolicy</a>.</p>\n"
+    "desc": "<p>Configurations of emphasis state.</p>\n"
+  },
+  "emphasis.focus": {
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>When the data is highlighted, whether to fade out of other data to focus the highlighted. The following configurations are supported:</p>\n<ul>\n<li><code class=\"codespan\">&#39;none&#39;</code> Do not fade out other data, it&#39;s by default.</li>\n<li><code class=\"codespan\">&#39;self&#39;</code> Only focus (not fade out) the element of the currently highlighted data.</li>\n<li><code class=\"codespan\">&#39;series&#39;</code> Focus on all elements of the series which the currently highlighted data belongs to.</li>\n</ul>\n<ul>\n<li><code class=\"codespan\">&#39;ancestor&#39;</code> Focus on all ancestor nodes.</li>\n<li><code class=\"codespan\">&#39;descendant&#39;</code> Focus on all descendants nodes.</li>\n</ul>\n<p><strong>Example: </strong></p>\n<pre><code class=\"lang-js\">emphasis: {\n    focus: &#39;series&#39;,\n    blurScope: &#39;coordinateSystem&#39;\n}\n</code></pre>\n<iframe  data-src=\"https://echarts.apache.org/examples/en/view.html?c=bar-y-category-stack&reset=1&edit=1\" width=\"600\" height=\"400\"></iframe>\n\n"
+  },
+  "emphasis.blurScope": {
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>The range of fade out when <code class=\"codespan\">focus</code> is enabled. Support the following configurations</p>\n<ul>\n<li><code class=\"codespan\">&#39;coordinateSystem&#39;</code></li>\n<li><code class=\"codespan\">&#39;series&#39;</code></li>\n<li><code class=\"codespan\">&#39;global&#39;</code></li>\n</ul>\n"
   },
   "emphasis.label": {
-    "desc": "<p><code class=\"codespan\">label</code> sets the text style for every sectors.</p>\n<p><strong>Priority: <a href=\"#series-sunburst.data.label\">series.data.label</a> &gt; <a href=\"#series-sunburst.levels.label\">series.levels.label</a> &gt; <a href=\"#series-sunburst.label\">series.label</a>.</strong></p>\n<p>Text label of , to explain some data information about graphic item like value, name and so on. <code class=\"codespan\">label</code> is placed under <code class=\"codespan\">itemStyle</code> in ECharts 2.x. In ECharts 3, to make the configuration structure flatter, <code class=\"codespan\">label</code>is taken to be at the same level with <code class=\"codespan\">itemStyle</code>, and has <code class=\"codespan\">emphasis</code> as <code class=\"codespan\">itemStyle</code> does.</p>\n"
+    "desc": "<p><code class=\"codespan\">label</code> 描述了每个扇形块中，文本标签的样式。</p>\n<p><strong>优先级：<a href=\"#series-sunburst.data.label\">series.data.label</a> &gt; <a href=\"#series-sunburst.levels.label\">series.levels.label</a> &gt; <a href=\"#series-sunburst.label\">series.label</a>。</strong></p>\n<p>Text label of , to explain some data information about graphic item like value, name and so on. <code class=\"codespan\">label</code> is placed under <code class=\"codespan\">itemStyle</code> in ECharts 2.x. In ECharts 3, to make the configuration structure flatter, <code class=\"codespan\">label</code>is taken to be at the same level with <code class=\"codespan\">itemStyle</code>, and has <code class=\"codespan\">emphasis</code> as <code class=\"codespan\">itemStyle</code> does.</p>\n"
   },
   "emphasis.label.rotate": {
-    "desc": "<p>If it is <code class=\"codespan\">number</code> type, then is stands for rotation, from -90 degrees to 90 degrees, and positive values stand for counterclockwise.</p>\n<p>Besides, it can be string <code class=\"codespan\">&#39;radial&#39;</code>, standing for radial rotation; or <code class=\"codespan\">&#39;tangential&#39;</code>, standing for tangential rotation.</p>\n<p>By default, it is <code class=\"codespan\">&#39;radial&#39;</code>. If no rotation is wanted, it can be set to <code class=\"codespan\">0</code>.</p>\n<p>The following example shows different <code class=\"codespan\">rotate</code> settings:</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=sunburst-label-rotate&edit=1&reset=1\" width=\"700\" height=\"400\"><iframe />\n\n",
+    "desc": "\n\n\n<p>同 <a href=\"#sunburst.label.rotate\">label.rotate</a></p>\n",
     "uiControl": {
       "type": "enum",
       "options": "radial,tangential",
@@ -2543,7 +3166,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "emphasis.label.align": {
-    "desc": "<p>Align of text, which can be <code class=\"codespan\">&#39;left&#39;</code>, <code class=\"codespan\">&#39;center&#39;</code>, or <code class=\"codespan\">&#39;right&#39;</code>. Note that <code class=\"codespan\">&#39;left&#39;</code> stands for inner side, and <code class=\"codespan\">&#39;right&#39;</code> stands for outer side.</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=doc-example/sunburst-label-align&edit=1&reset=1\" width=\"700\" height=\"400\"><iframe />\n\n",
+    "desc": "\n\n<p>Align of text, which can be <code class=\"codespan\">&#39;left&#39;</code>, <code class=\"codespan\">&#39;center&#39;</code>, or <code class=\"codespan\">&#39;right&#39;</code>. Note that <code class=\"codespan\">&#39;left&#39;</code> stands for inner side, and <code class=\"codespan\">&#39;right&#39;</code> stands for outer side.</p>\n<p>Same to <a href=\"#sunburst.label.align\">label.align</a></p>\n",
     "uiControl": {
       "type": "enum",
       "options": "left,center,right",
@@ -2551,7 +3174,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "emphasis.label.minAngle": {
-    "desc": "<p>If angle of data piece is smaller than this value (in degrees), then text is not displayed. This is used for hiding text for small piece of data.</p>\n",
+    "desc": "\n\n<p>If angle of data piece is smaller than this value (in degrees), then text is not displayed. This is used for hiding text for small piece of data.</p>\n",
     "uiControl": {
       "type": "angle",
       "min": "0",
@@ -2560,21 +3183,21 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "emphasis.label.show": {
-    "desc": "<p>Whether to show label.</p>\n",
+    "desc": "\n\n<p>Whether to show label.</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "true"
     }
   },
   "emphasis.label.position": {
-    "desc": "<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/examples/zh/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "emphasis.label.distance": {
-    "desc": "<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element.</p>\n<p>It is valid only when <code class=\"codespan\">position</code> is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -2583,7 +3206,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "emphasis.label.offset": {
-    "desc": "<p>Whether to move text slightly. For example: <code class=\"codespan\">[30, 40]</code> means move <code class=\"codespan\">30</code> horizontally and move <code class=\"codespan\">40</code> vertically.</p>\n",
+    "desc": "\n\n<p>Whether to move text slightly. For example: <code class=\"codespan\">[30, 40]</code> means move <code class=\"codespan\">30</code> horizontally and move <code class=\"codespan\">40</code> vertically.</p>\n",
     "uiControl": {
       "type": "vector",
       "dims": "x,y",
@@ -2592,17 +3215,17 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "emphasis.label.formatter": {
-    "desc": "<p>Data label formatter, which supports string template and callback function. In either form, <code class=\"codespan\">\\n</code> is supported to represent a new line.</p>\n<p><strong>String template</strong></p>\n<p>Model variation includes:</p>\n<ul>\n<li><code class=\"codespan\">{a}</code>: series name.</li>\n<li><code class=\"codespan\">{b}</code>: the name of a data item.</li>\n<li><code class=\"codespan\">{c}</code>: the value of a data item.</li>\n<li><code class=\"codespan\">{@xxx}: the value of a dimension named</code>&#39;xxx&#39;<code class=\"codespan\">, for example,</code>{@product}<code class=\"codespan\">refers the value of</code>&#39;product&#39;` dimension.</li>\n<li><code class=\"codespan\">{@[n]}: the value of a dimension at the index of</code>n<code class=\"codespan\">, for example,</code>{@[3]}` refers the value at dimensions[3].</li>\n</ul>\n<p><strong>example: </strong></p>\n<pre><code class=\"lang-js\">formatter: &#39;{b}: {@score}&#39;\n</code></pre>\n<p><strong>Callback function</strong></p>\n<p>Callback function is in form of:</p>\n<pre><code class=\"lang-js\">(params: Object|Array) =&gt; string\n</code></pre>\n<p>where <code class=\"codespan\">params</code> is the single dataset needed by formatter, which is formed as:</p>\n<pre><code class=\"lang-js\">{\n    componentType: &#39;series&#39;,\n    // Series type\n    seriesType: string,\n    // Series index in option.series\n    seriesIndex: number,\n    // Series name\n    seriesName: string,\n    // Data name, or category name\n    name: string,\n    // Data index in input data array\n    dataIndex: number,\n    // Original data as input\n    data: Object,\n    // Value of data. In most series it is the same as data.\n    // But in some series it is some part of the data (e.g., in map, radar)\n    value: number|Array|Object,\n    // encoding info of coordinate system\n    // Key: coord, like (&#39;x&#39; &#39;y&#39; &#39;radius&#39; &#39;angle&#39;)\n    // value: Must be an array, not null/undefined. Contain dimension indices, like:\n    // {\n    //     x: [2] // values on dimension index 2 are mapped to x axis.\n    //     y: [0] // values on dimension index 0 are mapped to y axis.\n    // }\n    encode: Object,\n    // dimension names list\n    dimensionNames: Array&lt;String&gt;,\n    // data dimension index, for example 0 or 1 or 2 ...\n    // Only work in `radar` series.\n    dimensionIndex: number,\n    // Color of data\n    color: string,\n\n}\n</code></pre>\n<p>Note: the usage of encode and dimensionNames can be:</p>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    source: [\n        [&#39;Matcha Latte&#39;, 43.3, 85.8, 93.7],\n        [&#39;Milk Tea&#39;, 83.1, 73.4, 55.1],\n        [&#39;Cheese Cocoa&#39;, 86.4, 65.2, 82.5],\n        [&#39;Walnut Brownie&#39;, 72.4, 53.9, 39.1]\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.encode.y[0]]\n</code></pre>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    dimensions: [&#39;product&#39;, &#39;2015&#39;, &#39;2016&#39;, &#39;2017&#39;],\n    source: [\n        {product: &#39;Matcha Latte&#39;, &#39;2015&#39;: 43.3, &#39;2016&#39;: 85.8, &#39;2017&#39;: 93.7},\n        {product: &#39;Milk Tea&#39;, &#39;2015&#39;: 83.1, &#39;2016&#39;: 73.4, &#39;2017&#39;: 55.1},\n        {product: &#39;Cheese Cocoa&#39;, &#39;2015&#39;: 86.4, &#39;2016&#39;: 65.2, &#39;2017&#39;: 82.5},\n        {product: &#39;Walnut Brownie&#39;, &#39;2015&#39;: 72.4, &#39;2016&#39;: 53.9, &#39;2017&#39;: 39.1}\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.dimensionNames[params.encode.y[0]]]\n</code></pre>\n"
+    "desc": "<p>Data label formatter, which supports string template and callback function. In either form, <code class=\"codespan\">\\n</code> is supported to represent a new line.</p>\n<p><strong>String template</strong></p>\n<p>Model variation includes:</p>\n<ul>\n<li><code class=\"codespan\">{a}</code>: series name.</li>\n<li><code class=\"codespan\">{b}</code>: the name of a data item.</li>\n<li><code class=\"codespan\">{c}</code>: the value of a data item.</li>\n<li><code class=\"codespan\">{@xxx}: the value of a dimension named</code>&#39;xxx&#39;<code class=\"codespan\">, for example,</code>{@product}<code class=\"codespan\">refers the value of</code>&#39;product&#39;` dimension.</li>\n<li><code class=\"codespan\">{@[n]}: the value of a dimension at the index of</code>n<code class=\"codespan\">, for example,</code>{@[3]}` refers the value at dimensions[3].</li>\n</ul>\n<p><strong>example: </strong></p>\n<pre><code class=\"lang-js\">formatter: &#39;{b}: {@score}&#39;\n</code></pre>\n<p><strong>Callback function</strong></p>\n<p>Callback function is in form of:</p>\n<pre><code class=\"lang-js\">(params: Object|Array) =&gt; string\n</code></pre>\n<p>where <code class=\"codespan\">params</code> is the single dataset needed by formatter, which is formed as:</p>\n<pre><code class=\"lang-js\">{\n    componentType: &#39;series&#39;,\n    // Series type\n    seriesType: string,\n    // Series index in option.series\n    seriesIndex: number,\n    // Series name\n    seriesName: string,\n    // Data name, or category name\n    name: string,\n    // Data index in input data array\n    dataIndex: number,\n    // Original data as input\n    data: Object,\n    // Value of data. In most series it is the same as data.\n    // But in some series it is some part of the data (e.g., in map, radar)\n    value: number|Array|Object,\n    // encoding info of coordinate system\n    // Key: coord, like (&#39;x&#39; &#39;y&#39; &#39;radius&#39; &#39;angle&#39;)\n    // value: Must be an array, not null/undefined. Contain dimension indices, like:\n    // {\n    //     x: [2] // values on dimension index 2 are mapped to x axis.\n    //     y: [0] // values on dimension index 0 are mapped to y axis.\n    // }\n    encode: Object,\n    // dimension names list\n    dimensionNames: Array&lt;String&gt;,\n    // data dimension index, for example 0 or 1 or 2 ...\n    // Only work in `radar` series.\n    dimensionIndex: number,\n    // Color of data\n    color: string,\n\n\n\n}\n</code></pre>\n<p>Note: the usage of encode and dimensionNames can be:</p>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    source: [\n        [&#39;Matcha Latte&#39;, 43.3, 85.8, 93.7],\n        [&#39;Milk Tea&#39;, 83.1, 73.4, 55.1],\n        [&#39;Cheese Cocoa&#39;, 86.4, 65.2, 82.5],\n        [&#39;Walnut Brownie&#39;, 72.4, 53.9, 39.1]\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.encode.y[0]]\n</code></pre>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    dimensions: [&#39;product&#39;, &#39;2015&#39;, &#39;2016&#39;, &#39;2017&#39;],\n    source: [\n        {product: &#39;Matcha Latte&#39;, &#39;2015&#39;: 43.3, &#39;2016&#39;: 85.8, &#39;2017&#39;: 93.7},\n        {product: &#39;Milk Tea&#39;, &#39;2015&#39;: 83.1, &#39;2016&#39;: 73.4, &#39;2017&#39;: 55.1},\n        {product: &#39;Cheese Cocoa&#39;, &#39;2015&#39;: 86.4, &#39;2016&#39;: 65.2, &#39;2017&#39;: 82.5},\n        {product: &#39;Walnut Brownie&#39;, &#39;2015&#39;: 72.4, &#39;2016&#39;: 53.9, &#39;2017&#39;: 39.1}\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.dimensionNames[params.encode.y[0]]]\n</code></pre>\n"
   },
   "emphasis.label.color": {
-    "desc": "<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "null"
     }
   },
   "emphasis.label.fontStyle": {
-    "desc": "<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
@@ -2610,7 +3233,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "emphasis.label.fontWeight": {
-    "desc": "<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
@@ -2618,7 +3241,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "emphasis.label.fontFamily": {
-    "desc": "<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "sans-serif",
@@ -2626,7 +3249,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "emphasis.label.fontSize": {
-    "desc": "<p> font size.</p>\n",
+    "desc": "\n\n<p> font size.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "12",
@@ -2635,14 +3258,14 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "emphasis.label.verticalAlign": {
-    "desc": "<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,middle,bottom"
     }
   },
   "emphasis.label.lineHeight": {
-    "desc": "<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -2651,21 +3274,21 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "emphasis.label.backgroundColor": {
-    "desc": "<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
   "emphasis.label.borderColor": {
-    "desc": "<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
   "emphasis.label.borderWidth": {
-    "desc": "<p>Border width of the text fragment.</p>\n",
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -2673,7 +3296,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "emphasis.label.borderRadius": {
-    "desc": "<p>Border radius of the text fragment.</p>\n",
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
@@ -2681,7 +3304,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "emphasis.label.padding": {
-    "desc": "<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
@@ -2689,13 +3312,13 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "emphasis.label.shadowColor": {
-    "desc": "<p>Shadow color of the text block.</p>\n",
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "emphasis.label.shadowBlur": {
-    "desc": "<p>Show blur of the text block.</p>\n",
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -2703,33 +3326,47 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "emphasis.label.shadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text block.</p>\n",
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
   "emphasis.label.shadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text block.</p>\n",
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
   "emphasis.label.width": {
-    "desc": "<p>Width of the text block. It is the width of the text by default. In most cases, there is no need to specify it. You may want to use it in some cases like make simple table or using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p><code class=\"codespan\">width</code> can also be percent string, like <code class=\"codespan\">&#39;100%&#39;</code>, which represents the percent of <code class=\"codespan\">contentWidth</code> (that is, the width without <code class=\"codespan\">padding</code>) of its container box. It is based on <code class=\"codespan\">contentWidth</code> because that each text fragment is layout based on the <code class=\"codespan\">content box</code>, where it makes no sense that calculating width based on <code class=\"codespan\">outerWith</code> in prectice.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "emphasis.label.height": {
-    "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "emphasis.label.textBorderColor": {
-    "desc": "<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "emphasis.label.textBorderWidth": {
-    "desc": "<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -2737,14 +3374,14 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "emphasis.label.textShadowColor": {
-    "desc": "<p>Shadow color of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#000"
     }
   },
   "emphasis.label.textShadowBlur": {
-    "desc": "<p>Shadow blue of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -2752,31 +3389,44 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "emphasis.label.textShadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
   "emphasis.label.textShadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
+  "emphasis.label.overflow": {
+    "desc": "\n\n<p>Determine how to display the text when it&#39;s overflow. Available when <code class=\"codespan\">width</code> is set.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the text and trailing with <code class=\"codespan\">ellipsis</code>.</li>\n<li><code class=\"codespan\">&#39;break&#39;</code> Break by word</li>\n<li><code class=\"codespan\">&#39;breakAll&#39;</code> Break by character.</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "truncate,break,breakAll"
+    }
+  },
+  "emphasis.label.ellipsis": {
+    "desc": "<p>Ellipsis to be displayed when <code class=\"codespan\">overflow</code> is set to <code class=\"codespan\">truncate</code>.</p>\n"
+  },
+  "emphasis.label.lineOverflow": {
+    "desc": "<p>Determine how to display the text when it&#39;s overflow on height.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the overflow lines.</li>\n</ul>\n"
+  },
   "emphasis.label.rich": {
     "desc": "<p>&quot;Rich text styles&quot; can be defined in this <code class=\"codespan\">rich</code> property. For example:</p>\n<pre><code class=\"lang-js\">label: {\n    // Styles defined in &#39;rich&#39; can be applied to some fragments\n    // of text by adding some markers to those fragment, like\n    // `{styleName|text content text content}`.\n    // `&#39;\\n&#39;` is the newline character.\n    formatter: [\n        &#39;{a|Style &quot;a&quot; is applied to this snippet}&#39;\n        &#39;{b|Style &quot;b&quot; is applied to this snippet}This snippet use default style{x|use style &quot;x&quot;}&#39;\n    ].join(&#39;\\n&#39;),\n\n    rich: {\n        a: {\n            color: &#39;red&#39;,\n            lineHeight: 10\n        },\n        b: {\n            backgroundColor: {\n                image: &#39;xxx/xxx.jpg&#39;\n            },\n            height: 40\n        },\n        x: {\n            fontSize: 18,\n            fontFamily: &#39;Microsoft YaHei&#39;,\n            borderColor: &#39;#449933&#39;,\n            borderRadius: 4\n        },\n        ...\n    }\n}\n</code></pre>\n<p>For more details, see <a href=\"tutorial.html#Rich%20Text\" target=\"_blank\">Rich Text</a> please.</p>\n"
   },
   "emphasis.label.rich.<style_name>.color": {
-    "desc": "<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "null"
     }
   },
   "emphasis.label.rich.<style_name>.fontStyle": {
-    "desc": "<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
@@ -2784,7 +3434,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "emphasis.label.rich.<style_name>.fontWeight": {
-    "desc": "<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
@@ -2792,7 +3442,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "emphasis.label.rich.<style_name>.fontFamily": {
-    "desc": "<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "sans-serif",
@@ -2800,7 +3450,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "emphasis.label.rich.<style_name>.fontSize": {
-    "desc": "<p> font size.</p>\n",
+    "desc": "\n\n<p> font size.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "12",
@@ -2809,21 +3459,21 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "emphasis.label.rich.<style_name>.align": {
-    "desc": "<p>Horizontal alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;left&#39;</code></li>\n<li><code class=\"codespan\">&#39;center&#39;</code></li>\n<li><code class=\"codespan\">&#39;right&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">align</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">align</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    align: right,\n    rich: {\n        a: {\n            // `align` is not set, then it will be right\n        }\n    }\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Horizontal alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;left&#39;</code></li>\n<li><code class=\"codespan\">&#39;center&#39;</code></li>\n<li><code class=\"codespan\">&#39;right&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">align</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">align</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    align: right,\n    rich: {\n        a: {\n            // `align` is not set, then it will be right\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "left,center,right"
     }
   },
   "emphasis.label.rich.<style_name>.verticalAlign": {
-    "desc": "<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,middle,bottom"
     }
   },
   "emphasis.label.rich.<style_name>.lineHeight": {
-    "desc": "<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -2832,21 +3482,21 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "emphasis.label.rich.<style_name>.backgroundColor": {
-    "desc": "<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
   "emphasis.label.rich.<style_name>.borderColor": {
-    "desc": "<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
   "emphasis.label.rich.<style_name>.borderWidth": {
-    "desc": "<p>Border width of the text fragment.</p>\n",
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -2854,7 +3504,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "emphasis.label.rich.<style_name>.borderRadius": {
-    "desc": "<p>Border radius of the text fragment.</p>\n",
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
@@ -2862,7 +3512,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "emphasis.label.rich.<style_name>.padding": {
-    "desc": "<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
@@ -2870,13 +3520,13 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "emphasis.label.rich.<style_name>.shadowColor": {
-    "desc": "<p>Shadow color of the text block.</p>\n",
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "emphasis.label.rich.<style_name>.shadowBlur": {
-    "desc": "<p>Show blur of the text block.</p>\n",
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -2884,14 +3534,14 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "emphasis.label.rich.<style_name>.shadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text block.</p>\n",
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
   "emphasis.label.rich.<style_name>.shadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text block.</p>\n",
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
@@ -2904,13 +3554,13 @@ window.__EC_DOC_option_series_sunburst = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "emphasis.label.rich.<style_name>.textBorderColor": {
-    "desc": "<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "emphasis.label.rich.<style_name>.textBorderWidth": {
-    "desc": "<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -2918,14 +3568,14 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "emphasis.label.rich.<style_name>.textShadowColor": {
-    "desc": "<p>Shadow color of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#000"
     }
   },
   "emphasis.label.rich.<style_name>.textShadowBlur": {
-    "desc": "<p>Shadow blue of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -2933,36 +3583,131 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "emphasis.label.rich.<style_name>.textShadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
   "emphasis.label.rich.<style_name>.textShadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
+  "emphasis.labelLine": {
+    "desc": "<p>Configuration of label guide line.</p>\n"
+  },
+  "emphasis.labelLine.show": {
+    "desc": "\n\n<p>Whether to show the label guide line.</p>\n",
+    "uiControl": {
+      "type": "boolean"
+    }
+  },
+  "emphasis.labelLine.showAbove": {
+    "desc": "<p>Whether to show the label guide line above the corresponding element.</p>\n"
+  },
+  "emphasis.labelLine.length2": {
+    "desc": "\n\n<p>The length of the second segment of guide line.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "15",
+      "min": "0",
+      "step": "1"
+    }
+  },
+  "emphasis.labelLine.smooth": {
+    "desc": "\n\n<p>Whether to smooth the guide line. It defaults to be <code class=\"codespan\">false</code> and can be set as <code class=\"codespan\">true</code> or the values from 0 to 1 which indicating the smoothness.</p>\n",
+    "uiControl": {
+      "type": "boolean"
+    }
+  },
+  "emphasis.labelLine.minTurnAngle": {
+    "desc": "<p>Minimum turn angle between two segments of guide line to prevent unaesthetic display when angle is too small.</p>\n<p>Can be 0 - 180 degree.</p>\n"
+  },
+  "emphasis.labelLine.lineStyle.color": {
+    "desc": "\n\n<p>Line color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "emphasis.labelLine.lineStyle.width": {
+    "desc": "\n\n<p> line width.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "value": "1",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "emphasis.labelLine.lineStyle.type": {
+    "desc": "\n\n<p> line type.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;solid&#39;</code></li>\n<li><code class=\"codespan\">&#39;dashed&#39;</code></li>\n<li><code class=\"codespan\">&#39;dotted&#39;</code></li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "solid",
+      "options": "solid,dashed,dotted"
+    }
+  },
+  "emphasis.labelLine.lineStyle.shadowBlur": {
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "emphasis.labelLine.lineStyle.shadowColor": {
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": ""
+    }
+  },
+  "emphasis.labelLine.lineStyle.shadowOffsetX": {
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "0",
+      "step": "0.5"
+    }
+  },
+  "emphasis.labelLine.lineStyle.shadowOffsetY": {
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "0",
+      "step": "0.5"
+    }
+  },
+  "emphasis.labelLine.lineStyle.opacity": {
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "1",
+      "min": "0",
+      "max": "1",
+      "step": "0.01"
+    }
+  },
   "emphasis.itemStyle": {
-    "desc": "<p>Style of Sunburst sectors.</p>\n<p>Style can be set in <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> for sectors of this series, or <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> for the whole level, or<a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> for single sector. If <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> is defined, it will cover the setting of <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> and <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a>.</p>\n<p><strong>Priority: <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> &gt; <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> &gt; <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a>.</strong></p>\n<p>In ECharts, <em>emphasis</em> is for styles when mouse hovers. For Sunburst charts, there are two extra states: <em>highlight</em> for highlighting items that relates to the emphasized one, and <em>downplay</em> for others when emphasizing an item. See <a href=\"#series-sunburst.highlightPolicy\">highlightPolicy</a>.</p>\n"
+    "desc": "<p>旭日图扇形块的样式。</p>\n<p>可以在 <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> 定义所有扇形块的样式，也可以在 <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> 定义每一层扇形块的样式，还可以在 <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> 定义每个扇形块单独的样式，这三者的优先级从低到高。也就是说，如果定义了 <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a>，将会覆盖 <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> 和 <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a>。</p>\n<p><strong>优先级：<a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> &gt; <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> &gt; <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a>。</strong></p>\n"
   },
   "emphasis.itemStyle.color": {
-    "desc": "<p> color.  Color is taken from <a href=\"#color\">option.color Palette</a> by default. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
+    "desc": "\n\n<p> color.  Color is taken from <a href=\"#color\">option.color Palette</a> by default. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "emphasis.itemStyle.borderColor": {
-    "desc": "<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
+    "desc": "\n\n<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "emphasis.itemStyle.borderWidth": {
-    "desc": "<p> border width. No border when it is set to be 0.</p>\n",
+    "desc": "\n\n<p> border width. No border when it is set to be 0.</p>\n",
     "uiControl": {
       "type": "number",
       "value": "1",
@@ -2971,7 +3716,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "emphasis.itemStyle.borderType": {
-    "desc": "<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
+    "desc": "\n\n<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "solid",
@@ -2979,7 +3724,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "emphasis.itemStyle.shadowBlur": {
-    "desc": "<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "default": "",
@@ -2988,14 +3733,14 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "emphasis.itemStyle.shadowColor": {
-    "desc": "<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color",
       "default": ""
     }
   },
   "emphasis.itemStyle.shadowOffsetX": {
-    "desc": "<p>Offset distance on the horizontal direction of shadow.</p>\n",
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
@@ -3003,7 +3748,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "emphasis.itemStyle.shadowOffsetY": {
-    "desc": "<p>Offset distance on the vertical direction of shadow.</p>\n",
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
@@ -3011,7 +3756,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "emphasis.itemStyle.opacity": {
-    "desc": "<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "1",
@@ -3020,30 +3765,63 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "0.01"
     }
   },
-  "highlight": {
-    "desc": "<p>Item style when mouse is hovering related items. See <a href=\"#series-sunburst.highlightPolicy\">highlightPolicy</a>.</p>\n"
+  "emphasis.itemStyle.decal(Object | 'none')": {
+    "desc": "<p>The style of the decal pattern. It works only if <a href=\"#aria.enabled\">aria.enabled</a> and <a href=\"#aria.decal.show\">aria.decal.show</a> are both set to be <code class=\"codespan\">true</code>.</p>\n<p>If it is set to be <code class=\"codespan\">&#39;none&#39;</code>, no decal will be used.</p>\n"
   },
-  "highlight.label": {
-    "desc": "<p><code class=\"codespan\">label</code> sets the text style for every sectors.</p>\n<p><strong>Priority: <a href=\"#series-sunburst.data.label\">series.data.label</a> &gt; <a href=\"#series-sunburst.levels.label\">series.levels.label</a> &gt; <a href=\"#series-sunburst.label\">series.label</a>.</strong></p>\n<p>Text label of , to explain some data information about graphic item like value, name and so on. <code class=\"codespan\">label</code> is placed under <code class=\"codespan\">itemStyle</code> in ECharts 2.x. In ECharts 3, to make the configuration structure flatter, <code class=\"codespan\">label</code>is taken to be at the same level with <code class=\"codespan\">itemStyle</code>, and has <code class=\"codespan\">emphasis</code> as <code class=\"codespan\">itemStyle</code> does.</p>\n"
+  "emphasis.itemStyle.decal(Object | 'none').symbol(string|string[]) = 'rect'": {
+    "desc": "<p>The symbol type of the decal. If it is in the type of <code class=\"codespan\">string[]</code>, it means the symbols are used one by one.</p>\n<p>Icon types provided by ECharts includes</p>\n<p><code class=\"codespan\">&#39;circle&#39;</code>, <code class=\"codespan\">&#39;rect&#39;</code>, <code class=\"codespan\">&#39;roundRect&#39;</code>, <code class=\"codespan\">&#39;triangle&#39;</code>, <code class=\"codespan\">&#39;diamond&#39;</code>, <code class=\"codespan\">&#39;pin&#39;</code>, <code class=\"codespan\">&#39;arrow&#39;</code>, <code class=\"codespan\">&#39;none&#39;</code></p>\n<p>It can be set to an image with <code class=\"codespan\">&#39;image://url&#39;</code> , in which URL is the link to an image, or <code class=\"codespan\">dataURI</code> of an image.</p>\n<p>An image URL example:</p>\n<pre><code>&#39;image://http://xxx.xxx.xxx/a/b.png&#39;\n</code></pre><p>A <code class=\"codespan\">dataURI</code> example:</p>\n<pre><code>&#39;image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7&#39;\n</code></pre><p>Icons can be set to arbitrary vector path via <code class=\"codespan\">&#39;path://&#39;</code> in ECharts. As compared with a raster image, vector paths prevent jagging and blurring when scaled, and have better control over changing colors. The size of the vector icon will be adapted automatically. Refer to <a href=\"http://www.w3.org/TR/SVG/paths.html#PathData\" target=\"_blank\">SVG PathData</a> for more information about the format of the path. You may export vector paths from tools like Adobe </p>\n<p>For example:</p>\n<pre><code>&#39;path://M30.9,53.2C16.8,53.2,5.3,41.7,5.3,27.6S16.8,2,30.9,2C45,2,56.4,13.5,56.4,27.6S45,53.2,30.9,53.2z M30.9,3.5C17.6,3.5,6.8,14.4,6.8,27.6c0,13.3,10.8,24.1,24.101,24.1C44.2,51.7,55,40.9,55,27.6C54.9,14.4,44.1,3.5,30.9,3.5z M36.9,35.8c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H36c0.5,0,0.9,0.4,0.9,1V35.8z M27.8,35.8 c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H27c0.5,0,0.9,0.4,0.9,1L27.8,35.8L27.8,35.8z&#39;\n</code></pre>"
   },
-  "highlight.label.rotate": {
-    "desc": "<p>If it is <code class=\"codespan\">number</code> type, then is stands for rotation, from -90 degrees to 90 degrees, and positive values stand for counterclockwise.</p>\n<p>Besides, it can be string <code class=\"codespan\">&#39;radial&#39;</code>, standing for radial rotation; or <code class=\"codespan\">&#39;tangential&#39;</code>, standing for tangential rotation.</p>\n<p>By default, it is <code class=\"codespan\">&#39;radial&#39;</code>. If no rotation is wanted, it can be set to <code class=\"codespan\">0</code>.</p>\n<p>The following example shows different <code class=\"codespan\">rotate</code> settings:</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=sunburst-label-rotate&edit=1&reset=1\" width=\"700\" height=\"400\"><iframe />\n\n",
+  "emphasis.itemStyle.decal(Object | 'none').symbolSize": {
+    "desc": "<p>Range of values: <code class=\"codespan\">0</code> to <code class=\"codespan\">1</code>, representing the size of symbol relative to decal.</p>\n"
+  },
+  "emphasis.itemStyle.decal(Object | 'none').symbolKeepAspect": {
+    "desc": "<p>Whether or not to keep the aspect ratio of the pattern.</p>\n"
+  },
+  "emphasis.itemStyle.decal(Object | 'none').color": {
+    "desc": "<p>For the color of the decal pattern, it is recommended to use a translucent color, which can be superimposed on the color of the series itself.</p>\n"
+  },
+  "emphasis.itemStyle.decal(Object | 'none').backgroundColor": {
+    "desc": "<p>The background color of the decal will be over the color of the series itself, under the decal pattern.</p>\n"
+  },
+  "emphasis.itemStyle.decal(Object | 'none').dashArrayX(number | number[] | (number | number[])[]) = 5": {
+    "desc": "<p>The basic pattern of the decal pattern is an infinite loop in the form of <code class=\"codespan\">Pattern - Blank - Pattern - Blank - Pattern - Blank</code> both horizontally and vertically, respectively. By setting the length of each pattern and blank, complex pattern effects can be achieved.</p>\n<p><code class=\"codespan\">dashArrayX</code> controls the horizontal pattern pattern. When its value is of type <code class=\"codespan\">number</code> or <code class=\"codespan\">number[]</code>, it is similar to <a href=\"https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray\" target=\"_blank\">SVG stroke-dasharray</a>.</p>\n<ul>\n<li><p>If it is of type <code class=\"codespan\">number</code>, it means that the pattern and the blank space are of this value respectively. For example, <code class=\"codespan\">5</code> means the pattern with width 5 is displayed first, then 5 pixels empty, then the pattern with width 5 is displayed...</p>\n</li>\n<li><p>In the case of <code class=\"codespan\">number[]</code> type, it means that the pattern and empty space are loops of an array of values. For example: <code class=\"codespan\">[5, 10, 2, 6]</code> means the pattern is 5 pixels wide, then 10 pixels empty, then the pattern is 2 pixels wide, then 6 pixels empty, then the pattern is 5 pixels wide...</p>\n</li>\n<li><p>If of type <code class=\"codespan\">(number | number[])[]</code>, it means that each row is a loop with an array of values for the pattern and blank space. For example: <code class=\"codespan\">[10, [2, 5]]</code> means that the first line will be 10 pixels by 10 pixels and empty space, the second line will be 2 pixels by 2 pixels and empty space, and the third line will be 10 pixels by 10 pixels and empty space...</p>\n</li>\n</ul>\n<p>This interface can be better understood with the following examples.</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/en/view.html?c=doc-example/aria-decal&edit=1&reset=1\" width=\"700\" height=\"300\"></iframe>\n\n"
+  },
+  "emphasis.itemStyle.decal(Object | 'none').dashArrayY(number | number[]) = 5": {
+    "desc": "<p>The basic pattern of the decal pattern is an infinite loop in the form of <code class=\"codespan\">Pattern - Blank - Pattern - Blank - Pattern - Blank</code> both horizontally and vertically, respectively. By setting the length of each pattern and blank, complex pattern effects can be achieved.</p>\n<p><code class=\"codespan\">dashArrayY</code> controls the horizontal pattern pattern. Similar to <a href=\"https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray\" target=\"_blank\">SVG stroke-dasharray</a>.</p>\n<ul>\n<li><p>If it is a <code class=\"codespan\">number</code> type, it means the pattern and the blank are each of this value. For example, <code class=\"codespan\">5</code> means that the pattern with a height of 5 is displayed first, then 5 pixels empty, then the pattern with a height of 5 is displayed...</p>\n</li>\n<li><p>In the case of <code class=\"codespan\">number[]</code> type, it means that the pattern and empty space are loops of sequential array values. For example: <code class=\"codespan\">[5, 10, 2, 6]</code> means the pattern is 5 pixels high, then 10 pixels empty, then the pattern is 2 pixels high, then 6 pixels empty, then the pattern is 5 pixels high...</p>\n</li>\n</ul>\n<p>This interface can be better understood with the following examples.</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/en/view.html?c=doc-example/aria-decal&edit=1&reset=1\" width=\"700\" height=\"300\"></iframe>\n\n"
+  },
+  "emphasis.itemStyle.decal(Object | 'none').rotation": {
+    "desc": "<p>The overall rotation angle (in radians) of the pattern, in the range from `-Math.</p>\n"
+  },
+  "emphasis.itemStyle.decal(Object | 'none').maxTileWidth": {
+    "desc": "<p>The upper limit of the width of the generated pattern before it is duplicated. Usually this value is not necessary, but you can try to increase it if you notice discontinuous seams in the pattern when it repeats.</p>\n"
+  },
+  "emphasis.itemStyle.decal(Object | 'none').maxTileHeight": {
+    "desc": "<p>The upper limit of the height of the generated pattern before it repeats. This value is usually not necessary to set, but you can try to increase it if you find that the pattern has discontinuous seams when it is repeated.</p>\n"
+  },
+  "blur": {
+    "desc": "<p>Configurations of blur state. Available when <a href=\"#series-sunburst.emphasis.focus\">emphasis.focus</a> is set.</p>\n"
+  },
+  "blur.label": {
+    "desc": "<p><code class=\"codespan\">label</code> 描述了每个扇形块中，文本标签的样式。</p>\n<p><strong>优先级：<a href=\"#series-sunburst.data.label\">series.data.label</a> &gt; <a href=\"#series-sunburst.levels.label\">series.levels.label</a> &gt; <a href=\"#series-sunburst.label\">series.label</a>。</strong></p>\n<p>Text label of , to explain some data information about graphic item like value, name and so on. <code class=\"codespan\">label</code> is placed under <code class=\"codespan\">itemStyle</code> in ECharts 2.x. In ECharts 3, to make the configuration structure flatter, <code class=\"codespan\">label</code>is taken to be at the same level with <code class=\"codespan\">itemStyle</code>, and has <code class=\"codespan\">emphasis</code> as <code class=\"codespan\">itemStyle</code> does.</p>\n"
+  },
+  "blur.label.rotate": {
+    "desc": "\n\n\n<p>同 <a href=\"#sunburst.label.rotate\">label.rotate</a></p>\n",
     "uiControl": {
       "type": "enum",
       "options": "radial,tangential",
       "default": "radial"
     }
   },
-  "highlight.label.align": {
-    "desc": "<p>Align of text, which can be <code class=\"codespan\">&#39;left&#39;</code>, <code class=\"codespan\">&#39;center&#39;</code>, or <code class=\"codespan\">&#39;right&#39;</code>. Note that <code class=\"codespan\">&#39;left&#39;</code> stands for inner side, and <code class=\"codespan\">&#39;right&#39;</code> stands for outer side.</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=doc-example/sunburst-label-align&edit=1&reset=1\" width=\"700\" height=\"400\"><iframe />\n\n",
+  "blur.label.align": {
+    "desc": "\n\n<p>Align of text, which can be <code class=\"codespan\">&#39;left&#39;</code>, <code class=\"codespan\">&#39;center&#39;</code>, or <code class=\"codespan\">&#39;right&#39;</code>. Note that <code class=\"codespan\">&#39;left&#39;</code> stands for inner side, and <code class=\"codespan\">&#39;right&#39;</code> stands for outer side.</p>\n<p>Same to <a href=\"#sunburst.label.align\">label.align</a></p>\n",
     "uiControl": {
       "type": "enum",
       "options": "left,center,right",
       "default": "center"
     }
   },
-  "highlight.label.minAngle": {
-    "desc": "<p>If angle of data piece is smaller than this value (in degrees), then text is not displayed. This is used for hiding text for small piece of data.</p>\n",
+  "blur.label.minAngle": {
+    "desc": "\n\n<p>If angle of data piece is smaller than this value (in degrees), then text is not displayed. This is used for hiding text for small piece of data.</p>\n",
     "uiControl": {
       "type": "angle",
       "min": "0",
@@ -3051,22 +3829,22 @@ window.__EC_DOC_option_series_sunburst = {
       "max": "360"
     }
   },
-  "highlight.label.show": {
-    "desc": "<p>Whether to show label.</p>\n",
+  "blur.label.show": {
+    "desc": "\n\n<p>Whether to show label.</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "true"
     }
   },
-  "highlight.label.position": {
-    "desc": "<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/examples/zh/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+  "blur.label.position": {
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
-  "highlight.label.distance": {
-    "desc": "<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+  "blur.label.distance": {
+    "desc": "\n\n<p>Distance to the host graphic element.</p>\n<p>It is valid only when <code class=\"codespan\">position</code> is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -3074,8 +3852,8 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "0.5"
     }
   },
-  "highlight.label.offset": {
-    "desc": "<p>Whether to move text slightly. For example: <code class=\"codespan\">[30, 40]</code> means move <code class=\"codespan\">30</code> horizontally and move <code class=\"codespan\">40</code> vertically.</p>\n",
+  "blur.label.offset": {
+    "desc": "\n\n<p>Whether to move text slightly. For example: <code class=\"codespan\">[30, 40]</code> means move <code class=\"codespan\">30</code> horizontally and move <code class=\"codespan\">40</code> vertically.</p>\n",
     "uiControl": {
       "type": "vector",
       "dims": "x,y",
@@ -3083,42 +3861,42 @@ window.__EC_DOC_option_series_sunburst = {
       "separate": "true"
     }
   },
-  "highlight.label.formatter": {
-    "desc": "<p>Data label formatter, which supports string template and callback function. In either form, <code class=\"codespan\">\\n</code> is supported to represent a new line.</p>\n<p><strong>String template</strong></p>\n<p>Model variation includes:</p>\n<ul>\n<li><code class=\"codespan\">{a}</code>: series name.</li>\n<li><code class=\"codespan\">{b}</code>: the name of a data item.</li>\n<li><code class=\"codespan\">{c}</code>: the value of a data item.</li>\n<li><code class=\"codespan\">{@xxx}: the value of a dimension named</code>&#39;xxx&#39;<code class=\"codespan\">, for example,</code>{@product}<code class=\"codespan\">refers the value of</code>&#39;product&#39;` dimension.</li>\n<li><code class=\"codespan\">{@[n]}: the value of a dimension at the index of</code>n<code class=\"codespan\">, for example,</code>{@[3]}` refers the value at dimensions[3].</li>\n</ul>\n<p><strong>example: </strong></p>\n<pre><code class=\"lang-js\">formatter: &#39;{b}: {@score}&#39;\n</code></pre>\n<p><strong>Callback function</strong></p>\n<p>Callback function is in form of:</p>\n<pre><code class=\"lang-js\">(params: Object|Array) =&gt; string\n</code></pre>\n<p>where <code class=\"codespan\">params</code> is the single dataset needed by formatter, which is formed as:</p>\n<pre><code class=\"lang-js\">{\n    componentType: &#39;series&#39;,\n    // Series type\n    seriesType: string,\n    // Series index in option.series\n    seriesIndex: number,\n    // Series name\n    seriesName: string,\n    // Data name, or category name\n    name: string,\n    // Data index in input data array\n    dataIndex: number,\n    // Original data as input\n    data: Object,\n    // Value of data. In most series it is the same as data.\n    // But in some series it is some part of the data (e.g., in map, radar)\n    value: number|Array|Object,\n    // encoding info of coordinate system\n    // Key: coord, like (&#39;x&#39; &#39;y&#39; &#39;radius&#39; &#39;angle&#39;)\n    // value: Must be an array, not null/undefined. Contain dimension indices, like:\n    // {\n    //     x: [2] // values on dimension index 2 are mapped to x axis.\n    //     y: [0] // values on dimension index 0 are mapped to y axis.\n    // }\n    encode: Object,\n    // dimension names list\n    dimensionNames: Array&lt;String&gt;,\n    // data dimension index, for example 0 or 1 or 2 ...\n    // Only work in `radar` series.\n    dimensionIndex: number,\n    // Color of data\n    color: string,\n\n}\n</code></pre>\n<p>Note: the usage of encode and dimensionNames can be:</p>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    source: [\n        [&#39;Matcha Latte&#39;, 43.3, 85.8, 93.7],\n        [&#39;Milk Tea&#39;, 83.1, 73.4, 55.1],\n        [&#39;Cheese Cocoa&#39;, 86.4, 65.2, 82.5],\n        [&#39;Walnut Brownie&#39;, 72.4, 53.9, 39.1]\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.encode.y[0]]\n</code></pre>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    dimensions: [&#39;product&#39;, &#39;2015&#39;, &#39;2016&#39;, &#39;2017&#39;],\n    source: [\n        {product: &#39;Matcha Latte&#39;, &#39;2015&#39;: 43.3, &#39;2016&#39;: 85.8, &#39;2017&#39;: 93.7},\n        {product: &#39;Milk Tea&#39;, &#39;2015&#39;: 83.1, &#39;2016&#39;: 73.4, &#39;2017&#39;: 55.1},\n        {product: &#39;Cheese Cocoa&#39;, &#39;2015&#39;: 86.4, &#39;2016&#39;: 65.2, &#39;2017&#39;: 82.5},\n        {product: &#39;Walnut Brownie&#39;, &#39;2015&#39;: 72.4, &#39;2016&#39;: 53.9, &#39;2017&#39;: 39.1}\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.dimensionNames[params.encode.y[0]]]\n</code></pre>\n"
+  "blur.label.formatter": {
+    "desc": "<p>Data label formatter, which supports string template and callback function. In either form, <code class=\"codespan\">\\n</code> is supported to represent a new line.</p>\n<p><strong>String template</strong></p>\n<p>Model variation includes:</p>\n<ul>\n<li><code class=\"codespan\">{a}</code>: series name.</li>\n<li><code class=\"codespan\">{b}</code>: the name of a data item.</li>\n<li><code class=\"codespan\">{c}</code>: the value of a data item.</li>\n<li><code class=\"codespan\">{@xxx}: the value of a dimension named</code>&#39;xxx&#39;<code class=\"codespan\">, for example,</code>{@product}<code class=\"codespan\">refers the value of</code>&#39;product&#39;` dimension.</li>\n<li><code class=\"codespan\">{@[n]}: the value of a dimension at the index of</code>n<code class=\"codespan\">, for example,</code>{@[3]}` refers the value at dimensions[3].</li>\n</ul>\n<p><strong>example: </strong></p>\n<pre><code class=\"lang-js\">formatter: &#39;{b}: {@score}&#39;\n</code></pre>\n<p><strong>Callback function</strong></p>\n<p>Callback function is in form of:</p>\n<pre><code class=\"lang-js\">(params: Object|Array) =&gt; string\n</code></pre>\n<p>where <code class=\"codespan\">params</code> is the single dataset needed by formatter, which is formed as:</p>\n<pre><code class=\"lang-js\">{\n    componentType: &#39;series&#39;,\n    // Series type\n    seriesType: string,\n    // Series index in option.series\n    seriesIndex: number,\n    // Series name\n    seriesName: string,\n    // Data name, or category name\n    name: string,\n    // Data index in input data array\n    dataIndex: number,\n    // Original data as input\n    data: Object,\n    // Value of data. In most series it is the same as data.\n    // But in some series it is some part of the data (e.g., in map, radar)\n    value: number|Array|Object,\n    // encoding info of coordinate system\n    // Key: coord, like (&#39;x&#39; &#39;y&#39; &#39;radius&#39; &#39;angle&#39;)\n    // value: Must be an array, not null/undefined. Contain dimension indices, like:\n    // {\n    //     x: [2] // values on dimension index 2 are mapped to x axis.\n    //     y: [0] // values on dimension index 0 are mapped to y axis.\n    // }\n    encode: Object,\n    // dimension names list\n    dimensionNames: Array&lt;String&gt;,\n    // data dimension index, for example 0 or 1 or 2 ...\n    // Only work in `radar` series.\n    dimensionIndex: number,\n    // Color of data\n    color: string,\n\n\n\n}\n</code></pre>\n<p>Note: the usage of encode and dimensionNames can be:</p>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    source: [\n        [&#39;Matcha Latte&#39;, 43.3, 85.8, 93.7],\n        [&#39;Milk Tea&#39;, 83.1, 73.4, 55.1],\n        [&#39;Cheese Cocoa&#39;, 86.4, 65.2, 82.5],\n        [&#39;Walnut Brownie&#39;, 72.4, 53.9, 39.1]\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.encode.y[0]]\n</code></pre>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    dimensions: [&#39;product&#39;, &#39;2015&#39;, &#39;2016&#39;, &#39;2017&#39;],\n    source: [\n        {product: &#39;Matcha Latte&#39;, &#39;2015&#39;: 43.3, &#39;2016&#39;: 85.8, &#39;2017&#39;: 93.7},\n        {product: &#39;Milk Tea&#39;, &#39;2015&#39;: 83.1, &#39;2016&#39;: 73.4, &#39;2017&#39;: 55.1},\n        {product: &#39;Cheese Cocoa&#39;, &#39;2015&#39;: 86.4, &#39;2016&#39;: 65.2, &#39;2017&#39;: 82.5},\n        {product: &#39;Walnut Brownie&#39;, &#39;2015&#39;: 72.4, &#39;2016&#39;: 53.9, &#39;2017&#39;: 39.1}\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.dimensionNames[params.encode.y[0]]]\n</code></pre>\n"
   },
-  "highlight.label.color": {
-    "desc": "<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "blur.label.color": {
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "null"
     }
   },
-  "highlight.label.fontStyle": {
-    "desc": "<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+  "blur.label.fontStyle": {
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
       "options": "normal,italic,oblique"
     }
   },
-  "highlight.label.fontWeight": {
-    "desc": "<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+  "blur.label.fontWeight": {
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
       "options": "normal,bold,bolder,lighter"
     }
   },
-  "highlight.label.fontFamily": {
-    "desc": "<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+  "blur.label.fontFamily": {
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "sans-serif",
       "options": "sans-serif,serif,monospace,Arial,Courier New"
     }
   },
-  "highlight.label.fontSize": {
-    "desc": "<p> font size.</p>\n",
+  "blur.label.fontSize": {
+    "desc": "\n\n<p> font size.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "12",
@@ -3126,15 +3904,15 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "1"
     }
   },
-  "highlight.label.verticalAlign": {
-    "desc": "<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
+  "blur.label.verticalAlign": {
+    "desc": "\n\n<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,middle,bottom"
     }
   },
-  "highlight.label.lineHeight": {
-    "desc": "<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+  "blur.label.lineHeight": {
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -3142,157 +3920,184 @@ window.__EC_DOC_option_series_sunburst = {
       "default": "12"
     }
   },
-  "highlight.label.backgroundColor": {
-    "desc": "<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "blur.label.backgroundColor": {
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
-  "highlight.label.borderColor": {
-    "desc": "<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "blur.label.borderColor": {
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
-  "highlight.label.borderWidth": {
-    "desc": "<p>Border width of the text fragment.</p>\n",
+  "blur.label.borderWidth": {
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "highlight.label.borderRadius": {
-    "desc": "<p>Border radius of the text fragment.</p>\n",
+  "blur.label.borderRadius": {
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
       "dims": "LT,RT, RB, LB"
     }
   },
-  "highlight.label.padding": {
-    "desc": "<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+  "blur.label.padding": {
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
       "dims": "T,R,B,L"
     }
   },
-  "highlight.label.shadowColor": {
-    "desc": "<p>Shadow color of the text block.</p>\n",
+  "blur.label.shadowColor": {
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
-  "highlight.label.shadowBlur": {
-    "desc": "<p>Show blur of the text block.</p>\n",
+  "blur.label.shadowBlur": {
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "highlight.label.shadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text block.</p>\n",
+  "blur.label.shadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "highlight.label.shadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text block.</p>\n",
+  "blur.label.shadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "highlight.label.width": {
-    "desc": "<p>Width of the text block. It is the width of the text by default. In most cases, there is no need to specify it. You may want to use it in some cases like make simple table or using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p><code class=\"codespan\">width</code> can also be percent string, like <code class=\"codespan\">&#39;100%&#39;</code>, which represents the percent of <code class=\"codespan\">contentWidth</code> (that is, the width without <code class=\"codespan\">padding</code>) of its container box. It is based on <code class=\"codespan\">contentWidth</code> because that each text fragment is layout based on the <code class=\"codespan\">content box</code>, where it makes no sense that calculating width based on <code class=\"codespan\">outerWith</code> in prectice.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+  "blur.label.width": {
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
-  "highlight.label.height": {
-    "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+  "blur.label.height": {
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
-  "highlight.label.textBorderColor": {
-    "desc": "<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "blur.label.textBorderColor": {
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
-  "highlight.label.textBorderWidth": {
-    "desc": "<p>Storke line width of the text.</p>\n",
+  "blur.label.textBorderWidth": {
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "highlight.label.textShadowColor": {
-    "desc": "<p>Shadow color of the text itself.</p>\n",
+  "blur.label.textShadowColor": {
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#000"
     }
   },
-  "highlight.label.textShadowBlur": {
-    "desc": "<p>Shadow blue of the text itself.</p>\n",
+  "blur.label.textShadowBlur": {
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "highlight.label.textShadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text itself.</p>\n",
+  "blur.label.textShadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "highlight.label.textShadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text itself.</p>\n",
+  "blur.label.textShadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "highlight.label.rich": {
+  "blur.label.overflow": {
+    "desc": "\n\n<p>Determine how to display the text when it&#39;s overflow. Available when <code class=\"codespan\">width</code> is set.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the text and trailing with <code class=\"codespan\">ellipsis</code>.</li>\n<li><code class=\"codespan\">&#39;break&#39;</code> Break by word</li>\n<li><code class=\"codespan\">&#39;breakAll&#39;</code> Break by character.</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "truncate,break,breakAll"
+    }
+  },
+  "blur.label.ellipsis": {
+    "desc": "<p>Ellipsis to be displayed when <code class=\"codespan\">overflow</code> is set to <code class=\"codespan\">truncate</code>.</p>\n"
+  },
+  "blur.label.lineOverflow": {
+    "desc": "<p>Determine how to display the text when it&#39;s overflow on height.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the overflow lines.</li>\n</ul>\n"
+  },
+  "blur.label.rich": {
     "desc": "<p>&quot;Rich text styles&quot; can be defined in this <code class=\"codespan\">rich</code> property. For example:</p>\n<pre><code class=\"lang-js\">label: {\n    // Styles defined in &#39;rich&#39; can be applied to some fragments\n    // of text by adding some markers to those fragment, like\n    // `{styleName|text content text content}`.\n    // `&#39;\\n&#39;` is the newline character.\n    formatter: [\n        &#39;{a|Style &quot;a&quot; is applied to this snippet}&#39;\n        &#39;{b|Style &quot;b&quot; is applied to this snippet}This snippet use default style{x|use style &quot;x&quot;}&#39;\n    ].join(&#39;\\n&#39;),\n\n    rich: {\n        a: {\n            color: &#39;red&#39;,\n            lineHeight: 10\n        },\n        b: {\n            backgroundColor: {\n                image: &#39;xxx/xxx.jpg&#39;\n            },\n            height: 40\n        },\n        x: {\n            fontSize: 18,\n            fontFamily: &#39;Microsoft YaHei&#39;,\n            borderColor: &#39;#449933&#39;,\n            borderRadius: 4\n        },\n        ...\n    }\n}\n</code></pre>\n<p>For more details, see <a href=\"tutorial.html#Rich%20Text\" target=\"_blank\">Rich Text</a> please.</p>\n"
   },
-  "highlight.label.rich.<style_name>.color": {
-    "desc": "<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "blur.label.rich.<style_name>.color": {
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "null"
     }
   },
-  "highlight.label.rich.<style_name>.fontStyle": {
-    "desc": "<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+  "blur.label.rich.<style_name>.fontStyle": {
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
       "options": "normal,italic,oblique"
     }
   },
-  "highlight.label.rich.<style_name>.fontWeight": {
-    "desc": "<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+  "blur.label.rich.<style_name>.fontWeight": {
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
       "options": "normal,bold,bolder,lighter"
     }
   },
-  "highlight.label.rich.<style_name>.fontFamily": {
-    "desc": "<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+  "blur.label.rich.<style_name>.fontFamily": {
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "sans-serif",
       "options": "sans-serif,serif,monospace,Arial,Courier New"
     }
   },
-  "highlight.label.rich.<style_name>.fontSize": {
-    "desc": "<p> font size.</p>\n",
+  "blur.label.rich.<style_name>.fontSize": {
+    "desc": "\n\n<p> font size.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "12",
@@ -3300,22 +4105,22 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "1"
     }
   },
-  "highlight.label.rich.<style_name>.align": {
-    "desc": "<p>Horizontal alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;left&#39;</code></li>\n<li><code class=\"codespan\">&#39;center&#39;</code></li>\n<li><code class=\"codespan\">&#39;right&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">align</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">align</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    align: right,\n    rich: {\n        a: {\n            // `align` is not set, then it will be right\n        }\n    }\n}\n</code></pre>\n",
+  "blur.label.rich.<style_name>.align": {
+    "desc": "\n\n<p>Horizontal alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;left&#39;</code></li>\n<li><code class=\"codespan\">&#39;center&#39;</code></li>\n<li><code class=\"codespan\">&#39;right&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">align</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">align</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    align: right,\n    rich: {\n        a: {\n            // `align` is not set, then it will be right\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "left,center,right"
     }
   },
-  "highlight.label.rich.<style_name>.verticalAlign": {
-    "desc": "<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
+  "blur.label.rich.<style_name>.verticalAlign": {
+    "desc": "\n\n<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,middle,bottom"
     }
   },
-  "highlight.label.rich.<style_name>.lineHeight": {
-    "desc": "<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+  "blur.label.rich.<style_name>.lineHeight": {
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -3323,138 +4128,138 @@ window.__EC_DOC_option_series_sunburst = {
       "default": "12"
     }
   },
-  "highlight.label.rich.<style_name>.backgroundColor": {
-    "desc": "<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "blur.label.rich.<style_name>.backgroundColor": {
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
-  "highlight.label.rich.<style_name>.borderColor": {
-    "desc": "<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "blur.label.rich.<style_name>.borderColor": {
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
-  "highlight.label.rich.<style_name>.borderWidth": {
-    "desc": "<p>Border width of the text fragment.</p>\n",
+  "blur.label.rich.<style_name>.borderWidth": {
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "highlight.label.rich.<style_name>.borderRadius": {
-    "desc": "<p>Border radius of the text fragment.</p>\n",
+  "blur.label.rich.<style_name>.borderRadius": {
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
       "dims": "LT,RT, RB, LB"
     }
   },
-  "highlight.label.rich.<style_name>.padding": {
-    "desc": "<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+  "blur.label.rich.<style_name>.padding": {
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
       "dims": "T,R,B,L"
     }
   },
-  "highlight.label.rich.<style_name>.shadowColor": {
-    "desc": "<p>Shadow color of the text block.</p>\n",
+  "blur.label.rich.<style_name>.shadowColor": {
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
-  "highlight.label.rich.<style_name>.shadowBlur": {
-    "desc": "<p>Show blur of the text block.</p>\n",
+  "blur.label.rich.<style_name>.shadowBlur": {
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "highlight.label.rich.<style_name>.shadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text block.</p>\n",
+  "blur.label.rich.<style_name>.shadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "highlight.label.rich.<style_name>.shadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text block.</p>\n",
+  "blur.label.rich.<style_name>.shadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "highlight.label.rich.<style_name>.width": {
+  "blur.label.rich.<style_name>.width": {
     "desc": "<p>Width of the text block. It is the width of the text by default. In most cases, there is no need to specify it. You may want to use it in some cases like make simple table or using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p><code class=\"codespan\">width</code> can also be percent string, like <code class=\"codespan\">&#39;100%&#39;</code>, which represents the percent of <code class=\"codespan\">contentWidth</code> (that is, the width without <code class=\"codespan\">padding</code>) of its container box. It is based on <code class=\"codespan\">contentWidth</code> because that each text fragment is layout based on the <code class=\"codespan\">content box</code>, where it makes no sense that calculating width based on <code class=\"codespan\">outerWith</code> in prectice.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
-  "highlight.label.rich.<style_name>.height": {
+  "blur.label.rich.<style_name>.height": {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
-  "highlight.label.rich.<style_name>.textBorderColor": {
-    "desc": "<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "blur.label.rich.<style_name>.textBorderColor": {
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
-  "highlight.label.rich.<style_name>.textBorderWidth": {
-    "desc": "<p>Storke line width of the text.</p>\n",
+  "blur.label.rich.<style_name>.textBorderWidth": {
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "highlight.label.rich.<style_name>.textShadowColor": {
-    "desc": "<p>Shadow color of the text itself.</p>\n",
+  "blur.label.rich.<style_name>.textShadowColor": {
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#000"
     }
   },
-  "highlight.label.rich.<style_name>.textShadowBlur": {
-    "desc": "<p>Shadow blue of the text itself.</p>\n",
+  "blur.label.rich.<style_name>.textShadowBlur": {
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "highlight.label.rich.<style_name>.textShadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text itself.</p>\n",
+  "blur.label.rich.<style_name>.textShadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "highlight.label.rich.<style_name>.textShadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text itself.</p>\n",
+  "blur.label.rich.<style_name>.textShadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "highlight.itemStyle": {
-    "desc": "<p>Style of Sunburst sectors.</p>\n<p>Style can be set in <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> for sectors of this series, or <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> for the whole level, or<a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> for single sector. If <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> is defined, it will cover the setting of <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> and <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a>.</p>\n<p><strong>Priority: <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> &gt; <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> &gt; <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a>.</strong></p>\n<p>In ECharts, <em>emphasis</em> is for styles when mouse hovers. For Sunburst charts, there are two extra states: <em>highlight</em> for highlighting items that relates to the emphasized one, and <em>downplay</em> for others when emphasizing an item. See <a href=\"#series-sunburst.highlightPolicy\">highlightPolicy</a>.</p>\n"
+  "blur.labelLine": {
+    "desc": "<p>Configuration of label guide line.</p>\n"
   },
-  "highlight.itemStyle.color": {
-    "desc": "<p> color.  Color is taken from <a href=\"#color\">option.color Palette</a> by default. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
+  "blur.labelLine.show": {
+    "desc": "\n\n<p>Whether to show the label guide line.</p>\n",
+    "uiControl": {
+      "type": "boolean"
+    }
+  },
+  "blur.labelLine.lineStyle.color": {
+    "desc": "\n\n<p>Line color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
     "uiControl": {
       "type": "color"
     }
   },
-  "highlight.itemStyle.borderColor": {
-    "desc": "<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
-    "uiControl": {
-      "type": "color"
-    }
-  },
-  "highlight.itemStyle.borderWidth": {
-    "desc": "<p> border width. No border when it is set to be 0.</p>\n",
+  "blur.labelLine.lineStyle.width": {
+    "desc": "\n\n<p> line width.</p>\n",
     "uiControl": {
       "type": "number",
       "value": "1",
@@ -3462,16 +4267,16 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "0.5"
     }
   },
-  "highlight.itemStyle.borderType": {
-    "desc": "<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
+  "blur.labelLine.lineStyle.type": {
+    "desc": "\n\n<p> line type.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;solid&#39;</code></li>\n<li><code class=\"codespan\">&#39;dashed&#39;</code></li>\n<li><code class=\"codespan\">&#39;dotted&#39;</code></li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "solid",
       "options": "solid,dashed,dotted"
     }
   },
-  "highlight.itemStyle.shadowBlur": {
-    "desc": "<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+  "blur.labelLine.lineStyle.shadowBlur": {
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "default": "",
@@ -3479,31 +4284,31 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "0.5"
     }
   },
-  "highlight.itemStyle.shadowColor": {
-    "desc": "<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+  "blur.labelLine.lineStyle.shadowColor": {
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color",
       "default": ""
     }
   },
-  "highlight.itemStyle.shadowOffsetX": {
-    "desc": "<p>Offset distance on the horizontal direction of shadow.</p>\n",
+  "blur.labelLine.lineStyle.shadowOffsetX": {
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
       "step": "0.5"
     }
   },
-  "highlight.itemStyle.shadowOffsetY": {
-    "desc": "<p>Offset distance on the vertical direction of shadow.</p>\n",
+  "blur.labelLine.lineStyle.shadowOffsetY": {
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
       "step": "0.5"
     }
   },
-  "highlight.itemStyle.opacity": {
-    "desc": "<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+  "blur.labelLine.lineStyle.opacity": {
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "1",
@@ -3512,30 +4317,104 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "0.01"
     }
   },
-  "downplay": {
-    "desc": "<p>Item style when mouse is hovering unrelated items. See <a href=\"#series-sunburst.highlightPolicy\">highlightPolicy</a>.</p>\n"
+  "blur.itemStyle": {
+    "desc": "<p>旭日图扇形块的样式。</p>\n<p>可以在 <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> 定义所有扇形块的样式，也可以在 <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> 定义每一层扇形块的样式，还可以在 <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> 定义每个扇形块单独的样式，这三者的优先级从低到高。也就是说，如果定义了 <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a>，将会覆盖 <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> 和 <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a>。</p>\n<p><strong>优先级：<a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> &gt; <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> &gt; <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a>。</strong></p>\n"
   },
-  "downplay.label": {
-    "desc": "<p><code class=\"codespan\">label</code> sets the text style for every sectors.</p>\n<p><strong>Priority: <a href=\"#series-sunburst.data.label\">series.data.label</a> &gt; <a href=\"#series-sunburst.levels.label\">series.levels.label</a> &gt; <a href=\"#series-sunburst.label\">series.label</a>.</strong></p>\n<p>Text label of , to explain some data information about graphic item like value, name and so on. <code class=\"codespan\">label</code> is placed under <code class=\"codespan\">itemStyle</code> in ECharts 2.x. In ECharts 3, to make the configuration structure flatter, <code class=\"codespan\">label</code>is taken to be at the same level with <code class=\"codespan\">itemStyle</code>, and has <code class=\"codespan\">emphasis</code> as <code class=\"codespan\">itemStyle</code> does.</p>\n"
+  "blur.itemStyle.color": {
+    "desc": "\n\n<p> color.  Color is taken from <a href=\"#color\">option.color Palette</a> by default. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
+    "uiControl": {
+      "type": "color"
+    }
   },
-  "downplay.label.rotate": {
-    "desc": "<p>If it is <code class=\"codespan\">number</code> type, then is stands for rotation, from -90 degrees to 90 degrees, and positive values stand for counterclockwise.</p>\n<p>Besides, it can be string <code class=\"codespan\">&#39;radial&#39;</code>, standing for radial rotation; or <code class=\"codespan\">&#39;tangential&#39;</code>, standing for tangential rotation.</p>\n<p>By default, it is <code class=\"codespan\">&#39;radial&#39;</code>. If no rotation is wanted, it can be set to <code class=\"codespan\">0</code>.</p>\n<p>The following example shows different <code class=\"codespan\">rotate</code> settings:</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=sunburst-label-rotate&edit=1&reset=1\" width=\"700\" height=\"400\"><iframe />\n\n",
+  "blur.itemStyle.borderColor": {
+    "desc": "\n\n<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "blur.itemStyle.borderWidth": {
+    "desc": "\n\n<p> border width. No border when it is set to be 0.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "value": "1",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "blur.itemStyle.borderType": {
+    "desc": "\n\n<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "solid",
+      "options": "solid,dashed,dotted"
+    }
+  },
+  "blur.itemStyle.shadowBlur": {
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "blur.itemStyle.shadowColor": {
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": ""
+    }
+  },
+  "blur.itemStyle.shadowOffsetX": {
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "0",
+      "step": "0.5"
+    }
+  },
+  "blur.itemStyle.shadowOffsetY": {
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "0",
+      "step": "0.5"
+    }
+  },
+  "blur.itemStyle.opacity": {
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "1",
+      "min": "0",
+      "max": "1",
+      "step": "0.01"
+    }
+  },
+  "select": {
+    "desc": "<p>Configurations of select state. Available when <a href=\"#series-sunburst.selectedMode\">selectedMode</a> is set.</p>\n"
+  },
+  "select.label": {
+    "desc": "<p><code class=\"codespan\">label</code> 描述了每个扇形块中，文本标签的样式。</p>\n<p><strong>优先级：<a href=\"#series-sunburst.data.label\">series.data.label</a> &gt; <a href=\"#series-sunburst.levels.label\">series.levels.label</a> &gt; <a href=\"#series-sunburst.label\">series.label</a>。</strong></p>\n<p>Text label of , to explain some data information about graphic item like value, name and so on. <code class=\"codespan\">label</code> is placed under <code class=\"codespan\">itemStyle</code> in ECharts 2.x. In ECharts 3, to make the configuration structure flatter, <code class=\"codespan\">label</code>is taken to be at the same level with <code class=\"codespan\">itemStyle</code>, and has <code class=\"codespan\">emphasis</code> as <code class=\"codespan\">itemStyle</code> does.</p>\n"
+  },
+  "select.label.rotate": {
+    "desc": "\n\n\n<p>同 <a href=\"#sunburst.label.rotate\">label.rotate</a></p>\n",
     "uiControl": {
       "type": "enum",
       "options": "radial,tangential",
       "default": "radial"
     }
   },
-  "downplay.label.align": {
-    "desc": "<p>Align of text, which can be <code class=\"codespan\">&#39;left&#39;</code>, <code class=\"codespan\">&#39;center&#39;</code>, or <code class=\"codespan\">&#39;right&#39;</code>. Note that <code class=\"codespan\">&#39;left&#39;</code> stands for inner side, and <code class=\"codespan\">&#39;right&#39;</code> stands for outer side.</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=doc-example/sunburst-label-align&edit=1&reset=1\" width=\"700\" height=\"400\"><iframe />\n\n",
+  "select.label.align": {
+    "desc": "\n\n<p>Align of text, which can be <code class=\"codespan\">&#39;left&#39;</code>, <code class=\"codespan\">&#39;center&#39;</code>, or <code class=\"codespan\">&#39;right&#39;</code>. Note that <code class=\"codespan\">&#39;left&#39;</code> stands for inner side, and <code class=\"codespan\">&#39;right&#39;</code> stands for outer side.</p>\n<p>Same to <a href=\"#sunburst.label.align\">label.align</a></p>\n",
     "uiControl": {
       "type": "enum",
       "options": "left,center,right",
       "default": "center"
     }
   },
-  "downplay.label.minAngle": {
-    "desc": "<p>If angle of data piece is smaller than this value (in degrees), then text is not displayed. This is used for hiding text for small piece of data.</p>\n",
+  "select.label.minAngle": {
+    "desc": "\n\n<p>If angle of data piece is smaller than this value (in degrees), then text is not displayed. This is used for hiding text for small piece of data.</p>\n",
     "uiControl": {
       "type": "angle",
       "min": "0",
@@ -3543,22 +4422,22 @@ window.__EC_DOC_option_series_sunburst = {
       "max": "360"
     }
   },
-  "downplay.label.show": {
-    "desc": "<p>Whether to show label.</p>\n",
+  "select.label.show": {
+    "desc": "\n\n<p>Whether to show label.</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "true"
     }
   },
-  "downplay.label.position": {
-    "desc": "<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/examples/zh/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+  "select.label.position": {
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
-  "downplay.label.distance": {
-    "desc": "<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+  "select.label.distance": {
+    "desc": "\n\n<p>Distance to the host graphic element.</p>\n<p>It is valid only when <code class=\"codespan\">position</code> is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -3566,8 +4445,8 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "0.5"
     }
   },
-  "downplay.label.offset": {
-    "desc": "<p>Whether to move text slightly. For example: <code class=\"codespan\">[30, 40]</code> means move <code class=\"codespan\">30</code> horizontally and move <code class=\"codespan\">40</code> vertically.</p>\n",
+  "select.label.offset": {
+    "desc": "\n\n<p>Whether to move text slightly. For example: <code class=\"codespan\">[30, 40]</code> means move <code class=\"codespan\">30</code> horizontally and move <code class=\"codespan\">40</code> vertically.</p>\n",
     "uiControl": {
       "type": "vector",
       "dims": "x,y",
@@ -3575,42 +4454,42 @@ window.__EC_DOC_option_series_sunburst = {
       "separate": "true"
     }
   },
-  "downplay.label.formatter": {
-    "desc": "<p>Data label formatter, which supports string template and callback function. In either form, <code class=\"codespan\">\\n</code> is supported to represent a new line.</p>\n<p><strong>String template</strong></p>\n<p>Model variation includes:</p>\n<ul>\n<li><code class=\"codespan\">{a}</code>: series name.</li>\n<li><code class=\"codespan\">{b}</code>: the name of a data item.</li>\n<li><code class=\"codespan\">{c}</code>: the value of a data item.</li>\n<li><code class=\"codespan\">{@xxx}: the value of a dimension named</code>&#39;xxx&#39;<code class=\"codespan\">, for example,</code>{@product}<code class=\"codespan\">refers the value of</code>&#39;product&#39;` dimension.</li>\n<li><code class=\"codespan\">{@[n]}: the value of a dimension at the index of</code>n<code class=\"codespan\">, for example,</code>{@[3]}` refers the value at dimensions[3].</li>\n</ul>\n<p><strong>example: </strong></p>\n<pre><code class=\"lang-js\">formatter: &#39;{b}: {@score}&#39;\n</code></pre>\n<p><strong>Callback function</strong></p>\n<p>Callback function is in form of:</p>\n<pre><code class=\"lang-js\">(params: Object|Array) =&gt; string\n</code></pre>\n<p>where <code class=\"codespan\">params</code> is the single dataset needed by formatter, which is formed as:</p>\n<pre><code class=\"lang-js\">{\n    componentType: &#39;series&#39;,\n    // Series type\n    seriesType: string,\n    // Series index in option.series\n    seriesIndex: number,\n    // Series name\n    seriesName: string,\n    // Data name, or category name\n    name: string,\n    // Data index in input data array\n    dataIndex: number,\n    // Original data as input\n    data: Object,\n    // Value of data. In most series it is the same as data.\n    // But in some series it is some part of the data (e.g., in map, radar)\n    value: number|Array|Object,\n    // encoding info of coordinate system\n    // Key: coord, like (&#39;x&#39; &#39;y&#39; &#39;radius&#39; &#39;angle&#39;)\n    // value: Must be an array, not null/undefined. Contain dimension indices, like:\n    // {\n    //     x: [2] // values on dimension index 2 are mapped to x axis.\n    //     y: [0] // values on dimension index 0 are mapped to y axis.\n    // }\n    encode: Object,\n    // dimension names list\n    dimensionNames: Array&lt;String&gt;,\n    // data dimension index, for example 0 or 1 or 2 ...\n    // Only work in `radar` series.\n    dimensionIndex: number,\n    // Color of data\n    color: string,\n\n}\n</code></pre>\n<p>Note: the usage of encode and dimensionNames can be:</p>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    source: [\n        [&#39;Matcha Latte&#39;, 43.3, 85.8, 93.7],\n        [&#39;Milk Tea&#39;, 83.1, 73.4, 55.1],\n        [&#39;Cheese Cocoa&#39;, 86.4, 65.2, 82.5],\n        [&#39;Walnut Brownie&#39;, 72.4, 53.9, 39.1]\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.encode.y[0]]\n</code></pre>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    dimensions: [&#39;product&#39;, &#39;2015&#39;, &#39;2016&#39;, &#39;2017&#39;],\n    source: [\n        {product: &#39;Matcha Latte&#39;, &#39;2015&#39;: 43.3, &#39;2016&#39;: 85.8, &#39;2017&#39;: 93.7},\n        {product: &#39;Milk Tea&#39;, &#39;2015&#39;: 83.1, &#39;2016&#39;: 73.4, &#39;2017&#39;: 55.1},\n        {product: &#39;Cheese Cocoa&#39;, &#39;2015&#39;: 86.4, &#39;2016&#39;: 65.2, &#39;2017&#39;: 82.5},\n        {product: &#39;Walnut Brownie&#39;, &#39;2015&#39;: 72.4, &#39;2016&#39;: 53.9, &#39;2017&#39;: 39.1}\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.dimensionNames[params.encode.y[0]]]\n</code></pre>\n"
+  "select.label.formatter": {
+    "desc": "<p>Data label formatter, which supports string template and callback function. In either form, <code class=\"codespan\">\\n</code> is supported to represent a new line.</p>\n<p><strong>String template</strong></p>\n<p>Model variation includes:</p>\n<ul>\n<li><code class=\"codespan\">{a}</code>: series name.</li>\n<li><code class=\"codespan\">{b}</code>: the name of a data item.</li>\n<li><code class=\"codespan\">{c}</code>: the value of a data item.</li>\n<li><code class=\"codespan\">{@xxx}: the value of a dimension named</code>&#39;xxx&#39;<code class=\"codespan\">, for example,</code>{@product}<code class=\"codespan\">refers the value of</code>&#39;product&#39;` dimension.</li>\n<li><code class=\"codespan\">{@[n]}: the value of a dimension at the index of</code>n<code class=\"codespan\">, for example,</code>{@[3]}` refers the value at dimensions[3].</li>\n</ul>\n<p><strong>example: </strong></p>\n<pre><code class=\"lang-js\">formatter: &#39;{b}: {@score}&#39;\n</code></pre>\n<p><strong>Callback function</strong></p>\n<p>Callback function is in form of:</p>\n<pre><code class=\"lang-js\">(params: Object|Array) =&gt; string\n</code></pre>\n<p>where <code class=\"codespan\">params</code> is the single dataset needed by formatter, which is formed as:</p>\n<pre><code class=\"lang-js\">{\n    componentType: &#39;series&#39;,\n    // Series type\n    seriesType: string,\n    // Series index in option.series\n    seriesIndex: number,\n    // Series name\n    seriesName: string,\n    // Data name, or category name\n    name: string,\n    // Data index in input data array\n    dataIndex: number,\n    // Original data as input\n    data: Object,\n    // Value of data. In most series it is the same as data.\n    // But in some series it is some part of the data (e.g., in map, radar)\n    value: number|Array|Object,\n    // encoding info of coordinate system\n    // Key: coord, like (&#39;x&#39; &#39;y&#39; &#39;radius&#39; &#39;angle&#39;)\n    // value: Must be an array, not null/undefined. Contain dimension indices, like:\n    // {\n    //     x: [2] // values on dimension index 2 are mapped to x axis.\n    //     y: [0] // values on dimension index 0 are mapped to y axis.\n    // }\n    encode: Object,\n    // dimension names list\n    dimensionNames: Array&lt;String&gt;,\n    // data dimension index, for example 0 or 1 or 2 ...\n    // Only work in `radar` series.\n    dimensionIndex: number,\n    // Color of data\n    color: string,\n\n\n\n}\n</code></pre>\n<p>Note: the usage of encode and dimensionNames can be:</p>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    source: [\n        [&#39;Matcha Latte&#39;, 43.3, 85.8, 93.7],\n        [&#39;Milk Tea&#39;, 83.1, 73.4, 55.1],\n        [&#39;Cheese Cocoa&#39;, 86.4, 65.2, 82.5],\n        [&#39;Walnut Brownie&#39;, 72.4, 53.9, 39.1]\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.encode.y[0]]\n</code></pre>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    dimensions: [&#39;product&#39;, &#39;2015&#39;, &#39;2016&#39;, &#39;2017&#39;],\n    source: [\n        {product: &#39;Matcha Latte&#39;, &#39;2015&#39;: 43.3, &#39;2016&#39;: 85.8, &#39;2017&#39;: 93.7},\n        {product: &#39;Milk Tea&#39;, &#39;2015&#39;: 83.1, &#39;2016&#39;: 73.4, &#39;2017&#39;: 55.1},\n        {product: &#39;Cheese Cocoa&#39;, &#39;2015&#39;: 86.4, &#39;2016&#39;: 65.2, &#39;2017&#39;: 82.5},\n        {product: &#39;Walnut Brownie&#39;, &#39;2015&#39;: 72.4, &#39;2016&#39;: 53.9, &#39;2017&#39;: 39.1}\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.dimensionNames[params.encode.y[0]]]\n</code></pre>\n"
   },
-  "downplay.label.color": {
-    "desc": "<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "select.label.color": {
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "null"
     }
   },
-  "downplay.label.fontStyle": {
-    "desc": "<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+  "select.label.fontStyle": {
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
       "options": "normal,italic,oblique"
     }
   },
-  "downplay.label.fontWeight": {
-    "desc": "<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+  "select.label.fontWeight": {
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
       "options": "normal,bold,bolder,lighter"
     }
   },
-  "downplay.label.fontFamily": {
-    "desc": "<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+  "select.label.fontFamily": {
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "sans-serif",
       "options": "sans-serif,serif,monospace,Arial,Courier New"
     }
   },
-  "downplay.label.fontSize": {
-    "desc": "<p> font size.</p>\n",
+  "select.label.fontSize": {
+    "desc": "\n\n<p> font size.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "12",
@@ -3618,15 +4497,15 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "1"
     }
   },
-  "downplay.label.verticalAlign": {
-    "desc": "<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
+  "select.label.verticalAlign": {
+    "desc": "\n\n<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,middle,bottom"
     }
   },
-  "downplay.label.lineHeight": {
-    "desc": "<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+  "select.label.lineHeight": {
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -3634,157 +4513,184 @@ window.__EC_DOC_option_series_sunburst = {
       "default": "12"
     }
   },
-  "downplay.label.backgroundColor": {
-    "desc": "<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "select.label.backgroundColor": {
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
-  "downplay.label.borderColor": {
-    "desc": "<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "select.label.borderColor": {
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
-  "downplay.label.borderWidth": {
-    "desc": "<p>Border width of the text fragment.</p>\n",
+  "select.label.borderWidth": {
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "downplay.label.borderRadius": {
-    "desc": "<p>Border radius of the text fragment.</p>\n",
+  "select.label.borderRadius": {
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
       "dims": "LT,RT, RB, LB"
     }
   },
-  "downplay.label.padding": {
-    "desc": "<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+  "select.label.padding": {
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
       "dims": "T,R,B,L"
     }
   },
-  "downplay.label.shadowColor": {
-    "desc": "<p>Shadow color of the text block.</p>\n",
+  "select.label.shadowColor": {
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
-  "downplay.label.shadowBlur": {
-    "desc": "<p>Show blur of the text block.</p>\n",
+  "select.label.shadowBlur": {
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "downplay.label.shadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text block.</p>\n",
+  "select.label.shadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "downplay.label.shadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text block.</p>\n",
+  "select.label.shadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "downplay.label.width": {
-    "desc": "<p>Width of the text block. It is the width of the text by default. In most cases, there is no need to specify it. You may want to use it in some cases like make simple table or using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p><code class=\"codespan\">width</code> can also be percent string, like <code class=\"codespan\">&#39;100%&#39;</code>, which represents the percent of <code class=\"codespan\">contentWidth</code> (that is, the width without <code class=\"codespan\">padding</code>) of its container box. It is based on <code class=\"codespan\">contentWidth</code> because that each text fragment is layout based on the <code class=\"codespan\">content box</code>, where it makes no sense that calculating width based on <code class=\"codespan\">outerWith</code> in prectice.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+  "select.label.width": {
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
-  "downplay.label.height": {
-    "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+  "select.label.height": {
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
-  "downplay.label.textBorderColor": {
-    "desc": "<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "select.label.textBorderColor": {
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
-  "downplay.label.textBorderWidth": {
-    "desc": "<p>Storke line width of the text.</p>\n",
+  "select.label.textBorderWidth": {
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "downplay.label.textShadowColor": {
-    "desc": "<p>Shadow color of the text itself.</p>\n",
+  "select.label.textShadowColor": {
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#000"
     }
   },
-  "downplay.label.textShadowBlur": {
-    "desc": "<p>Shadow blue of the text itself.</p>\n",
+  "select.label.textShadowBlur": {
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "downplay.label.textShadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text itself.</p>\n",
+  "select.label.textShadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "downplay.label.textShadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text itself.</p>\n",
+  "select.label.textShadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "downplay.label.rich": {
+  "select.label.overflow": {
+    "desc": "\n\n<p>Determine how to display the text when it&#39;s overflow. Available when <code class=\"codespan\">width</code> is set.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the text and trailing with <code class=\"codespan\">ellipsis</code>.</li>\n<li><code class=\"codespan\">&#39;break&#39;</code> Break by word</li>\n<li><code class=\"codespan\">&#39;breakAll&#39;</code> Break by character.</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "truncate,break,breakAll"
+    }
+  },
+  "select.label.ellipsis": {
+    "desc": "<p>Ellipsis to be displayed when <code class=\"codespan\">overflow</code> is set to <code class=\"codespan\">truncate</code>.</p>\n"
+  },
+  "select.label.lineOverflow": {
+    "desc": "<p>Determine how to display the text when it&#39;s overflow on height.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the overflow lines.</li>\n</ul>\n"
+  },
+  "select.label.rich": {
     "desc": "<p>&quot;Rich text styles&quot; can be defined in this <code class=\"codespan\">rich</code> property. For example:</p>\n<pre><code class=\"lang-js\">label: {\n    // Styles defined in &#39;rich&#39; can be applied to some fragments\n    // of text by adding some markers to those fragment, like\n    // `{styleName|text content text content}`.\n    // `&#39;\\n&#39;` is the newline character.\n    formatter: [\n        &#39;{a|Style &quot;a&quot; is applied to this snippet}&#39;\n        &#39;{b|Style &quot;b&quot; is applied to this snippet}This snippet use default style{x|use style &quot;x&quot;}&#39;\n    ].join(&#39;\\n&#39;),\n\n    rich: {\n        a: {\n            color: &#39;red&#39;,\n            lineHeight: 10\n        },\n        b: {\n            backgroundColor: {\n                image: &#39;xxx/xxx.jpg&#39;\n            },\n            height: 40\n        },\n        x: {\n            fontSize: 18,\n            fontFamily: &#39;Microsoft YaHei&#39;,\n            borderColor: &#39;#449933&#39;,\n            borderRadius: 4\n        },\n        ...\n    }\n}\n</code></pre>\n<p>For more details, see <a href=\"tutorial.html#Rich%20Text\" target=\"_blank\">Rich Text</a> please.</p>\n"
   },
-  "downplay.label.rich.<style_name>.color": {
-    "desc": "<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "select.label.rich.<style_name>.color": {
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "null"
     }
   },
-  "downplay.label.rich.<style_name>.fontStyle": {
-    "desc": "<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+  "select.label.rich.<style_name>.fontStyle": {
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
       "options": "normal,italic,oblique"
     }
   },
-  "downplay.label.rich.<style_name>.fontWeight": {
-    "desc": "<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+  "select.label.rich.<style_name>.fontWeight": {
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
       "options": "normal,bold,bolder,lighter"
     }
   },
-  "downplay.label.rich.<style_name>.fontFamily": {
-    "desc": "<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+  "select.label.rich.<style_name>.fontFamily": {
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "sans-serif",
       "options": "sans-serif,serif,monospace,Arial,Courier New"
     }
   },
-  "downplay.label.rich.<style_name>.fontSize": {
-    "desc": "<p> font size.</p>\n",
+  "select.label.rich.<style_name>.fontSize": {
+    "desc": "\n\n<p> font size.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "12",
@@ -3792,22 +4698,22 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "1"
     }
   },
-  "downplay.label.rich.<style_name>.align": {
-    "desc": "<p>Horizontal alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;left&#39;</code></li>\n<li><code class=\"codespan\">&#39;center&#39;</code></li>\n<li><code class=\"codespan\">&#39;right&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">align</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">align</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    align: right,\n    rich: {\n        a: {\n            // `align` is not set, then it will be right\n        }\n    }\n}\n</code></pre>\n",
+  "select.label.rich.<style_name>.align": {
+    "desc": "\n\n<p>Horizontal alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;left&#39;</code></li>\n<li><code class=\"codespan\">&#39;center&#39;</code></li>\n<li><code class=\"codespan\">&#39;right&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">align</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">align</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    align: right,\n    rich: {\n        a: {\n            // `align` is not set, then it will be right\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "left,center,right"
     }
   },
-  "downplay.label.rich.<style_name>.verticalAlign": {
-    "desc": "<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
+  "select.label.rich.<style_name>.verticalAlign": {
+    "desc": "\n\n<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,middle,bottom"
     }
   },
-  "downplay.label.rich.<style_name>.lineHeight": {
-    "desc": "<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+  "select.label.rich.<style_name>.lineHeight": {
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -3815,138 +4721,138 @@ window.__EC_DOC_option_series_sunburst = {
       "default": "12"
     }
   },
-  "downplay.label.rich.<style_name>.backgroundColor": {
-    "desc": "<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "select.label.rich.<style_name>.backgroundColor": {
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
-  "downplay.label.rich.<style_name>.borderColor": {
-    "desc": "<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "select.label.rich.<style_name>.borderColor": {
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
-  "downplay.label.rich.<style_name>.borderWidth": {
-    "desc": "<p>Border width of the text fragment.</p>\n",
+  "select.label.rich.<style_name>.borderWidth": {
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "downplay.label.rich.<style_name>.borderRadius": {
-    "desc": "<p>Border radius of the text fragment.</p>\n",
+  "select.label.rich.<style_name>.borderRadius": {
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
       "dims": "LT,RT, RB, LB"
     }
   },
-  "downplay.label.rich.<style_name>.padding": {
-    "desc": "<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+  "select.label.rich.<style_name>.padding": {
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
       "dims": "T,R,B,L"
     }
   },
-  "downplay.label.rich.<style_name>.shadowColor": {
-    "desc": "<p>Shadow color of the text block.</p>\n",
+  "select.label.rich.<style_name>.shadowColor": {
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
-  "downplay.label.rich.<style_name>.shadowBlur": {
-    "desc": "<p>Show blur of the text block.</p>\n",
+  "select.label.rich.<style_name>.shadowBlur": {
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "downplay.label.rich.<style_name>.shadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text block.</p>\n",
+  "select.label.rich.<style_name>.shadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "downplay.label.rich.<style_name>.shadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text block.</p>\n",
+  "select.label.rich.<style_name>.shadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "downplay.label.rich.<style_name>.width": {
+  "select.label.rich.<style_name>.width": {
     "desc": "<p>Width of the text block. It is the width of the text by default. In most cases, there is no need to specify it. You may want to use it in some cases like make simple table or using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p><code class=\"codespan\">width</code> can also be percent string, like <code class=\"codespan\">&#39;100%&#39;</code>, which represents the percent of <code class=\"codespan\">contentWidth</code> (that is, the width without <code class=\"codespan\">padding</code>) of its container box. It is based on <code class=\"codespan\">contentWidth</code> because that each text fragment is layout based on the <code class=\"codespan\">content box</code>, where it makes no sense that calculating width based on <code class=\"codespan\">outerWith</code> in prectice.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
-  "downplay.label.rich.<style_name>.height": {
+  "select.label.rich.<style_name>.height": {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
-  "downplay.label.rich.<style_name>.textBorderColor": {
-    "desc": "<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "select.label.rich.<style_name>.textBorderColor": {
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
-  "downplay.label.rich.<style_name>.textBorderWidth": {
-    "desc": "<p>Storke line width of the text.</p>\n",
+  "select.label.rich.<style_name>.textBorderWidth": {
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "downplay.label.rich.<style_name>.textShadowColor": {
-    "desc": "<p>Shadow color of the text itself.</p>\n",
+  "select.label.rich.<style_name>.textShadowColor": {
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#000"
     }
   },
-  "downplay.label.rich.<style_name>.textShadowBlur": {
-    "desc": "<p>Shadow blue of the text itself.</p>\n",
+  "select.label.rich.<style_name>.textShadowBlur": {
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "downplay.label.rich.<style_name>.textShadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text itself.</p>\n",
+  "select.label.rich.<style_name>.textShadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "downplay.label.rich.<style_name>.textShadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text itself.</p>\n",
+  "select.label.rich.<style_name>.textShadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "downplay.itemStyle": {
-    "desc": "<p>Style of Sunburst sectors.</p>\n<p>Style can be set in <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> for sectors of this series, or <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> for the whole level, or<a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> for single sector. If <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> is defined, it will cover the setting of <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> and <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a>.</p>\n<p><strong>Priority: <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> &gt; <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> &gt; <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a>.</strong></p>\n<p>In ECharts, <em>emphasis</em> is for styles when mouse hovers. For Sunburst charts, there are two extra states: <em>highlight</em> for highlighting items that relates to the emphasized one, and <em>downplay</em> for others when emphasizing an item. See <a href=\"#series-sunburst.highlightPolicy\">highlightPolicy</a>.</p>\n"
+  "select.labelLine": {
+    "desc": "<p>Configuration of label guide line.</p>\n"
   },
-  "downplay.itemStyle.color": {
-    "desc": "<p> color.  Color is taken from <a href=\"#color\">option.color Palette</a> by default. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
+  "select.labelLine.show": {
+    "desc": "\n\n<p>Whether to show the label guide line.</p>\n",
+    "uiControl": {
+      "type": "boolean"
+    }
+  },
+  "select.labelLine.lineStyle.color": {
+    "desc": "\n\n<p>Line color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
     "uiControl": {
       "type": "color"
     }
   },
-  "downplay.itemStyle.borderColor": {
-    "desc": "<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
-    "uiControl": {
-      "type": "color"
-    }
-  },
-  "downplay.itemStyle.borderWidth": {
-    "desc": "<p> border width. No border when it is set to be 0.</p>\n",
+  "select.labelLine.lineStyle.width": {
+    "desc": "\n\n<p> line width.</p>\n",
     "uiControl": {
       "type": "number",
       "value": "1",
@@ -3954,16 +4860,16 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "0.5"
     }
   },
-  "downplay.itemStyle.borderType": {
-    "desc": "<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
+  "select.labelLine.lineStyle.type": {
+    "desc": "\n\n<p> line type.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;solid&#39;</code></li>\n<li><code class=\"codespan\">&#39;dashed&#39;</code></li>\n<li><code class=\"codespan\">&#39;dotted&#39;</code></li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "solid",
       "options": "solid,dashed,dotted"
     }
   },
-  "downplay.itemStyle.shadowBlur": {
-    "desc": "<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+  "select.labelLine.lineStyle.shadowBlur": {
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "default": "",
@@ -3971,47 +4877,128 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "0.5"
     }
   },
-  "downplay.itemStyle.shadowColor": {
-    "desc": "<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+  "select.labelLine.lineStyle.shadowColor": {
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color",
       "default": ""
     }
   },
-  "downplay.itemStyle.shadowOffsetX": {
-    "desc": "<p>Offset distance on the horizontal direction of shadow.</p>\n",
+  "select.labelLine.lineStyle.shadowOffsetX": {
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
       "step": "0.5"
     }
   },
-  "downplay.itemStyle.shadowOffsetY": {
-    "desc": "<p>Offset distance on the vertical direction of shadow.</p>\n",
+  "select.labelLine.lineStyle.shadowOffsetY": {
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
       "step": "0.5"
     }
   },
-  "downplay.itemStyle.opacity": {
-    "desc": "<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+  "select.labelLine.lineStyle.opacity": {
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "1",
       "min": "0",
       "max": "1",
       "step": "0.01"
+    }
+  },
+  "select.itemStyle": {
+    "desc": "<p>旭日图扇形块的样式。</p>\n<p>可以在 <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> 定义所有扇形块的样式，也可以在 <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> 定义每一层扇形块的样式，还可以在 <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> 定义每个扇形块单独的样式，这三者的优先级从低到高。也就是说，如果定义了 <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a>，将会覆盖 <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> 和 <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a>。</p>\n<p><strong>优先级：<a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> &gt; <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> &gt; <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a>。</strong></p>\n"
+  },
+  "select.itemStyle.color": {
+    "desc": "\n\n<p> color.  Color is taken from <a href=\"#color\">option.color Palette</a> by default. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "select.itemStyle.borderColor": {
+    "desc": "\n\n<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "select.itemStyle.borderWidth": {
+    "desc": "\n\n<p> border width. No border when it is set to be 0.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "value": "1",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "select.itemStyle.borderType": {
+    "desc": "\n\n<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "solid",
+      "options": "solid,dashed,dotted"
+    }
+  },
+  "select.itemStyle.shadowBlur": {
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "select.itemStyle.shadowColor": {
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": ""
+    }
+  },
+  "select.itemStyle.shadowOffsetX": {
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "0",
+      "step": "0.5"
+    }
+  },
+  "select.itemStyle.shadowOffsetY": {
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "0",
+      "step": "0.5"
+    }
+  },
+  "select.itemStyle.opacity": {
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "1",
+      "min": "0",
+      "max": "1",
+      "step": "0.01"
+    }
+  },
+  "selectedMode": {
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n\n\n<p>Selected mode.  It is enabled by default, and you may set it to be <code class=\"codespan\">false</code> to disabled it.</p>\n<p>Besides, it can be set to <code class=\"codespan\">&#39;single&#39;</code> or <code class=\"codespan\">&#39;multiple&#39;</code>, for single selection and multiple selections.</p>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "false,true,single,multiple"
     }
   },
   "levels": {
     "desc": "<p><strong>Multiple levels</strong></p>\n<p>Sunburst chart has a leveled structure. To make it convenient, we provide a <code class=\"codespan\">levels</code> option, which is an array. The first element of it is for returning to parent node when data mining. The following elements are for levels from center to outside.</p>\n<p>For example, if we don&#39;t want the data mining, and want to set the most inside sector to be red, and text to be blue, we can set the option like:</p>\n<pre><code class=\"lang-js\">series: {\n    // ...\n    levels: [\n        {\n            // Blank setting for data mining\n        },\n        {\n            // The most inside level\n            itemStyle: {\n                color: &#39;red&#39;\n            },\n            label: {\n                color: &#39;blue&#39;\n            }\n        },\n        {\n            // The second level\n        }\n    ]\n}\n</code></pre>\n"
   },
   "levels.label": {
-    "desc": "<p><code class=\"codespan\">label</code> sets the text style for every sectors.</p>\n<p><strong>Priority: <a href=\"#series-sunburst.data.label\">series.data.label</a> &gt; <a href=\"#series-sunburst.levels.label\">series.levels.label</a> &gt; <a href=\"#series-sunburst.label\">series.label</a>.</strong></p>\n<p>Text label of , to explain some data information about graphic item like value, name and so on. <code class=\"codespan\">label</code> is placed under <code class=\"codespan\">itemStyle</code> in ECharts 2.x. In ECharts 3, to make the configuration structure flatter, <code class=\"codespan\">label</code>is taken to be at the same level with <code class=\"codespan\">itemStyle</code>, and has <code class=\"codespan\">emphasis</code> as <code class=\"codespan\">itemStyle</code> does.</p>\n"
+    "desc": "<p><code class=\"codespan\">label</code> 描述了每个扇形块中，文本标签的样式。</p>\n<p><strong>优先级：<a href=\"#series-sunburst.data.label\">series.data.label</a> &gt; <a href=\"#series-sunburst.levels.label\">series.levels.label</a> &gt; <a href=\"#series-sunburst.label\">series.label</a>。</strong></p>\n<p>Text label of , to explain some data information about graphic item like value, name and so on. <code class=\"codespan\">label</code> is placed under <code class=\"codespan\">itemStyle</code> in ECharts 2.x. In ECharts 3, to make the configuration structure flatter, <code class=\"codespan\">label</code>is taken to be at the same level with <code class=\"codespan\">itemStyle</code>, and has <code class=\"codespan\">emphasis</code> as <code class=\"codespan\">itemStyle</code> does.</p>\n"
   },
   "levels.label.rotate": {
-    "desc": "<p>If it is <code class=\"codespan\">number</code> type, then is stands for rotation, from -90 degrees to 90 degrees, and positive values stand for counterclockwise.</p>\n<p>Besides, it can be string <code class=\"codespan\">&#39;radial&#39;</code>, standing for radial rotation; or <code class=\"codespan\">&#39;tangential&#39;</code>, standing for tangential rotation.</p>\n<p>By default, it is <code class=\"codespan\">&#39;radial&#39;</code>. If no rotation is wanted, it can be set to <code class=\"codespan\">0</code>.</p>\n<p>The following example shows different <code class=\"codespan\">rotate</code> settings:</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=sunburst-label-rotate&edit=1&reset=1\" width=\"700\" height=\"400\"><iframe />\n\n",
+    "desc": "\n\n\n<p>同 <a href=\"#sunburst.label.rotate\">label.rotate</a></p>\n",
     "uiControl": {
       "type": "enum",
       "options": "radial,tangential",
@@ -4019,7 +5006,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.label.align": {
-    "desc": "<p>Align of text, which can be <code class=\"codespan\">&#39;left&#39;</code>, <code class=\"codespan\">&#39;center&#39;</code>, or <code class=\"codespan\">&#39;right&#39;</code>. Note that <code class=\"codespan\">&#39;left&#39;</code> stands for inner side, and <code class=\"codespan\">&#39;right&#39;</code> stands for outer side.</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=doc-example/sunburst-label-align&edit=1&reset=1\" width=\"700\" height=\"400\"><iframe />\n\n",
+    "desc": "\n\n<p>Align of text, which can be <code class=\"codespan\">&#39;left&#39;</code>, <code class=\"codespan\">&#39;center&#39;</code>, or <code class=\"codespan\">&#39;right&#39;</code>. Note that <code class=\"codespan\">&#39;left&#39;</code> stands for inner side, and <code class=\"codespan\">&#39;right&#39;</code> stands for outer side.</p>\n<p>Same to <a href=\"#sunburst.label.align\">label.align</a></p>\n",
     "uiControl": {
       "type": "enum",
       "options": "left,center,right",
@@ -4027,7 +5014,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.label.minAngle": {
-    "desc": "<p>If angle of data piece is smaller than this value (in degrees), then text is not displayed. This is used for hiding text for small piece of data.</p>\n",
+    "desc": "\n\n<p>If angle of data piece is smaller than this value (in degrees), then text is not displayed. This is used for hiding text for small piece of data.</p>\n",
     "uiControl": {
       "type": "angle",
       "min": "0",
@@ -4036,21 +5023,21 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.label.show": {
-    "desc": "<p>Whether to show label.</p>\n",
+    "desc": "\n\n<p>Whether to show label.</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "true"
     }
   },
   "levels.label.position": {
-    "desc": "<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/examples/zh/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "levels.label.distance": {
-    "desc": "<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element.</p>\n<p>It is valid only when <code class=\"codespan\">position</code> is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -4059,7 +5046,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.label.offset": {
-    "desc": "<p>Whether to move text slightly. For example: <code class=\"codespan\">[30, 40]</code> means move <code class=\"codespan\">30</code> horizontally and move <code class=\"codespan\">40</code> vertically.</p>\n",
+    "desc": "\n\n<p>Whether to move text slightly. For example: <code class=\"codespan\">[30, 40]</code> means move <code class=\"codespan\">30</code> horizontally and move <code class=\"codespan\">40</code> vertically.</p>\n",
     "uiControl": {
       "type": "vector",
       "dims": "x,y",
@@ -4068,17 +5055,17 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.label.formatter": {
-    "desc": "<p>Data label formatter, which supports string template and callback function. In either form, <code class=\"codespan\">\\n</code> is supported to represent a new line.</p>\n<p><strong>String template</strong></p>\n<p>Model variation includes:</p>\n<ul>\n<li><code class=\"codespan\">{a}</code>: series name.</li>\n<li><code class=\"codespan\">{b}</code>: the name of a data item.</li>\n<li><code class=\"codespan\">{c}</code>: the value of a data item.</li>\n<li><code class=\"codespan\">{@xxx}: the value of a dimension named</code>&#39;xxx&#39;<code class=\"codespan\">, for example,</code>{@product}<code class=\"codespan\">refers the value of</code>&#39;product&#39;` dimension.</li>\n<li><code class=\"codespan\">{@[n]}: the value of a dimension at the index of</code>n<code class=\"codespan\">, for example,</code>{@[3]}` refers the value at dimensions[3].</li>\n</ul>\n<p><strong>example: </strong></p>\n<pre><code class=\"lang-js\">formatter: &#39;{b}: {@score}&#39;\n</code></pre>\n<p><strong>Callback function</strong></p>\n<p>Callback function is in form of:</p>\n<pre><code class=\"lang-js\">(params: Object|Array) =&gt; string\n</code></pre>\n<p>where <code class=\"codespan\">params</code> is the single dataset needed by formatter, which is formed as:</p>\n<pre><code class=\"lang-js\">{\n    componentType: &#39;series&#39;,\n    // Series type\n    seriesType: string,\n    // Series index in option.series\n    seriesIndex: number,\n    // Series name\n    seriesName: string,\n    // Data name, or category name\n    name: string,\n    // Data index in input data array\n    dataIndex: number,\n    // Original data as input\n    data: Object,\n    // Value of data. In most series it is the same as data.\n    // But in some series it is some part of the data (e.g., in map, radar)\n    value: number|Array|Object,\n    // encoding info of coordinate system\n    // Key: coord, like (&#39;x&#39; &#39;y&#39; &#39;radius&#39; &#39;angle&#39;)\n    // value: Must be an array, not null/undefined. Contain dimension indices, like:\n    // {\n    //     x: [2] // values on dimension index 2 are mapped to x axis.\n    //     y: [0] // values on dimension index 0 are mapped to y axis.\n    // }\n    encode: Object,\n    // dimension names list\n    dimensionNames: Array&lt;String&gt;,\n    // data dimension index, for example 0 or 1 or 2 ...\n    // Only work in `radar` series.\n    dimensionIndex: number,\n    // Color of data\n    color: string,\n\n}\n</code></pre>\n<p>Note: the usage of encode and dimensionNames can be:</p>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    source: [\n        [&#39;Matcha Latte&#39;, 43.3, 85.8, 93.7],\n        [&#39;Milk Tea&#39;, 83.1, 73.4, 55.1],\n        [&#39;Cheese Cocoa&#39;, 86.4, 65.2, 82.5],\n        [&#39;Walnut Brownie&#39;, 72.4, 53.9, 39.1]\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.encode.y[0]]\n</code></pre>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    dimensions: [&#39;product&#39;, &#39;2015&#39;, &#39;2016&#39;, &#39;2017&#39;],\n    source: [\n        {product: &#39;Matcha Latte&#39;, &#39;2015&#39;: 43.3, &#39;2016&#39;: 85.8, &#39;2017&#39;: 93.7},\n        {product: &#39;Milk Tea&#39;, &#39;2015&#39;: 83.1, &#39;2016&#39;: 73.4, &#39;2017&#39;: 55.1},\n        {product: &#39;Cheese Cocoa&#39;, &#39;2015&#39;: 86.4, &#39;2016&#39;: 65.2, &#39;2017&#39;: 82.5},\n        {product: &#39;Walnut Brownie&#39;, &#39;2015&#39;: 72.4, &#39;2016&#39;: 53.9, &#39;2017&#39;: 39.1}\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.dimensionNames[params.encode.y[0]]]\n</code></pre>\n"
+    "desc": "<p>Data label formatter, which supports string template and callback function. In either form, <code class=\"codespan\">\\n</code> is supported to represent a new line.</p>\n<p><strong>String template</strong></p>\n<p>Model variation includes:</p>\n<ul>\n<li><code class=\"codespan\">{a}</code>: series name.</li>\n<li><code class=\"codespan\">{b}</code>: the name of a data item.</li>\n<li><code class=\"codespan\">{c}</code>: the value of a data item.</li>\n<li><code class=\"codespan\">{@xxx}: the value of a dimension named</code>&#39;xxx&#39;<code class=\"codespan\">, for example,</code>{@product}<code class=\"codespan\">refers the value of</code>&#39;product&#39;` dimension.</li>\n<li><code class=\"codespan\">{@[n]}: the value of a dimension at the index of</code>n<code class=\"codespan\">, for example,</code>{@[3]}` refers the value at dimensions[3].</li>\n</ul>\n<p><strong>example: </strong></p>\n<pre><code class=\"lang-js\">formatter: &#39;{b}: {@score}&#39;\n</code></pre>\n<p><strong>Callback function</strong></p>\n<p>Callback function is in form of:</p>\n<pre><code class=\"lang-js\">(params: Object|Array) =&gt; string\n</code></pre>\n<p>where <code class=\"codespan\">params</code> is the single dataset needed by formatter, which is formed as:</p>\n<pre><code class=\"lang-js\">{\n    componentType: &#39;series&#39;,\n    // Series type\n    seriesType: string,\n    // Series index in option.series\n    seriesIndex: number,\n    // Series name\n    seriesName: string,\n    // Data name, or category name\n    name: string,\n    // Data index in input data array\n    dataIndex: number,\n    // Original data as input\n    data: Object,\n    // Value of data. In most series it is the same as data.\n    // But in some series it is some part of the data (e.g., in map, radar)\n    value: number|Array|Object,\n    // encoding info of coordinate system\n    // Key: coord, like (&#39;x&#39; &#39;y&#39; &#39;radius&#39; &#39;angle&#39;)\n    // value: Must be an array, not null/undefined. Contain dimension indices, like:\n    // {\n    //     x: [2] // values on dimension index 2 are mapped to x axis.\n    //     y: [0] // values on dimension index 0 are mapped to y axis.\n    // }\n    encode: Object,\n    // dimension names list\n    dimensionNames: Array&lt;String&gt;,\n    // data dimension index, for example 0 or 1 or 2 ...\n    // Only work in `radar` series.\n    dimensionIndex: number,\n    // Color of data\n    color: string,\n\n\n\n}\n</code></pre>\n<p>Note: the usage of encode and dimensionNames can be:</p>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    source: [\n        [&#39;Matcha Latte&#39;, 43.3, 85.8, 93.7],\n        [&#39;Milk Tea&#39;, 83.1, 73.4, 55.1],\n        [&#39;Cheese Cocoa&#39;, 86.4, 65.2, 82.5],\n        [&#39;Walnut Brownie&#39;, 72.4, 53.9, 39.1]\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.encode.y[0]]\n</code></pre>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    dimensions: [&#39;product&#39;, &#39;2015&#39;, &#39;2016&#39;, &#39;2017&#39;],\n    source: [\n        {product: &#39;Matcha Latte&#39;, &#39;2015&#39;: 43.3, &#39;2016&#39;: 85.8, &#39;2017&#39;: 93.7},\n        {product: &#39;Milk Tea&#39;, &#39;2015&#39;: 83.1, &#39;2016&#39;: 73.4, &#39;2017&#39;: 55.1},\n        {product: &#39;Cheese Cocoa&#39;, &#39;2015&#39;: 86.4, &#39;2016&#39;: 65.2, &#39;2017&#39;: 82.5},\n        {product: &#39;Walnut Brownie&#39;, &#39;2015&#39;: 72.4, &#39;2016&#39;: 53.9, &#39;2017&#39;: 39.1}\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.dimensionNames[params.encode.y[0]]]\n</code></pre>\n"
   },
   "levels.label.color": {
-    "desc": "<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "null"
     }
   },
   "levels.label.fontStyle": {
-    "desc": "<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
@@ -4086,7 +5073,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.label.fontWeight": {
-    "desc": "<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
@@ -4094,7 +5081,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.label.fontFamily": {
-    "desc": "<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "sans-serif",
@@ -4102,7 +5089,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.label.fontSize": {
-    "desc": "<p> font size.</p>\n",
+    "desc": "\n\n<p> font size.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "12",
@@ -4111,14 +5098,14 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.label.verticalAlign": {
-    "desc": "<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,middle,bottom"
     }
   },
   "levels.label.lineHeight": {
-    "desc": "<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -4127,21 +5114,21 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.label.backgroundColor": {
-    "desc": "<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
   "levels.label.borderColor": {
-    "desc": "<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
   "levels.label.borderWidth": {
-    "desc": "<p>Border width of the text fragment.</p>\n",
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -4149,7 +5136,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.label.borderRadius": {
-    "desc": "<p>Border radius of the text fragment.</p>\n",
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
@@ -4157,7 +5144,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.label.padding": {
-    "desc": "<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
@@ -4165,13 +5152,13 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.label.shadowColor": {
-    "desc": "<p>Shadow color of the text block.</p>\n",
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "levels.label.shadowBlur": {
-    "desc": "<p>Show blur of the text block.</p>\n",
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -4179,33 +5166,47 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.label.shadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text block.</p>\n",
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
   "levels.label.shadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text block.</p>\n",
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
   "levels.label.width": {
-    "desc": "<p>Width of the text block. It is the width of the text by default. In most cases, there is no need to specify it. You may want to use it in some cases like make simple table or using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p><code class=\"codespan\">width</code> can also be percent string, like <code class=\"codespan\">&#39;100%&#39;</code>, which represents the percent of <code class=\"codespan\">contentWidth</code> (that is, the width without <code class=\"codespan\">padding</code>) of its container box. It is based on <code class=\"codespan\">contentWidth</code> because that each text fragment is layout based on the <code class=\"codespan\">content box</code>, where it makes no sense that calculating width based on <code class=\"codespan\">outerWith</code> in prectice.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "levels.label.height": {
-    "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "levels.label.textBorderColor": {
-    "desc": "<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "levels.label.textBorderWidth": {
-    "desc": "<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -4213,14 +5214,14 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.label.textShadowColor": {
-    "desc": "<p>Shadow color of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#000"
     }
   },
   "levels.label.textShadowBlur": {
-    "desc": "<p>Shadow blue of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -4228,31 +5229,44 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.label.textShadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
   "levels.label.textShadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
+  "levels.label.overflow": {
+    "desc": "\n\n<p>Determine how to display the text when it&#39;s overflow. Available when <code class=\"codespan\">width</code> is set.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the text and trailing with <code class=\"codespan\">ellipsis</code>.</li>\n<li><code class=\"codespan\">&#39;break&#39;</code> Break by word</li>\n<li><code class=\"codespan\">&#39;breakAll&#39;</code> Break by character.</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "truncate,break,breakAll"
+    }
+  },
+  "levels.label.ellipsis": {
+    "desc": "<p>Ellipsis to be displayed when <code class=\"codespan\">overflow</code> is set to <code class=\"codespan\">truncate</code>.</p>\n"
+  },
+  "levels.label.lineOverflow": {
+    "desc": "<p>Determine how to display the text when it&#39;s overflow on height.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the overflow lines.</li>\n</ul>\n"
+  },
   "levels.label.rich": {
     "desc": "<p>&quot;Rich text styles&quot; can be defined in this <code class=\"codespan\">rich</code> property. For example:</p>\n<pre><code class=\"lang-js\">label: {\n    // Styles defined in &#39;rich&#39; can be applied to some fragments\n    // of text by adding some markers to those fragment, like\n    // `{styleName|text content text content}`.\n    // `&#39;\\n&#39;` is the newline character.\n    formatter: [\n        &#39;{a|Style &quot;a&quot; is applied to this snippet}&#39;\n        &#39;{b|Style &quot;b&quot; is applied to this snippet}This snippet use default style{x|use style &quot;x&quot;}&#39;\n    ].join(&#39;\\n&#39;),\n\n    rich: {\n        a: {\n            color: &#39;red&#39;,\n            lineHeight: 10\n        },\n        b: {\n            backgroundColor: {\n                image: &#39;xxx/xxx.jpg&#39;\n            },\n            height: 40\n        },\n        x: {\n            fontSize: 18,\n            fontFamily: &#39;Microsoft YaHei&#39;,\n            borderColor: &#39;#449933&#39;,\n            borderRadius: 4\n        },\n        ...\n    }\n}\n</code></pre>\n<p>For more details, see <a href=\"tutorial.html#Rich%20Text\" target=\"_blank\">Rich Text</a> please.</p>\n"
   },
   "levels.label.rich.<style_name>.color": {
-    "desc": "<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "null"
     }
   },
   "levels.label.rich.<style_name>.fontStyle": {
-    "desc": "<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
@@ -4260,7 +5274,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.label.rich.<style_name>.fontWeight": {
-    "desc": "<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
@@ -4268,7 +5282,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.label.rich.<style_name>.fontFamily": {
-    "desc": "<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "sans-serif",
@@ -4276,7 +5290,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.label.rich.<style_name>.fontSize": {
-    "desc": "<p> font size.</p>\n",
+    "desc": "\n\n<p> font size.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "12",
@@ -4285,21 +5299,21 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.label.rich.<style_name>.align": {
-    "desc": "<p>Horizontal alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;left&#39;</code></li>\n<li><code class=\"codespan\">&#39;center&#39;</code></li>\n<li><code class=\"codespan\">&#39;right&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">align</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">align</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    align: right,\n    rich: {\n        a: {\n            // `align` is not set, then it will be right\n        }\n    }\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Horizontal alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;left&#39;</code></li>\n<li><code class=\"codespan\">&#39;center&#39;</code></li>\n<li><code class=\"codespan\">&#39;right&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">align</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">align</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    align: right,\n    rich: {\n        a: {\n            // `align` is not set, then it will be right\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "left,center,right"
     }
   },
   "levels.label.rich.<style_name>.verticalAlign": {
-    "desc": "<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,middle,bottom"
     }
   },
   "levels.label.rich.<style_name>.lineHeight": {
-    "desc": "<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -4308,21 +5322,21 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.label.rich.<style_name>.backgroundColor": {
-    "desc": "<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
   "levels.label.rich.<style_name>.borderColor": {
-    "desc": "<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
   "levels.label.rich.<style_name>.borderWidth": {
-    "desc": "<p>Border width of the text fragment.</p>\n",
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -4330,7 +5344,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.label.rich.<style_name>.borderRadius": {
-    "desc": "<p>Border radius of the text fragment.</p>\n",
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
@@ -4338,7 +5352,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.label.rich.<style_name>.padding": {
-    "desc": "<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
@@ -4346,13 +5360,13 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.label.rich.<style_name>.shadowColor": {
-    "desc": "<p>Shadow color of the text block.</p>\n",
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "levels.label.rich.<style_name>.shadowBlur": {
-    "desc": "<p>Show blur of the text block.</p>\n",
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -4360,14 +5374,14 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.label.rich.<style_name>.shadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text block.</p>\n",
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
   "levels.label.rich.<style_name>.shadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text block.</p>\n",
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
@@ -4380,13 +5394,13 @@ window.__EC_DOC_option_series_sunburst = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "levels.label.rich.<style_name>.textBorderColor": {
-    "desc": "<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "levels.label.rich.<style_name>.textBorderWidth": {
-    "desc": "<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -4394,14 +5408,14 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.label.rich.<style_name>.textShadowColor": {
-    "desc": "<p>Shadow color of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#000"
     }
   },
   "levels.label.rich.<style_name>.textShadowBlur": {
-    "desc": "<p>Shadow blue of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -4409,36 +5423,110 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.label.rich.<style_name>.textShadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
   "levels.label.rich.<style_name>.textShadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
+  "levels.labelLine": {
+    "desc": "<p>Configuration of label guide line.</p>\n"
+  },
+  "levels.labelLine.show": {
+    "desc": "\n\n<p>Whether to show the label guide line.</p>\n",
+    "uiControl": {
+      "type": "boolean"
+    }
+  },
+  "levels.labelLine.lineStyle.color": {
+    "desc": "\n\n<p>Line color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "levels.labelLine.lineStyle.width": {
+    "desc": "\n\n<p> line width.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "value": "1",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "levels.labelLine.lineStyle.type": {
+    "desc": "\n\n<p> line type.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;solid&#39;</code></li>\n<li><code class=\"codespan\">&#39;dashed&#39;</code></li>\n<li><code class=\"codespan\">&#39;dotted&#39;</code></li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "solid",
+      "options": "solid,dashed,dotted"
+    }
+  },
+  "levels.labelLine.lineStyle.shadowBlur": {
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "levels.labelLine.lineStyle.shadowColor": {
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": ""
+    }
+  },
+  "levels.labelLine.lineStyle.shadowOffsetX": {
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "0",
+      "step": "0.5"
+    }
+  },
+  "levels.labelLine.lineStyle.shadowOffsetY": {
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "0",
+      "step": "0.5"
+    }
+  },
+  "levels.labelLine.lineStyle.opacity": {
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "1",
+      "min": "0",
+      "max": "1",
+      "step": "0.01"
+    }
+  },
   "levels.itemStyle": {
-    "desc": "<p>Style of Sunburst sectors.</p>\n<p>Style can be set in <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> for sectors of this series, or <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> for the whole level, or<a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> for single sector. If <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> is defined, it will cover the setting of <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> and <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a>.</p>\n<p><strong>Priority: <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> &gt; <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> &gt; <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a>.</strong></p>\n<p>In ECharts, <em>emphasis</em> is for styles when mouse hovers. For Sunburst charts, there are two extra states: <em>highlight</em> for highlighting items that relates to the emphasized one, and <em>downplay</em> for others when emphasizing an item. See <a href=\"#series-sunburst.highlightPolicy\">highlightPolicy</a>.</p>\n"
+    "desc": "<p>旭日图扇形块的样式。</p>\n<p>可以在 <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> 定义所有扇形块的样式，也可以在 <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> 定义每一层扇形块的样式，还可以在 <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> 定义每个扇形块单独的样式，这三者的优先级从低到高。也就是说，如果定义了 <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a>，将会覆盖 <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> 和 <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a>。</p>\n<p><strong>优先级：<a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> &gt; <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> &gt; <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a>。</strong></p>\n"
   },
   "levels.itemStyle.color": {
-    "desc": "<p> color.  Color is taken from <a href=\"#color\">option.color Palette</a> by default. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
+    "desc": "\n\n<p> color.  Color is taken from <a href=\"#color\">option.color Palette</a> by default. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "levels.itemStyle.borderColor": {
-    "desc": "<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
+    "desc": "\n\n<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "levels.itemStyle.borderWidth": {
-    "desc": "<p> border width. No border when it is set to be 0.</p>\n",
+    "desc": "\n\n<p> border width. No border when it is set to be 0.</p>\n",
     "uiControl": {
       "type": "number",
       "value": "1",
@@ -4447,7 +5535,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.itemStyle.borderType": {
-    "desc": "<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
+    "desc": "\n\n<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "solid",
@@ -4455,7 +5543,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.itemStyle.shadowBlur": {
-    "desc": "<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "default": "",
@@ -4464,14 +5552,14 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.itemStyle.shadowColor": {
-    "desc": "<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color",
       "default": ""
     }
   },
   "levels.itemStyle.shadowOffsetX": {
-    "desc": "<p>Offset distance on the horizontal direction of shadow.</p>\n",
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
@@ -4479,7 +5567,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.itemStyle.shadowOffsetY": {
-    "desc": "<p>Offset distance on the vertical direction of shadow.</p>\n",
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
@@ -4487,7 +5575,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.itemStyle.opacity": {
-    "desc": "<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "1",
@@ -4497,13 +5585,13 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.emphasis": {
-    "desc": "<p>Item style when mouse is hovering. See <a href=\"#series-sunburst.highlightPolicy\">highlightPolicy</a>.</p>\n"
+    "desc": "<p>Emphasis state.</p>\n"
   },
   "levels.emphasis.label": {
-    "desc": "<p><code class=\"codespan\">label</code> sets the text style for every sectors.</p>\n<p><strong>Priority: <a href=\"#series-sunburst.data.label\">series.data.label</a> &gt; <a href=\"#series-sunburst.levels.label\">series.levels.label</a> &gt; <a href=\"#series-sunburst.label\">series.label</a>.</strong></p>\n<p>Text label of , to explain some data information about graphic item like value, name and so on. <code class=\"codespan\">label</code> is placed under <code class=\"codespan\">itemStyle</code> in ECharts 2.x. In ECharts 3, to make the configuration structure flatter, <code class=\"codespan\">label</code>is taken to be at the same level with <code class=\"codespan\">itemStyle</code>, and has <code class=\"codespan\">emphasis</code> as <code class=\"codespan\">itemStyle</code> does.</p>\n"
+    "desc": "<p><code class=\"codespan\">label</code> 描述了每个扇形块中，文本标签的样式。</p>\n<p><strong>优先级：<a href=\"#series-sunburst.data.label\">series.data.label</a> &gt; <a href=\"#series-sunburst.levels.label\">series.levels.label</a> &gt; <a href=\"#series-sunburst.label\">series.label</a>。</strong></p>\n<p>Text label of , to explain some data information about graphic item like value, name and so on. <code class=\"codespan\">label</code> is placed under <code class=\"codespan\">itemStyle</code> in ECharts 2.x. In ECharts 3, to make the configuration structure flatter, <code class=\"codespan\">label</code>is taken to be at the same level with <code class=\"codespan\">itemStyle</code>, and has <code class=\"codespan\">emphasis</code> as <code class=\"codespan\">itemStyle</code> does.</p>\n"
   },
   "levels.emphasis.label.rotate": {
-    "desc": "<p>If it is <code class=\"codespan\">number</code> type, then is stands for rotation, from -90 degrees to 90 degrees, and positive values stand for counterclockwise.</p>\n<p>Besides, it can be string <code class=\"codespan\">&#39;radial&#39;</code>, standing for radial rotation; or <code class=\"codespan\">&#39;tangential&#39;</code>, standing for tangential rotation.</p>\n<p>By default, it is <code class=\"codespan\">&#39;radial&#39;</code>. If no rotation is wanted, it can be set to <code class=\"codespan\">0</code>.</p>\n<p>The following example shows different <code class=\"codespan\">rotate</code> settings:</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=sunburst-label-rotate&edit=1&reset=1\" width=\"700\" height=\"400\"><iframe />\n\n",
+    "desc": "\n\n\n<p>同 <a href=\"#sunburst.label.rotate\">label.rotate</a></p>\n",
     "uiControl": {
       "type": "enum",
       "options": "radial,tangential",
@@ -4511,7 +5599,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.emphasis.label.align": {
-    "desc": "<p>Align of text, which can be <code class=\"codespan\">&#39;left&#39;</code>, <code class=\"codespan\">&#39;center&#39;</code>, or <code class=\"codespan\">&#39;right&#39;</code>. Note that <code class=\"codespan\">&#39;left&#39;</code> stands for inner side, and <code class=\"codespan\">&#39;right&#39;</code> stands for outer side.</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=doc-example/sunburst-label-align&edit=1&reset=1\" width=\"700\" height=\"400\"><iframe />\n\n",
+    "desc": "\n\n<p>Align of text, which can be <code class=\"codespan\">&#39;left&#39;</code>, <code class=\"codespan\">&#39;center&#39;</code>, or <code class=\"codespan\">&#39;right&#39;</code>. Note that <code class=\"codespan\">&#39;left&#39;</code> stands for inner side, and <code class=\"codespan\">&#39;right&#39;</code> stands for outer side.</p>\n<p>Same to <a href=\"#sunburst.label.align\">label.align</a></p>\n",
     "uiControl": {
       "type": "enum",
       "options": "left,center,right",
@@ -4519,7 +5607,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.emphasis.label.minAngle": {
-    "desc": "<p>If angle of data piece is smaller than this value (in degrees), then text is not displayed. This is used for hiding text for small piece of data.</p>\n",
+    "desc": "\n\n<p>If angle of data piece is smaller than this value (in degrees), then text is not displayed. This is used for hiding text for small piece of data.</p>\n",
     "uiControl": {
       "type": "angle",
       "min": "0",
@@ -4528,21 +5616,21 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.emphasis.label.show": {
-    "desc": "<p>Whether to show label.</p>\n",
+    "desc": "\n\n<p>Whether to show label.</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "true"
     }
   },
   "levels.emphasis.label.position": {
-    "desc": "<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/examples/zh/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
   "levels.emphasis.label.distance": {
-    "desc": "<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "desc": "\n\n<p>Distance to the host graphic element.</p>\n<p>It is valid only when <code class=\"codespan\">position</code> is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -4551,7 +5639,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.emphasis.label.offset": {
-    "desc": "<p>Whether to move text slightly. For example: <code class=\"codespan\">[30, 40]</code> means move <code class=\"codespan\">30</code> horizontally and move <code class=\"codespan\">40</code> vertically.</p>\n",
+    "desc": "\n\n<p>Whether to move text slightly. For example: <code class=\"codespan\">[30, 40]</code> means move <code class=\"codespan\">30</code> horizontally and move <code class=\"codespan\">40</code> vertically.</p>\n",
     "uiControl": {
       "type": "vector",
       "dims": "x,y",
@@ -4560,17 +5648,17 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.emphasis.label.formatter": {
-    "desc": "<p>Data label formatter, which supports string template and callback function. In either form, <code class=\"codespan\">\\n</code> is supported to represent a new line.</p>\n<p><strong>String template</strong></p>\n<p>Model variation includes:</p>\n<ul>\n<li><code class=\"codespan\">{a}</code>: series name.</li>\n<li><code class=\"codespan\">{b}</code>: the name of a data item.</li>\n<li><code class=\"codespan\">{c}</code>: the value of a data item.</li>\n<li><code class=\"codespan\">{@xxx}: the value of a dimension named</code>&#39;xxx&#39;<code class=\"codespan\">, for example,</code>{@product}<code class=\"codespan\">refers the value of</code>&#39;product&#39;` dimension.</li>\n<li><code class=\"codespan\">{@[n]}: the value of a dimension at the index of</code>n<code class=\"codespan\">, for example,</code>{@[3]}` refers the value at dimensions[3].</li>\n</ul>\n<p><strong>example: </strong></p>\n<pre><code class=\"lang-js\">formatter: &#39;{b}: {@score}&#39;\n</code></pre>\n<p><strong>Callback function</strong></p>\n<p>Callback function is in form of:</p>\n<pre><code class=\"lang-js\">(params: Object|Array) =&gt; string\n</code></pre>\n<p>where <code class=\"codespan\">params</code> is the single dataset needed by formatter, which is formed as:</p>\n<pre><code class=\"lang-js\">{\n    componentType: &#39;series&#39;,\n    // Series type\n    seriesType: string,\n    // Series index in option.series\n    seriesIndex: number,\n    // Series name\n    seriesName: string,\n    // Data name, or category name\n    name: string,\n    // Data index in input data array\n    dataIndex: number,\n    // Original data as input\n    data: Object,\n    // Value of data. In most series it is the same as data.\n    // But in some series it is some part of the data (e.g., in map, radar)\n    value: number|Array|Object,\n    // encoding info of coordinate system\n    // Key: coord, like (&#39;x&#39; &#39;y&#39; &#39;radius&#39; &#39;angle&#39;)\n    // value: Must be an array, not null/undefined. Contain dimension indices, like:\n    // {\n    //     x: [2] // values on dimension index 2 are mapped to x axis.\n    //     y: [0] // values on dimension index 0 are mapped to y axis.\n    // }\n    encode: Object,\n    // dimension names list\n    dimensionNames: Array&lt;String&gt;,\n    // data dimension index, for example 0 or 1 or 2 ...\n    // Only work in `radar` series.\n    dimensionIndex: number,\n    // Color of data\n    color: string,\n\n}\n</code></pre>\n<p>Note: the usage of encode and dimensionNames can be:</p>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    source: [\n        [&#39;Matcha Latte&#39;, 43.3, 85.8, 93.7],\n        [&#39;Milk Tea&#39;, 83.1, 73.4, 55.1],\n        [&#39;Cheese Cocoa&#39;, 86.4, 65.2, 82.5],\n        [&#39;Walnut Brownie&#39;, 72.4, 53.9, 39.1]\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.encode.y[0]]\n</code></pre>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    dimensions: [&#39;product&#39;, &#39;2015&#39;, &#39;2016&#39;, &#39;2017&#39;],\n    source: [\n        {product: &#39;Matcha Latte&#39;, &#39;2015&#39;: 43.3, &#39;2016&#39;: 85.8, &#39;2017&#39;: 93.7},\n        {product: &#39;Milk Tea&#39;, &#39;2015&#39;: 83.1, &#39;2016&#39;: 73.4, &#39;2017&#39;: 55.1},\n        {product: &#39;Cheese Cocoa&#39;, &#39;2015&#39;: 86.4, &#39;2016&#39;: 65.2, &#39;2017&#39;: 82.5},\n        {product: &#39;Walnut Brownie&#39;, &#39;2015&#39;: 72.4, &#39;2016&#39;: 53.9, &#39;2017&#39;: 39.1}\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.dimensionNames[params.encode.y[0]]]\n</code></pre>\n"
+    "desc": "<p>Data label formatter, which supports string template and callback function. In either form, <code class=\"codespan\">\\n</code> is supported to represent a new line.</p>\n<p><strong>String template</strong></p>\n<p>Model variation includes:</p>\n<ul>\n<li><code class=\"codespan\">{a}</code>: series name.</li>\n<li><code class=\"codespan\">{b}</code>: the name of a data item.</li>\n<li><code class=\"codespan\">{c}</code>: the value of a data item.</li>\n<li><code class=\"codespan\">{@xxx}: the value of a dimension named</code>&#39;xxx&#39;<code class=\"codespan\">, for example,</code>{@product}<code class=\"codespan\">refers the value of</code>&#39;product&#39;` dimension.</li>\n<li><code class=\"codespan\">{@[n]}: the value of a dimension at the index of</code>n<code class=\"codespan\">, for example,</code>{@[3]}` refers the value at dimensions[3].</li>\n</ul>\n<p><strong>example: </strong></p>\n<pre><code class=\"lang-js\">formatter: &#39;{b}: {@score}&#39;\n</code></pre>\n<p><strong>Callback function</strong></p>\n<p>Callback function is in form of:</p>\n<pre><code class=\"lang-js\">(params: Object|Array) =&gt; string\n</code></pre>\n<p>where <code class=\"codespan\">params</code> is the single dataset needed by formatter, which is formed as:</p>\n<pre><code class=\"lang-js\">{\n    componentType: &#39;series&#39;,\n    // Series type\n    seriesType: string,\n    // Series index in option.series\n    seriesIndex: number,\n    // Series name\n    seriesName: string,\n    // Data name, or category name\n    name: string,\n    // Data index in input data array\n    dataIndex: number,\n    // Original data as input\n    data: Object,\n    // Value of data. In most series it is the same as data.\n    // But in some series it is some part of the data (e.g., in map, radar)\n    value: number|Array|Object,\n    // encoding info of coordinate system\n    // Key: coord, like (&#39;x&#39; &#39;y&#39; &#39;radius&#39; &#39;angle&#39;)\n    // value: Must be an array, not null/undefined. Contain dimension indices, like:\n    // {\n    //     x: [2] // values on dimension index 2 are mapped to x axis.\n    //     y: [0] // values on dimension index 0 are mapped to y axis.\n    // }\n    encode: Object,\n    // dimension names list\n    dimensionNames: Array&lt;String&gt;,\n    // data dimension index, for example 0 or 1 or 2 ...\n    // Only work in `radar` series.\n    dimensionIndex: number,\n    // Color of data\n    color: string,\n\n\n\n}\n</code></pre>\n<p>Note: the usage of encode and dimensionNames can be:</p>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    source: [\n        [&#39;Matcha Latte&#39;, 43.3, 85.8, 93.7],\n        [&#39;Milk Tea&#39;, 83.1, 73.4, 55.1],\n        [&#39;Cheese Cocoa&#39;, 86.4, 65.2, 82.5],\n        [&#39;Walnut Brownie&#39;, 72.4, 53.9, 39.1]\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.encode.y[0]]\n</code></pre>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    dimensions: [&#39;product&#39;, &#39;2015&#39;, &#39;2016&#39;, &#39;2017&#39;],\n    source: [\n        {product: &#39;Matcha Latte&#39;, &#39;2015&#39;: 43.3, &#39;2016&#39;: 85.8, &#39;2017&#39;: 93.7},\n        {product: &#39;Milk Tea&#39;, &#39;2015&#39;: 83.1, &#39;2016&#39;: 73.4, &#39;2017&#39;: 55.1},\n        {product: &#39;Cheese Cocoa&#39;, &#39;2015&#39;: 86.4, &#39;2016&#39;: 65.2, &#39;2017&#39;: 82.5},\n        {product: &#39;Walnut Brownie&#39;, &#39;2015&#39;: 72.4, &#39;2016&#39;: 53.9, &#39;2017&#39;: 39.1}\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.dimensionNames[params.encode.y[0]]]\n</code></pre>\n"
   },
   "levels.emphasis.label.color": {
-    "desc": "<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "null"
     }
   },
   "levels.emphasis.label.fontStyle": {
-    "desc": "<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
@@ -4578,7 +5666,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.emphasis.label.fontWeight": {
-    "desc": "<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
@@ -4586,7 +5674,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.emphasis.label.fontFamily": {
-    "desc": "<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "sans-serif",
@@ -4594,7 +5682,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.emphasis.label.fontSize": {
-    "desc": "<p> font size.</p>\n",
+    "desc": "\n\n<p> font size.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "12",
@@ -4603,14 +5691,14 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.emphasis.label.verticalAlign": {
-    "desc": "<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,middle,bottom"
     }
   },
   "levels.emphasis.label.lineHeight": {
-    "desc": "<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -4619,21 +5707,21 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.emphasis.label.backgroundColor": {
-    "desc": "<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
   "levels.emphasis.label.borderColor": {
-    "desc": "<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
   "levels.emphasis.label.borderWidth": {
-    "desc": "<p>Border width of the text fragment.</p>\n",
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -4641,7 +5729,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.emphasis.label.borderRadius": {
-    "desc": "<p>Border radius of the text fragment.</p>\n",
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
@@ -4649,7 +5737,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.emphasis.label.padding": {
-    "desc": "<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
@@ -4657,13 +5745,13 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.emphasis.label.shadowColor": {
-    "desc": "<p>Shadow color of the text block.</p>\n",
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "levels.emphasis.label.shadowBlur": {
-    "desc": "<p>Show blur of the text block.</p>\n",
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -4671,33 +5759,47 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.emphasis.label.shadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text block.</p>\n",
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
   "levels.emphasis.label.shadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text block.</p>\n",
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
   "levels.emphasis.label.width": {
-    "desc": "<p>Width of the text block. It is the width of the text by default. In most cases, there is no need to specify it. You may want to use it in some cases like make simple table or using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p><code class=\"codespan\">width</code> can also be percent string, like <code class=\"codespan\">&#39;100%&#39;</code>, which represents the percent of <code class=\"codespan\">contentWidth</code> (that is, the width without <code class=\"codespan\">padding</code>) of its container box. It is based on <code class=\"codespan\">contentWidth</code> because that each text fragment is layout based on the <code class=\"codespan\">content box</code>, where it makes no sense that calculating width based on <code class=\"codespan\">outerWith</code> in prectice.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "levels.emphasis.label.height": {
-    "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "levels.emphasis.label.textBorderColor": {
-    "desc": "<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "levels.emphasis.label.textBorderWidth": {
-    "desc": "<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -4705,14 +5807,14 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.emphasis.label.textShadowColor": {
-    "desc": "<p>Shadow color of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#000"
     }
   },
   "levels.emphasis.label.textShadowBlur": {
-    "desc": "<p>Shadow blue of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -4720,31 +5822,44 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.emphasis.label.textShadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
   "levels.emphasis.label.textShadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
+  "levels.emphasis.label.overflow": {
+    "desc": "\n\n<p>Determine how to display the text when it&#39;s overflow. Available when <code class=\"codespan\">width</code> is set.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the text and trailing with <code class=\"codespan\">ellipsis</code>.</li>\n<li><code class=\"codespan\">&#39;break&#39;</code> Break by word</li>\n<li><code class=\"codespan\">&#39;breakAll&#39;</code> Break by character.</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "truncate,break,breakAll"
+    }
+  },
+  "levels.emphasis.label.ellipsis": {
+    "desc": "<p>Ellipsis to be displayed when <code class=\"codespan\">overflow</code> is set to <code class=\"codespan\">truncate</code>.</p>\n"
+  },
+  "levels.emphasis.label.lineOverflow": {
+    "desc": "<p>Determine how to display the text when it&#39;s overflow on height.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the overflow lines.</li>\n</ul>\n"
+  },
   "levels.emphasis.label.rich": {
     "desc": "<p>&quot;Rich text styles&quot; can be defined in this <code class=\"codespan\">rich</code> property. For example:</p>\n<pre><code class=\"lang-js\">label: {\n    // Styles defined in &#39;rich&#39; can be applied to some fragments\n    // of text by adding some markers to those fragment, like\n    // `{styleName|text content text content}`.\n    // `&#39;\\n&#39;` is the newline character.\n    formatter: [\n        &#39;{a|Style &quot;a&quot; is applied to this snippet}&#39;\n        &#39;{b|Style &quot;b&quot; is applied to this snippet}This snippet use default style{x|use style &quot;x&quot;}&#39;\n    ].join(&#39;\\n&#39;),\n\n    rich: {\n        a: {\n            color: &#39;red&#39;,\n            lineHeight: 10\n        },\n        b: {\n            backgroundColor: {\n                image: &#39;xxx/xxx.jpg&#39;\n            },\n            height: 40\n        },\n        x: {\n            fontSize: 18,\n            fontFamily: &#39;Microsoft YaHei&#39;,\n            borderColor: &#39;#449933&#39;,\n            borderRadius: 4\n        },\n        ...\n    }\n}\n</code></pre>\n<p>For more details, see <a href=\"tutorial.html#Rich%20Text\" target=\"_blank\">Rich Text</a> please.</p>\n"
   },
   "levels.emphasis.label.rich.<style_name>.color": {
-    "desc": "<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "null"
     }
   },
   "levels.emphasis.label.rich.<style_name>.fontStyle": {
-    "desc": "<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
@@ -4752,7 +5867,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.emphasis.label.rich.<style_name>.fontWeight": {
-    "desc": "<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
@@ -4760,7 +5875,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.emphasis.label.rich.<style_name>.fontFamily": {
-    "desc": "<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "sans-serif",
@@ -4768,7 +5883,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.emphasis.label.rich.<style_name>.fontSize": {
-    "desc": "<p> font size.</p>\n",
+    "desc": "\n\n<p> font size.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "12",
@@ -4777,21 +5892,21 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.emphasis.label.rich.<style_name>.align": {
-    "desc": "<p>Horizontal alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;left&#39;</code></li>\n<li><code class=\"codespan\">&#39;center&#39;</code></li>\n<li><code class=\"codespan\">&#39;right&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">align</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">align</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    align: right,\n    rich: {\n        a: {\n            // `align` is not set, then it will be right\n        }\n    }\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Horizontal alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;left&#39;</code></li>\n<li><code class=\"codespan\">&#39;center&#39;</code></li>\n<li><code class=\"codespan\">&#39;right&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">align</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">align</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    align: right,\n    rich: {\n        a: {\n            // `align` is not set, then it will be right\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "left,center,right"
     }
   },
   "levels.emphasis.label.rich.<style_name>.verticalAlign": {
-    "desc": "<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,middle,bottom"
     }
   },
   "levels.emphasis.label.rich.<style_name>.lineHeight": {
-    "desc": "<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -4800,21 +5915,21 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.emphasis.label.rich.<style_name>.backgroundColor": {
-    "desc": "<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
   "levels.emphasis.label.rich.<style_name>.borderColor": {
-    "desc": "<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
   "levels.emphasis.label.rich.<style_name>.borderWidth": {
-    "desc": "<p>Border width of the text fragment.</p>\n",
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -4822,7 +5937,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.emphasis.label.rich.<style_name>.borderRadius": {
-    "desc": "<p>Border radius of the text fragment.</p>\n",
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
@@ -4830,7 +5945,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.emphasis.label.rich.<style_name>.padding": {
-    "desc": "<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
@@ -4838,13 +5953,13 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.emphasis.label.rich.<style_name>.shadowColor": {
-    "desc": "<p>Shadow color of the text block.</p>\n",
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "levels.emphasis.label.rich.<style_name>.shadowBlur": {
-    "desc": "<p>Show blur of the text block.</p>\n",
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -4852,14 +5967,14 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.emphasis.label.rich.<style_name>.shadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text block.</p>\n",
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
   "levels.emphasis.label.rich.<style_name>.shadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text block.</p>\n",
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
@@ -4872,13 +5987,13 @@ window.__EC_DOC_option_series_sunburst = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "levels.emphasis.label.rich.<style_name>.textBorderColor": {
-    "desc": "<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "levels.emphasis.label.rich.<style_name>.textBorderWidth": {
-    "desc": "<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -4886,14 +6001,14 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.emphasis.label.rich.<style_name>.textShadowColor": {
-    "desc": "<p>Shadow color of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#000"
     }
   },
   "levels.emphasis.label.rich.<style_name>.textShadowBlur": {
-    "desc": "<p>Shadow blue of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -4901,36 +6016,110 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.emphasis.label.rich.<style_name>.textShadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
   "levels.emphasis.label.rich.<style_name>.textShadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
+  "levels.emphasis.labelLine": {
+    "desc": "<p>Configuration of label guide line.</p>\n"
+  },
+  "levels.emphasis.labelLine.show": {
+    "desc": "\n\n<p>Whether to show the label guide line.</p>\n",
+    "uiControl": {
+      "type": "boolean"
+    }
+  },
+  "levels.emphasis.labelLine.lineStyle.color": {
+    "desc": "\n\n<p>Line color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "levels.emphasis.labelLine.lineStyle.width": {
+    "desc": "\n\n<p> line width.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "value": "1",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "levels.emphasis.labelLine.lineStyle.type": {
+    "desc": "\n\n<p> line type.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;solid&#39;</code></li>\n<li><code class=\"codespan\">&#39;dashed&#39;</code></li>\n<li><code class=\"codespan\">&#39;dotted&#39;</code></li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "solid",
+      "options": "solid,dashed,dotted"
+    }
+  },
+  "levels.emphasis.labelLine.lineStyle.shadowBlur": {
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "levels.emphasis.labelLine.lineStyle.shadowColor": {
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": ""
+    }
+  },
+  "levels.emphasis.labelLine.lineStyle.shadowOffsetX": {
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "0",
+      "step": "0.5"
+    }
+  },
+  "levels.emphasis.labelLine.lineStyle.shadowOffsetY": {
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "0",
+      "step": "0.5"
+    }
+  },
+  "levels.emphasis.labelLine.lineStyle.opacity": {
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "1",
+      "min": "0",
+      "max": "1",
+      "step": "0.01"
+    }
+  },
   "levels.emphasis.itemStyle": {
-    "desc": "<p>Style of Sunburst sectors.</p>\n<p>Style can be set in <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> for sectors of this series, or <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> for the whole level, or<a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> for single sector. If <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> is defined, it will cover the setting of <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> and <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a>.</p>\n<p><strong>Priority: <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> &gt; <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> &gt; <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a>.</strong></p>\n<p>In ECharts, <em>emphasis</em> is for styles when mouse hovers. For Sunburst charts, there are two extra states: <em>highlight</em> for highlighting items that relates to the emphasized one, and <em>downplay</em> for others when emphasizing an item. See <a href=\"#series-sunburst.highlightPolicy\">highlightPolicy</a>.</p>\n"
+    "desc": "<p>旭日图扇形块的样式。</p>\n<p>可以在 <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> 定义所有扇形块的样式，也可以在 <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> 定义每一层扇形块的样式，还可以在 <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> 定义每个扇形块单独的样式，这三者的优先级从低到高。也就是说，如果定义了 <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a>，将会覆盖 <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> 和 <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a>。</p>\n<p><strong>优先级：<a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> &gt; <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> &gt; <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a>。</strong></p>\n"
   },
   "levels.emphasis.itemStyle.color": {
-    "desc": "<p> color.  Color is taken from <a href=\"#color\">option.color Palette</a> by default. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
+    "desc": "\n\n<p> color.  Color is taken from <a href=\"#color\">option.color Palette</a> by default. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "levels.emphasis.itemStyle.borderColor": {
-    "desc": "<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
+    "desc": "\n\n<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "levels.emphasis.itemStyle.borderWidth": {
-    "desc": "<p> border width. No border when it is set to be 0.</p>\n",
+    "desc": "\n\n<p> border width. No border when it is set to be 0.</p>\n",
     "uiControl": {
       "type": "number",
       "value": "1",
@@ -4939,7 +6128,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.emphasis.itemStyle.borderType": {
-    "desc": "<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
+    "desc": "\n\n<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "solid",
@@ -4947,7 +6136,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.emphasis.itemStyle.shadowBlur": {
-    "desc": "<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "default": "",
@@ -4956,14 +6145,14 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.emphasis.itemStyle.shadowColor": {
-    "desc": "<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color",
       "default": ""
     }
   },
   "levels.emphasis.itemStyle.shadowOffsetX": {
-    "desc": "<p>Offset distance on the horizontal direction of shadow.</p>\n",
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
@@ -4971,7 +6160,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.emphasis.itemStyle.shadowOffsetY": {
-    "desc": "<p>Offset distance on the vertical direction of shadow.</p>\n",
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
@@ -4979,7 +6168,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "levels.emphasis.itemStyle.opacity": {
-    "desc": "<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "1",
@@ -4988,30 +6177,30 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "0.01"
     }
   },
-  "levels.highlight": {
-    "desc": "<p>Item style when mouse is hovering related items. See <a href=\"#series-sunburst.highlightPolicy\">highlightPolicy</a>.</p>\n"
+  "levels.blur": {
+    "desc": "<p>Blur state.</p>\n"
   },
-  "levels.highlight.label": {
-    "desc": "<p><code class=\"codespan\">label</code> sets the text style for every sectors.</p>\n<p><strong>Priority: <a href=\"#series-sunburst.data.label\">series.data.label</a> &gt; <a href=\"#series-sunburst.levels.label\">series.levels.label</a> &gt; <a href=\"#series-sunburst.label\">series.label</a>.</strong></p>\n<p>Text label of , to explain some data information about graphic item like value, name and so on. <code class=\"codespan\">label</code> is placed under <code class=\"codespan\">itemStyle</code> in ECharts 2.x. In ECharts 3, to make the configuration structure flatter, <code class=\"codespan\">label</code>is taken to be at the same level with <code class=\"codespan\">itemStyle</code>, and has <code class=\"codespan\">emphasis</code> as <code class=\"codespan\">itemStyle</code> does.</p>\n"
+  "levels.blur.label": {
+    "desc": "<p><code class=\"codespan\">label</code> 描述了每个扇形块中，文本标签的样式。</p>\n<p><strong>优先级：<a href=\"#series-sunburst.data.label\">series.data.label</a> &gt; <a href=\"#series-sunburst.levels.label\">series.levels.label</a> &gt; <a href=\"#series-sunburst.label\">series.label</a>。</strong></p>\n<p>Text label of , to explain some data information about graphic item like value, name and so on. <code class=\"codespan\">label</code> is placed under <code class=\"codespan\">itemStyle</code> in ECharts 2.x. In ECharts 3, to make the configuration structure flatter, <code class=\"codespan\">label</code>is taken to be at the same level with <code class=\"codespan\">itemStyle</code>, and has <code class=\"codespan\">emphasis</code> as <code class=\"codespan\">itemStyle</code> does.</p>\n"
   },
-  "levels.highlight.label.rotate": {
-    "desc": "<p>If it is <code class=\"codespan\">number</code> type, then is stands for rotation, from -90 degrees to 90 degrees, and positive values stand for counterclockwise.</p>\n<p>Besides, it can be string <code class=\"codespan\">&#39;radial&#39;</code>, standing for radial rotation; or <code class=\"codespan\">&#39;tangential&#39;</code>, standing for tangential rotation.</p>\n<p>By default, it is <code class=\"codespan\">&#39;radial&#39;</code>. If no rotation is wanted, it can be set to <code class=\"codespan\">0</code>.</p>\n<p>The following example shows different <code class=\"codespan\">rotate</code> settings:</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=sunburst-label-rotate&edit=1&reset=1\" width=\"700\" height=\"400\"><iframe />\n\n",
+  "levels.blur.label.rotate": {
+    "desc": "\n\n\n<p>同 <a href=\"#sunburst.label.rotate\">label.rotate</a></p>\n",
     "uiControl": {
       "type": "enum",
       "options": "radial,tangential",
       "default": "radial"
     }
   },
-  "levels.highlight.label.align": {
-    "desc": "<p>Align of text, which can be <code class=\"codespan\">&#39;left&#39;</code>, <code class=\"codespan\">&#39;center&#39;</code>, or <code class=\"codespan\">&#39;right&#39;</code>. Note that <code class=\"codespan\">&#39;left&#39;</code> stands for inner side, and <code class=\"codespan\">&#39;right&#39;</code> stands for outer side.</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=doc-example/sunburst-label-align&edit=1&reset=1\" width=\"700\" height=\"400\"><iframe />\n\n",
+  "levels.blur.label.align": {
+    "desc": "\n\n<p>Align of text, which can be <code class=\"codespan\">&#39;left&#39;</code>, <code class=\"codespan\">&#39;center&#39;</code>, or <code class=\"codespan\">&#39;right&#39;</code>. Note that <code class=\"codespan\">&#39;left&#39;</code> stands for inner side, and <code class=\"codespan\">&#39;right&#39;</code> stands for outer side.</p>\n<p>Same to <a href=\"#sunburst.label.align\">label.align</a></p>\n",
     "uiControl": {
       "type": "enum",
       "options": "left,center,right",
       "default": "center"
     }
   },
-  "levels.highlight.label.minAngle": {
-    "desc": "<p>If angle of data piece is smaller than this value (in degrees), then text is not displayed. This is used for hiding text for small piece of data.</p>\n",
+  "levels.blur.label.minAngle": {
+    "desc": "\n\n<p>If angle of data piece is smaller than this value (in degrees), then text is not displayed. This is used for hiding text for small piece of data.</p>\n",
     "uiControl": {
       "type": "angle",
       "min": "0",
@@ -5019,22 +6208,22 @@ window.__EC_DOC_option_series_sunburst = {
       "max": "360"
     }
   },
-  "levels.highlight.label.show": {
-    "desc": "<p>Whether to show label.</p>\n",
+  "levels.blur.label.show": {
+    "desc": "\n\n<p>Whether to show label.</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "true"
     }
   },
-  "levels.highlight.label.position": {
-    "desc": "<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/examples/zh/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+  "levels.blur.label.position": {
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
     }
   },
-  "levels.highlight.label.distance": {
-    "desc": "<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+  "levels.blur.label.distance": {
+    "desc": "\n\n<p>Distance to the host graphic element.</p>\n<p>It is valid only when <code class=\"codespan\">position</code> is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "5",
@@ -5042,8 +6231,8 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "0.5"
     }
   },
-  "levels.highlight.label.offset": {
-    "desc": "<p>Whether to move text slightly. For example: <code class=\"codespan\">[30, 40]</code> means move <code class=\"codespan\">30</code> horizontally and move <code class=\"codespan\">40</code> vertically.</p>\n",
+  "levels.blur.label.offset": {
+    "desc": "\n\n<p>Whether to move text slightly. For example: <code class=\"codespan\">[30, 40]</code> means move <code class=\"codespan\">30</code> horizontally and move <code class=\"codespan\">40</code> vertically.</p>\n",
     "uiControl": {
       "type": "vector",
       "dims": "x,y",
@@ -5051,42 +6240,42 @@ window.__EC_DOC_option_series_sunburst = {
       "separate": "true"
     }
   },
-  "levels.highlight.label.formatter": {
-    "desc": "<p>Data label formatter, which supports string template and callback function. In either form, <code class=\"codespan\">\\n</code> is supported to represent a new line.</p>\n<p><strong>String template</strong></p>\n<p>Model variation includes:</p>\n<ul>\n<li><code class=\"codespan\">{a}</code>: series name.</li>\n<li><code class=\"codespan\">{b}</code>: the name of a data item.</li>\n<li><code class=\"codespan\">{c}</code>: the value of a data item.</li>\n<li><code class=\"codespan\">{@xxx}: the value of a dimension named</code>&#39;xxx&#39;<code class=\"codespan\">, for example,</code>{@product}<code class=\"codespan\">refers the value of</code>&#39;product&#39;` dimension.</li>\n<li><code class=\"codespan\">{@[n]}: the value of a dimension at the index of</code>n<code class=\"codespan\">, for example,</code>{@[3]}` refers the value at dimensions[3].</li>\n</ul>\n<p><strong>example: </strong></p>\n<pre><code class=\"lang-js\">formatter: &#39;{b}: {@score}&#39;\n</code></pre>\n<p><strong>Callback function</strong></p>\n<p>Callback function is in form of:</p>\n<pre><code class=\"lang-js\">(params: Object|Array) =&gt; string\n</code></pre>\n<p>where <code class=\"codespan\">params</code> is the single dataset needed by formatter, which is formed as:</p>\n<pre><code class=\"lang-js\">{\n    componentType: &#39;series&#39;,\n    // Series type\n    seriesType: string,\n    // Series index in option.series\n    seriesIndex: number,\n    // Series name\n    seriesName: string,\n    // Data name, or category name\n    name: string,\n    // Data index in input data array\n    dataIndex: number,\n    // Original data as input\n    data: Object,\n    // Value of data. In most series it is the same as data.\n    // But in some series it is some part of the data (e.g., in map, radar)\n    value: number|Array|Object,\n    // encoding info of coordinate system\n    // Key: coord, like (&#39;x&#39; &#39;y&#39; &#39;radius&#39; &#39;angle&#39;)\n    // value: Must be an array, not null/undefined. Contain dimension indices, like:\n    // {\n    //     x: [2] // values on dimension index 2 are mapped to x axis.\n    //     y: [0] // values on dimension index 0 are mapped to y axis.\n    // }\n    encode: Object,\n    // dimension names list\n    dimensionNames: Array&lt;String&gt;,\n    // data dimension index, for example 0 or 1 or 2 ...\n    // Only work in `radar` series.\n    dimensionIndex: number,\n    // Color of data\n    color: string,\n\n}\n</code></pre>\n<p>Note: the usage of encode and dimensionNames can be:</p>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    source: [\n        [&#39;Matcha Latte&#39;, 43.3, 85.8, 93.7],\n        [&#39;Milk Tea&#39;, 83.1, 73.4, 55.1],\n        [&#39;Cheese Cocoa&#39;, 86.4, 65.2, 82.5],\n        [&#39;Walnut Brownie&#39;, 72.4, 53.9, 39.1]\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.encode.y[0]]\n</code></pre>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    dimensions: [&#39;product&#39;, &#39;2015&#39;, &#39;2016&#39;, &#39;2017&#39;],\n    source: [\n        {product: &#39;Matcha Latte&#39;, &#39;2015&#39;: 43.3, &#39;2016&#39;: 85.8, &#39;2017&#39;: 93.7},\n        {product: &#39;Milk Tea&#39;, &#39;2015&#39;: 83.1, &#39;2016&#39;: 73.4, &#39;2017&#39;: 55.1},\n        {product: &#39;Cheese Cocoa&#39;, &#39;2015&#39;: 86.4, &#39;2016&#39;: 65.2, &#39;2017&#39;: 82.5},\n        {product: &#39;Walnut Brownie&#39;, &#39;2015&#39;: 72.4, &#39;2016&#39;: 53.9, &#39;2017&#39;: 39.1}\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.dimensionNames[params.encode.y[0]]]\n</code></pre>\n"
+  "levels.blur.label.formatter": {
+    "desc": "<p>Data label formatter, which supports string template and callback function. In either form, <code class=\"codespan\">\\n</code> is supported to represent a new line.</p>\n<p><strong>String template</strong></p>\n<p>Model variation includes:</p>\n<ul>\n<li><code class=\"codespan\">{a}</code>: series name.</li>\n<li><code class=\"codespan\">{b}</code>: the name of a data item.</li>\n<li><code class=\"codespan\">{c}</code>: the value of a data item.</li>\n<li><code class=\"codespan\">{@xxx}: the value of a dimension named</code>&#39;xxx&#39;<code class=\"codespan\">, for example,</code>{@product}<code class=\"codespan\">refers the value of</code>&#39;product&#39;` dimension.</li>\n<li><code class=\"codespan\">{@[n]}: the value of a dimension at the index of</code>n<code class=\"codespan\">, for example,</code>{@[3]}` refers the value at dimensions[3].</li>\n</ul>\n<p><strong>example: </strong></p>\n<pre><code class=\"lang-js\">formatter: &#39;{b}: {@score}&#39;\n</code></pre>\n<p><strong>Callback function</strong></p>\n<p>Callback function is in form of:</p>\n<pre><code class=\"lang-js\">(params: Object|Array) =&gt; string\n</code></pre>\n<p>where <code class=\"codespan\">params</code> is the single dataset needed by formatter, which is formed as:</p>\n<pre><code class=\"lang-js\">{\n    componentType: &#39;series&#39;,\n    // Series type\n    seriesType: string,\n    // Series index in option.series\n    seriesIndex: number,\n    // Series name\n    seriesName: string,\n    // Data name, or category name\n    name: string,\n    // Data index in input data array\n    dataIndex: number,\n    // Original data as input\n    data: Object,\n    // Value of data. In most series it is the same as data.\n    // But in some series it is some part of the data (e.g., in map, radar)\n    value: number|Array|Object,\n    // encoding info of coordinate system\n    // Key: coord, like (&#39;x&#39; &#39;y&#39; &#39;radius&#39; &#39;angle&#39;)\n    // value: Must be an array, not null/undefined. Contain dimension indices, like:\n    // {\n    //     x: [2] // values on dimension index 2 are mapped to x axis.\n    //     y: [0] // values on dimension index 0 are mapped to y axis.\n    // }\n    encode: Object,\n    // dimension names list\n    dimensionNames: Array&lt;String&gt;,\n    // data dimension index, for example 0 or 1 or 2 ...\n    // Only work in `radar` series.\n    dimensionIndex: number,\n    // Color of data\n    color: string,\n\n\n\n}\n</code></pre>\n<p>Note: the usage of encode and dimensionNames can be:</p>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    source: [\n        [&#39;Matcha Latte&#39;, 43.3, 85.8, 93.7],\n        [&#39;Milk Tea&#39;, 83.1, 73.4, 55.1],\n        [&#39;Cheese Cocoa&#39;, 86.4, 65.2, 82.5],\n        [&#39;Walnut Brownie&#39;, 72.4, 53.9, 39.1]\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.encode.y[0]]\n</code></pre>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    dimensions: [&#39;product&#39;, &#39;2015&#39;, &#39;2016&#39;, &#39;2017&#39;],\n    source: [\n        {product: &#39;Matcha Latte&#39;, &#39;2015&#39;: 43.3, &#39;2016&#39;: 85.8, &#39;2017&#39;: 93.7},\n        {product: &#39;Milk Tea&#39;, &#39;2015&#39;: 83.1, &#39;2016&#39;: 73.4, &#39;2017&#39;: 55.1},\n        {product: &#39;Cheese Cocoa&#39;, &#39;2015&#39;: 86.4, &#39;2016&#39;: 65.2, &#39;2017&#39;: 82.5},\n        {product: &#39;Walnut Brownie&#39;, &#39;2015&#39;: 72.4, &#39;2016&#39;: 53.9, &#39;2017&#39;: 39.1}\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.dimensionNames[params.encode.y[0]]]\n</code></pre>\n"
   },
-  "levels.highlight.label.color": {
-    "desc": "<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "levels.blur.label.color": {
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "null"
     }
   },
-  "levels.highlight.label.fontStyle": {
-    "desc": "<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+  "levels.blur.label.fontStyle": {
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
       "options": "normal,italic,oblique"
     }
   },
-  "levels.highlight.label.fontWeight": {
-    "desc": "<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+  "levels.blur.label.fontWeight": {
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
       "options": "normal,bold,bolder,lighter"
     }
   },
-  "levels.highlight.label.fontFamily": {
-    "desc": "<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+  "levels.blur.label.fontFamily": {
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "sans-serif",
       "options": "sans-serif,serif,monospace,Arial,Courier New"
     }
   },
-  "levels.highlight.label.fontSize": {
-    "desc": "<p> font size.</p>\n",
+  "levels.blur.label.fontSize": {
+    "desc": "\n\n<p> font size.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "12",
@@ -5094,15 +6283,15 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "1"
     }
   },
-  "levels.highlight.label.verticalAlign": {
-    "desc": "<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
+  "levels.blur.label.verticalAlign": {
+    "desc": "\n\n<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,middle,bottom"
     }
   },
-  "levels.highlight.label.lineHeight": {
-    "desc": "<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+  "levels.blur.label.lineHeight": {
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -5110,157 +6299,184 @@ window.__EC_DOC_option_series_sunburst = {
       "default": "12"
     }
   },
-  "levels.highlight.label.backgroundColor": {
-    "desc": "<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "levels.blur.label.backgroundColor": {
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
-  "levels.highlight.label.borderColor": {
-    "desc": "<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "levels.blur.label.borderColor": {
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
-  "levels.highlight.label.borderWidth": {
-    "desc": "<p>Border width of the text fragment.</p>\n",
+  "levels.blur.label.borderWidth": {
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "levels.highlight.label.borderRadius": {
-    "desc": "<p>Border radius of the text fragment.</p>\n",
+  "levels.blur.label.borderRadius": {
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
       "dims": "LT,RT, RB, LB"
     }
   },
-  "levels.highlight.label.padding": {
-    "desc": "<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+  "levels.blur.label.padding": {
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
       "dims": "T,R,B,L"
     }
   },
-  "levels.highlight.label.shadowColor": {
-    "desc": "<p>Shadow color of the text block.</p>\n",
+  "levels.blur.label.shadowColor": {
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
-  "levels.highlight.label.shadowBlur": {
-    "desc": "<p>Show blur of the text block.</p>\n",
+  "levels.blur.label.shadowBlur": {
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "levels.highlight.label.shadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text block.</p>\n",
+  "levels.blur.label.shadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "levels.highlight.label.shadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text block.</p>\n",
+  "levels.blur.label.shadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "levels.highlight.label.width": {
-    "desc": "<p>Width of the text block. It is the width of the text by default. In most cases, there is no need to specify it. You may want to use it in some cases like make simple table or using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p><code class=\"codespan\">width</code> can also be percent string, like <code class=\"codespan\">&#39;100%&#39;</code>, which represents the percent of <code class=\"codespan\">contentWidth</code> (that is, the width without <code class=\"codespan\">padding</code>) of its container box. It is based on <code class=\"codespan\">contentWidth</code> because that each text fragment is layout based on the <code class=\"codespan\">content box</code>, where it makes no sense that calculating width based on <code class=\"codespan\">outerWith</code> in prectice.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+  "levels.blur.label.width": {
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
-  "levels.highlight.label.height": {
-    "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+  "levels.blur.label.height": {
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
-  "levels.highlight.label.textBorderColor": {
-    "desc": "<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "levels.blur.label.textBorderColor": {
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
-  "levels.highlight.label.textBorderWidth": {
-    "desc": "<p>Storke line width of the text.</p>\n",
+  "levels.blur.label.textBorderWidth": {
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "levels.highlight.label.textShadowColor": {
-    "desc": "<p>Shadow color of the text itself.</p>\n",
+  "levels.blur.label.textShadowColor": {
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#000"
     }
   },
-  "levels.highlight.label.textShadowBlur": {
-    "desc": "<p>Shadow blue of the text itself.</p>\n",
+  "levels.blur.label.textShadowBlur": {
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "levels.highlight.label.textShadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text itself.</p>\n",
+  "levels.blur.label.textShadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "levels.highlight.label.textShadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text itself.</p>\n",
+  "levels.blur.label.textShadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "levels.highlight.label.rich": {
+  "levels.blur.label.overflow": {
+    "desc": "\n\n<p>Determine how to display the text when it&#39;s overflow. Available when <code class=\"codespan\">width</code> is set.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the text and trailing with <code class=\"codespan\">ellipsis</code>.</li>\n<li><code class=\"codespan\">&#39;break&#39;</code> Break by word</li>\n<li><code class=\"codespan\">&#39;breakAll&#39;</code> Break by character.</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "truncate,break,breakAll"
+    }
+  },
+  "levels.blur.label.ellipsis": {
+    "desc": "<p>Ellipsis to be displayed when <code class=\"codespan\">overflow</code> is set to <code class=\"codespan\">truncate</code>.</p>\n"
+  },
+  "levels.blur.label.lineOverflow": {
+    "desc": "<p>Determine how to display the text when it&#39;s overflow on height.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the overflow lines.</li>\n</ul>\n"
+  },
+  "levels.blur.label.rich": {
     "desc": "<p>&quot;Rich text styles&quot; can be defined in this <code class=\"codespan\">rich</code> property. For example:</p>\n<pre><code class=\"lang-js\">label: {\n    // Styles defined in &#39;rich&#39; can be applied to some fragments\n    // of text by adding some markers to those fragment, like\n    // `{styleName|text content text content}`.\n    // `&#39;\\n&#39;` is the newline character.\n    formatter: [\n        &#39;{a|Style &quot;a&quot; is applied to this snippet}&#39;\n        &#39;{b|Style &quot;b&quot; is applied to this snippet}This snippet use default style{x|use style &quot;x&quot;}&#39;\n    ].join(&#39;\\n&#39;),\n\n    rich: {\n        a: {\n            color: &#39;red&#39;,\n            lineHeight: 10\n        },\n        b: {\n            backgroundColor: {\n                image: &#39;xxx/xxx.jpg&#39;\n            },\n            height: 40\n        },\n        x: {\n            fontSize: 18,\n            fontFamily: &#39;Microsoft YaHei&#39;,\n            borderColor: &#39;#449933&#39;,\n            borderRadius: 4\n        },\n        ...\n    }\n}\n</code></pre>\n<p>For more details, see <a href=\"tutorial.html#Rich%20Text\" target=\"_blank\">Rich Text</a> please.</p>\n"
   },
-  "levels.highlight.label.rich.<style_name>.color": {
-    "desc": "<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "levels.blur.label.rich.<style_name>.color": {
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "null"
     }
   },
-  "levels.highlight.label.rich.<style_name>.fontStyle": {
-    "desc": "<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+  "levels.blur.label.rich.<style_name>.fontStyle": {
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
       "options": "normal,italic,oblique"
     }
   },
-  "levels.highlight.label.rich.<style_name>.fontWeight": {
-    "desc": "<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+  "levels.blur.label.rich.<style_name>.fontWeight": {
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
       "options": "normal,bold,bolder,lighter"
     }
   },
-  "levels.highlight.label.rich.<style_name>.fontFamily": {
-    "desc": "<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+  "levels.blur.label.rich.<style_name>.fontFamily": {
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "sans-serif",
       "options": "sans-serif,serif,monospace,Arial,Courier New"
     }
   },
-  "levels.highlight.label.rich.<style_name>.fontSize": {
-    "desc": "<p> font size.</p>\n",
+  "levels.blur.label.rich.<style_name>.fontSize": {
+    "desc": "\n\n<p> font size.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "12",
@@ -5268,22 +6484,22 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "1"
     }
   },
-  "levels.highlight.label.rich.<style_name>.align": {
-    "desc": "<p>Horizontal alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;left&#39;</code></li>\n<li><code class=\"codespan\">&#39;center&#39;</code></li>\n<li><code class=\"codespan\">&#39;right&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">align</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">align</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    align: right,\n    rich: {\n        a: {\n            // `align` is not set, then it will be right\n        }\n    }\n}\n</code></pre>\n",
+  "levels.blur.label.rich.<style_name>.align": {
+    "desc": "\n\n<p>Horizontal alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;left&#39;</code></li>\n<li><code class=\"codespan\">&#39;center&#39;</code></li>\n<li><code class=\"codespan\">&#39;right&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">align</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">align</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    align: right,\n    rich: {\n        a: {\n            // `align` is not set, then it will be right\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "left,center,right"
     }
   },
-  "levels.highlight.label.rich.<style_name>.verticalAlign": {
-    "desc": "<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
+  "levels.blur.label.rich.<style_name>.verticalAlign": {
+    "desc": "\n\n<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "options": "top,middle,bottom"
     }
   },
-  "levels.highlight.label.rich.<style_name>.lineHeight": {
-    "desc": "<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+  "levels.blur.label.rich.<style_name>.lineHeight": {
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -5291,138 +6507,138 @@ window.__EC_DOC_option_series_sunburst = {
       "default": "12"
     }
   },
-  "levels.highlight.label.rich.<style_name>.backgroundColor": {
-    "desc": "<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "levels.blur.label.rich.<style_name>.backgroundColor": {
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
-  "levels.highlight.label.rich.<style_name>.borderColor": {
-    "desc": "<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "levels.blur.label.rich.<style_name>.borderColor": {
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
-  "levels.highlight.label.rich.<style_name>.borderWidth": {
-    "desc": "<p>Border width of the text fragment.</p>\n",
+  "levels.blur.label.rich.<style_name>.borderWidth": {
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "levels.highlight.label.rich.<style_name>.borderRadius": {
-    "desc": "<p>Border radius of the text fragment.</p>\n",
+  "levels.blur.label.rich.<style_name>.borderRadius": {
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
       "dims": "LT,RT, RB, LB"
     }
   },
-  "levels.highlight.label.rich.<style_name>.padding": {
-    "desc": "<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+  "levels.blur.label.rich.<style_name>.padding": {
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
       "dims": "T,R,B,L"
     }
   },
-  "levels.highlight.label.rich.<style_name>.shadowColor": {
-    "desc": "<p>Shadow color of the text block.</p>\n",
+  "levels.blur.label.rich.<style_name>.shadowColor": {
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
-  "levels.highlight.label.rich.<style_name>.shadowBlur": {
-    "desc": "<p>Show blur of the text block.</p>\n",
+  "levels.blur.label.rich.<style_name>.shadowBlur": {
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "levels.highlight.label.rich.<style_name>.shadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text block.</p>\n",
+  "levels.blur.label.rich.<style_name>.shadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "levels.highlight.label.rich.<style_name>.shadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text block.</p>\n",
+  "levels.blur.label.rich.<style_name>.shadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "levels.highlight.label.rich.<style_name>.width": {
+  "levels.blur.label.rich.<style_name>.width": {
     "desc": "<p>Width of the text block. It is the width of the text by default. In most cases, there is no need to specify it. You may want to use it in some cases like make simple table or using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p><code class=\"codespan\">width</code> can also be percent string, like <code class=\"codespan\">&#39;100%&#39;</code>, which represents the percent of <code class=\"codespan\">contentWidth</code> (that is, the width without <code class=\"codespan\">padding</code>) of its container box. It is based on <code class=\"codespan\">contentWidth</code> because that each text fragment is layout based on the <code class=\"codespan\">content box</code>, where it makes no sense that calculating width based on <code class=\"codespan\">outerWith</code> in prectice.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
-  "levels.highlight.label.rich.<style_name>.height": {
+  "levels.blur.label.rich.<style_name>.height": {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
-  "levels.highlight.label.rich.<style_name>.textBorderColor": {
-    "desc": "<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "levels.blur.label.rich.<style_name>.textBorderColor": {
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
-  "levels.highlight.label.rich.<style_name>.textBorderWidth": {
-    "desc": "<p>Storke line width of the text.</p>\n",
+  "levels.blur.label.rich.<style_name>.textBorderWidth": {
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "levels.highlight.label.rich.<style_name>.textShadowColor": {
-    "desc": "<p>Shadow color of the text itself.</p>\n",
+  "levels.blur.label.rich.<style_name>.textShadowColor": {
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#000"
     }
   },
-  "levels.highlight.label.rich.<style_name>.textShadowBlur": {
-    "desc": "<p>Shadow blue of the text itself.</p>\n",
+  "levels.blur.label.rich.<style_name>.textShadowBlur": {
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
       "step": "0.5"
     }
   },
-  "levels.highlight.label.rich.<style_name>.textShadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text itself.</p>\n",
+  "levels.blur.label.rich.<style_name>.textShadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "levels.highlight.label.rich.<style_name>.textShadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text itself.</p>\n",
+  "levels.blur.label.rich.<style_name>.textShadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
-  "levels.highlight.itemStyle": {
-    "desc": "<p>Style of Sunburst sectors.</p>\n<p>Style can be set in <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> for sectors of this series, or <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> for the whole level, or<a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> for single sector. If <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> is defined, it will cover the setting of <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> and <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a>.</p>\n<p><strong>Priority: <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> &gt; <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> &gt; <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a>.</strong></p>\n<p>In ECharts, <em>emphasis</em> is for styles when mouse hovers. For Sunburst charts, there are two extra states: <em>highlight</em> for highlighting items that relates to the emphasized one, and <em>downplay</em> for others when emphasizing an item. See <a href=\"#series-sunburst.highlightPolicy\">highlightPolicy</a>.</p>\n"
+  "levels.blur.labelLine": {
+    "desc": "<p>Configuration of label guide line.</p>\n"
   },
-  "levels.highlight.itemStyle.color": {
-    "desc": "<p> color.  Color is taken from <a href=\"#color\">option.color Palette</a> by default. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
+  "levels.blur.labelLine.show": {
+    "desc": "\n\n<p>Whether to show the label guide line.</p>\n",
+    "uiControl": {
+      "type": "boolean"
+    }
+  },
+  "levels.blur.labelLine.lineStyle.color": {
+    "desc": "\n\n<p>Line color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
     "uiControl": {
       "type": "color"
     }
   },
-  "levels.highlight.itemStyle.borderColor": {
-    "desc": "<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
-    "uiControl": {
-      "type": "color"
-    }
-  },
-  "levels.highlight.itemStyle.borderWidth": {
-    "desc": "<p> border width. No border when it is set to be 0.</p>\n",
+  "levels.blur.labelLine.lineStyle.width": {
+    "desc": "\n\n<p> line width.</p>\n",
     "uiControl": {
       "type": "number",
       "value": "1",
@@ -5430,16 +6646,16 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "0.5"
     }
   },
-  "levels.highlight.itemStyle.borderType": {
-    "desc": "<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
+  "levels.blur.labelLine.lineStyle.type": {
+    "desc": "\n\n<p> line type.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;solid&#39;</code></li>\n<li><code class=\"codespan\">&#39;dashed&#39;</code></li>\n<li><code class=\"codespan\">&#39;dotted&#39;</code></li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "solid",
       "options": "solid,dashed,dotted"
     }
   },
-  "levels.highlight.itemStyle.shadowBlur": {
-    "desc": "<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+  "levels.blur.labelLine.lineStyle.shadowBlur": {
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "default": "",
@@ -5447,31 +6663,31 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "0.5"
     }
   },
-  "levels.highlight.itemStyle.shadowColor": {
-    "desc": "<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+  "levels.blur.labelLine.lineStyle.shadowColor": {
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color",
       "default": ""
     }
   },
-  "levels.highlight.itemStyle.shadowOffsetX": {
-    "desc": "<p>Offset distance on the horizontal direction of shadow.</p>\n",
+  "levels.blur.labelLine.lineStyle.shadowOffsetX": {
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
       "step": "0.5"
     }
   },
-  "levels.highlight.itemStyle.shadowOffsetY": {
-    "desc": "<p>Offset distance on the vertical direction of shadow.</p>\n",
+  "levels.blur.labelLine.lineStyle.shadowOffsetY": {
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
       "step": "0.5"
     }
   },
-  "levels.highlight.itemStyle.opacity": {
-    "desc": "<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+  "levels.blur.labelLine.lineStyle.opacity": {
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "1",
@@ -5480,441 +6696,23 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "0.01"
     }
   },
-  "levels.downplay": {
-    "desc": "<p>Item style when mouse is hovering unrelated items. See <a href=\"#series-sunburst.highlightPolicy\">highlightPolicy</a>.</p>\n"
+  "levels.blur.itemStyle": {
+    "desc": "<p>旭日图扇形块的样式。</p>\n<p>可以在 <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> 定义所有扇形块的样式，也可以在 <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> 定义每一层扇形块的样式，还可以在 <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> 定义每个扇形块单独的样式，这三者的优先级从低到高。也就是说，如果定义了 <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a>，将会覆盖 <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> 和 <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a>。</p>\n<p><strong>优先级：<a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> &gt; <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> &gt; <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a>。</strong></p>\n"
   },
-  "levels.downplay.label": {
-    "desc": "<p><code class=\"codespan\">label</code> sets the text style for every sectors.</p>\n<p><strong>Priority: <a href=\"#series-sunburst.data.label\">series.data.label</a> &gt; <a href=\"#series-sunburst.levels.label\">series.levels.label</a> &gt; <a href=\"#series-sunburst.label\">series.label</a>.</strong></p>\n<p>Text label of , to explain some data information about graphic item like value, name and so on. <code class=\"codespan\">label</code> is placed under <code class=\"codespan\">itemStyle</code> in ECharts 2.x. In ECharts 3, to make the configuration structure flatter, <code class=\"codespan\">label</code>is taken to be at the same level with <code class=\"codespan\">itemStyle</code>, and has <code class=\"codespan\">emphasis</code> as <code class=\"codespan\">itemStyle</code> does.</p>\n"
-  },
-  "levels.downplay.label.rotate": {
-    "desc": "<p>If it is <code class=\"codespan\">number</code> type, then is stands for rotation, from -90 degrees to 90 degrees, and positive values stand for counterclockwise.</p>\n<p>Besides, it can be string <code class=\"codespan\">&#39;radial&#39;</code>, standing for radial rotation; or <code class=\"codespan\">&#39;tangential&#39;</code>, standing for tangential rotation.</p>\n<p>By default, it is <code class=\"codespan\">&#39;radial&#39;</code>. If no rotation is wanted, it can be set to <code class=\"codespan\">0</code>.</p>\n<p>The following example shows different <code class=\"codespan\">rotate</code> settings:</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=sunburst-label-rotate&edit=1&reset=1\" width=\"700\" height=\"400\"><iframe />\n\n",
-    "uiControl": {
-      "type": "enum",
-      "options": "radial,tangential",
-      "default": "radial"
-    }
-  },
-  "levels.downplay.label.align": {
-    "desc": "<p>Align of text, which can be <code class=\"codespan\">&#39;left&#39;</code>, <code class=\"codespan\">&#39;center&#39;</code>, or <code class=\"codespan\">&#39;right&#39;</code>. Note that <code class=\"codespan\">&#39;left&#39;</code> stands for inner side, and <code class=\"codespan\">&#39;right&#39;</code> stands for outer side.</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=doc-example/sunburst-label-align&edit=1&reset=1\" width=\"700\" height=\"400\"><iframe />\n\n",
-    "uiControl": {
-      "type": "enum",
-      "options": "left,center,right",
-      "default": "center"
-    }
-  },
-  "levels.downplay.label.minAngle": {
-    "desc": "<p>If angle of data piece is smaller than this value (in degrees), then text is not displayed. This is used for hiding text for small piece of data.</p>\n",
-    "uiControl": {
-      "type": "angle",
-      "min": "0",
-      "step": "1",
-      "max": "360"
-    }
-  },
-  "levels.downplay.label.show": {
-    "desc": "<p>Whether to show label.</p>\n",
-    "uiControl": {
-      "type": "boolean",
-      "default": "true"
-    }
-  },
-  "levels.downplay.label.position": {
-    "desc": "<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/examples/zh/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
-    "uiControl": {
-      "type": "enum",
-      "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
-    }
-  },
-  "levels.downplay.label.distance": {
-    "desc": "<p>Distance to the host graphic element. Works when position is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
-    "uiControl": {
-      "type": "number",
-      "default": "5",
-      "min": "0",
-      "step": "0.5"
-    }
-  },
-  "levels.downplay.label.offset": {
-    "desc": "<p>Whether to move text slightly. For example: <code class=\"codespan\">[30, 40]</code> means move <code class=\"codespan\">30</code> horizontally and move <code class=\"codespan\">40</code> vertically.</p>\n",
-    "uiControl": {
-      "type": "vector",
-      "dims": "x,y",
-      "step": "0.5",
-      "separate": "true"
-    }
-  },
-  "levels.downplay.label.formatter": {
-    "desc": "<p>Data label formatter, which supports string template and callback function. In either form, <code class=\"codespan\">\\n</code> is supported to represent a new line.</p>\n<p><strong>String template</strong></p>\n<p>Model variation includes:</p>\n<ul>\n<li><code class=\"codespan\">{a}</code>: series name.</li>\n<li><code class=\"codespan\">{b}</code>: the name of a data item.</li>\n<li><code class=\"codespan\">{c}</code>: the value of a data item.</li>\n<li><code class=\"codespan\">{@xxx}: the value of a dimension named</code>&#39;xxx&#39;<code class=\"codespan\">, for example,</code>{@product}<code class=\"codespan\">refers the value of</code>&#39;product&#39;` dimension.</li>\n<li><code class=\"codespan\">{@[n]}: the value of a dimension at the index of</code>n<code class=\"codespan\">, for example,</code>{@[3]}` refers the value at dimensions[3].</li>\n</ul>\n<p><strong>example: </strong></p>\n<pre><code class=\"lang-js\">formatter: &#39;{b}: {@score}&#39;\n</code></pre>\n<p><strong>Callback function</strong></p>\n<p>Callback function is in form of:</p>\n<pre><code class=\"lang-js\">(params: Object|Array) =&gt; string\n</code></pre>\n<p>where <code class=\"codespan\">params</code> is the single dataset needed by formatter, which is formed as:</p>\n<pre><code class=\"lang-js\">{\n    componentType: &#39;series&#39;,\n    // Series type\n    seriesType: string,\n    // Series index in option.series\n    seriesIndex: number,\n    // Series name\n    seriesName: string,\n    // Data name, or category name\n    name: string,\n    // Data index in input data array\n    dataIndex: number,\n    // Original data as input\n    data: Object,\n    // Value of data. In most series it is the same as data.\n    // But in some series it is some part of the data (e.g., in map, radar)\n    value: number|Array|Object,\n    // encoding info of coordinate system\n    // Key: coord, like (&#39;x&#39; &#39;y&#39; &#39;radius&#39; &#39;angle&#39;)\n    // value: Must be an array, not null/undefined. Contain dimension indices, like:\n    // {\n    //     x: [2] // values on dimension index 2 are mapped to x axis.\n    //     y: [0] // values on dimension index 0 are mapped to y axis.\n    // }\n    encode: Object,\n    // dimension names list\n    dimensionNames: Array&lt;String&gt;,\n    // data dimension index, for example 0 or 1 or 2 ...\n    // Only work in `radar` series.\n    dimensionIndex: number,\n    // Color of data\n    color: string,\n\n}\n</code></pre>\n<p>Note: the usage of encode and dimensionNames can be:</p>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    source: [\n        [&#39;Matcha Latte&#39;, 43.3, 85.8, 93.7],\n        [&#39;Milk Tea&#39;, 83.1, 73.4, 55.1],\n        [&#39;Cheese Cocoa&#39;, 86.4, 65.2, 82.5],\n        [&#39;Walnut Brownie&#39;, 72.4, 53.9, 39.1]\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.encode.y[0]]\n</code></pre>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    dimensions: [&#39;product&#39;, &#39;2015&#39;, &#39;2016&#39;, &#39;2017&#39;],\n    source: [\n        {product: &#39;Matcha Latte&#39;, &#39;2015&#39;: 43.3, &#39;2016&#39;: 85.8, &#39;2017&#39;: 93.7},\n        {product: &#39;Milk Tea&#39;, &#39;2015&#39;: 83.1, &#39;2016&#39;: 73.4, &#39;2017&#39;: 55.1},\n        {product: &#39;Cheese Cocoa&#39;, &#39;2015&#39;: 86.4, &#39;2016&#39;: 65.2, &#39;2017&#39;: 82.5},\n        {product: &#39;Walnut Brownie&#39;, &#39;2015&#39;: 72.4, &#39;2016&#39;: 53.9, &#39;2017&#39;: 39.1}\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.dimensionNames[params.encode.y[0]]]\n</code></pre>\n"
-  },
-  "levels.downplay.label.color": {
-    "desc": "<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
-    "uiControl": {
-      "type": "color",
-      "default": "null"
-    }
-  },
-  "levels.downplay.label.fontStyle": {
-    "desc": "<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
-    "uiControl": {
-      "type": "enum",
-      "default": "normal",
-      "options": "normal,italic,oblique"
-    }
-  },
-  "levels.downplay.label.fontWeight": {
-    "desc": "<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
-    "uiControl": {
-      "type": "enum",
-      "default": "normal",
-      "options": "normal,bold,bolder,lighter"
-    }
-  },
-  "levels.downplay.label.fontFamily": {
-    "desc": "<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
-    "uiControl": {
-      "type": "enum",
-      "default": "sans-serif",
-      "options": "sans-serif,serif,monospace,Arial,Courier New"
-    }
-  },
-  "levels.downplay.label.fontSize": {
-    "desc": "<p> font size.</p>\n",
-    "uiControl": {
-      "type": "number",
-      "default": "12",
-      "min": "1",
-      "step": "1"
-    }
-  },
-  "levels.downplay.label.verticalAlign": {
-    "desc": "<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
-    "uiControl": {
-      "type": "enum",
-      "options": "top,middle,bottom"
-    }
-  },
-  "levels.downplay.label.lineHeight": {
-    "desc": "<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
-    "uiControl": {
-      "type": "number",
-      "min": "0",
-      "step": "1",
-      "default": "12"
-    }
-  },
-  "levels.downplay.label.backgroundColor": {
-    "desc": "<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
-    "uiControl": {
-      "type": "color",
-      "default": "#fff"
-    }
-  },
-  "levels.downplay.label.borderColor": {
-    "desc": "<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
-    "uiControl": {
-      "type": "color",
-      "default": "#fff"
-    }
-  },
-  "levels.downplay.label.borderWidth": {
-    "desc": "<p>Border width of the text fragment.</p>\n",
-    "uiControl": {
-      "type": "number",
-      "min": "0",
-      "step": "0.5"
-    }
-  },
-  "levels.downplay.label.borderRadius": {
-    "desc": "<p>Border radius of the text fragment.</p>\n",
-    "uiControl": {
-      "type": "vector",
-      "min": "0",
-      "dims": "LT,RT, RB, LB"
-    }
-  },
-  "levels.downplay.label.padding": {
-    "desc": "<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
-    "uiControl": {
-      "type": "vector",
-      "min": "0",
-      "dims": "T,R,B,L"
-    }
-  },
-  "levels.downplay.label.shadowColor": {
-    "desc": "<p>Shadow color of the text block.</p>\n",
+  "levels.blur.itemStyle.color": {
+    "desc": "\n\n<p> color.  Color is taken from <a href=\"#color\">option.color Palette</a> by default. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
     "uiControl": {
       "type": "color"
     }
   },
-  "levels.downplay.label.shadowBlur": {
-    "desc": "<p>Show blur of the text block.</p>\n",
-    "uiControl": {
-      "type": "number",
-      "min": "0",
-      "step": "0.5"
-    }
-  },
-  "levels.downplay.label.shadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text block.</p>\n",
-    "uiControl": {
-      "type": "number",
-      "step": "0.5"
-    }
-  },
-  "levels.downplay.label.shadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text block.</p>\n",
-    "uiControl": {
-      "type": "number",
-      "step": "0.5"
-    }
-  },
-  "levels.downplay.label.width": {
-    "desc": "<p>Width of the text block. It is the width of the text by default. In most cases, there is no need to specify it. You may want to use it in some cases like make simple table or using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p><code class=\"codespan\">width</code> can also be percent string, like <code class=\"codespan\">&#39;100%&#39;</code>, which represents the percent of <code class=\"codespan\">contentWidth</code> (that is, the width without <code class=\"codespan\">padding</code>) of its container box. It is based on <code class=\"codespan\">contentWidth</code> because that each text fragment is layout based on the <code class=\"codespan\">content box</code>, where it makes no sense that calculating width based on <code class=\"codespan\">outerWith</code> in prectice.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
-  },
-  "levels.downplay.label.height": {
-    "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
-  },
-  "levels.downplay.label.textBorderColor": {
-    "desc": "<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+  "levels.blur.itemStyle.borderColor": {
+    "desc": "\n\n<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
-  "levels.downplay.label.textBorderWidth": {
-    "desc": "<p>Storke line width of the text.</p>\n",
-    "uiControl": {
-      "type": "number",
-      "min": "0",
-      "step": "0.5"
-    }
-  },
-  "levels.downplay.label.textShadowColor": {
-    "desc": "<p>Shadow color of the text itself.</p>\n",
-    "uiControl": {
-      "type": "color",
-      "default": "#000"
-    }
-  },
-  "levels.downplay.label.textShadowBlur": {
-    "desc": "<p>Shadow blue of the text itself.</p>\n",
-    "uiControl": {
-      "type": "number",
-      "min": "0",
-      "step": "0.5"
-    }
-  },
-  "levels.downplay.label.textShadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text itself.</p>\n",
-    "uiControl": {
-      "type": "number",
-      "step": "0.5"
-    }
-  },
-  "levels.downplay.label.textShadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text itself.</p>\n",
-    "uiControl": {
-      "type": "number",
-      "step": "0.5"
-    }
-  },
-  "levels.downplay.label.rich": {
-    "desc": "<p>&quot;Rich text styles&quot; can be defined in this <code class=\"codespan\">rich</code> property. For example:</p>\n<pre><code class=\"lang-js\">label: {\n    // Styles defined in &#39;rich&#39; can be applied to some fragments\n    // of text by adding some markers to those fragment, like\n    // `{styleName|text content text content}`.\n    // `&#39;\\n&#39;` is the newline character.\n    formatter: [\n        &#39;{a|Style &quot;a&quot; is applied to this snippet}&#39;\n        &#39;{b|Style &quot;b&quot; is applied to this snippet}This snippet use default style{x|use style &quot;x&quot;}&#39;\n    ].join(&#39;\\n&#39;),\n\n    rich: {\n        a: {\n            color: &#39;red&#39;,\n            lineHeight: 10\n        },\n        b: {\n            backgroundColor: {\n                image: &#39;xxx/xxx.jpg&#39;\n            },\n            height: 40\n        },\n        x: {\n            fontSize: 18,\n            fontFamily: &#39;Microsoft YaHei&#39;,\n            borderColor: &#39;#449933&#39;,\n            borderRadius: 4\n        },\n        ...\n    }\n}\n</code></pre>\n<p>For more details, see <a href=\"tutorial.html#Rich%20Text\" target=\"_blank\">Rich Text</a> please.</p>\n"
-  },
-  "levels.downplay.label.rich.<style_name>.color": {
-    "desc": "<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
-    "uiControl": {
-      "type": "color",
-      "default": "null"
-    }
-  },
-  "levels.downplay.label.rich.<style_name>.fontStyle": {
-    "desc": "<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
-    "uiControl": {
-      "type": "enum",
-      "default": "normal",
-      "options": "normal,italic,oblique"
-    }
-  },
-  "levels.downplay.label.rich.<style_name>.fontWeight": {
-    "desc": "<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
-    "uiControl": {
-      "type": "enum",
-      "default": "normal",
-      "options": "normal,bold,bolder,lighter"
-    }
-  },
-  "levels.downplay.label.rich.<style_name>.fontFamily": {
-    "desc": "<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
-    "uiControl": {
-      "type": "enum",
-      "default": "sans-serif",
-      "options": "sans-serif,serif,monospace,Arial,Courier New"
-    }
-  },
-  "levels.downplay.label.rich.<style_name>.fontSize": {
-    "desc": "<p> font size.</p>\n",
-    "uiControl": {
-      "type": "number",
-      "default": "12",
-      "min": "1",
-      "step": "1"
-    }
-  },
-  "levels.downplay.label.rich.<style_name>.align": {
-    "desc": "<p>Horizontal alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;left&#39;</code></li>\n<li><code class=\"codespan\">&#39;center&#39;</code></li>\n<li><code class=\"codespan\">&#39;right&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">align</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">align</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    align: right,\n    rich: {\n        a: {\n            // `align` is not set, then it will be right\n        }\n    }\n}\n</code></pre>\n",
-    "uiControl": {
-      "type": "enum",
-      "options": "left,center,right"
-    }
-  },
-  "levels.downplay.label.rich.<style_name>.verticalAlign": {
-    "desc": "<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
-    "uiControl": {
-      "type": "enum",
-      "options": "top,middle,bottom"
-    }
-  },
-  "levels.downplay.label.rich.<style_name>.lineHeight": {
-    "desc": "<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
-    "uiControl": {
-      "type": "number",
-      "min": "0",
-      "step": "1",
-      "default": "12"
-    }
-  },
-  "levels.downplay.label.rich.<style_name>.backgroundColor": {
-    "desc": "<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
-    "uiControl": {
-      "type": "color",
-      "default": "#fff"
-    }
-  },
-  "levels.downplay.label.rich.<style_name>.borderColor": {
-    "desc": "<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
-    "uiControl": {
-      "type": "color",
-      "default": "#fff"
-    }
-  },
-  "levels.downplay.label.rich.<style_name>.borderWidth": {
-    "desc": "<p>Border width of the text fragment.</p>\n",
-    "uiControl": {
-      "type": "number",
-      "min": "0",
-      "step": "0.5"
-    }
-  },
-  "levels.downplay.label.rich.<style_name>.borderRadius": {
-    "desc": "<p>Border radius of the text fragment.</p>\n",
-    "uiControl": {
-      "type": "vector",
-      "min": "0",
-      "dims": "LT,RT, RB, LB"
-    }
-  },
-  "levels.downplay.label.rich.<style_name>.padding": {
-    "desc": "<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
-    "uiControl": {
-      "type": "vector",
-      "min": "0",
-      "dims": "T,R,B,L"
-    }
-  },
-  "levels.downplay.label.rich.<style_name>.shadowColor": {
-    "desc": "<p>Shadow color of the text block.</p>\n",
-    "uiControl": {
-      "type": "color"
-    }
-  },
-  "levels.downplay.label.rich.<style_name>.shadowBlur": {
-    "desc": "<p>Show blur of the text block.</p>\n",
-    "uiControl": {
-      "type": "number",
-      "min": "0",
-      "step": "0.5"
-    }
-  },
-  "levels.downplay.label.rich.<style_name>.shadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text block.</p>\n",
-    "uiControl": {
-      "type": "number",
-      "step": "0.5"
-    }
-  },
-  "levels.downplay.label.rich.<style_name>.shadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text block.</p>\n",
-    "uiControl": {
-      "type": "number",
-      "step": "0.5"
-    }
-  },
-  "levels.downplay.label.rich.<style_name>.width": {
-    "desc": "<p>Width of the text block. It is the width of the text by default. In most cases, there is no need to specify it. You may want to use it in some cases like make simple table or using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p><code class=\"codespan\">width</code> can also be percent string, like <code class=\"codespan\">&#39;100%&#39;</code>, which represents the percent of <code class=\"codespan\">contentWidth</code> (that is, the width without <code class=\"codespan\">padding</code>) of its container box. It is based on <code class=\"codespan\">contentWidth</code> because that each text fragment is layout based on the <code class=\"codespan\">content box</code>, where it makes no sense that calculating width based on <code class=\"codespan\">outerWith</code> in prectice.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
-  },
-  "levels.downplay.label.rich.<style_name>.height": {
-    "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
-  },
-  "levels.downplay.label.rich.<style_name>.textBorderColor": {
-    "desc": "<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;auto&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
-    "uiControl": {
-      "type": "color"
-    }
-  },
-  "levels.downplay.label.rich.<style_name>.textBorderWidth": {
-    "desc": "<p>Storke line width of the text.</p>\n",
-    "uiControl": {
-      "type": "number",
-      "min": "0",
-      "step": "0.5"
-    }
-  },
-  "levels.downplay.label.rich.<style_name>.textShadowColor": {
-    "desc": "<p>Shadow color of the text itself.</p>\n",
-    "uiControl": {
-      "type": "color",
-      "default": "#000"
-    }
-  },
-  "levels.downplay.label.rich.<style_name>.textShadowBlur": {
-    "desc": "<p>Shadow blue of the text itself.</p>\n",
-    "uiControl": {
-      "type": "number",
-      "min": "0",
-      "step": "0.5"
-    }
-  },
-  "levels.downplay.label.rich.<style_name>.textShadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text itself.</p>\n",
-    "uiControl": {
-      "type": "number",
-      "step": "0.5"
-    }
-  },
-  "levels.downplay.label.rich.<style_name>.textShadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text itself.</p>\n",
-    "uiControl": {
-      "type": "number",
-      "step": "0.5"
-    }
-  },
-  "levels.downplay.itemStyle": {
-    "desc": "<p>Style of Sunburst sectors.</p>\n<p>Style can be set in <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> for sectors of this series, or <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> for the whole level, or<a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> for single sector. If <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> is defined, it will cover the setting of <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> and <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a>.</p>\n<p><strong>Priority: <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> &gt; <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> &gt; <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a>.</strong></p>\n<p>In ECharts, <em>emphasis</em> is for styles when mouse hovers. For Sunburst charts, there are two extra states: <em>highlight</em> for highlighting items that relates to the emphasized one, and <em>downplay</em> for others when emphasizing an item. See <a href=\"#series-sunburst.highlightPolicy\">highlightPolicy</a>.</p>\n"
-  },
-  "levels.downplay.itemStyle.color": {
-    "desc": "<p> color.  Color is taken from <a href=\"#color\">option.color Palette</a> by default. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
-    "uiControl": {
-      "type": "color"
-    }
-  },
-  "levels.downplay.itemStyle.borderColor": {
-    "desc": "<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
-    "uiControl": {
-      "type": "color"
-    }
-  },
-  "levels.downplay.itemStyle.borderWidth": {
-    "desc": "<p> border width. No border when it is set to be 0.</p>\n",
+  "levels.blur.itemStyle.borderWidth": {
+    "desc": "\n\n<p> border width. No border when it is set to be 0.</p>\n",
     "uiControl": {
       "type": "number",
       "value": "1",
@@ -5922,16 +6720,16 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "0.5"
     }
   },
-  "levels.downplay.itemStyle.borderType": {
-    "desc": "<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
+  "levels.blur.itemStyle.borderType": {
+    "desc": "\n\n<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "solid",
       "options": "solid,dashed,dotted"
     }
   },
-  "levels.downplay.itemStyle.shadowBlur": {
-    "desc": "<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+  "levels.blur.itemStyle.shadowBlur": {
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "default": "",
@@ -5939,31 +6737,624 @@ window.__EC_DOC_option_series_sunburst = {
       "step": "0.5"
     }
   },
-  "levels.downplay.itemStyle.shadowColor": {
-    "desc": "<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+  "levels.blur.itemStyle.shadowColor": {
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color",
       "default": ""
     }
   },
-  "levels.downplay.itemStyle.shadowOffsetX": {
-    "desc": "<p>Offset distance on the horizontal direction of shadow.</p>\n",
+  "levels.blur.itemStyle.shadowOffsetX": {
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
       "step": "0.5"
     }
   },
-  "levels.downplay.itemStyle.shadowOffsetY": {
-    "desc": "<p>Offset distance on the vertical direction of shadow.</p>\n",
+  "levels.blur.itemStyle.shadowOffsetY": {
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
       "step": "0.5"
     }
   },
-  "levels.downplay.itemStyle.opacity": {
-    "desc": "<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+  "levels.blur.itemStyle.opacity": {
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "1",
+      "min": "0",
+      "max": "1",
+      "step": "0.01"
+    }
+  },
+  "levels.select": {
+    "desc": "<p>Select state.</p>\n"
+  },
+  "levels.select.label": {
+    "desc": "<p><code class=\"codespan\">label</code> 描述了每个扇形块中，文本标签的样式。</p>\n<p><strong>优先级：<a href=\"#series-sunburst.data.label\">series.data.label</a> &gt; <a href=\"#series-sunburst.levels.label\">series.levels.label</a> &gt; <a href=\"#series-sunburst.label\">series.label</a>。</strong></p>\n<p>Text label of , to explain some data information about graphic item like value, name and so on. <code class=\"codespan\">label</code> is placed under <code class=\"codespan\">itemStyle</code> in ECharts 2.x. In ECharts 3, to make the configuration structure flatter, <code class=\"codespan\">label</code>is taken to be at the same level with <code class=\"codespan\">itemStyle</code>, and has <code class=\"codespan\">emphasis</code> as <code class=\"codespan\">itemStyle</code> does.</p>\n"
+  },
+  "levels.select.label.rotate": {
+    "desc": "\n\n\n<p>同 <a href=\"#sunburst.label.rotate\">label.rotate</a></p>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "radial,tangential",
+      "default": "radial"
+    }
+  },
+  "levels.select.label.align": {
+    "desc": "\n\n<p>Align of text, which can be <code class=\"codespan\">&#39;left&#39;</code>, <code class=\"codespan\">&#39;center&#39;</code>, or <code class=\"codespan\">&#39;right&#39;</code>. Note that <code class=\"codespan\">&#39;left&#39;</code> stands for inner side, and <code class=\"codespan\">&#39;right&#39;</code> stands for outer side.</p>\n<p>Same to <a href=\"#sunburst.label.align\">label.align</a></p>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "left,center,right",
+      "default": "center"
+    }
+  },
+  "levels.select.label.minAngle": {
+    "desc": "\n\n<p>If angle of data piece is smaller than this value (in degrees), then text is not displayed. This is used for hiding text for small piece of data.</p>\n",
+    "uiControl": {
+      "type": "angle",
+      "min": "0",
+      "step": "1",
+      "max": "360"
+    }
+  },
+  "levels.select.label.show": {
+    "desc": "\n\n<p>Whether to show label.</p>\n",
+    "uiControl": {
+      "type": "boolean",
+      "default": "true"
+    }
+  },
+  "levels.select.label.position": {
+    "desc": "\n\n\n\n<p>Label position.</p>\n<p><strong>Followings are the options: </strong></p>\n<ul>\n<li><p>[x, y]</p>\n<p>  Use relative percentage, or absolute pixel values to represent position of label relative to top-left corner of bounding box.\n  For example:</p>\n<pre><code class=\"lang-js\">  // Absolute pixel values\n  position: [10, 10],\n  // Relative percentage\n  position: [&#39;50%&#39;, &#39;50%&#39;]\n</code></pre>\n</li>\n<li><p>&#39;top&#39;</p>\n</li>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n</ul>\n<p>See: <a href=\"https://echarts.apache.org/examples/en/view.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "top,left,right,bottom,inside,insideLeft,insideRight,insideTop,insideBottom,insideTopLeft,insideBottomLeft,insideTopRight,insideBottomRight,outside"
+    }
+  },
+  "levels.select.label.distance": {
+    "desc": "\n\n<p>Distance to the host graphic element.</p>\n<p>It is valid only when <code class=\"codespan\">position</code> is string value (like <code class=\"codespan\">&#39;top&#39;</code>、<code class=\"codespan\">&#39;insideRight&#39;</code>).</p>\n<p>See: <a href=\"https://echarts.apache.org/examples/en/editor.html?c=doc-example/label-position\" target=\"_blank\">label position</a>.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "5",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "levels.select.label.offset": {
+    "desc": "\n\n<p>Whether to move text slightly. For example: <code class=\"codespan\">[30, 40]</code> means move <code class=\"codespan\">30</code> horizontally and move <code class=\"codespan\">40</code> vertically.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "dims": "x,y",
+      "step": "0.5",
+      "separate": "true"
+    }
+  },
+  "levels.select.label.formatter": {
+    "desc": "<p>Data label formatter, which supports string template and callback function. In either form, <code class=\"codespan\">\\n</code> is supported to represent a new line.</p>\n<p><strong>String template</strong></p>\n<p>Model variation includes:</p>\n<ul>\n<li><code class=\"codespan\">{a}</code>: series name.</li>\n<li><code class=\"codespan\">{b}</code>: the name of a data item.</li>\n<li><code class=\"codespan\">{c}</code>: the value of a data item.</li>\n<li><code class=\"codespan\">{@xxx}: the value of a dimension named</code>&#39;xxx&#39;<code class=\"codespan\">, for example,</code>{@product}<code class=\"codespan\">refers the value of</code>&#39;product&#39;` dimension.</li>\n<li><code class=\"codespan\">{@[n]}: the value of a dimension at the index of</code>n<code class=\"codespan\">, for example,</code>{@[3]}` refers the value at dimensions[3].</li>\n</ul>\n<p><strong>example: </strong></p>\n<pre><code class=\"lang-js\">formatter: &#39;{b}: {@score}&#39;\n</code></pre>\n<p><strong>Callback function</strong></p>\n<p>Callback function is in form of:</p>\n<pre><code class=\"lang-js\">(params: Object|Array) =&gt; string\n</code></pre>\n<p>where <code class=\"codespan\">params</code> is the single dataset needed by formatter, which is formed as:</p>\n<pre><code class=\"lang-js\">{\n    componentType: &#39;series&#39;,\n    // Series type\n    seriesType: string,\n    // Series index in option.series\n    seriesIndex: number,\n    // Series name\n    seriesName: string,\n    // Data name, or category name\n    name: string,\n    // Data index in input data array\n    dataIndex: number,\n    // Original data as input\n    data: Object,\n    // Value of data. In most series it is the same as data.\n    // But in some series it is some part of the data (e.g., in map, radar)\n    value: number|Array|Object,\n    // encoding info of coordinate system\n    // Key: coord, like (&#39;x&#39; &#39;y&#39; &#39;radius&#39; &#39;angle&#39;)\n    // value: Must be an array, not null/undefined. Contain dimension indices, like:\n    // {\n    //     x: [2] // values on dimension index 2 are mapped to x axis.\n    //     y: [0] // values on dimension index 0 are mapped to y axis.\n    // }\n    encode: Object,\n    // dimension names list\n    dimensionNames: Array&lt;String&gt;,\n    // data dimension index, for example 0 or 1 or 2 ...\n    // Only work in `radar` series.\n    dimensionIndex: number,\n    // Color of data\n    color: string,\n\n\n\n}\n</code></pre>\n<p>Note: the usage of encode and dimensionNames can be:</p>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    source: [\n        [&#39;Matcha Latte&#39;, 43.3, 85.8, 93.7],\n        [&#39;Milk Tea&#39;, 83.1, 73.4, 55.1],\n        [&#39;Cheese Cocoa&#39;, 86.4, 65.2, 82.5],\n        [&#39;Walnut Brownie&#39;, 72.4, 53.9, 39.1]\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.encode.y[0]]\n</code></pre>\n<p>If data is:</p>\n<pre><code class=\"lang-js\">dataset: {\n    dimensions: [&#39;product&#39;, &#39;2015&#39;, &#39;2016&#39;, &#39;2017&#39;],\n    source: [\n        {product: &#39;Matcha Latte&#39;, &#39;2015&#39;: 43.3, &#39;2016&#39;: 85.8, &#39;2017&#39;: 93.7},\n        {product: &#39;Milk Tea&#39;, &#39;2015&#39;: 83.1, &#39;2016&#39;: 73.4, &#39;2017&#39;: 55.1},\n        {product: &#39;Cheese Cocoa&#39;, &#39;2015&#39;: 86.4, &#39;2016&#39;: 65.2, &#39;2017&#39;: 82.5},\n        {product: &#39;Walnut Brownie&#39;, &#39;2015&#39;: 72.4, &#39;2016&#39;: 53.9, &#39;2017&#39;: 39.1}\n    ]\n}\n</code></pre>\n<p>We can get values that corresponding to y axis by:</p>\n<pre><code class=\"lang-js\">params.value[params.dimensionNames[params.encode.y[0]]]\n</code></pre>\n"
+  },
+  "levels.select.label.color": {
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "null"
+    }
+  },
+  "levels.select.label.fontStyle": {
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,italic,oblique"
+    }
+  },
+  "levels.select.label.fontWeight": {
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,bold,bolder,lighter"
+    }
+  },
+  "levels.select.label.fontFamily": {
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "sans-serif",
+      "options": "sans-serif,serif,monospace,Arial,Courier New"
+    }
+  },
+  "levels.select.label.fontSize": {
+    "desc": "\n\n<p> font size.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "12",
+      "min": "1",
+      "step": "1"
+    }
+  },
+  "levels.select.label.verticalAlign": {
+    "desc": "\n\n<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "top,middle,bottom"
+    }
+  },
+  "levels.select.label.lineHeight": {
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "1",
+      "default": "12"
+    }
+  },
+  "levels.select.label.backgroundColor": {
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "levels.select.label.borderColor": {
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "levels.select.label.borderWidth": {
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "levels.select.label.borderRadius": {
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "LT,RT, RB, LB"
+    }
+  },
+  "levels.select.label.padding": {
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "T,R,B,L"
+    }
+  },
+  "levels.select.label.shadowColor": {
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "levels.select.label.shadowBlur": {
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "levels.select.label.shadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "levels.select.label.shadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "levels.select.label.width": {
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
+  },
+  "levels.select.label.height": {
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
+  },
+  "levels.select.label.textBorderColor": {
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "levels.select.label.textBorderWidth": {
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "levels.select.label.textShadowColor": {
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#000"
+    }
+  },
+  "levels.select.label.textShadowBlur": {
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "levels.select.label.textShadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "levels.select.label.textShadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "levels.select.label.overflow": {
+    "desc": "\n\n<p>Determine how to display the text when it&#39;s overflow. Available when <code class=\"codespan\">width</code> is set.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the text and trailing with <code class=\"codespan\">ellipsis</code>.</li>\n<li><code class=\"codespan\">&#39;break&#39;</code> Break by word</li>\n<li><code class=\"codespan\">&#39;breakAll&#39;</code> Break by character.</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "truncate,break,breakAll"
+    }
+  },
+  "levels.select.label.ellipsis": {
+    "desc": "<p>Ellipsis to be displayed when <code class=\"codespan\">overflow</code> is set to <code class=\"codespan\">truncate</code>.</p>\n"
+  },
+  "levels.select.label.lineOverflow": {
+    "desc": "<p>Determine how to display the text when it&#39;s overflow on height.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the overflow lines.</li>\n</ul>\n"
+  },
+  "levels.select.label.rich": {
+    "desc": "<p>&quot;Rich text styles&quot; can be defined in this <code class=\"codespan\">rich</code> property. For example:</p>\n<pre><code class=\"lang-js\">label: {\n    // Styles defined in &#39;rich&#39; can be applied to some fragments\n    // of text by adding some markers to those fragment, like\n    // `{styleName|text content text content}`.\n    // `&#39;\\n&#39;` is the newline character.\n    formatter: [\n        &#39;{a|Style &quot;a&quot; is applied to this snippet}&#39;\n        &#39;{b|Style &quot;b&quot; is applied to this snippet}This snippet use default style{x|use style &quot;x&quot;}&#39;\n    ].join(&#39;\\n&#39;),\n\n    rich: {\n        a: {\n            color: &#39;red&#39;,\n            lineHeight: 10\n        },\n        b: {\n            backgroundColor: {\n                image: &#39;xxx/xxx.jpg&#39;\n            },\n            height: 40\n        },\n        x: {\n            fontSize: 18,\n            fontFamily: &#39;Microsoft YaHei&#39;,\n            borderColor: &#39;#449933&#39;,\n            borderRadius: 4\n        },\n        ...\n    }\n}\n</code></pre>\n<p>For more details, see <a href=\"tutorial.html#Rich%20Text\" target=\"_blank\">Rich Text</a> please.</p>\n"
+  },
+  "levels.select.label.rich.<style_name>.color": {
+    "desc": "\n\n<p> text color.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "null"
+    }
+  },
+  "levels.select.label.rich.<style_name>.fontStyle": {
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,italic,oblique"
+    }
+  },
+  "levels.select.label.rich.<style_name>.fontWeight": {
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "normal",
+      "options": "normal,bold,bolder,lighter"
+    }
+  },
+  "levels.select.label.rich.<style_name>.fontFamily": {
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "sans-serif",
+      "options": "sans-serif,serif,monospace,Arial,Courier New"
+    }
+  },
+  "levels.select.label.rich.<style_name>.fontSize": {
+    "desc": "\n\n<p> font size.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "12",
+      "min": "1",
+      "step": "1"
+    }
+  },
+  "levels.select.label.rich.<style_name>.align": {
+    "desc": "\n\n<p>Horizontal alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;left&#39;</code></li>\n<li><code class=\"codespan\">&#39;center&#39;</code></li>\n<li><code class=\"codespan\">&#39;right&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">align</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">align</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    align: right,\n    rich: {\n        a: {\n            // `align` is not set, then it will be right\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "left,center,right"
+    }
+  },
+  "levels.select.label.rich.<style_name>.verticalAlign": {
+    "desc": "\n\n<p>Vertical alignment of text, automatic by default.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;top&#39;</code></li>\n<li><code class=\"codespan\">&#39;middle&#39;</code></li>\n<li><code class=\"codespan\">&#39;bottom&#39;</code></li>\n</ul>\n<p>If <code class=\"codespan\">verticalAlign</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">verticalAlign</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    verticalAlign: bottom,\n    rich: {\n        a: {\n            // `verticalAlign` is not set, then it will be bottom\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "top,middle,bottom"
+    }
+  },
+  "levels.select.label.rich.<style_name>.lineHeight": {
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "1",
+      "default": "12"
+    }
+  },
+  "levels.select.label.rich.<style_name>.backgroundColor": {
+    "desc": "\n\n<p>Background color of the text fragment.</p>\n<p>Can be color string, like <code class=\"codespan\">&#39;#123234&#39;</code>, <code class=\"codespan\">&#39;red&#39;</code>, <code class=\"codespan\">&#39;rgba(0,23,11,0.3)&#39;</code>.</p>\n<p>Or image can be used, for example:</p>\n<pre><code class=\"lang-js\">backgroundColor: {\n    image: &#39;xxx/xxx.png&#39;\n    // It can be URL of a image,\n    // or dataURI,\n    // or HTMLImageElement,\n    // or HTMLCanvasElement.\n}\n</code></pre>\n<p><code class=\"codespan\">width</code> or <code class=\"codespan\">height</code> can be specified when using background image, or\nauto adapted by default.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "levels.select.label.rich.<style_name>.borderColor": {
+    "desc": "\n\n<p>Border color of the text fragment.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#fff"
+    }
+  },
+  "levels.select.label.rich.<style_name>.borderWidth": {
+    "desc": "\n\n<p>Border width of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "levels.select.label.rich.<style_name>.borderRadius": {
+    "desc": "\n\n<p>Border radius of the text fragment.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "LT,RT, RB, LB"
+    }
+  },
+  "levels.select.label.rich.<style_name>.padding": {
+    "desc": "\n\n<p>Padding of the text fragment, for example:</p>\n<ul>\n<li><code class=\"codespan\">padding: [3, 4, 5, 6]</code>: represents padding of <code class=\"codespan\">[top, right, bottom, left]</code>.</li>\n<li><code class=\"codespan\">padding: 4</code>: represents <code class=\"codespan\">padding: [4, 4, 4, 4]</code>.</li>\n<li><code class=\"codespan\">padding: [3, 4]</code>: represents <code class=\"codespan\">padding: [3, 4, 3, 4]</code>.</li>\n</ul>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n",
+    "uiControl": {
+      "type": "vector",
+      "min": "0",
+      "dims": "T,R,B,L"
+    }
+  },
+  "levels.select.label.rich.<style_name>.shadowColor": {
+    "desc": "\n\n<p>Shadow color of the text block.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "levels.select.label.rich.<style_name>.shadowBlur": {
+    "desc": "\n\n<p>Show blur of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "levels.select.label.rich.<style_name>.shadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "levels.select.label.rich.<style_name>.shadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "levels.select.label.rich.<style_name>.width": {
+    "desc": "<p>Width of the text block. It is the width of the text by default. In most cases, there is no need to specify it. You may want to use it in some cases like make simple table or using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p><code class=\"codespan\">width</code> can also be percent string, like <code class=\"codespan\">&#39;100%&#39;</code>, which represents the percent of <code class=\"codespan\">contentWidth</code> (that is, the width without <code class=\"codespan\">padding</code>) of its container box. It is based on <code class=\"codespan\">contentWidth</code> because that each text fragment is layout based on the <code class=\"codespan\">content box</code>, where it makes no sense that calculating width based on <code class=\"codespan\">outerWith</code> in prectice.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+  },
+  "levels.select.label.rich.<style_name>.height": {
+    "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+  },
+  "levels.select.label.rich.<style_name>.textBorderColor": {
+    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "levels.select.label.rich.<style_name>.textBorderWidth": {
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "levels.select.label.rich.<style_name>.textShadowColor": {
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": "#000"
+    }
+  },
+  "levels.select.label.rich.<style_name>.textShadowBlur": {
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "levels.select.label.rich.<style_name>.textShadowOffsetX": {
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "levels.select.label.rich.<style_name>.textShadowOffsetY": {
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "step": "0.5"
+    }
+  },
+  "levels.select.labelLine": {
+    "desc": "<p>Configuration of label guide line.</p>\n"
+  },
+  "levels.select.labelLine.show": {
+    "desc": "\n\n<p>Whether to show the label guide line.</p>\n",
+    "uiControl": {
+      "type": "boolean"
+    }
+  },
+  "levels.select.labelLine.lineStyle.color": {
+    "desc": "\n\n<p>Line color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "levels.select.labelLine.lineStyle.width": {
+    "desc": "\n\n<p> line width.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "value": "1",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "levels.select.labelLine.lineStyle.type": {
+    "desc": "\n\n<p> line type.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;solid&#39;</code></li>\n<li><code class=\"codespan\">&#39;dashed&#39;</code></li>\n<li><code class=\"codespan\">&#39;dotted&#39;</code></li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "solid",
+      "options": "solid,dashed,dotted"
+    }
+  },
+  "levels.select.labelLine.lineStyle.shadowBlur": {
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "levels.select.labelLine.lineStyle.shadowColor": {
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": ""
+    }
+  },
+  "levels.select.labelLine.lineStyle.shadowOffsetX": {
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "0",
+      "step": "0.5"
+    }
+  },
+  "levels.select.labelLine.lineStyle.shadowOffsetY": {
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "0",
+      "step": "0.5"
+    }
+  },
+  "levels.select.labelLine.lineStyle.opacity": {
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "1",
+      "min": "0",
+      "max": "1",
+      "step": "0.01"
+    }
+  },
+  "levels.select.itemStyle": {
+    "desc": "<p>旭日图扇形块的样式。</p>\n<p>可以在 <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> 定义所有扇形块的样式，也可以在 <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> 定义每一层扇形块的样式，还可以在 <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> 定义每个扇形块单独的样式，这三者的优先级从低到高。也就是说，如果定义了 <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a>，将会覆盖 <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> 和 <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a>。</p>\n<p><strong>优先级：<a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> &gt; <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> &gt; <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a>。</strong></p>\n"
+  },
+  "levels.select.itemStyle.color": {
+    "desc": "\n\n<p> color.  Color is taken from <a href=\"#color\">option.color Palette</a> by default. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "levels.select.itemStyle.borderColor": {
+    "desc": "\n\n<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
+    "uiControl": {
+      "type": "color"
+    }
+  },
+  "levels.select.itemStyle.borderWidth": {
+    "desc": "\n\n<p> border width. No border when it is set to be 0.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "value": "1",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "levels.select.itemStyle.borderType": {
+    "desc": "\n\n<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "solid",
+      "options": "solid,dashed,dotted"
+    }
+  },
+  "levels.select.itemStyle.shadowBlur": {
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "",
+      "min": "0",
+      "step": "0.5"
+    }
+  },
+  "levels.select.itemStyle.shadowColor": {
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+    "uiControl": {
+      "type": "color",
+      "default": ""
+    }
+  },
+  "levels.select.itemStyle.shadowOffsetX": {
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "0",
+      "step": "0.5"
+    }
+  },
+  "levels.select.itemStyle.shadowOffsetY": {
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "0",
+      "step": "0.5"
+    }
+  },
+  "levels.select.itemStyle.opacity": {
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "1",
@@ -5973,7 +7364,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "animation": {
-    "desc": "<p>Whether to enable animation.</p>\n",
+    "desc": "\n\n<p>Whether to enable animation.</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "true",
@@ -5984,7 +7375,7 @@ window.__EC_DOC_option_series_sunburst = {
     "desc": "<p>Whether to set graphic number threshold to animation. Animation will be disabled when graphic number is larger than threshold.</p>\n"
   },
   "animationDuration": {
-    "desc": "<p>Duration of the first animation, which supports callback function for different data to have different animation effect:</p>\n<pre><code class=\"lang-js\">animationDuration: function (idx) {\n    // delay for later data is larger\n    return idx * 100;\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Duration of the first animation, which supports callback function for different data to have different animation effect:</p>\n<pre><code class=\"lang-js\">animationDuration: function (idx) {\n    // delay for later data is larger\n    return idx * 100;\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -5994,7 +7385,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "animationEasing": {
-    "desc": "<p>Easing method used for the first animation. Varied easing effects can be found at <a href=\"https://echarts.apache.org/examples/zh/editor.html?c=line-easing\" target=\"_blank\">easing effect example</a>.</p>\n",
+    "desc": "\n\n<p>Easing method used for the first animation. Varied easing effects can be found at <a href=\"https://echarts.apache.org/examples/en/editor.html?c=line-easing\" target=\"_blank\">easing effect example</a>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "linear,quadraticIn,quadraticOut,quadraticInOut,cubicIn,cubicOut,cubicInOut,quarticIn,quarticOut,quarticInOut,quinticIn,quinticOut,quinticInOut,sinusoidalIn,sinusoidalOut,sinusoidalInOut,exponentialIn,exponentialOut,exponentialInOut,circularIn,circularOut,circularInOut,elasticIn,elasticOut,elasticInOut,backIn,backOut,backInOut,bounceIn,bounceOut,bounceInOut",
@@ -6002,10 +7393,10 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "animationDelay": {
-    "desc": "<p>Delay before updating the first animation, which supports callback function for different data to have different animation effect.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">animationDelay: function (idx) {\n    // delay for later data is larger\n    return idx * 100;\n}\n</code></pre>\n<p>See <a href=\"https://echarts.apache.org/examples/zh/editor.html?c=bar-animation-delay\" target=\"_blank\">this example</a> for more information.</p>\n"
+    "desc": "<p>Delay before updating the first animation, which supports callback function for different data to have different animation effect.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">animationDelay: function (idx) {\n    // delay for later data is larger\n    return idx * 100;\n}\n</code></pre>\n<p>See <a href=\"https://echarts.apache.org/examples/en/editor.html?c=bar-animation-delay\" target=\"_blank\">this example</a> for more information.</p>\n"
   },
   "animationDurationUpdate": {
-    "desc": "<p>Time for animation to complete, which supports callback function for different data to have different animation effect:</p>\n<pre><code class=\"lang-js\">animationDurationUpdate: function (idx) {\n    // delay for later data is larger\n    return idx * 100;\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Time for animation to complete, which supports callback function for different data to have different animation effect:</p>\n<pre><code class=\"lang-js\">animationDurationUpdate: function (idx) {\n    // delay for later data is larger\n    return idx * 100;\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -6014,13 +7405,13 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "animationEasingUpdate": {
-    "desc": "<p>Easing method used for animation.</p>\n",
+    "desc": "\n\n<p>Easing method used for animation.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "linear,quadraticIn,quadraticOut,quadraticInOut,cubicIn,cubicOut,cubicInOut,quarticIn,quarticOut,quarticInOut,quinticIn,quinticOut,quinticInOut,sinusoidalIn,sinusoidalOut,sinusoidalInOut,exponentialIn,exponentialOut,exponentialInOut,circularIn,circularOut,circularInOut,elasticIn,elasticOut,elasticInOut,backIn,backOut,backInOut,bounceIn,bounceOut,bounceInOut"
     }
   },
   "animationDelayUpdate": {
-    "desc": "<p>Delay before updating animation, which supports callback function for different data to have different animation effects.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">animationDelayUpdate: function (idx) {\n    // delay for later data is larger\n    return idx * 100;\n}\n</code></pre>\n<p>See <a href=\"https://echarts.apache.org/examples/zh/editor.html?c=bar-animation-delay\" target=\"_blank\">this example</a> for more information.</p>\n"
+    "desc": "<p>Delay before updating animation, which supports callback function for different data to have different animation effects.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">animationDelayUpdate: function (idx) {\n    // delay for later data is larger\n    return idx * 100;\n}\n</code></pre>\n<p>See <a href=\"https://echarts.apache.org/examples/en/editor.html?c=bar-animation-delay\" target=\"_blank\">this example</a> for more information.</p>\n"
   }
 }

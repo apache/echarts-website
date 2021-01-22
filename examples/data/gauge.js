@@ -1,24 +1,23 @@
+/*
+title: Gauge Basic chart
+titleCN: 基础仪表盘
+category: gauge
+difficulty: 1
+*/
+
 option = {
     tooltip: {
         formatter: '{a} <br/>{b} : {c}%'
     },
-    toolbox: {
-        feature: {
-            restore: {},
-            saveAsImage: {}
-        }
-    },
-    series: [
-        {
-            name: '业务指标',
-            type: 'gauge',
-            detail: {formatter: '{value}%'},
-            data: [{value: 50, name: '完成率'}]
-        }
-    ]
+    series: [{
+        name: 'Pressure',
+        type: 'gauge',
+        detail: {
+            formatter: '{value}'
+        },
+        data: [{
+            value: 50,
+            name: 'SCORE'
+        }]
+    }]
 };
-
-setInterval(function () {
-    option.series[0].data[0].value = (Math.random() * 100).toFixed(2) - 0;
-    myChart.setOption(option, true);
-},2000);

@@ -1,3 +1,9 @@
+/*
+title: Scatter Map Brush
+category: scatter
+titleCN: Scatter Map Brush
+*/
+
 
 var geoCoordMap = {
     "海门":[121.15,31.89],
@@ -515,9 +521,6 @@ option = {
             type: 'scatter',
             coordinateSystem: 'geo',
             data: convertedData[0],
-            encode: {
-                value: 2
-            },
             symbolSize: function (val) {
                 return Math.max(val[2] / 10, 8);
             },
@@ -542,9 +545,6 @@ option = {
             type: 'effectScatter',
             coordinateSystem: 'geo',
             data: convertedData[1],
-            encode: {
-                value: 2
-            },
             symbolSize: function (val) {
                 return Math.max(val[2] / 10, 8);
             },

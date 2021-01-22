@@ -1,3 +1,10 @@
+/*
+title: Confidence Band
+category: line
+titleCN: Confidence Band
+difficulty: 4
+*/
+
 myChart.showLoading();
 $.get(ROOT_PATH + '/data/asset/data/confidence-band.json', function (data) {
     myChart.hideLoading();
@@ -48,9 +55,6 @@ $.get(ROOT_PATH + '/data/asset/data/confidence-band.json', function (data) {
                     return idx === 0 ? value : [date.getMonth() + 1, date.getDate()].join('-');
                 }
             },
-            splitLine: {
-                show: false
-            },
             boundaryGap: false
         },
         yAxis: {
@@ -66,10 +70,7 @@ $.get(ROOT_PATH + '/data/asset/data/confidence-band.json', function (data) {
                     }
                 }
             },
-            splitNumber: 3,
-            splitLine: {
-                show: false
-            }
+            splitNumber: 3
         },
         series: [{
             name: 'L',
@@ -104,7 +105,7 @@ $.get(ROOT_PATH + '/data/asset/data/confidence-band.json', function (data) {
             hoverAnimation: false,
             symbolSize: 6,
             itemStyle: {
-                color: '#c23531'
+                color: '#333'
             },
             showSymbol: false
         }]

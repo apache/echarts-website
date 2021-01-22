@@ -1,3 +1,10 @@
+/*
+title: Scatter3D
+category: scatter3D
+theme: dark
+titleCN: Scatter3D
+*/
+
 
 var indices = {
     name: 0,

@@ -1,0 +1,2488 @@
+{
+  "calculable": true,
+  "animation": false,
+  "darkMode": true,
+  "color": [
+    "#4992ff",
+    "#7cffb2",
+    "#fddd60",
+    "#ff6e76",
+    "#58d9f9",
+    "#05c091",
+    "#ff8a45",
+    "#8d48e3",
+    "#dd79ff"
+  ],
+  "backgroundColor": "#100C2A",
+  "textStyle": {
+    "color": "#B9B8CE",
+    "fontFamily": "sans-serif",
+    "fontSize": 12,
+    "fontStyle": "normal",
+    "fontWeight": "normal"
+  },
+  "timeAxis": {
+    "axisLine": {
+      "lineStyle": {
+        "color": "#B9B8CE"
+      }
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#484753"
+      }
+    },
+    "splitArea": {
+      "areaStyle": {
+        "color": [
+          "rgba(255,255,255,0.02)",
+          "rgba(255,255,255,0.05)"
+        ]
+      }
+    },
+    "minorSplitLine": {
+      "lineStyle": {
+        "color": "#20203B"
+      }
+    }
+  },
+  "logAxis": {
+    "axisLine": {
+      "lineStyle": {
+        "color": "#B9B8CE"
+      }
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#484753"
+      }
+    },
+    "splitArea": {
+      "areaStyle": {
+        "color": [
+          "rgba(255,255,255,0.02)",
+          "rgba(255,255,255,0.05)"
+        ]
+      }
+    },
+    "minorSplitLine": {
+      "lineStyle": {
+        "color": "#20203B"
+      }
+    }
+  },
+  "valueAxis": {
+    "axisLine": {
+      "lineStyle": {
+        "color": "#B9B8CE"
+      }
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#484753"
+      }
+    },
+    "splitArea": {
+      "areaStyle": {
+        "color": [
+          "rgba(255,255,255,0.02)",
+          "rgba(255,255,255,0.05)"
+        ]
+      }
+    },
+    "minorSplitLine": {
+      "lineStyle": {
+        "color": "#20203B"
+      }
+    }
+  },
+  "categoryAxis": {
+    "axisLine": {
+      "lineStyle": {
+        "color": "#B9B8CE"
+      }
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#484753"
+      },
+      "show": false
+    },
+    "splitArea": {
+      "areaStyle": {
+        "color": [
+          "rgba(255,255,255,0.02)",
+          "rgba(255,255,255,0.05)"
+        ]
+      }
+    },
+    "minorSplitLine": {
+      "lineStyle": {
+        "color": "#20203B"
+      }
+    }
+  },
+  "line": {
+    "symbol": "circle"
+  },
+  "graph": {
+    "color": [
+      "#4992ff",
+      "#7cffb2",
+      "#fddd60",
+      "#ff6e76",
+      "#58d9f9",
+      "#05c091",
+      "#ff8a45",
+      "#8d48e3",
+      "#dd79ff"
+    ]
+  },
+  "gauge": {
+    "title": {
+      "color": "#B9B8CE"
+    },
+    "axisLine": {
+      "lineStyle": {
+        "color": [
+          [
+            1,
+            "rgba(207,212,219,0.2)"
+          ]
+        ]
+      }
+    },
+    "axisLabel": {
+      "color": "#B9B8CE"
+    },
+    "detail": {
+      "color": "#EEF1FA"
+    }
+  },
+  "candlestick": {
+    "itemStyle": {
+      "color": "#FD1050",
+      "color0": "#0CF49B",
+      "borderColor": "#FD1050",
+      "borderColor0": "#0CF49B"
+    }
+  },
+  "gradientColor": [
+    "#f6efa6",
+    "#d88273",
+    "#bf444c"
+  ],
+  "aria": {
+    "decal": {
+      "decals": [
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "dashArrayX": [
+            1,
+            0
+          ],
+          "dashArrayY": [
+            2,
+            5
+          ],
+          "symbolSize": 1,
+          "rotation": 0.5235987755982988
+        },
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "symbol": "circle",
+          "dashArrayX": [
+            [
+              8,
+              8
+            ],
+            [
+              0,
+              8,
+              8,
+              0
+            ]
+          ],
+          "dashArrayY": [
+            6,
+            0
+          ],
+          "symbolSize": 0.8
+        },
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "dashArrayX": [
+            1,
+            0
+          ],
+          "dashArrayY": [
+            4,
+            3
+          ],
+          "dashLineOffset": 0,
+          "rotation": -0.7853981633974483
+        },
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "dashArrayX": [
+            [
+              6,
+              6
+            ],
+            [
+              0,
+              6,
+              6,
+              0
+            ]
+          ],
+          "dashArrayY": [
+            6,
+            0
+          ]
+        },
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "dashArrayX": [
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              6
+            ]
+          ],
+          "dashArrayY": [
+            1,
+            0,
+            6,
+            0
+          ],
+          "rotation": 0.7853981633974483
+        },
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "symbol": "triangle",
+          "dashArrayX": [
+            [
+              9,
+              9
+            ],
+            [
+              0,
+              9,
+              9,
+              0
+            ]
+          ],
+          "dashArrayY": [
+            7,
+            2
+          ],
+          "symbolSize": 0.75
+        }
+      ]
+    }
+  },
+  "stateAnimation": {
+    "duration": 300,
+    "easing": "cubicOut"
+  },
+  "animationDuration": 1000,
+  "animationDurationUpdate": 500,
+  "animationEasing": "cubicInOut",
+  "animationEasingUpdate": "cubicInOut",
+  "animationThreshold": 2000,
+  "progressiveThreshold": 3000,
+  "progressive": 400,
+  "hoverLayerThreshold": 3000,
+  "useUTC": false,
+  "toolbox": [
+    {
+      "show": true,
+      "feature": {
+        "mark": {
+          "show": true
+        },
+        "dataView": {
+          "show": true,
+          "readOnly": false,
+          "optionToContent": null,
+          "contentToOption": null,
+          "icon": "M17.5,17.3H33 M17.5,17.3H33 M45.4,29.5h-28 M11.5,2v56H51V14.8L38.4,2H11.5z M38.4,2.2v12.7H51 M45.4,41.7h-28",
+          "title": "Data View",
+          "lang": [
+            "Data View",
+            "Close",
+            "Refresh"
+          ],
+          "backgroundColor": "#fff",
+          "textColor": "#000",
+          "textareaColor": "#fff",
+          "textareaBorderColor": "#333",
+          "buttonColor": "#c23531",
+          "buttonTextColor": "#fff"
+        },
+        "magicType": {
+          "show": true,
+          "type": [
+            "line",
+            "bar"
+          ],
+          "icon": {
+            "line": "M4.1,28.9h7.1l9.3-22l7.4,38l9.7-19.7l3,12.8h14.9M4.1,58h51.4",
+            "bar": "M6.7,22.9h10V48h-10V22.9zM24.9,13h10v35h-10V13zM43.2,2h10v46h-10V2zM3.1,58h53.7",
+            "stack": "M8.2,38.4l-8.4,4.1l30.6,15.3L60,42.5l-8.1-4.1l-21.5,11L8.2,38.4z M51.9,30l-8.1,4.2l-13.4,6.9l-13.9-6.9L8.2,30l-8.4,4.2l8.4,4.2l22.2,11l21.5-11l8.1-4.2L51.9,30z M51.9,21.7l-8.1,4.2L35.7,30l-5.3,2.8L24.9,30l-8.4-4.1l-8.3-4.2l-8.4,4.2L8.2,30l8.3,4.2l13.9,6.9l13.4-6.9l8.1-4.2l8.1-4.1L51.9,21.7zM30.4,2.2L-0.2,17.5l8.4,4.1l8.3,4.2l8.4,4.2l5.5,2.7l5.3-2.7l8.1-4.2l8.1-4.2l8.1-4.1L30.4,2.2z"
+          },
+          "title": {
+            "line": "Switch to Line Chart",
+            "bar": "Switch to Bar Chart",
+            "stack": "Stack",
+            "tiled": "Tile"
+          },
+          "option": {},
+          "seriesIndex": {}
+        },
+        "restore": {
+          "show": true,
+          "icon": "M3.8,33.4 M47,18.9h9.8V8.7 M56.3,20.1 C52.1,9,40.5,0.6,26.8,2.1C12.6,3.7,1.6,16.2,2.1,30.6 M13,41.1H3.1v10.2 M3.7,39.9c4.2,11.1,15.8,19.5,29.5,18 c14.2-1.6,25.2-14.1,24.7-28.5",
+          "title": "Restore"
+        },
+        "saveAsImage": {
+          "show": true,
+          "icon": "M4.7,22.9L29.3,45.5L54.7,23.4M4.6,43.6L4.6,58L53.8,58L53.8,43.6M29.2,45.1L29.2,0",
+          "title": "Save as Image",
+          "type": "png",
+          "connectedBackgroundColor": "#fff",
+          "name": "",
+          "excludeComponents": [
+            "toolbox"
+          ],
+          "pixelRatio": 1,
+          "lang": [
+            "Right Click to Save Image"
+          ]
+        }
+      },
+      "padding": 15,
+      "iconStyle": {
+        "borderColor": "#B9B8CE",
+        "color": "none"
+      },
+      "z": 6,
+      "zlevel": 0,
+      "orient": "horizontal",
+      "left": "right",
+      "top": "top",
+      "backgroundColor": "transparent",
+      "borderColor": "#ccc",
+      "borderRadius": 0,
+      "borderWidth": 0,
+      "itemSize": 15,
+      "itemGap": 8,
+      "showTitle": true,
+      "emphasis": {
+        "iconStyle": {
+          "borderColor": "#3E98C5"
+        }
+      },
+      "tooltip": {
+        "show": false
+      }
+    }
+  ],
+  "axisPointer": [
+    {
+      "lineStyle": {
+        "color": "#817f91",
+        "width": 1,
+        "type": "dashed"
+      },
+      "crossStyle": {
+        "color": "#817f91"
+      },
+      "label": {
+        "color": "#fff",
+        "show": true,
+        "formatter": null,
+        "precision": "auto",
+        "margin": 3,
+        "padding": [
+          5,
+          7,
+          5,
+          7
+        ],
+        "backgroundColor": "auto",
+        "borderColor": null,
+        "borderWidth": 0,
+        "borderRadius": 3
+      },
+      "show": "auto",
+      "zlevel": 0,
+      "z": 50,
+      "type": "line",
+      "snap": false,
+      "triggerTooltip": true,
+      "value": null,
+      "status": null,
+      "link": [],
+      "animation": null,
+      "animationDurationUpdate": 200,
+      "shadowStyle": {
+        "color": "rgba(210,219,238,0.2)"
+      },
+      "handle": {
+        "show": false,
+        "icon": "M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7v-1.2h6.6z M13.3,22H6.7v-1.2h6.6z M13.3,19.6H6.7v-1.2h6.6z",
+        "size": 45,
+        "margin": 50,
+        "color": "#333",
+        "shadowBlur": 3,
+        "shadowColor": "#aaa",
+        "shadowOffsetX": 0,
+        "shadowOffsetY": 2,
+        "throttle": 40
+      }
+    }
+  ],
+  "tooltip": [
+    {
+      "trigger": "axis",
+      "axisPointer": {
+        "type": "shadow",
+        "label": {
+          "show": true
+        },
+        "axis": "auto",
+        "animation": "auto",
+        "animationDurationUpdate": 200,
+        "animationEasingUpdate": "exponentialOut",
+        "crossStyle": {
+          "color": "#999",
+          "width": 1,
+          "type": "dashed",
+          "textStyle": {}
+        }
+      },
+      "zlevel": 0,
+      "z": 60,
+      "show": true,
+      "showContent": true,
+      "triggerOn": "mousemove|click",
+      "alwaysShowContent": false,
+      "displayMode": "single",
+      "renderMode": "auto",
+      "confine": null,
+      "showDelay": 0,
+      "hideDelay": 100,
+      "transitionDuration": 0.4,
+      "enterable": false,
+      "backgroundColor": "#fff",
+      "shadowBlur": 10,
+      "shadowColor": "rgba(0, 0, 0, .2)",
+      "shadowOffsetX": 1,
+      "shadowOffsetY": 2,
+      "borderColor": "#333",
+      "borderRadius": 4,
+      "borderWidth": 1,
+      "padding": null,
+      "extraCssText": "",
+      "textStyle": {
+        "color": "#666",
+        "fontSize": 14
+      }
+    }
+  ],
+  "yAxis": [
+    {
+      "type": "value",
+      "name": "Budget (million USD)",
+      "axisLabel": {
+        "formatter": {},
+        "show": true,
+        "inside": false,
+        "rotate": 0,
+        "showMinLabel": null,
+        "showMaxLabel": null,
+        "margin": 8,
+        "fontSize": 12
+      },
+      "axisLine": {
+        "lineStyle": {
+          "color": "#B9B8CE",
+          "width": 1,
+          "type": "solid"
+        },
+        "show": "auto",
+        "onZero": true,
+        "onZeroAxisIndex": null,
+        "symbol": [
+          "none",
+          "none"
+        ],
+        "symbolSize": [
+          10,
+          15
+        ]
+      },
+      "splitLine": {
+        "lineStyle": {
+          "color": "#484753",
+          "width": 1,
+          "type": "solid"
+        },
+        "show": true
+      },
+      "splitArea": {
+        "areaStyle": {
+          "color": [
+            "rgba(255,255,255,0.02)",
+            "rgba(255,255,255,0.05)"
+          ]
+        },
+        "show": false
+      },
+      "minorSplitLine": {
+        "lineStyle": {
+          "color": "#20203B",
+          "width": 1
+        },
+        "show": false
+      },
+      "boundaryGap": [
+        0,
+        0
+      ],
+      "axisTick": {
+        "show": "auto",
+        "inside": false,
+        "length": 5,
+        "lineStyle": {
+          "width": 1
+        }
+      },
+      "splitNumber": 5,
+      "minorTick": {
+        "show": false,
+        "splitNumber": 5,
+        "length": 3,
+        "lineStyle": {}
+      },
+      "show": true,
+      "zlevel": 0,
+      "z": 0,
+      "inverse": false,
+      "nameLocation": "end",
+      "nameRotate": null,
+      "nameTruncate": {
+        "maxWidth": null,
+        "ellipsis": "...",
+        "placeholder": "."
+      },
+      "nameTextStyle": {},
+      "nameGap": 15,
+      "silent": false,
+      "triggerEvent": false,
+      "tooltip": {
+        "show": false
+      },
+      "axisPointer": {},
+      "offset": 0,
+      "categorySortInfo": []
+    }
+  ],
+  "xAxis": [
+    {
+      "type": "category",
+      "data": [
+        "Securities and Exchange Commission",
+        "Other Commissions and Boards(discretion)",
+        "Office of Chief Economist(discretion)",
+        "Departmental Management(discretion)",
+        "United States Geological Survey(discretion)",
+        "Public Company Accounting Oversight Board(discretion)",
+        "Christopher Columbus Fellowship Foundation(discretion)",
+        "Morris K. Udall and Stewart L. Udall Foundation(discretion)",
+        "Other(discretion)",
+        "Office of the Secretary(discretion)",
+        "United States Tax Court(discretion)",
+        "United States Court of Appeals for Veterans Claims(discretion)",
+        "Commission of Fine Arts(discretion)",
+        "Privacy and Civil Liberties Oversight Board(discretion)",
+        "National Credit Union Administration(discretion)",
+        "James Madison Memorial Fellowship Foundation(discretion)",
+        "Federal Financial Institutions Examination Council Appraisal Sub(discretion)",
+        "Northern Border Regional Commission(discretion)",
+        "Food and Drug Administration(discretion)",
+        "United States Court of International Trade(discretion)",
+        "Federal Financial Institutions Examination Council",
+        "Supreme Court of the United States(discretion)",
+        "United States Court of Appeals for the Federal Circuit(discretion)",
+        "Administrative Conference of the United States(discretion)",
+        "Council on Environmental Quality and Office of Environmental Qua(discretion)",
+        "Nuclear Waste Technical Review Board(discretion)",
+        "Marine Mammal Commission(discretion)",
+        "National Council on Disability(discretion)",
+        "Harry S Truman Scholarship Foundation(discretion)",
+        "Japan-United States Friendship Commission(discretion)",
+        "Office of the Fed Coordinator for Alaska Natural Gas Transportat(discretion)",
+        "Council of Economic Advisers(discretion)",
+        "Barry Goldwater Scholarship and Excellence in Education Foundati(discretion)",
+        "United States Interagency Council on Homelessness(discretion)",
+        "International Trade Administration(discretion)",
+        "State Justice Institute(discretion)",
+        "Special Assistance to the President and the Official Residence(discretion)",
+        "Office of Compliance(discretion)",
+        "Committee for Purchase from People who are Blind or Severely Dis(discretion)",
+        "Morris K. Udall and Stewart L. Udall Foundation(discretion)",
+        "Advisory Council on Historic Preservation(discretion)",
+        "Library of Congress(discretion)",
+        "Committee for Purchase from People Who Are Blind or Severely Dis",
+        "Office of Science and Technology Policy(discretion)",
+        "Access Board",
+        "Architectural and Transportation Barriers Compliance Board(discretion)",
+        "National Capital Planning Commission(discretion)",
+        "Bureau of Ocean Energy Management, Regulation and Enforcement(discretion)",
+        "Food Safety and Inspection Service(discretion)",
+        "Commission on Civil Rights(discretion)",
+        "Institute of American Indian and Alaska Native Culture and Arts(discretion)",
+        "District of Columbia Courts(discretion)",
+        "Office of Communications(discretion)",
+        "Office of Navajo and Hopi Indian Relocation(discretion)",
+        "Real Property Activities(discretion)",
+        "Corps of Engineers--Civil Works(discretion)",
+        "Chemical Safety and Hazard Investigation Board(discretion)",
+        "Election Assistance Commission(discretion)",
+        "General Activities(discretion)",
+        "Presidio Trust(discretion)",
+        "Botanic Garden(discretion)",
+        "National Security Council and Homeland Security Council(discretion)",
+        "Occupational Safety and Health Review Commission(discretion)",
+        "United States Parole Commission(discretion)",
+        "Supply and Technology Activities(discretion)",
+        "Delta Regional Authority(discretion)",
+        "Office of Government Ethics(discretion)",
+        "National Mediation Board(discretion)",
+        "Office of Chief Economist(discretion)",
+        "National Appeals Division(discretion)",
+        "FSLIC Resolution(discretion)",
+        "Executive Residence at the White House(discretion)",
+        "Denali Commission(discretion)",
+        "National Indian Gaming Commission(discretion)",
+        "Agricultural Research Service(discretion)",
+        "Research and Innovative Technology Administration(discretion)",
+        "United States Sentencing Commission(discretion)",
+        "Inter-American Foundation(discretion)",
+        "Office of Special Counsel(discretion)",
+        "Corporation for National and Community Service(discretion)",
+        "Economic Development Administration(discretion)",
+        "Joint Items(discretion)",
+        "United States Court of International Trade(discretion)",
+        "Federal Mine Safety and Health Review Commission(discretion)",
+        "Departmental Management(discretion)",
+        "National Railroad Passenger Corporation Office of Inspector Gene(discretion)",
+        "Federal Emergency Management Agency(discretion)",
+        "Office of National Drug Control Policy(discretion)",
+        "African Development Foundation(discretion)",
+        "Selective Service System(discretion)",
+        "Federal Labor Relations Authority(discretion)",
+        "Federal Maritime Commission(discretion)",
+        "Pipeline and Hazardous Materials Safety Administration(discretion)",
+        "Federal Judicial Center(discretion)",
+        "Defense Nuclear Facilities Safety Board(discretion)",
+        "Veterans Health Administration(discretion)",
+        "Surface Transportation Board(discretion)",
+        "Bureau of the Census(discretion)",
+        "Recovery Act Accountability and Transparency Board(discretion)",
+        "Recovery Accountability and Transparency Board",
+        "Minority Business Development Agency(discretion)",
+        "Senate(discretion)",
+        "Central Utah Project(discretion)",
+        "United Mine Workers of America Benefit Funds(discretion)",
+        "United States Court of Appeals for the Federal Circuit(discretion)",
+        "Saint Lawrence Seaway Development Corporation(discretion)",
+        "Program Support Center(discretion)",
+        "Office of Innovation and Improvement(discretion)",
+        "Office of Labor Management Standards(discretion)",
+        "Standard Setting Body(discretion)",
+        "Merit Systems Protection Board(discretion)",
+        "United States Institute of Peace(discretion)",
+        "Grain Inspection, Packers and Stockyards Administration(discretion)",
+        "FDIC_Office of Inspector General(discretion)",
+        "Office of the General Counsel(discretion)",
+        "Cemeterial Expenses(discretion)",
+        "Congressional Budget Office(discretion)",
+        "Federal Mediation and Conciliation Service(discretion)",
+        "Office of Inspector General(discretion)",
+        "National Telecommunications and Information Administration(discretion)",
+        "Office of the United States Trade Representative(discretion)",
+        "Wage and Hour Division(discretion)",
+        "United States Holocaust Memorial Museum(discretion)",
+        "Office of the Inspector General(discretion)",
+        "Office of the Secretary(discretion)",
+        "United States Court of Appeals for Veterans Claims(discretion)",
+        "Trade and Development Agency(discretion)",
+        "Policy Development and Research(discretion)",
+        "The White House(discretion)",
+        "United States Tax Court(discretion)",
+        "Federal Election Commission(discretion)",
+        "Office of the Solicitor(discretion)",
+        "Armed Forces Retirement Home(discretion)",
+        "Insular Affairs(discretion)",
+        "Overseas Private Investment Corporation(discretion)",
+        "Fair Housing and Equal Opportunity(discretion)",
+        "Appalachian Regional Commission(discretion)",
+        "Educational Benefits(discretion)",
+        "American Battle Monuments Commission(discretion)",
+        "Unanticipated Needs(discretion)",
+        "Risk Management Agency(discretion)",
+        "Supreme Court of the United States(discretion)",
+        "Economic Research Service(discretion)",
+        "Power Marketing Administration(discretion)",
+        "International Trade Commission(discretion)",
+        "Civilian Property Realignment Board(discretion)",
+        "National Security Division(discretion)",
+        "Office of Inspector General(discretion)",
+        "Administrative Office of the United States Courts(discretion)",
+        "Office of the Inspector General(discretion)",
+        "Office of Management and Budget(discretion)",
+        "Substance Abuse and Mental Health Services Administration(discretion)",
+        "Departmental Management(discretion)",
+        "Alcohol and Tobacco Tax and Trade Bureau(discretion)",
+        "Agricultural Marketing Service(discretion)",
+        "Research, Development, Test, and Evaluation(discretion)",
+        "Corporation for Travel Promotion(discretion)",
+        "Unanticipated Needs(discretion)",
+        "Electric Reliability Organization(discretion)",
+        "National Institute of Standards and Technology(discretion)",
+        "House of Representatives(discretion)",
+        "National Transportation Safety Board(discretion)",
+        "Energy Programs(discretion)",
+        "Bureau of Indian Affairs and Bureau of Indian Education(discretion)",
+        "Office of Federal Contract Compliance Programs(discretion)",
+        "Bureau of Industry and Security(discretion)",
+        "National Oceanic and Atmospheric Administration(discretion)",
+        "Economic and Statistical Analysis(discretion)",
+        "Financial Crimes Enforcement Network(discretion)",
+        "Office of Administration(discretion)",
+        "Radiation Exposure Compensation(discretion)",
+        "International Commissions(discretion)",
+        "Consumer Product Safety Commission(discretion)",
+        "Office of Workers' Compensation Programs(discretion)",
+        "Bureau of the Public Debt(discretion)",
+        "Nuclear Regulatory Commission(discretion)",
+        "Legislative Branch Boards and Commissions(discretion)",
+        "Bureau of Ocean Energy Management, Regulation and Enforcement(discretion)",
+        "Bureau of Land Management(discretion)",
+        "National Institute of Food and Agriculture(discretion)",
+        "Office of Lead Hazard Control and Healthy Homes(discretion)",
+        "Office of the Inspector General(discretion)",
+        "Office of Surface Mining Reclamation and Enforcement(discretion)",
+        "National Endowment for the Arts(discretion)",
+        "National Endowment for the Humanities(discretion)",
+        "Government Printing Office(discretion)",
+        "Patient-Centered Outcomes Research Trust Fund(discretion)",
+        "Office of Sustainable Housing and Communities(discretion)",
+        "Federal Transit Administration(discretion)",
+        "Office of the Special Trustee for American Indians(discretion)",
+        "Benefits Programs(discretion)",
+        "Indian Health Services(discretion)",
+        "National Agricultural Statistics Service(discretion)",
+        "Bureau of the Public Debt(discretion)",
+        "National Institutes of Health(discretion)",
+        "Departmental Offices(discretion)",
+        "Railroad Retirement Board(discretion)",
+        "Departmental Administration(discretion)",
+        "District of Columbia General and Special Payments(discretion)",
+        "Maritime Administration(discretion)",
+        "Rural Business_Cooperative Service(discretion)",
+        "Federal Railroad Administration(discretion)",
+        "Commodity Futures Trading Commission(discretion)",
+        "Pipeline and Hazardous Materials Safety Administration(discretion)",
+        "Bureau of Reclamation(discretion)",
+        "Federal Trade Commission(discretion)",
+        "Employee Benefits Security Administration(discretion)",
+        "Administration on Aging(discretion)",
+        "Public Company Accounting Oversight Board(discretion)",
+        "Neighborhood Reinvestment Corporation(discretion)",
+        "Affordable Housing Program(discretion)",
+        "Financial Management Service(discretion)",
+        "Federal Housing Finance Agency(discretion)",
+        "Rural Development(discretion)",
+        "Wage and Hour Division(discretion)",
+        "Departmental Offices(discretion)",
+        "Institute of Museum and Library Services(discretion)",
+        "United States Secret Service(discretion)",
+        "Judicial Retirement Funds(discretion)",
+        "National Science Foundation(discretion)",
+        "Transportation Security Administration(discretion)",
+        "Court Services and Offender Supervision Agency for the District(discretion)",
+        "Office of Personnel Management(discretion)",
+        "Animal and Plant Health Inspection Service(discretion)",
+        "Federal Law Enforcement Training Center(discretion)",
+        "Drug Enforcement Administration(discretion)",
+        "District of Columbia Courts(discretion)",
+        "Real Property Activities(discretion)",
+        "National Labor Relations Board(discretion)",
+        "Securities Investor Protection Corporation(discretion)",
+        "Office of the Secretary(discretion)",
+        "Maritime Administration(discretion)",
+        "Immigration and Customs Enforcement(discretion)",
+        "Economic Development Administration(discretion)",
+        "Bureau of Consumer Financial Protection(discretion)",
+        "Domestic Nuclear Detection Office(discretion)",
+        "General Activities(discretion)",
+        "Federal Drug Control Programs(discretion)",
+        "Postal Service(discretion)",
+        "Office of the Special Trustee for American Indians(discretion)",
+        "Citizenship and Immigration Services(discretion)",
+        "Mine Safety and Health Administration(discretion)",
+        "Equal Employment Opportunity Commission(discretion)",
+        "Capitol Police(discretion)",
+        "National Park Service(discretion)",
+        "Insular Affairs(discretion)",
+        "National Archives and Records Administration",
+        "National Archives and Records Administration(discretion)",
+        "Departmental Management(discretion)",
+        "Office of Postsecondary Education(discretion)",
+        "Department-Wide Programs(discretion)",
+        "Peace Corps(discretion)",
+        "Trust Funds(discretion)",
+        "Legal Services Corporation(discretion)",
+        "Corporation for Public Broadcasting(discretion)",
+        "Departmental Management(discretion)",
+        "Alcohol and Tobacco Tax and Trade Bureau(discretion)",
+        "Central Intelligence Agency(discretion)",
+        "International Trade Administration(discretion)",
+        "Office of Surface Mining Reclamation and Enforcement(discretion)",
+        "Interagency Law Enforcement(discretion)",
+        "Government Accountability Office(discretion)",
+        "Departmental Management(discretion)",
+        "Executive Office of the President",
+        "Rural Utilities Service(discretion)",
+        "Bureau of Labor Statistics(discretion)",
+        "Occupational Safety and Health Administration(discretion)",
+        "Intelligence Community Management Account(discretion)",
+        "District of Columbia General and Special Payments(discretion)",
+        "Power Marketing Administration(discretion)",
+        "Federal Motor Carrier Safety Administration(discretion)",
+        "Program Support Center(discretion)",
+        "General Services Administration",
+        "Departmental Management(discretion)",
+        "Library of Congress(discretion)",
+        "Architect of the Capitol(discretion)",
+        "Forest Service(discretion)",
+        "Office of English Language Acquisition(discretion)",
+        "Institute of Education Sciences(discretion)",
+        "Broadcasting Board of Governors(discretion)",
+        "Centers for Disease Control and Prevention(discretion)",
+        "Operation and Maintenance(discretion)",
+        "Animal and Plant Health Inspection Service(discretion)",
+        "Orderly Liquidation(discretion)",
+        "National Highway Traffic Safety Administration(discretion)",
+        "Department-Wide Programs(discretion)",
+        "Agricultural Research Service(discretion)",
+        "Federal Deposit Insurance Corporation",
+        "Senate(discretion)",
+        "Small Business Administration(discretion)",
+        "United States Fish and Wildlife Service(discretion)",
+        "Community Planning and Development(discretion)",
+        "National Institute of Standards and Technology(discretion)",
+        "Food Safety and Inspection Service(discretion)",
+        "Bureau of Reclamation(discretion)",
+        "Bureau of the Census(discretion)",
+        "Smithsonian Institution(discretion)",
+        "Departmental Management(discretion)",
+        "District of Columbia",
+        "United States Geological Survey(discretion)",
+        "Tennessee Valley Authority(discretion)",
+        "Millennium Challenge Corporation(discretion)",
+        "Bureau of Land Management(discretion)",
+        "Bureau of Alcohol, Tobacco, Firearms, and Explosives(discretion)",
+        "Science and Technology(discretion)",
+        "Courts of Appeals, District Courts, and other Judicial Services(discretion)",
+        "National Institute of Food and Agriculture(discretion)",
+        "Administration of Foreign Affairs(discretion)",
+        "Corporation for National and Community Service(discretion)",
+        "Departmental Management and Operations(discretion)",
+        "Agricultural Marketing Service(discretion)",
+        "House of Representatives(discretion)",
+        "National Telecommunications and Information Administration(discretion)",
+        "National Protection and Programs Directorate(discretion)",
+        "Rural Housing Service(discretion)",
+        "Customs and Border Protection(discretion)",
+        "United States Coast Guard(discretion)",
+        "Office of Vocational and Adult Education(discretion)",
+        "United States Fish and Wildlife Service(discretion)",
+        "Family Housing(discretion)",
+        "United States Secret Service(discretion)",
+        "Farm Service Agency(discretion)",
+        "Office of Safe and Drug-Free Schools(discretion)",
+        "Management and Administration(discretion)",
+        "National Credit Union Administration(discretion)",
+        "Drug Enforcement Administration(discretion)",
+        "Office of the Secretary(discretion)",
+        "Office of Workers' Compensation Programs(discretion)",
+        "Departmental Offices(discretion)",
+        "Foreign Agricultural Service(discretion)",
+        "Health Resources and Services Administration(discretion)",
+        "Administration on Aging(discretion)",
+        "General Administration(discretion)",
+        "Legal Activities and U.S. Marshals(discretion)",
+        "Bureau of Indian Affairs and Bureau of Indian Education(discretion)",
+        "Office of Postsecondary Education(discretion)",
+        "Citizenship and Immigration Services(discretion)",
+        "Food and Drug Administration(discretion)",
+        "National Park Service(discretion)",
+        "Risk Management Agency(discretion)",
+        "Office of Special Education and Rehabilitative Services(discretion)",
+        "Revolving and Management Funds(discretion)",
+        "Internal Revenue Service(discretion)",
+        "Substance Abuse and Mental Health Services Administration(discretion)",
+        "International Organizations and Conferences(discretion)",
+        "Multilateral Assistance(discretion)",
+        "Financial Management Service(discretion)",
+        "Legal Activities and U.S. Marshals(discretion)",
+        "Housing Programs(discretion)",
+        "Corps of Engineers--Civil Works(discretion)",
+        "Corps of Engineers--Civil Works",
+        "Natural Resources Conservation Service(discretion)",
+        "Indian Health Services(discretion)",
+        "Office of Innovation and Improvement(discretion)",
+        "National Infrastructure Bank(discretion)",
+        "Transportation Security Administration(discretion)",
+        "Forest Service(discretion)",
+        "Legislative Branch",
+        "Military Personnel(discretion)",
+        "Immigration and Customs Enforcement(discretion)",
+        "National Oceanic and Atmospheric Administration(discretion)",
+        "Federal Aviation Administration(discretion)",
+        "Centers for Disease Control and Prevention(discretion)",
+        "Postal Service(discretion)",
+        "Agency for International Development(discretion)",
+        "Environmental and Other Defense Activities(discretion)",
+        "Courts of Appeals, District Courts, and other Judicial Services(discretion)",
+        "Federal Emergency Management Agency(discretion)",
+        "Federal Prison System(discretion)",
+        "Health Resources and Services Administration(discretion)",
+        "Railroad Retirement Board(discretion)",
+        "Railroad Retirement Board",
+        "Departmental Administration(discretion)",
+        "Centers for Medicare and Medicaid Services(discretion)",
+        "Food and Nutrition Service(discretion)",
+        "National Science Foundation(discretion)",
+        "Office of Justice Programs(discretion)",
+        "Federal Railroad Administration(discretion)",
+        "Federal Bureau of Investigation(discretion)",
+        "Community Planning and Development(discretion)",
+        "Judicial Branch",
+        "United States Coast Guard(discretion)",
+        "Environmental Protection Agency(discretion)",
+        "Departmental Offices(discretion)",
+        "Farm Service Agency(discretion)",
+        "Retiree Health Care(discretion)",
+        "Employment and Training Administration(discretion)",
+        "Allowances(discretion)",
+        "Social Security Administration(discretion)",
+        "Commerce",
+        "Customs and Border Protection(discretion)",
+        "Federal Communications Commission(discretion)",
+        "Federal Communications Commission",
+        "National Nuclear Security Administration(discretion)",
+        "Energy Programs(discretion)",
+        "Office of Special Education and Rehabilitative Services(discretion)",
+        "Office of Federal Student Aid(discretion)",
+        "Federal Aviation Administration(discretion)",
+        "Military Construction(discretion)",
+        "Other(discretion)",
+        "Internal Revenue Service(discretion)",
+        "Military Sales Program(discretion)",
+        "Administration of Foreign Affairs(discretion)",
+        "International Security Assistance(discretion)",
+        "Administration for Children and Families(discretion)",
+        "Interior",
+        "National Aeronautics and Space Administration(discretion)",
+        "Office of Elementary and Secondary Education(discretion)",
+        "Federal Transit Administration(discretion)",
+        "Financial Management Service(discretion)",
+        "Energy",
+        "Office of Federal Student Aid(discretion)",
+        "National Institutes of Health(discretion)",
+        "State",
+        "Administration for Children and Families(discretion)",
+        "Justice",
+        "Public and Indian Housing Programs(discretion)",
+        "International Assistance Programs",
+        "Military Retirement(discretion)",
+        "Homeland Security",
+        "Housing and Urban Development",
+        "Veterans Health Administration(discretion)",
+        "Other Defense Civil Programs",
+        "Other",
+        "Benefits Programs(discretion)",
+        "Federal Highway Administration(discretion)",
+        "Research, Development, Test, and Evaluation(discretion)",
+        "Internal Revenue Service(discretion)",
+        "Office of Personnel Management(discretion)",
+        "Office of Personnel Management",
+        "Education",
+        "Food and Nutrition Service(discretion)",
+        "Employment and Training Administration(discretion)",
+        "Procurement(discretion)",
+        "Transportation",
+        "Veterans Affairs",
+        "Labor",
+        "Agriculture",
+        "Military Personnel(discretion)",
+        "Operation and Maintenance(discretion)",
+        "Interest on the Public Debt(discretion)",
+        "Treasury",
+        "Defense--Military Programs",
+        "Social Security Administration(discretion)",
+        "Social Security Administration",
+        "Centers for Medicare and Medicaid Services(discretion)",
+        "Health and Human Services"
+      ],
+      "axisLine": {
+        "lineStyle": {
+          "color": "#B9B8CE",
+          "width": 1,
+          "type": "solid"
+        },
+        "show": true,
+        "onZero": true,
+        "onZeroAxisIndex": null,
+        "symbol": [
+          "none",
+          "none"
+        ],
+        "symbolSize": [
+          10,
+          15
+        ]
+      },
+      "splitLine": {
+        "lineStyle": {
+          "color": "#484753",
+          "width": 1,
+          "type": "solid"
+        },
+        "show": false
+      },
+      "splitArea": {
+        "areaStyle": {
+          "color": [
+            "rgba(255,255,255,0.02)",
+            "rgba(255,255,255,0.05)"
+          ]
+        },
+        "show": false
+      },
+      "minorSplitLine": {
+        "lineStyle": {
+          "color": "#20203B"
+        }
+      },
+      "boundaryGap": true,
+      "deduplication": null,
+      "axisTick": {
+        "alignWithLabel": false,
+        "interval": "auto",
+        "show": true,
+        "inside": false,
+        "length": 5,
+        "lineStyle": {
+          "width": 1
+        }
+      },
+      "axisLabel": {
+        "interval": "auto",
+        "show": true,
+        "inside": false,
+        "rotate": 0,
+        "showMinLabel": null,
+        "showMaxLabel": null,
+        "margin": 8,
+        "fontSize": 12
+      },
+      "show": true,
+      "zlevel": 0,
+      "z": 0,
+      "inverse": false,
+      "name": "",
+      "nameLocation": "end",
+      "nameRotate": null,
+      "nameTruncate": {
+        "maxWidth": null,
+        "ellipsis": "...",
+        "placeholder": "."
+      },
+      "nameTextStyle": {},
+      "nameGap": 15,
+      "silent": false,
+      "triggerEvent": false,
+      "tooltip": {
+        "show": false
+      },
+      "axisPointer": {
+        "status": "hide",
+        "value": 446
+      },
+      "offset": 0,
+      "categorySortInfo": []
+    }
+  ],
+  "grid": [
+    {
+      "top": "12%",
+      "left": "1%",
+      "right": "10%",
+      "containLabel": true,
+      "show": false,
+      "zlevel": 0,
+      "z": 0,
+      "bottom": 70,
+      "backgroundColor": "rgba(0,0,0,0)",
+      "borderWidth": 1,
+      "borderColor": "#ccc"
+    }
+  ],
+  "series": [
+    {
+      "name": "Budget 2011",
+      "type": "bar",
+      "data": [
+        null,
+        1000,
+        1000,
+        1000,
+        2000,
+        2000,
+        1000,
+        1000,
+        4000,
+        1000,
+        1000,
+        1000,
+        12000,
+        12000,
+        1000,
+        2000,
+        3000,
+        2000,
+        2000,
+        2000,
+        2000,
+        2000,
+        2000,
+        2000,
+        3000,
+        4000,
+        3000,
+        3000,
+        1000,
+        2000,
+        4000,
+        4000,
+        4000,
+        2000,
+        5000,
+        5000,
+        5000,
+        4000,
+        5000,
+        7000,
+        6000,
+        9000,
+        9000,
+        7000,
+        7000,
+        7000,
+        9000,
+        21000,
+        10000,
+        9000,
+        8000,
+        8000,
+        10000,
+        8000,
+        3000,
+        3000,
+        11000,
+        89000,
+        11000,
+        23000,
+        11000,
+        12000,
+        12000,
+        13000,
+        13000,
+        13000,
+        14000,
+        13000,
+        13000,
+        15000,
+        27000,
+        17000,
+        19000,
+        13000,
+        14000,
+        13000,
+        17000,
+        23000,
+        18000,
+        14000,
+        14000,
+        21000,
+        19000,
+        14000,
+        22000,
+        19000,
+        19000,
+        30000,
+        30000,
+        24000,
+        25000,
+        24000,
+        23000,
+        27000,
+        26000,
+        27000,
+        28000,
+        30000,
+        30000,
+        30000,
+        32000,
+        33000,
+        52000,
+        42000,
+        29000,
+        32000,
+        36000,
+        36000,
+        36000,
+        34000,
+        40000,
+        49000,
+        42000,
+        33000,
+        44000,
+        40000,
+        45000,
+        47000,
+        49000,
+        49000,
+        48000,
+        48000,
+        49000,
+        50000,
+        18000,
+        27000,
+        55000,
+        48000,
+        60000,
+        49000,
+        67000,
+        65000,
+        134000,
+        60000,
+        20000,
+        71000,
+        76000,
+        76000,
+        83000,
+        39000,
+        80000,
+        87000,
+        82000,
+        150000,
+        81000,
+        81000,
+        88000,
+        77000,
+        83000,
+        89000,
+        93000,
+        20000,
+        109000,
+        103000,
+        93000,
+        93000,
+        93000,
+        93000,
+        100000,
+        100000,
+        110000,
+        98000,
+        62000,
+        121000,
+        121000,
+        100000,
+        58000,
+        97000,
+        111000,
+        115000,
+        120000,
+        143000,
+        118000,
+        118000,
+        103000,
+        139000,
+        57000,
+        191000,
+        208000,
+        123000,
+        139000,
+        135000,
+        163000,
+        168000,
+        168000,
+        148000,
+        10000,
+        10000,
+        2389000,
+        177000,
+        233000,
+        158000,
+        162000,
+        185000,
+        166000,
+        861000,
+        181000,
+        256000,
+        186000,
+        226000,
+        384000,
+        4360000,
+        169000,
+        164000,
+        104000,
+        205000,
+        160000,
+        10000,
+        164000,
+        233000,
+        216000,
+        244000,
+        143000,
+        202000,
+        202000,
+        138000,
+        282000,
+        244000,
+        197000,
+        90000,
+        250000,
+        249000,
+        243000,
+        320000,
+        290000,
+        272000,
+        316000,
+        10000,
+        283000,
+        417000,
+        890000,
+        413000,
+        275000,
+        347000,
+        18000,
+        376000,
+        267000,
+        375000,
+        370000,
+        482000,
+        246000,
+        364000,
+        367000,
+        342000,
+        393000,
+        429000,
+        429000,
+        458000,
+        431000,
+        462000,
+        626000,
+        400000,
+        756000,
+        420000,
+        506000,
+        1047000,
+        378000,
+        291000,
+        448000,
+        542000,
+        548000,
+        558000,
+        530000,
+        530000,
+        694000,
+        530000,
+        559000,
+        705000,
+        523000,
+        785000,
+        536000,
+        610000,
+        610000,
+        619000,
+        642000,
+        590000,
+        779000,
+        750000,
+        659000,
+        750000,
+        297000,
+        804000,
+        949000,
+        949000,
+        696000,
+        960000,
+        1251000,
+        1251000,
+        918000,
+        1786000,
+        1362000,
+        4000,
+        863000,
+        1019000,
+        1098000,
+        7096000,
+        980000,
+        4554000,
+        4554000,
+        1112000,
+        672000,
+        1055000,
+        1156000,
+        1158000,
+        999000,
+        1141000,
+        1351000,
+        1266000,
+        1150000,
+        1133000,
+        1276000,
+        1369000,
+        197000,
+        197000,
+        1885000,
+        1295000,
+        2233000,
+        2016000,
+        1648000,
+        2267000,
+        1490000,
+        2139000,
+        393000,
+        2000000,
+        2000000,
+        2084000,
+        50000,
+        2217000,
+        1775000,
+        2376000,
+        707000,
+        1513000,
+        2312000,
+        1646000,
+        2612000,
+        2512000,
+        2410000,
+        2599000,
+        2770000,
+        4547000,
+        3085000,
+        4159000,
+        2177000,
+        3431000,
+        3905000,
+        3115000,
+        2192000,
+        4358000,
+        3025000,
+        5739000,
+        5739000,
+        2939000,
+        4053000,
+        1378000,
+        1378000,
+        5515000,
+        5313000,
+        5313000,
+        4516000,
+        5520000,
+        4878000,
+        3121000,
+        6467000,
+        4449000,
+        6127000,
+        6585000,
+        6175000,
+        12211000,
+        6205000,
+        7506000,
+        6864000,
+        6864000,
+        7718000,
+        6246000,
+        8227000,
+        6873000,
+        774000,
+        15000,
+        7874000,
+        8601000,
+        8601000,
+        8894000,
+        10257000,
+        15156000,
+        10069000,
+        8623000,
+        10917000,
+        10917000,
+        9294000,
+        9294000,
+        10323000,
+        8918000,
+        8918000,
+        9881000,
+        8610000,
+        13225000,
+        14290000,
+        12470000,
+        22578000,
+        12954000,
+        12147000,
+        3257000,
+        12367000,
+        14252000,
+        17334000,
+        17334000,
+        18725000,
+        22495000,
+        9772000,
+        12679000,
+        12679000,
+        20085000,
+        30784000,
+        30784000,
+        34325000,
+        34325000,
+        34796000,
+        34796000,
+        51097000,
+        51097000,
+        51097000,
+        47966000,
+        47966000,
+        47966000,
+        71940000,
+        67815000,
+        80232000,
+        110583000,
+        73691000,
+        73691000,
+        73691000,
+        85935000,
+        240093000,
+        135819000,
+        135819000,
+        135819000,
+        135819000,
+        135819000,
+        152586000,
+        292828000,
+        413955000,
+        413955000,
+        413955000,
+        744812000,
+        744812000,
+        1071808000,
+        1071808000
+      ],
+      "progressive": 100000,
+      "animation": false,
+      "zlevel": 0,
+      "z": 2,
+      "coordinateSystem": "cartesian2d",
+      "legendHoverLink": true,
+      "barMinHeight": 0,
+      "barMinAngle": 0,
+      "large": false,
+      "largeThreshold": 400,
+      "progressiveChunkMode": "mod",
+      "clip": true,
+      "roundCap": false,
+      "showBackground": false,
+      "backgroundStyle": {
+        "color": "rgba(180, 180, 180, 0.2)",
+        "borderColor": null,
+        "borderWidth": 0,
+        "borderType": "solid",
+        "borderRadius": 0,
+        "shadowBlur": 0,
+        "shadowColor": null,
+        "shadowOffsetX": 0,
+        "shadowOffsetY": 0,
+        "opacity": 1
+      },
+      "select": {
+        "itemStyle": {
+          "borderColor": "#212121"
+        }
+      },
+      "realtimeSort": false,
+      "label": {},
+      "emphasis": {
+        "label": {}
+      }
+    },
+    {
+      "name": "Budget 2012",
+      "type": "bar",
+      "data": [
+        0,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        2000,
+        2000,
+        2000,
+        2000,
+        2000,
+        2000,
+        2000,
+        2000,
+        2000,
+        2000,
+        2000,
+        2000,
+        3000,
+        3000,
+        3000,
+        3000,
+        3000,
+        3000,
+        3000,
+        4000,
+        4000,
+        4000,
+        4000,
+        5000,
+        5000,
+        5000,
+        5000,
+        6000,
+        6000,
+        6000,
+        6000,
+        6000,
+        7000,
+        7000,
+        7000,
+        8000,
+        8000,
+        9000,
+        9000,
+        9000,
+        9000,
+        10000,
+        10000,
+        10000,
+        10000,
+        11000,
+        11000,
+        12000,
+        12000,
+        12000,
+        13000,
+        13000,
+        13000,
+        13000,
+        13000,
+        14000,
+        14000,
+        15000,
+        15000,
+        15000,
+        15000,
+        16000,
+        17000,
+        18000,
+        18000,
+        18000,
+        19000,
+        19000,
+        20000,
+        20000,
+        20000,
+        21000,
+        22000,
+        22000,
+        22000,
+        23000,
+        23000,
+        24000,
+        24000,
+        26000,
+        26000,
+        28000,
+        29000,
+        29000,
+        29000,
+        30000,
+        30000,
+        32000,
+        32000,
+        32000,
+        33000,
+        33000,
+        33000,
+        33000,
+        34000,
+        39000,
+        40000,
+        41000,
+        41000,
+        42000,
+        43000,
+        44000,
+        45000,
+        46000,
+        46000,
+        47000,
+        48000,
+        49000,
+        50000,
+        51000,
+        51000,
+        53000,
+        53000,
+        53000,
+        56000,
+        56000,
+        57000,
+        59000,
+        60000,
+        67000,
+        68000,
+        68000,
+        69000,
+        70000,
+        72000,
+        76000,
+        76000,
+        77000,
+        81000,
+        82000,
+        83000,
+        86000,
+        86000,
+        87000,
+        88000,
+        88000,
+        89000,
+        89000,
+        91000,
+        92000,
+        93000,
+        95000,
+        98000,
+        99000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        101000,
+        102000,
+        103000,
+        106000,
+        109000,
+        111000,
+        111000,
+        113000,
+        114000,
+        116000,
+        120000,
+        122000,
+        122000,
+        123000,
+        127000,
+        128000,
+        130000,
+        132000,
+        133000,
+        134000,
+        140000,
+        144000,
+        146000,
+        146000,
+        146000,
+        148000,
+        150000,
+        150000,
+        150000,
+        152000,
+        156000,
+        158000,
+        165000,
+        166000,
+        166000,
+        166000,
+        170000,
+        171000,
+        174000,
+        175000,
+        175000,
+        183000,
+        191000,
+        192000,
+        194000,
+        197000,
+        198000,
+        210000,
+        213000,
+        215000,
+        216000,
+        219000,
+        227000,
+        234000,
+        241000,
+        242000,
+        243000,
+        245000,
+        248000,
+        248000,
+        250000,
+        258000,
+        263000,
+        264000,
+        276000,
+        282000,
+        284000,
+        286000,
+        288000,
+        288000,
+        290000,
+        303000,
+        311000,
+        325000,
+        329000,
+        331000,
+        332000,
+        333000,
+        347000,
+        358000,
+        365000,
+        384000,
+        386000,
+        387000,
+        395000,
+        405000,
+        407000,
+        407000,
+        412000,
+        426000,
+        437000,
+        440000,
+        447000,
+        450000,
+        451000,
+        473000,
+        510000,
+        514000,
+        517000,
+        538000,
+        541000,
+        557000,
+        567000,
+        569000,
+        577000,
+        578000,
+        583000,
+        592000,
+        603000,
+        604000,
+        606000,
+        647000,
+        653000,
+        654000,
+        667000,
+        694000,
+        695000,
+        750000,
+        760000,
+        767000,
+        809000,
+        836000,
+        838000,
+        855000,
+        860000,
+        911000,
+        914000,
+        915000,
+        971000,
+        984000,
+        996000,
+        1001000,
+        1004000,
+        1011000,
+        1018000,
+        1025000,
+        1048000,
+        1063000,
+        1070000,
+        1118000,
+        1125000,
+        1125000,
+        1132000,
+        1147000,
+        1177000,
+        1177000,
+        1209000,
+        1257000,
+        1259000,
+        1302000,
+        1306000,
+        1334000,
+        1400000,
+        1428000,
+        1446000,
+        1471000,
+        1662000,
+        1683000,
+        1695000,
+        1695000,
+        1699000,
+        1777000,
+        1781000,
+        1791000,
+        1900000,
+        2012000,
+        2050000,
+        2078000,
+        2117000,
+        2124000,
+        2155000,
+        2237000,
+        2293000,
+        2323000,
+        2501000,
+        2533000,
+        2534000,
+        2744000,
+        2892000,
+        2981000,
+        3122000,
+        3136000,
+        3289000,
+        3387000,
+        3539000,
+        3713000,
+        3841000,
+        3909000,
+        4484000,
+        4574000,
+        4584000,
+        4592000,
+        4624000,
+        4995000,
+        5000000,
+        5114000,
+        5125000,
+        5173000,
+        5475000,
+        5495000,
+        5510000,
+        5774000,
+        5893000,
+        5947000,
+        6246000,
+        6267000,
+        6580000,
+        6790000,
+        6791000,
+        6821000,
+        6945000,
+        7115000,
+        7259000,
+        7324000,
+        7765000,
+        7768000,
+        7808000,
+        8046000,
+        8076000,
+        8211000,
+        8284000,
+        8935000,
+        8973000,
+        9495000,
+        9801000,
+        9917000,
+        10000000,
+        10000000,
+        10243000,
+        10449000,
+        10493000,
+        11570000,
+        11570000,
+        11712000,
+        11836000,
+        12647000,
+        12805000,
+        12883000,
+        13073000,
+        13080000,
+        13285000,
+        14257000,
+        14747000,
+        15965000,
+        16180000,
+        17863000,
+        18724000,
+        20161000,
+        22201000,
+        24495000,
+        30779000,
+        31433000,
+        31829000,
+        32746000,
+        34502000,
+        35403000,
+        36186000,
+        41915000,
+        48455000,
+        50045000,
+        52092000,
+        54438000,
+        58663000,
+        66476000,
+        70477000,
+        70546000,
+        75722000,
+        82053000,
+        83239000,
+        83502000,
+        93790000,
+        104212000,
+        117659000,
+        128051000,
+        129458000,
+        132359000,
+        132612000,
+        148349000,
+        154057000,
+        294891000,
+        474146000,
+        612004000,
+        677483000,
+        808041000,
+        818284000,
+        1105220000,
+        1226629000
+      ],
+      "progressive": 100000,
+      "animation": false,
+      "zlevel": 0,
+      "z": 2,
+      "coordinateSystem": "cartesian2d",
+      "legendHoverLink": true,
+      "barMinHeight": 0,
+      "barMinAngle": 0,
+      "large": false,
+      "largeThreshold": 400,
+      "progressiveChunkMode": "mod",
+      "clip": true,
+      "roundCap": false,
+      "showBackground": false,
+      "backgroundStyle": {
+        "color": "rgba(180, 180, 180, 0.2)",
+        "borderColor": null,
+        "borderWidth": 0,
+        "borderType": "solid",
+        "borderRadius": 0,
+        "shadowBlur": 0,
+        "shadowColor": null,
+        "shadowOffsetX": 0,
+        "shadowOffsetY": 0,
+        "opacity": 1
+      },
+      "select": {
+        "itemStyle": {
+          "borderColor": "#212121"
+        }
+      },
+      "realtimeSort": false,
+      "label": {},
+      "emphasis": {
+        "label": {}
+      }
+    }
+  ],
+  "visualMap": [],
+  "legend": [
+    {
+      "data": [
+        "Growth",
+        "Budget 2011",
+        "Budget 2012"
+      ],
+      "itemGap": 5,
+      "padding": 15,
+      "textStyle": {
+        "color": "#B9B8CE"
+      },
+      "zlevel": 0,
+      "z": 4,
+      "show": true,
+      "orient": "horizontal",
+      "left": "center",
+      "top": 0,
+      "align": "auto",
+      "backgroundColor": "rgba(0,0,0,0)",
+      "borderColor": "#ccc",
+      "borderRadius": 0,
+      "borderWidth": 0,
+      "itemWidth": 25,
+      "itemHeight": 14,
+      "inactiveColor": "#ccc",
+      "inactiveBorderColor": "#ccc",
+      "itemStyle": {
+        "borderWidth": 0
+      },
+      "selectedMode": true,
+      "selector": false,
+      "selectorLabel": {
+        "show": true,
+        "borderRadius": 10,
+        "padding": [
+          3,
+          5,
+          3,
+          5
+        ],
+        "fontSize": 12,
+        "fontFamily": " sans-serif",
+        "color": "#666",
+        "borderWidth": 1,
+        "borderColor": "#666"
+      },
+      "emphasis": {
+        "selectorLabel": {
+          "show": true,
+          "color": "#eee",
+          "backgroundColor": "#666"
+        }
+      },
+      "selectorPosition": "auto",
+      "selectorItemGap": 7,
+      "selectorButtonGap": 10,
+      "tooltip": {
+        "show": false
+      },
+      "selected": {}
+    }
+  ],
+  "markArea": [
+    {
+      "zlevel": 0,
+      "z": 1,
+      "tooltip": {
+        "trigger": "item"
+      },
+      "animation": false,
+      "label": {
+        "show": true,
+        "position": "top"
+      },
+      "itemStyle": {
+        "borderWidth": 0
+      },
+      "emphasis": {
+        "label": {
+          "show": true,
+          "position": "top"
+        }
+      }
+    }
+  ],
+  "markLine": [
+    {
+      "zlevel": 0,
+      "z": 5,
+      "symbol": [
+        "circle",
+        "arrow"
+      ],
+      "symbolSize": [
+        8,
+        16
+      ],
+      "precision": 2,
+      "tooltip": {
+        "trigger": "item"
+      },
+      "label": {
+        "show": true,
+        "position": "end",
+        "distance": 5
+      },
+      "lineStyle": {
+        "type": "dashed"
+      },
+      "emphasis": {
+        "label": {
+          "show": true
+        },
+        "lineStyle": {
+          "width": 3
+        }
+      },
+      "animationEasing": "linear"
+    }
+  ],
+  "markPoint": [
+    {
+      "zlevel": 0,
+      "z": 5,
+      "symbol": "pin",
+      "symbolSize": 50,
+      "tooltip": {
+        "trigger": "item"
+      },
+      "label": {
+        "show": true,
+        "position": "inside"
+      },
+      "itemStyle": {
+        "borderWidth": 2
+      },
+      "emphasis": {
+        "label": {
+          "show": true
+        }
+      }
+    }
+  ],
+  "brush": [],
+  "dataZoom": [
+    {
+      "show": true,
+      "start": 94,
+      "end": 100,
+      "borderColor": "#71708A",
+      "textStyle": {
+        "color": "#B9B8CE"
+      },
+      "brushStyle": {
+        "color": "rgba(135,163,206,0.3)"
+      },
+      "handleStyle": {
+        "color": "#353450",
+        "borderColor": "#C5CBE3"
+      },
+      "moveHandleStyle": {
+        "color": "#B0B6C3",
+        "opacity": 0.3
+      },
+      "fillerColor": "rgba(135,163,206,0.2)",
+      "emphasis": {
+        "handleStyle": {
+          "borderColor": "#91B7F2",
+          "color": "#4D587D"
+        },
+        "moveHandleStyle": {
+          "color": "#636D9A",
+          "opacity": 0.7
+        }
+      },
+      "dataBackground": {
+        "lineStyle": {
+          "color": "#71708A",
+          "width": 1
+        },
+        "areaStyle": {
+          "color": "#71708A",
+          "opacity": 0.2
+        }
+      },
+      "selectedDataBackground": {
+        "lineStyle": {
+          "color": "#87A3CE",
+          "width": 0.5
+        },
+        "areaStyle": {
+          "color": "#87A3CE",
+          "opacity": 0.2
+        }
+      },
+      "zlevel": 0,
+      "z": 4,
+      "filterMode": "filter",
+      "right": "ph",
+      "top": "ph",
+      "width": "ph",
+      "height": "ph",
+      "left": null,
+      "bottom": null,
+      "borderRadius": 3,
+      "backgroundColor": "rgba(47,69,84,0)",
+      "handleIcon": "path://M-9.35,34.56V42m0-40V9.5m-2,0h4a2,2,0,0,1,2,2v21a2,2,0,0,1-2,2h-4a2,2,0,0,1-2-2v-21A2,2,0,0,1-11.35,9.5Z",
+      "handleSize": "100%",
+      "moveHandleSize": 7,
+      "moveHandleIcon": "path://M-320.9-50L-320.9-50c18.1,0,27.1,9,27.1,27.1V85.7c0,18.1-9,27.1-27.1,27.1l0,0c-18.1,0-27.1-9-27.1-27.1V-22.9C-348-41-339-50-320.9-50z M-212.3-50L-212.3-50c18.1,0,27.1,9,27.1,27.1V85.7c0,18.1-9,27.1-27.1,27.1l0,0c-18.1,0-27.1-9-27.1-27.1V-22.9C-239.4-41-230.4-50-212.3-50z M-103.7-50L-103.7-50c18.1,0,27.1,9,27.1,27.1V85.7c0,18.1-9,27.1-27.1,27.1l0,0c-18.1,0-27.1-9-27.1-27.1V-22.9C-130.9-41-121.8-50-103.7-50z",
+      "showDetail": true,
+      "showDataShadow": "auto",
+      "realtime": true,
+      "zoomLock": false,
+      "brushSelect": true,
+      "throttle": 20,
+      "startValue": 419,
+      "endValue": 446
+    },
+    {
+      "type": "inside",
+      "start": 94,
+      "end": 100,
+      "borderColor": "#71708A",
+      "textStyle": {
+        "color": "#B9B8CE"
+      },
+      "brushStyle": {
+        "color": "rgba(135,163,206,0.3)"
+      },
+      "handleStyle": {
+        "color": "#353450",
+        "borderColor": "#C5CBE3"
+      },
+      "moveHandleStyle": {
+        "color": "#B0B6C3",
+        "opacity": 0.3
+      },
+      "fillerColor": "rgba(135,163,206,0.2)",
+      "emphasis": {
+        "handleStyle": {
+          "borderColor": "#91B7F2",
+          "color": "#4D587D"
+        },
+        "moveHandleStyle": {
+          "color": "#636D9A",
+          "opacity": 0.7
+        }
+      },
+      "dataBackground": {
+        "lineStyle": {
+          "color": "#71708A",
+          "width": 1
+        },
+        "areaStyle": {
+          "color": "#71708A"
+        }
+      },
+      "selectedDataBackground": {
+        "lineStyle": {
+          "color": "#87A3CE"
+        },
+        "areaStyle": {
+          "color": "#87A3CE"
+        }
+      },
+      "zlevel": 0,
+      "z": 4,
+      "filterMode": "filter",
+      "disabled": false,
+      "zoomLock": false,
+      "zoomOnMouseWheel": true,
+      "moveOnMouseMove": true,
+      "moveOnMouseWheel": false,
+      "preventDefaultMouseMove": true,
+      "throttle": 20,
+      "startValue": 419,
+      "endValue": 446
+    },
+    {
+      "show": true,
+      "yAxisIndex": 0,
+      "filterMode": "empty",
+      "width": 30,
+      "height": "80%",
+      "showDataShadow": false,
+      "left": "93%",
+      "borderColor": "#71708A",
+      "textStyle": {
+        "color": "#B9B8CE"
+      },
+      "brushStyle": {
+        "color": "rgba(135,163,206,0.3)"
+      },
+      "handleStyle": {
+        "color": "#353450",
+        "borderColor": "#C5CBE3"
+      },
+      "moveHandleStyle": {
+        "color": "#B0B6C3",
+        "opacity": 0.3
+      },
+      "fillerColor": "rgba(135,163,206,0.2)",
+      "emphasis": {
+        "handleStyle": {
+          "borderColor": "#91B7F2",
+          "color": "#4D587D"
+        },
+        "moveHandleStyle": {
+          "color": "#636D9A",
+          "opacity": 0.7
+        }
+      },
+      "dataBackground": {
+        "lineStyle": {
+          "color": "#71708A",
+          "width": 1
+        },
+        "areaStyle": {
+          "color": "#71708A",
+          "opacity": 0.2
+        }
+      },
+      "selectedDataBackground": {
+        "lineStyle": {
+          "color": "#87A3CE",
+          "width": 0.5
+        },
+        "areaStyle": {
+          "color": "#87A3CE",
+          "opacity": 0.2
+        }
+      },
+      "zlevel": 0,
+      "z": 4,
+      "start": 0,
+      "end": 100,
+      "top": "ph",
+      "bottom": null,
+      "borderRadius": 3,
+      "backgroundColor": "rgba(47,69,84,0)",
+      "handleIcon": "path://M-9.35,34.56V42m0-40V9.5m-2,0h4a2,2,0,0,1,2,2v21a2,2,0,0,1-2,2h-4a2,2,0,0,1-2-2v-21A2,2,0,0,1-11.35,9.5Z",
+      "handleSize": "100%",
+      "moveHandleSize": 7,
+      "moveHandleIcon": "path://M-320.9-50L-320.9-50c18.1,0,27.1,9,27.1,27.1V85.7c0,18.1-9,27.1-27.1,27.1l0,0c-18.1,0-27.1-9-27.1-27.1V-22.9C-348-41-339-50-320.9-50z M-212.3-50L-212.3-50c18.1,0,27.1,9,27.1,27.1V85.7c0,18.1-9,27.1-27.1,27.1l0,0c-18.1,0-27.1-9-27.1-27.1V-22.9C-239.4-41-230.4-50-212.3-50z M-103.7-50L-103.7-50c18.1,0,27.1,9,27.1,27.1V85.7c0,18.1-9,27.1-27.1,27.1l0,0c-18.1,0-27.1-9-27.1-27.1V-22.9C-130.9-41-121.8-50-103.7-50z",
+      "showDetail": true,
+      "realtime": true,
+      "zoomLock": false,
+      "brushSelect": true,
+      "throttle": 20,
+      "startValue": 0,
+      "endValue": 1226629000
+    }
+  ]
+}

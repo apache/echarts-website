@@ -1,8 +1,17 @@
+/*
+title: Basic Sankey
+category: sankey
+titleCN: 基础桑基图
+difficulty: 0
+*/
+
 option = {
     series: {
         type: 'sankey',
         layout: 'none',
-        focusNodeAdjacency: 'allEdges',
+        emphasis: {
+            focus: 'adjacency'
+        },
         data: [{
             name: 'a'
         }, {

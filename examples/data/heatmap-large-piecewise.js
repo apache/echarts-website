@@ -1,3 +1,10 @@
+/*
+title: Heatmap - Discrete Mapping of Color
+category: heatmap
+titleCN: 热力图 - 颜色的离散映射
+difficulty: 2
+*/
+
 var noise = getNoiseHelper();
 var xData = [];
 var yData = [];
@@ -23,8 +30,8 @@ var data = generateData(2, -5, 5);
 option = {
     tooltip: {},
     grid: {
-        right: 10,
-        left: 140
+        right: 140,
+        left: 40
     },
     xAxis: {
         type: 'category',
@@ -38,6 +45,8 @@ option = {
         type: 'piecewise',
         min: 0,
         max: 1,
+        left: 'right',
+        top: 'center',
         calculable: true,
         realtime: false,
         splitNumber: 8,

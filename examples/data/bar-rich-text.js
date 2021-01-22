@@ -1,3 +1,10 @@
+/*
+title: Wheater Statistics
+category: 'bar, rich'
+titleCN: 天气统计（富文本）
+difficulty: 6
+*/
+
 
 var weatherIcons = {
     'Sunny': ROOT_PATH + '/data/asset/img/weather/sunny_128.png',
@@ -6,11 +13,7 @@ var weatherIcons = {
 };
 
 var seriesLabel = {
-    normal: {
-        show: true,
-        textBorderColor: '#333',
-        textBorderWidth: 2
-    }
+    show: true
 }
 
 option = {

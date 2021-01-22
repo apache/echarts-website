@@ -1,3 +1,10 @@
+/*
+title: Click to Add Points
+category: line
+titleCN: 点击添加折线图拐点
+difficulty: 9
+*/
+
 var symbolSize = 20;
 var data = [[15, 0], [-50, 10], [-56.5, 20], [-46.5, 30], [-22.1, 40]];
 var points = [];

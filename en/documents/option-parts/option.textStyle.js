@@ -1,13 +1,13 @@
 window.__EC_DOC_option_textStyle = {
   "color": {
-    "desc": "<p> text color.</p>\n",
+    "desc": "\n\n<p> text color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "null"
     }
   },
   "fontStyle": {
-    "desc": "<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
+    "desc": "\n\n<p> font style.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;italic&#39;</code></li>\n<li><code class=\"codespan\">&#39;oblique&#39;</code></li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
@@ -15,7 +15,7 @@ window.__EC_DOC_option_textStyle = {
     }
   },
   "fontWeight": {
-    "desc": "<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
+    "desc": "\n\n<p> font thick weight.</p>\n<p>Options are:</p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "default": "normal",
@@ -23,7 +23,7 @@ window.__EC_DOC_option_textStyle = {
     }
   },
   "fontFamily": {
-    "desc": "<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
+    "desc": "\n\n<p> font family.</p>\n<p>Can also be &#39;serif&#39; , &#39;monospace&#39;, ...</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "sans-serif",
@@ -31,7 +31,7 @@ window.__EC_DOC_option_textStyle = {
     }
   },
   "fontSize": {
-    "desc": "<p> font size.</p>\n",
+    "desc": "\n\n<p> font size.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "12",
@@ -40,7 +40,7 @@ window.__EC_DOC_option_textStyle = {
     }
   },
   "lineHeight": {
-    "desc": "<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Line height of the text fragment.</p>\n<p>If <code class=\"codespan\">lineHeight</code> is not set in <code class=\"codespan\">rich</code>, <code class=\"codespan\">lineHeight</code> in parent level will be used. For example:</p>\n<pre><code class=\"lang-js\">{\n    lineHeight: 56,\n    rich: {\n        a: {\n            // `lineHeight` is not set, then it will be 56\n        }\n    }\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -49,19 +49,33 @@ window.__EC_DOC_option_textStyle = {
     }
   },
   "width": {
-    "desc": "<p>Width of the text block. It is the width of the text by default. In most cases, there is no need to specify it. You may want to use it in some cases like make simple table or using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p><code class=\"codespan\">width</code> can also be percent string, like <code class=\"codespan\">&#39;100%&#39;</code>, which represents the percent of <code class=\"codespan\">contentWidth</code> (that is, the width without <code class=\"codespan\">padding</code>) of its container box. It is based on <code class=\"codespan\">contentWidth</code> because that each text fragment is layout based on the <code class=\"codespan\">content box</code>, where it makes no sense that calculating width based on <code class=\"codespan\">outerWith</code> in prectice.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+    "desc": "\n\n<p>Width of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "height": {
-    "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
+    "desc": "\n\n<p>Height of text block.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "50",
+      "min": "1",
+      "max": "200",
+      "step": "1"
+    }
   },
   "textBorderColor": {
-    "desc": "<p>Storke color of the text.</p>\n",
+    "desc": "\n\n<p>Storke color of the text.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "textBorderWidth": {
-    "desc": "<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Storke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -69,14 +83,14 @@ window.__EC_DOC_option_textStyle = {
     }
   },
   "textShadowColor": {
-    "desc": "<p>Shadow color of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow color of the text itself.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#000"
     }
   },
   "textShadowBlur": {
-    "desc": "<p>Shadow blue of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow blue of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -84,17 +98,30 @@ window.__EC_DOC_option_textStyle = {
     }
   },
   "textShadowOffsetX": {
-    "desc": "<p>Shadow X offset of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow X offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
   },
   "textShadowOffsetY": {
-    "desc": "<p>Shadow Y offset of the text itself.</p>\n",
+    "desc": "\n\n<p>Shadow Y offset of the text itself.</p>\n",
     "uiControl": {
       "type": "number",
       "step": "0.5"
     }
+  },
+  "overflow": {
+    "desc": "\n\n<p>Determine how to display the text when it&#39;s overflow. Available when <code class=\"codespan\">width</code> is set.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the text and trailing with <code class=\"codespan\">ellipsis</code>.</li>\n<li><code class=\"codespan\">&#39;break&#39;</code> Break by word</li>\n<li><code class=\"codespan\">&#39;breakAll&#39;</code> Break by character.</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "truncate,break,breakAll"
+    }
+  },
+  "ellipsis": {
+    "desc": "<p>Ellipsis to be displayed when <code class=\"codespan\">overflow</code> is set to <code class=\"codespan\">truncate</code>.</p>\n"
+  },
+  "lineOverflow": {
+    "desc": "<p>Determine how to display the text when it&#39;s overflow on height.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the overflow lines.</li>\n</ul>\n"
   }
 }

@@ -1,3 +1,10 @@
+/*
+title: Bar Chart on Polar
+category: bar
+difficulty: 7
+shotWidth: 800
+*/
+
 var data = [
     [5000, 10000, 6785.71],
     [4000, 10000, 6825],

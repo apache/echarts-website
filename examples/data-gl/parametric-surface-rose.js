@@ -1,3 +1,9 @@
+/*
+title: Parametric Surface Rose
+category: surface
+titleCN: Parametric Surface Rose
+*/
+
 
 var sin = Math.sin;
 var cos = Math.cos;

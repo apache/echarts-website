@@ -1,3 +1,11 @@
+/*
+title: Calendar Heatmap Vertical
+category: 'calendar, heatmap'
+titleCN: 纵向日历图
+shotWidth: 900
+difficulty: 1
+*/
+
 function getVirtulData(year) {
     year = year || '2017';
     var date = +echarts.number.parseDate(year + '-01-01');

@@ -1,3 +1,9 @@
+/*
+title: Basic Treemap
+category: treemap
+titleCN: 基础矩形树图
+*/
+
 option = {
     series: [{
         type: 'treemap',

@@ -1,3 +1,9 @@
+/*
+title: Moon
+category: globe
+titleCN: Moon
+*/
+
 option = {
     globe: {
         baseTexture: ROOT_PATH + '/data-gl/asset/moon-base.jpg',

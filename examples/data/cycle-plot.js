@@ -1,3 +1,10 @@
+/*
+title: Cycle Plot
+category: custom
+titleCN: Cycle Plot
+difficulty: 3
+*/
+
 
 var rawData = [
     [2002, 14, 21, 25, 21, 26, 32, 27, 20, 10, 11, 5, 5],
@@ -15,8 +22,8 @@ var rawData = [
 
 var dataByMonth = [];
 var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-echarts.util.each(rawData, function (entry, yearIndex) {
-    echarts.util.each(entry, function (value, index) {
+rawData.forEach(function (entry, yearIndex) {
+    entry.forEach(function (value, index) {
         if (index) {
             var monthIndex = index - 1;
             var monthItem = dataByMonth[monthIndex] = dataByMonth[monthIndex] || [];
@@ -26,9 +33,9 @@ echarts.util.each(rawData, function (entry, yearIndex) {
     });
 });
 var averageByMonth = [];
-echarts.util.each(dataByMonth, function (entry, index) {
+dataByMonth.forEach(function (entry, index) {
     var sum = 0;
-    echarts.util.each(entry, function (value, index) {
+    entry.forEach(function (value, index) {
         index && (sum += value);
     });
     averageByMonth.push([index, sum / (entry.length - 1)]);
@@ -38,7 +45,7 @@ function renderTrendItem(params, api) {
     var categoryIndex = api.value(0);
     var unitBandWidth = api.size([0, 0])[0] * 0.85 / (rawData.length - 1);
 
-    var points = echarts.util.map(rawData, function (entry, index) {
+    var points = rawData.map(function (entry, index) {
         var value = api.value(index + 1);
         var point = api.coord([categoryIndex, value]);
         point[0] += unitBandWidth * (index - rawData.length / 2);
@@ -47,6 +54,7 @@ function renderTrendItem(params, api) {
 
     return {
         type: 'polyline',
+        transition: ['shape'],
         shape: {
             points: points
         },
@@ -64,6 +72,7 @@ function renderAverageItem(param, api) {
 
     return {
         type: 'line',
+        transition: ['shape'],
         shape: {
             x1: point[0] - bandWidth / 2,
             x2: point[0] + bandWidth / 2,
@@ -92,26 +101,13 @@ option = {
     },
     dataZoom: [{
         type: 'slider',
-        showDataShadow: false,
-        bottom: 10,
-        height: 20,
-        borderColor: 'transparent',
-        backgroundColor: '#e2e2e2',
-        handleIcon: 'M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7v-1.2h6.6z M13.3,22H6.7v-1.2h6.6z M13.3,19.6H6.7v-1.2h6.6z', // jshint ignore:line
-        handleSize: 20,
-        handleStyle: {
-            shadowBlur: 6,
-            shadowOffsetX: 1,
-            shadowOffsetY: 2,
-            shadowColor: '#aaa'
-        },
         labelFormatter: ''
     }, {
         type: 'inside'
     }],
     grid: {
         bottom: 70,
-        top: 120,
+        top: 120
     },
     xAxis: {
         data: months
@@ -134,7 +130,7 @@ option = {
         renderItem: renderTrendItem,
         encode: {
             x: 0,
-            y: echarts.util.map(rawData, function (entry, index) {
+            y: rawData.map(function (entry, index) {
                 return index + 1;
             })
         },

@@ -1,3 +1,10 @@
+/*
+title: Waterfall Chart
+titleCN: 阶梯瀑布图（柱状图模拟）
+category: bar
+difficulty: 3
+*/
+
 option = {
     title: {
         text: '阶梯瀑布图',

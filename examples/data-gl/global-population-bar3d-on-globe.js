@@ -1,3 +1,9 @@
+/*
+title: Global Population - Bar3D on Globe
+category: bar3D
+titleCN: Global Population - Bar3D on Globe
+*/
+
 $.getJSON(ROOT_PATH + "/data-gl/asset/data/population.json", function (data) {
 
     data = data.filter(function (dataItem) {

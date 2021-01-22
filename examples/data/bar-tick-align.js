@@ -1,5 +1,11 @@
+/*
+title: Axis Align with Tick
+titleCN: 坐标轴刻度与标签对齐
+category: bar
+difficulty: 0
+*/
+
 option = {
-    color: ['#3398DB'],
     tooltip: {
         trigger: 'axis',
         axisPointer: {            // 坐标轴指示器，坐标轴触发有效

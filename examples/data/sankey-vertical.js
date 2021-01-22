@@ -1,7 +1,11 @@
+/*
+title: Sankey Orient Vertical
+category: sankey
+titleCN: 垂直方向的桑基图
+difficulty: 1
+*/
+
 option = {
-    color: [
-        '#67001f', '#b2182b', '#d6604d', '#f4a582', '#fddbc7', '#d1e5f0', '#92c5de', '#4393c3', '#2166ac', '#053061'
-    ],
     tooltip: {
         trigger: 'item',
         triggerOn: 'mousemove'
@@ -11,7 +15,9 @@ option = {
         {
             type: 'sankey',
             bottom: '10%',
-            focusNodeAdjacency: 'allEdges',
+            emphasis: {
+                focus: 'adjacency'
+            },
             data: [
                 {name: 'a'},
                 {name: 'b'},

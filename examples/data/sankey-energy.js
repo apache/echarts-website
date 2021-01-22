@@ -1,3 +1,10 @@
+/*
+title: Gradient Edge
+category: sankey
+titleCN: 桑基图渐变色边
+difficulty: 3
+*/
+
 myChart.showLoading();
 $.get(ROOT_PATH + '/data/asset/data/energy.json', function (data) {
     myChart.hideLoading();
@@ -15,13 +22,11 @@ $.get(ROOT_PATH + '/data/asset/data/energy.json', function (data) {
                 type: 'sankey',
                 data: data.nodes,
                 links: data.links,
-                focusNodeAdjacency: 'allEdges',
-                itemStyle: {
-                    borderWidth: 1,
-                    borderColor: '#aaa'
+                emphasis: {
+                    focus: 'adjacency'
                 },
                 lineStyle: {
-                    color: 'source',
+                    color: 'gradient',
                     curveness: 0.5
                 }
             }

@@ -1,3 +1,10 @@
+/*
+title: AQI - Radar Chart
+category: radar
+titleCN: AQI - 雷达图
+difficulty: 1
+*/
+
 // Schema:
 // date,AQIindex,PM2.5,PM10,CO,NO2,SO2
 var dataBJ = [

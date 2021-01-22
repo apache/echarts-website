@@ -1,3 +1,10 @@
+/*
+title: Simple Graph
+category: graph
+titleCN: Graph 简单示例
+difficulty: 2
+*/
+
 option = {
     title: {
         text: 'Graph 简单示例'

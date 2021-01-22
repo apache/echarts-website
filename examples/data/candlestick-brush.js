@@ -1,3 +1,9 @@
+/*
+title: Candlestick Brush
+category: candlestick
+titleCN: 日力图刷选
+*/
+
 var upColor = '#00da3c';
 var downColor = '#ec0000';
 
@@ -40,7 +46,6 @@ $.get(ROOT_PATH + '/data/asset/data/stock-DJI.json', function (rawData) {
     var data = splitData(rawData);
 
     myChart.setOption(option = {
-        backgroundColor: '#fff',
         animation: false,
         legend: {
             bottom: 10,
@@ -52,7 +57,6 @@ $.get(ROOT_PATH + '/data/asset/data/stock-DJI.json', function (rawData) {
             axisPointer: {
                 type: 'cross'
             },
-            backgroundColor: 'rgba(245, 245, 245, 0.8)',
             borderWidth: 1,
             borderColor: '#ccc',
             padding: 10,

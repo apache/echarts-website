@@ -1,3 +1,9 @@
+/*
+title: 星云
+category: bar3D
+titleCN: 星云
+*/
+
 var img = new Image();
 var canvas = document.createElement('canvas');
 var ctx = canvas.getContext('2d');
@@ -75,6 +81,7 @@ img.onload = function () {
             shading: 'lambert',
             barSize: 0.8,
             silent: true,
+            dimensions: ['x', 'y', 'z'],
             itemStyle: {
                 color: function (params) {
                     var i = params.dataIndex;

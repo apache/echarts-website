@@ -1,0 +1,1203 @@
+{
+  "animation": false,
+  "darkMode": true,
+  "color": [
+    "#4992ff",
+    "#7cffb2",
+    "#fddd60",
+    "#ff6e76",
+    "#58d9f9",
+    "#05c091",
+    "#ff8a45",
+    "#8d48e3",
+    "#dd79ff"
+  ],
+  "backgroundColor": "#100C2A",
+  "textStyle": {
+    "color": "#B9B8CE",
+    "fontFamily": "sans-serif",
+    "fontSize": 12,
+    "fontStyle": "normal",
+    "fontWeight": "normal"
+  },
+  "timeAxis": {
+    "axisLine": {
+      "lineStyle": {
+        "color": "#B9B8CE"
+      }
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#484753"
+      }
+    },
+    "splitArea": {
+      "areaStyle": {
+        "color": [
+          "rgba(255,255,255,0.02)",
+          "rgba(255,255,255,0.05)"
+        ]
+      }
+    },
+    "minorSplitLine": {
+      "lineStyle": {
+        "color": "#20203B"
+      }
+    }
+  },
+  "logAxis": {
+    "axisLine": {
+      "lineStyle": {
+        "color": "#B9B8CE"
+      }
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#484753"
+      }
+    },
+    "splitArea": {
+      "areaStyle": {
+        "color": [
+          "rgba(255,255,255,0.02)",
+          "rgba(255,255,255,0.05)"
+        ]
+      }
+    },
+    "minorSplitLine": {
+      "lineStyle": {
+        "color": "#20203B"
+      }
+    }
+  },
+  "valueAxis": {
+    "axisLine": {
+      "lineStyle": {
+        "color": "#B9B8CE"
+      }
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#484753"
+      }
+    },
+    "splitArea": {
+      "areaStyle": {
+        "color": [
+          "rgba(255,255,255,0.02)",
+          "rgba(255,255,255,0.05)"
+        ]
+      }
+    },
+    "minorSplitLine": {
+      "lineStyle": {
+        "color": "#20203B"
+      }
+    }
+  },
+  "categoryAxis": {
+    "axisLine": {
+      "lineStyle": {
+        "color": "#B9B8CE"
+      }
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#484753"
+      },
+      "show": false
+    },
+    "splitArea": {
+      "areaStyle": {
+        "color": [
+          "rgba(255,255,255,0.02)",
+          "rgba(255,255,255,0.05)"
+        ]
+      }
+    },
+    "minorSplitLine": {
+      "lineStyle": {
+        "color": "#20203B"
+      }
+    }
+  },
+  "line": {
+    "symbol": "circle"
+  },
+  "graph": {
+    "color": [
+      "#4992ff",
+      "#7cffb2",
+      "#fddd60",
+      "#ff6e76",
+      "#58d9f9",
+      "#05c091",
+      "#ff8a45",
+      "#8d48e3",
+      "#dd79ff"
+    ]
+  },
+  "gauge": {
+    "title": {
+      "color": "#B9B8CE"
+    },
+    "axisLine": {
+      "lineStyle": {
+        "color": [
+          [
+            1,
+            "rgba(207,212,219,0.2)"
+          ]
+        ]
+      }
+    },
+    "axisLabel": {
+      "color": "#B9B8CE"
+    },
+    "detail": {
+      "color": "#EEF1FA"
+    }
+  },
+  "candlestick": {
+    "itemStyle": {
+      "color": "#FD1050",
+      "color0": "#0CF49B",
+      "borderColor": "#FD1050",
+      "borderColor0": "#0CF49B"
+    }
+  },
+  "gradientColor": [
+    "#f6efa6",
+    "#d88273",
+    "#bf444c"
+  ],
+  "aria": {
+    "decal": {
+      "decals": [
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "dashArrayX": [
+            1,
+            0
+          ],
+          "dashArrayY": [
+            2,
+            5
+          ],
+          "symbolSize": 1,
+          "rotation": 0.5235987755982988
+        },
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "symbol": "circle",
+          "dashArrayX": [
+            [
+              8,
+              8
+            ],
+            [
+              0,
+              8,
+              8,
+              0
+            ]
+          ],
+          "dashArrayY": [
+            6,
+            0
+          ],
+          "symbolSize": 0.8
+        },
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "dashArrayX": [
+            1,
+            0
+          ],
+          "dashArrayY": [
+            4,
+            3
+          ],
+          "dashLineOffset": 0,
+          "rotation": -0.7853981633974483
+        },
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "dashArrayX": [
+            [
+              6,
+              6
+            ],
+            [
+              0,
+              6,
+              6,
+              0
+            ]
+          ],
+          "dashArrayY": [
+            6,
+            0
+          ]
+        },
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "dashArrayX": [
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              6
+            ]
+          ],
+          "dashArrayY": [
+            1,
+            0,
+            6,
+            0
+          ],
+          "rotation": 0.7853981633974483
+        },
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "symbol": "triangle",
+          "dashArrayX": [
+            [
+              9,
+              9
+            ],
+            [
+              0,
+              9,
+              9,
+              0
+            ]
+          ],
+          "dashArrayY": [
+            7,
+            2
+          ],
+          "symbolSize": 0.75
+        }
+      ]
+    }
+  },
+  "stateAnimation": {
+    "duration": 300,
+    "easing": "cubicOut"
+  },
+  "animationDuration": 1000,
+  "animationDurationUpdate": 500,
+  "animationEasing": "cubicInOut",
+  "animationEasingUpdate": "cubicInOut",
+  "animationThreshold": 2000,
+  "progressiveThreshold": 3000,
+  "progressive": 400,
+  "hoverLayerThreshold": 3000,
+  "useUTC": false,
+  "title": [
+    {
+      "text": "Sankey Diagram",
+      "padding": 15,
+      "textStyle": {
+        "color": "#EEF1FA",
+        "fontSize": 18,
+        "fontWeight": "bold"
+      },
+      "subtextStyle": {
+        "color": "#B9B8CE",
+        "fontSize": 12
+      },
+      "zlevel": 0,
+      "z": 6,
+      "show": true,
+      "target": "blank",
+      "subtext": "",
+      "subtarget": "blank",
+      "left": 0,
+      "top": 0,
+      "backgroundColor": "rgba(0,0,0,0)",
+      "borderColor": "#ccc",
+      "borderWidth": 0,
+      "itemGap": 10
+    }
+  ],
+  "axisPointer": [
+    {
+      "lineStyle": {
+        "color": "#817f91",
+        "width": 1,
+        "type": "dashed"
+      },
+      "crossStyle": {
+        "color": "#817f91"
+      },
+      "label": {
+        "color": "#fff",
+        "show": true,
+        "formatter": null,
+        "precision": "auto",
+        "margin": 3,
+        "padding": [
+          5,
+          7,
+          5,
+          7
+        ],
+        "backgroundColor": "auto",
+        "borderColor": null,
+        "borderWidth": 0,
+        "borderRadius": 3
+      },
+      "show": "auto",
+      "zlevel": 0,
+      "z": 50,
+      "type": "line",
+      "snap": false,
+      "triggerTooltip": true,
+      "value": null,
+      "status": null,
+      "link": [],
+      "animation": null,
+      "animationDurationUpdate": 200,
+      "shadowStyle": {
+        "color": "rgba(210,219,238,0.2)"
+      },
+      "handle": {
+        "show": false,
+        "icon": "M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7v-1.2h6.6z M13.3,22H6.7v-1.2h6.6z M13.3,19.6H6.7v-1.2h6.6z",
+        "size": 45,
+        "margin": 50,
+        "color": "#333",
+        "shadowBlur": 3,
+        "shadowColor": "#aaa",
+        "shadowOffsetX": 0,
+        "shadowOffsetY": 2,
+        "throttle": 40
+      }
+    }
+  ],
+  "tooltip": [
+    {
+      "trigger": "item",
+      "triggerOn": "mousemove",
+      "zlevel": 0,
+      "z": 60,
+      "show": true,
+      "showContent": true,
+      "alwaysShowContent": false,
+      "displayMode": "single",
+      "renderMode": "auto",
+      "confine": null,
+      "showDelay": 0,
+      "hideDelay": 100,
+      "transitionDuration": 0.4,
+      "enterable": false,
+      "backgroundColor": "#fff",
+      "shadowBlur": 10,
+      "shadowColor": "rgba(0, 0, 0, .2)",
+      "shadowOffsetX": 1,
+      "shadowOffsetY": 2,
+      "borderColor": "#333",
+      "borderRadius": 4,
+      "borderWidth": 1,
+      "padding": null,
+      "extraCssText": "",
+      "axisPointer": {
+        "type": "line",
+        "axis": "auto",
+        "animation": "auto",
+        "animationDurationUpdate": 200,
+        "animationEasingUpdate": "exponentialOut",
+        "crossStyle": {
+          "color": "#999",
+          "width": 1,
+          "type": "dashed",
+          "textStyle": {}
+        }
+      },
+      "textStyle": {
+        "color": "#666",
+        "fontSize": 14
+      }
+    }
+  ],
+  "series": [
+    {
+      "type": "sankey",
+      "data": [
+        {
+          "name": "Total"
+        },
+        {
+          "name": "Environment"
+        },
+        {
+          "name": "Land use"
+        },
+        {
+          "name": "Cocoa butter (Organic)"
+        },
+        {
+          "name": "Cocoa mass (Organic)"
+        },
+        {
+          "name": "Hazelnuts (Organic)"
+        },
+        {
+          "name": "Cane sugar (Organic)"
+        },
+        {
+          "name": "Vegetables (Organic)"
+        },
+        {
+          "name": "Climate change"
+        },
+        {
+          "name": "Harmful substances"
+        },
+        {
+          "name": "Water use"
+        },
+        {
+          "name": "Resource depletion"
+        },
+        {
+          "name": "Refrigeration"
+        },
+        {
+          "name": "Packaging"
+        },
+        {
+          "name": "Human rights"
+        },
+        {
+          "name": "Child labour"
+        },
+        {
+          "name": "Coconut oil (Organic)"
+        },
+        {
+          "name": "Forced labour"
+        },
+        {
+          "name": "Health safety"
+        },
+        {
+          "name": "Access to water"
+        },
+        {
+          "name": "Freedom of association"
+        },
+        {
+          "name": "Access to land"
+        },
+        {
+          "name": "Sufficient wage"
+        },
+        {
+          "name": "Equal rights migrants"
+        },
+        {
+          "name": "Discrimination"
+        },
+        {
+          "name": "Working hours"
+        }
+      ],
+      "links": [
+        {
+          "source": "Total",
+          "target": "Environment",
+          "value": 0.342284047256003
+        },
+        {
+          "source": "Environment",
+          "target": "Land use",
+          "value": 0.32322870366987
+        },
+        {
+          "source": "Land use",
+          "target": "Cocoa butter (Organic)",
+          "value": 0.177682517071359
+        },
+        {
+          "source": "Land use",
+          "target": "Cocoa mass (Organic)",
+          "value": 0.137241325342711
+        },
+        {
+          "source": "Land use",
+          "target": "Hazelnuts (Organic)",
+          "value": 0.00433076373512774
+        },
+        {
+          "source": "Land use",
+          "target": "Cane sugar (Organic)",
+          "value": 0.00296956039863467
+        },
+        {
+          "source": "Land use",
+          "target": "Vegetables (Organic)",
+          "value": 0.00100453712203756
+        },
+        {
+          "source": "Environment",
+          "target": "Climate change",
+          "value": 0.0112886157414413
+        },
+        {
+          "source": "Climate change",
+          "target": "Cocoa butter (Organic)",
+          "value": 0.00676852971933996
+        },
+        {
+          "source": "Climate change",
+          "target": "Cocoa mass (Organic)",
+          "value": 0.00394686874786743
+        },
+        {
+          "source": "Climate change",
+          "target": "Cane sugar (Organic)",
+          "value": 0.000315972058711838
+        },
+        {
+          "source": "Climate change",
+          "target": "Hazelnuts (Organic)",
+          "value": 0.000218969462265292
+        },
+        {
+          "source": "Climate change",
+          "target": "Vegetables (Organic)",
+          "value": 0.0000382757532567656
+        },
+        {
+          "source": "Environment",
+          "target": "Harmful substances",
+          "value": 0.00604275542495656
+        },
+        {
+          "source": "Harmful substances",
+          "target": "Cocoa mass (Organic)",
+          "value": 0.0055125989240741
+        },
+        {
+          "source": "Harmful substances",
+          "target": "Cocoa butter (Organic)",
+          "value": 0.000330017607892127
+        },
+        {
+          "source": "Harmful substances",
+          "target": "Cane sugar (Organic)",
+          "value": 0.000200138892990337
+        },
+        {
+          "source": "Harmful substances",
+          "target": "Hazelnuts (Organic)",
+          "value": 0
+        },
+        {
+          "source": "Harmful substances",
+          "target": "Vegetables (Organic)",
+          "value": 0
+        },
+        {
+          "source": "Environment",
+          "target": "Water use",
+          "value": 0.00148345269044703
+        },
+        {
+          "source": "Water use",
+          "target": "Cocoa butter (Organic)",
+          "value": 0.00135309891304186
+        },
+        {
+          "source": "Water use",
+          "target": "Cocoa mass (Organic)",
+          "value": 0.000105714137908639
+        },
+        {
+          "source": "Water use",
+          "target": "Hazelnuts (Organic)",
+          "value": 0.0000133452642581887
+        },
+        {
+          "source": "Water use",
+          "target": "Cane sugar (Organic)",
+          "value": 0.00000878074837009238
+        },
+        {
+          "source": "Water use",
+          "target": "Vegetables (Organic)",
+          "value": 0.0000025136268682477
+        },
+        {
+          "source": "Environment",
+          "target": "Resource depletion",
+          "value": 0.000240519729288764
+        },
+        {
+          "source": "Resource depletion",
+          "target": "Cane sugar (Organic)",
+          "value": 0.000226237279345084
+        },
+        {
+          "source": "Resource depletion",
+          "target": "Vegetables (Organic)",
+          "value": 0.0000142824499436793
+        },
+        {
+          "source": "Resource depletion",
+          "target": "Hazelnuts (Organic)",
+          "value": 0
+        },
+        {
+          "source": "Resource depletion",
+          "target": "Cocoa mass (Organic)",
+          "value": 0
+        },
+        {
+          "source": "Resource depletion",
+          "target": "Cocoa butter (Organic)",
+          "value": 0
+        },
+        {
+          "source": "Environment",
+          "target": "Refrigeration",
+          "value": 0
+        },
+        {
+          "source": "Environment",
+          "target": "Packaging",
+          "value": 0
+        },
+        {
+          "source": "Total",
+          "target": "Human rights",
+          "value": 0.307574096993239
+        },
+        {
+          "source": "Human rights",
+          "target": "Child labour",
+          "value": 0.0410641202645833
+        },
+        {
+          "source": "Child labour",
+          "target": "Hazelnuts (Organic)",
+          "value": 0.0105339381639722
+        },
+        {
+          "source": "Child labour",
+          "target": "Cocoa mass (Organic)",
+          "value": 0.0105
+        },
+        {
+          "source": "Child labour",
+          "target": "Cocoa butter (Organic)",
+          "value": 0.0087294420777
+        },
+        {
+          "source": "Child labour",
+          "target": "Coconut oil (Organic)",
+          "value": 0.00474399974233333
+        },
+        {
+          "source": "Child labour",
+          "target": "Cane sugar (Organic)",
+          "value": 0.00388226450884445
+        },
+        {
+          "source": "Child labour",
+          "target": "Vegetables (Organic)",
+          "value": 0.00267447577173333
+        },
+        {
+          "source": "Human rights",
+          "target": "Forced labour",
+          "value": 0.0365458590642445
+        },
+        {
+          "source": "Forced labour",
+          "target": "Hazelnuts (Organic)",
+          "value": 0.0114913076376389
+        },
+        {
+          "source": "Forced labour",
+          "target": "Cocoa butter (Organic)",
+          "value": 0.0081134807347
+        },
+        {
+          "source": "Forced labour",
+          "target": "Cocoa mass (Organic)",
+          "value": 0.00765230236575
+        },
+        {
+          "source": "Forced labour",
+          "target": "Cane sugar (Organic)",
+          "value": 0.004
+        },
+        {
+          "source": "Forced labour",
+          "target": "Vegetables (Organic)",
+          "value": 0.00296668823626667
+        },
+        {
+          "source": "Forced labour",
+          "target": "Coconut oil (Organic)",
+          "value": 0.00232208008988889
+        },
+        {
+          "source": "Human rights",
+          "target": "Health safety",
+          "value": 0.0345435327843611
+        },
+        {
+          "source": "Health safety",
+          "target": "Hazelnuts (Organic)",
+          "value": 0.0121419536385
+        },
+        {
+          "source": "Health safety",
+          "target": "Cocoa mass (Organic)",
+          "value": 0.00766772850678333
+        },
+        {
+          "source": "Health safety",
+          "target": "Cocoa butter (Organic)",
+          "value": 0.0056245892061
+        },
+        {
+          "source": "Health safety",
+          "target": "Coconut oil (Organic)",
+          "value": 0.00361616847688889
+        },
+        {
+          "source": "Health safety",
+          "target": "Cane sugar (Organic)",
+          "value": 0.00277374682533333
+        },
+        {
+          "source": "Health safety",
+          "target": "Vegetables (Organic)",
+          "value": 0.00271934613075556
+        },
+        {
+          "source": "Human rights",
+          "target": "Access to water",
+          "value": 0.0340206659360667
+        },
+        {
+          "source": "Access to water",
+          "target": "Cocoa mass (Organic)",
+          "value": 0.0105
+        },
+        {
+          "source": "Access to water",
+          "target": "Cocoa butter (Organic)",
+          "value": 0.0089274160792
+        },
+        {
+          "source": "Access to water",
+          "target": "Hazelnuts (Organic)",
+          "value": 0.0054148022845
+        },
+        {
+          "source": "Access to water",
+          "target": "Cane sugar (Organic)",
+          "value": 0.00333938149786667
+        },
+        {
+          "source": "Access to water",
+          "target": "Vegetables (Organic)",
+          "value": 0.00314663377488889
+        },
+        {
+          "source": "Access to water",
+          "target": "Coconut oil (Organic)",
+          "value": 0.00269243229961111
+        },
+        {
+          "source": "Human rights",
+          "target": "Freedom of association",
+          "value": 0.0320571523941667
+        },
+        {
+          "source": "Freedom of association",
+          "target": "Hazelnuts (Organic)",
+          "value": 0.0132312483463611
+        },
+        {
+          "source": "Freedom of association",
+          "target": "Cocoa butter (Organic)",
+          "value": 0.0077695200707
+        },
+        {
+          "source": "Freedom of association",
+          "target": "Cocoa mass (Organic)",
+          "value": 0.00510606573995
+        },
+        {
+          "source": "Freedom of association",
+          "target": "Vegetables (Organic)",
+          "value": 0.00354321156324444
+        },
+        {
+          "source": "Freedom of association",
+          "target": "Cane sugar (Organic)",
+          "value": 0.00240710667391111
+        },
+        {
+          "source": "Freedom of association",
+          "target": "Coconut oil (Organic)",
+          "value": 0
+        },
+        {
+          "source": "Human rights",
+          "target": "Access to land",
+          "value": 0.0315022209894056
+        },
+        {
+          "source": "Access to land",
+          "target": "Hazelnuts (Organic)",
+          "value": 0.00964970063322223
+        },
+        {
+          "source": "Access to land",
+          "target": "Cocoa mass (Organic)",
+          "value": 0.00938530207965
+        },
+        {
+          "source": "Access to land",
+          "target": "Cocoa butter (Organic)",
+          "value": 0.0060110791848
+        },
+        {
+          "source": "Access to land",
+          "target": "Cane sugar (Organic)",
+          "value": 0.00380818314608889
+        },
+        {
+          "source": "Access to land",
+          "target": "Vegetables (Organic)",
+          "value": 0.00264795594564445
+        },
+        {
+          "source": "Access to land",
+          "target": "Coconut oil (Organic)",
+          "value": 0
+        },
+        {
+          "source": "Human rights",
+          "target": "Sufficient wage",
+          "value": 0.0287776757227333
+        },
+        {
+          "source": "Sufficient wage",
+          "target": "Cocoa mass (Organic)",
+          "value": 0.00883512456493333
+        },
+        {
+          "source": "Sufficient wage",
+          "target": "Cocoa butter (Organic)",
+          "value": 0.0078343367268
+        },
+        {
+          "source": "Sufficient wage",
+          "target": "Coconut oil (Organic)",
+          "value": 0.00347879026511111
+        },
+        {
+          "source": "Sufficient wage",
+          "target": "Hazelnuts (Organic)",
+          "value": 0.00316254211388889
+        },
+        {
+          "source": "Sufficient wage",
+          "target": "Vegetables (Organic)",
+          "value": 0.00281013722808889
+        },
+        {
+          "source": "Sufficient wage",
+          "target": "Cane sugar (Organic)",
+          "value": 0.00265674482391111
+        },
+        {
+          "source": "Human rights",
+          "target": "Equal rights migrants",
+          "value": 0.0271146645119444
+        },
+        {
+          "source": "Equal rights migrants",
+          "target": "Cocoa butter (Organic)",
+          "value": 0.0071042315061
+        },
+        {
+          "source": "Equal rights migrants",
+          "target": "Cocoa mass (Organic)",
+          "value": 0.00636673210005
+        },
+        {
+          "source": "Equal rights migrants",
+          "target": "Hazelnuts (Organic)",
+          "value": 0.00601459775836111
+        },
+        {
+          "source": "Equal rights migrants",
+          "target": "Coconut oil (Organic)",
+          "value": 0.00429185583138889
+        },
+        {
+          "source": "Equal rights migrants",
+          "target": "Cane sugar (Organic)",
+          "value": 0.00182647471915556
+        },
+        {
+          "source": "Equal rights migrants",
+          "target": "Vegetables (Organic)",
+          "value": 0.00151077259688889
+        },
+        {
+          "source": "Human rights",
+          "target": "Discrimination",
+          "value": 0.0211217763359833
+        },
+        {
+          "source": "Discrimination",
+          "target": "Cocoa mass (Organic)",
+          "value": 0.00609671700306667
+        },
+        {
+          "source": "Discrimination",
+          "target": "Cocoa butter (Organic)",
+          "value": 0.0047738806325
+        },
+        {
+          "source": "Discrimination",
+          "target": "Coconut oil (Organic)",
+          "value": 0.00368119084494444
+        },
+        {
+          "source": "Discrimination",
+          "target": "Vegetables (Organic)",
+          "value": 0.00286009813604444
+        },
+        {
+          "source": "Discrimination",
+          "target": "Cane sugar (Organic)",
+          "value": 0.00283706180951111
+        },
+        {
+          "source": "Discrimination",
+          "target": "Hazelnuts (Organic)",
+          "value": 0.000872827909916666
+        },
+        {
+          "source": "Human rights",
+          "target": "Working hours",
+          "value": 0.02082642898975
+        },
+        {
+          "source": "Working hours",
+          "target": "Hazelnuts (Organic)",
+          "value": 0.0107216773848333
+        },
+        {
+          "source": "Working hours",
+          "target": "Coconut oil (Organic)",
+          "value": 0.00359009052944444
+        },
+        {
+          "source": "Working hours",
+          "target": "Vegetables (Organic)",
+          "value": 0.00212300379075556
+        },
+        {
+          "source": "Working hours",
+          "target": "Cocoa butter (Organic)",
+          "value": 0.0018518584356
+        },
+        {
+          "source": "Working hours",
+          "target": "Cocoa mass (Organic)",
+          "value": 0.00158227069058333
+        },
+        {
+          "source": "Working hours",
+          "target": "Cane sugar (Organic)",
+          "value": 0.000957528158533333
+        }
+      ],
+      "emphasis": {
+        "focus": "adjacency",
+        "label": {
+          "show": true
+        },
+        "lineStyle": {
+          "opacity": 0.5
+        }
+      },
+      "levels": [
+        {
+          "depth": 0,
+          "itemStyle": {
+            "color": "#fbb4ae"
+          },
+          "lineStyle": {
+            "color": "source",
+            "opacity": 0.6
+          }
+        },
+        {
+          "depth": 1,
+          "itemStyle": {
+            "color": "#b3cde3"
+          },
+          "lineStyle": {
+            "color": "source",
+            "opacity": 0.6
+          }
+        },
+        {
+          "depth": 2,
+          "itemStyle": {
+            "color": "#ccebc5"
+          },
+          "lineStyle": {
+            "color": "source",
+            "opacity": 0.6
+          }
+        },
+        {
+          "depth": 3,
+          "itemStyle": {
+            "color": "#decbe4"
+          },
+          "lineStyle": {
+            "color": "source",
+            "opacity": 0.6
+          }
+        }
+      ],
+      "lineStyle": {
+        "curveness": 0.5,
+        "color": "#314656",
+        "opacity": 0.2
+      },
+      "progressive": 100000,
+      "animation": false,
+      "zlevel": 0,
+      "z": 2,
+      "coordinateSystem": "view",
+      "left": "5%",
+      "top": "5%",
+      "right": "20%",
+      "bottom": "5%",
+      "orient": "horizontal",
+      "nodeWidth": 20,
+      "nodeGap": 8,
+      "draggable": true,
+      "focusNodeAdjacency": false,
+      "layoutIterations": 32,
+      "label": {
+        "show": true,
+        "position": "right",
+        "fontSize": 12
+      },
+      "nodeAlign": "justify",
+      "select": {
+        "itemStyle": {
+          "borderColor": "#212121"
+        }
+      },
+      "animationEasing": "linear",
+      "animationDuration": 1000
+    }
+  ],
+  "visualMap": [],
+  "legend": [],
+  "markArea": [
+    {
+      "zlevel": 0,
+      "z": 1,
+      "tooltip": {
+        "trigger": "item"
+      },
+      "animation": false,
+      "label": {
+        "show": true,
+        "position": "top"
+      },
+      "itemStyle": {
+        "borderWidth": 0
+      },
+      "emphasis": {
+        "label": {
+          "show": true,
+          "position": "top"
+        }
+      }
+    }
+  ],
+  "markLine": [
+    {
+      "zlevel": 0,
+      "z": 5,
+      "symbol": [
+        "circle",
+        "arrow"
+      ],
+      "symbolSize": [
+        8,
+        16
+      ],
+      "precision": 2,
+      "tooltip": {
+        "trigger": "item"
+      },
+      "label": {
+        "show": true,
+        "position": "end",
+        "distance": 5
+      },
+      "lineStyle": {
+        "type": "dashed"
+      },
+      "emphasis": {
+        "label": {
+          "show": true
+        },
+        "lineStyle": {
+          "width": 3
+        }
+      },
+      "animationEasing": "linear"
+    }
+  ],
+  "markPoint": [
+    {
+      "zlevel": 0,
+      "z": 5,
+      "symbol": "pin",
+      "symbolSize": 50,
+      "tooltip": {
+        "trigger": "item"
+      },
+      "label": {
+        "show": true,
+        "position": "inside"
+      },
+      "itemStyle": {
+        "borderWidth": 2
+      },
+      "emphasis": {
+        "label": {
+          "show": true
+        }
+      }
+    }
+  ],
+  "brush": [],
+  "dataZoom": []
+}

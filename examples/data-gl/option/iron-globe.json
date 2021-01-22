@@ -1,0 +1,587 @@
+{
+  "backgroundColor": "#000",
+  "animation": false,
+  "darkMode": true,
+  "color": [
+    "#4992ff",
+    "#7cffb2",
+    "#fddd60",
+    "#ff6e76",
+    "#58d9f9",
+    "#05c091",
+    "#ff8a45",
+    "#8d48e3",
+    "#dd79ff"
+  ],
+  "textStyle": {
+    "color": "#B9B8CE",
+    "fontFamily": "sans-serif",
+    "fontSize": 12,
+    "fontStyle": "normal",
+    "fontWeight": "normal"
+  },
+  "timeAxis": {
+    "axisLine": {
+      "lineStyle": {
+        "color": "#B9B8CE"
+      }
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#484753"
+      }
+    },
+    "splitArea": {
+      "areaStyle": {
+        "color": [
+          "rgba(255,255,255,0.02)",
+          "rgba(255,255,255,0.05)"
+        ]
+      }
+    },
+    "minorSplitLine": {
+      "lineStyle": {
+        "color": "#20203B"
+      }
+    }
+  },
+  "logAxis": {
+    "axisLine": {
+      "lineStyle": {
+        "color": "#B9B8CE"
+      }
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#484753"
+      }
+    },
+    "splitArea": {
+      "areaStyle": {
+        "color": [
+          "rgba(255,255,255,0.02)",
+          "rgba(255,255,255,0.05)"
+        ]
+      }
+    },
+    "minorSplitLine": {
+      "lineStyle": {
+        "color": "#20203B"
+      }
+    }
+  },
+  "valueAxis": {
+    "axisLine": {
+      "lineStyle": {
+        "color": "#B9B8CE"
+      }
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#484753"
+      }
+    },
+    "splitArea": {
+      "areaStyle": {
+        "color": [
+          "rgba(255,255,255,0.02)",
+          "rgba(255,255,255,0.05)"
+        ]
+      }
+    },
+    "minorSplitLine": {
+      "lineStyle": {
+        "color": "#20203B"
+      }
+    }
+  },
+  "categoryAxis": {
+    "axisLine": {
+      "lineStyle": {
+        "color": "#B9B8CE"
+      }
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#484753"
+      },
+      "show": false
+    },
+    "splitArea": {
+      "areaStyle": {
+        "color": [
+          "rgba(255,255,255,0.02)",
+          "rgba(255,255,255,0.05)"
+        ]
+      }
+    },
+    "minorSplitLine": {
+      "lineStyle": {
+        "color": "#20203B"
+      }
+    }
+  },
+  "line": {
+    "symbol": "circle"
+  },
+  "graph": {
+    "color": [
+      "#4992ff",
+      "#7cffb2",
+      "#fddd60",
+      "#ff6e76",
+      "#58d9f9",
+      "#05c091",
+      "#ff8a45",
+      "#8d48e3",
+      "#dd79ff"
+    ]
+  },
+  "gauge": {
+    "title": {
+      "color": "#B9B8CE"
+    },
+    "axisLine": {
+      "lineStyle": {
+        "color": [
+          [
+            1,
+            "rgba(207,212,219,0.2)"
+          ]
+        ]
+      }
+    },
+    "axisLabel": {
+      "color": "#B9B8CE"
+    },
+    "detail": {
+      "color": "#EEF1FA"
+    }
+  },
+  "candlestick": {
+    "itemStyle": {
+      "color": "#f64e56",
+      "color0": "#54ea92",
+      "borderColor": "#f64e56",
+      "borderColor0": "#54ea92"
+    }
+  },
+  "gradientColor": [
+    "#f6efa6",
+    "#d88273",
+    "#bf444c"
+  ],
+  "aria": {
+    "decal": {
+      "decals": [
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "dashArrayX": [
+            1,
+            0
+          ],
+          "dashArrayY": [
+            2,
+            5
+          ],
+          "symbolSize": 1,
+          "rotation": 0.5235987755982988
+        },
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "symbol": "circle",
+          "dashArrayX": [
+            [
+              8,
+              8
+            ],
+            [
+              0,
+              8,
+              8,
+              0
+            ]
+          ],
+          "dashArrayY": [
+            6,
+            0
+          ],
+          "symbolSize": 0.8
+        },
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "dashArrayX": [
+            1,
+            0
+          ],
+          "dashArrayY": [
+            4,
+            3
+          ],
+          "rotation": -0.7853981633974483
+        },
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "dashArrayX": [
+            [
+              6,
+              6
+            ],
+            [
+              0,
+              6,
+              6,
+              0
+            ]
+          ],
+          "dashArrayY": [
+            6,
+            0
+          ]
+        },
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "dashArrayX": [
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              6
+            ]
+          ],
+          "dashArrayY": [
+            1,
+            0,
+            6,
+            0
+          ],
+          "rotation": 0.7853981633974483
+        },
+        {
+          "color": "rgba(0, 0, 0, 0.2)",
+          "symbol": "triangle",
+          "dashArrayX": [
+            [
+              9,
+              9
+            ],
+            [
+              0,
+              9,
+              9,
+              0
+            ]
+          ],
+          "dashArrayY": [
+            7,
+            2
+          ],
+          "symbolSize": 0.75
+        }
+      ]
+    }
+  },
+  "stateAnimation": {
+    "duration": 300,
+    "easing": "cubicOut"
+  },
+  "animationDuration": 1000,
+  "animationDurationUpdate": 500,
+  "animationEasing": "cubicInOut",
+  "animationEasingUpdate": "cubicInOut",
+  "animationThreshold": 2000,
+  "progressiveThreshold": 3000,
+  "progressive": 400,
+  "hoverLayerThreshold": 3000,
+  "useUTC": false,
+  "globe": [
+    {
+      "baseTexture": "http://localhost:3323/public/data-gl/asset/world.topo.bathy.200401.jpg",
+      "heightTexture": "http://localhost:3323/public/data-gl/asset/bathymetry_bw_composite_4k.jpg",
+      "displacementScale": 0.2,
+      "shading": "realistic",
+      "environment": "http://localhost:3323/public/data-gl/asset/starfield.jpg",
+      "realisticMaterial": {
+        "roughness": "http://localhost:3323/public/asset/get/s/data-1497599804873-H1SHkG-mZ.jpg",
+        "metalness": "http://localhost:3323/public/asset/get/s/data-1497599800643-BJbHyGWQW.jpg",
+        "textureTiling": [
+          8,
+          4
+        ],
+        "textureOffset": 0,
+        "detailTexture": null
+      },
+      "postEffect": {
+        "enable": true,
+        "bloom": {
+          "enable": true,
+          "intensity": 0.1
+        },
+        "depthOfField": {
+          "enable": false,
+          "focalRange": 20,
+          "focalDistance": 50,
+          "blurRadius": 10,
+          "fstop": 2.8,
+          "quality": "medium"
+        },
+        "screenSpaceAmbientOcclusion": {
+          "enable": false,
+          "radius": 2,
+          "quality": "medium",
+          "intensity": 1
+        },
+        "screenSpaceReflection": {
+          "enable": false,
+          "quality": "medium",
+          "maxRoughness": 0.8
+        },
+        "colorCorrection": {
+          "enable": true,
+          "exposure": 0,
+          "brightness": 0,
+          "contrast": 1,
+          "saturation": 1,
+          "lookupTexture": ""
+        },
+        "edge": {
+          "enable": false
+        },
+        "FXAA": {
+          "enable": false
+        }
+      },
+      "viewControl": {
+        "autoRotate": false,
+        "panSensitivity": 0,
+        "targetCoord": null,
+        "projection": "perspective",
+        "autoRotateDirection": "cw",
+        "autoRotateSpeed": 10,
+        "autoRotateAfterStill": 3,
+        "damping": 0.8,
+        "rotateSensitivity": 1,
+        "zoomSensitivity": 1,
+        "panMouseButton": "middle",
+        "rotateMouseButton": "left",
+        "distance": 150,
+        "minDistance": 40,
+        "maxDistance": 400,
+        "orthographicSize": 150,
+        "maxOrthographicSize": 400,
+        "minOrthographicSize": 20,
+        "center": [
+          0,
+          0,
+          0
+        ],
+        "alpha": 0,
+        "beta": 0,
+        "minAlpha": -90,
+        "maxAlpha": 90
+      },
+      "light": {
+        "main": {
+          "intensity": 2,
+          "shadow": true,
+          "time": "",
+          "shadowQuality": "high",
+          "color": "#fff",
+          "alpha": 0,
+          "beta": 0
+        },
+        "ambientCubemap": {
+          "texture": "http://localhost:3323/public/data-gl/asset/pisa.hdr",
+          "exposure": 2,
+          "diffuseIntensity": 2,
+          "specularIntensity": 2
+        },
+        "ambient": {
+          "color": "#fff",
+          "intensity": 0.2
+        }
+      },
+      "show": true,
+      "zlevel": -10,
+      "left": 0,
+      "top": 0,
+      "width": "100%",
+      "height": "100%",
+      "baseColor": "#fff",
+      "displacementTexture": "",
+      "displacementQuality": "medium",
+      "globeRadius": 100,
+      "globeOuterRadius": 150,
+      "atmosphere": {
+        "show": false,
+        "offset": 5,
+        "color": "#ffffff",
+        "glowPower": 6,
+        "innerGlowPower": 2
+      },
+      "layers": [],
+      "temporalSuperSampling": {
+        "enable": "auto"
+      },
+      "lambertMaterial": {
+        "textureTiling": 1,
+        "textureOffset": 0,
+        "detailTexture": null
+      },
+      "colorMaterial": {
+        "textureTiling": 1,
+        "textureOffset": 0,
+        "detailTexture": null
+      },
+      "hatchingMaterial": {
+        "textureTiling": 1,
+        "textureOffset": 0,
+        "paperColor": "#fff"
+      }
+    }
+  ],
+  "axisPointer": [
+    {
+      "lineStyle": {
+        "color": "#817f91",
+        "width": 1,
+        "type": "dashed"
+      },
+      "crossStyle": {
+        "color": "#817f91"
+      },
+      "label": {
+        "color": "#fff",
+        "show": true,
+        "formatter": null,
+        "precision": "auto",
+        "margin": 3,
+        "padding": [
+          5,
+          7,
+          5,
+          7
+        ],
+        "backgroundColor": "auto",
+        "borderColor": null,
+        "borderWidth": 0,
+        "borderRadius": 3
+      },
+      "show": "auto",
+      "zlevel": 0,
+      "z": 50,
+      "type": "line",
+      "snap": false,
+      "triggerTooltip": true,
+      "value": null,
+      "status": null,
+      "link": [],
+      "animation": null,
+      "animationDurationUpdate": 200,
+      "shadowStyle": {
+        "color": "rgba(210,219,238,0.2)"
+      },
+      "handle": {
+        "show": false,
+        "icon": "M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7v-1.2h6.6z M13.3,22H6.7v-1.2h6.6z M13.3,19.6H6.7v-1.2h6.6z",
+        "size": 45,
+        "margin": 50,
+        "color": "#333",
+        "shadowBlur": 3,
+        "shadowColor": "#aaa",
+        "shadowOffsetX": 0,
+        "shadowOffsetY": 2,
+        "throttle": 40
+      }
+    }
+  ],
+  "tooltip": [],
+  "series": [],
+  "visualMap": [],
+  "legend": [],
+  "markArea": [
+    {
+      "zlevel": 0,
+      "z": 1,
+      "tooltip": {
+        "trigger": "item"
+      },
+      "animation": false,
+      "label": {
+        "show": true,
+        "position": "top"
+      },
+      "itemStyle": {
+        "borderWidth": 0
+      },
+      "emphasis": {
+        "label": {
+          "show": true,
+          "position": "top"
+        }
+      }
+    }
+  ],
+  "markLine": [
+    {
+      "zlevel": 0,
+      "z": 5,
+      "symbol": [
+        "circle",
+        "arrow"
+      ],
+      "symbolSize": [
+        8,
+        16
+      ],
+      "precision": 2,
+      "tooltip": {
+        "trigger": "item"
+      },
+      "label": {
+        "show": true,
+        "position": "end",
+        "distance": 5
+      },
+      "lineStyle": {
+        "type": "dashed"
+      },
+      "emphasis": {
+        "label": {
+          "show": true
+        },
+        "lineStyle": {
+          "width": 3
+        }
+      },
+      "animationEasing": "linear"
+    }
+  ],
+  "markPoint": [
+    {
+      "zlevel": 0,
+      "z": 5,
+      "symbol": "pin",
+      "symbolSize": 50,
+      "tooltip": {
+        "trigger": "item"
+      },
+      "label": {
+        "show": true,
+        "position": "inside"
+      },
+      "itemStyle": {
+        "borderWidth": 2
+      },
+      "emphasis": {
+        "label": {
+          "show": true
+        }
+      }
+    }
+  ],
+  "brush": [],
+  "dataZoom": []
+}

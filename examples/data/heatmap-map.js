@@ -1,3 +1,10 @@
+/*
+title: Air Qulity
+category: heatmap
+titleCN: 全国主要城市空气质量
+difficulty: 3
+*/
+
 var geoCoordMap = {
     "海门":[121.15,31.89],
     "鄂尔多斯":[109.781327,39.608266],

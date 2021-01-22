@@ -1,3 +1,10 @@
+/*
+title: Scatter Nutrients Matrix
+category: scatter
+titleCN: 营养分布散点矩阵
+difficulty: 7
+*/
+
 var indices = {
     name: 0,
     group: 1,
@@ -145,18 +152,8 @@ function makeSeries(xLeftOrRight, yTopOrBottom) {
 }
 
 function makeDataZoom(opt) {
-    return echarts.util.extend({
+    return Object.assign({
         type: 'slider',
-        fillerColor: 'rgba(255,255,255,0.1)',
-        borderColor: '#777',
-        handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
-        handleSize: '60%',
-        handleStyle: {
-            color: '#aaa'
-        },
-        textStyle: {
-            color: '#aaa'
-        },
         filterMode: 'empty',
         realtime: false
     }, opt);
@@ -166,7 +163,7 @@ function tooltipFormatter(params) {
     // Remove duplicate by data name.
     var mapByDataName = {};
     var mapOnDim = {x: {}, y: {}, xy: {}};
-    echarts.util.each(params, function (item) {
+    params.forEach(function (item) {
         var data = item.data;
         var dataName = data[3];
         var mapItem = mapByDataName[dataName] || (mapByDataName[dataName] = {});
@@ -174,23 +171,24 @@ function tooltipFormatter(params) {
         mapItem[data[5]] = data[1];
         mapOnDim[item.axisDim][dataName] = mapItem;
     });
-    echarts.util.each(mapByDataName, function (mapItem, dataName) {
+    Object.keys(mapByDataName).forEach(function (dataName) {
         if (mapOnDim.x[dataName] && mapOnDim.y[dataName]) {
-            mapOnDim.xy[dataName] = mapItem;
+            mapOnDim.xy[dataName] = mapByDataName[dataName];
             delete mapOnDim.x[dataName];
             delete mapOnDim.y[dataName];
         }
     });
     var resultHTML = [];
-    echarts.util.each([['xy', 'CROSS'], ['x', 'V LINE'], ['y', 'H LINE']], function (dimDefine) {
+    [['xy', 'CROSS'], ['x', 'V LINE'], ['y', 'H LINE']].forEach(function (dimDefine) {
         var html = [];
-        echarts.util.each(mapOnDim[dimDefine[0]], function (mapItem, dataName) {
+        Object.keys(mapOnDim[dimDefine[0]]).forEach(function (dataName) {
+            var mapItem = mapOnDim[dimDefine[0]][dataName];
             var valuesHTML = [];
-            echarts.util.each(mapItem, function (value, dataName) {
+            Object.keys(mapItem).forEach(function (dataName) {
                 valuesHTML.push(
                     '<span style="color:' + colorBySchema[dataName] + '">'
                         + dataName
-                    + '</span>: ' + value
+                    + '</span>: ' + mapItem[dataName]
                 );
             });
             html.push('<div style="margin: 10px 0">' + dataName + '<br/>' + valuesHTML.join('<br/>') + '</div>');
@@ -214,17 +212,14 @@ function getOption(data) {
     var gridBottom = 80;
 
     return {
-        backgroundColor: '#2c343c',
         tooltip: {
             trigger: 'none',
             padding: [10, 20, 10, 20],
-            backgroundColor: 'rgba(44,52,60,0.7)',
-            borderColor: '#ccc',
-            borderWidth: 2,
-            borderRadius: 4,
+            backgroundColor: 'rgba(0,0,0,0.7)',
             transitionDuration: 0,
             extraCssText: 'width: 300px; white-space: normal',
             textStyle: {
+                color: '#fff',
                 fontSize: 12
             },
             position: function (pos, params, el, elRect, size) {

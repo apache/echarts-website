@@ -1,3 +1,10 @@
+/*
+title: Calendar Effectscatter
+category: calendar
+titleCN: 热力特效散点图
+difficulty:3
+*/
+
 function getVirtulData(year) {
     year = year || '2017';
     var date = +echarts.number.parseDate(year + '-01-01');

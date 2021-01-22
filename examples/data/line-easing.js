@@ -1,3 +1,10 @@
+/*
+title: Line Easing Visualizing
+category: line
+titleCN: 缓动函数可视化
+difficulty: 8
+*/
+
 var easingFuncs = {
     linear: function (k) {
         return k;
@@ -153,7 +160,8 @@ var yAxes = [];
 var series = [];
 var titles = [];
 var count = 0;
-echarts.util.each(easingFuncs, function (easingFunc, name) {
+Object.keys(easingFuncs).forEach(function (easingName) {
+    var easingFunc = easingFuncs[easingName];
     var data = [];
     for (var i = 0; i <= N_POINT; i++) {
         var x = i / N_POINT;
@@ -163,7 +171,6 @@ echarts.util.each(easingFuncs, function (easingFunc, name) {
     grids.push({
         show: true,
         borderWidth: 0,
-        backgroundColor: '#fff',
         shadowColor: 'rgba(0, 0, 0, 0.3)',
         shadowBlur: 2
     });
@@ -182,18 +189,18 @@ echarts.util.each(easingFuncs, function (easingFunc, name) {
         gridIndex: count
     });
     series.push({
-        name: name,
+        name: easingName,
         type: 'line',
         xAxisIndex: count,
         yAxisIndex: count,
         data: data,
         showSymbol: false,
-        animationEasing: name,
+        animationEasing: easingName,
         animationDuration: 1000
     });
     titles.push({
         textAlign: 'center',
-        text: name,
+        text: easingName,
         textStyle: {
             fontSize: 12,
             fontWeight: 'normal'
@@ -203,7 +210,7 @@ echarts.util.each(easingFuncs, function (easingFunc, name) {
 });
 
 var rowNumber = Math.ceil(Math.sqrt(count));
-echarts.util.each(grids, function (grid, idx) {
+grids.forEach(function (grid, idx) {
     grid.left = ((idx % rowNumber) / rowNumber * 100 + 0.5) + '%';
     grid.top = (Math.floor(idx / rowNumber) / rowNumber * 100 + 0.5) + '%';
     grid.width = (1 / rowNumber * 100 - 1) + '%';

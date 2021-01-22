@@ -1,3 +1,9 @@
+/*
+title: 3D Bar with Dataset
+category: bar3D
+titleCN: 使用 dataset 为三维柱状图设置数据
+*/
+
 $.get(ROOT_PATH + '/data/asset/data/life-expectancy-table.json', function (data) {
     option = {
         grid3D: {},

@@ -1,3 +1,10 @@
+/*
+title: Pie with Scrollable Legend
+category: pie
+titleCN: 可滚动的图例
+difficulty: 4
+*/
+
 var data = genData(50);
 
 option = {
@@ -47,9 +54,8 @@ function genData(count) {
     ];
     var legendData = [];
     var seriesData = [];
-    var selected = {};
     for (var i = 0; i < count; i++) {
-        name = Math.random() > 0.65
+        var name = Math.random() > 0.65
             ? makeWord(4, 1) + '·' + makeWord(3, 0)
             : makeWord(2, 1);
         legendData.push(name);
@@ -57,13 +63,11 @@ function genData(count) {
             name: name,
             value: Math.round(Math.random() * 100000)
         });
-        selected[name] = i < 6;
     }
 
     return {
         legendData: legendData,
-        seriesData: seriesData,
-        selected: selected
+        seriesData: seriesData
     };
 
     function makeWord(max, min) {

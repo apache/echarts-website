@@ -1,3 +1,9 @@
+/*
+title: Image to Bar3D
+category: bar3D
+titleCN: Image to Bar3D
+*/
+
 var img = new Image();
 var canvas = document.createElement('canvas');
 var ctx = canvas.getContext('2d');
@@ -36,8 +42,8 @@ img.onload = function () {
         },
         grid3D: {
             viewControl: {
-                alpha: 70,
-                beta: 0
+                alpha: 20,
+                beta: -30
             },
             postEffect: {
                 enable: true,

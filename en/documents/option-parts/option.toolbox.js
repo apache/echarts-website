@@ -3,20 +3,20 @@ window.__EC_DOC_option_toolbox = {
     "desc": "<p>Component ID, not specified by default. If specified, it can be used to refer the component in option or API.</p>\n"
   },
   "show": {
-    "desc": "<p>Whether to show toolbox component.</p>\n",
+    "desc": "\n\n<p>Whether to show toolbox component.</p>\n",
     "uiControl": {
       "type": "boolean"
     }
   },
   "orient": {
-    "desc": "<p>The layout orientation of toolbox&#39;s icon.</p>\n<p>Options:</p>\n<ul>\n<li>&#39;horizontal&#39;</li>\n<li>&#39;vertical&#39;</li>\n</ul>\n",
+    "desc": "\n\n<p>The layout orientation of toolbox&#39;s icon.</p>\n<p>Options:</p>\n<ul>\n<li>&#39;horizontal&#39;</li>\n<li>&#39;vertical&#39;</li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "options": "vertical,horizontal"
     }
   },
   "itemSize": {
-    "desc": "<p>The size of toolbox&#39;s icon.</p>\n",
+    "desc": "\n\n<p>The size of toolbox&#39;s icon.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -24,7 +24,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "itemGap": {
-    "desc": "<p>The gap between each icon of toolbox. It is horizontal gap in horizontal layout, while vertical gap in vertical layout.</p>\n",
+    "desc": "\n\n<p>The gap between each icon of toolbox. It is horizontal gap in horizontal layout, while vertical gap in vertical layout.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -32,7 +32,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "showTitle": {
-    "desc": "<p>Whether to show the title of each tool icon when mouse hovers.</p>\n",
+    "desc": "\n\n<p>Whether to show the title of each tool icon when mouse hovers.</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "true"
@@ -45,26 +45,26 @@ window.__EC_DOC_option_toolbox = {
     "desc": "<p>Save as image.</p>\n"
   },
   "feature.saveAsImage.type": {
-    "desc": "<p>File suffix of the image saved.</p>\n<ul>\n<li>If the <code class=\"codespan\">renderer</code> is set to be <code class=\"codespan\">&#39;canvas&#39;</code> when chart <a href=\"api.html#echarts.init\" target=\"_blank\">initialized</a> (default), then <code class=\"codespan\">&#39;png&#39;</code> (default) and <code class=\"codespan\">&#39;jpeg&#39;</code> are supported.</li>\n<li>If the <code class=\"codespan\">renderer</code> is set to be <code class=\"codespan\">&#39;svg&#39;</code> when when chart <a href=\"api.html#echarts.init\" target=\"_blank\">initialized</a>, then only <code class=\"codespan\">&#39;svg&#39;</code> is supported for <code class=\"codespan\">type</code> (<code class=\"codespan\">&#39;svg&#39;</code> type is supported since <code class=\"codespan\">v4.8.0</code>).</li>\n</ul>\n",
+    "desc": "\n\n<p>File suffix of the image saved.</p>\n<ul>\n<li>If the <code class=\"codespan\">renderer</code> is set to be <code class=\"codespan\">&#39;canvas&#39;</code> when chart <a href=\"api.html#echarts.init\" target=\"_blank\">initialized</a> (default), then <code class=\"codespan\">&#39;png&#39;</code> (default) and <code class=\"codespan\">&#39;jpg&#39;</code> are supported.</li>\n<li>If the <code class=\"codespan\">renderer</code> is set to be <code class=\"codespan\">&#39;svg&#39;</code> when when chart <a href=\"api.html#echarts.init\" target=\"_blank\">initialized</a>, then only <code class=\"codespan\">&#39;svg&#39;</code> is supported for <code class=\"codespan\">type</code> (<code class=\"codespan\">&#39;svg&#39;</code> type is supported since <code class=\"codespan\">v4.8.0</code>).</li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
       "options": "png,jpg"
     }
   },
   "feature.saveAsImage.name": {
-    "desc": "<p>Name to save the image, whose default value is <a href=\"#title.text\">title.text</a>.</p>\n",
+    "desc": "\n\n<p>Name to save the image, whose default value is <a href=\"#title.text\">title.text</a>.</p>\n",
     "uiControl": {
       "type": "text"
     }
   },
   "feature.saveAsImage.backgroundColor": {
-    "desc": "<p>Background color to save the image, whose default value is <a href=\"#backgroundColor\">backgroundColor</a>. If <code class=\"codespan\">backgroundColor</code> is not set, white color is used.</p>\n",
+    "desc": "\n\n<p>Background color to save the image, whose default value is <a href=\"#backgroundColor\">backgroundColor</a>. If <code class=\"codespan\">backgroundColor</code> is not set, white color is used.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "feature.saveAsImage.connectedBackgroundColor": {
-    "desc": "<p>When <a href=\"api.html#echarts.connect\" target=\"_blank\">echarts.connect</a> is used to connect the interaction of multiple chart series, they will all be included in the exported image. This option sets the background color between these charts.</p>\n",
+    "desc": "\n\n<p>When <a href=\"api.html#echarts.connect\" target=\"_blank\">echarts.connect</a> is used to connect the interaction of multiple chart series, they will all be included in the exported image. This option sets the background color between these charts.</p>\n",
     "uiControl": {
       "type": "color"
     }
@@ -82,19 +82,19 @@ window.__EC_DOC_option_toolbox = {
     "desc": "<p>The style setting of save as image icon. Since icon label is displayed only when hovering on the icon, the label configuration options are available under <code class=\"codespan\">emphasis</code>.</p>\n"
   },
   "feature.saveAsImage.iconStyle.color": {
-    "desc": "<p> color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
+    "desc": "\n\n<p> color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "feature.saveAsImage.iconStyle.borderColor": {
-    "desc": "<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
+    "desc": "\n\n<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "feature.saveAsImage.iconStyle.borderWidth": {
-    "desc": "<p> border width. No border when it is set to be 0.</p>\n",
+    "desc": "\n\n<p> border width. No border when it is set to be 0.</p>\n",
     "uiControl": {
       "type": "number",
       "value": "1",
@@ -103,7 +103,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.saveAsImage.iconStyle.borderType": {
-    "desc": "<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
+    "desc": "\n\n<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "solid",
@@ -111,7 +111,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.saveAsImage.iconStyle.shadowBlur": {
-    "desc": "<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "default": "",
@@ -120,14 +120,14 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.saveAsImage.iconStyle.shadowColor": {
-    "desc": "<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color",
       "default": ""
     }
   },
   "feature.saveAsImage.iconStyle.shadowOffsetX": {
-    "desc": "<p>Offset distance on the horizontal direction of shadow.</p>\n",
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
@@ -135,7 +135,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.saveAsImage.iconStyle.shadowOffsetY": {
-    "desc": "<p>Offset distance on the vertical direction of shadow.</p>\n",
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
@@ -143,7 +143,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.saveAsImage.iconStyle.opacity": {
-    "desc": "<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "1",
@@ -153,19 +153,19 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.saveAsImage.emphasis.iconStyle.color": {
-    "desc": "<p> color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
+    "desc": "\n\n<p> color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "feature.saveAsImage.emphasis.iconStyle.borderColor": {
-    "desc": "<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
+    "desc": "\n\n<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "feature.saveAsImage.emphasis.iconStyle.borderWidth": {
-    "desc": "<p> border width. No border when it is set to be 0.</p>\n",
+    "desc": "\n\n<p> border width. No border when it is set to be 0.</p>\n",
     "uiControl": {
       "type": "number",
       "value": "0",
@@ -174,7 +174,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.saveAsImage.emphasis.iconStyle.borderType": {
-    "desc": "<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
+    "desc": "\n\n<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "solid",
@@ -182,7 +182,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.saveAsImage.emphasis.iconStyle.shadowBlur": {
-    "desc": "<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "default": "",
@@ -191,14 +191,14 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.saveAsImage.emphasis.iconStyle.shadowColor": {
-    "desc": "<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color",
       "default": ""
     }
   },
   "feature.saveAsImage.emphasis.iconStyle.shadowOffsetX": {
-    "desc": "<p>Offset distance on the horizontal direction of shadow.</p>\n",
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
@@ -206,7 +206,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.saveAsImage.emphasis.iconStyle.shadowOffsetY": {
-    "desc": "<p>Offset distance on the vertical direction of shadow.</p>\n",
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
@@ -214,7 +214,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.saveAsImage.emphasis.iconStyle.opacity": {
-    "desc": "<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "1",
@@ -227,26 +227,26 @@ window.__EC_DOC_option_toolbox = {
     "desc": "<p>Text position: <code class=\"codespan\">&#39;left&#39;</code> / <code class=\"codespan\">&#39;right&#39;</code> / <code class=\"codespan\">&#39;top&#39;</code> / <code class=\"codespan\">&#39;bottom&#39;</code>.</p>\n"
   },
   "feature.saveAsImage.emphasis.iconStyle.textFill": {
-    "desc": "<p>Fill color of text. If it&#39;s not set, it will use in the order of icon&#39;s fill color, stroke color, and <code class=\"codespan\">&#39;#000&#39;</code>.</p>\n",
+    "desc": "\n\n<p>Fill color of text. If it&#39;s not set, it will use in the order of icon&#39;s fill color, stroke color, and <code class=\"codespan\">&#39;#000&#39;</code>.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "feature.saveAsImage.emphasis.iconStyle.textAlign": {
-    "desc": "<p>Text align: <code class=\"codespan\">&#39;left&#39;</code> / <code class=\"codespan\">&#39;center&#39;</code> / <code class=\"codespan\">&#39;right&#39;</code>.</p>\n",
+    "desc": "\n\n<p>Text align: <code class=\"codespan\">&#39;left&#39;</code> / <code class=\"codespan\">&#39;center&#39;</code> / <code class=\"codespan\">&#39;right&#39;</code>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "left,center,right"
     }
   },
   "feature.saveAsImage.emphasis.iconStyle.textBackgroundColor": {
-    "desc": "<p>Text background color.</p>\n",
+    "desc": "\n\n<p>Text background color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "feature.saveAsImage.emphasis.iconStyle.textBorderRadius": {
-    "desc": "<p>Border radius of text area.</p>\n",
+    "desc": "\n\n<p>Border radius of text area.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
@@ -254,7 +254,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.saveAsImage.emphasis.iconStyle.textPadding": {
-    "desc": "<p>Padding of text area.</p>\n",
+    "desc": "\n\n<p>Padding of text area.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
@@ -262,7 +262,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.saveAsImage.pixelRatio": {
-    "desc": "<p>Resolution ratio to save image, whose default value is that of the container. Values larger than 1 (e.g.: 2) is supported when you need higher resolution.</p>\n",
+    "desc": "\n\n<p>Resolution ratio to save image, whose default value is that of the container. Values larger than 1 (e.g.: 2) is supported when you need higher resolution.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0.5",
@@ -283,19 +283,19 @@ window.__EC_DOC_option_toolbox = {
     "desc": "<p>The style setting of restore icon. Since icon label is displayed only when hovering on the icon, the label configuration options are available under <code class=\"codespan\">emphasis</code>.</p>\n"
   },
   "feature.restore.iconStyle.color": {
-    "desc": "<p> color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
+    "desc": "\n\n<p> color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "feature.restore.iconStyle.borderColor": {
-    "desc": "<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
+    "desc": "\n\n<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "feature.restore.iconStyle.borderWidth": {
-    "desc": "<p> border width. No border when it is set to be 0.</p>\n",
+    "desc": "\n\n<p> border width. No border when it is set to be 0.</p>\n",
     "uiControl": {
       "type": "number",
       "value": "1",
@@ -304,7 +304,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.restore.iconStyle.borderType": {
-    "desc": "<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
+    "desc": "\n\n<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "solid",
@@ -312,7 +312,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.restore.iconStyle.shadowBlur": {
-    "desc": "<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "default": "",
@@ -321,14 +321,14 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.restore.iconStyle.shadowColor": {
-    "desc": "<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color",
       "default": ""
     }
   },
   "feature.restore.iconStyle.shadowOffsetX": {
-    "desc": "<p>Offset distance on the horizontal direction of shadow.</p>\n",
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
@@ -336,7 +336,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.restore.iconStyle.shadowOffsetY": {
-    "desc": "<p>Offset distance on the vertical direction of shadow.</p>\n",
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
@@ -344,7 +344,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.restore.iconStyle.opacity": {
-    "desc": "<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "1",
@@ -354,19 +354,19 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.restore.emphasis.iconStyle.color": {
-    "desc": "<p> color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
+    "desc": "\n\n<p> color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "feature.restore.emphasis.iconStyle.borderColor": {
-    "desc": "<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
+    "desc": "\n\n<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "feature.restore.emphasis.iconStyle.borderWidth": {
-    "desc": "<p> border width. No border when it is set to be 0.</p>\n",
+    "desc": "\n\n<p> border width. No border when it is set to be 0.</p>\n",
     "uiControl": {
       "type": "number",
       "value": "0",
@@ -375,7 +375,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.restore.emphasis.iconStyle.borderType": {
-    "desc": "<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
+    "desc": "\n\n<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "solid",
@@ -383,7 +383,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.restore.emphasis.iconStyle.shadowBlur": {
-    "desc": "<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "default": "",
@@ -392,14 +392,14 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.restore.emphasis.iconStyle.shadowColor": {
-    "desc": "<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color",
       "default": ""
     }
   },
   "feature.restore.emphasis.iconStyle.shadowOffsetX": {
-    "desc": "<p>Offset distance on the horizontal direction of shadow.</p>\n",
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
@@ -407,7 +407,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.restore.emphasis.iconStyle.shadowOffsetY": {
-    "desc": "<p>Offset distance on the vertical direction of shadow.</p>\n",
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
@@ -415,7 +415,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.restore.emphasis.iconStyle.opacity": {
-    "desc": "<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "1",
@@ -428,26 +428,26 @@ window.__EC_DOC_option_toolbox = {
     "desc": "<p>Text position: <code class=\"codespan\">&#39;left&#39;</code> / <code class=\"codespan\">&#39;right&#39;</code> / <code class=\"codespan\">&#39;top&#39;</code> / <code class=\"codespan\">&#39;bottom&#39;</code>.</p>\n"
   },
   "feature.restore.emphasis.iconStyle.textFill": {
-    "desc": "<p>Fill color of text. If it&#39;s not set, it will use in the order of icon&#39;s fill color, stroke color, and <code class=\"codespan\">&#39;#000&#39;</code>.</p>\n",
+    "desc": "\n\n<p>Fill color of text. If it&#39;s not set, it will use in the order of icon&#39;s fill color, stroke color, and <code class=\"codespan\">&#39;#000&#39;</code>.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "feature.restore.emphasis.iconStyle.textAlign": {
-    "desc": "<p>Text align: <code class=\"codespan\">&#39;left&#39;</code> / <code class=\"codespan\">&#39;center&#39;</code> / <code class=\"codespan\">&#39;right&#39;</code>.</p>\n",
+    "desc": "\n\n<p>Text align: <code class=\"codespan\">&#39;left&#39;</code> / <code class=\"codespan\">&#39;center&#39;</code> / <code class=\"codespan\">&#39;right&#39;</code>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "left,center,right"
     }
   },
   "feature.restore.emphasis.iconStyle.textBackgroundColor": {
-    "desc": "<p>Text background color.</p>\n",
+    "desc": "\n\n<p>Text background color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "feature.restore.emphasis.iconStyle.textBorderRadius": {
-    "desc": "<p>Border radius of text area.</p>\n",
+    "desc": "\n\n<p>Border radius of text area.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
@@ -455,7 +455,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.restore.emphasis.iconStyle.textPadding": {
-    "desc": "<p>Padding of text area.</p>\n",
+    "desc": "\n\n<p>Padding of text area.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
@@ -475,19 +475,19 @@ window.__EC_DOC_option_toolbox = {
     "desc": "<p>The style setting of data view icon. Since icon label is displayed only when hovering on the icon, the label configuration options are available under <code class=\"codespan\">emphasis</code>.</p>\n"
   },
   "feature.dataView.iconStyle.color": {
-    "desc": "<p> color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
+    "desc": "\n\n<p> color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "feature.dataView.iconStyle.borderColor": {
-    "desc": "<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
+    "desc": "\n\n<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "feature.dataView.iconStyle.borderWidth": {
-    "desc": "<p> border width. No border when it is set to be 0.</p>\n",
+    "desc": "\n\n<p> border width. No border when it is set to be 0.</p>\n",
     "uiControl": {
       "type": "number",
       "value": "1",
@@ -496,7 +496,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.dataView.iconStyle.borderType": {
-    "desc": "<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
+    "desc": "\n\n<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "solid",
@@ -504,7 +504,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.dataView.iconStyle.shadowBlur": {
-    "desc": "<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "default": "",
@@ -513,14 +513,14 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.dataView.iconStyle.shadowColor": {
-    "desc": "<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color",
       "default": ""
     }
   },
   "feature.dataView.iconStyle.shadowOffsetX": {
-    "desc": "<p>Offset distance on the horizontal direction of shadow.</p>\n",
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
@@ -528,7 +528,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.dataView.iconStyle.shadowOffsetY": {
-    "desc": "<p>Offset distance on the vertical direction of shadow.</p>\n",
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
@@ -536,7 +536,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.dataView.iconStyle.opacity": {
-    "desc": "<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "1",
@@ -546,19 +546,19 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.dataView.emphasis.iconStyle.color": {
-    "desc": "<p> color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
+    "desc": "\n\n<p> color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "feature.dataView.emphasis.iconStyle.borderColor": {
-    "desc": "<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
+    "desc": "\n\n<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "feature.dataView.emphasis.iconStyle.borderWidth": {
-    "desc": "<p> border width. No border when it is set to be 0.</p>\n",
+    "desc": "\n\n<p> border width. No border when it is set to be 0.</p>\n",
     "uiControl": {
       "type": "number",
       "value": "0",
@@ -567,7 +567,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.dataView.emphasis.iconStyle.borderType": {
-    "desc": "<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
+    "desc": "\n\n<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "solid",
@@ -575,7 +575,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.dataView.emphasis.iconStyle.shadowBlur": {
-    "desc": "<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "default": "",
@@ -584,14 +584,14 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.dataView.emphasis.iconStyle.shadowColor": {
-    "desc": "<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color",
       "default": ""
     }
   },
   "feature.dataView.emphasis.iconStyle.shadowOffsetX": {
-    "desc": "<p>Offset distance on the horizontal direction of shadow.</p>\n",
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
@@ -599,7 +599,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.dataView.emphasis.iconStyle.shadowOffsetY": {
-    "desc": "<p>Offset distance on the vertical direction of shadow.</p>\n",
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
@@ -607,7 +607,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.dataView.emphasis.iconStyle.opacity": {
-    "desc": "<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "1",
@@ -620,26 +620,26 @@ window.__EC_DOC_option_toolbox = {
     "desc": "<p>Text position: <code class=\"codespan\">&#39;left&#39;</code> / <code class=\"codespan\">&#39;right&#39;</code> / <code class=\"codespan\">&#39;top&#39;</code> / <code class=\"codespan\">&#39;bottom&#39;</code>.</p>\n"
   },
   "feature.dataView.emphasis.iconStyle.textFill": {
-    "desc": "<p>Fill color of text. If it&#39;s not set, it will use in the order of icon&#39;s fill color, stroke color, and <code class=\"codespan\">&#39;#000&#39;</code>.</p>\n",
+    "desc": "\n\n<p>Fill color of text. If it&#39;s not set, it will use in the order of icon&#39;s fill color, stroke color, and <code class=\"codespan\">&#39;#000&#39;</code>.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "feature.dataView.emphasis.iconStyle.textAlign": {
-    "desc": "<p>Text align: <code class=\"codespan\">&#39;left&#39;</code> / <code class=\"codespan\">&#39;center&#39;</code> / <code class=\"codespan\">&#39;right&#39;</code>.</p>\n",
+    "desc": "\n\n<p>Text align: <code class=\"codespan\">&#39;left&#39;</code> / <code class=\"codespan\">&#39;center&#39;</code> / <code class=\"codespan\">&#39;right&#39;</code>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "left,center,right"
     }
   },
   "feature.dataView.emphasis.iconStyle.textBackgroundColor": {
-    "desc": "<p>Text background color.</p>\n",
+    "desc": "\n\n<p>Text background color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "feature.dataView.emphasis.iconStyle.textBorderRadius": {
-    "desc": "<p>Border radius of text area.</p>\n",
+    "desc": "\n\n<p>Border radius of text area.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
@@ -647,7 +647,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.dataView.emphasis.iconStyle.textPadding": {
-    "desc": "<p>Padding of text area.</p>\n",
+    "desc": "\n\n<p>Padding of text area.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
@@ -655,7 +655,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.dataView.readOnly": {
-    "desc": "<p>Whether it is read-only.</p>\n",
+    "desc": "\n\n<p>Whether it is read-only.</p>\n",
     "uiControl": {
       "type": "boolean"
     }
@@ -670,42 +670,42 @@ window.__EC_DOC_option_toolbox = {
     "desc": "<p>There are 3 names in data view, which are <code class=\"codespan\">[&#39;data view&#39;, &#39;turn off&#39; and &#39;refresh&#39;]</code>.</p>\n"
   },
   "feature.dataView.backgroundColor": {
-    "desc": "<p>Background color of the floating layer in data view.</p>\n",
+    "desc": "\n\n<p>Background color of the floating layer in data view.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
   "feature.dataView.textareaColor": {
-    "desc": "<p>Background color of input area of the floating layer in data view.</p>\n",
+    "desc": "\n\n<p>Background color of input area of the floating layer in data view.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
     }
   },
   "feature.dataView.textareaBorderColor": {
-    "desc": "<p>Border color of input area of the floating layer in data view.</p>\n",
+    "desc": "\n\n<p>Border color of input area of the floating layer in data view.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#333"
     }
   },
   "feature.dataView.textColor": {
-    "desc": "<p>Text color.</p>\n",
+    "desc": "\n\n<p>Text color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#000"
     }
   },
   "feature.dataView.buttonColor": {
-    "desc": "<p>Button color.</p>\n",
+    "desc": "\n\n<p>Button color.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#c23531"
     }
   },
   "feature.dataView.buttonTextColor": {
-    "desc": "<p>Color of button text.</p>\n",
+    "desc": "\n\n<p>Color of button text.</p>\n",
     "uiControl": {
       "type": "color",
       "default": "#fff"
@@ -733,19 +733,19 @@ window.__EC_DOC_option_toolbox = {
     "desc": "<p>The style setting of data area zooming icon. Since icon label is displayed only when hovering on the icon, the label configuration options are available under <code class=\"codespan\">emphasis</code>.</p>\n"
   },
   "feature.dataZoom.iconStyle.color": {
-    "desc": "<p> color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
+    "desc": "\n\n<p> color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "feature.dataZoom.iconStyle.borderColor": {
-    "desc": "<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
+    "desc": "\n\n<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "feature.dataZoom.iconStyle.borderWidth": {
-    "desc": "<p> border width. No border when it is set to be 0.</p>\n",
+    "desc": "\n\n<p> border width. No border when it is set to be 0.</p>\n",
     "uiControl": {
       "type": "number",
       "value": "1",
@@ -754,7 +754,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.dataZoom.iconStyle.borderType": {
-    "desc": "<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
+    "desc": "\n\n<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "solid",
@@ -762,7 +762,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.dataZoom.iconStyle.shadowBlur": {
-    "desc": "<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "default": "",
@@ -771,14 +771,14 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.dataZoom.iconStyle.shadowColor": {
-    "desc": "<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color",
       "default": ""
     }
   },
   "feature.dataZoom.iconStyle.shadowOffsetX": {
-    "desc": "<p>Offset distance on the horizontal direction of shadow.</p>\n",
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
@@ -786,7 +786,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.dataZoom.iconStyle.shadowOffsetY": {
-    "desc": "<p>Offset distance on the vertical direction of shadow.</p>\n",
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
@@ -794,7 +794,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.dataZoom.iconStyle.opacity": {
-    "desc": "<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "1",
@@ -804,19 +804,19 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.dataZoom.emphasis.iconStyle.color": {
-    "desc": "<p> color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
+    "desc": "\n\n<p> color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "feature.dataZoom.emphasis.iconStyle.borderColor": {
-    "desc": "<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
+    "desc": "\n\n<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "feature.dataZoom.emphasis.iconStyle.borderWidth": {
-    "desc": "<p> border width. No border when it is set to be 0.</p>\n",
+    "desc": "\n\n<p> border width. No border when it is set to be 0.</p>\n",
     "uiControl": {
       "type": "number",
       "value": "0",
@@ -825,7 +825,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.dataZoom.emphasis.iconStyle.borderType": {
-    "desc": "<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
+    "desc": "\n\n<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "solid",
@@ -833,7 +833,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.dataZoom.emphasis.iconStyle.shadowBlur": {
-    "desc": "<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "default": "",
@@ -842,14 +842,14 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.dataZoom.emphasis.iconStyle.shadowColor": {
-    "desc": "<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color",
       "default": ""
     }
   },
   "feature.dataZoom.emphasis.iconStyle.shadowOffsetX": {
-    "desc": "<p>Offset distance on the horizontal direction of shadow.</p>\n",
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
@@ -857,7 +857,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.dataZoom.emphasis.iconStyle.shadowOffsetY": {
-    "desc": "<p>Offset distance on the vertical direction of shadow.</p>\n",
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
@@ -865,7 +865,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.dataZoom.emphasis.iconStyle.opacity": {
-    "desc": "<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "1",
@@ -878,26 +878,26 @@ window.__EC_DOC_option_toolbox = {
     "desc": "<p>Text position: <code class=\"codespan\">&#39;left&#39;</code> / <code class=\"codespan\">&#39;right&#39;</code> / <code class=\"codespan\">&#39;top&#39;</code> / <code class=\"codespan\">&#39;bottom&#39;</code>.</p>\n"
   },
   "feature.dataZoom.emphasis.iconStyle.textFill": {
-    "desc": "<p>Fill color of text. If it&#39;s not set, it will use in the order of icon&#39;s fill color, stroke color, and <code class=\"codespan\">&#39;#000&#39;</code>.</p>\n",
+    "desc": "\n\n<p>Fill color of text. If it&#39;s not set, it will use in the order of icon&#39;s fill color, stroke color, and <code class=\"codespan\">&#39;#000&#39;</code>.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "feature.dataZoom.emphasis.iconStyle.textAlign": {
-    "desc": "<p>Text align: <code class=\"codespan\">&#39;left&#39;</code> / <code class=\"codespan\">&#39;center&#39;</code> / <code class=\"codespan\">&#39;right&#39;</code>.</p>\n",
+    "desc": "\n\n<p>Text align: <code class=\"codespan\">&#39;left&#39;</code> / <code class=\"codespan\">&#39;center&#39;</code> / <code class=\"codespan\">&#39;right&#39;</code>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "left,center,right"
     }
   },
   "feature.dataZoom.emphasis.iconStyle.textBackgroundColor": {
-    "desc": "<p>Text background color.</p>\n",
+    "desc": "\n\n<p>Text background color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "feature.dataZoom.emphasis.iconStyle.textBorderRadius": {
-    "desc": "<p>Border radius of text area.</p>\n",
+    "desc": "\n\n<p>Border radius of text area.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
@@ -905,7 +905,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.dataZoom.emphasis.iconStyle.textPadding": {
-    "desc": "<p>Padding of text area.</p>\n",
+    "desc": "\n\n<p>Padding of text area.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
@@ -925,19 +925,19 @@ window.__EC_DOC_option_toolbox = {
     "desc": "<p>Style of brush rectangle.</p>\n"
   },
   "feature.dataZoom.brushStyle.color": {
-    "desc": "<p> color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
+    "desc": "\n\n<p> color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "feature.dataZoom.brushStyle.borderColor": {
-    "desc": "<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
+    "desc": "\n\n<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "feature.dataZoom.brushStyle.borderWidth": {
-    "desc": "<p> border width. No border when it is set to be 0.</p>\n",
+    "desc": "\n\n<p> border width. No border when it is set to be 0.</p>\n",
     "uiControl": {
       "type": "number",
       "value": "0",
@@ -946,7 +946,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.dataZoom.brushStyle.borderType": {
-    "desc": "<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
+    "desc": "\n\n<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "solid",
@@ -954,7 +954,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.dataZoom.brushStyle.shadowBlur": {
-    "desc": "<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "default": "",
@@ -963,14 +963,14 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.dataZoom.brushStyle.shadowColor": {
-    "desc": "<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color",
       "default": ""
     }
   },
   "feature.dataZoom.brushStyle.shadowOffsetX": {
-    "desc": "<p>Offset distance on the horizontal direction of shadow.</p>\n",
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
@@ -978,7 +978,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.dataZoom.brushStyle.shadowOffsetY": {
-    "desc": "<p>Offset distance on the vertical direction of shadow.</p>\n",
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
@@ -986,7 +986,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.dataZoom.brushStyle.opacity": {
-    "desc": "<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "1",
@@ -1026,19 +1026,19 @@ window.__EC_DOC_option_toolbox = {
     "desc": "<p>The style setting of magic type switching icon. Since icon label is displayed only when hovering on the icon, the label configuration options are available under <code class=\"codespan\">emphasis</code>.</p>\n"
   },
   "feature.magicType.iconStyle.color": {
-    "desc": "<p> color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
+    "desc": "\n\n<p> color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "feature.magicType.iconStyle.borderColor": {
-    "desc": "<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
+    "desc": "\n\n<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "feature.magicType.iconStyle.borderWidth": {
-    "desc": "<p> border width. No border when it is set to be 0.</p>\n",
+    "desc": "\n\n<p> border width. No border when it is set to be 0.</p>\n",
     "uiControl": {
       "type": "number",
       "value": "1",
@@ -1047,7 +1047,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.magicType.iconStyle.borderType": {
-    "desc": "<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
+    "desc": "\n\n<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "solid",
@@ -1055,7 +1055,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.magicType.iconStyle.shadowBlur": {
-    "desc": "<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "default": "",
@@ -1064,14 +1064,14 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.magicType.iconStyle.shadowColor": {
-    "desc": "<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color",
       "default": ""
     }
   },
   "feature.magicType.iconStyle.shadowOffsetX": {
-    "desc": "<p>Offset distance on the horizontal direction of shadow.</p>\n",
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
@@ -1079,7 +1079,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.magicType.iconStyle.shadowOffsetY": {
-    "desc": "<p>Offset distance on the vertical direction of shadow.</p>\n",
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
@@ -1087,7 +1087,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.magicType.iconStyle.opacity": {
-    "desc": "<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "1",
@@ -1097,19 +1097,19 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.magicType.emphasis.iconStyle.color": {
-    "desc": "<p> color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
+    "desc": "\n\n<p> color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "feature.magicType.emphasis.iconStyle.borderColor": {
-    "desc": "<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
+    "desc": "\n\n<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "feature.magicType.emphasis.iconStyle.borderWidth": {
-    "desc": "<p> border width. No border when it is set to be 0.</p>\n",
+    "desc": "\n\n<p> border width. No border when it is set to be 0.</p>\n",
     "uiControl": {
       "type": "number",
       "value": "0",
@@ -1118,7 +1118,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.magicType.emphasis.iconStyle.borderType": {
-    "desc": "<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
+    "desc": "\n\n<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "solid",
@@ -1126,7 +1126,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.magicType.emphasis.iconStyle.shadowBlur": {
-    "desc": "<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "default": "",
@@ -1135,14 +1135,14 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.magicType.emphasis.iconStyle.shadowColor": {
-    "desc": "<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color",
       "default": ""
     }
   },
   "feature.magicType.emphasis.iconStyle.shadowOffsetX": {
-    "desc": "<p>Offset distance on the horizontal direction of shadow.</p>\n",
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
@@ -1150,7 +1150,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.magicType.emphasis.iconStyle.shadowOffsetY": {
-    "desc": "<p>Offset distance on the vertical direction of shadow.</p>\n",
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
@@ -1158,7 +1158,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.magicType.emphasis.iconStyle.opacity": {
-    "desc": "<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "1",
@@ -1171,26 +1171,26 @@ window.__EC_DOC_option_toolbox = {
     "desc": "<p>Text position: <code class=\"codespan\">&#39;left&#39;</code> / <code class=\"codespan\">&#39;right&#39;</code> / <code class=\"codespan\">&#39;top&#39;</code> / <code class=\"codespan\">&#39;bottom&#39;</code>.</p>\n"
   },
   "feature.magicType.emphasis.iconStyle.textFill": {
-    "desc": "<p>Fill color of text. If it&#39;s not set, it will use in the order of icon&#39;s fill color, stroke color, and <code class=\"codespan\">&#39;#000&#39;</code>.</p>\n",
+    "desc": "\n\n<p>Fill color of text. If it&#39;s not set, it will use in the order of icon&#39;s fill color, stroke color, and <code class=\"codespan\">&#39;#000&#39;</code>.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "feature.magicType.emphasis.iconStyle.textAlign": {
-    "desc": "<p>Text align: <code class=\"codespan\">&#39;left&#39;</code> / <code class=\"codespan\">&#39;center&#39;</code> / <code class=\"codespan\">&#39;right&#39;</code>.</p>\n",
+    "desc": "\n\n<p>Text align: <code class=\"codespan\">&#39;left&#39;</code> / <code class=\"codespan\">&#39;center&#39;</code> / <code class=\"codespan\">&#39;right&#39;</code>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "left,center,right"
     }
   },
   "feature.magicType.emphasis.iconStyle.textBackgroundColor": {
-    "desc": "<p>Text background color.</p>\n",
+    "desc": "\n\n<p>Text background color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "feature.magicType.emphasis.iconStyle.textBorderRadius": {
-    "desc": "<p>Border radius of text area.</p>\n",
+    "desc": "\n\n<p>Border radius of text area.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
@@ -1198,7 +1198,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "feature.magicType.emphasis.iconStyle.textPadding": {
-    "desc": "<p>Padding of text area.</p>\n",
+    "desc": "\n\n<p>Padding of text area.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
@@ -1245,19 +1245,19 @@ window.__EC_DOC_option_toolbox = {
     "desc": "<p>The style setting of Shared icon. Since icon label is displayed only when hovering on the icon, the label configuration options are available under <code class=\"codespan\">emphasis</code>.</p>\n"
   },
   "iconStyle.color": {
-    "desc": "<p> color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
+    "desc": "\n\n<p> color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "iconStyle.borderColor": {
-    "desc": "<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
+    "desc": "\n\n<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "iconStyle.borderWidth": {
-    "desc": "<p> border width. No border when it is set to be 0.</p>\n",
+    "desc": "\n\n<p> border width. No border when it is set to be 0.</p>\n",
     "uiControl": {
       "type": "number",
       "value": "1",
@@ -1266,7 +1266,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "iconStyle.borderType": {
-    "desc": "<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
+    "desc": "\n\n<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "solid",
@@ -1274,7 +1274,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "iconStyle.shadowBlur": {
-    "desc": "<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "default": "",
@@ -1283,14 +1283,14 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "iconStyle.shadowColor": {
-    "desc": "<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color",
       "default": ""
     }
   },
   "iconStyle.shadowOffsetX": {
-    "desc": "<p>Offset distance on the horizontal direction of shadow.</p>\n",
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
@@ -1298,7 +1298,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "iconStyle.shadowOffsetY": {
-    "desc": "<p>Offset distance on the vertical direction of shadow.</p>\n",
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
@@ -1306,7 +1306,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "iconStyle.opacity": {
-    "desc": "<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "1",
@@ -1316,19 +1316,19 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "emphasis.iconStyle.color": {
-    "desc": "<p> color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
+    "desc": "\n\n<p> color. </p>\n<blockquote>\n<p>Color can be represented in RGB, for example <code class=\"codespan\">&#39;rgb(128, 128, 128)&#39;</code>. RGBA can be used when you need alpha channel, for example <code class=\"codespan\">&#39;rgba(128, 128, 128, 0.5)&#39;</code>. You may also use hexadecimal format, for example <code class=\"codespan\">&#39;#ccc&#39;</code>. Gradient color and texture are also supported besides single colors.</p>\n<pre><code class=\"lang-js\">// Linear gradient. First four parameters are x0, y0, x2, and y2, each ranged from 0 to 1, standing for percentage in the bounding box. If global is `true`, then the first four parameters are in absolute pixel positions.\ncolor: {\n    type: &#39;linear&#39;,\n    x: 0,\n    y: 0,\n    x2: 0,\n    y2: 1,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Radial gradient. First three parameters are x and y positions of center, and radius, similar to linear gradient.\ncolor: {\n    type: &#39;radial&#39;,\n    x: 0.5,\n    y: 0.5,\n    r: 0.5,\n    colorStops: [{\n        offset: 0, color: &#39;red&#39; // color at 0% position\n    }, {\n        offset: 1, color: &#39;blue&#39; // color at 100% position\n    }],\n    global: false // false by default\n}\n// Fill with texture\ncolor: {\n    image: imageDom, // HTMLImageElement, and HTMLCanvasElement are supported, while string path is not supported\n    repeat: &#39;repeat&#39; // whether to repeat texture, whose value can be repeat-x, repeat-y, or no-repeat\n}\n</code></pre>\n</blockquote>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "emphasis.iconStyle.borderColor": {
-    "desc": "<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
+    "desc": "\n\n<p> border color, whose format is similar to that of <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "emphasis.iconStyle.borderWidth": {
-    "desc": "<p> border width. No border when it is set to be 0.</p>\n",
+    "desc": "\n\n<p> border width. No border when it is set to be 0.</p>\n",
     "uiControl": {
       "type": "number",
       "value": "0",
@@ -1337,7 +1337,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "emphasis.iconStyle.borderType": {
-    "desc": "<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
+    "desc": "\n\n<p>Border type, which can be <code class=\"codespan\">&#39;solid&#39;</code>, <code class=\"codespan\">&#39;dashed&#39;</code>, or <code class=\"codespan\">&#39;dotted&#39;</code>. <code class=\"codespan\">&#39;solid&#39;</code> by default.</p>\n",
     "uiControl": {
       "type": "enum",
       "default": "solid",
@@ -1345,7 +1345,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "emphasis.iconStyle.shadowBlur": {
-    "desc": "<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
+    "desc": "\n\n<p>Size of shadow blur. This attribute should be used along with <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> to set shadow to component.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
     "uiControl": {
       "type": "number",
       "default": "",
@@ -1354,14 +1354,14 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "emphasis.iconStyle.shadowColor": {
-    "desc": "<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
+    "desc": "\n\n<p>Shadow color. Support same format as <code class=\"codespan\">color</code>.</p>\n",
     "uiControl": {
       "type": "color",
       "default": ""
     }
   },
   "emphasis.iconStyle.shadowOffsetX": {
-    "desc": "<p>Offset distance on the horizontal direction of shadow.</p>\n",
+    "desc": "\n\n<p>Offset distance on the horizontal direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
@@ -1369,7 +1369,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "emphasis.iconStyle.shadowOffsetY": {
-    "desc": "<p>Offset distance on the vertical direction of shadow.</p>\n",
+    "desc": "\n\n<p>Offset distance on the vertical direction of shadow.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "0",
@@ -1377,7 +1377,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "emphasis.iconStyle.opacity": {
-    "desc": "<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
+    "desc": "\n\n<p>Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.</p>\n",
     "uiControl": {
       "type": "number",
       "default": "1",
@@ -1390,26 +1390,26 @@ window.__EC_DOC_option_toolbox = {
     "desc": "<p>Text position: <code class=\"codespan\">&#39;left&#39;</code> / <code class=\"codespan\">&#39;right&#39;</code> / <code class=\"codespan\">&#39;top&#39;</code> / <code class=\"codespan\">&#39;bottom&#39;</code>.</p>\n"
   },
   "emphasis.iconStyle.textFill": {
-    "desc": "<p>Fill color of text. If it&#39;s not set, it will use in the order of icon&#39;s fill color, stroke color, and <code class=\"codespan\">&#39;#000&#39;</code>.</p>\n",
+    "desc": "\n\n<p>Fill color of text. If it&#39;s not set, it will use in the order of icon&#39;s fill color, stroke color, and <code class=\"codespan\">&#39;#000&#39;</code>.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "emphasis.iconStyle.textAlign": {
-    "desc": "<p>Text align: <code class=\"codespan\">&#39;left&#39;</code> / <code class=\"codespan\">&#39;center&#39;</code> / <code class=\"codespan\">&#39;right&#39;</code>.</p>\n",
+    "desc": "\n\n<p>Text align: <code class=\"codespan\">&#39;left&#39;</code> / <code class=\"codespan\">&#39;center&#39;</code> / <code class=\"codespan\">&#39;right&#39;</code>.</p>\n",
     "uiControl": {
       "type": "enum",
       "options": "left,center,right"
     }
   },
   "emphasis.iconStyle.textBackgroundColor": {
-    "desc": "<p>Text background color.</p>\n",
+    "desc": "\n\n<p>Text background color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "emphasis.iconStyle.textBorderRadius": {
-    "desc": "<p>Border radius of text area.</p>\n",
+    "desc": "\n\n<p>Border radius of text area.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",
@@ -1417,7 +1417,7 @@ window.__EC_DOC_option_toolbox = {
     }
   },
   "emphasis.iconStyle.textPadding": {
-    "desc": "<p>Padding of text area.</p>\n",
+    "desc": "\n\n<p>Padding of text area.</p>\n",
     "uiControl": {
       "type": "vector",
       "min": "0",

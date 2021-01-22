@@ -1,3 +1,9 @@
+/*
+title: Mollusc Shell
+category: surface
+titleCN: Mollusc Shell
+*/
+
 option = {
     tooltip: {},
     visualMap: {

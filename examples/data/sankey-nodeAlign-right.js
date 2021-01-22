@@ -1,3 +1,10 @@
+/*
+title: Node Align Right in Sankey
+category: sankey
+titleCN: 桑基图右对齐布局
+difficulty: 3
+*/
+
 myChart.showLoading();
 $.get(ROOT_PATH + '/data/asset/data/energy.json', function (data) {
     myChart.hideLoading();
@@ -14,7 +21,9 @@ $.get(ROOT_PATH + '/data/asset/data/energy.json', function (data) {
         series: [
             {
                 type: 'sankey',
-                focusNodeAdjacency: 'allEdges',
+                emphasis: {
+                    focus: 'adjacency'
+                },
                 nodeAlign: 'right',
                 data: data.nodes,
                 links: data.links,

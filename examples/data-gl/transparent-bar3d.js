@@ -1,3 +1,9 @@
+/*
+title: Transparent Bar3D
+category: bar3D
+titleCN: Transparent Bar3D
+*/
+
 
 var hours = ['12a', '1a', '2a', '3a', '4a', '5a', '6a',
         '7a', '8a', '9a','10a','11a',
@@ -49,22 +55,18 @@ option = {
 
         label: {
             show: false,
-            textStyle: {
-                fontSize: 16,
-                borderWidth: 1
-            }
+            fontSize: 16,
+            borderWidth: 1
         },
-        
+
         itemStyle: {
             opacity: 0.4
         },
 
         emphasis: {
             label: {
-                textStyle: {
-                    fontSize: 20,
-                    color: '#900'
-                }
+                fontSize: 20,
+                color: '#900'
             },
             itemStyle: {
                 color: '#900'

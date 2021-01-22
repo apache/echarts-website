@@ -1,3 +1,10 @@
+/*
+title: Line Style and Item Style
+category: line
+titleCN: 自定义折线图样式
+difficulty: 6
+*/
+
 option = {
     xAxis: {
         type: 'category',
@@ -12,14 +19,14 @@ option = {
         symbol: 'triangle',
         symbolSize: 20,
         lineStyle: {
-            color: 'green',
+            color: '#5470C6',
             width: 4,
             type: 'dashed'
         },
         itemStyle: {
             borderWidth: 3,
-            borderColor: 'yellow',
-            color: 'blue'
+            borderColor: '#EE6666',
+            color: 'yellow'
         }
     }]
 };

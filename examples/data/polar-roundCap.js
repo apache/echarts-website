@@ -1,3 +1,10 @@
+/*
+title: Rounded Bar on Polar
+category: bar
+titleCN: 圆角环形图
+difficulty: 7
+*/
+
 option = {
     angleAxis: {
         max: 2,
@@ -18,9 +25,9 @@ option = {
         data: [4, 3, 2, 1, 0],
         coordinateSystem: 'polar',
         name: 'Without Round Cap',
-        color: 'rgba(200, 0, 0, 0.5)',
         itemStyle: {
             borderColor: 'red',
+            opacity: 0.8,
             borderWidth: 1
         }
     }, {
@@ -29,9 +36,9 @@ option = {
         coordinateSystem: 'polar',
         name: 'With Round Cap',
         roundCap: true,
-        color: 'rgba(0, 200, 0, 0.5)',
         itemStyle: {
             borderColor: 'green',
+            opacity: 0.8,
             borderWidth: 1
         }
     }],

@@ -1,3 +1,10 @@
+/*
+title: Basic Parallel
+category: parallel
+titleCN: 基础平行坐标
+difficulty: 1
+*/
+
 option = {
     parallelAxis: [
         {dim: 0, name: 'Price'},

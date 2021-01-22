@@ -1,3 +1,9 @@
+/*
+title: Airline on Globe
+category: lines3D
+titleCN: Airline on Globe
+*/
+
 $.getJSON(ROOT_PATH + '/data-gl/asset/data/flights.json', function(data) {
 
     function getAirportCoord(idx) {

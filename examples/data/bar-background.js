@@ -1,3 +1,10 @@
+/*
+title: Bar with Background
+category: bar
+titleCN: 带背景色的柱状图
+difficulty: 0
+*/
+
 option = {
     xAxis: {
         type: 'category',
@@ -11,7 +18,7 @@ option = {
         type: 'bar',
         showBackground: true,
         backgroundStyle: {
-            color: 'rgba(220, 220, 220, 0.8)'
+            color: 'rgba(180, 180, 180, 0.2)'
         }
     }]
 };

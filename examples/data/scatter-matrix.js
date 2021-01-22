@@ -1,3 +1,10 @@
+/*
+title: Scatter Matrix
+category: 'parallel, scatter'
+titleCN: 散点矩阵和平行坐标
+difficulty: 10
+*/
+
 // Schema:
 // date,AQIindex,PM2.5,PM10,CO,NO2,SO2
 var schema = [
@@ -109,7 +116,7 @@ var rawData = [
 ];
 
 var CATEGORY_DIM_COUNT = 6;
-var GAP = 1;
+var GAP = 2;
 var BASE_LEFT = 5;
 var BASE_TOP = 10;
 // var GRID_WIDTH = 220;
@@ -117,7 +124,7 @@ var BASE_TOP = 10;
 var GRID_WIDTH = (100 - BASE_LEFT - GAP) / CATEGORY_DIM_COUNT - GAP;
 var GRID_HEIGHT = (100 - BASE_TOP - GAP) / CATEGORY_DIM_COUNT - GAP;
 var CATEGORY_DIM = 7;
-var SYMBOL_SIZE = 3;
+var SYMBOL_SIZE = 4;
 
 function retrieveScatterData(data, dimX, dimY) {
     var result = [];
@@ -220,7 +227,7 @@ var option = {
         top: 0,
         left: 'center',
         inRange: {
-            color: ['#c23531','#2f4554', '#61a0a8']
+            color: ['#51689b', '#ce5c5c', '#fbc357']
         },
         outOfRange: {
             color: '#ddd'
@@ -243,8 +250,8 @@ var option = {
     ],
     parallel: {
         bottom: '5%',
-        left: '5%',
-        height: '31%',
+        left: '2%',
+        height: '30%',
         width: '55%',
         parallelAxisDefault: {
             type: 'value',
