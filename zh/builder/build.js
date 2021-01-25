@@ -22,11 +22,6 @@ define(function (require) {
     var topCode = [`export * from "echarts/src/echarts";`];
     var srcFolder = version.startsWith('5.0.0') ? 'esm' // Only 5.0.0 has esm folder
         : isVersion5 ? 'lib' : 'src';
-
-    if (BUILD_CONFIG.api) {
-        topCode.push(`export * from "echarts/src/export";`);
-    }
-
     // Including charts
     (BUILD_CONFIG.charts || '').split(',').forEach(function (chart) {
         chart && topCode.push(`import "echarts/src/chart/${chart}";`);
