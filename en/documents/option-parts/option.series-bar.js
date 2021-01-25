@@ -2630,7 +2630,10 @@ window.__EC_DOC_option_series_bar = {
     "desc": "<p>The minimum width of the bar. In cartesian the default value is <code class=\"codespan\">1</code>, otherwise the default value if <code class=\"codespan\">null</code>.</p>\n<p>Has higer priority than <a href=\"#series-bar.barWidth\">barWidth</a>.</p>\n<p>Can be an absolute value like <code class=\"codespan\">40</code> or a percent value like <code class=\"codespan\">&#39;60%&#39;</code>. The percent is based on the calculated category width.</p>\n<p>In a single coodinate system, this attribute is shared by multiple <code class=\"codespan\">&#39;bar&#39;</code> series. This attribute should be set on the last <code class=\"codespan\">&#39;bar&#39;</code> series in the coodinate system, then it will be adopted by all <code class=\"codespan\">&#39;bar&#39;</code> series in the coordinate system.</p>\n"
   },
   "barMinHeight": {
-    "desc": "<p>The minimum width of bar. It could be used to avoid the following situation: the interaction would be affected when the value of some data item is too small.</p>\n\n",
+    "desc": "<p>The minimum width of bar. It could be used to avoid the following situation: the interaction would be affected when the value of some data item is too small.</p>\n"
+  },
+  "barMinAngle": {
+    "desc": "<p>The minimum angle of bar. It could be used to avoid the following situation: the interaction would be affected when the value of some data item is too small. Valid only for bar series on polar coordinates.</p>\n\n",
     "uiControl": {
       "type": "number",
       "min": "0"
