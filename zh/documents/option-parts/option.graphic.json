@@ -71,6 +71,45 @@
   "elements-group.ignore": {
     "desc": "<p>节点是否完全被忽略（既不渲染，也不响应事件）。</p>\n"
   },
+  "elements-group.textContent": {
+    "desc": "<p>这是一个文本定义，附着在一个节点上，会依据 <code class=\"codespan\">textConfig</code> 配置，相对于节点布局。</p>\n<p>里面的属性同于 <a href=\"option.html#graphic.elements-text\" target=\"_blank\">text</a>。</p>\n"
+  },
+  "elements-group.textConfig.position": {
+    "desc": "<p>Position of <code class=\"codespan\">textContent</code>.</p>\n<ul>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;top&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n<li>or like <code class=\"codespan\">[12, 33]</code></li>\n<li>or like <code class=\"codespan\">[&#39;50%&#39;, &#39;50%&#39;]</code></li>\n</ul>\n"
+  },
+  "elements-group.textConfig.rotation": {
+    "desc": "<p><code class=\"codespan\">textContent</code> 的旋转弧度。</p>\n"
+  },
+  "elements-group.textConfig.layoutRect": {
+    "desc": "<p><code class=\"codespan\">textContent</code> 根据此矩形来布局位置。\n默认是节点的包围盒。</p>\n<pre><code class=\"lang-js\">{\n    x: number\n    y: number\n    width: number\n    height: number\n}\n</code></pre>\n"
+  },
+  "elements-group.textConfig.offset(number[])": {
+    "desc": "<p><code class=\"codespan\">textContent</code> 的偏移。</p>\n<p><code class=\"codespan\">offset</code> 和 <code class=\"codespan\">position</code> 的区别是，<code class=\"codespan\">offset</code> 是旋转（rotation）后计算。</p>\n"
+  },
+  "elements-group.textConfig.origin": {
+    "desc": "<p><code class=\"codespan\">origin</code> 相对于节点的包围盒。\n可以是百分数。\n如果指定为 <code class=\"codespan\">&#39;center&#39;</code>，则定位在包围盒中心。</p>\n<p>只有当 <code class=\"codespan\">position</code> and <code class=\"codespan\">rotation</code> 都设置时，生效。</p>\n<ul>\n<li>如 <code class=\"codespan\">[12, 33]</code></li>\n<li>或如 <code class=\"codespan\">[&#39;50%&#39;, &#39;50%&#39;]</code></li>\n<li>&#39;center&#39;</li>\n</ul>\n"
+  },
+  "elements-group.textConfig.distance": {
+    "desc": "<p>距离 <code class=\"codespan\">layoutRect</code> 的距离。</p>\n"
+  },
+  "elements-group.textConfig.local": {
+    "desc": "<p>如果 <code class=\"codespan\">true</code> 的话，会采用节点的 transform。</p>\n"
+  },
+  "elements-group.textConfig.insideFill": {
+    "desc": "<p><code class=\"codespan\">insideFill</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 是 <code class=\"codespan\">&quot;inside&quot;</code>，它的 <code class=\"codespan\">fill</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.fill</code> &gt; <code class=\"codespan\">textConfig.insideFill</code> &gt; &quot;auto-calculated-fill&quot;\n在绝大多数场景下，&quot;auto-calculated-fill&quot; 是白色。</p>\n"
+  },
+  "elements-group.textConfig.insideStroke": {
+    "desc": "<p><code class=\"codespan\">insideStroke</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 是 <code class=\"codespan\">&quot;inside&quot;</code>，它的 <code class=\"codespan\">stroke</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.stroke</code> &gt; <code class=\"codespan\">textConfig.insideStroke</code> &gt; &quot;auto-calculated-stroke&quot;</p>\n<p>&quot;auto-calculated-stroke&quot; 的规则是：</p>\n<ul>\n<li>如果<ul>\n<li>(A) <code class=\"codespan\">fill</code> 在 style 中被指定（无论是在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>或者 (B) 需要画文字的背景（无论是定义在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>&quot;auto-calculated-stroke&quot; 都会为 <code class=\"codespan\">null</code>。</li>\n</ul>\n</li>\n<li>否则<ul>\n<li>&quot;auto-calculated-stroke&quot; 会和节点的 <code class=\"codespan\">fill</code> 相同，如果 <code class=\"codespan\">fill</code> 没有的话则为 <code class=\"codespan\">null</code>。</li>\n</ul>\n</li>\n</ul>\n"
+  },
+  "elements-group.textConfig.outsideFill": {
+    "desc": "<p><code class=\"codespan\">outsideFill</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 是 &quot;inside&quot;，它的 <code class=\"codespan\">fill</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.fill</code> &gt; <code class=\"codespan\">textConfig.outsideFill</code> &gt; #000</p>\n"
+  },
+  "elements-group.textConfig.outsideStroke": {
+    "desc": "<p><code class=\"codespan\">outsideStroke</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 不是 &quot;inside&quot;，它的 <code class=\"codespan\">stroke</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.stroke</code> &gt; <code class=\"codespan\">textConfig.outsideStroke</code> &gt; &quot;auto-calculated-stroke&quot;</p>\n<p>&quot;auto-calculated-stroke&quot; 的规则是：</p>\n<ul>\n<li>如果<ul>\n<li>(A) <code class=\"codespan\">fill</code> 在 style 中被指定（无论是在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>或者 (B) 需要画文字的背景（无论是定义在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>&quot;auto-calculated-stroke&quot; 都会为 <code class=\"codespan\">null</code>。</li>\n</ul>\n</li>\n<li>否则<ul>\n<li>&quot;auto-calculated-stroke&quot; 会为一个近似于白色的颜色，来区别于背景。</li>\n</ul>\n</li>\n</ul>\n"
+  },
+  "elements-group.textConfig.inside": {
+    "desc": "<p>如果确定文本是在节点中的话，则此可设置为 <code class=\"codespan\">true</code>，避免 echarts 额外猜测。</p>\n"
+  },
   "elements-group.cursor": {
     "desc": "\n\n<p>鼠标悬浮时在图形元素上时鼠标的样式是什么。同 CSS 的 <code class=\"codespan\">cursor</code>。</p>\n",
     "uiControl": {
@@ -160,6 +199,45 @@
   "elements-image.ignore": {
     "desc": "<p>节点是否完全被忽略（既不渲染，也不响应事件）。</p>\n"
   },
+  "elements-image.textContent": {
+    "desc": "<p>这是一个文本定义，附着在一个节点上，会依据 <code class=\"codespan\">textConfig</code> 配置，相对于节点布局。</p>\n<p>里面的属性同于 <a href=\"option.html#graphic.elements-text\" target=\"_blank\">text</a>。</p>\n"
+  },
+  "elements-image.textConfig.position": {
+    "desc": "<p>Position of <code class=\"codespan\">textContent</code>.</p>\n<ul>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;top&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n<li>or like <code class=\"codespan\">[12, 33]</code></li>\n<li>or like <code class=\"codespan\">[&#39;50%&#39;, &#39;50%&#39;]</code></li>\n</ul>\n"
+  },
+  "elements-image.textConfig.rotation": {
+    "desc": "<p><code class=\"codespan\">textContent</code> 的旋转弧度。</p>\n"
+  },
+  "elements-image.textConfig.layoutRect": {
+    "desc": "<p><code class=\"codespan\">textContent</code> 根据此矩形来布局位置。\n默认是节点的包围盒。</p>\n<pre><code class=\"lang-js\">{\n    x: number\n    y: number\n    width: number\n    height: number\n}\n</code></pre>\n"
+  },
+  "elements-image.textConfig.offset(number[])": {
+    "desc": "<p><code class=\"codespan\">textContent</code> 的偏移。</p>\n<p><code class=\"codespan\">offset</code> 和 <code class=\"codespan\">position</code> 的区别是，<code class=\"codespan\">offset</code> 是旋转（rotation）后计算。</p>\n"
+  },
+  "elements-image.textConfig.origin": {
+    "desc": "<p><code class=\"codespan\">origin</code> 相对于节点的包围盒。\n可以是百分数。\n如果指定为 <code class=\"codespan\">&#39;center&#39;</code>，则定位在包围盒中心。</p>\n<p>只有当 <code class=\"codespan\">position</code> and <code class=\"codespan\">rotation</code> 都设置时，生效。</p>\n<ul>\n<li>如 <code class=\"codespan\">[12, 33]</code></li>\n<li>或如 <code class=\"codespan\">[&#39;50%&#39;, &#39;50%&#39;]</code></li>\n<li>&#39;center&#39;</li>\n</ul>\n"
+  },
+  "elements-image.textConfig.distance": {
+    "desc": "<p>距离 <code class=\"codespan\">layoutRect</code> 的距离。</p>\n"
+  },
+  "elements-image.textConfig.local": {
+    "desc": "<p>如果 <code class=\"codespan\">true</code> 的话，会采用节点的 transform。</p>\n"
+  },
+  "elements-image.textConfig.insideFill": {
+    "desc": "<p><code class=\"codespan\">insideFill</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 是 <code class=\"codespan\">&quot;inside&quot;</code>，它的 <code class=\"codespan\">fill</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.fill</code> &gt; <code class=\"codespan\">textConfig.insideFill</code> &gt; &quot;auto-calculated-fill&quot;\n在绝大多数场景下，&quot;auto-calculated-fill&quot; 是白色。</p>\n"
+  },
+  "elements-image.textConfig.insideStroke": {
+    "desc": "<p><code class=\"codespan\">insideStroke</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 是 <code class=\"codespan\">&quot;inside&quot;</code>，它的 <code class=\"codespan\">stroke</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.stroke</code> &gt; <code class=\"codespan\">textConfig.insideStroke</code> &gt; &quot;auto-calculated-stroke&quot;</p>\n<p>&quot;auto-calculated-stroke&quot; 的规则是：</p>\n<ul>\n<li>如果<ul>\n<li>(A) <code class=\"codespan\">fill</code> 在 style 中被指定（无论是在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>或者 (B) 需要画文字的背景（无论是定义在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>&quot;auto-calculated-stroke&quot; 都会为 <code class=\"codespan\">null</code>。</li>\n</ul>\n</li>\n<li>否则<ul>\n<li>&quot;auto-calculated-stroke&quot; 会和节点的 <code class=\"codespan\">fill</code> 相同，如果 <code class=\"codespan\">fill</code> 没有的话则为 <code class=\"codespan\">null</code>。</li>\n</ul>\n</li>\n</ul>\n"
+  },
+  "elements-image.textConfig.outsideFill": {
+    "desc": "<p><code class=\"codespan\">outsideFill</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 是 &quot;inside&quot;，它的 <code class=\"codespan\">fill</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.fill</code> &gt; <code class=\"codespan\">textConfig.outsideFill</code> &gt; #000</p>\n"
+  },
+  "elements-image.textConfig.outsideStroke": {
+    "desc": "<p><code class=\"codespan\">outsideStroke</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 不是 &quot;inside&quot;，它的 <code class=\"codespan\">stroke</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.stroke</code> &gt; <code class=\"codespan\">textConfig.outsideStroke</code> &gt; &quot;auto-calculated-stroke&quot;</p>\n<p>&quot;auto-calculated-stroke&quot; 的规则是：</p>\n<ul>\n<li>如果<ul>\n<li>(A) <code class=\"codespan\">fill</code> 在 style 中被指定（无论是在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>或者 (B) 需要画文字的背景（无论是定义在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>&quot;auto-calculated-stroke&quot; 都会为 <code class=\"codespan\">null</code>。</li>\n</ul>\n</li>\n<li>否则<ul>\n<li>&quot;auto-calculated-stroke&quot; 会为一个近似于白色的颜色，来区别于背景。</li>\n</ul>\n</li>\n</ul>\n"
+  },
+  "elements-image.textConfig.inside": {
+    "desc": "<p>如果确定文本是在节点中的话，则此可设置为 <code class=\"codespan\">true</code>，避免 echarts 额外猜测。</p>\n"
+  },
   "elements-image.cursor": {
     "desc": "\n\n<p>鼠标悬浮时在图形元素上时鼠标的样式是什么。同 CSS 的 <code class=\"codespan\">cursor</code>。</p>\n",
     "uiControl": {
@@ -209,6 +287,12 @@
   },
   "elements-image.style.shadowColor": {
     "desc": "<p>阴影颜色。</p>\n"
+  },
+  "elements-image.focus": {
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>在高亮图形时，是否淡出其它数据的图形已达到聚焦的效果。支持如下配置：</p>\n<ul>\n<li><code class=\"codespan\">&#39;none&#39;</code> 不淡出其它图形，默认使用该配置。</li>\n<li><code class=\"codespan\">&#39;self&#39;</code> 只聚焦（不淡出）当前高亮的数据的图形。</li>\n<li><code class=\"codespan\">&#39;series&#39;</code> 聚焦当前高亮的数据所在的系列的所有图形。</li>\n</ul>\n"
+  },
+  "elements-image.blurScope": {
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>在开启<code class=\"codespan\">focus</code>的时候，可以通过<code class=\"codespan\">blurScope</code>配置淡出的范围。支持如下配置</p>\n<ul>\n<li><code class=\"codespan\">&#39;coordinateSystem&#39;</code> 淡出范围为坐标系，默认使用该配置。</li>\n<li><code class=\"codespan\">&#39;series&#39;</code> 淡出范围为系列。</li>\n<li><code class=\"codespan\">&#39;global&#39;</code> 淡出范围为全局。</li>\n</ul>\n"
   },
   "elements-text": {
     "desc": "<p>文本块。</p>\n"
@@ -276,6 +360,45 @@
   "elements-text.ignore": {
     "desc": "<p>节点是否完全被忽略（既不渲染，也不响应事件）。</p>\n"
   },
+  "elements-text.textContent": {
+    "desc": "<p>这是一个文本定义，附着在一个节点上，会依据 <code class=\"codespan\">textConfig</code> 配置，相对于节点布局。</p>\n<p>里面的属性同于 <a href=\"option.html#graphic.elements-text\" target=\"_blank\">text</a>。</p>\n"
+  },
+  "elements-text.textConfig.position": {
+    "desc": "<p>Position of <code class=\"codespan\">textContent</code>.</p>\n<ul>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;top&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n<li>or like <code class=\"codespan\">[12, 33]</code></li>\n<li>or like <code class=\"codespan\">[&#39;50%&#39;, &#39;50%&#39;]</code></li>\n</ul>\n"
+  },
+  "elements-text.textConfig.rotation": {
+    "desc": "<p><code class=\"codespan\">textContent</code> 的旋转弧度。</p>\n"
+  },
+  "elements-text.textConfig.layoutRect": {
+    "desc": "<p><code class=\"codespan\">textContent</code> 根据此矩形来布局位置。\n默认是节点的包围盒。</p>\n<pre><code class=\"lang-js\">{\n    x: number\n    y: number\n    width: number\n    height: number\n}\n</code></pre>\n"
+  },
+  "elements-text.textConfig.offset(number[])": {
+    "desc": "<p><code class=\"codespan\">textContent</code> 的偏移。</p>\n<p><code class=\"codespan\">offset</code> 和 <code class=\"codespan\">position</code> 的区别是，<code class=\"codespan\">offset</code> 是旋转（rotation）后计算。</p>\n"
+  },
+  "elements-text.textConfig.origin": {
+    "desc": "<p><code class=\"codespan\">origin</code> 相对于节点的包围盒。\n可以是百分数。\n如果指定为 <code class=\"codespan\">&#39;center&#39;</code>，则定位在包围盒中心。</p>\n<p>只有当 <code class=\"codespan\">position</code> and <code class=\"codespan\">rotation</code> 都设置时，生效。</p>\n<ul>\n<li>如 <code class=\"codespan\">[12, 33]</code></li>\n<li>或如 <code class=\"codespan\">[&#39;50%&#39;, &#39;50%&#39;]</code></li>\n<li>&#39;center&#39;</li>\n</ul>\n"
+  },
+  "elements-text.textConfig.distance": {
+    "desc": "<p>距离 <code class=\"codespan\">layoutRect</code> 的距离。</p>\n"
+  },
+  "elements-text.textConfig.local": {
+    "desc": "<p>如果 <code class=\"codespan\">true</code> 的话，会采用节点的 transform。</p>\n"
+  },
+  "elements-text.textConfig.insideFill": {
+    "desc": "<p><code class=\"codespan\">insideFill</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 是 <code class=\"codespan\">&quot;inside&quot;</code>，它的 <code class=\"codespan\">fill</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.fill</code> &gt; <code class=\"codespan\">textConfig.insideFill</code> &gt; &quot;auto-calculated-fill&quot;\n在绝大多数场景下，&quot;auto-calculated-fill&quot; 是白色。</p>\n"
+  },
+  "elements-text.textConfig.insideStroke": {
+    "desc": "<p><code class=\"codespan\">insideStroke</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 是 <code class=\"codespan\">&quot;inside&quot;</code>，它的 <code class=\"codespan\">stroke</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.stroke</code> &gt; <code class=\"codespan\">textConfig.insideStroke</code> &gt; &quot;auto-calculated-stroke&quot;</p>\n<p>&quot;auto-calculated-stroke&quot; 的规则是：</p>\n<ul>\n<li>如果<ul>\n<li>(A) <code class=\"codespan\">fill</code> 在 style 中被指定（无论是在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>或者 (B) 需要画文字的背景（无论是定义在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>&quot;auto-calculated-stroke&quot; 都会为 <code class=\"codespan\">null</code>。</li>\n</ul>\n</li>\n<li>否则<ul>\n<li>&quot;auto-calculated-stroke&quot; 会和节点的 <code class=\"codespan\">fill</code> 相同，如果 <code class=\"codespan\">fill</code> 没有的话则为 <code class=\"codespan\">null</code>。</li>\n</ul>\n</li>\n</ul>\n"
+  },
+  "elements-text.textConfig.outsideFill": {
+    "desc": "<p><code class=\"codespan\">outsideFill</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 是 &quot;inside&quot;，它的 <code class=\"codespan\">fill</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.fill</code> &gt; <code class=\"codespan\">textConfig.outsideFill</code> &gt; #000</p>\n"
+  },
+  "elements-text.textConfig.outsideStroke": {
+    "desc": "<p><code class=\"codespan\">outsideStroke</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 不是 &quot;inside&quot;，它的 <code class=\"codespan\">stroke</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.stroke</code> &gt; <code class=\"codespan\">textConfig.outsideStroke</code> &gt; &quot;auto-calculated-stroke&quot;</p>\n<p>&quot;auto-calculated-stroke&quot; 的规则是：</p>\n<ul>\n<li>如果<ul>\n<li>(A) <code class=\"codespan\">fill</code> 在 style 中被指定（无论是在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>或者 (B) 需要画文字的背景（无论是定义在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>&quot;auto-calculated-stroke&quot; 都会为 <code class=\"codespan\">null</code>。</li>\n</ul>\n</li>\n<li>否则<ul>\n<li>&quot;auto-calculated-stroke&quot; 会为一个近似于白色的颜色，来区别于背景。</li>\n</ul>\n</li>\n</ul>\n"
+  },
+  "elements-text.textConfig.inside": {
+    "desc": "<p>如果确定文本是在节点中的话，则此可设置为 <code class=\"codespan\">true</code>，避免 echarts 额外猜测。</p>\n"
+  },
   "elements-text.cursor": {
     "desc": "\n\n<p>鼠标悬浮时在图形元素上时鼠标的样式是什么。同 CSS 的 <code class=\"codespan\">cursor</code>。</p>\n",
     "uiControl": {
@@ -328,6 +451,12 @@
   },
   "elements-text.style.shadowColor": {
     "desc": "<p>阴影颜色。</p>\n"
+  },
+  "elements-text.focus": {
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>在高亮图形时，是否淡出其它数据的图形已达到聚焦的效果。支持如下配置：</p>\n<ul>\n<li><code class=\"codespan\">&#39;none&#39;</code> 不淡出其它图形，默认使用该配置。</li>\n<li><code class=\"codespan\">&#39;self&#39;</code> 只聚焦（不淡出）当前高亮的数据的图形。</li>\n<li><code class=\"codespan\">&#39;series&#39;</code> 聚焦当前高亮的数据所在的系列的所有图形。</li>\n</ul>\n"
+  },
+  "elements-text.blurScope": {
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>在开启<code class=\"codespan\">focus</code>的时候，可以通过<code class=\"codespan\">blurScope</code>配置淡出的范围。支持如下配置</p>\n<ul>\n<li><code class=\"codespan\">&#39;coordinateSystem&#39;</code> 淡出范围为坐标系，默认使用该配置。</li>\n<li><code class=\"codespan\">&#39;series&#39;</code> 淡出范围为系列。</li>\n<li><code class=\"codespan\">&#39;global&#39;</code> 淡出范围为全局。</li>\n</ul>\n"
   },
   "elements-rect": {
     "desc": "<p>矩形。</p>\n"
@@ -395,6 +524,45 @@
   "elements-rect.ignore": {
     "desc": "<p>节点是否完全被忽略（既不渲染，也不响应事件）。</p>\n"
   },
+  "elements-rect.textContent": {
+    "desc": "<p>这是一个文本定义，附着在一个节点上，会依据 <code class=\"codespan\">textConfig</code> 配置，相对于节点布局。</p>\n<p>里面的属性同于 <a href=\"option.html#graphic.elements-text\" target=\"_blank\">text</a>。</p>\n"
+  },
+  "elements-rect.textConfig.position": {
+    "desc": "<p>Position of <code class=\"codespan\">textContent</code>.</p>\n<ul>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;top&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n<li>or like <code class=\"codespan\">[12, 33]</code></li>\n<li>or like <code class=\"codespan\">[&#39;50%&#39;, &#39;50%&#39;]</code></li>\n</ul>\n"
+  },
+  "elements-rect.textConfig.rotation": {
+    "desc": "<p><code class=\"codespan\">textContent</code> 的旋转弧度。</p>\n"
+  },
+  "elements-rect.textConfig.layoutRect": {
+    "desc": "<p><code class=\"codespan\">textContent</code> 根据此矩形来布局位置。\n默认是节点的包围盒。</p>\n<pre><code class=\"lang-js\">{\n    x: number\n    y: number\n    width: number\n    height: number\n}\n</code></pre>\n"
+  },
+  "elements-rect.textConfig.offset(number[])": {
+    "desc": "<p><code class=\"codespan\">textContent</code> 的偏移。</p>\n<p><code class=\"codespan\">offset</code> 和 <code class=\"codespan\">position</code> 的区别是，<code class=\"codespan\">offset</code> 是旋转（rotation）后计算。</p>\n"
+  },
+  "elements-rect.textConfig.origin": {
+    "desc": "<p><code class=\"codespan\">origin</code> 相对于节点的包围盒。\n可以是百分数。\n如果指定为 <code class=\"codespan\">&#39;center&#39;</code>，则定位在包围盒中心。</p>\n<p>只有当 <code class=\"codespan\">position</code> and <code class=\"codespan\">rotation</code> 都设置时，生效。</p>\n<ul>\n<li>如 <code class=\"codespan\">[12, 33]</code></li>\n<li>或如 <code class=\"codespan\">[&#39;50%&#39;, &#39;50%&#39;]</code></li>\n<li>&#39;center&#39;</li>\n</ul>\n"
+  },
+  "elements-rect.textConfig.distance": {
+    "desc": "<p>距离 <code class=\"codespan\">layoutRect</code> 的距离。</p>\n"
+  },
+  "elements-rect.textConfig.local": {
+    "desc": "<p>如果 <code class=\"codespan\">true</code> 的话，会采用节点的 transform。</p>\n"
+  },
+  "elements-rect.textConfig.insideFill": {
+    "desc": "<p><code class=\"codespan\">insideFill</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 是 <code class=\"codespan\">&quot;inside&quot;</code>，它的 <code class=\"codespan\">fill</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.fill</code> &gt; <code class=\"codespan\">textConfig.insideFill</code> &gt; &quot;auto-calculated-fill&quot;\n在绝大多数场景下，&quot;auto-calculated-fill&quot; 是白色。</p>\n"
+  },
+  "elements-rect.textConfig.insideStroke": {
+    "desc": "<p><code class=\"codespan\">insideStroke</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 是 <code class=\"codespan\">&quot;inside&quot;</code>，它的 <code class=\"codespan\">stroke</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.stroke</code> &gt; <code class=\"codespan\">textConfig.insideStroke</code> &gt; &quot;auto-calculated-stroke&quot;</p>\n<p>&quot;auto-calculated-stroke&quot; 的规则是：</p>\n<ul>\n<li>如果<ul>\n<li>(A) <code class=\"codespan\">fill</code> 在 style 中被指定（无论是在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>或者 (B) 需要画文字的背景（无论是定义在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>&quot;auto-calculated-stroke&quot; 都会为 <code class=\"codespan\">null</code>。</li>\n</ul>\n</li>\n<li>否则<ul>\n<li>&quot;auto-calculated-stroke&quot; 会和节点的 <code class=\"codespan\">fill</code> 相同，如果 <code class=\"codespan\">fill</code> 没有的话则为 <code class=\"codespan\">null</code>。</li>\n</ul>\n</li>\n</ul>\n"
+  },
+  "elements-rect.textConfig.outsideFill": {
+    "desc": "<p><code class=\"codespan\">outsideFill</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 是 &quot;inside&quot;，它的 <code class=\"codespan\">fill</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.fill</code> &gt; <code class=\"codespan\">textConfig.outsideFill</code> &gt; #000</p>\n"
+  },
+  "elements-rect.textConfig.outsideStroke": {
+    "desc": "<p><code class=\"codespan\">outsideStroke</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 不是 &quot;inside&quot;，它的 <code class=\"codespan\">stroke</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.stroke</code> &gt; <code class=\"codespan\">textConfig.outsideStroke</code> &gt; &quot;auto-calculated-stroke&quot;</p>\n<p>&quot;auto-calculated-stroke&quot; 的规则是：</p>\n<ul>\n<li>如果<ul>\n<li>(A) <code class=\"codespan\">fill</code> 在 style 中被指定（无论是在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>或者 (B) 需要画文字的背景（无论是定义在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>&quot;auto-calculated-stroke&quot; 都会为 <code class=\"codespan\">null</code>。</li>\n</ul>\n</li>\n<li>否则<ul>\n<li>&quot;auto-calculated-stroke&quot; 会为一个近似于白色的颜色，来区别于背景。</li>\n</ul>\n</li>\n</ul>\n"
+  },
+  "elements-rect.textConfig.inside": {
+    "desc": "<p>如果确定文本是在节点中的话，则此可设置为 <code class=\"codespan\">true</code>，避免 echarts 额外猜测。</p>\n"
+  },
   "elements-rect.cursor": {
     "desc": "\n\n<p>鼠标悬浮时在图形元素上时鼠标的样式是什么。同 CSS 的 <code class=\"codespan\">cursor</code>。</p>\n",
     "uiControl": {
@@ -447,6 +615,12 @@
   },
   "elements-rect.style.shadowColor": {
     "desc": "<p>阴影颜色。</p>\n"
+  },
+  "elements-rect.focus": {
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>在高亮图形时，是否淡出其它数据的图形已达到聚焦的效果。支持如下配置：</p>\n<ul>\n<li><code class=\"codespan\">&#39;none&#39;</code> 不淡出其它图形，默认使用该配置。</li>\n<li><code class=\"codespan\">&#39;self&#39;</code> 只聚焦（不淡出）当前高亮的数据的图形。</li>\n<li><code class=\"codespan\">&#39;series&#39;</code> 聚焦当前高亮的数据所在的系列的所有图形。</li>\n</ul>\n"
+  },
+  "elements-rect.blurScope": {
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>在开启<code class=\"codespan\">focus</code>的时候，可以通过<code class=\"codespan\">blurScope</code>配置淡出的范围。支持如下配置</p>\n<ul>\n<li><code class=\"codespan\">&#39;coordinateSystem&#39;</code> 淡出范围为坐标系，默认使用该配置。</li>\n<li><code class=\"codespan\">&#39;series&#39;</code> 淡出范围为系列。</li>\n<li><code class=\"codespan\">&#39;global&#39;</code> 淡出范围为全局。</li>\n</ul>\n"
   },
   "elements-circle": {
     "desc": "<p>圆。</p>\n"
@@ -514,6 +688,45 @@
   "elements-circle.ignore": {
     "desc": "<p>节点是否完全被忽略（既不渲染，也不响应事件）。</p>\n"
   },
+  "elements-circle.textContent": {
+    "desc": "<p>这是一个文本定义，附着在一个节点上，会依据 <code class=\"codespan\">textConfig</code> 配置，相对于节点布局。</p>\n<p>里面的属性同于 <a href=\"option.html#graphic.elements-text\" target=\"_blank\">text</a>。</p>\n"
+  },
+  "elements-circle.textConfig.position": {
+    "desc": "<p>Position of <code class=\"codespan\">textContent</code>.</p>\n<ul>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;top&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n<li>or like <code class=\"codespan\">[12, 33]</code></li>\n<li>or like <code class=\"codespan\">[&#39;50%&#39;, &#39;50%&#39;]</code></li>\n</ul>\n"
+  },
+  "elements-circle.textConfig.rotation": {
+    "desc": "<p><code class=\"codespan\">textContent</code> 的旋转弧度。</p>\n"
+  },
+  "elements-circle.textConfig.layoutRect": {
+    "desc": "<p><code class=\"codespan\">textContent</code> 根据此矩形来布局位置。\n默认是节点的包围盒。</p>\n<pre><code class=\"lang-js\">{\n    x: number\n    y: number\n    width: number\n    height: number\n}\n</code></pre>\n"
+  },
+  "elements-circle.textConfig.offset(number[])": {
+    "desc": "<p><code class=\"codespan\">textContent</code> 的偏移。</p>\n<p><code class=\"codespan\">offset</code> 和 <code class=\"codespan\">position</code> 的区别是，<code class=\"codespan\">offset</code> 是旋转（rotation）后计算。</p>\n"
+  },
+  "elements-circle.textConfig.origin": {
+    "desc": "<p><code class=\"codespan\">origin</code> 相对于节点的包围盒。\n可以是百分数。\n如果指定为 <code class=\"codespan\">&#39;center&#39;</code>，则定位在包围盒中心。</p>\n<p>只有当 <code class=\"codespan\">position</code> and <code class=\"codespan\">rotation</code> 都设置时，生效。</p>\n<ul>\n<li>如 <code class=\"codespan\">[12, 33]</code></li>\n<li>或如 <code class=\"codespan\">[&#39;50%&#39;, &#39;50%&#39;]</code></li>\n<li>&#39;center&#39;</li>\n</ul>\n"
+  },
+  "elements-circle.textConfig.distance": {
+    "desc": "<p>距离 <code class=\"codespan\">layoutRect</code> 的距离。</p>\n"
+  },
+  "elements-circle.textConfig.local": {
+    "desc": "<p>如果 <code class=\"codespan\">true</code> 的话，会采用节点的 transform。</p>\n"
+  },
+  "elements-circle.textConfig.insideFill": {
+    "desc": "<p><code class=\"codespan\">insideFill</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 是 <code class=\"codespan\">&quot;inside&quot;</code>，它的 <code class=\"codespan\">fill</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.fill</code> &gt; <code class=\"codespan\">textConfig.insideFill</code> &gt; &quot;auto-calculated-fill&quot;\n在绝大多数场景下，&quot;auto-calculated-fill&quot; 是白色。</p>\n"
+  },
+  "elements-circle.textConfig.insideStroke": {
+    "desc": "<p><code class=\"codespan\">insideStroke</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 是 <code class=\"codespan\">&quot;inside&quot;</code>，它的 <code class=\"codespan\">stroke</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.stroke</code> &gt; <code class=\"codespan\">textConfig.insideStroke</code> &gt; &quot;auto-calculated-stroke&quot;</p>\n<p>&quot;auto-calculated-stroke&quot; 的规则是：</p>\n<ul>\n<li>如果<ul>\n<li>(A) <code class=\"codespan\">fill</code> 在 style 中被指定（无论是在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>或者 (B) 需要画文字的背景（无论是定义在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>&quot;auto-calculated-stroke&quot; 都会为 <code class=\"codespan\">null</code>。</li>\n</ul>\n</li>\n<li>否则<ul>\n<li>&quot;auto-calculated-stroke&quot; 会和节点的 <code class=\"codespan\">fill</code> 相同，如果 <code class=\"codespan\">fill</code> 没有的话则为 <code class=\"codespan\">null</code>。</li>\n</ul>\n</li>\n</ul>\n"
+  },
+  "elements-circle.textConfig.outsideFill": {
+    "desc": "<p><code class=\"codespan\">outsideFill</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 是 &quot;inside&quot;，它的 <code class=\"codespan\">fill</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.fill</code> &gt; <code class=\"codespan\">textConfig.outsideFill</code> &gt; #000</p>\n"
+  },
+  "elements-circle.textConfig.outsideStroke": {
+    "desc": "<p><code class=\"codespan\">outsideStroke</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 不是 &quot;inside&quot;，它的 <code class=\"codespan\">stroke</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.stroke</code> &gt; <code class=\"codespan\">textConfig.outsideStroke</code> &gt; &quot;auto-calculated-stroke&quot;</p>\n<p>&quot;auto-calculated-stroke&quot; 的规则是：</p>\n<ul>\n<li>如果<ul>\n<li>(A) <code class=\"codespan\">fill</code> 在 style 中被指定（无论是在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>或者 (B) 需要画文字的背景（无论是定义在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>&quot;auto-calculated-stroke&quot; 都会为 <code class=\"codespan\">null</code>。</li>\n</ul>\n</li>\n<li>否则<ul>\n<li>&quot;auto-calculated-stroke&quot; 会为一个近似于白色的颜色，来区别于背景。</li>\n</ul>\n</li>\n</ul>\n"
+  },
+  "elements-circle.textConfig.inside": {
+    "desc": "<p>如果确定文本是在节点中的话，则此可设置为 <code class=\"codespan\">true</code>，避免 echarts 额外猜测。</p>\n"
+  },
   "elements-circle.cursor": {
     "desc": "\n\n<p>鼠标悬浮时在图形元素上时鼠标的样式是什么。同 CSS 的 <code class=\"codespan\">cursor</code>。</p>\n",
     "uiControl": {
@@ -560,6 +773,12 @@
   },
   "elements-circle.style.shadowColor": {
     "desc": "<p>阴影颜色。</p>\n"
+  },
+  "elements-circle.focus": {
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>在高亮图形时，是否淡出其它数据的图形已达到聚焦的效果。支持如下配置：</p>\n<ul>\n<li><code class=\"codespan\">&#39;none&#39;</code> 不淡出其它图形，默认使用该配置。</li>\n<li><code class=\"codespan\">&#39;self&#39;</code> 只聚焦（不淡出）当前高亮的数据的图形。</li>\n<li><code class=\"codespan\">&#39;series&#39;</code> 聚焦当前高亮的数据所在的系列的所有图形。</li>\n</ul>\n"
+  },
+  "elements-circle.blurScope": {
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>在开启<code class=\"codespan\">focus</code>的时候，可以通过<code class=\"codespan\">blurScope</code>配置淡出的范围。支持如下配置</p>\n<ul>\n<li><code class=\"codespan\">&#39;coordinateSystem&#39;</code> 淡出范围为坐标系，默认使用该配置。</li>\n<li><code class=\"codespan\">&#39;series&#39;</code> 淡出范围为系列。</li>\n<li><code class=\"codespan\">&#39;global&#39;</code> 淡出范围为全局。</li>\n</ul>\n"
   },
   "elements-ring": {
     "desc": "<p>圆环。</p>\n"
@@ -627,6 +846,45 @@
   "elements-ring.ignore": {
     "desc": "<p>节点是否完全被忽略（既不渲染，也不响应事件）。</p>\n"
   },
+  "elements-ring.textContent": {
+    "desc": "<p>这是一个文本定义，附着在一个节点上，会依据 <code class=\"codespan\">textConfig</code> 配置，相对于节点布局。</p>\n<p>里面的属性同于 <a href=\"option.html#graphic.elements-text\" target=\"_blank\">text</a>。</p>\n"
+  },
+  "elements-ring.textConfig.position": {
+    "desc": "<p>Position of <code class=\"codespan\">textContent</code>.</p>\n<ul>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;top&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n<li>or like <code class=\"codespan\">[12, 33]</code></li>\n<li>or like <code class=\"codespan\">[&#39;50%&#39;, &#39;50%&#39;]</code></li>\n</ul>\n"
+  },
+  "elements-ring.textConfig.rotation": {
+    "desc": "<p><code class=\"codespan\">textContent</code> 的旋转弧度。</p>\n"
+  },
+  "elements-ring.textConfig.layoutRect": {
+    "desc": "<p><code class=\"codespan\">textContent</code> 根据此矩形来布局位置。\n默认是节点的包围盒。</p>\n<pre><code class=\"lang-js\">{\n    x: number\n    y: number\n    width: number\n    height: number\n}\n</code></pre>\n"
+  },
+  "elements-ring.textConfig.offset(number[])": {
+    "desc": "<p><code class=\"codespan\">textContent</code> 的偏移。</p>\n<p><code class=\"codespan\">offset</code> 和 <code class=\"codespan\">position</code> 的区别是，<code class=\"codespan\">offset</code> 是旋转（rotation）后计算。</p>\n"
+  },
+  "elements-ring.textConfig.origin": {
+    "desc": "<p><code class=\"codespan\">origin</code> 相对于节点的包围盒。\n可以是百分数。\n如果指定为 <code class=\"codespan\">&#39;center&#39;</code>，则定位在包围盒中心。</p>\n<p>只有当 <code class=\"codespan\">position</code> and <code class=\"codespan\">rotation</code> 都设置时，生效。</p>\n<ul>\n<li>如 <code class=\"codespan\">[12, 33]</code></li>\n<li>或如 <code class=\"codespan\">[&#39;50%&#39;, &#39;50%&#39;]</code></li>\n<li>&#39;center&#39;</li>\n</ul>\n"
+  },
+  "elements-ring.textConfig.distance": {
+    "desc": "<p>距离 <code class=\"codespan\">layoutRect</code> 的距离。</p>\n"
+  },
+  "elements-ring.textConfig.local": {
+    "desc": "<p>如果 <code class=\"codespan\">true</code> 的话，会采用节点的 transform。</p>\n"
+  },
+  "elements-ring.textConfig.insideFill": {
+    "desc": "<p><code class=\"codespan\">insideFill</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 是 <code class=\"codespan\">&quot;inside&quot;</code>，它的 <code class=\"codespan\">fill</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.fill</code> &gt; <code class=\"codespan\">textConfig.insideFill</code> &gt; &quot;auto-calculated-fill&quot;\n在绝大多数场景下，&quot;auto-calculated-fill&quot; 是白色。</p>\n"
+  },
+  "elements-ring.textConfig.insideStroke": {
+    "desc": "<p><code class=\"codespan\">insideStroke</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 是 <code class=\"codespan\">&quot;inside&quot;</code>，它的 <code class=\"codespan\">stroke</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.stroke</code> &gt; <code class=\"codespan\">textConfig.insideStroke</code> &gt; &quot;auto-calculated-stroke&quot;</p>\n<p>&quot;auto-calculated-stroke&quot; 的规则是：</p>\n<ul>\n<li>如果<ul>\n<li>(A) <code class=\"codespan\">fill</code> 在 style 中被指定（无论是在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>或者 (B) 需要画文字的背景（无论是定义在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>&quot;auto-calculated-stroke&quot; 都会为 <code class=\"codespan\">null</code>。</li>\n</ul>\n</li>\n<li>否则<ul>\n<li>&quot;auto-calculated-stroke&quot; 会和节点的 <code class=\"codespan\">fill</code> 相同，如果 <code class=\"codespan\">fill</code> 没有的话则为 <code class=\"codespan\">null</code>。</li>\n</ul>\n</li>\n</ul>\n"
+  },
+  "elements-ring.textConfig.outsideFill": {
+    "desc": "<p><code class=\"codespan\">outsideFill</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 是 &quot;inside&quot;，它的 <code class=\"codespan\">fill</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.fill</code> &gt; <code class=\"codespan\">textConfig.outsideFill</code> &gt; #000</p>\n"
+  },
+  "elements-ring.textConfig.outsideStroke": {
+    "desc": "<p><code class=\"codespan\">outsideStroke</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 不是 &quot;inside&quot;，它的 <code class=\"codespan\">stroke</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.stroke</code> &gt; <code class=\"codespan\">textConfig.outsideStroke</code> &gt; &quot;auto-calculated-stroke&quot;</p>\n<p>&quot;auto-calculated-stroke&quot; 的规则是：</p>\n<ul>\n<li>如果<ul>\n<li>(A) <code class=\"codespan\">fill</code> 在 style 中被指定（无论是在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>或者 (B) 需要画文字的背景（无论是定义在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>&quot;auto-calculated-stroke&quot; 都会为 <code class=\"codespan\">null</code>。</li>\n</ul>\n</li>\n<li>否则<ul>\n<li>&quot;auto-calculated-stroke&quot; 会为一个近似于白色的颜色，来区别于背景。</li>\n</ul>\n</li>\n</ul>\n"
+  },
+  "elements-ring.textConfig.inside": {
+    "desc": "<p>如果确定文本是在节点中的话，则此可设置为 <code class=\"codespan\">true</code>，避免 echarts 额外猜测。</p>\n"
+  },
   "elements-ring.cursor": {
     "desc": "\n\n<p>鼠标悬浮时在图形元素上时鼠标的样式是什么。同 CSS 的 <code class=\"codespan\">cursor</code>。</p>\n",
     "uiControl": {
@@ -676,6 +934,12 @@
   },
   "elements-ring.style.shadowColor": {
     "desc": "<p>阴影颜色。</p>\n"
+  },
+  "elements-ring.focus": {
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>在高亮图形时，是否淡出其它数据的图形已达到聚焦的效果。支持如下配置：</p>\n<ul>\n<li><code class=\"codespan\">&#39;none&#39;</code> 不淡出其它图形，默认使用该配置。</li>\n<li><code class=\"codespan\">&#39;self&#39;</code> 只聚焦（不淡出）当前高亮的数据的图形。</li>\n<li><code class=\"codespan\">&#39;series&#39;</code> 聚焦当前高亮的数据所在的系列的所有图形。</li>\n</ul>\n"
+  },
+  "elements-ring.blurScope": {
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>在开启<code class=\"codespan\">focus</code>的时候，可以通过<code class=\"codespan\">blurScope</code>配置淡出的范围。支持如下配置</p>\n<ul>\n<li><code class=\"codespan\">&#39;coordinateSystem&#39;</code> 淡出范围为坐标系，默认使用该配置。</li>\n<li><code class=\"codespan\">&#39;series&#39;</code> 淡出范围为系列。</li>\n<li><code class=\"codespan\">&#39;global&#39;</code> 淡出范围为全局。</li>\n</ul>\n"
   },
   "elements-sector": {
     "desc": "<p>扇形。</p>\n"
@@ -743,6 +1007,45 @@
   "elements-sector.ignore": {
     "desc": "<p>节点是否完全被忽略（既不渲染，也不响应事件）。</p>\n"
   },
+  "elements-sector.textContent": {
+    "desc": "<p>这是一个文本定义，附着在一个节点上，会依据 <code class=\"codespan\">textConfig</code> 配置，相对于节点布局。</p>\n<p>里面的属性同于 <a href=\"option.html#graphic.elements-text\" target=\"_blank\">text</a>。</p>\n"
+  },
+  "elements-sector.textConfig.position": {
+    "desc": "<p>Position of <code class=\"codespan\">textContent</code>.</p>\n<ul>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;top&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n<li>or like <code class=\"codespan\">[12, 33]</code></li>\n<li>or like <code class=\"codespan\">[&#39;50%&#39;, &#39;50%&#39;]</code></li>\n</ul>\n"
+  },
+  "elements-sector.textConfig.rotation": {
+    "desc": "<p><code class=\"codespan\">textContent</code> 的旋转弧度。</p>\n"
+  },
+  "elements-sector.textConfig.layoutRect": {
+    "desc": "<p><code class=\"codespan\">textContent</code> 根据此矩形来布局位置。\n默认是节点的包围盒。</p>\n<pre><code class=\"lang-js\">{\n    x: number\n    y: number\n    width: number\n    height: number\n}\n</code></pre>\n"
+  },
+  "elements-sector.textConfig.offset(number[])": {
+    "desc": "<p><code class=\"codespan\">textContent</code> 的偏移。</p>\n<p><code class=\"codespan\">offset</code> 和 <code class=\"codespan\">position</code> 的区别是，<code class=\"codespan\">offset</code> 是旋转（rotation）后计算。</p>\n"
+  },
+  "elements-sector.textConfig.origin": {
+    "desc": "<p><code class=\"codespan\">origin</code> 相对于节点的包围盒。\n可以是百分数。\n如果指定为 <code class=\"codespan\">&#39;center&#39;</code>，则定位在包围盒中心。</p>\n<p>只有当 <code class=\"codespan\">position</code> and <code class=\"codespan\">rotation</code> 都设置时，生效。</p>\n<ul>\n<li>如 <code class=\"codespan\">[12, 33]</code></li>\n<li>或如 <code class=\"codespan\">[&#39;50%&#39;, &#39;50%&#39;]</code></li>\n<li>&#39;center&#39;</li>\n</ul>\n"
+  },
+  "elements-sector.textConfig.distance": {
+    "desc": "<p>距离 <code class=\"codespan\">layoutRect</code> 的距离。</p>\n"
+  },
+  "elements-sector.textConfig.local": {
+    "desc": "<p>如果 <code class=\"codespan\">true</code> 的话，会采用节点的 transform。</p>\n"
+  },
+  "elements-sector.textConfig.insideFill": {
+    "desc": "<p><code class=\"codespan\">insideFill</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 是 <code class=\"codespan\">&quot;inside&quot;</code>，它的 <code class=\"codespan\">fill</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.fill</code> &gt; <code class=\"codespan\">textConfig.insideFill</code> &gt; &quot;auto-calculated-fill&quot;\n在绝大多数场景下，&quot;auto-calculated-fill&quot; 是白色。</p>\n"
+  },
+  "elements-sector.textConfig.insideStroke": {
+    "desc": "<p><code class=\"codespan\">insideStroke</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 是 <code class=\"codespan\">&quot;inside&quot;</code>，它的 <code class=\"codespan\">stroke</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.stroke</code> &gt; <code class=\"codespan\">textConfig.insideStroke</code> &gt; &quot;auto-calculated-stroke&quot;</p>\n<p>&quot;auto-calculated-stroke&quot; 的规则是：</p>\n<ul>\n<li>如果<ul>\n<li>(A) <code class=\"codespan\">fill</code> 在 style 中被指定（无论是在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>或者 (B) 需要画文字的背景（无论是定义在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>&quot;auto-calculated-stroke&quot; 都会为 <code class=\"codespan\">null</code>。</li>\n</ul>\n</li>\n<li>否则<ul>\n<li>&quot;auto-calculated-stroke&quot; 会和节点的 <code class=\"codespan\">fill</code> 相同，如果 <code class=\"codespan\">fill</code> 没有的话则为 <code class=\"codespan\">null</code>。</li>\n</ul>\n</li>\n</ul>\n"
+  },
+  "elements-sector.textConfig.outsideFill": {
+    "desc": "<p><code class=\"codespan\">outsideFill</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 是 &quot;inside&quot;，它的 <code class=\"codespan\">fill</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.fill</code> &gt; <code class=\"codespan\">textConfig.outsideFill</code> &gt; #000</p>\n"
+  },
+  "elements-sector.textConfig.outsideStroke": {
+    "desc": "<p><code class=\"codespan\">outsideStroke</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 不是 &quot;inside&quot;，它的 <code class=\"codespan\">stroke</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.stroke</code> &gt; <code class=\"codespan\">textConfig.outsideStroke</code> &gt; &quot;auto-calculated-stroke&quot;</p>\n<p>&quot;auto-calculated-stroke&quot; 的规则是：</p>\n<ul>\n<li>如果<ul>\n<li>(A) <code class=\"codespan\">fill</code> 在 style 中被指定（无论是在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>或者 (B) 需要画文字的背景（无论是定义在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>&quot;auto-calculated-stroke&quot; 都会为 <code class=\"codespan\">null</code>。</li>\n</ul>\n</li>\n<li>否则<ul>\n<li>&quot;auto-calculated-stroke&quot; 会为一个近似于白色的颜色，来区别于背景。</li>\n</ul>\n</li>\n</ul>\n"
+  },
+  "elements-sector.textConfig.inside": {
+    "desc": "<p>如果确定文本是在节点中的话，则此可设置为 <code class=\"codespan\">true</code>，避免 echarts 额外猜测。</p>\n"
+  },
   "elements-sector.cursor": {
     "desc": "\n\n<p>鼠标悬浮时在图形元素上时鼠标的样式是什么。同 CSS 的 <code class=\"codespan\">cursor</code>。</p>\n",
     "uiControl": {
@@ -801,6 +1104,12 @@
   },
   "elements-sector.style.shadowColor": {
     "desc": "<p>阴影颜色。</p>\n"
+  },
+  "elements-sector.focus": {
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>在高亮图形时，是否淡出其它数据的图形已达到聚焦的效果。支持如下配置：</p>\n<ul>\n<li><code class=\"codespan\">&#39;none&#39;</code> 不淡出其它图形，默认使用该配置。</li>\n<li><code class=\"codespan\">&#39;self&#39;</code> 只聚焦（不淡出）当前高亮的数据的图形。</li>\n<li><code class=\"codespan\">&#39;series&#39;</code> 聚焦当前高亮的数据所在的系列的所有图形。</li>\n</ul>\n"
+  },
+  "elements-sector.blurScope": {
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>在开启<code class=\"codespan\">focus</code>的时候，可以通过<code class=\"codespan\">blurScope</code>配置淡出的范围。支持如下配置</p>\n<ul>\n<li><code class=\"codespan\">&#39;coordinateSystem&#39;</code> 淡出范围为坐标系，默认使用该配置。</li>\n<li><code class=\"codespan\">&#39;series&#39;</code> 淡出范围为系列。</li>\n<li><code class=\"codespan\">&#39;global&#39;</code> 淡出范围为全局。</li>\n</ul>\n"
   },
   "elements-arc": {
     "desc": "<p>圆弧。</p>\n"
@@ -868,6 +1177,45 @@
   "elements-arc.ignore": {
     "desc": "<p>节点是否完全被忽略（既不渲染，也不响应事件）。</p>\n"
   },
+  "elements-arc.textContent": {
+    "desc": "<p>这是一个文本定义，附着在一个节点上，会依据 <code class=\"codespan\">textConfig</code> 配置，相对于节点布局。</p>\n<p>里面的属性同于 <a href=\"option.html#graphic.elements-text\" target=\"_blank\">text</a>。</p>\n"
+  },
+  "elements-arc.textConfig.position": {
+    "desc": "<p>Position of <code class=\"codespan\">textContent</code>.</p>\n<ul>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;top&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n<li>or like <code class=\"codespan\">[12, 33]</code></li>\n<li>or like <code class=\"codespan\">[&#39;50%&#39;, &#39;50%&#39;]</code></li>\n</ul>\n"
+  },
+  "elements-arc.textConfig.rotation": {
+    "desc": "<p><code class=\"codespan\">textContent</code> 的旋转弧度。</p>\n"
+  },
+  "elements-arc.textConfig.layoutRect": {
+    "desc": "<p><code class=\"codespan\">textContent</code> 根据此矩形来布局位置。\n默认是节点的包围盒。</p>\n<pre><code class=\"lang-js\">{\n    x: number\n    y: number\n    width: number\n    height: number\n}\n</code></pre>\n"
+  },
+  "elements-arc.textConfig.offset(number[])": {
+    "desc": "<p><code class=\"codespan\">textContent</code> 的偏移。</p>\n<p><code class=\"codespan\">offset</code> 和 <code class=\"codespan\">position</code> 的区别是，<code class=\"codespan\">offset</code> 是旋转（rotation）后计算。</p>\n"
+  },
+  "elements-arc.textConfig.origin": {
+    "desc": "<p><code class=\"codespan\">origin</code> 相对于节点的包围盒。\n可以是百分数。\n如果指定为 <code class=\"codespan\">&#39;center&#39;</code>，则定位在包围盒中心。</p>\n<p>只有当 <code class=\"codespan\">position</code> and <code class=\"codespan\">rotation</code> 都设置时，生效。</p>\n<ul>\n<li>如 <code class=\"codespan\">[12, 33]</code></li>\n<li>或如 <code class=\"codespan\">[&#39;50%&#39;, &#39;50%&#39;]</code></li>\n<li>&#39;center&#39;</li>\n</ul>\n"
+  },
+  "elements-arc.textConfig.distance": {
+    "desc": "<p>距离 <code class=\"codespan\">layoutRect</code> 的距离。</p>\n"
+  },
+  "elements-arc.textConfig.local": {
+    "desc": "<p>如果 <code class=\"codespan\">true</code> 的话，会采用节点的 transform。</p>\n"
+  },
+  "elements-arc.textConfig.insideFill": {
+    "desc": "<p><code class=\"codespan\">insideFill</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 是 <code class=\"codespan\">&quot;inside&quot;</code>，它的 <code class=\"codespan\">fill</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.fill</code> &gt; <code class=\"codespan\">textConfig.insideFill</code> &gt; &quot;auto-calculated-fill&quot;\n在绝大多数场景下，&quot;auto-calculated-fill&quot; 是白色。</p>\n"
+  },
+  "elements-arc.textConfig.insideStroke": {
+    "desc": "<p><code class=\"codespan\">insideStroke</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 是 <code class=\"codespan\">&quot;inside&quot;</code>，它的 <code class=\"codespan\">stroke</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.stroke</code> &gt; <code class=\"codespan\">textConfig.insideStroke</code> &gt; &quot;auto-calculated-stroke&quot;</p>\n<p>&quot;auto-calculated-stroke&quot; 的规则是：</p>\n<ul>\n<li>如果<ul>\n<li>(A) <code class=\"codespan\">fill</code> 在 style 中被指定（无论是在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>或者 (B) 需要画文字的背景（无论是定义在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>&quot;auto-calculated-stroke&quot; 都会为 <code class=\"codespan\">null</code>。</li>\n</ul>\n</li>\n<li>否则<ul>\n<li>&quot;auto-calculated-stroke&quot; 会和节点的 <code class=\"codespan\">fill</code> 相同，如果 <code class=\"codespan\">fill</code> 没有的话则为 <code class=\"codespan\">null</code>。</li>\n</ul>\n</li>\n</ul>\n"
+  },
+  "elements-arc.textConfig.outsideFill": {
+    "desc": "<p><code class=\"codespan\">outsideFill</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 是 &quot;inside&quot;，它的 <code class=\"codespan\">fill</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.fill</code> &gt; <code class=\"codespan\">textConfig.outsideFill</code> &gt; #000</p>\n"
+  },
+  "elements-arc.textConfig.outsideStroke": {
+    "desc": "<p><code class=\"codespan\">outsideStroke</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 不是 &quot;inside&quot;，它的 <code class=\"codespan\">stroke</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.stroke</code> &gt; <code class=\"codespan\">textConfig.outsideStroke</code> &gt; &quot;auto-calculated-stroke&quot;</p>\n<p>&quot;auto-calculated-stroke&quot; 的规则是：</p>\n<ul>\n<li>如果<ul>\n<li>(A) <code class=\"codespan\">fill</code> 在 style 中被指定（无论是在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>或者 (B) 需要画文字的背景（无论是定义在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>&quot;auto-calculated-stroke&quot; 都会为 <code class=\"codespan\">null</code>。</li>\n</ul>\n</li>\n<li>否则<ul>\n<li>&quot;auto-calculated-stroke&quot; 会为一个近似于白色的颜色，来区别于背景。</li>\n</ul>\n</li>\n</ul>\n"
+  },
+  "elements-arc.textConfig.inside": {
+    "desc": "<p>如果确定文本是在节点中的话，则此可设置为 <code class=\"codespan\">true</code>，避免 echarts 额外猜测。</p>\n"
+  },
   "elements-arc.cursor": {
     "desc": "\n\n<p>鼠标悬浮时在图形元素上时鼠标的样式是什么。同 CSS 的 <code class=\"codespan\">cursor</code>。</p>\n",
     "uiControl": {
@@ -926,6 +1274,12 @@
   },
   "elements-arc.style.shadowColor": {
     "desc": "<p>阴影颜色。</p>\n"
+  },
+  "elements-arc.focus": {
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>在高亮图形时，是否淡出其它数据的图形已达到聚焦的效果。支持如下配置：</p>\n<ul>\n<li><code class=\"codespan\">&#39;none&#39;</code> 不淡出其它图形，默认使用该配置。</li>\n<li><code class=\"codespan\">&#39;self&#39;</code> 只聚焦（不淡出）当前高亮的数据的图形。</li>\n<li><code class=\"codespan\">&#39;series&#39;</code> 聚焦当前高亮的数据所在的系列的所有图形。</li>\n</ul>\n"
+  },
+  "elements-arc.blurScope": {
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>在开启<code class=\"codespan\">focus</code>的时候，可以通过<code class=\"codespan\">blurScope</code>配置淡出的范围。支持如下配置</p>\n<ul>\n<li><code class=\"codespan\">&#39;coordinateSystem&#39;</code> 淡出范围为坐标系，默认使用该配置。</li>\n<li><code class=\"codespan\">&#39;series&#39;</code> 淡出范围为系列。</li>\n<li><code class=\"codespan\">&#39;global&#39;</code> 淡出范围为全局。</li>\n</ul>\n"
   },
   "elements-polygon": {
     "desc": "<p>多边形。</p>\n"
@@ -993,6 +1347,45 @@
   "elements-polygon.ignore": {
     "desc": "<p>节点是否完全被忽略（既不渲染，也不响应事件）。</p>\n"
   },
+  "elements-polygon.textContent": {
+    "desc": "<p>这是一个文本定义，附着在一个节点上，会依据 <code class=\"codespan\">textConfig</code> 配置，相对于节点布局。</p>\n<p>里面的属性同于 <a href=\"option.html#graphic.elements-text\" target=\"_blank\">text</a>。</p>\n"
+  },
+  "elements-polygon.textConfig.position": {
+    "desc": "<p>Position of <code class=\"codespan\">textContent</code>.</p>\n<ul>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;top&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n<li>or like <code class=\"codespan\">[12, 33]</code></li>\n<li>or like <code class=\"codespan\">[&#39;50%&#39;, &#39;50%&#39;]</code></li>\n</ul>\n"
+  },
+  "elements-polygon.textConfig.rotation": {
+    "desc": "<p><code class=\"codespan\">textContent</code> 的旋转弧度。</p>\n"
+  },
+  "elements-polygon.textConfig.layoutRect": {
+    "desc": "<p><code class=\"codespan\">textContent</code> 根据此矩形来布局位置。\n默认是节点的包围盒。</p>\n<pre><code class=\"lang-js\">{\n    x: number\n    y: number\n    width: number\n    height: number\n}\n</code></pre>\n"
+  },
+  "elements-polygon.textConfig.offset(number[])": {
+    "desc": "<p><code class=\"codespan\">textContent</code> 的偏移。</p>\n<p><code class=\"codespan\">offset</code> 和 <code class=\"codespan\">position</code> 的区别是，<code class=\"codespan\">offset</code> 是旋转（rotation）后计算。</p>\n"
+  },
+  "elements-polygon.textConfig.origin": {
+    "desc": "<p><code class=\"codespan\">origin</code> 相对于节点的包围盒。\n可以是百分数。\n如果指定为 <code class=\"codespan\">&#39;center&#39;</code>，则定位在包围盒中心。</p>\n<p>只有当 <code class=\"codespan\">position</code> and <code class=\"codespan\">rotation</code> 都设置时，生效。</p>\n<ul>\n<li>如 <code class=\"codespan\">[12, 33]</code></li>\n<li>或如 <code class=\"codespan\">[&#39;50%&#39;, &#39;50%&#39;]</code></li>\n<li>&#39;center&#39;</li>\n</ul>\n"
+  },
+  "elements-polygon.textConfig.distance": {
+    "desc": "<p>距离 <code class=\"codespan\">layoutRect</code> 的距离。</p>\n"
+  },
+  "elements-polygon.textConfig.local": {
+    "desc": "<p>如果 <code class=\"codespan\">true</code> 的话，会采用节点的 transform。</p>\n"
+  },
+  "elements-polygon.textConfig.insideFill": {
+    "desc": "<p><code class=\"codespan\">insideFill</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 是 <code class=\"codespan\">&quot;inside&quot;</code>，它的 <code class=\"codespan\">fill</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.fill</code> &gt; <code class=\"codespan\">textConfig.insideFill</code> &gt; &quot;auto-calculated-fill&quot;\n在绝大多数场景下，&quot;auto-calculated-fill&quot; 是白色。</p>\n"
+  },
+  "elements-polygon.textConfig.insideStroke": {
+    "desc": "<p><code class=\"codespan\">insideStroke</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 是 <code class=\"codespan\">&quot;inside&quot;</code>，它的 <code class=\"codespan\">stroke</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.stroke</code> &gt; <code class=\"codespan\">textConfig.insideStroke</code> &gt; &quot;auto-calculated-stroke&quot;</p>\n<p>&quot;auto-calculated-stroke&quot; 的规则是：</p>\n<ul>\n<li>如果<ul>\n<li>(A) <code class=\"codespan\">fill</code> 在 style 中被指定（无论是在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>或者 (B) 需要画文字的背景（无论是定义在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>&quot;auto-calculated-stroke&quot; 都会为 <code class=\"codespan\">null</code>。</li>\n</ul>\n</li>\n<li>否则<ul>\n<li>&quot;auto-calculated-stroke&quot; 会和节点的 <code class=\"codespan\">fill</code> 相同，如果 <code class=\"codespan\">fill</code> 没有的话则为 <code class=\"codespan\">null</code>。</li>\n</ul>\n</li>\n</ul>\n"
+  },
+  "elements-polygon.textConfig.outsideFill": {
+    "desc": "<p><code class=\"codespan\">outsideFill</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 是 &quot;inside&quot;，它的 <code class=\"codespan\">fill</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.fill</code> &gt; <code class=\"codespan\">textConfig.outsideFill</code> &gt; #000</p>\n"
+  },
+  "elements-polygon.textConfig.outsideStroke": {
+    "desc": "<p><code class=\"codespan\">outsideStroke</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 不是 &quot;inside&quot;，它的 <code class=\"codespan\">stroke</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.stroke</code> &gt; <code class=\"codespan\">textConfig.outsideStroke</code> &gt; &quot;auto-calculated-stroke&quot;</p>\n<p>&quot;auto-calculated-stroke&quot; 的规则是：</p>\n<ul>\n<li>如果<ul>\n<li>(A) <code class=\"codespan\">fill</code> 在 style 中被指定（无论是在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>或者 (B) 需要画文字的背景（无论是定义在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>&quot;auto-calculated-stroke&quot; 都会为 <code class=\"codespan\">null</code>。</li>\n</ul>\n</li>\n<li>否则<ul>\n<li>&quot;auto-calculated-stroke&quot; 会为一个近似于白色的颜色，来区别于背景。</li>\n</ul>\n</li>\n</ul>\n"
+  },
+  "elements-polygon.textConfig.inside": {
+    "desc": "<p>如果确定文本是在节点中的话，则此可设置为 <code class=\"codespan\">true</code>，避免 echarts 额外猜测。</p>\n"
+  },
   "elements-polygon.cursor": {
     "desc": "\n\n<p>鼠标悬浮时在图形元素上时鼠标的样式是什么。同 CSS 的 <code class=\"codespan\">cursor</code>。</p>\n",
     "uiControl": {
@@ -1039,6 +1432,12 @@
   },
   "elements-polygon.style.shadowColor": {
     "desc": "<p>阴影颜色。</p>\n"
+  },
+  "elements-polygon.focus": {
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>在高亮图形时，是否淡出其它数据的图形已达到聚焦的效果。支持如下配置：</p>\n<ul>\n<li><code class=\"codespan\">&#39;none&#39;</code> 不淡出其它图形，默认使用该配置。</li>\n<li><code class=\"codespan\">&#39;self&#39;</code> 只聚焦（不淡出）当前高亮的数据的图形。</li>\n<li><code class=\"codespan\">&#39;series&#39;</code> 聚焦当前高亮的数据所在的系列的所有图形。</li>\n</ul>\n"
+  },
+  "elements-polygon.blurScope": {
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>在开启<code class=\"codespan\">focus</code>的时候，可以通过<code class=\"codespan\">blurScope</code>配置淡出的范围。支持如下配置</p>\n<ul>\n<li><code class=\"codespan\">&#39;coordinateSystem&#39;</code> 淡出范围为坐标系，默认使用该配置。</li>\n<li><code class=\"codespan\">&#39;series&#39;</code> 淡出范围为系列。</li>\n<li><code class=\"codespan\">&#39;global&#39;</code> 淡出范围为全局。</li>\n</ul>\n"
   },
   "elements-polyline": {
     "desc": "<p>折线。</p>\n"
@@ -1106,6 +1505,45 @@
   "elements-polyline.ignore": {
     "desc": "<p>节点是否完全被忽略（既不渲染，也不响应事件）。</p>\n"
   },
+  "elements-polyline.textContent": {
+    "desc": "<p>这是一个文本定义，附着在一个节点上，会依据 <code class=\"codespan\">textConfig</code> 配置，相对于节点布局。</p>\n<p>里面的属性同于 <a href=\"option.html#graphic.elements-text\" target=\"_blank\">text</a>。</p>\n"
+  },
+  "elements-polyline.textConfig.position": {
+    "desc": "<p>Position of <code class=\"codespan\">textContent</code>.</p>\n<ul>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;top&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n<li>or like <code class=\"codespan\">[12, 33]</code></li>\n<li>or like <code class=\"codespan\">[&#39;50%&#39;, &#39;50%&#39;]</code></li>\n</ul>\n"
+  },
+  "elements-polyline.textConfig.rotation": {
+    "desc": "<p><code class=\"codespan\">textContent</code> 的旋转弧度。</p>\n"
+  },
+  "elements-polyline.textConfig.layoutRect": {
+    "desc": "<p><code class=\"codespan\">textContent</code> 根据此矩形来布局位置。\n默认是节点的包围盒。</p>\n<pre><code class=\"lang-js\">{\n    x: number\n    y: number\n    width: number\n    height: number\n}\n</code></pre>\n"
+  },
+  "elements-polyline.textConfig.offset(number[])": {
+    "desc": "<p><code class=\"codespan\">textContent</code> 的偏移。</p>\n<p><code class=\"codespan\">offset</code> 和 <code class=\"codespan\">position</code> 的区别是，<code class=\"codespan\">offset</code> 是旋转（rotation）后计算。</p>\n"
+  },
+  "elements-polyline.textConfig.origin": {
+    "desc": "<p><code class=\"codespan\">origin</code> 相对于节点的包围盒。\n可以是百分数。\n如果指定为 <code class=\"codespan\">&#39;center&#39;</code>，则定位在包围盒中心。</p>\n<p>只有当 <code class=\"codespan\">position</code> and <code class=\"codespan\">rotation</code> 都设置时，生效。</p>\n<ul>\n<li>如 <code class=\"codespan\">[12, 33]</code></li>\n<li>或如 <code class=\"codespan\">[&#39;50%&#39;, &#39;50%&#39;]</code></li>\n<li>&#39;center&#39;</li>\n</ul>\n"
+  },
+  "elements-polyline.textConfig.distance": {
+    "desc": "<p>距离 <code class=\"codespan\">layoutRect</code> 的距离。</p>\n"
+  },
+  "elements-polyline.textConfig.local": {
+    "desc": "<p>如果 <code class=\"codespan\">true</code> 的话，会采用节点的 transform。</p>\n"
+  },
+  "elements-polyline.textConfig.insideFill": {
+    "desc": "<p><code class=\"codespan\">insideFill</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 是 <code class=\"codespan\">&quot;inside&quot;</code>，它的 <code class=\"codespan\">fill</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.fill</code> &gt; <code class=\"codespan\">textConfig.insideFill</code> &gt; &quot;auto-calculated-fill&quot;\n在绝大多数场景下，&quot;auto-calculated-fill&quot; 是白色。</p>\n"
+  },
+  "elements-polyline.textConfig.insideStroke": {
+    "desc": "<p><code class=\"codespan\">insideStroke</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 是 <code class=\"codespan\">&quot;inside&quot;</code>，它的 <code class=\"codespan\">stroke</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.stroke</code> &gt; <code class=\"codespan\">textConfig.insideStroke</code> &gt; &quot;auto-calculated-stroke&quot;</p>\n<p>&quot;auto-calculated-stroke&quot; 的规则是：</p>\n<ul>\n<li>如果<ul>\n<li>(A) <code class=\"codespan\">fill</code> 在 style 中被指定（无论是在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>或者 (B) 需要画文字的背景（无论是定义在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>&quot;auto-calculated-stroke&quot; 都会为 <code class=\"codespan\">null</code>。</li>\n</ul>\n</li>\n<li>否则<ul>\n<li>&quot;auto-calculated-stroke&quot; 会和节点的 <code class=\"codespan\">fill</code> 相同，如果 <code class=\"codespan\">fill</code> 没有的话则为 <code class=\"codespan\">null</code>。</li>\n</ul>\n</li>\n</ul>\n"
+  },
+  "elements-polyline.textConfig.outsideFill": {
+    "desc": "<p><code class=\"codespan\">outsideFill</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 是 &quot;inside&quot;，它的 <code class=\"codespan\">fill</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.fill</code> &gt; <code class=\"codespan\">textConfig.outsideFill</code> &gt; #000</p>\n"
+  },
+  "elements-polyline.textConfig.outsideStroke": {
+    "desc": "<p><code class=\"codespan\">outsideStroke</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 不是 &quot;inside&quot;，它的 <code class=\"codespan\">stroke</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.stroke</code> &gt; <code class=\"codespan\">textConfig.outsideStroke</code> &gt; &quot;auto-calculated-stroke&quot;</p>\n<p>&quot;auto-calculated-stroke&quot; 的规则是：</p>\n<ul>\n<li>如果<ul>\n<li>(A) <code class=\"codespan\">fill</code> 在 style 中被指定（无论是在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>或者 (B) 需要画文字的背景（无论是定义在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>&quot;auto-calculated-stroke&quot; 都会为 <code class=\"codespan\">null</code>。</li>\n</ul>\n</li>\n<li>否则<ul>\n<li>&quot;auto-calculated-stroke&quot; 会为一个近似于白色的颜色，来区别于背景。</li>\n</ul>\n</li>\n</ul>\n"
+  },
+  "elements-polyline.textConfig.inside": {
+    "desc": "<p>如果确定文本是在节点中的话，则此可设置为 <code class=\"codespan\">true</code>，避免 echarts 额外猜测。</p>\n"
+  },
   "elements-polyline.cursor": {
     "desc": "\n\n<p>鼠标悬浮时在图形元素上时鼠标的样式是什么。同 CSS 的 <code class=\"codespan\">cursor</code>。</p>\n",
     "uiControl": {
@@ -1152,6 +1590,12 @@
   },
   "elements-polyline.style.shadowColor": {
     "desc": "<p>阴影颜色。</p>\n"
+  },
+  "elements-polyline.focus": {
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>在高亮图形时，是否淡出其它数据的图形已达到聚焦的效果。支持如下配置：</p>\n<ul>\n<li><code class=\"codespan\">&#39;none&#39;</code> 不淡出其它图形，默认使用该配置。</li>\n<li><code class=\"codespan\">&#39;self&#39;</code> 只聚焦（不淡出）当前高亮的数据的图形。</li>\n<li><code class=\"codespan\">&#39;series&#39;</code> 聚焦当前高亮的数据所在的系列的所有图形。</li>\n</ul>\n"
+  },
+  "elements-polyline.blurScope": {
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>在开启<code class=\"codespan\">focus</code>的时候，可以通过<code class=\"codespan\">blurScope</code>配置淡出的范围。支持如下配置</p>\n<ul>\n<li><code class=\"codespan\">&#39;coordinateSystem&#39;</code> 淡出范围为坐标系，默认使用该配置。</li>\n<li><code class=\"codespan\">&#39;series&#39;</code> 淡出范围为系列。</li>\n<li><code class=\"codespan\">&#39;global&#39;</code> 淡出范围为全局。</li>\n</ul>\n"
   },
   "elements-line": {
     "desc": "<p>直线。</p>\n"
@@ -1219,6 +1663,45 @@
   "elements-line.ignore": {
     "desc": "<p>节点是否完全被忽略（既不渲染，也不响应事件）。</p>\n"
   },
+  "elements-line.textContent": {
+    "desc": "<p>这是一个文本定义，附着在一个节点上，会依据 <code class=\"codespan\">textConfig</code> 配置，相对于节点布局。</p>\n<p>里面的属性同于 <a href=\"option.html#graphic.elements-text\" target=\"_blank\">text</a>。</p>\n"
+  },
+  "elements-line.textConfig.position": {
+    "desc": "<p>Position of <code class=\"codespan\">textContent</code>.</p>\n<ul>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;top&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n<li>or like <code class=\"codespan\">[12, 33]</code></li>\n<li>or like <code class=\"codespan\">[&#39;50%&#39;, &#39;50%&#39;]</code></li>\n</ul>\n"
+  },
+  "elements-line.textConfig.rotation": {
+    "desc": "<p><code class=\"codespan\">textContent</code> 的旋转弧度。</p>\n"
+  },
+  "elements-line.textConfig.layoutRect": {
+    "desc": "<p><code class=\"codespan\">textContent</code> 根据此矩形来布局位置。\n默认是节点的包围盒。</p>\n<pre><code class=\"lang-js\">{\n    x: number\n    y: number\n    width: number\n    height: number\n}\n</code></pre>\n"
+  },
+  "elements-line.textConfig.offset(number[])": {
+    "desc": "<p><code class=\"codespan\">textContent</code> 的偏移。</p>\n<p><code class=\"codespan\">offset</code> 和 <code class=\"codespan\">position</code> 的区别是，<code class=\"codespan\">offset</code> 是旋转（rotation）后计算。</p>\n"
+  },
+  "elements-line.textConfig.origin": {
+    "desc": "<p><code class=\"codespan\">origin</code> 相对于节点的包围盒。\n可以是百分数。\n如果指定为 <code class=\"codespan\">&#39;center&#39;</code>，则定位在包围盒中心。</p>\n<p>只有当 <code class=\"codespan\">position</code> and <code class=\"codespan\">rotation</code> 都设置时，生效。</p>\n<ul>\n<li>如 <code class=\"codespan\">[12, 33]</code></li>\n<li>或如 <code class=\"codespan\">[&#39;50%&#39;, &#39;50%&#39;]</code></li>\n<li>&#39;center&#39;</li>\n</ul>\n"
+  },
+  "elements-line.textConfig.distance": {
+    "desc": "<p>距离 <code class=\"codespan\">layoutRect</code> 的距离。</p>\n"
+  },
+  "elements-line.textConfig.local": {
+    "desc": "<p>如果 <code class=\"codespan\">true</code> 的话，会采用节点的 transform。</p>\n"
+  },
+  "elements-line.textConfig.insideFill": {
+    "desc": "<p><code class=\"codespan\">insideFill</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 是 <code class=\"codespan\">&quot;inside&quot;</code>，它的 <code class=\"codespan\">fill</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.fill</code> &gt; <code class=\"codespan\">textConfig.insideFill</code> &gt; &quot;auto-calculated-fill&quot;\n在绝大多数场景下，&quot;auto-calculated-fill&quot; 是白色。</p>\n"
+  },
+  "elements-line.textConfig.insideStroke": {
+    "desc": "<p><code class=\"codespan\">insideStroke</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 是 <code class=\"codespan\">&quot;inside&quot;</code>，它的 <code class=\"codespan\">stroke</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.stroke</code> &gt; <code class=\"codespan\">textConfig.insideStroke</code> &gt; &quot;auto-calculated-stroke&quot;</p>\n<p>&quot;auto-calculated-stroke&quot; 的规则是：</p>\n<ul>\n<li>如果<ul>\n<li>(A) <code class=\"codespan\">fill</code> 在 style 中被指定（无论是在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>或者 (B) 需要画文字的背景（无论是定义在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>&quot;auto-calculated-stroke&quot; 都会为 <code class=\"codespan\">null</code>。</li>\n</ul>\n</li>\n<li>否则<ul>\n<li>&quot;auto-calculated-stroke&quot; 会和节点的 <code class=\"codespan\">fill</code> 相同，如果 <code class=\"codespan\">fill</code> 没有的话则为 <code class=\"codespan\">null</code>。</li>\n</ul>\n</li>\n</ul>\n"
+  },
+  "elements-line.textConfig.outsideFill": {
+    "desc": "<p><code class=\"codespan\">outsideFill</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 是 &quot;inside&quot;，它的 <code class=\"codespan\">fill</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.fill</code> &gt; <code class=\"codespan\">textConfig.outsideFill</code> &gt; #000</p>\n"
+  },
+  "elements-line.textConfig.outsideStroke": {
+    "desc": "<p><code class=\"codespan\">outsideStroke</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 不是 &quot;inside&quot;，它的 <code class=\"codespan\">stroke</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.stroke</code> &gt; <code class=\"codespan\">textConfig.outsideStroke</code> &gt; &quot;auto-calculated-stroke&quot;</p>\n<p>&quot;auto-calculated-stroke&quot; 的规则是：</p>\n<ul>\n<li>如果<ul>\n<li>(A) <code class=\"codespan\">fill</code> 在 style 中被指定（无论是在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>或者 (B) 需要画文字的背景（无论是定义在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>&quot;auto-calculated-stroke&quot; 都会为 <code class=\"codespan\">null</code>。</li>\n</ul>\n</li>\n<li>否则<ul>\n<li>&quot;auto-calculated-stroke&quot; 会为一个近似于白色的颜色，来区别于背景。</li>\n</ul>\n</li>\n</ul>\n"
+  },
+  "elements-line.textConfig.inside": {
+    "desc": "<p>如果确定文本是在节点中的话，则此可设置为 <code class=\"codespan\">true</code>，避免 echarts 额外猜测。</p>\n"
+  },
   "elements-line.cursor": {
     "desc": "\n\n<p>鼠标悬浮时在图形元素上时鼠标的样式是什么。同 CSS 的 <code class=\"codespan\">cursor</code>。</p>\n",
     "uiControl": {
@@ -1271,6 +1754,12 @@
   },
   "elements-line.style.shadowColor": {
     "desc": "<p>阴影颜色。</p>\n"
+  },
+  "elements-line.focus": {
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>在高亮图形时，是否淡出其它数据的图形已达到聚焦的效果。支持如下配置：</p>\n<ul>\n<li><code class=\"codespan\">&#39;none&#39;</code> 不淡出其它图形，默认使用该配置。</li>\n<li><code class=\"codespan\">&#39;self&#39;</code> 只聚焦（不淡出）当前高亮的数据的图形。</li>\n<li><code class=\"codespan\">&#39;series&#39;</code> 聚焦当前高亮的数据所在的系列的所有图形。</li>\n</ul>\n"
+  },
+  "elements-line.blurScope": {
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>在开启<code class=\"codespan\">focus</code>的时候，可以通过<code class=\"codespan\">blurScope</code>配置淡出的范围。支持如下配置</p>\n<ul>\n<li><code class=\"codespan\">&#39;coordinateSystem&#39;</code> 淡出范围为坐标系，默认使用该配置。</li>\n<li><code class=\"codespan\">&#39;series&#39;</code> 淡出范围为系列。</li>\n<li><code class=\"codespan\">&#39;global&#39;</code> 淡出范围为全局。</li>\n</ul>\n"
   },
   "elements-bezierCurve": {
     "desc": "<p>二次或三次贝塞尔曲线。</p>\n"
@@ -1338,6 +1827,45 @@
   "elements-bezierCurve.ignore": {
     "desc": "<p>节点是否完全被忽略（既不渲染，也不响应事件）。</p>\n"
   },
+  "elements-bezierCurve.textContent": {
+    "desc": "<p>这是一个文本定义，附着在一个节点上，会依据 <code class=\"codespan\">textConfig</code> 配置，相对于节点布局。</p>\n<p>里面的属性同于 <a href=\"option.html#graphic.elements-text\" target=\"_blank\">text</a>。</p>\n"
+  },
+  "elements-bezierCurve.textConfig.position": {
+    "desc": "<p>Position of <code class=\"codespan\">textContent</code>.</p>\n<ul>\n<li>&#39;left&#39;</li>\n<li>&#39;right&#39;</li>\n<li>&#39;top&#39;</li>\n<li>&#39;bottom&#39;</li>\n<li>&#39;inside&#39;</li>\n<li>&#39;insideLeft&#39;</li>\n<li>&#39;insideRight&#39;</li>\n<li>&#39;insideTop&#39;</li>\n<li>&#39;insideBottom&#39;</li>\n<li>&#39;insideTopLeft&#39;</li>\n<li>&#39;insideTopRight&#39;</li>\n<li>&#39;insideBottomLeft&#39;</li>\n<li>&#39;insideBottomRight&#39;</li>\n<li>or like <code class=\"codespan\">[12, 33]</code></li>\n<li>or like <code class=\"codespan\">[&#39;50%&#39;, &#39;50%&#39;]</code></li>\n</ul>\n"
+  },
+  "elements-bezierCurve.textConfig.rotation": {
+    "desc": "<p><code class=\"codespan\">textContent</code> 的旋转弧度。</p>\n"
+  },
+  "elements-bezierCurve.textConfig.layoutRect": {
+    "desc": "<p><code class=\"codespan\">textContent</code> 根据此矩形来布局位置。\n默认是节点的包围盒。</p>\n<pre><code class=\"lang-js\">{\n    x: number\n    y: number\n    width: number\n    height: number\n}\n</code></pre>\n"
+  },
+  "elements-bezierCurve.textConfig.offset(number[])": {
+    "desc": "<p><code class=\"codespan\">textContent</code> 的偏移。</p>\n<p><code class=\"codespan\">offset</code> 和 <code class=\"codespan\">position</code> 的区别是，<code class=\"codespan\">offset</code> 是旋转（rotation）后计算。</p>\n"
+  },
+  "elements-bezierCurve.textConfig.origin": {
+    "desc": "<p><code class=\"codespan\">origin</code> 相对于节点的包围盒。\n可以是百分数。\n如果指定为 <code class=\"codespan\">&#39;center&#39;</code>，则定位在包围盒中心。</p>\n<p>只有当 <code class=\"codespan\">position</code> and <code class=\"codespan\">rotation</code> 都设置时，生效。</p>\n<ul>\n<li>如 <code class=\"codespan\">[12, 33]</code></li>\n<li>或如 <code class=\"codespan\">[&#39;50%&#39;, &#39;50%&#39;]</code></li>\n<li>&#39;center&#39;</li>\n</ul>\n"
+  },
+  "elements-bezierCurve.textConfig.distance": {
+    "desc": "<p>距离 <code class=\"codespan\">layoutRect</code> 的距离。</p>\n"
+  },
+  "elements-bezierCurve.textConfig.local": {
+    "desc": "<p>如果 <code class=\"codespan\">true</code> 的话，会采用节点的 transform。</p>\n"
+  },
+  "elements-bezierCurve.textConfig.insideFill": {
+    "desc": "<p><code class=\"codespan\">insideFill</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 是 <code class=\"codespan\">&quot;inside&quot;</code>，它的 <code class=\"codespan\">fill</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.fill</code> &gt; <code class=\"codespan\">textConfig.insideFill</code> &gt; &quot;auto-calculated-fill&quot;\n在绝大多数场景下，&quot;auto-calculated-fill&quot; 是白色。</p>\n"
+  },
+  "elements-bezierCurve.textConfig.insideStroke": {
+    "desc": "<p><code class=\"codespan\">insideStroke</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 是 <code class=\"codespan\">&quot;inside&quot;</code>，它的 <code class=\"codespan\">stroke</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.stroke</code> &gt; <code class=\"codespan\">textConfig.insideStroke</code> &gt; &quot;auto-calculated-stroke&quot;</p>\n<p>&quot;auto-calculated-stroke&quot; 的规则是：</p>\n<ul>\n<li>如果<ul>\n<li>(A) <code class=\"codespan\">fill</code> 在 style 中被指定（无论是在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>或者 (B) 需要画文字的背景（无论是定义在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>&quot;auto-calculated-stroke&quot; 都会为 <code class=\"codespan\">null</code>。</li>\n</ul>\n</li>\n<li>否则<ul>\n<li>&quot;auto-calculated-stroke&quot; 会和节点的 <code class=\"codespan\">fill</code> 相同，如果 <code class=\"codespan\">fill</code> 没有的话则为 <code class=\"codespan\">null</code>。</li>\n</ul>\n</li>\n</ul>\n"
+  },
+  "elements-bezierCurve.textConfig.outsideFill": {
+    "desc": "<p><code class=\"codespan\">outsideFill</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 是 &quot;inside&quot;，它的 <code class=\"codespan\">fill</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.fill</code> &gt; <code class=\"codespan\">textConfig.outsideFill</code> &gt; #000</p>\n"
+  },
+  "elements-bezierCurve.textConfig.outsideStroke": {
+    "desc": "<p><code class=\"codespan\">outsideStroke</code> 可以是一个颜色字符串，或者空着。</p>\n<p>如果 <code class=\"codespan\">textContent</code> 不是 &quot;inside&quot;，它的 <code class=\"codespan\">stroke</code> 会按这个优先级来选取：\n<code class=\"codespan\">textContent.style.stroke</code> &gt; <code class=\"codespan\">textConfig.outsideStroke</code> &gt; &quot;auto-calculated-stroke&quot;</p>\n<p>&quot;auto-calculated-stroke&quot; 的规则是：</p>\n<ul>\n<li>如果<ul>\n<li>(A) <code class=\"codespan\">fill</code> 在 style 中被指定（无论是在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>或者 (B) 需要画文字的背景（无论是定义在 <code class=\"codespan\">textContent.style</code> 还是 <code class=\"codespan\">textContent.style.rich</code> 里）</li>\n<li>&quot;auto-calculated-stroke&quot; 都会为 <code class=\"codespan\">null</code>。</li>\n</ul>\n</li>\n<li>否则<ul>\n<li>&quot;auto-calculated-stroke&quot; 会为一个近似于白色的颜色，来区别于背景。</li>\n</ul>\n</li>\n</ul>\n"
+  },
+  "elements-bezierCurve.textConfig.inside": {
+    "desc": "<p>如果确定文本是在节点中的话，则此可设置为 <code class=\"codespan\">true</code>，避免 echarts 额外猜测。</p>\n"
+  },
   "elements-bezierCurve.cursor": {
     "desc": "\n\n<p>鼠标悬浮时在图形元素上时鼠标的样式是什么。同 CSS 的 <code class=\"codespan\">cursor</code>。</p>\n",
     "uiControl": {
@@ -1402,5 +1930,11 @@
   },
   "elements-bezierCurve.style.shadowColor": {
     "desc": "<p>阴影颜色。</p>\n"
+  },
+  "elements-bezierCurve.focus": {
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>在高亮图形时，是否淡出其它数据的图形已达到聚焦的效果。支持如下配置：</p>\n<ul>\n<li><code class=\"codespan\">&#39;none&#39;</code> 不淡出其它图形，默认使用该配置。</li>\n<li><code class=\"codespan\">&#39;self&#39;</code> 只聚焦（不淡出）当前高亮的数据的图形。</li>\n<li><code class=\"codespan\">&#39;series&#39;</code> 聚焦当前高亮的数据所在的系列的所有图形。</li>\n</ul>\n"
+  },
+  "elements-bezierCurve.blurScope": {
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>在开启<code class=\"codespan\">focus</code>的时候，可以通过<code class=\"codespan\">blurScope</code>配置淡出的范围。支持如下配置</p>\n<ul>\n<li><code class=\"codespan\">&#39;coordinateSystem&#39;</code> 淡出范围为坐标系，默认使用该配置。</li>\n<li><code class=\"codespan\">&#39;series&#39;</code> 淡出范围为系列。</li>\n<li><code class=\"codespan\">&#39;global&#39;</code> 淡出范围为全局。</li>\n</ul>\n"
   }
 }

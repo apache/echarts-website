@@ -250,9 +250,9 @@ window.__EC_DOC_option_parallel = {
     "desc": "\n\n<p>Width of text block.</p>\n",
     "uiControl": {
       "type": "number",
-      "default": "50",
+      "default": "100",
       "min": "1",
-      "max": "200",
+      "max": "500",
       "step": "1"
     }
   },
@@ -262,7 +262,7 @@ window.__EC_DOC_option_parallel = {
       "type": "number",
       "default": "50",
       "min": "1",
-      "max": "200",
+      "max": "500",
       "step": "1"
     }
   },
@@ -1072,9 +1072,9 @@ window.__EC_DOC_option_parallel = {
     "desc": "\n\n<p>Width of text block.</p>\n",
     "uiControl": {
       "type": "number",
-      "default": "50",
+      "default": "100",
       "min": "1",
-      "max": "200",
+      "max": "500",
       "step": "1"
     }
   },
@@ -1084,7 +1084,7 @@ window.__EC_DOC_option_parallel = {
       "type": "number",
       "default": "50",
       "min": "1",
-      "max": "200",
+      "max": "500",
       "step": "1"
     }
   },
@@ -1467,9 +1467,9 @@ window.__EC_DOC_option_parallel = {
     "desc": "\n\n<p>Width of text block.</p>\n",
     "uiControl": {
       "type": "number",
-      "default": "50",
+      "default": "100",
       "min": "1",
-      "max": "200",
+      "max": "500",
       "step": "1"
     }
   },
@@ -1479,7 +1479,7 @@ window.__EC_DOC_option_parallel = {
       "type": "number",
       "default": "50",
       "min": "1",
-      "max": "200",
+      "max": "500",
       "step": "1"
     }
   },

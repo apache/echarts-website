@@ -86,15 +86,6 @@ window.__EC_DOC_api_action = {
   "geo.geoToggleSelect": {
     "desc": "<p>Toggles selecting status of specified geo region.</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;geoToggleSelect&#39;,\n    // optional; series index; could be an array of multiple series\n    seriesIndex?: number|Array,\n    // optional; series name; could be an array of multiple series\n    seriesName?: string|Array,\n    // data index; could assign by name attribute when not defined\n    dataIndex?: number,\n    // optional; data name; ignored when dataIndex is defined\n    name?: string\n})\n</code></pre>\n<p><strong>EVENT:</strong> <a href=\"#events.geoselectchanged\">geoselectchanged</a></p>\n"
   },
-  "graph": {
-    "desc": "<p>Actions related to <a href=\"option.html#series-graph\" target=\"_blank\">graph</a>, <a href=\"option.html#series-graph\" target=\"_blank\">graph</a> should be imported before use.</p>\n"
-  },
-  "graph.focusNodeAdjacency": {
-    "desc": "<p>Highlight the specified node and all of its adjacent nodes.</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;focusNodeAdjacency&#39;,\n\n    // Use seriesId or seriesIndex or seriesName to specify\n    // the target series.\n    seriesId: &#39;xxx&#39;,\n    seriesIndex: 0,\n    seriesName: &#39;nnn&#39;,\n\n    // Use either `dataIndex` or `edgeDataIndex` to specify\n    // the target node or target edge.\n    dataIndex: 12\n    edgeDataIndex: 5\n})\n</code></pre>\n<p>Event <a href=\"#event.focusNodeAdjacency\">focusNodeAdjacency</a> will be thrown finally.</p>\n"
-  },
-  "graph.unfocusNodeAdjacency": {
-    "desc": "<p>Reverse highlight the specified node and all of its adjacent nodes.</p>\n<pre><code class=\"lang-js\">dispatchAction({\n    type: &#39;unfocusNodeAdjacency&#39;,\n\n    // Use seriesId or seriesIndex or seriesName to location the series.\n    seriesId: &#39;xxx&#39;,\n    seriesIndex: 0,\n    seriesName: &#39;nnn&#39;\n})\n</code></pre>\n<p>Event <a href=\"#event.unfocusNodeAdjacency\">unfocusNodeAdjacency</a> will be thrown finally.</p>\n"
-  },
   "brush": {
     "desc": "<p><a href=\"option.html#brush\" target=\"_blank\">brush</a> related actions.</p>\n"
   },

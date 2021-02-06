@@ -62,12 +62,6 @@ window.__EC_DOC_api_events = {
   "axisareaselected": {
     "desc": "<p>Selecting event of range of <a href=\"option.html#parallelAxis\" target=\"_blank\">parallel axis</a>.</p>\n<p>When selecting axis range, the following method can be used to get data indices of currently highlighted lines, which is the list of indices in <code class=\"codespan\">data</code> of <code class=\"codespan\">series</code>.</p>\n<pre><code class=\"lang-javascript\">chart.on(&#39;axisareaselected&#39;, function () {\n    var series1 = chart.getModel().getSeries()[0];\n    var series2 = chart.getModel().getSeries()[0];\n    var indices1 = series1.getRawIndicesByActiveState(&#39;active&#39;);\n    var indices2 = series2.getRawIndicesByActiveState(&#39;active&#39;);\n    console.log(indices1);\n    console.log(indices2);\n});\n</code></pre>\n"
   },
-  "focusnodeadjacency": {
-    "desc": "<p>Adjacent nodes highlight event in <a href=\"option.html#graph\" target=\"_blank\">graph</a>.</p>\n<p>See <a href=\"#action.graph.focusNodeAdjacency\">focusNodeAdjacency</a>.</p>\n"
-  },
-  "unfocusnodeadjacency": {
-    "desc": "<p>Adjacent nodes reverse-highlight event in <a href=\"option.html#graph\" target=\"_blank\">graph</a>.</p>\n<p>See <a href=\"#action.graph.unfocusNodeAdjacency\">unfocusNodeAdjacency</a>.</p>\n"
-  },
   "brush": {
     "desc": "<p>Event triggered after action <a href=\"#action.brush.brush\">brush</a> dispatched.</p>\n"
   },

@@ -62,12 +62,6 @@
   "axisareaselected": {
     "desc": "<p><a href=\"option.html#parallelAxis\" target=\"_blank\">平行坐标轴 (Parallel)</a>范围选取事件。</p>\n<p>当进行坐标轴范围选取时，可以用如下方式获取当前高亮的线所对应的 data indices\n（即 <code class=\"codespan\">series</code> 的 <code class=\"codespan\">data</code> 中的序号列表）。</p>\n<pre><code class=\"lang-javascript\">chart.on(&#39;axisareaselected&#39;, function () {\n    var series0 = chart.getModel().getSeries()[0];\n    var series1 = chart.getModel().getSeries()[1];\n    var indices0 = series0.getRawIndicesByActiveState(&#39;active&#39;);\n    var indices1 = series1.getRawIndicesByActiveState(&#39;active&#39;);\n    console.log(indices0, indices1);\n});\n</code></pre>\n"
   },
-  "focusnodeadjacency": {
-    "desc": "<p><a href=\"option.html#graph\" target=\"_blank\">graph</a>的邻接节点高亮事件。</p>\n<p>参见<a href=\"#action.graph.focusNodeAdjacency\">focusNodeAdjacency</a>。</p>\n"
-  },
-  "unfocusnodeadjacency": {
-    "desc": "<p><a href=\"option.html#graph\" target=\"_blank\">graph</a>的邻接节点取消高亮事件。</p>\n<p>参见<a href=\"#action.graph.unfocusNodeAdjacency\">unfocusNodeAdjacency</a>。</p>\n"
-  },
   "brush": {
     "desc": "<p>“选框正在添加”事件。即发出 <a href=\"#action.brush.brush\">brush action</a> 得到的事件。</p>\n"
   },

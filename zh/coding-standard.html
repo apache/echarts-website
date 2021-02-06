@@ -39,7 +39,7 @@ default:
 </code></pre>
 <h3 id="空格">空格</h3>
 <p><strong>[强制]</strong> 二元运算符两个操作数之间必须使用空格，但一元运算符与其操作数间不能有空格。 </p>
-<pre><code class="lang-js">var a = !arr.length;
+<pre><code class="lang-js">let a = !arr.length;
 a++;
 a = b + c;
 </code></pre>
@@ -97,14 +97,14 @@ while(condition) {
 </code></pre>
 <p><strong>[强制]</strong> 在创建对象的语句中，<code>:</code> 后必须加一个空格，<code>:</code> 前不能有空格。</p>
 <pre><code class="lang-js">// 正例
-var obj = {
+const obj = {
     a: 1,
     b: 2,
     c: 3
 };
 
 // 反例
-var obj = {
+const obj = {
     a : 1,
     b:2,
     c :3
@@ -116,7 +116,7 @@ var obj = {
 function funcName() {
 }
 
-var funcName = function funcName() {
+const funcName = function funcName() {
 };
 
 funcName();
@@ -127,7 +127,7 @@ funcName();
 function funcName () {
 }
 
-var funcName = function funcName () {
+const funcName = function funcName () {
 };
 
 funcName ();
@@ -171,22 +171,22 @@ while ( len-- ) {
 
 
 // 正例
-var arr1 = [];
-var arr2 = [1, 2, 3];
-var obj1 = {};
-var obj2 = {name: &#39;obj&#39;};
-var obj3 = {
+const arr1 = [];
+const arr2 = [1, 2, 3];
+const obj1 = {};
+const obj2 = {name: &#39;obj&#39;};
+const obj3 = {
     name: &#39;obj&#39;,
     age: 20,
     sex: 1
 };
 
 // 反例
-var arr1 = [ ];
-var arr2 = [ 1, 2, 3 ];
-var obj1 = { };
-var obj2 = { name: &#39;obj&#39; };
-var obj3 = {name: &#39;obj&#39;, age: 20, sex: 1};
+const arr1 = [ ];
+const arr2 = [ 1, 2, 3 ];
+const obj1 = { };
+const obj2 = { name: &#39;obj&#39; };
+const obj3 = {name: &#39;obj&#39;, age: 20, sex: 1};
 </code></pre>
 <p><strong>[强制]</strong> 每行代码后不能有尾随空格。</p>
 <h3 id="换行">换行</h3>
@@ -202,7 +202,7 @@ if (user.isAuthenticated()
     // Code
 }
 
-var result = number1 + number2 + number3
+const result = number1 + number2 + number3
     + number4 + number5;
 
 
@@ -214,7 +214,7 @@ if (user.isAuthenticated() &amp;&amp;
     // Code
 }
 
-var result = number1 + number2 + number3 +
+const result = number1 + number2 + number3 +
     number4 + number5;
 </code></pre>
 <p><strong>[强制]</strong> 如果括号中的内容有多行，必须为 <code>)</code>、 <code>]</code>、 <code>}</code> 另开一个新行，并使新行与 <code>(</code>、 <code>[</code>、 <code>{</code> 所在行的缩进相对应。</p>
@@ -228,7 +228,7 @@ if (product) {
         sendProduct(user, product);
     }
 }
-var arr = [
+const arr = [
     &#39;candy&#39;, &#39;sugar&#39;
 ];
 
@@ -241,13 +241,13 @@ if (product) {
         sendProduct(user, product);
     }
 }
-var arr = [
+const arr = [
         &#39;candy&#39;, &#39;sugar&#39;
     ];
 </code></pre>
 <p><strong>[强制]</strong> <code>,</code> 或 <code>;</code> 前不能有换行。 </p>
 <pre><code class="lang-js">// 正例
-var obj = {
+const obj = {
     a: 1,
     b: 2,
     c: 3
@@ -261,7 +261,7 @@ foo(
 
 
 // 反例
-var obj = {
+const obj = {
     a: 1
     , b: 2
     , c: 3
@@ -297,10 +297,10 @@ $(&#39;#items&#39;)
     .highlight()
     .end();
 
-var result = thisIsAVeryVeryLongCondition
+const result = thisIsAVeryVeryLongCondition
     ? resultA : resultB;
 
-var result = condition
+const res = condition
     ? thisIsAVeryVeryLongResult
     : resultB;
 </code></pre>
@@ -359,18 +359,18 @@ function funcName() {
 };
 
 // 对于函数表达式，不能忽略分号
-var funcName = function () {
+const funcName = function () {
 };
 </code></pre>
 <p><strong>[强制]</strong> 对象和数组的声明中不能有尾随逗号。</p>
 <pre><code class="lang-js">// 正例
 
-var obj = {
+const obj = {
     attr1: &#39;xxx&#39;,
     attr2: &#39;yyy&#39;
 };
 
-var arr = [
+const arr = [
     &#39;xxx&#39;,
     &#39;yyy&#39;
 ];
@@ -378,19 +378,19 @@ var arr = [
 
 // 反例
 
-var obj = {
+const obj = {
     attr1: &#39;xxx&#39;,
     attr2: &#39;yyy&#39;,
 };
 
-var arr = [
+const arr = [
     &#39;xxx&#39;,
     &#39;yyy&#39;,
 ];
 </code></pre>
 <h3 id="命名规约">命名规约</h3>
 <p><strong>[强制]</strong> 变量名、属性名及函数名的命名必须遵循 lowerCamelCase（小骆驼拼写法）。</p>
-<pre><code class="lang-js">var loadingModules = {};
+<pre><code class="lang-js">const loadingModules = {};
 function loadProduct() {
 }
 </code></pre>
@@ -401,12 +401,10 @@ function loadProduct() {
 <p><strong>[推荐]</strong> 缩略词的所有字符应当一并大写或一并小写。</p>
 <pre><code class="lang-js">function parseSVG() {
 }
-var svgParser;
+const svgParser;
 </code></pre>
 <h2 id="语法特性">语法特性</h2>
 <h3 id="兼容性">兼容性</h3>
-<p><strong>[强制]</strong> ECharts的JavaScript源代码应基于 <code>ECMAScript Language Specification Edition 3 (ES3)</code>，不能使用ES3不支持的语法特性（即不能使用ES5、ES6或更高版本的语法特性）。</p>
-<p>但允许使用ES Module。</p>
 <p>语法特性可以通过一些工具方法进行弥补，但不能通过修改内置JavaScript对象的原型来实现。</p>
 <pre><code class="lang-js">// 正例
 
@@ -416,13 +414,13 @@ zrUtil.each(array, function (val, index) {
     sum += val;
 });
 
-var result = zrUtil.map(array, function (val) {
+const result = zrUtil.map(array, function (val) {
     return parse(val);
 });
 
-var pos = zrUtil.indexOf(array, val);
+const pos = zrUtil.indexOf(array, val);
 
-var obj2 = zrUtil.extend({}, obj1);
+const obj2 = zrUtil.extend({}, obj1);
 
 function Element() {
     // ...
@@ -441,7 +439,7 @@ let result = array.map(function (val) {
 
 const pos = array.indexOf(val);
 
-var obj2 = Object.assign({}, obj1);
+const obj2 = Object.assign({}, obj1);
 
 class Element {
     // ...
@@ -451,16 +449,16 @@ String.prototype.trim = function () {
 };
 </code></pre>
 <h3 id="变量">变量</h3>
-<p><strong>[强制]</strong> 变量必须用 <code>var</code> 声明，且一个 <code>var</code> 不能同时声明多个变量。</p>
+<p><strong>[强制]</strong> 优先使用<code>const</code>声明变量，且一行不能同时声明多个变量。</p>
 <pre><code class="lang-js">// 正例
-var name = &#39;MyName&#39;;
-var hangModules = [];
-var missModules = [];
-var visited = {};
+const name = &#39;MyName&#39;;
+const hangModules = [];
+const missModules = [];
+const visited = {};
 
 // 反例
 name = &#39;MyName&#39;;
-var hangModules = [],
+const hangModules = [],
     missModules = [],
     visited = {};
 </code></pre>
@@ -487,15 +485,15 @@ function clicker() {
     // ......
 }
 
-for (var i = 0, len = elements.length; i &lt; len; i++) {
-    var element = elements[i];
+for (let i = 0, len = elements.length; i &lt; len; i++) {
+    const element = elements[i];
     addListener(element, &#39;click&#39;, clicker);
 }
 
 
 // 反例
-for (var i = 0, len = elements.length; i &lt; len; i++) {
-    var element = elements[i];
+for (let i = 0, len = elements.length; i &lt; len; i++) {
+    const element = elements[i];
     addListener(element, &#39;click&#39;, function () {});
 }
 </code></pre>
@@ -527,24 +525,24 @@ parseInt(str);
 <p><strong>[强制]</strong> 必须使用 <code>&#39;</code> 而不是 <code>&quot;</code> 定义字符串。</p>
 <p><strong>[强制]</strong> 必须使用对象字面量 <code>{}</code> 来创建简单对象。</p>
 <pre><code class="lang-js">// 正例
-var obj = {};
+const obj = {};
 
 // 反例
-var obj = new Object();
+const obj = new Object();
 </code></pre>
 <p><strong>[强制]</strong> 如果一个对象字面量的所有属性都不需要引号，引号必须省略。如果需要加引号，须使用 <code>&#39;</code> 而不是 <code>&quot;</code>。</p>
 <pre><code class="lang-js">// 正例
-var info = {
+const info = {
     name: &#39;someone&#39;,
     age: 28
 };
 
 // 反例
-var info = {
+const info = {
     &#39;name&#39;: &#39;someone&#39;,
     &#39;age&#39;: 28
 };
-var info2 = {
+const info2 = {
     &quot;age&quot;: 40
 };
 </code></pre>
@@ -555,8 +553,8 @@ String.prototype.trim = function () {
 </code></pre>
 <p><strong>[推荐]</strong> 尽可能使用 <code>.</code> 而不是 <code>[]</code> 访问对象的属性。</p>
 <p><strong>[推荐]</strong> 使用 <code>for ... in ...</code> 时，应当注意使用 <code>hasOwnProperty</code> 以防 <code>Object</code> 的原型在某些运行时环境中被添加一些额外属性的情况。</p>
-<pre><code class="lang-js">var newInfo = {};
-for (var key in info) {
+<pre><code class="lang-js">const newInfo = {};
+for (const key in info) {
     if (info.hasOwnProperty(key)) {
         newInfo[key] = info[key];
     }
@@ -564,11 +562,11 @@ for (var key in info) {
 </code></pre>
 <p><strong>[强制]</strong> 除非需要创建指定长度的数组，否则必须使用数组字面量 <code>[]</code> 创建数组。</p>
 <pre><code class="lang-js">// 正例
-var arr = [];
-var arr2 = new Array(1e4);
+const arr = [];
+const arr2 = new Array(1e4);
 
 // 反例
-var arr = new Array();
+const arr = new Array();
 </code></pre>
 <p><strong>[强制]</strong> 不要使用 <code>for in</code> 语句对数组进行遍历。</p>
 <h3 id="其他">其他</h3>
