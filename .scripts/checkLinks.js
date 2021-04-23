@@ -16,7 +16,7 @@ function getPurgeUrl(fileUrl) {
 }
 // Only reject when url is 403. Don't check if url is 404 or other status
 function checkIsUrl403(url) {
-    return fetch(url, {
+    return fetch(encodeURI(url), {
         method: 'HEAD'
     }).then(response => {
         console.log('Check', url, response.status);
@@ -27,7 +27,7 @@ function checkIsUrl403(url) {
 }
 
 function purgeUrl(url) {
-    return fetch(url).then(response => response.json())
+    return fetch(encodeURI(url)).then(response => response.json())
         .then(json => {
             if (json.success) {
                 console.log('Purge Success', url);
@@ -74,7 +74,7 @@ async function run() {
     const files403 = await find403Urls(files);
     let successPurged = 0;
     if (files403.length) {
-        console.log(`Purging ${files403.length} 403 Urls`);
+        console.log(`Purging ${files403.length} 403 URLs`);
 
         const totalLen = files403.length;
         let finished = 0;
