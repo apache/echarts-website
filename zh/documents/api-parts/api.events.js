@@ -75,9 +75,9 @@ window.__EC_DOC_api_events = {
     "desc": "<p>参见 <a href=\"#action.brush.takeGlobalCursor\">takeGlobalCursor</a>。</p>\n"
   },
   "rendered": {
-    "desc": "<p>渲染结束事件。注意 <code class=\"codespan\">rendered</code> 事件并不代表渲染动画（参见 <a href=\"#animation\">animation</a> 相关配置）或者渐进渲染（参见 <a href=\"#series-scatter.progressive\">progressive</a> 相关配置）停止，只代表本帧的渲染结束。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">var snapshotImage = new Image();\ndocument.body.append(snapshotImage);\nchart.on(&#39;rendered&#39;, function () {\n    snapshotImage.src = chart.getDataURL();\n});\n</code></pre>\n"
+    "desc": "<p>渲染结束事件。注意 <code class=\"codespan\">rendered</code> 事件并不代表渲染动画（参见 <a href=\"option.html#animation\" target=\"_blank\">animation</a> 相关配置）或者渐进渲染（参见 <a href=\"option.html#series-scatter.progressive\" target=\"_blank\">progressive</a> 相关配置）停止，只代表本帧的渲染结束。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">var snapshotImage = new Image();\ndocument.body.append(snapshotImage);\nchart.on(&#39;rendered&#39;, function () {\n    snapshotImage.src = chart.getDataURL();\n});\n</code></pre>\n"
   },
   "finished": {
-    "desc": "<p>渲染完成事件。当渲染动画（参见 <a href=\"#animation\">animation</a> 相关配置）或者渐进渲染（参见 <a href=\"#series-scatter.progressive\">progressive</a> 相关配置）停止时触发。</p>\n<pre><code class=\"lang-js\">var snapshotImage = new Image();\ndocument.body.append(snapshotImage);\nchart.on(&#39;finished&#39;, function () {\n    snapshotImage.src = chart.getDataURL();\n});\n</code></pre>\n"
+    "desc": "<p>渲染完成事件。当渲染动画（参见 <a href=\"option.html#animation\" target=\"_blank\">animation</a> 相关配置）或者渐进渲染（参见 <a href=\"option.html#series-scatter.progressive\" target=\"_blank\">progressive</a> 相关配置）停止时触发。</p>\n<pre><code class=\"lang-js\">var snapshotImage = new Image();\ndocument.body.append(snapshotImage);\nchart.on(&#39;finished&#39;, function () {\n    snapshotImage.src = chart.getDataURL();\n});\n</code></pre>\n"
   }
 }

@@ -75,9 +75,9 @@
     "desc": "<p>See <a href=\"#action.brush.takeGlobalCursor\">takeGlobalCursor</a>.</p>\n"
   },
   "rendered": {
-    "desc": "<p>Trigger when a frame rendered. Notice that the <code class=\"codespan\">rendered</code> event does not indicate that the animation finished (see <a href=\"#animation\">animation</a> and relevant options) or progressive rendering finished (see <a href=\"#series-scatter.progressive\">progressive</a> and relevant options).</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">var snapshotImage = new Image();\ndocument.body.append(snapshotImage);\nchart.on(&#39;rendered&#39;, function () {\n    snapshotImage.src = chart.getDataURL();\n});\n</code></pre>\n"
+    "desc": "<p>Trigger when a frame rendered. Notice that the <code class=\"codespan\">rendered</code> event does not indicate that the animation finished (see <a href=\"option.html#animation\" target=\"_blank\">animation</a> and relevant options) or progressive rendering finished (see <a href=\"option.html#series-scatter.progressive\" target=\"_blank\">progressive</a> and relevant options).</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">var snapshotImage = new Image();\ndocument.body.append(snapshotImage);\nchart.on(&#39;rendered&#39;, function () {\n    snapshotImage.src = chart.getDataURL();\n});\n</code></pre>\n"
   },
   "finished": {
-    "desc": "<p>Triggered when render finished, that is, when animation finished (see <a href=\"#animation\">animation</a> and relevant options) and progressive rendering finished (see <a href=\"#series-scatter.progressive\">progressive</a> and relevant options).</p>\n<pre><code class=\"lang-js\">var snapshotImage = new Image();\ndocument.body.append(snapshotImage);\nchart.on(&#39;finished&#39;, function () {\n    snapshotImage.src = chart.getDataURL();\n});\n</code></pre>\n"
+    "desc": "<p>Triggered when render finished, that is, when animation finished (see <a href=\"option.html#animation\" target=\"_blank\">animation</a> and relevant options) and progressive rendering finished (see <a href=\"option.html#series-scatter.progressive\" target=\"_blank\">progressive</a> and relevant options).</p>\n<pre><code class=\"lang-js\">var snapshotImage = new Image();\ndocument.body.append(snapshotImage);\nchart.on(&#39;finished&#39;, function () {\n    snapshotImage.src = chart.getDataURL();\n});\n</code></pre>\n"
   }
 }

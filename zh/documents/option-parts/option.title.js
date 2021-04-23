@@ -104,6 +104,23 @@ window.__EC_DOC_option_title = {
       "step": "0.5"
     }
   },
+  "textStyle.textBorderType": {
+    "desc": "\n\n\n<p>文字本身的描边类型。</p>\n<p>可选：</p>\n<ul>\n<li><code class=\"codespan\">&#39;solid&#39;</code></li>\n<li><code class=\"codespan\">&#39;dashed&#39;</code></li>\n<li><code class=\"codespan\">&#39;dotted&#39;</code></li>\n</ul>\n<p>自 <code class=\"codespan\">v5.0.0</code> 开始，也可以是 <code class=\"codespan\">number</code> 或者 <code class=\"codespan\">number</code> 数组，用以指定线条的 <a href=\"https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray\" target=\"_blank\">dash array</a>，配合 \n<code class=\"codespan\">textBorderDashOffset</code>\n 可实现更灵活的虚线效果。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">{\n    textBorderType: [5, 10],\n    textBorderDashOffset: 5\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "solid",
+      "options": "solid,dashed,dotted"
+    }
+  },
+  "textStyle.textBorderDashOffset": {
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n\n\n<p>用于设置虚线的偏移量，可搭配 \n<code class=\"codespan\">textBorderType</code>\n 指定 dash array 实现灵活的虚线效果。</p>\n<p>更多详情可以参考 MDN <a href=\"https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset\" target=\"_blank\">lineDashOffset</a>。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "1",
+      "default": "0"
+    }
+  },
   "textStyle.textShadowColor": {
     "desc": "\n\n<p>文字本身的阴影颜色。</p>\n",
     "uiControl": {
@@ -234,6 +251,23 @@ window.__EC_DOC_option_title = {
       "step": "0.5"
     }
   },
+  "textStyle.rich.<style_name>.borderType": {
+    "desc": "\n\n\n<p>文字块边框描边类型。</p>\n<p>可选：</p>\n<ul>\n<li><code class=\"codespan\">&#39;solid&#39;</code></li>\n<li><code class=\"codespan\">&#39;dashed&#39;</code></li>\n<li><code class=\"codespan\">&#39;dotted&#39;</code></li>\n</ul>\n<p>自 <code class=\"codespan\">v5.0.0</code> 开始，也可以是 <code class=\"codespan\">number</code> 或者 <code class=\"codespan\">number</code> 数组，用以指定线条的 <a href=\"https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray\" target=\"_blank\">dash array</a>，配合 \n<code class=\"codespan\">borderDashOffset</code>\n 可实现更灵活的虚线效果。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">{\n    borderType: [5, 10],\n    borderDashOffset: 5\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "solid",
+      "options": "solid,dashed,dotted"
+    }
+  },
+  "textStyle.rich.<style_name>.borderDashOffset": {
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n\n\n<p>用于设置虚线的偏移量，可搭配 \n<code class=\"codespan\">borderType</code>\n 指定 dash array 实现灵活的虚线效果。</p>\n<p>更多详情可以参考 MDN <a href=\"https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset\" target=\"_blank\">lineDashOffset</a>。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "1",
+      "default": "0"
+    }
+  },
   "textStyle.rich.<style_name>.borderRadius": {
     "desc": "\n\n<p>文字块的圆角。</p>\n",
     "uiControl": {
@@ -296,6 +330,23 @@ window.__EC_DOC_option_title = {
       "type": "number",
       "min": "0",
       "step": "0.5"
+    }
+  },
+  "textStyle.rich.<style_name>.textBorderType": {
+    "desc": "\n\n\n<p>文字本身的描边类型。</p>\n<p>可选：</p>\n<ul>\n<li><code class=\"codespan\">&#39;solid&#39;</code></li>\n<li><code class=\"codespan\">&#39;dashed&#39;</code></li>\n<li><code class=\"codespan\">&#39;dotted&#39;</code></li>\n</ul>\n<p>自 <code class=\"codespan\">v5.0.0</code> 开始，也可以是 <code class=\"codespan\">number</code> 或者 <code class=\"codespan\">number</code> 数组，用以指定线条的 <a href=\"https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray\" target=\"_blank\">dash array</a>，配合 \n<code class=\"codespan\">textBorderDashOffset</code>\n 可实现更灵活的虚线效果。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">{\n    textBorderType: [5, 10],\n    textBorderDashOffset: 5\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "solid",
+      "options": "solid,dashed,dotted"
+    }
+  },
+  "textStyle.rich.<style_name>.textBorderDashOffset": {
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n\n\n<p>用于设置虚线的偏移量，可搭配 \n<code class=\"codespan\">textBorderType</code>\n 指定 dash array 实现灵活的虚线效果。</p>\n<p>更多详情可以参考 MDN <a href=\"https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset\" target=\"_blank\">lineDashOffset</a>。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "1",
+      "default": "0"
     }
   },
   "textStyle.rich.<style_name>.textShadowColor": {
@@ -436,6 +487,23 @@ window.__EC_DOC_option_title = {
       "step": "0.5"
     }
   },
+  "subtextStyle.textBorderType": {
+    "desc": "\n\n\n<p>文字本身的描边类型。</p>\n<p>可选：</p>\n<ul>\n<li><code class=\"codespan\">&#39;solid&#39;</code></li>\n<li><code class=\"codespan\">&#39;dashed&#39;</code></li>\n<li><code class=\"codespan\">&#39;dotted&#39;</code></li>\n</ul>\n<p>自 <code class=\"codespan\">v5.0.0</code> 开始，也可以是 <code class=\"codespan\">number</code> 或者 <code class=\"codespan\">number</code> 数组，用以指定线条的 <a href=\"https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray\" target=\"_blank\">dash array</a>，配合 \n<code class=\"codespan\">textBorderDashOffset</code>\n 可实现更灵活的虚线效果。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">{\n    textBorderType: [5, 10],\n    textBorderDashOffset: 5\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "solid",
+      "options": "solid,dashed,dotted"
+    }
+  },
+  "subtextStyle.textBorderDashOffset": {
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n\n\n<p>用于设置虚线的偏移量，可搭配 \n<code class=\"codespan\">textBorderType</code>\n 指定 dash array 实现灵活的虚线效果。</p>\n<p>更多详情可以参考 MDN <a href=\"https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset\" target=\"_blank\">lineDashOffset</a>。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "1",
+      "default": "0"
+    }
+  },
   "subtextStyle.textShadowColor": {
     "desc": "\n\n<p>文字本身的阴影颜色。</p>\n",
     "uiControl": {
@@ -566,6 +634,23 @@ window.__EC_DOC_option_title = {
       "step": "0.5"
     }
   },
+  "subtextStyle.rich.<style_name>.borderType": {
+    "desc": "\n\n\n<p>文字块边框描边类型。</p>\n<p>可选：</p>\n<ul>\n<li><code class=\"codespan\">&#39;solid&#39;</code></li>\n<li><code class=\"codespan\">&#39;dashed&#39;</code></li>\n<li><code class=\"codespan\">&#39;dotted&#39;</code></li>\n</ul>\n<p>自 <code class=\"codespan\">v5.0.0</code> 开始，也可以是 <code class=\"codespan\">number</code> 或者 <code class=\"codespan\">number</code> 数组，用以指定线条的 <a href=\"https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray\" target=\"_blank\">dash array</a>，配合 \n<code class=\"codespan\">borderDashOffset</code>\n 可实现更灵活的虚线效果。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">{\n    borderType: [5, 10],\n    borderDashOffset: 5\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "solid",
+      "options": "solid,dashed,dotted"
+    }
+  },
+  "subtextStyle.rich.<style_name>.borderDashOffset": {
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n\n\n<p>用于设置虚线的偏移量，可搭配 \n<code class=\"codespan\">borderType</code>\n 指定 dash array 实现灵活的虚线效果。</p>\n<p>更多详情可以参考 MDN <a href=\"https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset\" target=\"_blank\">lineDashOffset</a>。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "1",
+      "default": "0"
+    }
+  },
   "subtextStyle.rich.<style_name>.borderRadius": {
     "desc": "\n\n<p>文字块的圆角。</p>\n",
     "uiControl": {
@@ -628,6 +713,23 @@ window.__EC_DOC_option_title = {
       "type": "number",
       "min": "0",
       "step": "0.5"
+    }
+  },
+  "subtextStyle.rich.<style_name>.textBorderType": {
+    "desc": "\n\n\n<p>文字本身的描边类型。</p>\n<p>可选：</p>\n<ul>\n<li><code class=\"codespan\">&#39;solid&#39;</code></li>\n<li><code class=\"codespan\">&#39;dashed&#39;</code></li>\n<li><code class=\"codespan\">&#39;dotted&#39;</code></li>\n</ul>\n<p>自 <code class=\"codespan\">v5.0.0</code> 开始，也可以是 <code class=\"codespan\">number</code> 或者 <code class=\"codespan\">number</code> 数组，用以指定线条的 <a href=\"https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray\" target=\"_blank\">dash array</a>，配合 \n<code class=\"codespan\">textBorderDashOffset</code>\n 可实现更灵活的虚线效果。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">{\n    textBorderType: [5, 10],\n    textBorderDashOffset: 5\n}\n</code></pre>\n",
+    "uiControl": {
+      "type": "enum",
+      "default": "solid",
+      "options": "solid,dashed,dotted"
+    }
+  },
+  "subtextStyle.rich.<style_name>.textBorderDashOffset": {
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n\n\n<p>用于设置虚线的偏移量，可搭配 \n<code class=\"codespan\">textBorderType</code>\n 指定 dash array 实现灵活的虚线效果。</p>\n<p>更多详情可以参考 MDN <a href=\"https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset\" target=\"_blank\">lineDashOffset</a>。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "step": "1",
+      "default": "0"
     }
   },
   "subtextStyle.rich.<style_name>.textShadowColor": {

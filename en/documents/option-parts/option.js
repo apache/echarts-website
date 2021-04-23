@@ -577,6 +577,9 @@ window.__EC_DOC_option = {
   "animationDelayUpdate": {
     "desc": "<p>Delay before updating animation, which supports callback function for different data to have different animation effects.</p>\n<p>For example:</p>\n<pre><code class=\"lang-js\">animationDelayUpdate: function (idx) {\n    // delay for later data is larger\n    return idx * 100;\n}\n</code></pre>\n<p>See <a href=\"https://echarts.apache.org/examples/en/editor.html?c=bar-animation-delay\" target=\"_blank\">this example</a> for more information.</p>\n"
   },
+  "stateAnimation": {
+    "desc": "<p>Animation configurations of state switchment. Can be configured in each series individually.</p>\n"
+  },
   "blendMode": {
     "desc": "<p>Sets the type of compositing operation to apply when drawing a new shape. See the different type: <a href=\"https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation\" target=\"_blank\">https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation</a>.</p>\n<p>The default is <code class=\"codespan\">&#39;source-over&#39;</code>. Support settings for each series.</p>\n<p><code class=\"codespan\">&#39;lighter&#39;</code> is also a common type of compositing operation. In this mode, the area where the number of graphics is concentrated is superimposed into a high-brightness color (white). It often used to highlight the effect of the area. See example <a href=\"https://echarts.apache.org/examples/en/editor.html?c=lines-airline\" target=\"_blank\">Global airline</a></p>\n"
   },

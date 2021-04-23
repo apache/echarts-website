@@ -83,7 +83,7 @@
   "elements-group.textConfig.layoutRect": {
     "desc": "<p><code class=\"codespan\">textContent</code> 根据此矩形来布局位置。\n默认是节点的包围盒。</p>\n<pre><code class=\"lang-js\">{\n    x: number\n    y: number\n    width: number\n    height: number\n}\n</code></pre>\n"
   },
-  "elements-group.textConfig.offset(number[])": {
+  "elements-group.textConfig.offset": {
     "desc": "<p><code class=\"codespan\">textContent</code> 的偏移。</p>\n<p><code class=\"codespan\">offset</code> 和 <code class=\"codespan\">position</code> 的区别是，<code class=\"codespan\">offset</code> 是旋转（rotation）后计算。</p>\n"
   },
   "elements-group.textConfig.origin": {
@@ -211,7 +211,7 @@
   "elements-image.textConfig.layoutRect": {
     "desc": "<p><code class=\"codespan\">textContent</code> 根据此矩形来布局位置。\n默认是节点的包围盒。</p>\n<pre><code class=\"lang-js\">{\n    x: number\n    y: number\n    width: number\n    height: number\n}\n</code></pre>\n"
   },
-  "elements-image.textConfig.offset(number[])": {
+  "elements-image.textConfig.offset": {
     "desc": "<p><code class=\"codespan\">textContent</code> 的偏移。</p>\n<p><code class=\"codespan\">offset</code> 和 <code class=\"codespan\">position</code> 的区别是，<code class=\"codespan\">offset</code> 是旋转（rotation）后计算。</p>\n"
   },
   "elements-image.textConfig.origin": {
@@ -372,7 +372,7 @@
   "elements-text.textConfig.layoutRect": {
     "desc": "<p><code class=\"codespan\">textContent</code> 根据此矩形来布局位置。\n默认是节点的包围盒。</p>\n<pre><code class=\"lang-js\">{\n    x: number\n    y: number\n    width: number\n    height: number\n}\n</code></pre>\n"
   },
-  "elements-text.textConfig.offset(number[])": {
+  "elements-text.textConfig.offset": {
     "desc": "<p><code class=\"codespan\">textContent</code> 的偏移。</p>\n<p><code class=\"codespan\">offset</code> 和 <code class=\"codespan\">position</code> 的区别是，<code class=\"codespan\">offset</code> 是旋转（rotation）后计算。</p>\n"
   },
   "elements-text.textConfig.origin": {
@@ -536,7 +536,7 @@
   "elements-rect.textConfig.layoutRect": {
     "desc": "<p><code class=\"codespan\">textContent</code> 根据此矩形来布局位置。\n默认是节点的包围盒。</p>\n<pre><code class=\"lang-js\">{\n    x: number\n    y: number\n    width: number\n    height: number\n}\n</code></pre>\n"
   },
-  "elements-rect.textConfig.offset(number[])": {
+  "elements-rect.textConfig.offset": {
     "desc": "<p><code class=\"codespan\">textContent</code> 的偏移。</p>\n<p><code class=\"codespan\">offset</code> 和 <code class=\"codespan\">position</code> 的区别是，<code class=\"codespan\">offset</code> 是旋转（rotation）后计算。</p>\n"
   },
   "elements-rect.textConfig.origin": {
@@ -700,7 +700,7 @@
   "elements-circle.textConfig.layoutRect": {
     "desc": "<p><code class=\"codespan\">textContent</code> 根据此矩形来布局位置。\n默认是节点的包围盒。</p>\n<pre><code class=\"lang-js\">{\n    x: number\n    y: number\n    width: number\n    height: number\n}\n</code></pre>\n"
   },
-  "elements-circle.textConfig.offset(number[])": {
+  "elements-circle.textConfig.offset": {
     "desc": "<p><code class=\"codespan\">textContent</code> 的偏移。</p>\n<p><code class=\"codespan\">offset</code> 和 <code class=\"codespan\">position</code> 的区别是，<code class=\"codespan\">offset</code> 是旋转（rotation）后计算。</p>\n"
   },
   "elements-circle.textConfig.origin": {
@@ -858,7 +858,7 @@
   "elements-ring.textConfig.layoutRect": {
     "desc": "<p><code class=\"codespan\">textContent</code> 根据此矩形来布局位置。\n默认是节点的包围盒。</p>\n<pre><code class=\"lang-js\">{\n    x: number\n    y: number\n    width: number\n    height: number\n}\n</code></pre>\n"
   },
-  "elements-ring.textConfig.offset(number[])": {
+  "elements-ring.textConfig.offset": {
     "desc": "<p><code class=\"codespan\">textContent</code> 的偏移。</p>\n<p><code class=\"codespan\">offset</code> 和 <code class=\"codespan\">position</code> 的区别是，<code class=\"codespan\">offset</code> 是旋转（rotation）后计算。</p>\n"
   },
   "elements-ring.textConfig.origin": {
@@ -1019,7 +1019,7 @@
   "elements-sector.textConfig.layoutRect": {
     "desc": "<p><code class=\"codespan\">textContent</code> 根据此矩形来布局位置。\n默认是节点的包围盒。</p>\n<pre><code class=\"lang-js\">{\n    x: number\n    y: number\n    width: number\n    height: number\n}\n</code></pre>\n"
   },
-  "elements-sector.textConfig.offset(number[])": {
+  "elements-sector.textConfig.offset": {
     "desc": "<p><code class=\"codespan\">textContent</code> 的偏移。</p>\n<p><code class=\"codespan\">offset</code> 和 <code class=\"codespan\">position</code> 的区别是，<code class=\"codespan\">offset</code> 是旋转（rotation）后计算。</p>\n"
   },
   "elements-sector.textConfig.origin": {
@@ -1189,7 +1189,7 @@
   "elements-arc.textConfig.layoutRect": {
     "desc": "<p><code class=\"codespan\">textContent</code> 根据此矩形来布局位置。\n默认是节点的包围盒。</p>\n<pre><code class=\"lang-js\">{\n    x: number\n    y: number\n    width: number\n    height: number\n}\n</code></pre>\n"
   },
-  "elements-arc.textConfig.offset(number[])": {
+  "elements-arc.textConfig.offset": {
     "desc": "<p><code class=\"codespan\">textContent</code> 的偏移。</p>\n<p><code class=\"codespan\">offset</code> 和 <code class=\"codespan\">position</code> 的区别是，<code class=\"codespan\">offset</code> 是旋转（rotation）后计算。</p>\n"
   },
   "elements-arc.textConfig.origin": {
@@ -1359,7 +1359,7 @@
   "elements-polygon.textConfig.layoutRect": {
     "desc": "<p><code class=\"codespan\">textContent</code> 根据此矩形来布局位置。\n默认是节点的包围盒。</p>\n<pre><code class=\"lang-js\">{\n    x: number\n    y: number\n    width: number\n    height: number\n}\n</code></pre>\n"
   },
-  "elements-polygon.textConfig.offset(number[])": {
+  "elements-polygon.textConfig.offset": {
     "desc": "<p><code class=\"codespan\">textContent</code> 的偏移。</p>\n<p><code class=\"codespan\">offset</code> 和 <code class=\"codespan\">position</code> 的区别是，<code class=\"codespan\">offset</code> 是旋转（rotation）后计算。</p>\n"
   },
   "elements-polygon.textConfig.origin": {
@@ -1517,7 +1517,7 @@
   "elements-polyline.textConfig.layoutRect": {
     "desc": "<p><code class=\"codespan\">textContent</code> 根据此矩形来布局位置。\n默认是节点的包围盒。</p>\n<pre><code class=\"lang-js\">{\n    x: number\n    y: number\n    width: number\n    height: number\n}\n</code></pre>\n"
   },
-  "elements-polyline.textConfig.offset(number[])": {
+  "elements-polyline.textConfig.offset": {
     "desc": "<p><code class=\"codespan\">textContent</code> 的偏移。</p>\n<p><code class=\"codespan\">offset</code> 和 <code class=\"codespan\">position</code> 的区别是，<code class=\"codespan\">offset</code> 是旋转（rotation）后计算。</p>\n"
   },
   "elements-polyline.textConfig.origin": {
@@ -1675,7 +1675,7 @@
   "elements-line.textConfig.layoutRect": {
     "desc": "<p><code class=\"codespan\">textContent</code> 根据此矩形来布局位置。\n默认是节点的包围盒。</p>\n<pre><code class=\"lang-js\">{\n    x: number\n    y: number\n    width: number\n    height: number\n}\n</code></pre>\n"
   },
-  "elements-line.textConfig.offset(number[])": {
+  "elements-line.textConfig.offset": {
     "desc": "<p><code class=\"codespan\">textContent</code> 的偏移。</p>\n<p><code class=\"codespan\">offset</code> 和 <code class=\"codespan\">position</code> 的区别是，<code class=\"codespan\">offset</code> 是旋转（rotation）后计算。</p>\n"
   },
   "elements-line.textConfig.origin": {
@@ -1839,7 +1839,7 @@
   "elements-bezierCurve.textConfig.layoutRect": {
     "desc": "<p><code class=\"codespan\">textContent</code> 根据此矩形来布局位置。\n默认是节点的包围盒。</p>\n<pre><code class=\"lang-js\">{\n    x: number\n    y: number\n    width: number\n    height: number\n}\n</code></pre>\n"
   },
-  "elements-bezierCurve.textConfig.offset(number[])": {
+  "elements-bezierCurve.textConfig.offset": {
     "desc": "<p><code class=\"codespan\">textContent</code> 的偏移。</p>\n<p><code class=\"codespan\">offset</code> 和 <code class=\"codespan\">position</code> 的区别是，<code class=\"codespan\">offset</code> 是旋转（rotation）后计算。</p>\n"
   },
   "elements-bezierCurve.textConfig.origin": {
