@@ -2,7 +2,7 @@ name: Check Links
 
 on:
   schedule:
-    - cron: '0 10 * * *'
+    - cron: '0 10,22 * * *'
   repository_dispatch:
     types: check-links
 
