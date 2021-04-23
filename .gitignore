@@ -1,6 +1,7 @@
 _*.html
 .DS_Store
 en/_*.html
+node_modules
 package-lock.json
 /examples/data/option
 /examples/data-gl/option

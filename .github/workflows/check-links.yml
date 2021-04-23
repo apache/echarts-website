@@ -1,0 +1,27 @@
+name: Check Links
+
+on:
+  schedule:
+    - cron: '0 10 * * *'
+  repository_dispatch:
+    types: check-links
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          registry-url: https://registry.npmjs.org/
+      - name: Check links
+        run: |
+          npm i
+          node checkLinks.js
+        working-directory: .scripts
