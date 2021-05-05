@@ -1,6 +1,6 @@
 window.__EC_DOC_option_tooltip = {
   "show": {
-    "desc": "\n\n<p>Whether to show the tooltip component, including tooltip floating layer and <a href=\"#tooltip.axisPointer\">axisPointer</a>.</p>\n",
+    "desc": "\n\n<p>Whether to show the tooltip component.</p>\n<p>including tooltip floating layer and <a href=\"#tooltip.axisPointer\">axisPointer</a>.</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "true"

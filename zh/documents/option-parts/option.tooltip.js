@@ -1,6 +1,6 @@
 window.__EC_DOC_option_tooltip = {
   "show": {
-    "desc": "\n\n<p>是否显示提示框组件，包括提示框浮层和 <a href=\"#tooltip.axisPointer\">axisPointer</a>。</p>\n",
+    "desc": "\n\n<p>是否显示提示框组件。</p>\n<p>包括提示框浮层和 <a href=\"#tooltip.axisPointer\">axisPointer</a>。</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "true"

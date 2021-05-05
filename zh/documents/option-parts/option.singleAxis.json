@@ -2757,7 +2757,7 @@
     "desc": "<p>本坐标系特定的 tooltip 设定。</p>\n<hr>\n<p><strong>提示框组件的通用介绍：</strong></p>\n<p>提示框组件可以设置在多种地方：</p>\n<ul>\n<li><p>可以设置在全局，即 <a href=\"#tooltip\">tooltip</a></p>\n</li>\n<li><p>可以设置在坐标系中，即 <a href=\"#grid.tooltip\">grid.tooltip</a>、<a href=\"#polar.tooltip\">polar.tooltip</a>、<a href=\"#single.tooltip\">single.tooltip</a></p>\n</li>\n<li><p>可以设置在系列中，即 <a href=\"#series.tooltip\">series.tooltip</a></p>\n</li>\n<li><p>可以设置在系列的每个数据项中，即 <a href=\"#series.data.tooltip\">series.data.tooltip</a></p>\n</li>\n</ul>\n<hr>\n"
   },
   "tooltip.show": {
-    "desc": "\n\n<p>是否显示提示框组件，包括提示框浮层和 <a href=\"#tooltip.axisPointer\">axisPointer</a>。</p>\n",
+    "desc": "\n\n<p>是否显示提示框组件。</p>\n<p>包括提示框浮层和 <a href=\"#tooltip.axisPointer\">axisPointer</a>。</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "true"

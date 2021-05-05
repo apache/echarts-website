@@ -122,7 +122,7 @@ window.__EC_DOC_option_grid = {
     "desc": "<p>tooltip settings in the coordinate system component.</p>\n<hr>\n<p><strong>General Introduction:</strong></p>\n<p>tooltip can be configured on different places:</p>\n<ul>\n<li><p>Configured on global: <a href=\"#tooltip\">tooltip</a></p>\n</li>\n<li><p>Configured in a coordinate system: <a href=\"#grid.tooltip\">grid.tooltip</a>, <a href=\"#polar.tooltip\">polar.tooltip</a>, <a href=\"#single.tooltip\">single.tooltip</a></p>\n</li>\n<li><p>Configured in a series: <a href=\"#series.tooltip\">series.tooltip</a></p>\n</li>\n<li><p>Configured in each item of <code class=\"codespan\">series.data</code>: <a href=\"#series.data.tooltip\">series.data.tooltip</a></p>\n</li>\n</ul>\n<hr>\n"
   },
   "tooltip.show": {
-    "desc": "\n\n<p>Whether to show the tooltip component, including tooltip floating layer and <a href=\"#tooltip.axisPointer\">axisPointer</a>.</p>\n",
+    "desc": "\n\n<p>Whether to show the tooltip component.</p>\n<p>including tooltip floating layer and <a href=\"#tooltip.axisPointer\">axisPointer</a>.</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "true"
