@@ -358,21 +358,6 @@
       "step": "0.01"
     }
   },
-  "symbolSize": {
-    "desc": "\n\n<p>Legend item symbol size. Valid values: <code class=\"codespan\">number | &#39;auto&#39; | &#39;inherit&#39;</code>.</p>\n<p>If it is <code class=\"codespan\">&#39;auto&#39;</code>, different series types may use different logic to decide symbol size. For example, a bar chart with a rounded rectangle as the legend symbol will take <code class=\"codespan\">itemWidth</code> and <code class=\"codespan\">itemHeight</code> as the size, while a line chart will use 80% of <code class=\"codespan\">itemHeight</code> as the graph height and overlay a horizontal line, but if user defined <code class=\"codespan\">icon</code>, then <code class=\"codespan\">itemHeight</code> is used as the height of the graph and no horizontal line is drawn. The exact logic depends on the internal implementation of the series.</p>\n<p>If it is <code class=\"codespan\">&#39;inherit&#39;</code>, it always takes the symbol size of the series.</p>\n<p>The symbol size is kept within <code class=\"codespan\">itemWidth</code> and <code class=\"codespan\">itemHeight</code> for these all cases.</p>\n",
-    "uiControl": {
-      "type": "number",
-      "min": "0",
-      "default": "50",
-      "step": "5"
-    }
-  },
-  "symbolKeepAspect": {
-    "desc": "\n\n<p>Whether to keep aspect for icons (from <code class=\"codespan\">series.symbol</code> or user-defined <code class=\"codespan\">legend.data.icon</code>) in the form of <code class=\"codespan\">path://</code>.</p>\n",
-    "uiControl": {
-      "type": "boolean"
-    }
-  },
   "formatter": {
     "desc": "<p>Formatter is used to format label of legend, which supports string template and callback function.</p>\n<p>Example:</p>\n<pre><code class=\"lang-js\">// using string template, the template variable is legend name {name}\nformatter: &#39;Legend {name}&#39;\n// using callback function\nformatter: function (name) {\n    return &#39;Legend &#39; + name;\n}\n</code></pre>\n"
   },

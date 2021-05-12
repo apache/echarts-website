@@ -358,21 +358,6 @@ window.__EC_DOC_option_legend = {
       "step": "0.01"
     }
   },
-  "symbolSize": {
-    "desc": "\n\n<p>图形大小，类型为 <code class=\"codespan\">number | &#39;auto&#39; | &#39;inherit&#39;</code>。</p>\n<p>如果为 <code class=\"codespan\">&#39;auto&#39;</code>，不同系列类型可能采用不同的大小逻辑，比如柱状图之类的采用圆角矩形作为图例的，会取 <code class=\"codespan\">itemWidth</code> 和 <code class=\"codespan\">itemHeight</code> 作为大小；而折线图会用 80% 的 <code class=\"codespan\">itemHeight</code> 作为图形高度并叠加一条横线，但如果用户自定义了 <code class=\"codespan\">icon</code>，则以 <code class=\"codespan\">itemHeight</code> 作为图形高度，不绘制横线。具体逻辑取决于系列内部实现。</p>\n<p>如果为 <code class=\"codespan\">&#39;inherit&#39;</code> 则表示：始终取系列的图形大小。</p>\n<p>无论取何值，最终会保证图形大小不超过 <code class=\"codespan\">itemWidth</code> 和 <code class=\"codespan\">itemHeight</code>。</p>\n",
-    "uiControl": {
-      "type": "number",
-      "min": "0",
-      "default": "50",
-      "step": "5"
-    }
-  },
-  "symbolKeepAspect": {
-    "desc": "\n\n<p>如果图标（可能来自系列的 <code class=\"codespan\">symbol</code> 或用户自定义的 <code class=\"codespan\">legend.data.icon</code>）是 <code class=\"codespan\">path://</code> 的形式，是否在缩放时保持该图形的长宽比。</p>\n",
-    "uiControl": {
-      "type": "boolean"
-    }
-  },
   "formatter": {
     "desc": "<p>用来格式化图例文本，支持字符串模板和回调函数两种形式。</p>\n<p>示例：</p>\n<pre><code class=\"lang-js\">// 使用字符串模板，模板变量为图例名称 {name}\nformatter: &#39;Legend {name}&#39;\n// 使用回调函数\nformatter: function (name) {\n    return &#39;Legend &#39; + name;\n}\n</code></pre>\n"
   },
