@@ -61,7 +61,7 @@ option = {
                 valueAnimation: true,
                 width: '60%',
                 lineHeight: 40,
-                height: 15,
+                height: '15%',
                 borderRadius: 8,
                 offsetCenter: [0, '-15%'],
                 fontSize: 60,
