@@ -13,13 +13,16 @@
     }
   },
   "coordinateSystem": {
-    "desc": "<p>The coordinate used in the series, whose options are:</p>\n<ul>\n<li><p><code class=\"codespan\">&#39;cartesian2d&#39;</code></p>\n<p>  Use a two-dimensional rectangular coordinate (also known as Cartesian coordinate), with <a href=\"#series-bar.xAxisIndex\">xAxisIndex</a> and <a href=\"#series-bar.yAxisIndex\">yAxisIndex</a> to assign the corresponding axis component.</p>\n</li>\n</ul>\n"
+    "desc": "<p>The coordinate used in the series, whose options are:</p>\n<ul>\n<li><p><code class=\"codespan\">&#39;cartesian2d&#39;</code></p>\n<p>  Use a two-dimensional rectangular coordinate (also known as Cartesian coordinate), with <a href=\"#series-bar.xAxisIndex\">xAxisIndex</a> and <a href=\"#series-bar.yAxisIndex\">yAxisIndex</a> to assign the corresponding axis component.</p>\n</li>\n</ul>\n<ul>\n<li><p><code class=\"codespan\">&#39;polar&#39;</code></p>\n<p>  Use polar coordinates, with <a href=\"#series-bar.polarIndex\">polarIndex</a> to assign the corresponding polar coordinate component.</p>\n</li>\n</ul>\n"
   },
   "xAxisIndex": {
     "desc": "<p>Index of <a href=\"#xAxis\">x axis</a> to combine with, which is  useful for multiple x axes in one chart.</p>\n"
   },
   "yAxisIndex": {
     "desc": "<p>Index of <a href=\"#yAxis\">y axis</a> to combine with, which is  useful for multiple y axes in one chart.</p>\n"
+  },
+  "polarIndex": {
+    "desc": "<p>Index of <a href=\"#polar\">polar coordinate</a> to combine with, which is useful for multiple polar axes in one chart.</p>\n"
   },
   "roundCap": {
     "desc": "\n\n\n\n<blockquote>\n<p>Since <code class=\"codespan\">v4.5.0</code></p>\n</blockquote>\n\n\n<p>Whether to add round caps at the end of the bar sectors. Valid only for bar series on polar coordinates.</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/en/view.html?c=polar-roundCap&reset=1&edit=1\" width=\"800\" height=\"500\"></iframe>\n\n",
