@@ -48,12 +48,16 @@ jobs:
           cd echarts-handbook
           npm install
 
+
       - name: Build 🔧
         working-directory: tmp-workspace
         run: |
           mkdir echarts-website
           cd echarts-www
           npm run release
+
+      - name: Install Dep
+        run: npm install
 
       - name: Deploy 🚀
         uses: ./node_modules/@jamesives/github-pages-deploy-action
