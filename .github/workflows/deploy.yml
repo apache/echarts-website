@@ -65,6 +65,7 @@ jobs:
           branch: asf-site
           folder: tmp-workspace/echarts-website
           single-commit: false
+          git-config-name: ${{env.GITHUB_ACTOR}}
           clean: true
           clean-exclude: |
             .*
