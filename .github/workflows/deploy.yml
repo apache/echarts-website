@@ -70,3 +70,4 @@ jobs:
             .*
             v4/**/*
             README.md
+            package.json
