@@ -1,0 +1,68 @@
+name: Build and Deploy
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+
+      - name: Prepare workspace
+        run: mkdir tmp-workspace
+
+      - name: Install ECharts WWW
+        working-directory: tmp-workspace
+        run: |
+          git clone --depth 1 https://github.com/apache/echarts-www
+          cd echarts-www
+          npm install
+
+      - name: Install ECharts Doc
+        working-directory: tmp-workspace
+        run: |
+          git clone --depth 1 https://github.com/apache/echarts-doc
+          cd echarts-doc
+          npm install
+
+      - name: Install ECharts Example
+        working-directory: tmp-workspace
+        run: |
+          git clone --depth 1 https://github.com/apache/echarts-examples
+          cd echarts-examples
+          npm install
+
+      - name: Install ECharts Theme Builder
+        working-directory: tmp-workspace
+        run: |
+          git clone --depth 1 https://github.com/apache/echarts-theme-builder
+          cd echarts-theme-builder
+          npm install
+
+      - name: Install ECharts Handbook
+        working-directory: tmp-workspace
+        run: |
+          git clone --depth 1 https://github.com/apache/echarts-handbook
+          cd echarts-handbook
+          npm install
+
+      - name: Build 🔧
+        working-directory: tmp-workspace
+        run: |
+          mkdir echarts-website
+          cd echarts-www
+          npm run release
+
+      - name: Deploy 🚀
+        uses: ./node_modules/@jamesives/github-pages-deploy-action
+        with:
+          branch: asf-site
+          folder: tmp-workspace/echarts-website
+          single-commit: false
+          clean: true
+          clean-exclude: |
+            .*
+            v4/**/*
+            README.md
