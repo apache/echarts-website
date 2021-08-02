@@ -719,7 +719,7 @@ window.__EC_DOC_option_series_sankey = {
     }
   },
   "levels.lineStyle.color": {
-    "desc": "<p>桑基图边的颜色。</p>\n"
+    "desc": "<p>桑基图边的颜色。</p>\n<ul>\n<li><code class=\"codespan\">&#39;source&#39;</code>: 使用源节点颜色。</li>\n<li><code class=\"codespan\">&#39;target&#39;</code>: 使用目标节点颜色。</li>\n<li><code class=\"codespan\">&#39;gradient&#39;</code>: 以源节点和目标节点的颜色做一个渐变过度色。(5.0开始支持)</li>\n</ul>\n"
   },
   "levels.lineStyle.opacity": {
     "desc": "<p>桑基图边的透明度。</p>\n"
@@ -1368,7 +1368,7 @@ window.__EC_DOC_option_series_sankey = {
     }
   },
   "levels.emphasis.lineStyle.color": {
-    "desc": "<p>桑基图边的颜色。</p>\n"
+    "desc": "<p>桑基图边的颜色。</p>\n<ul>\n<li><code class=\"codespan\">&#39;source&#39;</code>: 使用源节点颜色。</li>\n<li><code class=\"codespan\">&#39;target&#39;</code>: 使用目标节点颜色。</li>\n<li><code class=\"codespan\">&#39;gradient&#39;</code>: 以源节点和目标节点的颜色做一个渐变过度色。(5.0开始支持)</li>\n</ul>\n"
   },
   "levels.emphasis.lineStyle.opacity": {
     "desc": "<p>桑基图边的透明度。</p>\n"
@@ -2020,7 +2020,7 @@ window.__EC_DOC_option_series_sankey = {
     }
   },
   "levels.blur.lineStyle.color": {
-    "desc": "<p>桑基图边的颜色。</p>\n"
+    "desc": "<p>桑基图边的颜色。</p>\n<ul>\n<li><code class=\"codespan\">&#39;source&#39;</code>: 使用源节点颜色。</li>\n<li><code class=\"codespan\">&#39;target&#39;</code>: 使用目标节点颜色。</li>\n<li><code class=\"codespan\">&#39;gradient&#39;</code>: 以源节点和目标节点的颜色做一个渐变过度色。(5.0开始支持)</li>\n</ul>\n"
   },
   "levels.blur.lineStyle.opacity": {
     "desc": "<p>桑基图边的透明度。</p>\n"
@@ -2672,7 +2672,7 @@ window.__EC_DOC_option_series_sankey = {
     }
   },
   "levels.select.lineStyle.color": {
-    "desc": "<p>桑基图边的颜色。</p>\n"
+    "desc": "<p>桑基图边的颜色。</p>\n<ul>\n<li><code class=\"codespan\">&#39;source&#39;</code>: 使用源节点颜色。</li>\n<li><code class=\"codespan\">&#39;target&#39;</code>: 使用目标节点颜色。</li>\n<li><code class=\"codespan\">&#39;gradient&#39;</code>: 以源节点和目标节点的颜色做一个渐变过度色。(5.0开始支持)</li>\n</ul>\n"
   },
   "levels.select.lineStyle.opacity": {
     "desc": "<p>桑基图边的透明度。</p>\n"
@@ -3408,10 +3408,10 @@ window.__EC_DOC_option_series_sankey = {
     "desc": "<p>生成的图案在未重复之前的高度上限。通常不需要设置该值，当你发现图案在重复的时候出现不连续的接缝时，可以尝试提高该值。</p>\n"
   },
   "lineStyle": {
-    "desc": "<p>桑基图边的样式，其中 <a href=\"#series-sankey.lineStyle.color\">lineStyle.color</a> 支持设置为<code class=\"codespan\">&#39;source&#39;</code>或者<code class=\"codespan\">&#39;target&#39;</code>特殊值，此时边会自动取源节点或目标节点的颜色作为自己的颜色。</p>\n<p>从 5.0 开始, <a href=\"#series-sankey.lineStyle.color\">lineStyle.color</a> 还可以设置为<code class=\"codespan\">&#39;gradient&#39;</code>，取从源节点到目标节点的渐变色。</p>\n"
+    "desc": "<p>桑基图边的样式</p>\n"
   },
   "lineStyle.color": {
-    "desc": "<p>桑基图边的颜色。</p>\n"
+    "desc": "<p>桑基图边的颜色。</p>\n<ul>\n<li><code class=\"codespan\">&#39;source&#39;</code>: 使用源节点颜色。</li>\n<li><code class=\"codespan\">&#39;target&#39;</code>: 使用目标节点颜色。</li>\n<li><code class=\"codespan\">&#39;gradient&#39;</code>: 以源节点和目标节点的颜色做一个渐变过度色。(5.0开始支持)</li>\n</ul>\n"
   },
   "lineStyle.opacity": {
     "desc": "<p>桑基图边的透明度。</p>\n"
@@ -4072,7 +4072,7 @@ window.__EC_DOC_option_series_sankey = {
     }
   },
   "emphasis.lineStyle.color": {
-    "desc": "<p>桑基图边的颜色。</p>\n"
+    "desc": "<p>桑基图边的颜色。</p>\n<ul>\n<li><code class=\"codespan\">&#39;source&#39;</code>: 使用源节点颜色。</li>\n<li><code class=\"codespan\">&#39;target&#39;</code>: 使用目标节点颜色。</li>\n<li><code class=\"codespan\">&#39;gradient&#39;</code>: 以源节点和目标节点的颜色做一个渐变过度色。(5.0开始支持)</li>\n</ul>\n"
   },
   "emphasis.lineStyle.opacity": {
     "desc": "<p>桑基图边的透明度。</p>\n"
@@ -4727,7 +4727,7 @@ window.__EC_DOC_option_series_sankey = {
     }
   },
   "blur.lineStyle.color": {
-    "desc": "<p>桑基图边的颜色。</p>\n"
+    "desc": "<p>桑基图边的颜色。</p>\n<ul>\n<li><code class=\"codespan\">&#39;source&#39;</code>: 使用源节点颜色。</li>\n<li><code class=\"codespan\">&#39;target&#39;</code>: 使用目标节点颜色。</li>\n<li><code class=\"codespan\">&#39;gradient&#39;</code>: 以源节点和目标节点的颜色做一个渐变过度色。(5.0开始支持)</li>\n</ul>\n"
   },
   "blur.lineStyle.opacity": {
     "desc": "<p>桑基图边的透明度。</p>\n"
@@ -5382,7 +5382,7 @@ window.__EC_DOC_option_series_sankey = {
     }
   },
   "select.lineStyle.color": {
-    "desc": "<p>桑基图边的颜色。</p>\n"
+    "desc": "<p>桑基图边的颜色。</p>\n<ul>\n<li><code class=\"codespan\">&#39;source&#39;</code>: 使用源节点颜色。</li>\n<li><code class=\"codespan\">&#39;target&#39;</code>: 使用目标节点颜色。</li>\n<li><code class=\"codespan\">&#39;gradient&#39;</code>: 以源节点和目标节点的颜色做一个渐变过度色。(5.0开始支持)</li>\n</ul>\n"
   },
   "select.lineStyle.opacity": {
     "desc": "<p>桑基图边的透明度。</p>\n"
@@ -8201,7 +8201,7 @@ window.__EC_DOC_option_series_sankey = {
     "desc": "<p>关系边的线条样式。</p>\n"
   },
   "links.lineStyle.color": {
-    "desc": "<p>桑基图边的颜色。</p>\n"
+    "desc": "<p>桑基图边的颜色。</p>\n<ul>\n<li><code class=\"codespan\">&#39;source&#39;</code>: 使用源节点颜色。</li>\n<li><code class=\"codespan\">&#39;target&#39;</code>: 使用目标节点颜色。</li>\n<li><code class=\"codespan\">&#39;gradient&#39;</code>: 以源节点和目标节点的颜色做一个渐变过度色。(5.0开始支持)</li>\n</ul>\n"
   },
   "links.lineStyle.opacity": {
     "desc": "<p>桑基图边的透明度。</p>\n"
@@ -8249,7 +8249,7 @@ window.__EC_DOC_option_series_sankey = {
     }
   },
   "links.emphasis.lineStyle.color": {
-    "desc": "<p>桑基图边的颜色。</p>\n"
+    "desc": "<p>桑基图边的颜色。</p>\n<ul>\n<li><code class=\"codespan\">&#39;source&#39;</code>: 使用源节点颜色。</li>\n<li><code class=\"codespan\">&#39;target&#39;</code>: 使用目标节点颜色。</li>\n<li><code class=\"codespan\">&#39;gradient&#39;</code>: 以源节点和目标节点的颜色做一个渐变过度色。(5.0开始支持)</li>\n</ul>\n"
   },
   "links.emphasis.lineStyle.opacity": {
     "desc": "<p>桑基图边的透明度。</p>\n"
@@ -8300,7 +8300,7 @@ window.__EC_DOC_option_series_sankey = {
     "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n"
   },
   "links.blur.lineStyle.color": {
-    "desc": "<p>桑基图边的颜色。</p>\n"
+    "desc": "<p>桑基图边的颜色。</p>\n<ul>\n<li><code class=\"codespan\">&#39;source&#39;</code>: 使用源节点颜色。</li>\n<li><code class=\"codespan\">&#39;target&#39;</code>: 使用目标节点颜色。</li>\n<li><code class=\"codespan\">&#39;gradient&#39;</code>: 以源节点和目标节点的颜色做一个渐变过度色。(5.0开始支持)</li>\n</ul>\n"
   },
   "links.blur.lineStyle.opacity": {
     "desc": "<p>桑基图边的透明度。</p>\n"
@@ -8351,7 +8351,7 @@ window.__EC_DOC_option_series_sankey = {
     "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n"
   },
   "links.select.lineStyle.color": {
-    "desc": "<p>桑基图边的颜色。</p>\n"
+    "desc": "<p>桑基图边的颜色。</p>\n<ul>\n<li><code class=\"codespan\">&#39;source&#39;</code>: 使用源节点颜色。</li>\n<li><code class=\"codespan\">&#39;target&#39;</code>: 使用目标节点颜色。</li>\n<li><code class=\"codespan\">&#39;gradient&#39;</code>: 以源节点和目标节点的颜色做一个渐变过度色。(5.0开始支持)</li>\n</ul>\n"
   },
   "links.select.lineStyle.opacity": {
     "desc": "<p>桑基图边的透明度。</p>\n"

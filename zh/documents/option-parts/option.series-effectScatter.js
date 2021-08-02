@@ -36,6 +36,15 @@ window.__EC_DOC_option_series_effectScatter = {
       "type": "color"
     }
   },
+  "rippleEffect.number": {
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.2.0</code> 开始支持</p>\n</blockquote>\n\n\n<p>波纹的数量。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "default": "3",
+      "step": "1"
+    }
+  },
   "rippleEffect.period": {
     "desc": "\n\n<p>动画的周期，秒数。</p>\n",
     "uiControl": {

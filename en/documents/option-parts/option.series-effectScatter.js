@@ -36,6 +36,15 @@ window.__EC_DOC_option_series_effectScatter = {
       "type": "color"
     }
   },
+  "rippleEffect.number": {
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.2.0</code></p>\n</blockquote>\n\n\n<p>The number of ripples.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "min": "0",
+      "default": "3",
+      "step": "1"
+    }
+  },
   "rippleEffect.period": {
     "desc": "\n\n<p>The period duration of animation, in seconds.</p>\n",
     "uiControl": {
