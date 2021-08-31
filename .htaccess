@@ -6,6 +6,10 @@ Header set Access-Control-Allow-Origin "https://echarts.apache.org"
 Header set Access-Control-Allow-Methods: "*"
 Header set Access-Control-Allow-Headers: "*"
 
+<FilesMatch "\.html$">
+  Header append Vary: "negotiate,accept-language,accept-charset"
+</FilesMatch>
+
 <IfModule mod_expires.c>
   ExpiresActive on
 
