@@ -1507,6 +1507,12 @@ span.CodeMirror-selectedtext { background: none; }
 .ec-doc > .el-aside .doc-type-nav a.selected {
           border-top: 3px solid #B03A5B;
 }
+.ec-doc > .el-aside .doc-type-nav a.handbook-link {
+          color: #337ab7;
+}
+.ec-doc > .el-aside .doc-type-nav a.handbook-link:hover {
+            text-decoration: underline;
+}
 .ec-doc > .el-aside .doc-nav {
       position: absolute;
       top: 90px;

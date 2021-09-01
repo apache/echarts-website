@@ -44,7 +44,7 @@ jobs:
       - name: Install ECharts Handbook
         working-directory: tmp-workspace
         run: |
-          git clone --depth 1 https://github.com/apache/echarts-handbook
+          git clone https://github.com/apache/echarts-handbook
           cd echarts-handbook
           npm install
 
