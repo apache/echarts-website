@@ -8,6 +8,8 @@ Header set Access-Control-Allow-Headers: "*"
 
 Header append Vary: "Accept-Language"
 
+SetEnvIf Referer "^$" local_referal
+
 <IfModule mod_expires.c>
   ExpiresActive on
 
@@ -19,6 +21,11 @@ Header append Vary: "Accept-Language"
   ExpiresByType application/javascript    "access plus 1 hour"
   ExpiresByType application/json          "access plus 1 hour"
   ExpiresDefault                          "access plus 10 days"
+  
+  # Header always unset env=NO_CACHE
+  # Header always unset env=NO_CACHE
+  Header always set Cache-Control "no-store, no-cache, must-revalidate" env=NO_CACHE
+  Header always set Expires "Thu, 01 Dec 1994 16:00:00 GMT" env=NO_CACHE
 </IfModule>
 
 
@@ -33,8 +40,5 @@ RewriteRule ^/?(index[.]html)?$ "/en/index.html" [L,R=302,E=NO_CACHE:1]
 RewriteRule ^/?(index[.]html)?$ "/en/index.html" [L,R=302]
 
 RewriteRule ^/?next\/?(.*) "/$1" [L,R=301]
-
-Header always set Cache-Control "no-store, no-cache, must-revalidate" env=NO_CACHE
-Header always set Expires "Thu, 01 Dec 1994 16:00:00 GM" env=NO_CACHE
 
 
