@@ -34,8 +34,8 @@ RewriteRule ^/?(index[.]html)?$ "/en/index.html" [L,R=302]
 
 RewriteRule ^/?next\/?(.*) "/$1" [L,R=301]
 
-Header always merge Cache-Control "no-store, no-cache, must-revalidate" env=NO_CACHE
-Header always merge Expires "Thu, 01 Dec 1994 16:00:00 GMT" env=NO_CACHE
+Header always set Cache-Control "no-store, no-cache, must-revalidate" env=NO_CACHE
+Header always set Expires "Thu, 01 Dec 1994 16:00:00 GMT" env=NO_CACHE
 
 
 
