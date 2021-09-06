@@ -6,10 +6,8 @@ Header set Access-Control-Allow-Origin "https://echarts.apache.org"
 Header set Access-Control-Allow-Methods: "*"
 Header set Access-Control-Allow-Headers: "*"
 
-Header append Vary: "Accept-Language"
-
 <IfModule mod_expires.c>
-  ExpiresActive off
+  ExpiresActive on
 
   ExpiresByType text/html                 "access plus 1 hour"
   ExpiresByType image/png                 "access plus 1 hour"
@@ -25,17 +23,15 @@ Header append Vary: "Accept-Language"
 RewriteEngine On
 
 RewriteCond "%{HTTP:Accept-Language}" ^zh [NC]
-RewriteRule ^/?(index[.]html)?$ "/zh/index.html" [L,R=302,E=NO_CACHE:1]
+RewriteRule ^/?(index[.]html)?$ "/zh/index.html" [L,R=302]
 
 RewriteCond "%{HTTP:Accept-Language}" ^en [NC]
-RewriteRule ^/?(index[.]html)?$ "/en/index.html" [L,R=302,E=NO_CACHE:1]
+RewriteRule ^/?(index[.]html)?$ "/en/index.html" [L,R=302]
 
 RewriteRule ^/?(index[.]html)?$ "/en/index.html" [L,R=302]
 
 RewriteRule ^/?next\/?(.*) "/$1" [L,R=301]
 
-Header always set Cache-Control "no-store, no-cache, must-revalidate" env=NO_CACHE
-Header always set Expires "Thu, 01 Dec 1994 16:00:00 GMT" env=NO_CACHE
 
 
 
