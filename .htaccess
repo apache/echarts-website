@@ -8,7 +8,8 @@ RedirectMatch 404 /\.github
 RedirectMatch 404 /\.asf\.yaml
 
 <IfModule mod_headers.c>
-	Header set Access-Control-Allow-Origin "%{HTTP_SCHEME}e://echarts.apache.org"
+	Header set Access-Control-Allow-Origin: http://echarts.apache.org
+	Header set Access-Control-Allow-Origin: https://echarts.apache.org env=HTTPS
 	Header set Access-Control-Allow-Methods "*"
 	Header set Access-Control-Allow-Headers "*"
 </IfModule>
@@ -36,18 +37,12 @@ RedirectMatch 404 /\.asf\.yaml
 	<IfModule mod_headers.c>
 		Header always set Cache-Control "no-store, no-cache, must-revalidate"
 		Header always set Expires "Thu, 01 Dec 1994 16:00:00 GMT"
-		Header always append Vary "Accept-Language"
+		Header always merge Vary "Accept-Language"
 	</IfModule>
 </If>
 
 <IfModule mod_rewrite.c>
 	RewriteEngine On
-
-	RewriteCond %{HTTPS} =on
-	RewriteRule ^(.*)$ - [env=HTTP_SCHEME:https]
-
-	RewriteCond %{HTTPS} !=on
-	RewriteRule ^(.*)$ - [env=HTTP_SCHEME:http]
 
 	RewriteCond "%{HTTP:Accept-Language}" ^zh [NC]
 	RewriteRule ^/?(index[.]html)?$ "/zh/index.html" [L,R=302]
