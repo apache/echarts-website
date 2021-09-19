@@ -1,38 +1,60 @@
+AddDefaultCharset UTF-8
+
 RedirectMatch 404 /\.git
 RedirectMatch 404 /\.gitignore
 RedirectMatch 404 /\.htaccess
+RedirectMatch 404 /\.scripts
+RedirectMatch 404 /\.github
+RedirectMatch 404 /\.asf\.yaml
 
-Header set Access-Control-Allow-Origin "https://echarts.apache.org"
-Header set Access-Control-Allow-Methods: "*"
-Header set Access-Control-Allow-Headers: "*"
-
-<IfModule mod_expires.c>
-  ExpiresActive on
-
-  ExpiresByType text/html                 "access plus 1 hour"
-  ExpiresByType image/png                 "access plus 1 hour"
-  ExpiresByType image/jpg                 "access plus 1 hour"
-  ExpiresByType image/jpeg                "access plus 1 hour"
-  ExpiresByType text/css                  "access plus 1 hour"
-  ExpiresByType application/javascript    "access plus 1 hour"
-  ExpiresByType application/json          "access plus 1 hour"
-  ExpiresDefault                          "access plus 10 days"
+<IfModule mod_headers.c>
+	Header set Access-Control-Allow-Origin "%{HTTP_SCHEME}e://echarts.apache.org"
+	Header set Access-Control-Allow-Methods "*"
+	Header set Access-Control-Allow-Headers "*"
 </IfModule>
 
 
-RewriteEngine On
+<IfModule mod_expires.c>
+	ExpiresActive on
 
-RewriteCond "%{HTTP:Accept-Language}" ^zh [NC]
-RewriteRule ^/?(index[.]html)?$ "/zh/index.html" [L,R=302]
+	ExpiresByType text/html            		"access plus 1 hour"
+	ExpiresByType image/png            		"access plus 1 hour"
+	ExpiresByType image/jpg            		"access plus 1 hour"
+	ExpiresByType image/jpeg           		"access plus 1 hour"
+	ExpiresByType text/css            		"access plus 1 hour"
+	ExpiresByType application/javascript    "access plus 1 hour"
+	ExpiresByType application/json       	"access plus 1 hour"
+	ExpiresDefault                  		"access plus 10 days"
+</IfModule>
 
-RewriteCond "%{HTTP:Accept-Language}" ^en [NC]
-RewriteRule ^/?(index[.]html)?$ "/en/index.html" [L,R=302]
+# no cahce for index redirection
+<If "%{REQUEST_URI} =~ m#^/(index\.html)?$#">
+	<IfModule mod_expires.c>
+		ExpiresActive off
+	</IfModule>
 
-RewriteRule ^/?(index[.]html)?$ "/en/index.html" [L,R=302]
+	<IfModule mod_headers.c>
+		Header always set Cache-Control "no-store, no-cache, must-revalidate"
+		Header always set Expires "Thu, 01 Dec 1994 16:00:00 GMT"
+		Header always append Vary "Accept-Language"
+	</IfModule>
+</If>
 
-RewriteRule ^/?next\/?(.*) "/$1" [L,R=301]
+<IfModule mod_rewrite.c>
+	RewriteEngine On
 
+	RewriteCond %{HTTPS} =on
+	RewriteRule ^(.*)$ - [env=HTTP_SCHEME:https]
 
+	RewriteCond %{HTTPS} !=on
+	RewriteRule ^(.*)$ - [env=HTTP_SCHEME:http]
 
+	RewriteCond "%{HTTP:Accept-Language}" ^zh [NC]
+	RewriteRule ^/?(index[.]html)?$ "/zh/index.html" [L,R=302]
 
+	RewriteCond "%{HTTP:Accept-Language}" ^en [NC]
+	RewriteRule ^/?(index[.]html)?$ "/en/index.html" [L,R=302]
+
+	RewriteRule ^/?(index[.]html)?$ "/en/index.html" [L,R=302]
+</IfModule>
 
