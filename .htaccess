@@ -8,47 +8,55 @@ RedirectMatch 404 /\.github
 RedirectMatch 404 /\.asf\.yaml
 
 <IfModule mod_headers.c>
-	Header set Access-Control-Allow-Origin: https://echarts.apache.org
-	Header set Access-Control-Allow-Methods "*"
-	Header set Access-Control-Allow-Headers "*"
+    Header set Access-Control-Allow-Origin: https://echarts.apache.org
+    Header set Access-Control-Allow-Methods "*"
+    Header set Access-Control-Allow-Headers "*"
 </IfModule>
 
 
 <IfModule mod_expires.c>
-	ExpiresActive on
+    ExpiresActive on
 
-	ExpiresByType text/html            		"access plus 1 hour"
-	ExpiresByType image/png            		"access plus 1 hour"
-	ExpiresByType image/jpg            		"access plus 1 hour"
-	ExpiresByType image/jpeg           		"access plus 1 hour"
-	ExpiresByType text/css            		"access plus 1 hour"
-	ExpiresByType application/javascript    "access plus 1 hour"
-	ExpiresByType application/json       	"access plus 1 hour"
-	ExpiresDefault                  		"access plus 10 days"
+    ExpiresByType text/html            		"access plus 1 hour"
+    ExpiresByType image/png            		"access plus 1 hour"
+    ExpiresByType image/jpg            		"access plus 1 hour"
+    ExpiresByType image/jpeg           		"access plus 1 hour"
+    ExpiresByType text/css            		"access plus 1 hour"
+    ExpiresByType application/javascript    "access plus 1 hour"
+    ExpiresByType application/json       	"access plus 1 hour"
+    ExpiresDefault                  		"access plus 10 days"
 </IfModule>
 
 # no cahce for index redirection
 <If "%{REQUEST_URI} =~ m#^/(index\.html)?$#">
-	<IfModule mod_expires.c>
-		ExpiresActive off
-	</IfModule>
+    <IfModule mod_expires.c>
+        ExpiresActive off
+    </IfModule>
 
-	<IfModule mod_headers.c>
-		Header always set Cache-Control "no-store, no-cache, must-revalidate"
-		Header always set Expires "Thu, 01 Dec 1994 16:00:00 GMT"
-		Header always merge Vary "Accept-Language"
-	</IfModule>
+    <IfModule mod_headers.c>
+        Header always set Cache-Control "no-store, no-cache, must-revalidate"
+        Header always set Expires "Thu, 01 Dec 1994 16:00:00 GMT"
+        Header always merge Vary "Accept-Language"
+    </IfModule>
 </If>
 
 <IfModule mod_rewrite.c>
-	RewriteEngine On
+    RewriteEngine On
 
-	RewriteCond "%{HTTP:Accept-Language}" ^zh [NC]
-	RewriteRule ^/?(index[.]html)?$ "/zh/index.html" [L,R=302]
+    RewriteCond "%{HTTP:Accept-Language}" ^zh [NC]
+    RewriteRule ^/?(index[.]html)?$ "/zh/index.html" [L,R=302]
 
-	RewriteCond "%{HTTP:Accept-Language}" ^en [NC]
-	RewriteRule ^/?(index[.]html)?$ "/en/index.html" [L,R=302]
+    RewriteCond "%{HTTP:Accept-Language}" ^en [NC]
+    RewriteRule ^/?(index[.]html)?$ "/en/index.html" [L,R=302]
 
-	RewriteRule ^/?(index[.]html)?$ "/en/index.html" [L,R=302]
+    RewriteRule ^/?(index[.]html)?$ "/en/index.html" [L,R=302]
+
+    RewriteCond "%{HTTP:Accept-Language}" ^zh [NC]
+    RewriteRule ^/?([a-zA-Z0-9\_\-])+[.]html$ "/zh/$1.html" [L,R=302]
+
+    RewriteCond "%{HTTP:Accept-Language}" ^en [NC]
+    RewriteRule ^/?([a-zA-Z0-9\_\-])+[.]html$ "/en/$1.html" [L,R=302]
+
+    RewriteRule ^/?([a-zA-Z0-9\_\-])+[.]html$ "/en/$1.html" [L,R=302]
 </IfModule>
 
