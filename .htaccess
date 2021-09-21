@@ -28,7 +28,7 @@ RedirectMatch 404 /\.asf\.yaml
 </IfModule>
 
 # no cahce for root index redirection
-<If "%{REQUEST_URI} =~ m#^/?([\w\-]+\.html)?$# || %{REQUEST_URI} =~ m#^/?((examples)|(handbook))/?([\w\-]+\.html)?$#">
+<If "%{REQUEST_URI} =~ m#^/?(((examples)|(handbook))/?)?([\w\-]+\.html)?$#">
     <IfModule mod_expires.c>
         ExpiresActive off
     </IfModule>
