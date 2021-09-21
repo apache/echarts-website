@@ -1,0 +1,32 @@
+name: Check Changed Files & Purge CDN
+
+on:
+  push:
+    branches: [ asf-site ]
+
+  workflow_dispatch:
+
+jobs:
+  'Check-Changed-Files-Purge-CDN':
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v1.1.2
+        with:
+          separator: ","
+          files: |
+            ^[^\.]
+
+      - name: Purge changed files
+        run: |
+          npm i
+          node purgeCDN.js --files ${{ steps.changed-files.outputs.all_modified_files }}
+        working-directory: .scripts
+
+

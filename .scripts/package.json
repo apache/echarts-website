@@ -5,6 +5,7 @@
     "globby": "^11.0.3"
   },
   "devDependencies": {
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "minimist": "^1.2.5"
   }
 }
