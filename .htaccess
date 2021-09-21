@@ -27,8 +27,8 @@ RedirectMatch 404 /\.asf\.yaml
     ExpiresDefault                  		"access plus 10 days"
 </IfModule>
 
-# no cahce for index redirection
-<If "%{REQUEST_URI} =~ m#^/(index\.html)?$#">
+# no cahce for root index redirection
+<If "%{REQUEST_URI} =~ m#^/?([\w\-]+\.html)?$# || %{REQUEST_URI} =~ m#^/?((examples)|(handbook))/?([\w\-]+\.html)?$#">
     <IfModule mod_expires.c>
         ExpiresActive off
     </IfModule>
@@ -41,22 +41,22 @@ RedirectMatch 404 /\.asf\.yaml
 </If>
 
 <IfModule mod_rewrite.c>
-    RewriteEngine On
+  RewriteEngine On
+  
+  RewriteCond "%{HTTP:Accept-Language}" ^zh [NC]
+  RewriteRule ^/?(index\.html)?$ "/zh/index.html" [L,R=302]
 
-    RewriteCond "%{HTTP:Accept-Language}" ^zh [NC]
-    RewriteRule ^/?(index[.]html)?$ "/zh/index.html" [L,R=302]
+  RewriteRule ^/?(index\.html)?$ "/en/index.html" [L,R=302]
 
-    RewriteCond "%{HTTP:Accept-Language}" ^en [NC]
-    RewriteRule ^/?(index[.]html)?$ "/en/index.html" [L,R=302]
+  # special redirection for examples & handbook
+  RewriteCond "%{HTTP:Accept-Language}" ^zh [NC]
+  RewriteRule ^/?((examples)|(handbook))/?([\w\-]+\.html)?$ "/$1/zh/$4" [L,R=302]
 
-    RewriteRule ^/?(index[.]html)?$ "/en/index.html" [L,R=302]
+  RewriteRule ^/?((examples)|(handbook))/?([\w\-]+\.html)?$ "/$1/en/$4" [L,R=302]
 
-    RewriteCond "%{HTTP:Accept-Language}" ^zh [NC]
-    RewriteRule ^/?([a-zA-Z0-9\_\-]+)[.]html$ "/zh/$1.html" [L,R=302]
+  RewriteCond "%{HTTP:Accept-Language}" ^zh [NC]
+  RewriteRule ^/?([\w\-]+)\.html$ "/zh/$1.html" [L,R=302]
 
-    RewriteCond "%{HTTP:Accept-Language}" ^en [NC]
-    RewriteRule ^/?([a-zA-Z0-9\_\-]+)[.]html$ "/en/$1.html" [L,R=302]
-
-    RewriteRule ^/?([a-zA-Z0-9\_\-]+)[.]html$ "/en/$1.html" [L,R=302]
+  RewriteRule ^/?([\w\-]+)\.html$ "/en/$1.html" [L,R=302]
 </IfModule>
 
