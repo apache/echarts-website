@@ -14,7 +14,7 @@
   position: absolute;
   top: 42px;
   right: 15px;
-  bottom: 15px;
+  bottom: 50px;
   left: 15px;
   box-sizing: border-box;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 20px;
@@ -48,10 +48,17 @@
   padding-top: 5px;
   padding-left: 15px;
 }
+#tool-panel * {
+    font-size: 12px;
+}
 #tool-panel .render-config-trigger {
-    margin-left: 10px;
     cursor: pointer;
     font-weight: 500;
+    margin-left: 10px;
+}
+#tool-panel .version-select {
+    width: 80px;
+    margin-left: 10px;
 }
 #tool-panel label {
     margin-bottom: 0;
@@ -68,14 +75,10 @@
     text-transform: uppercase;
     margin-left: 20px;
 }
-#tool-panel .screenshot, #tool-panel .download, #tool-panel .edit {
+#tool-panel .edit {
     float: right;
     margin-right: 15px;
     cursor: pointer;
-}
-#tool-panel .screenshot {
-    font-size: 22px;
-    margin-right: 10px;
 }
 .full #chart-panel {
   top: 40px;
@@ -87,8 +90,60 @@
 .full #tool-panel {
   padding-left: 5px;
 }
-.full #tool-panel .download, .full #tool-panel .edit {
+.full #tool-panel .download,
+.full #tool-panel .edit {
     margin-right: 5px;
+}
+#preview-status {
+  overflow: hidden;
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  right: 0;
+  height: 30px;
+  padding: 0 20px;
+  font-size: 0.9rem;
+}
+#preview-status .screenshot,
+#preview-status .download,
+#preview-status .edit {
+    margin-right: 15px;
+    cursor: pointer;
+}
+#preview-status .screenshot {
+    margin-right: 5px;
+    width: 25px;
+    height: 25px;
+    margin-top: 2px;
+}
+#preview-status .left {
+    float: left;
+}
+#preview-status .left > * {
+      display: inline-block;
+      vertical-align: middle;
+}
+#preview-status .right {
+    float: right;
+}
+#preview-status #run-log {
+    line-height: 25px;
+}
+#preview-status #run-log .run-log-time {
+      color: #666;
+      display: inline-block;
+      margin-right: 10px;
+      font-size: 12px;
+}
+#preview-status #run-log .run-log-type-info {
+      color: #666;
+      font-size: 12px;
+}
+#preview-status #run-log .run-log-type-warn {
+      color: #f93;
+}
+#preview-status #run-log .run-log-type-error {
+      color: #e43c59;
 }
 .dg.main * {
   box-sizing: content-box;
@@ -127,77 +182,75 @@
 }
 
 .object-visualizer {
-    border-radius: 4px;
-    overflow-x: auto;
-    margin: 0;
-    padding: 10px;
-    /* font-family: Menlo; */
-    font-size: 0.6em;
-    line-height: 1.7;
-  }
+  border-radius: 4px;
+  overflow-x: auto;
+  margin: 0;
+  padding: 10px;
+  /* font-family: Menlo; */
+  font-size: 0.6em;
+  line-height: 1.7;
+}
 
-  .array > .value,
-  .object > .value {
-    display: flex;
-    flex-direction: column;
-    margin-left: 2em;
-  }
+.array > .value,
+.object > .value {
+  display: flex;
+  flex-direction: column;
+  margin-left: 2em;
+}
 
-  .key {
-    /* color: #4078f2; */
-    color: #111;
-    user-select: none;
-  }
+.key {
+  /* color: #4078f2; */
+  color: #111;
+}
 
-  .string > .value {
-    color: #50a14f;
-  }
+.string > .value {
+  color: #50a14f;
+}
 
-  .boolean > .value,
-  .number > .value {
-    color: #d19a66;
-  }
+.boolean > .value,
+.number > .value {
+  color: #d19a66;
+}
 
-  .null > .value,
-  .undefined > .value {
-    color: hsl(0, 0%, 40%);
-  }
+.null > .value,
+.undefined > .value {
+  color: hsl(0, 0%, 40%);
+}
 
-  .separator {
-    cursor: pointer;
-    font-size: 0.8em;
-    user-select: none;
-    color: hsl(0, 0%, 30%);
-  }
+.separator {
+  cursor: pointer;
+  font-size: 0.8em;
+  color: hsl(0, 0%, 30%);
+}
 
-  .indicator {
-    cursor: pointer;
-    font-size: 0.8em;
-    padding-right: 0.5em;
-    user-select: none;
-    vertical-align: text-bottom;
-    color: hsl(0, 0%, 30%);
-  }
+.indicator {
+  cursor: pointer;
+  font-size: 0.8em;
+  padding-right: 0.5em;
+  user-select: none;
+  vertical-align: text-bottom;
+  color: hsl(0, 0%, 30%);
+}
 
-  .array > .key,
-  .object > .key {
-    cursor: pointer;
-  }
+.array > .key,
+.object > .key {
+  cursor: pointer;
+}
 
-  .value > .array,
-  .value > .object {
-    position: relative;
-    left: -0.8em;
-  }
+.value > .array,
+.value > .object {
+  position: relative;
+  left: -0.8em;
+}
 
-  .count,
-  .preview,
-  .quotes {
-    cursor: pointer;
-    font-size: 0.8em;
-    user-select: none;
-    color: hsl(0, 0%, 30%);
-  }
+.count,
+.preview,
+.quotes {
+  cursor: pointer;
+  font-size: 0.8em;
+  user-select: none;
+  color: hsl(0, 0%, 30%);
+}
 
 #main-container .handler {
   position: absolute;
@@ -271,7 +324,8 @@
     height: 34px;
     line-height: 34px;
 }
-#editor-control-panel, #full-code-generate-config {
+#editor-control-panel,
+#full-code-generate-config {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 #option-outline {
@@ -282,6 +336,13 @@
   right: 0;
   font-size: 13px;
   font-family: 'Source Code Pro', 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+}
+#option-outline .el-icon-document {
+    margin-left: 5px;
+    font-size: 1rem;
+}
+#option-outline .el-icon-document:hover {
+      text-decoration: underline;
 }
 #full-code-generate-config .full-code-generate-config-label {
   height: 30px;
@@ -305,6 +366,43 @@
 #editor-control-panel .setting-panel .btn-group + .btn-group {
     margin-left: 10px;
 }
+#editor-control-panel .languages {
+  display: inline-block;
+  padding: 2px 10px;
+  font-weight: bold;
+}
+#editor-control-panel .languages a {
+    display: inline-block;
+    padding: 3px 10px;
+    margin-left: 5px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+#editor-control-panel .languages a.ts {
+      color: #3178c6;
+}
+#editor-control-panel .languages a.ts.disabled {
+      color: #ddd;
+      cursor: default;
+}
+#editor-control-panel .languages a.ts.disabled:hover {
+        text-decoration: none;
+}
+#editor-control-panel .languages a.js {
+      color: #000;
+}
+#editor-control-panel .languages a.active {
+      font-size: 12px;
+      border-radius: 3px;
+}
+#editor-control-panel .languages a.active.js {
+        background: #f7df1e;
+        color: #000;
+}
+#editor-control-panel .languages a.active.ts {
+        background: #3178c6;
+        color: #fff;
+}
 #editor-control-panel .editor-controls {
   float: right;
 }
@@ -315,41 +413,27 @@
     font-size: 12px;
 }
 #editor-control-panel .editor-controls .btn {
-    color: #FFF;
     border-radius: 0;
-    background-color: #409eff;
     margin-left: 10px;
     border: none;
     height: 30px;
-    width: 50px;
-}
-#editor-control-panel .editor-controls .btn:hover {
-    background-color: #5aabff;
-}
-#code-info {
-  position: absolute;
-  bottom: 0;
-  overflow: hidden;
-  height: 30px;
-  line-height: 30px;
-  padding: 0px 10px;
-  font-size: 0.9rem;
-}
-#code-info .code-info-time {
+    background: none;
     color: #666;
-    display: inline-block;
-    margin-right: 10px;
-    font-size: 12px;
 }
-#code-info .code-info-type-info {
-    color: #666;
-    font-size: 12px;
+#editor-control-panel .editor-controls .btn > * {
+      display: inline-block;
+      vertical-align: middle;
 }
-#code-info .code-info-type-warn {
-    color: #f93;
+#editor-control-panel .editor-controls .btn svg {
+      width: 15px;
+      height: 15px;
 }
-#code-info .code-info-type-error {
-    color: #e43c59;
+#editor-control-panel .editor-controls .btn.run {
+      color: #fff;
+      background-color: #409eff;
+}
+#editor-control-panel .editor-controls .btn.run:hover {
+      background-color: #5aabff;
 }
 .right-container {
   position: absolute;
@@ -367,39 +451,69 @@
   width: 100%;
   max-width: 350px;
   margin-bottom: 30px;
-  border-radius: 2px;
+  position: relative;
 }
 .example-list-item .example-link {
-    position: relative;
+    margin-top: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
     display: block;
 }
-.example-list-item .example-link .chart-area {
-      width: 100%;
-      height: 100%;
-      border-radius: 5px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
-      margin-top: 10px;
+.example-list-item .chart-area {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
 }
-.example-list-item .example-link .example-title {
-      color: #293c55;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      padding: 10px 10px 2px 10px;
-      margin: 0;
-      font-weight: normal;
-      font-size: 14px;
-      text-align: center;
+.example-list-item .chart-area:hover {
+      transform: scale(1.2);
 }
-.example-list-item .example-link .example-subtitle {
-      font-size: 12px;
-      text-align: center;
-      color: #aaa;
-      font-weight: normal;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      margin: 3px 0 0 0;
+.example-list-item .example-title {
+    color: #293c55;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 10px 10px 2px 10px;
+    margin: 0;
+    display: block;
+    font-size: 14px;
+    text-align: left;
+}
+.example-list-item .example-subtitle {
+    font-size: 12px;
+    text-align: left;
+    color: #aaa;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin: 3px 0 0 0;
+    padding-left: 10px;
+}
+.example-list-item .example-langs {
+    margin-top: 10px;
+    float: right;
+}
+.example-list-item .example-langs > * {
+      display: inline-block;
+      padding: 1px 6px;
+      margin-left: 5px;
+      vertical-align: middle;
+      border-radius: 3px;
+      font-size: 10px;
+      opacity: 0.8;
+}
+.example-list-item .example-langs > *:hover {
+        opacity: 1;
+}
+.example-list-item .example-langs .js {
+      background: #f7df1e;
+      color: #444;
+}
+.example-list-item .example-langs .ts {
+      background: #3178c6;
+      color: #eee;
 }
 .example-list-item .example-info {
     padding: 5px 0;
@@ -480,14 +594,68 @@ td.hidden-lg {
      col-xl, col-xxl, col-xxxl setup.
      Don't remove anything below this line
      ========================================================================== */
-.col-xl-1, .col-xxl-1, .col-xxxl-1, .col-xl-2, .col-xxl-2, .col-md-2, .col-xxxl-2, .col-xl-3, .col-xxl-3, .col-md-3, .col-xxxl-3, .col-xl-4, .col-xxl-4, .col-md-4, .col-xxxl-4, .col-xl-5, .col-xxl-5, .col-md-5, .col-xxxl-5, .col-xl-6, .col-xxl-6, .col-md-6, .col-xxxl-6, .col-xl-7, .col-xxl-7, .col-md-7, .col-xxxl-7, .col-xl-8, .col-xxl-8, .col-md-8, .col-xxxl-8, .col-xl-9, .col-xxl-9, .col-md-9, .col-xxxl-9, .col-xl-10, .col-xxl-100, .col-xxxl-10, .col-xl-11, .col-xxl-111, .col-xxxl-11, .col-xl-12, .col-xxl-122, .col-xxxl-12 {
+.col-xl-1,
+.col-xxl-1,
+.col-xxxl-1,
+.col-xl-2,
+.col-xxl-2,
+.col-md-2,
+.col-xxxl-2,
+.col-xl-3,
+.col-xxl-3,
+.col-md-3,
+.col-xxxl-3,
+.col-xl-4,
+.col-xxl-4,
+.col-md-4,
+.col-xxxl-4,
+.col-xl-5,
+.col-xxl-5,
+.col-md-5,
+.col-xxxl-5,
+.col-xl-6,
+.col-xxl-6,
+.col-md-6,
+.col-xxxl-6,
+.col-xl-7,
+.col-xxl-7,
+.col-md-7,
+.col-xxxl-7,
+.col-xl-8,
+.col-xxl-8,
+.col-md-8,
+.col-xxxl-8,
+.col-xl-9,
+.col-xxl-9,
+.col-md-9,
+.col-xxxl-9,
+.col-xl-10,
+.col-xxl-100,
+.col-xxxl-10,
+.col-xl-11,
+.col-xxl-111,
+.col-xxxl-11,
+.col-xl-12,
+.col-xxl-122,
+.col-xxxl-12 {
   position: relative;
   min-height: 1px;
   padding-right: 15px;
   padding-left: 15px;
 }
 @media (min-width: 1600px) {
-.col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12 {
+.col-xl-1,
+.col-xl-2,
+.col-xl-3,
+.col-xl-4,
+.col-xl-5,
+.col-xl-6,
+.col-xl-7,
+.col-xl-8,
+.col-xl-9,
+.col-xl-10,
+.col-xl-11,
+.col-xl-12 {
     float: left;
 }
 .col-xl-12 {
@@ -645,7 +813,18 @@ td.hidden-lg {
 }
 }
 @media (min-width: 1920px) {
-.col-xxl-1, .col-xxl-2, .col-xxl-3, .col-xxl-4, .col-xxl-5, .col-xxl-6, .col-xxl-7, .col-xxl-8, .col-xxl-9, .col-xxl-10, .col-xxl-11, .col-xxl-12 {
+.col-xxl-1,
+.col-xxl-2,
+.col-xxl-3,
+.col-xxl-4,
+.col-xxl-5,
+.col-xxl-6,
+.col-xxl-7,
+.col-xxl-8,
+.col-xxl-9,
+.col-xxl-10,
+.col-xxl-11,
+.col-xxl-12 {
     float: left;
 }
 .col-xxl-12 {
@@ -803,7 +982,18 @@ td.hidden-lg {
 }
 }
 @media (min-width: 2560px) {
-.col-xxxl-1, .col-xxxl-2, .col-xxxl-3, .col-xxxl-4, .col-xxxl-5, .col-xxxl-6, .col-xxxl-7, .col-xxxl-8, .col-xxxl-9, .col-xxxl-10, .col-xxxl-11, .col-xxxl-12 {
+.col-xxxl-1,
+.col-xxxl-2,
+.col-xxxl-3,
+.col-xxxl-4,
+.col-xxxl-5,
+.col-xxxl-6,
+.col-xxxl-7,
+.col-xxxl-8,
+.col-xxxl-9,
+.col-xxxl-10,
+.col-xxxl-11,
+.col-xxxl-12 {
     float: left;
 }
 .col-xxxl-12 {
@@ -1066,7 +1256,7 @@ td.visible-xxxl {
 .example-list-panel h3 {
     margin-bottom: 20px;
     padding-bottom: 10px;
-    border-bottom: 1px solid #E1E5F2;
+    border-bottom: 1px solid #e1e5f2;
     font-weight: normal;
     color: #464646;
     font-size: 20px;
@@ -1074,7 +1264,7 @@ td.visible-xxxl {
 .example-list-panel .chart-type-head span {
     font-size: 16px;
     padding-left: 5px;
-    color: #949CB1;
+    color: #949cb1;
     font-weight: 200;
 }
 #left-container {
@@ -1116,48 +1306,45 @@ td.visible-xxxl {
 #left-chart-nav:hover a {
       text-decoration: none;
 }
-#left-chart-nav li {
-    cursor: pointer;
-}
 #left-chart-nav li a {
-      height: 45px;
-      padding: 10px 0 10px 20px;
-      display: block;
-      text-decoration: none;
-      color: #6E7079;
+    height: 45px;
+    padding: 10px 0 10px 20px;
+    display: block;
+    text-decoration: none;
+    color: #6e7079;
 }
 #left-chart-nav li a .chart-name {
-        display: inline-block;
-        position: relative;
-        vertical-align: middle;
-        margin-left: 10px;
+      display: inline-block;
+      position: relative;
+      vertical-align: middle;
+      margin-left: 10px;
 }
 #left-chart-nav li a .chart-icon {
-        content: '';
-        width: 20px;
-        display: inline-block;
-        border-radius: 50%;
-        vertical-align: middle;
+      content: '';
+      width: 20px;
+      display: inline-block;
+      border-radius: 50%;
+      vertical-align: middle;
 }
 #left-chart-nav li a .chart-icon svg {
-          width: 100% !important;
-          height: auto !important;
+        width: 100% !important;
+        height: auto !important;
 }
 #left-chart-nav li a.active {
-        background-color: #5470C6;
-        color: #fff;
+      background-color: #5470c6;
+      color: #fff;
 }
 #left-chart-nav li a.active .chart-icon * {
-          fill: #fff;
+        fill: #fff;
 }
 #left-chart-nav li a.active:hover {
-        color: #fff;
+      color: #fff;
 }
 #left-chart-nav li:hover {
-      border-right: 4px solid #5470C6;
+    border-right: 4px solid #5470c6;
 }
 #left-chart-nav li:hover a {
-        color: #464646;
+      color: #464646;
 }
 @media (max-width: 768px) {
 #left-container {

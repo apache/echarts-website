@@ -4706,19 +4706,19 @@ window.__EC_DOC_option_series_treemap = {
     "desc": "<p> 图形样式。</p>\n"
   },
   "breadcrumb.itemStyle.color": {
-    "desc": "\n\n<p>boxplot图形的颜色。</p>\n<blockquote>\n<p>支持使用<code class=\"codespan\">rgb(255,255,255)</code>，<code class=\"codespan\">rgba(255,255,255,1)</code>，<code class=\"codespan\">#fff</code>等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见<a href=\"#color\">option.color</a></p>\n</blockquote>\n",
+    "desc": "\n\n<p>面包屑图形的颜色。</p>\n<blockquote>\n<p>支持使用<code class=\"codespan\">rgb(255,255,255)</code>，<code class=\"codespan\">rgba(255,255,255,1)</code>，<code class=\"codespan\">#fff</code>等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见<a href=\"#color\">option.color</a></p>\n</blockquote>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "breadcrumb.itemStyle.borderColor": {
-    "desc": "\n\n<p>boxplot图形的描边颜色。支持的颜色格式同 <code class=\"codespan\">color</code>，不支持回调函数。</p>\n",
+    "desc": "\n\n<p>面包屑图形的描边颜色。支持的颜色格式同 <code class=\"codespan\">color</code>，不支持回调函数。</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "breadcrumb.itemStyle.borderWidth": {
-    "desc": "\n\n<p>boxplot描边线宽。为 0 时无描边。</p>\n",
+    "desc": "\n\n<p>面包屑描边线宽。为 0 时无描边。</p>\n",
     "uiControl": {
       "type": "number",
       "value": "1",
@@ -4727,7 +4727,7 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "breadcrumb.itemStyle.borderType": {
-    "desc": "\n\n\n<p>boxplot描边类型。</p>\n<p>可选：</p>\n<ul>\n<li><code class=\"codespan\">&#39;solid&#39;</code></li>\n<li><code class=\"codespan\">&#39;dashed&#39;</code></li>\n<li><code class=\"codespan\">&#39;dotted&#39;</code></li>\n</ul>\n<p>自 <code class=\"codespan\">v5.0.0</code> 开始，也可以是 <code class=\"codespan\">number</code> 或者 <code class=\"codespan\">number</code> 数组，用以指定线条的 <a href=\"https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray\" target=\"_blank\">dash array</a>，配合 \n<code class=\"codespan\">borderDashOffset</code>\n 可实现更灵活的虚线效果。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">{\n\nborderType: [5, 10],\n\nborderDashOffset: 5\n}\n</code></pre>\n",
+    "desc": "\n\n\n<p>面包屑描边类型。</p>\n<p>可选：</p>\n<ul>\n<li><code class=\"codespan\">&#39;solid&#39;</code></li>\n<li><code class=\"codespan\">&#39;dashed&#39;</code></li>\n<li><code class=\"codespan\">&#39;dotted&#39;</code></li>\n</ul>\n<p>自 <code class=\"codespan\">v5.0.0</code> 开始，也可以是 <code class=\"codespan\">number</code> 或者 <code class=\"codespan\">number</code> 数组，用以指定线条的 <a href=\"https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray\" target=\"_blank\">dash array</a>，配合 \n<code class=\"codespan\">borderDashOffset</code>\n 可实现更灵活的虚线效果。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">{\n\nborderType: [5, 10],\n\nborderDashOffset: 5\n}\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "default": "solid",
@@ -5265,19 +5265,19 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "breadcrumb.emphasis.itemStyle.color": {
-    "desc": "\n\n<p>boxplot图形的颜色。在<code class=\"codespan\">emphasis</code>状态中支持设置为<code class=\"codespan\">&#39;inherit&#39;</code>取消高亮颜色。</p>\n<blockquote>\n<p>支持使用<code class=\"codespan\">rgb(255,255,255)</code>，<code class=\"codespan\">rgba(255,255,255,1)</code>，<code class=\"codespan\">#fff</code>等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见<a href=\"#color\">option.color</a></p>\n</blockquote>\n",
+    "desc": "\n\n<p>面包屑图形的颜色。从 5.2.0 开始支持在<code class=\"codespan\">emphasis</code>状态中支持设置为<code class=\"codespan\">&#39;inherit&#39;</code>取消高亮颜色。</p>\n<blockquote>\n<p>支持使用<code class=\"codespan\">rgb(255,255,255)</code>，<code class=\"codespan\">rgba(255,255,255,1)</code>，<code class=\"codespan\">#fff</code>等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见<a href=\"#color\">option.color</a></p>\n</blockquote>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "breadcrumb.emphasis.itemStyle.borderColor": {
-    "desc": "\n\n<p>boxplot图形的描边颜色。支持的颜色格式同 <code class=\"codespan\">color</code>，不支持回调函数。</p>\n",
+    "desc": "\n\n<p>面包屑图形的描边颜色。支持的颜色格式同 <code class=\"codespan\">color</code>，不支持回调函数。</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "breadcrumb.emphasis.itemStyle.borderWidth": {
-    "desc": "\n\n<p>boxplot描边线宽。为 0 时无描边。</p>\n",
+    "desc": "\n\n<p>面包屑描边线宽。为 0 时无描边。</p>\n",
     "uiControl": {
       "type": "number",
       "value": "1",
@@ -5286,7 +5286,7 @@ window.__EC_DOC_option_series_treemap = {
     }
   },
   "breadcrumb.emphasis.itemStyle.borderType": {
-    "desc": "\n\n\n<p>boxplot描边类型。</p>\n<p>可选：</p>\n<ul>\n<li><code class=\"codespan\">&#39;solid&#39;</code></li>\n<li><code class=\"codespan\">&#39;dashed&#39;</code></li>\n<li><code class=\"codespan\">&#39;dotted&#39;</code></li>\n</ul>\n<p>自 <code class=\"codespan\">v5.0.0</code> 开始，也可以是 <code class=\"codespan\">number</code> 或者 <code class=\"codespan\">number</code> 数组，用以指定线条的 <a href=\"https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray\" target=\"_blank\">dash array</a>，配合 \n<code class=\"codespan\">borderDashOffset</code>\n 可实现更灵活的虚线效果。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">{\n\nborderType: [5, 10],\n\nborderDashOffset: 5\n}\n</code></pre>\n",
+    "desc": "\n\n\n<p>面包屑描边类型。</p>\n<p>可选：</p>\n<ul>\n<li><code class=\"codespan\">&#39;solid&#39;</code></li>\n<li><code class=\"codespan\">&#39;dashed&#39;</code></li>\n<li><code class=\"codespan\">&#39;dotted&#39;</code></li>\n</ul>\n<p>自 <code class=\"codespan\">v5.0.0</code> 开始，也可以是 <code class=\"codespan\">number</code> 或者 <code class=\"codespan\">number</code> 数组，用以指定线条的 <a href=\"https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray\" target=\"_blank\">dash array</a>，配合 \n<code class=\"codespan\">borderDashOffset</code>\n 可实现更灵活的虚线效果。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">{\n\nborderType: [5, 10],\n\nborderDashOffset: 5\n}\n</code></pre>\n",
     "uiControl": {
       "type": "enum",
       "default": "solid",

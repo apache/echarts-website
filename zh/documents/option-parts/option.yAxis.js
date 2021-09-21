@@ -1055,6 +1055,12 @@ window.__EC_DOC_option_yAxis = {
       "type": "boolean"
     }
   },
+  "axisLabel.hideOverlap": {
+    "desc": "\n\n\n\n<blockquote>\n<p>从 <code class=\"codespan\">v5.2.0</code> 开始支持</p>\n</blockquote>\n<p>是否隐藏重叠的标签。</p>\n",
+    "uiControl": {
+      "type": "boolean"
+    }
+  },
   "axisLabel.color": {
     "desc": "\n\n<p>刻度标签文字的颜色，默认取 <a href=\"#yAxis.axisLine.lineStyle.color\">axisLine.lineStyle.color</a>。支持回调函数，格式如下</p>\n<pre><code class=\"lang-js\">(val: string) =&gt; Color\n</code></pre>\n<p>参数是标签的文本，返回颜色值，如下示例：</p>\n<pre><code class=\"lang-js\">textStyle: {\n    color: function (value, index) {\n        return value &gt;= 0 ? &#39;green&#39; : &#39;red&#39;;\n    }\n}\n</code></pre>\n",
     "uiControl": {

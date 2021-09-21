@@ -2254,7 +2254,7 @@ window.__EC_DOC_option_series_sunburst = {
     "desc": "<p>旭日图扇形块的样式。</p>\n<p>可以在 <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> 定义所有扇形块的样式，也可以在 <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> 定义每一层扇形块的样式，还可以在 <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> 定义每个扇形块单独的样式，这三者的优先级从低到高。也就是说，如果定义了 <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a>，将会覆盖 <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> 和 <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a>。</p>\n<p><strong>优先级：<a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> &gt; <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> &gt; <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a>。</strong></p>\n"
   },
   "emphasis.itemStyle.color": {
-    "desc": "\n\n<p>图形的颜色。 默认从全局调色盘 <a href=\"#color\">option.color</a> 获取颜色。在<code class=\"codespan\">emphasis</code>状态中支持设置为<code class=\"codespan\">&#39;inherit&#39;</code>取消高亮颜色。</p>\n<blockquote>\n<p>支持使用<code class=\"codespan\">rgb(255,255,255)</code>，<code class=\"codespan\">rgba(255,255,255,1)</code>，<code class=\"codespan\">#fff</code>等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见<a href=\"#color\">option.color</a></p>\n</blockquote>\n",
+    "desc": "\n\n<p>图形的颜色。 默认从全局调色盘 <a href=\"#color\">option.color</a> 获取颜色。从 5.2.0 开始支持在<code class=\"codespan\">emphasis</code>状态中支持设置为<code class=\"codespan\">&#39;inherit&#39;</code>取消高亮颜色。</p>\n<blockquote>\n<p>支持使用<code class=\"codespan\">rgb(255,255,255)</code>，<code class=\"codespan\">rgba(255,255,255,1)</code>，<code class=\"codespan\">#fff</code>等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见<a href=\"#color\">option.color</a></p>\n</blockquote>\n",
     "uiControl": {
       "type": "color"
     }
@@ -3826,6 +3826,9 @@ window.__EC_DOC_option_series_sunburst = {
   "levels": {
     "desc": "<p><strong>多层配置</strong></p>\n<p>旭日图是一种有层次的结构，为了方便同一层样式的配置，我们提供了 levels 配置项。它是一个数组，其中的第 0 项表示数据下钻后返回上级的图形，其后的每一项分别表示从圆心向外层的层级。</p>\n<p>例如，假设我们没有数据下钻功能，并且希望将最内层的扇形块的颜色设为红色，文字设为蓝色，可以这样设置：</p>\n<pre><code class=\"lang-js\">series: {\n    // ...\n    levels: [\n        {\n            // 留给数据下钻点的空白配置\n        },\n        {\n            // 最靠内测的第一层\n            itemStyle: {\n                color: &#39;red&#39;\n            },\n            label: {\n                color: &#39;blue&#39;\n            }\n        },\n        {\n            // 第二层 ...\n        }\n    ]\n}\n</code></pre>\n"
   },
+  "levels.radius": {
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.2.0</code> 开始支持</p>\n</blockquote>\n<p>当前层的内半径和外半径，注意其它层的内外半径不会因为该层的改变自适应。</p>\n"
+  },
   "levels.label": {
     "desc": "<p><code class=\"codespan\">label</code> 描述了每个扇形块中，文本标签的样式。</p>\n<p><strong>优先级：<a href=\"#series-sunburst.data.label\">series.data.label</a> &gt; <a href=\"#series-sunburst.levels.label\">series.levels.label</a> &gt; <a href=\"#series-sunburst.label\">series.label</a>。</strong></p>\n<p>图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等。</p>\n"
   },
@@ -5177,7 +5180,7 @@ window.__EC_DOC_option_series_sunburst = {
     "desc": "<p>旭日图扇形块的样式。</p>\n<p>可以在 <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> 定义所有扇形块的样式，也可以在 <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> 定义每一层扇形块的样式，还可以在 <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> 定义每个扇形块单独的样式，这三者的优先级从低到高。也就是说，如果定义了 <a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a>，将会覆盖 <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a> 和 <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a>。</p>\n<p><strong>优先级：<a href=\"#series-sunburst.data.itemStyle\">series.data.itemStyle</a> &gt; <a href=\"#series-sunburst.levels.itemStyle\">series.levels.itemStyle</a> &gt; <a href=\"#series-sunburst.itemStyle\">series.itemStyle</a>。</strong></p>\n"
   },
   "levels.emphasis.itemStyle.color": {
-    "desc": "\n\n<p>图形的颜色。 默认从全局调色盘 <a href=\"#color\">option.color</a> 获取颜色。在<code class=\"codespan\">emphasis</code>状态中支持设置为<code class=\"codespan\">&#39;inherit&#39;</code>取消高亮颜色。</p>\n<blockquote>\n<p>支持使用<code class=\"codespan\">rgb(255,255,255)</code>，<code class=\"codespan\">rgba(255,255,255,1)</code>，<code class=\"codespan\">#fff</code>等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见<a href=\"#color\">option.color</a></p>\n</blockquote>\n",
+    "desc": "\n\n<p>图形的颜色。 默认从全局调色盘 <a href=\"#color\">option.color</a> 获取颜色。从 5.2.0 开始支持在<code class=\"codespan\">emphasis</code>状态中支持设置为<code class=\"codespan\">&#39;inherit&#39;</code>取消高亮颜色。</p>\n<blockquote>\n<p>支持使用<code class=\"codespan\">rgb(255,255,255)</code>，<code class=\"codespan\">rgba(255,255,255,1)</code>，<code class=\"codespan\">#fff</code>等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见<a href=\"#color\">option.color</a></p>\n</blockquote>\n",
     "uiControl": {
       "type": "color"
     }

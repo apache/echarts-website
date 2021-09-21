@@ -1465,7 +1465,7 @@ window.__EC_DOC_option_series_themeRiver = {
     }
   },
   "emphasis.itemStyle.color": {
-    "desc": "\n\n<p>图形的颜色。在<code class=\"codespan\">emphasis</code>状态中支持设置为<code class=\"codespan\">&#39;inherit&#39;</code>取消高亮颜色。</p>\n<blockquote>\n<p>支持使用<code class=\"codespan\">rgb(255,255,255)</code>，<code class=\"codespan\">rgba(255,255,255,1)</code>，<code class=\"codespan\">#fff</code>等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见<a href=\"#color\">option.color</a></p>\n</blockquote>\n",
+    "desc": "\n\n<p>图形的颜色。从 5.2.0 开始支持在<code class=\"codespan\">emphasis</code>状态中支持设置为<code class=\"codespan\">&#39;inherit&#39;</code>取消高亮颜色。</p>\n<blockquote>\n<p>支持使用<code class=\"codespan\">rgb(255,255,255)</code>，<code class=\"codespan\">rgba(255,255,255,1)</code>，<code class=\"codespan\">#fff</code>等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见<a href=\"#color\">option.color</a></p>\n</blockquote>\n",
     "uiControl": {
       "type": "color"
     }

@@ -1403,7 +1403,7 @@ window.__EC_DOC_option_series_graph = {
     "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>The range of fade out when <code class=\"codespan\">focus</code> is enabled. Support the following configurations</p>\n<ul>\n<li><code class=\"codespan\">&#39;coordinateSystem&#39;</code></li>\n<li><code class=\"codespan\">&#39;series&#39;</code></li>\n<li><code class=\"codespan\">&#39;global&#39;</code></li>\n</ul>\n"
   },
   "emphasis.itemStyle.color": {
-    "desc": "\n\n<p> color. Can set to <code class=\"codespan\">&#39;inherit&#39;</code> in the <code class=\"codespan\">emphasis</code> state to disable color highlight.</p>\n<blockquote>\n<p>Supports setting as solid color using <code class=\"codespan\">rgb(255,255,255)</code>, <code class=\"codespan\">rgba(255,255,255,1)</code>, <code class=\"codespan\">#fff</code>, etc. Also supports setting as gradient color and pattern fill, see <a href=\"#color\">option.color</a> for details</p>\n</blockquote>\n",
+    "desc": "\n\n<p> color. Since 5.2.0, it can be set to <code class=\"codespan\">&#39;inherit&#39;</code> in the <code class=\"codespan\">emphasis</code> state to disable color highlight.</p>\n<blockquote>\n<p>Supports setting as solid color using <code class=\"codespan\">rgb(255,255,255)</code>, <code class=\"codespan\">rgba(255,255,255,1)</code>, <code class=\"codespan\">#fff</code>, etc. Also supports setting as gradient color and pattern fill, see <a href=\"#color\">option.color</a> for details</p>\n</blockquote>\n",
     "uiControl": {
       "type": "color"
     }
@@ -5601,7 +5601,7 @@ window.__EC_DOC_option_series_graph = {
     "desc": "<p>Emphasis state of nodes in this category.</p>\n"
   },
   "categories.emphasis.itemStyle.color": {
-    "desc": "\n\n<p> color. Can set to <code class=\"codespan\">&#39;inherit&#39;</code> in the <code class=\"codespan\">emphasis</code> state to disable color highlight.</p>\n<blockquote>\n<p>Supports setting as solid color using <code class=\"codespan\">rgb(255,255,255)</code>, <code class=\"codespan\">rgba(255,255,255,1)</code>, <code class=\"codespan\">#fff</code>, etc. Also supports setting as gradient color and pattern fill, see <a href=\"#color\">option.color</a> for details</p>\n</blockquote>\n",
+    "desc": "\n\n<p> color. Since 5.2.0, it can be set to <code class=\"codespan\">&#39;inherit&#39;</code> in the <code class=\"codespan\">emphasis</code> state to disable color highlight.</p>\n<blockquote>\n<p>Supports setting as solid color using <code class=\"codespan\">rgb(255,255,255)</code>, <code class=\"codespan\">rgba(255,255,255,1)</code>, <code class=\"codespan\">#fff</code>, etc. Also supports setting as gradient color and pattern fill, see <a href=\"#color\">option.color</a> for details</p>\n</blockquote>\n",
     "uiControl": {
       "type": "color"
     }
@@ -8082,7 +8082,7 @@ window.__EC_DOC_option_series_graph = {
     "desc": "<p>Emphasis state of specified node.</p>\n"
   },
   "data.emphasis.itemStyle.color": {
-    "desc": "\n\n<p> color. Can set to <code class=\"codespan\">&#39;inherit&#39;</code> in the <code class=\"codespan\">emphasis</code> state to disable color highlight.</p>\n<blockquote>\n<p>Supports setting as solid color using <code class=\"codespan\">rgb(255,255,255)</code>, <code class=\"codespan\">rgba(255,255,255,1)</code>, <code class=\"codespan\">#fff</code>, etc. Also supports setting as gradient color and pattern fill, see <a href=\"#color\">option.color</a> for details</p>\n</blockquote>\n",
+    "desc": "\n\n<p> color. Since 5.2.0, it can be set to <code class=\"codespan\">&#39;inherit&#39;</code> in the <code class=\"codespan\">emphasis</code> state to disable color highlight.</p>\n<blockquote>\n<p>Supports setting as solid color using <code class=\"codespan\">rgb(255,255,255)</code>, <code class=\"codespan\">rgba(255,255,255,1)</code>, <code class=\"codespan\">#fff</code>, etc. Also supports setting as gradient color and pattern fill, see <a href=\"#color\">option.color</a> for details</p>\n</blockquote>\n",
     "uiControl": {
       "type": "color"
     }

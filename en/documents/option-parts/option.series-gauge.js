@@ -2546,7 +2546,7 @@ window.__EC_DOC_option_series_gauge = {
     "desc": "<p>Configurations of emphasis state.</p>\n"
   },
   "emphasis.itemStyle.color": {
-    "desc": "\n\n<p> color. Can set to <code class=\"codespan\">&#39;inherit&#39;</code> in the <code class=\"codespan\">emphasis</code> state to disable color highlight.</p>\n<blockquote>\n<p>Supports setting as solid color using <code class=\"codespan\">rgb(255,255,255)</code>, <code class=\"codespan\">rgba(255,255,255,1)</code>, <code class=\"codespan\">#fff</code>, etc. Also supports setting as gradient color and pattern fill, see <a href=\"#color\">option.color</a> for details</p>\n</blockquote>\n",
+    "desc": "\n\n<p> color. Since 5.2.0, it can be set to <code class=\"codespan\">&#39;inherit&#39;</code> in the <code class=\"codespan\">emphasis</code> state to disable color highlight.</p>\n<blockquote>\n<p>Supports setting as solid color using <code class=\"codespan\">rgb(255,255,255)</code>, <code class=\"codespan\">rgba(255,255,255,1)</code>, <code class=\"codespan\">#fff</code>, etc. Also supports setting as gradient color and pattern fill, see <a href=\"#color\">option.color</a> for details</p>\n</blockquote>\n",
     "uiControl": {
       "type": "color"
     }
