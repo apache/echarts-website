@@ -31,7 +31,5 @@ option = {
       position: 'middle',
       formatter: '{b}: {c}'
     }
-  },
-  backgroundColor: '#fff',
-  animation: false
+  }
 };

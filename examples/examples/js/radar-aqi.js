@@ -112,7 +112,7 @@ const lineStyle = {
 option = {
   backgroundColor: '#161627',
   title: {
-    text: 'AQI - 雷达图',
+    text: 'AQI - Radar',
     left: 'center',
     textStyle: {
       color: '#eee'
