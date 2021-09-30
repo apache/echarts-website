@@ -1389,7 +1389,6 @@ window.__EC_DOC_option_series_gauge = {
     "uiControl": {
       "type": "number",
       "default": "10",
-      "min": "0",
       "step": "0.5"
     }
   },
@@ -1525,7 +1524,6 @@ window.__EC_DOC_option_series_gauge = {
     "uiControl": {
       "type": "number",
       "default": "10",
-      "min": "0",
       "step": "0.5"
     }
   },
@@ -1643,7 +1641,6 @@ window.__EC_DOC_option_series_gauge = {
     "uiControl": {
       "type": "number",
       "default": "15",
-      "min": "0",
       "step": "0.5"
     }
   },

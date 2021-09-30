@@ -1,18 +1,18 @@
 option = {
   title: {
-    text: 'ECharts 入门示例'
+    text: 'ECharts Getting Started Example'
   },
   tooltip: {},
   legend: {
-    data: ['销量']
+    data: ['sales']
   },
   xAxis: {
-    data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+    data: ['Shirts', 'Cardigans', 'Chiffons', 'Pants', 'Heels', 'Socks']
   },
   yAxis: {},
   series: [
     {
-      name: '销量',
+      name: 'sales',
       type: 'bar',
       data: [5, 20, 36, 10, 10, 20]
     }
