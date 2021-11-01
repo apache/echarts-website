@@ -102,6 +102,9 @@ window.__EC_DOC_option_series_line = {
       "default": "true"
     }
   },
+  "triggerLineEvent": {
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.2.2</code> 开始支持</p>\n</blockquote>\n<p>线条和区域面积是否触发事件</p>\n"
+  },
   "step": {
     "desc": "\n\n<p>是否是阶梯线图。可以设置为 <code class=\"codespan\">true</code> 显示成阶梯线图，也支持设置成 <code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code> 分别配置在当前点，当前点与下个点的中间点，下个点拐弯。</p>\n<p>不同的配置效果如下：</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=line-step&edit=1&reset=1\" width=\"600\" height=\"400\"></iframe>\n\n",
     "uiControl": {

@@ -102,6 +102,9 @@ window.__EC_DOC_option_series_line = {
       "default": "true"
     }
   },
+  "triggerLineEvent": {
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.2.2</code></p>\n</blockquote>\n<p>Whether <code class=\"codespan\">line</code> and <code class=\"codespan\">area</code> can trigger the event.</p>\n"
+  },
   "step": {
     "desc": "\n\n<p>Whether to show as a step line. It can be <code class=\"codespan\">true</code>, <code class=\"codespan\">false</code>. Or <code class=\"codespan\">&#39;start&#39;</code>, <code class=\"codespan\">&#39;middle&#39;</code>, <code class=\"codespan\">&#39;end&#39;</code>. Which will configure the turn point of step line.</p>\n<p>See the example using different <code class=\"codespan\">step</code> options:</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/en/view.html?c=line-step&edit=1&reset=1\" width=\"600\" height=\"400\"></iframe>\n\n",
     "uiControl": {
