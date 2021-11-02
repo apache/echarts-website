@@ -54,10 +54,6 @@
     {"name": "Parallel", "value": 5176},
     {"name": "Pause", "value": 449},
     {"name": "Scheduler", "value": 5593},
-    {"name": "Sequence", "value": 5534},
-    {"name": "Transition", "value": 9201},
-    {"name": "Transitioner", "value": 19975},
-    {"name": "TransitionEvent", "value": 1116},
     {"name": "Tween", "value": 6006}
    ]
   },
@@ -74,12 +70,6 @@
       {"name": "JSONConverter", "value": 2220}
      ]
     },
-    {"name": "DataField", "value": 1759},
-    {"name": "DataSchema", "value": 2165},
-    {"name": "DataSet", "value": 586},
-    {"name": "DataSource", "value": 3331},
-    {"name": "DataTable", "value": 772},
-    {"name": "DataUtil", "value": 3322}
    ]
   },
   {
@@ -116,16 +106,6 @@
     {"name": "AggregateExpression", "value": 1616},
     {"name": "And", "value": 1027},
     {"name": "Arithmetic", "value": 3891},
-    {"name": "Average", "value": 891},
-    {"name": "BinaryExpression", "value": 2893},
-    {"name": "Comparison", "value": 5103},
-    {"name": "CompositeExpression", "value": 3677},
-    {"name": "Count", "value": 781},
-    {"name": "DateUtil", "value": 4141},
-    {"name": "Distinct", "value": 933},
-    {"name": "Expression", "value": 5130},
-    {"name": "ExpressionIterator", "value": 3617},
-    {"name": "Fn", "value": 3240},
     {"name": "If", "value": 2732},
     {"name": "IsA", "value": 2039},
     {"name": "Literal", "value": 1214},
@@ -141,40 +121,12 @@
       {"name": "distinct", "value": 292},
       {"name": "div", "value": 595},
       {"name": "eq", "value": 594},
-      {"name": "fn", "value": 460},
-      {"name": "gt", "value": 603},
-      {"name": "gte", "value": 625},
-      {"name": "iff", "value": 748},
-      {"name": "isa", "value": 461},
-      {"name": "lt", "value": 597},
-      {"name": "lte", "value": 619},
-      {"name": "max", "value": 283},
-      {"name": "min", "value": 283},
-      {"name": "mod", "value": 591},
-      {"name": "mul", "value": 603},
-      {"name": "neq", "value": 599},
-      {"name": "not", "value": 386},
-      {"name": "or", "value": 323},
-      {"name": "orderby", "value": 307},
-      {"name": "range", "value": 772},
-      {"name": "select", "value": 296},
-      {"name": "stddev", "value": 363},
       {"name": "sub", "value": 600},
-      {"name": "sum", "value": 280},
-      {"name": "update", "value": 307},
-      {"name": "variance", "value": 335},
-      {"name": "where", "value": 299},
-      {"name": "xor", "value": 354},
-      {"name": "-", "value": 264}
      ]
     },
     {"name": "Minimum", "value": 843},
     {"name": "Not", "value": 1554},
     {"name": "Or", "value": 970},
-    {"name": "Query", "value": 13896},
-    {"name": "Range", "value": 1594},
-    {"name": "StringUtil", "value": 4130},
-    {"name": "Sum", "value": 791},
     {"name": "Variable", "value": 1124},
     {"name": "Variance", "value": 1876},
     {"name": "Xor", "value": 1101}
@@ -188,11 +140,7 @@
     {"name": "LogScale", "value": 3151},
     {"name": "OrdinalScale", "value": 3770},
     {"name": "QuantileScale", "value": 2435},
-    {"name": "QuantitativeScale", "value": 4839},
-    {"name": "RootScale", "value": 1756},
-    {"name": "Scale", "value": 4268},
-    {"name": "ScaleType", "value": 1821},
-    {"name": "TimeScale", "value": 5833}
+    {"name": "QuantitativeScale", "value": 4839}
    ]
   },
   {
@@ -205,25 +153,14 @@
     {"name": "Filter", "value": 2324},
     {"name": "Geometry", "value": 10993},
     {
-     "name": "heap",
-     "children": [
-      {"name": "FibonacciHeap", "value": 9354},
-      {"name": "HeapNode", "value": 1233}
-     ]
+     "name": "heap"
     },
     {"name": "IEvaluable", "value": 335},
     {"name": "IPredicate", "value": 383},
     {"name": "IValueProxy", "value": 874},
     {
      "name": "math",
-     "children": [
-      {"name": "DenseMatrix", "value": 3165},
-      {"name": "IMatrix", "value": 2815},
-      {"name": "SparseMatrix", "value": 3366}
-     ]
     },
-    {"name": "Maths", "value": 17705},
-    {"name": "Orientation", "value": 1486},
     {
      "name": "palette",
      "children": [
@@ -264,9 +201,6 @@
       {"name": "ExpandControl", "value": 2832},
       {"name": "HoverControl", "value": 4896},
       {"name": "IControl", "value": 763},
-      {"name": "PanZoomControl", "value": 5222},
-      {"name": "SelectionControl", "value": 7862},
-      {"name": "TooltipControl", "value": 8435}
      ]
     },
     {
@@ -337,7 +271,6 @@
         {"name": "VisibilityFilter", "value": 3509}
        ]
       },
-      {"name": "IOperator", "value": 1286},
       {
        "name": "label",
        "children": [
@@ -349,21 +282,12 @@
       {
        "name": "layout",
        "children": [
-        {"name": "AxisLayout", "value": 6725},
-        {"name": "BundledEdgeRouter", "value": 3727},
-        {"name": "CircleLayout", "value": 9317},
-        {"name": "CirclePackingLayout", "value": 12003},
-        {"name": "DendrogramLayout", "value": 4853},
-        {"name": "ForceDirectedLayout", "value": 8411},
         {"name": "IcicleTreeLayout", "value": 4864},
         {"name": "IndentedTreeLayout", "value": 3174},
         {"name": "Layout", "value": 7881},
         {"name": "NodeLinkTreeLayout", "value": 12870},
         {"name": "PieLayout", "value": 2728},
         {"name": "RadialTreeLayout", "value": 12348},
-        {"name": "RandomLayout", "value": 870},
-        {"name": "StackedAreaLayout", "value": 9121},
-        {"name": "TreeMapLayout", "value": 9191}
        ]
       },
       {"name": "Operator", "value": 2490},
