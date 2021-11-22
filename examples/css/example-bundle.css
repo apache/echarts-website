@@ -60,6 +60,9 @@
     width: 80px;
     margin-left: 10px;
 }
+#tool-panel .random {
+    margin-left: 10px;
+}
 #tool-panel label {
     margin-bottom: 0;
 }
