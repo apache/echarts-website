@@ -21,7 +21,7 @@ define(function (require) {
 
     var topCode = [`export * from "echarts/src/echarts";`];
     var srcFolder = version.startsWith('5.0.0') ? 'esm' // Only 5.0.0 has esm folder
-        : isVersion5 ? 'lib' : 'src';
+        : isVersion5 || version === 'latest' ? 'lib' : 'src';
 
     if (BUILD_CONFIG.api && (version.startsWith('5.0.0') || !isVersion5)) {
         topCode.push(`export * from "echarts/src/export";`);

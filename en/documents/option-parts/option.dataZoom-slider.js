@@ -756,10 +756,7 @@ window.__EC_DOC_option_dataZoom_slider = {
     }
   },
   "textStyle.ellipsis": {
-    "desc": "<p>Ellipsis to be displayed when <code class=\"codespan\">overflow</code> is set to <code class=\"codespan\">truncate</code>.</p>\n"
-  },
-  "textStyle.lineOverflow": {
-    "desc": "<p>Determine how to display the text when it&#39;s overflow on height.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the overflow lines.</li>\n</ul>\n"
+    "desc": "<p>Ellipsis to be displayed when <code class=\"codespan\">overflow</code> is set to <code class=\"codespan\">truncate</code>.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the overflow lines.</li>\n</ul>\n"
   },
   "xAxisIndex": {
     "desc": "<p>Specify which <a href=\"#xAxis\">xAxis</a> is/are controlled by the <code class=\"codespan\">dataZoom-slider</code> when <a href=\"#grid\">catesian coordinate system</a> is used.</p>\n<p>By default the first <code class=\"codespan\">xAxis</code> that parallel to <code class=\"codespan\">dataZoom</code> are controlled when <a href=\"#dataZoom-slider.orient\">dataZoom-slider.orient</a> is set as <code class=\"codespan\">&#39;horizontal&#39;</code>. But it is recommended to specify it explicitly but not use default value.</p>\n<p>If it is set as a single <code class=\"codespan\">number</code>, one axis is controlled, while if it is set as an <code class=\"codespan\">Array</code> , multiple axes are controlled.</p>\n<p>For example:</p>\n<pre><code class=\"lang-javascript\">option: {\n    xAxis: [\n        {...}, // The first xAxis\n        {...}, // The second xAxis\n        {...}, // The third xAxis\n        {...}  // The fourth xAxis\n    ],\n    dataZoom: [\n        { // The first dataZoom component\n            xAxisIndex: [0, 2] // Indicates that this dataZoom component\n                                     // controls the first and the third xAxis\n        },\n        { // The second dataZoom component\n            xAxisIndex: 3      // indicates that this dataZoom component\n                                     // controls the fourth xAxis\n        }\n    ]\n}\n</code></pre>\n"

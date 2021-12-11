@@ -335,10 +335,7 @@
     }
   },
   "textStyle.ellipsis": {
-    "desc": "<p>Ellipsis to be displayed when <code class=\"codespan\">overflow</code> is set to <code class=\"codespan\">truncate</code>.</p>\n"
-  },
-  "textStyle.lineOverflow": {
-    "desc": "<p>Determine how to display the text when it&#39;s overflow on height.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the overflow lines.</li>\n</ul>\n"
+    "desc": "<p>Ellipsis to be displayed when <code class=\"codespan\">overflow</code> is set to <code class=\"codespan\">truncate</code>.</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> Truncate the overflow lines.</li>\n</ul>\n"
   },
   "formatter": {
     "desc": "<p>the formatter tool for label.</p>\n<ul>\n<li><p>If it was set as a <code class=\"codespan\">string</code>, it refers to a template, for instance: <code class=\"codespan\">aaaa{value}bbbb{value2}</code>, where <code class=\"codespan\">{value}</code> and <code class=\"codespan\">{value2}</code> represents the current selected range of dataValues.</p>\n</li>\n<li><p>If it was set as a <code class=\"codespan\">Function</code>, it refers to a callback function, for instance:</p>\n</li>\n</ul>\n<pre><code class=\"lang-javascript\">formatter: function (value, value2) {\n    return &#39;aaaa&#39; + value + &#39;bbbb&#39; + value2;\n}\n</code></pre>\n"

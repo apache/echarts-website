@@ -337,9 +337,6 @@ window.__EC_DOC_option_visualMap_piecewise = {
   "textStyle.ellipsis": {
     "desc": "<p>在<code class=\"codespan\">overflow</code>配置为<code class=\"codespan\">&#39;truncate&#39;</code>的时候，可以通过该属性配置末尾显示的文本。</p>\n"
   },
-  "textStyle.lineOverflow": {
-    "desc": "<p>文本超出高度部分是否截断，配置<code class=\"codespan\">height</code>时有效。</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> 在文本行数超出高度部分截断。</li>\n</ul>\n"
-  },
   "formatter": {
     "desc": "<p>标签的格式化工具。</p>\n<ul>\n<li>如果为<code class=\"codespan\">string</code>，表示模板，例如：<code class=\"codespan\">aaaa{value}bbbb{value2}</code>。其中 <code class=\"codespan\">{value}</code> 和 <code class=\"codespan\">{value2}</code> 是当前的范围边界值。</li>\n<li>如果为 <code class=\"codespan\">Function</code>，表示回调函数，形如：</li>\n</ul>\n<pre><code class=\"lang-javascript\">formatter: function (value, value2) {\n    return &#39;aaaa&#39; + value + &#39;bbbb&#39; + value2; // 范围标签显示内容。\n}\n</code></pre>\n"
   }

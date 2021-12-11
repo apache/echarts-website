@@ -758,9 +758,6 @@ window.__EC_DOC_option_dataZoom_slider = {
   "textStyle.ellipsis": {
     "desc": "<p>在<code class=\"codespan\">overflow</code>配置为<code class=\"codespan\">&#39;truncate&#39;</code>的时候，可以通过该属性配置末尾显示的文本。</p>\n"
   },
-  "textStyle.lineOverflow": {
-    "desc": "<p>文本超出高度部分是否截断，配置<code class=\"codespan\">height</code>时有效。</p>\n<ul>\n<li><code class=\"codespan\">&#39;truncate&#39;</code> 在文本行数超出高度部分截断。</li>\n</ul>\n"
-  },
   "xAxisIndex": {
     "desc": "<p>设置 <code class=\"codespan\">dataZoom-slider</code> 组件控制的 <code class=\"codespan\">x轴</code>（即<a href=\"#xAxis\">xAxis</a>，是直角坐标系中的概念，参见 <a href=\"#grid\">grid</a>）。</p>\n<p>不指定时，当 <a href=\"#dataZoom-slider.orient\">dataZoom-slider.orient</a> 为 <code class=\"codespan\">&#39;horizontal&#39;</code>时，默认控制和 dataZoom 平行的第一个 <code class=\"codespan\">xAxis</code>。但是不建议使用默认值，建议显式指定。</p>\n<p>如果是 <code class=\"codespan\">number</code> 表示控制一个轴，如果是 <code class=\"codespan\">Array</code> 表示控制多个轴。</p>\n<p>例如有如下 ECharts option：</p>\n<pre><code class=\"lang-javascript\">option: {\n    xAxis: [\n        {...}, // 第一个 xAxis\n        {...}, // 第二个 xAxis\n        {...}, // 第三个 xAxis\n        {...}  // 第四个 xAxis\n    ],\n    dataZoom: [\n        { // 第一个 dataZoom 组件\n            xAxisIndex: [0, 2] // 表示这个 dataZoom 组件控制 第一个 和 第三个 xAxis\n        },\n        { // 第二个 dataZoom 组件\n            xAxisIndex: 3      // 表示这个 dataZoom 组件控制 第四个 xAxis\n        }\n    ]\n}\n</code></pre>\n"
   },
