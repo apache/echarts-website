@@ -81,7 +81,7 @@ window.__EC_DOC_option_gl_series_graphGL = {
     "desc": "<p>The width of the line.</p>\n"
   },
   "data": {
-    "desc": "<p>The data set of the node.</p>\n<p>The data format is the same as <a href=\"http://echarts.baidu.com/option.html#series-graph.data\" target=\"_blank\">graph.data</a></p>\n"
+    "desc": "<p>The data set of the node.</p>\n<p>The data format is the same as <a href=\"https://echarts.apache.org/en/option.html#series-graph.data\" target=\"_blank\">graph.data</a></p>\n"
   },
   "data.name": {
     "desc": "<p>The name of the data item.</p>\n"
@@ -108,7 +108,7 @@ window.__EC_DOC_option_gl_series_graphGL = {
     "desc": "<p>Same as <a href=\"#series-graphGL.data\">graphGL.data</a>.</p>\n"
   },
   "links": {
-    "desc": "<p>Relational data between nodes.\nThe data format is the same as <a href=\"http://echarts.baidu.com/option.html#series-graph.links\" target=\"_blank\">graph.links</a></p>\n"
+    "desc": "<p>Relational data between nodes.\nThe data format is the same as <a href=\"https://echarts.apache.org/en/option.html#series-graph.links\" target=\"_blank\">graph.links</a></p>\n"
   },
   "links.source": {
     "desc": "<p>A string of source node names for edges also supports the use of numbers to represent the index of the source node.</p>\n"

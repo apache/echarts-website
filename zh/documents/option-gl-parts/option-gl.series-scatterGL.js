@@ -3,7 +3,7 @@ window.__EC_DOC_option_gl_series_scatterGL = {
     "desc": "<p>系列名称，用于 <a href=\"https://echarts.apache.org/zh/option.html#tooltip\" target=\"_blank\">tooltip</a> 的显示，<a href=\"https://echarts.apache.org/zh/option.html#legend\" target=\"_blank\">legend</a> 的图例筛选，在 <code class=\"codespan\">setOption</code> 更新数据和配置项时用于指定对应的系列。</p>\n"
   },
   "coordinateSystem": {
-    "desc": "<p>使用的坐标系。</p>\n<p>同 <a href=\"http://echarts.baidu.com/option.html#series-scatter.coordinateSystem\" target=\"_blank\">scatter.coordinateSystem</a></p>\n"
+    "desc": "<p>使用的坐标系。</p>\n<p>同 <a href=\"https://echarts.apache.org/zh/option.html#series-scatter.coordinateSystem\" target=\"_blank\">scatter.coordinateSystem</a></p>\n"
   },
   "symbol": {
     "desc": "<p>散点的形状。默认为圆形。</p>\n<p>ECharts 提供的标记类型包括 \n<code class=\"codespan\">&#39;circle&#39;</code>, <code class=\"codespan\">&#39;rect&#39;</code>, <code class=\"codespan\">&#39;roundRect&#39;</code>, <code class=\"codespan\">&#39;triangle&#39;</code>, <code class=\"codespan\">&#39;diamond&#39;</code>, <code class=\"codespan\">&#39;pin&#39;</code>, <code class=\"codespan\">&#39;arrow&#39;</code>, <code class=\"codespan\">&#39;none&#39;</code></p>\n<p>可以通过 <code class=\"codespan\">&#39;path://&#39;</code> 将图标设置为任意的矢量路径。这种方式相比于使用图片的方式，不用担心因为缩放而产生锯齿或模糊，而且可以设置为任意颜色。路径图形会自适应调整为合适（如果是 <code class=\"codespan\">symbol</code> 的话就是 <code class=\"codespan\">symbolSize</code>）的大小。路径的格式参见 <a href=\"http://www.w3.org/TR/SVG/paths.html#PathData\" target=\"_blank\">SVG PathData</a>。可以从 Adobe Illustrator 等工具编辑导出。</p>\n"
@@ -27,7 +27,7 @@ window.__EC_DOC_option_gl_series_scatterGL = {
     "desc": "<p>图形描边颜色。</p>\n"
   },
   "data": {
-    "desc": "<p>散点图的数据集。</p>\n<p>数据格式同 <a href=\"http://echarts.baidu.com/option.html#series-scatter.data\" target=\"_blank\">scatter.data</a></p>\n"
+    "desc": "<p>散点图的数据集。</p>\n<p>数据格式同 <a href=\"https://echarts.apache.org/zh/option.html#series-scatter.data\" target=\"_blank\">scatter.data</a></p>\n"
   },
   "data.name": {
     "desc": "<p>数据项名称。</p>\n"

@@ -3,7 +3,7 @@
     "desc": "<p>Series name used for displaying in <a href=\"https://echarts.apache.org/zh/option.html#tooltip\" target=\"_blank\">tooltip</a> and filtering with <a href=\"https://echarts.apache.org/zh/option.html#legend\" target=\"_blank\">legend</a>, or updating data and configuration with <code class=\"codespan\">setOption</code>.</p>\n"
   },
   "coordinateSystem": {
-    "desc": "<p>The coordinate system used.</p>\n<p>Same as <a href=\"http://echarts.baidu.com/option.html#series-scatter.coordinateSystem\" target=\"_blank\">scatter.coordinateSystem</a></p>\n"
+    "desc": "<p>The coordinate system used.</p>\n<p>Same as <a href=\"https://echarts.apache.org/en/option.html#series-scatter.coordinateSystem\" target=\"_blank\">scatter.coordinateSystem</a></p>\n"
   },
   "symbol": {
     "desc": "<p>The shape of the scatter. The default is a circle.</p>\n<p>Icon types provided by ECharts includes \n<code class=\"codespan\">&#39;circle&#39;</code>, <code class=\"codespan\">&#39;rect&#39;</code>, <code class=\"codespan\">&#39;roundRect&#39;</code>, <code class=\"codespan\">&#39;triangle&#39;</code>, <code class=\"codespan\">&#39;diamond&#39;</code>, <code class=\"codespan\">&#39;pin&#39;</code>, <code class=\"codespan\">&#39;arrow&#39;</code>, <code class=\"codespan\">&#39;none&#39;</code></p>\n<p>Icons can be set to arbitrary vector path via <code class=\"codespan\">&#39;path://&#39;</code> in ECharts. As compared with a raster image, vector paths prevent jagging and blurring when scaled, and have better control over changing colors. The size of the vector icon will be adapted automatically. Refer to <a href=\"http://www.w3.org/TR/SVG/paths.html#PathData\" target=\"_blank\">SVG PathData</a> for more information about the format of the path. You may export vector paths from tools like Adobe </p>\n"
@@ -27,7 +27,7 @@
     "desc": "<p>Sets the color of the border.</p>\n"
   },
   "data": {
-    "desc": "<p>The data array of scatter.</p>\n<p>The data format is the same as <a href=\"http://echarts.baidu.com/option.html#series-scatter.data\" target=\"_blank\">scatter.data</a></p>\n"
+    "desc": "<p>The data array of scatter.</p>\n<p>The data format is the same as <a href=\"https://echarts.apache.org/en/option.html#series-scatter.data\" target=\"_blank\">scatter.data</a></p>\n"
   },
   "data.name": {
     "desc": "<p>The name of the data item.</p>\n"

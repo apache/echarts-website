@@ -6,7 +6,7 @@ window.__EC_DOC_option_gl_series_polygons3D = {
     "desc": "<p>图形样式，包括颜色、透明度、描边等。</p>\n"
   },
   "itemStyle.color": {
-    "desc": "<p>图形的颜色。 默认从全局调色盘 <a href=\"http://echarts.baidu.com/option.html#color\" target=\"_blank\">option.color</a> 获取颜色 </p>\n<p>除了颜色字符串外，支持使用数组表示的 RGBA 值，例如：</p>\n<pre><code class=\"lang-js\">// 纯白色\n[1, 1, 1, 1]\n</code></pre>\n<p>使用数组表示的时候，每个通道可以设置大于 1 的值用于表示 HDR 的色值。</p>\n"
+    "desc": "<p>图形的颜色。 默认从全局调色盘 <a href=\"https://echarts.apache.org/zh/option.html#color\" target=\"_blank\">option.color</a> 获取颜色 </p>\n<p>除了颜色字符串外，支持使用数组表示的 RGBA 值，例如：</p>\n<pre><code class=\"lang-js\">// 纯白色\n[1, 1, 1, 1]\n</code></pre>\n<p>使用数组表示的时候，每个通道可以设置大于 1 的值用于表示 HDR 的色值。</p>\n"
   },
   "itemStyle.opacity": {
     "desc": "<p>图形的不透明度。</p>\n"

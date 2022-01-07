@@ -81,7 +81,7 @@
     "desc": "<p>线条的宽度。</p>\n"
   },
   "data": {
-    "desc": "<p>节点的数据集。</p>\n<p>数据格式同 <a href=\"http://echarts.baidu.com/option.html#series-graph.data\" target=\"_blank\">graph.data</a></p>\n"
+    "desc": "<p>节点的数据集。</p>\n<p>数据格式同 <a href=\"https://echarts.apache.org/zh/option.html#series-graph.data\" target=\"_blank\">graph.data</a></p>\n"
   },
   "data.name": {
     "desc": "<p>数据项名称。</p>\n"
@@ -108,7 +108,7 @@
     "desc": "<p>同 <a href=\"#series-graphGL.data\">graphGL.data</a>。</p>\n"
   },
   "links": {
-    "desc": "<p>节点间的关系数据。\n数据格式同 <a href=\"http://echarts.baidu.com/option.html#series-graph.links\" target=\"_blank\">graph.links</a></p>\n"
+    "desc": "<p>节点间的关系数据。\n数据格式同 <a href=\"https://echarts.apache.org/zh/option.html#series-graph.links\" target=\"_blank\">graph.links</a></p>\n"
   },
   "links.source": {
     "desc": "<p>边的源节点名称的字符串，也支持使用数字表示源节点的索引。</p>\n"

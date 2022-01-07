@@ -36,7 +36,7 @@
     "desc": "<p>三维的飞线图。跟二维的<a href=\"https://echarts.apache.org/zh/option.html#series-line\" target=\"_blank\">飞线图</a>一样用于表现起点终点的线数据。更多用在地理可视化上。</p>\n<p>下图是使用 <a href=\"#series-lines3D\">lines3D</a> 在 <a href=\"#globe\">globe</a> 上可视化飞机航班的一个例子。</p>\n<p><img width=\"700\" height=\"auto\" src=\"documents/asset/gl/img/globe-airline.png\"></p>\n"
   },
   "series-map3D": {
-    "desc": "<p><strong>三维地图</strong></p>\n<p>三维地图主要用于地理区域数据的可视化，配合 <a href=\"http://echarts.baidu.com/option.html#visualMap\" target=\"_blank\">visualMap</a> 组件用于展示不同区域的人口分布密度等数据。</p>\n<p>相比于二维的地图，三维地图还能每个区域设置不同的高度，这个高度能够用来展示数据，也能够用来显示建筑数据中建筑的高度。</p>\n"
+    "desc": "<p><strong>三维地图</strong></p>\n<p>三维地图主要用于地理区域数据的可视化，配合 <a href=\"https://echarts.apache.org/zh/option.html#visualMap\" target=\"_blank\">visualMap</a> 组件用于展示不同区域的人口分布密度等数据。</p>\n<p>相比于二维的地图，三维地图还能每个区域设置不同的高度，这个高度能够用来展示数据，也能够用来显示建筑数据中建筑的高度。</p>\n"
   },
   "series-surface": {
     "desc": "<p>曲面图。支持通过 <a href=\"#series-surface.parametric\">parametric</a> 绘制<a href=\"https://en.wikipedia.org/wiki/Parametric_surface\" target=\"_blank\">参数曲面</a>。</p>\n<p>下图就是一个配置成金属材质的类似一个金属零件的参数曲面。</p>\n<p><img width=\"500\" height=\"auto\" src=\"documents/asset/gl/img/parametric-surface.png\"></p>\n"
@@ -45,7 +45,7 @@
     "desc": "<p><code class=\"codespan\">polygons3D</code> 用于可视化地图上带有高度信息的多边形数据，常用于建筑群的绘制。下图就是用<code class=\"codespan\">polygons3D</code>绘制的近 50w 数量的纽约建筑群。</p>\n<p><img width=\"900\" height=\"auto\" src=\"documents/asset/gl/img/polygons3D-ny.jpg\"></p>\n"
   },
   "series-scatterGL": {
-    "desc": "<p>使用 WebGL 绘制的二维散点/气泡图。</p>\n<p>使用方式同 <a href=\"http://echarts.baidu.com/option.html#series-scatter\" target=\"_blank\">scatter</a>。</p>\n"
+    "desc": "<p>使用 WebGL 绘制的二维散点/气泡图。</p>\n<p>使用方式同 <a href=\"https://echarts.apache.org/zh/option.html#series-scatter\" target=\"_blank\">scatter</a>。</p>\n"
   },
   "series-graphGL": {
     "desc": "<p>使用 WebGL 绘制的关系图，支持大规模的网络/关系数据的布局和绘制。</p>\n"
