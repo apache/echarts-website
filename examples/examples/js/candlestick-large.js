@@ -46,7 +46,6 @@ option = {
   xAxis: [
     {
       type: 'category',
-      scale: true,
       boundaryGap: false,
       // inverse: true,
       axisLine: { onZero: false },
@@ -57,7 +56,6 @@ option = {
     {
       type: 'category',
       gridIndex: 1,
-      scale: true,
       boundaryGap: false,
       axisLine: { onZero: false },
       axisTick: { show: false },

@@ -40,9 +40,8 @@ option = {
     {
       type: 'value',
       name: 'Evaporation',
-      min: 0,
-      max: 250,
       position: 'right',
+      alignTicks: true,
       axisLine: {
         show: true,
         lineStyle: {
@@ -56,9 +55,8 @@ option = {
     {
       type: 'value',
       name: 'Precipitation',
-      min: 0,
-      max: 250,
       position: 'right',
+      alignTicks: true,
       offset: 80,
       axisLine: {
         show: true,
@@ -73,9 +71,8 @@ option = {
     {
       type: 'value',
       name: '温度',
-      min: 0,
-      max: 25,
       position: 'left',
+      alignTicks: true,
       axisLine: {
         show: true,
         lineStyle: {

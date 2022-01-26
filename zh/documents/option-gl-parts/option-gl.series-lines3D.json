@@ -42,7 +42,7 @@
     "desc": "<p>飞线的线条样式。</p>\n"
   },
   "lineStyle.color": {
-    "desc": "<p>线条的颜色。</p>\n<p>除了颜色字符串外，支持使用数组表示的 RGBA 值，例如：</p>\n<pre><code class=\"lang-js\">// 纯白色\n[1, 1, 1, 1]\n</code></pre>\n<p>使用数组表示的时候，每个通道可以设置大于 1 的值用于表示 HDR 的色值。</p>\n"
+    "desc": "<p>线条的颜色。</p>\n<p>除了颜色字符串外，支持使用数组表示的 RGBA 值，例如：</p>\n<pre><code class=\"lang-ts\">// 纯白色\n[1, 1, 1, 1]\n</code></pre>\n<p>使用数组表示的时候，每个通道可以设置大于 1 的值用于表示 HDR 的色值。</p>\n"
   },
   "lineStyle.opacity": {
     "desc": "<p>线条的不透明度。</p>\n"
@@ -51,7 +51,7 @@
     "desc": "<p>线条的宽度。</p>\n"
   },
   "data": {
-    "desc": "<p>三维飞线图的数据数组，通常数据的每一项可以是一个包含起点和终点的坐标集。在 <a href=\"#series-lines3D.polyline\">polyline</a> 设置为 <code class=\"codespan\">true</code> 时支持多于两个的坐标。\n如下：</p>\n<pre><code class=\"lang-js\">data: [\n    [\n        [120, 66, 1], // 起点的经纬度和海拔坐标\n        [122, 67, 2]  // 终点的经纬度和海拔坐标\n    ]\n]\n</code></pre>\n<p>有些时候需要配置数据项的名字或者单独的样式。需要把经纬度坐标写到 coords 属性下。如下：</p>\n<pre><code class=\"lang-js\">data: [\n    {\n        coords: [ [120, 66], [122, 67] ],\n        // 数据值\n        value: 10,\n        // 数据名\n        name: &#39;foo&#39;,\n        // 线条样式\n        lineStyle: {}\n    }\n]\n</code></pre>\n"
+    "desc": "<p>三维飞线图的数据数组，通常数据的每一项可以是一个包含起点和终点的坐标集。在 <a href=\"#series-lines3D.polyline\">polyline</a> 设置为 <code class=\"codespan\">true</code> 时支持多于两个的坐标。\n如下：</p>\n<pre><code class=\"lang-ts\">data: [\n    [\n        [120, 66, 1], // 起点的经纬度和海拔坐标\n        [122, 67, 2]  // 终点的经纬度和海拔坐标\n    ]\n]\n</code></pre>\n<p>有些时候需要配置数据项的名字或者单独的样式。需要把经纬度坐标写到 coords 属性下。如下：</p>\n<pre><code class=\"lang-ts\">data: [\n    {\n        coords: [ [120, 66], [122, 67] ],\n        // 数据值\n        value: 10,\n        // 数据名\n        name: &#39;foo&#39;,\n        // 线条样式\n        lineStyle: {}\n    }\n]\n</code></pre>\n"
   },
   "data.coords": {
     "desc": "<p>一个包含两个到多个经纬度坐标的数组。在 <a href=\"#series-lines3D.polyline\">polyline</a> 设置为 <code class=\"codespan\">true</code> 时支持多于两个的坐标。</p>\n"
@@ -63,7 +63,7 @@
     "desc": "<p>单个数据（单条线）的样式设置。</p>\n"
   },
   "data.lineStyle.color": {
-    "desc": "<p>线条的颜色。</p>\n<p>除了颜色字符串外，支持使用数组表示的 RGBA 值，例如：</p>\n<pre><code class=\"lang-js\">// 纯白色\n[1, 1, 1, 1]\n</code></pre>\n<p>使用数组表示的时候，每个通道可以设置大于 1 的值用于表示 HDR 的色值。</p>\n"
+    "desc": "<p>线条的颜色。</p>\n<p>除了颜色字符串外，支持使用数组表示的 RGBA 值，例如：</p>\n<pre><code class=\"lang-ts\">// 纯白色\n[1, 1, 1, 1]\n</code></pre>\n<p>使用数组表示的时候，每个通道可以设置大于 1 的值用于表示 HDR 的色值。</p>\n"
   },
   "data.lineStyle.opacity": {
     "desc": "<p>线条的不透明度。</p>\n"

@@ -11,18 +11,16 @@ $.get(ROOT_PATH + '/data/asset/geo/USA.json', function (usaJson) {
 
   echarts.registerMap('USA', usaJson, {
     Alaska: {
-      // 把阿拉斯加移到美国主大陆左下方
       left: -131,
       top: 25,
       width: 15
     },
     Hawaii: {
-      left: -110, // 夏威夷
+      left: -110,
       top: 28,
       width: 5
     },
     'Puerto Rico': {
-      // 波多黎各
       left: -76,
       top: 26,
       width: 2
@@ -38,15 +36,7 @@ $.get(ROOT_PATH + '/data/asset/geo/USA.json', function (usaJson) {
     tooltip: {
       trigger: 'item',
       showDelay: 0,
-      transitionDuration: 0.2,
-      formatter: function (params: any) {
-        const value = (params.value + '').split('.');
-        const valueStr = value[0].replace(
-          /(\d{1,3})(?=(?:\d{3})+(?!\d))/g,
-          '$1,'
-        );
-        return params.seriesName + '<br/>' + params.name + ': ' + valueStr;
-      }
+      transitionDuration: 0.2
     },
     visualMap: {
       left: 'right',
@@ -67,7 +57,7 @@ $.get(ROOT_PATH + '/data/asset/geo/USA.json', function (usaJson) {
           '#a50026'
         ]
       },
-      text: ['High', 'Low'], // 文本，默认为数值文本
+      text: ['High', 'Low'],
       calculable: true
     },
     toolbox: {

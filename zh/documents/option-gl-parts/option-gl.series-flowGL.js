@@ -24,7 +24,7 @@ window.__EC_DOC_option_gl_series_flowGL = {
     "desc": "<p>传入的网格数据的网格高度数量。</p>\n"
   },
   "data": {
-    "desc": "<p>向量场数据，包含向量的位置和向量的方向（包含大小）。<code class=\"codespan\">flowGL</code> 对数据的存储顺序和没有强制性要求，你甚至可以传入比较稀疏的向量数据。</p>\n<p>如下示例</p>\n<pre><code class=\"lang-js\">data: [\n    // 每个数据项包含四个值，表示位置的 lng、lat 以及相应维度上的速度 sLng、 sLat.\n    // 如果是直角坐标系上的话则是表示位置的 x、y 以及相应维度上的速度 sx、sy\n    [0, 0, 1, 1], [1, 0, 1, 1],\n    [0, 1, 1, 1], [1, 1, 1, 1]\n];\n</code></pre>\n<p>默认<code class=\"codespan\">flowGL</code>会根据规整的网格形数据自动计算 <a href=\"#series-flowGL.gridWidth\">gridWidth</a> 和 <a href=\"#series-flowGL.gridHeight\">gridHeight</a>。但是因为 flowGL 也支持相对稀疏的数据格式，也可以手动指定这两个值。</p>\n"
+    "desc": "<p>向量场数据，包含向量的位置和向量的方向（包含大小）。<code class=\"codespan\">flowGL</code> 对数据的存储顺序和没有强制性要求，你甚至可以传入比较稀疏的向量数据。</p>\n<p>如下示例</p>\n<pre><code class=\"lang-ts\">data: [\n    // 每个数据项包含四个值，表示位置的 lng、lat 以及相应维度上的速度 sLng、 sLat.\n    // 如果是直角坐标系上的话则是表示位置的 x、y 以及相应维度上的速度 sx、sy\n    [0, 0, 1, 1], [1, 0, 1, 1],\n    [0, 1, 1, 1], [1, 1, 1, 1]\n];\n</code></pre>\n<p>默认<code class=\"codespan\">flowGL</code>会根据规整的网格形数据自动计算 <a href=\"#series-flowGL.gridWidth\">gridWidth</a> 和 <a href=\"#series-flowGL.gridHeight\">gridHeight</a>。但是因为 flowGL 也支持相对稀疏的数据格式，也可以手动指定这两个值。</p>\n"
   },
   "itemStyle": {
     "desc": "<p>向量场迹线的样式。</p>\n"

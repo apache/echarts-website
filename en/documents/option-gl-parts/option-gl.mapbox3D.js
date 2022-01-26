@@ -3,7 +3,7 @@ window.__EC_DOC_option_gl_mapbox3D = {
     "desc": "<p>Sets the style of the Mapbox map. Same as <a href=\"https://www.mapbox.com/mapbox-gl-js/style-spec/\" target=\"_blank\">https://www.mapbox.com/mapbox-gl-js/style-spec/</a>.</p>\n"
   },
   "center": {
-    "desc": "<p>Sets the longitude and latitude of the center of the map. Longitude and latitude are represented by arrays, for example:</p>\n<pre><code class=\"lang-js\">mapbox3D: {\n    center: [104.114129, 37.550339],\n    zoom: 3\n}\n</code></pre>\n"
+    "desc": "<p>Sets the longitude and latitude of the center of the map. Longitude and latitude are represented by arrays, for example:</p>\n<pre><code class=\"lang-ts\">mapbox3D: {\n    center: [104.114129, 37.550339],\n    zoom: 3\n}\n</code></pre>\n"
   },
   "zoom": {
     "desc": "<p>Sets the zoom level of the map. See <a href=\"https://www.mapbox.com/mapbox-gl-js/style-spec/#root-zoom\" target=\"_blank\">https://www.mapbox.com/mapbox-gl-js/style-spec/#root-zoom</a></p>\n"
@@ -108,7 +108,7 @@ window.__EC_DOC_option_gl_mapbox3D = {
     "desc": "<p>The ambientCubemap uses texture as the source of ambient light, which provides diffuse and specular for objects. The diffuse and specular can be set separately by <a href=\"#mapbox3D.light.ambientCubemap.diffuseIntensity\">diffuseIntensity</a> and <a href=\"#mapbox3D.light.ambientCubemap.specularIntensity\">specularIntensity</a>.</p>\n"
   },
   "light.ambientCubemap.texture": {
-    "desc": "<p>The URL of the ambient cubemap supports HDR images in the <code class=\"codespan\">.hdr</code> format. You can obtained the resources for <code class=\"codespan\">.hdr</code> from <a href=\"http://www.hdrlabs.com/sibl/archive.html\" target=\"_blank\">http://www.hdrlabs.com/sibl/archive.html</a> and other websites.</p>\n<p>Example：</p>\n<pre><code class=\"lang-js\">ambientCubemap: {\n    texture: &#39;pisa.hdr&#39;,\n    // The exposure value used when analytic hdr\n    exposure: 1.0\n}\n</code></pre>\n"
+    "desc": "<p>The URL of the ambient cubemap supports HDR images in the <code class=\"codespan\">.hdr</code> format. You can obtained the resources for <code class=\"codespan\">.hdr</code> from <a href=\"http://www.hdrlabs.com/sibl/archive.html\" target=\"_blank\">http://www.hdrlabs.com/sibl/archive.html</a> and other websites.</p>\n<p>Example：</p>\n<pre><code class=\"lang-ts\">ambientCubemap: {\n    texture: &#39;pisa.hdr&#39;,\n    // The exposure value used when analytic hdr\n    exposure: 1.0\n}\n</code></pre>\n"
   },
   "light.ambientCubemap.diffuseIntensity": {
     "desc": "<p>The intensity of diffuse.</p>\n"
@@ -147,7 +147,7 @@ window.__EC_DOC_option_gl_mapbox3D = {
     "desc": "<p>[F value] of the lens (<a href=\"https://zh.wikipedia.org/wiki/%E7%84%A6%E6%AF%94)\" target=\"_blank\">https://zh.wikipedia.org/wiki/%E7%84%A6%E6%AF%94)</a>, the smaller the value, the shallower the depth of field.</p>\n"
   },
   "postEffect.depthOfField.blurRadius": {
-    "desc": "<p>Blur radius outside the focus.</p>\n<p>The difference blur effect between the different radius. </p>\n<div  class=\"twentytwenty-container\" style=\"width: 700px;\">\n    <img  src=\"documents/asset/gl/img/geo-dof-small.png\" width=\"100%\" title=\"blurSize: 3\"></img>\n    <img  src=\"documents/asset/gl/img/geo-dof-large.png\" width=\"100%\" title=\"blurSize: 10\"></img>\n</div>\n"
+    "desc": "<p>Blur radius outside the focus.</p>\n<p>The difference blur effect between the different radius.</p>\n<div  class=\"twentytwenty-container\" style=\"width: 700px;\">\n    <img  src=\"documents/asset/gl/img/geo-dof-small.png\" width=\"100%\" title=\"blurSize: 3\"></img>\n    <img  src=\"documents/asset/gl/img/geo-dof-large.png\" width=\"100%\" title=\"blurSize: 10\"></img>\n</div>\n"
   },
   "postEffect.screenSpaceAmbientOcclusion": {
     "desc": "<p>The ambient occlusion post-processing effect darkens the corners, holes, crevices, and areas where most light can`t reach. It is a supplement to the traditional shadow map, which makes the whole scene more natural and layered.</p>\n<p>Below is a comparison of the effects of no SSAO and SSAO:</p>\n<div  class=\"twentytwenty-container\" style=\"width: 700px;\">\n    <img  src=\"documents/asset/gl/img/geo-no-ssao.png\" width=\"100%\" title=\"No SSAO\"></img>\n    <img  src=\"documents/asset/gl/img/geo-ssao.png\" width=\"100%\" title=\"SSAO\"></img>\n</div>\n"
@@ -162,7 +162,7 @@ window.__EC_DOC_option_gl_mapbox3D = {
     "desc": "<p>The quality of SSAO (screen space ambient occlusion). Supporting<code class=\"codespan\">&#39;low&#39;</code>, <code class=\"codespan\">&#39;medium&#39;</code>, <code class=\"codespan\">&#39;high&#39;</code>, <code class=\"codespan\">&#39;ultra&#39;</code></p>\n"
   },
   "postEffect.SSAO.radius": {
-    "desc": "<p>The radius of the SSAO (screen space ambient occlusion). The larger the radius, the more natural the effect, but you need to set a higher <code class=\"codespan\">&#39;quality&#39;</code>. </p>\n<p>The following example is the difference between a smaller and larger radius:</p>\n<div  class=\"twentytwenty-container\" style=\"width: 700px;\">\n    <img  src=\"documents/asset/gl/img/geo-ssao-small-radius.png\" width=\"100%\" title=\"Radius: 1\"></img>\n    <img  src=\"documents/asset/gl/img/geo-ssao-large-radius.png\" width=\"100%\" title=\"Radius: 10\"></img>\n</div>\n"
+    "desc": "<p>The radius of the SSAO (screen space ambient occlusion). The larger the radius, the more natural the effect, but you need to set a higher <code class=\"codespan\">&#39;quality&#39;</code>.</p>\n<p>The following example is the difference between a smaller and larger radius:</p>\n<div  class=\"twentytwenty-container\" style=\"width: 700px;\">\n    <img  src=\"documents/asset/gl/img/geo-ssao-small-radius.png\" width=\"100%\" title=\"Radius: 1\"></img>\n    <img  src=\"documents/asset/gl/img/geo-ssao-large-radius.png\" width=\"100%\" title=\"Radius: 10\"></img>\n</div>\n"
   },
   "postEffect.SSAO.intensity": {
     "desc": "<p>The intensity of SSAO (screen space ambient occlusion). The larger the value, the darker the color.</p>\n"
@@ -189,7 +189,7 @@ window.__EC_DOC_option_gl_mapbox3D = {
     "desc": "<p>The saturation of the image.</p>\n"
   },
   "postEffect.FXAA": {
-    "desc": "<p>After opening <a href=\"#mapbox3D.postEffect\">postEffect</a>, WebGL&#39;s default MSAA (Multi Sampling Anti Aliasing) will not work. At this time, FXAA (Fast Approximate Anti-Aliasing) can solve the anti-aliasing problem quickly and easily. FXAA blurs the edge of the scene to solve the problem of aliasing. It works well on some scenes, but in echarts-gl, you need to ensure that the edges of many texts and lines are sharp and clear, so FXAA is not suitable. At this point we can use supersampling by setting a higher <code class=\"codespan\">devicePixelRatio</code> as follows:</p>\n<pre><code class=\"lang-js\">var chart = echarts.init(dom, null, {\n    devicePixelRatio: 2\n})\n</code></pre>\n<p>However, setting a higher <code class=\"codespan\">devicePixelRatio</code> has high requirements for computer performance, so more often we recommend using <a href=\"#mapbox3D.temporalSuperSampling\">temporalSuperSampling</a> in echarts-gl. After the picture is still, it will continue to sample multiple times and taken at several instances inside the pixel and an average color value is calculated.,thus achieving anti-aliasing effect.</p>\n"
+    "desc": "<p>After opening <a href=\"#mapbox3D.postEffect\">postEffect</a>, WebGL&#39;s default MSAA (Multi Sampling Anti Aliasing) will not work. At this time, FXAA (Fast Approximate Anti-Aliasing) can solve the anti-aliasing problem quickly and easily. FXAA blurs the edge of the scene to solve the problem of aliasing. It works well on some scenes, but in echarts-gl, you need to ensure that the edges of many texts and lines are sharp and clear, so FXAA is not suitable. At this point we can use supersampling by setting a higher <code class=\"codespan\">devicePixelRatio</code> as follows:</p>\n<pre><code class=\"lang-ts\">var chart = echarts.init(dom, null, {\n    devicePixelRatio: 2\n})\n</code></pre>\n<p>However, setting a higher <code class=\"codespan\">devicePixelRatio</code> has high requirements for computer performance, so more often we recommend using <a href=\"#mapbox3D.temporalSuperSampling\">temporalSuperSampling</a> in echarts-gl. After the picture is still, it will continue to sample multiple times and taken at several instances inside the pixel and an average color value is calculated.,thus achieving anti-aliasing effect.</p>\n"
   },
   "postEffect.FXAA.enable": {
     "desc": "<p>Whether to enable FXAA. Not enabled by default.</p>\n"

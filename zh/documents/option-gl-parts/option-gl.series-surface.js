@@ -21,7 +21,7 @@ window.__EC_DOC_option_gl_series_surface = {
     "desc": "<p>网格线的样式。</p>\n"
   },
   "wireframe.lineStyle.color": {
-    "desc": "<p>线条的颜色。</p>\n<p>除了颜色字符串外，支持使用数组表示的 RGBA 值，例如：</p>\n<pre><code class=\"lang-js\">// 纯白色\n[1, 1, 1, 1]\n</code></pre>\n<p>使用数组表示的时候，每个通道可以设置大于 1 的值用于表示 HDR 的色值。</p>\n"
+    "desc": "<p>线条的颜色。</p>\n<p>除了颜色字符串外，支持使用数组表示的 RGBA 值，例如：</p>\n<pre><code class=\"lang-ts\">// 纯白色\n[1, 1, 1, 1]\n</code></pre>\n<p>使用数组表示的时候，每个通道可以设置大于 1 的值用于表示 HDR 的色值。</p>\n"
   },
   "wireframe.lineStyle.opacity": {
     "desc": "<p>线条的不透明度。</p>\n"
@@ -30,7 +30,7 @@ window.__EC_DOC_option_gl_series_surface = {
     "desc": "<p>线条的宽度。</p>\n"
   },
   "equation": {
-    "desc": "<p>曲面的函数表达式。如果需要展示的是函数曲面，可以不设置 <a href=\"#series-surface.data\">data</a>，通过 <a href=\"#series-surface.equation\">equation</a> 去声明函数表达式。例如通过下面这个函数可以模拟波纹效果。</p>\n<pre><code class=\"lang-js\">equation: {\n    x: {\n        step: 0.1,\n        min: -3,\n        max: 3,\n    },\n    y: {\n        step: 0.1,\n        min: -3,\n        max: 3,\n    },\n    z: function (x, y) {\n        return Math.sin(x * x + y * y) * x / 3.14\n    }\n}\n</code></pre>\n"
+    "desc": "<p>曲面的函数表达式。如果需要展示的是函数曲面，可以不设置 <a href=\"#series-surface.data\">data</a>，通过 <a href=\"#series-surface.equation\">equation</a> 去声明函数表达式。例如通过下面这个函数可以模拟波纹效果。</p>\n<pre><code class=\"lang-ts\">equation: {\n    x: {\n        step: 0.1,\n        min: -3,\n        max: 3,\n    },\n    y: {\n        step: 0.1,\n        min: -3,\n        max: 3,\n    },\n    z: function (x, y) {\n        return Math.sin(x * x + y * y) * x / 3.14\n    }\n}\n</code></pre>\n"
   },
   "equation.x": {
     "desc": "<p>自变量 x。</p>\n"
@@ -57,10 +57,10 @@ window.__EC_DOC_option_gl_series_surface = {
     "desc": "<p>y 的最大值。</p>\n"
   },
   "equation.z": {
-    "desc": "<p>因变量 z。</p>\n<p>z 为关于 <a href=\"#series-surface.equation.x\">x</a>, <a href=\"#series-surface.equation.y\">y</a> 的函数。</p>\n<pre><code class=\"lang-js\">(x: number, y: number) =&gt; number\n</code></pre>\n"
+    "desc": "<p>因变量 z。</p>\n<p>z 为关于 <a href=\"#series-surface.equation.x\">x</a>, <a href=\"#series-surface.equation.y\">y</a> 的函数。</p>\n<pre><code class=\"lang-ts\">(x: number, y: number) =&gt; number\n</code></pre>\n"
   },
   "parametricEquation": {
-    "desc": "<p>曲面的<a href=\"https://zh.wikipedia.org/wiki/%E5%8F%83%E6%95%B8%E6%96%B9%E7%A8%8B\" target=\"_blank\">参数方程</a>。在<a href=\"#series-surface.data\">data</a>没被设置的时候，可以通过 <a href=\"#series-surface.equation\">parametricEquation</a> 去声明参数参数方程。在 <a href=\"#series-surface\">parametric</a> 为<code class=\"codespan\">true</code>时有效。</p>\n<p>参数方程是 <a href=\"#series-surface.parametricEquation.x\">x</a>、<a href=\"#series-surface.parametricEquation.y\">y</a>、 <a href=\"#series-surface.parametricEquation.z\">z</a> 关于参数 <a href=\"#series-surface.parametricEquation.u\">u</a>、<a href=\"#series-surface.parametricEquation.v\">v</a> 的方程。</p>\n<p>下面的参数方程就是绘制前面图中类似一个金属零件的参数曲面的：</p>\n<pre><code class=\"lang-js\">var aa = 0.4;\nvar r = 1 - aa * aa;\nvar w = sqrt(r);\n...\nparametricEquation: {\n    u: {\n        min: -13.2,\n        max: 13.2,\n        step: 0.5\n    },\n    v: {\n        min: -37.4,\n        max: 37.4,\n        step: 0.5\n    },\n    x: function (u, v) {\n        var denom = aa * (pow(w * cosh(aa * u), 2) + aa * pow(sin(w * v), 2))\n        return -u + (2 * r * cosh(aa * u) * sinh(aa * u) / denom);\n    },\n    y: function (u, v) {\n        var denom = aa * (pow(w * cosh(aa * u), 2) + aa * pow(sin(w * v), 2))\n        return 2 * w * cosh(aa * u) * (-(w * cos(v) * cos(w * v)) - (sin(v) * sin(w * v))) / denom;\n    },\n    z: function (u, v) {\n        var denom = aa * (pow(w * cosh(aa * u), 2) + aa * pow(sin(w * v), 2))\n        return  2 * w * cosh(aa * u) * (-(w * sin(v) * cos(w * v)) + (cos(v) * sin(w * v))) / denom\n    }\n}\n</code></pre>\n"
+    "desc": "<p>曲面的<a href=\"https://zh.wikipedia.org/wiki/%E5%8F%83%E6%95%B8%E6%96%B9%E7%A8%8B\" target=\"_blank\">参数方程</a>。在<a href=\"#series-surface.data\">data</a>没被设置的时候，可以通过 <a href=\"#series-surface.equation\">parametricEquation</a> 去声明参数参数方程。在 <a href=\"#series-surface\">parametric</a> 为<code class=\"codespan\">true</code>时有效。</p>\n<p>参数方程是 <a href=\"#series-surface.parametricEquation.x\">x</a>、<a href=\"#series-surface.parametricEquation.y\">y</a>、 <a href=\"#series-surface.parametricEquation.z\">z</a> 关于参数 <a href=\"#series-surface.parametricEquation.u\">u</a>、<a href=\"#series-surface.parametricEquation.v\">v</a> 的方程。</p>\n<p>下面的参数方程就是绘制前面图中类似一个金属零件的参数曲面的：</p>\n<pre><code class=\"lang-ts\">var aa = 0.4;\nvar r = 1 - aa * aa;\nvar w = sqrt(r);\n...\nparametricEquation: {\n    u: {\n        min: -13.2,\n        max: 13.2,\n        step: 0.5\n    },\n    v: {\n        min: -37.4,\n        max: 37.4,\n        step: 0.5\n    },\n    x: function (u, v) {\n        var denom = aa * (pow(w * cosh(aa * u), 2) + aa * pow(sin(w * v), 2))\n        return -u + (2 * r * cosh(aa * u) * sinh(aa * u) / denom);\n    },\n    y: function (u, v) {\n        var denom = aa * (pow(w * cosh(aa * u), 2) + aa * pow(sin(w * v), 2))\n        return 2 * w * cosh(aa * u) * (-(w * cos(v) * cos(w * v)) - (sin(v) * sin(w * v))) / denom;\n    },\n    z: function (u, v) {\n        var denom = aa * (pow(w * cosh(aa * u), 2) + aa * pow(sin(w * v), 2))\n        return  2 * w * cosh(aa * u) * (-(w * sin(v) * cos(w * v)) + (cos(v) * sin(w * v))) / denom\n    }\n}\n</code></pre>\n"
   },
   "parametricEquation.u": {
     "desc": "<p>自变量 u。</p>\n"
@@ -87,25 +87,25 @@ window.__EC_DOC_option_gl_series_surface = {
     "desc": "<p>v 的最大值。</p>\n"
   },
   "parametricEquation.x": {
-    "desc": "<p>x 为关于 <a href=\"#series-surface.equation.u\">u</a>, <a href=\"#series-surface.equation.v\">v</a> 的函数。</p>\n<pre><code class=\"lang-js\">(u: number, v: number) =&gt; number\n</code></pre>\n"
+    "desc": "<p>x 为关于 <a href=\"#series-surface.equation.u\">u</a>, <a href=\"#series-surface.equation.v\">v</a> 的函数。</p>\n<pre><code class=\"lang-ts\">(u: number, v: number) =&gt; number\n</code></pre>\n"
   },
   "parametricEquation.y": {
-    "desc": "<p>x 为关于 <a href=\"#series-surface.equation.u\">u</a>, <a href=\"#series-surface.equation.v\">v</a> 的函数。</p>\n<pre><code class=\"lang-js\">(u: number, v: number) =&gt; number\n</code></pre>\n"
+    "desc": "<p>x 为关于 <a href=\"#series-surface.equation.u\">u</a>, <a href=\"#series-surface.equation.v\">v</a> 的函数。</p>\n<pre><code class=\"lang-ts\">(u: number, v: number) =&gt; number\n</code></pre>\n"
   },
   "parametricEquation.z": {
-    "desc": "<p>x 为关于 <a href=\"#series-surface.equation.u\">u</a>, <a href=\"#series-surface.equation.v\">v</a> 的函数。</p>\n<pre><code class=\"lang-js\">(u: number, v: number) =&gt; number\n</code></pre>\n"
+    "desc": "<p>x 为关于 <a href=\"#series-surface.equation.u\">u</a>, <a href=\"#series-surface.equation.v\">v</a> 的函数。</p>\n<pre><code class=\"lang-ts\">(u: number, v: number) =&gt; number\n</code></pre>\n"
   },
   "itemStyle": {
     "desc": "<p>曲面的颜色、不透明度等样式。</p>\n"
   },
   "itemStyle.color": {
-    "desc": "<p>图形的颜色。</p>\n<p>除了颜色字符串外，支持使用数组表示的 RGBA 值，例如：</p>\n<pre><code class=\"lang-js\">// 纯白色\n[1, 1, 1, 1]\n</code></pre>\n<p>使用数组表示的时候，每个通道可以设置大于 1 的值用于表示 HDR 的色值。</p>\n"
+    "desc": "<p>图形的颜色。</p>\n<p>除了颜色字符串外，支持使用数组表示的 RGBA 值，例如：</p>\n<pre><code class=\"lang-ts\">// 纯白色\n[1, 1, 1, 1]\n</code></pre>\n<p>使用数组表示的时候，每个通道可以设置大于 1 的值用于表示 HDR 的色值。</p>\n"
   },
   "itemStyle.opacity": {
     "desc": "<p>图形的不透明度。</p>\n"
   },
   "data": {
-    "desc": "<p>曲面图的数据数组。</p>\n<p>数据是线性存储的数组，包含<code class=\"codespan\">X 顶点数</code>x<code class=\"codespan\">Y 顶点数</code>个数据。一个 5 x 5 的曲面共有 25 个顶点，数据在数组中的索引如下</p>\n<p><img width=\"400\" height=\"auto\" src=\"documents/asset/gl/img/surface-index.png\"></p>\n<p>上图使用的数据：</p>\n<pre><code class=\"lang-js\">data: [\n    [-1,-1,0],[-0.5,-1,0],[0,-1,0],[0.5,-1,0],[1,-1,0],\n    [-1,-0.5,0],[-0.5,-0.5,1],[0,-0.5,0],[0.5,-0.5,-1],[1,-0.5,0],\n    [-1,0,0],[-0.5,0,0],[0,0,0],[0.5,0,0],[1,0,0],\n    [-1,0.5,0],[-0.5,0.5,-1],[0,0.5,0],[0.5,0.5,1],[1,0.5,0],\n    [-1,1,0],[-0.5,1,0],[0,1,0],[0.5,1,0],[1,1,0]\n]\n</code></pre>\n<p>每一项分别为 <code class=\"codespan\">x</code>, <code class=\"codespan\">y</code>, <code class=\"codespan\">z</code>。</p>\n<p>对于参数方程来说，每一项需要存储五个数据，分别是 <code class=\"codespan\">x</code>, <code class=\"codespan\">y</code>, <code class=\"codespan\">z</code> 和参数 <code class=\"codespan\">u</code>, <code class=\"codespan\">v</code>。而数据的索引按照<code class=\"codespan\">u</code>, <code class=\"codespan\">v</code> 的顺序。例如下面的数据：</p>\n<pre><code class=\"lang-js\">data: [\n    // v 为 0，u 从 -3.14 到 3.13\n    [0,0,1,-3.14,0],[0,0,1,-1.57,0],[0,0,1,0,0],[0,0,1,1.57,0],[0,0,1,3.14,0],\n    // v 为 1.57，u 从 -3.14 到 3.13\n    [0,-1,0,-3.14,1.57],[-1,0,0,-1.57,1.57],[0,1,0,0,1.57],[1,0,0,1.57,1.57],[0,-1,0,3.14,1.57],\n    // v 为 3.14，u 从 -3.14 到 3.13\n    [0,0,-1,-3.14,3.14],[0,0,-1,-1.57,3.14],[0,0,-1,0,3.14],[0,0,-1,1.57,3.14],[0,0,-1,3.14,3.14]]\n]\n</code></pre>\n<p>有些时候我们需要指定每个数据项的名称，这时候需要每个项为一个对象：</p>\n<pre><code class=\"lang-js\">[{\n    // 数据项的名称\n    name: &#39;数据1&#39;,\n    // 数据项值\n    value: [12, 14, 10]\n}, {\n    name: &#39;数据2&#39;,\n    value: [34, 50, 15]\n}]\n</code></pre>\n<p>需要对个别内容指定进行个性化定义时：</p>\n<pre><code class=\"lang-js\">[{\n    name: &#39;数据1&#39;,\n    value: [12, 14, 10]\n}, {\n    // 数据项名称\n    name: &#39;数据2&#39;,\n    value : [34, 50, 15],\n    //自定义特殊itemStyle，仅对该item有效\n    itemStyle:{}\n}]\n</code></pre>\n"
+    "desc": "<p>曲面图的数据数组。</p>\n<p>数据是线性存储的数组，包含<code class=\"codespan\">X 顶点数</code>x<code class=\"codespan\">Y 顶点数</code>个数据。一个 5 x 5 的曲面共有 25 个顶点，数据在数组中的索引如下</p>\n<p><img width=\"400\" height=\"auto\" src=\"documents/asset/gl/img/surface-index.png\"></p>\n<p>上图使用的数据：</p>\n<pre><code class=\"lang-ts\">data: [\n    [-1,-1,0],[-0.5,-1,0],[0,-1,0],[0.5,-1,0],[1,-1,0],\n    [-1,-0.5,0],[-0.5,-0.5,1],[0,-0.5,0],[0.5,-0.5,-1],[1,-0.5,0],\n    [-1,0,0],[-0.5,0,0],[0,0,0],[0.5,0,0],[1,0,0],\n    [-1,0.5,0],[-0.5,0.5,-1],[0,0.5,0],[0.5,0.5,1],[1,0.5,0],\n    [-1,1,0],[-0.5,1,0],[0,1,0],[0.5,1,0],[1,1,0]\n]\n</code></pre>\n<p>每一项分别为 <code class=\"codespan\">x</code>, <code class=\"codespan\">y</code>, <code class=\"codespan\">z</code>。</p>\n<p>对于参数方程来说，每一项需要存储五个数据，分别是 <code class=\"codespan\">x</code>, <code class=\"codespan\">y</code>, <code class=\"codespan\">z</code> 和参数 <code class=\"codespan\">u</code>, <code class=\"codespan\">v</code>。而数据的索引按照<code class=\"codespan\">u</code>, <code class=\"codespan\">v</code> 的顺序。例如下面的数据：</p>\n<pre><code class=\"lang-ts\">data: [\n    // v 为 0，u 从 -3.14 到 3.13\n    [0,0,1,-3.14,0],[0,0,1,-1.57,0],[0,0,1,0,0],[0,0,1,1.57,0],[0,0,1,3.14,0],\n    // v 为 1.57，u 从 -3.14 到 3.13\n    [0,-1,0,-3.14,1.57],[-1,0,0,-1.57,1.57],[0,1,0,0,1.57],[1,0,0,1.57,1.57],[0,-1,0,3.14,1.57],\n    // v 为 3.14，u 从 -3.14 到 3.13\n    [0,0,-1,-3.14,3.14],[0,0,-1,-1.57,3.14],[0,0,-1,0,3.14],[0,0,-1,1.57,3.14],[0,0,-1,3.14,3.14]]\n]\n</code></pre>\n<p>有些时候我们需要指定每个数据项的名称，这时候需要每个项为一个对象：</p>\n<pre><code class=\"lang-ts\">[{\n    // 数据项的名称\n    name: &#39;数据1&#39;,\n    // 数据项值\n    value: [12, 14, 10]\n}, {\n    name: &#39;数据2&#39;,\n    value: [34, 50, 15]\n}]\n</code></pre>\n<p>需要对个别内容指定进行个性化定义时：</p>\n<pre><code class=\"lang-ts\">[{\n    name: &#39;数据1&#39;,\n    value: [12, 14, 10]\n}, {\n    // 数据项名称\n    name: &#39;数据2&#39;,\n    value : [34, 50, 15],\n    //自定义特殊itemStyle，仅对该item有效\n    itemStyle:{}\n}]\n</code></pre>\n"
   },
   "data.name": {
     "desc": "<p>数据项名称。</p>\n"
@@ -117,7 +117,7 @@ window.__EC_DOC_option_gl_series_surface = {
     "desc": "<p>单个数据项的样式设置。</p>\n"
   },
   "data.itemStyle.color": {
-    "desc": "<p>图形的颜色。</p>\n<p>除了颜色字符串外，支持使用数组表示的 RGBA 值，例如：</p>\n<pre><code class=\"lang-js\">// 纯白色\n[1, 1, 1, 1]\n</code></pre>\n<p>使用数组表示的时候，每个通道可以设置大于 1 的值用于表示 HDR 的色值。</p>\n"
+    "desc": "<p>图形的颜色。</p>\n<p>除了颜色字符串外，支持使用数组表示的 RGBA 值，例如：</p>\n<pre><code class=\"lang-ts\">// 纯白色\n[1, 1, 1, 1]\n</code></pre>\n<p>使用数组表示的时候，每个通道可以设置大于 1 的值用于表示 HDR 的色值。</p>\n"
   },
   "data.itemStyle.opacity": {
     "desc": "<p>图形的不透明度。</p>\n"

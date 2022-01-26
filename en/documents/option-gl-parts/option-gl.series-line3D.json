@@ -12,7 +12,7 @@
     "desc": "<p>The style of the lines.</p>\n"
   },
   "lineStyle.color": {
-    "desc": "<p>The color of the line. </p>\n<p>In addition to color strings, RGBA values represented by arrays are supported, for example:</p>\n<pre><code class=\"lang-js\">// pure white\n[1, 1, 1, 1]\n</code></pre>\n<p>When using an array representation, each channel can set a value greater than 1 to represent the color value of HDR.</p>\n"
+    "desc": "<p>The color of the line. </p>\n<p>In addition to color strings, RGBA values represented by arrays are supported, for example:</p>\n<pre><code class=\"lang-ts\">// pure white\n[1, 1, 1, 1]\n</code></pre>\n<p>When using an array representation, each channel can set a value greater than 1 to represent the color value of HDR.</p>\n"
   },
   "lineStyle.opacity": {
     "desc": "<p>The opacity of the line.</p>\n"
@@ -21,7 +21,7 @@
     "desc": "<p>The width of the line.</p>\n"
   },
   "lineStyle.lineStyle.color": {
-    "desc": "<p>The color of the line. </p>\n<p>In addition to color strings, RGBA values represented by arrays are supported, for example:</p>\n<pre><code class=\"lang-js\">// pure white\n[1, 1, 1, 1]\n</code></pre>\n<p>When using an array representation, each channel can set a value greater than 1 to represent the color value of HDR.</p>\n"
+    "desc": "<p>The color of the line. </p>\n<p>In addition to color strings, RGBA values represented by arrays are supported, for example:</p>\n<pre><code class=\"lang-ts\">// pure white\n[1, 1, 1, 1]\n</code></pre>\n<p>When using an array representation, each channel can set a value greater than 1 to represent the color value of HDR.</p>\n"
   },
   "lineStyle.lineStyle.opacity": {
     "desc": "<p>The opacity of the line.</p>\n"
@@ -30,7 +30,7 @@
     "desc": "<p>The width of the line.</p>\n"
   },
   "data": {
-    "desc": "<p>A data array. Each item of the array is a piece of data. Usually this data is an array to store each attribute/dimension of the data. For example below:</p>\n<pre><code class=\"lang-js\">data: [\n    [[12, 14, 10], [34, 50, 15], [56, 30, 20], [10, 15, 12], [23, 10, 14]]\n]\n</code></pre>\n<p>The first three values of each item in the array are <code class=\"codespan\">x</code>, <code class=\"codespan\">y</code>, <code class=\"codespan\">z</code>. In addition to these three values, you can add other values to the <a href=\"#visualMap\">visualMap</a> component to map to other graphical properties such as colors.</p>\n<p>More likely, we need to assign name to each data item, in which case each item should be an object:</p>\n<pre><code class=\"lang-js\">[{\n    // name of date item\n    name: &#39;data1&#39;,\n    // value of date item is 8\n    value: [12, 14, 10]\n}, {\n    name: &#39;data2&#39;,\n    value: 20\n}]\n</code></pre>\n<p>Each data item can be further customized:</p>\n<pre><code class=\"lang-js\">[{\n    name: &#39;data1&#39;,\n    value: [12, 14, 10]\n}, {\n    // name of data item\n    name: &#39;data2&#39;,\n    value : [34, 50, 15],\n    // user-defined special itemStyle that only useful for this data item\n    itemStyle:{}\n}]\n</code></pre>\n"
+    "desc": "<p>A data array. Each item of the array is a piece of data. Usually this data is an array to store each attribute/dimension of the data. For example below:</p>\n<pre><code class=\"lang-ts\">data: [\n    [[12, 14, 10], [34, 50, 15], [56, 30, 20], [10, 15, 12], [23, 10, 14]]\n]\n</code></pre>\n<p>The first three values of each item in the array are <code class=\"codespan\">x</code>, <code class=\"codespan\">y</code>, <code class=\"codespan\">z</code>. In addition to these three values, you can add other values to the <a href=\"#visualMap\">visualMap</a> component to map to other graphical properties such as colors.</p>\n<p>More likely, we need to assign name to each data item, in which case each item should be an object:</p>\n<pre><code class=\"lang-ts\">[{\n    // name of date item\n    name: &#39;data1&#39;,\n    // value of date item is 8\n    value: [12, 14, 10]\n}, {\n    name: &#39;data2&#39;,\n    value: 20\n}]\n</code></pre>\n<p>Each data item can be further customized:</p>\n<pre><code class=\"lang-ts\">[{\n    name: &#39;data1&#39;,\n    value: [12, 14, 10]\n}, {\n    // name of data item\n    name: &#39;data2&#39;,\n    value : [34, 50, 15],\n    // user-defined special itemStyle that only useful for this data item\n    itemStyle:{}\n}]\n</code></pre>\n"
   },
   "data.name": {
     "desc": "<p>The name of data item.</p>\n"
@@ -42,7 +42,7 @@
     "desc": "<p>The style setting of a single data item.</p>\n"
   },
   "data.itemStyle.color": {
-    "desc": "<p>The color of the line. </p>\n<p>In addition to color strings, RGBA values represented by arrays are supported, for example:</p>\n<pre><code class=\"lang-js\">// pure white\n[1, 1, 1, 1]\n</code></pre>\n<p>When using an array representation, each channel can set a value greater than 1 to represent the color value of HDR.</p>\n"
+    "desc": "<p>The color of the line. </p>\n<p>In addition to color strings, RGBA values represented by arrays are supported, for example:</p>\n<pre><code class=\"lang-ts\">// pure white\n[1, 1, 1, 1]\n</code></pre>\n<p>When using an array representation, each channel can set a value greater than 1 to represent the color value of HDR.</p>\n"
   },
   "data.itemStyle.opacity": {
     "desc": "<p>The opacity of the line.</p>\n"

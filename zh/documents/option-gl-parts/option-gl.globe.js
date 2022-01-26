@@ -9,10 +9,10 @@ window.__EC_DOC_option_gl_globe = {
     "desc": "<p>地球的外半径。<code class=\"codespan\">globeRadius</code> 到 <code class=\"codespan\">globeOuterRadius</code> 之间这片区域会被用于展示三维柱状图，散点图等。</p>\n"
   },
   "environment": {
-    "desc": "<p>环境贴图。支持纯色、渐变色、全景贴图的 url。默认为 <code class=\"codespan\">&#39;auto&#39;</code>，在配置有 <a href=\"#globe.light.ambientCubemap.texture\">light.ambientCubemap.texture</a> 的时候会使用该纹理作为环境贴图。否则则不显示环境贴图。</p>\n<p>示例：</p>\n<pre><code class=\"lang-js\">// 配置为全景贴图\nenvironment: &#39;asset/starfield.jpg&#39;\n// 配置为纯黑色的背景\nenvironment: &#39;#000&#39;\n// 配置为垂直渐变的背景\nenvironment: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{\n  offset: 0, color: &#39;#00aaff&#39; // 天空颜色\n}, {\n  offset: 0.7, color: &#39;#998866&#39; // 地面颜色\n}, {\n  offset: 1, color: &#39;#998866&#39; // 地面颜色\n}], false)\n\n</code></pre>\n"
+    "desc": "<p>环境贴图。支持纯色、渐变色、全景贴图的 url。默认为 <code class=\"codespan\">&#39;auto&#39;</code>，在配置有 <a href=\"#globe.light.ambientCubemap.texture\">light.ambientCubemap.texture</a> 的时候会使用该纹理作为环境贴图。否则则不显示环境贴图。</p>\n<p>示例：</p>\n<pre><code class=\"lang-ts\">// 配置为全景贴图\nenvironment: &#39;asset/starfield.jpg&#39;\n// 配置为纯黑色的背景\nenvironment: &#39;#000&#39;\n// 配置为垂直渐变的背景\nenvironment: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{\n  offset: 0, color: &#39;#00aaff&#39; // 天空颜色\n}, {\n  offset: 0.7, color: &#39;#998866&#39; // 地面颜色\n}, {\n  offset: 1, color: &#39;#998866&#39; // 地面颜色\n}], false)\n\n</code></pre>\n"
   },
   "baseTexture": {
-    "desc": "<p>地球的纹理。支持图片路径的字符串，图片或者 Canvas 的对象。</p>\n<p>也支持直接使用 echarts 的实例作为纹理，此时在地球上的鼠标动作会跟纹理上使用的 echarts 实例有联动。</p>\n<p>示例：</p>\n<pre><code class=\"lang-js\">// 使用地球的纹理图片\nbaseTexture: &#39;asset/earth.jpg&#39;\n\n\n// 使用 echarts 绘制世界地图的实例作为纹理\nvar canvas = document.createElement(&#39;canvas&#39;);\nvar mapChart = echarts.init(canvas, null, {\n    width: 4096, height: 2048\n});\nmapChart.setOption({\n    series : [\n        {\n            type: &#39;map&#39;,\n            map: &#39;world&#39;,\n            // 绘制完整尺寸的 echarts 实例\n            top: 0, left: 0,\n            right: 0, bottom: 0,\n            boundingCoords: [[-180, 90], [180, -90]]\n        }\n    ]\n});\n...\nbaseTexture: mapChart\n\n</code></pre>\n"
+    "desc": "<p>地球的纹理。支持图片路径的字符串，图片或者 Canvas 的对象。</p>\n<p>也支持直接使用 echarts 的实例作为纹理，此时在地球上的鼠标动作会跟纹理上使用的 echarts 实例有联动。</p>\n<p>示例：</p>\n<pre><code class=\"lang-ts\">// 使用地球的纹理图片\nbaseTexture: &#39;asset/earth.jpg&#39;\n\n\n// 使用 echarts 绘制世界地图的实例作为纹理\nvar canvas = document.createElement(&#39;canvas&#39;);\nvar mapChart = echarts.init(canvas, null, {\n    width: 4096, height: 2048\n});\nmapChart.setOption({\n    series : [\n        {\n            type: &#39;map&#39;,\n            map: &#39;world&#39;,\n            // 绘制完整尺寸的 echarts 实例\n            top: 0, left: 0,\n            right: 0, bottom: 0,\n            boundingCoords: [[-180, 90], [180, -90]]\n        }\n    ]\n});\n...\nbaseTexture: mapChart\n\n</code></pre>\n"
   },
   "heightTexture": {
     "desc": "<p>地球的高度纹理。高度纹理可以用于<a href=\"https://zh.wikipedia.org/wiki/%E5%87%B9%E5%87%B8%E8%B4%B4%E5%9B%BE\" target=\"_blank\">凹凸贴图</a>表现地球表面的明暗细节。下面两张图分别是使用<code class=\"codespan\">heightTexture</code>和未使用<code class=\"codespan\">heightTexuture</code>的效果区别。</p>\n<p><img width=\"400\" height=\"auto\" src=\"documents/asset/gl/img/heightmap-enable.png\"></p>\n<p><img width=\"400\" height=\"auto\" src=\"documents/asset/gl/img/heightmap-disable.png\"></p>\n"
@@ -120,7 +120,7 @@ window.__EC_DOC_option_gl_globe = {
     "desc": "<p>ambientCubemap 会使用纹理作为环境光的光源，会为物体提供漫反射和高光反射。可以通过 <a href=\"#globe.light.ambientCubemap.diffuseIntensity\">diffuseIntensity</a> 和 <a href=\"#globe.light.ambientCubemap.specularIntensity\">specularIntensity</a> 分别设置漫反射强度和高光反射强度。</p>\n"
   },
   "light.ambientCubemap.texture": {
-    "desc": "<p>环境光贴图的 url，支持使用<code class=\"codespan\">.hdr</code>格式的 HDR 图片。可以从 <a href=\"http://www.hdrlabs.com/sibl/archive.html\" target=\"_blank\">http://www.hdrlabs.com/sibl/archive.html</a> 等网站获取 <code class=\"codespan\">.hdr</code> 的资源。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">ambientCubemap: {\n    texture: &#39;pisa.hdr&#39;,\n    // 解析 hdr 时使用的曝光值\n    exposure: 1.0\n}\n</code></pre>\n"
+    "desc": "<p>环境光贴图的 url，支持使用<code class=\"codespan\">.hdr</code>格式的 HDR 图片。可以从 <a href=\"http://www.hdrlabs.com/sibl/archive.html\" target=\"_blank\">http://www.hdrlabs.com/sibl/archive.html</a> 等网站获取 <code class=\"codespan\">.hdr</code> 的资源。</p>\n<p>例如：</p>\n<pre><code class=\"lang-ts\">ambientCubemap: {\n    texture: &#39;pisa.hdr&#39;,\n    // 解析 hdr 时使用的曝光值\n    exposure: 1.0\n}\n</code></pre>\n"
   },
   "light.ambientCubemap.diffuseIntensity": {
     "desc": "<p>漫反射的强度。</p>\n"
@@ -201,7 +201,7 @@ window.__EC_DOC_option_gl_globe = {
     "desc": "<p>画面的饱和度。</p>\n"
   },
   "postEffect.FXAA": {
-    "desc": "<p>在开启 <a href=\"#globe.postEffect\">postEffect</a> 后，WebGL 默认的 MSAA (Multi Sampling Anti Aliasing) 会无法使用。这时候通过 FXAA (Fast Approximate Anti-Aliasing) 可以廉价方便的解决抗锯齿的问题，FXAA 会对一些场景的边缘部分进行模糊从而解决锯齿的问题，这在一些场景上效果还不错，但是在 echarts-gl 中，需要保证很多文字和线条边缘的锐利清晰，因此 FXAA 并不是那么适用。这时候我们可以通过设置更高的<code class=\"codespan\">devicePixelRatio</code>来使用超采样，如下所示：</p>\n<pre><code class=\"lang-js\">var chart = echarts.init(dom, null, {\n    devicePixelRatio: 2\n})\n</code></pre>\n<p>但是设置更高的<code class=\"codespan\">devicePixelRatio</code> 对电脑性能有很高的要求，所以更多时候我们建议使用 echarts-gl 中的 <a href=\"#globe.temporalSuperSampling\">temporalSuperSampling</a>，在画面静止后会持续分帧对一个像素多次抖动采样，从而达到超采样抗锯齿的效果。</p>\n"
+    "desc": "<p>在开启 <a href=\"#globe.postEffect\">postEffect</a> 后，WebGL 默认的 MSAA (Multi Sampling Anti Aliasing) 会无法使用。这时候通过 FXAA (Fast Approximate Anti-Aliasing) 可以廉价方便的解决抗锯齿的问题，FXAA 会对一些场景的边缘部分进行模糊从而解决锯齿的问题，这在一些场景上效果还不错，但是在 echarts-gl 中，需要保证很多文字和线条边缘的锐利清晰，因此 FXAA 并不是那么适用。这时候我们可以通过设置更高的<code class=\"codespan\">devicePixelRatio</code>来使用超采样，如下所示：</p>\n<pre><code class=\"lang-ts\">var chart = echarts.init(dom, null, {\n    devicePixelRatio: 2\n})\n</code></pre>\n<p>但是设置更高的<code class=\"codespan\">devicePixelRatio</code> 对电脑性能有很高的要求，所以更多时候我们建议使用 echarts-gl 中的 <a href=\"#globe.temporalSuperSampling\">temporalSuperSampling</a>，在画面静止后会持续分帧对一个像素多次抖动采样，从而达到超采样抗锯齿的效果。</p>\n"
   },
   "postEffect.FXAA.enable": {
     "desc": "<p>是否开启 FXAA。默认为不开启。</p>\n"
@@ -234,7 +234,7 @@ window.__EC_DOC_option_gl_globe = {
     "desc": "<p>鼠标进行旋转，缩放等操作时的迟滞因子，在大于 0 的时候鼠标在停止操作后，视角仍会因为一定的惯性继续运动（旋转和缩放）。</p>\n"
   },
   "viewControl.rotateSensitivity": {
-    "desc": "<p>旋转操作的灵敏度，值越大越灵敏。支持使用数组分别设置横向和纵向的旋转灵敏度。</p>\n<p>默认为<code class=\"codespan\">1</code>。</p>\n<p>设置为<code class=\"codespan\">0</code>后无法旋转。</p>\n<pre><code class=\"lang-js\">// 无法旋转\nrotateSensitivity: 0\n// 只能横向旋转\nrotateSensitivity: [1, 0]\n// 只能纵向旋转\nrotateSensitivity: [0, 1]\n</code></pre>\n"
+    "desc": "<p>旋转操作的灵敏度，值越大越灵敏。支持使用数组分别设置横向和纵向的旋转灵敏度。</p>\n<p>默认为<code class=\"codespan\">1</code>。</p>\n<p>设置为<code class=\"codespan\">0</code>后无法旋转。</p>\n<pre><code class=\"lang-ts\">// 无法旋转\nrotateSensitivity: 0\n// 只能横向旋转\nrotateSensitivity: [1, 0]\n// 只能纵向旋转\nrotateSensitivity: [0, 1]\n</code></pre>\n"
   },
   "viewControl.zoomSensitivity": {
     "desc": "<p>缩放操作的灵敏度，值越大越灵敏。默认为<code class=\"codespan\">1</code>。</p>\n<p>设置为<code class=\"codespan\">0</code>后无法缩放。</p>\n"
@@ -297,7 +297,7 @@ window.__EC_DOC_option_gl_globe = {
     "desc": "<p>过渡动画的缓动效果。</p>\n"
   },
   "viewControl.targetCoord": {
-    "desc": "<p>定位目标的经纬度坐标。设置后会忽略 <a href=\"#globe.viewControl.alpha\">alpha</a> 和 <a href=\"#globe.viewControl.beta\">beta</a>。</p>\n<pre><code class=\"lang-js\">viewControl: {\n    // 定位到北京\n    targetCoord: [116.46, 39.92]\n}\n</code></pre>\n"
+    "desc": "<p>定位目标的经纬度坐标。设置后会忽略 <a href=\"#globe.viewControl.alpha\">alpha</a> 和 <a href=\"#globe.viewControl.beta\">beta</a>。</p>\n<pre><code class=\"lang-ts\">viewControl: {\n    // 定位到北京\n    targetCoord: [116.46, 39.92]\n}\n</code></pre>\n"
   },
   "layers": {
     "desc": "<p>地球表面层的配置，你可以使用该配置项加入云层，或者对 <a href=\"#globe.baseTexture\">baseTexture</a> 进行补充绘制出国家的轮廓等等。</p>\n"
@@ -309,7 +309,7 @@ window.__EC_DOC_option_gl_globe = {
     "desc": "<p>层的类型，可选：</p>\n<ul>\n<li><code class=\"codespan\">&#39;overlay&#39;</code></li>\n</ul>\n<p>在地表上的覆盖层，可以用来显示云层等。</p>\n<ul>\n<li><code class=\"codespan\">&#39;blend&#39;</code></li>\n</ul>\n<p>跟 <a href=\"#globe.baseTexture\">baseTexture</a> 混合。</p>\n"
   },
   "layers.name": {
-    "desc": "<p>层的名字，在用 setOption 设置层属性的时候可以用 name 来标识需要更新的层。</p>\n<pre><code class=\"lang-js\">chart.setOption({\n    globe: {\n        layer: [{\n            // 更新 name 为 &#39;cloud&#39; 的层的纹理\n            name: &#39;cloud&#39;,\n            texture: &#39;cloud.png&#39;\n        }]\n    }\n});\n</code></pre>\n"
+    "desc": "<p>层的名字，在用 setOption 设置层属性的时候可以用 name 来标识需要更新的层。</p>\n<pre><code class=\"lang-ts\">chart.setOption({\n    globe: {\n        layer: [{\n            // 更新 name 为 &#39;cloud&#39; 的层的纹理\n            name: &#39;cloud&#39;,\n            texture: &#39;cloud.png&#39;\n        }]\n    }\n});\n</code></pre>\n"
   },
   "layers.blendTo": {
     "desc": "<p>在 <a href=\"#globe.layers.type\">type</a> 为 <code class=\"codespan\">&#39;blend&#39;</code> 时有效。</p>\n<p>可选：</p>\n<ul>\n<li><p><code class=\"codespan\">albedo</code> 混合到 albedo，受光照的影响。</p>\n</li>\n<li><p><code class=\"codespan\">emission</code> 混合到自发光，不受光照影响。</p>\n</li>\n</ul>\n"

@@ -18,10 +18,10 @@
     "desc": "<p>是否显示坐标轴轴线。</p>\n"
   },
   "axisLine.interval": {
-    "desc": "<p>坐标轴刻度标签的显示间隔，在类目轴中有效。</p>\n<p>默认会自动计算<code class=\"codespan\">interval</code>以保证较好的展示效果。</p>\n<p>可以设置成 0 强制显示所有标签。</p>\n<p>如果设置为 <code class=\"codespan\">1</code>，表示『隔一个标签显示一个标签』，如果值为 <code class=\"codespan\">2</code>，表示『隔两个标签显示一个标签』，以此类推。</p>\n<p>可以用数值表示间隔的数据，也可以通过回调函数控制。回调函数格式如下：</p>\n<pre><code class=\"lang-js\">(index:number, value: string) =&gt; boolean\n</code></pre>\n<p>第一个参数是类目的 index，第二个值是类目名称，如果跳过则返回 <code class=\"codespan\">false</code>。</p>\n"
+    "desc": "<p>坐标轴刻度标签的显示间隔，在类目轴中有效。</p>\n<p>默认会自动计算<code class=\"codespan\">interval</code>以保证较好的展示效果。</p>\n<p>可以设置成 0 强制显示所有标签。</p>\n<p>如果设置为 <code class=\"codespan\">1</code>，表示『隔一个标签显示一个标签』，如果值为 <code class=\"codespan\">2</code>，表示『隔两个标签显示一个标签』，以此类推。</p>\n<p>可以用数值表示间隔的数据，也可以通过回调函数控制。回调函数格式如下：</p>\n<pre><code class=\"lang-ts\">(index:number, value: string) =&gt; boolean\n</code></pre>\n<p>第一个参数是类目的 index，第二个值是类目名称，如果跳过则返回 <code class=\"codespan\">false</code>。</p>\n"
   },
   "axisLine.lineStyle.color": {
-    "desc": "<p>线条的颜色。</p>\n<p>除了颜色字符串外，支持使用数组表示的 RGBA 值，例如：</p>\n<pre><code class=\"lang-js\">// 纯白色\n[1, 1, 1, 1]\n</code></pre>\n<p>使用数组表示的时候，每个通道可以设置大于 1 的值用于表示 HDR 的色值。</p>\n"
+    "desc": "<p>线条的颜色。</p>\n<p>除了颜色字符串外，支持使用数组表示的 RGBA 值，例如：</p>\n<pre><code class=\"lang-ts\">// 纯白色\n[1, 1, 1, 1]\n</code></pre>\n<p>使用数组表示的时候，每个通道可以设置大于 1 的值用于表示 HDR 的色值。</p>\n"
   },
   "axisLine.lineStyle.opacity": {
     "desc": "<p>线条的不透明度。</p>\n"
@@ -39,10 +39,10 @@
     "desc": "<p>刻度标签与轴线之间的距离。</p>\n<p><strong>注意：</strong> 这个距离是三维空间而非屏幕空间的。</p>\n"
   },
   "axisLabel.interval": {
-    "desc": "<p>坐标轴刻度标签的显示间隔，在类目轴中有效。</p>\n<p>默认会自动计算<code class=\"codespan\">interval</code>以保证较好的展示效果。</p>\n<p>可以设置成 0 强制显示所有标签。</p>\n<p>如果设置为 <code class=\"codespan\">1</code>，表示『隔一个标签显示一个标签』，如果值为 <code class=\"codespan\">2</code>，表示『隔两个标签显示一个标签』，以此类推。</p>\n<p>可以用数值表示间隔的数据，也可以通过回调函数控制。回调函数格式如下：</p>\n<pre><code class=\"lang-js\">(index:number, value: string) =&gt; boolean\n</code></pre>\n<p>第一个参数是类目的 index，第二个值是类目名称，如果跳过则返回 <code class=\"codespan\">false</code>。</p>\n"
+    "desc": "<p>坐标轴刻度标签的显示间隔，在类目轴中有效。</p>\n<p>默认会自动计算<code class=\"codespan\">interval</code>以保证较好的展示效果。</p>\n<p>可以设置成 0 强制显示所有标签。</p>\n<p>如果设置为 <code class=\"codespan\">1</code>，表示『隔一个标签显示一个标签』，如果值为 <code class=\"codespan\">2</code>，表示『隔两个标签显示一个标签』，以此类推。</p>\n<p>可以用数值表示间隔的数据，也可以通过回调函数控制。回调函数格式如下：</p>\n<pre><code class=\"lang-ts\">(index:number, value: string) =&gt; boolean\n</code></pre>\n<p>第一个参数是类目的 index，第二个值是类目名称，如果跳过则返回 <code class=\"codespan\">false</code>。</p>\n"
   },
   "axisLabel.textStyle.color": {
-    "desc": "<p>刻度标签文字的颜色，默认取 <a href=\"#.axisLine.lineStyle.color\">axisLine.lineStyle.color</a>。支持回调函数，格式如下</p>\n<pre><code class=\"lang-js\">(val: string) =&gt; Color\n</code></pre>\n<p>参数是标签的文本，返回颜色值，如下示例：</p>\n<pre><code class=\"lang-js\">textStyle: {\n    color: function (value, index) {\n        return value &gt;= 0 ? &#39;green&#39; : &#39;red&#39;;\n    }\n}\n</code></pre>\n"
+    "desc": "<p>刻度标签文字的颜色，默认取 <a href=\"#.axisLine.lineStyle.color\">axisLine.lineStyle.color</a>。支持回调函数，格式如下</p>\n<pre><code class=\"lang-ts\">(val: string) =&gt; Color\n</code></pre>\n<p>参数是标签的文本，返回颜色值，如下示例：</p>\n<pre><code class=\"lang-ts\">textStyle: {\n    color: function (value, index) {\n        return value &gt;= 0 ? &#39;green&#39; : &#39;red&#39;;\n    }\n}\n</code></pre>\n"
   },
   "axisLabel.textStyle.borderWidth": {
     "desc": "<p>文字的描边宽度。</p>\n"
@@ -66,7 +66,7 @@
     "desc": "<p>是否显示坐标轴刻度。</p>\n"
   },
   "axisTick.interval": {
-    "desc": "<p>坐标轴刻度标签的显示间隔，在类目轴中有效。默认同 <a href=\"#.axisLabel.interval\">axisLabel.interval</a> 一样。</p>\n<p>默认会自动计算<code class=\"codespan\">interval</code>以保证较好的展示效果。</p>\n<p>可以设置成 0 强制显示所有标签。</p>\n<p>如果设置为 <code class=\"codespan\">1</code>，表示『隔一个标签显示一个标签』，如果值为 <code class=\"codespan\">2</code>，表示『隔两个标签显示一个标签』，以此类推。</p>\n<p>可以用数值表示间隔的数据，也可以通过回调函数控制。回调函数格式如下：</p>\n<pre><code class=\"lang-js\">(index:number, value: string) =&gt; boolean\n</code></pre>\n<p>第一个参数是类目的 index，第二个值是类目名称，如果跳过则返回 <code class=\"codespan\">false</code>。</p>\n"
+    "desc": "<p>坐标轴刻度标签的显示间隔，在类目轴中有效。默认同 <a href=\"#.axisLabel.interval\">axisLabel.interval</a> 一样。</p>\n<p>默认会自动计算<code class=\"codespan\">interval</code>以保证较好的展示效果。</p>\n<p>可以设置成 0 强制显示所有标签。</p>\n<p>如果设置为 <code class=\"codespan\">1</code>，表示『隔一个标签显示一个标签』，如果值为 <code class=\"codespan\">2</code>，表示『隔两个标签显示一个标签』，以此类推。</p>\n<p>可以用数值表示间隔的数据，也可以通过回调函数控制。回调函数格式如下：</p>\n<pre><code class=\"lang-ts\">(index:number, value: string) =&gt; boolean\n</code></pre>\n<p>第一个参数是类目的 index，第二个值是类目名称，如果跳过则返回 <code class=\"codespan\">false</code>。</p>\n"
   },
   "axisTick.length": {
     "desc": "<p>坐标轴刻度的长度。</p>\n"
@@ -87,10 +87,10 @@
     "desc": "<p>是否显示坐标轴轴线。</p>\n"
   },
   "splitLine.interval": {
-    "desc": "<p>坐标轴刻度标签的显示间隔，在类目轴中有效。</p>\n<p>默认会自动计算<code class=\"codespan\">interval</code>以保证较好的展示效果。</p>\n<p>可以设置成 0 强制显示所有标签。</p>\n<p>如果设置为 <code class=\"codespan\">1</code>，表示『隔一个标签显示一个标签』，如果值为 <code class=\"codespan\">2</code>，表示『隔两个标签显示一个标签』，以此类推。</p>\n<p>可以用数值表示间隔的数据，也可以通过回调函数控制。回调函数格式如下：</p>\n<pre><code class=\"lang-js\">(index:number, value: string) =&gt; boolean\n</code></pre>\n<p>第一个参数是类目的 index，第二个值是类目名称，如果跳过则返回 <code class=\"codespan\">false</code>。</p>\n"
+    "desc": "<p>坐标轴刻度标签的显示间隔，在类目轴中有效。</p>\n<p>默认会自动计算<code class=\"codespan\">interval</code>以保证较好的展示效果。</p>\n<p>可以设置成 0 强制显示所有标签。</p>\n<p>如果设置为 <code class=\"codespan\">1</code>，表示『隔一个标签显示一个标签』，如果值为 <code class=\"codespan\">2</code>，表示『隔两个标签显示一个标签』，以此类推。</p>\n<p>可以用数值表示间隔的数据，也可以通过回调函数控制。回调函数格式如下：</p>\n<pre><code class=\"lang-ts\">(index:number, value: string) =&gt; boolean\n</code></pre>\n<p>第一个参数是类目的 index，第二个值是类目名称，如果跳过则返回 <code class=\"codespan\">false</code>。</p>\n"
   },
   "splitLine.lineStyle.color": {
-    "desc": "<p>线条的颜色。</p>\n<p>除了颜色字符串外，支持使用数组表示的 RGBA 值，例如：</p>\n<pre><code class=\"lang-js\">// 纯白色\n[1, 1, 1, 1]\n</code></pre>\n<p>使用数组表示的时候，每个通道可以设置大于 1 的值用于表示 HDR 的色值。</p>\n"
+    "desc": "<p>线条的颜色。</p>\n<p>除了颜色字符串外，支持使用数组表示的 RGBA 值，例如：</p>\n<pre><code class=\"lang-ts\">// 纯白色\n[1, 1, 1, 1]\n</code></pre>\n<p>使用数组表示的时候，每个通道可以设置大于 1 的值用于表示 HDR 的色值。</p>\n"
   },
   "splitLine.lineStyle.opacity": {
     "desc": "<p>线条的不透明度。</p>\n"
@@ -105,7 +105,7 @@
     "desc": "<p>是否显示分隔区域。</p>\n"
   },
   "splitArea.interval": {
-    "desc": "<p>坐标轴分隔区域的显示间隔，在类目轴中有效。默认同 <a href=\"#.axisLabel.interval\">axisLabel.interval</a> 一样。</p>\n<p>默认会自动计算<code class=\"codespan\">interval</code>以保证较好的展示效果。</p>\n<p>可以设置成 0 强制显示所有标签。</p>\n<p>如果设置为 <code class=\"codespan\">1</code>，表示『隔一个标签显示一个标签』，如果值为 <code class=\"codespan\">2</code>，表示『隔两个标签显示一个标签』，以此类推。</p>\n<p>可以用数值表示间隔的数据，也可以通过回调函数控制。回调函数格式如下：</p>\n<pre><code class=\"lang-js\">(index:number, value: string) =&gt; boolean\n</code></pre>\n<p>第一个参数是类目的 index，第二个值是类目名称，如果跳过则返回 <code class=\"codespan\">false</code>。</p>\n"
+    "desc": "<p>坐标轴分隔区域的显示间隔，在类目轴中有效。默认同 <a href=\"#.axisLabel.interval\">axisLabel.interval</a> 一样。</p>\n<p>默认会自动计算<code class=\"codespan\">interval</code>以保证较好的展示效果。</p>\n<p>可以设置成 0 强制显示所有标签。</p>\n<p>如果设置为 <code class=\"codespan\">1</code>，表示『隔一个标签显示一个标签』，如果值为 <code class=\"codespan\">2</code>，表示『隔两个标签显示一个标签』，以此类推。</p>\n<p>可以用数值表示间隔的数据，也可以通过回调函数控制。回调函数格式如下：</p>\n<pre><code class=\"lang-ts\">(index:number, value: string) =&gt; boolean\n</code></pre>\n<p>第一个参数是类目的 index，第二个值是类目名称，如果跳过则返回 <code class=\"codespan\">false</code>。</p>\n"
   },
   "splitArea.areaStyle": {
     "desc": "<p>分隔区域的样式设置。</p>\n"
@@ -120,7 +120,7 @@
     "desc": "<p>是否显示坐标轴指示线。</p>\n"
   },
   "axisPointer.lineStyle.color": {
-    "desc": "<p>线条的颜色。</p>\n<p>除了颜色字符串外，支持使用数组表示的 RGBA 值，例如：</p>\n<pre><code class=\"lang-js\">// 纯白色\n[1, 1, 1, 1]\n</code></pre>\n<p>使用数组表示的时候，每个通道可以设置大于 1 的值用于表示 HDR 的色值。</p>\n"
+    "desc": "<p>线条的颜色。</p>\n<p>除了颜色字符串外，支持使用数组表示的 RGBA 值，例如：</p>\n<pre><code class=\"lang-ts\">// 纯白色\n[1, 1, 1, 1]\n</code></pre>\n<p>使用数组表示的时候，每个通道可以设置大于 1 的值用于表示 HDR 的色值。</p>\n"
   },
   "axisPointer.lineStyle.opacity": {
     "desc": "<p>线条的不透明度。</p>\n"
@@ -135,7 +135,7 @@
     "desc": "<p>是否显示指示线标签。默认数值轴显示，类目轴不显示。</p>\n"
   },
   "axisPointer.label.formatter": {
-    "desc": "<p>标签格式器，函数第一个参数是当前坐标轴的数值，第二个参数是所有坐标轴的数值数组。</p>\n<pre><code class=\"lang-js\">(value: number, valueAll: Array) =&gt; string\n</code></pre>\n"
+    "desc": "<p>标签格式器，函数第一个参数是当前坐标轴的数值，第二个参数是所有坐标轴的数值数组。</p>\n<pre><code class=\"lang-ts\">(value: number, valueAll: Array) =&gt; string\n</code></pre>\n"
   },
   "axisPointer.label.margin": {
     "desc": "<p>标签距离坐标轴的距离。同刻度标签一样，这个距离是三维空间而非屏幕像素。</p>\n"
@@ -159,7 +159,7 @@
     "desc": "<p>文字字体的粗细。</p>\n<p><strong>可选：</strong></p>\n<ul>\n<li><code class=\"codespan\">&#39;normal&#39;</code></li>\n<li><code class=\"codespan\">&#39;bold&#39;</code></li>\n<li><code class=\"codespan\">&#39;bolder&#39;</code></li>\n<li><code class=\"codespan\">&#39;lighter&#39;</code></li>\n<li>100 | 200 | 300 | 400...</li>\n</ul>\n"
   },
   "environment": {
-    "desc": "<p>环境贴图。支持纯色、渐变色、全景贴图的 url。默认为 <code class=\"codespan\">&#39;auto&#39;</code>，在配置有 <a href=\"#grid3D.light.ambientCubemap.texture\">light.ambientCubemap.texture</a> 的时候会使用该纹理作为环境贴图。否则则不显示环境贴图。</p>\n<p>示例：</p>\n<pre><code class=\"lang-js\">// 配置为全景贴图\nenvironment: &#39;asset/starfield.jpg&#39;\n// 配置为纯黑色的背景\nenvironment: &#39;#000&#39;\n// 配置为垂直渐变的背景\nenvironment: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{\n  offset: 0, color: &#39;#00aaff&#39; // 天空颜色\n}, {\n  offset: 0.7, color: &#39;#998866&#39; // 地面颜色\n}, {\n  offset: 1, color: &#39;#998866&#39; // 地面颜色\n}], false)\n\n</code></pre>\n"
+    "desc": "<p>环境贴图。支持纯色、渐变色、全景贴图的 url。默认为 <code class=\"codespan\">&#39;auto&#39;</code>，在配置有 <a href=\"#grid3D.light.ambientCubemap.texture\">light.ambientCubemap.texture</a> 的时候会使用该纹理作为环境贴图。否则则不显示环境贴图。</p>\n<p>示例：</p>\n<pre><code class=\"lang-ts\">// 配置为全景贴图\nenvironment: &#39;asset/starfield.jpg&#39;\n// 配置为纯黑色的背景\nenvironment: &#39;#000&#39;\n// 配置为垂直渐变的背景\nenvironment: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{\n  offset: 0, color: &#39;#00aaff&#39; // 天空颜色\n}, {\n  offset: 0.7, color: &#39;#998866&#39; // 地面颜色\n}, {\n  offset: 1, color: &#39;#998866&#39; // 地面颜色\n}], false)\n\n</code></pre>\n"
   },
   "light": {
     "desc": "<p>光照相关的设置。在 <a href=\"#grid3D.shading\">shading</a> 为 <code class=\"codespan\">&#39;color&#39;</code> 的时候无效。</p>\n<p>光照的设置会影响到组件以及组件所在坐标系上的所有图表。</p>\n<p>合理的光照设置能够让整个场景的明暗变得更丰富，更有层次。</p>\n"
@@ -198,7 +198,7 @@
     "desc": "<p>ambientCubemap 会使用纹理作为环境光的光源，会为物体提供漫反射和高光反射。可以通过 <a href=\"#grid3D.light.ambientCubemap.diffuseIntensity\">diffuseIntensity</a> 和 <a href=\"#grid3D.light.ambientCubemap.specularIntensity\">specularIntensity</a> 分别设置漫反射强度和高光反射强度。</p>\n"
   },
   "light.ambientCubemap.texture": {
-    "desc": "<p>环境光贴图的 url，支持使用<code class=\"codespan\">.hdr</code>格式的 HDR 图片。可以从 <a href=\"http://www.hdrlabs.com/sibl/archive.html\" target=\"_blank\">http://www.hdrlabs.com/sibl/archive.html</a> 等网站获取 <code class=\"codespan\">.hdr</code> 的资源。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">ambientCubemap: {\n    texture: &#39;pisa.hdr&#39;,\n    // 解析 hdr 时使用的曝光值\n    exposure: 1.0\n}\n</code></pre>\n"
+    "desc": "<p>环境光贴图的 url，支持使用<code class=\"codespan\">.hdr</code>格式的 HDR 图片。可以从 <a href=\"http://www.hdrlabs.com/sibl/archive.html\" target=\"_blank\">http://www.hdrlabs.com/sibl/archive.html</a> 等网站获取 <code class=\"codespan\">.hdr</code> 的资源。</p>\n<p>例如：</p>\n<pre><code class=\"lang-ts\">ambientCubemap: {\n    texture: &#39;pisa.hdr&#39;,\n    // 解析 hdr 时使用的曝光值\n    exposure: 1.0\n}\n</code></pre>\n"
   },
   "light.ambientCubemap.diffuseIntensity": {
     "desc": "<p>漫反射的强度。</p>\n"
@@ -279,7 +279,7 @@
     "desc": "<p>画面的饱和度。</p>\n"
   },
   "postEffect.FXAA": {
-    "desc": "<p>在开启 <a href=\"#grid3D.postEffect\">postEffect</a> 后，WebGL 默认的 MSAA (Multi Sampling Anti Aliasing) 会无法使用。这时候通过 FXAA (Fast Approximate Anti-Aliasing) 可以廉价方便的解决抗锯齿的问题，FXAA 会对一些场景的边缘部分进行模糊从而解决锯齿的问题，这在一些场景上效果还不错，但是在 echarts-gl 中，需要保证很多文字和线条边缘的锐利清晰，因此 FXAA 并不是那么适用。这时候我们可以通过设置更高的<code class=\"codespan\">devicePixelRatio</code>来使用超采样，如下所示：</p>\n<pre><code class=\"lang-js\">var chart = echarts.init(dom, null, {\n    devicePixelRatio: 2\n})\n</code></pre>\n<p>但是设置更高的<code class=\"codespan\">devicePixelRatio</code> 对电脑性能有很高的要求，所以更多时候我们建议使用 echarts-gl 中的 <a href=\"#grid3D.temporalSuperSampling\">temporalSuperSampling</a>，在画面静止后会持续分帧对一个像素多次抖动采样，从而达到超采样抗锯齿的效果。</p>\n"
+    "desc": "<p>在开启 <a href=\"#grid3D.postEffect\">postEffect</a> 后，WebGL 默认的 MSAA (Multi Sampling Anti Aliasing) 会无法使用。这时候通过 FXAA (Fast Approximate Anti-Aliasing) 可以廉价方便的解决抗锯齿的问题，FXAA 会对一些场景的边缘部分进行模糊从而解决锯齿的问题，这在一些场景上效果还不错，但是在 echarts-gl 中，需要保证很多文字和线条边缘的锐利清晰，因此 FXAA 并不是那么适用。这时候我们可以通过设置更高的<code class=\"codespan\">devicePixelRatio</code>来使用超采样，如下所示：</p>\n<pre><code class=\"lang-ts\">var chart = echarts.init(dom, null, {\n    devicePixelRatio: 2\n})\n</code></pre>\n<p>但是设置更高的<code class=\"codespan\">devicePixelRatio</code> 对电脑性能有很高的要求，所以更多时候我们建议使用 echarts-gl 中的 <a href=\"#grid3D.temporalSuperSampling\">temporalSuperSampling</a>，在画面静止后会持续分帧对一个像素多次抖动采样，从而达到超采样抗锯齿的效果。</p>\n"
   },
   "postEffect.FXAA.enable": {
     "desc": "<p>是否开启 FXAA。默认为不开启。</p>\n"
@@ -312,7 +312,7 @@
     "desc": "<p>鼠标进行旋转，缩放等操作时的迟滞因子，在大于 0 的时候鼠标在停止操作后，视角仍会因为一定的惯性继续运动（旋转和缩放）。</p>\n"
   },
   "viewControl.rotateSensitivity": {
-    "desc": "<p>旋转操作的灵敏度，值越大越灵敏。支持使用数组分别设置横向和纵向的旋转灵敏度。</p>\n<p>默认为<code class=\"codespan\">1</code>。</p>\n<p>设置为<code class=\"codespan\">0</code>后无法旋转。</p>\n<pre><code class=\"lang-js\">// 无法旋转\nrotateSensitivity: 0\n// 只能横向旋转\nrotateSensitivity: [1, 0]\n// 只能纵向旋转\nrotateSensitivity: [0, 1]\n</code></pre>\n"
+    "desc": "<p>旋转操作的灵敏度，值越大越灵敏。支持使用数组分别设置横向和纵向的旋转灵敏度。</p>\n<p>默认为<code class=\"codespan\">1</code>。</p>\n<p>设置为<code class=\"codespan\">0</code>后无法旋转。</p>\n<pre><code class=\"lang-ts\">// 无法旋转\nrotateSensitivity: 0\n// 只能横向旋转\nrotateSensitivity: [1, 0]\n// 只能纵向旋转\nrotateSensitivity: [0, 1]\n</code></pre>\n"
   },
   "viewControl.zoomSensitivity": {
     "desc": "<p>缩放操作的灵敏度，值越大越灵敏。默认为<code class=\"codespan\">1</code>。</p>\n<p>设置为<code class=\"codespan\">0</code>后无法缩放。</p>\n"

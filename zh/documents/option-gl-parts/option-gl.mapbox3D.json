@@ -3,7 +3,7 @@
     "desc": "<p>Mapbox 地图样式。同 <a href=\"https://www.mapbox.com/mapbox-gl-js/style-spec/\" target=\"_blank\">https://www.mapbox.com/mapbox-gl-js/style-spec/</a></p>\n"
   },
   "center": {
-    "desc": "<p>Mapbox 地图中心经纬度。经纬度用数组表示，例如：</p>\n<pre><code class=\"lang-js\">mapbox3D: {\n    center: [104.114129, 37.550339],\n    zoom: 3\n}\n</code></pre>\n"
+    "desc": "<p>Mapbox 地图中心经纬度。经纬度用数组表示，例如：</p>\n<pre><code class=\"lang-ts\">mapbox3D: {\n    center: [104.114129, 37.550339],\n    zoom: 3\n}\n</code></pre>\n"
   },
   "zoom": {
     "desc": "<p>Mapbox 地图的缩放等级。见 <a href=\"https://www.mapbox.com/mapbox-gl-js/style-spec/#root-zoom\" target=\"_blank\">https://www.mapbox.com/mapbox-gl-js/style-spec/#root-zoom</a></p>\n"
@@ -108,7 +108,7 @@
     "desc": "<p>ambientCubemap 会使用纹理作为环境光的光源，会为物体提供漫反射和高光反射。可以通过 <a href=\"#mapbox3D.light.ambientCubemap.diffuseIntensity\">diffuseIntensity</a> 和 <a href=\"#mapbox3D.light.ambientCubemap.specularIntensity\">specularIntensity</a> 分别设置漫反射强度和高光反射强度。</p>\n"
   },
   "light.ambientCubemap.texture": {
-    "desc": "<p>环境光贴图的 url，支持使用<code class=\"codespan\">.hdr</code>格式的 HDR 图片。可以从 <a href=\"http://www.hdrlabs.com/sibl/archive.html\" target=\"_blank\">http://www.hdrlabs.com/sibl/archive.html</a> 等网站获取 <code class=\"codespan\">.hdr</code> 的资源。</p>\n<p>例如：</p>\n<pre><code class=\"lang-js\">ambientCubemap: {\n    texture: &#39;pisa.hdr&#39;,\n    // 解析 hdr 时使用的曝光值\n    exposure: 1.0\n}\n</code></pre>\n"
+    "desc": "<p>环境光贴图的 url，支持使用<code class=\"codespan\">.hdr</code>格式的 HDR 图片。可以从 <a href=\"http://www.hdrlabs.com/sibl/archive.html\" target=\"_blank\">http://www.hdrlabs.com/sibl/archive.html</a> 等网站获取 <code class=\"codespan\">.hdr</code> 的资源。</p>\n<p>例如：</p>\n<pre><code class=\"lang-ts\">ambientCubemap: {\n    texture: &#39;pisa.hdr&#39;,\n    // 解析 hdr 时使用的曝光值\n    exposure: 1.0\n}\n</code></pre>\n"
   },
   "light.ambientCubemap.diffuseIntensity": {
     "desc": "<p>漫反射的强度。</p>\n"
@@ -189,7 +189,7 @@
     "desc": "<p>画面的饱和度。</p>\n"
   },
   "postEffect.FXAA": {
-    "desc": "<p>在开启 <a href=\"#mapbox3D.postEffect\">postEffect</a> 后，WebGL 默认的 MSAA (Multi Sampling Anti Aliasing) 会无法使用。这时候通过 FXAA (Fast Approximate Anti-Aliasing) 可以廉价方便的解决抗锯齿的问题，FXAA 会对一些场景的边缘部分进行模糊从而解决锯齿的问题，这在一些场景上效果还不错，但是在 echarts-gl 中，需要保证很多文字和线条边缘的锐利清晰，因此 FXAA 并不是那么适用。这时候我们可以通过设置更高的<code class=\"codespan\">devicePixelRatio</code>来使用超采样，如下所示：</p>\n<pre><code class=\"lang-js\">var chart = echarts.init(dom, null, {\n    devicePixelRatio: 2\n})\n</code></pre>\n<p>但是设置更高的<code class=\"codespan\">devicePixelRatio</code> 对电脑性能有很高的要求，所以更多时候我们建议使用 echarts-gl 中的 <a href=\"#mapbox3D.temporalSuperSampling\">temporalSuperSampling</a>，在画面静止后会持续分帧对一个像素多次抖动采样，从而达到超采样抗锯齿的效果。</p>\n"
+    "desc": "<p>在开启 <a href=\"#mapbox3D.postEffect\">postEffect</a> 后，WebGL 默认的 MSAA (Multi Sampling Anti Aliasing) 会无法使用。这时候通过 FXAA (Fast Approximate Anti-Aliasing) 可以廉价方便的解决抗锯齿的问题，FXAA 会对一些场景的边缘部分进行模糊从而解决锯齿的问题，这在一些场景上效果还不错，但是在 echarts-gl 中，需要保证很多文字和线条边缘的锐利清晰，因此 FXAA 并不是那么适用。这时候我们可以通过设置更高的<code class=\"codespan\">devicePixelRatio</code>来使用超采样，如下所示：</p>\n<pre><code class=\"lang-ts\">var chart = echarts.init(dom, null, {\n    devicePixelRatio: 2\n})\n</code></pre>\n<p>但是设置更高的<code class=\"codespan\">devicePixelRatio</code> 对电脑性能有很高的要求，所以更多时候我们建议使用 echarts-gl 中的 <a href=\"#mapbox3D.temporalSuperSampling\">temporalSuperSampling</a>，在画面静止后会持续分帧对一个像素多次抖动采样，从而达到超采样抗锯齿的效果。</p>\n"
   },
   "postEffect.FXAA.enable": {
     "desc": "<p>是否开启 FXAA。默认为不开启。</p>\n"

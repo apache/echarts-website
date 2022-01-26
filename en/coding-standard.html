@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en-US"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1" user-scalable="no"><meta name="description" content="ECharts, a powerful, interactive charting and visualization library for browser"><link rel="shortcut icon" href="https://echarts.apache.org/en/images/favicon.png?_v_=20200710_1"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"><!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries--><!--[if lt IE 9]><script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script><script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]--><link rel="stylesheet" type="text/css" href="https://echarts.apache.org/en/css/main.css?_v_=8cedaa8e59"><script>window.EC_WWW_LANG = 'en';
+<!DOCTYPE html><html lang="en-US"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1" user-scalable="no"><meta name="description" content="ECharts, a powerful, interactive charting and visualization library for browser"><link rel="shortcut icon" href="https://echarts.apache.org/en/images/favicon.png?_v_=20200710_1"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"><!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries--><!--[if lt IE 9]><script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script><script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]--><link rel="stylesheet" type="text/css" href="https://echarts.apache.org/en/css/main.css?_v_=393296e51a"><script>window.EC_WWW_LANG = 'en';
 </script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pace-progressbar@1.0.2/pace.min.js"></script><script id="font-hack" type="text/javascript">if (/windows/i.test(navigator.userAgent)) {
     var el = document.createElement('style');
     el.innerHTML = ''
@@ -13,7 +13,7 @@
 <h3 id="indentation">Indentation</h3>
 <p><strong>[MUST]</strong> 4 space indentation. tabs and 2 space are not allowed.</p>
 <p><strong>[MUST]</strong> <code>case</code> and <code>default</code> in <code>switch</code> must be indented.</p>
-<pre><code class="lang-js">// good
+<pre><code class="lang-ts">// good
 switch (variable) {
     case &#39;1&#39;:
         // do...
@@ -39,12 +39,12 @@ default:
 </code></pre>
 <h3 id="space">Space</h3>
 <p><strong>[MUST]</strong> Set off binary operator with spaces. But place no space between unary operator and its operand.</p>
-<pre><code class="lang-js">let a = !arr.length;
+<pre><code class="lang-ts">let a = !arr.length;
 a++;
 a = b + c;
 </code></pre>
 <p><strong>[MUST]</strong> Place 1 space before the leading brace.</p>
-<pre><code class="lang-js">// good
+<pre><code class="lang-ts">// good
 
 if (condition) {
 }
@@ -72,7 +72,7 @@ function funcName(){
 }
 </code></pre>
 <p><strong>[MUST]</strong> Place 1 space after <code>if</code> / <code>else</code> / <code>for</code> / <code>while</code> / <code>function</code> / <code>switch</code> / <code>do</code> / <code>try</code> / <code>catch</code> / <code>finally</code>.</p>
-<pre><code class="lang-js">// good
+<pre><code class="lang-ts">// good
 
 if (condition) {
 }
@@ -96,7 +96,7 @@ while(condition) {
 })();
 </code></pre>
 <p><strong>[MUST]</strong> In the object creating statement, place 1 space after <code>:</code>, but no space before it.</p>
-<pre><code class="lang-js">// good
+<pre><code class="lang-ts">// good
 const obj = {
     a: 1,
     b: 2,
@@ -111,7 +111,7 @@ const obj = {
 };
 </code></pre>
 <p><strong>[MUST]</strong> Place no space between the function name and <code>(</code> in function declaration, expression of named function and function call.</p>
-<pre><code class="lang-js">// good
+<pre><code class="lang-ts">// good
 
 function funcName() {
 }
@@ -133,14 +133,14 @@ const funcName = function funcName () {
 funcName ();
 </code></pre>
 <p><strong>[MUST]</strong> Place no space between <code>,</code> and <code>;</code>.</p>
-<pre><code class="lang-js">// good
+<pre><code class="lang-ts">// good
 callFunc(a, b);
 
 // bad
 callFunc(a , b) ;
 </code></pre>
 <p><strong>[MUST]</strong> Place no space after <code>(</code> and <code>[</code> and before <code>)</code> and <code>]</code>.</p>
-<pre><code class="lang-js">// good
+<pre><code class="lang-ts">// good
 
 callFunc(param1, param2, param3);
 
@@ -193,7 +193,7 @@ const obj3 = {name: &#39;obj&#39;, age: 20, sex: 1};
 <p><strong>[MUST]</strong> Place line break in the end of a statement.</p>
 <p><strong>[MUST]</strong> No more than 120 characters per line.</p>
 <p><strong>[MUST]</strong> Place operator at the beginning of a line if it break lines.</p>
-<pre><code class="lang-js">// good
+<pre><code class="lang-ts">// good
 if (user.isAuthenticated()
     &amp;&amp; user.isInRole(&#39;admin&#39;)
     &amp;&amp; user.hasAuthority(&#39;add-admin&#39;)
@@ -219,7 +219,7 @@ const result = number1 + number2 + number3 +
 </code></pre>
 <p><strong>[MUST]</strong> Start a new line for <code>)</code>, <code>]</code>, <code>}</code> if the content inside the brackets occupies multiple lines.
 Make the same indent as the line where the corresponding <code>(</code>, <code>[</code>, <code>{</code> placed.</p>
-<pre><code class="lang-js">// good
+<pre><code class="lang-ts">// good
 if (product) {
     product.load();
     if (user.isAuthenticated()
@@ -247,7 +247,7 @@ const arr = [
     ];
 </code></pre>
 <p><strong>[MUST]</strong> Must not break lines before <code>,</code> or <code>;</code>.</p>
-<pre><code class="lang-js">// good
+<pre><code class="lang-ts">// good
 const obj = {
     a: 1,
     b: 2,
@@ -275,7 +275,7 @@ foo(
 );
 </code></pre>
 <p><strong>[SUGGEST]</strong> Suggestion about line break and indent:</p>
-<pre><code class="lang-js">if (user.isAuthenticated()
+<pre><code class="lang-ts">if (user.isAuthenticated()
     &amp;&amp; user.isInRole(&#39;admin&#39;)
     &amp;&amp; user.hasAuthority(&#39;add-admin&#39;)
 ) {
@@ -306,7 +306,7 @@ const res = condition
     : resultB;
 </code></pre>
 <p><strong>[MUST]</strong> Start a new line for <code>else</code> and <code>catch</code> if using multi-line blocks.</p>
-<pre><code class="lang-js">// good
+<pre><code class="lang-ts">// good
 
 if (condition) {
     // some statements;
@@ -340,7 +340,7 @@ try {
 <h3 id="statement">Statement</h3>
 <p><strong>[MUST]</strong> The semicolon must not be ignored at the end of a statement.</p>
 <p><strong>[MUST]</strong> The <code>{}</code> must not be ignored even if there is only one line.</p>
-<pre><code class="lang-js">// good
+<pre><code class="lang-ts">// good
 if (condition) {
     callFunc();
 }
@@ -351,7 +351,7 @@ if (condition)
     callFunc();
 </code></pre>
 <p><strong>[MUST]</strong> Place no semicolon at the end of a function definition.</p>
-<pre><code class="lang-js">// good
+<pre><code class="lang-ts">// good
 function funcName() {
 }
 
@@ -364,7 +364,7 @@ const funcName = function () {
 };
 </code></pre>
 <p><strong>[MUST]</strong> No trailing comma in object and array declarations.</p>
-<pre><code class="lang-js">// good
+<pre><code class="lang-ts">// good
 
 const obj = {
     attr1: &#39;xxx&#39;,
@@ -391,23 +391,23 @@ const arr = [
 </code></pre>
 <h3 id="naming-conventions">Naming Conventions</h3>
 <p><strong>[MUST]</strong> Use lowerCamelCase for variables, properties and function names.</p>
-<pre><code class="lang-js">const loadingModules = {};
+<pre><code class="lang-ts">const loadingModules = {};
 function loadProduct() {
 }
 </code></pre>
 <p><strong>[MUST]</strong> Use UpperCamelCase (Pascal) for class names.</p>
-<pre><code class="lang-js">function Element(options) {
+<pre><code class="lang-ts">function Element(options) {
 }
 </code></pre>
 <p><strong>[SUGGEST]</strong> All of the letters of a abbreviation should be both upper cases or both lower cases.</p>
-<pre><code class="lang-js">function parseSVG() {
+<pre><code class="lang-ts">function parseSVG() {
 }
 const svgParser;
 </code></pre>
 <h2 id="language-features">Language features</h2>
 <h3 id="compatibility">Compatibility</h3>
 <p>Language features can be polyfilled by some utilities, but must not by modifying the prototype of the built-in JS objects.</p>
-<pre><code class="lang-js">// good
+<pre><code class="lang-ts">// good
 
 import * as zrUtil from &#39;zrender/src/core/util&#39;;
 
@@ -451,7 +451,7 @@ String.prototype.trim = function () {
 </code></pre>
 <h3 id="variable">Variable</h3>
 <p><strong>[MUST]</strong> Prefer using <code>const</code> to declare variable. And one line can not declares more than one variable.</p>
-<pre><code class="lang-js">// good
+<pre><code class="lang-ts">// good
 const name = &#39;MyName&#39;;
 const hangModules = [];
 const missModules = [];
@@ -465,7 +465,7 @@ const hangModules = [],
 </code></pre>
 <h3 id="condition">Condition</h3>
 <p><strong>[MUST]</strong> In equality expression, <code>==</code> can only be used on <code>null</code> or <code>undefined</code> detection. <code>===</code> should be used in the rest of cases .</p>
-<pre><code class="lang-js">// good
+<pre><code class="lang-ts">// good
 if (age === 30) {
     // ...
 }
@@ -481,7 +481,7 @@ if (age == 30) {
 <p><strong>[SUGGEST]</strong> Use <code>xxx == null</code> to determine <code>null</code> or <code>undefined</code>.</p>
 <p><strong>[SUGGEST]</strong> Try best to make the meaning of <code>null</code> and <code>undefined</code> the same, namely, do not make users or developers distinguishing whether a variable is <code>null</code> or <code>undefined</code>.</p>
 <p><strong>[SUGGEST]</strong> The function expression or function declaration should not be placed inside a loop body.</p>
-<pre><code class="lang-js">// good
+<pre><code class="lang-ts">// good
 function clicker() {
     // ......
 }
@@ -500,7 +500,7 @@ for (let i = 0, len = elements.length; i &lt; len; i++) {
 </code></pre>
 <h3 id="type-conversion">Type Conversion</h3>
 <p><strong>[SUGGEST]</strong> Use <code>+ &#39;&#39;</code> to convert a value to string.</p>
-<pre><code class="lang-js">// good
+<pre><code class="lang-ts">// good
 num + &#39;&#39;;
 
 // bad
@@ -509,14 +509,14 @@ num.toString();
 String(num);
 </code></pre>
 <p><strong>[SUGGEST]</strong> Use <code>+</code> to convert a value to number.</p>
-<pre><code class="lang-js">// good
+<pre><code class="lang-ts">// good
 +str;
 
 // bad
 Number(str);
 </code></pre>
 <p><strong>[MUST]</strong> The second parameter must not be ignored when using <code>parseInt</code>.</p>
-<pre><code class="lang-js">// good
+<pre><code class="lang-ts">// good
 parseInt(str, 10);
 
 // bad
@@ -525,14 +525,14 @@ parseInt(str);
 <h3 id="string-object-array">String, Object, Array</h3>
 <p><strong>[MUST]</strong> Use <code>&#39;</code> but not <code>&quot;</code> to define a string.</p>
 <p><strong>[MUST]</strong> Use object literal <code>{}</code> to create a plain object.</p>
-<pre><code class="lang-js">// good
+<pre><code class="lang-ts">// good
 const obj = {};
 
 // bad
 const obj = new Object();
 </code></pre>
 <p><strong>[MUST]</strong> If all of the properties of an object literal do not need quotation marks, they should ignore them. If quotation marks is necessary, use <code>&#39;</code> but not <code>&quot;</code>.</p>
-<pre><code class="lang-js">// good
+<pre><code class="lang-ts">// good
 const info = {
     name: &#39;someone&#39;,
     age: 28
@@ -548,13 +548,13 @@ const info2 = {
 };
 </code></pre>
 <p><strong>[MUST]</strong> The prototype of built-in objects must not be modified.</p>
-<pre><code class="lang-js">// Forbidden
+<pre><code class="lang-ts">// Forbidden
 String.prototype.trim = function () {
 };
 </code></pre>
 <p><strong>[SUGGEST]</strong> Try best to use <code>.</code> but not <code>[]</code> to visit properties of an object.</p>
 <p><strong>[SUGGEST]</strong> <code>hasOwnProperty</code> should be used to when using <code>for ... in ...</code>, in case that some extra properties is added on the prototype of <code>Object</code> in some runtime environment.</p>
-<pre><code class="lang-js">const newInfo = {};
+<pre><code class="lang-ts">const newInfo = {};
 for (const key in info) {
     if (info.hasOwnProperty(key)) {
         newInfo[key] = info[key];
@@ -562,7 +562,7 @@ for (const key in info) {
 }
 </code></pre>
 <p><strong>[MUST]</strong> Use array literal <code>[]</code> to create an array, except intending to create an array with a given length.</p>
-<pre><code class="lang-js">// good
+<pre><code class="lang-ts">// good
 const arr = [];
 const arr2 = new Array(1e4);
 
