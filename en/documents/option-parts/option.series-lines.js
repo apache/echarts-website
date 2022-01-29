@@ -683,7 +683,7 @@ window.__EC_DOC_option_series_lines = {
     "desc": "<p>Emphasis state.</p>\n"
   },
   "emphasis.disabled": {
-    "desc": "\n\n<p>Whether to disable the emphasis state.</p>\n<p>When emphasis state is disabled. There will be no highlight effect when the mouse hovered the element, tooltip is triggered, or the legend is hovered. It can be used to improve interaction fluency when there are massive graphic elements.</p>\n",
+    "desc": "\n\n\n\n<blockquote>\n<p>Since <code class=\"codespan\">v5.3.0</code></p>\n</blockquote>\n<p>Whether to disable the emphasis state.</p>\n<p>When emphasis state is disabled. There will be no highlight effect when the mouse hovered the element, tooltip is triggered, or the legend is hovered. It can be used to improve interaction fluency when there are massive graphic elements.</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "false"
@@ -1820,7 +1820,7 @@ window.__EC_DOC_option_series_lines = {
     "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Configurations of select state. Available when <a href=\"#series-lines.selectedMode\">selectedMode</a> is set.</p>\n"
   },
   "select.disabled": {
-    "desc": "\n\n<p>If data can be selected. Available when <code class=\"codespan\">selectedMode</code> is used. Can be used to disable selection for part of the data.</p>\n",
+    "desc": "\n\n\n\n<blockquote>\n<p>Since <code class=\"codespan\">v5.3.0</code></p>\n</blockquote>\n<p>If data can be selected. Available when <code class=\"codespan\">selectedMode</code> is used. Can be used to disable selection for part of the data.</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "false"
@@ -2386,7 +2386,7 @@ window.__EC_DOC_option_series_lines = {
     }
   },
   "selectedMode": {
-    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n\n\n<p>Selected mode.  It is enabled by default, and you may set it to be <code class=\"codespan\">false</code> to disabled it.</p>\n<p>Besides, it can be set to <code class=\"codespan\">&#39;single&#39;</code>, <code class=\"codespan\">&#39;multiple&#39;</code> or <code class=\"codespan\">&#39;series&#39;</code>, for single selection, multiple selections and whole series selection.</p>\n",
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n\n\n<p>Selected mode. It is enabled by default, and you may set it to be <code class=\"codespan\">false</code> to disable it.</p>\n<p>Besides, it can be set to <code class=\"codespan\">&#39;single&#39;</code>, <code class=\"codespan\">&#39;multiple&#39;</code> or <code class=\"codespan\">&#39;series&#39;</code>, for single selection, multiple selections and whole series selection.</p>\n<blockquote>\n<p><code class=\"codespan\">&#39;series&#39;</code> is supported since v5.3.0</p>\n</blockquote>\n",
     "uiControl": {
       "type": "enum",
       "options": "false,true,single,multiple,series"
@@ -2989,7 +2989,7 @@ window.__EC_DOC_option_series_lines = {
     }
   },
   "data.emphasis.disabled": {
-    "desc": "\n\n<p>Whether to disable the emphasis state.</p>\n<p>When emphasis state is disabled. There will be no highlight effect when the mouse hovered the element, tooltip is triggered, or the legend is hovered. It can be used to improve interaction fluency when there are massive graphic elements.</p>\n",
+    "desc": "\n\n\n\n<blockquote>\n<p>Since <code class=\"codespan\">v5.3.0</code></p>\n</blockquote>\n<p>Whether to disable the emphasis state.</p>\n<p>When emphasis state is disabled. There will be no highlight effect when the mouse hovered the element, tooltip is triggered, or the legend is hovered. It can be used to improve interaction fluency when there are massive graphic elements.</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "false"
@@ -4120,7 +4120,7 @@ window.__EC_DOC_option_series_lines = {
     "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n"
   },
   "data.select.disabled": {
-    "desc": "\n\n<p>If data can be selected. Available when <code class=\"codespan\">selectedMode</code> is used. Can be used to disable selection for part of the data.</p>\n",
+    "desc": "\n\n\n\n<blockquote>\n<p>Since <code class=\"codespan\">v5.3.0</code></p>\n</blockquote>\n<p>If data can be selected. Available when <code class=\"codespan\">selectedMode</code> is used. Can be used to disable selection for part of the data.</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "false"
@@ -5343,7 +5343,7 @@ window.__EC_DOC_option_series_lines = {
     "desc": "<p>Emphasis status of mark point.</p>\n"
   },
   "markPoint.emphasis.disabled": {
-    "desc": "\n\n<p>Whether to disable the emphasis state.</p>\n<p>When emphasis state is disabled. There will be no highlight effect when the mouse hovered the element, tooltip is triggered, or the legend is hovered. It can be used to improve interaction fluency when there are massive graphic elements.</p>\n",
+    "desc": "\n\n\n\n<blockquote>\n<p>Since <code class=\"codespan\">v5.3.0</code></p>\n</blockquote>\n<p>Whether to disable the emphasis state.</p>\n<p>When emphasis state is disabled. There will be no highlight effect when the mouse hovered the element, tooltip is triggered, or the legend is hovered. It can be used to improve interaction fluency when there are massive graphic elements.</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "false"
@@ -7217,7 +7217,7 @@ window.__EC_DOC_option_series_lines = {
     }
   },
   "markPoint.data.emphasis.disabled": {
-    "desc": "\n\n<p>Whether to disable the emphasis state.</p>\n<p>When emphasis state is disabled. There will be no highlight effect when the mouse hovered the element, tooltip is triggered, or the legend is hovered. It can be used to improve interaction fluency when there are massive graphic elements.</p>\n",
+    "desc": "\n\n\n\n<blockquote>\n<p>Since <code class=\"codespan\">v5.3.0</code></p>\n</blockquote>\n<p>Whether to disable the emphasis state.</p>\n<p>When emphasis state is disabled. There will be no highlight effect when the mouse hovered the element, tooltip is triggered, or the legend is hovered. It can be used to improve interaction fluency when there are massive graphic elements.</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "false"
@@ -8458,7 +8458,7 @@ window.__EC_DOC_option_series_lines = {
     "desc": "<p>Emphasis status of mark line.</p>\n"
   },
   "markLine.emphasis.disabled": {
-    "desc": "\n\n<p>Whether to disable the emphasis state.</p>\n<p>When emphasis state is disabled. There will be no highlight effect when the mouse hovered the element, tooltip is triggered, or the legend is hovered. It can be used to improve interaction fluency when there are massive graphic elements.</p>\n",
+    "desc": "\n\n\n\n<blockquote>\n<p>Since <code class=\"codespan\">v5.3.0</code></p>\n</blockquote>\n<p>Whether to disable the emphasis state.</p>\n<p>When emphasis state is disabled. There will be no highlight effect when the mouse hovered the element, tooltip is triggered, or the legend is hovered. It can be used to improve interaction fluency when there are massive graphic elements.</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "false"
@@ -10198,7 +10198,7 @@ window.__EC_DOC_option_series_lines = {
     }
   },
   "markLine.data.0.emphasis.disabled": {
-    "desc": "\n\n<p>Whether to disable the emphasis state.</p>\n<p>When emphasis state is disabled. There will be no highlight effect when the mouse hovered the element, tooltip is triggered, or the legend is hovered. It can be used to improve interaction fluency when there are massive graphic elements.</p>\n",
+    "desc": "\n\n\n\n<blockquote>\n<p>Since <code class=\"codespan\">v5.3.0</code></p>\n</blockquote>\n<p>Whether to disable the emphasis state.</p>\n<p>When emphasis state is disabled. There will be no highlight effect when the mouse hovered the element, tooltip is triggered, or the legend is hovered. It can be used to improve interaction fluency when there are massive graphic elements.</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "false"
@@ -11955,7 +11955,7 @@ window.__EC_DOC_option_series_lines = {
     }
   },
   "markLine.data.1.emphasis.disabled": {
-    "desc": "\n\n<p>Whether to disable the emphasis state.</p>\n<p>When emphasis state is disabled. There will be no highlight effect when the mouse hovered the element, tooltip is triggered, or the legend is hovered. It can be used to improve interaction fluency when there are massive graphic elements.</p>\n",
+    "desc": "\n\n\n\n<blockquote>\n<p>Since <code class=\"codespan\">v5.3.0</code></p>\n</blockquote>\n<p>Whether to disable the emphasis state.</p>\n<p>When emphasis state is disabled. There will be no highlight effect when the mouse hovered the element, tooltip is triggered, or the legend is hovered. It can be used to improve interaction fluency when there are massive graphic elements.</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "false"
@@ -13748,7 +13748,7 @@ window.__EC_DOC_option_series_lines = {
     "desc": "<p>Emphasis status of mark area.</p>\n"
   },
   "markArea.emphasis.disabled": {
-    "desc": "\n\n<p>Whether to disable the emphasis state.</p>\n<p>When emphasis state is disabled. There will be no highlight effect when the mouse hovered the element, tooltip is triggered, or the legend is hovered. It can be used to improve interaction fluency when there are massive graphic elements.</p>\n",
+    "desc": "\n\n\n\n<blockquote>\n<p>Since <code class=\"codespan\">v5.3.0</code></p>\n</blockquote>\n<p>Whether to disable the emphasis state.</p>\n<p>When emphasis state is disabled. There will be no highlight effect when the mouse hovered the element, tooltip is triggered, or the legend is hovered. It can be used to improve interaction fluency when there are massive graphic elements.</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "false"
@@ -15584,7 +15584,7 @@ window.__EC_DOC_option_series_lines = {
     }
   },
   "markArea.data.0.emphasis.disabled": {
-    "desc": "\n\n<p>Whether to disable the emphasis state.</p>\n<p>When emphasis state is disabled. There will be no highlight effect when the mouse hovered the element, tooltip is triggered, or the legend is hovered. It can be used to improve interaction fluency when there are massive graphic elements.</p>\n",
+    "desc": "\n\n\n\n<blockquote>\n<p>Since <code class=\"codespan\">v5.3.0</code></p>\n</blockquote>\n<p>Whether to disable the emphasis state.</p>\n<p>When emphasis state is disabled. There will be no highlight effect when the mouse hovered the element, tooltip is triggered, or the legend is hovered. It can be used to improve interaction fluency when there are massive graphic elements.</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "false"
@@ -17417,7 +17417,7 @@ window.__EC_DOC_option_series_lines = {
     }
   },
   "markArea.data.1.emphasis.disabled": {
-    "desc": "\n\n<p>Whether to disable the emphasis state.</p>\n<p>When emphasis state is disabled. There will be no highlight effect when the mouse hovered the element, tooltip is triggered, or the legend is hovered. It can be used to improve interaction fluency when there are massive graphic elements.</p>\n",
+    "desc": "\n\n\n\n<blockquote>\n<p>Since <code class=\"codespan\">v5.3.0</code></p>\n</blockquote>\n<p>Whether to disable the emphasis state.</p>\n<p>When emphasis state is disabled. There will be no highlight effect when the mouse hovered the element, tooltip is triggered, or the legend is hovered. It can be used to improve interaction fluency when there are massive graphic elements.</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "false"

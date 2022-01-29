@@ -121,7 +121,7 @@ window.__EC_DOC_option_series_parallel = {
     }
   },
   "emphasis.disabled": {
-    "desc": "\n\n<p>Whether to disable the emphasis state.</p>\n<p>When emphasis state is disabled. There will be no highlight effect when the mouse hovered the element, tooltip is triggered, or the legend is hovered. It can be used to improve interaction fluency when there are massive graphic elements.</p>\n",
+    "desc": "\n\n\n\n<blockquote>\n<p>Since <code class=\"codespan\">v5.3.0</code></p>\n</blockquote>\n<p>Whether to disable the emphasis state.</p>\n<p>When emphasis state is disabled. There will be no highlight effect when the mouse hovered the element, tooltip is triggered, or the legend is hovered. It can be used to improve interaction fluency when there are massive graphic elements.</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "false"
@@ -380,7 +380,7 @@ window.__EC_DOC_option_series_parallel = {
     }
   },
   "data.emphasis.disabled": {
-    "desc": "\n\n<p>Whether to disable the emphasis state.</p>\n<p>When emphasis state is disabled. There will be no highlight effect when the mouse hovered the element, tooltip is triggered, or the legend is hovered. It can be used to improve interaction fluency when there are massive graphic elements.</p>\n",
+    "desc": "\n\n\n\n<blockquote>\n<p>Since <code class=\"codespan\">v5.3.0</code></p>\n</blockquote>\n<p>Whether to disable the emphasis state.</p>\n<p>When emphasis state is disabled. There will be no highlight effect when the mouse hovered the element, tooltip is triggered, or the legend is hovered. It can be used to improve interaction fluency when there are massive graphic elements.</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "false"

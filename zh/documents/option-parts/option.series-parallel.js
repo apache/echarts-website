@@ -121,7 +121,7 @@ window.__EC_DOC_option_series_parallel = {
     }
   },
   "emphasis.disabled": {
-    "desc": "\n\n<p>是否关闭高亮状态。</p>\n<p>关闭高亮状态可以在鼠标移到图形上，tooltip 触发，或者图例联动的时候不再触发高亮效果。在图形非常多的时候可以关闭以提升交互流畅性。</p>\n",
+    "desc": "\n\n\n\n<blockquote>\n<p>从 <code class=\"codespan\">v5.3.0</code> 开始支持</p>\n</blockquote>\n<p>是否关闭高亮状态。</p>\n<p>关闭高亮状态可以在鼠标移到图形上，tooltip 触发，或者图例联动的时候不再触发高亮效果。在图形非常多的时候可以关闭以提升交互流畅性。</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "false"
@@ -380,7 +380,7 @@ window.__EC_DOC_option_series_parallel = {
     }
   },
   "data.emphasis.disabled": {
-    "desc": "\n\n<p>是否关闭高亮状态。</p>\n<p>关闭高亮状态可以在鼠标移到图形上，tooltip 触发，或者图例联动的时候不再触发高亮效果。在图形非常多的时候可以关闭以提升交互流畅性。</p>\n",
+    "desc": "\n\n\n\n<blockquote>\n<p>从 <code class=\"codespan\">v5.3.0</code> 开始支持</p>\n</blockquote>\n<p>是否关闭高亮状态。</p>\n<p>关闭高亮状态可以在鼠标移到图形上，tooltip 触发，或者图例联动的时候不再触发高亮效果。在图形非常多的时候可以关闭以提升交互流畅性。</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "false"

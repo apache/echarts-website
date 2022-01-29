@@ -3847,7 +3847,7 @@ window.__EC_DOC_option_series_sunburst = {
     }
   },
   "selectedMode": {
-    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n\n\n<p>Selected mode.  It is enabled by default, and you may set it to be <code class=\"codespan\">false</code> to disabled it.</p>\n<p>Besides, it can be set to <code class=\"codespan\">&#39;single&#39;</code>, <code class=\"codespan\">&#39;multiple&#39;</code> or <code class=\"codespan\">&#39;series&#39;</code>, for single selection, multiple selections and whole series selection.</p>\n",
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n\n\n<p>Selected mode. It is enabled by default, and you may set it to be <code class=\"codespan\">false</code> to disable it.</p>\n<p>Besides, it can be set to <code class=\"codespan\">&#39;single&#39;</code>, <code class=\"codespan\">&#39;multiple&#39;</code> or <code class=\"codespan\">&#39;series&#39;</code>, for single selection, multiple selections and whole series selection.</p>\n<blockquote>\n<p><code class=\"codespan\">&#39;series&#39;</code> is supported since v5.3.0</p>\n</blockquote>\n",
     "uiControl": {
       "type": "enum",
       "options": "false,true,single,multiple,series"
