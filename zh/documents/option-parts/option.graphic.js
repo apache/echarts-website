@@ -128,9 +128,6 @@ window.__EC_DOC_option_graphic = {
   "elements-group.silent": {
     "desc": "<p>是否不响应鼠标以及触摸事件。</p>\n"
   },
-  "elements-group.invisible": {
-    "desc": "<p>节点是否可见。</p>\n"
-  },
   "elements-group.ignore": {
     "desc": "<p>节点是否完全被忽略（既不渲染，也不响应事件）。</p>\n"
   },
@@ -176,19 +173,8 @@ window.__EC_DOC_option_graphic = {
   "elements-group.during": {
     "desc": "<p>在动画的每一帧里，用户可以使用 <code class=\"codespan\">during</code> 回调来设定节点的各种属性。</p>\n<pre><code class=\"lang-ts\">(duringAPI: CustomDuringAPI) =&gt; void\n\ninterface CustomDuringAPI {\n    // 设置 transform 属性值。\n    // transform 属性参见 `TransformProp`。\n    setTransform(key: TransformProp, val: unknown): void;\n    // 获得当前动画帧的 transform 属性值。\n    getTransform(key: TransformProp): unknown;\n    // 设置 shape 属性值。\n    // shape 属性形如：`{ type: &#39;rect&#39;, shape: { xxxProp: xxxValue } }`。\n    setShape(key: string, val: unknown): void;\n    // 获得当前动画帧的 shape 属性值。\n    getShape(key: string): unknown;\n    // 设置 style 属性值。\n    // style 属性形如：`{ type: &#39;rect&#39;, style: { xxxProp: xxxValue } }`。\n    setStyle(key: string, val: unknown): void;\n    // 获得当前动画帧的 style 属性值。\n    getStyle(key: string): unknown;\n    // 设置 extra 属性值。\n    // extra 属性形如：`{ type: &#39;rect&#39;, extra: { xxxProp: xxxValue } }`。\n    setExtra(key: string, val: unknown): void;\n    // 获得当前动画帧的 extra 属性值。\n    getExtra(key: string): unknown;\n}\n\ntype TransformProp =\n    &#39;x&#39; | &#39;y&#39; | &#39;scaleX&#39; | &#39;scaleY&#39; | &#39;originX&#39; | &#39;originY&#39; | &#39;rotation&#39;;\n</code></pre>\n<p>在绝大多数场景下，用户不需要这个 <code class=\"codespan\">during</code> 回调。因为，假如属性被设定到 <a href=\"option.html#series-custom.renderItem.return_rect.transition\" target=\"_blank\">transition</a> 中后，echarts 会自动对它进行插值，并且基于这些插值形成动画。但是，如果这些插值形成的动画不满足用户需求，那么用户可以使用 <code class=\"codespan\">during</code> 回调来定制他们。</p>\n<p>例如，如果用户使用 <a href=\"option.html#series-custom.renderItem.return_polygon\" target=\"_blank\">polygon</a> 画图形，图形的形状会由 <a href=\"option.html#series-custom.renderItem.return_polygon.shape.points\" target=\"_blank\">shape.points</a> 来定义，形如：</p>\n<pre><code class=\"lang-ts\">{\n    type: &#39;polygon&#39;,\n    shape: {\n        points: [[12, 33], [15, 36], [19, 39], ...]\n    },\n    // ...\n}\n</code></pre>\n<p>如果用户指定了 <a href=\"option.html#series-custom.renderItem.return_polygon.transition\" target=\"_blank\">transition</a> 如：</p>\n<pre><code class=\"lang-ts\">{\n    type: &#39;polygon&#39;,\n    shape: {\n        points: [[12, 33], [15, 36], [19, 39], ...],\n    },\n    transition: &#39;shape&#39;\n    // ...\n}\n</code></pre>\n<p>尽管这些 <code class=\"codespan\">points</code> 会被 echarts 自动插值，但是这样形成的动画里，这些点会直线走向目标位置。假如用户需求是，这些点要按照某种特定的路径（如弧线、螺旋）来移动，则这就不满足了。所以在这种情况下，可以使用 <code class=\"codespan\">during</code> 回调如下：</p>\n<pre><code class=\"lang-ts\">{\n    type: &#39;polygon&#39;,\n    shape: {\n        points: calculatePoints(initialDegree),\n        transition: &#39;points&#39;\n    },\n    extra: {\n        degree: nextDegree\n    },\n    // 让 echarts 对 `extra.degree` 进行插值，然后基于\n    // `extra.degree` 来计算动画中每一帧时的 polygon 形状。\n    transition: &#39;extra&#39;,\n    during: function (duringAPI) {\n        var currentDegree = duringAPI.getExtra(&#39;degree&#39;);\n        duringAPI.setShape(calculatePoints(currentDegree));\n    }\n    // ...\n}\n</code></pre>\n<p>也参见这个 <a href=\"https://echarts.apache.org/examples/zh/editor.html?c=custom-spiral-race&amp;edit=1&amp;reset=1\" target=\"_blank\">例子</a>。</p>\n"
   },
-  "elements-group.cursor": {
-    "desc": "\n\n<p>鼠标悬浮时在图形元素上时鼠标的样式是什么。同 CSS 的 <code class=\"codespan\">cursor</code>。</p>\n",
-    "uiControl": {
-      "type": "enum",
-      "options": "auto,pointer,move",
-      "default": "pointer"
-    }
-  },
   "elements-group.draggable": {
-    "desc": "<p>图形元素是否可以被拖拽。</p>\n"
-  },
-  "elements-group.progressive": {
-    "desc": "<p>是否渐进式渲染。当图形元素过多时才使用。</p>\n"
+    "desc": "<p>图形元素是否可以被拖拽。</p>\n<p>设置为 <code class=\"codespan\">true/false</code> 以启用/禁用拖拽，也可以设置为 <code class=\"codespan\">&#39;horizontal&#39;/&#39;vertical&#39;</code> 限制只允许水平或垂直方向拖拽。</p>\n"
   },
   "elements-group.width": {
     "desc": "<p>用于描述此 <code class=\"codespan\">group</code> 的宽。</p>\n<p>这个宽只用于给子节点定位。</p>\n<p>即便当宽度为零的时候，子节点也可以使用 <code class=\"codespan\">left: &#39;center&#39;</code> 相对于父节点水平居中。</p>\n"
@@ -379,7 +365,7 @@ window.__EC_DOC_option_graphic = {
     }
   },
   "elements-image.draggable": {
-    "desc": "<p>图形元素是否可以被拖拽。</p>\n"
+    "desc": "<p>图形元素是否可以被拖拽。</p>\n<p>设置为 <code class=\"codespan\">true/false</code> 以启用/禁用拖拽，也可以设置为 <code class=\"codespan\">&#39;horizontal&#39;/&#39;vertical&#39;</code> 限制只允许水平或垂直方向拖拽。</p>\n"
   },
   "elements-image.progressive": {
     "desc": "<p>是否渐进式渲染。当图形元素过多时才使用。</p>\n"
@@ -609,7 +595,7 @@ window.__EC_DOC_option_graphic = {
     }
   },
   "elements-text.draggable": {
-    "desc": "<p>图形元素是否可以被拖拽。</p>\n"
+    "desc": "<p>图形元素是否可以被拖拽。</p>\n<p>设置为 <code class=\"codespan\">true/false</code> 以启用/禁用拖拽，也可以设置为 <code class=\"codespan\">&#39;horizontal&#39;/&#39;vertical&#39;</code> 限制只允许水平或垂直方向拖拽。</p>\n"
   },
   "elements-text.progressive": {
     "desc": "<p>是否渐进式渲染。当图形元素过多时才使用。</p>\n"
@@ -842,7 +828,7 @@ window.__EC_DOC_option_graphic = {
     }
   },
   "elements-rect.draggable": {
-    "desc": "<p>图形元素是否可以被拖拽。</p>\n"
+    "desc": "<p>图形元素是否可以被拖拽。</p>\n<p>设置为 <code class=\"codespan\">true/false</code> 以启用/禁用拖拽，也可以设置为 <code class=\"codespan\">&#39;horizontal&#39;/&#39;vertical&#39;</code> 限制只允许水平或垂直方向拖拽。</p>\n"
   },
   "elements-rect.progressive": {
     "desc": "<p>是否渐进式渲染。当图形元素过多时才使用。</p>\n"
@@ -1078,7 +1064,7 @@ window.__EC_DOC_option_graphic = {
     }
   },
   "elements-circle.draggable": {
-    "desc": "<p>图形元素是否可以被拖拽。</p>\n"
+    "desc": "<p>图形元素是否可以被拖拽。</p>\n<p>设置为 <code class=\"codespan\">true/false</code> 以启用/禁用拖拽，也可以设置为 <code class=\"codespan\">&#39;horizontal&#39;/&#39;vertical&#39;</code> 限制只允许水平或垂直方向拖拽。</p>\n"
   },
   "elements-circle.progressive": {
     "desc": "<p>是否渐进式渲染。当图形元素过多时才使用。</p>\n"
@@ -1308,7 +1294,7 @@ window.__EC_DOC_option_graphic = {
     }
   },
   "elements-ring.draggable": {
-    "desc": "<p>图形元素是否可以被拖拽。</p>\n"
+    "desc": "<p>图形元素是否可以被拖拽。</p>\n<p>设置为 <code class=\"codespan\">true/false</code> 以启用/禁用拖拽，也可以设置为 <code class=\"codespan\">&#39;horizontal&#39;/&#39;vertical&#39;</code> 限制只允许水平或垂直方向拖拽。</p>\n"
   },
   "elements-ring.progressive": {
     "desc": "<p>是否渐进式渲染。当图形元素过多时才使用。</p>\n"
@@ -1541,7 +1527,7 @@ window.__EC_DOC_option_graphic = {
     }
   },
   "elements-sector.draggable": {
-    "desc": "<p>图形元素是否可以被拖拽。</p>\n"
+    "desc": "<p>图形元素是否可以被拖拽。</p>\n<p>设置为 <code class=\"codespan\">true/false</code> 以启用/禁用拖拽，也可以设置为 <code class=\"codespan\">&#39;horizontal&#39;/&#39;vertical&#39;</code> 限制只允许水平或垂直方向拖拽。</p>\n"
   },
   "elements-sector.progressive": {
     "desc": "<p>是否渐进式渲染。当图形元素过多时才使用。</p>\n"
@@ -1783,7 +1769,7 @@ window.__EC_DOC_option_graphic = {
     }
   },
   "elements-arc.draggable": {
-    "desc": "<p>图形元素是否可以被拖拽。</p>\n"
+    "desc": "<p>图形元素是否可以被拖拽。</p>\n<p>设置为 <code class=\"codespan\">true/false</code> 以启用/禁用拖拽，也可以设置为 <code class=\"codespan\">&#39;horizontal&#39;/&#39;vertical&#39;</code> 限制只允许水平或垂直方向拖拽。</p>\n"
   },
   "elements-arc.progressive": {
     "desc": "<p>是否渐进式渲染。当图形元素过多时才使用。</p>\n"
@@ -2025,7 +2011,7 @@ window.__EC_DOC_option_graphic = {
     }
   },
   "elements-polygon.draggable": {
-    "desc": "<p>图形元素是否可以被拖拽。</p>\n"
+    "desc": "<p>图形元素是否可以被拖拽。</p>\n<p>设置为 <code class=\"codespan\">true/false</code> 以启用/禁用拖拽，也可以设置为 <code class=\"codespan\">&#39;horizontal&#39;/&#39;vertical&#39;</code> 限制只允许水平或垂直方向拖拽。</p>\n"
   },
   "elements-polygon.progressive": {
     "desc": "<p>是否渐进式渲染。当图形元素过多时才使用。</p>\n"
@@ -2255,7 +2241,7 @@ window.__EC_DOC_option_graphic = {
     }
   },
   "elements-polyline.draggable": {
-    "desc": "<p>图形元素是否可以被拖拽。</p>\n"
+    "desc": "<p>图形元素是否可以被拖拽。</p>\n<p>设置为 <code class=\"codespan\">true/false</code> 以启用/禁用拖拽，也可以设置为 <code class=\"codespan\">&#39;horizontal&#39;/&#39;vertical&#39;</code> 限制只允许水平或垂直方向拖拽。</p>\n"
   },
   "elements-polyline.progressive": {
     "desc": "<p>是否渐进式渲染。当图形元素过多时才使用。</p>\n"
@@ -2485,7 +2471,7 @@ window.__EC_DOC_option_graphic = {
     }
   },
   "elements-line.draggable": {
-    "desc": "<p>图形元素是否可以被拖拽。</p>\n"
+    "desc": "<p>图形元素是否可以被拖拽。</p>\n<p>设置为 <code class=\"codespan\">true/false</code> 以启用/禁用拖拽，也可以设置为 <code class=\"codespan\">&#39;horizontal&#39;/&#39;vertical&#39;</code> 限制只允许水平或垂直方向拖拽。</p>\n"
   },
   "elements-line.progressive": {
     "desc": "<p>是否渐进式渲染。当图形元素过多时才使用。</p>\n"
@@ -2721,7 +2707,7 @@ window.__EC_DOC_option_graphic = {
     }
   },
   "elements-bezierCurve.draggable": {
-    "desc": "<p>图形元素是否可以被拖拽。</p>\n"
+    "desc": "<p>图形元素是否可以被拖拽。</p>\n<p>设置为 <code class=\"codespan\">true/false</code> 以启用/禁用拖拽，也可以设置为 <code class=\"codespan\">&#39;horizontal&#39;/&#39;vertical&#39;</code> 限制只允许水平或垂直方向拖拽。</p>\n"
   },
   "elements-bezierCurve.progressive": {
     "desc": "<p>是否渐进式渲染。当图形元素过多时才使用。</p>\n"

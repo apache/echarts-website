@@ -886,6 +886,20 @@
       "default": "0%"
     }
   },
+  "width": {
+    "desc": "\n\n<p>dataZoom-slider 组件的宽度。竖直布局默认 30，水平布局默认自适应。</p>\n<p>比 <code class=\"codespan\">left</code> 和 <code class=\"codespan\">right</code> 优先级高。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "30"
+    }
+  },
+  "height": {
+    "desc": "\n\n<p>dataZoom-slider 组件的高度。水平布局默认 30，竖直布局默认自适应。</p>\n<p>比 <code class=\"codespan\">top</code> 和 <code class=\"codespan\">bottom</code> 优先级高。</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "30"
+    }
+  },
   "brushSelect": {
     "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>是否开启刷选功能。在下图的 brush 区域你可以按住鼠标左键后框选出选中部分。</p>\n<p><img width=\"600\" height=\"auto\" src=\"documents/asset/img/dataZoom-zone.png\"></p>\n"
   },

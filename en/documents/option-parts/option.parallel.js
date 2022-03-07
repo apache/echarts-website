@@ -637,7 +637,7 @@ window.__EC_DOC_option_parallel = {
     }
   },
   "parallelAxisDefault.interval": {
-    "desc": "\n\n<p>Compulsively set segmentation interval for axis.</p>\n<p>As <a href=\"#parallelAxis.splitNumber\">splitNumber</a> is a recommendation value, the calculated tick may not be the same as expected. In this case, interval should be used along with <a href=\"#parallelAxis.min\">min</a> and <a href=\"#parallelAxis.max\">max</a> to compulsively set tickings. But in most cases, we do not suggest using this, out automatic calculation is enough for most situations.</p>\n<p>This is unavailable for category axis. Timestamp should be passed for <a href=\"#parallelAxis.type\">type</a>: &#39;time&#39; axis. Logged value should be passed for <a href=\"#parallelAxis.type\">type</a>: &#39;log&#39; axis.</p>\n",
+    "desc": "\n\n<p>Compulsively set segmentation interval for axis.</p>\n<p>As <a href=\"#parallelAxis.splitNumber\">splitNumber</a> is a recommendation value, the calculated tick may not be the same as expected. In this case, interval should be used along with <a href=\"#parallelAxis.min\">min</a> and <a href=\"#parallelAxis.max\">max</a> to compulsively set tickings. But in most cases, we do not suggest using this, our automatic calculation is enough for most situations.</p>\n<p>This is unavailable for category axis. Timestamp should be passed for <a href=\"#parallelAxis.type\">type</a>: &#39;time&#39; axis. Logged value should be passed for <a href=\"#parallelAxis.type\">type</a>: &#39;log&#39; axis.</p>\n",
     "uiControl": {
       "type": "number"
     }

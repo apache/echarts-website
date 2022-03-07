@@ -128,9 +128,6 @@ window.__EC_DOC_option_graphic = {
   "elements-group.silent": {
     "desc": "<p>Whether response to mouse events / touch events.</p>\n"
   },
-  "elements-group.invisible": {
-    "desc": "<p>Whether the element is visible.</p>\n"
-  },
   "elements-group.ignore": {
     "desc": "<p>Whether the element is totally ignored (neither render nor listen events).</p>\n"
   },
@@ -176,19 +173,8 @@ window.__EC_DOC_option_graphic = {
   "elements-group.during": {
     "desc": "<p><code class=\"codespan\">during</code> callback enable users to set props to an element in each animation frame.</p>\n<pre><code class=\"lang-ts\">(duringAPI: CustomDuringAPI) =&gt; void\n\ninterface CustomDuringAPI {\n    // Set transform prop value.\n    // Transform prop see `TransformProp`.\n    setTransform(key: TransformProp, val: unknown): void;\n    // Get transform prop value of the current animation frame.\n    getTransform(key: TransformProp): unknown;\n    // Set shape prop value.\n    // Shape prop is like `{ type: &#39;rect&#39;, shape: { xxxProp: xxxValue } }`.\n    setShape(key: string, val: unknown): void;\n    // Get shape prop value of the current animation frame.\n    getShape(key: string): unknown;\n    // Set style prop value.\n    // Style prop is like `{ type: &#39;rect&#39;, style: { xxxProp: xxxValue } }`.\n    setStyle(key: string, val: unknown): void;\n    // Get style prop value of the current animation frame.\n    getStyle(key: string): unknown;\n    // Set extra prop value.\n    // Extra prop is like `{ type: &#39;rect&#39;, extra: { xxxProp: xxxValue } }`.\n    setExtra(key: string, val: unknown): void;\n    // Get extra prop value of the current animation frame.\n    getExtra(key: string): unknown;\n}\n\ntype TransformProp =\n    &#39;x&#39; | &#39;y&#39; | &#39;scaleX&#39; | &#39;scaleY&#39; | &#39;originX&#39; | &#39;originY&#39; | &#39;rotation&#39;;\n</code></pre>\n<p>In most cases users do not need this <code class=\"codespan\">during</code> callback. For example, if some props are specified in <a href=\"option.html#series-custom.renderItem.return_rect.transition\" target=\"_blank\">transition</a>, echarts will make interpolation for these props internally and therefore have animation based on these props automatically. But if this kind of internal interpolation does not match the user requirements of animation, users can use this <code class=\"codespan\">during</code> callback to customize them.</p>\n<p>For example, if users are using <a href=\"option.html#series-custom.renderItem.return_polygon\" target=\"_blank\">polygon</a> shape. The shape is described by <a href=\"option.html#series-custom.renderItem.return_polygon.shape.points\" target=\"_blank\">shape.points</a>, which is an points array like:</p>\n<pre><code class=\"lang-ts\">{\n    type: &#39;polygon&#39;,\n    shape: {\n        points: [[12, 33], [15, 36], [19, 39], ...]\n    },\n    // ...\n}\n</code></pre>\n<p>If users specify them into <a href=\"option.html#series-custom.renderItem.return_polygon.transition\" target=\"_blank\">transition</a> like:</p>\n<pre><code class=\"lang-ts\">{\n    type: &#39;polygon&#39;,\n    shape: {\n        points: [[12, 33], [15, 36], [19, 39], ...],\n    },\n    transition: &#39;shape&#39;\n    // ...\n}\n</code></pre>\n<p>Although the points will be interpolated, the consequent animation will be like that each point runs straight to the target position, which might do not match the user requirement if some kind of track like spiral is actually needed. In this case, users can use the <code class=\"codespan\">during</code> callback like that:</p>\n<pre><code class=\"lang-ts\">{\n    type: &#39;polygon&#39;,\n    shape: {\n        points: calculatePoints(initialDegree),\n        transition: &#39;points&#39;\n    },\n    extra: {\n        degree: nextDegree\n    },\n    // Make echarts interpolate `extra.degree` internally, based on which\n    // we calculate the `points` in each animation frame.\n    transition: &#39;extra&#39;,\n    during: function (duringAPI) {\n        var currentDegree = duringAPI.getExtra(&#39;degree&#39;);\n        duringAPI.setShape(calculatePoints(currentDegree));\n    }\n    // ...\n}\n</code></pre>\n<p>See this example <a href=\"https://echarts.apache.org/examples/en/editor.html?c=custom-spiral-race&amp;edit=1&amp;reset=1\" target=\"_blank\">example</a>.</p>\n"
   },
-  "elements-group.cursor": {
-    "desc": "\n\n<p>The mouse style when mouse hovers on an element, the same as <code class=\"codespan\">cursor</code> property in <code class=\"codespan\">CSS</code>.</p>\n",
-    "uiControl": {
-      "type": "enum",
-      "options": "auto,pointer,move",
-      "default": "pointer"
-    }
-  },
   "elements-group.draggable": {
-    "desc": "<p>Can be dragged or not.</p>\n"
-  },
-  "elements-group.progressive": {
-    "desc": "<p>Whether use progressive render to improve performance. Usually used when number of element is too large.</p>\n"
+    "desc": "<p>Whether the element is draggable.</p>\n<p>You may set it to be <code class=\"codespan\">true/false</code> to enable/disable dragging, or set it to be <code class=\"codespan\">&#39;horizontal&#39;/&#39;vertical&#39;</code> to make the element only horizontally/vertically draggable.</p>\n"
   },
   "elements-group.width": {
     "desc": "<p>Specify width of this <code class=\"codespan\">group</code>.</p>\n<p>This width is only used for the positioning of its children.</p>\n<p>When width is <code class=\"codespan\">0</code>, children can also be positioned according to its parent using <code class=\"codespan\">left: &#39;center&#39;</code>.</p>\n"
@@ -379,7 +365,7 @@ window.__EC_DOC_option_graphic = {
     }
   },
   "elements-image.draggable": {
-    "desc": "<p>Can be dragged or not.</p>\n"
+    "desc": "<p>Whether the element is draggable.</p>\n<p>You may set it to be <code class=\"codespan\">true/false</code> to enable/disable dragging, or set it to be <code class=\"codespan\">&#39;horizontal&#39;/&#39;vertical&#39;</code> to make the element only horizontally/vertically draggable.</p>\n"
   },
   "elements-image.progressive": {
     "desc": "<p>Whether use progressive render to improve performance. Usually used when number of element is too large.</p>\n"
@@ -609,7 +595,7 @@ window.__EC_DOC_option_graphic = {
     }
   },
   "elements-text.draggable": {
-    "desc": "<p>Can be dragged or not.</p>\n"
+    "desc": "<p>Whether the element is draggable.</p>\n<p>You may set it to be <code class=\"codespan\">true/false</code> to enable/disable dragging, or set it to be <code class=\"codespan\">&#39;horizontal&#39;/&#39;vertical&#39;</code> to make the element only horizontally/vertically draggable.</p>\n"
   },
   "elements-text.progressive": {
     "desc": "<p>Whether use progressive render to improve performance. Usually used when number of element is too large.</p>\n"
@@ -842,7 +828,7 @@ window.__EC_DOC_option_graphic = {
     }
   },
   "elements-rect.draggable": {
-    "desc": "<p>Can be dragged or not.</p>\n"
+    "desc": "<p>Whether the element is draggable.</p>\n<p>You may set it to be <code class=\"codespan\">true/false</code> to enable/disable dragging, or set it to be <code class=\"codespan\">&#39;horizontal&#39;/&#39;vertical&#39;</code> to make the element only horizontally/vertically draggable.</p>\n"
   },
   "elements-rect.progressive": {
     "desc": "<p>Whether use progressive render to improve performance. Usually used when number of element is too large.</p>\n"
@@ -1078,7 +1064,7 @@ window.__EC_DOC_option_graphic = {
     }
   },
   "elements-circle.draggable": {
-    "desc": "<p>Can be dragged or not.</p>\n"
+    "desc": "<p>Whether the element is draggable.</p>\n<p>You may set it to be <code class=\"codespan\">true/false</code> to enable/disable dragging, or set it to be <code class=\"codespan\">&#39;horizontal&#39;/&#39;vertical&#39;</code> to make the element only horizontally/vertically draggable.</p>\n"
   },
   "elements-circle.progressive": {
     "desc": "<p>Whether use progressive render to improve performance. Usually used when number of element is too large.</p>\n"
@@ -1308,7 +1294,7 @@ window.__EC_DOC_option_graphic = {
     }
   },
   "elements-ring.draggable": {
-    "desc": "<p>Can be dragged or not.</p>\n"
+    "desc": "<p>Whether the element is draggable.</p>\n<p>You may set it to be <code class=\"codespan\">true/false</code> to enable/disable dragging, or set it to be <code class=\"codespan\">&#39;horizontal&#39;/&#39;vertical&#39;</code> to make the element only horizontally/vertically draggable.</p>\n"
   },
   "elements-ring.progressive": {
     "desc": "<p>Whether use progressive render to improve performance. Usually used when number of element is too large.</p>\n"
@@ -1541,7 +1527,7 @@ window.__EC_DOC_option_graphic = {
     }
   },
   "elements-sector.draggable": {
-    "desc": "<p>Can be dragged or not.</p>\n"
+    "desc": "<p>Whether the element is draggable.</p>\n<p>You may set it to be <code class=\"codespan\">true/false</code> to enable/disable dragging, or set it to be <code class=\"codespan\">&#39;horizontal&#39;/&#39;vertical&#39;</code> to make the element only horizontally/vertically draggable.</p>\n"
   },
   "elements-sector.progressive": {
     "desc": "<p>Whether use progressive render to improve performance. Usually used when number of element is too large.</p>\n"
@@ -1783,7 +1769,7 @@ window.__EC_DOC_option_graphic = {
     }
   },
   "elements-arc.draggable": {
-    "desc": "<p>Can be dragged or not.</p>\n"
+    "desc": "<p>Whether the element is draggable.</p>\n<p>You may set it to be <code class=\"codespan\">true/false</code> to enable/disable dragging, or set it to be <code class=\"codespan\">&#39;horizontal&#39;/&#39;vertical&#39;</code> to make the element only horizontally/vertically draggable.</p>\n"
   },
   "elements-arc.progressive": {
     "desc": "<p>Whether use progressive render to improve performance. Usually used when number of element is too large.</p>\n"
@@ -2025,7 +2011,7 @@ window.__EC_DOC_option_graphic = {
     }
   },
   "elements-polygon.draggable": {
-    "desc": "<p>Can be dragged or not.</p>\n"
+    "desc": "<p>Whether the element is draggable.</p>\n<p>You may set it to be <code class=\"codespan\">true/false</code> to enable/disable dragging, or set it to be <code class=\"codespan\">&#39;horizontal&#39;/&#39;vertical&#39;</code> to make the element only horizontally/vertically draggable.</p>\n"
   },
   "elements-polygon.progressive": {
     "desc": "<p>Whether use progressive render to improve performance. Usually used when number of element is too large.</p>\n"
@@ -2255,7 +2241,7 @@ window.__EC_DOC_option_graphic = {
     }
   },
   "elements-polyline.draggable": {
-    "desc": "<p>Can be dragged or not.</p>\n"
+    "desc": "<p>Whether the element is draggable.</p>\n<p>You may set it to be <code class=\"codespan\">true/false</code> to enable/disable dragging, or set it to be <code class=\"codespan\">&#39;horizontal&#39;/&#39;vertical&#39;</code> to make the element only horizontally/vertically draggable.</p>\n"
   },
   "elements-polyline.progressive": {
     "desc": "<p>Whether use progressive render to improve performance. Usually used when number of element is too large.</p>\n"
@@ -2485,7 +2471,7 @@ window.__EC_DOC_option_graphic = {
     }
   },
   "elements-line.draggable": {
-    "desc": "<p>Can be dragged or not.</p>\n"
+    "desc": "<p>Whether the element is draggable.</p>\n<p>You may set it to be <code class=\"codespan\">true/false</code> to enable/disable dragging, or set it to be <code class=\"codespan\">&#39;horizontal&#39;/&#39;vertical&#39;</code> to make the element only horizontally/vertically draggable.</p>\n"
   },
   "elements-line.progressive": {
     "desc": "<p>Whether use progressive render to improve performance. Usually used when number of element is too large.</p>\n"
@@ -2721,7 +2707,7 @@ window.__EC_DOC_option_graphic = {
     }
   },
   "elements-bezierCurve.draggable": {
-    "desc": "<p>Can be dragged or not.</p>\n"
+    "desc": "<p>Whether the element is draggable.</p>\n<p>You may set it to be <code class=\"codespan\">true/false</code> to enable/disable dragging, or set it to be <code class=\"codespan\">&#39;horizontal&#39;/&#39;vertical&#39;</code> to make the element only horizontally/vertically draggable.</p>\n"
   },
   "elements-bezierCurve.progressive": {
     "desc": "<p>Whether use progressive render to improve performance. Usually used when number of element is too large.</p>\n"

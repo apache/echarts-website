@@ -27,7 +27,7 @@ window.__EC_DOC_option_visualMap_continuous = {
     }
   },
   "realtime": {
-    "desc": "\n\n<p>拖拽时，是否实时更新。</p>\n<ul>\n<li><p>如果为<code class=\"codespan\">ture</code>则拖拽手柄过程中实时更新图表视图。</p>\n</li>\n<li><p>如果为<code class=\"codespan\">false</code>则拖拽结束时，才更新视图。</p>\n</li>\n</ul>\n",
+    "desc": "\n\n<p>拖拽时，是否实时更新。</p>\n<ul>\n<li><p>如果为<code class=\"codespan\">true</code>则拖拽手柄过程中实时更新图表视图。</p>\n</li>\n<li><p>如果为<code class=\"codespan\">false</code>则拖拽结束时，才更新视图。</p>\n</li>\n</ul>\n",
     "uiControl": {
       "type": "boolean",
       "default": "true"

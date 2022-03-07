@@ -196,9 +196,6 @@ window.__EC_DOC_option_series_custom = {
   "renderItem.return_group.silent": {
     "desc": "<p>Whether response to mouse events / touch events.</p>\n"
   },
-  "renderItem.return_group.invisible": {
-    "desc": "<p>Whether the element is visible.</p>\n"
-  },
   "renderItem.return_group.ignore": {
     "desc": "<p>Whether the element is totally ignored (neither render nor listen events).</p>\n"
   },

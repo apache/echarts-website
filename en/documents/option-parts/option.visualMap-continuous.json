@@ -27,7 +27,7 @@
     }
   },
   "realtime": {
-    "desc": "\n\n<p>Whether to update view in real time when dragging a handle.</p>\n<ul>\n<li><p>If <code class=\"codespan\">ture</code>, the chart view will be updated in real time when dragging.</p>\n</li>\n<li><p>If <code class=\"codespan\">false</code>, the chart view will be updated at the end of the handle dragging.</p>\n</li>\n</ul>\n",
+    "desc": "\n\n<p>Whether to update view in real time when dragging a handle.</p>\n<ul>\n<li><p>If <code class=\"codespan\">true</code>, the chart view will be updated in real time when dragging.</p>\n</li>\n<li><p>If <code class=\"codespan\">false</code>, the chart view will be updated at the end of the handle dragging.</p>\n</li>\n</ul>\n",
     "uiControl": {
       "type": "boolean",
       "default": "true"

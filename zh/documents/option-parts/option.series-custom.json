@@ -196,9 +196,6 @@
   "renderItem.return_group.silent": {
     "desc": "<p>是否不响应鼠标以及触摸事件。</p>\n"
   },
-  "renderItem.return_group.invisible": {
-    "desc": "<p>节点是否可见。</p>\n"
-  },
   "renderItem.return_group.ignore": {
     "desc": "<p>节点是否完全被忽略（既不渲染，也不响应事件）。</p>\n"
   },

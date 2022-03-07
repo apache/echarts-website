@@ -886,6 +886,20 @@
       "default": "0%"
     }
   },
+  "width": {
+    "desc": "\n\n<p>Width of dataZoom-slider component. Default to 30 when vertical, adaptive when horizontal.</p>\n<p>Has higer priority than <code class=\"codespan\">left</code> and <code class=\"codespan\">right</code>.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "30"
+    }
+  },
+  "height": {
+    "desc": "\n\n<p>Height of dataZoom-slider component. Default to 30 when horizontal, adaptive when vertical.</p>\n<p>Has higer priority than <code class=\"codespan\">top</code> and <code class=\"codespan\">bottom</code>.</p>\n",
+    "uiControl": {
+      "type": "number",
+      "default": "30"
+    }
+  },
   "brushSelect": {
     "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Whether to enable brush to select.</p>\n"
   },
