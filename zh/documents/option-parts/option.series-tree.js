@@ -5496,6 +5496,9 @@ window.__EC_DOC_option_series_tree = {
   "data.value": {
     "desc": "<p>节点的值，在 tooltip 中显示。</p>\n"
   },
+  "data.collapsed": {
+    "desc": "<p>节点初始化是否折叠。</p>\n"
+  },
   "data.itemStyle": {
     "desc": "<p>该节点的样式。</p>\n"
   },

@@ -5488,13 +5488,16 @@
     }
   },
   "data": {
-    "desc": "<p><a href=\"#series-tree.data\">series-tree.data</a> the data format is a tree structure, for example：</p>\n<pre><code class=\"lang-javascript\">{ // note that the outermost layer is an object that represents the root node of the tree.\n    name: &quot;flare&quot;,    // the name of the node, the text corresponding to the current node label.\n    label: {          // the special label configuration (if necessary).\n        ...           // the format of the label is shown in the series-tree.label.\n    },\n    itemStyle: {      // the special itemStyle configuration (if necessary).\n        ...           // the format of the itemstyle is shown in the series-tree.itemStyle.\n    },\n    children: [\n        {\n            name: &quot;flex&quot;,\n            value: 4116,    // value, which only displayed in tooltip.\n            label: {\n                ...\n            },\n            itemStyle: {\n                ...\n            },\n            collapsed: null, // If set as `true`, the node is collpased in the initialization.\n            children: [...]  // leaf nodes do not have children, can not write.\n        },\n        ...\n    ]\n};\n</code></pre>\n"
+    "desc": "<p><a href=\"#series-tree.data\">series-tree.data</a> the data format is a tree structure, for example：</p>\n<pre><code class=\"lang-javascript\">{ // note that the outermost layer is an object that represents the root node of the tree.\n    name: &quot;flare&quot;,    // the name of the node, the text corresponding to the current node label.\n    label: {          // the special label configuration (if necessary).\n        ...           // the format of the label is shown in the series-tree.label.\n    },\n    itemStyle: {      // the special itemStyle configuration (if necessary).\n        ...           // the format of the itemstyle is shown in the series-tree.itemStyle.\n    },\n    children: [\n        {\n            name: &quot;flex&quot;,\n            value: 4116,    // value, which only displayed in tooltip.\n            label: {\n                ...\n            },\n            itemStyle: {\n                ...\n            },\n            collapsed: null, // If set as `true`, the node is collapsed in the initialization.\n            children: [...]  // leaf nodes do not have children, can not write.\n        },\n        ...\n    ]\n};\n</code></pre>\n"
   },
   "data.name": {
     "desc": "<p>The name of the tree node, used to identify each node.</p>\n"
   },
   "data.value": {
     "desc": "<p>The value of the node, displayed in the tooltip.</p>\n"
+  },
+  "data.collapsed": {
+    "desc": "<p>Whether to collapse node at initialization.</p>\n"
   },
   "data.itemStyle": {
     "desc": "<p>The style of the node.</p>\n"
