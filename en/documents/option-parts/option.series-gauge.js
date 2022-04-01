@@ -240,13 +240,13 @@ window.__EC_DOC_option_series_gauge = {
     }
   },
   "data.title.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "data.title.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -465,13 +465,13 @@ window.__EC_DOC_option_series_gauge = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "data.title.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "data.title.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -686,13 +686,13 @@ window.__EC_DOC_option_series_gauge = {
     }
   },
   "data.detail.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "data.detail.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -911,13 +911,13 @@ window.__EC_DOC_option_series_gauge = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "data.detail.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "data.detail.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -1798,13 +1798,13 @@ window.__EC_DOC_option_series_gauge = {
     }
   },
   "axisLabel.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "axisLabel.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -2023,13 +2023,13 @@ window.__EC_DOC_option_series_gauge = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "axisLabel.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "axisLabel.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -2820,13 +2820,13 @@ window.__EC_DOC_option_series_gauge = {
     }
   },
   "title.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "title.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -3045,13 +3045,13 @@ window.__EC_DOC_option_series_gauge = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "title.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "title.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -3266,13 +3266,13 @@ window.__EC_DOC_option_series_gauge = {
     }
   },
   "detail.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "detail.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -3491,13 +3491,13 @@ window.__EC_DOC_option_series_gauge = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "detail.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "detail.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -3826,13 +3826,13 @@ window.__EC_DOC_option_series_gauge = {
     }
   },
   "markPoint.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markPoint.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -4051,13 +4051,13 @@ window.__EC_DOC_option_series_gauge = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "markPoint.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markPoint.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -4440,13 +4440,13 @@ window.__EC_DOC_option_series_gauge = {
     }
   },
   "markPoint.emphasis.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markPoint.emphasis.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -4665,13 +4665,13 @@ window.__EC_DOC_option_series_gauge = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "markPoint.emphasis.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markPoint.emphasis.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -5044,13 +5044,13 @@ window.__EC_DOC_option_series_gauge = {
     }
   },
   "markPoint.blur.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markPoint.blur.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -5269,13 +5269,13 @@ window.__EC_DOC_option_series_gauge = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "markPoint.blur.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markPoint.blur.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -5811,13 +5811,13 @@ window.__EC_DOC_option_series_gauge = {
     }
   },
   "markPoint.data.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markPoint.data.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -6036,13 +6036,13 @@ window.__EC_DOC_option_series_gauge = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "markPoint.data.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markPoint.data.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -6311,13 +6311,13 @@ window.__EC_DOC_option_series_gauge = {
     }
   },
   "markPoint.data.emphasis.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markPoint.data.emphasis.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -6536,13 +6536,13 @@ window.__EC_DOC_option_series_gauge = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "markPoint.data.emphasis.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markPoint.data.emphasis.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -6937,13 +6937,13 @@ window.__EC_DOC_option_series_gauge = {
     }
   },
   "markLine.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markLine.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -7162,13 +7162,13 @@ window.__EC_DOC_option_series_gauge = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "markLine.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markLine.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -7508,13 +7508,13 @@ window.__EC_DOC_option_series_gauge = {
     }
   },
   "markLine.emphasis.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markLine.emphasis.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -7733,13 +7733,13 @@ window.__EC_DOC_option_series_gauge = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "markLine.emphasis.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markLine.emphasis.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -8059,13 +8059,13 @@ window.__EC_DOC_option_series_gauge = {
     }
   },
   "markLine.blur.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markLine.blur.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -8284,13 +8284,13 @@ window.__EC_DOC_option_series_gauge = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "markLine.blur.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markLine.blur.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -8792,13 +8792,13 @@ window.__EC_DOC_option_series_gauge = {
     }
   },
   "markLine.data.0.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markLine.data.0.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -9017,13 +9017,13 @@ window.__EC_DOC_option_series_gauge = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "markLine.data.0.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markLine.data.0.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -9357,13 +9357,13 @@ window.__EC_DOC_option_series_gauge = {
     }
   },
   "markLine.data.0.emphasis.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markLine.data.0.emphasis.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -9582,13 +9582,13 @@ window.__EC_DOC_option_series_gauge = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "markLine.data.0.emphasis.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markLine.data.0.emphasis.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -9918,13 +9918,13 @@ window.__EC_DOC_option_series_gauge = {
     }
   },
   "markLine.data.0.blur.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markLine.data.0.blur.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -10143,13 +10143,13 @@ window.__EC_DOC_option_series_gauge = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "markLine.data.0.blur.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markLine.data.0.blur.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -10549,13 +10549,13 @@ window.__EC_DOC_option_series_gauge = {
     }
   },
   "markLine.data.1.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markLine.data.1.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -10774,13 +10774,13 @@ window.__EC_DOC_option_series_gauge = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "markLine.data.1.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markLine.data.1.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -11114,13 +11114,13 @@ window.__EC_DOC_option_series_gauge = {
     }
   },
   "markLine.data.1.emphasis.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markLine.data.1.emphasis.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -11339,13 +11339,13 @@ window.__EC_DOC_option_series_gauge = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "markLine.data.1.emphasis.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markLine.data.1.emphasis.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -11675,13 +11675,13 @@ window.__EC_DOC_option_series_gauge = {
     }
   },
   "markLine.data.1.blur.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markLine.data.1.blur.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -11900,13 +11900,13 @@ window.__EC_DOC_option_series_gauge = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "markLine.data.1.blur.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markLine.data.1.blur.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -12231,13 +12231,13 @@ window.__EC_DOC_option_series_gauge = {
     }
   },
   "markArea.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markArea.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -12456,13 +12456,13 @@ window.__EC_DOC_option_series_gauge = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "markArea.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markArea.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -12842,13 +12842,13 @@ window.__EC_DOC_option_series_gauge = {
     }
   },
   "markArea.emphasis.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markArea.emphasis.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -13067,13 +13067,13 @@ window.__EC_DOC_option_series_gauge = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "markArea.emphasis.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markArea.emphasis.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -13443,13 +13443,13 @@ window.__EC_DOC_option_series_gauge = {
     }
   },
   "markArea.blur.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markArea.blur.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -13668,13 +13668,13 @@ window.__EC_DOC_option_series_gauge = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "markArea.blur.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markArea.blur.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -14178,13 +14178,13 @@ window.__EC_DOC_option_series_gauge = {
     }
   },
   "markArea.data.0.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markArea.data.0.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -14403,13 +14403,13 @@ window.__EC_DOC_option_series_gauge = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "markArea.data.0.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markArea.data.0.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -14783,13 +14783,13 @@ window.__EC_DOC_option_series_gauge = {
     }
   },
   "markArea.data.0.emphasis.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markArea.data.0.emphasis.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -15008,13 +15008,13 @@ window.__EC_DOC_option_series_gauge = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "markArea.data.0.emphasis.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markArea.data.0.emphasis.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -15384,13 +15384,13 @@ window.__EC_DOC_option_series_gauge = {
     }
   },
   "markArea.data.0.blur.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markArea.data.0.blur.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -15609,13 +15609,13 @@ window.__EC_DOC_option_series_gauge = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "markArea.data.0.blur.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markArea.data.0.blur.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -16011,13 +16011,13 @@ window.__EC_DOC_option_series_gauge = {
     }
   },
   "markArea.data.1.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markArea.data.1.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -16236,13 +16236,13 @@ window.__EC_DOC_option_series_gauge = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "markArea.data.1.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markArea.data.1.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -16616,13 +16616,13 @@ window.__EC_DOC_option_series_gauge = {
     }
   },
   "markArea.data.1.emphasis.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markArea.data.1.emphasis.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -16841,13 +16841,13 @@ window.__EC_DOC_option_series_gauge = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "markArea.data.1.emphasis.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markArea.data.1.emphasis.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -17217,13 +17217,13 @@ window.__EC_DOC_option_series_gauge = {
     }
   },
   "markArea.data.1.blur.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markArea.data.1.blur.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -17442,13 +17442,13 @@ window.__EC_DOC_option_series_gauge = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "markArea.data.1.blur.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "markArea.data.1.blur.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -17720,13 +17720,13 @@ window.__EC_DOC_option_series_gauge = {
     }
   },
   "tooltip.textStyle.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "tooltip.textStyle.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",

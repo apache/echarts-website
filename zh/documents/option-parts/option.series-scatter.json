@@ -889,7 +889,7 @@
     }
   },
   "emphasis.scale": {
-    "desc": "\n\n<p>是否开启高亮后的放大效果。</p>\n",
+    "desc": "\n\n<p>是否开启高亮后的放大效果。从 <code class=\"codespan\">5.3.2</code> 版本开始支持 <code class=\"codespan\">number</code>, 来设置高亮放大倍数, 默认放大 1.1 倍。</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "true"

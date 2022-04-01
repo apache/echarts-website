@@ -885,7 +885,7 @@ window.__EC_DOC_option_series_radar = {
     "desc": "\n\n<p>图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。</p>\n",
     "uiControl": {
       "type": "number",
-      "default": "1",
+      "default": "0.7",
       "min": "0",
       "max": "1",
       "step": "0.01"
@@ -3975,7 +3975,7 @@ window.__EC_DOC_option_series_radar = {
     "desc": "\n\n<p>图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。</p>\n",
     "uiControl": {
       "type": "number",
-      "default": "1",
+      "default": "0.7",
       "min": "0",
       "max": "1",
       "step": "0.01"

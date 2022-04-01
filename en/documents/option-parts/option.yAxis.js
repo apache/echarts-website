@@ -30,12 +30,6 @@ window.__EC_DOC_option_yAxis = {
       "step": "0.5"
     }
   },
-  "realtimeSort": {
-    "desc": "<p><code class=\"codespan\">realtimeSort</code> is used to enable bar race if set to be <code class=\"codespan\">true</code>. It is only valid if the <a href=\"#yAxis.type\">type</a> of yAxis is <code class=\"codespan\">&#39;value&#39;</code>.</p>\n<p>It should be used along with other options to enable bar race. Please refer to <a href=\"https://echarts.apache.org/handbook/en/how-to/chart-types/bar/bar-race\" target=\"_blank\">bar race</a> tutorial for more details.</p>\n"
-  },
-  "sortSeriesIndex": {
-    "desc": "<p>The index of series used to sort in bar race. Since only one series is supported in bar race, <code class=\"codespan\">sortSeriesIndex</code> should always be <code class=\"codespan\">0</code>. It is only valid if <a href=\"#yAxis.realtimeSort\">realtimeSort</a> is <code class=\"codespan\">true</code> and <a href=\"#yAxis.type\">type</a> is <code class=\"codespan\">&#39;value&#39;</code>.</p>\n<p>It should be used along with other options to enable bar race. Please refer to <a href=\"https://echarts.apache.org/handbook/en/how-to/chart-types/bar/bar-race\" target=\"_blank\">bar race</a> tutorial for more details.</p>\n"
-  },
   "type": {
     "desc": "<p>Type of axis.</p>\n<p>Option:</p>\n<ul>\n<li><p><code class=\"codespan\">&#39;value&#39;</code>\n  Numerical axis, suitable for continuous data.</p>\n</li>\n<li><p><code class=\"codespan\">&#39;category&#39;</code>\n  Category axis, suitable for discrete category data. Category data can be auto retrieved from <a href=\"#series.data\">series.data</a> or <a href=\"#dataset.source\">dataset.source</a>, or can be specified via <a href=\"#yAxis.data\">yAxis.data</a>.</p>\n</li>\n<li><p><code class=\"codespan\">&#39;time&#39;</code>\n  Time axis, suitable for continuous time series data. As compared to value axis, it has a better formatting for time and a different tick calculation method. For example, it decides to use month, week, day or hour for tick based on the range of span.</p>\n</li>\n<li><p><code class=\"codespan\">&#39;log&#39;</code>\n  Log axis, suitable for log data.</p>\n</li>\n</ul>\n"
   },
@@ -222,13 +216,13 @@ window.__EC_DOC_option_yAxis = {
     }
   },
   "nameTextStyle.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "nameTextStyle.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -447,13 +441,13 @@ window.__EC_DOC_option_yAxis = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "nameTextStyle.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "nameTextStyle.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -1227,13 +1221,13 @@ window.__EC_DOC_option_yAxis = {
     }
   },
   "axisLabel.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "axisLabel.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -1452,13 +1446,13 @@ window.__EC_DOC_option_yAxis = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "axisLabel.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "axisLabel.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -1979,13 +1973,13 @@ window.__EC_DOC_option_yAxis = {
     }
   },
   "data.textStyle.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "data.textStyle.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -2204,13 +2198,13 @@ window.__EC_DOC_option_yAxis = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "data.textStyle.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "data.textStyle.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -2370,13 +2364,13 @@ window.__EC_DOC_option_yAxis = {
     }
   },
   "axisPointer.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "axisPointer.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",

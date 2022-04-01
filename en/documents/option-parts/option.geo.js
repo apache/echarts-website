@@ -272,13 +272,13 @@ window.__EC_DOC_option_geo = {
     }
   },
   "label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -497,13 +497,13 @@ window.__EC_DOC_option_geo = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -892,13 +892,13 @@ window.__EC_DOC_option_geo = {
     }
   },
   "emphasis.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "emphasis.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -1117,13 +1117,13 @@ window.__EC_DOC_option_geo = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "emphasis.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "emphasis.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -1506,13 +1506,13 @@ window.__EC_DOC_option_geo = {
     }
   },
   "select.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "select.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -1731,13 +1731,13 @@ window.__EC_DOC_option_geo = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "select.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "select.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -2113,13 +2113,13 @@ window.__EC_DOC_option_geo = {
     }
   },
   "blur.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "blur.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -2338,13 +2338,13 @@ window.__EC_DOC_option_geo = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "blur.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "blur.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -2880,13 +2880,13 @@ window.__EC_DOC_option_geo = {
     }
   },
   "regions.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "regions.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -3105,13 +3105,13 @@ window.__EC_DOC_option_geo = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "regions.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "regions.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -3487,13 +3487,13 @@ window.__EC_DOC_option_geo = {
     }
   },
   "regions.emphasis.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "regions.emphasis.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -3712,13 +3712,13 @@ window.__EC_DOC_option_geo = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "regions.emphasis.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "regions.emphasis.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -4094,13 +4094,13 @@ window.__EC_DOC_option_geo = {
     }
   },
   "regions.select.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "regions.select.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -4319,13 +4319,13 @@ window.__EC_DOC_option_geo = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "regions.select.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "regions.select.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -4701,13 +4701,13 @@ window.__EC_DOC_option_geo = {
     }
   },
   "regions.blur.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "regions.blur.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -4926,13 +4926,13 @@ window.__EC_DOC_option_geo = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "regions.blur.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "regions.blur.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -5103,13 +5103,13 @@ window.__EC_DOC_option_geo = {
     }
   },
   "regions.tooltip.textStyle.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "regions.tooltip.textStyle.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -5302,13 +5302,13 @@ window.__EC_DOC_option_geo = {
     }
   },
   "tooltip.textStyle.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "tooltip.textStyle.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",

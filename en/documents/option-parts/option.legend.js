@@ -551,13 +551,13 @@ window.__EC_DOC_option_legend = {
     }
   },
   "textStyle.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "textStyle.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -776,13 +776,13 @@ window.__EC_DOC_option_legend = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "textStyle.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "textStyle.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -1283,13 +1283,13 @@ window.__EC_DOC_option_legend = {
     }
   },
   "pageTextStyle.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "pageTextStyle.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -1573,13 +1573,13 @@ window.__EC_DOC_option_legend = {
     }
   },
   "emphasis.selectorLabel.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "emphasis.selectorLabel.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -1798,13 +1798,13 @@ window.__EC_DOC_option_legend = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "emphasis.selectorLabel.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "emphasis.selectorLabel.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -2065,13 +2065,13 @@ window.__EC_DOC_option_legend = {
     }
   },
   "selectorLabel.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "selectorLabel.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -2290,13 +2290,13 @@ window.__EC_DOC_option_legend = {
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "selectorLabel.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "selectorLabel.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",

@@ -354,13 +354,13 @@
     }
   },
   "label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -579,13 +579,13 @@
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -852,13 +852,13 @@
     }
   },
   "upperLabel.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "upperLabel.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -1077,13 +1077,13 @@
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "upperLabel.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "upperLabel.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -1143,26 +1143,6 @@
     "desc": "\n\n<p>The color of a node. It use global palette <a href=\"#color\">option.color</a> by default.</p>\n",
     "uiControl": {
       "type": "color"
-    }
-  },
-  "itemStyle.colorAlpha": {
-    "desc": "\n\n<p>The tranparent rate of a node, the range is between 0 ~ 1.</p>\n",
-    "uiControl": {
-      "type": "number",
-      "step": "0.01",
-      "min": "0",
-      "max": "1",
-      "default": "1"
-    }
-  },
-  "itemStyle.colorSaturation": {
-    "desc": "\n\n<p>The color saturation of a node. The range is between 0 ~ 1.</p>\n",
-    "uiControl": {
-      "type": "number",
-      "step": "0.01",
-      "min": "0",
-      "max": "1",
-      "default": "0.5"
     }
   },
   "itemStyle.borderRadius": {
@@ -1510,13 +1490,13 @@
     }
   },
   "emphasis.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "emphasis.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -1735,13 +1715,13 @@
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "emphasis.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "emphasis.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -2114,13 +2094,13 @@
     }
   },
   "emphasis.upperLabel.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "emphasis.upperLabel.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -2339,13 +2319,13 @@
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "emphasis.upperLabel.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "emphasis.upperLabel.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -2619,13 +2599,13 @@
     }
   },
   "blur.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "blur.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -2844,13 +2824,13 @@
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "blur.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "blur.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -3223,13 +3203,13 @@
     }
   },
   "blur.upperLabel.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "blur.upperLabel.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -3448,13 +3428,13 @@
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "blur.upperLabel.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "blur.upperLabel.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -3735,13 +3715,13 @@
     }
   },
   "select.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "select.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -3960,13 +3940,13 @@
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "select.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "select.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -4339,13 +4319,13 @@
     }
   },
   "select.upperLabel.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "select.upperLabel.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -4564,13 +4544,13 @@
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "select.upperLabel.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "select.upperLabel.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -4967,13 +4947,13 @@
     }
   },
   "breadcrumb.itemStyle.textStyle.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "breadcrumb.itemStyle.textStyle.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -5192,13 +5172,13 @@
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "breadcrumb.itemStyle.textStyle.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "breadcrumb.itemStyle.textStyle.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -5523,13 +5503,13 @@
     }
   },
   "breadcrumb.emphasis.itemStyle.textStyle.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "breadcrumb.emphasis.itemStyle.textStyle.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -5748,13 +5728,13 @@
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "breadcrumb.emphasis.itemStyle.textStyle.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "breadcrumb.emphasis.itemStyle.textStyle.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -6249,13 +6229,13 @@
     }
   },
   "levels.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "levels.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -6474,13 +6454,13 @@
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "levels.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "levels.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -6747,13 +6727,13 @@
     }
   },
   "levels.upperLabel.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "levels.upperLabel.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -6972,13 +6952,13 @@
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "levels.upperLabel.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "levels.upperLabel.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -7038,26 +7018,6 @@
     "desc": "\n\n<p>The color of a node. It use global palette <a href=\"#color\">option.color</a> by default.</p>\n",
     "uiControl": {
       "type": "color"
-    }
-  },
-  "levels.itemStyle.colorAlpha": {
-    "desc": "\n\n<p>The tranparent rate of a node, the range is between 0 ~ 1.</p>\n",
-    "uiControl": {
-      "type": "number",
-      "step": "0.01",
-      "min": "0",
-      "max": "1",
-      "default": "1"
-    }
-  },
-  "levels.itemStyle.colorSaturation": {
-    "desc": "\n\n<p>The color saturation of a node. The range is between 0 ~ 1.</p>\n",
-    "uiControl": {
-      "type": "number",
-      "step": "0.01",
-      "min": "0",
-      "max": "1",
-      "default": "0.5"
     }
   },
   "levels.itemStyle.borderRadius": {
@@ -7399,13 +7359,13 @@
     }
   },
   "levels.emphasis.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "levels.emphasis.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -7624,13 +7584,13 @@
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "levels.emphasis.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "levels.emphasis.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -8003,13 +7963,13 @@
     }
   },
   "levels.emphasis.upperLabel.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "levels.emphasis.upperLabel.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -8228,13 +8188,13 @@
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "levels.emphasis.upperLabel.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "levels.emphasis.upperLabel.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -8508,13 +8468,13 @@
     }
   },
   "levels.blur.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "levels.blur.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -8733,13 +8693,13 @@
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "levels.blur.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "levels.blur.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -9112,13 +9072,13 @@
     }
   },
   "levels.blur.upperLabel.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "levels.blur.upperLabel.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -9337,13 +9297,13 @@
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "levels.blur.upperLabel.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "levels.blur.upperLabel.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -9624,13 +9584,13 @@
     }
   },
   "levels.select.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "levels.select.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -9849,13 +9809,13 @@
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "levels.select.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "levels.select.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -10228,13 +10188,13 @@
     }
   },
   "levels.select.upperLabel.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "levels.select.upperLabel.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -10453,13 +10413,13 @@
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "levels.select.upperLabel.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "levels.select.upperLabel.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -10795,13 +10755,13 @@
     }
   },
   "data.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "data.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -11020,13 +10980,13 @@
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "data.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "data.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -11293,13 +11253,13 @@
     }
   },
   "data.upperLabel.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "data.upperLabel.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -11518,13 +11478,13 @@
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "data.upperLabel.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "data.upperLabel.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -11584,26 +11544,6 @@
     "desc": "\n\n<p>The color of a node. It use global palette <a href=\"#color\">option.color</a> by default.</p>\n",
     "uiControl": {
       "type": "color"
-    }
-  },
-  "data.itemStyle.colorAlpha": {
-    "desc": "\n\n<p>The tranparent rate of a node, the range is between 0 ~ 1.</p>\n",
-    "uiControl": {
-      "type": "number",
-      "step": "0.01",
-      "min": "0",
-      "max": "1",
-      "default": "1"
-    }
-  },
-  "data.itemStyle.colorSaturation": {
-    "desc": "\n\n<p>The color saturation of a node. The range is between 0 ~ 1.</p>\n",
-    "uiControl": {
-      "type": "number",
-      "step": "0.01",
-      "min": "0",
-      "max": "1",
-      "default": "0.5"
     }
   },
   "data.itemStyle.borderRadius": {
@@ -11945,13 +11885,13 @@
     }
   },
   "data.emphasis.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "data.emphasis.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -12170,13 +12110,13 @@
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "data.emphasis.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "data.emphasis.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -12549,13 +12489,13 @@
     }
   },
   "data.emphasis.upperLabel.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "data.emphasis.upperLabel.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -12774,13 +12714,13 @@
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "data.emphasis.upperLabel.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "data.emphasis.upperLabel.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -13054,13 +12994,13 @@
     }
   },
   "data.blur.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "data.blur.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -13279,13 +13219,13 @@
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "data.blur.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "data.blur.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -13658,13 +13598,13 @@
     }
   },
   "data.blur.upperLabel.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "data.blur.upperLabel.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -13883,13 +13823,13 @@
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "data.blur.upperLabel.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "data.blur.upperLabel.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -14170,13 +14110,13 @@
     }
   },
   "data.select.label.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "data.select.label.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -14395,13 +14335,13 @@
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "data.select.label.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "data.select.label.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -14774,13 +14714,13 @@
     }
   },
   "data.select.upperLabel.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "data.select.upperLabel.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -14999,13 +14939,13 @@
     "desc": "<p>Height of the text block. It is the width of the text by default. You may want to use it in some cases like using background image (see <code class=\"codespan\">backgroundColor</code>).</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> specifies the width and height of the content, without <code class=\"codespan\">padding</code>.</p>\n<p>Notice, <code class=\"codespan\">width</code> and <code class=\"codespan\">height</code> only work when <code class=\"codespan\">rich</code> specified.</p>\n"
   },
   "data.select.upperLabel.rich.<style_name>.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n<p>If set as <code class=\"codespan\">&#39;inherit&#39;</code>, the color will assigned as visual color, such as series color.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "data.select.upperLabel.rich.<style_name>.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -15184,13 +15124,13 @@
     }
   },
   "data.tooltip.textStyle.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "data.tooltip.textStyle.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",
@@ -15397,13 +15337,13 @@
     }
   },
   "tooltip.textStyle.textBorderColor": {
-    "desc": "\n\n<p>Storke color of the text.</p>\n",
+    "desc": "\n\n<p>Stroke color of the text.</p>\n",
     "uiControl": {
       "type": "color"
     }
   },
   "tooltip.textStyle.textBorderWidth": {
-    "desc": "\n\n<p>Storke line width of the text.</p>\n",
+    "desc": "\n\n<p>Stroke line width of the text.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",

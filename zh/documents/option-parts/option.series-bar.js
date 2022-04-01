@@ -3003,7 +3003,7 @@ window.__EC_DOC_option_series_bar = {
     }
   },
   "stack": {
-    "desc": "<p>数据堆叠，同个类目轴上系列配置相同的<code class=\"codespan\">stack</code>值可以堆叠放置。</p>\n"
+    "desc": "<p>数据堆叠，同个类目轴上系列配置相同的<code class=\"codespan\">stack</code>值可以堆叠放置。</p>\n<p>注：目前<code class=\"codespan\">stack</code>只支持堆叠于 <code class=\"codespan\">value</code> 和 <code class=\"codespan\">log</code> 类型的类目轴上，不支持 <code class=\"codespan\">time</code> 和 <code class=\"codespan\">category</code> 类型的类目轴。</p>\n"
   },
   "sampling": {
     "desc": "<p>柱状图在数据量远大于像素点时候的降采样策略，开启后可以有效的优化图表的绘制效率，默认关闭，也就是全部绘制不过滤数据点。</p>\n<p>可选：</p>\n<ul>\n<li><code class=\"codespan\">&#39;lttb&#39;</code> 采用 Largest-Triangle-Three-Bucket 算法，可以最大程度保证采样后线条的趋势，形状和极值。</li>\n<li><code class=\"codespan\">&#39;average&#39;</code> 取过滤点的平均值</li>\n<li><code class=\"codespan\">&#39;max&#39;</code> 取过滤点的最大值</li>\n<li><code class=\"codespan\">&#39;min&#39;</code> 取过滤点的最小值</li>\n<li><code class=\"codespan\">&#39;sum&#39;</code> 取过滤点的和</li>\n</ul>\n"

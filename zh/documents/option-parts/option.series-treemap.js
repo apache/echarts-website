@@ -1145,26 +1145,6 @@ window.__EC_DOC_option_series_treemap = {
       "type": "color"
     }
   },
-  "itemStyle.colorAlpha": {
-    "desc": "\n\n<p>矩形颜色的透明度。取值范围是 0 ~ 1 之间的浮点数。</p>\n",
-    "uiControl": {
-      "type": "number",
-      "step": "0.01",
-      "min": "0",
-      "max": "1",
-      "default": "1"
-    }
-  },
-  "itemStyle.colorSaturation": {
-    "desc": "\n\n<p>矩形颜色的饱和度。取值范围是 0 ~ 1 之间的浮点数。</p>\n",
-    "uiControl": {
-      "type": "number",
-      "step": "0.01",
-      "min": "0",
-      "max": "1",
-      "default": "0.5"
-    }
-  },
   "itemStyle.borderRadius": {
     "desc": "\n\n<p>矩形圆角。</p>\n",
     "uiControl": {
@@ -7040,26 +7020,6 @@ window.__EC_DOC_option_series_treemap = {
       "type": "color"
     }
   },
-  "levels.itemStyle.colorAlpha": {
-    "desc": "\n\n<p>矩形颜色的透明度。取值范围是 0 ~ 1 之间的浮点数。</p>\n",
-    "uiControl": {
-      "type": "number",
-      "step": "0.01",
-      "min": "0",
-      "max": "1",
-      "default": "1"
-    }
-  },
-  "levels.itemStyle.colorSaturation": {
-    "desc": "\n\n<p>矩形颜色的饱和度。取值范围是 0 ~ 1 之间的浮点数。</p>\n",
-    "uiControl": {
-      "type": "number",
-      "step": "0.01",
-      "min": "0",
-      "max": "1",
-      "default": "0.5"
-    }
-  },
   "levels.itemStyle.borderRadius": {
     "desc": "\n\n<p>矩形圆角。</p>\n",
     "uiControl": {
@@ -11584,26 +11544,6 @@ window.__EC_DOC_option_series_treemap = {
     "desc": "\n\n<p>矩形的颜色。默认从全局调色盘 <a href=\"#color\">option.color</a> 获取颜色。</p>\n",
     "uiControl": {
       "type": "color"
-    }
-  },
-  "data.itemStyle.colorAlpha": {
-    "desc": "\n\n<p>矩形颜色的透明度。取值范围是 0 ~ 1 之间的浮点数。</p>\n",
-    "uiControl": {
-      "type": "number",
-      "step": "0.01",
-      "min": "0",
-      "max": "1",
-      "default": "1"
-    }
-  },
-  "data.itemStyle.colorSaturation": {
-    "desc": "\n\n<p>矩形颜色的饱和度。取值范围是 0 ~ 1 之间的浮点数。</p>\n",
-    "uiControl": {
-      "type": "number",
-      "step": "0.01",
-      "min": "0",
-      "max": "1",
-      "default": "0.5"
     }
   },
   "data.itemStyle.borderRadius": {

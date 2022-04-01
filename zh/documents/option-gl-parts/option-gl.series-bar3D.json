@@ -21,7 +21,7 @@
     "desc": "<p>柱子倒角的光滑/圆润度，数值越大越光滑/圆润。</p>\n"
   },
   "stack": {
-    "desc": "<p>柱状图堆叠，相同 <code class=\"codespan\">stack</code> 值的柱状图系列数据会有叠加。注意不同系列需要叠加的数据项在数组中的索引必须是一样的。</p>\n"
+    "desc": "<p>柱状图堆叠，相同 <code class=\"codespan\">stack</code> 值的柱状图系列数据会有叠加。注意不同系列需要叠加的数据项在数组中的索引必须是一样的。</p>\n<p>注：目前<code class=\"codespan\">stack</code>只支持堆叠于 <code class=\"codespan\">value</code> 和 <code class=\"codespan\">log</code> 类型的类目轴上，不支持 <code class=\"codespan\">time</code> 和 <code class=\"codespan\">category</code> 类型的类目轴。</p>\n"
   },
   "minHeight": {
     "desc": "<p>最小柱子高度。</p>\n"

@@ -30,12 +30,6 @@ window.__EC_DOC_option_xAxis = {
       "step": "0.5"
     }
   },
-  "realtimeSort": {
-    "desc": "<p>用于制作动态排序柱状图。设为 <code class=\"codespan\">true</code> 时，表示 X 轴开启实时排序效果，仅当 X 轴的 <a href=\"#xAxis.type\">type</a> 是 <code class=\"codespan\">&#39;value&#39;</code> 时有效。</p>\n<p>需要配合其他配置项共同实现动态排序柱状图效果，具体参见<a href=\"https://echarts.apache.org/handbook/zh/how-to/chart-types/bar/bar-race\" target=\"_blank\">动态排序柱状图</a>教程。</p>\n"
-  },
-  "sortSeriesIndex": {
-    "desc": "<p>动态排序柱状图用于排序的系列 id。目前只支持一个系列的柱状图排序效果，所以这个值只能取 0。仅当 X 轴 <a href=\"#xAxis.realtimeSort\">realtimeSort</a> 为 <code class=\"codespan\">true</code> 并且 <a href=\"#xAxis.type\">type</a> 是 <code class=\"codespan\">&#39;value&#39;</code> 时有效。</p>\n<p>需要配合其他配置项共同实现动态排序柱状图效果，具体参见<a href=\"https://echarts.apache.org/handbook/zh/how-to/chart-types/bar/bar-race\" target=\"_blank\">动态排序柱状图</a>教程。</p>\n"
-  },
   "type": {
     "desc": "<p>坐标轴类型。</p>\n<p>可选：</p>\n<ul>\n<li><p><code class=\"codespan\">&#39;value&#39;</code>\n  数值轴，适用于连续数据。</p>\n</li>\n<li><p><code class=\"codespan\">&#39;category&#39;</code>\n  类目轴，适用于离散的类目数据。为该类型时类目数据可自动从 <a href=\"#series.data\">series.data</a> 或 <a href=\"#dataset.source\">dataset.source</a> 中取，或者可通过 <a href=\"#xAxis.data\">xAxis.data</a> 设置类目数据。</p>\n</li>\n<li><p><code class=\"codespan\">&#39;time&#39;</code>\n  时间轴，适用于连续的时序数据，与数值轴相比时间轴带有时间的格式化，在刻度计算上也有所不同，例如会根据跨度的范围来决定使用月，星期，日还是小时范围的刻度。</p>\n</li>\n<li><p><code class=\"codespan\">&#39;log&#39;</code>\n  对数轴。适用于对数数据。</p>\n</li>\n</ul>\n"
   },

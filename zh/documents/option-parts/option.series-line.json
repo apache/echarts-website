@@ -83,7 +83,7 @@
     }
   },
   "stack": {
-    "desc": "<p>数据堆叠，同个类目轴上系列配置相同的<code class=\"codespan\">stack</code>值后，后一个系列的值会在前一个系列的值上相加。</p>\n<p>下面示例可以通过右上角 <a href=\"#toolbox\">toolbox</a> 中的堆叠切换看效果：</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=doc-example/line-stack-tiled&edit=1&reset=1\" width=\"600\" height=\"400\"></iframe>\n\n\n\n"
+    "desc": "<p>数据堆叠，同个类目轴上系列配置相同的<code class=\"codespan\">stack</code>值后，后一个系列的值会在前一个系列的值上相加。</p>\n<p>注：目前<code class=\"codespan\">stack</code>只支持堆叠于 <code class=\"codespan\">value</code> 和 <code class=\"codespan\">log</code> 类型的类目轴上，不支持 <code class=\"codespan\">time</code> 和 <code class=\"codespan\">category</code> 类型的类目轴。</p>\n<p>下面示例可以通过右上角 <a href=\"#toolbox\">toolbox</a> 中的堆叠切换看效果：</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=doc-example/line-stack-tiled&edit=1&reset=1\" width=\"600\" height=\"400\"></iframe>\n\n\n\n"
   },
   "cursor": {
     "desc": "\n\n<p>鼠标悬浮时在图形元素上时鼠标的样式是什么。同 CSS 的 <code class=\"codespan\">cursor</code>。</p>\n",
@@ -1537,7 +1537,11 @@
     }
   },
   "areaStyle.origin": {
-    "desc": "<p>图形区域的起始位置。</p>\n<p>默认情况下，图形会从坐标轴轴线到数据间进行填充。如果需要填充的区域是坐标轴最大值到数据间，或者坐标轴最小值到数据间，则可以通过这个配置项进行设置。</p>\n<p>可选值包括 <code class=\"codespan\">&#39;auto&#39;</code>（默认值）、 <code class=\"codespan\">&#39;start&#39;</code>、 <code class=\"codespan\">&#39;end&#39;</code>。</p>\n<ul>\n<li><code class=\"codespan\">&#39;auto&#39;</code> 填充坐标轴轴线到数据间的区域；</li>\n<li><code class=\"codespan\">&#39;start&#39;</code> 填充坐标轴底部（非 <code class=\"codespan\">inverse</code> 情况是最小值）到数据间的区域；</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> 填充坐标轴顶部（非 <code class=\"codespan\">inverse</code> 情况是最大值）到数据间的区域。</li>\n</ul>\n"
+    "desc": "\n\n<p>图形区域的起始位置。</p>\n<p>默认情况下，图形会从坐标轴轴线到数据间进行填充。如果需要填充的区域是坐标轴最大值到数据间，或者坐标轴最小值到数据间，或者某个数值到数据间则可以通过这个配置项进行设置。</p>\n<p>可选值包括：</p>\n<ul>\n<li><code class=\"codespan\">&#39;auto&#39;</code> 填充坐标轴轴线到数据间的区域（<strong>默认值</strong>）</li>\n<li><code class=\"codespan\">&#39;start&#39;</code> 填充坐标轴底部（非 <a href=\"#yAxis.inverse\"><code class=\"codespan\">inverse</code></a> 情况是最小值）到数据间的区域</li>\n<li><code class=\"codespan\">&#39;end&#39;</code> 填充坐标轴顶部（非 <a href=\"#yAxis.inverse\"><code class=\"codespan\">inverse</code></a> 情况是最大值）到数据间的区域</li>\n<li><code class=\"codespan\">number</code> 填充指定数值到数据间的区域（从 <code class=\"codespan\">v5.3.2</code> 开始支持）</li>\n</ul>\n",
+    "uiControl": {
+      "type": "enum",
+      "options": "auto,start,end"
+    }
   },
   "areaStyle.shadowBlur": {
     "desc": "\n\n<p>图形阴影的模糊大小。该属性配合 <code class=\"codespan\">shadowColor</code>,<code class=\"codespan\">shadowOffsetX</code>, <code class=\"codespan\">shadowOffsetY</code> 一起设置图形的阴影效果。</p>\n<p>示例：</p>\n<pre><code class=\"lang-ts\">{\n    shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;,\n    shadowBlur: 10\n}\n</code></pre>\n",
@@ -1575,7 +1579,7 @@
     "desc": "\n\n<p>图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。</p>\n",
     "uiControl": {
       "type": "number",
-      "default": "1",
+      "default": "0.7",
       "min": "0",
       "max": "1",
       "step": "0.01"

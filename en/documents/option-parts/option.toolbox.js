@@ -28,7 +28,7 @@ window.__EC_DOC_option_toolbox = {
     "uiControl": {
       "type": "number",
       "min": "0",
-      "default": "10"
+      "default": "8"
     }
   },
   "showTitle": {
