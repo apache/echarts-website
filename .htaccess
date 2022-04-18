@@ -13,6 +13,10 @@ RedirectMatch 404 /\.asf\.yaml
     Header set Access-Control-Allow-Headers "*"
 </IfModule>
 
+<IfModule mod_mime.c>
+   # Manifest file
+   AddType application/manifest+json webmanifest
+</IfModule>
 
 <IfModule mod_expires.c>
     ExpiresActive on
