@@ -28,7 +28,6 @@ window.addEventListener('load', () => {
     }
 
     const showToast = () => {
-        hideToast()
         pwaToast.classList.add('show')
     }
 
@@ -41,6 +40,7 @@ window.addEventListener('load', () => {
             console.log('Page is ready to work offline')
         },
         onNeedRefresh() {
+            console.log('New content available')
             showToast()
         }
     })
