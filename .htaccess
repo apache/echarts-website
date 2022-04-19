@@ -6,6 +6,8 @@ RedirectMatch 404 /\.htaccess
 RedirectMatch 404 /\.scripts
 RedirectMatch 404 /\.github
 RedirectMatch 404 /\.asf\.yaml
+RedirectMatch 404 /package\.json
+RedirectMatch 404 /package-lock\.json
 
 <IfModule mod_headers.c>
     Header set Access-Control-Allow-Origin: https://echarts.apache.org
