@@ -2,14 +2,17 @@
   "name": "echarts-website",
   "version": "1.0.0",
   "scripts": {
-    "build:pwa": "node .scripts/build-pwa.js"
+    "build:pwa": "vite --config .scripts/pwa/vite.config.js build"
   },
   "devDependencies": {
     "@jamesives/github-pages-deploy-action": "^4.1.3",
     "globby": "^11.1.0",
     "minimist": "^1.2.5",
     "node-fetch": "^2.6.1",
-    "workbox-build": "^6.5.3"
+    "vite": "^2.9.5",
+    "vite-plugin-pwa": "^0.11.13",
+    "workbox-build": "^6.5.3",
+    "workbox-window": "^6.5.3"
   },
   "repository": {
     "type": "git",
