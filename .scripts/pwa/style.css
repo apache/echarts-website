@@ -14,7 +14,7 @@
     background-color: #fff;
     transition: opacity ease .5s, visibility ease .5s;
 }
-.pwa-toast .message {
+.pwa-toast .pwa-msg {
     margin-bottom: 8px;
 }
 .pwa-toast button {
@@ -29,10 +29,4 @@
 .pwa-toast.show {
     visibility: visible;
     opacity: 1;
-}
-button#pwa-refresh {
-    display: none;
-}
-.pwa-toast.show.refresh button#pwa-refresh {
-    display: block;
 }

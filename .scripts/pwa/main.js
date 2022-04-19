@@ -13,10 +13,9 @@ window.addEventListener('load', () => {
     const pwaToast = document.createElement('div')
     pwaToast.className = 'pwa-toast'
     pwaToast.setAttribute('role', 'alert')
-    pwaToast.innerHTML = `<div class="message"></div><button id="pwa-refresh">${lang['Reload']}</button><button id="pwa-close">${lang['Close']}</button>`
+    pwaToast.innerHTML = `<div class="pwa-msg">${lang['NewContent']}</div><button id="pwa-close">${lang['Close']}</button><button id="pwa-refresh">${lang['Reload']}</button>`
     document.body.appendChild(pwaToast)
 
-    const pwaToastMessage = pwaToast.querySelector('.message')
     const pwaCloseBtn = pwaToast.querySelector('#pwa-close')
     const pwaRefreshBtn = pwaToast.querySelector('#pwa-refresh')
 
@@ -24,34 +23,25 @@ window.addEventListener('load', () => {
 
     const refreshCallback = () => refreshSW && refreshSW(true)
 
-    const hidePwaToast = () => {
-        if (pwaToast.classList.contains('refresh')) {
-            pwaRefreshBtn.removeEventListener('click', refreshCallback)
-        }
-
-        pwaToast.classList.remove('show', 'refresh')
+    const hideToast = () => {
+        pwaToast.classList.remove('show')
     }
-    const showPwaToast = (offline) => {
-        hidePwaToast()
 
-        if (!offline) {
-            pwaRefreshBtn.addEventListener('click', refreshCallback)
-            pwaToast.classList.add('refresh')
-        }
-
+    const showToast = () => {
+        hideToast()
         pwaToast.classList.add('show')
     }
 
-    pwaCloseBtn.addEventListener('click', hidePwaToast)
+    pwaRefreshBtn.addEventListener('click', refreshCallback)
+    pwaCloseBtn.addEventListener('click', hideToast)
+
     refreshSW = registerSW({
         immediate: true,
         onOfflineReady() {
-            pwaToastMessage.innerHTML = lang['ReadyOffline']
-            showPwaToast(true)
+            console.log('Page is ready to work offline')
         },
         onNeedRefresh() {
-            pwaToastMessage.innerHTML = lang['NewContent']
-            showPwaToast(false)
+            showToast()
         }
     })
 })

@@ -2,13 +2,11 @@
     "zh": {
         "Reload": "刷新",
         "Close": "关闭",
-        "ReadyOffline": "当前页面已可以离线访问",
         "NewContent": "有更新可用，点击”刷新“按钮获取最新内容"
     },
     "en": {
         "Reload": "Reload",
         "Close": "Close",
-        "ReadyOffline": "App ready to work offline",
         "NewContent": "New content available, click on reload button to update"
     }
 }
