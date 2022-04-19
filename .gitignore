@@ -4,5 +4,6 @@ en/_*.html
 node_modules
 /examples/data/option
 /examples/data-gl/option
-sw.js
+pwa.js
+pwa-*.js
 workbox-*.js

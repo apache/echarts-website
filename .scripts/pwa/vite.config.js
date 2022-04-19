@@ -25,8 +25,9 @@ module.exports = defineConfig({
           '**\/\.*\/**\/*',
           '**\/node_modules\/**\/*',
           'v4\/**\/*',
-          'sw\.js',
-          'workbox-*'
+          'pwa\.js',
+          'pwa-*\.js',
+          'workbox-*\.js'
         ],
         runtimeCaching: [
           {
