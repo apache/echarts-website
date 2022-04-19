@@ -42,6 +42,9 @@ window.addEventListener('load', () => {
         onNeedRefresh() {
             console.log('New content available')
             showToast()
+        },
+        onRegisterError(e) {
+            console.error('failed to register service worker', e)
         }
     })
 })
