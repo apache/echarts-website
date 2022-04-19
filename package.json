@@ -10,9 +10,7 @@
     "minimist": "^1.2.5",
     "node-fetch": "^2.6.1",
     "vite": "^2.9.5",
-    "vite-plugin-pwa": "^0.11.13",
-    "workbox-build": "^6.5.3",
-    "workbox-window": "^6.5.3"
+    "vite-plugin-pwa": "^0.11.13"
   },
   "repository": {
     "type": "git",
