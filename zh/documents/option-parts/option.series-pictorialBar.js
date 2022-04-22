@@ -20536,7 +20536,7 @@ window.__EC_DOC_option_series_pictorialBar = {
     }
   },
   "universalTransition": {
-    "desc": "<p>全局过渡动画相关的配置。</p>\n<p>全局过渡动画（Universal Transition）提供了任意系列之间进行变形动画的功能。开启该功能后，每次<code class=\"codespan\">setOption</code>，相同<code class=\"codespan\">id</code>的系列之间会自动关联进行动画的过渡，更细粒度的关联配置见<code class=\"codespan\">universalTransition.seriesKey</code>配置。</p>\n<p>通过配置<code class=\"codespan\">encode.itemGroupId</code>或者<code class=\"codespan\">dataGroupId</code>等指定数据的分组，还可以实现诸如下钻，聚合等一对多或者多对一的动画。</p>\n<p>可以直接在系列中配置 <code class=\"codespan\">universalTransition: true</code> 开启该功能。也可以提供一个对象进行更多属性的配置。</p>\n"
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.2.0</code> 开始支持</p>\n</blockquote>\n<p>全局过渡动画相关的配置。</p>\n<p>全局过渡动画（Universal Transition）提供了任意系列之间进行变形动画的功能。开启该功能后，每次<code class=\"codespan\">setOption</code>，相同<code class=\"codespan\">id</code>的系列之间会自动关联进行动画的过渡，更细粒度的关联配置见<code class=\"codespan\">universalTransition.seriesKey</code>配置。</p>\n<p>通过配置<code class=\"codespan\">encode.itemGroupId</code>或者<code class=\"codespan\">dataGroupId</code>等指定数据的分组，还可以实现诸如下钻，聚合等一对多或者多对一的动画。</p>\n<p>可以直接在系列中配置 <code class=\"codespan\">universalTransition: true</code> 开启该功能。也可以提供一个对象进行更多属性的配置。</p>\n"
   },
   "universalTransition.enabled": {
     "desc": "<p>是否开启全局过渡动画。</p>\n"

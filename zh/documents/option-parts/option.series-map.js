@@ -23,7 +23,7 @@ window.__EC_DOC_option_series_map = {
     }
   },
   "projection": {
-    "desc": "<p>自定义地图投影，至少需要提供<code class=\"codespan\">project</code>, <code class=\"codespan\">unproject</code>两个方法分别用来计算投影后的坐标以及计算投影前的坐标。</p>\n<p>比如墨卡托投影：</p>\n<pre><code class=\"lang-ts\">series: {\n    type: &#39;map&#39;,\n    projection: {\n        project: (point) =&gt; [point[0] / 180 * Math.PI, -Math.log(Math.tan((Math.PI / 2 + point[1] / 180 * Math.PI) / 2))],\n        unproject: (point) =&gt; [point[0] * 180 / Math.PI, 2 * 180 / Math.PI * Math.atan(Math.exp(point[1])) - 90]\n    }\n}\n</code></pre>\n<p>除了我们自己实现投影公式，我们也可以使用 <a href=\"https://github.com/d3/d3-geo\" target=\"_blank\">d3-geo</a> 等第三方库提供的现成的投影实现：</p>\n<pre><code class=\"lang-ts\">const projection = d3.geoConicEqualArea();\n// ...\nseries: {\n    type: &#39;map&#39;,\n    projection: {\n        project: (point) =&gt; projection(point),\n        unproject: (point) =&gt; projection.invert(point)\n    }\n}\n</code></pre>\n<p>注：自定义投影只有在使用<code class=\"codespan\">GeoJSON</code>作为数据源的时候有用。</p>\n"
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.3.0</code> 开始支持</p>\n</blockquote>\n<p>自定义地图投影，至少需要提供<code class=\"codespan\">project</code>, <code class=\"codespan\">unproject</code>两个方法分别用来计算投影后的坐标以及计算投影前的坐标。</p>\n<p>比如墨卡托投影：</p>\n<pre><code class=\"lang-ts\">series: {\n    type: &#39;map&#39;,\n    projection: {\n        project: (point) =&gt; [point[0] / 180 * Math.PI, -Math.log(Math.tan((Math.PI / 2 + point[1] / 180 * Math.PI) / 2))],\n        unproject: (point) =&gt; [point[0] * 180 / Math.PI, 2 * 180 / Math.PI * Math.atan(Math.exp(point[1])) - 90]\n    }\n}\n</code></pre>\n<p>除了我们自己实现投影公式，我们也可以使用 <a href=\"https://github.com/d3/d3-geo\" target=\"_blank\">d3-geo</a> 等第三方库提供的现成的投影实现：</p>\n<pre><code class=\"lang-ts\">const projection = d3.geoConicEqualArea();\n// ...\nseries: {\n    type: &#39;map&#39;,\n    projection: {\n        project: (point) =&gt; projection(point),\n        unproject: (point) =&gt; projection.invert(point)\n    }\n}\n</code></pre>\n<p>注：自定义投影只有在使用<code class=\"codespan\">GeoJSON</code>作为数据源的时候有用。</p>\n"
   },
   "projection.project": {
     "desc": "<pre><code class=\"lang-ts\">(coord: [number, number]) =&gt; [number, number]\n</code></pre>\n<p>将经纬度坐标投影为其它坐标。</p>\n"
@@ -18546,7 +18546,7 @@ window.__EC_DOC_option_series_map = {
     }
   },
   "universalTransition": {
-    "desc": "<p>全局过渡动画相关的配置。</p>\n<p>全局过渡动画（Universal Transition）提供了任意系列之间进行变形动画的功能。开启该功能后，每次<code class=\"codespan\">setOption</code>，相同<code class=\"codespan\">id</code>的系列之间会自动关联进行动画的过渡，更细粒度的关联配置见<code class=\"codespan\">universalTransition.seriesKey</code>配置。</p>\n<p>通过配置<code class=\"codespan\">encode.itemGroupId</code>或者<code class=\"codespan\">dataGroupId</code>等指定数据的分组，还可以实现诸如下钻，聚合等一对多或者多对一的动画。</p>\n<p>可以直接在系列中配置 <code class=\"codespan\">universalTransition: true</code> 开启该功能。也可以提供一个对象进行更多属性的配置。</p>\n"
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.2.0</code> 开始支持</p>\n</blockquote>\n<p>全局过渡动画相关的配置。</p>\n<p>全局过渡动画（Universal Transition）提供了任意系列之间进行变形动画的功能。开启该功能后，每次<code class=\"codespan\">setOption</code>，相同<code class=\"codespan\">id</code>的系列之间会自动关联进行动画的过渡，更细粒度的关联配置见<code class=\"codespan\">universalTransition.seriesKey</code>配置。</p>\n<p>通过配置<code class=\"codespan\">encode.itemGroupId</code>或者<code class=\"codespan\">dataGroupId</code>等指定数据的分组，还可以实现诸如下钻，聚合等一对多或者多对一的动画。</p>\n<p>可以直接在系列中配置 <code class=\"codespan\">universalTransition: true</code> 开启该功能。也可以提供一个对象进行更多属性的配置。</p>\n"
   },
   "universalTransition.enabled": {
     "desc": "<p>是否开启全局过渡动画。</p>\n"
