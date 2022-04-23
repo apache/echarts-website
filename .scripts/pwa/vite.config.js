@@ -24,11 +24,14 @@ module.exports = defineConfig({
         globIgnores: [
           '**\/\.*\/**\/*',
           '**\/node_modules\/**\/*',
+          '**\/examples\/**\/view\.html',
           'v4\/**\/*',
           'pwa\.js',
           'pwa-*\.js',
           'workbox-*\.js'
         ],
+        // ignoreURLParametersMatching: true,
+        offlineGoogleAnalytics: false,
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.(?:googleapis|gstatic)\.com\/.*/i,
@@ -46,8 +49,24 @@ module.exports = defineConfig({
             },
           },
           {
-            urlPattern: '/^https:\/\/.*\.?(?:hm\.baidu|google-analytics).*/i',
+            urlPattern: /^https:\/\/.*\.?(?:hm\.baidu|google-analytics|googletagmanager).*/i,
             handler: 'NetworkOnly'
+          },
+          {
+            urlPattern: /^https:\/\/.*\.(?:jsdelivr|unpkg)(?:.*\/gh\/apache\/).*/i,
+            handler: 'StaleWhileRevalidate',
+            options: {
+              cacheName: 'cdn-apache-assets',
+              expiration: {
+                // PENDING not limit our apache repositories?
+                // maxEntries: 128,
+                maxAgeSeconds: 7 * 24 * 60 * 60, // 7 days
+              },
+              fetchOptions: {
+                mode: 'cors',
+                credentials: 'omit'
+              }
+            },
           },
           {
             urlPattern: /^https:\/\/.*\.(?:jsdelivr|unpkg).*/i,
@@ -56,7 +75,7 @@ module.exports = defineConfig({
               cacheName: 'cdn-assets',
               expiration: {
                 maxEntries: 128,
-                maxAgeSeconds: 7 * 24 * 60 * 60, // 7 days
+                maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
               },
               fetchOptions: {
                 mode: 'cors',
@@ -70,7 +89,7 @@ module.exports = defineConfig({
             options: {
               cacheName: 'static-font-assets',
               expiration: {
-                maxEntries: 4,
+                maxEntries: 8,
                 maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
               }
             },
@@ -92,7 +111,7 @@ module.exports = defineConfig({
             options: {
               cacheName: 'static-js-assets',
               expiration: {
-                maxEntries: 32,
+                maxEntries: 64,
                 maxAgeSeconds: 24 * 60 * 60, // 24 hours
               },
             },
@@ -103,7 +122,7 @@ module.exports = defineConfig({
             options: {
               cacheName: 'static-style-assets',
               expiration: {
-                maxEntries: 32,
+                maxEntries: 64,
                 maxAgeSeconds: 24 * 60 * 60, // 24 hours
               },
             },
@@ -127,8 +146,9 @@ module.exports = defineConfig({
       name: 'replace-host',
       transform(code) {
         return {
-          // FIXME
+          // FIXME a bit tricky
           code: code
+            // inject by echarts-www
             .replace(/\/?__HOST__/g, '" + window.EC_WWW_HOST + "/')
             .replace(/__SCOPE__/g, '')
         }
