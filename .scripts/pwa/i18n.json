@@ -2,11 +2,13 @@
     "zh": {
         "Reload": "刷新",
         "Close": "关闭",
-        "NewContent": "有更新可用，点击”刷新“按钮获取最新内容"
+        "NewContent": "有新内容更新，点击”刷新“按钮以获取最新内容",
+        "Offline": "📴 您当前处于离线模式"
     },
     "en": {
         "Reload": "Reload",
         "Close": "Close",
-        "NewContent": "New content available, click on reload button to update"
+        "NewContent": "New content available, click on reload button to update.",
+        "Offline": "📴 You are in OFFLINE mode."
     }
 }
