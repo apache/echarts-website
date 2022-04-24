@@ -243,7 +243,7 @@
 
 .doc-content-item-card {
   margin-top: 30px;
-  margin-left: 15px;
+  margin-left: 10px;
   border-top: 1px solid #ccc;
   position: relative;
   padding: 15px 0;
@@ -378,10 +378,14 @@
 }
 .doc-content-item-card.level-2 .guider {
       vertical-align: middle;
-      width: 28px;
-      margin-left: -39px;
-      margin-right: 2px;
-      border-top: 1px solid #E0E6F1;
+      width: 23px;
+      margin-left: -34px;
+      margin-right: 0px;
+      border-bottom: 1px solid #E0E6F1;
+      border-left: 1px solid #E0E6F1;
+      height: 15px;
+      margin-top: -15px;
+      border-bottom-left-radius: 10px;
       position: relative;
 }
 .doc-content-item-card.level-3 {
@@ -390,10 +394,14 @@
 }
 .doc-content-item-card.level-3 .guider {
       vertical-align: middle;
-      width: 28px;
-      margin-left: -39px;
-      margin-right: 2px;
-      border-top: 1px solid #E0E6F1;
+      width: 23px;
+      margin-left: -34px;
+      margin-right: 0px;
+      border-bottom: 1px solid #E0E6F1;
+      border-left: 1px solid #E0E6F1;
+      height: 15px;
+      margin-top: -15px;
+      border-bottom-left-radius: 10px;
       position: relative;
 }
 .doc-content-item-card.level-4 {
@@ -402,10 +410,14 @@
 }
 .doc-content-item-card.level-4 .guider {
       vertical-align: middle;
-      width: 28px;
-      margin-left: -39px;
-      margin-right: 2px;
-      border-top: 1px solid #E0E6F1;
+      width: 23px;
+      margin-left: -34px;
+      margin-right: 0px;
+      border-bottom: 1px solid #E0E6F1;
+      border-left: 1px solid #E0E6F1;
+      height: 15px;
+      margin-top: -15px;
+      border-bottom-left-radius: 10px;
       position: relative;
 }
 .doc-content-item-card.level-5 {
@@ -414,10 +426,14 @@
 }
 .doc-content-item-card.level-5 .guider {
       vertical-align: middle;
-      width: 28px;
-      margin-left: -39px;
-      margin-right: 2px;
-      border-top: 1px solid #E0E6F1;
+      width: 23px;
+      margin-left: -34px;
+      margin-right: 0px;
+      border-bottom: 1px solid #E0E6F1;
+      border-left: 1px solid #E0E6F1;
+      height: 15px;
+      margin-top: -15px;
+      border-bottom-left-radius: 10px;
       position: relative;
 }
 .doc-content-item-card.level-6 {
@@ -426,10 +442,14 @@
 }
 .doc-content-item-card.level-6 .guider {
       vertical-align: middle;
-      width: 28px;
-      margin-left: -39px;
-      margin-right: 2px;
-      border-top: 1px solid #E0E6F1;
+      width: 23px;
+      margin-left: -34px;
+      margin-right: 0px;
+      border-bottom: 1px solid #E0E6F1;
+      border-left: 1px solid #E0E6F1;
+      height: 15px;
+      margin-top: -15px;
+      border-bottom-left-radius: 10px;
       position: relative;
 }
 .doc-content-item-card.level-7 {
@@ -438,10 +458,14 @@
 }
 .doc-content-item-card.level-7 .guider {
       vertical-align: middle;
-      width: 28px;
-      margin-left: -39px;
-      margin-right: 2px;
-      border-top: 1px solid #E0E6F1;
+      width: 23px;
+      margin-left: -34px;
+      margin-right: 0px;
+      border-bottom: 1px solid #E0E6F1;
+      border-left: 1px solid #E0E6F1;
+      height: 15px;
+      margin-top: -15px;
+      border-bottom-left-radius: 10px;
       position: relative;
 }
 .doc-content-item-card.level-8 {
@@ -450,10 +474,14 @@
 }
 .doc-content-item-card.level-8 .guider {
       vertical-align: middle;
-      width: 28px;
-      margin-left: -39px;
-      margin-right: 2px;
-      border-top: 1px solid #E0E6F1;
+      width: 23px;
+      margin-left: -34px;
+      margin-right: 0px;
+      border-bottom: 1px solid #E0E6F1;
+      border-left: 1px solid #E0E6F1;
+      height: 15px;
+      margin-top: -15px;
+      border-bottom-left-radius: 10px;
       position: relative;
 }
 .doc-content-item-card.level-9 {
@@ -462,10 +490,14 @@
 }
 .doc-content-item-card.level-9 .guider {
       vertical-align: middle;
-      width: 28px;
-      margin-left: -39px;
-      margin-right: 2px;
-      border-top: 1px solid #E0E6F1;
+      width: 23px;
+      margin-left: -34px;
+      margin-right: 0px;
+      border-bottom: 1px solid #E0E6F1;
+      border-left: 1px solid #E0E6F1;
+      height: 15px;
+      margin-top: -15px;
+      border-bottom-left-radius: 10px;
       position: relative;
 }
 .doc-content-item-card.level-10 {
@@ -474,10 +506,14 @@
 }
 .doc-content-item-card.level-10 .guider {
       vertical-align: middle;
-      width: 28px;
-      margin-left: -39px;
-      margin-right: 2px;
-      border-top: 1px solid #E0E6F1;
+      width: 23px;
+      margin-left: -34px;
+      margin-right: 0px;
+      border-bottom: 1px solid #E0E6F1;
+      border-left: 1px solid #E0E6F1;
+      height: 15px;
+      margin-top: -15px;
+      border-bottom-left-radius: 10px;
       position: relative;
 }
 .doc-content-item-card.level-11 {
@@ -486,10 +522,14 @@
 }
 .doc-content-item-card.level-11 .guider {
       vertical-align: middle;
-      width: 28px;
-      margin-left: -39px;
-      margin-right: 2px;
-      border-top: 1px solid #E0E6F1;
+      width: 23px;
+      margin-left: -34px;
+      margin-right: 0px;
+      border-bottom: 1px solid #E0E6F1;
+      border-left: 1px solid #E0E6F1;
+      height: 15px;
+      margin-top: -15px;
+      border-bottom-left-radius: 10px;
       position: relative;
 }
 .doc-content-item-card .prop-types {

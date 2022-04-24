@@ -53,6 +53,12 @@ window.__EC_DOC_option_series_tree = {
       "default": "50%"
     }
   },
+  "center": {
+    "desc": "<p>当前视角的中心点</p>\n<p>例如：</p>\n<pre><code class=\"lang-ts\">center: [115.97, 29.71]\n</code></pre>\n"
+  },
+  "zoom": {
+    "desc": "<p>当前视角的缩放比例。</p>\n"
+  },
   "layout": {
     "desc": "\n\n<p>树图的布局，有 <code class=\"codespan\">正交</code> 和 <code class=\"codespan\">径向</code> 两种。这里的 <code class=\"codespan\">正交布局</code> 就是我们通常所说的 <code class=\"codespan\">水平</code> 和 <code class=\"codespan\">垂直</code> 方向，对应的参数取值为 <code class=\"codespan\">&#39;orthogonal&#39;</code> 。而 <code class=\"codespan\">径向布局</code> 是指以根节点为圆心，每一层节点为环，一层层向外发散绘制而成的布局，对应的参数取值为 <code class=\"codespan\">&#39;radial&#39;</code> 。</p>\n<p><strong>正交布局示例：</strong></p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=tree-basic&edit=1&reset=1\" width=\"780\" height=\"900\"></iframe>\n\n\n\n<p><strong>径向布局示例：</strong></p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=tree-radial&edit=1&reset=1\" width=\"800\" height=\"800\"></iframe>\n\n",
     "uiControl": {
