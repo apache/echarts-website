@@ -149,8 +149,9 @@
 #preview-status #run-log .run-log-type-error {
       color: #e43c59;
 }
-.el-message.no-min-width {
+.el-message.toast-shared-url {
   min-width: auto;
+  z-index: 9999999 !important;
 }
 
 .object-visualizer {
