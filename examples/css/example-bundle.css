@@ -10,157 +10,6 @@
   right: 0;
 }
 
-#chart-panel {
-  position: absolute;
-  top: 42px;
-  right: 15px;
-  bottom: 50px;
-  left: 15px;
-  box-sizing: border-box;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 20px;
-  border-radius: 5px;
-  background: #fff;
-  overflow: hidden;
-  padding: 10px;
-}
-#chart-panel .ec-debug-dirty-rect-container {
-    left: 10px !important;
-    top: 10px !important;
-    right: 10px !important;
-    bottom: 10px !important;
-}
-#chart-panel .ec-debug-dirty-rect-container .ec-debug-dirty-rect {
-      background-color: rgba(255, 0, 0, 0.2) !important;
-      border: 1px solid red !important;
-}
-#chart-panel .chart-container {
-    position: relative;
-    height: 100%;
-}
-.render-config-container .el-radio-group label {
-  margin-bottom: 0;
-}
-#tool-panel {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  padding-top: 5px;
-  padding-left: 15px;
-}
-#tool-panel * {
-    font-size: 12px;
-}
-#tool-panel .render-config-trigger {
-    cursor: pointer;
-    font-weight: 500;
-    margin-left: 10px;
-}
-#tool-panel .version-select {
-    width: 80px;
-    margin-left: 10px;
-}
-#tool-panel .random {
-    margin-left: 10px;
-}
-#tool-panel label {
-    margin-bottom: 0;
-}
-#tool-panel .left-panel {
-    float: left;
-}
-#tool-panel .left-panel > * {
-    vertical-align: middle;
-    display: inline-block;
-}
-#tool-panel .tool-label {
-    font-weight: bold;
-    text-transform: uppercase;
-    margin-left: 20px;
-}
-#tool-panel .edit {
-    float: right;
-    margin-right: 15px;
-    cursor: pointer;
-}
-.full #chart-panel {
-  top: 40px;
-  right: 5px;
-  bottom: 5px;
-  left: 5px;
-  box-shadow: rgba(10, 9, 9, 0.1) 0px 0px 5px;
-}
-.full #tool-panel {
-  padding-left: 5px;
-}
-.full #tool-panel .download,
-.full #tool-panel .edit {
-    margin-right: 5px;
-}
-#preview-status {
-  overflow: hidden;
-  position: absolute;
-  bottom: 5px;
-  left: 0;
-  right: 0;
-  height: 30px;
-  padding: 0 20px;
-  font-size: 0.9rem;
-}
-#preview-status .screenshot,
-#preview-status .download,
-#preview-status .edit {
-    margin-right: 15px;
-    cursor: pointer;
-}
-#preview-status .screenshot {
-    margin-right: 5px;
-    width: 25px;
-    height: 25px;
-    margin-top: 2px;
-}
-#preview-status .left {
-    float: left;
-}
-#preview-status .left > * {
-      display: inline-block;
-      vertical-align: middle;
-}
-#preview-status .right {
-    float: right;
-}
-#preview-status #run-log {
-    line-height: 25px;
-}
-#preview-status #run-log .run-log-time {
-      color: #666;
-      display: inline-block;
-      margin-right: 10px;
-      font-size: 12px;
-}
-#preview-status #run-log .run-log-type-info {
-      color: #666;
-      font-size: 12px;
-}
-#preview-status #run-log .run-log-type-warn {
-      color: #f93;
-}
-#preview-status #run-log .run-log-type-error {
-      color: #e43c59;
-}
-.dg.main * {
-  box-sizing: content-box;
-}
-.dg.main input {
-  line-height: normal;
-}
-.dg.main.a {
-  overflow-x: visible;
-}
-.dg.main .c select {
-  color: #000;
-}
-
 .monaco-editor-main {
   font-family: 'Source Code Pro', 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
   font-size: 12px;
@@ -182,6 +31,126 @@
   top: 0;
   bottom: 0;
   right: 0;
+}
+
+#chart-panel {
+  position: absolute;
+  top: 42px;
+  right: 15px;
+  bottom: 50px;
+  left: 15px;
+  box-sizing: border-box;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 20px;
+  border-radius: 5px;
+  background: #fff;
+  overflow: hidden;
+  padding: 10px;
+}
+.render-config-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+}
+.render-config-container > * {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.render-config-container .tool-label {
+    font-weight: bold;
+    margin-right: 5px;
+}
+.render-config-container .el-radio-group label {
+    margin-bottom: 0;
+}
+#tool-panel {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  left: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+}
+#tool-panel * {
+    font-size: 12px;
+}
+#tool-panel .render-config-trigger {
+    cursor: pointer;
+    font-weight: 500;
+    margin-left: 10px;
+}
+#tool-panel .version-select {
+    width: 80px;
+    margin-left: 10px;
+}
+#tool-panel .version-select.nightly {
+      width: 160px;
+}
+#tool-panel .random,
+#tool-panel .use-nightly {
+    margin-left: 10px;
+}
+#tool-panel label {
+    margin-bottom: 0;
+}
+#tool-panel .dark-mode {
+    margin-right: 5px;
+}
+#tool-panel .edit {
+    margin-left: 5px;
+    cursor: pointer;
+}
+.full #chart-panel {
+  top: 40px;
+  right: 5px;
+  bottom: 5px;
+  left: 5px;
+  box-shadow: rgba(10, 9, 9, 0.1) 0px 0px 5px;
+}
+.full #tool-panel {
+  right: 5px;
+  left: 5px;
+}
+#preview-status {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  padding: 0 15px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#preview-status .left-buttons {
+    flex-shrink: 0;
+}
+#preview-status #run-log {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    margin-left: 10px;
+    text-align: right;
+}
+#preview-status #run-log .run-log-time {
+      color: #666;
+      margin-right: 10px;
+      white-space: nowrap;
+}
+#preview-status #run-log .run-log-type-info {
+      color: #666;
+}
+#preview-status #run-log .run-log-type-warn {
+      color: #f93;
+}
+#preview-status #run-log .run-log-type-error {
+      color: #e43c59;
+}
+.el-message.no-min-width {
+  min-width: auto;
 }
 
 .object-visualizer {
@@ -417,11 +386,14 @@
 }
 #editor-control-panel .editor-controls .btn {
     border-radius: 0;
-    margin-left: 10px;
+    margin: 0;
     border: none;
     height: 30px;
     background: none;
     color: #666;
+}
+#editor-control-panel .editor-controls .btn:hover {
+      color: #409eff;
 }
 #editor-control-panel .editor-controls .btn > * {
       display: inline-block;
@@ -437,6 +409,9 @@
 }
 #editor-control-panel .editor-controls .btn.run:hover {
       background-color: #5aabff;
+}
+#editor-control-panel .editor-controls .btn.codepen svg {
+      transform: scale(1.08);
 }
 .right-container {
   position: absolute;
