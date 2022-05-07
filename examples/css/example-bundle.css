@@ -55,10 +55,17 @@
 .render-config-container > * {
     margin-left: 10px;
     margin-right: 10px;
+    flex-shrink: 0;
+}
+.render-config-container .cfg-renderer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 .render-config-container .tool-label {
     font-weight: bold;
     margin-right: 5px;
+    margin-bottom: 0;
 }
 .render-config-container .el-radio-group label {
     margin-bottom: 0;

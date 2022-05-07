@@ -45,10 +45,10 @@ window.__EC_DOC_option_visualMap_piecewise = {
     }
   },
   "selectedMode": {
-    "desc": "\n\n<p>Selected Mode could be:</p>\n<ul>\n<li><code class=\"codespan\">&#39;multiple&#39;</code> (multiple selection).</li>\n<li><code class=\"codespan\">&#39;single&#39;</code> (single selection).</li>\n</ul>\n",
+    "desc": "\n\n<p>Selected Mode could be:</p>\n<ul>\n<li><code class=\"codespan\">&#39;multiple&#39;</code> (multiple selection).</li>\n<li><code class=\"codespan\">&#39;single&#39;</code> (single selection).</li>\n<li><code class=\"codespan\">true</code> (single selection) since version <code class=\"codespan\">5.3.3</code>.</li>\n<li><code class=\"codespan\">false</code> (no selection) since version <code class=\"codespan\">5.3.3</code>.</li>\n</ul>\n",
     "uiControl": {
       "type": "enum",
-      "options": "single,multiple"
+      "options": "single,multiple,true,false"
     }
   },
   "inverse": {
