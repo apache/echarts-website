@@ -38,6 +38,9 @@
       "clean": "true"
     }
   },
+  "realtimeSort": {
+    "desc": "<p>Whether to enable realtime sorting, which is used for bar-racing effect. Please refer to the tutorial <a href=\"https://echarts.apache.org/handbook/en/how-to/chart-types/bar/bar-race/\" target=\"_blank\">Dynamic Sorting Bar Chart</a> in the Handbook.</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/en/view.html?c=bar-race-country&reset=1&edit=1\" width=\"800\" height=\"500\"></iframe>\n\n"
+  },
   "showBackground": {
     "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v4.7.0</code></p>\n</blockquote>\n\n\n<p>Whether to show background behind each bar. Use <a href=\"#series-bar.backgroundStyle\">backgroundStyle</a> to set background style.</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/en/view.html?c=bar-background&reset=1&edit=1\" width=\"800\" height=\"400\"></iframe>\n\n",
     "uiControl": {

@@ -38,6 +38,9 @@
       "clean": "true"
     }
   },
+  "realtimeSort": {
+    "desc": "<p>是否开启实时排序，用来实现动态排序图效果，具体参见手册中<a href=\"https://echarts.apache.org/handbook/zh/how-to/chart-types/bar/bar-race/\" target=\"_blank\">动态排序柱状图</a>的教程。</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=bar-race-country&reset=1&edit=1\" width=\"800\" height=\"500\"></iframe>\n\n"
+  },
   "showBackground": {
     "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v4.7.0</code> 开始支持</p>\n</blockquote>\n\n\n<p>是否显示柱条的背景色。通过 <a href=\"#series-bar.backgroundStyle\">backgroundStyle</a> 配置背景样式。</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=bar-background&reset=1&edit=1\" width=\"800\" height=\"400\"></iframe>\n\n",
     "uiControl": {
