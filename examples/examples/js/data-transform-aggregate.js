@@ -13,7 +13,7 @@ $.when(
   run(res[0]);
 });
 function run(_rawData) {
-  echarts.registerTransform(window.ecSimpleTransform.aggregate);
+  echarts.registerTransform(ecSimpleTransform.aggregate);
   option = {
     dataset: [
       {

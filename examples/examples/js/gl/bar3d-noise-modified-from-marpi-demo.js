@@ -7,7 +7,6 @@ $.getScript(
   'https://cdn.jsdelivr.net/npm/simplex-noise@2.4.0/simplex-noise.js'
 ).done(function () {
   var simplex = new SimplexNoise();
-  window.onresize = myChart.resize;
   var UPDATE_DURATION = 1000;
   function initVisualizer() {
     var config = {
