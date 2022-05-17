@@ -15,7 +15,7 @@ define(function (require) {
 
     var version = BUILD_CONFIG.version + '';
     var isVersion5 = version.startsWith('5');
-    var jsDelivrBase = 'https://cdn.jsdelivr.net/npm';
+    var jsDelivrBase = 'https://fastly.jsdelivr.net/npm';
 
     var urlArgs = '__v__=' + (+new Date());
 
