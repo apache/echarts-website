@@ -30,7 +30,7 @@ const countryColors = {
   'United States': '#b22234'
 };
 $.when(
-  $.getJSON('https://cdn.jsdelivr.net/npm/emoji-flags@1.3.0/data.json'),
+  $.getJSON('https://fastly.jsdelivr.net/npm/emoji-flags@1.3.0/data.json'),
   $.getJSON(ROOT_PATH + '/data/asset/data/life-expectancy-table.json')
 ).done(function (res0, res1) {
   const flags = res0[0];

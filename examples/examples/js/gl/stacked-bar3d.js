@@ -4,7 +4,7 @@ category: bar3D
 titleCN: Stacked Bar3D
 */
 $.getScript(
-  'https://cdn.jsdelivr.net/npm/simplex-noise@2.4.0/simplex-noise.js'
+  'https://fastly.jsdelivr.net/npm/simplex-noise@2.4.0/simplex-noise.js'
 ).done(function () {
   function generateData() {
     var data = [];

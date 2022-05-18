@@ -6,8 +6,8 @@ titleCN: 自定义地图投影
 myChart.showLoading();
 $.when(
   $.get(ROOT_PATH + '/data/asset/geo/USA.json'),
-  $.getScript('https://cdn.jsdelivr.net/npm/d3-array'),
-  $.getScript('https://cdn.jsdelivr.net/npm/d3-geo')
+  $.getScript('https://fastly.jsdelivr.net/npm/d3-array'),
+  $.getScript('https://fastly.jsdelivr.net/npm/d3-geo')
 ).done(function (res) {
   const usaJson = res[0];
   const projection = d3.geoAlbersUsa();

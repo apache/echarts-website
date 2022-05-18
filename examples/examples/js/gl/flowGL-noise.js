@@ -7,7 +7,7 @@ videoStart: 2000
 videoEnd: 10000
 */
 $.getScript(
-  'https://cdn.jsdelivr.net/npm/simplex-noise@2.4.0/simplex-noise.js'
+  'https://fastly.jsdelivr.net/npm/simplex-noise@2.4.0/simplex-noise.js'
 ).done(function () {
   var noise = new SimplexNoise(Math.random);
   var noise2 = new SimplexNoise(Math.random);

@@ -513,10 +513,10 @@ echarts.util.each(optionCreators, function (creator, key) {
 console.log(app.config);
 $.when(
   $.getScript(
-    'https://cdn.jsdelivr.net/npm/echarts-simple-transform/dist/ecSimpleTransform.min.js'
+    'https://fastly.jsdelivr.net/npm/echarts-simple-transform/dist/ecSimpleTransform.min.js'
   ),
   $.getScript(
-    'https://cdn.jsdelivr.net/npm/echarts-simple-option-player/dist/ecSimpleOptionPlayer.min.js'
+    'https://fastly.jsdelivr.net/npm/echarts-simple-option-player/dist/ecSimpleOptionPlayer.min.js'
   )
 ).done(function () {
   run();

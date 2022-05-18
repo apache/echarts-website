@@ -67,7 +67,7 @@ var RAW_DATA = [
 ];
 $.when(
   $.getScript(
-    'https://cdn.jsdelivr.net/npm/echarts-simple-transform@1.0.0/dist/ecSimpleTransform.min.js'
+    'https://fastly.jsdelivr.net/npm/echarts-simple-transform@1.0.0/dist/ecSimpleTransform.min.js'
   )
 ).done(function () {
   init();
