@@ -32,7 +32,7 @@ jobs:
         run: |
           git clone --depth 1 https://github.com/apache/echarts-examples
           cd echarts-examples
-          npm install
+          npm install --force
 
       - name: Install ECharts Theme Builder
         working-directory: tmp-workspace
@@ -57,7 +57,7 @@ jobs:
           npm run release
 
       - name: Install Dep
-        run: npm install --force
+        run: npm install
 
       - name: Deploy 🚀
         uses: ./node_modules/@jamesives/github-pages-deploy-action
