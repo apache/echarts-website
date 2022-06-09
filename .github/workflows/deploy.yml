@@ -57,7 +57,7 @@ jobs:
           npm run release
 
       - name: Install Dep
-        run: npm install
+        run: npm install --force
 
       - name: Deploy 🚀
         uses: ./node_modules/@jamesives/github-pages-deploy-action
