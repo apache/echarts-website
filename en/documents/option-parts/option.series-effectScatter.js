@@ -642,7 +642,7 @@ window.__EC_DOC_option_series_effectScatter = {
     }
   },
   "labelLine": {
-    "desc": "<p>Configuration of label guide line.</p>\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Configuration of label guide line.</p>\n"
   },
   "labelLine.show": {
     "desc": "\n\n<p>Whether to show the label guide line.</p>\n",
@@ -651,7 +651,7 @@ window.__EC_DOC_option_series_effectScatter = {
     }
   },
   "labelLine.showAbove": {
-    "desc": "<p>Whether to show the label guide line above the corresponding element.</p>\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Whether to show the label guide line above the corresponding element.</p>\n"
   },
   "labelLine.length2": {
     "desc": "\n\n<p>The length of the second segment of guide line.</p>\n",
@@ -669,7 +669,7 @@ window.__EC_DOC_option_series_effectScatter = {
     }
   },
   "labelLine.minTurnAngle": {
-    "desc": "<p>Minimum turn angle between two segments of guide line to prevent unaesthetic display when angle is too small.</p>\n<p>Can be 0 - 180 degree.</p>\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Minimum turn angle between two segments of guide line to prevent unaesthetic display when angle is too small.</p>\n<p>Can be 0 - 180 degree.</p>\n"
   },
   "labelLine.lineStyle.color": {
     "desc": "\n\n<p>Line color. </p>\n<blockquote>\n<p>Supports setting as solid color using <code class=\"codespan\">rgb(255,255,255)</code>, <code class=\"codespan\">rgba(255,255,255,1)</code>, <code class=\"codespan\">#fff</code>, etc. Also supports setting as gradient color and pattern fill, see <a href=\"#color\">option.color</a> for details</p>\n</blockquote>\n",
@@ -934,7 +934,7 @@ window.__EC_DOC_option_series_effectScatter = {
     }
   },
   "emphasis.scale": {
-    "desc": "\n\n<p>Whether to scale to highlight the data in emphasis state.</p>\n",
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n\n\n<p>Whether to scale to highlight the data in emphasis state. <code class=\"codespan\">number</code> has been supported since <code class=\"codespan\">v5.3.2</code>, the default scale value is 1.1.</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "true"
@@ -1443,7 +1443,7 @@ window.__EC_DOC_option_series_effectScatter = {
     }
   },
   "emphasis.labelLine": {
-    "desc": "<p>Configuration of label guide line.</p>\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Configuration of label guide line.</p>\n"
   },
   "emphasis.labelLine.show": {
     "desc": "\n\n<p>Whether to show the label guide line.</p>\n",
@@ -2155,7 +2155,7 @@ window.__EC_DOC_option_series_effectScatter = {
     }
   },
   "blur.labelLine": {
-    "desc": "<p>Configuration of label guide line.</p>\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Configuration of label guide line.</p>\n"
   },
   "blur.labelLine.show": {
     "desc": "\n\n<p>Whether to show the label guide line.</p>\n",
@@ -2874,7 +2874,7 @@ window.__EC_DOC_option_series_effectScatter = {
     }
   },
   "select.labelLine": {
-    "desc": "<p>Configuration of label guide line.</p>\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Configuration of label guide line.</p>\n"
   },
   "select.labelLine.show": {
     "desc": "\n\n<p>Whether to show the label guide line.</p>\n",
@@ -3640,7 +3640,7 @@ window.__EC_DOC_option_series_effectScatter = {
     }
   },
   "data.labelLine": {
-    "desc": "<p>Configuration of label guide line.</p>\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Configuration of label guide line.</p>\n"
   },
   "data.labelLine.show": {
     "desc": "\n\n<p>Whether to show the label guide line.</p>\n",
@@ -3649,7 +3649,7 @@ window.__EC_DOC_option_series_effectScatter = {
     }
   },
   "data.labelLine.showAbove": {
-    "desc": "<p>Whether to show the label guide line above the corresponding element.</p>\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Whether to show the label guide line above the corresponding element.</p>\n"
   },
   "data.labelLine.length2": {
     "desc": "\n\n<p>The length of the second segment of guide line.</p>\n",
@@ -3667,7 +3667,7 @@ window.__EC_DOC_option_series_effectScatter = {
     }
   },
   "data.labelLine.minTurnAngle": {
-    "desc": "<p>Minimum turn angle between two segments of guide line to prevent unaesthetic display when angle is too small.</p>\n<p>Can be 0 - 180 degree.</p>\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Minimum turn angle between two segments of guide line to prevent unaesthetic display when angle is too small.</p>\n<p>Can be 0 - 180 degree.</p>\n"
   },
   "data.labelLine.lineStyle.color": {
     "desc": "\n\n<p>Line color. </p>\n<blockquote>\n<p>Supports setting as solid color using <code class=\"codespan\">rgb(255,255,255)</code>, <code class=\"codespan\">rgba(255,255,255,1)</code>, <code class=\"codespan\">#fff</code>, etc. Also supports setting as gradient color and pattern fill, see <a href=\"#color\">option.color</a> for details</p>\n</blockquote>\n",
@@ -4377,7 +4377,7 @@ window.__EC_DOC_option_series_effectScatter = {
     }
   },
   "data.emphasis.labelLine": {
-    "desc": "<p>Configuration of label guide line.</p>\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Configuration of label guide line.</p>\n"
   },
   "data.emphasis.labelLine.show": {
     "desc": "\n\n<p>Whether to show the label guide line.</p>\n",
@@ -5086,7 +5086,7 @@ window.__EC_DOC_option_series_effectScatter = {
     }
   },
   "data.blur.labelLine": {
-    "desc": "<p>Configuration of label guide line.</p>\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Configuration of label guide line.</p>\n"
   },
   "data.blur.labelLine.show": {
     "desc": "\n\n<p>Whether to show the label guide line.</p>\n",
@@ -5802,7 +5802,7 @@ window.__EC_DOC_option_series_effectScatter = {
     }
   },
   "data.select.labelLine": {
-    "desc": "<p>Configuration of label guide line.</p>\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Configuration of label guide line.</p>\n"
   },
   "data.select.labelLine.show": {
     "desc": "\n\n<p>Whether to show the label guide line.</p>\n",

@@ -758,7 +758,7 @@
     }
   },
   "labelLine.showAbove": {
-    "desc": "<p>Whether to show the label guide line above the corresponding element.</p>\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Whether to show the label guide line above the corresponding element.</p>\n"
   },
   "labelLine.length": {
     "desc": "\n\n<p>The length of the first segment of guide line.</p>\n",
@@ -785,7 +785,7 @@
     }
   },
   "labelLine.minTurnAngle": {
-    "desc": "<p>Minimum turn angle between two segments of guide line to prevent unaesthetic display when angle is too small.</p>\n<p>Can be 0 - 180 degree.</p>\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Minimum turn angle between two segments of guide line to prevent unaesthetic display when angle is too small.</p>\n<p>Can be 0 - 180 degree.</p>\n"
   },
   "labelLine.lineStyle.color": {
     "desc": "\n\n<p>Line color. </p>\n<blockquote>\n<p>Supports setting as solid color using <code class=\"codespan\">rgb(255,255,255)</code>, <code class=\"codespan\">rgba(255,255,255,1)</code>, <code class=\"codespan\">#fff</code>, etc. Also supports setting as gradient color and pattern fill, see <a href=\"#color\">option.color</a> for details</p>\n</blockquote>\n",
@@ -887,7 +887,7 @@
     }
   },
   "labelLine.maxSurfaceAngle": {
-    "desc": "<p>Max angle between guide line and surface normal. To prevent guide line overlapping with sector.</p>\n<p>Can be 0 - 180 degree.</p>\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Max angle between guide line and surface normal. To prevent guide line overlapping with sector.</p>\n<p>Can be 0 - 180 degree.</p>\n"
   },
   "labelLayout": {
     "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Unified layout configuration of labels.</p>\n<p>It provide a chance to adjust the labels&#39; <code class=\"codespan\">(x, y)</code> position, alignment based on the original layout each series provides.</p>\n<p>This option can be a callback with following parameters.</p>\n<pre><code class=\"lang-ts\">// corresponding index of data\ndataIndex: number\n// corresponding type of data. Only available in graph, in which it can be &#39;node&#39; or &#39;edge&#39;\ndataType?: string\n// corresponding index of series\nseriesIndex: number\n// Displayed text of label.\ntext: string\n// Bounding rectangle of label.\nlabelRect: {x: number, y: number, width: number, height: number}\n// Horizontal alignment of label.\nalign: &#39;left&#39; | &#39;center&#39; | &#39;right&#39;\n// Vertical alignment of label.\nverticalAlign: &#39;top&#39; | &#39;middle&#39; | &#39;bottom&#39;\n// Bounding rectangle of the element corresponding to.\nrect: {x: number, y: number, width: number, height: number}\n// Default points array of labelLine. Currently only provided in pie and funnel series.\n// It&#39;s null in other series.\nlabelLinePoints?: number[][]\n</code></pre>\n<p><strong>Example:</strong></p>\n<p>Align the labels on the right. Left 10px margin to the edge.</p>\n<pre><code class=\"lang-ts\">labelLayout(params) {\n    return {\n        x: params.rect.x + 10,\n        y: params.rect.y + params.rect.height / 2,\n        verticalAlign: &#39;middle&#39;,\n        align: &#39;left&#39;\n    }\n}\n</code></pre>\n<p>Set the text size based on the size of element bounding rectangle.</p>\n<pre><code class=\"lang-ts\">\nlabelLayout(params) {\n    return {\n        fontSize: Math.max(params.rect.width / 10, 5)\n    };\n}\n</code></pre>\n"
@@ -1095,14 +1095,14 @@
     }
   },
   "emphasis.scale": {
-    "desc": "\n\n<p>Whether to scale to highlight the data in emphasis state.</p>\n",
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n\n\n<p>Whether to scale to highlight the data in emphasis state.</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "true"
     }
   },
   "emphasis.scaleSize": {
-    "desc": "\n\n<p>Size of scale. Available when <a href=\"#series-pie.emphasis.scale\">emphasis.scale</a> is set <code class=\"codespan\">true</code>.</p>\n",
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n\n\n<p>Size of scale. Available when <a href=\"#series-pie.emphasis.scale\">emphasis.scale</a> is set as <code class=\"codespan\">true</code>.</p>\n",
     "uiControl": {
       "type": "number",
       "min": "0",

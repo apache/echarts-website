@@ -1438,7 +1438,7 @@ window.__EC_DOC_option_series_graph = {
     }
   },
   "emphasis.scale": {
-    "desc": "\n\n<p>Whether to scale to highlight the node in emphasis state.</p>\n",
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n\n\n<p>Whether to scale to highlight the node in emphasis state. <code class=\"codespan\">number</code> has been supported since <code class=\"codespan\">v5.3.2</code>, the default scale value is 1.1.</p>\n",
     "uiControl": {
       "type": "boolean",
       "default": "true"

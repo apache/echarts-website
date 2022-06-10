@@ -688,7 +688,7 @@ window.__EC_DOC_option_series_heatmap = {
     }
   },
   "itemStyle.borderRadius": {
-    "desc": "\n\n<p>The radius of rounded corner. Its unit is px. And it supports use array to respectively specify the 4 corner radiuses.</p>\n<p>For example:</p>\n<pre><code>borderRadius: 5, // consistently set the size of 4 rounded corners\nborderRadius: [5, 5, 0, 0] // (clockwise upper left, upper right, bottom right and bottom left)\n</code></pre>",
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.3.1</code></p>\n</blockquote>\n\n\n<p>The radius of rounded corner. Its unit is px. And it supports use array to respectively specify the 4 corner radiuses.</p>\n<p>For example:</p>\n<pre><code>borderRadius: 5, // consistently set the size of 4 rounded corners\nborderRadius: [5, 5, 0, 0] // (clockwise upper left, upper right, bottom right and bottom left)\n</code></pre>",
     "uiControl": {
       "type": "vector",
       "min": "0",
@@ -3169,7 +3169,7 @@ window.__EC_DOC_option_series_heatmap = {
     }
   },
   "data.itemStyle.borderRadius": {
-    "desc": "\n\n<p>The radius of rounded corner. Its unit is px. And it supports use array to respectively specify the 4 corner radiuses.</p>\n<p>For example:</p>\n<pre><code>borderRadius: 5, // consistently set the size of 4 rounded corners\nborderRadius: [5, 5, 0, 0] // (clockwise upper left, upper right, bottom right and bottom left)\n</code></pre>",
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.3.1</code></p>\n</blockquote>\n\n\n<p>The radius of rounded corner. Its unit is px. And it supports use array to respectively specify the 4 corner radiuses.</p>\n<p>For example:</p>\n<pre><code>borderRadius: 5, // consistently set the size of 4 rounded corners\nborderRadius: [5, 5, 0, 0] // (clockwise upper left, upper right, bottom right and bottom left)\n</code></pre>",
     "uiControl": {
       "type": "vector",
       "min": "0",

@@ -552,7 +552,7 @@ window.__EC_DOC_option_series_themeRiver = {
     }
   },
   "labelLine": {
-    "desc": "<p>标签的视觉引导线配置。</p>\n"
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>标签的视觉引导线配置。</p>\n"
   },
   "labelLine.show": {
     "desc": "\n\n<p>是否显示视觉引导线。</p>\n",
@@ -561,7 +561,7 @@ window.__EC_DOC_option_series_themeRiver = {
     }
   },
   "labelLine.showAbove": {
-    "desc": "<p>是否显示在图形上方。</p>\n"
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>是否显示在图形上方。</p>\n"
   },
   "labelLine.length2": {
     "desc": "\n\n<p>视觉引导项第二段的长度。</p>\n",
@@ -579,7 +579,7 @@ window.__EC_DOC_option_series_themeRiver = {
     }
   },
   "labelLine.minTurnAngle": {
-    "desc": "<p>通过调整第二段线的长度，限制引导线两端之间最小的夹角，以防止过小的夹角导致显示不美观。</p>\n<p>可以设置为 0 - 180 度。</p>\n"
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>通过调整第二段线的长度，限制引导线两端之间最小的夹角，以防止过小的夹角导致显示不美观。</p>\n<p>可以设置为 0 - 180 度。</p>\n"
   },
   "labelLine.lineStyle.color": {
     "desc": "\n\n<p>线的颜色。</p>\n<blockquote>\n<p>支持使用<code class=\"codespan\">rgb(255,255,255)</code>，<code class=\"codespan\">rgba(255,255,255,1)</code>，<code class=\"codespan\">#fff</code>等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见<a href=\"#color\">option.color</a></p>\n</blockquote>\n",
@@ -1362,7 +1362,7 @@ window.__EC_DOC_option_series_themeRiver = {
     }
   },
   "emphasis.labelLine": {
-    "desc": "<p>标签的视觉引导线配置。</p>\n"
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>标签的视觉引导线配置。</p>\n"
   },
   "emphasis.labelLine.show": {
     "desc": "\n\n<p>是否显示视觉引导线。</p>\n",
@@ -2057,7 +2057,7 @@ window.__EC_DOC_option_series_themeRiver = {
     }
   },
   "blur.labelLine": {
-    "desc": "<p>标签的视觉引导线配置。</p>\n"
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>标签的视觉引导线配置。</p>\n"
   },
   "blur.labelLine.show": {
     "desc": "\n\n<p>是否显示视觉引导线。</p>\n",
@@ -2759,7 +2759,7 @@ window.__EC_DOC_option_series_themeRiver = {
     }
   },
   "select.labelLine": {
-    "desc": "<p>标签的视觉引导线配置。</p>\n"
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>标签的视觉引导线配置。</p>\n"
   },
   "select.labelLine.show": {
     "desc": "\n\n<p>是否显示视觉引导线。</p>\n",

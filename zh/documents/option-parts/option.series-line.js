@@ -1111,7 +1111,7 @@ window.__EC_DOC_option_series_line = {
     "desc": "<p>是否开启标签的数字动画。</p>\n"
   },
   "labelLine": {
-    "desc": "<p>标签的视觉引导线配置。</p>\n"
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>标签的视觉引导线配置。</p>\n"
   },
   "labelLine.show": {
     "desc": "\n\n<p>是否显示视觉引导线。</p>\n",
@@ -1120,7 +1120,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "labelLine.showAbove": {
-    "desc": "<p>是否显示在图形上方。</p>\n"
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>是否显示在图形上方。</p>\n"
   },
   "labelLine.length2": {
     "desc": "\n\n<p>视觉引导项第二段的长度。</p>\n",
@@ -1138,7 +1138,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "labelLine.minTurnAngle": {
-    "desc": "<p>通过调整第二段线的长度，限制引导线两端之间最小的夹角，以防止过小的夹角导致显示不美观。</p>\n<p>可以设置为 0 - 180 度。</p>\n"
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>通过调整第二段线的长度，限制引导线两端之间最小的夹角，以防止过小的夹角导致显示不美观。</p>\n<p>可以设置为 0 - 180 度。</p>\n"
   },
   "labelLine.lineStyle.color": {
     "desc": "\n\n<p>线的颜色。</p>\n<blockquote>\n<p>支持使用<code class=\"codespan\">rgb(255,255,255)</code>，<code class=\"codespan\">rgba(255,255,255,1)</code>，<code class=\"codespan\">#fff</code>等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见<a href=\"#color\">option.color</a></p>\n</blockquote>\n",
@@ -1596,7 +1596,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "emphasis.scale": {
-    "desc": "<p>是否开启 hover 在拐点标志上的放大效果。</p>\n"
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>是否开启 hover 在拐点标志上的放大效果。从 <code class=\"codespan\">5.3.2</code> 版本开始支持 <code class=\"codespan\">number</code>，用以设置高亮放大倍数，默认放大 1.1 倍。</p>\n"
   },
   "emphasis.focus": {
     "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>在高亮图形时，是否淡出其它数据的图形已达到聚焦的效果。支持如下配置：</p>\n<ul>\n<li><code class=\"codespan\">&#39;none&#39;</code> 不淡出其它图形，默认使用该配置。</li>\n<li><code class=\"codespan\">&#39;self&#39;</code> 只聚焦（不淡出）当前高亮的数据的图形。</li>\n</ul>\n<ul>\n<li><code class=\"codespan\">&#39;series&#39;</code> 聚焦当前高亮的数据所在的系列的所有图形。</li>\n</ul>\n<p><strong>示例：</strong></p>\n<p>下面代码配置了柱状图在高亮一个图形的时候，淡出当前直角坐标系所有其它的系列。</p>\n<pre><code class=\"lang-ts\">emphasis: {\n    focus: &#39;series&#39;,\n    blurScope: &#39;coordinateSystem&#39;\n}\n</code></pre>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=bar-y-category-stack&reset=1&edit=1\" width=\"600\" height=\"400\"></iframe>\n\n\n\n"
@@ -2101,7 +2101,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "emphasis.labelLine": {
-    "desc": "<p>标签的视觉引导线配置。</p>\n"
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>标签的视觉引导线配置。</p>\n"
   },
   "emphasis.labelLine.show": {
     "desc": "\n\n<p>是否显示视觉引导线。</p>\n",
@@ -3443,7 +3443,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "blur.labelLine": {
-    "desc": "<p>标签的视觉引导线配置。</p>\n"
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>标签的视觉引导线配置。</p>\n"
   },
   "blur.labelLine.show": {
     "desc": "\n\n<p>是否显示视觉引导线。</p>\n",
@@ -4789,7 +4789,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "select.labelLine": {
-    "desc": "<p>标签的视觉引导线配置。</p>\n"
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>标签的视觉引导线配置。</p>\n"
   },
   "select.labelLine.show": {
     "desc": "\n\n<p>是否显示视觉引导线。</p>\n",
@@ -6206,7 +6206,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "data.labelLine": {
-    "desc": "<p>标签的视觉引导线配置。</p>\n"
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>标签的视觉引导线配置。</p>\n"
   },
   "data.labelLine.show": {
     "desc": "\n\n<p>是否显示视觉引导线。</p>\n",
@@ -6215,7 +6215,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "data.labelLine.showAbove": {
-    "desc": "<p>是否显示在图形上方。</p>\n"
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>是否显示在图形上方。</p>\n"
   },
   "data.labelLine.length2": {
     "desc": "\n\n<p>视觉引导项第二段的长度。</p>\n",
@@ -6233,7 +6233,7 @@ window.__EC_DOC_option_series_line = {
     }
   },
   "data.labelLine.minTurnAngle": {
-    "desc": "<p>通过调整第二段线的长度，限制引导线两端之间最小的夹角，以防止过小的夹角导致显示不美观。</p>\n<p>可以设置为 0 - 180 度。</p>\n"
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>通过调整第二段线的长度，限制引导线两端之间最小的夹角，以防止过小的夹角导致显示不美观。</p>\n<p>可以设置为 0 - 180 度。</p>\n"
   },
   "data.labelLine.lineStyle.color": {
     "desc": "\n\n<p>线的颜色。</p>\n<blockquote>\n<p>支持使用<code class=\"codespan\">rgb(255,255,255)</code>，<code class=\"codespan\">rgba(255,255,255,1)</code>，<code class=\"codespan\">#fff</code>等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见<a href=\"#color\">option.color</a></p>\n</blockquote>\n",

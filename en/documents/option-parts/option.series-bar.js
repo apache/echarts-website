@@ -631,7 +631,7 @@ window.__EC_DOC_option_series_bar = {
     }
   },
   "labelLine": {
-    "desc": "<p>Configuration of label guide line.</p>\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Configuration of label guide line.</p>\n"
   },
   "labelLine.show": {
     "desc": "\n\n<p>Whether to show the label guide line.</p>\n",
@@ -1415,7 +1415,7 @@ window.__EC_DOC_option_series_bar = {
     }
   },
   "emphasis.labelLine": {
-    "desc": "<p>Configuration of label guide line.</p>\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Configuration of label guide line.</p>\n"
   },
   "emphasis.labelLine.show": {
     "desc": "\n\n<p>Whether to show the label guide line.</p>\n",
@@ -2108,7 +2108,7 @@ window.__EC_DOC_option_series_bar = {
     }
   },
   "blur.labelLine": {
-    "desc": "<p>Configuration of label guide line.</p>\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Configuration of label guide line.</p>\n"
   },
   "blur.labelLine.show": {
     "desc": "\n\n<p>Whether to show the label guide line.</p>\n",
@@ -2808,7 +2808,7 @@ window.__EC_DOC_option_series_bar = {
     }
   },
   "select.labelLine": {
-    "desc": "<p>Configuration of label guide line.</p>\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Configuration of label guide line.</p>\n"
   },
   "select.labelLine.show": {
     "desc": "\n\n<p>Whether to show the label guide line.</p>\n",
@@ -3602,7 +3602,7 @@ window.__EC_DOC_option_series_bar = {
     }
   },
   "data.labelLine": {
-    "desc": "<p>Configuration of label guide line.</p>\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Configuration of label guide line.</p>\n"
   },
   "data.labelLine.show": {
     "desc": "\n\n<p>Whether to show the label guide line.</p>\n",
@@ -4332,7 +4332,7 @@ window.__EC_DOC_option_series_bar = {
     }
   },
   "data.emphasis.labelLine": {
-    "desc": "<p>Configuration of label guide line.</p>\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Configuration of label guide line.</p>\n"
   },
   "data.emphasis.labelLine.show": {
     "desc": "\n\n<p>Whether to show the label guide line.</p>\n",
@@ -5022,7 +5022,7 @@ window.__EC_DOC_option_series_bar = {
     }
   },
   "data.blur.labelLine": {
-    "desc": "<p>Configuration of label guide line.</p>\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Configuration of label guide line.</p>\n"
   },
   "data.blur.labelLine.show": {
     "desc": "\n\n<p>Whether to show the label guide line.</p>\n",
@@ -5719,7 +5719,7 @@ window.__EC_DOC_option_series_bar = {
     }
   },
   "data.select.labelLine": {
-    "desc": "<p>Configuration of label guide line.</p>\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Configuration of label guide line.</p>\n"
   },
   "data.select.labelLine.show": {
     "desc": "\n\n<p>Whether to show the label guide line.</p>\n",

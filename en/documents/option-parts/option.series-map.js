@@ -2006,7 +2006,7 @@ window.__EC_DOC_option_series_map = {
     "desc": "<p>The array of the three points of the label guide line. The format is:</p>\n<pre><code class=\"lang-ts\">[[x, y], [x, y], [x, y]]\n</code></pre>\n<p>It is often used in pie charts to fine-tune the guide line that has been calculated. Usually not recommended to set it in other situations.</p>\n"
   },
   "labelLine": {
-    "desc": "<p>Configuration of label guide line.</p>\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Configuration of label guide line.</p>\n"
   },
   "labelLine.show": {
     "desc": "\n\n<p>Whether to show the label guide line.</p>\n",
@@ -2015,7 +2015,7 @@ window.__EC_DOC_option_series_map = {
     }
   },
   "labelLine.showAbove": {
-    "desc": "<p>Whether to show the label guide line above the corresponding element.</p>\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Whether to show the label guide line above the corresponding element.</p>\n"
   },
   "labelLine.length2": {
     "desc": "\n\n<p>The length of the second segment of guide line.</p>\n",
@@ -2033,7 +2033,7 @@ window.__EC_DOC_option_series_map = {
     }
   },
   "labelLine.minTurnAngle": {
-    "desc": "<p>Minimum turn angle between two segments of guide line to prevent unaesthetic display when angle is too small.</p>\n<p>Can be 0 - 180 degree.</p>\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Minimum turn angle between two segments of guide line to prevent unaesthetic display when angle is too small.</p>\n<p>Can be 0 - 180 degree.</p>\n"
   },
   "labelLine.lineStyle.color": {
     "desc": "\n\n<p>Line color. </p>\n<blockquote>\n<p>Supports setting as solid color using <code class=\"codespan\">rgb(255,255,255)</code>, <code class=\"codespan\">rgba(255,255,255,1)</code>, <code class=\"codespan\">#fff</code>, etc. Also supports setting as gradient color and pattern fill, see <a href=\"#color\">option.color</a> for details</p>\n</blockquote>\n",
@@ -2746,7 +2746,7 @@ window.__EC_DOC_option_series_map = {
     }
   },
   "data.labelLine": {
-    "desc": "<p>Configuration of label guide line.</p>\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Configuration of label guide line.</p>\n"
   },
   "data.labelLine.show": {
     "desc": "\n\n<p>Whether to show the label guide line.</p>\n",
@@ -2755,7 +2755,7 @@ window.__EC_DOC_option_series_map = {
     }
   },
   "data.labelLine.showAbove": {
-    "desc": "<p>Whether to show the label guide line above the corresponding element.</p>\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Whether to show the label guide line above the corresponding element.</p>\n"
   },
   "data.labelLine.length2": {
     "desc": "\n\n<p>The length of the second segment of guide line.</p>\n",
@@ -2773,7 +2773,7 @@ window.__EC_DOC_option_series_map = {
     }
   },
   "data.labelLine.minTurnAngle": {
-    "desc": "<p>Minimum turn angle between two segments of guide line to prevent unaesthetic display when angle is too small.</p>\n<p>Can be 0 - 180 degree.</p>\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Minimum turn angle between two segments of guide line to prevent unaesthetic display when angle is too small.</p>\n<p>Can be 0 - 180 degree.</p>\n"
   },
   "data.labelLine.lineStyle.color": {
     "desc": "\n\n<p>Line color. </p>\n<blockquote>\n<p>Supports setting as solid color using <code class=\"codespan\">rgb(255,255,255)</code>, <code class=\"codespan\">rgba(255,255,255,1)</code>, <code class=\"codespan\">#fff</code>, etc. Also supports setting as gradient color and pattern fill, see <a href=\"#color\">option.color</a> for details</p>\n</blockquote>\n",
@@ -3475,7 +3475,7 @@ window.__EC_DOC_option_series_map = {
     }
   },
   "data.emphasis.labelLine": {
-    "desc": "<p>Configuration of label guide line.</p>\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Configuration of label guide line.</p>\n"
   },
   "data.emphasis.labelLine.show": {
     "desc": "\n\n<p>Whether to show the label guide line.</p>\n",
@@ -4183,7 +4183,7 @@ window.__EC_DOC_option_series_map = {
     }
   },
   "data.select.labelLine": {
-    "desc": "<p>Configuration of label guide line.</p>\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.0.0</code></p>\n</blockquote>\n<p>Configuration of label guide line.</p>\n"
   },
   "data.select.labelLine.show": {
     "desc": "\n\n<p>Whether to show the label guide line.</p>\n",

@@ -688,7 +688,7 @@ window.__EC_DOC_option_series_heatmap = {
     }
   },
   "itemStyle.borderRadius": {
-    "desc": "\n\n<p>圆角半径，单位px，支持传入数组分别指定 4 个圆角半径。\n如:</p>\n<pre><code>borderRadius: 5, // 统一设置四个角的圆角大小\nborderRadius: [5, 5, 0, 0] //（顺时针左上，右上，右下，左下）\n</code></pre>",
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.3.1</code> 开始支持</p>\n</blockquote>\n\n\n<p>圆角半径，单位px，支持传入数组分别指定 4 个圆角半径。\n如:</p>\n<pre><code>borderRadius: 5, // 统一设置四个角的圆角大小\nborderRadius: [5, 5, 0, 0] //（顺时针左上，右上，右下，左下）\n</code></pre>",
     "uiControl": {
       "type": "vector",
       "min": "0",
@@ -3169,7 +3169,7 @@ window.__EC_DOC_option_series_heatmap = {
     }
   },
   "data.itemStyle.borderRadius": {
-    "desc": "\n\n<p>圆角半径，单位px，支持传入数组分别指定 4 个圆角半径。\n如:</p>\n<pre><code>borderRadius: 5, // 统一设置四个角的圆角大小\nborderRadius: [5, 5, 0, 0] //（顺时针左上，右上，右下，左下）\n</code></pre>",
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.3.1</code> 开始支持</p>\n</blockquote>\n\n\n<p>圆角半径，单位px，支持传入数组分别指定 4 个圆角半径。\n如:</p>\n<pre><code>borderRadius: 5, // 统一设置四个角的圆角大小\nborderRadius: [5, 5, 0, 0] //（顺时针左上，右上，右下，左下）\n</code></pre>",
     "uiControl": {
       "type": "vector",
       "min": "0",

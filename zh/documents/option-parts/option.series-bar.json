@@ -631,7 +631,7 @@
     }
   },
   "labelLine": {
-    "desc": "<p>标签的视觉引导线配置。</p>\n"
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>标签的视觉引导线配置。</p>\n"
   },
   "labelLine.show": {
     "desc": "\n\n<p>是否显示视觉引导线。</p>\n",
@@ -1415,7 +1415,7 @@
     }
   },
   "emphasis.labelLine": {
-    "desc": "<p>标签的视觉引导线配置。</p>\n"
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>标签的视觉引导线配置。</p>\n"
   },
   "emphasis.labelLine.show": {
     "desc": "\n\n<p>是否显示视觉引导线。</p>\n",
@@ -2108,7 +2108,7 @@
     }
   },
   "blur.labelLine": {
-    "desc": "<p>标签的视觉引导线配置。</p>\n"
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>标签的视觉引导线配置。</p>\n"
   },
   "blur.labelLine.show": {
     "desc": "\n\n<p>是否显示视觉引导线。</p>\n",
@@ -2808,7 +2808,7 @@
     }
   },
   "select.labelLine": {
-    "desc": "<p>标签的视觉引导线配置。</p>\n"
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>标签的视觉引导线配置。</p>\n"
   },
   "select.labelLine.show": {
     "desc": "\n\n<p>是否显示视觉引导线。</p>\n",
@@ -3602,7 +3602,7 @@
     }
   },
   "data.labelLine": {
-    "desc": "<p>标签的视觉引导线配置。</p>\n"
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>标签的视觉引导线配置。</p>\n"
   },
   "data.labelLine.show": {
     "desc": "\n\n<p>是否显示视觉引导线。</p>\n",
@@ -4332,7 +4332,7 @@
     }
   },
   "data.emphasis.labelLine": {
-    "desc": "<p>标签的视觉引导线配置。</p>\n"
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>标签的视觉引导线配置。</p>\n"
   },
   "data.emphasis.labelLine.show": {
     "desc": "\n\n<p>是否显示视觉引导线。</p>\n",
@@ -5022,7 +5022,7 @@
     }
   },
   "data.blur.labelLine": {
-    "desc": "<p>标签的视觉引导线配置。</p>\n"
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>标签的视觉引导线配置。</p>\n"
   },
   "data.blur.labelLine.show": {
     "desc": "\n\n<p>是否显示视觉引导线。</p>\n",
@@ -5719,7 +5719,7 @@
     }
   },
   "data.select.labelLine": {
-    "desc": "<p>标签的视觉引导线配置。</p>\n"
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.0.0</code> 开始支持</p>\n</blockquote>\n<p>标签的视觉引导线配置。</p>\n"
   },
   "data.select.labelLine.show": {
     "desc": "\n\n<p>是否显示视觉引导线。</p>\n",
