@@ -31,7 +31,7 @@
     "desc": "<p>Index of <a href=\"#calendar\">calendar coordinates</a> to combine with, which is useful for multiple calendar coordinates in one chart.</p>\n"
   },
   "center": {
-    "desc": "\n\n<p>Center of current view-port.</p>\n<p>Example:</p>\n<pre><code class=\"lang-ts\">center: [115.97, 29.71]\n</code></pre>\n",
+    "desc": "\n\n<p>Center of current view-port. It can be an arrary containing two <code class=\"codespan\">number</code>s in pixels or <code class=\"codespan\">string</code>s in percentage relative to the container width/height.\n<code class=\"codespan\">string</code> is supported from version <code class=\"codespan\">5.3.3</code>.</p>\n<p>Example:</p>\n<pre><code class=\"lang-ts\">center: [115.97, &#39;30%&#39;]\n</code></pre>\n",
     "uiControl": {
       "type": "vector",
       "default": "0,0",

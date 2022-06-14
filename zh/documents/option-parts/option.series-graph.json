@@ -31,7 +31,7 @@
     "desc": "<p>使用的<a href=\"#calendar\">日历坐标系</a>的 index，在单个图表实例中存在多个日历坐标系的时候有用。</p>\n"
   },
   "center": {
-    "desc": "\n\n<p>当前视角的中心点</p>\n<p>例如：</p>\n<pre><code class=\"lang-ts\">center: [115.97, 29.71]\n</code></pre>\n",
+    "desc": "\n\n<p>当前视角的中心点。可以是包含两个 <code class=\"codespan\">number</code> 类型（表示像素值）或 <code class=\"codespan\">string</code> 类型（表示相对容器的百分比）的数组。\n从 <code class=\"codespan\">5.3.3</code> 版本开始支持 <code class=\"codespan\">string</code> 类型。</p>\n<p>例如：</p>\n<pre><code class=\"lang-ts\">center: [115.97, &#39;30%&#39;]\n</code></pre>\n",
     "uiControl": {
       "type": "vector",
       "default": "0,0",

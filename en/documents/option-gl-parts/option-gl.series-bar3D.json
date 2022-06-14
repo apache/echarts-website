@@ -21,7 +21,10 @@
     "desc": "<p>The smoothness of the bevel, the larger the value, the smoother.</p>\n"
   },
   "stack": {
-    "desc": "<p>Stacking of bar chart. On the same category axis, the series with the same <code class=\"codespan\">stack</code> name would be put on top of each other. Note that the data items that need to be stack in different series must have the same index in the array.</p>\n<p>Notice: <code class=\"codespan\">stack</code> only supports stacking on <code class=\"codespan\">value</code> and <code class=\"codespan\">log</code> axis for now. <code class=\"codespan\">time</code> and <code class=\"codespan\">category</code> axis are not supported.</p>\n"
+    "desc": "<p>Stacking of bar chart. On the same category axis, the series with the same <code class=\"codespan\">stack</code> name would be put on top of each other. Note that the data items that need to be stack in different series must have the same index in the array.</p>\n<p>See also <a href=\"#series-bar3D.stackStrategy\">stackStrategy</a> on how to customize how values are stacked.</p>\n<p>Notice: <code class=\"codespan\">stack</code> only supports stacking on <code class=\"codespan\">value</code> and <code class=\"codespan\">log</code> axis for now. <code class=\"codespan\">time</code> and <code class=\"codespan\">category</code> axis are not supported.</p>\n"
+  },
+  "stackStrategy": {
+    "desc": "<blockquote>\n<p>Since ECharts <code class=\"codespan\">v5.3.3</code></p>\n</blockquote>\n<p>How to stack values if the <a href=\"#series-bar3D.stack\">stack</a> property has been set. Options:</p>\n<ul>\n<li><code class=\"codespan\">&#39;samesign&#39;</code>: only stack values if the value to be stacked has the same sign as the currently cumulated stacked value.</li>\n<li><code class=\"codespan\">&#39;all&#39;</code>: stack all values, irrespective of the signs of the current or cumulative stacked value.</li>\n<li><code class=\"codespan\">&#39;positive&#39;</code>: only stack positive values.</li>\n<li><code class=\"codespan\">&#39;negative&#39;</code>: only stack negative values.</li>\n</ul>\n"
   },
   "minHeight": {
     "desc": "<p>The minimum width of the bar.</p>\n"

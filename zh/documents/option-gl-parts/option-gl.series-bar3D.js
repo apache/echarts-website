@@ -21,7 +21,10 @@ window.__EC_DOC_option_gl_series_bar3D = {
     "desc": "<p>柱子倒角的光滑/圆润度，数值越大越光滑/圆润。</p>\n"
   },
   "stack": {
-    "desc": "<p>柱状图堆叠，相同 <code class=\"codespan\">stack</code> 值的柱状图系列数据会有叠加。注意不同系列需要叠加的数据项在数组中的索引必须是一样的。</p>\n<p>注：目前<code class=\"codespan\">stack</code>只支持堆叠于 <code class=\"codespan\">value</code> 和 <code class=\"codespan\">log</code> 类型的类目轴上，不支持 <code class=\"codespan\">time</code> 和 <code class=\"codespan\">category</code> 类型的类目轴。</p>\n"
+    "desc": "<p>柱状图堆叠，相同 <code class=\"codespan\">stack</code> 值的柱状图系列数据会有叠加。注意不同系列需要叠加的数据项在数组中的索引必须是一样的。关于如何定制数值的堆叠方式，参见 <a href=\"#series-bar3D.stackStrategy\">stackStrategy</a>。</p>\n<p>注：目前 <code class=\"codespan\">stack</code> 只支持堆叠于 <code class=\"codespan\">value</code> 和 <code class=\"codespan\">log</code> 类型的类目轴上，不支持 <code class=\"codespan\">time</code> 和 <code class=\"codespan\">category</code> 类型的类目轴。</p>\n"
+  },
+  "stackStrategy": {
+    "desc": "<blockquote>\n<p>从 ECharts <code class=\"codespan\">v5.3.3</code> 开始支持</p>\n</blockquote>\n<p>堆积数值的策略，前提是<a href=\"#series-bar3D.stack\">stack</a>属性已被设置。其值可以是：</p>\n<ul>\n<li><code class=\"codespan\">&#39;samesign&#39;</code> 只在要堆叠的值与当前累积的堆叠值具有相同的正负符号时才堆叠。</li>\n<li><code class=\"codespan\">&#39;all&#39;</code> 堆叠所有的值，不管当前或累积的堆叠值的正负符号是什么。</li>\n<li><code class=\"codespan\">&#39;positive&#39;</code> 只堆积正值。</li>\n<li><code class=\"codespan\">&#39;negative&#39;</code> 只堆叠负值。</li>\n</ul>\n"
   },
   "minHeight": {
     "desc": "<p>最小柱子高度。</p>\n"

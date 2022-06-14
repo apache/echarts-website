@@ -13,7 +13,7 @@ window.__EC_DOC_option_yAxis = {
     "desc": "<p>The index of grid which the y axis belongs to. Defaults to be in the first grid.</p>\n"
   },
   "alignTicks": {
-    "desc": "<p><code class=\"codespan\">alignTicks</code> turned on to automatically align ticks when multiple numeric y axes. Only available for axes of type <code class=\"codespan\">&#39;value&#39;</code> and <code class=\"codespan\">&#39;log&#39;</code>.</p>\n"
+    "desc": "<blockquote>\n<p>Since <code class=\"codespan\">v5.3.0</code></p>\n</blockquote>\n<p><code class=\"codespan\">alignTicks</code> turned on to automatically align ticks when multiple numeric y axes. Only available for axes of type <code class=\"codespan\">&#39;value&#39;</code> and <code class=\"codespan\">&#39;log&#39;</code>.</p>\n"
   },
   "position": {
     "desc": "\n\n<p>the position of y axis.</p>\n<p>options:</p>\n<ul>\n<li><code class=\"codespan\">&#39;left&#39;</code></li>\n<li><code class=\"codespan\">&#39;right&#39;</code></li>\n</ul>\n<p>The first y axis in grid defaults to be the left (<code class=\"codespan\">&#39;left&#39;</code>)  of the grid, and the second y axis is on the other side against the first y axis.<br>Notice: Set <code class=\"codespan\">yAxis.axisLine.onZero</code> to <code class=\"codespan\">false</code> to activate this option.</p>\n",

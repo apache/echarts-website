@@ -13,7 +13,7 @@
     "desc": "<p>y 轴所在的 grid 的索引，默认位于第一个 grid。</p>\n"
   },
   "alignTicks": {
-    "desc": "<p>在多个 y 轴为数值轴的时候，可以开启该配置项自动对齐刻度。只对<code class=\"codespan\">&#39;value&#39;</code>和<code class=\"codespan\">&#39;log&#39;</code>类型的轴有效。</p>\n"
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.3.0</code> 开始支持</p>\n</blockquote>\n<p>在多个 y 轴为数值轴的时候，可以开启该配置项自动对齐刻度。只对<code class=\"codespan\">&#39;value&#39;</code>和<code class=\"codespan\">&#39;log&#39;</code>类型的轴有效。</p>\n"
   },
   "position": {
     "desc": "\n\n<p>y 轴的位置。</p>\n<p>可选：</p>\n<ul>\n<li><code class=\"codespan\">&#39;left&#39;</code></li>\n<li><code class=\"codespan\">&#39;right&#39;</code></li>\n</ul>\n<p>默认 grid 中的第一个 y 轴在 grid 的左侧（<code class=\"codespan\">&#39;left&#39;</code>），第二个 y 轴视第一个 y 轴的位置放在另一侧。<br>注：若未将 <code class=\"codespan\">yAxis.axisLine.onZero</code> 设为 <code class=\"codespan\">false</code> , 则该项无法生效</p>\n",

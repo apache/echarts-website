@@ -83,7 +83,10 @@
     }
   },
   "stack": {
-    "desc": "<p>数据堆叠，同个类目轴上系列配置相同的<code class=\"codespan\">stack</code>值后，后一个系列的值会在前一个系列的值上相加。</p>\n<p>注：目前<code class=\"codespan\">stack</code>只支持堆叠于 <code class=\"codespan\">value</code> 和 <code class=\"codespan\">log</code> 类型的类目轴上，不支持 <code class=\"codespan\">time</code> 和 <code class=\"codespan\">category</code> 类型的类目轴。</p>\n<p>下面示例可以通过右上角 <a href=\"#toolbox\">toolbox</a> 中的堆叠切换看效果：</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=doc-example/line-stack-tiled&edit=1&reset=1\" width=\"600\" height=\"400\"></iframe>\n\n\n\n"
+    "desc": "<p>数据堆叠，同个类目轴上系列配置相同的 <code class=\"codespan\">stack</code> 值可以堆叠放置。关于如何定制数值的堆叠方式，参见 <a href=\"#series-line.stackStrategy\">stackStrategy</a>。</p>\n<p>注：目前 <code class=\"codespan\">stack</code> 只支持堆叠于 <code class=\"codespan\">&#39;value&#39;</code> 和 <code class=\"codespan\">&#39;log&#39;</code> 类型的类目轴上，不支持 <code class=\"codespan\">&#39;time&#39;</code> 和 <code class=\"codespan\">&#39;category&#39;</code> 类型的类目轴。</p>\n<p>下面示例可以通过右上角 <a href=\"#toolbox\">toolbox</a> 中的堆叠切换看效果：</p>\n<iframe  data-src=\"https://echarts.apache.org/examples/zh/view.html?c=doc-example/line-stack-tiled&edit=1&reset=1\" width=\"600\" height=\"400\"></iframe>\n\n"
+  },
+  "stackStrategy": {
+    "desc": "<blockquote>\n<p>从 <code class=\"codespan\">v5.3.3</code> 开始支持</p>\n</blockquote>\n<p>堆积数值的策略，前提是<a href=\"#series-line.stack\">stack</a>属性已被设置。其值可以是：</p>\n<ul>\n<li><code class=\"codespan\">&#39;samesign&#39;</code> 只在要堆叠的值与当前累积的堆叠值具有相同的正负符号时才堆叠。</li>\n<li><code class=\"codespan\">&#39;all&#39;</code> 堆叠所有的值，不管当前或累积的堆叠值的正负符号是什么。</li>\n<li><code class=\"codespan\">&#39;positive&#39;</code> 只堆积正值。</li>\n<li><code class=\"codespan\">&#39;negative&#39;</code> 只堆叠负值。</li>\n</ul>\n"
   },
   "cursor": {
     "desc": "\n\n<p>鼠标悬浮时在图形元素上时鼠标的样式是什么。同 CSS 的 <code class=\"codespan\">cursor</code>。</p>\n",
