@@ -32,7 +32,7 @@ jobs:
         run: |
           git clone --depth 1 https://github.com/apache/echarts-examples
           cd echarts-examples
-          npm install --force
+          npm install
 
       - name: Install ECharts Theme Builder
         working-directory: tmp-workspace
