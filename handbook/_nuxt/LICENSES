@@ -1,23 +1,4 @@
 /*!
- * vue-client-only v2.0.0
- * (c) 2019-present egoist <0x142857@gmail.com>
- * Released under the MIT License.
- */
-
-/*!
- * vue-i18n v8.24.4 
- * (c) 2021 kazuya kawaguchi
- * Released under the MIT License.
- */
-
-/*!
- * vue-no-ssr v1.1.1
- * (c) 2018-present egoist <0x142857@gmail.com>
- * Released under the MIT License.
- */
-
-
-/*!
  * clipboard.js v2.0.8
  * https://clipboardjs.com/
  *
@@ -48,6 +29,25 @@ PERFORMANCE OF THIS SOFTWARE.
  * @author Lea Verou <https://lea.verou.me>
  * @namespace
  * @public
+ */
+
+
+/*!
+ * vue-client-only v2.0.0
+ * (c) 2019-present egoist <0x142857@gmail.com>
+ * Released under the MIT License.
+ */
+
+/*!
+ * vue-i18n v8.24.4 
+ * (c) 2021 kazuya kawaguchi
+ * Released under the MIT License.
+ */
+
+/*!
+ * vue-no-ssr v1.1.1
+ * (c) 2018-present egoist <0x142857@gmail.com>
+ * Released under the MIT License.
  */
 
 
