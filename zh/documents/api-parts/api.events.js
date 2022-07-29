@@ -35,6 +35,15 @@ window.__EC_DOC_api_events = {
   "datarangeselected": {
     "desc": "<p><strong>ACTION:</strong> <a href=\"#action.dataRange.selectDataRange\">selectDataRange</a>\n视觉映射组件中，<code class=\"codespan\">range</code> 值改变后触发的事件。</p>\n<pre><code class=\"lang-ts\">{\n    type: &#39;datarangeselected&#39;,\n    // 连续型 visualMap 和 离散型 visualMap 不一样\n    // 连续型的是一个表示数值范围的数组。\n    // 离散型的是一个对象，键值是类目或者分段的索引。值是`true`或`false`\n    selected: Object|Array\n}\n</code></pre>\n"
   },
+  "graphroam": {
+    "desc": "<p>关系图 <a href=\"option.html#series-graph\" target=\"_blank\">series-graph</a> 的缩放和平移漫游事件。</p>\n<pre><code class=\"lang-ts\">{\n    type: &#39;graphroam&#39;,\n    seriesId: string,\n    zoom: number, // 单次缩放倍数\n    originX: number,\n    originY: number\n}\n</code></pre>\n"
+  },
+  "georoam": {
+    "desc": "<p>地理坐标系 <a href=\"option.html#geo\" target=\"_blank\">geo</a> 的缩放和平移漫游事件。</p>\n<pre><code class=\"lang-ts\">{\n    type: &#39;georoam&#39;,\n    componentType: &#39;geo&#39; | &#39;series&#39;,\n    seriesId: string,\n    zoom: number, // 单次缩放倍数\n    originX: number,\n    originY: number\n}\n</code></pre>\n"
+  },
+  "treeroam": {
+    "desc": "<p>树图 <a href=\"option.html#series-tree\" target=\"_blank\">series-tree</a> 的缩放和平移漫游事件。</p>\n<p><code class=\"codespan\">treeroam</code> 事件包括两种，其中一种是平移，事件参数为：</p>\n<pre><code class=\"lang-ts\">{\n    type: &#39;treeroam&#39;,\n    seriesId: string,\n    dx: number,\n    dy: number\n}\n</code></pre>\n<p>另一种是缩放，参数为：</p>\n<pre><code class=\"lang-ts\">{\n    type: &#39;treeroam&#39;,\n    seriesId: string,\n    zoom: number, // 单次缩放倍数\n    originX: number,\n    originY: number\n}\n</code></pre>\n"
+  },
   "timelinechanged": {
     "desc": "<p><strong>ACTION:</strong> <a href=\"#action.timeline.timelineChange\">timelineChange</a>\n时间轴中的时间点改变后的事件。</p>\n<pre><code class=\"lang-ts\">{\n    type: &#39;timelinechanged&#39;,\n    // 时间点的 index\n    currentIndex: number\n}\n</code></pre>\n"
   },

@@ -35,6 +35,15 @@ window.__EC_DOC_api_events = {
   "datarangeselected": {
     "desc": "<p><strong>ACTION:</strong> <a href=\"#action.dataRange.selectDataRange\">selectDataRange</a>\nEvent emitted after range is changed in visualMap.</p>\n<pre><code class=\"lang-ts\">{\n    type: &#39;datarangeselected&#39;,\n    // continuous visualMap is different from discrete one\n    // continuous visualMap is an array representing range of data values.\n    // discrete visualMap is an object, whose key is category or piece index; value is `true` or `false`\n    selected: Object|Array\n}\n</code></pre>\n"
   },
+  "graphroam": {
+    "desc": "<p>Event emitted after <a href=\"option.html#series-graph\" target=\"_blank\">series-graph</a> is roamed.</p>\n<pre><code class=\"lang-ts\">{\n    type: &#39;graphroam&#39;,\n    seriesId: string,\n    zoom: number, // zoom ratio of roaming once\n    originX: number,\n    originY: number\n}\n</code></pre>\n"
+  },
+  "georoam": {
+    "desc": "<p>Event emitted after <a href=\"option.html#geo\" target=\"_blank\">geo</a> is roamed.</p>\n<pre><code class=\"lang-ts\">{\n    type: &#39;georoam&#39;,\n    componentType: &#39;geo&#39; | &#39;series&#39;,\n    seriesId: string,\n    zoom: number, // zoom ratio of roaming once\n    originX: number,\n    originY: number\n}\n</code></pre>\n"
+  },
+  "treeroam": {
+    "desc": "<p>Event emitted after <a href=\"option.html#series-tree\" target=\"_blank\">series-tree</a> is roamed.</p>\n<p><code class=\"codespan\">treeroam</code> events include two types. One is triggered by panning and the parameters are:</p>\n<pre><code class=\"lang-ts\">{\n    type: &#39;treeroam&#39;,\n    seriesId: string,\n    dx: number,\n    dy: number\n}\n</code></pre>\n<p>The other type is triggered by zooming and the parameters are:</p>\n<pre><code class=\"lang-ts\">{\n    type: &#39;treeroam&#39;,\n    seriesId: string,\n    zoom: number, // zoom ratio of roaming once\n    originX: number,\n    originY: number\n}\n</code></pre>\n"
+  },
   "timelinechanged": {
     "desc": "<p><strong>ACTION:</strong> <a href=\"#action.timeline.timelineChange\">timelineChange</a>\nEvent emitted after time point in timeline is changed.</p>\n<pre><code class=\"lang-ts\">{\n    type: &#39;timelinechanged&#39;,\n    // index of time point\n    currentIndex: number\n}\n</code></pre>\n"
   },

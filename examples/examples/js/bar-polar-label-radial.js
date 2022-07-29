@@ -32,6 +32,5 @@ option = {
       formatter: '{b}: {c}'
     }
   },
-  backgroundColor: '#fff',
   animation: false
 };
