@@ -1266,7 +1266,6 @@ td.visible-xxxl {
   width: 200px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
-  scroll-behavior: smooth;
 }
 #toolbar {
   position: fixed;

@@ -5,6 +5,7 @@ titleCN: 桑基图节点自定义样式
 difficulty: 2
 */
 option = {
+  backgroundColor: '#fff',
   title: {
     subtext: 'Data From lisachristina1234 on GitHub',
     left: 'center'
