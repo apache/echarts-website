@@ -1047,6 +1047,15 @@ span.CodeMirror-selectedtext { background: none; }
 #example-panel .example-code .codemirror-main .CodeMirror .CodeMirror-cursor {
           display: none;
 }
+#example-panel .example-code .btn-to-editor {
+      position: absolute;
+      right: 5px;
+      top: 8px;
+      z-index: 10;
+}
+#example-panel .example-code .btn-to-editor:not(:hover) {
+        color: #fff;
+}
 #example-panel .toolbar {
     position: absolute;
     top: 15px;
