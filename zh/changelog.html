@@ -11,33 +11,33 @@
 <div class="time">2022-09-25</div>
 
 <ul>
-<li>[Feature] 新增<a href="https://echarts.apache.org/handbook/zh/how-to/interaction/coarse-pointer">智能指针吸附</a>. <a href="https://github.com/apache/echarts/issues/17102">#17102</a> (<a href="https://github.com/Ovilia">Ovilia</a>)</li>
-<li>[Feature] [pie] 饼图新增 <code>coordinateSystem</code> 配置项以支持定位在某个坐标系上。 <a href="https://github.com/apache/echarts/issues/17132">#17132</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
-<li>[Feature] [gauge] 仪表盘轴标签支持旋转。 <a href="https://github.com/apache/echarts/issues/16985">#16985</a> (<a href="https://github.com/MeetzhDing">MeetzhDing</a>)</li>
-<li>[Feature] [lines] 线系列动画特效支持原路返回。 <a href="https://github.com/apache/echarts/issues/16943">#16943</a> (<a href="https://github.com/wangguisong">wangguisong</a>)</li>
-<li>[Feature] [treemap] 矩形树图面包屑新增 <code>emphasis</code> 状态。 <a href="https://github.com/apache/echarts/issues/17242">#17242</a> (<a href="https://github.com/susiwen8">susiwen8</a>)</li>
-<li>[Feature] [i18n] 新增乌克兰语。 <a href="https://github.com/apache/echarts/issues/17244">#17244</a> (<a href="https://github.com/Amice13">Amice13</a>)</li>
-<li>[Feature] [type] 导出类型 <code>ElementEvent</code>。 <a href="https://github.com/apache/echarts/issues/15291">#15291</a> (<a href="https://github.com/Map1en">Map1en</a>)</li>
-<li>[Fix] [pie] 修复指定 <code>minShowLabelRadian</code> 时 <code>labelLine</code> 可能无法被隐藏的问题。 <a href="https://github.com/apache/echarts/issues/17412">#17412</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
-<li>[Fix] [pie] 优化饼图的渲染性能。 <a href="https://github.com/apache/echarts/issues/17275">#17275</a> (<a href="https://github.com/wind108369">wind108369</a>)</li>
-<li>[Fix] [line] 为 <code>symbol</code> 设置默认的 <code>z/zlevel</code> 避免警告日志。 <a href="https://github.com/apache/echarts/issues/17247">#17247</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
-<li>[Fix] [bar-race] 修复子像素优化导致线条在动画过程中抖动的问题。 <a href="https://github.com/apache/echarts/issues/17426">#17426</a> (<a href="https://github.com/Ovilia">Ovilia</a>)</li>
-<li>[Fix] [axis] 修复单轴 <code>singleAxis</code> 中 <code>inverse</code> 配置项不生效的问题。 <a href="https://github.com/apache/echarts/issues/17411">#17411</a> (<a href="https://github.com/wind108369">wind108369</a>)</li>
-<li>[Fix] [axis] 修复坐标轴反转时，坐标轴 symbol 没有反转的问题。 <a href="https://github.com/apache/echarts/issues/17329">#17329</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
-<li>[Fix] [state] [emphasis] 修复 <code>emphasis.scale</code> 无法被重置及指定值可能不生效的问题。 <a href="https://github.com/apache/echarts/issues/17442">#17442</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
-<li>[Fix] [state] [emphasis] 为 <code>scatter/line/graph</code> 系列的 <code>emphasis.scale</code> 添加缺失的 <code>number</code> 值类型。 <a href="https://github.com/apache/echarts/issues/17390">#17390</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
-<li>[Fix] [svg] 生成 SVG 字符串时编码 HTML 字符。 <a href="https://github.com/apache/echarts/issues/17406">#17406</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
-<li>[Fix] [visualMap] 修复鼠标悬浮在地图标签时 <code>visualMap</code> 指示器不显示的问题。 <a href="https://github.com/apache/echarts/issues/17346">#17346</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
-<li>[Fix] [custom] 修复自定义组件中元素更新后可能不能被删除的问题。 <a href="https://github.com/apache/echarts/issues/17349">#17349</a>. (<a href="https://github.com/Ovilia">Ovilia</a>)</li>
-<li>[Fix] [custom] 修复由于离开动画导致自定义元素可能无法被删除的问题。 <a href="https://github.com/apache/echarts/issues/17308">#17308</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
-<li>[Fix] [theme] 修复 <code>macarons</code> 主题中 <code>tooltip</code> 的文本样式。 <a href="https://github.com/apache/echarts/issues/17551">#17551</a> (<a href="https://github.com/mousne">mousne</a>)</li>
-<li>[Fix] [theme] 移除主题中已被废弃的 <code>normal</code> 层级。 <a href="https://github.com/apache/echarts/issues/17482">#17482</a> (<a href="https://github.com/Liangism">Liangism</a>)</li>
-<li>[Fix] [axis] [log] 修复当对数轴只包含单个数据且值小于 1 时图表无法渲染的问题。 <a href="https://github.com/apache/echarts/issues/17322">#17322</a> (<a href="https://github.com/Ovilia">Ovilia</a>)</li>
-<li>[Fix] [dataZoom] 修复 K 线图使用 <code>dataset</code> 时 <code>sliderZoom</code> 可能会抛错的问题。 <a href="https://github.com/apache/echarts/issues/17237">#17237</a> (<a href="https://github.com/jiawulin001">jiawulin001</a>)</li>
-<li>[Fix] [sunburst] 修复日志输出错误。 <a href="https://github.com/apache/echarts/issues/17587">#17587</a> (<a href="https://github.com/gitforhlp">gitforhlp</a>)</li>
-<li>[Fix] [type] 兼容 TypeScript 4.8。 <a href="https://github.com/apache/echarts/issues/17582">#17582</a> (<a href="https://github.com/AviVahl">AviVahl</a>)</li>
-<li>[Fix] [type] 为 <code>SunburstSeriesOption</code> 和 <code>TreemapSeriesOption</code> 的 <code>nodeClick</code> 配置项添加缺失的 <code>false</code> 类型。 <a href="https://github.com/apache/echarts/issues/17218">#17218</a> (<a href="https://github.com/dmzc">dmzc</a>)</li>
-<li>[Fix] [typo] 修复一个文件名的语法错误。 <code>src/animation/basicTrasition.ts</code> → <code>src/animation/basicTransition.ts</code>
+<li>[Feature] 新增<a href="https://echarts.apache.org/handbook/zh/how-to/interaction/coarse-pointer">智能指针吸附</a>。<a href="https://github.com/apache/echarts/issues/17102">#17102</a> (<a href="https://github.com/Ovilia">Ovilia</a>)</li>
+<li>[Feature] [pie] 饼图新增 <code>coordinateSystem</code> 配置项以支持定位在某个坐标系上。<a href="https://github.com/apache/echarts/issues/17132">#17132</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
+<li>[Feature] [gauge] 仪表盘轴标签支持旋转。<a href="https://github.com/apache/echarts/issues/16985">#16985</a> (<a href="https://github.com/MeetzhDing">MeetzhDing</a>)</li>
+<li>[Feature] [lines] 线系列动画特效支持原路返回。<a href="https://github.com/apache/echarts/issues/16943">#16943</a> (<a href="https://github.com/wangguisong">wangguisong</a>)</li>
+<li>[Feature] [treemap] 矩形树图面包屑新增 <code>emphasis</code> 状态。<a href="https://github.com/apache/echarts/issues/17242">#17242</a> (<a href="https://github.com/susiwen8">susiwen8</a>)</li>
+<li>[Feature] [i18n] 新增乌克兰语。<a href="https://github.com/apache/echarts/issues/17244">#17244</a> (<a href="https://github.com/Amice13">Amice13</a>)</li>
+<li>[Feature] [type] 导出类型 <code>ElementEvent</code>。<a href="https://github.com/apache/echarts/issues/15291">#15291</a> (<a href="https://github.com/Map1en">Map1en</a>)</li>
+<li>[Fix] [pie] 修复指定 <code>minShowLabelRadian</code> 时 <code>labelLine</code> 可能无法被隐藏的问题。<a href="https://github.com/apache/echarts/issues/17412">#17412</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
+<li>[Fix] [pie] 优化饼图的渲染性能。<a href="https://github.com/apache/echarts/issues/17275">#17275</a> (<a href="https://github.com/wind108369">wind108369</a>)</li>
+<li>[Fix] [line] 为 <code>symbol</code> 设置默认的 <code>z/zlevel</code> 避免警告日志。<a href="https://github.com/apache/echarts/issues/17247">#17247</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
+<li>[Fix] [bar-race] 修复子像素优化导致线条在动画过程中抖动的问题。<a href="https://github.com/apache/echarts/issues/17426">#17426</a> (<a href="https://github.com/Ovilia">Ovilia</a>)</li>
+<li>[Fix] [axis] 修复单轴 <code>singleAxis</code> 中 <code>inverse</code> 配置项不生效的问题。<a href="https://github.com/apache/echarts/issues/17411">#17411</a> (<a href="https://github.com/wind108369">wind108369</a>)</li>
+<li>[Fix] [axis] 修复坐标轴反转时，坐标轴 symbol 没有反转的问题。<a href="https://github.com/apache/echarts/issues/17329">#17329</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
+<li>[Fix] [state] [emphasis] 修复 <code>emphasis.scale</code> 无法被重置及指定值可能不生效的问题。<a href="https://github.com/apache/echarts/issues/17442">#17442</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
+<li>[Fix] [state] [emphasis] 为 <code>scatter/line/graph</code> 系列的 <code>emphasis.scale</code> 添加缺失的 <code>number</code> 值类型。<a href="https://github.com/apache/echarts/issues/17390">#17390</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
+<li>[Fix] [svg] 生成 SVG 字符串时编码 HTML 字符。<a href="https://github.com/apache/echarts/issues/17406">#17406</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
+<li>[Fix] [visualMap] 修复鼠标悬浮在地图标签时 <code>visualMap</code> 指示器不显示的问题。<a href="https://github.com/apache/echarts/issues/17346">#17346</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
+<li>[Fix] [custom] 修复自定义组件中元素更新后可能不能被删除的问题。<a href="https://github.com/apache/echarts/issues/17349">#17349</a> (<a href="https://github.com/Ovilia">Ovilia</a>)</li>
+<li>[Fix] [custom] 修复由于离开动画导致自定义元素可能无法被删除的问题。<a href="https://github.com/apache/echarts/issues/17308">#17308</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
+<li>[Fix] [theme] 修复 <code>macarons</code> 主题中 <code>tooltip</code> 的文本样式。<a href="https://github.com/apache/echarts/issues/17551">#17551</a> (<a href="https://github.com/mousne">mousne</a>)</li>
+<li>[Fix] [theme] 移除主题中已被废弃的 <code>normal</code> 层级。<a href="https://github.com/apache/echarts/issues/17482">#17482</a> (<a href="https://github.com/Liangism">Liangism</a>)</li>
+<li>[Fix] [axis] [log] 修复当对数轴只包含单个数据且值小于 1 时图表无法渲染的问题。<a href="https://github.com/apache/echarts/issues/17322">#17322</a> (<a href="https://github.com/Ovilia">Ovilia</a>)</li>
+<li>[Fix] [dataZoom] 修复 K 线图使用 <code>dataset</code> 时 <code>sliderZoom</code> 可能会抛错的问题。<a href="https://github.com/apache/echarts/issues/17237">#17237</a> (<a href="https://github.com/jiawulin001">jiawulin001</a>)</li>
+<li>[Fix] [sunburst] 修复日志输出错误。<a href="https://github.com/apache/echarts/issues/17587">#17587</a> (<a href="https://github.com/gitforhlp">gitforhlp</a>)</li>
+<li>[Fix] [type] 兼容 TypeScript 4.8。<a href="https://github.com/apache/echarts/issues/17582">#17582</a> (<a href="https://github.com/AviVahl">AviVahl</a>)</li>
+<li>[Fix] [type] 为 <code>SunburstSeriesOption</code> 和 <code>TreemapSeriesOption</code> 的 <code>nodeClick</code> 配置项添加缺失的 <code>false</code> 类型。<a href="https://github.com/apache/echarts/issues/17218">#17218</a> (<a href="https://github.com/dmzc">dmzc</a>)</li>
+<li>[Fix] [typo] 修复一个文件名的语法错误。<code>src/animation/basicTrasition.ts</code> → <code>src/animation/basicTransition.ts</code>
 <a href="https://github.com/apache/echarts/issues/17193">#17193</a> (<a href="https://github.com/kxxoling">kxxoling</a>)</li>
 </ul>
 <h2 id="v5-3-3">v5.3.3</h2>
@@ -94,7 +94,7 @@
 <div class="time">2022-03-07</div>
 
 <ul>
-<li>[Feature] [i18n] 新增韩语翻译。 <a href="https://github.com/apache/echarts/issues/16582">#16582</a> (<a href="https://github.com/hijae">hijae</a>)</li>
+<li>[Feature] [i18n] 新增韩语翻译。<a href="https://github.com/apache/echarts/issues/16582">#16582</a> (<a href="https://github.com/hijae">hijae</a>)</li>
 <li>[Feature] [heatmap] 热力图支持 <code>borderRadius</code> 配置项。 <a href="https://github.com/apache/echarts/issues/16493">#16493</a> (<a href="https://github.com/Rain120">Rain120</a>)</li>
 <li>[Fix] [lines] 修复 <code>setOption</code> 且 <code>notMerge</code> 时 effectLine 的潜在内存泄漏。 <a href="https://github.com/apache/echarts/issues/16525">#16525</a> (<a href="https://github.com/pissang">pissang</a>)</li>
 <li>[Fix] [line] 修复阶梯折线图空数据引起的斜线。 <a href="https://github.com/apache/echarts/issues/16435">#16435</a> (<a href="https://github.com/Gyyi">Gyyi</a>)</li>
