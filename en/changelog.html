@@ -11,33 +11,34 @@
 <div class="time">2022-09-25</div>
 
 <ul>
-<li>[Feature] Coarse pointer tolerance. <a href="https://github.com/apache/echarts/issues/17102">#17102</a> (<a href="https://github.com/Ovilia">Ovilia</a>)</li>
-<li>[Feature] [pie]: Support specifying coordinate system for pie series. <a href="https://github.com/apache/echarts/issues/17132">#17132</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
-<li>[Feature] [gauge]: Support angle rotating in <code>axisLabel</code>. Close <a href="https://github.com/apache/echarts/issues/15944">#15944</a>. <a href="https://github.com/apache/echarts/issues/16985">#16985</a> (<a href="https://github.com/MeetzhDing">MeetzhDing</a>)</li>
-<li>[Feature] [lines] Support the effect animation go back. <a href="https://github.com/apache/echarts/issues/16943">#16943</a> (<a href="https://github.com/wangguisong">wangguisong</a>)</li>
-<li>[Feature] [treemap.breadcrumb]: Add <code>emphasis</code> state. <a href="https://github.com/apache/echarts/issues/17242">#17242</a> (<a href="https://github.com/susiwen8">susiwen8</a>)</li>
-<li>[Feature] [i18n]: Add Ukrainian translation. Close <a href="https://github.com/apache/echarts/issues/17243">#17243</a>. <a href="https://github.com/apache/echarts/issues/17244">#17244</a> (<a href="https://github.com/Amice13">Amice13</a>)</li>
-<li>[Fix] [pie]: Fix that <code>labelLine</code> may not be hidden when <code>minShowLabelRadian</code> is specified. <a href="https://github.com/apache/echarts/issues/17412">#17412</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
-<li>[Fix] [pie(perf)]: Optimize performance of pie series. <a href="https://github.com/apache/echarts/issues/17275">#17275</a> (<a href="https://github.com/wind108369">wind108369</a>)</li>
-<li>[Fix] [line]: Set default z/zlevel for temporary symbol to avoid warnings. <a href="https://github.com/apache/echarts/issues/17247">#17247</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
-<li>[Fix] [bar-race]: Fix lines glitch with sub-pixel optimization in animations. Solve <a href="https://github.com/apache/echarts/issues/14679">#14679</a>. <a href="https://github.com/apache/echarts/issues/17426">#17426</a> (<a href="https://github.com/Ovilia">Ovilia</a>)</li>
-<li>[Fix] [axis]: Fix that <code>inverse</code> option does not work for <code>singleAxis</code>. <a href="https://github.com/apache/echarts/issues/17411">#17411</a> (<a href="https://github.com/wind108369">wind108369</a>)</li>
-<li>[Fix] [axis]: Fix that axis symbol is not reversed when axis is reversed. <a href="https://github.com/apache/echarts/issues/17329">#17329</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
-<li>[Fix] [emphasis.scale]: Fix that <code>emphasis.scale</code> can&#39;t be reset and specified values may not be respected. <a href="https://github.com/apache/echarts/issues/17442">#17442</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
-<li>[Fix] [emphasis.scale]: add missing type <code>number</code> to <code>emphasis.scale</code> for scatter/line/graph series <a href="https://github.com/apache/echarts/issues/17390">#17390</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
-<li>[Fix]: Ensure compatibility with <a href="mailto:typescript@4.8">typescript@4.8</a> <a href="https://github.com/apache/echarts/issues/17582">#17582</a> (<a href="https://github.com/AviVahl">AviVahl</a>)</li>
-<li>[Fix] [svg]: Encode HTML special characters when generating SVG string. <a href="https://github.com/apache/echarts/issues/17406">#17406</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
-<li>[Fix] [visualMap]: Fix that the indicator doesn&#39;t show when hovering on map label. <a href="https://github.com/apache/echarts/issues/17346">#17346</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
-<li>[Fix] [custom]: Fix that elements may not be removed after updates. Close <a href="https://github.com/apache/echarts/issues/17333">#17333</a> <a href="https://github.com/apache/echarts/issues/17349">#17349</a>. (<a href="https://github.com/Ovilia">Ovilia</a>)</li>
-<li>[Fix] [custom]: Fix that custom elements probably can&#39;t be removed due to NPE when applying leave transition. <a href="https://github.com/apache/echarts/issues/17308">#17308</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
-<li>[Fix] [theme]: Fix tooltips text style of the theme macarons <a href="https://github.com/apache/echarts/issues/17551">#17551</a> (<a href="https://github.com/mousne">mousne</a>)</li>
-<li>[Fix] [theme]: Fix the abandoned normal level in the theme file <a href="https://github.com/apache/echarts/issues/17482">#17482</a> (<a href="https://github.com/Liangism">Liangism</a>)</li>
-<li>[Fix] [log]: Fix that log axis breaks a single data whose log value is negative. <a href="https://github.com/apache/echarts/issues/17322">#17322</a> (<a href="https://github.com/Ovilia">Ovilia</a>)</li>
-<li>[Fix] [dataZoom]: Fix sliderZoom in candlestick dataset error <a href="https://github.com/apache/echarts/issues/17237">#17237</a> (<a href="https://github.com/jiawulin001">jiawulin001</a>)</li>
-<li>[Fix] [log]: Fix the wrong code of <code>deprecateReplaceLog</code> in <code>sunburstAction.ts</code>. <a href="https://github.com/apache/echarts/issues/17587">#17587</a> (<a href="https://github.com/gitforhlp">gitforhlp</a>)</li>
-<li>[Fix] [ts]: fix <code>SunburstSeriesOption</code> and <code>TreemapSeriesOption</code> types. <a href="https://github.com/apache/echarts/issues/17218">#17218</a> (<a href="https://github.com/dmzc">dmzc</a>)</li>
-<li>[Fix] [ts]: Export type <code>ElementEvent</code>. <a href="https://github.com/apache/echarts/issues/15291">#15291</a> (<a href="https://github.com/Map1en">Map1en</a>)</li>
-<li>[Fix] [typo]: Fix file typo. <a href="https://github.com/apache/echarts/issues/17193">#17193</a> (<a href="https://github.com/kxxoling">kxxoling</a>)</li>
+<li>[Feature] Support <a href="https://echarts.apache.org/handbook/en/how-to/interaction/coarse-pointer">intelligent pointer snapping</a>. <a href="https://github.com/apache/echarts/issues/17102">#17102</a> (<a href="https://github.com/Ovilia">Ovilia</a>)</li>
+<li>[Feature] [pie] Support specifying coordinate system for pie series. <a href="https://github.com/apache/echarts/issues/17132">#17132</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
+<li>[Feature] [gauge] Support rotation for <code>axisLabel</code>. <a href="https://github.com/apache/echarts/issues/16985">#16985</a> (<a href="https://github.com/MeetzhDing">MeetzhDing</a>)</li>
+<li>[Feature] [lines] Support going back for effect animation. <a href="https://github.com/apache/echarts/issues/16943">#16943</a> (<a href="https://github.com/wangguisong">wangguisong</a>)</li>
+<li>[Feature] [treemap] Support <code>emphasis</code> state for <code>breadcrumb</code>. <a href="https://github.com/apache/echarts/issues/17242">#17242</a> (<a href="https://github.com/susiwen8">susiwen8</a>)</li>
+<li>[Feature] [i18n] Add Ukrainian(uk-UA) translation. <a href="https://github.com/apache/echarts/issues/17244">#17244</a> (<a href="https://github.com/Amice13">Amice13</a>)</li>
+<li>[Feature] [type] Export type <code>ElementEvent</code>. <a href="https://github.com/apache/echarts/issues/15291">#15291</a> (<a href="https://github.com/Map1en">Map1en</a>)</li>
+<li>[Fix] [pie] Fix <code>labelLine</code> may not be hidden when <code>minShowLabelRadian</code> is specified. <a href="https://github.com/apache/echarts/issues/17412">#17412</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
+<li>[Fix] [pie] Optimize performance of pie series. <a href="https://github.com/apache/echarts/issues/17275">#17275</a> (<a href="https://github.com/wind108369">wind108369</a>)</li>
+<li>[Fix] [line] Set default <code>z/zlevel</code> for temporary symbol to avoid warnings. <a href="https://github.com/apache/echarts/issues/17247">#17247</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
+<li>[Fix] [bar-race] Fix lines glitch with sub-pixel optimization in animations. <a href="https://github.com/apache/echarts/issues/17426">#17426</a> (<a href="https://github.com/Ovilia">Ovilia</a>)</li>
+<li>[Fix] [axis] Fix <code>inverse</code> option does not work for <code>singleAxis</code>. <a href="https://github.com/apache/echarts/issues/17411">#17411</a> (<a href="https://github.com/wind108369">wind108369</a>)</li>
+<li>[Fix] [axis] Fix axis symbol is not reversed when axis is reversed. <a href="https://github.com/apache/echarts/issues/17329">#17329</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
+<li>[Fix] [state] [emphasis] Fix <code>emphasis.scale</code> can&#39;t be reset and specified values may not be respected. <a href="https://github.com/apache/echarts/issues/17442">#17442</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
+<li>[Fix] [state] [emphasis] Add missing type <code>number</code> to <code>emphasis.scale</code> for <code>scatter/line/graph</code> series. <a href="https://github.com/apache/echarts/issues/17390">#17390</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
+<li>[Fix] [svg] Encode HTML special characters when generating SVG string. <a href="https://github.com/apache/echarts/issues/17406">#17406</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
+<li>[Fix] [visualMap] Fix the indicator doesn&#39;t show when hovering on map label. <a href="https://github.com/apache/echarts/issues/17346">#17346</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
+<li>[Fix] [custom] Fix elements may not be removed after updates. <a href="https://github.com/apache/echarts/issues/17349">#17349</a>. (<a href="https://github.com/Ovilia">Ovilia</a>)</li>
+<li>[Fix] [custom] Fix custom elements probably can&#39;t be removed when applying leave transition. <a href="https://github.com/apache/echarts/issues/17308">#17308</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
+<li>[Fix] [theme] Fix text style of <code>tooltip</code> in <code>macarons</code> theme. <a href="https://github.com/apache/echarts/issues/17551">#17551</a> (<a href="https://github.com/mousne">mousne</a>)</li>
+<li>[Fix] [theme] Fix abandoned <code>normal</code> level in theme files. <a href="https://github.com/apache/echarts/issues/17482">#17482</a> (<a href="https://github.com/Liangism">Liangism</a>)</li>
+<li>[Fix] [axis] [log] Fix log axis breaks a single data whose log value is negative. <a href="https://github.com/apache/echarts/issues/17322">#17322</a> (<a href="https://github.com/Ovilia">Ovilia</a>)</li>
+<li>[Fix] [dataZoom] Fix errors when using <code>sliderZoom</code> in candlestick series with dataset. <a href="https://github.com/apache/echarts/issues/17237">#17237</a> (<a href="https://github.com/jiawulin001">jiawulin001</a>)</li>
+<li>[Fix] [sunburst] Fix wrong log for deprecated action. <a href="https://github.com/apache/echarts/issues/17587">#17587</a> (<a href="https://github.com/gitforhlp">gitforhlp</a>)</li>
+<li>[Fix] [type] Ensure compatibility with TypeScript 4.8. <a href="https://github.com/apache/echarts/issues/17582">#17582</a> (<a href="https://github.com/AviVahl">AviVahl</a>)</li>
+<li>[Fix] [type] Add missing value type <code>false</code> for <code>nodeClick</code> option for <code>SunburstSeriesOption</code> and <code>TreemapSeriesOption</code>. <a href="https://github.com/apache/echarts/issues/17218">#17218</a> (<a href="https://github.com/dmzc">dmzc</a>)</li>
+<li>[Fix] [typo] Fix a file name typo. <code>src/animation/basicTrasition.ts</code> → <code>src/animation/basicTransition.ts</code>
+<a href="https://github.com/apache/echarts/issues/17193">#17193</a> (<a href="https://github.com/kxxoling">kxxoling</a>)</li>
 </ul>
 <h2 id="v5-3-3">v5.3.3</h2>
 <div class="time">2022-06-14</div>
@@ -889,22 +890,22 @@ The registered shape classes can be used in <code>custom series</code> and <code
 </li>
 <li><p>[Feature] Support using BaiduMap API version 3.0 in bmap by option <code>bmap.mapStyleV2</code>.</p>
 </li>
-<li><p>[Fix] Fix that the stacked bar exceed zoom limit.
+<li><p>[Fix] Fix the stacked bar exceed zoom limit.
 Fix #7534, #7672, #7732, #7872, #8069, #8520, #8935, #8955, #9200, #9237, #9847, #10359, #10518, #10972.</p>
 </li>
-<li><p>[Fix] Fix that sometimes when using &quot;toolbox dataZoom&quot; it can not return to the original state. Fix #11055.</p>
+<li><p>[Fix] Fix sometimes when using &quot;toolbox dataZoom&quot; it can not return to the original state. Fix #11055.</p>
 </li>
-<li><p>[Fix] Fix the texture pattern rendering in <code>map</code> and <code>geo</code>. And Fix that the the shadow of them are different between canvas renderer and SVG renderer. Fix #11055, #5429.</p>
+<li><p>[Fix] Fix the texture pattern rendering in <code>map</code> and <code>geo</code>. And Fix the the shadow of them are different between canvas renderer and SVG renderer. Fix #11055, #5429.</p>
 </li>
-<li><p>[Fix] Fix that data does not rendered after a <code>NaN</code> value in candlestick. Fix #11101.</p>
+<li><p>[Fix] Fix data does not rendered after a <code>NaN</code> value in candlestick. Fix #11101.</p>
 </li>
 <li><p>[Fix] Fix <code>geo.label.formatter</code> does not work. Fix #8489.</p>
 </li>
 <li><p>[Fix] Fix the hover style incorrect in <code>custom series</code>. Fix #11103.</p>
 </li>
-<li><p>[Fix] Fix that tree root node disappears after roaming. Fix #10291, #10986, #10164, #9580, #9256, #9216.</p>
+<li><p>[Fix] Fix tree root node disappears after roaming. Fix #10291, #10986, #10164, #9580, #9256, #9216.</p>
 </li>
-<li><p>[Fix] Fix that SVG renderer should render normally despite hover layer set. Fix #11054.</p>
+<li><p>[Fix] Fix SVG renderer should render normally despite hover layer set. Fix #11054.</p>
 </li>
 <li><p>[Fix] Add dispose checking for chart instance.</p>
 </li>
@@ -943,7 +944,7 @@ Normalize illegal range setting and get accurate <code>start</code>/<code>end</c
 </li>
 <li><p>[Fix] Use a clearer warning message when initing dom without size. Fix #10478.</p>
 </li>
-<li><p>[Fix] Fix that the rgba opacity does not work in SVG renderer. Fix #9014</p>
+<li><p>[Fix] Fix the rgba opacity does not work in SVG renderer. Fix #9014</p>
 </li>
 <li><p>[Fix] Enhance funnel chart label display policy PR #8759</p>
 </li>
@@ -951,9 +952,9 @@ Normalize illegal range setting and get accurate <code>start</code>/<code>end</c
 </li>
 <li><p>[Fix] Fix the mouse pointer in force graph. Fix #7764, contributed by PR #9134.</p>
 </li>
-<li><p>[Fix] Fix that <code>symbol</code> and <code>symbolSize</code> and <code>opacity</code> does not work in <code>series[i]-graph.categories[i]</code>. Fix #8009 and #5969, contributed by PR #9171.</p>
+<li><p>[Fix] Fix <code>symbol</code> and <code>symbolSize</code> and <code>opacity</code> does not work in <code>series[i]-graph.categories[i]</code>. Fix #8009 and #5969, contributed by PR #9171.</p>
 </li>
-<li><p>[Fix] Fix that <code>axisLine.show</code> does not work in the gauge. Fix #9194, contributed by PR #9195.</p>
+<li><p>[Fix] Fix <code>axisLine.show</code> does not work in the gauge. Fix #9194, contributed by PR #9195.</p>
 </li>
 <li><p>[Fix] Fix a display error when the first data item is &#39;-&#39; in radar. Fix 8962.</p>
 </li>
@@ -961,25 +962,25 @@ Normalize illegal range setting and get accurate <code>start</code>/<code>end</c
 </li>
 <li><p>[Fix] Fix text truncate bug in treemap when using SVG renderer.</p>
 </li>
-<li><p>[Fix] Fix that <code>label.rotate</code> does not work in graph. Fix #9182, contributed by PR #9210.</p>
+<li><p>[Fix] Fix <code>label.rotate</code> does not work in graph. Fix #9182, contributed by PR #9210.</p>
 </li>
 <li><p>[Fix] Fix the rich content hiding bug and confine bug in tooltip. Fix ecomfe/echarts-for-weixin#360, ecomfe/echarts-for-weixin#347.</p>
 </li>
-<li><p>[Fix] Fix that callback function params.color is incorrect in sunburst area. Fix #8952, contributed by PR #9238.</p>
+<li><p>[Fix] Fix callback function params.color is incorrect in sunburst area. Fix #8952, contributed by PR #9238.</p>
 </li>
-<li><p>[Fix] Fix that when <code>axisLabel.interval</code> of a category axis is set as <code>0</code>, all labels are displayed regardless of overlap. Fix #9589.</p>
+<li><p>[Fix] Fix when <code>axisLabel.interval</code> of a category axis is set as <code>0</code>, all labels are displayed regardless of overlap. Fix #9589.</p>
 </li>
 <li><p>[Fix] Fix sub-pixel in markLine. Move subPixelOptimize to zrender. Fix #9598.</p>
 </li>
-<li><p>[Fix] Fix that when doing clear on click handler error is thrown. Fix #9649.</p>
+<li><p>[Fix] Fix when doing clear on click handler error is thrown. Fix #9649.</p>
 </li>
-<li><p>[Fix] Fix that <code>false</code> value in data items effect subsequent items in <code>visualMap</code>. Fix #8799.</p>
+<li><p>[Fix] Fix <code>false</code> value in data items effect subsequent items in <code>visualMap</code>. Fix #8799.</p>
 </li>
 <li><p>[Fix] Enhance <code>hoverStyle</code> and <code>highlight</code>/<code>downplay</code> API. Support keep highlighted when changing style (e.g., <code>setOption</code> or <code>hoverLink</code>). Fix the highlight conflict.</p>
 </li>
 <li><p>[Fix] Fix radar line disappear on hover when there is empty value in data.</p>
 </li>
-<li><p>[Fix] Fix that geo map panning not working on Edge browser. Fix #9479.</p>
+<li><p>[Fix] Fix geo map panning not working on Edge browser. Fix #9479.</p>
 </li>
 <li><p>[Fix] Fix map label bugs:
 Fix map rich label missing when missing data.
@@ -988,13 +989,13 @@ Fix #9682.</p>
 </li>
 <li><p>[Fix] Enable <code>triggerEvent</code> for label of <code>angleAxis</code>. Fix #9765.</p>
 </li>
-<li><p>[Fix] Fix that the hover style bugs of graph:
-Fix that the hover style is disabled by <code>focusNodeAdjacency</code> in graph.
-Fix that the line label can not be returned to its original opacity after <code>&quot;focusNodeAdjacency&quot;</code>.</p>
+<li><p>[Fix] Fix the hover style bugs of graph:
+Fix the hover style is disabled by <code>focusNodeAdjacency</code> in graph.
+Fix the line label can not be returned to its original opacity after <code>&quot;focusNodeAdjacency&quot;</code>.</p>
 </li>
 <li><p>[Fix] Lift the axis line arrow over splitLine and tick.</p>
 </li>
-<li><p>[Fix] Fix that the scrollable legend pager does not work when the target index is illegal. Fix #7568.</p>
+<li><p>[Fix] Fix the scrollable legend pager does not work when the target index is illegal. Fix #7568.</p>
 </li>
 <li><p>[Fix] Exclude padding from tooltip position, since it&#39;s included in clientWidth. Contributed by PR #9750.</p>
 </li>
@@ -1010,31 +1011,31 @@ Fix that the line label can not be returned to its original opacity after <code>
 </li>
 <li><p>[Fix] Add <code>seriesId</code> in <code>pieselectchanged</code>. Fix #9830.</p>
 </li>
-<li><p>[Fix] Fix that axis name align does not work. Fix #9901.</p>
+<li><p>[Fix] Fix axis name align does not work. Fix #9901.</p>
 </li>
 <li><p>[Fix] Fix taht the strange label position when the pie chart series data value is <code>null</code>. Fix #10088.</p>
 </li>
 <li><p>[Fix] Do not create an anchor element if you don&#39;t need to in <code>SaveAsImage</code>. Contributed by PR #10132.</p>
 </li>
-<li><p>[Fix] Fix that <code>axisLabel</code> dost not display correctly in radar. Fix #9282, contributed by PR #10036.</p>
+<li><p>[Fix] Fix <code>axisLabel</code> dost not display correctly in radar. Fix #9282, contributed by PR #10036.</p>
 </li>
-<li><p>[Fix] Fix that bar chart is abnormal when <code>filterMode</code> of <code>dataZoom</code> is &#39;empty&#39;. Fix #9882.</p>
+<li><p>[Fix] Fix bar chart is abnormal when <code>filterMode</code> of <code>dataZoom</code> is &#39;empty&#39;. Fix #9882.</p>
 </li>
 <li><p>[Fix] Fix <code>series.label.formatter</code> callback bug. Fix #10248, contributed by PR #10250.</p>
 </li>
-<li><p>[Fix] Fix that the last axis labels are duplicated. Fix #10304.</p>
+<li><p>[Fix] Fix the last axis labels are duplicated. Fix #10304.</p>
 </li>
-<li><p>[Fix] Fix that setting <code>emphasis.lineStyle.type</code> as <code>solid</code> dose not work. Fix #9704, close #10129.</p>
+<li><p>[Fix] Fix setting <code>emphasis.lineStyle.type</code> as <code>solid</code> dose not work. Fix #9704, close #10129.</p>
 </li>
-<li><p>[Fix] Fix that if some negetive numbers or strings existing in the dimensions array, the corresponding line will not show. Fix #10343.</p>
+<li><p>[Fix] Fix if some negetive numbers or strings existing in the dimensions array, the corresponding line will not show. Fix #10343.</p>
 </li>
-<li><p>[Fix] Fix that when <code>&#39;0&#39;</code> existing in dimentions the chart do not work. Make backward compat when dimention is a number-like string. Fix #9363, contributed by PR #9388.</p>
+<li><p>[Fix] Fix when <code>&#39;0&#39;</code> existing in dimentions the chart do not work. Make backward compat when dimention is a number-like string. Fix #9363, contributed by PR #9388.</p>
 </li>
 <li><p>[Fix] Fix hover style on <code>textStroke</code> bug in custom series.</p>
 </li>
 <li><p>[Fix] Fix graph bug when data is number typed. Fix #10485.</p>
 </li>
-<li><p>[Fix] Fix that <code>axisPointer</code> label padding does not work. Fix #10569.</p>
+<li><p>[Fix] Fix <code>axisPointer</code> label padding does not work. Fix #10569.</p>
 </li>
 <li><p>[Fix] Add <code>dimIndex</code> for callback formatter in radar. Close #10403, #10180, contributed PR #10437.</p>
 </li>
@@ -1053,21 +1054,21 @@ Fix that the line label can not be returned to its original opacity after <code>
 <ul>
 <li><p>[Fix] Fix text cache problem. See <a href="https://github.com/apache/incubator-echarts/issues/9190">#9190</a>, <a href="https://github.com/apache/incubator-echarts/issues/9597">#9597</a>, <a href="https://github.com/apache/incubator-echarts/issues/9762">#9762</a>.</p>
 </li>
-<li><p>[Fix] Fix that in some case re-<code>setOption</code> in event handler throws error. See <a href="https://github.com/apache/incubator-echarts/issues/9649">#9649</a>.</p>
+<li><p>[Fix] Fix in some case re-<code>setOption</code> in event handler throws error. See <a href="https://github.com/apache/incubator-echarts/issues/9649">#9649</a>.</p>
 </li>
-<li><p>[Fix] Fix that geo region problem causes <code>showTip</code> abnormal. See <a href="https://github.com/apache/incubator-echarts/issues/9156">#9156</a>.</p>
+<li><p>[Fix] Fix geo region problem causes <code>showTip</code> abnormal. See <a href="https://github.com/apache/incubator-echarts/issues/9156">#9156</a>.</p>
 </li>
-<li><p>[Fix] Fix that stacked bars are over cartesian in some cases. See <a href="https://github.com/apache/incubator-echarts/issues/9346">#9346</a>.</p>
+<li><p>[Fix] Fix stacked bars are over cartesian in some cases. See <a href="https://github.com/apache/incubator-echarts/issues/9346">#9346</a>.</p>
 </li>
-<li><p>[Fix] Fix that legend is not able to scroll when the space is not enough to contain one item. See <a href="https://github.com/apache/incubator-echarts/issues/6743">#6743</a>, <a href="https://github.com/apache/incubator-echarts/issues/8971">#8971</a>, <a href="https://github.com/apache/incubator-echarts/issues/9471">#9471</a>.</p>
+<li><p>[Fix] Fix legend is not able to scroll when the space is not enough to contain one item. See <a href="https://github.com/apache/incubator-echarts/issues/6743">#6743</a>, <a href="https://github.com/apache/incubator-echarts/issues/8971">#8971</a>, <a href="https://github.com/apache/incubator-echarts/issues/9471">#9471</a>.</p>
 </li>
-<li><p>[Fix] Fix that the centered pie label might has some bias on some angles. See <a href="https://github.com/apache/incubator-echarts/issues/9657">#9657</a>.</p>
+<li><p>[Fix] Fix the centered pie label might has some bias on some angles. See <a href="https://github.com/apache/incubator-echarts/issues/9657">#9657</a>.</p>
 </li>
-<li><p>[Fix] Fix that Geo map panning is not working on MS Edge browser See <a href="https://github.com/apache/incubator-echarts/issues/9479">#9479</a>.</p>
+<li><p>[Fix] Fix Geo map panning is not working on MS Edge browser See <a href="https://github.com/apache/incubator-echarts/issues/9479">#9479</a>.</p>
 </li>
-<li><p>[Fix] Fix that label dispaly problem in map series. See <a href="https://github.com/apache/incubator-echarts/issues/9682">#9682</a>.</p>
+<li><p>[Fix] Fix label dispaly problem in map series. See <a href="https://github.com/apache/incubator-echarts/issues/9682">#9682</a>.</p>
 </li>
-<li><p>[Fix] Fix that <code>visualMap: false</code> set on data items makes subsequent items abnormal. See <a href="https://github.com/apache/incubator-echarts/issues/8799">#8799</a>.</p>
+<li><p>[Fix] Fix <code>visualMap: false</code> set on data items makes subsequent items abnormal. See <a href="https://github.com/apache/incubator-echarts/issues/8799">#8799</a>.</p>
 </li>
 <li><p>[Fix] When <code>axisLabel.interval</code> of a category axis is set as <code>0</code>, all labels show regardless of overlap. See <a href="https://github.com/apache/incubator-echarts/issues/9589">#9589</a>.</p>
 </li>
@@ -1723,7 +1724,7 @@ Fix that the line label can not be returned to its original opacity after <code>
 </li>
 <li><p>[+] Add <a href="https://ecomfe.github.io/echarts-doc/public/en/option.html#tooltip.confine">tooltip.confine</a>, which can confine tooltip within contianer of echarts instance. It helps a lot in small screen, or in the situation that outer dom is set to be <code>overflow:hidden</code>.</p>
 </li>
-<li><p>[^] Fix that erroneously forbiden default pan behavior in touch device. See <a href="https://github.com/apache/incubator-echarts/issues/4393">#4393</a>.</p>
+<li><p>[^] Fix erroneously forbiden default pan behavior in touch device. See <a href="https://github.com/apache/incubator-echarts/issues/4393">#4393</a>.</p>
 </li>
 <li><p>[^] Enhance user experience for <a href="https://ecomfe.github.io/echarts-doc/public/en/option.html#geo">geo</a> / <a href="https://ecomfe.github.io/echarts-doc/public/en/option.html#series-map">map</a> in touche device.</p>
 </li>
@@ -1737,7 +1738,7 @@ Fix that the line label can not be returned to its original opacity after <code>
 </li>
 <li><p>[^] Fix highlight error in <a href="https://ecomfe.github.io/echarts-doc/public/en/option.html#dataZoom">dataZoom</a>. See <a href="https://github.com/apache/incubator-echarts/issues/4475">#4475</a>.</p>
 </li>
-<li><p>[^] Fix that can not save as image in MS Edge browser. See <a href="https://github.com/apache/incubator-echarts/issues/2451">#2451</a> and <a href="https://github.com/apache/incubator-echarts/issues/3586">#3586</a>.</p>
+<li><p>[^] Fix can not save as image in MS Edge browser. See <a href="https://github.com/apache/incubator-echarts/issues/2451">#2451</a> and <a href="https://github.com/apache/incubator-echarts/issues/3586">#3586</a>.</p>
 </li>
 <li><p>[^] Fix format problem for <code>&#39;time&#39;</code> axis in <a href="https://ecomfe.github.io/echarts-doc/public/en/option.html#tooltip">tooltip</a>. See <a href="https://github.com/apache/incubator-echarts/issues/4398">#4398</a>.</p>
 </li>
