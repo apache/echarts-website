@@ -1,2 +1,6 @@
 publish:
   whoami: asf-site
+  homepage: https://echarts.apache.org
+  labels:
+    - echarts
+    - apache
