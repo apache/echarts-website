@@ -1,5 +1,5 @@
 /*
-title: Grogress Gauge
+title: Progress Gauge
 titleCN: 进度仪表盘
 category: gauge
 shotWidth: 800
