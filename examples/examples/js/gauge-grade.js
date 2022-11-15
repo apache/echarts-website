@@ -77,7 +77,7 @@ option = {
         offsetCenter: [0, '-35%'],
         valueAnimation: true,
         formatter: function (value) {
-          return Math.round(value * 100);
+          return Math.round(value * 100) + '';
         },
         color: 'auto'
       },

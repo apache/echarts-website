@@ -1,24 +1,23 @@
 /*
-title: Calendar Effectscatter
+title: Calendar EffectScatter
 category: calendar
 titleCN: 热力特效散点图
 difficulty:3
 */
-function getVirtulData(year) {
-  year = year || '2017';
-  let date = +echarts.number.parseDate(year + '-01-01');
-  let end = +echarts.number.parseDate(+year + 1 + '-01-01');
-  let dayTime = 3600 * 24 * 1000;
-  let data = [];
+function getVirtualData(year) {
+  const date = +echarts.time.parse(year + '-01-01');
+  const end = +echarts.time.parse(+year + 1 + '-01-01');
+  const dayTime = 3600 * 24 * 1000;
+  const data = [];
   for (let time = date; time < end; time += dayTime) {
     data.push([
-      echarts.format.formatTime('yyyy-MM-dd', time),
+      echarts.time.format(time, '{yyyy}-{MM}-{dd}', false),
       Math.floor(Math.random() * 10000)
     ]);
   }
   return data;
 }
-const data = getVirtulData('2016');
+const data = getVirtualData('2016');
 option = {
   backgroundColor: '#404a59',
   title: {

@@ -5,15 +5,14 @@ titleCN: 横向日历图
 shotWidth: 900
 difficulty: 2
 */
-function getVirtulData(year) {
-  year = year || '2017';
-  let date = +echarts.number.parseDate(year + '-01-01');
-  let end = +echarts.number.parseDate(+year + 1 + '-01-01');
-  let dayTime = 3600 * 24 * 1000;
-  let data = [];
+function getVirtualData(year) {
+  const date = +echarts.time.parse(year + '-01-01');
+  const end = +echarts.time.parse(+year + 1 + '-01-01');
+  const dayTime = 3600 * 24 * 1000;
+  const data = [];
   for (let time = date; time < end; time += dayTime) {
     data.push([
-      echarts.format.formatTime('yyyy-MM-dd', time),
+      echarts.time.format(time, '{yyyy}-{MM}-{dd}', false),
       Math.floor(Math.random() * 1000)
     ]);
   }
@@ -53,19 +52,19 @@ option = {
       type: 'heatmap',
       coordinateSystem: 'calendar',
       calendarIndex: 0,
-      data: getVirtulData('2017')
+      data: getVirtualData('2017')
     },
     {
       type: 'heatmap',
       coordinateSystem: 'calendar',
       calendarIndex: 1,
-      data: getVirtulData('2016')
+      data: getVirtualData('2016')
     },
     {
       type: 'heatmap',
       coordinateSystem: 'calendar',
       calendarIndex: 2,
-      data: getVirtulData('2015')
+      data: getVirtualData('2015')
     }
   ]
 };

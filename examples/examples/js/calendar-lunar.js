@@ -371,8 +371,8 @@ const dateList = [
   ['2017-12-30', '十三'],
   ['2017-12-31', '十四']
 ];
-let heatmapData = [];
-let lunarData = [];
+const heatmapData = [];
+const lunarData = [];
 for (let i = 0; i < dateList.length; i++) {
   heatmapData.push([dateList[i][0], Math.random() * 300]);
   lunarData.push([dateList[i][0], 1, dateList[i][1], dateList[i][2]]);
@@ -423,7 +423,7 @@ option = {
     {
       type: 'scatter',
       coordinateSystem: 'calendar',
-      symbolSize: 1,
+      symbolSize: 0,
       label: {
         show: true,
         formatter: function (params) {
@@ -432,12 +432,13 @@ option = {
         },
         color: '#000'
       },
-      data: lunarData
+      data: lunarData,
+      silent: true
     },
     {
       type: 'scatter',
       coordinateSystem: 'calendar',
-      symbolSize: 1,
+      symbolSize: 0,
       label: {
         show: true,
         formatter: function (params) {
@@ -447,7 +448,8 @@ option = {
         fontWeight: 700,
         color: '#a00'
       },
-      data: lunarData
+      data: lunarData,
+      silent: true
     },
     {
       name: '降雨量',
