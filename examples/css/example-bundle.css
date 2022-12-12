@@ -1213,7 +1213,6 @@ td.visible-xxxl {
   bottom: 0;
   left: 0;
   overflow-y: auto;
-  scroll-behavior: smooth;
 }
 #example-explore ::-webkit-scrollbar {
     height: 4px;
@@ -1251,7 +1250,6 @@ td.visible-xxxl {
     font-weight: normal;
     color: #464646;
     font-size: 20px;
-    scroll-margin-top: 30px;
 }
 .example-list-panel .chart-type-head span {
     font-size: 16px;
@@ -1268,7 +1266,6 @@ td.visible-xxxl {
   width: 200px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
-  scrollbar-width: thin;
 }
 #toolbar {
   position: fixed;
