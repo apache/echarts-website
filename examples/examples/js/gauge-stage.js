@@ -20,7 +20,7 @@ option = {
       },
       pointer: {
         itemStyle: {
-          color: 'auto'
+          color: 'inherit'
         }
       },
       axisTick: {
@@ -40,14 +40,14 @@ option = {
         }
       },
       axisLabel: {
-        color: 'auto',
+        color: 'inherit',
         distance: 40,
         fontSize: 20
       },
       detail: {
         valueAnimation: true,
         formatter: '{value} km/h',
-        color: 'auto'
+        color: 'inherit'
       },
       data: [
         {

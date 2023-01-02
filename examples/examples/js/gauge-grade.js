@@ -33,20 +33,20 @@ option = {
         width: 20,
         offsetCenter: [0, '-60%'],
         itemStyle: {
-          color: 'auto'
+          color: 'inherit'
         }
       },
       axisTick: {
         length: 12,
         lineStyle: {
-          color: 'auto',
+          color: 'inherit',
           width: 2
         }
       },
       splitLine: {
         length: 20,
         lineStyle: {
-          color: 'auto',
+          color: 'inherit',
           width: 5
         }
       },
@@ -79,7 +79,7 @@ option = {
         formatter: function (value) {
           return Math.round(value * 100) + '';
         },
-        color: 'auto'
+        color: 'inherit'
       },
       data: [
         {
