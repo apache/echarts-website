@@ -40,7 +40,10 @@ option = {
           value: 1048 + 735 + 580 + 484 + 300,
           itemStyle: {
             // stop the chart from rendering this piece
-            color: 'none'
+            color: 'none',
+            decal: {
+              symbol: 'none'
+            }
           },
           label: {
             show: false
