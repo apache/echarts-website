@@ -1,16 +1,19 @@
 {
   "name": "echarts-website",
   "version": "1.0.0",
-  "description": "",
   "scripts": {
+    "build:pwa": "vite --config .scripts/pwa/vite.config.js build"
   },
   "devDependencies": {
-    "@jamesives/github-pages-deploy-action": "^4.1.3"
+    "@jamesives/github-pages-deploy-action": "^4.1.3",
+    "globby": "^11.1.0",
+    "minimist": "^1.2.5",
+    "node-fetch": "^2.6.1",
+    "vite": "^2.9.5",
+    "vite-plugin-pwa": "^0.11.13"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/apache/echarts-website.git"
-  },
-  "author": "",
-  "license": "ISC"
+  }
 }
