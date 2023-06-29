@@ -78,6 +78,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  white-space: nowrap;
+  overflow-x: auto;
   user-select: none;
 }
 #tool-panel * {
@@ -92,7 +94,7 @@
     width: 80px;
     margin-left: 10px;
 }
-#tool-panel .version-select.nightly {
+#tool-panel .version-select.is-nightly, #tool-panel .version-select.is-pr {
       width: 160px;
 }
 #tool-panel .random,
@@ -130,6 +132,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  white-space: nowrap;
+  overflow-x: auto;
 }
 #preview-status .left-buttons {
     flex-shrink: 0;
@@ -156,11 +160,14 @@
 #preview-status #run-log .run-log-type-error {
       color: #e43c59;
 }
-.el-message.toast-shared-url {
+.el-message.toast-declaration {
   min-width: auto;
   z-index: 9999999 !important;
 }
-.el-message.toast-shared-url .el-message__content {
+.el-message.toast-declaration .el-message__icon {
+    font-size: 20px;
+}
+.el-message.toast-declaration .el-message__content {
     padding-right: 20px;
     line-height: 1.25;
 }
@@ -344,51 +351,55 @@
 #full-code-generate-config .el-switch__label * {
   font-size: 12px;
 }
+#editor-control-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  white-space: nowrap;
+  overflow-x: auto;
+}
 #editor-control-panel .setting-panel {
-  display: inline-block;
+    display: inline-block;
 }
 #editor-control-panel .setting-panel .btn-group + .btn-group {
-    margin-left: 10px;
+      margin-left: 10px;
 }
 #editor-control-panel .languages {
-  display: inline-block;
-  padding: 2px 10px;
-  font-weight: bold;
+    display: inline-block;
+    padding: 2px 10px;
+    font-weight: bold;
 }
 #editor-control-panel .languages a {
-    display: inline-block;
-    padding: 3px 10px;
-    margin-left: 5px;
-    vertical-align: middle;
-    cursor: pointer;
+      display: inline-block;
+      padding: 3px 10px;
+      margin-left: 5px;
+      vertical-align: middle;
+      cursor: pointer;
 }
 #editor-control-panel .languages a.ts {
-      color: #3178c6;
+        color: #3178c6;
 }
 #editor-control-panel .languages a.ts.disabled {
-      color: #ddd;
-      cursor: default;
+        color: #ddd;
+        cursor: default;
 }
 #editor-control-panel .languages a.ts.disabled:hover {
-        text-decoration: none;
+          text-decoration: none;
 }
 #editor-control-panel .languages a.js {
-      color: #000;
-}
-#editor-control-panel .languages a.active {
-      font-size: 12px;
-      border-radius: 3px;
-}
-#editor-control-panel .languages a.active.js {
-        background: #f7df1e;
         color: #000;
 }
-#editor-control-panel .languages a.active.ts {
-        background: #3178c6;
-        color: #fff;
+#editor-control-panel .languages a.active {
+        font-size: 12px;
+        border-radius: 3px;
 }
-#editor-control-panel .editor-controls {
-  float: right;
+#editor-control-panel .languages a.active.js {
+          background: #f7df1e;
+          color: #000;
+}
+#editor-control-panel .languages a.active.ts {
+          background: #3178c6;
+          color: #fff;
 }
 #editor-control-panel .editor-controls .el-switch__label {
     margin-top: -3px;
@@ -424,6 +435,36 @@
 }
 #editor-control-panel .editor-controls .btn.codepen svg {
       transform: scale(1.08);
+}
+#pr-preview {
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  overflow: auto;
+}
+#pr-preview .pr-info {
+    width: 100%;
+}
+#pr-preview .pr-author-avatar {
+    display: flex;
+    align-items: center;
+}
+#pr-preview .pr-author-avatar .el-avatar {
+      margin-right: 6px;
+}
+#pr-preview .pr-label {
+    margin-right: 5px;
+    margin-bottom: 5px;
+    color: #fff;
+    border: none;
+    border-radius: 2em;
+}
+#pr-preview .pr-diff {
+    width: 100%;
+    margin-top: 5px;
+    overflow: auto;
+    box-sizing: border-box;
+    white-space: pre-wrap;
 }
 .right-container {
   position: absolute;

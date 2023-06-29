@@ -189,18 +189,6 @@ $.get(ROOT_PATH + '/data/asset/data/stock-DJI.json', function (rawData) {
             color0: downColor,
             borderColor: undefined,
             borderColor0: undefined
-          },
-          tooltip: {
-            formatter: function (param) {
-              param = param[0];
-              return [
-                'Date: ' + param.name + '<hr size=1 style="margin: 3px 0">',
-                'Open: ' + param.data[0] + '<br/>',
-                'Close: ' + param.data[1] + '<br/>',
-                'Lowest: ' + param.data[2] + '<br/>',
-                'Highest: ' + param.data[3] + '<br/>'
-              ].join('');
-            }
           }
         },
         {

@@ -163,7 +163,7 @@ option = {
         distance: 20,
         length: 15,
         lineStyle: {
-          color: 'inherit',
+          color: 'auto',
           width: 4,
           shadowColor: 'rgba(255, 255, 255, 0.5)',
           shadowBlur: 15,
@@ -174,7 +174,7 @@ option = {
         distance: 20,
         length: 8,
         lineStyle: {
-          color: 'inherit',
+          color: 'auto',
           width: 2,
           shadowColor: 'rgba(255, 255, 255)',
           shadowBlur: 10,
