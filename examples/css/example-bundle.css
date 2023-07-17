@@ -81,6 +81,7 @@
   white-space: nowrap;
   overflow-x: auto;
   overflow-y: hidden;
+  scrollbar-width: thin;
   user-select: none;
 }
 #tool-panel * {
@@ -135,6 +136,8 @@
   justify-content: space-between;
   white-space: nowrap;
   overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
 }
 #preview-status .left-buttons {
     flex-shrink: 0;
@@ -325,7 +328,9 @@
     bottom: 0;
     padding: 0;
 }
-#editor-left-container .el-tabs__item {
+#editor-left-container .el-tabs__item,
+#editor-left-container .el-tabs__nav-next,
+#editor-left-container .el-tabs__nav-prev {
     height: 34px;
     line-height: 34px;
 }
@@ -372,6 +377,7 @@
   white-space: nowrap;
   overflow-x: auto;
   overflow-y: hidden;
+  scrollbar-width: thin;
 }
 #editor-control-panel .setting-panel {
     display: inline-block;
