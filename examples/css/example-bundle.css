@@ -80,6 +80,7 @@
   justify-content: space-between;
   white-space: nowrap;
   overflow-x: auto;
+  overflow-y: hidden;
   user-select: none;
 }
 #tool-panel * {
@@ -370,6 +371,7 @@
   justify-content: space-between;
   white-space: nowrap;
   overflow-x: auto;
+  overflow-y: hidden;
 }
 #editor-control-panel .setting-panel {
     display: inline-block;
