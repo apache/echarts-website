@@ -11,23 +11,24 @@
 <div class="time">2023-07-18</div>
 
 <ul>
-<li>[Feature] [axisPointer] 添加<code>triggerEmphasis</code>选项来禁用强调。 <a href="https://github.com/apache/echarts/issues/18524">#18524</a> (<a href="https://github.com/juliepagano">juliepagano</a>)</li>
-<li>[Feature] [sankey] 支持用于强调状态的<code>trajectory</code>。<a href="https://github.com/apache/echarts/issues/17451">#17451</a> (<a href="https://github.com/ElayGelbart">ElayGelbart</a>)</li>
-<li>[Fix] [sankey] 修复sankey线条颜色的<code>&#39;target&#39;/&#39;source&#39;/&#39;gradient&#39;</code>属性在异常状态下不起作用。<a href="https://github.com/apache/echarts/issues/18834">#18834</a> (<a href="https://github.com/linghaoSu">linghaoSu</a>)</li>
-<li>[Fix] [sankey] 修复标签/边缘标签格式中<code>value</code>未定义的问题。<a href="https://github.com/apache/echarts/issues/18733">#18733</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
-<li>[Fix] [sunburst] 修复启用<code>labelLayout.hideOverlap</code>时，旭日标签可能会旋转的问题。<a href="https://github.com/apache/echarts/issues/18808">#18808</a> (<a href="https://github.com/linghaoSu">linghaoSu</a>)</li>
-<li>[Fix] [graph] 修复由于edgeLabel NPE导致图例无法覆盖图表的问题。<a href="https://github.com/apache/echarts/issues/18624">#18624</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
-<li>[Fix] [label] 修复<code>ellipsis</code>不起作用的问题。<a href="https://github.com/apache/echarts/issues/18525">#18525</a> (<a href="https://github.com/Ovilia">Ovilia</a>)</li>
-<li>[Fix] [state] 修复当项目被其他组件emphasize时，focus自身无效。Fix focus self doesn&#39;t work when item emphasis by other component. <a href="https://github.com/apache/echarts/issues/18511">#18511</a> (<a href="https://github.com/linghaoSu">linghaoSu</a>)</li>
-<li>[Fix] [axis] 修复单个数据最后一个刻度不显示的问题。<a href="https://github.com/apache/echarts/issues/18469">#18469</a> (<a href="https://github.com/Ovilia">Ovilia</a>)</li>
-<li>[Fix] [pie] 修正当<code>selectedOffset</code>启用且<code>animation</code>禁用时，饼图响应区域不正确的问题。<a href="https://github.com/ecomfe/zrender/pull/1011">#1011</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
-<li>[Fix] [custom] 修复用户自定义<code>info</code>属性在eventHandler中不可用的问题。<a href="https://github.com/apache/echarts/issues/18400">#18400</a> (<a href="https://github.com/sobolewsk">sobolewsk</a>)</li>
-<li>[Fix] [legend] 从图例选项继承图例富文本颜色。<a href="https://github.com/apache/echarts/issues/18260">#18260</a> (<a href="https://github.com/ChepteaCatalin">ChepteaCatalin</a>)</li>
-<li>[Fix] [util] 修复时间格式util中<code>{yy}</code>日期格式没有填充零的问题。<a href="https://github.com/apache/echarts/issues/18535">#18535</a> (<a href="https://github.com/linghaoSu">linghaoSu</a>)</li>
-<li>[Fix] [api] 只废弃<code>disConnect</code>而不废弃<code>disconnect</code>。<a href="https://github.com/apache/echarts/issues/18758">#18758</a> (<a href="https://github.com/Justineo">Justineo</a>)</li>
-<li>[Fix] [i18n] 修复德语中 &quot;March &quot;的短语（&quot;Mar&quot; -&gt; &quot;Mrz&quot;）。 <a href="https://github.com/apache/echarts/issues/18387">#18387</a> (<a href="https://github.com/Stebeber">Stebeber</a>)</li>
-<li>[Fix] [type] 修复<code>parallel</code>场景中数据item值的错误类型。<a href="https://github.com/apache/echarts/issues/18425">#18425</a> (<a href="https://github.com/ManishDait">ManishDait</a>)</li>
-<li>[Fix] [type] 允许把<code>null</code>值传给init函数作为参数。<a href="https://github.com/apache/echarts/issues/18575">#18575</a> (<a href="https://github.com/zhuscat">zhuscat</a>)</li>
+<li>[Feature] [axisPointer] 坐标轴指示器新增 <code>triggerEmphasis</code> 配置项，支持禁止触发系列高亮。<a href="https://github.com/apache/echarts/issues/18524">#18524</a> (<a href="https://github.com/juliepagano">juliepagano</a>)</li>
+<li>[Feature] [sankey] 桑基图 <code>emphasis.focus</code> 新增 <code>trajectory</code> 可选项，支持聚焦所有连接到当前高亮数据的节点和边。<a href="https://github.com/apache/echarts/issues/17451">#17451</a> (<a href="https://github.com/ElayGelbart">ElayGelbart</a>)</li>
+<li>[Fix] [sankey] 修复桑基图边的颜色值 <code>&#39;target&#39;/&#39;source&#39;/&#39;gradient&#39;</code> 在非 normal 状态下不生效的问题。<a href="https://github.com/apache/echarts/issues/18834">#18834</a> (<a href="https://github.com/linghaoSu">linghaoSu</a>)</li>
+<li>[Fix] [sankey] 修复桑基图 <code>label</code> 和 <code>edgeLabel</code> formatter 中不能正常获取 <code>value</code> 的问题。<a href="https://github.com/apache/echarts/issues/18733">#18733</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
+<li>[Fix] [sunburst] 修复旭日图标签启用 <code>labelLayout.hideOverlap</code> 后可能旋转的问题。<a href="https://github.com/apache/echarts/issues/18808">#18808</a> (<a href="https://github.com/linghaoSu">linghaoSu</a>)</li>
+<li>[Fix] [graph] 修复关系图可能无法通过图例隐藏的问题。<a href="https://github.com/apache/echarts/issues/18624">#18624</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
+<li>[Fix] [state] 修复 <code>emphasis.focus: self</code> 在启用了坐标轴指示器后聚焦元素可能不对的问题。<a href="https://github.com/apache/echarts/issues/18511">#18511</a> (<a href="https://github.com/linghaoSu">linghaoSu</a>)</li>
+<li>[Fix] [axis] 修复只有单个数据时最后一个轴刻度不显示的问题。<a href="https://github.com/apache/echarts/issues/18469">#18469</a> (<a href="https://github.com/Ovilia">Ovilia</a>)</li>
+<li>[Fix] [pie] 修复饼图在启用了 <code>selectedOffset</code> 并禁用 <code>animation</code> 时响应区域不正确的问题。<a href="https://github.com/ecomfe/zrender/pull/1011">#1011</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
+<li>[Fix] [custom] 修复自定义系列无法在事件监听回调函数中获取在元素中定义的 <code>info</code> 数据的问题。<a href="https://github.com/apache/echarts/issues/18400">#18400</a> (<a href="https://github.com/sobolewsk">sobolewsk</a>)</li>
+<li>[Fix] [legend] 修复图例富文本颜色没有继承图例配置颜色的问题。<a href="https://github.com/apache/echarts/issues/18260">#18260</a> (<a href="https://github.com/ChepteaCatalin">ChepteaCatalin</a>)</li>
+<li>[Fix] [label] 修复标签的 <code>ellipsis</code> 配置项不生效的问题。<a href="https://github.com/apache/echarts/issues/18525">#18525</a> (<a href="https://github.com/Ovilia">Ovilia</a>)</li>
+<li>[Fix] [label] 修复当数据为空时 <code>endLabel</code> 报错的问题。<a href="https://github.com/apache/echarts/issues/18841">#18841</a> (<a href="https://github.com/Ovilia">Ovilia</a>)</li>
+<li>[Fix] [util] 修复时间格式化工具函数中没有对 <code>{yy}</code> 进行补零的问题。<a href="https://github.com/apache/echarts/issues/18535">#18535</a> (<a href="https://github.com/linghaoSu">linghaoSu</a>)</li>
+<li>[Fix] [api] 修复 <code>disconnect</code> API 被意外标记为过时的问题。<a href="https://github.com/apache/echarts/issues/18758">#18758</a> (<a href="https://github.com/Justineo">Justineo</a>)</li>
+<li>[Fix] [i18n] 修正德语翻译中 <code>&quot;March&quot;</code> 的缩写为 <code>&quot;Mrz&quot;</code>。<a href="https://github.com/apache/echarts/issues/18387">#18387</a> (<a href="https://github.com/Stebeber">Stebeber</a>)</li>
+<li>[Fix] [type] 修复平行坐标系系列 <code>parallel</code> 数据项 <code>value</code> 类型错误的问题。<a href="https://github.com/apache/echarts/issues/18425">#18425</a> (<a href="https://github.com/ManishDait">ManishDait</a>)</li>
+<li>[Fix] [type] TypeScript 中 <code>echarts.init</code> API 允许传入 <code>null</code> 作为参数。<a href="https://github.com/apache/echarts/issues/18575">#18575</a> (<a href="https://github.com/zhuscat">zhuscat</a>)</li>
 </ul>
 <h2 id="v5-4-2">v5.4.2</h2>
 <div class="time">2023-03-23</div>
