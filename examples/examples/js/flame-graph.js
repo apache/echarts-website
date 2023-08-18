@@ -186,7 +186,7 @@ $.get(ROOT_PATH + '/data/asset/data/stack-trace.json', (stackTrace) => {
         type: 'custom',
         renderItem,
         encode: {
-          x: [0, 1],
+          x: [0, 1, 2],
           y: 0
         },
         data: recursionJson(stackTrace)
