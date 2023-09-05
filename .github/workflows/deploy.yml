@@ -77,3 +77,4 @@ jobs:
             v4/**/*
             README.md
             package.json
+            doap_ECharts.rdf
