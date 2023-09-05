@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl"?>
+<rdf:RDF xml:lang="en"
+         xmlns="http://usefulinc.com/ns/doap#" 
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+         xmlns:asfext="http://projects.apache.org/ns/asfext#"
+         xmlns:foaf="http://xmlns.com/foaf/0.1/">
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+   
+         https://www.apache.org/licenses/LICENSE-2.0
+   
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+  <Project rdf:about="https://echarts.apache.org">
+    <created>2021-01-26</created>
+    <license rdf:resource="https://spdx.org/licenses/Apache-2.0" />
+    <name>Apache ECharts</name>
+    <homepage rdf:resource="https://echarts.apache.org" />
+    <asfext:pmc rdf:resource="https://echarts.apache.org" />
+    <shortdesc>A powerful, interactive charting and visualization library for browser</shortdesc>
+    <description>Apache ECharts is a free, powerful charting and visualization library offering easy ways to add intuitive, interactive, and highly customizable charts to your commercial products. It is written in pure JavaScript and based on zrender, which is a whole new lightweight canvas library.</description>
+    <bug-database rdf:resource="https://github.com/apache/echarts/issues" />
+    <mailing-list rdf:resource="https://echarts.apache.org/maillist.html" />
+    <download-page rdf:resource="https://echarts.apache.org/download.html" />
+    <programming-language>JavaScript</programming-language>
+    <category rdf:resource="https://projects.apache.org/category/library" />
+    <release>
+      <Version>
+        <name>apache-echarts-5.4.3</name>
+        <created>2023-07-18</created>
+        <revision>5.4.3</revision>
+      </Version>
+    </release>
+    <repository>
+      <GitRepository>
+        <location rdf:resource="https://git://gitbox.apache.org/repos/asf/echarts.git"/>
+        <browse rdf:resource="https://github.com/apache/echarts.git"/>
+      </GitRepository>
+    </repository>
+    <maintainer>
+      <foaf:Person>
+        <foaf:name>Apache ECharts PMC</foaf:name>
+          <foaf:mbox rdf:resource="mailto:dev@echarts.apache.org"/>
+      </foaf:Person>
+    </maintainer>
+  </Project>
+</rdf:RDF>
+
