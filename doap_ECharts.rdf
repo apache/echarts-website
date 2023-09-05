@@ -43,16 +43,15 @@
     </release>
     <repository>
       <GitRepository>
-        <location rdf:resource="https://git://gitbox.apache.org/repos/asf/echarts.git"/>
-        <browse rdf:resource="https://github.com/apache/echarts.git"/>
+        <location rdf:resource="git://gitbox.apache.org/repos/asf/echarts.git" />
+        <browse rdf:resource="https://github.com/apache/echarts.git" />
       </GitRepository>
     </repository>
     <maintainer>
       <foaf:Person>
         <foaf:name>Apache ECharts PMC</foaf:name>
-          <foaf:mbox rdf:resource="mailto:dev@echarts.apache.org"/>
+          <foaf:mbox rdf:resource="mailto:dev@echarts.apache.org" />
       </foaf:Person>
     </maintainer>
   </Project>
 </rdf:RDF>
-
