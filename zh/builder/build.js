@@ -28,7 +28,8 @@ define(function (require) {
     }
 
     // Including charts
-    (BUILD_CONFIG.charts || '').split(',').forEach(function (chart) {
+    var charts = (BUILD_CONFIG.charts || '').split(',');
+    charts.forEach(function (chart) {
         chart && topCode.push(`import "echarts/src/chart/${chart}";`);
     });
 
@@ -37,7 +38,10 @@ define(function (require) {
     }
 
     // Including components
-    (BUILD_CONFIG.components || '').split(',').forEach(function (component) {
+    var components = (BUILD_CONFIG.components || '').split(',');
+    // PENDING: always import dataset & transform component as they have no entry for now
+    components.push('dataset', 'transform');
+    components.forEach(function (component) {
         component && topCode.push(`import "echarts/src/component/${component}";`);
     });
 
