@@ -1,68 +1,72 @@
-<!Doctype html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <link rel="dns-prefetch" href="https://fastly.jsdelivr.net/npm">
+    <link rel="shortcut icon" href="https://echarts.apache.org/en/images/favicon.png">
     <script src="lib/esl.js"></script>
-    <script src="lib/uglify.js"></script>
+    <script src="lib/uglifyjs.js"></script>
 
     <style type="text/css">
         body {
             margin: 0;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            height: 100vh;
         }
         #log {
-            height: 500px;
-            overflow-y: scroll;
-
-            width: 600px;
+            width: 700px;
+            max-width: 100vw;
+            flex-grow: 1;
+            padding: 0 20px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
             text-align: left;
-            margin: 0 auto;
-
-            line-height: 18px;
+            line-height: 1.2;
+            font-size: 16px;
+            word-break: break-word;
+            overflow-y: auto;
+            scrollbar-width: thin;
         }
     </style>
 </head>
 <body>
 
     <h1 id="tip">
-        Building ....
+        Building...
     </h1>
     <div id="log"></div>
 
     <script>
-
-        var search = window.location.search;
-
         var BUILD_CONFIG = {};
-        if (search) {
-            search = search.slice(search.indexOf('?') + 1);
-            var params = search.split('&');
-            for (var i = 0; i < params.length; i++) {
-                var keyValue = params[i].split('=');
-                var key = decodeURIComponent(keyValue[0]);
-                var value = decodeURIComponent(keyValue[1]);
-                BUILD_CONFIG[key.toLowerCase()] = parseURIValue(value);
-            }
+        if (location.search) {
+            var searchParams = new URLSearchParams(location.search);
+            searchParams.forEach(function(value, key) {
+                // for XSS
+                BUILD_CONFIG[key.toLowerCase()] = value.replace(/[^\w-,.]/g, '');
+            });
         }
 
-        BUILD_CONFIG.version = BUILD_CONFIG.version || 'latest';
-
-        var postfix = BUILD_CONFIG.dev ? '-dev' : '';
+        // avoid using 'latest' as it may fall back to previous version
+        // when a file doesn't exist in current main version
+        BUILD_CONFIG.version = BUILD_CONFIG.version || '5';
 
         require.config({
             paths: {
                 'rollup': 'lib/rollup.browser',
                 'transformDev': 'lib/transform-dev-bundle'
             },
-            urlArgs: 'v=1695511661725'
+            urlArgs: 'v=1695525721461'
         });
 
         require(['build']);
-
-        function parseURIValue(value) { // for XSS
-            return value.replace(/[^0-9a-zA-Z-_,.]/g, '');
-        }
-
     </script>
 </body>
 </html>

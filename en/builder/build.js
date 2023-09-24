@@ -1,7 +1,6 @@
 /* global BUILD_CONFIG, UglifyJS */
 define(function (require) {
 
-    // var mangleString = require('./mangleString');
     var saveAs = require('./lib/FileSaver');
     var rollup = require('rollup');
     var transformDev = require('transformDev');
@@ -12,6 +11,7 @@ define(function (require) {
     var RETRY_DELAY = 2000;
 
     var $log = document.getElementById('log');
+    var $tip = document.getElementById('tip');
 
     var version = BUILD_CONFIG.version + '';
     var isVersion5 = version.startsWith('5');
@@ -88,9 +88,11 @@ define(function (require) {
     // Loading scripts and build
 
     function startRollup() {
+        var moduleLoadErr;
+        var moduleLoadTimers = [];
         rollup.rollup({
             input: TOP_MODULE_NAME,
-            legacy: true,
+            // legacy: true,
             plugins: [{
                 resolveId: function (importee, importor) {
                     if (importee === TOP_MODULE_NAME) {
@@ -110,28 +112,43 @@ define(function (require) {
                     };
                 },
                 load: function (path) {
+                    if (moduleLoadErr) {
+                        return;
+                    }
+
                     if (path === TOP_MODULE_NAME) {
                         return topCode.join('\n');
                     }
 
+                    // PENDING: fetch minified file to speed up downloading if no source required
+                    if (!BUILD_CONFIG.source) {
+                        path = path.replace('.js', '.min.js');
+                    }
+
                     var retryCount = 0;
                     return new Promise(function (resolve, reject) {
+                        var err;
                         function retryableLoad() {
-                            // When using apache CDN, might fail to loading soource.
+                            // When using apache CDN, might fail to loading source.
                             if (retryCount >= RETRY_MAX) {
-                                var log = 'Loaded module failed: "' + path
-                                    + '"<br><strong style="color:red">! Please reload page to retry. !</strong>';
-                                builderLog(log);
-                                return reject(log);
+                                var msg = 'Failed to load module: "' + path + '"!'
+                                    + ' Please reload the page to retry.';
+                                err.customMessage = msg;
+                                moduleLoadErr = err;
+                                moduleLoadTimers.forEach(clearTimeout);
+                                moduleLoadTimers.length = 0;
+                                return reject(err);
                             }
-                            ajax(`${jsDelivrBase}/${path}`, TIMEOUT)
+                            fetchModuleContent(`${jsDelivrBase}/${path}`)
                                 .then(function (content) {
                                     builderLog('Loaded module: "' + path + '"');
+                                    err = null;
                                     resolve(content);
                                 })
-                                .catch(function () {
+                                .catch(function (e) {
                                     retryCount++;
-                                    setTimeout(retryableLoad, RETRY_DELAY);
+                                    err = e;
+                                    moduleLoadTimers.push(setTimeout(retryableLoad, RETRY_DELAY));
                                 });
                         }
                         retryableLoad();
@@ -139,44 +156,61 @@ define(function (require) {
                 }
             }]
         }).then(function (bundle) {
-            return bundle.generate({
-                name: 'echarts',
-                format: 'umd',
-                legacy: true
+            builderLog('Bundling code...');
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    bundle.generate({
+                        name: 'echarts',
+                        format: 'umd',
+                        // legacy: true
+                    })
+                    .then((result) => {
+                        var code = result.output[0].code;
+                        code = transformDev.transform(code, false, !BUILD_CONFIG.source ? 'false' : 'true').code;
+                        builderLog('Bundle code: Done.', 'success');
+                        resolve(code);
+                    })
+                    .catch(reject);
+                }, 0);
             });
-        }).then(function (result) {
-            var code = result.code;
-            code = transformDev.transform(code, false, !BUILD_CONFIG.source ? 'false' : 'true').code;
-
-            if (!BUILD_CONFIG.source) {
-                builderLog('<br />Compressing code...');
-                // code = mangleString(code);
-                // Otherwise uglify will throw error.
-                code = code.replace(/\t/g, '    ');
-                code = jsCompress(code);
+        }).then(function (code) {
+            if (BUILD_CONFIG.source) {
+                return onDone();
             }
+            builderLog('Compressing code...');
+            setTimeout(() => {
+                try {
+                    code = jsCompress(code);
+                    setTimeout(() => {
+                        builderLog('Compress code: Done.', 'success');
+                        onDone();
+                    }, 0);
+                } catch (e) {
+                    e.customMessage = 'Failed to compress code: ' + e.message;
+                    throw e;
+                }
+            }, 0);
 
-            download(code);
-
-            builderLog('<br />Completed');
-
-            document.getElementById('tip').innerHTML = 'OK';
+            function onDone() {
+                download(code);
+                setTimeout(() => {
+                    builderLog('✔️ All Done!', 'success');
+                    $tip.innerHTML = 'OK';
+                }, 0);
+            }
+        }).catch(function (err) {
+            builderLog(err.customMessage || ('Failed to build code: ' + err.message), 'error');
+            $tip.innerHTML = 'Error';
+            console.error(err);
         });
     }
 
     function download(code) {
+        const contentType = 'text/javascript;charset=utf-8';
         try {
             var blob = new Blob([code], {
-                type: 'text/plain;charset=utf8'
+                type: contentType
             });
-
-            // var URL = window.URL || window.webkitURL;
-            // var scriptUrl = URL.createObjectURL(blob);
-
-            // URL.revokeObjectURL(blob);
-
-            // window.open(scriptUrl);
-            // return;
 
             var fileName = ['echarts'];
             if (!BUILD_CONFIG.source) {
@@ -188,28 +222,26 @@ define(function (require) {
         }
         catch (e) {
             console.error(e);
-            window.open('data:text/plain;charset=utf-8,' + encodeURIComponent(code));
+            window.open('data:' + contentType +',' + encodeURIComponent(code));
         }
     }
 
-    function builderLog(msg) {
-        $log.innerHTML += msg + '<br />';
-        $log.scrollTop = $log.scrollHeight;
+    function builderLog(msg, type) {
+        requestAnimationFrame(() => {
+            var logLine = document.createElement('div');
+            logLine.innerHTML = '[' + new Date().toLocaleTimeString() + '] '
+                + (type ? ('<strong style="color:' + (type === 'success' ? 'green' : 'red') + '">' + msg + '</strong>') : msg);
+            $log.appendChild(logLine);
+            $log.scrollTop = $log.scrollHeight;
+        });
     }
 
     function jsCompress(source) {
-        var ast = UglifyJS.parse(source);
-        /* jshint camelcase: false */
-        // compressor needs figure_out_scope too
-        ast.figure_out_scope();
-        ast = ast.transform(UglifyJS.Compressor());
-
-        // need to figure out scope again so mangler works optimally
-        ast.figure_out_scope();
-        ast.compute_char_frequency();
-        ast.mangle_names();
-
-        return ast.print_to_string();
+        var result = UglifyJS.minify(source);
+        if (result.error) {
+            throw new Error(result.error)
+        }
+        return result.code;
     }
 
     // Get absolute path. `basePath` can be omitted if moduleId is absolute.
@@ -246,12 +278,18 @@ define(function (require) {
         return moduleId;
     }
 
-    function ajax(toUrl, timeout) {
-        toUrl += '?' + urlArgs;
+    function fetchModuleContent(moduleUrl) {
+        moduleUrl += '?' + urlArgs;
 
-        return fetch(toUrl, {
-            mode: 'cors'
-        }).then(response => response.text());
+        var controller = new AbortController();
+        var timeout = setTimeout(() => controller.abort(), TIMEOUT);
+
+        return fetch(moduleUrl, {
+            mode: 'cors',
+            signal: controller.signal
+        })
+        .then(response => response.text())
+        .finally(() => clearTimeout(timeout));
     }
 
     // Nodejs `path.resolve`.
