@@ -13,8 +13,8 @@ RedirectMatch 404 /\.asf\.yaml
     Header set Access-Control-Allow-Headers "*"
     Header set X-XSS-Protection "1; mode=block"
     Header set X-Frame-Options "sameorigin"
+    Header set X-Content-Type-Options "nosniff"
 </IfModule>
-
 
 <IfModule mod_expires.c>
     ExpiresActive on
@@ -29,7 +29,7 @@ RedirectMatch 404 /\.asf\.yaml
     ExpiresDefault                  		"access plus 10 days"
 </IfModule>
 
-# no cahce for root index redirection
+# no cache for root index redirection
 <If "%{REQUEST_URI} =~ m#^/?(((examples)|(handbook))/?)?([\w\-]+\.html)?$#">
     <IfModule mod_expires.c>
         ExpiresActive off
@@ -61,4 +61,3 @@ RedirectMatch 404 /\.asf\.yaml
 
   RewriteRule ^/?([\w\-]+)\.html$ "/en/$1.html" [L,R=302]
 </IfModule>
-
