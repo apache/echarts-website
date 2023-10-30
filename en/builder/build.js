@@ -40,7 +40,8 @@ define(function (require) {
     // Including components
     var components = (BUILD_CONFIG.components || '').split(',');
     // PENDING: always import dataset & transform component as they have no entry for now
-    components.push('dataset', 'transform');
+    components.push('dataset');
+    isVersion5 && components.push('transform');
     components.forEach(function (component) {
         component && topCode.push(`import "echarts/src/component/${component}";`);
     });
