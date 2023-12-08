@@ -15,7 +15,10 @@ define(function (require) {
 
     var version = BUILD_CONFIG.version + '';
     var isVersion5 = version.startsWith('5');
-    var jsDelivrBase = 'https://fastly.jsdelivr.net/npm';
+    var isCN = BUILD_CONFIG.cn == 1;
+    var jsDelivrBase = isCN
+        ? 'https://registry.npmmirror.com'
+        : 'https://fastly.jsdelivr.net/npm';
 
     var urlArgs = '__v__=' + (+new Date());
 
@@ -65,7 +68,7 @@ define(function (require) {
     };
 
     function resolveNpmDependencies(pkg, version) {
-        return fetch(`${jsDelivrBase}/${pkg}@${version}/package.json`, { mode: 'cors' })
+        return fetch(`${jsDelivrBase}/${pkg}${isCN ? '/' : '@'}${version}/${isCN ? 'files/' : ''}package.json`, { mode: 'cors' })
             .then(response => response.json())
             .then(pkgCfg => {
                 var entry = pkgCfg.module || pkgCfg.main || 'index.js';
@@ -122,8 +125,13 @@ define(function (require) {
                     }
 
                     // PENDING: fetch minified file to speed up downloading if no source required
-                    if (!BUILD_CONFIG.source) {
+                    if (!BUILD_CONFIG.source && !isCN) {
                         path = path.replace('.js', '.min.js');
+                    }
+
+                    if (isCN) {
+                        // compatible with npmmirror.com
+                        path = path.replace(/([^\/]+)@([^/]+)/, '$1/$2/files');
                     }
 
                     var retryCount = 0;
@@ -140,7 +148,8 @@ define(function (require) {
                                 moduleLoadTimers.length = 0;
                                 return reject(err);
                             }
-                            fetchModuleContent(`${jsDelivrBase}/${path}`)
+                            console.log(path)
+                            fetchModuleContent(`${jsDelivrBase}${path}`)
                                 .then(function (content) {
                                     builderLog('Loaded module: "' + path + '"');
                                     err = null;
