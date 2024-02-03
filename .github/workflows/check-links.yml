@@ -10,17 +10,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [12.x]
-
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
         with:
+          node-version: 18
           registry-url: https://registry.npmjs.org/
-      - name: Check links
+
+      - name: Check Links
         run: |
           npm i
           node checkLinks.js
