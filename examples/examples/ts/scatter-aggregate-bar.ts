@@ -171,11 +171,11 @@ const barOption: echarts.EChartsOption = {
       data: [
         {
           value: calculateAverage(maleDeta, 0),
-          groupId: 'male'
+          groupId: 'female'
         },
         {
           value: calculateAverage(femaleData, 0),
-          groupId: 'female'
+          groupId: 'male'
         }
       ],
       universalTransition: {
