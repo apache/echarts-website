@@ -171,7 +171,10 @@ const barOption: echarts.EChartsOption = {
       data: [
         {
           value: calculateAverage(maleDeta, 0),
-          groupId: 'female'
+          groupId: 'female',
+          itemStyle: {
+            color: '#60a960'      /* green, similar to the scatter plot */
+          }
         },
         {
           value: calculateAverage(femaleData, 0),
