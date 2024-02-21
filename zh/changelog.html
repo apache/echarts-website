@@ -13,42 +13,42 @@
 <ul>
 <li>[Break Change] [Feature] [core] 默认解析为 ESM 包。<a href="https://github.com/apache/echarts/issues/19513">#19513</a> (<a href="https://github.com/100pah">100pah</a>)</li>
 <li>[Feature] [ssr] 服务器端渲染和客户端轻量运行时。<a href="https://github.com/apache/echarts/issues/18381">#18381</a> (<a href="https://github.com/Ovilia">Ovilia</a>)</li>
-<li>[Feature] [animation] 支持多层下钻的通用动画。<a href="https://github.com/apache/echarts/issues/17611">#17611</a> (<a href="https://github.com/tyn1998">tyn1998</a>)</li>
-<li>[Feature] [pie] 添加 <code>padAngle</code> 选项。<a href="https://github.com/apache/echarts/issues/19076">#19076</a> (<a href="https://github.com/linghaoSu">linghaoSu</a>)</li>
-<li>[Feature] [pie] 添加 <code>endAngle</code> 以控制饼状图范围。<a href="https://github.com/apache/echarts/issues/18820">#18820</a> (<a href="https://github.com/linghaoSu">linghaoSu</a>)</li>
-<li>[Feature] [polar] 允许设置 <code>angleAxis.endAngle</code>。<a href="https://github.com/apache/echarts/issues/19099">#19099</a> (<a href="https://github.com/yassilah">yassilah</a>)</li>
-<li>[Feature] [sampler] 添加 min-max 采样器功能。<a href="https://github.com/apache/echarts/issues/19279">#19279</a> (<a href="https://github.com/snukhulov">snukhulov</a>)</li>
-<li>[Feature] [i18n] 添加阿拉伯语（AR）翻译。<a href="https://github.com/apache/echarts/issues/19214">#19214</a> (<a href="https://github.com/OthmanAliModaes">OthmanAliModaes</a>)</li>
-<li>[Feature] [i18n] 添加荷兰语（NL）翻译。<a href="https://github.com/apache/echarts/issues/19252">#19252</a> (<a href="https://github.com/tijmenamsing">tijmenamsing</a>)</li>
-<li>[Feature] [tooltip] 添加 <code>appendTo</code> 选项，允许自定义提示工具容器。<a href="https://github.com/apache/echarts/issues/18436">#18436</a> (<a href="https://github.com/viking7982">viking7982</a>)</li>
-<li>[Feature] [label] 支持最小/最大标签对齐。<a href="https://github.com/apache/echarts/issues/19228">#19228</a> (<a href="https://github.com/Ovilia">Ovilia</a>)</li>
-<li>[Feature] [pictorialBar] 支持象形柱状图系列裁剪。<a href="https://github.com/apache/echarts/issues/19197">#19197</a> (<a href="https://github.com/Ovilia">Ovilia</a>)</li>
-<li>[Feature] [tooltip] 将 <code>dataIndex</code> 添加到 <code>valueFormatter</code> 回调。<a href="https://github.com/apache/echarts/issues/19123">#19123</a> (<a href="https://github.com/ChepteaCatalin">ChepteaCatalin</a>)</li>
-<li>[Fix] [toolbox] 修复工具箱文本无法应用指定或全局字体样式的问题。<a href="https://github.com/apache/echarts/issues/19170">#19170</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
-<li>[Fix] [label] 修复 labelLine 在正常状态不显示，但其他状态显示的问题。<a href="https://github.com/apache/echarts/issues/18800">#18800</a> (<a href="https://github.com/linghaoSu">linghaoSu</a>)</li>
-<li>[Fix] [labelLine] 修复饼图中 <code>emphasis.labelLine</code> 不生效的问题。<a href="https://github.com/apache/echarts/issues/19180">#19180</a> (<a href="https://github.com/shiersansi">shiersansi</a>)</li>
-<li>[Fix] [marker] 修复当轴与 <code>alignWithLabel</code> 一起使用时，markArea 位置的问题。<a href="https://github.com/apache/echarts/issues/19516">#19516</a> (<a href="https://github.com/Ovilia">Ovilia</a>)</li>
-<li>[Fix] [line] 修复在启用动画时，时间轴上的线可能交叉的问题。<a href="https://github.com/apache/echarts/issues/18960">#18960</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
-<li>[Fix] [scatter] 修复由于微小偏移导致的边缘散点可能被意外裁剪的问题。<a href="https://github.com/apache/echarts/issues/18867">#18867</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
-<li>[Fix] [sunburst] 标签旋转翻转。<a href="https://github.com/apache/echarts/issues/19176">#19176</a> (<a href="https://github.com/Ovilia">Ovilia</a>)</li>
-<li>[Fix] [aria] 修复硬编码的系列类型名称翻译。<a href="https://github.com/apache/echarts/issues/19239">#19239</a> (<a href="https://github.com/Ovilia">Ovilia</a>)</li>
-<li>[Feature] [matrix] 允许相对于原点以外的点进行旋转。<a href="https://github.com/ecomfe/zrender/issues/1034">#1034</a> (<a href="https://github.com/ChepteaCatalin">ChepteaCatalin</a>)</li>
-<li>[Fix] [graph] 修复在销毁图表后，力布局迭代计时器不会停止的问题。<a href="https://github.com/apache/echarts/issues/19514">#19514</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
-<li>[Fix] [tooltip] 修复当提示元素的父节点不存在时，可能出现的空指针异常。<a href="https://github.com/apache/echarts/issues/19265">#19265</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
-<li>[Fix] [visualMap] 修复连续 visualMap 鼠标悬停事件除第一次连续 visualMap 外不注册的问题。<a href="https://github.com/apache/echarts/issues/19097">#19097</a> (<a href="https://github.com/linghaoSu">linghaoSu</a>)</li>
-<li>[Fix] [clip] 在裁剪路径宽度上添加额外的空间，以防止意外裁剪。<a href="https://github.com/apache/echarts/issues/19056">#19056</a> (<a href="https://github.com/RexSkz">RexSkz</a>)</li>
-<li>[Fix] [dataset] 修复多类型数组检测缺陷。<a href="https://github.com/apache/echarts/issues/19035">#19035</a> (<a href="https://github.com/linghaoSu">linghaoSu</a>)</li>
-<li>[Fix] [core] 修复在开发环境中从全局对象读取默认初始化选项时可能出现的空指针异常。<a href="https://github.com/apache/echarts/issues/19217">#19217</a> (<a href="https://github.com/sunpm">sunpm</a>)</li>
+<li>[Feature] [animation] 支持多级下钻全局过渡动画。<a href="https://github.com/apache/echarts/issues/17611">#17611</a> (<a href="https://github.com/tyn1998">tyn1998</a>)</li>
+<li>[Feature] [pie] 新增 <code>padAngle</code> 选项以支持设置饼图扇区间隔。<a href="https://github.com/apache/echarts/issues/19076">#19076</a> (<a href="https://github.com/linghaoSu">linghaoSu</a>)</li>
+<li>[Feature] [pie] 新增 <code>endAngle</code> 选项以支持控制饼图渲染范围。<a href="https://github.com/apache/echarts/issues/18820">#18820</a> (<a href="https://github.com/linghaoSu">linghaoSu</a>)</li>
+<li>[Feature] [polar] 极坐标系角度轴 <code>angleAxis</code> 新增 <code>endAngle</code> 选项以支持设置结束角度。<a href="https://github.com/apache/echarts/issues/19099">#19099</a> (<a href="https://github.com/yassilah">yassilah</a>)</li>
+<li>[Feature] [sampler] 新增 <code>min-max</code> 数据采样策略。<a href="https://github.com/apache/echarts/issues/19279">#19279</a> (<a href="https://github.com/snukhulov">snukhulov</a>)</li>
+<li>[Feature] [i18n] 新增阿拉伯语翻译。<a href="https://github.com/apache/echarts/issues/19214">#19214</a> (<a href="https://github.com/OthmanAliModaes">OthmanAliModaes</a>)</li>
+<li>[Feature] [i18n] 新增荷兰语翻译。<a href="https://github.com/apache/echarts/issues/19252">#19252</a> (<a href="https://github.com/tijmenamsing">tijmenamsing</a>)</li>
+<li>[Feature] [tooltip] 新增 <code>appendTo</code> 选项以允许自定义 tooltip 的容器。<a href="https://github.com/apache/echarts/issues/18436">#18436</a> (<a href="https://github.com/viking7982">viking7982</a>)</li>
+<li>[Feature] [label] 轴标签 <code>minLabel</code> 和 <code>maxLabel</code> 支持设置对齐方式。<a href="https://github.com/apache/echarts/issues/19228">#19228</a> (<a href="https://github.com/Ovilia">Ovilia</a>)</li>
+<li>[Feature] [pictorialBar] 象形柱图系列新增 <code>clip</code> 选项以支持裁剪。<a href="https://github.com/apache/echarts/issues/19197">#19197</a> (<a href="https://github.com/Ovilia">Ovilia</a>)</li>
+<li>[Feature] [tooltip] tooltip 的 <code>valueFormatter</code> 回调新增 <code>dataIndex</code> 参数。<a href="https://github.com/apache/echarts/issues/19123">#19123</a> (<a href="https://github.com/ChepteaCatalin">ChepteaCatalin</a>)</li>
+<li>[Fix] [toolbox] 修复 toolbox 文本没有应用指定或全局字体样式的问题。<a href="https://github.com/apache/echarts/issues/19170">#19170</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
+<li>[Fix] [label] 修复 labelLine 在 normal 状态下隐藏而在其他状态显示时，其颜色没有继承系列颜色的问题。<a href="https://github.com/apache/echarts/issues/18800">#18800</a> (<a href="https://github.com/linghaoSu">linghaoSu</a>)</li>
+<li>[Fix] [labelLine] 修复饼图 <code>emphasis.labelLine</code> 配置不生效的问题。<a href="https://github.com/apache/echarts/issues/19180">#19180</a> (<a href="https://github.com/shiersansi">shiersansi</a>)</li>
+<li>[Fix] [marker] 修复当轴刻度 <code>axisTick</code> 启用了 <code>alignWithLabel</code> 时 markArea 范围错误的问题。<a href="https://github.com/apache/echarts/issues/19516">#19516</a> (<a href="https://github.com/Ovilia">Ovilia</a>)</li>
+<li>[Fix] [line] 修复时间轴上的折线在启用动画时可能交叉的问题。<a href="https://github.com/apache/echarts/issues/18960">#18960</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
+<li>[Fix] [scatter] 修复边缘处的散点可能被意外裁剪的问题。<a href="https://github.com/apache/echarts/issues/18867">#18867</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
+<li>[Fix] [sunburst] 修复旭日图标签可能异常翻转的问题。<a href="https://github.com/apache/echarts/issues/19176">#19176</a> (<a href="https://github.com/Ovilia">Ovilia</a>)</li>
+<li>[Fix] [aria] 修复部分系列类型名称的翻译。<a href="https://github.com/apache/echarts/issues/19239">#19239</a> (<a href="https://github.com/Ovilia">Ovilia</a>)</li>
+<li>[Feature] [matrix] 支持相对于原点以外的点进行旋转。<a href="https://github.com/ecomfe/zrender/issues/1034">#1034</a> (<a href="https://github.com/ChepteaCatalin">ChepteaCatalin</a>)</li>
+<li>[Fix] [graph] 修复图表销毁后力引导布局迭代计时器没有停止的问题。<a href="https://github.com/apache/echarts/issues/19514">#19514</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
+<li>[Fix] [tooltip] 修复当 tooltip 元素的父节点不存在时可能报错的问题。<a href="https://github.com/apache/echarts/issues/19265">#19265</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
+<li>[Fix] [visualMap] 修复在配置了多个连续型 <code>visualMap</code> 组件时只有第一个生效的问题。<a href="https://github.com/apache/echarts/issues/19097">#19097</a> (<a href="https://github.com/linghaoSu">linghaoSu</a>)</li>
+<li>[Fix] [clip] 修复直角坐标系下图表裁剪范围可能溢出的问题。<a href="https://github.com/apache/echarts/issues/19056">#19056</a> (<a href="https://github.com/RexSkz">RexSkz</a>)</li>
+<li>[Fix] [dataset] 修复数据集对多维 <code>TypedArray</code> 数据源类型的检测逻辑缺陷。<a href="https://github.com/apache/echarts/issues/19035">#19035</a> (<a href="https://github.com/linghaoSu">linghaoSu</a>)</li>
+<li>[Fix] [core] 修复开发环境下读取初始化选项时可能报错的问题。<a href="https://github.com/apache/echarts/issues/19217">#19217</a> (<a href="https://github.com/sunpm">sunpm</a>)</li>
 <li>[Fix] [i18n] 增强默认语言兜底逻辑。<a href="https://github.com/apache/echarts/issues/19107">#19107</a> (<a href="https://github.com/ultravires">ultravires</a>)</li>
-<li>[Fix] [svg] 修复当强制执行 CSP 时，分配样式属性无效。<a href="https://github.com/ecomfe/zrender/issues/1030">ecomfe/zrender#1030</a> (<a href="https://github.com/alxnddr">alxnddr</a>)</li>
-<li>[Fix] [svg] 多图表背景矩形的重复 id。<a href="https://github.com/ecomfe/zrender/issues/1002">ecomfe/zrender#1002</a> (<a href="https://github.com/Ovilia">Ovilia</a>)</li>
-<li>[Fix] [node] 使 Node.js 检测逻辑更强壮。<a href="https://github.com/ecomfe/zrender/pull/1036">ecomfe/zrender#1036</a> (<a href="https://github.com/Uzlopak">Uzlopak</a>)</li>
-<li>[Fix] [type] 允许 <code>truncateText</code> 的 <code>ellipsis</code> 和 <code>options</code> 可空值。<a href="https://github.com/ecomfe/zrender/issues/1047">ecomfe/zrender#1047</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
-<li>[Fix] [type] 添加缺失的值类型 <code>string</code> 为酒吧系列的 <code>barMinWidth</code> 和 <code>barMaxWidth</code>。<a href="https://github.com/apache/echarts/issues/19424">#19424</a> (<a href="https://github.com/zhaxnb">zhaxnb</a>)</li>
-<li>[Feature] [type] 导出 <code>EChartsInitOpts</code> 和一些 <code>Payload</code> 类型为 <code>echarts/core</code>。<a href="https://github.com/apache/echarts/issues/19103">#19103</a> (<a href="https://github.com/dalenguyen">dalenguyen</a>)</li>
-<li>[Fix] [type] 允许 <code>OptionDataValue</code> 的可空值。<a href="https://github.com/apache/echarts/issues/19111">#19111</a> (<a href="https://github.com/avin-kavish">avin-kavish</a>)</li>
-<li>[Fix] [type] 添加 <code>undefined</code> 到函数 <code>graphic.clipRectByRect</code> 的返回类型。<a href="https://github.com/apache/echarts/issues/18950">#18950</a> (<a href="https://github.com/benlongo">benlongo</a>)</li>
-<li>[Fix] [type] 在 <code>GraphNodeItemOption</code> 中删除重复的扩展。<a href="https://github.com/apache/echarts/issues/18901">#18901</a> (<a href="https://github.com/nenoNaninu">nenoNaninu</a>)</li>
+<li>[Fix] [svg] 修复 <code>CSP</code> 策略开启时，SVG 元素样式无法应用的问题。<a href="https://github.com/ecomfe/zrender/issues/1030">ecomfe/zrender#1030</a> (<a href="https://github.com/alxnddr">alxnddr</a>)</li>
+<li>[Fix] [svg] 移除无用的 SVG 背景矩形的 id 属性。<a href="https://github.com/ecomfe/zrender/issues/1002">ecomfe/zrender#1002</a> (<a href="https://github.com/Ovilia">Ovilia</a>)</li>
+<li>[Fix] [env] 修复对 Node.js &gt;= v21.1.0 环境检测逻辑缺陷。<a href="https://github.com/ecomfe/zrender/pull/1036">ecomfe/zrender#1036</a> (<a href="https://github.com/Uzlopak">Uzlopak</a>)</li>
+<li>[Fix] [type] 允许 <code>truncateText</code> 工具的 <code>ellipsis</code> 和 <code>options</code> 参数为空。<a href="https://github.com/ecomfe/zrender/issues/1047">ecomfe/zrender#1047</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
+<li>[Fix] [type] 柱状图系列的 <code>barMinWidth</code> 和 <code>barMaxWidth</code> 选项添加缺失的 <code>string</code> 类型定义。<a href="https://github.com/apache/echarts/issues/19424">#19424</a> (<a href="https://github.com/zhaxnb">zhaxnb</a>)</li>
+<li>[Feature] [type] <code>echarts/core</code> 导出 <code>EChartsInitOpts</code> 和一些 <code>Payload</code> 类型。<a href="https://github.com/apache/echarts/issues/19103">#19103</a> (<a href="https://github.com/dalenguyen">dalenguyen</a>)</li>
+<li>[Fix] [type] <code>OptionDataValue</code> 添加缺失的 <code>null</code> 和 <code>undefined</code> 类型。<a href="https://github.com/apache/echarts/issues/19111">#19111</a> (<a href="https://github.com/avin-kavish">avin-kavish</a>)</li>
+<li>[Fix] [type] 修复 <code>graphic.clipRectByRect</code> 的返回类型定义，添加缺失的 <code>undefined</code> 类型。<a href="https://github.com/apache/echarts/issues/18950">#18950</a> (<a href="https://github.com/benlongo">benlongo</a>)</li>
+<li>[Fix] [type] 修复 graph 系列中 <code>GraphNodeItemOption</code> 类型重复继承 <code>GraphNodeStateOption</code> 的问题。<a href="https://github.com/apache/echarts/issues/18901">#18901</a> (<a href="https://github.com/nenoNaninu">nenoNaninu</a>)</li>
 <li>[Refactor] [util] 将 <code>liftColor</code> 函数移至 zrender 并引用。<a href="https://github.com/apache/echarts/issues/19526">#19526</a> (<a href="https://github.com/plainheart">plainheart</a>)</li>
 </ul>
 <h2 id="v5-4-3">v5.4.3</h2>
