@@ -44,7 +44,7 @@ RedirectMatch 404 /\.asf\.yaml
 
 <IfModule mod_headers.c>
     <FilesMatch ".+\.(?<imgExt>webp|apng|avif)$">
-        Header setifempty Content-Type "image/%{env:MATCH_IMGEXT}"
+        Header setifempty Content-Type image/%{env:MATCH_IMGEXT}
     </FilesMatch>
 </IfModule>
 
