@@ -42,9 +42,15 @@ RedirectMatch 404 /\.asf\.yaml
     </IfModule>
 </If>
 
+<IfModule mod_headers.c>
+    <FilesMatch ".+\.(?<imgExt>webp|apng|avif)$">
+        Header setifempty Content-Type "image/%{MATCH_imgExt}e"
+    </FilesMatch>
+</IfModule>
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  
+
   RewriteCond "%{HTTP:Accept-Language}" ^zh [NC]
   RewriteRule ^/?(index\.html)?$ "/zh/index.html" [L,R=302]
 
