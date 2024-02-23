@@ -1,9 +1,5 @@
 AddDefaultCharset UTF-8
 
-AddType image/webp .webp
-AddType image/avif .avif
-AddType image/apng .apng
-
 RedirectMatch 404 /\.git
 RedirectMatch 404 /\.gitignore
 RedirectMatch 404 /\.htaccess
@@ -45,6 +41,12 @@ RedirectMatch 404 /\.asf\.yaml
         Header always merge Vary "Accept-Language"
     </IfModule>
 </If>
+
+<IfModule mod_headers.c>
+    <FilesMatch ".+\.(?<imgExt>webp|apng|avif)$">
+        Header setifempty Content-Type "image/%{env:MATCH_IMGEXT}"
+    </FilesMatch>
+</IfModule>
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
