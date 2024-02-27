@@ -38,9 +38,9 @@
     <category rdf:resource="https://projects.apache.org/category/data-visualization" />
     <release>
       <Version>
-        <name>apache-echarts-5.4.3</name>
-        <created>2023-07-18</created>
-        <revision>5.4.3</revision>
+        <name>apache-echarts-5.5.0</name>
+        <created>2024-02-18</created>
+        <revision>5.5.0</revision>
       </Version>
     </release>
     <repository>
