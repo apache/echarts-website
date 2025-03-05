@@ -73,9 +73,9 @@ jobs:
           git-config-name: ${{env.GITHUB_ACTOR}}
           clean: true
           clean-exclude: |
-            .*
-            v4/**/*
-            README.md
-            package.json
-            doap_ECharts.rdf
-            favicon.ico
+            /.*
+            /v4
+            /README.md
+            /package.json
+            /doap_ECharts.rdf
+            /favicon.ico
