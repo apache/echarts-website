@@ -13,18 +13,15 @@ define(function (require) {
     var $log = document.getElementById('log');
     var $tip = document.getElementById('tip');
 
-    var version = BUILD_CONFIG.version + '';
-    var isVersion5 = version.startsWith('5');
-    var isCN = BUILD_CONFIG.cn == 1;
-    var jsDelivrBase = isCN
-        ? 'https://registry.npmmirror.com'
-        : 'https://fastly.jsdelivr.net/npm';
+    var version = BUILD_CONFIG.version || 'latest';
+    var isVersion5 = version === 'latest' || +version[0] >= 5;
+    var jsDelivrBase = 'https://echarts.apache.org/en/js/vendors';
 
     var urlArgs = '__v__=' + (+new Date());
 
     var topCode = [`export * from "echarts/src/echarts";`];
     var srcFolder = version.startsWith('5.0.0') ? 'esm' // Only 5.0.0 has esm folder
-        : isVersion5 || version === 'latest' ? 'lib' : 'src';
+        : isVersion5 ? 'lib' : 'src';
 
     if (BUILD_CONFIG.api && (version.startsWith('5.0.0') || !isVersion5)) {
         topCode.push(`export * from "echarts/src/export";`);
@@ -62,25 +59,29 @@ define(function (require) {
         `import "echarts/src/scale/Log";`
     );
 
+    var versionId = !version || version === 'latest' ? '' : '@' + version;
+
     var npmEntries = {};
     var pathsConfig = {
-        'echarts/src': `/echarts@${version}/${srcFolder}`
+        'echarts/src': `/echarts${versionId}/${srcFolder}`
     };
 
     function resolveNpmDependencies(pkg, version) {
-        return fetch(`${jsDelivrBase}/${pkg}${isCN ? '/' : '@'}${version}/${isCN ? 'files/' : ''}package.json`, { mode: 'cors' })
+        var versionId = !version || version === 'latest' ? '' : '@' + version;
+        return fetch(`${jsDelivrBase}/${pkg}${versionId}/package.json`, { mode: 'cors' })
             .then(response => response.json())
             .then(pkgCfg => {
                 var entry = pkgCfg.module || pkgCfg.main || 'index.js';
                 if (!entry.endsWith('.js')) {
                     entry = entry + '.js';
                 }
-                npmEntries[pkg] = `/${pkg}@${version}/${entry}`;
+                npmEntries[pkg] = `/${pkg}${versionId}/${entry}`;
 
                 var promises = [];
                 for (let pkgName in pkgCfg.dependencies) {
                     var depVersion = pkgCfg.dependencies[pkgName];
-                    pathsConfig[pkgName] = `/${pkgName}@${depVersion}`;
+                    var depVersionId = !depVersion || depVersion === 'latest' ? '' : '@' + depVersion;
+                    pathsConfig[pkgName] = `/${pkgName}${depVersionId}`;
                     promises.push(resolveNpmDependencies(pkgName, depVersion));
                 }
                 return Promise.all(promises);
