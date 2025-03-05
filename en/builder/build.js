@@ -125,16 +125,6 @@ define(function (require) {
                         return topCode.join('\n');
                     }
 
-                    // PENDING: fetch minified file to speed up downloading if no source required
-                    if (!BUILD_CONFIG.source && !isCN) {
-                        path = path.replace('.js', '.min.js');
-                    }
-
-                    if (isCN) {
-                        // compatible with npmmirror.com
-                        path = path.replace(/([^\/]+)@([^/]+)/, '$1/$2/files');
-                    }
-
                     var retryCount = 0;
                     return new Promise(function (resolve, reject) {
                         var err;
