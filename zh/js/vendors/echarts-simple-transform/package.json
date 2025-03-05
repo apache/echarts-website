@@ -1,0 +1,35 @@
+{
+  "name": "echarts-simple-transform",
+  "version": "1.0.0",
+  "description": "Some simple data transforms for Apache ECharts 5",
+  "license": "Apache-2.0",
+  "main": "dist/ecSimpleTransform.js",
+  "jsdelivr": "dist/ecSimpleTransform.min.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/100pah/echarts-simple-transform.git"
+  },
+  "scripts": {
+    "build": "node build/build.js",
+    "release": "node build/build.js --release",
+    "lint": "./node_modules/.bin/eslint src/**/*.ts",
+    "cp2echarts": "cp ./dist/ecSimpleTransform.js ../echarts/test/lib/ecSimpleTransform.js"
+  },
+  "dependencies": {
+    "tslib": "2.0.3"
+  },
+  "devDependencies": {
+    "@microsoft/api-extractor": "7.7.2",
+    "@typescript-eslint/eslint-plugin": "^2.15.0",
+    "@typescript-eslint/parser": "^2.18.0",
+    "chalk": "^3.0.0",
+    "commander": "2.11.0",
+    "eslint": "6.3.0",
+    "fs-extra": "0.26.7",
+    "rollup": "2.34.2",
+    "rollup-plugin-typescript2": "^0.25.3",
+    "rollup-plugin-terser": "^7.0.2",
+    "terser": "^5.3.8",
+    "typescript": "^4.1.2"
+  }
+}
