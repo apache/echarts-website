@@ -38,11 +38,7 @@
 }
 
 #chart-panel {
-  position: absolute;
-  top: 42px;
-  right: 15px;
-  bottom: 50px;
-  left: 15px;
+  flex-grow: 1;
   box-sizing: border-box;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 20px;
   border-radius: 5px;
@@ -75,88 +71,84 @@
     margin-bottom: 0;
 }
 #tool-panel {
-  position: absolute;
-  top: 5px;
-  right: 15px;
-  left: 15px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  white-space: nowrap;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scrollbar-width: thin;
+  flex-shrink: 0;
+  flex-wrap: wrap;
   user-select: none;
 }
 #tool-panel * {
     font-size: 12px;
 }
+#tool-panel .left-panel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+#tool-panel .left-panel > * {
+      margin-left: 0 !important;
+}
 #tool-panel .render-config-trigger {
     cursor: pointer;
     font-weight: 500;
-    margin-left: 10px;
 }
 #tool-panel .version-select {
     width: 80px;
-    margin-left: 10px;
 }
 #tool-panel .version-select.is-nightly, #tool-panel .version-select.is-pr {
       width: 160px;
 }
-#tool-panel .random,
-#tool-panel .use-nightly {
-    margin-left: 10px;
-}
 #tool-panel label {
     margin-bottom: 0;
 }
-#tool-panel .dark-mode {
-    margin-right: 5px;
-}
 #tool-panel .edit {
-    margin-left: 5px;
     cursor: pointer;
 }
-.full #chart-panel {
-  top: 40px;
-  right: 5px;
-  bottom: 5px;
-  left: 5px;
-  box-shadow: rgba(10, 9, 9, 0.1) 0px 0px 5px;
+.full {
+  position: absolute;
+  inset: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
-.full #tool-panel {
-  right: 5px;
-  left: 5px;
+.full #chart-panel {
+    box-shadow: rgba(10, 9, 9, 0.1) 0px 0px 5px;
 }
 #preview-status {
-  position: absolute;
-  bottom: 10px;
-  left: 0;
-  right: 0;
-  padding: 0 15px;
+  flex-shrink: 0;
   font-size: 0.9rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
   white-space: nowrap;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scrollbar-width: thin;
 }
 #preview-status .left-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
     flex-shrink: 0;
+    gap: 10px;
+}
+#preview-status .left-buttons > * {
+      margin-left: 0 !important;
 }
 #preview-status #run-log {
     display: flex;
     align-items: center;
     justify-content: space-between;
     font-size: 12px;
-    margin-left: 10px;
     text-align: right;
+    gap: 10px;
 }
 #preview-status #run-log .run-log-time {
       color: #666;
-      margin-right: 10px;
       white-space: nowrap;
 }
 #preview-status #run-log .run-log-type-info {
@@ -494,11 +486,14 @@
 }
 .right-container {
   position: absolute;
+  top: 0;
   right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   width: 50%;
   height: 100%;
-  padding: 0;
-  padding-left: 15px;
+  padding: 10px 15px;
   border: none;
   z-index: 30;
   background: #f3f4fa;
