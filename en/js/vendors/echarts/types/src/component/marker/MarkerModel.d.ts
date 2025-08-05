@@ -12,6 +12,7 @@ export declare type MarkerStatisticType = 'average' | 'min' | 'max' | 'median';
 export interface MarkerPositionOption {
     x?: number | string;
     y?: number | string;
+    relativeTo?: 'container' | 'coordinate';
     /**
      * Coord on any coordinate system
      */
@@ -46,6 +47,7 @@ declare abstract class MarkerModel<Opts extends MarkerOption = MarkerOption> ext
      * If marker model is created by self from series
      */
     createdBySelf: boolean;
+    preventAutoZ: boolean;
     static readonly dependencies: string[];
     __hostSeries: SeriesModel;
     private _data;

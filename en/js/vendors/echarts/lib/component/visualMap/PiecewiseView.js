@@ -62,8 +62,6 @@ var PiecewiseVisualMapView = /** @class */function (_super) {
     var visualMapModel = this.visualMapModel;
     var textGap = visualMapModel.get('textGap');
     var textStyleModel = visualMapModel.textStyleModel;
-    var textFont = textStyleModel.getFont();
-    var textFill = textStyleModel.getTextColor();
     var itemAlign = this._getItemAlign();
     var itemSize = visualMapModel.itemSize;
     var viewData = this._getViewData();
@@ -81,17 +79,16 @@ var PiecewiseVisualMapView = /** @class */function (_super) {
       this._createItemSymbol(itemGroup, representValue, [0, 0, itemSize[0], itemSize[1]], silent);
       if (showLabel) {
         var visualState = this.visualMapModel.getValueState(representValue);
+        var align = textStyleModel.get('align') || itemAlign;
         itemGroup.add(new graphic.Text({
-          style: {
-            x: itemAlign === 'right' ? -textGap : itemSize[0] + textGap,
+          style: createTextStyle(textStyleModel, {
+            x: align === 'right' ? -textGap : itemSize[0] + textGap,
             y: itemSize[1] / 2,
             text: piece.text,
-            verticalAlign: 'middle',
-            align: itemAlign,
-            font: textFont,
-            fill: textFill,
-            opacity: visualState === 'outOfRange' ? 0.5 : 1
-          },
+            verticalAlign: textStyleModel.get('verticalAlign') || 'middle',
+            align: align,
+            opacity: zrUtil.retrieve2(textStyleModel.get('opacity'), visualState === 'outOfRange' ? 0.5 : 1)
+          }),
           silent: silent
         }));
       }

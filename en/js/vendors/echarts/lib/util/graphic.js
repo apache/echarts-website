@@ -67,16 +67,17 @@ import OrientedBoundingRect from 'zrender/lib/core/OrientedBoundingRect.js';
 import Point from 'zrender/lib/core/Point.js';
 import IncrementalDisplayable from 'zrender/lib/graphic/IncrementalDisplayable.js';
 import * as subPixelOptimizeUtil from 'zrender/lib/graphic/helper/subPixelOptimize.js';
-import { extend, isArrayLike, map, defaults, isString, keys, each, hasOwn, isArray } from 'zrender/lib/core/util.js';
+import { extend, isArrayLike, map, defaults, isString, keys, each, hasOwn, isArray, isNumber, clone, assert } from 'zrender/lib/core/util.js';
 import { getECData } from './innerStore.js';
 import { updateProps, initProps, removeElement, removeElementWithFadeOut, isElementRemoved } from '../animation/basicTransition.js';
+import { mathMin, mathMax, mathAbs } from './number.js';
 /**
  * @deprecated export for compatitable reason
  */
 export { updateProps, initProps, removeElement, removeElementWithFadeOut, isElementRemoved };
-var mathMax = Math.max;
-var mathMin = Math.min;
 var _customShapeMap = {};
+export var XY = ['x', 'y'];
+export var WH = ['width', 'height'];
 /**
  * Extend shape with parameters
  */
@@ -234,9 +235,9 @@ export function subPixelOptimizeLine(shape, lineWidth) {
 /**
  * Sub pixel optimize rect for canvas
  */
-export function subPixelOptimizeRect(param) {
-  subPixelOptimizeUtil.subPixelOptimizeRect(param.shape, param.shape, param.style);
-  return param;
+export function subPixelOptimizeRect(shape, style) {
+  subPixelOptimizeUtil.subPixelOptimizeRect(shape, shape, style);
+  return shape;
 }
 /**
  * Sub pixel optimize for canvas
@@ -288,11 +289,11 @@ export function applyTransform(target, transform, invert) {
  */
 export function transformDirection(direction, transform, invert) {
   // Pick a base, ensure that transform result will not be (0, 0).
-  var hBase = transform[4] === 0 || transform[5] === 0 || transform[0] === 0 ? 1 : Math.abs(2 * transform[4] / transform[0]);
-  var vBase = transform[4] === 0 || transform[5] === 0 || transform[2] === 0 ? 1 : Math.abs(2 * transform[4] / transform[2]);
+  var hBase = transform[4] === 0 || transform[5] === 0 || transform[0] === 0 ? 1 : mathAbs(2 * transform[4] / transform[0]);
+  var vBase = transform[4] === 0 || transform[5] === 0 || transform[2] === 0 ? 1 : mathAbs(2 * transform[4] / transform[2]);
   var vertex = [direction === 'left' ? -hBase : direction === 'right' ? hBase : 0, direction === 'top' ? -vBase : direction === 'bottom' ? vBase : 0];
   vertex = applyTransform(vertex, transform, invert);
-  return Math.abs(vertex[0]) > Math.abs(vertex[1]) ? vertex[0] > 0 ? 'right' : 'left' : vertex[1] > 0 ? 'bottom' : 'top';
+  return mathAbs(vertex[0]) > mathAbs(vertex[1]) ? vertex[0] > 0 ? 'right' : 'left' : vertex[1] > 0 ? 'bottom' : 'top';
 }
 function isNotGroup(el) {
   return !el.isGroup;
@@ -324,7 +325,7 @@ export function groupTransition(g1, g2, animatableModel) {
       rotation: el.rotation
     };
     if (isPath(el)) {
-      obj.shape = extend({}, el.shape);
+      obj.shape = clone(el.shape);
     }
     return obj;
   }
@@ -449,6 +450,77 @@ function crossProduct2d(x1, y1, x2, y2) {
 function nearZero(val) {
   return val <= 1e-6 && val >= -1e-6;
 }
+/**
+ * NOTE:
+ *  A negative-width/height rect (due to negative margins) is not supported;
+ *  it will be clampped to zero width/height.
+ *  Although negative-width/height rects can be defined reasonably following the
+ *  similar sense in CSS, but they are rarely used, hard to understand and complicated.
+ *
+ * @param rect Assume its width/height >= 0 if existing.
+ *  x/y/width/height is allowed to be NaN,
+ *  for the case that only x/width or y/height is intended to be computed.
+ * @param delta
+ *  If be `number[]`, should be `[top, right, bottom, left]`,
+ *      which can be used in padding or margin case.
+ *      @see `normalizeCssArray` in `util/format.ts`
+ *  If be `number`, it means [delta, delta, delta, delta],
+ *      which can be used in lineWidth (borderWith) case,
+ *      [NOTICE]: commonly pass lineWidth / 2, following the convention that border is
+ *      half inside half outside of the rect.
+ * @param shrinkOrExpand
+ *  `true` - shrink if `delta[i]` is positive, commmonly used in `padding` case.
+ *  `false` - expand if `delta[i]` is positive, commmonly used in `margin` case. (default)
+ * @param noNegative
+ *  `true` - negative `delta[i]` will be clampped to 0.
+ *  `false` - No clamp to `delta`. (default).
+ * @return The input `rect`.
+ */
+export function expandOrShrinkRect(rect, delta, shrinkOrExpand, noNegative, minSize // by default [0, 0].
+) {
+  if (delta == null) {
+    return rect;
+  } else if (isNumber(delta)) {
+    _tmpExpandRectDelta[0] = _tmpExpandRectDelta[1] = _tmpExpandRectDelta[2] = _tmpExpandRectDelta[3] = delta;
+  } else {
+    if (process.env.NODE_ENV !== 'production') {
+      assert(delta.length === 4);
+    }
+    _tmpExpandRectDelta[0] = delta[0];
+    _tmpExpandRectDelta[1] = delta[1];
+    _tmpExpandRectDelta[2] = delta[2];
+    _tmpExpandRectDelta[3] = delta[3];
+  }
+  if (noNegative) {
+    _tmpExpandRectDelta[0] = mathMax(0, _tmpExpandRectDelta[0]);
+    _tmpExpandRectDelta[1] = mathMax(0, _tmpExpandRectDelta[1]);
+    _tmpExpandRectDelta[2] = mathMax(0, _tmpExpandRectDelta[2]);
+    _tmpExpandRectDelta[3] = mathMax(0, _tmpExpandRectDelta[3]);
+  }
+  if (shrinkOrExpand) {
+    _tmpExpandRectDelta[0] = -_tmpExpandRectDelta[0];
+    _tmpExpandRectDelta[1] = -_tmpExpandRectDelta[1];
+    _tmpExpandRectDelta[2] = -_tmpExpandRectDelta[2];
+    _tmpExpandRectDelta[3] = -_tmpExpandRectDelta[3];
+  }
+  expandRectOnOneDimension(rect, _tmpExpandRectDelta, 'x', 'width', 3, 1, minSize && minSize[0] || 0);
+  expandRectOnOneDimension(rect, _tmpExpandRectDelta, 'y', 'height', 0, 2, minSize && minSize[1] || 0);
+  return rect;
+}
+var _tmpExpandRectDelta = [0, 0, 0, 0];
+function expandRectOnOneDimension(rect, delta, xy, wh, ltIdx, rbIdx, minSize) {
+  var deltaSum = delta[rbIdx] + delta[ltIdx];
+  var oldSize = rect[wh];
+  rect[wh] += deltaSum;
+  minSize = mathMax(0, mathMin(minSize, oldSize));
+  if (rect[wh] < minSize) {
+    rect[wh] = minSize;
+    // Try to make the position of the zero rect reasonable in most visual cases.
+    rect[xy] += delta[ltIdx] >= 0 ? -delta[ltIdx] : delta[rbIdx] >= 0 ? oldSize + delta[rbIdx] : mathAbs(deltaSum) > 1e-8 ? (oldSize - minSize) * delta[ltIdx] / deltaSum : 0;
+  } else {
+    rect[xy] -= delta[ltIdx];
+  }
+}
 export function setTooltipConfig(opt) {
   var itemTooltipOption = opt.itemTooltipOption;
   var componentModel = opt.componentModel;
@@ -506,6 +578,128 @@ export function traverseElements(els, cb) {
       traverseElement(els, cb);
     }
   }
+}
+/**
+ * After a boundingRect applying a `transform`, whether to be still parallel screen X and Y.
+ */
+export function isBoundingRectAxisAligned(transform) {
+  return !transform || mathAbs(transform[1]) < AXIS_ALIGN_EPSILON && mathAbs(transform[2]) < AXIS_ALIGN_EPSILON || mathAbs(transform[0]) < AXIS_ALIGN_EPSILON && mathAbs(transform[3]) < AXIS_ALIGN_EPSILON;
+}
+var AXIS_ALIGN_EPSILON = 1e-5;
+/**
+ * Create or copy to the existing bounding rect to avoid modifying `source`.
+ *
+ * @usage
+ *  out.rect = ensureCopyRect(out.rect, sourceRect);
+ */
+export function ensureCopyRect(target, source) {
+  return target ? BoundingRect.copy(target, source) : source.clone();
+}
+/**
+ * Create or copy to the existing transform to avoid modifying `source`.
+ *
+ * [CAUTION]: transform is `NullUndefined` if no transform, following convention of zrender,
+ *  and enable to bypass some unnecessary calculation, since in most cases there is no transform.
+ *
+ * @usage
+ *  out.transform = ensureCopyTransform(out.transform, sourceTransform);
+ */
+export function ensureCopyTransform(target, source) {
+  return source ? matrix.copy(target || matrix.create(), source) : undefined;
+}
+export function retrieveZInfo(model) {
+  return {
+    z: model.get('z') || 0,
+    zlevel: model.get('zlevel') || 0
+  };
+}
+/**
+ * Assume all of the elements has the same `z` and `zlevel`.
+ */
+export function calcZ2Range(el) {
+  var max = -Infinity;
+  var min = Infinity;
+  traverseElement(el, function (el) {
+    visitEl(el);
+    visitEl(el.getTextContent());
+    visitEl(el.getTextGuideLine());
+  });
+  function visitEl(el) {
+    if (!el || el.isGroup) {
+      return;
+    }
+    var currentStates = el.currentStates;
+    if (currentStates.length) {
+      for (var idx = 0; idx < currentStates.length; idx++) {
+        calcZ2(el.states[currentStates[idx]]);
+      }
+    }
+    calcZ2(el);
+  }
+  function calcZ2(entity) {
+    if (entity) {
+      var z2 = entity.z2;
+      // Consider z2 may be NullUndefined
+      if (z2 > max) {
+        max = z2;
+      }
+      if (z2 < min) {
+        min = z2;
+      }
+    }
+  }
+  if (min > max) {
+    min = max = 0;
+  }
+  return {
+    min: min,
+    max: max
+  };
+}
+export function traverseUpdateZ(el, z, zlevel) {
+  doUpdateZ(el, z, zlevel, -Infinity);
+}
+function doUpdateZ(el, z, zlevel,
+// FIXME: Ideally all the labels should be above all the glyphs by default,
+//  e.g. in graph, edge labels should be above node elements.
+//  Currently impl does not guarantee that.
+maxZ2) {
+  // `ignoreModelZ` is used to intentionally lift elements to cover other elements,
+  // where maxZ2 (for label.z2) should also not be counted for its parents.
+  if (el.ignoreModelZ) {
+    return maxZ2;
+  }
+  // Group may also have textContent
+  var label = el.getTextContent();
+  var labelLine = el.getTextGuideLine();
+  var isGroup = el.isGroup;
+  if (isGroup) {
+    // set z & zlevel of children elements of Group
+    var children = el.childrenRef();
+    for (var i = 0; i < children.length; i++) {
+      maxZ2 = mathMax(doUpdateZ(children[i], z, zlevel, maxZ2), maxZ2);
+    }
+  } else {
+    // not Group
+    el.z = z;
+    el.zlevel = zlevel;
+    maxZ2 = mathMax(el.z2 || 0, maxZ2);
+  }
+  // always set z and zlevel if label/labelLine exists
+  if (label) {
+    label.z = z;
+    label.zlevel = zlevel;
+    // lift z2 of text content
+    // TODO if el.emphasis.z2 is spcefied, what about textContent.
+    isFinite(maxZ2) && (label.z2 = maxZ2 + 2);
+  }
+  if (labelLine) {
+    var textGuideLineConfig = el.textGuideLineConfig;
+    labelLine.z = z;
+    labelLine.zlevel = zlevel;
+    isFinite(maxZ2) && (labelLine.z2 = maxZ2 + (textGuideLineConfig && textGuideLineConfig.showAbove ? 1 : -1));
+  }
+  return maxZ2;
 }
 // Register built-in shapes. These shapes might be overwritten
 // by users, although we do not recommend that.

@@ -44,9 +44,10 @@
 // FIXME emphasis label position is not same with normal label position
 import { parsePercent } from '../../util/number.js';
 import { Point } from '../../util/graphic.js';
+import BoundingRect from 'zrender/lib/core/BoundingRect.js';
 import { each, isNumber } from 'zrender/lib/core/util.js';
 import { limitTurnAngle, limitSurfaceAngle } from '../../label/labelGuideHelper.js';
-import { shiftLayoutOnY } from '../../label/labelLayoutHelper.js';
+import { computeLabelGeometry, shiftLayoutOnXY } from '../../label/labelLayoutHelper.js';
 var RADIAN = Math.PI / 180;
 function adjustSingleSide(list, cx, cy, r, dir, viewWidth, viewHeight, viewLeft, viewTop, farthestX) {
   if (list.length < 2) {
@@ -112,7 +113,7 @@ function adjustSingleSide(list, cx, cy, r, dir, viewWidth, viewHeight, viewLeft,
       list[i].label.x = farthestX;
     }
   }
-  if (shiftLayoutOnY(list, viewTop, viewTop + viewHeight)) {
+  if (shiftLayoutOnXY(list, 1, viewTop, viewTop + viewHeight)) {
     recalculateX(list);
   }
 }
@@ -163,7 +164,7 @@ function avoidOverlap(labelLayoutList, cx, cy, r, viewWidth, viewHeight, viewLef
         }
       }
       layout.targetTextWidth = targetTextWidth;
-      constrainTextWidth(layout, targetTextWidth);
+      constrainTextWidth(layout, targetTextWidth, false);
     }
   }
   adjustSingleSide(rightList, cx, cy, r, 1, viewWidth, viewHeight, viewLeft, viewTop, rightmostX);
@@ -209,9 +210,6 @@ function avoidOverlap(labelLayoutList, cx, cy, r, viewWidth, viewHeight, viewLef
  * which case, previous wrapping should be redo.
  */
 function constrainTextWidth(layout, availableWidth, forceRecalculate) {
-  if (forceRecalculate === void 0) {
-    forceRecalculate = false;
-  }
   if (layout.labelStyleWidth != null) {
     // User-defined style.width has the highest priority.
     return;
@@ -226,7 +224,6 @@ function constrainTextWidth(layout, availableWidth, forceRecalculate) {
   // textRect.width already contains paddingH if bgColor is set
   var oldOuterWidth = textRect.width + (bgColor ? 0 : paddingH);
   if (availableWidth < oldOuterWidth || forceRecalculate) {
-    var oldHeight = textRect.height;
     if (overflow && overflow.match('break')) {
       // Temporarily set background to be null to calculate
       // the bounding box without background.
@@ -258,13 +255,18 @@ function constrainTextWidth(layout, availableWidth, forceRecalculate) {
       : null;
       label.setStyle('width', newWidth);
     }
-    var newRect = label.getBoundingRect();
-    textRect.width = newRect.width;
-    var margin = (label.style.margin || 0) + 2.1;
-    textRect.height = newRect.height + margin;
-    textRect.y -= (textRect.height - oldHeight) / 2;
+    computeLabelGlobalRect(textRect, label);
   }
 }
+function computeLabelGlobalRect(out, label) {
+  _tmpLabelGeometry.rect = out;
+  computeLabelGeometry(_tmpLabelGeometry, label, _computeLabelGeometryOpt);
+}
+var _computeLabelGeometryOpt = {
+  minMarginForce: [null, 0, null, 0],
+  marginDefault: [1, 0, 1, 0]
+};
+var _tmpLabelGeometry = {};
 function isPositionCenter(sectorShape) {
   // Not change x for center label
   return sectorShape.position === 'center';
@@ -309,6 +311,10 @@ export default function pieLabelLayout(seriesModel) {
     var labelAlignTo = labelModel.get('alignTo');
     var edgeDistance = parsePercent(labelModel.get('edgeDistance'), viewWidth);
     var bleedMargin = labelModel.get('bleedMargin');
+    if (bleedMargin == null) {
+      // An arbitrary strategy for small viewRect - especial pie is layout in calendar or matrix coord sys.
+      bleedMargin = Math.min(viewWidth, viewHeight) > 200 ? 10 : 2;
+    }
     var labelLineModel = itemModel.getModel('labelLine');
     var labelLineLen = labelLineModel.get('length');
     labelLineLen = parsePercent(labelLineLen, viewWidth);
@@ -392,12 +398,8 @@ export default function pieLabelLayout(seriesModel) {
     });
     // Not sectorShape the inside label
     if (!isLabelInside) {
-      var textRect = label.getBoundingRect().clone();
-      textRect.applyTransform(label.getComputedTransform());
-      // Text has a default 1px stroke. Exclude this.
-      var margin = (label.style.margin || 0) + 2.1;
-      textRect.y -= margin / 2;
-      textRect.height += margin;
+      var textRect = new BoundingRect(0, 0, 0, 0);
+      computeLabelGlobalRect(textRect, label);
       labelLayoutList.push({
         label: label,
         labelLine: labelLine,

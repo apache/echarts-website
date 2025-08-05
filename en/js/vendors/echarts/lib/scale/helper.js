@@ -42,6 +42,7 @@
 * under the License.
 */
 import { getPrecision, round, nice, quantityExponent } from '../util/number.js';
+import { bind } from 'zrender/lib/core/util.js';
 export function isValueNice(val) {
   var exp10 = Math.pow(10, quantityExponent(Math.abs(val)));
   var f = Math.abs(val / exp10);
@@ -55,10 +56,9 @@ export function isIntervalOrLogScale(scale) {
  *               Should be extent[0] < extent[1].
  * @param splitNumber splitNumber should be >= 1.
  */
-export function intervalScaleNiceTicks(extent, splitNumber, minInterval, maxInterval) {
+export function intervalScaleNiceTicks(extent, spanWithBreaks, splitNumber, minInterval, maxInterval) {
   var result = {};
-  var span = extent[1] - extent[0];
-  var interval = result.interval = nice(span / splitNumber, true);
+  var interval = result.interval = nice(spanWithBreaks / splitNumber, true);
   if (minInterval != null && interval < minInterval) {
     interval = result.interval = minInterval;
   }
@@ -111,12 +111,37 @@ export function fixExtent(niceTickExtent, extent) {
 export function contain(val, extent) {
   return val >= extent[0] && val <= extent[1];
 }
-export function normalize(val, extent) {
+var ScaleCalculator = /** @class */function () {
+  function ScaleCalculator() {
+    this.normalize = normalize;
+    this.scale = scale;
+  }
+  ScaleCalculator.prototype.updateMethods = function (brkCtx) {
+    if (brkCtx.hasBreaks()) {
+      this.normalize = bind(brkCtx.normalize, brkCtx);
+      this.scale = bind(brkCtx.scale, brkCtx);
+    } else {
+      this.normalize = normalize;
+      this.scale = scale;
+    }
+  };
+  return ScaleCalculator;
+}();
+export { ScaleCalculator };
+function normalize(val, extent) {
   if (extent[1] === extent[0]) {
     return 0.5;
   }
   return (val - extent[0]) / (extent[1] - extent[0]);
 }
-export function scale(val, extent) {
+function scale(val, extent) {
   return val * (extent[1] - extent[0]) + extent[0];
+}
+export function logTransform(base, extent, noClampNegative) {
+  var loggedBase = Math.log(base);
+  return [
+  // log(negative) is NaN, so safe guard here.
+  // PENDING: But even getting a -Infinity still does not make sense in extent.
+  //  Just keep it as is, getting a NaN to make some previous cases works by coincidence.
+  Math.log(noClampNegative ? extent[0] : Math.max(0, extent[0])) / loggedBase, Math.log(noClampNegative ? extent[1] : Math.max(0, extent[1])) / loggedBase];
 }

@@ -45,13 +45,11 @@ import { __extends } from "tslib";
 import * as zrUtil from 'zrender/lib/core/util.js';
 import Scale from './Scale.js';
 import * as numberUtil from '../util/number.js';
-import * as scaleHelper from './helper.js';
 // Use some method of IntervalScale
 import IntervalScale from './Interval.js';
-var scaleProto = Scale.prototype;
-// FIXME:TS refactor: not good to call it directly with `this`?
-var intervalScaleProto = IntervalScale.prototype;
-var roundingErrorFix = numberUtil.round;
+import { getIntervalPrecision, logTransform } from './helper.js';
+import { getScaleBreakHelper } from './break.js';
+var fixRound = numberUtil.round;
 var mathFloor = Math.floor;
 var mathCeil = Math.ceil;
 var mathPow = Math.pow;
@@ -63,62 +61,72 @@ var LogScale = /** @class */function (_super) {
     _this.type = 'log';
     _this.base = 10;
     _this._originalScale = new IntervalScale();
-    // FIXME:TS actually used by `IntervalScale`
-    _this._interval = 0;
     return _this;
   }
   /**
    * @param Whether expand the ticks to niced extent.
    */
-  LogScale.prototype.getTicks = function (expandToNicedExtent) {
-    var originalScale = this._originalScale;
-    var extent = this._extent;
-    var originalExtent = originalScale.getExtent();
-    var ticks = intervalScaleProto.getTicks.call(this, expandToNicedExtent);
+  LogScale.prototype.getTicks = function (opt) {
+    opt = opt || {};
+    var extent = this._extent.slice();
+    var originalExtent = this._originalScale.getExtent();
+    var ticks = _super.prototype.getTicks.call(this, opt);
+    var base = this.base;
+    var originalBreaks = this._originalScale._innerGetBreaks();
+    var scaleBreakHelper = getScaleBreakHelper();
     return zrUtil.map(ticks, function (tick) {
       var val = tick.value;
-      var powVal = numberUtil.round(mathPow(this.base, val));
+      var roundingCriterion = null;
+      var powVal = mathPow(base, val);
       // Fix #4158
-      powVal = val === extent[0] && this._fixMin ? fixRoundingError(powVal, originalExtent[0]) : powVal;
-      powVal = val === extent[1] && this._fixMax ? fixRoundingError(powVal, originalExtent[1]) : powVal;
+      if (val === extent[0] && this._fixMin) {
+        roundingCriterion = originalExtent[0];
+      } else if (val === extent[1] && this._fixMax) {
+        roundingCriterion = originalExtent[1];
+      }
+      var vBreak;
+      if (scaleBreakHelper) {
+        var transformed = scaleBreakHelper.getTicksLogTransformBreak(tick, base, originalBreaks, fixRoundingError);
+        vBreak = transformed.vBreak;
+        if (roundingCriterion == null) {
+          roundingCriterion = transformed.brkRoundingCriterion;
+        }
+      }
+      if (roundingCriterion != null) {
+        powVal = fixRoundingError(powVal, roundingCriterion);
+      }
       return {
-        value: powVal
+        value: powVal,
+        "break": vBreak
       };
     }, this);
   };
+  LogScale.prototype._getNonTransBreaks = function () {
+    return this._originalScale._innerGetBreaks();
+  };
   LogScale.prototype.setExtent = function (start, end) {
-    var base = mathLog(this.base);
-    // log(-Infinity) is NaN, so safe guard here
-    start = mathLog(Math.max(0, start)) / base;
-    end = mathLog(Math.max(0, end)) / base;
-    intervalScaleProto.setExtent.call(this, start, end);
+    this._originalScale.setExtent(start, end);
+    var loggedExtent = logTransform(this.base, [start, end]);
+    _super.prototype.setExtent.call(this, loggedExtent[0], loggedExtent[1]);
   };
   /**
    * @return {number} end
    */
   LogScale.prototype.getExtent = function () {
     var base = this.base;
-    var extent = scaleProto.getExtent.call(this);
+    var extent = _super.prototype.getExtent.call(this);
     extent[0] = mathPow(base, extent[0]);
     extent[1] = mathPow(base, extent[1]);
     // Fix #4158
-    var originalScale = this._originalScale;
-    var originalExtent = originalScale.getExtent();
+    var originalExtent = this._originalScale.getExtent();
     this._fixMin && (extent[0] = fixRoundingError(extent[0], originalExtent[0]));
     this._fixMax && (extent[1] = fixRoundingError(extent[1], originalExtent[1]));
     return extent;
   };
-  LogScale.prototype.unionExtent = function (extent) {
-    this._originalScale.unionExtent(extent);
-    var base = this.base;
-    extent[0] = mathLog(extent[0]) / mathLog(base);
-    extent[1] = mathLog(extent[1]) / mathLog(base);
-    scaleProto.unionExtent.call(this, extent);
-  };
   LogScale.prototype.unionExtentFromData = function (data, dim) {
-    // TODO
-    // filter value that <= 0
-    this.unionExtent(data.getApproximateExtent(dim));
+    this._originalScale.unionExtentFromData(data, dim);
+    var loggedOther = logTransform(this.base, data.getApproximateExtent(dim), true);
+    this._innerUnionExtent(loggedOther);
   };
   /**
    * Update interval and extent of intervals for nice ticks
@@ -126,9 +134,9 @@ var LogScale = /** @class */function (_super) {
    */
   LogScale.prototype.calcNiceTicks = function (approxTickNum) {
     approxTickNum = approxTickNum || 10;
-    var extent = this._extent;
-    var span = extent[1] - extent[0];
-    if (span === Infinity || span <= 0) {
+    var extent = this._extent.slice();
+    var span = this._getExtentSpanWithBreaks();
+    if (!isFinite(span) || span <= 0) {
       return;
     }
     var interval = numberUtil.quantity(span);
@@ -141,38 +149,44 @@ var LogScale = /** @class */function (_super) {
     while (!isNaN(interval) && Math.abs(interval) < 1 && Math.abs(interval) > 0) {
       interval *= 10;
     }
-    var niceExtent = [numberUtil.round(mathCeil(extent[0] / interval) * interval), numberUtil.round(mathFloor(extent[1] / interval) * interval)];
+    var niceExtent = [fixRound(mathCeil(extent[0] / interval) * interval), fixRound(mathFloor(extent[1] / interval) * interval)];
     this._interval = interval;
+    this._intervalPrecision = getIntervalPrecision(interval);
     this._niceExtent = niceExtent;
   };
   LogScale.prototype.calcNiceExtent = function (opt) {
-    intervalScaleProto.calcNiceExtent.call(this, opt);
+    _super.prototype.calcNiceExtent.call(this, opt);
     this._fixMin = opt.fixMin;
     this._fixMax = opt.fixMax;
   };
-  LogScale.prototype.parse = function (val) {
-    return val;
-  };
   LogScale.prototype.contain = function (val) {
     val = mathLog(val) / mathLog(this.base);
-    return scaleHelper.contain(val, this._extent);
+    return _super.prototype.contain.call(this, val);
   };
   LogScale.prototype.normalize = function (val) {
     val = mathLog(val) / mathLog(this.base);
-    return scaleHelper.normalize(val, this._extent);
+    return _super.prototype.normalize.call(this, val);
   };
   LogScale.prototype.scale = function (val) {
-    val = scaleHelper.scale(val, this._extent);
+    val = _super.prototype.scale.call(this, val);
     return mathPow(this.base, val);
+  };
+  LogScale.prototype.setBreaksFromOption = function (breakOptionList) {
+    var scaleBreakHelper = getScaleBreakHelper();
+    if (!scaleBreakHelper) {
+      return;
+    }
+    var _a = scaleBreakHelper.logarithmicParseBreaksFromOption(breakOptionList, this.base, zrUtil.bind(this.parse, this)),
+      parsedOriginal = _a.parsedOriginal,
+      parsedLogged = _a.parsedLogged;
+    this._originalScale._innerSetBreak(parsedOriginal);
+    this._innerSetBreak(parsedLogged);
   };
   LogScale.type = 'log';
   return LogScale;
-}(Scale);
-var proto = LogScale.prototype;
-proto.getMinorTicks = intervalScaleProto.getMinorTicks;
-proto.getLabel = intervalScaleProto.getLabel;
+}(IntervalScale);
 function fixRoundingError(val, originalVal) {
-  return roundingErrorFix(val, numberUtil.getPrecision(originalVal));
+  return fixRound(val, numberUtil.getPrecision(originalVal));
 }
 Scale.registerClass(LogScale);
 export default LogScale;

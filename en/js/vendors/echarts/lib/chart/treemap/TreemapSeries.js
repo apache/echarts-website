@@ -50,6 +50,7 @@ import { wrapTreePathInfo } from '../helper/treeHelper.js';
 import { normalizeToArray } from '../../util/model.js';
 import { createTooltipMarkup } from '../../component/tooltip/tooltipMarkup.js';
 import enableAriaDecalForTree from '../helper/enableAriaDecalForTree.js';
+import tokens from '../../visual/tokens.js';
 var TreemapSeriesModel = /** @class */function (_super) {
   __extends(TreemapSeriesModel, _super);
   function TreemapSeriesModel() {
@@ -195,10 +196,13 @@ var TreemapSeriesModel = /** @class */function (_super) {
     // Disable progressive rendering
     progressive: 0,
     // size: ['80%', '80%'],            // deprecated, compatible with ec2.
-    left: 'center',
-    top: 'middle',
-    width: '80%',
-    height: '80%',
+    // `coordinateSystem` can be declared as 'matrix', 'calendar',
+    //  which provides box layout container.
+    coordinateSystemUsage: 'box',
+    left: tokens.size.l,
+    top: tokens.size.xxxl,
+    right: tokens.size.l,
+    bottom: tokens.size.xxxl,
     sort: true,
     clipWindow: 'origin',
     squareRatio: 0.5 * (1 + Math.sqrt(5)),
@@ -206,8 +210,12 @@ var TreemapSeriesModel = /** @class */function (_super) {
     drillDownIcon: '▶',
     // to align specialized icon. ▷▶❒❐▼✚
     zoomToNodeRatio: 0.32 * 0.32,
-    scaleLimit: null,
+    scaleLimit: {
+      max: 5,
+      min: 0.2
+    },
     roam: true,
+    roamTrigger: 'global',
     nodeClick: 'zoomToNode',
     animation: true,
     animationDurationUpdate: 900,
@@ -216,19 +224,19 @@ var TreemapSeriesModel = /** @class */function (_super) {
       show: true,
       height: 22,
       left: 'center',
-      top: 'bottom',
+      bottom: tokens.size.m,
       // right
       // bottom
       emptyItemWidth: 25,
       itemStyle: {
-        color: 'rgba(0,0,0,0.7)',
+        color: tokens.color.backgroundShade,
         textStyle: {
-          color: '#fff'
+          color: tokens.color.secondary
         }
       },
       emphasis: {
         itemStyle: {
-          color: 'rgba(0,0,0,0.9)' // '#5793f3',
+          color: tokens.color.background
         }
       }
     },
@@ -239,7 +247,7 @@ var TreemapSeriesModel = /** @class */function (_super) {
       padding: 5,
       position: 'inside',
       // formatter: null,
-      color: '#fff',
+      color: tokens.color.neutral00,
       overflow: 'truncate'
       // align
       // verticalAlign
@@ -260,7 +268,7 @@ var TreemapSeriesModel = /** @class */function (_super) {
       colorSaturation: null,
       borderWidth: 0,
       gapWidth: 0,
-      borderColor: '#fff',
+      borderColor: tokens.color.neutral00,
       borderColorSaturation: null // If specified, borderColor will be ineffective, and the
       // border color is evaluated by color of current node and
       // borderColorSaturation.

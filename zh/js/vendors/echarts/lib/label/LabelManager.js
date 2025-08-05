@@ -49,7 +49,7 @@ import Transformable from 'zrender/lib/core/Transformable.js';
 import { updateLabelLinePoints, setLabelLineStyle, getLabelLineStatesModels } from './labelGuideHelper.js';
 import { makeInner } from '../util/model.js';
 import { retrieve2, each, keys, isFunction, filter, indexOf } from 'zrender/lib/core/util.js';
-import { prepareLayoutList, hideOverlap, shiftLayoutOnX, shiftLayoutOnY } from './labelLayoutHelper.js';
+import { hideOverlap, shiftLayoutOnXY, restoreIgnore, newLabelLayoutWithGeometry } from './labelLayoutHelper.js';
 import { labelInner, animateLabelValue } from './labelStyle.js';
 import { normalizeRadian } from 'zrender/lib/contain/util.js';
 function cloneArr(points) {
@@ -103,7 +103,7 @@ var LabelManager = /** @class */function () {
   /**
    * Add label to manager
    */
-  LabelManager.prototype._addLabel = function (dataIndex, dataType, seriesModel, label, layoutOption) {
+  LabelManager.prototype._addLabel = function (dataIndex, dataType, seriesModel, label, layoutOptionOrCb) {
     var labelStyle = label.style;
     var hostEl = label.__hostTarget;
     var textConfig = hostEl.textConfig || {};
@@ -133,8 +133,8 @@ var LabelManager = /** @class */function () {
       seriesModel: seriesModel,
       dataIndex: dataIndex,
       dataType: dataType,
-      layoutOption: layoutOption,
-      computedLayoutOption: null,
+      layoutOptionOrCb: layoutOptionOrCb,
+      layoutOption: null,
       rect: labelRect,
       hostRect: hostRect,
       // Label with lower priority will be hidden when overlapped
@@ -204,13 +204,13 @@ var LabelManager = /** @class */function () {
       var defaultLabelAttr = labelItem.defaultAttr;
       var layoutOption = void 0;
       // TODO A global layout option?
-      if (isFunction(labelItem.layoutOption)) {
-        layoutOption = labelItem.layoutOption(prepareLayoutCallbackParams(labelItem, hostEl));
+      if (isFunction(labelItem.layoutOptionOrCb)) {
+        layoutOption = labelItem.layoutOptionOrCb(prepareLayoutCallbackParams(labelItem, hostEl));
       } else {
-        layoutOption = labelItem.layoutOption;
+        layoutOption = labelItem.layoutOptionOrCb;
       }
       layoutOption = layoutOption || {};
-      labelItem.computedLayoutOption = layoutOption;
+      labelItem.layoutOption = layoutOption;
       var degreeToRadian = Math.PI / 180;
       // TODO hostEl should always exists.
       // Or label should not have parent because the x, y is all in global space.
@@ -284,18 +284,24 @@ var LabelManager = /** @class */function () {
   LabelManager.prototype.layout = function (api) {
     var width = api.getWidth();
     var height = api.getHeight();
-    var labelList = prepareLayoutList(this._labelList);
+    var labelList = [];
+    each(this._labelList, function (inputItem) {
+      if (!inputItem.defaultAttr.ignore) {
+        labelList.push(newLabelLayoutWithGeometry({}, inputItem));
+      }
+    });
     var labelsNeedsAdjustOnX = filter(labelList, function (item) {
       return item.layoutOption.moveOverlap === 'shiftX';
     });
     var labelsNeedsAdjustOnY = filter(labelList, function (item) {
       return item.layoutOption.moveOverlap === 'shiftY';
     });
-    shiftLayoutOnX(labelsNeedsAdjustOnX, 0, width);
-    shiftLayoutOnY(labelsNeedsAdjustOnY, 0, height);
+    shiftLayoutOnXY(labelsNeedsAdjustOnX, 0, 0, width);
+    shiftLayoutOnXY(labelsNeedsAdjustOnY, 1, 0, height);
     var labelsNeedsHideOverlap = filter(labelList, function (item) {
       return item.layoutOption.hideOverlap;
     });
+    restoreIgnore(labelsNeedsHideOverlap);
     hideOverlap(labelsNeedsHideOverlap);
   };
   /**

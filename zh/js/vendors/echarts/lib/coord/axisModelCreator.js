@@ -47,6 +47,7 @@ import { getLayoutParams, mergeLayoutParam, fetchLayoutMode } from '../util/layo
 import OrdinalMeta from '../data/OrdinalMeta.js';
 import { AXIS_TYPES } from './axisCommonTypes.js';
 import { each, merge } from 'zrender/lib/core/util.js';
+import { getAxisBreakHelper } from '../component/axis/axisBreakHelper.js';
 /**
  * Generate sub axis model class
  * @param axisName 'x' 'y' 'radius' 'angle' 'parallel' ...
@@ -95,6 +96,12 @@ export default function axisModelCreator(registers, axisName, BaseAxisModelClass
       };
       AxisModel.prototype.getOrdinalMeta = function () {
         return this.__ordinalMeta;
+      };
+      AxisModel.prototype.updateAxisBreaks = function (payload) {
+        var axisBreakHelper = getAxisBreakHelper();
+        return axisBreakHelper ? axisBreakHelper.updateModelAxisBreak(this, payload) : {
+          breaks: []
+        };
       };
       AxisModel.type = axisName + 'Axis.' + axisType;
       AxisModel.defaultOption = defaultOption;

@@ -74,6 +74,7 @@ declare class GlobalModel extends Model<ECUnitOption> {
      * Get option for output (cloned option and inner info removed)
      */
     getOption(): ECUnitOption;
+    setTheme(theme: object): void;
     getTheme(): Model;
     getLocaleModel(): Model<LocaleOption>;
     setUpdatePayload(payload: Payload): void;

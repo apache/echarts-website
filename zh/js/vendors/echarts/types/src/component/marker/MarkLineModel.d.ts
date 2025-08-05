@@ -8,6 +8,7 @@ interface MarkLineStateOption {
      */
     itemStyle?: ItemStyleOption;
     label?: SeriesLineLabelOption;
+    z2?: number;
 }
 interface MarkLineDataItemOptionBase extends MarkLineStateOption, StatesOptionMixin<MarkLineStateOption, StatesMixinBase> {
     name?: string;

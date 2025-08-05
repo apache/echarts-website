@@ -1,9 +1,12 @@
-/**
- * Layout list like component.
- * It will box layout each items in group of component and then position the whole group in the viewport
- * @param {module:zrender/group/Group} group
- * @param {module:echarts/model/Component} componentModel
- * @param {module:echarts/ExtensionAPI}
- */
-export declare function layout(group: any, componentModel: any, api: any): void;
-export declare function makeBackground(rect: any, componentModel: any): any;
+import * as graphic from '../../util/graphic.js';
+import { RectLike } from 'zrender/lib/core/BoundingRect.js';
+import { ItemStyleOption, ZRColor } from '../../util/types.js';
+import Model from '../../model/Model.js';
+interface BackgroundRelatedOption {
+    backgroundColor?: ZRColor;
+    borderRadius?: number | number[];
+    padding?: number | number[];
+    itemStyle?: Omit<ItemStyleOption, 'color' | 'opacity'>;
+}
+export declare function makeBackground(rect: RectLike, componentModel: Model<BackgroundRelatedOption>): graphic.Rect;
+export {};

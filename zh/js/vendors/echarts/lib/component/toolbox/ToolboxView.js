@@ -54,6 +54,8 @@ import { ToolboxFeature, getFeature } from './featureManager.js';
 import { getUID } from '../../util/component.js';
 import ZRText from 'zrender/lib/graphic/Text.js';
 import { getFont } from '../../label/labelStyle.js';
+import { box, createBoxLayoutReference, getLayoutRect, positionElement } from '../../util/layout.js';
+import tokens from '../../visual/tokens.js';
 var ToolboxView = /** @class */function (_super) {
   __extends(ToolboxView, _super);
   function ToolboxView() {
@@ -211,7 +213,7 @@ var ToolboxView = /** @class */function (_super) {
           var hoverStyle = iconStyleEmphasisModel.getItemStyle();
           var defaultTextPosition = isVertical ? toolboxModel.get('right') == null && toolboxModel.get('left') !== 'right' ? 'right' : 'left' : toolboxModel.get('bottom') == null && toolboxModel.get('top') !== 'bottom' ? 'bottom' : 'top';
           textContent.setStyle({
-            fill: iconStyleEmphasisModel.get('textFill') || hoverStyle.fill || hoverStyle.stroke || '#000',
+            fill: iconStyleEmphasisModel.get('textFill') || hoverStyle.fill || hoverStyle.stroke || tokens.color.neutral99,
             backgroundColor: iconStyleEmphasisModel.get('textBackgroundColor')
           });
           path.setTextConfig({
@@ -233,7 +235,12 @@ var ToolboxView = /** @class */function (_super) {
         iconPaths[iconName] = path;
       });
     }
-    listComponentHelper.layout(group, toolboxModel, api);
+    var refContainer = createBoxLayoutReference(toolboxModel, api).refContainer;
+    var boxLayoutParams = toolboxModel.getBoxLayoutParams();
+    var padding = toolboxModel.get('padding');
+    var viewRect = getLayoutRect(boxLayoutParams, refContainer, padding);
+    box(toolboxModel.get('orient'), group, toolboxModel.get('itemGap'), viewRect.width, viewRect.height);
+    positionElement(group, boxLayoutParams, refContainer, padding);
     // Render background after group is layout
     // FIXME
     group.add(listComponentHelper.makeBackground(group.getBoundingRect(), toolboxModel));

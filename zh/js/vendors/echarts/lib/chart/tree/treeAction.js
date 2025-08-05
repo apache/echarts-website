@@ -41,7 +41,7 @@
 * specific language governing permissions and limitations
 * under the License.
 */
-import { updateCenterAndZoom } from '../../action/roamHelper.js';
+import { updateCenterAndZoomInAction } from '../../component/helper/roamHelper.js';
 export function installTreeAction(registers) {
   registers.registerAction({
     type: 'treeExpandAndCollapse',
@@ -74,9 +74,9 @@ export function installTreeAction(registers) {
       query: payload
     }, function (seriesModel) {
       var coordSys = seriesModel.coordinateSystem;
-      var res = updateCenterAndZoom(coordSys, payload, undefined, api);
-      seriesModel.setCenter && seriesModel.setCenter(res.center);
-      seriesModel.setZoom && seriesModel.setZoom(res.zoom);
+      var res = updateCenterAndZoomInAction(coordSys, payload, seriesModel.get('scaleLimit'));
+      seriesModel.setCenter(res.center);
+      seriesModel.setZoom(res.zoom);
     });
   });
 }

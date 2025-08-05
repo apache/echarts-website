@@ -20,12 +20,6 @@ for (let i = 0; i < rawData[0].length; ++i) {
   }
   totalData.push(sum);
 }
-const grid = {
-  left: 100,
-  right: 100,
-  top: 50,
-  bottom: 50
-};
 const series = [
   'Direct',
   'Mail Ad',
@@ -51,7 +45,6 @@ option = {
   legend: {
     selectedMode: false
   },
-  grid,
   yAxis: {
     type: 'value'
   },

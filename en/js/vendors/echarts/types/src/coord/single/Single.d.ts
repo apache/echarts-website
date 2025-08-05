@@ -58,12 +58,12 @@ declare class Single implements CoordinateSystem, CoordinateSystemMaster {
      * If contain point.
      */
     containPoint(point: number[]): boolean;
-    pointToData(point: number[]): number[];
+    pointToData(point: number[], reserved?: null, out?: number[]): number[];
     /**
      * Convert the series data to concrete point.
      * Can be [val] | val
      */
-    dataToPoint(val: ScaleDataValue | ScaleDataValue[]): number[];
+    dataToPoint(val: ScaleDataValue | ScaleDataValue[], reserved?: unknown, out?: number[]): number[];
     convertToPixel(ecModel: GlobalModel, finder: ParsedModelFinder, value: ScaleDataValue[]): number[];
     convertFromPixel(ecModel: GlobalModel, finder: ParsedModelFinder, pixel: number[]): number[];
 }

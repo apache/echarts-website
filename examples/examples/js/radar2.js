@@ -28,7 +28,9 @@ option = {
   visualMap: {
     top: 'middle',
     right: 10,
-    color: ['red', 'yellow'],
+    inRange: {
+      color: ['red', 'yellow']
+    },
     calculable: true
   },
   radar: {

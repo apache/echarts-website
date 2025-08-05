@@ -3,7 +3,8 @@ import * as componentUtil from '../util/component.js';
 import { ExtendableConstructor, ClassManager } from '../util/clazz.js';
 import { QueryReferringOpt } from '../util/model.js';
 import GlobalModel from './Global.js';
-import { ComponentOption, ComponentMainType, ComponentSubType, ComponentFullType, ComponentLayoutMode } from '../util/types.js';
+import { ComponentOption, ComponentMainType, ComponentSubType, ComponentFullType, ComponentLayoutMode, NullUndefined } from '../util/types.js';
+import { CoordinateSystem } from '../coord/CoordinateSystem.js';
 declare class ComponentModel<Opt extends ComponentOption = ComponentOption> extends Model<Opt> {
     /**
      * @readonly
@@ -48,6 +49,7 @@ declare class ComponentModel<Opt extends ComponentOption = ComponentOption> exte
      */
     static dependencies: string[];
     readonly uid: string;
+    boxCoordinateSystem?: CoordinateSystem | NullUndefined;
     /**
      * Support merge layout params.
      * Only support 'box' now (left/right/top/bottom/width/height).
@@ -136,12 +138,12 @@ declare class ComponentModel<Opt extends ComponentOption = ComponentOption> exte
         specified: boolean;
     };
     getBoxLayoutParams(): {
-        left: string | number;
-        top: string | number;
-        right: string | number;
-        bottom: string | number;
-        width: string | number;
-        height: string | number;
+        left: import("../util/types").PositionSizeOption;
+        top: import("../util/types").PositionSizeOption;
+        right: import("../util/types").PositionSizeOption;
+        bottom: import("../util/types").PositionSizeOption;
+        width: import("../util/types").PositionSizeOption;
+        height: import("../util/types").PositionSizeOption;
     };
     /**
      * Get key for zlevel.

@@ -44,12 +44,6 @@
 import * as layout from '../../util/layout.js';
 import { parsePercent, linearMap } from '../../util/number.js';
 import { isFunction } from 'zrender/lib/core/util.js';
-function getViewRect(seriesModel, api) {
-  return layout.getLayoutRect(seriesModel.getBoxLayoutParams(), {
-    width: api.getWidth(),
-    height: api.getHeight()
-  });
-}
 function getSortedIndices(data, sort) {
   var valueDim = data.mapDimension('value');
   var valueArr = data.mapArray(valueDim, function (val) {
@@ -234,7 +228,8 @@ export default function funnelLayout(ecModel, api) {
     var data = seriesModel.getData();
     var valueDim = data.mapDimension('value');
     var sort = seriesModel.get('sort');
-    var viewRect = getViewRect(seriesModel, api);
+    var layoutRef = layout.createBoxLayoutReference(seriesModel, api);
+    var viewRect = layout.getLayoutRect(seriesModel.getBoxLayoutParams(), layoutRef.refContainer);
     var orient = seriesModel.get('orient');
     var viewWidth = viewRect.width;
     var viewHeight = viewRect.height;

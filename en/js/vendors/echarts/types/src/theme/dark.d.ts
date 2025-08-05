@@ -37,6 +37,13 @@ declare const theme: {
             borderColor: string;
         };
     };
+    tooltip: {
+        backgroundColor: string;
+        defaultBorderColor: string;
+        textStyle: {
+            color: string;
+        };
+    };
     dataZoom: {
         borderColor: string;
         textStyle: {
@@ -51,23 +58,15 @@ declare const theme: {
         };
         moveHandleStyle: {
             color: string;
-            opacity: number;
         };
-        fillerColor: string;
         emphasis: {
             handleStyle: {
                 borderColor: string;
-                color: string;
-            };
-            moveHandleStyle: {
-                color: string;
-                opacity: number;
             };
         };
         dataBackground: {
             lineStyle: {
                 color: string;
-                width: number;
             };
             areaStyle: {
                 color: string;
@@ -86,6 +85,9 @@ declare const theme: {
         textStyle: {
             color: string;
         };
+        handleStyle: {
+            borderColor: string;
+        };
     };
     timeline: {
         lineStyle: {
@@ -102,6 +104,7 @@ declare const theme: {
     calendar: {
         itemStyle: {
             color: string;
+            borderColor: string;
         };
         dayLabel: {
             color: string;
@@ -111,6 +114,38 @@ declare const theme: {
         };
         yearLabel: {
             color: string;
+        };
+    };
+    matrix: {
+        x: {
+            label: {
+                color: string;
+            };
+            itemStyle: {
+                borderColor: string;
+            };
+            dividerLineStyle: {
+                color: string;
+            };
+        };
+        y: {
+            label: {
+                color: string;
+            };
+            itemStyle: {
+                borderColor: string;
+            };
+            dividerLineStyle: {
+                color: string;
+            };
+        };
+        backgroundColor: {
+            borderColor: string;
+        };
+        body: {
+            itemStyle: {
+                borderColor: string;
+            };
         };
     };
     timeAxis: {
@@ -134,6 +169,10 @@ declare const theme: {
                 color: string;
             };
         };
+        axisLabel: {
+            color: string;
+        };
+        axisName: {};
     };
     logAxis: {
         axisLine: {
@@ -156,6 +195,10 @@ declare const theme: {
                 color: string;
             };
         };
+        axisLabel: {
+            color: string;
+        };
+        axisName: {};
     };
     valueAxis: {
         axisLine: {
@@ -178,6 +221,10 @@ declare const theme: {
                 color: string;
             };
         };
+        axisLabel: {
+            color: string;
+        };
+        axisName: {};
     };
     categoryAxis: {
         axisLine: {
@@ -200,6 +247,10 @@ declare const theme: {
                 color: string;
             };
         };
+        axisLabel: {
+            color: string;
+        };
+        axisName: {};
     };
     line: {
         symbol: string;
@@ -229,6 +280,104 @@ declare const theme: {
             color0: string;
             borderColor: string;
             borderColor0: string;
+        };
+    };
+    funnel: {
+        itemStyle: {
+            borderColor: string;
+        };
+    };
+    radar: {
+        axisLine: {
+            lineStyle: {
+                color: string;
+            };
+        };
+        splitLine: {
+            lineStyle: {
+                color: string;
+            };
+        };
+        splitArea: {
+            areaStyle: {
+                color: string[];
+            };
+        };
+        minorSplitLine: {
+            lineStyle: {
+                color: string;
+            };
+        };
+        axisLabel: {
+            color: string;
+        };
+        axisName: {};
+    };
+    treemap: {
+        breadcrumb: {
+            itemStyle: {
+                color: string;
+                textStyle: {
+                    color: string;
+                };
+            };
+            emphasis: {
+                itemStyle: {
+                    color: string;
+                };
+            };
+        };
+    };
+    sunburst: {
+        itemStyle: {
+            borderColor: string;
+        };
+    };
+    map: {
+        itemStyle: {
+            borderColor: string;
+            areaColor: string;
+        };
+        label: {
+            color: string;
+        };
+        emphasis: {
+            label: {
+                color: string;
+            };
+            itemStyle: {
+                areaColor: string;
+            };
+        };
+        select: {
+            label: {
+                color: string;
+            };
+            itemStyle: {
+                areaColor: string;
+            };
+        };
+    };
+    geo: {
+        itemStyle: {
+            borderColor: string;
+            areaColor: string;
+        };
+        emphasis: {
+            label: {
+                color: string;
+            };
+            itemStyle: {
+                areaColor: string;
+            };
+        };
+        select: {
+            label: {
+                color: string;
+            };
+            itemStyle: {
+                color: string;
+            };
         };
     };
 };

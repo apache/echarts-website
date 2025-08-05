@@ -54,6 +54,7 @@ declare type ArrayLike$1<T> = {
     [key: number]: T;
     length: number;
 };
+declare type NullUndefined = null | undefined;
 declare type ImageLike = HTMLImageElement | HTMLCanvasElement | HTMLVideoElement;
 declare type TextVerticalAlign = 'top' | 'middle' | 'bottom';
 declare type TextAlign = 'left' | 'center' | 'right';
@@ -212,6 +213,7 @@ declare function disableUserSelect(dom: HTMLElement): void;
 declare function hasOwn(own: object, prop: string): boolean;
 declare function noop(): void;
 declare const RADIAN_TO_DEGREE: number;
+declare const EPSILON: number;
 
 declare const util_d_curry: typeof curry;
 declare const util_d_guid: typeof guid;
@@ -273,6 +275,7 @@ declare const util_d_disableUserSelect: typeof disableUserSelect;
 declare const util_d_hasOwn: typeof hasOwn;
 declare const util_d_noop: typeof noop;
 declare const util_d_RADIAN_TO_DEGREE: typeof RADIAN_TO_DEGREE;
+declare const util_d_EPSILON: typeof EPSILON;
 declare namespace util_d {
   export {
     util_d_curry as curry,
@@ -334,6 +337,7 @@ declare namespace util_d {
     util_d_hasOwn as hasOwn,
     util_d_noop as noop,
     util_d_RADIAN_TO_DEGREE as RADIAN_TO_DEGREE,
+    util_d_EPSILON as EPSILON,
   };
 }
 
@@ -517,10 +521,13 @@ declare class BoundingRect {
     width: number;
     height: number;
     constructor(x: number, y: number, width: number, height: number);
+    static set<TTarget extends RectLike>(target: TTarget, x: number, y: number, width: number, height: number): TTarget;
     union(other: BoundingRect): void;
     applyTransform(m: MatrixArray): void;
     calculateTransform(b: RectLike): MatrixArray;
-    intersect(b: RectLike, mtv?: PointLike): boolean;
+    intersect(b: RectLike, mtv?: PointLike, opt?: BoundingRectIntersectOpt): boolean;
+    static intersect(a: RectLike, b: RectLike, mtv?: PointLike, opt?: BoundingRectIntersectOpt): boolean;
+    static contain(rect: RectLike, x: number, y: number): boolean;
     contain(x: number, y: number): boolean;
     clone(): BoundingRect;
     copy(other: RectLike): void;
@@ -528,7 +535,7 @@ declare class BoundingRect {
     isFinite(): boolean;
     isZero(): boolean;
     static create(rect: RectLike): BoundingRect;
-    static copy(target: RectLike, source: RectLike): void;
+    static copy<TTarget extends RectLike>(target: TTarget, source: RectLike): TTarget;
     static applyTransform(target: RectLike, source: RectLike, m: MatrixArray): void;
 }
 declare type RectLike = {
@@ -537,6 +544,13 @@ declare type RectLike = {
     width: number;
     height: number;
 };
+interface BoundingRectIntersectOpt {
+    direction?: number;
+    bidirectional?: boolean;
+    touchThreshold?: number;
+    outIntersectRect?: RectLike;
+    clamp?: boolean;
+}
 
 interface ExtendedCanvasRenderingContext2D extends CanvasRenderingContext2D {
     dpr?: number;
@@ -598,6 +612,7 @@ declare class PathProxy {
     private _calculateLength;
     rebuildPath(ctx: PathRebuilder, percent: number): void;
     clone(): PathProxy;
+    canSave(): boolean;
     private static initDefaultProps;
 }
 interface PathRebuilder {
@@ -1071,7 +1086,7 @@ interface TextStylePropsPart {
         image: ImageLike | string;
     };
     padding?: number | number[];
-    margin?: number;
+    margin?: number | number[];
     borderColor?: string;
     borderWidth?: number;
     borderRadius?: number | number[];
@@ -1103,6 +1118,7 @@ interface TextProps extends DisplayableProps {
 declare type TextState = Pick<TextProps, DisplayableStatePropNames> & ElementCommonState;
 declare type DefaultTextStyle = Pick<TextStyleProps, 'fill' | 'stroke' | 'align' | 'verticalAlign'> & {
     autoStroke?: boolean;
+    overflowRect?: BoundingRect | NullUndefined;
 };
 interface ZRText {
     animate(key?: '', loop?: boolean): Animator<this>;
@@ -1196,6 +1212,7 @@ interface ElementTextConfig {
     outsideFill?: string;
     outsideStroke?: string;
     inside?: boolean;
+    autoOverflowArea?: boolean;
 }
 interface ElementTextGuideLineConfig {
     anchor?: Point;
@@ -1245,6 +1262,7 @@ interface ElementProps extends Partial<ElementEventHandlerProps>, Partial<Pick<T
     isGroup?: boolean;
     draggable?: boolean | 'horizontal' | 'vertical';
     silent?: boolean;
+    ignoreHostSilent?: boolean;
     ignoreClip?: boolean;
     globalScaleRatio?: number;
     textConfig?: ElementTextConfig;
@@ -1273,6 +1291,7 @@ declare class Element<Props extends ElementProps = ElementProps> {
     name: string;
     ignore: boolean;
     silent: boolean;
+    ignoreHostSilent: boolean;
     isGroup: boolean;
     draggable: boolean | 'horizontal' | 'vertical';
     dragging: boolean;
@@ -1284,6 +1303,7 @@ declare class Element<Props extends ElementProps = ElementProps> {
     __dirty: number;
     __isRendered: boolean;
     __inHover: boolean;
+    __clipPaths?: Path[];
     private _clipPath?;
     private _textContent?;
     private _textGuide?;
@@ -1628,7 +1648,7 @@ declare type ElementSSRData = HashMap<unknown>;
 declare type ElementSSRDataGetter<T> = (el: Element) => HashMap<T>;
 declare function getElementSSRData(el: Element): ElementSSRData;
 declare function registerSSRDataGetter<T>(getter: ElementSSRDataGetter<T>): void;
-declare const version = "5.6.1";
+declare const version = "6.0.0";
 interface ZRenderType extends ZRender {
 }
 
@@ -2257,7 +2277,7 @@ declare class Scheduler {
      * Caution:
      * `updateStreamModes` use `seriesModel.getData()`.
      */
-    updateStreamModes(seriesModel: SeriesModel<SeriesOption & SeriesLargeOptionMixin>, view: ChartView): void;
+    updateStreamModes(seriesModel: SeriesModel<SeriesOption$1 & SeriesLargeOptionMixin>, view: ChartView): void;
     restorePipelines(ecModel: GlobalModel): void;
     prepareStageTasks(): void;
     prepareView(view: ChartView, model: SeriesModel, ecModel: GlobalModel, api: ExtensionAPI): void;
@@ -2366,7 +2386,135 @@ declare abstract class ExtensionAPI {
     abstract getViewOfComponentModel(componentModel: ComponentModel): ComponentView;
     abstract getViewOfSeriesModel(seriesModel: SeriesModel): ChartView;
     abstract getModel(): GlobalModel;
+    abstract getMainProcessVersion(): number;
 }
+
+declare const _default: {
+    time: {
+        month: string[];
+        monthAbbr: string[];
+        dayOfWeek: string[];
+        dayOfWeekAbbr: string[];
+    };
+    legend: {
+        selector: {
+            all: string;
+            inverse: string;
+        };
+    };
+    toolbox: {
+        brush: {
+            title: {
+                rect: string;
+                polygon: string;
+                lineX: string;
+                lineY: string;
+                keep: string;
+                clear: string;
+            };
+        };
+        dataView: {
+            title: string;
+            lang: string[];
+        };
+        dataZoom: {
+            title: {
+                zoom: string;
+                back: string;
+            };
+        };
+        magicType: {
+            title: {
+                line: string;
+                bar: string;
+                stack: string;
+                tiled: string;
+            };
+        };
+        restore: {
+            title: string;
+        };
+        saveAsImage: {
+            title: string;
+            lang: string[];
+        };
+    };
+    series: {
+        typeNames: {
+            pie: string;
+            bar: string;
+            line: string;
+            scatter: string;
+            effectScatter: string;
+            radar: string;
+            tree: string;
+            treemap: string;
+            boxplot: string;
+            candlestick: string;
+            k: string;
+            heatmap: string;
+            map: string;
+            parallel: string;
+            lines: string;
+            graph: string;
+            sankey: string;
+            funnel: string;
+            gauge: string;
+            pictorialBar: string;
+            themeRiver: string;
+            sunburst: string;
+            custom: string;
+            chart: string;
+        };
+    };
+    aria: {
+        general: {
+            withTitle: string;
+            withoutTitle: string;
+        };
+        series: {
+            single: {
+                prefix: string;
+                withName: string;
+                withoutName: string;
+            };
+            multiple: {
+                prefix: string;
+                withName: string;
+                withoutName: string;
+                separator: {
+                    middle: string;
+                    end: string;
+                };
+            };
+        };
+        data: {
+            allData: string;
+            partialData: string;
+            withName: string;
+            withoutName: string;
+            separator: {
+                middle: string;
+                end: string;
+            };
+        };
+    };
+};
+
+declare type LocaleOption = typeof _default;
+declare function registerLocale(locale: string, localeObj: LocaleOption): void;
+
+declare type PrimaryTimeUnit = (typeof primaryTimeUnits)[number];
+declare const primaryTimeUnits: readonly ["year", "month", "day", "hour", "minute", "second", "millisecond"];
+declare function format(time: unknown, template: string, isUTC: boolean, lang?: string | Model<LocaleOption>): string;
+/**
+ * e.g.,
+ * If timeUnit is 'year', return the Jan 1st 00:00:00 000 of that year.
+ * If timeUnit is 'day', return the 00:00:00 000 of that day.
+ *
+ * @return The input date.
+ */
+declare function roundTime(date: Date, timeUnit: PrimaryTimeUnit, isUTC: boolean): Date;
 
 declare const AXIS_TYPES: {
     readonly value: 1;
@@ -2380,7 +2528,13 @@ interface AxisBaseOptionCommon extends ComponentOption, AnimationOptionMixin {
     show?: boolean;
     inverse?: boolean;
     name?: string;
-    nameLocation?: 'start' | 'middle' | 'end';
+    /**
+     * - 'start': place name based on axis.extent[0].
+     * - 'end': place name based on axis.extent[1].
+     * - 'middle': place name based on the center of the axis.
+     * - 'center': ='middle'.
+     */
+    nameLocation?: 'start' | 'middle' | 'center' | 'end';
     nameRotate?: number;
     nameTruncate?: {
         maxWidth?: number;
@@ -2388,7 +2542,27 @@ interface AxisBaseOptionCommon extends ComponentOption, AnimationOptionMixin {
         placeholder?: string;
     };
     nameTextStyle?: AxisNameTextStyleOption;
+    /**
+     * This is the offset of axis name from:
+     * - If `nameMoveOverlap: false`: offset from axisLine.
+     * - If `nameMoveOverlap: true`: offset from axisLine+axisLabels.
+     *
+     * PENDING: should it named as "nameOffset" or support `[offsetX, offsetY]`?
+     */
     nameGap?: number;
+    /**
+     * Whether to auto move axis name to avoid overlap with axis labels.
+     * The procedure of axis name layout:
+     * 1. Firstly apply `nameRotate`, `nameTruncate`, `nameLocation`, `nameGap`.
+     *  Note that if `nameGap` is applied after the overlap handling, it may still
+     *  cause overlap and confuse users.
+     * 2. If `nameMoveOverlap: true`, move the name util it does not overlap with
+     *  axis lables. `nameTextStyle.textMargin` can be used to adjust its gap from
+     *  others in this case.
+     * - If 'auto'/null/undefined, use `nameMoveOverlap`, except when `grid.containLabel` is
+     *  true. This is for backward compat - users have tuned the position based on no name moved.
+     */
+    nameMoveOverlap?: boolean | 'auto' | NullUndefined$1;
     silent?: boolean;
     triggerEvent?: boolean;
     tooltip?: {
@@ -2423,6 +2597,22 @@ interface AxisBaseOptionCommon extends ComponentOption, AnimationOptionMixin {
         max: number;
     }) => ScaleDataValue);
     startValue?: number;
+    jitter?: number;
+    jitterOverlap?: boolean;
+    jitterMargin?: number;
+    breaks?: AxisBreakOption[];
+    breakArea?: {
+        show?: boolean;
+        itemStyle?: ItemStyleOption;
+        zigzagAmplitude?: number;
+        zigzagMinSpan?: number;
+        zigzagMaxSpan?: number;
+        zigzagZ: number;
+        expandOnClick?: boolean;
+    };
+    breakLabelLayout?: {
+        moveOverlap?: 'auto' | boolean;
+    };
 }
 interface NumericAxisBaseOptionCommon extends AxisBaseOptionCommon {
     boundaryGap?: [number | string, number | string];
@@ -2453,9 +2643,7 @@ interface NumericAxisBaseOptionCommon extends AxisBaseOptionCommon {
 interface CategoryAxisBaseOption extends AxisBaseOptionCommon {
     type?: 'category';
     boundaryGap?: boolean;
-    axisLabel?: AxisLabelOption<'category'> & {
-        interval?: 'auto' | number | ((index: number, value: string) => boolean);
-    };
+    axisLabel?: AxisLabelOption<'category'>;
     data?: (OrdinalRawValue | {
         value: OrdinalRawValue;
         textStyle?: TextCommonOption;
@@ -2485,8 +2673,8 @@ interface TimeAxisBaseOption extends NumericAxisBaseOptionCommon {
     type?: 'time';
     axisLabel?: AxisLabelOption<'time'>;
 }
-interface AxisNameTextStyleOption extends TextCommonOption {
-    rich?: Dictionary<TextCommonOption>;
+interface AxisNameTextStyleOption extends LabelCommonOption {
+    rich?: RichTextOption;
 }
 interface AxisLineOption {
     show?: boolean | 'auto';
@@ -2496,6 +2684,7 @@ interface AxisLineOption {
     symbolSize?: number[];
     symbolOffset?: string | number | (string | number)[];
     lineStyle?: LineStyleOption;
+    breakLine?: boolean;
 }
 interface AxisTickOption {
     show?: boolean | 'auto';
@@ -2504,29 +2693,39 @@ interface AxisTickOption {
     lineStyle?: LineStyleOption;
     customValues?: (number | string | Date)[];
 }
-declare type AxisLabelValueFormatter = (value: number, index: number) => string;
-declare type AxisLabelCategoryFormatter = (value: string, index: number) => string;
-declare type TimeAxisLabelUnitFormatter = AxisLabelValueFormatter | string[] | string;
-declare type TimeAxisLabelFormatterOption = string | ((value: number, index: number, extra: {
+declare type AxisLabelValueFormatter = (value: number, index: number, extra: AxisLabelFormatterExtraParams | NullUndefined$1) => string;
+declare type AxisLabelCategoryFormatter = (value: string, index: number, extra: NullUndefined$1) => string;
+declare type AxisLabelTimeFormatter = (value: number, index: number, extra: TimeAxisLabelFormatterExtraParams) => string;
+declare type AxisLabelFormatterExtraParams = {} & AxisLabelFormatterExtraBreakPart;
+declare type TimeAxisLabelFormatterExtraParams = {
+    time: TimeScaleTick['time'];
+    /**
+     * @deprecated Refactored to `time.level`, and keep it for backward compat,
+     *  although `level` is never published in doc since it is introduced.
+     */
     level: number;
-}) => string) | {
-    year?: TimeAxisLabelUnitFormatter;
-    month?: TimeAxisLabelUnitFormatter;
-    week?: TimeAxisLabelUnitFormatter;
-    day?: TimeAxisLabelUnitFormatter;
-    hour?: TimeAxisLabelUnitFormatter;
-    minute?: TimeAxisLabelUnitFormatter;
-    second?: TimeAxisLabelUnitFormatter;
-    millisecond?: TimeAxisLabelUnitFormatter;
-    inherit?: boolean;
+} & AxisLabelFormatterExtraParams;
+declare type TimeAxisLabelLeveledFormatterOption = string[] | string;
+declare type TimeAxisLabelFormatterUpperDictionaryOption = {
+    [key in PrimaryTimeUnit]?: TimeAxisLabelLeveledFormatterOption;
 };
+/**
+ * @see {parseTimeAxisLabelFormatterDictionary}
+ */
+declare type TimeAxisLabelFormatterDictionaryOption = {
+    [key in PrimaryTimeUnit]?: TimeAxisLabelLeveledFormatterOption | TimeAxisLabelFormatterUpperDictionaryOption;
+};
+declare type TimeAxisLabelFormatterOption = string | AxisLabelTimeFormatter | TimeAxisLabelFormatterDictionaryOption;
 declare type LabelFormatters = {
     value: AxisLabelValueFormatter | string;
     log: AxisLabelValueFormatter | string;
     category: AxisLabelCategoryFormatter | string;
     time: TimeAxisLabelFormatterOption;
 };
-interface AxisLabelBaseOption extends Omit<TextCommonOption, 'color'> {
+declare type AxisLabelBaseOptionNuance = {
+    color?: ColorString | ((value?: string | number, index?: number) => ColorString);
+};
+interface AxisLabelBaseOption extends LabelCommonOption<AxisLabelBaseOptionNuance> {
     show?: boolean;
     inside?: boolean;
     rotate?: number;
@@ -2537,17 +2736,15 @@ interface AxisLabelBaseOption extends Omit<TextCommonOption, 'color'> {
     verticalAlignMinLabel?: TextVerticalAlign;
     verticalAlignMaxLabel?: TextVerticalAlign;
     margin?: number;
-    rich?: Dictionary<TextCommonOption>;
     /**
      * If hide overlapping labels.
      */
     hideOverlap?: boolean;
     customValues?: (number | string | Date)[];
-    color?: ColorString | ((value?: string | number, index?: number) => ColorString);
-    overflow?: TextStyleProps['overflow'];
 }
 interface AxisLabelOption<TType extends OptionAxisType> extends AxisLabelBaseOption {
     formatter?: LabelFormatters[TType];
+    interval?: TType extends 'category' ? ('auto' | number | ((index: number, value: string) => boolean)) : unknown;
 }
 interface MinorTickOption {
     show?: boolean;
@@ -2571,7 +2768,7 @@ interface SplitAreaOption {
     interval?: 'auto' | number | ((index: number, value: string) => boolean);
     areaStyle?: AreaStyleOption<ZRColor[]>;
 }
-declare type AxisBaseOption = ValueAxisBaseOption | LogAxisBaseOption | CategoryAxisBaseOption | TimeAxisBaseOption | AxisBaseOptionCommon;
+declare type AxisBaseOption = ValueAxisBaseOption | LogAxisBaseOption | CategoryAxisBaseOption | TimeAxisBaseOption;
 
 interface AxisModelCommonMixin<Opt extends AxisBaseOption> extends Pick<Model<Opt>, 'option'> {
     axis: Axis;
@@ -2590,11 +2787,37 @@ declare class OrdinalMeta {
     private _needCollect;
     private _deduplication;
     private _map;
+    private _onCollect;
     readonly uid: number;
+    /**
+     * PENDING - Regarding forcibly converting to string:
+     *  In the early days, the underlying hash map impl used JS plain object and converted the key to
+     *  string; later in https://github.com/ecomfe/zrender/pull/966 it was changed to a JS Map (in supported
+     *  platforms), which does not require string keys. But consider any input that `scale/Ordinal['parse']`
+     *  is involved, a number input represents an `OrdinalNumber` (i.e., an index), and affect the query
+     *  behavior:
+     *    - If forcbily converting to string:
+     *      pros: users can use numeric string (such as, '123') to query the raw data (123), tho it's probably
+     *      still confusing.
+     *      cons: NaN/null/undefined in data will be equals to 'NaN'/'null'/'undefined', if simply using
+     *      `val + ''` to convert them, like currently `getName` does.
+     *    - Otherwise:
+     *      pros: see NaN/null/undefined case above.
+     *      cons: users cannot query the raw data (123) any more.
+     *  There are two inconsistent behaviors in the current impl:
+     *    - Force conversion is applied on the case `xAxis{data: ['aaa', 'bbb', ...]}`,
+     *      but no conversion applied to the case `xAxis{data: [{value: 'aaa'}, ...]}` and
+     *      the case `dataset: {source: [['aaa', 123], ['bbb', 234], ...]}`.
+     *    - behaves differently according to whether JS Map is supported (the polyfill is simply using JS
+     *      plain object) (tho it seems rare platform that do not support it).
+     *  Since there's no sufficient good solution to offset cost of the breaking change, we preserve the
+     *  current behavior, until real issues is reported.
+     */
     constructor(opt: {
         categories?: OrdinalRawValue[];
         needCollect?: boolean;
         deduplication?: boolean;
+        onCollect?: OrdinalMeta['_onCollect'];
     });
     static createByAxisModel(axisModel: Model): OrdinalMeta;
     getOrdinal(category: OrdinalRawValue): OrdinalNumber;
@@ -2607,85 +2830,147 @@ declare class OrdinalMeta {
 
 declare function registerImpl(name: string, impl: any): void;
 
-declare const extensionRegisters: {
-    registerPreprocessor: typeof registerPreprocessor;
-    registerProcessor: typeof registerProcessor;
-    registerPostInit: typeof registerPostInit;
-    registerPostUpdate: typeof registerPostUpdate;
-    registerUpdateLifecycle: typeof registerUpdateLifecycle;
-    registerAction: typeof registerAction;
-    registerCoordinateSystem: typeof registerCoordinateSystem;
-    registerLayout: typeof registerLayout;
-    registerVisual: typeof registerVisual;
-    registerTransform: typeof registerExternalTransform;
-    registerLoading: typeof registerLoading;
-    registerMap: typeof registerMap;
-    registerImpl: typeof registerImpl;
-    PRIORITY: {
-        PROCESSOR: {
-            FILTER: number;
-            SERIES_FILTER: number;
-            STATISTIC: number;
-        };
-        VISUAL: {
-            LAYOUT: number;
-            PROGRESSIVE_LAYOUT: number;
-            GLOBAL: number;
-            CHART: number;
-            POST_CHART_LAYOUT: number;
-            COMPONENT: number;
-            BRUSH: number;
-            CHART_ITEM: number;
-            ARIA: number;
-            DECAL: number;
-        };
+declare type MarkerStatisticType = 'average' | 'min' | 'max' | 'median';
+/**
+ * Option to specify where to put the marker.
+ */
+interface MarkerPositionOption {
+    x?: number | string;
+    y?: number | string;
+    relativeTo?: 'container' | 'coordinate';
+    /**
+     * Coord on any coordinate system
+     */
+    coord?: (ScaleDataValue | MarkerStatisticType)[];
+    xAxis?: ScaleDataValue;
+    yAxis?: ScaleDataValue;
+    radiusAxis?: ScaleDataValue;
+    angleAxis?: ScaleDataValue;
+    type?: MarkerStatisticType;
+    /**
+     * When using statistic method with type.
+     * valueIndex and valueDim can be specify which dim the statistic is used on.
+     */
+    valueIndex?: number;
+    valueDim?: string;
+    /**
+     * Value to be displayed as label. Totally optional
+     */
+    value?: string | number;
+}
+interface MarkerOption extends ComponentOption, AnimationOptionMixin {
+    silent?: boolean;
+    data?: unknown[];
+    tooltip?: CommonTooltipOption<unknown> & {
+        trigger?: 'item' | 'axis' | boolean | 'none';
     };
-    ComponentModel: typeof ComponentModel;
-    ComponentView: typeof ComponentView;
-    SeriesModel: typeof SeriesModel;
-    ChartView: typeof ChartView;
-    registerComponentModel(ComponentModelClass: Constructor): void;
-    registerComponentView(ComponentViewClass: typeof ComponentView): void;
-    registerSeriesModel(SeriesModelClass: Constructor): void;
-    registerChartView(ChartViewClass: typeof ChartView): void;
-    registerSubTypeDefaulter(componentType: string, defaulter: SubTypeDefaulter): void;
-    registerPainter(painterType: string, PainterCtor: Parameters<typeof registerPainter>[1]): void;
-};
-declare type EChartsExtensionInstallRegisters = typeof extensionRegisters;
-declare type EChartsExtensionInstaller = (ec: EChartsExtensionInstallRegisters) => void;
-interface EChartsExtension {
-    install: EChartsExtensionInstaller;
 }
-declare function use(ext: EChartsExtensionInstaller | EChartsExtension | (EChartsExtensionInstaller | EChartsExtension)[]): void;
 
-interface AxisModelExtendedInCreator {
-    getCategories(rawData?: boolean): OrdinalRawValue[] | CategoryAxisBaseOption['data'];
-    getOrdinalMeta(): OrdinalMeta;
+interface MarkAreaStateOption {
+    itemStyle?: ItemStyleOption;
+    label?: SeriesLabelOption;
+    z2?: number;
+}
+interface MarkAreaDataItemOptionBase extends MarkAreaStateOption, StatesOptionMixin<MarkAreaStateOption, StatesMixinBase> {
+    name?: string;
+}
+interface MarkArea1DDataItemOption extends MarkAreaDataItemOptionBase {
+    xAxis?: number;
+    yAxis?: number;
+    type?: MarkerStatisticType;
+    valueIndex?: number;
+    valueDim?: string;
+}
+interface MarkArea2DDataItemDimOption extends MarkAreaDataItemOptionBase, MarkerPositionOption {
+}
+declare type MarkArea2DDataItemOption = [
+    MarkArea2DDataItemDimOption,
+    MarkArea2DDataItemDimOption
+];
+interface MarkAreaOption extends MarkerOption, MarkAreaStateOption, StatesOptionMixin<MarkAreaStateOption, StatesMixinBase> {
+    mainType?: 'markArea';
+    precision?: number;
+    data?: (MarkArea1DDataItemOption | MarkArea2DDataItemOption)[];
+}
+
+declare const dimPermutations: readonly [readonly ["x0", "y0"], readonly ["x1", "y0"], readonly ["x1", "y1"], readonly ["x0", "y1"]];
+
+interface BaseBarSeriesOption<StateOption, ExtraStateOption extends StatesMixinBase = DefaultStatesMixin> extends SeriesOption$1<StateOption, ExtraStateOption>, SeriesOnCartesianOptionMixin, SeriesOnPolarOptionMixin {
+    /**
+     * Min height of bar
+     */
+    barMinHeight?: number;
+    /**
+     * Min angle of bar. Available on polar coordinate system.
+     */
+    barMinAngle?: number;
+    /**
+     * Max width of bar. Defaults to 1 on cartesian coordinate system. Otherwise it's null.
+     */
+    barMaxWidth?: number | string;
+    barMinWidth?: number | string;
+    /**
+     * Bar width. Will be calculated automatically.
+     * Can be pixel width or percent string.
+     */
+    barWidth?: number | string;
+    /**
+     * Gap between each bar inside category. Default to be 30%. Can be an aboslute pixel value
+     */
+    barGap?: string | number;
+    /**
+     * @private
+     */
+    defaultBarGap?: string | number;
+    /**
+     * Gap between each category. Default to be 20%. can be an absolute pixel value.
+     */
+    barCategoryGap?: string | number;
+    large?: boolean;
+    largeThreshold?: number;
 }
 
 /**
- * Base Axis Model for xAxis, yAxis, angleAxis, radiusAxis. singleAxis
+ * @file The fasade of scale break.
+ *  Separate the impl to reduce code size.
+ *
+ * @caution
+ *  Must not import `scale/breakImpl.ts` directly or indirectly.
+ *  Must not implement anything in this file.
  */
-
-interface AxisBaseModel<T extends AxisBaseOptionCommon = AxisBaseOptionCommon> extends ComponentModel<T>, AxisModelCommonMixin<T>, AxisModelExtendedInCreator {
-    axis: Axis;
+interface ScaleBreakContext {
+    readonly breaks: ParsedAxisBreakList;
+    setBreaks(parsed: AxisBreakParsingResult): void;
+    update(scaleExtent: [number, number]): void;
+    hasBreaks(): boolean;
+    calcNiceTickMultiple(tickVal: number, estimateNiceMultiple: (tickVal: number, brkEnd: number) => number): number;
+    getExtentSpan(): number;
+    normalize(val: number): number;
+    scale(val: number): number;
+    elapse(val: number): number;
+    unelapse(elapsedVal: number): number;
 }
-
-declare function createAxisLabels(axis: Axis): {
-    labels: {
-        level?: number;
-        formattedLabel: string;
-        rawLabel: string;
-        tickValue: number;
-    }[];
-    labelCategoryInterval?: number;
+declare type AxisBreakParsingResult = {
+    breaks: ParsedAxisBreakList;
 };
 /**
- * Calculate interval for category axis ticks and labels.
- * To get precise result, at least one of `getRotate` and `isHorizontal`
- * should be implemented in axis.
+ * Whether to remove any normal ticks that are too close to axis breaks.
+ *  - 'auto': Default. Remove any normal ticks that are too close to axis breaks.
+ *  - 'no': Do nothing pruning.
+ *  - 'exclude_scale_bound': Prune but keep scale extent boundary.
+ * For example:
+ *  - For splitLine, if remove the tick on extent, split line on the bounary of cartesian
+ *   will not be displayed, causing werid effect.
+ *  - For labels, scale extent boundary should be pruned if in break, otherwise duplicated
+ *   labels will displayed.
  */
-declare function calculateCategoryInterval(axis: Axis): number;
+declare type ParamPruneByBreak = 'auto' | 'no' | 'preserve_extent_bound' | NullUndefined$1;
+
+declare class ScaleCalculator {
+    normalize: (val: number, extent: [number, number]) => number;
+    scale: (val: number, extent: [number, number]) => number;
+    updateMethods(brkCtx: ScaleBreakContext): void;
+}
 
 interface ScaleRawExtentResult {
     readonly min: number;
@@ -2726,10 +3011,18 @@ declare class ScaleRawExtentInfo {
     freeze(): void;
 }
 
-declare abstract class Scale<SETTING extends Dictionary<unknown> = Dictionary<unknown>> {
+declare type ScaleGetTicksOpt = {
+    expandToNicedExtent?: boolean;
+    pruneByBreak?: ParamPruneByBreak;
+    breakTicks?: 'only_break' | 'none' | NullUndefined$1;
+};
+declare type ScaleSettingDefault = Dictionary<unknown>;
+declare abstract class Scale<SETTING extends ScaleSettingDefault = ScaleSettingDefault> {
     type: string;
     private _setting;
     protected _extent: [number, number];
+    protected _brkCtx: ScaleBreakContext | NullUndefined$1;
+    protected _calculator: ScaleCalculator;
     private _isBlank;
     readonly rawExtentInfo: ScaleRawExtentInfo;
     constructor(setting?: SETTING);
@@ -2741,37 +3034,54 @@ declare abstract class Scale<SETTING extends Dictionary<unknown> = Dictionary<un
      * before extent set (like in dataZoom), it would be wrong.
      * Nevertheless, parse does not depend on extent generally.
      */
-    abstract parse(val: OptionDataValue): number;
+    abstract parse(val: ScaleDataValue): number;
     /**
      * Whether contain the given value.
      */
-    abstract contain(val: ScaleDataValue): boolean;
+    abstract contain(val: number): boolean;
     /**
      * Normalize value to linear [0, 1], return 0.5 if extent span is 0.
      */
-    abstract normalize(val: ScaleDataValue): number;
+    abstract normalize(val: number): number;
     /**
      * Scale normalized value to extent.
      */
     abstract scale(val: number): number;
     /**
-     * Set extent from data
+     * [CAVEAT]: It should not be overridden!
      */
-    unionExtent(other: [number, number]): void;
+    _innerUnionExtent(other: [number, number]): void;
     /**
      * Set extent from data
      */
     unionExtentFromData(data: SeriesData, dim: DimensionName | DimensionLoose): void;
     /**
-     * Get extent
-     *
+     * Get a new slice of extent.
      * Extent is always in increase order.
      */
     getExtent(): [number, number];
-    /**
-     * Set extent
-     */
     setExtent(start: number, end: number): void;
+    /**
+     * [CAVEAT]: It should not be overridden!
+     */
+    protected _innerSetExtent(start: number, end: number): void;
+    /**
+     * Prerequisite: Scale#parse is ready.
+     */
+    setBreaksFromOption(breakOptionList: AxisBreakOption[]): void;
+    /**
+     * [CAVEAT]: It should not be overridden!
+     */
+    _innerSetBreak(parsed: AxisBreakParsingResult): void;
+    /**
+     * [CAVEAT]: It should not be overridden!
+     */
+    _innerGetBreaks(): ParsedAxisBreakList;
+    /**
+     * Do not expose the internal `_breaks` unless necessary.
+     */
+    hasBreaks(): boolean;
+    protected _getExtentSpanWithBreaks(): number;
     /**
      * If value is in extent range
      */
@@ -2807,218 +3117,76 @@ declare abstract class Scale<SETTING extends Dictionary<unknown> = Dictionary<un
      * @return label of the tick.
      */
     abstract getLabel(tick: ScaleTick): string;
-    abstract getTicks(): ScaleTick[];
+    abstract getTicks(opt?: ScaleGetTicksOpt): ScaleTick[];
     abstract getMinorTicks(splitNumber: number): number[][];
     static registerClass: ClassManager['registerClass'];
     static getClass: ClassManager['getClass'];
 }
 
-interface TickCoord {
-    coord: number;
-    tickValue?: ScaleTick['value'];
-}
 /**
- * Base class of Axis.
+ * @see {getLayoutRect}
  */
-declare class Axis {
-    /**
-     * Axis type
-     *  - 'category'
-     *  - 'value'
-     *  - 'time'
-     *  - 'log'
-     */
-    type: OptionAxisType;
-    readonly dim: DimensionName;
-    scale: Scale;
-    private _extent;
-    model: AxisBaseModel;
-    onBand: CategoryAxisBaseOption['boundaryGap'];
-    inverse: AxisBaseOption['inverse'];
-    constructor(dim: DimensionName, scale: Scale, extent: [number, number]);
-    /**
-     * If axis extent contain given coord
-     */
-    contain(coord: number): boolean;
-    /**
-     * If axis extent contain given data
-     */
-    containData(data: ScaleDataValue): boolean;
-    /**
-     * Get coord extent.
-     */
-    getExtent(): [number, number];
-    /**
-     * Get precision used for formatting
-     */
-    getPixelPrecision(dataExtent?: [number, number]): number;
-    /**
-     * Set coord extent
-     */
-    setExtent(start: number, end: number): void;
-    /**
-     * Convert data to coord. Data is the rank if it has an ordinal scale
-     */
-    dataToCoord(data: ScaleDataValue, clamp?: boolean): number;
-    /**
-     * Convert coord to data. Data is the rank if it has an ordinal scale
-     */
-    coordToData(coord: number, clamp?: boolean): number;
-    /**
-     * Convert pixel point to data in axis
-     */
-    pointToData(point: number[], clamp?: boolean): number;
-    /**
-     * Different from `zrUtil.map(axis.getTicks(), axis.dataToCoord, axis)`,
-     * `axis.getTicksCoords` considers `onBand`, which is used by
-     * `boundaryGap:true` of category axis and splitLine and splitArea.
-     * @param opt.tickModel default: axis.model.getModel('axisTick')
-     * @param opt.clamp If `true`, the first and the last
-     *        tick must be at the axis end points. Otherwise, clip ticks
-     *        that outside the axis extent.
-     */
-    getTicksCoords(opt?: {
-        tickModel?: Model;
-        clamp?: boolean;
-    }): TickCoord[];
-    getMinorTicksCoords(): TickCoord[][];
-    getViewLabels(): ReturnType<typeof createAxisLabels>['labels'];
-    getLabelModel(): Model<AxisBaseOption['axisLabel']>;
-    /**
-     * Notice here we only get the default tick model. For splitLine
-     * or splitArea, we should pass the splitLineModel or splitAreaModel
-     * manually when calling `getTicksCoords`.
-     * In GL, this method may be overridden to:
-     * `axisModel.getModel('axisTick', grid3DModel.getModel('axisTick'));`
-     */
-    getTickModel(): Model;
-    /**
-     * Get width of band
-     */
-    getBandWidth(): number;
-    /**
-     * Get axis rotate, by degree.
-     */
-    getRotate: () => number;
-    /**
-     * Only be called in category axis.
-     * Can be overridden, consider other axes like in 3D.
-     * @return Auto interval for cateogry axis tick and label
-     */
-    calculateCategoryInterval(): ReturnType<typeof calculateCategoryInterval>;
-}
-
-declare type MarkerStatisticType = 'average' | 'min' | 'max' | 'median';
-/**
- * Option to specify where to put the marker.
- */
-interface MarkerPositionOption {
-    x?: number | string;
-    y?: number | string;
-    /**
-     * Coord on any coordinate system
-     */
-    coord?: (ScaleDataValue | MarkerStatisticType)[];
-    xAxis?: ScaleDataValue;
-    yAxis?: ScaleDataValue;
-    radiusAxis?: ScaleDataValue;
-    angleAxis?: ScaleDataValue;
-    type?: MarkerStatisticType;
-    /**
-     * When using statistic method with type.
-     * valueIndex and valueDim can be specify which dim the statistic is used on.
-     */
-    valueIndex?: number;
-    valueDim?: string;
-    /**
-     * Value to be displayed as label. Totally optional
-     */
-    value?: string | number;
-}
-interface MarkerOption extends ComponentOption, AnimationOptionMixin {
-    silent?: boolean;
-    data?: unknown[];
-    tooltip?: CommonTooltipOption<unknown> & {
-        trigger?: 'item' | 'axis' | boolean | 'none';
-    };
-}
-
-interface MarkAreaStateOption {
-    itemStyle?: ItemStyleOption;
-    label?: SeriesLabelOption;
-}
-interface MarkAreaDataItemOptionBase extends MarkAreaStateOption, StatesOptionMixin<MarkAreaStateOption, StatesMixinBase> {
-    name?: string;
-}
-interface MarkArea1DDataItemOption extends MarkAreaDataItemOptionBase {
-    xAxis?: number;
-    yAxis?: number;
-    type?: MarkerStatisticType;
-    valueIndex?: number;
-    valueDim?: string;
-}
-interface MarkArea2DDataItemDimOption extends MarkAreaDataItemOptionBase, MarkerPositionOption {
-}
-declare type MarkArea2DDataItemOption = [
-    MarkArea2DDataItemDimOption,
-    MarkArea2DDataItemDimOption
-];
-interface MarkAreaOption extends MarkerOption, MarkAreaStateOption, StatesOptionMixin<MarkAreaStateOption, StatesMixinBase> {
-    mainType?: 'markArea';
-    precision?: number;
-    data?: (MarkArea1DDataItemOption | MarkArea2DDataItemOption)[];
-}
-
-declare const dimPermutations: readonly [readonly ["x0", "y0"], readonly ["x1", "y0"], readonly ["x1", "y1"], readonly ["x0", "y1"]];
-
-interface BaseBarSeriesOption<StateOption, ExtraStateOption extends StatesMixinBase = DefaultStatesMixin> extends SeriesOption<StateOption, ExtraStateOption>, SeriesOnCartesianOptionMixin, SeriesOnPolarOptionMixin {
-    /**
-     * Min height of bar
-     */
-    barMinHeight?: number;
-    /**
-     * Min angle of bar. Available on polar coordinate system.
-     */
-    barMinAngle?: number;
-    /**
-     * Max width of bar. Defaults to 1 on cartesian coordinate system. Otherwise it's null.
-     */
-    barMaxWidth?: number | string;
-    barMinWidth?: number | string;
-    /**
-     * Bar width. Will be calculated automatically.
-     * Can be pixel width or percent string.
-     */
-    barWidth?: number | string;
-    /**
-     * Gap between each bar inside category. Default to be 30%. Can be an aboslute pixel value
-     */
-    barGap?: string | number;
-    /**
-     * Gap between each category. Default to be 20%. can be an absolute pixel value.
-     */
-    barCategoryGap?: string | number;
-    large?: boolean;
-    largeThreshold?: number;
-}
-
 interface LayoutRect extends BoundingRect {
     margin: number[];
 }
+declare type GetLayoutRectInputContainerRect = {
+    x?: number;
+    y?: number;
+    width: number;
+    height: number;
+};
 /**
  * Parse position info.
  */
 declare function getLayoutRect(positionInfo: BoxLayoutOptionMixin & {
     aspect?: number;
-}, containerRect: {
-    width: number;
-    height: number;
-}, margin?: number | number[]): LayoutRect;
+}, containerRect: GetLayoutRectInputContainerRect, margin?: number | number[]): LayoutRect;
 
 interface GridOption extends ComponentOption, BoxLayoutOptionMixin, ShadowOptionMixin {
     mainType?: 'grid';
     show?: boolean;
+    /**
+     * @deprecated Use `grid.outerBounds` instead.
+     * Whether grid size contains axis labels. This approach estimates the size by sample labels.
+     * It works for most case but it does not strictly contain all labels in some cases.
+     */
     containLabel?: boolean;
+    /**
+     * Define a constrains rect.
+     * Axis lines is firstly laid out based on the rect defined by `grid.left/right/top/bottom/width/height`.
+     * (for axis line alignment requirements between multiple grids)
+     * But if axisLabel and/or axisName overflow the outerBounds, shrink the layout to avoid that overflow.
+     *
+     * Options:
+     *  - 'none': outerBounds is infinity.
+     *  - 'same': outerBounds is the same as the layout rect defined by `grid.left/right/top/bottom/width/height`.
+     *  - 'auto'/null/undefined: Default. Use `outerBounds`, or 'same' if `containLabel:true`.
+     *
+     * Note:
+     *  `grid.containLabel` is equivalent to `{outerBoundsMode: 'same', outerBoundsContain: 'axisLabel'}`.
+     */
+    outerBoundsMode?: 'auto' | NullUndefined$1 | 'same' | 'none';
+    /**
+     * {left, right, top, bottom, width, height}: Define a outerBounds rect, based on:
+     *  - the canvas by default.
+     *  - or the `dataToLayout` result if a `boxCoordinateSystem` is specified.
+     */
+    outerBounds?: BoxLayoutOptionMixin;
+    /**
+     * - 'all': Default. Contains the cartesian rect and axis labels and axis name.
+     * - 'axisLabel': Contains the cartesian rect and axis labels. This effect differs slightly from the
+     *  previous option `containLabel` but more precise.
+     * - 'auto'/null/undefined: Default. be 'axisLabel' if `containLabel:true`, otherwise 'all'.
+     */
+    outerBoundsContain?: 'all' | 'axisLabel' | 'auto' | NullUndefined$1;
+    /**
+     * Available only when `outerBoundsMode` is not 'none'.
+     * Offer a constraint to not to shrink the grid rect causing smaller that width/height.
+     * A string means percent, like '30%', based on the original rect size
+     *  determined by `grid.top/right/bottom/left/width/height`.
+     */
+    outerBoundsClampWidth?: number | string;
+    outerBoundsClampHeight?: number | string;
     backgroundColor?: ZRColor;
     borderWidth?: number;
     borderColor?: ZRColor;
@@ -3100,6 +3268,3511 @@ interface BrushCoverConfig {
     z?: number;
 }
 declare type BrushStyleKey = 'fill' | 'stroke' | 'lineWidth' | 'opacity' | 'shadowBlur' | 'shadowOffsetX' | 'shadowOffsetY' | 'shadowColor';
+
+interface RadarIndicatorOption {
+    name?: string;
+    /**
+     * @deprecated Use `name` instead.
+     */
+    text?: string;
+    min?: number;
+    max?: number;
+    color?: ColorString;
+    axisType?: 'value' | 'log';
+}
+interface RadarOption extends ComponentOption, CircleLayoutOptionMixin {
+    mainType?: 'radar';
+    startAngle?: number;
+    shape?: 'polygon' | 'circle';
+    axisLine?: AxisBaseOption['axisLine'];
+    axisTick?: AxisBaseOption['axisTick'];
+    axisLabel?: AxisBaseOption['axisLabel'];
+    splitLine?: AxisBaseOption['splitLine'];
+    splitArea?: AxisBaseOption['splitArea'];
+    axisName?: {
+        show?: boolean;
+        formatter?: string | ((name?: string, indicatorOpt?: InnerIndicatorAxisOption) => string);
+    } & LabelOption;
+    axisNameGap?: number;
+    triggerEvent?: boolean;
+    scale?: boolean;
+    splitNumber?: number;
+    boundaryGap?: CategoryAxisBaseOption['boundaryGap'] | ValueAxisBaseOption['boundaryGap'];
+    indicator?: RadarIndicatorOption[];
+}
+declare type InnerIndicatorAxisOption = AxisBaseOption & {
+    showName?: boolean;
+};
+
+declare type SingleAxisPosition = 'top' | 'bottom' | 'left' | 'right';
+declare type SingleAxisOption = AxisBaseOption & BoxLayoutOptionMixin & {
+    mainType?: 'singleAxis';
+    position?: SingleAxisPosition;
+    orient?: LayoutOrient;
+};
+
+declare type ParallelLayoutDirection = 'horizontal' | 'vertical';
+interface ParallelCoordinateSystemOption extends ComponentOption, BoxLayoutOptionMixin {
+    mainType?: 'parallel';
+    layout?: ParallelLayoutDirection;
+    axisExpandable?: boolean;
+    axisExpandCenter?: number;
+    axisExpandCount?: number;
+    axisExpandWidth?: number;
+    axisExpandTriggerOn?: 'click' | 'mousemove';
+    axisExpandRate?: number;
+    axisExpandDebounce?: number;
+    axisExpandSlideTriggerArea?: [number, number, number];
+    axisExpandWindow?: number[];
+    parallelAxisDefault?: ParallelAxisOption;
+}
+
+declare type ParallelAxisOption = AxisBaseOption & {
+    /**
+     * 0, 1, 2, ...
+     */
+    dim?: number | number[];
+    parallelIndex?: number;
+    areaSelectStyle?: {
+        width?: number;
+        borderWidth?: number;
+        borderColor?: ZRColor;
+        color?: ZRColor;
+        opacity?: number;
+    };
+    realtime?: boolean;
+};
+
+interface CalendarMonthLabelFormatterCallbackParams {
+    nameMap: string;
+    yyyy: string;
+    yy: string;
+    /**
+     * Month string. With 0 prefix.
+     */
+    MM: string;
+    /**
+     * Month number
+     */
+    M: number;
+}
+interface CalendarYearLabelFormatterCallbackParams {
+    nameMap: string;
+    /**
+     * Start year
+     */
+    start: string;
+    /**
+     * End year
+     */
+    end: string;
+}
+interface CalendarOption extends ComponentOption, BoxLayoutOptionMixin {
+    mainType?: 'calendar';
+    cellSize?: number | 'auto' | (number | 'auto')[];
+    orient?: LayoutOrient;
+    splitLine?: {
+        show?: boolean;
+        lineStyle?: LineStyleOption;
+    };
+    itemStyle?: ItemStyleOption;
+    /**
+     * // one year
+     * range: 2017
+     * // one month
+     * range: '2017-02'
+     * //  a range
+     * range: ['2017-01-02', '2017-02-23']
+     * // note: they will be identified as ['2017-01-01', '2017-02-01']
+     * range: ['2017-01', '2017-02']
+     */
+    range?: OptionDataValueDate | (OptionDataValueDate)[];
+    dayLabel?: Omit<LabelOption, 'position'> & {
+        /**
+         * First day of week.
+         */
+        firstDay?: number;
+        /**
+         * Margin between day label and axis line.
+         * Can be percent string of cell size.
+         */
+        margin?: number | string;
+        /**
+         * Position of week, at the beginning or end of the range.
+         */
+        position?: 'start' | 'end';
+        /**
+         * Week text content
+         *
+         * defaults to auto-detected locale by the browser or the specified locale by `echarts.init` function.
+         * It supports any registered locale name (case-sensitive) or customized array.
+         * index 0 always means Sunday.
+         */
+        nameMap?: string | string[];
+    };
+    monthLabel?: Omit<LabelOption, 'position'> & {
+        /**
+         * Margin between month label and axis line.
+         */
+        margin?: number;
+        /**
+         * Position of month label, at the beginning or end of the range.
+         */
+        position?: 'start' | 'end';
+        /**
+         * Month text content
+         *
+         * defaults to auto-detected locale by the browser or the specified locale by `echarts.init` function.
+         * It supports any registered locale name (case-sensitive) or customized array.
+         * index 0 always means Jan.
+         */
+        nameMap?: string | string[];
+        formatter?: string | ((params: CalendarMonthLabelFormatterCallbackParams) => string);
+    };
+    yearLabel?: Omit<LabelOption, 'position'> & {
+        /**
+         * Margin between year label and axis line.
+         */
+        margin?: number;
+        /**
+         * Position of year label, at the beginning or end of the range.
+         */
+        position?: 'top' | 'bottom' | 'left' | 'right';
+        formatter?: string | ((params: CalendarYearLabelFormatterCallbackParams) => string);
+    };
+}
+
+declare const MatrixCellLayoutInfoType: {
+    readonly level: 1;
+    readonly leaf: 2;
+    readonly nonLeaf: 3;
+};
+declare type MatrixCellLayoutInfoType = (typeof MatrixCellLayoutInfoType)[keyof typeof MatrixCellLayoutInfoType];
+
+interface MatrixCellLayoutInfo {
+    type: MatrixCellLayoutInfoType;
+    id: Point;
+    xy: number;
+    wh: number;
+    dim: MatrixDim;
+}
+declare type MatrixXYLocator = MatrixCellLayoutInfo['id']['x'] | MatrixCellLayoutInfo['id']['y'];
+interface MatrixDimensionCell extends MatrixCellLayoutInfo {
+    span: Point;
+    level: number;
+    firstLeafLocator: MatrixXYLocator;
+    ordinal: OrdinalNumber;
+    option: MatrixDimensionCellOption;
+    rect: RectLike;
+}
+/**
+ * Computed properties of a certain tree level.
+ * In most cases this is used to describe level size or locate corner cells.
+ */
+interface MatrixDimensionLevelInfo extends MatrixCellLayoutInfo {
+    option: MatrixDimensionLevelOption | NullUndefined$1;
+}
+/**
+ * Lifetime: the same with `MatrixModel`, but different from `coord/Matrix`.
+ */
+declare class MatrixDim {
+    readonly dim: 'x' | 'y';
+    readonly dimIdx: number;
+    private _cells;
+    private _levels;
+    private _leavesCount;
+    private _model;
+    private _ordinalMeta;
+    private _scale;
+    private _uniqueValueGen;
+    constructor(dim: 'x' | 'y', dimModel: MatrixDimensionModel);
+    private _initByDimModelData;
+    private _initBySeriesData;
+    private _setCellId;
+    private _initCellsId;
+    private _initLevelIdOptions;
+    shouldShow(): boolean;
+    /**
+     * Iterate leaves (they are layout units) if dimIdx === this.dimIdx.
+     * Iterate levels if dimIdx !== this.dimIdx.
+     */
+    resetLayoutIterator(it: ListIterator<MatrixCellLayoutInfo> | NullUndefined$1, dimIdx: number, startLocator?: MatrixXYLocator | NullUndefined$1, count?: number | NullUndefined$1): ListIterator<MatrixCellLayoutInfo>;
+    resetCellIterator(it?: ListIterator<MatrixDimensionCell>): ListIterator<MatrixDimensionCell>;
+    resetLevelIterator(it?: ListIterator<MatrixDimensionLevelInfo>): ListIterator<MatrixDimensionLevelInfo>;
+    getLayout(outRect: RectLike, dimIdx: number, locator: MatrixXYLocator): void;
+    /**
+     * Get leaf cell or get level info.
+     * Should be able to return null/undefined if not found on x or y, thus input `dimIdx` is needed.
+     */
+    getUnitLayoutInfo(dimIdx: number, locator: MatrixXYLocator): MatrixCellLayoutInfo | NullUndefined$1;
+    /**
+     * Get dimension cell by data, including leaves and non-leaves.
+     */
+    getCell(value: MatrixCoordValueOption): MatrixDimensionCell | NullUndefined$1;
+    /**
+     * Get leaf count or get level count.
+     */
+    getLocatorCount(dimIdx: number): number;
+    getOrdinalMeta(): OrdinalMeta;
+}
+
+interface MatrixOption extends ComponentOption, BoxLayoutOptionMixin {
+    mainType?: 'matrix';
+    x?: MatrixDimensionOption;
+    y?: MatrixDimensionOption;
+    body?: MatrixBodyOption;
+    corner?: MatrixCornerOption;
+    backgroundStyle?: ItemStyleOption;
+    borderZ2?: number;
+    tooltip?: CommonTooltipOption<MatrixTooltipFormatterParams>;
+}
+interface MatrixBodyCornerBaseOption extends MatrixCellStyleOption {
+    /**
+     * Only specify some special cell definitions.
+     * It can represent both body cells and top-left corner cells.
+     *
+     * [body/corner cell locating]:
+     *  The rule is uniformly applied, such as, in `matrix.dataToPoint`
+     *  and `matrix.dataToLayout` and `xxxComponent.coord`.
+     *  Suppose the matrix.x/y dimensions (header) are defined as:
+     *  matrix: {
+     *      x: [{ value: 'Xa0', children: ['Xb0', 'Xb1'] }, 'Xa1'],
+     *      y: [{ value: 'Ya0', children: ['Yb0', 'Yb1'] }],
+     *  }
+     *  -----------------------------------------
+     *  |       |       |     Xa0       |       |
+     *  |-------+-------+---------------|  Xa1  |
+     *  |cornerQ|cornerP|  Xb0  |  Xb1  |       |
+     *  |-------+-------+-------+-------+--------
+     *  |       |  Yb0  | bodyR | bodyS |       |
+     *  |  Ya0  |-------+-------+---------------|
+     *  |       |  Yb1  |       |     bodyT     |
+     *  |---------------|------------------------
+     *  "Locator number" (`MatrixXYLocator`):
+     *    The term `locator` refers to a integer number to locate cells on x or y direction.
+     *    Use the top-left cell of the body as the origin point (0, 0),
+     *      the non-negative locator indicates the right/bottom of the origin point;
+     *      the negative locator indicates the left/top of the origin point.
+     *  "Ordinal number" (`OrdinalNumber`):
+     *    This term follows the same meaning as that in category axis of cartesian. They are
+     *    non-negative integer, designating each string `matrix.x.data[i].value`/`matrix.y.data[i].value`.
+     *    'Xb0', 'Xb2', 'Xa1', 'Xa0' are assigned with the ordinal numbers 0, 1, 2, 3.
+     *    For every leaf dimension cell, `OrdinalNumber` and `MatrixXYLocator` is the same.
+     *
+     *  A cell or pixel point or rect can be determined/located by a pair of `MatrixCoordValueOption`.
+     *  See also `MatrixBodyCornerCellOption['coord']`.
+     *
+     *  - The body cell `bodyS` above can be located by:
+     *      - `coord: [1, 0]` (`MatrixXYLocator` or `OrdinalNumber`, which is a non-negative integer)
+     *      - `coord: ['Xb1', 'Yb0']`
+     *      - `coord: ['Xb1', 0]` (mix them)
+     *  - The corner cell `cornerQ` above can be located by:
+     *      - `coord: [-2, -1]` (negative `MatrixXYLocator`)
+     *      - But it is NOT supported to use `coord: ['Y1_0', 'X1_0']` (XY transposed form) here.
+     *        It's mathematically sound, but may introduce confusion and unnecessary
+     *        complexity (consider the 'Xa1' case), and corner locating is not frequently used.
+     *  - `mergeCells`: Body cells or corner cells can be merged, such as "bodyT" above, an input
+     *      - The merging can be defined by:
+     *        `matrix.data[i]: {coord: [['Xb1', 'Xa1'], 'Yb0'], mergeCells: true}`.
+     *      - Input `['Xa1', 'Yb1']` to `dataToPoint` will get a point in the center of "bodyT".
+     *      - Input `['Xa1', 'Yb1']` to `dataToLayout` will get a rect of the "bodyT".
+     *  - If inputing a non-leaf dimension cell to locate, such as `['Xa0', 'Yb0']`,
+     *      - it returns only according to the center of the dimension cells, regardless of the body span.
+     *        (therefore, the result can be on the boundary of two body cells.)
+     *        And the oridinal number assigned to 'Xa0' is 3, thus input `[3, 'Yb0']` get the some result.
+     *  - The dimension (header) cell can be located by negative `MatrixXYLocator`. For example:
+     *      - The center of the node 'Ya0' can be located by `[-2, 'Ya0']`.
+     */
+    data?: MatrixBodyCornerCellOption[];
+}
+interface MatrixBodyOption extends MatrixBodyCornerBaseOption {
+}
+interface MatrixCornerOption extends MatrixBodyCornerBaseOption {
+}
+/**
+ * Commonly used as `MatrixCoordRangeOption[]`
+ * Can locate a cell or a rect range of cells.
+ * `[2, 8]` indicates a cell.
+ * `[2, null/undefined/NaN]` means y is not relevant.
+ * `[null/undefined/NaN, 8]` means x is not relevant.
+ * `[[2, 5], 8]` indicates a rect of cells in x range of `2~5` and y `8`.
+ * `[[2, 5], null/undefined/NaN]` indicates a x range of `2~5` and y is not relevant.
+ * `[[2, 5], [7, 8]]` indicates a rect of cells in x range of `2~5` and y range of `7~8`.
+ * `['aNonLeaf', 8]` indicates a rect of cells in x range of `aNonLeaf` and y `8`.
+ * @see {parseCoordRangeOption}
+ * @see {MatrixBodyCornerBaseOption['data']}
+ */
+declare type MatrixCoordRangeOption = (MatrixCoordValueOption | MatrixCoordValueOption[] | NullUndefined$1);
+/**
+ * `OrdinalRawValue` is originally provided by `matrix.x/y.data[i].value` or `series.data`.
+ */
+declare type MatrixCoordValueOption = OrdinalRawValue | OrdinalNumber | MatrixXYLocator;
+interface MatrixBaseCellOption extends MatrixCellStyleOption {
+}
+interface MatrixBodyCornerCellOption extends MatrixBaseCellOption {
+    value?: string;
+    coord?: MatrixCoordRangeOption[];
+    coordClamp?: boolean;
+    mergeCells?: boolean;
+}
+interface MatrixDimensionOption extends MatrixCellStyleOption, MatrixDimensionLevelOption {
+    type?: 'category';
+    show?: boolean;
+    data?: MatrixDimensionCellLooseOption[];
+    levels?: (MatrixDimensionLevelOption | NullUndefined$1)[];
+    dividerLineStyle?: LineStyleOption;
+}
+interface MatrixDimensionCellOption extends MatrixBaseCellOption {
+    value?: string;
+    size?: PositionSizeOption;
+    children?: MatrixDimensionCellOption[];
+}
+declare type MatrixDimensionCellLooseOption = MatrixDimensionCellOption | MatrixDimensionCellOption['value'];
+interface MatrixDimensionLevelOption {
+    levelSize?: PositionSizeOption;
+}
+/**
+ * Two levels of cascade inheritance:
+ *  - priority-high: style options defined in `matrix.x/y/coner/body.data[i]` (in cell)
+ *  - priority-low: style options defined in `matrix.x/y/coner/body`
+ */
+interface MatrixCellStyleOption {
+    label?: LabelOption;
+    itemStyle?: ItemStyleOption;
+    cursor?: string;
+    silent?: boolean | NullUndefined$1;
+    z2?: number;
+}
+interface MatrixTooltipFormatterParams {
+    componentType: 'matrix';
+    matrixIndex: number;
+    name: string;
+    $vars: ['name', 'xyLocator'];
+}
+interface MatrixDimensionModel extends Model<MatrixDimensionOption> {
+}
+declare class MatrixDimensionModel extends Model<MatrixDimensionOption> {
+    dim: MatrixDim;
+    getOrdinalMeta(): OrdinalMeta;
+}
+
+declare type IconStyle = ItemStyleOption & {
+    textFill?: LabelOption['color'];
+    textBackgroundColor?: LabelOption['backgroundColor'];
+    textPosition?: LabelOption['position'];
+    textAlign?: LabelOption['align'];
+    textBorderRadius?: LabelOption['borderRadius'];
+    textPadding?: LabelOption['padding'];
+    textFontFamily?: LabelOption['fontFamily'];
+    textFontSize?: LabelOption['fontSize'];
+    textFontWeight?: LabelOption['fontWeight'];
+    textFontStyle?: LabelOption['fontStyle'];
+};
+interface ToolboxFeatureOption {
+    show?: boolean;
+    title?: string | Partial<Dictionary<string>>;
+    icon?: string | Partial<Dictionary<string>>;
+    iconStyle?: IconStyle;
+    emphasis?: {
+        iconStyle?: IconStyle;
+    };
+    iconStatus?: Partial<Dictionary<DisplayState>>;
+    onclick?: () => void;
+}
+
+interface ToolboxTooltipFormatterParams {
+    componentType: 'toolbox';
+    name: string;
+    title: string;
+    $vars: ['name', 'title'];
+}
+interface ToolboxOption extends ComponentOption, BoxLayoutOptionMixin, BorderOptionMixin {
+    mainType?: 'toolbox';
+    show?: boolean;
+    orient?: LayoutOrient;
+    backgroundColor?: ZRColor;
+    borderRadius?: number | number[];
+    padding?: number | number[];
+    itemSize?: number;
+    itemGap?: number;
+    showTitle?: boolean;
+    iconStyle?: ItemStyleOption;
+    emphasis?: {
+        iconStyle?: ItemStyleOption;
+    };
+    textStyle?: LabelOption;
+    tooltip?: CommonTooltipOption<ToolboxTooltipFormatterParams>;
+    /**
+     * Write all supported features in the final export option.
+     */
+    feature?: Partial<Dictionary<ToolboxFeatureOption>>;
+}
+
+interface MapperParamAxisInfo {
+    axisIndex: number;
+    axisName: string;
+    axisId: string;
+    axisDim: string;
+}
+interface AxisPointerLink {
+    xAxisIndex?: number[] | 'all';
+    yAxisIndex?: number[] | 'all';
+    xAxisId?: string[];
+    yAxisId?: string[];
+    xAxisName?: string[] | string;
+    yAxisName?: string[] | string;
+    radiusAxisIndex?: number[] | 'all';
+    angleAxisIndex?: number[] | 'all';
+    radiusAxisId?: string[];
+    angleAxisId?: string[];
+    radiusAxisName?: string[] | string;
+    angleAxisName?: string[] | string;
+    singleAxisIndex?: number[] | 'all';
+    singleAxisId?: string[];
+    singleAxisName?: string[] | string;
+    mapper?(sourceVal: ScaleDataValue, sourceAxisInfo: MapperParamAxisInfo, targetAxisInfo: MapperParamAxisInfo): CommonAxisPointerOption['value'];
+}
+interface AxisPointerOption extends ComponentOption, Omit<CommonAxisPointerOption, 'type'> {
+    mainType?: 'axisPointer';
+    type?: 'line' | 'shadow' | 'cross' | 'none';
+    link?: AxisPointerLink[];
+}
+
+declare type TopLevelFormatterParams = CallbackDataParams | CallbackDataParams[];
+interface TooltipOption extends CommonTooltipOption<TopLevelFormatterParams>, ComponentOption {
+    mainType?: 'tooltip';
+    axisPointer?: AxisPointerOption & {
+        axis?: 'auto' | 'x' | 'y' | 'angle' | 'radius';
+        crossStyle?: LineStyleOption & {
+            textStyle?: LabelOption;
+        };
+    };
+    /**
+     * If show popup content
+     */
+    showContent?: boolean;
+    /**
+     * Trigger only works on coordinate system.
+     */
+    trigger?: 'item' | 'axis' | 'none';
+    /**
+     * 'auto': use html by default, and use non-html if `document` is not defined
+     * 'html': use html for tooltip
+     * 'richText': use canvas, svg, and etc. for tooltip
+     */
+    renderMode?: 'auto' | TooltipRenderMode;
+    /**
+     * @deprecated
+     * use appendTo: 'body' instead
+     */
+    appendToBody?: boolean;
+    /**
+     * If append the tooltip element to another DOM element.
+     * Only available when renderMode is html
+     */
+    appendTo?: ((chartContainer: HTMLElement) => HTMLElement | undefined | null) | string | HTMLElement;
+    /**
+     * Specify the class name of tooltip element
+     * Only available when renderMode is html
+     */
+    className?: string;
+    /**
+     * Default border color to use when there are multiple series
+     */
+    defaultBorderColor?: string;
+    order?: TooltipOrderMode;
+}
+
+interface TitleTextStyleOption extends LabelOption {
+    width?: number;
+}
+interface TitleOption extends ComponentOption, BoxLayoutOptionMixin, BorderOptionMixin {
+    mainType?: 'title';
+    show?: boolean;
+    text?: string;
+    /**
+     * Link to url
+     */
+    link?: string;
+    target?: 'self' | 'blank';
+    subtext?: string;
+    sublink?: string;
+    subtarget?: 'self' | 'blank';
+    textAlign?: ZRTextAlign;
+    textVerticalAlign?: ZRTextVerticalAlign;
+    /**
+     * @deprecated Use textVerticalAlign instead
+     */
+    textBaseline?: ZRTextVerticalAlign;
+    backgroundColor?: ZRColor;
+    /**
+     * Padding between text and border.
+     * Support to be a single number or an array.
+     */
+    padding?: number | number[];
+    /**
+     * Gap between text and subtext
+     */
+    itemGap?: number;
+    textStyle?: TitleTextStyleOption;
+    subtextStyle?: TitleTextStyleOption;
+    /**
+     * If trigger mouse or touch event
+     */
+    triggerEvent?: boolean;
+    /**
+     * Radius of background border.
+     */
+    borderRadius?: number | number[];
+}
+
+/**
+ * [NOTE]: thumbnail is implemented as a component, rather than internal data strucutrue,
+ *  due to the possibility of serveing geo and related series with a single thumbnail,
+ *  and enable to apply some common layout feature, such as matrix coord sys.
+ */
+interface ThumbnailOption extends ComponentOption, BoxLayoutOptionMixin, BorderOptionMixin {
+    mainType?: 'thumbnail';
+    show?: boolean;
+    itemStyle?: ItemStyleOption;
+    windowStyle?: ItemStyleOption;
+    seriesIndex?: number | number[];
+    seriesId?: string | string[];
+}
+
+interface TimelineControlStyle extends ItemStyleOption {
+    show?: boolean;
+    showPlayBtn?: boolean;
+    showPrevBtn?: boolean;
+    showNextBtn?: boolean;
+    itemSize?: number;
+    itemGap?: number;
+    position?: 'left' | 'right' | 'top' | 'bottom';
+    playIcon?: string;
+    stopIcon?: string;
+    prevIcon?: string;
+    nextIcon?: string;
+    playBtnSize?: number | string;
+    stopBtnSize?: number | string;
+    nextBtnSize?: number | string;
+    prevBtnSize?: number | string;
+}
+interface TimelineCheckpointStyle extends ItemStyleOption, SymbolOptionMixin {
+    animation?: boolean;
+    animationDuration?: number;
+    animationEasing?: ZREasing;
+}
+interface TimelineLineStyleOption extends LineStyleOption {
+    show?: boolean;
+}
+interface TimelineLabelOption extends Omit<LabelOption, 'position'> {
+    show?: boolean;
+    position?: 'auto' | 'left' | 'right' | 'top' | 'bottom' | number;
+    interval?: 'auto' | number;
+    formatter?: string | ((value: string | number, index: number) => string);
+}
+interface TimelineDataItemOption extends SymbolOptionMixin {
+    value?: OptionDataValue;
+    itemStyle?: ItemStyleOption;
+    label?: TimelineLabelOption;
+    checkpointStyle?: TimelineCheckpointStyle;
+    emphasis?: {
+        itemStyle?: ItemStyleOption;
+        label?: TimelineLabelOption;
+        checkpointStyle?: TimelineCheckpointStyle;
+    };
+    progress?: {
+        lineStyle?: TimelineLineStyleOption;
+        itemStyle?: ItemStyleOption;
+        label?: TimelineLabelOption;
+    };
+    tooltip?: boolean;
+}
+interface TimelineOption extends ComponentOption, BoxLayoutOptionMixin, SymbolOptionMixin {
+    mainType?: 'timeline';
+    backgroundColor?: ZRColor;
+    borderColor?: ColorString;
+    borderWidth?: number;
+    tooltip?: CommonTooltipOption<CallbackDataParams> & {
+        trigger?: 'item';
+    };
+    show?: boolean;
+    axisType?: 'category' | 'time' | 'value';
+    currentIndex?: number;
+    autoPlay?: boolean;
+    rewind?: boolean;
+    loop?: boolean;
+    playInterval?: number;
+    realtime?: boolean;
+    controlPosition?: 'left' | 'right' | 'top' | 'bottom';
+    padding?: number | number[];
+    orient?: LayoutOrient;
+    inverse?: boolean;
+    replaceMerge?: GlobalModelSetOptionOpts['replaceMerge'];
+    lineStyle?: TimelineLineStyleOption;
+    itemStyle?: ItemStyleOption;
+    checkpointStyle?: TimelineCheckpointStyle;
+    controlStyle?: TimelineControlStyle;
+    label?: TimelineLabelOption;
+    emphasis?: {
+        lineStyle?: TimelineLineStyleOption;
+        itemStyle?: ItemStyleOption;
+        checkpointStyle?: TimelineCheckpointStyle;
+        controlStyle?: TimelineControlStyle;
+        label?: TimelineLabelOption;
+    };
+    progress?: {
+        lineStyle?: TimelineLineStyleOption;
+        itemStyle?: ItemStyleOption;
+        label?: TimelineLabelOption;
+    };
+    data?: (OptionDataValue | TimelineDataItemOption)[];
+}
+
+interface SliderTimelineOption extends TimelineOption {
+}
+
+declare type ItemStyleKeys = 'fill' | 'stroke' | 'decal' | 'lineWidth' | 'opacity' | 'shadowBlur' | 'shadowOffsetX' | 'shadowOffsetY' | 'shadowColor' | 'lineDash' | 'lineDashOffset' | 'lineCap' | 'lineJoin' | 'miterLimit';
+declare type ItemStyleProps = Pick<PathStyleProps, ItemStyleKeys>;
+declare class ItemStyleMixin {
+    getItemStyle(this: Model, excludes?: readonly (keyof ItemStyleOption)[], includes?: readonly (keyof ItemStyleOption)[]): ItemStyleProps;
+}
+
+declare type LineStyleKeys = 'lineWidth' | 'stroke' | 'opacity' | 'shadowBlur' | 'shadowOffsetX' | 'shadowOffsetY' | 'shadowColor' | 'lineDash' | 'lineDashOffset' | 'lineCap' | 'lineJoin' | 'miterLimit';
+declare type LineStyleProps = Pick<PathStyleProps, LineStyleKeys>;
+declare class LineStyleMixin {
+    getLineStyle(this: Model, excludes?: readonly (keyof LineStyleOption)[]): LineStyleProps;
+}
+
+declare type SelectorType = 'all' | 'inverse';
+interface LegendSelectorButtonOption {
+    type?: SelectorType;
+    title?: string;
+}
+/**
+ * T: the type to be extended
+ * ET: extended type for keys of T
+ * ST: special type for T to be extended
+ */
+declare type ExtendPropertyType<T, ET, ST extends {
+    [key in keyof T]: any;
+}> = {
+    [key in keyof T]: key extends keyof ST ? T[key] | ET | ST[key] : T[key] | ET;
+};
+interface LegendItemStyleOption extends ExtendPropertyType<ItemStyleOption, 'inherit', {
+    borderWidth: 'auto';
+}> {
+}
+interface LegendLineStyleOption extends ExtendPropertyType<LineStyleOption, 'inherit', {
+    width: 'auto';
+}> {
+    inactiveColor?: ColorString;
+    inactiveWidth?: number;
+}
+interface LegendStyleOption {
+    /**
+     * Icon of the legend items.
+     * @default 'roundRect'
+     */
+    icon?: string;
+    /**
+     * Color when legend item is not selected
+     */
+    inactiveColor?: ColorString;
+    /**
+     * Border color when legend item is not selected
+     */
+    inactiveBorderColor?: ColorString;
+    /**
+     * Border color when legend item is not selected
+     */
+    inactiveBorderWidth?: number | 'auto';
+    /**
+     * Legend label formatter
+     */
+    formatter?: string | ((name: string) => string);
+    itemStyle?: LegendItemStyleOption;
+    lineStyle?: LegendLineStyleOption;
+    textStyle?: LabelOption;
+    symbolRotate?: number | 'inherit';
+    /**
+     * @deprecated
+     */
+    symbolKeepAspect?: boolean;
+}
+interface DataItem extends LegendStyleOption {
+    name?: string;
+    icon?: string;
+    textStyle?: LabelOption;
+    tooltip?: unknown;
+}
+interface LegendTooltipFormatterParams {
+    componentType: 'legend';
+    legendIndex: number;
+    name: string;
+    $vars: ['name'];
+}
+interface LegendIconParams {
+    itemWidth: number;
+    itemHeight: number;
+    /**
+     * symbolType is from legend.icon, legend.data.icon, or series visual
+     */
+    icon: string;
+    iconRotate: number | 'inherit';
+    symbolKeepAspect: boolean;
+    itemStyle: PathStyleProps;
+    lineStyle: LineStyleProps;
+}
+interface LegendOption extends ComponentOption, LegendStyleOption, BoxLayoutOptionMixin, BorderOptionMixin {
+    mainType?: 'legend';
+    show?: boolean;
+    orient?: LayoutOrient;
+    align?: 'auto' | 'left' | 'right';
+    backgroundColor?: ColorString;
+    /**
+     * Border radius of background rect
+     * @default 0
+     */
+    borderRadius?: number | number[];
+    /**
+     * Padding between legend item and border.
+     * Support to be a single number or an array.
+     * @default 5
+     */
+    padding?: number | number[];
+    /**
+     * Gap between each legend item.
+     * @default 10
+     */
+    itemGap?: number;
+    /**
+     * Width of legend symbol
+     */
+    itemWidth?: number;
+    /**
+     * Height of legend symbol
+     */
+    itemHeight?: number;
+    selectedMode?: boolean | 'single' | 'multiple';
+    /**
+     * selected map of each item. Default to be selected if item is not in the map
+     */
+    selected?: Dictionary<boolean>;
+    /**
+     * Buttons for all select or inverse select.
+     * @example
+     *  selector: [{type: 'all or inverse', title: xxx}]
+     *  selector: true
+     *  selector: ['all', 'inverse']
+     */
+    selector?: (LegendSelectorButtonOption | SelectorType)[] | boolean;
+    selectorLabel?: LabelOption;
+    emphasis?: {
+        selectorLabel?: LabelOption;
+    };
+    /**
+     * Position of selector buttons.
+     */
+    selectorPosition?: 'auto' | 'start' | 'end';
+    /**
+     * Gap between each selector button
+     */
+    selectorItemGap?: number;
+    /**
+     * Gap between selector buttons group and legend main items.
+     */
+    selectorButtonGap?: number;
+    data?: (string | DataItem)[];
+    /**
+     * Tooltip option
+     */
+    tooltip?: CommonTooltipOption<LegendTooltipFormatterParams>;
+    triggerEvent?: boolean;
+}
+
+interface ScrollableLegendOption extends LegendOption {
+    scrollDataIndex?: number;
+    /**
+     * Gap between each page button
+     */
+    pageButtonItemGap?: number;
+    /**
+     * Gap between page buttons group and legend items.
+     */
+    pageButtonGap?: number;
+    pageButtonPosition?: 'start' | 'end';
+    pageFormatter?: string | ((param: {
+        current: number;
+        total: number;
+    }) => string);
+    pageIcons?: {
+        horizontal?: string[];
+        vertical?: string[];
+    };
+    pageIconColor?: ZRColor;
+    pageIconInactiveColor?: ZRColor;
+    pageIconSize?: number;
+    pageTextStyle?: LabelOption;
+    animationDurationUpdate?: number;
+}
+
+interface DataZoomOption extends ComponentOption {
+    mainType?: 'dataZoom';
+    /**
+     * Default auto by axisIndex
+     */
+    orient?: LayoutOrient;
+    /**
+     * Default the first horizontal category axis.
+     */
+    xAxisIndex?: number | number[];
+    xAxisId?: string | string[];
+    /**
+     * Default the first vertical category axis.
+     */
+    yAxisIndex?: number | number[];
+    yAxisId?: string | string[];
+    radiusAxisIndex?: number | number[];
+    radiusAxisId?: string | string[];
+    angleAxisIndex?: number | number[];
+    angleAxisId?: string | string[];
+    singleAxisIndex?: number | number[];
+    singleAxisId?: string | string[];
+    /**
+     * Possible values: 'filter' or 'empty' or 'weakFilter'.
+     * 'filter': data items which are out of window will be removed. This option is
+     *         applicable when filtering outliers. For each data item, it will be
+     *         filtered if one of the relevant dimensions is out of the window.
+     * 'weakFilter': data items which are out of window will be removed. This option
+     *         is applicable when filtering outliers. For each data item, it will be
+     *         filtered only if all  of the relevant dimensions are out of the same
+     *         side of the window.
+     * 'empty': data items which are out of window will be set to empty.
+     *         This option is applicable when user should not neglect
+     *         that there are some data items out of window.
+     * 'none': Do not filter.
+     * Taking line chart as an example, line will be broken in
+     * the filtered points when filterModel is set to 'empty', but
+     * be connected when set to 'filter'.
+     */
+    filterMode?: 'filter' | 'weakFilter' | 'empty' | 'none';
+    /**
+     * Dispatch action by the fixed rate, avoid frequency.
+     * default 100. Do not throttle when use null/undefined.
+     * If animation === true and animationDurationUpdate > 0,
+     * default value is 100, otherwise 20.
+     */
+    throttle?: number | null | undefined;
+    /**
+     * Start percent. 0 ~ 100
+     */
+    start?: number;
+    /**
+     * End percent. 0 ~ 100
+     */
+    end?: number;
+    /**
+     * Start value. If startValue specified, start is ignored
+     */
+    startValue?: number | string | Date;
+    /**
+     * End value. If endValue specified, end is ignored.
+     */
+    endValue?: number | string | Date;
+    /**
+     * Min span percent, 0 - 100
+     * The range of dataZoom can not be smaller than that.
+     */
+    minSpan?: number;
+    /**
+     * Max span percent, 0 - 100
+     * The range of dataZoom can not be larger than that.
+     */
+    maxSpan?: number;
+    minValueSpan?: number;
+    maxValueSpan?: number;
+    rangeMode?: ['value' | 'percent', 'value' | 'percent'];
+    realtime?: boolean;
+    textStyle?: LabelOption;
+}
+
+interface SliderHandleLabelOption {
+    show?: boolean;
+}
+interface SliderDataZoomOption extends DataZoomOption, BoxLayoutOptionMixin {
+    show?: boolean;
+    /**
+     * Slider dataZoom don't support textStyle
+     */
+    /**
+     * Background of slider zoom component
+     */
+    backgroundColor?: ZRColor;
+    /**
+     * @deprecated Use borderColor instead
+     */
+    /**
+     * border color of the box. For compatibility,
+     * if dataBackgroundColor is set, borderColor
+     * is ignored.
+     */
+    borderColor?: ZRColor;
+    /**
+     * Border radius of the box.
+     */
+    borderRadius?: number | number[];
+    dataBackground?: {
+        lineStyle?: LineStyleOption;
+        areaStyle?: AreaStyleOption;
+    };
+    selectedDataBackground?: {
+        lineStyle?: LineStyleOption;
+        areaStyle?: AreaStyleOption;
+    };
+    /**
+     * Color of selected area.
+     */
+    fillerColor?: ZRColor;
+    /**
+     * @deprecated Use handleStyle instead
+     */
+    handleIcon?: string;
+    handleLabel?: SliderHandleLabelOption;
+    /**
+     * number: height of icon. width will be calculated according to the aspect of icon.
+     * string: percent of the slider height. width will be calculated according to the aspect of icon.
+     */
+    handleSize?: string | number;
+    handleStyle?: ItemStyleOption;
+    /**
+     * Icon to indicate it is a draggable panel.
+     */
+    moveHandleIcon?: string;
+    moveHandleStyle?: ItemStyleOption;
+    /**
+     * Height of handle rect. Can be a percent string relative to the slider height.
+     */
+    moveHandleSize?: number;
+    labelPrecision?: number | 'auto';
+    labelFormatter?: string | ((value: number, valueStr: string) => string);
+    showDetail?: boolean;
+    showDataShadow?: 'auto' | boolean;
+    zoomLock?: boolean;
+    textStyle?: LabelOption;
+    /**
+     * If eable select by brushing
+     */
+    brushSelect?: boolean;
+    brushStyle?: ItemStyleOption;
+    emphasis?: {
+        handleLabel: SliderHandleLabelOption;
+        handleStyle?: ItemStyleOption;
+        moveHandleStyle?: ItemStyleOption;
+    };
+    /**
+     * @private
+     * Distance between the slider and the edge of the chart.
+     */
+    defaultLocationEdgeGap?: number;
+}
+
+interface InsideDataZoomOption extends DataZoomOption {
+    /**
+     * Whether disable this inside zoom.
+     */
+    disabled?: boolean;
+    /**
+     * Whether disable zoom but only pan.
+     */
+    zoomLock?: boolean;
+    zoomOnMouseWheel?: boolean | 'shift' | 'ctrl' | 'alt';
+    moveOnMouseMove?: boolean | 'shift' | 'ctrl' | 'alt';
+    moveOnMouseWheel?: boolean | 'shift' | 'ctrl' | 'alt';
+    preventDefaultMouseMove?: boolean;
+    /**
+     * Inside dataZoom don't support textStyle
+     */
+    textStyle?: never;
+}
+
+declare type VisualOptionBase = {
+    [key in BuiltinVisualProperty]?: any;
+};
+declare type LabelFormatter = (min: OptionDataValue, max?: OptionDataValue) => string;
+interface VisualMapOption<T extends VisualOptionBase = VisualOptionBase> extends ComponentOption, BoxLayoutOptionMixin, BorderOptionMixin {
+    mainType?: 'visualMap';
+    show?: boolean;
+    align?: string;
+    realtime?: boolean;
+    /**
+     * 'all' or null/undefined: all series.
+     * A number or an array of number: the specified series.
+     */
+    seriesIndex?: 'all' | number[] | number;
+    seriesId?: OptionId | OptionId[];
+    /**
+     * set min: 0, max: 200, only for campatible with ec2.
+     * In fact min max should not have default value.
+     * min value, must specified if pieces is not specified.
+     */
+    min?: number;
+    /**
+     * max value, must specified if pieces is not specified.
+     */
+    max?: number;
+    /**
+     * Dimension to be encoded
+     */
+    dimension?: number;
+    /**
+     * Visual configuration for the data in selection
+     */
+    inRange?: T;
+    /**
+     * Visual configuration for the out of selection
+     */
+    outOfRange?: T;
+    controller?: {
+        inRange?: T;
+        outOfRange?: T;
+    };
+    target?: {
+        inRange?: T;
+        outOfRange?: T;
+    };
+    /**
+     * Width of the display item
+     */
+    itemWidth?: number;
+    /**
+     * Height of the display item
+     */
+    itemHeight?: number;
+    inverse?: boolean;
+    orient?: 'horizontal' | 'vertical';
+    backgroundColor?: ZRColor;
+    contentColor?: ZRColor;
+    inactiveColor?: ZRColor;
+    /**
+     * Padding of the component. Can be an array similar to CSS
+     */
+    padding?: number[] | number;
+    /**
+     * Gap between text and item
+     */
+    textGap?: number;
+    precision?: number;
+    /**
+     * @deprecated
+     * Option from version 2
+     */
+    color?: ColorString[];
+    formatter?: string | LabelFormatter;
+    /**
+     * Text on the both end. Such as ['High', 'Low']
+     */
+    text?: string[];
+    textStyle?: LabelOption;
+    categories?: unknown;
+}
+interface VisualMeta {
+    stops: {
+        value: number;
+        color: ColorString;
+    }[];
+    outerColors: ColorString[];
+    dimension?: DimensionIndex;
+}
+
+interface ContinousVisualMapOption extends VisualMapOption {
+    align?: 'auto' | 'left' | 'right' | 'top' | 'bottom';
+    /**
+     * This prop effect default component type determine
+     * @see echarts/component/visualMap/typeDefaulter.
+     */
+    calculable?: boolean;
+    /**
+     * selected range. In default case `range` is `[min, max]`
+     * and can auto change along with user interaction or action "selectDataRange",
+     * until user specified a range.
+     * @see unboundedRange for the special case when `range[0]` or `range[1]` touch `min` or `max`.
+     */
+    range?: number[];
+    /**
+     * Whether to treat the range as unbounded when `range` touches `min` or `max`.
+     * - `true`:
+     *   when `range[0]` <= `min`, the actual range becomes `[-Infinity, range[1]]`;
+     *   when `range[1]` >= `max`, the actual range becomes `[range[0], Infinity]`.
+     *   NOTE:
+     *     - This provides a way to ensure all data can be considered in-range when `min`/`max`
+     *       are not precisely known.
+     *     - Default is `true` for backward compatibility.
+     *     - Piecewise VisualMap does not need it, since it can define unbounded range in each piece,
+     *       such as "< 12", ">= 300".
+     * - `false`:
+     *   Disable the unbounded range behavior.
+     *   Use case: `min`/`max` reflect the normal data range, and some outlier data should always be
+     *   treated as out of range.
+     */
+    unboundedRange?: boolean;
+    /**
+     * Whether to enable hover highlight.
+     */
+    hoverLink?: boolean;
+    /**
+     * The extent of hovered data.
+     */
+    hoverLinkDataSize?: number;
+    /**
+     * Whether trigger hoverLink when hover handle.
+     * If not specified, follow the value of `realtime`.
+     */
+    hoverLinkOnHandle?: boolean;
+    handleIcon?: string;
+    handleSize?: string | number;
+    handleStyle?: ItemStyleOption;
+    indicatorIcon?: string;
+    indicatorSize?: string | number;
+    indicatorStyle?: ItemStyleOption;
+    emphasis?: {
+        handleStyle?: ItemStyleOption;
+    };
+}
+
+interface VisualPiece extends VisualOptionPiecewise {
+    min?: number;
+    max?: number;
+    lt?: number;
+    gt?: number;
+    lte?: number;
+    gte?: number;
+    value?: number;
+    label?: string;
+}
+/**
+ * Order Rule:
+ *
+ * option.categories / option.pieces / option.text / option.selected:
+ *     If !option.inverse,
+ *     Order when vertical: ['top', ..., 'bottom'].
+ *     Order when horizontal: ['left', ..., 'right'].
+ *     If option.inverse, the meaning of
+ *     the order should be reversed.
+ *
+ * this._pieceList:
+ *     The order is always [low, ..., high].
+ *
+ * Mapping from location to low-high:
+ *     If !option.inverse
+ *     When vertical, top is high.
+ *     When horizontal, right is high.
+ *     If option.inverse, reverse.
+ */
+interface PiecewiseVisualMapOption extends VisualMapOption {
+    align?: 'auto' | 'left' | 'right';
+    minOpen?: boolean;
+    maxOpen?: boolean;
+    /**
+     * When put the controller vertically, it is the length of
+     * horizontal side of each item. Otherwise, vertical side.
+     * When put the controller vertically, it is the length of
+     * vertical side of each item. Otherwise, horizontal side.
+     */
+    itemWidth?: number;
+    itemHeight?: number;
+    itemSymbol?: string;
+    pieces?: VisualPiece[];
+    /**
+     * category names, like: ['some1', 'some2', 'some3'].
+     * Attr min/max are ignored when categories set. See "Order Rule"
+     */
+    categories?: string[];
+    /**
+     * If set to 5, auto split five pieces equally.
+     * If set to 0 and component type not set, component type will be
+     * determined as "continuous". (It is less reasonable but for ec2
+     * compatibility, see echarts/component/visualMap/typeDefaulter)
+     */
+    splitNumber?: number;
+    /**
+     * Object. If not specified, means selected. When pieces and splitNumber: {'0': true, '5': true}
+     * When categories: {'cate1': false, 'cate3': true} When selected === false, means all unselected.
+     */
+    selected?: Dictionary<boolean>;
+    selectedMode?: 'multiple' | 'single' | boolean;
+    /**
+     * By default, when text is used, label will hide (the logic
+     * is remained for compatibility reason)
+     */
+    showLabel?: boolean;
+    itemGap?: number;
+    hoverLink?: boolean;
+}
+
+interface MarkLineStateOption {
+    lineStyle?: LineStyleOption;
+    /**
+     * itemStyle for symbol
+     */
+    itemStyle?: ItemStyleOption;
+    label?: SeriesLineLabelOption;
+    z2?: number;
+}
+interface MarkLineDataItemOptionBase extends MarkLineStateOption, StatesOptionMixin<MarkLineStateOption, StatesMixinBase> {
+    name?: string;
+}
+interface MarkLine1DDataItemOption extends MarkLineDataItemOptionBase {
+    xAxis?: number | string;
+    yAxis?: number | string;
+    type?: MarkerStatisticType;
+    /**
+     * When using statistic method with type.
+     * valueIndex and valueDim can be specify which dim the statistic is used on.
+     */
+    valueIndex?: number;
+    valueDim?: string;
+    /**
+     * Symbol for both two ends
+     */
+    symbol?: string[] | string;
+    symbolSize?: number[] | number;
+    symbolRotate?: number[] | number;
+    symbolOffset?: number | string | (number | string)[];
+}
+interface MarkLine2DDataItemDimOption extends MarkLineDataItemOptionBase, SymbolOptionMixin, MarkerPositionOption {
+}
+declare type MarkLine2DDataItemOption = [
+    MarkLine2DDataItemDimOption,
+    MarkLine2DDataItemDimOption
+];
+interface MarkLineOption extends MarkerOption, MarkLineStateOption, StatesOptionMixin<MarkLineStateOption, StatesMixinBase> {
+    mainType?: 'markLine';
+    symbol?: string[] | string;
+    symbolSize?: number[] | number;
+    symbolRotate?: number[] | number;
+    symbolOffset?: number | string | (number | string)[] | (number | string)[][];
+    /**
+     * Precision used on statistic method
+     */
+    precision?: number;
+    data?: (MarkLine1DDataItemOption | MarkLine2DDataItemOption)[];
+}
+
+interface MarkPointStateOption {
+    itemStyle?: ItemStyleOption;
+    label?: SeriesLabelOption;
+    z2?: number;
+}
+interface MarkPointDataItemOption extends MarkPointStateOption, StatesOptionMixin<MarkPointStateOption, StatesMixinBase>, SymbolOptionMixin<CallbackDataParams>, MarkerPositionOption {
+    name: string;
+}
+interface MarkPointOption extends MarkerOption, SymbolOptionMixin<CallbackDataParams>, StatesOptionMixin<MarkPointStateOption, StatesMixinBase>, MarkPointStateOption {
+    mainType?: 'markPoint';
+    precision?: number;
+    data?: MarkPointDataItemOption[];
+}
+
+declare type ECSymbol = Path & {
+    __isEmptyBrush?: boolean;
+    setColor: (color: ZRColor, innerColor?: ZRColor) => void;
+    getColor: () => ZRColor;
+};
+/**
+ * Create a symbol element with given symbol configuration: shape, x, y, width, height, color
+ */
+declare function createSymbol(symbolType: string, x: number, y: number, w: number, h: number, color?: ZRColor, keepAspect?: boolean): ECSymbol;
+
+declare type LineDataValue = OptionDataValue | OptionDataValue[];
+interface LineStateOptionMixin {
+    emphasis?: {
+        focus?: DefaultEmphasisFocus;
+        scale?: boolean | number;
+    };
+}
+interface LineStateOption<TCbParams = never> {
+    itemStyle?: ItemStyleOption<TCbParams>;
+    label?: SeriesLabelOption;
+    endLabel?: LineEndLabelOption;
+}
+interface LineDataItemOption extends SymbolOptionMixin, LineStateOption, StatesOptionMixin<LineStateOption, LineStateOptionMixin> {
+    name?: string;
+    value?: LineDataValue;
+}
+interface LineEndLabelOption extends SeriesLabelOption {
+    valueAnimation?: boolean;
+}
+interface LineSeriesOption extends SeriesOption$1<LineStateOption<CallbackDataParams>, LineStateOptionMixin & {
+    emphasis?: {
+        lineStyle?: Omit<LineStyleOption, 'width'> & {
+            width?: LineStyleOption['width'] | 'bolder';
+        };
+        areaStyle?: AreaStyleOption;
+    };
+    blur?: {
+        lineStyle?: LineStyleOption;
+        areaStyle?: AreaStyleOption;
+    };
+}>, LineStateOption<CallbackDataParams>, SeriesOnCartesianOptionMixin, SeriesOnPolarOptionMixin, SeriesStackOptionMixin, SeriesSamplingOptionMixin, SymbolOptionMixin<CallbackDataParams>, SeriesEncodeOptionMixin {
+    type?: 'line';
+    coordinateSystem?: 'cartesian2d' | 'polar';
+    clip?: boolean;
+    label?: SeriesLabelOption;
+    endLabel?: LineEndLabelOption;
+    lineStyle?: LineStyleOption;
+    areaStyle?: AreaStyleOption & {
+        origin?: 'auto' | 'start' | 'end' | number;
+    };
+    step?: false | 'start' | 'end' | 'middle';
+    smooth?: boolean | number;
+    smoothMonotone?: 'x' | 'y' | 'none';
+    connectNulls?: boolean;
+    showSymbol?: boolean;
+    showAllSymbol?: 'auto' | boolean;
+    data?: (LineDataValue | LineDataItemOption)[];
+    triggerLineEvent?: boolean;
+}
+
+interface ScatterStateOption<TCbParams = never> {
+    itemStyle?: ItemStyleOption<TCbParams>;
+    label?: SeriesLabelOption;
+}
+interface ScatterStatesOptionMixin {
+    emphasis?: {
+        focus?: DefaultEmphasisFocus;
+        scale?: boolean | number;
+    };
+}
+interface ScatterDataItemOption extends SymbolOptionMixin, ScatterStateOption, StatesOptionMixin<ScatterStateOption, ScatterStatesOptionMixin>, OptionDataItemObject<OptionDataValue> {
+}
+interface ScatterSeriesOption extends SeriesOption$1<ScatterStateOption<CallbackDataParams>, ScatterStatesOptionMixin>, ScatterStateOption<CallbackDataParams>, SeriesOnCartesianOptionMixin, SeriesOnPolarOptionMixin, SeriesOnCalendarOptionMixin, SeriesOnGeoOptionMixin, SeriesOnSingleOptionMixin, SeriesLargeOptionMixin, SeriesStackOptionMixin, SymbolOptionMixin<CallbackDataParams>, SeriesEncodeOptionMixin {
+    type?: 'scatter';
+    coordinateSystem?: string;
+    cursor?: string;
+    clip?: boolean;
+    data?: (ScatterDataItemOption | OptionDataValue | OptionDataValue[])[] | ArrayLike<number>;
+}
+
+interface PieItemStyleOption<TCbParams = never> extends ItemStyleOption<TCbParams> {
+    borderRadius?: (number | string)[] | number | string;
+}
+interface PieCallbackDataParams extends CallbackDataParams {
+    percent: number;
+}
+interface PieStateOption<TCbParams = never> {
+    itemStyle?: PieItemStyleOption<TCbParams>;
+    label?: PieLabelOption;
+    labelLine?: PieLabelLineOption;
+}
+interface PieLabelOption extends Omit<SeriesLabelOption, 'rotate' | 'position'> {
+    rotate?: number | boolean | 'radial' | 'tangential';
+    alignTo?: 'none' | 'labelLine' | 'edge';
+    edgeDistance?: string | number;
+    /**
+     * @deprecated Use `edgeDistance` instead
+     */
+    margin?: string | number;
+    bleedMargin?: number;
+    distanceToLabelLine?: number;
+    position?: SeriesLabelOption['position'] | 'outer' | 'inner' | 'center' | 'outside';
+}
+interface PieLabelLineOption extends LabelLineOption {
+    /**
+     * Max angle between labelLine and surface normal.
+     * 0 - 180
+     */
+    maxSurfaceAngle?: number;
+}
+interface ExtraStateOption {
+    emphasis?: {
+        focus?: DefaultEmphasisFocus;
+        scale?: boolean;
+        scaleSize?: number;
+    };
+}
+interface PieDataItemOption extends OptionDataItemObject<OptionDataValueNumeric>, PieStateOption, StatesOptionMixin<PieStateOption, ExtraStateOption> {
+    cursor?: string;
+}
+interface PieSeriesOption extends Omit<SeriesOption$1<PieStateOption<PieCallbackDataParams>, ExtraStateOption>, 'labelLine'>, PieStateOption<PieCallbackDataParams>, CircleLayoutOptionMixin<{
+    centerExtra: string | number;
+}>, BoxLayoutOptionMixin, SeriesEncodeOptionMixin {
+    type?: 'pie';
+    roseType?: 'radius' | 'area';
+    clockwise?: boolean;
+    startAngle?: number;
+    endAngle?: number | 'auto';
+    padAngle?: number;
+    minAngle?: number;
+    minShowLabelAngle?: number;
+    selectedOffset?: number;
+    avoidLabelOverlap?: boolean;
+    percentPrecision?: number;
+    stillShowZeroSum?: boolean;
+    animationType?: 'expansion' | 'scale';
+    animationTypeUpdate?: 'transition' | 'expansion';
+    showEmptyCircle?: boolean;
+    emptyCircleStyle?: PieItemStyleOption;
+    data?: (OptionDataValueNumeric | OptionDataValueNumeric[] | PieDataItemOption)[];
+}
+
+declare type RadarSeriesDataValue = OptionDataValue[];
+interface RadarStatesMixin {
+    emphasis?: DefaultStatesMixinEmphasis;
+}
+interface RadarSeriesStateOption<TCbParams = never> {
+    lineStyle?: LineStyleOption;
+    areaStyle?: AreaStyleOption;
+    label?: SeriesLabelOption;
+    itemStyle?: ItemStyleOption<TCbParams>;
+}
+interface RadarSeriesDataItemOption extends SymbolOptionMixin, RadarSeriesStateOption<CallbackDataParams>, StatesOptionMixin<RadarSeriesStateOption<CallbackDataParams>, RadarStatesMixin>, OptionDataItemObject<RadarSeriesDataValue> {
+}
+interface RadarSeriesOption extends SeriesOption$1<RadarSeriesStateOption, RadarStatesMixin>, RadarSeriesStateOption, SymbolOptionMixin<CallbackDataParams>, SeriesEncodeOptionMixin {
+    type?: 'radar';
+    coordinateSystem?: 'radar';
+    radarIndex?: number;
+    radarId?: string;
+    data?: (RadarSeriesDataItemOption | RadarSeriesDataValue)[];
+}
+
+interface MapStateOption<TCbParams = never> {
+    itemStyle?: GeoItemStyleOption<TCbParams>;
+    label?: SeriesLabelOption;
+}
+interface MapDataItemOption extends MapStateOption, StatesOptionMixin<MapStateOption, StatesMixinBase>, OptionDataItemObject<OptionDataValueNumeric> {
+    cursor?: string;
+    silent?: boolean;
+}
+declare type MapValueCalculationType = 'sum' | 'average' | 'min' | 'max';
+interface MapSeriesOption extends SeriesOption$1<MapStateOption<CallbackDataParams>, StatesMixinBase>, MapStateOption<CallbackDataParams>, GeoCommonOptionMixin, SeriesOnGeoOptionMixin, BoxLayoutOptionMixin, SeriesEncodeOptionMixin {
+    type?: 'map';
+    coordinateSystem?: string;
+    silent?: boolean;
+    markLine?: any;
+    markPoint?: any;
+    markArea?: any;
+    mapValueCalculation?: MapValueCalculationType;
+    showLegendSymbol?: boolean;
+    geoCoord?: Dictionary<number[]>;
+    data?: (OptionDataValueNumeric | OptionDataValueNumeric[] | MapDataItemOption)[];
+    nameProperty?: string;
+}
+
+interface CurveLineStyleOption extends LineStyleOption {
+    curveness?: number;
+}
+interface TreeSeriesStateOption<TCbParams = never> {
+    itemStyle?: ItemStyleOption<TCbParams>;
+    /**
+     * Line style of the edge between node and it's parent.
+     */
+    lineStyle?: CurveLineStyleOption;
+    label?: SeriesLabelOption;
+}
+interface TreeStatesMixin {
+    emphasis?: {
+        focus?: DefaultEmphasisFocus | 'ancestor' | 'descendant' | 'relative';
+        scale?: boolean;
+    };
+}
+interface TreeSeriesNodeItemOption extends SymbolOptionMixin<CallbackDataParams>, TreeSeriesStateOption<CallbackDataParams>, StatesOptionMixin<TreeSeriesStateOption<CallbackDataParams>, TreeStatesMixin>, OptionDataItemObject<OptionDataValue> {
+    children?: TreeSeriesNodeItemOption[];
+    collapsed?: boolean;
+    link?: string;
+    target?: string;
+}
+/**
+ * Configuration of leaves nodes.
+ */
+interface TreeSeriesLeavesOption extends TreeSeriesStateOption, StatesOptionMixin<TreeSeriesStateOption, TreeStatesMixin> {
+}
+interface TreeSeriesOption extends SeriesOption$1<TreeSeriesStateOption, TreeStatesMixin>, TreeSeriesStateOption, SymbolOptionMixin<CallbackDataParams>, BoxLayoutOptionMixin, RoamOptionMixin {
+    type?: 'tree';
+    layout?: 'orthogonal' | 'radial';
+    edgeShape?: 'polyline' | 'curve';
+    /**
+     * Available when edgeShape is polyline
+     */
+    edgeForkPosition?: string | number;
+    nodeScaleRatio?: number;
+    /**
+     * The orient of orthoginal layout, can be setted to 'LR', 'TB', 'RL', 'BT'.
+     * and the backward compatibility configuration 'horizontal = LR', 'vertical = TB'.
+     */
+    orient?: 'LR' | 'TB' | 'RL' | 'BT' | 'horizontal' | 'vertical';
+    expandAndCollapse?: boolean;
+    /**
+     * The initial expanded depth of tree
+     */
+    initialTreeDepth?: number;
+    leaves?: TreeSeriesLeavesOption;
+    data?: TreeSeriesNodeItemOption[];
+}
+
+declare type TreeTraverseOrder = 'preorder' | 'postorder';
+declare type TreeTraverseCallback<Ctx> = (this: Ctx, node: TreeNode) => boolean | void;
+declare type TreeTraverseOption = {
+    order?: TreeTraverseOrder;
+    attr?: 'children' | 'viewChildren';
+};
+interface TreeNodeOption extends Pick<OptionDataItemObject<OptionDataValue>, 'name' | 'value'> {
+    children?: TreeNodeOption[];
+}
+declare class TreeNode {
+    name: string;
+    depth: number;
+    height: number;
+    parentNode: TreeNode;
+    /**
+     * Reference to list item.
+     * Do not persistent dataIndex outside,
+     * besause it may be changed by list.
+     * If dataIndex -1,
+     * this node is logical deleted (filtered) in list.
+     */
+    dataIndex: number;
+    children: TreeNode[];
+    viewChildren: TreeNode[];
+    isExpand: boolean;
+    readonly hostTree: Tree<Model>;
+    constructor(name: string, hostTree: Tree<Model>);
+    /**
+     * The node is removed.
+     */
+    isRemoved(): boolean;
+    /**
+     * Travel this subtree (include this node).
+     * Usage:
+     *    node.eachNode(function () { ... }); // preorder
+     *    node.eachNode('preorder', function () { ... }); // preorder
+     *    node.eachNode('postorder', function () { ... }); // postorder
+     *    node.eachNode(
+     *        {order: 'postorder', attr: 'viewChildren'},
+     *        function () { ... }
+     *    ); // postorder
+     *
+     * @param options If string, means order.
+     * @param options.order 'preorder' or 'postorder'
+     * @param options.attr 'children' or 'viewChildren'
+     * @param cb If in preorder and return false,
+     *                      its subtree will not be visited.
+     */
+    eachNode<Ctx>(options: TreeTraverseOrder, cb: TreeTraverseCallback<Ctx>, context?: Ctx): void;
+    eachNode<Ctx>(options: TreeTraverseOption, cb: TreeTraverseCallback<Ctx>, context?: Ctx): void;
+    eachNode<Ctx>(cb: TreeTraverseCallback<Ctx>, context?: Ctx): void;
+    /**
+     * Update depth and height of this subtree.
+     */
+    updateDepthAndHeight(depth: number): void;
+    getNodeById(id: string): TreeNode;
+    contains(node: TreeNode): boolean;
+    /**
+     * @param includeSelf Default false.
+     * @return order: [root, child, grandchild, ...]
+     */
+    getAncestors(includeSelf?: boolean): TreeNode[];
+    getAncestorsIndices(): number[];
+    getDescendantIndices(): number[];
+    getValue(dimension?: DimensionLoose): ParsedValue;
+    setLayout(layout: any, merge?: boolean): void;
+    /**
+     * @return {Object} layout
+     */
+    getLayout(): any;
+    getModel<T = unknown>(): Model<T>;
+    getLevelModel(): Model;
+    /**
+     * @example
+     *  setItemVisual('color', color);
+     *  setItemVisual({
+     *      'color': color
+     *  });
+     */
+    setVisual(key: string, value: any): void;
+    setVisual(obj: Dictionary<any>): void;
+    /**
+     * Get item visual
+     * FIXME: make return type better
+     */
+    getVisual(key: string): unknown;
+    getRawIndex(): number;
+    getId(): string;
+    /**
+     * index in parent's children
+     */
+    getChildIndex(): number;
+    /**
+     * if this is an ancestor of another node
+     *
+     * @param node another node
+     * @return if is ancestor
+     */
+    isAncestorOf(node: TreeNode): boolean;
+    /**
+     * if this is an descendant of another node
+     *
+     * @param node another node
+     * @return if is descendant
+     */
+    isDescendantOf(node: TreeNode): boolean;
+}
+declare class Tree<HostModel extends Model = Model, LevelOption = any> {
+    type: 'tree';
+    root: TreeNode;
+    data: SeriesData;
+    hostModel: HostModel;
+    levelModels: Model<LevelOption>[];
+    private _nodes;
+    constructor(hostModel: HostModel);
+    /**
+     * Travel this subtree (include this node).
+     * Usage:
+     *    node.eachNode(function () { ... }); // preorder
+     *    node.eachNode('preorder', function () { ... }); // preorder
+     *    node.eachNode('postorder', function () { ... }); // postorder
+     *    node.eachNode(
+     *        {order: 'postorder', attr: 'viewChildren'},
+     *        function () { ... }
+     *    ); // postorder
+     *
+     * @param options If string, means order.
+     * @param options.order 'preorder' or 'postorder'
+     * @param options.attr 'children' or 'viewChildren'
+     * @param cb
+     * @param context
+     */
+    eachNode<Ctx>(options: TreeTraverseOrder, cb: TreeTraverseCallback<Ctx>, context?: Ctx): void;
+    eachNode<Ctx>(options: TreeTraverseOption, cb: TreeTraverseCallback<Ctx>, context?: Ctx): void;
+    eachNode<Ctx>(cb: TreeTraverseCallback<Ctx>, context?: Ctx): void;
+    getNodeByDataIndex(dataIndex: number): TreeNode;
+    getNodeById(name: string): TreeNode;
+    /**
+     * Update item available by list,
+     * when list has been performed options like 'filterSelf' or 'map'.
+     */
+    update(): void;
+    /**
+     * Clear all layouts
+     */
+    clearLayouts(): void;
+    /**
+     * data node format:
+     * {
+     *     name: ...
+     *     value: ...
+     *     children: [
+     *         {
+     *             name: ...
+     *             value: ...
+     *             children: ...
+     *         },
+     *         ...
+     *     ]
+     * }
+     */
+    static createTree<T extends TreeNodeOption, HostModel extends Model>(dataRoot: T, hostModel: HostModel, beforeLink?: (data: SeriesData) => void): Tree<HostModel, any>;
+}
+
+declare type TreemapSeriesDataValue = number | number[];
+interface BreadcrumbItemStyleOption extends ItemStyleOption {
+    textStyle?: LabelOption;
+}
+interface TreemapSeriesLabelOption extends SeriesLabelOption {
+    formatter?: string | ((params: CallbackDataParams) => string);
+}
+interface TreemapSeriesItemStyleOption<TCbParams = never> extends ItemStyleOption<TCbParams> {
+    borderRadius?: number | number[];
+    colorAlpha?: number;
+    colorSaturation?: number;
+    borderColorSaturation?: number;
+    gapWidth?: number;
+}
+interface TreePathInfo {
+    name: string;
+    dataIndex: number;
+    value: TreemapSeriesDataValue;
+}
+interface TreemapSeriesCallbackDataParams extends CallbackDataParams {
+    /**
+     * @deprecated
+     */
+    treePathInfo?: TreePathInfo[];
+    treeAncestors?: TreePathInfo[];
+}
+interface ExtraStateOption$1 {
+    emphasis?: {
+        focus?: DefaultEmphasisFocus | 'descendant' | 'ancestor';
+    };
+}
+interface TreemapStateOption<TCbParams = never> {
+    itemStyle?: TreemapSeriesItemStyleOption<TCbParams>;
+    label?: TreemapSeriesLabelOption;
+    upperLabel?: TreemapSeriesLabelOption;
+}
+interface TreemapSeriesVisualOption {
+    /**
+     * Which dimension will be applied with the visual properties.
+     */
+    visualDimension?: number | string;
+    /**
+     * @deprecated Use colorBy instead
+     */
+    colorMappingBy?: 'value' | 'index' | 'id';
+    visualMin?: number;
+    visualMax?: number;
+    colorAlpha?: number[] | 'none';
+    colorSaturation?: number[] | 'none';
+    /**
+     * A node will not be shown when its area size is smaller than this value (unit: px square).
+     */
+    visibleMin?: number;
+    /**
+     * Children will not be shown when area size of a node is smaller than this value (unit: px square).
+     */
+    childrenVisibleMin?: number;
+}
+interface TreemapSeriesLevelOption extends TreemapSeriesVisualOption, TreemapStateOption, StatesOptionMixin<TreemapStateOption, ExtraStateOption$1> {
+    color?: ColorString[] | 'none';
+    decal?: DecalObject[] | 'none';
+}
+interface TreemapSeriesNodeItemOption extends TreemapSeriesVisualOption, TreemapStateOption, StatesOptionMixin<TreemapStateOption, ExtraStateOption$1> {
+    id?: OptionId;
+    name?: OptionName;
+    value?: TreemapSeriesDataValue;
+    children?: TreemapSeriesNodeItemOption[];
+    color?: ColorString[] | 'none';
+    decal?: DecalObject[] | 'none';
+    cursor?: string;
+}
+interface TreemapSeriesOption extends SeriesOption$1<TreemapStateOption<TreemapSeriesCallbackDataParams>, ExtraStateOption$1>, TreemapStateOption<TreemapSeriesCallbackDataParams>, BoxLayoutOptionMixin, RoamOptionMixin, TreemapSeriesVisualOption {
+    type?: 'treemap';
+    /**
+     * configuration in echarts2
+     * @deprecated
+     */
+    size?: (number | string)[];
+    /**
+     * If sort in desc order.
+     * Default to be desc. asc has strange effect
+     */
+    sort?: boolean | 'asc' | 'desc';
+    /**
+     * Size of clipped window when zooming. 'origin' or 'fullscreen'
+     */
+    clipWindow?: 'origin' | 'fullscreen';
+    squareRatio?: number;
+    /**
+     * Nodes on depth from root are regarded as leaves.
+     * Count from zero (zero represents only view root).
+     */
+    leafDepth?: number;
+    drillDownIcon?: string;
+    /**
+     * Be effective when using zoomToNode. Specify the proportion of the
+     * target node area in the view area.
+     */
+    zoomToNodeRatio?: number;
+    /**
+     * Leaf node click behaviour: 'zoomToNode', 'link', false.
+     * If leafDepth is set and clicking a node which has children but
+     * be on left depth, the behaviour would be changing root. Otherwise
+     * use behaviour defined above.
+     */
+    nodeClick?: 'zoomToNode' | 'link' | false;
+    breadcrumb?: BoxLayoutOptionMixin & {
+        show?: boolean;
+        height?: number;
+        emptyItemWidth?: number;
+        itemStyle?: BreadcrumbItemStyleOption;
+        emphasis?: {
+            disabled?: boolean;
+            focus?: DefaultEmphasisFocus;
+            blurScope?: BlurScope;
+            itemStyle?: BreadcrumbItemStyleOption;
+        };
+    };
+    levels?: TreemapSeriesLevelOption[];
+    data?: TreemapSeriesNodeItemOption[];
+}
+
+declare class Graph {
+    type: 'graph';
+    readonly nodes: GraphNode[];
+    readonly edges: GraphEdge[];
+    data: SeriesData;
+    edgeData: SeriesData;
+    /**
+     * Whether directed graph.
+     */
+    private _directed;
+    private _nodesMap;
+    /**
+     * @type {Object.<string, module:echarts/data/Graph.Edge>}
+     * @private
+     */
+    private _edgesMap;
+    constructor(directed?: boolean);
+    /**
+     * If is directed graph
+     */
+    isDirected(): boolean;
+    /**
+     * Add a new node
+     */
+    addNode(id: string | number, dataIndex?: number): GraphNode;
+    /**
+     * Get node by data index
+     */
+    getNodeByIndex(dataIndex: number): GraphNode;
+    /**
+     * Get node by id
+     */
+    getNodeById(id: string): GraphNode;
+    /**
+     * Add a new edge
+     */
+    addEdge(n1: GraphNode | number | string, n2: GraphNode | number | string, dataIndex?: number): GraphEdge;
+    /**
+     * Get edge by data index
+     */
+    getEdgeByIndex(dataIndex: number): GraphEdge;
+    /**
+     * Get edge by two linked nodes
+     */
+    getEdge(n1: string | GraphNode, n2: string | GraphNode): GraphEdge;
+    /**
+     * Iterate all nodes
+     */
+    eachNode<Ctx>(cb: (this: Ctx, node: GraphNode, idx: number) => void, context?: Ctx): void;
+    /**
+     * Iterate all edges
+     */
+    eachEdge<Ctx>(cb: (this: Ctx, edge: GraphEdge, idx: number) => void, context?: Ctx): void;
+    /**
+     * Breadth first traverse
+     * Return true to stop traversing
+     */
+    breadthFirstTraverse<Ctx>(cb: (this: Ctx, node: GraphNode, fromNode: GraphNode) => boolean | void, startNode: GraphNode | string, direction: 'none' | 'in' | 'out', context?: Ctx): void;
+    update(): void;
+    /**
+     * @return {module:echarts/data/Graph}
+     */
+    clone(): Graph;
+}
+interface GraphDataProxyMixin {
+    getValue(dimension?: DimensionLoose): ParsedValue;
+    setVisual(key: string | Dictionary<any>, value?: any): void;
+    getVisual(key: string): any;
+    setLayout(layout: any, merge?: boolean): void;
+    getLayout(): any;
+    getGraphicEl(): Element;
+    getRawIndex(): number;
+}
+declare class GraphEdge {
+    /**
+     * The first node. If directed graph, it represents the source node.
+     */
+    node1: GraphNode;
+    /**
+     * The second node. If directed graph, it represents the target node.
+     */
+    node2: GraphNode;
+    dataIndex: number;
+    hostGraph: Graph;
+    constructor(n1: GraphNode, n2: GraphNode, dataIndex?: number);
+    getModel<T = unknown>(): Model<T>;
+    getModel<T = unknown, S extends keyof T = keyof T>(path: S): Model<T[S]>;
+    getAdjacentDataIndices(): {
+        node: number[];
+        edge: number[];
+    };
+    getTrajectoryDataIndices(): {
+        node: number[];
+        edge: number[];
+    };
+}
+interface GraphEdge extends GraphDataProxyMixin {
+}
+declare class GraphNode {
+    id: string;
+    inEdges: GraphEdge[];
+    outEdges: GraphEdge[];
+    edges: GraphEdge[];
+    hostGraph: Graph;
+    dataIndex: number;
+    __visited: boolean;
+    constructor(id?: string, dataIndex?: number);
+    /**
+     * @return {number}
+     */
+    degree(): number;
+    /**
+     * @return {number}
+     */
+    inDegree(): number;
+    /**
+    * @return {number}
+    */
+    outDegree(): number;
+    getModel<T = unknown>(): Model<T>;
+    getModel<T = unknown, S extends keyof T = keyof T>(path: S): Model<T[S]>;
+    getAdjacentDataIndices(): {
+        node: number[];
+        edge: number[];
+    };
+    getTrajectoryDataIndices(): {
+        node: number[];
+        edge: number[];
+    };
+}
+interface GraphNode extends GraphDataProxyMixin {
+}
+
+declare type GraphDataValue = OptionDataValue | OptionDataValue[];
+interface GraphEdgeLineStyleOption extends LineStyleOption {
+    curveness?: number;
+}
+interface GraphNodeStateOption<TCbParams = never> {
+    itemStyle?: ItemStyleOption<TCbParams>;
+    label?: SeriesLabelOption;
+}
+interface ExtraEmphasisState {
+    focus?: DefaultEmphasisFocus | 'adjacency';
+}
+interface GraphNodeStatesMixin {
+    emphasis?: ExtraEmphasisState;
+}
+interface GraphEdgeStatesMixin {
+    emphasis?: ExtraEmphasisState;
+}
+interface GraphNodeItemOption extends SymbolOptionMixin, GraphNodeStateOption, StatesOptionMixin<GraphNodeStateOption, GraphNodeStatesMixin> {
+    id?: string;
+    name?: string;
+    value?: GraphDataValue;
+    /**
+     * Fixed x position
+     */
+    x?: number;
+    /**
+     * Fixed y position
+     */
+    y?: number;
+    /**
+     * If this node is fixed during force layout.
+     */
+    fixed?: boolean;
+    /**
+     * Index or name of category
+     */
+    category?: number | string;
+    draggable?: boolean;
+    cursor?: string;
+}
+interface GraphEdgeStateOption {
+    lineStyle?: GraphEdgeLineStyleOption;
+    label?: SeriesLineLabelOption;
+}
+interface GraphEdgeItemOption extends GraphEdgeStateOption, StatesOptionMixin<GraphEdgeStateOption, GraphEdgeStatesMixin>, GraphEdgeItemObject<OptionDataValueNumeric> {
+    value?: number;
+    /**
+     * Symbol of both line ends
+     */
+    symbol?: string | string[];
+    symbolSize?: number | number[];
+    ignoreForceLayout?: boolean;
+}
+interface GraphCategoryItemOption extends SymbolOptionMixin, GraphNodeStateOption, StatesOptionMixin<GraphNodeStateOption, GraphNodeStatesMixin> {
+    name?: string;
+    value?: OptionDataValue;
+}
+interface GraphSeriesOption extends SeriesOption$1<GraphNodeStateOption<CallbackDataParams>, GraphNodeStatesMixin>, SeriesOnCartesianOptionMixin, SeriesOnPolarOptionMixin, SeriesOnCalendarOptionMixin, SeriesOnGeoOptionMixin, SeriesOnSingleOptionMixin, SymbolOptionMixin<CallbackDataParams>, RoamOptionMixin, BoxLayoutOptionMixin, PreserveAspectMixin {
+    type?: 'graph';
+    coordinateSystem?: string;
+    legendHoverLink?: boolean;
+    layout?: 'none' | 'force' | 'circular';
+    data?: (GraphNodeItemOption | GraphDataValue)[];
+    nodes?: (GraphNodeItemOption | GraphDataValue)[];
+    edges?: GraphEdgeItemOption[];
+    links?: GraphEdgeItemOption[];
+    categories?: GraphCategoryItemOption[];
+    /**
+     * @deprecated
+     */
+    focusNodeAdjacency?: boolean;
+    /**
+     * Symbol size scale ratio in roam
+     */
+    nodeScaleRatio?: 0.6;
+    draggable?: boolean;
+    edgeSymbol?: string | string[];
+    edgeSymbolSize?: number | number[];
+    edgeLabel?: SeriesLineLabelOption;
+    label?: SeriesLabelOption;
+    itemStyle?: ItemStyleOption<CallbackDataParams>;
+    lineStyle?: GraphEdgeLineStyleOption;
+    emphasis?: {
+        focus?: Exclude<GraphNodeItemOption['emphasis'], undefined>['focus'];
+        scale?: boolean | number;
+        label?: SeriesLabelOption;
+        edgeLabel?: SeriesLabelOption;
+        itemStyle?: ItemStyleOption;
+        lineStyle?: LineStyleOption;
+    };
+    blur?: {
+        label?: SeriesLabelOption;
+        edgeLabel?: SeriesLabelOption;
+        itemStyle?: ItemStyleOption;
+        lineStyle?: LineStyleOption;
+    };
+    select?: {
+        label?: SeriesLabelOption;
+        edgeLabel?: SeriesLabelOption;
+        itemStyle?: ItemStyleOption;
+        lineStyle?: LineStyleOption;
+    };
+    circular?: {
+        rotateLabel?: boolean;
+    };
+    force?: {
+        initLayout?: 'circular' | 'none';
+        repulsion?: number | number[];
+        gravity?: number;
+        friction?: number;
+        edgeLength?: number | number[];
+        layoutAnimation?: boolean;
+    };
+    /**
+     * auto curveness for multiple edge, invalid when `lineStyle.curveness` is set
+     */
+    autoCurveness?: boolean | number | number[];
+}
+
+interface ExtraEmphasisState$1 {
+    /**
+     * For focus on nodes:
+     * - self: Focus self node, and all edges connected to it.
+     * - adjacency: Focus self nodes and two edges (source and target)
+     *   connected to the focused node.
+     *
+     * For focus on edges:
+     * - self: Focus self edge, and all nodes connected to it.
+     * - adjacency: Focus self edge and all edges connected to it and all
+     *   nodes connected to these edges.
+     */
+    focus?: DefaultEmphasisFocus | 'adjacency';
+}
+interface ChordStatesMixin {
+    emphasis?: ExtraEmphasisState$1;
+}
+interface ChordEdgeStatesMixin {
+    emphasis?: ExtraEmphasisState$1;
+}
+declare type ChordDataValue = OptionDataValue | OptionDataValue[];
+interface ChordItemStyleOption<TCbParams = never> extends ItemStyleOption<TCbParams> {
+    borderRadius?: (number | string)[] | number | string;
+}
+interface ChordNodeStateOption<TCbParams = never> {
+    itemStyle?: ChordItemStyleOption<TCbParams>;
+    label?: ChordNodeLabelOption;
+}
+interface ChordNodeItemOption extends ChordNodeStateOption, StatesOptionMixin<ChordNodeStateOption, ChordStatesMixin> {
+    id?: string;
+    name?: string;
+    value?: ChordDataValue;
+}
+interface ChordEdgeLineStyleOption extends LineStyleOption {
+    curveness?: number;
+}
+interface ChordNodeLabelOption extends Omit<SeriesLabelOption<CallbackDataParams>, 'position'> {
+    silent?: boolean;
+    position?: SeriesLabelOption['position'] | 'outside';
+}
+interface ChordEdgeStateOption {
+    lineStyle?: ChordEdgeLineStyleOption;
+    label?: SeriesLineLabelOption;
+}
+interface ChordEdgeItemOption extends ChordEdgeStateOption, StatesOptionMixin<ChordEdgeStateOption, ChordEdgeStatesMixin>, GraphEdgeItemObject<OptionDataValueNumeric> {
+    value?: number;
+}
+interface ChordSeriesOption extends SeriesOption$1<ChordNodeStateOption<CallbackDataParams>, ChordStatesMixin>, SeriesOnCartesianOptionMixin, SeriesOnPolarOptionMixin, SeriesOnCalendarOptionMixin, SeriesOnGeoOptionMixin, SeriesOnSingleOptionMixin, SymbolOptionMixin<CallbackDataParams>, RoamOptionMixin, BoxLayoutOptionMixin, CircleLayoutOptionMixin {
+    type?: 'chord';
+    coordinateSystem?: 'none';
+    legendHoverLink?: boolean;
+    clockwise?: boolean;
+    startAngle?: number;
+    endAngle?: number | 'auto';
+    padAngle?: number;
+    minAngle?: number;
+    data?: (ChordNodeItemOption | ChordDataValue)[];
+    nodes?: (ChordNodeItemOption | ChordDataValue)[];
+    edges?: ChordEdgeItemOption[];
+    links?: ChordEdgeItemOption[];
+    edgeLabel?: SeriesLineLabelOption;
+    label?: ChordNodeLabelOption;
+    itemStyle?: ChordItemStyleOption<CallbackDataParams>;
+    lineStyle?: ChordEdgeLineStyleOption;
+    emphasis?: {
+        focus?: Exclude<ChordNodeItemOption['emphasis'], undefined>['focus'];
+        scale?: boolean | number;
+        label?: SeriesLabelOption;
+        edgeLabel?: SeriesLabelOption;
+        itemStyle?: ItemStyleOption;
+        lineStyle?: LineStyleOption;
+    };
+    blur?: {
+        label?: SeriesLabelOption;
+        edgeLabel?: SeriesLabelOption;
+        itemStyle?: ItemStyleOption;
+        lineStyle?: LineStyleOption;
+    };
+    select?: {
+        label?: SeriesLabelOption;
+        edgeLabel?: SeriesLabelOption;
+        itemStyle?: ItemStyleOption;
+        lineStyle?: LineStyleOption;
+    };
+}
+
+declare type GaugeColorStop = [number, ColorString];
+interface LabelFormatter$1 {
+    (value: number): string;
+}
+interface PointerOption {
+    icon?: string;
+    show?: boolean;
+    /**
+     * If pointer shows above title and detail
+     */
+    showAbove?: boolean;
+    keepAspect?: boolean;
+    itemStyle?: ItemStyleOption;
+    /**
+     * Can be percent
+     */
+    offsetCenter?: (number | string)[];
+    length?: number | string;
+    width?: number;
+}
+interface AnchorOption {
+    show?: boolean;
+    showAbove?: boolean;
+    size?: number;
+    icon?: string;
+    offsetCenter?: (number | string)[];
+    keepAspect?: boolean;
+    itemStyle?: ItemStyleOption;
+}
+interface ProgressOption {
+    show?: boolean;
+    overlap?: boolean;
+    width?: number;
+    roundCap?: boolean;
+    clip?: boolean;
+    itemStyle?: ItemStyleOption;
+}
+interface TitleOption$1 extends LabelOption {
+    /**
+     * [x, y] offset
+     */
+    offsetCenter?: (number | string)[];
+    formatter?: LabelFormatter$1 | string;
+    /**
+     * If do value animtion.
+     */
+    valueAnimation?: boolean;
+}
+interface DetailOption extends LabelOption {
+    /**
+     * [x, y] offset
+     */
+    offsetCenter?: (number | string)[];
+    formatter?: LabelFormatter$1 | string;
+    /**
+     * If do value animtion.
+     */
+    valueAnimation?: boolean;
+}
+interface GaugeStatesMixin {
+    emphasis?: DefaultStatesMixinEmphasis;
+}
+interface GaugeStateOption<TCbParams = never> {
+    itemStyle?: ItemStyleOption<TCbParams>;
+}
+interface GaugeDataItemOption extends GaugeStateOption, StatesOptionMixin<GaugeStateOption<CallbackDataParams>, GaugeStatesMixin> {
+    name?: string;
+    value?: OptionDataValueNumeric;
+    pointer?: PointerOption;
+    progress?: ProgressOption;
+    title?: TitleOption$1;
+    detail?: DetailOption;
+}
+interface GaugeSeriesOption extends SeriesOption$1<GaugeStateOption, GaugeStatesMixin>, GaugeStateOption<CallbackDataParams>, CircleLayoutOptionMixin, SeriesEncodeOptionMixin {
+    type?: 'gauge';
+    radius?: number | string;
+    startAngle?: number;
+    endAngle?: number;
+    clockwise?: boolean;
+    min?: number;
+    max?: number;
+    splitNumber?: number;
+    itemStyle?: ItemStyleOption;
+    axisLine?: {
+        show?: boolean;
+        roundCap?: boolean;
+        lineStyle?: Omit<LineStyleOption, 'color'> & {
+            color?: GaugeColorStop[];
+        };
+    };
+    progress?: ProgressOption;
+    splitLine?: {
+        show?: boolean;
+        /**
+         * Can be percent
+         */
+        length?: number;
+        distance?: number;
+        lineStyle?: LineStyleOption;
+    };
+    axisTick?: {
+        show?: boolean;
+        splitNumber?: number;
+        /**
+         * Can be percent
+         */
+        length?: number | string;
+        distance?: number;
+        lineStyle?: LineStyleOption;
+    };
+    axisLabel?: Omit<LabelOption, 'rotate'> & {
+        formatter?: LabelFormatter$1 | string;
+        rotate?: 'tangential' | 'radial' | number;
+    };
+    pointer?: PointerOption;
+    anchor?: AnchorOption;
+    title?: TitleOption$1;
+    detail?: DetailOption;
+    data?: (OptionDataValueNumeric | GaugeDataItemOption)[];
+}
+
+declare type FunnelLabelOption = Omit<SeriesLabelOption, 'position'> & {
+    position?: LabelOption['position'] | 'outer' | 'inner' | 'center' | 'rightTop' | 'rightBottom' | 'leftTop' | 'leftBottom';
+};
+interface FunnelStatesMixin {
+    emphasis?: DefaultStatesMixinEmphasis;
+}
+interface FunnelCallbackDataParams extends CallbackDataParams {
+    percent: number;
+}
+interface FunnelStateOption<TCbParams = never> {
+    itemStyle?: ItemStyleOption<TCbParams>;
+    label?: FunnelLabelOption;
+    labelLine?: LabelLineOption;
+}
+interface FunnelDataItemOption extends FunnelStateOption, StatesOptionMixin<FunnelStateOption, FunnelStatesMixin>, OptionDataItemObject<OptionDataValueNumeric> {
+    itemStyle?: ItemStyleOption & {
+        width?: number | string;
+        height?: number | string;
+    };
+}
+interface FunnelSeriesOption extends SeriesOption$1<FunnelStateOption<FunnelCallbackDataParams>, FunnelStatesMixin>, FunnelStateOption<FunnelCallbackDataParams>, BoxLayoutOptionMixin, SeriesEncodeOptionMixin {
+    type?: 'funnel';
+    min?: number;
+    max?: number;
+    /**
+     * Absolute number or percent string
+     */
+    minSize?: number | string;
+    maxSize?: number | string;
+    sort?: 'ascending' | 'descending' | 'none';
+    orient?: LayoutOrient;
+    gap?: number;
+    funnelAlign?: HorizontalAlign | VerticalAlign;
+    data?: (OptionDataValueNumeric | OptionDataValueNumeric[] | FunnelDataItemOption)[];
+}
+
+declare type ParallelSeriesDataValue = OptionDataValue[];
+interface ParallelStatesMixin {
+    emphasis?: DefaultStatesMixinEmphasis;
+}
+interface ParallelStateOption<TCbParams = never> {
+    lineStyle?: LineStyleOption<(TCbParams extends never ? never : (params: TCbParams) => ZRColor) | ZRColor>;
+    label?: SeriesLabelOption;
+}
+interface ParallelSeriesDataItemOption extends ParallelStateOption, StatesOptionMixin<ParallelStateOption, ParallelStatesMixin> {
+    value?: ParallelSeriesDataValue;
+}
+interface ParallelSeriesOption extends SeriesOption$1<ParallelStateOption<CallbackDataParams>, ParallelStatesMixin>, ParallelStateOption<CallbackDataParams>, SeriesEncodeOptionMixin {
+    type?: 'parallel';
+    coordinateSystem?: string;
+    parallelIndex?: number;
+    parallelId?: string;
+    inactiveOpacity?: number;
+    activeOpacity?: number;
+    smooth?: boolean | number;
+    realtime?: boolean;
+    tooltip?: SeriesTooltipOption;
+    parallelAxisDefault?: ParallelAxisOption;
+    data?: (ParallelSeriesDataValue | ParallelSeriesDataItemOption)[];
+}
+
+declare type FocusNodeAdjacency = boolean | 'inEdges' | 'outEdges' | 'allEdges';
+interface SankeyNodeStateOption<TCbParams = never> {
+    label?: SeriesLabelOption;
+    itemStyle?: ItemStyleOption<TCbParams>;
+}
+interface SankeyEdgeStateOption {
+    lineStyle?: SankeyEdgeStyleOption;
+}
+interface SankeyBothStateOption<TCbParams> extends SankeyNodeStateOption<TCbParams>, SankeyEdgeStateOption {
+}
+interface SankeyEdgeStyleOption extends LineStyleOption {
+    curveness?: number;
+}
+interface ExtraStateOption$2 {
+    emphasis?: {
+        focus?: DefaultEmphasisFocus | 'adjacency' | 'trajectory';
+    };
+}
+interface SankeyNodeItemOption extends SankeyNodeStateOption, StatesOptionMixin<SankeyNodeStateOption, ExtraStateOption$2>, OptionDataItemObject<OptionDataValue> {
+    id?: string;
+    localX?: number;
+    localY?: number;
+    depth?: number;
+    draggable?: boolean;
+    focusNodeAdjacency?: FocusNodeAdjacency;
+}
+interface SankeyEdgeItemOption extends SankeyEdgeStateOption, StatesOptionMixin<SankeyEdgeStateOption, ExtraStateOption$2>, GraphEdgeItemObject<OptionDataValueNumeric> {
+    focusNodeAdjacency?: FocusNodeAdjacency;
+    edgeLabel?: SeriesLabelOption;
+}
+interface SankeyLevelOption extends SankeyNodeStateOption, SankeyEdgeStateOption {
+    depth: number;
+}
+interface SankeySeriesOption extends SeriesOption$1<SankeyBothStateOption<CallbackDataParams>, ExtraStateOption$2>, SankeyBothStateOption<CallbackDataParams>, BoxLayoutOptionMixin, RoamOptionMixin {
+    type?: 'sankey';
+    /**
+     * color will be linear mapped.
+     */
+    color?: ColorString[];
+    coordinateSystem?: 'view';
+    orient?: LayoutOrient;
+    /**
+     * The width of the node
+     */
+    nodeWidth?: number;
+    /**
+     * The vertical distance between two nodes
+     */
+    nodeGap?: number;
+    /**
+     * Control if the node can move or not
+     */
+    draggable?: boolean;
+    /**
+     * Will be allEdges if true.
+     * @deprecated
+     */
+    focusNodeAdjacency?: FocusNodeAdjacency;
+    /**
+     * The number of iterations to change the position of the node
+     */
+    layoutIterations?: number;
+    nodeAlign?: 'justify' | 'left' | 'right';
+    data?: SankeyNodeItemOption[];
+    nodes?: SankeyNodeItemOption[];
+    edges?: SankeyEdgeItemOption[];
+    links?: SankeyEdgeItemOption[];
+    levels?: SankeyLevelOption[];
+    edgeLabel?: SeriesLabelOption & {
+        position?: 'inside';
+    };
+}
+
+declare class SeriesDimensionDefine {
+    /**
+     * Dimension type. The enumerable values are the key of
+     * Optional.
+     */
+    type?: DimensionType;
+    /**
+     * Dimension name.
+     * Mandatory.
+     */
+    name: string;
+    /**
+     * The origin name in dimsDef, see source helper.
+     * If displayName given, the tooltip will displayed vertically.
+     * Optional.
+     */
+    displayName?: string;
+    tooltip?: boolean;
+    /**
+     * This dimension maps to the the dimension in dataStore by `storeDimIndex`.
+     * Notice the facts:
+     * 1. When there are too many dimensions in data store, seriesData only save the
+     * used store dimensions.
+     * 2. We use dimensionIndex but not name to reference store dimension
+     * becuause the dataset dimension definition might has no name specified by users,
+     * or names in sereis dimension definition might be different from dataset.
+     */
+    storeDimIndex?: number;
+    /**
+     * Which coordSys dimension this dimension mapped to.
+     * A `coordDim` can be a "coordSysDim" that the coordSys required
+     * (for example, an item in `coordSysDims` of `model/referHelper#CoordSysInfo`),
+     * or an generated "extra coord name" if does not mapped to any "coordSysDim"
+     * (That is determined by whether `isExtraCoord` is `true`).
+     * Mandatory.
+     */
+    coordDim?: string;
+    /**
+     * The index of this dimension in `series.encode[coordDim]`.
+     * Mandatory.
+     */
+    coordDimIndex?: number;
+    /**
+     * The format of `otherDims` is:
+     * ```js
+     * {
+     *     tooltip?: number
+     *     label?: number
+     *     itemName?: number
+     *     seriesName?: number
+     * }
+     * ```
+     *
+     * A `series.encode` can specified these fields:
+     * ```js
+     * encode: {
+     *     // "3, 1, 5" is the index of data dimension.
+     *     tooltip: [3, 1, 5],
+     *     label: [0, 3],
+     *     ...
+     * }
+     * ```
+     * `otherDims` is the parse result of the `series.encode` above, like:
+     * ```js
+     * // Suppose the index of this data dimension is `3`.
+     * this.otherDims = {
+     *     // `3` is at the index `0` of the `encode.tooltip`
+     *     tooltip: 0,
+     *     // `3` is at the index `1` of the `encode.label`
+     *     label: 1
+     * };
+     * ```
+     *
+     * This prop should never be `null`/`undefined` after initialized.
+     */
+    otherDims?: DataVisualDimensions;
+    /**
+     * Be `true` if this dimension is not mapped to any "coordSysDim" that the
+     * "coordSys" required.
+     * Mandatory.
+     */
+    isExtraCoord?: boolean;
+    /**
+     * If this dimension if for calculated value like stacking
+     */
+    isCalculationCoord?: boolean;
+    defaultTooltip?: boolean;
+    ordinalMeta?: OrdinalMeta;
+    /**
+     * Whether to create inverted indices.
+     */
+    createInvertedIndices?: boolean;
+    /**
+     * @param opt All of the fields will be shallow copied.
+     */
+    constructor(opt?: object | SeriesDimensionDefine);
+}
+
+/**
+ * Multi dimensional data store
+ */
+declare const dataCtors: {
+    readonly float: ArrayConstructor | Float64ArrayConstructor;
+    readonly int: ArrayConstructor | Int32ArrayConstructor;
+    readonly ordinal: ArrayConstructor;
+    readonly number: ArrayConstructor;
+    readonly time: ArrayConstructor | Float64ArrayConstructor;
+};
+declare type DataStoreDimensionType = keyof typeof dataCtors;
+declare type EachCb = (...args: any) => void;
+declare type FilterCb = (...args: any) => boolean;
+declare type MapCb = (...args: any) => ParsedValue | ParsedValue[];
+declare type DimValueGetter = (this: DataStore, dataItem: any, property: string, dataIndex: number, dimIndex: DimensionIndex) => ParsedValue;
+interface DataStoreDimensionDefine {
+    /**
+     * Default to be float.
+     */
+    type?: DataStoreDimensionType;
+    /**
+     * Only used in SOURCE_FORMAT_OBJECT_ROWS and SOURCE_FORMAT_KEYED_COLUMNS to retrieve value
+     * by "object property".
+     * For example, in `[{bb: 124, aa: 543}, ...]`, "aa" and "bb" is "object property".
+     *
+     * Deliberately name it as "property" rather than "name" to prevent it from been used in
+     * SOURCE_FORMAT_ARRAY_ROWS, because if it comes from series, it probably
+     * can not be shared by different series.
+     */
+    property?: string;
+    /**
+     * When using category axis.
+     * Category strings will be collected and stored in ordinalMeta.categories.
+     * And store will store the index of categories.
+     */
+    ordinalMeta?: OrdinalMeta;
+    /**
+     * Offset for ordinal parsing and collect
+     */
+    ordinalOffset?: number;
+}
+/**
+ * Basically, DataStore API keep immutable.
+ */
+declare class DataStore {
+    private _chunks;
+    private _provider;
+    private _rawExtent;
+    private _extent;
+    private _indices;
+    private _count;
+    private _rawCount;
+    private _dimensions;
+    private _dimValueGetter;
+    private _calcDimNameToIdx;
+    defaultDimValueGetter: DimValueGetter;
+    /**
+     * Initialize from data
+     */
+    initData(provider: DataProvider, inputDimensions: DataStoreDimensionDefine[], dimValueGetter?: DimValueGetter): void;
+    getProvider(): DataProvider;
+    /**
+     * Caution: even when a `source` instance owned by a series, the created data store
+     * may still be shared by different sereis (the source hash does not use all `source`
+     * props, see `sourceManager`). In this case, the `source` props that are not used in
+     * hash (like `source.dimensionDefine`) probably only belongs to a certain series and
+     * thus should not be fetch here.
+     */
+    getSource(): Source;
+    /**
+     * @caution Only used in dataStack.
+     */
+    ensureCalculationDimension(dimName: DimensionName, type: DataStoreDimensionType): DimensionIndex;
+    collectOrdinalMeta(dimIdx: number, ordinalMeta: OrdinalMeta): void;
+    getOrdinalMeta(dimIdx: number): OrdinalMeta;
+    getDimensionProperty(dimIndex: DimensionIndex): DataStoreDimensionDefine['property'];
+    /**
+     * Caution: Can be only called on raw data (before `this._indices` created).
+     */
+    appendData(data: ArrayLike<any>): number[];
+    appendValues(values: any[][], minFillLen?: number): {
+        start: number;
+        end: number;
+    };
+    private _initDataFromProvider;
+    count(): number;
+    /**
+     * Get value. Return NaN if idx is out of range.
+     */
+    get(dim: DimensionIndex, idx: number): ParsedValue;
+    getValues(idx: number): ParsedValue[];
+    getValues(dimensions: readonly DimensionIndex[], idx?: number): ParsedValue[];
+    /**
+     * @param dim concrete dim
+     */
+    getByRawIndex(dim: DimensionIndex, rawIdx: number): ParsedValue;
+    /**
+     * Get sum of data in one dimension
+     */
+    getSum(dim: DimensionIndex): number;
+    /**
+     * Get median of data in one dimension
+     */
+    getMedian(dim: DimensionIndex): number;
+    /**
+     * Retrieve the index with given raw data index.
+     */
+    indexOfRawIndex(rawIndex: number): number;
+    getIndices(): ArrayLike<number>;
+    /**
+     * Data filter.
+     */
+    filter(dims: DimensionIndex[], cb: FilterCb): DataStore;
+    /**
+     * Select data in range. (For optimization of filter)
+     * (Manually inline code, support 5 million data filtering in data zoom.)
+     */
+    selectRange(range: {
+        [dimIdx: number]: [number, number];
+    }): DataStore;
+    /**
+     * Data mapping to a new List with given dimensions
+     */
+    map(dims: DimensionIndex[], cb: MapCb): DataStore;
+    /**
+     * @caution Danger!! Only used in dataStack.
+     */
+    modify(dims: DimensionIndex[], cb: MapCb): void;
+    private _updateDims;
+    /**
+     * Large data down sampling using largest-triangle-three-buckets
+     * @param {string} valueDimension
+     * @param {number} targetCount
+     */
+    lttbDownSample(valueDimension: DimensionIndex, rate: number): DataStore;
+    /**
+     * Large data down sampling using min-max
+     * @param {string} valueDimension
+     * @param {number} rate
+     */
+    minmaxDownSample(valueDimension: DimensionIndex, rate: number): DataStore;
+    /**
+     * Large data down sampling on given dimension
+     * @param sampleIndex Sample index for name and id
+     */
+    downSample(dimension: DimensionIndex, rate: number, sampleValue: (frameValues: ArrayLike<ParsedValue>) => ParsedValueNumeric, sampleIndex: (frameValues: ArrayLike<ParsedValue>, value: ParsedValueNumeric) => number): DataStore;
+    /**
+     * Data iteration
+     * @param ctx default this
+     * @example
+     *  list.each('x', function (x, idx) {});
+     *  list.each(['x', 'y'], function (x, y, idx) {});
+     *  list.each(function (idx) {})
+     */
+    each(dims: DimensionIndex[], cb: EachCb): void;
+    /**
+     * Get extent of data in one dimension
+     */
+    getDataExtent(dim: DimensionIndex): [number, number];
+    /**
+     * Get raw data index.
+     * Do not initialize.
+     * Default `getRawIndex`. And it can be changed.
+     */
+    getRawIndex: (idx: number) => number;
+    /**
+     * Get raw data item
+     */
+    getRawDataItem(idx: number): OptionDataItem;
+    /**
+     * Clone shallow.
+     *
+     * @param clonedDims Determine which dims to clone. Will share the data if not specified.
+     */
+    clone(clonedDims?: DimensionIndex[], ignoreIndices?: boolean): DataStore;
+    private _copyCommonProps;
+    private _cloneIndices;
+    private _getRawIdxIdentity;
+    private _getRawIdx;
+    private _updateGetRawIdx;
+    private static internalField;
+}
+
+/**
+ * Represents the dimension requirement of a series.
+ *
+ * NOTICE:
+ * When there are too many dimensions in dataset and many series, only the used dimensions
+ * (i.e., used by coord sys and declared in `series.encode`) are add to `dimensionDefineList`.
+ * But users may query data by other unused dimension names.
+ * In this case, users can only query data if and only if they have defined dimension names
+ * via ec option, so we provide `getDimensionIndexFromSource`, which only query them from
+ * `source` dimensions.
+ */
+declare class SeriesDataSchema {
+    /**
+     * When there are too many dimensions, `dimensionDefineList` might only contain
+     * used dimensions.
+     *
+     * CAUTION:
+     * Should have been sorted by `storeDimIndex` asc.
+     *
+     * PENDING:
+     * The item can still be modified outsite.
+     * But MUST NOT add/remove item of this array.
+     */
+    readonly dimensions: SeriesDimensionDefine[];
+    readonly source: Source;
+    private _fullDimCount;
+    private _dimNameMap;
+    private _dimOmitted;
+    constructor(opt: {
+        source: Source;
+        dimensions: SeriesDimensionDefine[];
+        fullDimensionCount: number;
+        dimensionOmitted: boolean;
+    });
+    isDimensionOmitted(): boolean;
+    private _updateDimOmitted;
+    /**
+     * @caution Can only be used when `dimensionOmitted: true`.
+     *
+     * Get index by user defined dimension name (i.e., not internal generate name).
+     * That is, get index from `dimensionsDefine`.
+     * If no `dimensionsDefine`, or no name get, return -1.
+     */
+    getSourceDimensionIndex(dimName: DimensionName): DimensionIndex;
+    /**
+     * @caution Can only be used when `dimensionOmitted: true`.
+     *
+     * Notice: may return `null`/`undefined` if user not specify dimension names.
+     */
+    getSourceDimension(dimIndex: DimensionIndex): DimensionDefinition;
+    makeStoreSchema(): {
+        dimensions: DataStoreDimensionDefine[];
+        hash: string;
+    };
+    makeOutputDimensionNames(): DimensionName[];
+    appendCalculationDimension(dimDef: SeriesDimensionDefine): void;
+}
+
+interface CoordDimensionDefinition extends DimensionDefinition {
+    dimsDef?: (DimensionName | {
+        name: DimensionName;
+        defaultTooltip?: boolean;
+    })[];
+    otherDims?: DataVisualDimensions;
+    ordinalMeta?: OrdinalMeta;
+    coordDim?: DimensionName;
+    coordDimIndex?: DimensionIndex;
+}
+declare type CoordDimensionDefinitionLoose = CoordDimensionDefinition['name'] | CoordDimensionDefinition;
+declare type PrepareSeriesDataSchemaParams = {
+    coordDimensions?: CoordDimensionDefinitionLoose[];
+    /**
+     * Will use `source.dimensionsDefine` if not given.
+     */
+    dimensionsDefine?: DimensionDefinitionLoose[];
+    /**
+     * Will use `source.encodeDefine` if not given.
+     */
+    encodeDefine?: HashMap<OptionEncodeValue, DimensionName> | OptionEncode;
+    dimensionsCount?: number;
+    /**
+     * Make default encode if user not specified.
+     */
+    encodeDefaulter?: EncodeDefaulter;
+    generateCoord?: string;
+    generateCoordCount?: number;
+    /**
+     * If be able to omit unused dimension
+     * Used to improve the performance on high dimension data.
+     */
+    canOmitUnusedDimensions?: boolean;
+};
+/**
+ * For outside usage compat (like echarts-gl are using it).
+ */
+declare function createDimensions(source: Source | OptionSourceData, opt?: PrepareSeriesDataSchemaParams): SeriesDimensionDefine[];
+
+declare type BoxplotDataValue = OptionDataValueNumeric[];
+interface BoxplotStateOption<TCbParams = never> {
+    itemStyle?: ItemStyleOption<TCbParams>;
+    label?: SeriesLabelOption;
+}
+interface BoxplotDataItemOption extends BoxplotStateOption, StatesOptionMixin<BoxplotStateOption, ExtraStateOption$3> {
+    value: BoxplotDataValue;
+}
+interface ExtraStateOption$3 {
+    emphasis?: {
+        focus?: DefaultEmphasisFocus;
+        scale?: boolean;
+    };
+}
+interface BoxplotSeriesOption extends SeriesOption$1<BoxplotStateOption<CallbackDataParams>, ExtraStateOption$3>, BoxplotStateOption<CallbackDataParams>, SeriesOnCartesianOptionMixin, SeriesEncodeOptionMixin {
+    type?: 'boxplot';
+    coordinateSystem?: 'cartesian2d';
+    layout?: LayoutOrient;
+    /**
+     * [min, max] can be percent of band width.
+     */
+    boxWidth?: (string | number)[];
+    data?: (BoxplotDataValue | BoxplotDataItemOption)[];
+}
+
+declare type CandlestickDataValue = OptionDataValue[];
+interface CandlestickItemStyleOption extends ItemStyleOption {
+    color0?: ZRColor;
+    borderColor0?: ColorString;
+    borderColorDoji?: ZRColor;
+}
+interface CandlestickStateOption {
+    itemStyle?: CandlestickItemStyleOption;
+    label?: SeriesLabelOption;
+}
+interface CandlestickDataItemOption extends CandlestickStateOption, StatesOptionMixin<CandlestickStateOption, ExtraStateOption$4> {
+    value: CandlestickDataValue;
+}
+interface ExtraStateOption$4 {
+    emphasis?: {
+        focus?: DefaultEmphasisFocus;
+        scale?: boolean;
+    };
+}
+interface CandlestickSeriesOption extends SeriesOption$1<CandlestickStateOption, ExtraStateOption$4>, CandlestickStateOption, SeriesOnCartesianOptionMixin, SeriesLargeOptionMixin, SeriesEncodeOptionMixin {
+    type?: 'candlestick';
+    coordinateSystem?: 'cartesian2d';
+    layout?: LayoutOrient;
+    clip?: boolean;
+    barMaxWidth?: number | string;
+    barMinWidth?: number | string;
+    barWidth?: number | string;
+    data?: (CandlestickDataValue | CandlestickDataItemOption)[];
+}
+
+interface RippleEffectOption {
+    period?: number;
+    /**
+     * Scale of ripple
+     */
+    scale?: number;
+    brushType?: 'fill' | 'stroke';
+    color?: ZRColor;
+    /**
+     * ripple number
+     */
+    number?: number;
+}
+interface SymbolDrawStateOption {
+    itemStyle?: ItemStyleOption;
+    label?: LabelOption;
+}
+interface SymbolDrawItemModelOption extends SymbolOptionMixin<object>, StatesOptionMixin<SymbolDrawStateOption, {
+    emphasis?: {
+        focus?: DefaultEmphasisFocus;
+        scale?: boolean | number;
+    };
+}>, SymbolDrawStateOption {
+    cursor?: string;
+    rippleEffect?: RippleEffectOption;
+}
+
+declare type ScatterDataValue = OptionDataValue | OptionDataValue[];
+interface EffectScatterStatesOptionMixin {
+    emphasis?: {
+        focus?: DefaultEmphasisFocus;
+        scale?: boolean | number;
+    };
+}
+interface EffectScatterStateOption<TCbParams = never> {
+    itemStyle?: ItemStyleOption<TCbParams>;
+    label?: SeriesLabelOption;
+}
+interface EffectScatterDataItemOption extends SymbolOptionMixin, EffectScatterStateOption, StatesOptionMixin<EffectScatterStateOption, EffectScatterStatesOptionMixin> {
+    name?: string;
+    value?: ScatterDataValue;
+    rippleEffect?: SymbolDrawItemModelOption['rippleEffect'];
+}
+interface EffectScatterSeriesOption extends SeriesOption$1<EffectScatterStateOption<CallbackDataParams>, EffectScatterStatesOptionMixin>, EffectScatterStateOption<CallbackDataParams>, SeriesOnCartesianOptionMixin, SeriesOnPolarOptionMixin, SeriesOnCalendarOptionMixin, SeriesOnGeoOptionMixin, SeriesOnSingleOptionMixin, SymbolOptionMixin<CallbackDataParams>, SeriesEncodeOptionMixin {
+    type?: 'effectScatter';
+    coordinateSystem?: string;
+    effectType?: 'ripple';
+    /**
+     * When to show the effect
+     */
+    showEffectOn?: 'render' | 'emphasis';
+    clip?: boolean;
+    /**
+     * Ripple effect config
+     */
+    rippleEffect?: SymbolDrawItemModelOption['rippleEffect'];
+    data?: (EffectScatterDataItemOption | ScatterDataValue)[];
+}
+
+interface LineDrawStateOption {
+    lineStyle?: LineStyleOption;
+    label?: LineLabelOption;
+}
+interface LineDrawModelOption extends LineDrawStateOption, StatesOptionMixin<LineDrawStateOption, {
+    emphasis?: {
+        focus?: DefaultEmphasisFocus;
+    };
+}> {
+    effect?: {
+        show?: boolean;
+        period?: number;
+        delay?: number | ((idx: number) => number);
+        /**
+         * If move with constant speed px/sec
+         * period will be ignored if this property is > 0,
+         */
+        constantSpeed?: number;
+        symbol?: string;
+        symbolSize?: number | number[];
+        loop?: boolean;
+        roundTrip?: boolean;
+        /**
+         * Length of trail, 0 - 1
+         */
+        trailLength?: number;
+        /**
+         * Default to be same with lineStyle.color
+         */
+        color?: ColorString;
+    };
+}
+
+declare type LinesCoords = number[][];
+declare type LinesValue = OptionDataValue | OptionDataValue[];
+interface LinesLineStyleOption<TClr> extends LineStyleOption<TClr> {
+    curveness?: number;
+}
+interface LinesStatesMixin {
+    emphasis?: DefaultStatesMixinEmphasis;
+}
+interface LinesStateOption<TCbParams = never> {
+    lineStyle?: LinesLineStyleOption<(TCbParams extends never ? never : (params: TCbParams) => ZRColor) | ZRColor>;
+    label?: SeriesLineLabelOption;
+}
+interface LinesDataItemOption extends LinesStateOption, StatesOptionMixin<LinesStateOption, LinesStatesMixin> {
+    name?: string;
+    fromName?: string;
+    toName?: string;
+    symbol?: string[] | string;
+    symbolSize?: number[] | number;
+    coords?: LinesCoords;
+    value?: LinesValue;
+    effect?: LineDrawModelOption['effect'];
+}
+interface LinesSeriesOption extends SeriesOption$1<LinesStateOption, LinesStatesMixin>, LinesStateOption<CallbackDataParams>, SeriesOnCartesianOptionMixin, SeriesOnGeoOptionMixin, SeriesOnPolarOptionMixin, SeriesOnCalendarOptionMixin, SeriesLargeOptionMixin {
+    type?: 'lines';
+    coordinateSystem?: string;
+    symbol?: string[] | string;
+    symbolSize?: number[] | number;
+    effect?: LineDrawModelOption['effect'];
+    /**
+     * If lines are polyline
+     * polyline not support curveness, label, animation
+     */
+    polyline?: boolean;
+    /**
+     * If clip the overflow.
+     * Available when coordinateSystem is cartesian or polar.
+     */
+    clip?: boolean;
+    data?: LinesDataItemOption[] | ArrayLike<number>;
+    dimensions?: DimensionDefinitionLoose | DimensionDefinitionLoose[];
+}
+
+declare type HeatmapDataValue = OptionDataValue[];
+interface HeatmapStateOption<TCbParams = never> {
+    itemStyle?: ItemStyleOption<TCbParams> & {
+        borderRadius?: number | number[];
+    };
+    label?: SeriesLabelOption;
+}
+interface HeatmapStatesMixin {
+    emphasis?: DefaultStatesMixinEmphasis;
+}
+interface HeatmapDataItemOption extends HeatmapStateOption, StatesOptionMixin<HeatmapStateOption, HeatmapStatesMixin> {
+    value: HeatmapDataValue;
+}
+interface HeatmapSeriesOption extends SeriesOption$1<HeatmapStateOption<CallbackDataParams>, HeatmapStatesMixin>, HeatmapStateOption<CallbackDataParams>, SeriesOnCartesianOptionMixin, SeriesOnGeoOptionMixin, SeriesOnCalendarOptionMixin, SeriesEncodeOptionMixin {
+    type?: 'heatmap';
+    coordinateSystem?: 'cartesian2d' | 'geo' | 'calendar' | 'matrix';
+    blurSize?: number;
+    pointSize?: number;
+    maxOpacity?: number;
+    minOpacity?: number;
+    data?: (HeatmapDataItemOption | HeatmapDataValue)[];
+}
+
+interface PictorialBarStateOption {
+    itemStyle?: ItemStyleOption;
+    label?: SeriesLabelOption<CallbackDataParams, {
+        positionExtra: 'outside';
+    }>;
+}
+interface PictorialBarSeriesSymbolOption {
+    /**
+     * Customized bar shape
+     */
+    symbol?: string;
+    /**
+     * Can be ['100%', '100%'], null means auto.
+     * The percent will be relative to category width. If no repeat.
+     * Will be relative to symbolBoundingData.
+     */
+    symbolSize?: (number | string)[] | number | string;
+    symbolRotate?: number;
+    /**
+     * Default to be auto
+     */
+    symbolPosition?: 'start' | 'end' | 'center';
+    /**
+     * Can be percent offset relative to the symbolSize
+     */
+    symbolOffset?: (number | string)[] | number | string;
+    /**
+     * start margin and end margin. Can be a number or a percent string relative to symbolSize.
+     * Auto margin by default.
+     */
+    symbolMargin?: (number | string)[] | number | string;
+    /**
+     * true: means auto calculate repeat times and cut by data.
+     * a number: specifies repeat times, and do not cut by data.
+     * 'fixed': means auto calculate repeat times but do not cut by data.
+     *
+     * Otherwise means no repeat
+     */
+    symbolRepeat?: boolean | number | 'fixed';
+    /**
+     * From start to end or end to start.
+     */
+    symbolRepeatDirection?: 'start' | 'end';
+    symbolClip?: boolean;
+    /**
+     * It will define the size of graphic elements.
+     */
+    symbolBoundingData?: number | number[];
+    symbolPatternSize?: number;
+}
+interface ExtraStateOption$5 {
+    emphasis?: {
+        focus?: DefaultEmphasisFocus;
+        scale?: boolean;
+    };
+}
+interface PictorialBarDataItemOption extends PictorialBarSeriesSymbolOption, AnimationOptionMixin, PictorialBarStateOption, StatesOptionMixin<PictorialBarStateOption, ExtraStateOption$5>, OptionDataItemObject<OptionDataValue> {
+    z?: number;
+    cursor?: string;
+}
+interface PictorialBarSeriesOption extends BaseBarSeriesOption<PictorialBarStateOption, ExtraStateOption$5>, PictorialBarStateOption, PictorialBarSeriesSymbolOption, SeriesStackOptionMixin, SeriesEncodeOptionMixin {
+    type?: 'pictorialBar';
+    coordinateSystem?: 'cartesian2d';
+    data?: (PictorialBarDataItemOption | OptionDataValue | OptionDataValue[])[];
+    clip?: boolean;
+}
+
+interface ThemeRiverSeriesLabelOption extends SeriesLabelOption {
+    margin?: number;
+}
+declare type ThemerRiverDataItem = [OptionDataValueDate, OptionDataValueNumeric, string];
+interface ThemeRiverStatesMixin {
+    emphasis?: DefaultStatesMixinEmphasis;
+}
+interface ThemeRiverStateOption<TCbParams = never> {
+    label?: ThemeRiverSeriesLabelOption;
+    itemStyle?: ItemStyleOption<TCbParams>;
+}
+interface ThemeRiverSeriesOption extends SeriesOption$1<ThemeRiverStateOption<CallbackDataParams>, ThemeRiverStatesMixin>, ThemeRiverStateOption<CallbackDataParams>, SeriesOnSingleOptionMixin, BoxLayoutOptionMixin {
+    type?: 'themeRiver';
+    color?: ZRColor[];
+    coordinateSystem?: 'singleAxis';
+    /**
+     * gap in axis's orthogonal orientation
+     */
+    boundaryGap?: (string | number)[];
+    /**
+     * [date, value, name]
+     */
+    data?: ThemerRiverDataItem[];
+}
+
+interface SunburstItemStyleOption<TCbParams = never> extends ItemStyleOption<TCbParams> {
+    borderRadius?: (number | string)[] | number | string;
+}
+interface SunburstLabelOption extends Omit<SeriesLabelOption<SunburstDataParams>, 'rotate' | 'position'> {
+    rotate?: 'radial' | 'tangential' | number;
+    minAngle?: number;
+    silent?: boolean;
+    position?: SeriesLabelOption['position'] | 'outside';
+}
+interface SunburstDataParams extends CallbackDataParams {
+    treePathInfo: {
+        name: string;
+        dataIndex: number;
+        value: SunburstSeriesNodeItemOption['value'];
+    }[];
+}
+interface SunburstStatesMixin {
+    emphasis?: {
+        focus?: DefaultEmphasisFocus | 'descendant' | 'ancestor' | 'relative';
+    };
+}
+interface SunburstStateOption<TCbParams = never> {
+    itemStyle?: SunburstItemStyleOption<TCbParams>;
+    label?: SunburstLabelOption;
+}
+interface SunburstSeriesNodeItemOption extends SunburstStateOption<SunburstDataParams>, StatesOptionMixin<SunburstStateOption<SunburstDataParams>, SunburstStatesMixin>, OptionDataItemObject<OptionDataValue> {
+    nodeClick?: 'rootToNode' | 'link' | false;
+    link?: string;
+    target?: string;
+    children?: SunburstSeriesNodeItemOption[];
+    collapsed?: boolean;
+    cursor?: string;
+}
+interface SunburstSeriesLevelOption extends SunburstStateOption<SunburstDataParams>, StatesOptionMixin<SunburstStateOption<SunburstDataParams>, SunburstStatesMixin> {
+    radius?: (number | string)[];
+    /**
+     * @deprecated use radius instead
+     */
+    r?: number | string;
+    /**
+     * @deprecated use radius instead
+     */
+    r0?: number | string;
+    highlight?: {
+        itemStyle?: SunburstItemStyleOption;
+        label?: SunburstLabelOption;
+    };
+}
+interface SortParam {
+    dataIndex: number;
+    depth: number;
+    height: number;
+    getValue(): number;
+}
+interface SunburstSeriesOption extends SeriesOption$1<SunburstStateOption<SunburstDataParams>, SunburstStatesMixin>, SunburstStateOption<SunburstDataParams>, SunburstColorByMixin, CircleLayoutOptionMixin {
+    type?: 'sunburst';
+    clockwise?: boolean;
+    startAngle?: number;
+    minAngle?: number;
+    /**
+     * If still show when all data zero.
+     */
+    stillShowZeroSum?: boolean;
+    /**
+     * Policy of highlighting pieces when hover on one
+     * Valid values: 'none' (for not downplay others), 'descendant',
+     * 'ancestor', 'self'
+     */
+    nodeClick?: 'rootToNode' | 'link' | false;
+    renderLabelForZeroData?: boolean;
+    data?: SunburstSeriesNodeItemOption[];
+    levels?: SunburstSeriesLevelOption[];
+    animationType?: 'expansion' | 'scale';
+    sort?: 'desc' | 'asc' | ((a: SortParam, b: SortParam) => number);
+}
+
+interface TransitionOptionMixin<T = Record<string, any>> {
+    transition?: (keyof T & string) | ((keyof T & string)[]) | 'all';
+    enterFrom?: T;
+    leaveTo?: T;
+    enterAnimation?: AnimationOption$1;
+    updateAnimation?: AnimationOption$1;
+    leaveAnimation?: AnimationOption$1;
+}
+interface TransitionBaseDuringAPI {
+    setTransform(key: TransformProp, val: number): this;
+    getTransform(key: TransformProp): number;
+    setExtra(key: string, val: unknown): this;
+    getExtra(key: string): unknown;
+}
+interface TransitionDuringAPI<StyleOpt extends any = any, ShapeOpt extends any = any> extends TransitionBaseDuringAPI {
+    setShape<T extends keyof ShapeOpt>(key: T, val: ShapeOpt[T]): this;
+    getShape<T extends keyof ShapeOpt>(key: T): ShapeOpt[T];
+    setStyle<T extends keyof StyleOpt>(key: T, val: StyleOpt[T]): this;
+    getStyle<T extends keyof StyleOpt>(key: T): StyleOpt[T];
+}
+
+declare type AnimationKeyframe<T extends Record<string, any>> = T & {
+    easing?: AnimationEasing;
+    percent?: number;
+};
+interface ElementKeyframeAnimationOption<Props extends Record<string, any>> extends AnimationOption$1 {
+    loop?: boolean;
+    keyframes?: AnimationKeyframe<Props>[];
+}
+
+interface GraphicComponentBaseElementOption extends Partial<Pick<Element, TransformProp | 'silent' | 'ignore' | 'textConfig' | 'draggable' | ElementEventNameWithOn>>, 
+/**
+ * left/right/top/bottom: (like 12, '22%', 'center', default undefined)
+ * If left/right is set, shape.x/shape.cx/position will not be used.
+ * If top/bottom is set, shape.y/shape.cy/position will not be used.
+ * This mechanism is useful when you want to position a group/element
+ * against the right side or the center of this container.
+ */
+Partial<Pick<BoxLayoutOptionMixin, 'left' | 'right' | 'top' | 'bottom'>> {
+    /**
+     * element type, mandatory.
+     * Only can be omit if call setOption not at the first time and perform merge.
+     */
+    type?: string;
+    id?: OptionId;
+    name?: string;
+    parentId?: OptionId;
+    parentOption?: GraphicComponentElementOption;
+    children?: GraphicComponentElementOption[];
+    hv?: [boolean, boolean];
+    /**
+     * bounding: (enum: 'all' (default) | 'raw')
+     * Specify how to calculate boundingRect when locating.
+     * 'all': Get uioned and transformed boundingRect
+     *     from both itself and its descendants.
+     *     This mode simplies confining a group of elements in the bounding
+     *     of their ancester container (e.g., using 'right: 0').
+     * 'raw': Only use the boundingRect of itself and before transformed.
+     *     This mode is similar to css behavior, which is useful when you
+     *     want an element to be able to overflow its container. (Consider
+     *     a rotated circle needs to be located in a corner.)
+     */
+    bounding?: 'raw' | 'all';
+    /**
+     * info: custom info. enables user to mount some info on elements and use them
+     * in event handlers. Update them only when user specified, otherwise, remain.
+     */
+    info?: GraphicExtraElementInfo;
+    clipPath?: Omit<GraphicComponentZRPathOption, 'clipPath'> | false;
+    textContent?: Omit<GraphicComponentTextOption, 'clipPath'>;
+    textConfig?: ElementTextConfig;
+    $action?: 'merge' | 'replace' | 'remove';
+    tooltip?: CommonTooltipOption<unknown>;
+    enterAnimation?: AnimationOption$1;
+    updateAnimation?: AnimationOption$1;
+    leaveAnimation?: AnimationOption$1;
+}
+interface GraphicComponentDisplayableOption extends GraphicComponentBaseElementOption, Partial<Pick<Displayable, 'zlevel' | 'z' | 'z2' | 'invisible' | 'cursor'>> {
+    style?: ZRStyleProps;
+    z2?: number;
+}
+interface GraphicComponentGroupOption extends GraphicComponentBaseElementOption, TransitionOptionMixin<GroupProps> {
+    type?: 'group';
+    /**
+     * width/height: (can only be pixel value, default 0)
+     * Is only used to specify container (group) size, if needed. And
+     * cannot be a percentage value (like '33%'). See the reason in the
+     * layout algorithm below.
+     */
+    width?: number;
+    height?: number;
+    children: GraphicComponentElementOption[];
+    keyframeAnimation?: ElementKeyframeAnimationOption<GroupProps> | ElementKeyframeAnimationOption<GroupProps>[];
+}
+interface GraphicComponentZRPathOption extends GraphicComponentDisplayableOption, TransitionOptionMixin<PathProps> {
+    shape?: PathProps['shape'] & TransitionOptionMixin<PathProps['shape']>;
+    style?: PathStyleProps & TransitionOptionMixin<PathStyleProps>;
+    keyframeAnimation?: ElementKeyframeAnimationOption<PathProps> | ElementKeyframeAnimationOption<PathProps>[];
+}
+interface GraphicComponentImageOption extends GraphicComponentDisplayableOption, TransitionOptionMixin<ImageProps> {
+    type?: 'image';
+    style?: ImageStyleProps & TransitionOptionMixin<ImageStyleProps>;
+    keyframeAnimation?: ElementKeyframeAnimationOption<ImageProps> | ElementKeyframeAnimationOption<ImageProps>[];
+}
+interface GraphicComponentTextOption extends Omit<GraphicComponentDisplayableOption, 'textContent' | 'textConfig'>, TransitionOptionMixin<TextProps> {
+    type?: 'text';
+    style?: TextStyleProps & TransitionOptionMixin<TextStyleProps>;
+    keyframeAnimation?: ElementKeyframeAnimationOption<TextProps> | ElementKeyframeAnimationOption<TextProps>[];
+}
+declare type GraphicComponentElementOption = GraphicComponentGroupOption | GraphicComponentZRPathOption | GraphicComponentImageOption | GraphicComponentTextOption;
+declare type GraphicExtraElementInfo = Dictionary<unknown>;
+declare type GraphicComponentLooseOption = (GraphicComponentOption | GraphicComponentElementOption) & {
+    mainType?: 'graphic';
+};
+interface GraphicComponentOption extends ComponentOption, AnimationOptionMixin {
+    elements?: GraphicComponentElementOption[];
+}
+
+declare const ICON_TYPES: readonly ["rect", "polygon", "lineX", "lineY", "keep", "clear"];
+declare type IconType = typeof ICON_TYPES[number];
+interface ToolboxBrushFeatureOption extends ToolboxFeatureOption {
+    type?: IconType[];
+    icon?: {
+        [key in IconType]?: string;
+    };
+    title?: {
+        [key in IconType]?: string;
+    };
+}
+
+interface ToolboxDataViewFeatureOption extends ToolboxFeatureOption {
+    readOnly?: boolean;
+    optionToContent?: (option: ECUnitOption) => string | HTMLElement;
+    contentToOption?: (viewMain: HTMLDivElement, oldOption: ECUnitOption) => ECUnitOption;
+    icon?: string;
+    title?: string;
+    lang?: string[];
+    backgroundColor?: ColorString;
+    textColor?: ColorString;
+    textareaColor?: ColorString;
+    textareaBorderColor?: ColorString;
+    buttonColor?: ColorString;
+    buttonTextColor?: ColorString;
+}
+
+declare const ICON_TYPES$1: readonly ["zoom", "back"];
+declare type IconType$1 = typeof ICON_TYPES$1[number];
+interface ToolboxDataZoomFeatureOption extends ToolboxFeatureOption {
+    type?: IconType$1[];
+    icon?: {
+        [key in IconType$1]?: string;
+    };
+    title?: {
+        [key in IconType$1]?: string;
+    };
+    filterMode?: 'filter' | 'weakFilter' | 'empty' | 'none';
+    xAxisIndex?: ModelFinderIndexQuery;
+    yAxisIndex?: ModelFinderIndexQuery;
+    xAxisId?: ModelFinderIdQuery;
+    yAxisId?: ModelFinderIdQuery;
+    brushStyle?: ItemStyleOption;
+}
+
+declare const ICON_TYPES$2: readonly ["line", "bar", "stack"];
+declare const TITLE_TYPES: readonly ["line", "bar", "stack", "tiled"];
+declare type IconType$2 = typeof ICON_TYPES$2[number];
+declare type TitleType = typeof TITLE_TYPES[number];
+interface ToolboxMagicTypeFeatureOption extends ToolboxFeatureOption {
+    type?: IconType$2[];
+    /**
+     * Icon group
+     */
+    icon?: {
+        [key in IconType$2]?: string;
+    };
+    title?: {
+        [key in TitleType]?: string;
+    };
+    option?: {
+        [key in IconType$2]?: SeriesOption$1;
+    };
+    /**
+     * Map of seriesType: seriesIndex
+     */
+    seriesIndex?: {
+        line?: number;
+        bar?: number;
+    };
+}
+
+interface ToolboxRestoreFeatureOption extends ToolboxFeatureOption {
+    icon?: string;
+    title?: string;
+}
+
+interface ToolboxSaveAsImageFeatureOption extends ToolboxFeatureOption {
+    icon?: string;
+    title?: string;
+    type?: 'png' | 'jpeg';
+    backgroundColor?: ZRColor;
+    connectedBackgroundColor?: ZRColor;
+    name?: string;
+    excludeComponents?: string[];
+    pixelRatio?: number;
+    lang?: string[];
+}
+
+interface ToolboxComponentOption extends ToolboxOption {
+    feature?: {
+        brush?: ToolboxBrushFeatureOption;
+        dataView?: ToolboxDataViewFeatureOption;
+        dataZoom?: ToolboxDataZoomFeatureOption;
+        magicType?: ToolboxMagicTypeFeatureOption;
+        restore?: ToolboxRestoreFeatureOption;
+        saveAsImage?: ToolboxSaveAsImageFeatureOption;
+        [key: string]: ToolboxFeatureOption | {
+            [key: string]: any;
+        } | undefined;
+    };
+}
+
+declare type DataZoomComponentOption = SliderDataZoomOption | InsideDataZoomOption;
+
+declare type VisualMapComponentOption = ContinousVisualMapOption | PiecewiseVisualMapOption;
+
+declare type LegendComponentOption = LegendOption | ScrollableLegendOption;
+
+declare type SeriesInjectedOption = {
+    markArea?: MarkAreaOption;
+    markLine?: MarkLineOption;
+    markPoint?: MarkPointOption;
+    tooltip?: SeriesTooltipOption;
+};
+declare type LineSeriesOption$1 = LineSeriesOption & SeriesInjectedOption;
+declare type BarSeriesOption = BarSeriesOption$1 & SeriesInjectedOption;
+declare type ScatterSeriesOption$1 = ScatterSeriesOption & SeriesInjectedOption;
+declare type PieSeriesOption$1 = PieSeriesOption & SeriesInjectedOption;
+declare type RadarSeriesOption$1 = RadarSeriesOption & SeriesInjectedOption;
+declare type MapSeriesOption$1 = MapSeriesOption & SeriesInjectedOption;
+declare type TreeSeriesOption$1 = TreeSeriesOption & SeriesInjectedOption;
+declare type TreemapSeriesOption$1 = TreemapSeriesOption & SeriesInjectedOption;
+declare type GraphSeriesOption$1 = GraphSeriesOption & SeriesInjectedOption;
+declare type ChordSeriesOption$1 = ChordSeriesOption & SeriesInjectedOption;
+declare type GaugeSeriesOption$1 = GaugeSeriesOption & SeriesInjectedOption;
+declare type FunnelSeriesOption$1 = FunnelSeriesOption & SeriesInjectedOption;
+declare type ParallelSeriesOption$1 = ParallelSeriesOption & SeriesInjectedOption;
+declare type SankeySeriesOption$1 = SankeySeriesOption & SeriesInjectedOption;
+declare type BoxplotSeriesOption$1 = BoxplotSeriesOption & SeriesInjectedOption;
+declare type CandlestickSeriesOption$1 = CandlestickSeriesOption & SeriesInjectedOption;
+declare type EffectScatterSeriesOption$1 = EffectScatterSeriesOption & SeriesInjectedOption;
+declare type LinesSeriesOption$1 = LinesSeriesOption & SeriesInjectedOption;
+declare type HeatmapSeriesOption$1 = HeatmapSeriesOption & SeriesInjectedOption;
+declare type PictorialBarSeriesOption$1 = PictorialBarSeriesOption & SeriesInjectedOption;
+declare type ThemeRiverSeriesOption$1 = ThemeRiverSeriesOption & SeriesInjectedOption;
+declare type SunburstSeriesOption$1 = SunburstSeriesOption & SeriesInjectedOption;
+declare type CustomSeriesOption = CustomSeriesOption$1 & SeriesInjectedOption;
+/**
+ * A map from series 'type' to series option
+ * It's used for declaration merging in echarts extensions.
+ * For example:
+ * ```ts
+ * import echarts from 'echarts';
+ * declare module 'echarts/types/dist/echarts' {
+ *   interface RegisteredSeriesOption {
+ *     wordCloud: WordCloudSeriesOption
+ *   }
+ * }
+ * ```
+ */
+interface RegisteredSeriesOption {
+    line: LineSeriesOption$1;
+    bar: BarSeriesOption;
+    scatter: ScatterSeriesOption$1;
+    pie: PieSeriesOption$1;
+    radar: RadarSeriesOption$1;
+    map: MapSeriesOption$1;
+    tree: TreeSeriesOption$1;
+    treemap: TreemapSeriesOption$1;
+    graph: GraphSeriesOption$1;
+    chord: ChordSeriesOption$1;
+    gauge: GaugeSeriesOption$1;
+    funnel: FunnelSeriesOption$1;
+    parallel: ParallelSeriesOption$1;
+    sankey: SankeySeriesOption$1;
+    boxplot: BoxplotSeriesOption$1;
+    candlestick: CandlestickSeriesOption$1;
+    effectScatter: EffectScatterSeriesOption$1;
+    lines: LinesSeriesOption$1;
+    heatmap: HeatmapSeriesOption$1;
+    pictorialBar: PictorialBarSeriesOption$1;
+    themeRiver: ThemeRiverSeriesOption$1;
+    sunburst: SunburstSeriesOption$1;
+    custom: CustomSeriesOption;
+}
+declare type Values<T> = T[keyof T];
+declare type SeriesOption = Values<RegisteredSeriesOption>;
+interface EChartsOption extends ECBasicOption {
+    dataset?: DatasetOption | DatasetOption[];
+    aria?: AriaOption;
+    title?: TitleOption | TitleOption[];
+    grid?: GridOption | GridOption[];
+    radar?: RadarOption | RadarOption[];
+    polar?: PolarOption | PolarOption[];
+    geo?: GeoOption | GeoOption[];
+    angleAxis?: AngleAxisOption | AngleAxisOption[];
+    radiusAxis?: RadiusAxisOption | RadiusAxisOption[];
+    xAxis?: XAXisOption | XAXisOption[];
+    yAxis?: YAXisOption | YAXisOption[];
+    singleAxis?: SingleAxisOption | SingleAxisOption[];
+    parallel?: ParallelCoordinateSystemOption | ParallelCoordinateSystemOption[];
+    parallelAxis?: ParallelAxisOption | ParallelAxisOption[];
+    calendar?: CalendarOption | CalendarOption[];
+    matrix?: MatrixOption | MatrixOption[];
+    toolbox?: ToolboxComponentOption | ToolboxComponentOption[];
+    tooltip?: TooltipOption | TooltipOption[];
+    axisPointer?: AxisPointerOption | AxisPointerOption[];
+    brush?: BrushOption | BrushOption[];
+    timeline?: TimelineOption | SliderTimelineOption;
+    legend?: LegendComponentOption | (LegendComponentOption)[];
+    dataZoom?: DataZoomComponentOption | (DataZoomComponentOption)[];
+    visualMap?: VisualMapComponentOption | (VisualMapComponentOption)[];
+    thumbnail?: ThumbnailOption | (ThumbnailOption)[];
+    graphic?: GraphicComponentLooseOption | GraphicComponentLooseOption[];
+    series?: SeriesOption | SeriesOption[];
+    options?: EChartsOption[];
+    baseOption?: EChartsOption;
+}
 
 declare type GeoSVGSourceInput = string | Document | SVGElement;
 declare type GeoJSONSourceInput = string | GeoJSON | GeoJSONCompressed;
@@ -3264,197 +6937,6 @@ declare class GeoJSONRegion extends Region {
     cloneShallow(name: string): GeoJSONRegion;
 }
 
-declare type ECSymbol = Path & {
-    __isEmptyBrush?: boolean;
-    setColor: (color: ZRColor, innerColor?: ZRColor) => void;
-    getColor: () => ZRColor;
-};
-/**
- * Create a symbol element with given symbol configuration: shape, x, y, width, height, color
- */
-declare function createSymbol(symbolType: string, x: number, y: number, w: number, h: number, color?: ZRColor, keepAspect?: boolean): ECSymbol;
-
-declare type ItemStyleKeys = 'fill' | 'stroke' | 'decal' | 'lineWidth' | 'opacity' | 'shadowBlur' | 'shadowOffsetX' | 'shadowOffsetY' | 'shadowColor' | 'lineDash' | 'lineDashOffset' | 'lineCap' | 'lineJoin' | 'miterLimit';
-declare type ItemStyleProps = Pick<PathStyleProps, ItemStyleKeys>;
-declare class ItemStyleMixin {
-    getItemStyle(this: Model, excludes?: readonly (keyof ItemStyleOption)[], includes?: readonly (keyof ItemStyleOption)[]): ItemStyleProps;
-}
-
-declare type LineStyleKeys = 'lineWidth' | 'stroke' | 'opacity' | 'shadowBlur' | 'shadowOffsetX' | 'shadowOffsetY' | 'shadowColor' | 'lineDash' | 'lineDashOffset' | 'lineCap' | 'lineJoin' | 'miterLimit';
-declare type LineStyleProps = Pick<PathStyleProps, LineStyleKeys>;
-declare class LineStyleMixin {
-    getLineStyle(this: Model, excludes?: readonly (keyof LineStyleOption)[]): LineStyleProps;
-}
-
-declare type SelectorType = 'all' | 'inverse';
-interface LegendSelectorButtonOption {
-    type?: SelectorType;
-    title?: string;
-}
-/**
- * T: the type to be extended
- * ET: extended type for keys of T
- * ST: special type for T to be extended
- */
-declare type ExtendPropertyType<T, ET, ST extends {
-    [key in keyof T]: any;
-}> = {
-    [key in keyof T]: key extends keyof ST ? T[key] | ET | ST[key] : T[key] | ET;
-};
-interface LegendItemStyleOption extends ExtendPropertyType<ItemStyleOption, 'inherit', {
-    borderWidth: 'auto';
-}> {
-}
-interface LegendLineStyleOption extends ExtendPropertyType<LineStyleOption, 'inherit', {
-    width: 'auto';
-}> {
-    inactiveColor?: ColorString;
-    inactiveWidth?: number;
-}
-interface LegendStyleOption {
-    /**
-     * Icon of the legend items.
-     * @default 'roundRect'
-     */
-    icon?: string;
-    /**
-     * Color when legend item is not selected
-     */
-    inactiveColor?: ColorString;
-    /**
-     * Border color when legend item is not selected
-     */
-    inactiveBorderColor?: ColorString;
-    /**
-     * Border color when legend item is not selected
-     */
-    inactiveBorderWidth?: number | 'auto';
-    /**
-     * Legend label formatter
-     */
-    formatter?: string | ((name: string) => string);
-    itemStyle?: LegendItemStyleOption;
-    lineStyle?: LegendLineStyleOption;
-    textStyle?: LabelOption;
-    symbolRotate?: number | 'inherit';
-    /**
-     * @deprecated
-     */
-    symbolKeepAspect?: boolean;
-}
-interface DataItem extends LegendStyleOption {
-    name?: string;
-    icon?: string;
-    textStyle?: LabelOption;
-    tooltip?: unknown;
-}
-interface LegendTooltipFormatterParams {
-    componentType: 'legend';
-    legendIndex: number;
-    name: string;
-    $vars: ['name'];
-}
-interface LegendIconParams {
-    itemWidth: number;
-    itemHeight: number;
-    /**
-     * symbolType is from legend.icon, legend.data.icon, or series visual
-     */
-    icon: string;
-    iconRotate: number | 'inherit';
-    symbolKeepAspect: boolean;
-    itemStyle: PathStyleProps;
-    lineStyle: LineStyleProps;
-}
-interface LegendOption extends ComponentOption, LegendStyleOption, BoxLayoutOptionMixin, BorderOptionMixin {
-    mainType?: 'legend';
-    show?: boolean;
-    orient?: LayoutOrient;
-    align?: 'auto' | 'left' | 'right';
-    backgroundColor?: ColorString;
-    /**
-     * Border radius of background rect
-     * @default 0
-     */
-    borderRadius?: number | number[];
-    /**
-     * Padding between legend item and border.
-     * Support to be a single number or an array.
-     * @default 5
-     */
-    padding?: number | number[];
-    /**
-     * Gap between each legend item.
-     * @default 10
-     */
-    itemGap?: number;
-    /**
-     * Width of legend symbol
-     */
-    itemWidth?: number;
-    /**
-     * Height of legend symbol
-     */
-    itemHeight?: number;
-    selectedMode?: boolean | 'single' | 'multiple';
-    /**
-     * selected map of each item. Default to be selected if item is not in the map
-     */
-    selected?: Dictionary<boolean>;
-    /**
-     * Buttons for all select or inverse select.
-     * @example
-     *  selector: [{type: 'all or inverse', title: xxx}]
-     *  selector: true
-     *  selector: ['all', 'inverse']
-     */
-    selector?: (LegendSelectorButtonOption | SelectorType)[] | boolean;
-    selectorLabel?: LabelOption;
-    emphasis?: {
-        selectorLabel?: LabelOption;
-    };
-    /**
-     * Position of selector buttons.
-     */
-    selectorPosition?: 'auto' | 'start' | 'end';
-    /**
-     * Gap between each selector button
-     */
-    selectorItemGap?: number;
-    /**
-     * Gap between selector buttons group and legend main items.
-     */
-    selectorButtonGap?: number;
-    data?: (string | DataItem)[];
-    /**
-     * Tooltip option
-     */
-    tooltip?: CommonTooltipOption<LegendTooltipFormatterParams>;
-}
-
-interface MapStateOption<TCbParams = never> {
-    itemStyle?: GeoItemStyleOption<TCbParams>;
-    label?: SeriesLabelOption;
-}
-interface MapDataItemOption extends MapStateOption, StatesOptionMixin<MapStateOption, StatesMixinBase>, OptionDataItemObject<OptionDataValueNumeric> {
-    cursor?: string;
-    silent?: boolean;
-}
-declare type MapValueCalculationType = 'sum' | 'average' | 'min' | 'max';
-interface MapSeriesOption extends SeriesOption<MapStateOption<CallbackDataParams>, StatesMixinBase>, MapStateOption<CallbackDataParams>, GeoCommonOptionMixin, SeriesOnGeoOptionMixin, BoxLayoutOptionMixin, SeriesEncodeOptionMixin {
-    type?: 'map';
-    coordinateSystem?: string;
-    silent?: boolean;
-    markLine?: any;
-    markPoint?: any;
-    markArea?: any;
-    mapValueCalculation?: MapValueCalculationType;
-    showLegendSymbol?: boolean;
-    geoCoord?: Dictionary<number[]>;
-    data?: (OptionDataValueNumeric | OptionDataValueNumeric[] | MapDataItemOption)[];
-    nameProperty?: string;
-}
-
 interface GeoItemStyleOption<TCbParams = never> extends ItemStyleOption<TCbParams> {
     areaColor?: ZRColor;
 }
@@ -3481,11 +6963,12 @@ interface GeoTooltipFormatterParams {
     name: string;
     $vars: ['name'];
 }
-interface GeoCommonOptionMixin extends RoamOptionMixin {
+interface GeoCommonOptionMixin extends RoamOptionMixin, PreserveAspectMixin {
     map: string;
     aspectScale?: number;
     layoutCenter?: (number | string)[];
     layoutSize?: number | string;
+    clip?: boolean;
     boundingCoords?: number[][];
     nameMap?: NameMap;
     nameProperty?: string;
@@ -3506,6 +6989,10 @@ interface GeoOption extends ComponentOption, BoxLayoutOptionMixin, AnimationOpti
     selectedMode?: 'single' | 'multiple' | boolean;
     selectedMap?: Dictionary<boolean>;
     tooltip?: CommonTooltipOption<GeoTooltipFormatterParams>;
+    /**
+     * @private
+     */
+    defaultItemStyleColor?: ZRColor;
 }
 
 /**
@@ -3561,6 +7048,10 @@ interface BrushOption extends ComponentOption, ModelFinderObject {
     transformable?: boolean;
     brushMode?: BrushMode;
     removeOnClick?: boolean;
+    /**
+     * @private
+     */
+    defaultOutOfBrushColor?: ColorString;
 }
 
 interface BrushSelectableArea extends BrushAreaParamInternal {
@@ -3576,10 +7067,10 @@ interface BrushCommonSelectorsForSeries {
     rect(itemLayout: RectLike): boolean;
 }
 
-declare type PolarBarLabelPosition = SeriesLabelOption['position'] | 'start' | 'insideStart' | 'middle' | 'end' | 'insideEnd';
-declare type BarSeriesLabelOption = Omit<SeriesLabelOption, 'position'> & {
-    position?: PolarBarLabelPosition | 'outside';
-};
+declare type PolarBarLabelPositionExtra = 'start' | 'insideStart' | 'middle' | 'end' | 'insideEnd';
+declare type BarSeriesLabelOption = SeriesLabelOption<CallbackDataParams, {
+    positionExtra: PolarBarLabelPositionExtra | 'outside';
+}>;
 interface BarStateOption<TCbParams = never> {
     itemStyle?: BarItemStyleOption<TCbParams>;
     label?: BarSeriesLabelOption;
@@ -3593,7 +7084,7 @@ interface BarItemStyleOption<TCbParams = never> extends ItemStyleOption<TCbParam
 interface BarDataItemOption extends BarStateOption, StatesOptionMixin<BarStateOption, BarStatesMixin>, OptionDataItemObject<OptionDataValue> {
     cursor?: string;
 }
-interface BarSeriesOption extends BaseBarSeriesOption<BarStateOption<CallbackDataParams>, BarStatesMixin>, BarStateOption<CallbackDataParams>, SeriesStackOptionMixin, SeriesSamplingOptionMixin, SeriesEncodeOptionMixin {
+interface BarSeriesOption$1 extends BaseBarSeriesOption<BarStateOption<CallbackDataParams>, BarStatesMixin>, BarStateOption<CallbackDataParams>, SeriesStackOptionMixin, SeriesSamplingOptionMixin, SeriesEncodeOptionMixin {
     type?: 'bar';
     coordinateSystem?: 'cartesian2d' | 'polar';
     clip?: boolean;
@@ -3603,7 +7094,6 @@ interface BarSeriesOption extends BaseBarSeriesOption<BarStateOption<CallbackDat
      */
     roundCap?: boolean;
     showBackground?: boolean;
-    startValue?: number;
     backgroundStyle?: ItemStyleOption & {
         borderRadius?: number | number[];
     };
@@ -3633,36 +7123,6 @@ interface BarGridLayoutOptionForCustomSeries {
     barCategoryGap?: number | string;
 }
 declare type BarGridLayoutResult = BarWidthAndOffset[string][string][];
-
-interface TransitionOptionMixin<T = Record<string, any>> {
-    transition?: (keyof T & string) | ((keyof T & string)[]) | 'all';
-    enterFrom?: T;
-    leaveTo?: T;
-    enterAnimation?: AnimationOption$1;
-    updateAnimation?: AnimationOption$1;
-    leaveAnimation?: AnimationOption$1;
-}
-interface TransitionBaseDuringAPI {
-    setTransform(key: TransformProp, val: number): this;
-    getTransform(key: TransformProp): number;
-    setExtra(key: string, val: unknown): this;
-    getExtra(key: string): unknown;
-}
-interface TransitionDuringAPI<StyleOpt extends any = any, ShapeOpt extends any = any> extends TransitionBaseDuringAPI {
-    setShape<T extends keyof ShapeOpt>(key: T, val: ShapeOpt[T]): this;
-    getShape<T extends keyof ShapeOpt>(key: T): ShapeOpt[T];
-    setStyle<T extends keyof StyleOpt>(key: T, val: StyleOpt[T]): this;
-    getStyle<T extends keyof StyleOpt>(key: T): StyleOpt[T];
-}
-
-declare type AnimationKeyframe<T extends Record<string, any>> = T & {
-    easing?: AnimationEasing;
-    percent?: number;
-};
-interface ElementKeyframeAnimationOption<Props extends Record<string, any>> extends AnimationOption$1 {
-    loop?: boolean;
-    keyframes?: AnimationKeyframe<Props>[];
-}
 
 declare type CustomExtraElementInfo = Dictionary<unknown>;
 declare const STYLE_VISUAL_TYPE: {
@@ -3694,6 +7154,7 @@ interface CustomBaseElementOption extends Partial<Pick<Element, TransformProp | 
     info?: CustomExtraElementInfo;
     textContent?: CustomTextOption | false;
     clipPath?: CustomBaseZRPathOption | false;
+    tooltipDisabled?: boolean;
     extra?: Dictionary<unknown> & TransitionOptionMixin;
     during?(params: TransitionBaseDuringAPI): void;
     enterAnimation?: AnimationOption$1;
@@ -3788,7 +7249,19 @@ interface CustomTextOption extends CustomDisplayableOption, TransitionOptionMixi
     select?: CustomTextOptionOnState;
     keyframeAnimation?: ElementKeyframeAnimationOption<TextProps> | ElementKeyframeAnimationOption<TextProps>[];
 }
-declare type CustomElementOption = CustomPathOption | CustomImageOption | CustomTextOption | CustomGroupOption;
+interface CustomompoundPathOptionOnState extends CustomDisplayableOptionOnState {
+    style?: PathStyleProps;
+}
+interface CustomCompoundPathOption extends CustomDisplayableOption, TransitionOptionMixin<PathProps> {
+    type: 'compoundPath';
+    shape?: PathProps['shape'];
+    style?: PathStyleProps & TransitionOptionMixin<PathStyleProps>;
+    emphasis?: CustomompoundPathOptionOnState;
+    blur?: CustomompoundPathOptionOnState;
+    select?: CustomompoundPathOptionOnState;
+    keyframeAnimation?: ElementKeyframeAnimationOption<PathProps> | ElementKeyframeAnimationOption<PathProps>[];
+}
+declare type CustomElementOption = CustomPathOption | CustomImageOption | CustomTextOption | CustomCompoundPathOption | CustomGroupOption;
 declare type CustomRootElementOption = CustomElementOption & {
     focus?: 'none' | 'self' | 'series' | ArrayLike<number>;
     blurScope?: BlurScope;
@@ -3818,8 +7291,9 @@ interface CustomSeriesRenderItemParamsCoordSys {
     type: string;
 }
 interface CustomSeriesRenderItemCoordinateSystemAPI {
-    coord(data: OptionDataValue | OptionDataValue[], clamp?: boolean): number[];
+    coord(data: (OptionDataValue | NullUndefined$1) | (OptionDataValue | NullUndefined$1)[] | (OptionDataValue | OptionDataValue[] | NullUndefined$1)[], opt?: unknown): number[];
     size?(dataSize: OptionDataValue | OptionDataValue[], dataItem?: OptionDataValue | OptionDataValue[]): number | number[];
+    layout?(data: (OptionDataValue | NullUndefined$1) | (OptionDataValue | NullUndefined$1)[] | (OptionDataValue | OptionDataValue[] | NullUndefined$1)[], opt?: unknown): CoordinateSystemDataLayout;
 }
 declare type WrapEncodeDefRet = Dictionary<number[]>;
 interface CustomSeriesRenderItemParams {
@@ -3832,15 +7306,17 @@ interface CustomSeriesRenderItemParams {
     encode: WrapEncodeDefRet;
     dataIndexInside: number;
     dataInsideLength: number;
+    itemPayload: Dictionary<unknown>;
     actionType?: string;
 }
 declare type CustomSeriesRenderItemReturn = CustomRootElementOption | undefined | null;
 declare type CustomSeriesRenderItem = (params: CustomSeriesRenderItemParams, api: CustomSeriesRenderItemAPI) => CustomSeriesRenderItemReturn;
-interface CustomSeriesOption extends SeriesOption<unknown>, // don't support StateOption in custom series.
+interface CustomSeriesOption$1 extends SeriesOption$1<unknown>, // don't support StateOption in custom series.
 SeriesEncodeOptionMixin, SeriesOnCartesianOptionMixin, SeriesOnPolarOptionMixin, SeriesOnSingleOptionMixin, SeriesOnGeoOptionMixin, SeriesOnCalendarOptionMixin {
     type?: 'custom';
     coordinateSystem?: string | 'none';
     renderItem?: CustomSeriesRenderItem;
+    itemPayload?: Dictionary<unknown>;
     /**
      * @deprecated
      */
@@ -3869,6 +7345,246 @@ declare type PrepareCustomInfo = (coordSys: CoordinateSystem) => {
     api: CustomSeriesRenderItemCoordinateSystemAPI;
 };
 
+declare const extensionRegisters: {
+    registerPreprocessor: typeof registerPreprocessor;
+    registerProcessor: typeof registerProcessor;
+    registerPostInit: typeof registerPostInit;
+    registerPostUpdate: typeof registerPostUpdate;
+    registerUpdateLifecycle: typeof registerUpdateLifecycle;
+    registerAction: typeof registerAction;
+    registerCoordinateSystem: typeof registerCoordinateSystem;
+    registerLayout: typeof registerLayout;
+    registerVisual: typeof registerVisual;
+    registerTransform: typeof registerExternalTransform;
+    registerLoading: typeof registerLoading;
+    registerMap: typeof registerMap;
+    registerImpl: typeof registerImpl;
+    PRIORITY: {
+        PROCESSOR: {
+            FILTER: number;
+            SERIES_FILTER: number;
+            STATISTIC: number;
+        };
+        VISUAL: {
+            LAYOUT: number;
+            PROGRESSIVE_LAYOUT: number;
+            GLOBAL: number;
+            CHART: number;
+            POST_CHART_LAYOUT: number;
+            COMPONENT: number;
+            BRUSH: number;
+            CHART_ITEM: number;
+            ARIA: number;
+            DECAL: number;
+        };
+    };
+    ComponentModel: typeof ComponentModel;
+    ComponentView: typeof ComponentView;
+    SeriesModel: typeof SeriesModel;
+    ChartView: typeof ChartView;
+    registerComponentModel(ComponentModelClass: Constructor): void;
+    registerComponentView(ComponentViewClass: typeof ComponentView): void;
+    registerSeriesModel(SeriesModelClass: Constructor): void;
+    registerChartView(ChartViewClass: typeof ChartView): void;
+    registerCustomSeries(seriesType: string, renderItem: CustomSeriesRenderItem): void;
+    registerSubTypeDefaulter(componentType: string, defaulter: SubTypeDefaulter): void;
+    registerPainter(painterType: string, PainterCtor: Parameters<typeof registerPainter>[1]): void;
+};
+declare type EChartsExtensionInstallRegisters = typeof extensionRegisters;
+declare type EChartsExtensionInstaller = (ec: EChartsExtensionInstallRegisters) => void;
+interface EChartsExtension {
+    install: EChartsExtensionInstaller;
+}
+declare function use(ext: EChartsExtensionInstaller | EChartsExtension | (EChartsExtensionInstaller | EChartsExtension)[]): void;
+
+interface BaseAxisBreakPayload extends Payload {
+    xAxisIndex?: ModelFinderIndexQuery;
+    xAxisId?: ModelFinderIdQuery;
+    xAxisName?: ModelFinderNameQuery;
+    yAxisIndex?: ModelFinderIndexQuery;
+    yAxisId?: ModelFinderIdQuery;
+    yAxisName?: ModelFinderNameQuery;
+    singleAxisIndex?: ModelFinderIndexQuery;
+    singleAxisId?: ModelFinderIdQuery;
+    singleAxisName?: ModelFinderNameQuery;
+    breaks: AxisBreakOptionIdentifierInAxis[];
+}
+interface ExpandAxisBreakPayload extends BaseAxisBreakPayload {
+    type: typeof AXIS_BREAK_EXPAND_ACTION_TYPE;
+}
+interface CollapseAxisBreakPayload extends BaseAxisBreakPayload {
+    type: typeof AXIS_BREAK_COLLAPSE_ACTION_TYPE;
+}
+interface ToggleAxisBreakPayload extends BaseAxisBreakPayload {
+    type: typeof AXIS_BREAK_TOGGLE_ACTION_TYPE;
+}
+declare type AxisBreakChangedEventBreak = AxisBreakOptionIdentifierInAxis & {
+    xAxisIndex?: ModelFinderIndexQuery;
+    yAxisIndex?: ModelFinderIndexQuery;
+    singleAxisIndex?: ModelFinderIndexQuery;
+    isExpanded: boolean;
+    old: {
+        isExpanded: boolean;
+    };
+};
+interface AxisBreakChangedEvent extends ECActionRefinedEvent {
+    type: typeof AXIS_BREAK_CHANGED_EVENT_TYPE;
+    fromAction: typeof AXIS_BREAK_EXPAND_ACTION_TYPE | typeof AXIS_BREAK_COLLAPSE_ACTION_TYPE | typeof AXIS_BREAK_TOGGLE_ACTION_TYPE;
+    fromActionPayload: ExpandAxisBreakPayload | CollapseAxisBreakPayload | ToggleAxisBreakPayload;
+    breaks: AxisBreakChangedEventBreak[];
+}
+declare const AXIS_BREAK_EXPAND_ACTION_TYPE: "expandAxisBreak";
+declare const AXIS_BREAK_COLLAPSE_ACTION_TYPE: "collapseAxisBreak";
+declare const AXIS_BREAK_TOGGLE_ACTION_TYPE: "toggleAxisBreak";
+declare const AXIS_BREAK_CHANGED_EVENT_TYPE: "axisbreakchanged";
+
+declare type AxisBreakUpdateResult = {
+    breaks: (AxisBreakOptionIdentifierInAxis & {
+        isExpanded: boolean;
+        old: {
+            isExpanded: boolean;
+        };
+    })[];
+};
+
+interface AxisModelExtendedInCreator {
+    getCategories(rawData?: boolean): OrdinalRawValue[] | CategoryAxisBaseOption['data'];
+    getOrdinalMeta(): OrdinalMeta;
+    updateAxisBreaks(payload: BaseAxisBreakPayload): AxisBreakUpdateResult;
+}
+
+/**
+ * Base Axis Model for xAxis, yAxis, angleAxis, radiusAxis. singleAxis
+ */
+
+interface AxisBaseModel<T extends AxisBaseOptionCommon = AxisBaseOptionCommon> extends ComponentModel<T>, AxisModelCommonMixin<T>, AxisModelExtendedInCreator {
+    axis: Axis;
+}
+
+declare type AxisLabelInfoDetermined = {
+    formattedLabel: string;
+    rawLabel: string;
+    tickValue: number;
+    time: ScaleTick['time'] | NullUndefined$1;
+    break: VisualAxisBreak | NullUndefined$1;
+};
+declare const AxisTickLabelComputingKind: {
+    readonly estimate: 1;
+    readonly determine: 2;
+};
+declare type AxisTickLabelComputingKind = (typeof AxisTickLabelComputingKind)[keyof typeof AxisTickLabelComputingKind];
+interface AxisLabelsComputingContext {
+    out: {
+        noPxChangeTryDetermine: (() => boolean)[];
+    };
+    kind: AxisTickLabelComputingKind;
+}
+declare function createAxisLabels(axis: Axis, ctx: AxisLabelsComputingContext): {
+    labels: AxisLabelInfoDetermined[];
+};
+
+interface AxisTickCoord {
+    coord: number;
+    tickValue?: ScaleTick['value'];
+    onBand?: boolean;
+}
+/**
+ * Base class of Axis.
+ *
+ * Lifetime: recreate for each main process.
+ * [NOTICE]: Some caches is stored on the axis instance (see `axisTickLabelBuilder.ts`)
+ *  which is based on this lifetime.
+ */
+declare class Axis {
+    /**
+     * Axis type
+     *  - 'category'
+     *  - 'value'
+     *  - 'time'
+     *  - 'log'
+     */
+    type: OptionAxisType;
+    readonly dim: DimensionName;
+    scale: Scale;
+    private _extent;
+    model: AxisBaseModel;
+    onBand: CategoryAxisBaseOption['boundaryGap'];
+    inverse: AxisBaseOption['inverse'];
+    constructor(dim: DimensionName, scale: Scale, extent: [number, number]);
+    /**
+     * If axis extent contain given coord
+     */
+    contain(coord: number): boolean;
+    /**
+     * If axis extent contain given data
+     */
+    containData(data: ScaleDataValue): boolean;
+    /**
+     * Get coord extent.
+     */
+    getExtent(): [number, number];
+    /**
+     * Get precision used for formatting
+     */
+    getPixelPrecision(dataExtent?: [number, number]): number;
+    /**
+     * Set coord extent
+     */
+    setExtent(start: number, end: number): void;
+    /**
+     * Convert data to coord. Data is the rank if it has an ordinal scale
+     */
+    dataToCoord(data: ScaleDataValue, clamp?: boolean): number;
+    /**
+     * Convert coord to data. Data is the rank if it has an ordinal scale
+     */
+    coordToData(coord: number, clamp?: boolean): number;
+    /**
+     * Convert pixel point to data in axis
+     */
+    pointToData(point: number[], clamp?: boolean): number;
+    /**
+     * Different from `zrUtil.map(axis.getTicks(), axis.dataToCoord, axis)`,
+     * `axis.getTicksCoords` considers `onBand`, which is used by
+     * `boundaryGap:true` of category axis and splitLine and splitArea.
+     * @param opt.tickModel default: axis.model.getModel('axisTick')
+     * @param opt.clamp If `true`, the first and the last
+     *        tick must be at the axis end points. Otherwise, clip ticks
+     *        that outside the axis extent.
+     */
+    getTicksCoords(opt?: {
+        tickModel?: Model;
+        clamp?: boolean;
+        breakTicks?: ScaleGetTicksOpt['breakTicks'];
+        pruneByBreak?: ScaleGetTicksOpt['pruneByBreak'];
+    }): AxisTickCoord[];
+    getMinorTicksCoords(): AxisTickCoord[][];
+    getViewLabels(ctx?: AxisLabelsComputingContext): ReturnType<typeof createAxisLabels>['labels'];
+    getLabelModel(): Model<AxisBaseOption['axisLabel']>;
+    /**
+     * Notice here we only get the default tick model. For splitLine
+     * or splitArea, we should pass the splitLineModel or splitAreaModel
+     * manually when calling `getTicksCoords`.
+     * In GL, this method may be overridden to:
+     * `axisModel.getModel('axisTick', grid3DModel.getModel('axisTick'));`
+     */
+    getTickModel(): Model;
+    /**
+     * Get width of band
+     */
+    getBandWidth(): number;
+    /**
+     * Get axis rotate, by degree.
+     */
+    getRotate: () => number;
+    /**
+     * Only be called in category axis.
+     * Can be overridden, consider other axes like in 3D.
+     * @return Auto interval for cateogry axis tick and label
+     */
+    calculateCategoryInterval(ctx?: AxisLabelsComputingContext): number;
+}
+
 interface CoordinateSystemCreator {
     create: (ecModel: GlobalModel, api: ExtensionAPI) => CoordinateSystemMaster[];
     dimensions?: DimensionName[];
@@ -3876,13 +7592,17 @@ interface CoordinateSystemCreator {
 }
 /**
  * The instance get from `CoordinateSystemManger` is `CoordinateSystemMaster`.
+ * Consider a typical case: `grid` is a `CoordinateSystemMaster`, and it contains
+ * one or multiple `cartesian2d`s, which are `CoordinateSystem`s.
  */
 interface CoordinateSystemMaster {
     dimensions: DimensionName[];
     model?: ComponentModel;
+    boxCoordinateSystem?: CoordinateSystem;
     update?: (ecModel: GlobalModel, api: ExtensionAPI) => void;
-    convertToPixel?(ecModel: GlobalModel, finder: ParsedModelFinder, value: ScaleDataValue | ScaleDataValue[]): number | number[];
-    convertFromPixel?(ecModel: GlobalModel, finder: ParsedModelFinder, pixelValue: number | number[]): number | number[];
+    convertToPixel?(ecModel: GlobalModel, finder: ParsedModelFinder, value: Parameters<CoordinateSystem['dataToPoint']>[0], opt?: unknown): ReturnType<CoordinateSystem['dataToPoint']> | number | NullUndefined$1;
+    convertToLayout?(ecModel: GlobalModel, finder: ParsedModelFinder, value: Parameters<NonNullable<CoordinateSystem['dataToLayout']>>[0], opt?: unknown): ReturnType<NonNullable<CoordinateSystem['dataToLayout']>> | NullUndefined$1;
+    convertFromPixel?(ecModel: GlobalModel, finder: ParsedModelFinder, pixelValue: Parameters<NonNullable<CoordinateSystem['pointToData']>>[0], opt?: unknown): ReturnType<NonNullable<CoordinateSystem['pointToData']>> | NullUndefined$1;
     containPoint(point: number[]): boolean;
     getAxes?: () => Axis[];
     axisPointerEnabled?: boolean;
@@ -3911,18 +7631,33 @@ interface CoordinateSystem {
     /**
      * @param data
      * @param reserved Defined by the coordinate system itself
-     * @param out
-     * @return {Array.<number>} point Point in global pixel coordinate system.
+     * @param out Fill it if passing, and return. For performance optimization.
+     * @return Point in global pixel coordinate system.
+     *  An invalid returned point should be represented by `[NaN, NaN]`,
+     *  rather than `null/undefined`.
      */
-    dataToPoint(data: ScaleDataValue | ScaleDataValue[], reserved?: any, out?: number[]): number[];
+    dataToPoint(data: CoordinateSystemDataCoord, opt?: unknown, out?: number[]): number[];
+    /**
+     * @param data See the meaning in `dataToPoint`.
+     * @param reserved Defined by the coordinate system itself
+     * @param out Fill it if passing, and return. For performance optimization. Vary by different coord sys.
+     * @return Layout in global pixel coordinate system.
+     *  An invalid returned rect should be represented by `{x: NaN, y: NaN, width: NaN, height: NaN}`,
+     *  Never return `null/undefined`.
+     */
+    dataToLayout?(data: CoordinateSystemDataCoord, opt?: unknown, out?: CoordinateSystemDataLayout): CoordinateSystemDataLayout;
     /**
      * Some coord sys (like Parallel) might do not have `pointToData`,
      * or the meaning of this kind of features is not clear yet.
      * @param point point Point in global pixel coordinate system.
-     * @param clamp Clamp range
+     * @param out Fill it if passing, and return. For performance optimization.
      * @return data
+     *  An invalid returned data should be represented by `[NaN, NaN]` or `NaN`,
+     *  rather than `null/undefined`, which represents not-applicable in `convertFromPixel`.
+     *  Return `OrdinalNumber` in ordianal (category axis) case.
+     *  Return timestamp in time axis.
      */
-    pointToData?(point: number[], clamp?: boolean): number | number[];
+    pointToData?(point: number[], opt?: unknown, out?: number | number[]): number | number[];
     containPoint(point: number[]): boolean;
     getAxes?: () => Axis[];
     getAxis?: (dim?: DimensionName) => Axis;
@@ -3946,6 +7681,10 @@ interface CoordinateSystemHostModel extends ComponentModel {
  * It is used to clip the graphic elements with the contain methods.
  */
 interface CoordinateSystemClipArea {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
     contain(x: number, y: number): boolean;
 }
 
@@ -4001,9 +7740,9 @@ interface SeriesModel {
     brushSelector(dataIndex: number, data: SeriesData, selectors: BrushCommonSelectorsForSeries, area: BrushSelectableArea): boolean;
     enableAriaDecal(): void;
 }
-declare class SeriesModel<Opt extends SeriesOption = SeriesOption> extends ComponentModel<Opt> {
+declare class SeriesModel<Opt extends SeriesOption$1 = SeriesOption$1> extends ComponentModel<Opt> {
     type: string;
-    defaultOption: SeriesOption;
+    defaultOption: SeriesOption$1;
     seriesIndex: number;
     coordinateSystem: CoordinateSystem;
     dataTask: SeriesTask;
@@ -4067,6 +7806,18 @@ declare class SeriesModel<Opt extends SeriesOption = SeriesOption> extends Compo
      */
     getBaseAxis(): Axis;
     /**
+     * Retrieve the index of nearest value in the view coordinate.
+     * Data position is compared with each axis's dataToCoord.
+     *
+     * @param axisDim axis dimension
+     * @param dim data dimension
+     * @param value
+     * @param [maxDistance=Infinity] The maximum distance in view coordinate space
+     * @return If and only if multiple indices has
+     *         the same value, they are put to the result.
+     */
+    indicesOfNearest(axisDim: DimensionName, dim: DimensionLoose, value: number, maxDistance?: number): number[];
+    /**
      * Default tooltip formatter
      *
      * @param dataIndex
@@ -4107,359 +7858,11 @@ declare class SeriesModel<Opt extends SeriesOption = SeriesOption> extends Compo
     private _initSelectedMapFromData;
     static registerClass(clz: Constructor): Constructor;
 }
-interface SeriesModel<Opt extends SeriesOption = SeriesOption> extends DataFormatMixin, PaletteMixin<Opt>, DataHost {
+interface SeriesModel<Opt extends SeriesOption$1 = SeriesOption$1> extends DataFormatMixin, PaletteMixin<Opt>, DataHost {
     /**
      * Get dimension to render shadow in dataZoom component
      */
     getShadowDim?(): string;
-}
-
-/**
- * Multi dimensional data store
- */
-declare const dataCtors: {
-    readonly float: ArrayConstructor | Float64ArrayConstructor;
-    readonly int: ArrayConstructor | Int32ArrayConstructor;
-    readonly ordinal: ArrayConstructor;
-    readonly number: ArrayConstructor;
-    readonly time: ArrayConstructor | Float64ArrayConstructor;
-};
-declare type DataStoreDimensionType = keyof typeof dataCtors;
-declare type EachCb = (...args: any) => void;
-declare type FilterCb = (...args: any) => boolean;
-declare type MapCb = (...args: any) => ParsedValue | ParsedValue[];
-declare type DimValueGetter = (this: DataStore, dataItem: any, property: string, dataIndex: number, dimIndex: DimensionIndex) => ParsedValue;
-interface DataStoreDimensionDefine {
-    /**
-     * Default to be float.
-     */
-    type?: DataStoreDimensionType;
-    /**
-     * Only used in SOURCE_FORMAT_OBJECT_ROWS and SOURCE_FORMAT_KEYED_COLUMNS to retrieve value
-     * by "object property".
-     * For example, in `[{bb: 124, aa: 543}, ...]`, "aa" and "bb" is "object property".
-     *
-     * Deliberately name it as "property" rather than "name" to prevent it from been used in
-     * SOURCE_FORMAT_ARRAY_ROWS, because if it comes from series, it probably
-     * can not be shared by different series.
-     */
-    property?: string;
-    /**
-     * When using category axis.
-     * Category strings will be collected and stored in ordinalMeta.categories.
-     * And store will store the index of categories.
-     */
-    ordinalMeta?: OrdinalMeta;
-    /**
-     * Offset for ordinal parsing and collect
-     */
-    ordinalOffset?: number;
-}
-/**
- * Basically, DataStore API keep immutable.
- */
-declare class DataStore {
-    private _chunks;
-    private _provider;
-    private _rawExtent;
-    private _extent;
-    private _indices;
-    private _count;
-    private _rawCount;
-    private _dimensions;
-    private _dimValueGetter;
-    private _calcDimNameToIdx;
-    defaultDimValueGetter: DimValueGetter;
-    /**
-     * Initialize from data
-     */
-    initData(provider: DataProvider, inputDimensions: DataStoreDimensionDefine[], dimValueGetter?: DimValueGetter): void;
-    getProvider(): DataProvider;
-    /**
-     * Caution: even when a `source` instance owned by a series, the created data store
-     * may still be shared by different sereis (the source hash does not use all `source`
-     * props, see `sourceManager`). In this case, the `source` props that are not used in
-     * hash (like `source.dimensionDefine`) probably only belongs to a certain series and
-     * thus should not be fetch here.
-     */
-    getSource(): Source;
-    /**
-     * @caution Only used in dataStack.
-     */
-    ensureCalculationDimension(dimName: DimensionName, type: DataStoreDimensionType): DimensionIndex;
-    collectOrdinalMeta(dimIdx: number, ordinalMeta: OrdinalMeta): void;
-    getOrdinalMeta(dimIdx: number): OrdinalMeta;
-    getDimensionProperty(dimIndex: DimensionIndex): DataStoreDimensionDefine['property'];
-    /**
-     * Caution: Can be only called on raw data (before `this._indices` created).
-     */
-    appendData(data: ArrayLike<any>): number[];
-    appendValues(values: any[][], minFillLen?: number): {
-        start: number;
-        end: number;
-    };
-    private _initDataFromProvider;
-    count(): number;
-    /**
-     * Get value. Return NaN if idx is out of range.
-     */
-    get(dim: DimensionIndex, idx: number): ParsedValue;
-    getValues(idx: number): ParsedValue[];
-    getValues(dimensions: readonly DimensionIndex[], idx?: number): ParsedValue[];
-    /**
-     * @param dim concrete dim
-     */
-    getByRawIndex(dim: DimensionIndex, rawIdx: number): ParsedValue;
-    /**
-     * Get sum of data in one dimension
-     */
-    getSum(dim: DimensionIndex): number;
-    /**
-     * Get median of data in one dimension
-     */
-    getMedian(dim: DimensionIndex): number;
-    /**
-     * Retrieve the index with given raw data index.
-     */
-    indexOfRawIndex(rawIndex: number): number;
-    /**
-     * Retrieve the index of nearest value.
-     * @param dim
-     * @param value
-     * @param [maxDistance=Infinity]
-     * @return If and only if multiple indices have
-     *         the same value, they are put to the result.
-     */
-    indicesOfNearest(dim: DimensionIndex, value: number, maxDistance?: number): number[];
-    getIndices(): ArrayLike<number>;
-    /**
-     * Data filter.
-     */
-    filter(dims: DimensionIndex[], cb: FilterCb): DataStore;
-    /**
-     * Select data in range. (For optimization of filter)
-     * (Manually inline code, support 5 million data filtering in data zoom.)
-     */
-    selectRange(range: {
-        [dimIdx: number]: [number, number];
-    }): DataStore;
-    /**
-     * Data mapping to a new List with given dimensions
-     */
-    map(dims: DimensionIndex[], cb: MapCb): DataStore;
-    /**
-     * @caution Danger!! Only used in dataStack.
-     */
-    modify(dims: DimensionIndex[], cb: MapCb): void;
-    private _updateDims;
-    /**
-     * Large data down sampling using largest-triangle-three-buckets
-     * @param {string} valueDimension
-     * @param {number} targetCount
-     */
-    lttbDownSample(valueDimension: DimensionIndex, rate: number): DataStore;
-    /**
-     * Large data down sampling using min-max
-     * @param {string} valueDimension
-     * @param {number} rate
-     */
-    minmaxDownSample(valueDimension: DimensionIndex, rate: number): DataStore;
-    /**
-     * Large data down sampling on given dimension
-     * @param sampleIndex Sample index for name and id
-     */
-    downSample(dimension: DimensionIndex, rate: number, sampleValue: (frameValues: ArrayLike<ParsedValue>) => ParsedValueNumeric, sampleIndex: (frameValues: ArrayLike<ParsedValue>, value: ParsedValueNumeric) => number): DataStore;
-    /**
-     * Data iteration
-     * @param ctx default this
-     * @example
-     *  list.each('x', function (x, idx) {});
-     *  list.each(['x', 'y'], function (x, y, idx) {});
-     *  list.each(function (idx) {})
-     */
-    each(dims: DimensionIndex[], cb: EachCb): void;
-    /**
-     * Get extent of data in one dimension
-     */
-    getDataExtent(dim: DimensionIndex): [number, number];
-    /**
-     * Get raw data index.
-     * Do not initialize.
-     * Default `getRawIndex`. And it can be changed.
-     */
-    getRawIndex: (idx: number) => number;
-    /**
-     * Get raw data item
-     */
-    getRawDataItem(idx: number): OptionDataItem;
-    /**
-     * Clone shallow.
-     *
-     * @param clonedDims Determine which dims to clone. Will share the data if not specified.
-     */
-    clone(clonedDims?: DimensionIndex[], ignoreIndices?: boolean): DataStore;
-    private _copyCommonProps;
-    private _cloneIndices;
-    private _getRawIdxIdentity;
-    private _getRawIdx;
-    private _updateGetRawIdx;
-    private static internalField;
-}
-
-declare class SeriesDimensionDefine {
-    /**
-     * Dimension type. The enumerable values are the key of
-     * Optional.
-     */
-    type?: DimensionType;
-    /**
-     * Dimension name.
-     * Mandatory.
-     */
-    name: string;
-    /**
-     * The origin name in dimsDef, see source helper.
-     * If displayName given, the tooltip will displayed vertically.
-     * Optional.
-     */
-    displayName?: string;
-    tooltip?: boolean;
-    /**
-     * This dimension maps to the the dimension in dataStore by `storeDimIndex`.
-     * Notice the facts:
-     * 1. When there are too many dimensions in data store, seriesData only save the
-     * used store dimensions.
-     * 2. We use dimensionIndex but not name to reference store dimension
-     * becuause the dataset dimension definition might has no name specified by users,
-     * or names in sereis dimension definition might be different from dataset.
-     */
-    storeDimIndex?: number;
-    /**
-     * Which coordSys dimension this dimension mapped to.
-     * A `coordDim` can be a "coordSysDim" that the coordSys required
-     * (for example, an item in `coordSysDims` of `model/referHelper#CoordSysInfo`),
-     * or an generated "extra coord name" if does not mapped to any "coordSysDim"
-     * (That is determined by whether `isExtraCoord` is `true`).
-     * Mandatory.
-     */
-    coordDim?: string;
-    /**
-     * The index of this dimension in `series.encode[coordDim]`.
-     * Mandatory.
-     */
-    coordDimIndex?: number;
-    /**
-     * The format of `otherDims` is:
-     * ```js
-     * {
-     *     tooltip?: number
-     *     label?: number
-     *     itemName?: number
-     *     seriesName?: number
-     * }
-     * ```
-     *
-     * A `series.encode` can specified these fields:
-     * ```js
-     * encode: {
-     *     // "3, 1, 5" is the index of data dimension.
-     *     tooltip: [3, 1, 5],
-     *     label: [0, 3],
-     *     ...
-     * }
-     * ```
-     * `otherDims` is the parse result of the `series.encode` above, like:
-     * ```js
-     * // Suppose the index of this data dimension is `3`.
-     * this.otherDims = {
-     *     // `3` is at the index `0` of the `encode.tooltip`
-     *     tooltip: 0,
-     *     // `3` is at the index `1` of the `encode.label`
-     *     label: 1
-     * };
-     * ```
-     *
-     * This prop should never be `null`/`undefined` after initialized.
-     */
-    otherDims?: DataVisualDimensions;
-    /**
-     * Be `true` if this dimension is not mapped to any "coordSysDim" that the
-     * "coordSys" required.
-     * Mandatory.
-     */
-    isExtraCoord?: boolean;
-    /**
-     * If this dimension if for calculated value like stacking
-     */
-    isCalculationCoord?: boolean;
-    defaultTooltip?: boolean;
-    ordinalMeta?: OrdinalMeta;
-    /**
-     * Whether to create inverted indices.
-     */
-    createInvertedIndices?: boolean;
-    /**
-     * @param opt All of the fields will be shallow copied.
-     */
-    constructor(opt?: object | SeriesDimensionDefine);
-}
-
-/**
- * Represents the dimension requirement of a series.
- *
- * NOTICE:
- * When there are too many dimensions in dataset and many series, only the used dimensions
- * (i.e., used by coord sys and declared in `series.encode`) are add to `dimensionDefineList`.
- * But users may query data by other unused dimension names.
- * In this case, users can only query data if and only if they have defined dimension names
- * via ec option, so we provide `getDimensionIndexFromSource`, which only query them from
- * `source` dimensions.
- */
-declare class SeriesDataSchema {
-    /**
-     * When there are too many dimensions, `dimensionDefineList` might only contain
-     * used dimensions.
-     *
-     * CAUTION:
-     * Should have been sorted by `storeDimIndex` asc.
-     *
-     * PENDING:
-     * The item can still be modified outsite.
-     * But MUST NOT add/remove item of this array.
-     */
-    readonly dimensions: SeriesDimensionDefine[];
-    readonly source: Source;
-    private _fullDimCount;
-    private _dimNameMap;
-    private _dimOmitted;
-    constructor(opt: {
-        source: Source;
-        dimensions: SeriesDimensionDefine[];
-        fullDimensionCount: number;
-        dimensionOmitted: boolean;
-    });
-    isDimensionOmitted(): boolean;
-    private _updateDimOmitted;
-    /**
-     * @caution Can only be used when `dimensionOmitted: true`.
-     *
-     * Get index by user defined dimension name (i.e., not internal generate name).
-     * That is, get index from `dimensionsDefine`.
-     * If no `dimensionsDefine`, or no name get, return -1.
-     */
-    getSourceDimensionIndex(dimName: DimensionName): DimensionIndex;
-    /**
-     * @caution Can only be used when `dimensionOmitted: true`.
-     *
-     * Notice: may return `null`/`undefined` if user not specify dimension names.
-     */
-    getSourceDimension(dimIndex: DimensionIndex): DimensionDefinition;
-    makeStoreSchema(): {
-        dimensions: DataStoreDimensionDefine[];
-        hash: string;
-    };
-    makeOutputDimensionNames(): DimensionName[];
-    appendCalculationDimension(dimDef: SeriesDimensionDefine): void;
 }
 
 /**
@@ -4780,391 +8183,6 @@ declare class DimensionUserOuput {
     private _getFullDimensionNames;
 }
 
-declare class Graph {
-    type: 'graph';
-    readonly nodes: GraphNode[];
-    readonly edges: GraphEdge[];
-    data: SeriesData;
-    edgeData: SeriesData;
-    /**
-     * Whether directed graph.
-     */
-    private _directed;
-    private _nodesMap;
-    /**
-     * @type {Object.<string, module:echarts/data/Graph.Edge>}
-     * @private
-     */
-    private _edgesMap;
-    constructor(directed?: boolean);
-    /**
-     * If is directed graph
-     */
-    isDirected(): boolean;
-    /**
-     * Add a new node
-     */
-    addNode(id: string | number, dataIndex?: number): GraphNode;
-    /**
-     * Get node by data index
-     */
-    getNodeByIndex(dataIndex: number): GraphNode;
-    /**
-     * Get node by id
-     */
-    getNodeById(id: string): GraphNode;
-    /**
-     * Add a new edge
-     */
-    addEdge(n1: GraphNode | number | string, n2: GraphNode | number | string, dataIndex?: number): GraphEdge;
-    /**
-     * Get edge by data index
-     */
-    getEdgeByIndex(dataIndex: number): GraphEdge;
-    /**
-     * Get edge by two linked nodes
-     */
-    getEdge(n1: string | GraphNode, n2: string | GraphNode): GraphEdge;
-    /**
-     * Iterate all nodes
-     */
-    eachNode<Ctx>(cb: (this: Ctx, node: GraphNode, idx: number) => void, context?: Ctx): void;
-    /**
-     * Iterate all edges
-     */
-    eachEdge<Ctx>(cb: (this: Ctx, edge: GraphEdge, idx: number) => void, context?: Ctx): void;
-    /**
-     * Breadth first traverse
-     * Return true to stop traversing
-     */
-    breadthFirstTraverse<Ctx>(cb: (this: Ctx, node: GraphNode, fromNode: GraphNode) => boolean | void, startNode: GraphNode | string, direction: 'none' | 'in' | 'out', context?: Ctx): void;
-    update(): void;
-    /**
-     * @return {module:echarts/data/Graph}
-     */
-    clone(): Graph;
-}
-interface GraphDataProxyMixin {
-    getValue(dimension?: DimensionLoose): ParsedValue;
-    setVisual(key: string | Dictionary<any>, value?: any): void;
-    getVisual(key: string): any;
-    setLayout(layout: any, merge?: boolean): void;
-    getLayout(): any;
-    getGraphicEl(): Element;
-    getRawIndex(): number;
-}
-declare class GraphEdge {
-    /**
-     * The first node. If directed graph, it represents the source node.
-     */
-    node1: GraphNode;
-    /**
-     * The second node. If directed graph, it represents the target node.
-     */
-    node2: GraphNode;
-    dataIndex: number;
-    hostGraph: Graph;
-    constructor(n1: GraphNode, n2: GraphNode, dataIndex?: number);
-    getModel<T = unknown>(): Model<T>;
-    getModel<T = unknown, S extends keyof T = keyof T>(path: S): Model<T[S]>;
-    getAdjacentDataIndices(): {
-        node: number[];
-        edge: number[];
-    };
-    getTrajectoryDataIndices(): {
-        node: number[];
-        edge: number[];
-    };
-}
-interface GraphEdge extends GraphDataProxyMixin {
-}
-declare class GraphNode {
-    id: string;
-    inEdges: GraphEdge[];
-    outEdges: GraphEdge[];
-    edges: GraphEdge[];
-    hostGraph: Graph;
-    dataIndex: number;
-    __visited: boolean;
-    constructor(id?: string, dataIndex?: number);
-    /**
-     * @return {number}
-     */
-    degree(): number;
-    /**
-     * @return {number}
-     */
-    inDegree(): number;
-    /**
-    * @return {number}
-    */
-    outDegree(): number;
-    getModel<T = unknown>(): Model<T>;
-    getModel<T = unknown, S extends keyof T = keyof T>(path: S): Model<T[S]>;
-    getAdjacentDataIndices(): {
-        node: number[];
-        edge: number[];
-    };
-    getTrajectoryDataIndices(): {
-        node: number[];
-        edge: number[];
-    };
-}
-interface GraphNode extends GraphDataProxyMixin {
-}
-
-declare type TreeTraverseOrder = 'preorder' | 'postorder';
-declare type TreeTraverseCallback<Ctx> = (this: Ctx, node: TreeNode) => boolean | void;
-declare type TreeTraverseOption = {
-    order?: TreeTraverseOrder;
-    attr?: 'children' | 'viewChildren';
-};
-interface TreeNodeOption extends Pick<OptionDataItemObject<OptionDataValue>, 'name' | 'value'> {
-    children?: TreeNodeOption[];
-}
-declare class TreeNode {
-    name: string;
-    depth: number;
-    height: number;
-    parentNode: TreeNode;
-    /**
-     * Reference to list item.
-     * Do not persistent dataIndex outside,
-     * besause it may be changed by list.
-     * If dataIndex -1,
-     * this node is logical deleted (filtered) in list.
-     */
-    dataIndex: number;
-    children: TreeNode[];
-    viewChildren: TreeNode[];
-    isExpand: boolean;
-    readonly hostTree: Tree<Model>;
-    constructor(name: string, hostTree: Tree<Model>);
-    /**
-     * The node is removed.
-     */
-    isRemoved(): boolean;
-    /**
-     * Travel this subtree (include this node).
-     * Usage:
-     *    node.eachNode(function () { ... }); // preorder
-     *    node.eachNode('preorder', function () { ... }); // preorder
-     *    node.eachNode('postorder', function () { ... }); // postorder
-     *    node.eachNode(
-     *        {order: 'postorder', attr: 'viewChildren'},
-     *        function () { ... }
-     *    ); // postorder
-     *
-     * @param options If string, means order.
-     * @param options.order 'preorder' or 'postorder'
-     * @param options.attr 'children' or 'viewChildren'
-     * @param cb If in preorder and return false,
-     *                      its subtree will not be visited.
-     */
-    eachNode<Ctx>(options: TreeTraverseOrder, cb: TreeTraverseCallback<Ctx>, context?: Ctx): void;
-    eachNode<Ctx>(options: TreeTraverseOption, cb: TreeTraverseCallback<Ctx>, context?: Ctx): void;
-    eachNode<Ctx>(cb: TreeTraverseCallback<Ctx>, context?: Ctx): void;
-    /**
-     * Update depth and height of this subtree.
-     */
-    updateDepthAndHeight(depth: number): void;
-    getNodeById(id: string): TreeNode;
-    contains(node: TreeNode): boolean;
-    /**
-     * @param includeSelf Default false.
-     * @return order: [root, child, grandchild, ...]
-     */
-    getAncestors(includeSelf?: boolean): TreeNode[];
-    getAncestorsIndices(): number[];
-    getDescendantIndices(): number[];
-    getValue(dimension?: DimensionLoose): ParsedValue;
-    setLayout(layout: any, merge?: boolean): void;
-    /**
-     * @return {Object} layout
-     */
-    getLayout(): any;
-    getModel<T = unknown>(): Model<T>;
-    getLevelModel(): Model;
-    /**
-     * @example
-     *  setItemVisual('color', color);
-     *  setItemVisual({
-     *      'color': color
-     *  });
-     */
-    setVisual(key: string, value: any): void;
-    setVisual(obj: Dictionary<any>): void;
-    /**
-     * Get item visual
-     * FIXME: make return type better
-     */
-    getVisual(key: string): unknown;
-    getRawIndex(): number;
-    getId(): string;
-    /**
-     * index in parent's children
-     */
-    getChildIndex(): number;
-    /**
-     * if this is an ancestor of another node
-     *
-     * @param node another node
-     * @return if is ancestor
-     */
-    isAncestorOf(node: TreeNode): boolean;
-    /**
-     * if this is an descendant of another node
-     *
-     * @param node another node
-     * @return if is descendant
-     */
-    isDescendantOf(node: TreeNode): boolean;
-}
-declare class Tree<HostModel extends Model = Model, LevelOption = any> {
-    type: 'tree';
-    root: TreeNode;
-    data: SeriesData;
-    hostModel: HostModel;
-    levelModels: Model<LevelOption>[];
-    private _nodes;
-    constructor(hostModel: HostModel);
-    /**
-     * Travel this subtree (include this node).
-     * Usage:
-     *    node.eachNode(function () { ... }); // preorder
-     *    node.eachNode('preorder', function () { ... }); // preorder
-     *    node.eachNode('postorder', function () { ... }); // postorder
-     *    node.eachNode(
-     *        {order: 'postorder', attr: 'viewChildren'},
-     *        function () { ... }
-     *    ); // postorder
-     *
-     * @param options If string, means order.
-     * @param options.order 'preorder' or 'postorder'
-     * @param options.attr 'children' or 'viewChildren'
-     * @param cb
-     * @param context
-     */
-    eachNode<Ctx>(options: TreeTraverseOrder, cb: TreeTraverseCallback<Ctx>, context?: Ctx): void;
-    eachNode<Ctx>(options: TreeTraverseOption, cb: TreeTraverseCallback<Ctx>, context?: Ctx): void;
-    eachNode<Ctx>(cb: TreeTraverseCallback<Ctx>, context?: Ctx): void;
-    getNodeByDataIndex(dataIndex: number): TreeNode;
-    getNodeById(name: string): TreeNode;
-    /**
-     * Update item available by list,
-     * when list has been performed options like 'filterSelf' or 'map'.
-     */
-    update(): void;
-    /**
-     * Clear all layouts
-     */
-    clearLayouts(): void;
-    /**
-     * data node format:
-     * {
-     *     name: ...
-     *     value: ...
-     *     children: [
-     *         {
-     *             name: ...
-     *             value: ...
-     *             children: ...
-     *         },
-     *         ...
-     *     ]
-     * }
-     */
-    static createTree<T extends TreeNodeOption, HostModel extends Model>(dataRoot: T, hostModel: HostModel, beforeLink?: (data: SeriesData) => void): Tree<HostModel, any>;
-}
-
-declare type VisualOptionBase = {
-    [key in BuiltinVisualProperty]?: any;
-};
-declare type LabelFormatter = (min: OptionDataValue, max?: OptionDataValue) => string;
-interface VisualMapOption<T extends VisualOptionBase = VisualOptionBase> extends ComponentOption, BoxLayoutOptionMixin, BorderOptionMixin {
-    mainType?: 'visualMap';
-    show?: boolean;
-    align?: string;
-    realtime?: boolean;
-    /**
-     * 'all' or null/undefined: all series.
-     * A number or an array of number: the specified series.
-     * set min: 0, max: 200, only for campatible with ec2.
-     * In fact min max should not have default value.
-     */
-    seriesIndex?: 'all' | number[] | number;
-    /**
-     * min value, must specified if pieces is not specified.
-     */
-    min?: number;
-    /**
-     * max value, must specified if pieces is not specified.
-     */
-    max?: number;
-    /**
-     * Dimension to be encoded
-     */
-    dimension?: number;
-    /**
-     * Visual configuration for the data in selection
-     */
-    inRange?: T;
-    /**
-     * Visual configuration for the out of selection
-     */
-    outOfRange?: T;
-    controller?: {
-        inRange?: T;
-        outOfRange?: T;
-    };
-    target?: {
-        inRange?: T;
-        outOfRange?: T;
-    };
-    /**
-     * Width of the display item
-     */
-    itemWidth?: number;
-    /**
-     * Height of the display item
-     */
-    itemHeight?: number;
-    inverse?: boolean;
-    orient?: 'horizontal' | 'vertical';
-    backgroundColor?: ZRColor;
-    contentColor?: ZRColor;
-    inactiveColor?: ZRColor;
-    /**
-     * Padding of the component. Can be an array similar to CSS
-     */
-    padding?: number[] | number;
-    /**
-     * Gap between text and item
-     */
-    textGap?: number;
-    precision?: number;
-    /**
-     * @deprecated
-     * Option from version 2
-     */
-    color?: ColorString[];
-    formatter?: string | LabelFormatter;
-    /**
-     * Text on the both end. Such as ['High', 'Low']
-     */
-    text?: string[];
-    textStyle?: LabelOption;
-    categories?: unknown;
-}
-interface VisualMeta {
-    stops: {
-        value: number;
-        color: ColorString;
-    }[];
-    outerColors: ColorString[];
-    dimension?: DimensionIndex;
-}
-
 declare type ItrParamDims = DimensionLoose | Array<DimensionLoose>;
 declare type CtxOrList<Ctx> = unknown extends Ctx ? SeriesData : Ctx;
 declare type EachCb0<Ctx> = (this: CtxOrList<Ctx>, idx: number) => void;
@@ -5192,6 +8210,7 @@ interface DefaultDataVisual {
     symbolRotate?: number;
     symbolKeepAspect?: boolean;
     symbolOffset?: string | number | (string | number)[];
+    z2: number;
     liftZ?: number;
     legendIcon?: string;
     legendLineStyle?: LineStyleProps;
@@ -5455,15 +8474,6 @@ declare class SeriesData<HostModel extends Model = Model, Visual extends Default
      */
     rawIndexOf(dim: SeriesDimensionName, value: OrdinalNumber): number;
     /**
-     * Retrieve the index of nearest value
-     * @param dim
-     * @param value
-     * @param [maxDistance=Infinity]
-     * @return If and only if multiple indices has
-     *         the same value, they are put to the result.
-     */
-    indicesOfNearest(dim: DimensionLoose, value: number, maxDistance?: number): number[];
-    /**
      * Data iteration
      * @param ctx default this
      * @example
@@ -5674,6 +8684,9 @@ declare type ModelFinderObject = {
     gridIndex?: ModelFinderIndexQuery;
     gridId?: ModelFinderIdQuery;
     gridName?: ModelFinderNameQuery;
+    matrixIndex?: ModelFinderIndexQuery;
+    matrixId?: ModelFinderIdQuery;
+    matrixName?: ModelFinderNameQuery;
     dataIndex?: number;
     dataIndexInside?: number;
 };
@@ -5694,6 +8707,39 @@ declare type QueryReferringOpt = {
     enableAll?: boolean;
     enableNone?: boolean;
 };
+/**
+ * Use an iterator to avoid exposing the internal list or duplicating it
+ * for the outside traveller, and no extra heap allocation.
+ * @usage
+ *  for (const it = resetIterator(); it.next();) {
+ *      const item = it.item;
+ *      const key = it.key;
+ *      const itIdx = it.itIdx;
+ *      // ...
+ *  }
+ * @usage
+ *  const it = resetIterator();
+ *  while (it.next()) { ... }
+ * @usage
+ *  for (resetIterator(it); it.next();) { ... }
+ */
+declare class ListIterator<TItem> {
+    private _idx;
+    private _end;
+    private _list;
+    private _step;
+    item: TItem | NullUndefined$1;
+    key: number;
+    /**
+     * The loop condition is `idx < end` if `step > 0`;
+     * The loop condition is `idx >= end` if `step < 0`.
+     *
+     * @param end By default `list.length` if `step > 0`; `0` if `step < 0`.
+     * @param step By default `1`.
+     */
+    reset(list: TItem[], start: number, end?: number, step?: number): ListIterator<TItem>;
+    next(): boolean;
+}
 
 declare class ComponentModel<Opt extends ComponentOption = ComponentOption> extends Model<Opt> {
     /**
@@ -5739,6 +8785,7 @@ declare class ComponentModel<Opt extends ComponentOption = ComponentOption> exte
      */
     static dependencies: string[];
     readonly uid: string;
+    boxCoordinateSystem?: CoordinateSystem | NullUndefined$1;
     /**
      * Support merge layout params.
      * Only support 'box' now (left/right/top/bottom/width/height).
@@ -5827,12 +8874,12 @@ declare class ComponentModel<Opt extends ComponentOption = ComponentOption> exte
         specified: boolean;
     };
     getBoxLayoutParams(): {
-        left: string | number;
-        top: string | number;
-        right: string | number;
-        bottom: string | number;
-        width: string | number;
-        height: string | number;
+        left: PositionSizeOption;
+        top: PositionSizeOption;
+        right: PositionSizeOption;
+        bottom: PositionSizeOption;
+        width: PositionSizeOption;
+        height: PositionSizeOption;
     };
     /**
      * Get key for zlevel.
@@ -6030,78 +9077,6 @@ declare function formatTime(tpl: string, value: unknown, isUTC?: boolean): strin
  */
 declare function capitalFirst(str: string): string;
 
-interface MapperParamAxisInfo {
-    axisIndex: number;
-    axisName: string;
-    axisId: string;
-    axisDim: string;
-}
-interface AxisPointerLink {
-    xAxisIndex?: number[] | 'all';
-    yAxisIndex?: number[] | 'all';
-    xAxisId?: string[];
-    yAxisId?: string[];
-    xAxisName?: string[] | string;
-    yAxisName?: string[] | string;
-    radiusAxisIndex?: number[] | 'all';
-    angleAxisIndex?: number[] | 'all';
-    radiusAxisId?: string[];
-    angleAxisId?: string[];
-    radiusAxisName?: string[] | string;
-    angleAxisName?: string[] | string;
-    singleAxisIndex?: number[] | 'all';
-    singleAxisId?: string[];
-    singleAxisName?: string[] | string;
-    mapper?(sourceVal: ScaleDataValue, sourceAxisInfo: MapperParamAxisInfo, targetAxisInfo: MapperParamAxisInfo): CommonAxisPointerOption['value'];
-}
-interface AxisPointerOption extends ComponentOption, Omit<CommonAxisPointerOption, 'type'> {
-    mainType?: 'axisPointer';
-    type?: 'line' | 'shadow' | 'cross' | 'none';
-    link?: AxisPointerLink[];
-}
-
-declare type TopLevelFormatterParams = CallbackDataParams | CallbackDataParams[];
-interface TooltipOption extends CommonTooltipOption<TopLevelFormatterParams>, ComponentOption {
-    mainType?: 'tooltip';
-    axisPointer?: AxisPointerOption & {
-        axis?: 'auto' | 'x' | 'y' | 'angle' | 'radius';
-        crossStyle?: LineStyleOption & {
-            textStyle?: LabelOption;
-        };
-    };
-    /**
-     * If show popup content
-     */
-    showContent?: boolean;
-    /**
-     * Trigger only works on coordinate system.
-     */
-    trigger?: 'item' | 'axis' | 'none';
-    displayMode?: 'single' | 'multipleByCoordSys';
-    /**
-     * 'auto': use html by default, and use non-html if `document` is not defined
-     * 'html': use html for tooltip
-     * 'richText': use canvas, svg, and etc. for tooltip
-     */
-    renderMode?: 'auto' | TooltipRenderMode;
-    /**
-     * @deprecated
-     * use appendTo: 'body' instead
-     */
-    appendToBody?: boolean;
-    /**
-     * If append the tooltip element to another DOM element.
-     * Only available when renderMode is html
-     */
-    appendTo?: ((chartContainer: HTMLElement) => HTMLElement | undefined | null) | string | HTMLElement;
-    /**
-     * Specify the class name of tooltip element
-     * Only available when renderMode is html
-     */
-    className?: string;
-    order?: TooltipOrderMode;
-}
-
 /**
  * This is an abstract layer to insulate the upper usage of tooltip content
  * from the different backends according to different `renderMode` ('html' or 'richText').
@@ -6207,6 +9182,7 @@ declare type TooltipFormatResult = string | TooltipMarkupBlockFragment;
  */
 
 declare type RendererType = 'canvas' | 'svg';
+declare type NullUndefined$1 = null | undefined;
 declare type LayoutOrient = 'vertical' | 'horizontal';
 declare type HorizontalAlign = 'left' | 'center' | 'right';
 declare type VerticalAlign = 'top' | 'middle' | 'bottom';
@@ -6253,9 +9229,22 @@ interface PayloadAnimationPart {
     easing?: AnimationEasing;
     delay?: number;
 }
+interface SelectChangedEvent extends ECActionRefinedEvent {
+    type: 'selectchanged';
+    isFromClick: boolean;
+    fromAction: 'select' | 'unselect' | 'toggleSelected';
+    fromActionPayload: Payload;
+    selected: {
+        seriesIndex: number;
+        dataType?: SeriesDataType;
+        dataIndex: number[];
+    }[];
+}
+/**
+ * @deprecated Backward compat.
+ */
 interface SelectChangedPayload extends Payload {
     type: 'selectchanged';
-    escapeConnect: boolean;
     isFromClick: boolean;
     fromAction: 'select' | 'unselect' | 'toggleSelected';
     fromActionPayload: Payload;
@@ -6285,21 +9274,52 @@ interface ECActionEvent extends ECEventData {
     componentIndex?: number;
     seriesIndex?: number;
     escapeConnect?: boolean;
-    batch?: ECEventData;
+    batch?: ECEventData[];
 }
+/**
+ * TODO: not applicable in `ECEventProcessor` yet.
+ */
+interface ECActionRefinedEvent extends ECActionEvent {
+    type: string;
+    fromAction: string;
+    fromActionPayload: Payload;
+}
+declare type ECActionRefinedEventContent<TRefinedEvent extends ECActionRefinedEvent> = Omit<TRefinedEvent, 'type' | 'fromAction' | 'fromActionPayload'>;
 interface ECEventData {
     [key: string]: any;
 }
 interface EventQueryItem {
     [key: string]: any;
 }
+/**
+ * The rule of creating "public event" and "event for connect":
+ *  - If `refineEvent` provided,
+ *      `refineEvent` creates the "public event",
+ *      and "event for connect" is created internally by replicating the payload.
+ *      This is because `makeActionFromEvent` requires the content of event to be
+ *      the same as the original payload, while `refineEvent` creates a user-friend
+ *      event that differs from the original payload.
+ *  - Else if `ActionHandler` returns an object,
+ *      it is both the "public event" and the "event for connect".
+ *      (@deprecated, but keep this mechanism for backward compatibility).
+ *  - Else,
+ *      replicate the payload as both the "public event" and "event for connect".
+ */
 interface ActionInfo {
     type: string;
     event?: string;
     update?: string;
+    action?: ActionHandler;
+    refineEvent?: ActionRefineEvent;
+    publishNonRefinedEvent?: boolean;
 }
 interface ActionHandler {
     (payload: Payload, ecModel: GlobalModel, api: ExtensionAPI): void | ECEventData;
+}
+interface ActionRefineEvent {
+    (actionResultBatch: ECEventData[], payload: Payload, ecModel: GlobalModel, api: ExtensionAPI): {
+        eventContent: ECActionRefinedEventContent<ECActionRefinedEvent>;
+    };
 }
 interface OptionPreprocessor {
     (option: ECUnitOption, isTheme: boolean): void;
@@ -6398,23 +9418,104 @@ declare type OrdinalSortInfo = {
  * `OptionDataValue` are parsed (see `src/data/helper/dataValueHelper.parseDataValue`)
  * into `ParsedValue` and stored into `data/SeriesData` storage.
  * Note:
- * (1) The term "parse" does not mean `src/scale/Scale['parse']`.
+ * (1) The term "parse" does not mean `src/scale/Scale['parse']`(@see `ScaleDataValue`).
  * (2) If a category dimension is not mapped to any axis, its raw value will NOT be
  * parsed to `OrdinalNumber` but keep the original `OrdinalRawValue` in `src/data/SeriesData` storage.
  */
 declare type ParsedValue = ParsedValueNumeric | OrdinalRawValue;
 declare type ParsedValueNumeric = number | OrdinalNumber;
 /**
- * `ScaleDataValue` means that the user input primitive value to `src/scale/Scale`.
- * (For example, used in `axis.min`, `axis.max`, `convertToPixel`).
- * Note:
- * `ScaleDataValue` is a little different from `OptionDataValue`, because it will not go through
- * `src/data/helper/dataValueHelper.parseDataValue`, but go through `src/scale/Scale['parse']`.
+ * `ScaleDataValue` represents the user input axis value in echarts API.
+ * (For example, used `axis.min`/`axis.max` in echarts option, `convertToPixel`).
+ * NOTICE:
+ *  `ScaleDataValue` is slightly different from `OptionDataValue` for historical reason.
+ *  `ScaleDataValue` should be parsed by `src/scale/Scale['parse']`.
+ *  `OptionDataValue` should be parsed by `src/data/helper/dataValueHelper.parseDataValue`.
+ * FIXME:
+ *  Make `ScaleDataValue` `OptionDataValue` consistent? Since numeric string (like `'123'`) is accepted
+ *  in `series.data` and is effectively accepted in some axis relevant option (e.g., `axis.min/max`),
+ *  `type ScaleDataValue` should also include it for consistency. But it might bring some breaking in
+ *  TS interface (user callback) and need comprehensive checks for all of the parsing of `ScaleDataValue`.
  */
 declare type ScaleDataValue = ParsedValueNumeric | OrdinalRawValue | Date;
+/**
+ * - `ScaleDataValue`:
+ *   e.g. geo accept that primitive input, like `convertToPixel('some_place')`;
+ *   Some coord sys, such as 'cartesian2d', also supports that for only query only a single axis.
+ * - `ScaleDataValue[]`:
+ *   This is the most common case, each array item represent each data in
+ *   every dimension required by the coord sys. e.g., `[12, 98]` represents `[xData, yData]`.
+ * - `(ScaleDataValue[])[]`:
+ *   represents `[data_range_x, data_range_y]`. e.g., `dataToPoint([[5, 600], [8889, 9000]])`,
+ *   represents data range `[5, 600]` in x, and `[8889, 9000]` in y.
+ *   Can be also `[5, [8999, 9000]]`.
+ */
+declare type CoordinateSystemDataCoord = (ScaleDataValue | NullUndefined$1) | (ScaleDataValue | NullUndefined$1)[] | (ScaleDataValue | ScaleDataValue[] | NullUndefined$1)[];
+declare type AxisBreakOption = {
+    start: ScaleDataValue;
+    end: ScaleDataValue;
+    gap?: number | string;
+    isExpanded?: boolean;
+};
+declare type AxisBreakOptionIdentifierInAxis = Pick<AxisBreakOption, 'start' | 'end'>;
+declare type ParsedAxisBreakList = ParsedAxisBreak[];
+declare type ParsedAxisBreak = {
+    breakOption: AxisBreakOption;
+    vmin: number;
+    vmax: number;
+    gapParsed: {
+        type: 'tpAbs' | 'tpPrct';
+        val: number;
+    };
+    gapReal: number | NullUndefined$1;
+};
+declare type VisualAxisBreak = {
+    type: 'vmin' | 'vmax';
+    parsedBreak: ParsedAxisBreak;
+};
+declare type AxisLabelFormatterExtraBreakPart = {
+    break?: {
+        type: 'start' | 'end';
+        start: ParsedAxisBreak['vmin'];
+        end: ParsedAxisBreak['vmax'];
+    };
+};
 interface ScaleTick {
-    level?: number;
     value: number;
+    break?: VisualAxisBreak;
+    time?: TimeScaleTick['time'];
+}
+interface TimeScaleTick extends ScaleTick {
+    time: {
+        /**
+         * Level information is used for label formatting.
+         * `level` is 0 or undefined by default, with higher value indicating greater significant.
+         * For example, a time axis may contain labels like: Jan, 8th, 16th, 23th, Feb, and etc.
+         * In this case, month labels like Jan and Feb should be displayed in a more significant
+         * way than days. The tick labels are:
+         *      labels: `Jan  8th  16th  23th  Feb`
+         *      levels: `1    0    0     0     1  `
+         * The label formatter can be configured as `{[timeUnit]: string | string[]}`, where the
+         * timeUnit is determined by the tick value itself by `time.ts#getUnitFromValue`, while
+         * the `level` is the index under that time unit. (i.e., `formatter[timeUnit][level]`).
+         */
+        level: number;
+        /**
+         * An upper and lower time unit that is suggested to be displayed.
+         * Terms upper/lower means, such as 'year' is "upper" and 'month' is "lower".
+         * This is just suggestion. Time units that are out of this range can also be displayed.
+         */
+        upperTimeUnit: PrimaryTimeUnit;
+        lowerTimeUnit: PrimaryTimeUnit;
+    };
+}
+/**
+ * Return type of API `CoordinateSystem['dataToLayout']`, expose to users.
+ */
+interface CoordinateSystemDataLayout {
+    rect?: RectLike;
+    contentRect?: RectLike;
+    matrixXYLocatorRange?: number[][];
 }
 declare type DimensionIndex = number;
 declare type DimensionIndexLoose = DimensionIndex | string;
@@ -6488,8 +9589,10 @@ declare type ECUnitOption = {
     timeline?: ComponentOption | ComponentOption[];
     backgroundColor?: ZRColor;
     darkMode?: boolean | 'auto';
-    textStyle?: Pick<LabelOption, 'color' | 'fontStyle' | 'fontWeight' | 'fontSize' | 'fontFamily'>;
+    textStyle?: GlobalTextStyleOption;
     useUTC?: boolean;
+    hoverLayerThreshold?: number;
+    legacyViewCoordSysCenterBase?: boolean;
     [key: string]: ComponentOption | ComponentOption[] | Dictionary<unknown> | unknown;
     stateAnimation?: AnimationOption$1;
 } & AnimationOptionMixin & ColorPaletteOptionMixin;
@@ -6649,15 +9752,25 @@ interface ColorPaletteOptionMixin {
  * Mixin of option set to control the box layout of each component.
  */
 interface BoxLayoutOptionMixin {
-    width?: number | string;
-    height?: number | string;
-    top?: number | string;
-    right?: number | string;
-    bottom?: number | string;
-    left?: number | string;
+    width?: PositionSizeOption;
+    height?: PositionSizeOption;
+    top?: PositionSizeOption;
+    right?: PositionSizeOption;
+    bottom?: PositionSizeOption;
+    left?: PositionSizeOption;
 }
-interface CircleLayoutOptionMixin {
-    center?: (number | string)[];
+/**
+ * Need to be parsed by `parsePositionOption` or `parsePositionSizeOption`.
+ * Accept number, or numeric string (`'123'`), or percentage ('100%'), as x/y/width/height pixel number.
+ * If null/undefined or invalid, return NaN.
+ */
+declare type PositionSizeOption = number | string;
+interface CircleLayoutOptionMixin<TNuance extends {
+    centerExtra: unknown;
+} = {
+    centerExtra: never;
+}> {
+    center?: (number | string)[] | TNuance['centerExtra'];
     radius?: (number | string)[] | number | string;
 }
 interface ShadowOptionMixin {
@@ -6737,6 +9850,24 @@ interface RoamOptionMixin {
      */
     roam?: boolean | 'pan' | 'move' | 'zoom' | 'scale';
     /**
+     * Hover over an area where roaming is triggered.
+     * - if `null`/`undefined`, the trigger area is
+     *   the intersection of "self bounding rect" and "clipping rect (if any)".
+     * - if 'global', the trigger area is
+     *   the intersection of "the entire canvas" and "clipping rect (if any)".
+     * NOTE:
+     *  The clipping rect, which can be enabled by `clip: true`, is typically the layout rect.
+     *  The layout rect is typically determined by option `left`/`right`/`top`/`bottom`/`width`/`height`, some
+     *  components/series, such as `geo` and `series.map` can also be determined by `layoutCenter`/`layoutSize`,
+     *  and may modified by `preserveAspect`.
+     *
+     * PENDING: do we need to support to only trigger roaming on the shapes themselves,
+     *  rather than the bounding rect?
+     * PENDING: do we need to support to check by the laytout rect? But in this case,
+     *  `roamTrigger: 'global', clip: true` is more reasonable.
+     */
+    roamTrigger?: 'global' | 'selfRect' | NullUndefined$1;
+    /**
      * Current center position.
      */
     center?: (number | string)[];
@@ -6748,6 +9879,11 @@ interface RoamOptionMixin {
         min?: number;
         max?: number;
     };
+}
+interface PreserveAspectMixin {
+    preserveAspect?: boolean | 'contain' | 'cover';
+    preserveAspectAlign?: 'left' | 'right' | 'center';
+    preserveAspectVerticalAlign?: 'top' | 'bottom' | 'middle';
 }
 declare type SymbolSizeCallback<T> = (rawValue: any, params: T) => number | number[];
 declare type SymbolCallback<T> = (rawValue: any, params: T) => string;
@@ -6825,8 +9961,11 @@ declare type VisualOptionPiecewise = VisualOptionUnit;
  * All visual properties can be encoded.
  */
 declare type BuiltinVisualProperty = keyof VisualOptionUnit;
-interface TextCommonOption extends ShadowOptionMixin {
-    color?: string;
+declare type TextCommonOptionNuanceBase = Record<string, unknown>;
+declare type TextCommonOptionNuanceDefault = {};
+declare type LabelStyleColorString = ColorString | 'inherit' | 'auto';
+interface TextCommonOption<TNuance extends TextCommonOptionNuanceBase = TextCommonOptionNuanceDefault> extends ShadowOptionMixin {
+    color?: 'color' extends keyof TNuance ? (TNuance['color'] | LabelStyleColorString) : LabelStyleColorString;
     fontStyle?: ZRFontStyle;
     fontWeight?: ZRFontWeight;
     fontFamily?: string;
@@ -6845,6 +9984,10 @@ interface TextCommonOption extends ShadowOptionMixin {
     borderDashOffset?: number;
     borderRadius?: number | number[];
     padding?: number | number[];
+    /**
+     * Currently margin related options are not declared here. They are not supported in rich text.
+     * @see {LabelCommonOption}
+     */
     width?: number | string;
     height?: number;
     textBorderColor?: string;
@@ -6857,6 +10000,9 @@ interface TextCommonOption extends ShadowOptionMixin {
     textShadowOffsetY?: number;
     tag?: string;
 }
+declare type GlobalTextStyleOption = Pick<TextCommonOption, 'color' | 'opacity' | 'fontStyle' | 'fontWeight' | 'fontSize' | 'fontFamily' | 'textShadowColor' | 'textShadowBlur' | 'textShadowOffsetX' | 'textShadowOffsetY' | 'textBorderColor' | 'textBorderWidth' | 'textBorderType' | 'textBorderDashOffset'>;
+interface RichTextOption extends Dictionary<TextCommonOption> {
+}
 interface LabelFormatterCallback<T = CallbackDataParams> {
     (params: T): string;
 }
@@ -6864,28 +10010,67 @@ interface LabelFormatterCallback<T = CallbackDataParams> {
  * LabelOption is an option set to control the style of labels.
  * Include color, background, shadow, truncate, rotation, distance, etc..
  */
-interface LabelOption extends TextCommonOption {
+interface LabelOption<TNuance extends {
+    positionExtra: unknown;
+} = {
+    positionExtra: never;
+}> extends LabelCommonOption {
     /**
      * If show label
      */
     show?: boolean;
-    position?: ElementTextConfig['position'];
+    position?: ElementTextConfig['position'] | TNuance['positionExtra'];
     distance?: number;
     rotate?: number;
     offset?: number[];
-    /**
-     * Min margin between labels. Used when label has layout.
-     */
-    minMargin?: number;
-    overflow?: TextStyleProps['overflow'];
-    ellipsis?: TextStyleProps['ellipsis'];
     silent?: boolean;
     precision?: number | 'auto';
     valueAnimation?: boolean;
-    rich?: Dictionary<TextCommonOption>;
 }
-interface SeriesLabelOption<T extends CallbackDataParams = CallbackDataParams> extends LabelOption {
-    formatter?: string | LabelFormatterCallback<T>;
+/**
+ * Common options for both `axis.axisLabel`, `axis.nameTextStyle and other `label`s.
+ * Historically, they have had some nuances in options.
+ */
+interface LabelCommonOption<TNuanceOption extends TextCommonOptionNuanceBase = TextCommonOptionNuanceDefault> extends TextCommonOption<TNuanceOption> {
+    /**
+     * Min margin between labels. Used when label has layout.
+     * PENDING: @see {LabelMarginType}
+     * It's `minMargin` instead of `margin` is for not breaking the previous code using `margin`.
+     * See the summary in `textMargin`.
+     *
+     * [CAUTION]: do not set `minMargin` in `defaultOption`, otherwise users have to explicitly
+     *  clear the `minMargin` to use `textMargin`.
+     */
+    minMargin?: number;
+    /**
+     * The space around the label to escape from overlapping.
+     * Applied on the label local rect (rather than rotated enlarged rect)
+     * Follow the format defined by `format.ts#normalizeCssArray`.
+     *
+     * Introduce the name `textMargin` rather than reuse the existing names to avoid breaking change:
+     *  - `margin` historically have been used to indicate the distance from `label.x/.y` to something:
+     *      - `axisLabel.margin` & `axisPointer.label.margin`: to the axis line.
+     *      - `calendar.dayLabel/monthLabel/yearLabel.margin`:
+     *      - `series-pie.label.margin`: to pie body (deprecated, replaced by `edgeDistance`)
+     *      - `series-themeRiver.label.margin`: to the shape edge
+     *  - `minMargin` conveys the same meaning as this `textMargin` but has a different nuance,
+     *    it works like CSS margin collapse (gap = label1.minMargin/2 + label2.minMargin/2),
+     *    and `minMargin` applied on the global bounding rect (parallel to screen x and y) rather
+     *    than the original local bounding rect (can be rotated, smaller and more presice).
+     * PENDING: @see {LabelMarginType}
+     */
+    textMargin?: number | number[];
+    overflow?: TextStyleProps['overflow'];
+    lineOverflow?: TextStyleProps['lineOverflow'];
+    ellipsis?: TextStyleProps['ellipsis'];
+    rich?: RichTextOption;
+}
+interface SeriesLabelOption<TCallbackDataParams extends CallbackDataParams = CallbackDataParams, TNuance extends {
+    positionExtra: unknown;
+} = {
+    positionExtra: never;
+}> extends LabelOption<TNuance> {
+    formatter?: string | LabelFormatterCallback<TCallbackDataParams>;
 }
 /**
  * Option for labels on line, like markLine, lines
@@ -7064,6 +10249,14 @@ interface CommonTooltipOption<FormatterParams> {
      * If you need to interact in the tooltip like with links or buttons, it can be set as true.
      */
     enterable?: boolean;
+    /**
+     * Whether enable display transition when show/hide tooltip.
+     * Defaults to `true` for backward compatibility.
+     * If set to `false`, the tooltip 'display' will be set to 'none' when hidden.
+     * @default true
+     * @since v6.0.0
+     */
+    displayTransition?: boolean;
     backgroundColor?: ColorString;
     borderColor?: ColorString;
     borderRadius?: number;
@@ -7179,7 +10372,22 @@ interface ComponentOption {
     name?: OptionName;
     z?: number;
     zlevel?: number;
+    coordinateSystem?: string;
+    coordinateSystemUsage?: CoordinateSystemUsageOption;
+    coord?: CoordinateSystemDataCoord;
 }
+/**
+ * - "data": Use it as "dataCoordSys", each data item is laid out based on a coord sys.
+ * - "box": Use it as "boxCoordSys", the overall bounding rect or anchor point is calculated based on a coord sys.
+ *   e.g.,
+ *      grid rect (cartesian rect) is calculate based on matrix/calendar coord sys;
+ *      pie center is calculated based on calendar/cartesian;
+ *
+ * The default value (if not declared in option `coordinateSystemUsage`):
+ *  For series, be "data", since this is the most case and backward compatible.
+ *  For non-series components, be "box", since "data" is not applicable.
+ */
+declare type CoordinateSystemUsageOption = 'data' | 'box';
 declare type BlurScope = 'coordinateSystem' | 'series' | 'global';
 /**
  * can be array of data indices.
@@ -7258,7 +10466,7 @@ interface UniversalTransitionOption {
      */
     seriesKey?: string | string[];
 }
-interface SeriesOption<StateOption = unknown, StatesMixin extends StatesMixinBase = DefaultStatesMixin> extends ComponentOption, AnimationOptionMixin, ColorPaletteOptionMixin, StatesOptionMixin<StateOption, StatesMixin> {
+interface SeriesOption$1<StateOption = unknown, StatesMixin extends StatesMixinBase = DefaultStatesMixin> extends ComponentOption, AnimationOptionMixin, ColorPaletteOptionMixin, StatesOptionMixin<StateOption, StatesMixin> {
     mainType?: 'series';
     silent?: boolean;
     blendMode?: string;
@@ -7282,10 +10490,6 @@ interface SeriesOption<StateOption = unknown, StatesMixin extends StatesMixinBas
     progressive?: number | false;
     progressiveThreshold?: number;
     progressiveChunkMode?: 'mod';
-    /**
-     * Not available on every series
-     */
-    coordinateSystem?: string;
     hoverLayerThreshold?: number;
     /**
      * When dataset is used, seriesLayoutBy specifies whether the column or the row of dataset is mapped to the series
@@ -7345,6 +10549,7 @@ interface SeriesLargeOptionMixin {
 interface SeriesStackOptionMixin {
     stack?: string;
     stackStrategy?: 'samesign' | 'all' | 'positive' | 'negative';
+    stackOrder?: 'seriesAsc' | 'seriesDesc';
 }
 declare type SamplingFunc = (frame: ArrayLike<number>) => number;
 interface SeriesSamplingOptionMixin {
@@ -7486,121 +10691,6 @@ declare class OptionManager {
     getMediaOption(ecModel: GlobalModel): ECUnitOption[];
 }
 
-declare const _default: {
-    time: {
-        month: string[];
-        monthAbbr: string[];
-        dayOfWeek: string[];
-        dayOfWeekAbbr: string[];
-    };
-    legend: {
-        selector: {
-            all: string;
-            inverse: string;
-        };
-    };
-    toolbox: {
-        brush: {
-            title: {
-                rect: string;
-                polygon: string;
-                lineX: string;
-                lineY: string;
-                keep: string;
-                clear: string;
-            };
-        };
-        dataView: {
-            title: string;
-            lang: string[];
-        };
-        dataZoom: {
-            title: {
-                zoom: string;
-                back: string;
-            };
-        };
-        magicType: {
-            title: {
-                line: string;
-                bar: string;
-                stack: string;
-                tiled: string;
-            };
-        };
-        restore: {
-            title: string;
-        };
-        saveAsImage: {
-            title: string;
-            lang: string[];
-        };
-    };
-    series: {
-        typeNames: {
-            pie: string;
-            bar: string;
-            line: string;
-            scatter: string;
-            effectScatter: string;
-            radar: string;
-            tree: string;
-            treemap: string;
-            boxplot: string;
-            candlestick: string;
-            k: string;
-            heatmap: string;
-            map: string;
-            parallel: string;
-            lines: string;
-            graph: string;
-            sankey: string;
-            funnel: string;
-            gauge: string;
-            pictorialBar: string;
-            themeRiver: string;
-            sunburst: string;
-            custom: string;
-            chart: string;
-        };
-    };
-    aria: {
-        general: {
-            withTitle: string;
-            withoutTitle: string;
-        };
-        series: {
-            single: {
-                prefix: string;
-                withName: string;
-                withoutName: string;
-            };
-            multiple: {
-                prefix: string;
-                withName: string;
-                withoutName: string;
-                separator: {
-                    middle: string;
-                    end: string;
-                };
-            };
-        };
-        data: {
-            allData: string;
-            partialData: string;
-            withName: string;
-            withoutName: string;
-            separator: {
-                middle: string;
-                end: string;
-            };
-        };
-    };
-};
-
-declare type LocaleOption = typeof _default;
-declare function registerLocale(locale: string, localeObj: LocaleOption): void;
-
 /**
  * Caution: If the mechanism should be changed some day, these cases
  * should be considered:
@@ -7708,6 +10798,7 @@ declare class GlobalModel extends Model<ECUnitOption> {
      * Get option for output (cloned option and inner info removed)
      */
     getOption(): ECUnitOption;
+    setTheme(theme: object): void;
     getTheme(): Model;
     getLocaleModel(): Model<LocaleOption>;
     setUpdatePayload(payload: Payload): void;
@@ -7917,7 +11008,7 @@ declare const _default$1: {
 };
 
 declare type ModelFinder$1 = ModelFinder;
-declare const version$1 = "5.6.0";
+declare const version$1 = "6.0.0";
 declare const dependencies: {
     zrender: string;
 };
@@ -7941,6 +11032,7 @@ declare const PRIORITY: {
     };
 };
 declare const IN_MAIN_PROCESS_KEY: "__flagInMainProcess";
+declare const MAIN_PROCESS_VERSION_KEY: "__mainProcessVersion";
 declare const PENDING_UPDATE: "__pendingUpdate";
 declare const STATUS_NEEDS_UPDATE_KEY: "__needsUpdateStatus";
 declare const CONNECT_STATUS_KEY: "__connectUpdateStatus";
@@ -7957,6 +11049,9 @@ interface ResizeOpts {
     width?: number | 'auto';
     height?: number | 'auto';
     animation?: AnimationOption$1;
+    silent?: boolean;
+}
+interface SetThemeOpts {
     silent?: boolean;
 }
 interface PostIniter {
@@ -8015,6 +11110,7 @@ declare class ECharts extends Eventful<ECEventDefinition> {
     private _loadingFX;
     private [PENDING_UPDATE];
     private [IN_MAIN_PROCESS_KEY];
+    private [MAIN_PROCESS_VERSION_KEY];
     private [CONNECT_STATUS_KEY];
     private [STATUS_NEEDS_UPDATE_KEY];
     constructor(dom: HTMLElement, theme?: string | ThemeOption, opts?: EChartsInitOpts);
@@ -8041,9 +11137,12 @@ declare class ECharts extends Eventful<ECEventDefinition> {
     setOption<Opt extends ECBasicOption>(option: Opt, notMerge?: boolean, lazyUpdate?: boolean): void;
     setOption<Opt extends ECBasicOption>(option: Opt, opts?: SetOptionOpts): void;
     /**
-     * @deprecated
+     * Update theme with name or theme option and repaint the chart.
+     * @param theme Theme name or theme option.
+     * @param opts Optional settings
      */
-    private setTheme;
+    setTheme(theme: string | ThemeOption, opts?: SetThemeOpts): void;
+    private _updateTheme;
     private getModel;
     getOption(): ECBasicOption;
     getWidth(): number;
@@ -8081,15 +11180,38 @@ declare class ECharts extends Eventful<ECEventDefinition> {
     /**
      * Convert from logical coordinate system to pixel coordinate system.
      * See CoordinateSystem#convertToPixel.
+     *
+     * TODO / PENDING:
+     *  currently `convertToPixel` `convertFromPixel` `convertToLayout` may not be suitable
+     *  for some extremely performance-sensitive scenarios (such as, handling massive amounts of data),
+     *  since it performce "find component" every time.
+     *  And it is not friendly to the nuances between different coordinate systems.
+     *  @see https://github.com/apache/echarts/issues/20985 for details
+     *
+     * @see CoordinateSystem['dataToPoint'] for parameters and return.
+     * @see CoordinateSystemDataCoord
      */
     convertToPixel(finder: ModelFinder$1, value: ScaleDataValue): number;
     convertToPixel(finder: ModelFinder$1, value: ScaleDataValue[]): number[];
+    convertToPixel(finder: ModelFinder$1, value: ScaleDataValue | ScaleDataValue[]): number | number[];
+    convertToPixel(finder: ModelFinder$1, value: (ScaleDataValue | ScaleDataValue[] | NullUndefined$1)[]): number | number[];
+    /**
+     * Convert from logical coordinate system to pixel coordinate system.
+     * See CoordinateSystem#convertToPixel.
+     *
+     * @see CoordinateSystem['dataToLayout'] for parameters and return.
+     * @see CoordinateSystemDataCoord
+     */
+    convertToLayout(finder: ModelFinder$1, value: (ScaleDataValue | NullUndefined$1) | (ScaleDataValue | ScaleDataValue[] | NullUndefined$1)[], opt?: unknown): CoordinateSystemDataLayout;
     /**
      * Convert from pixel coordinate system to logical coordinate system.
      * See CoordinateSystem#convertFromPixel.
+     *
+     * @see CoordinateSystem['pointToData'] for parameters and return.
      */
     convertFromPixel(finder: ModelFinder$1, value: number): number;
     convertFromPixel(finder: ModelFinder$1, value: number[]): number[];
+    convertFromPixel(finder: ModelFinder$1, value: number | number[]): number | number[];
     /**
      * Is the specified coordinate systems or components contain the given pixel point.
      * @param {Array|number} value
@@ -8229,17 +11351,18 @@ declare function registerUpdateLifecycle<T extends keyof LifecycleEvents>(name: 
  *     {type: 'someAction', event: 'someEvent', update: 'updateView'},
  *     function () { ... }
  * );
- *
- * @param {(string|Object)} actionInfo
- * @param {string} actionInfo.type
- * @param {string} [actionInfo.event]
- * @param {string} [actionInfo.update]
- * @param {string} [eventName]
- * @param {Function} action
+ * registerAction({
+ *     type: 'someAction',
+ *     event: 'someEvent',
+ *     update: 'updateView'
+ *     action: function () { ... }
+ *     refineEvent: function () { ... }
+ * });
+ * @see {ActionInfo} for more details.
  */
-declare function registerAction(type: string, eventName: string, action: ActionHandler): void;
+declare function registerAction(type: string, eventType: string, action: ActionHandler): void;
 declare function registerAction(type: string, action: ActionHandler): void;
-declare function registerAction(actionInfo: ActionInfo, action: ActionHandler): void;
+declare function registerAction(actionInfo: ActionInfo, action?: ActionHandler): void;
 declare function registerCoordinateSystem(type: string, coordSysCreator: CoordinateSystemCreator): void;
 /**
  * Get dimensions of specified coordinate system.
@@ -8247,6 +11370,7 @@ declare function registerCoordinateSystem(type: string, coordSysCreator: Coordin
  * @return {Array.<string|Object>}
  */
 declare function getCoordinateSystemDimensions(type: string): DimensionDefinitionLoose[];
+declare function registerCustomSeries(seriesType: string, renderItem: CustomSeriesRenderItem): void;
 
 /**
  * Layout is a special stage of visual encoding
@@ -8288,6 +11412,8 @@ declare const dataTool: {};
 interface EChartsType extends ECharts {
 }
 
+declare function parseCssInt(val: string | number): number;
+declare function parseCssFloat(val: string | number): number;
 declare function parse(colorStr: string, rgbaArr?: number[]): number[];
 declare function lift(color: string, level: number): string;
 declare function toHex(color: string): string;
@@ -8302,7 +11428,7 @@ declare type LerpFullOutput = {
 declare function lerp$1(normalizedValue: number, colors: string[], fullOutput: boolean): LerpFullOutput;
 declare function lerp$1(normalizedValue: number, colors: string[]): string;
 declare const mapToColor: typeof lerp$1;
-declare function modifyHSL(color: string, h?: number, s?: number, l?: number): string;
+declare function modifyHSL(color: string, h?: number | ((h: number) => number), s?: number | string | ((s: number) => number), l?: number | string | ((l: number) => number)): string;
 declare function modifyAlpha(color: string, alpha?: number): string;
 declare function stringify(arrColor: number[], type: string): string;
 declare function lum(color: string, backgroundLum: number): number;
@@ -8310,6 +11436,8 @@ declare function random(): string;
 declare function liftColor(color: GradientObject): GradientObject;
 declare function liftColor(color: string): string;
 
+declare const color_d_parseCssInt: typeof parseCssInt;
+declare const color_d_parseCssFloat: typeof parseCssFloat;
 declare const color_d_parse: typeof parse;
 declare const color_d_lift: typeof lift;
 declare const color_d_toHex: typeof toHex;
@@ -8324,6 +11452,8 @@ declare const color_d_random: typeof random;
 declare const color_d_liftColor: typeof liftColor;
 declare namespace color_d {
   export {
+    color_d_parseCssInt as parseCssInt,
+    color_d_parseCssFloat as parseCssFloat,
     color_d_parse as parse,
     color_d_lift as lift,
     color_d_toHex as toHex,
@@ -8381,7 +11511,7 @@ declare type EnableDataStackDimensionsInputLegacy = (SeriesDimensionDefine | str
  *     stackResultDimension: string
  * }
  */
-declare function enableDataStack(seriesModel: SeriesModel<SeriesOption & SeriesStackOptionMixin>, dimensionsInput: EnableDataStackDimensionsInput | EnableDataStackDimensionsInputLegacy, opt?: {
+declare function enableDataStack(seriesModel: SeriesModel<SeriesOption$1 & SeriesStackOptionMixin>, dimensionsInput: EnableDataStackDimensionsInput | EnableDataStackDimensionsInputLegacy, opt?: {
     stackedCoordDimension?: string;
     byIndex?: boolean;
 }): Pick<DataCalculationInfo<unknown>, 'stackedDimension' | 'stackedByDimension' | 'isStackedByIndex' | 'stackedOverDimension' | 'stackResultDimension'>;
@@ -8411,45 +11541,6 @@ interface ECData {
 }
 declare const getECData: (hostObj: Element<ElementProps>) => ECData;
 
-interface CoordDimensionDefinition extends DimensionDefinition {
-    dimsDef?: (DimensionName | {
-        name: DimensionName;
-        defaultTooltip?: boolean;
-    })[];
-    otherDims?: DataVisualDimensions;
-    ordinalMeta?: OrdinalMeta;
-    coordDim?: DimensionName;
-    coordDimIndex?: DimensionIndex;
-}
-declare type CoordDimensionDefinitionLoose = CoordDimensionDefinition['name'] | CoordDimensionDefinition;
-declare type PrepareSeriesDataSchemaParams = {
-    coordDimensions?: CoordDimensionDefinitionLoose[];
-    /**
-     * Will use `source.dimensionsDefine` if not given.
-     */
-    dimensionsDefine?: DimensionDefinitionLoose[];
-    /**
-     * Will use `source.encodeDefine` if not given.
-     */
-    encodeDefine?: HashMap<OptionEncodeValue, DimensionName> | OptionEncode;
-    dimensionsCount?: number;
-    /**
-     * Make default encode if user not specified.
-     */
-    encodeDefaulter?: EncodeDefaulter;
-    generateCoord?: string;
-    generateCoordCount?: number;
-    /**
-     * If be able to omit unused dimension
-     * Used to improve the performance on high dimension data.
-     */
-    canOmitUnusedDimensions?: boolean;
-};
-/**
- * For outside usage compat (like echarts-gl are using it).
- */
-declare function createDimensions(source: Source | OptionSourceData, opt?: PrepareSeriesDataSchemaParams): SeriesDimensionDefine[];
-
 /**
  * Enable the function that mouseover will trigger the emphasis state.
  *
@@ -8476,7 +11567,7 @@ declare const dataStack: {
  * @param {Object|module:echarts/Model} option If `optoin.type`
  *        is secified, it can only be `'value'` currently.
  */
-declare function createScale(dataExtent: number[], option: object | AxisBaseModel): Scale<Dictionary<unknown>>;
+declare function createScale(dataExtent: number[], option: object | AxisBaseModel): Scale<ScaleSettingDefault>;
 /**
  * Mixin common methods to axis model,
  *
@@ -8537,6 +11628,16 @@ declare function parseGeoJSON(geoJson: GeoJSON | GeoJSONCompressed, nameProperty
  * @param  clamp Default to be false
  */
 declare function linearMap(val: number, domain: number[], range: number[], clamp?: boolean): number;
+/**
+ * Preserve the name `parsePercent` for backward compatibility,
+ * and it's effectively published as `echarts.number.parsePercent`.
+ */
+declare const parsePercent: typeof parsePositionOption;
+/**
+ * @see {parsePositionSizeOption} and also accept a string preset.
+ * @see {PositionSizeOption}
+ */
+declare function parsePositionOption(option: unknown, percentBase: number, percentOffset?: number): number;
 /**
  * (1) Fix rounding error of float numbers.
  * (2) Support return string to avoid scientific notation like '3.5e-7'.
@@ -8690,6 +11791,7 @@ declare const number_d_getPrecision: typeof getPrecision;
 declare const number_d_getPrecisionSafe: typeof getPrecisionSafe;
 declare const number_d_getPixelPrecision: typeof getPixelPrecision;
 declare const number_d_getPercentWithPrecision: typeof getPercentWithPrecision;
+declare const number_d_parsePercent: typeof parsePercent;
 declare const number_d_MAX_SAFE_INTEGER: typeof MAX_SAFE_INTEGER;
 declare const number_d_remRadian: typeof remRadian;
 declare const number_d_isRadianAroundZero: typeof isRadianAroundZero;
@@ -8710,6 +11812,7 @@ declare namespace number_d {
     number_d_getPrecisionSafe as getPrecisionSafe,
     number_d_getPixelPrecision as getPixelPrecision,
     number_d_getPercentWithPrecision as getPercentWithPrecision,
+    number_d_parsePercent as parsePercent,
     number_d_MAX_SAFE_INTEGER as MAX_SAFE_INTEGER,
     number_d_remRadian as remRadian,
     number_d_isRadianAroundZero as isRadianAroundZero,
@@ -8724,13 +11827,13 @@ declare namespace number_d {
   };
 }
 
-declare function format(time: unknown, template: string, isUTC: boolean, lang?: string | Model<LocaleOption>): string;
-
 declare const time_d_format: typeof format;
+declare const time_d_roundTime: typeof roundTime;
 declare namespace time_d {
   export {
     parseDate as parse,
     time_d_format as format,
+    time_d_roundTime as roundTime,
   };
 }
 
@@ -8907,38 +12010,6 @@ declare function extendComponentView(proto: object): ChartView;
 declare function extendSeriesModel(proto: object): SeriesModel;
 declare function extendChartView(proto: object): ChartView;
 
-declare type ParallelLayoutDirection = 'horizontal' | 'vertical';
-interface ParallelCoordinateSystemOption extends ComponentOption, BoxLayoutOptionMixin {
-    mainType?: 'parallel';
-    layout?: ParallelLayoutDirection;
-    axisExpandable?: boolean;
-    axisExpandCenter?: number;
-    axisExpandCount?: number;
-    axisExpandWidth?: number;
-    axisExpandTriggerOn?: 'click' | 'mousemove';
-    axisExpandRate?: number;
-    axisExpandDebounce?: number;
-    axisExpandSlideTriggerArea?: [number, number, number];
-    axisExpandWindow?: number[];
-    parallelAxisDefault?: ParallelAxisOption;
-}
-
-declare type ParallelAxisOption = AxisBaseOption & {
-    /**
-     * 0, 1, 2, ...
-     */
-    dim?: number | number[];
-    parallelIndex?: number;
-    areaSelectStyle?: {
-        width?: number;
-        borderWidth?: number;
-        borderColor?: ZRColor;
-        color?: ZRColor;
-        opacity?: number;
-    };
-    realtime?: boolean;
-};
-
 declare type Dependencies = {
     grid: XAXisOption | YAXisOption | AxisPointerOption;
     polar: AngleAxisOption | RadiusAxisOption;
@@ -8963,2067 +12034,4 @@ declare type ComposeOption<OptionUnion extends ComponentOption> = ComposeUnitOpt
     options?: ComposeUnitOption<OptionUnion>[];
 };
 
-interface RadarIndicatorOption {
-    name?: string;
-    /**
-     * @deprecated Use `name` instead.
-     */
-    text?: string;
-    min?: number;
-    max?: number;
-    color?: ColorString;
-    axisType?: 'value' | 'log';
-}
-interface RadarOption extends ComponentOption, CircleLayoutOptionMixin {
-    mainType?: 'radar';
-    startAngle?: number;
-    shape?: 'polygon' | 'circle';
-    axisLine?: AxisBaseOption['axisLine'];
-    axisTick?: AxisBaseOption['axisTick'];
-    axisLabel?: AxisBaseOption['axisLabel'];
-    splitLine?: AxisBaseOption['splitLine'];
-    splitArea?: AxisBaseOption['splitArea'];
-    axisName?: {
-        show?: boolean;
-        formatter?: string | ((name?: string, indicatorOpt?: InnerIndicatorAxisOption) => string);
-    } & LabelOption;
-    axisNameGap?: number;
-    triggerEvent?: boolean;
-    scale?: boolean;
-    splitNumber?: number;
-    boundaryGap?: CategoryAxisBaseOption['boundaryGap'] | ValueAxisBaseOption['boundaryGap'];
-    indicator?: RadarIndicatorOption[];
-}
-declare type InnerIndicatorAxisOption = AxisBaseOption & {
-    showName?: boolean;
-};
-
-declare type SingleAxisPosition = 'top' | 'bottom' | 'left' | 'right';
-declare type SingleAxisOption = AxisBaseOption & BoxLayoutOptionMixin & {
-    mainType?: 'singleAxis';
-    position?: SingleAxisPosition;
-    orient?: LayoutOrient;
-};
-
-interface CalendarMonthLabelFormatterCallbackParams {
-    nameMap: string;
-    yyyy: string;
-    yy: string;
-    /**
-     * Month string. With 0 prefix.
-     */
-    MM: string;
-    /**
-     * Month number
-     */
-    M: number;
-}
-interface CalendarYearLabelFormatterCallbackParams {
-    nameMap: string;
-    /**
-     * Start year
-     */
-    start: string;
-    /**
-     * End year
-     */
-    end: string;
-}
-interface CalendarOption extends ComponentOption, BoxLayoutOptionMixin {
-    mainType?: 'calendar';
-    cellSize?: number | 'auto' | (number | 'auto')[];
-    orient?: LayoutOrient;
-    splitLine?: {
-        show?: boolean;
-        lineStyle?: LineStyleOption;
-    };
-    itemStyle?: ItemStyleOption;
-    /**
-     * // one year
-     * range: 2017
-     * // one month
-     * range: '2017-02'
-     * //  a range
-     * range: ['2017-01-02', '2017-02-23']
-     * // note: they will be identified as ['2017-01-01', '2017-02-01']
-     * range: ['2017-01', '2017-02']
-     */
-    range?: OptionDataValueDate | (OptionDataValueDate)[];
-    dayLabel?: Omit<LabelOption, 'position'> & {
-        /**
-         * First day of week.
-         */
-        firstDay?: number;
-        /**
-         * Margin between day label and axis line.
-         * Can be percent string of cell size.
-         */
-        margin?: number | string;
-        /**
-         * Position of week, at the beginning or end of the range.
-         */
-        position?: 'start' | 'end';
-        /**
-         * Week text content
-         *
-         * defaults to auto-detected locale by the browser or the specified locale by `echarts.init` function.
-         * It supports any registered locale name (case-sensitive) or customized array.
-         * index 0 always means Sunday.
-         */
-        nameMap?: string | string[];
-    };
-    monthLabel?: Omit<LabelOption, 'position'> & {
-        /**
-         * Margin between month label and axis line.
-         */
-        margin?: number;
-        /**
-         * Position of month label, at the beginning or end of the range.
-         */
-        position?: 'start' | 'end';
-        /**
-         * Month text content
-         *
-         * defaults to auto-detected locale by the browser or the specified locale by `echarts.init` function.
-         * It supports any registered locale name (case-sensitive) or customized array.
-         * index 0 always means Jan.
-         */
-        nameMap?: string | string[];
-        formatter?: string | ((params: CalendarMonthLabelFormatterCallbackParams) => string);
-    };
-    yearLabel?: Omit<LabelOption, 'position'> & {
-        /**
-         * Margin between year label and axis line.
-         */
-        margin?: number;
-        /**
-         * Position of year label, at the beginning or end of the range.
-         */
-        position?: 'top' | 'bottom' | 'left' | 'right';
-        formatter?: string | ((params: CalendarYearLabelFormatterCallbackParams) => string);
-    };
-}
-
-declare type IconStyle = ItemStyleOption & {
-    textFill?: LabelOption['color'];
-    textBackgroundColor?: LabelOption['backgroundColor'];
-    textPosition?: LabelOption['position'];
-    textAlign?: LabelOption['align'];
-    textBorderRadius?: LabelOption['borderRadius'];
-    textPadding?: LabelOption['padding'];
-    textFontFamily?: LabelOption['fontFamily'];
-    textFontSize?: LabelOption['fontSize'];
-    textFontWeight?: LabelOption['fontWeight'];
-    textFontStyle?: LabelOption['fontStyle'];
-};
-interface ToolboxFeatureOption {
-    show?: boolean;
-    title?: string | Partial<Dictionary<string>>;
-    icon?: string | Partial<Dictionary<string>>;
-    iconStyle?: IconStyle;
-    emphasis?: {
-        iconStyle?: IconStyle;
-    };
-    iconStatus?: Partial<Dictionary<DisplayState>>;
-    onclick?: () => void;
-}
-
-interface ToolboxTooltipFormatterParams {
-    componentType: 'toolbox';
-    name: string;
-    title: string;
-    $vars: ['name', 'title'];
-}
-interface ToolboxOption extends ComponentOption, BoxLayoutOptionMixin, BorderOptionMixin {
-    mainType?: 'toolbox';
-    show?: boolean;
-    orient?: LayoutOrient;
-    backgroundColor?: ZRColor;
-    borderRadius?: number | number[];
-    padding?: number | number[];
-    itemSize?: number;
-    itemGap?: number;
-    showTitle?: boolean;
-    iconStyle?: ItemStyleOption;
-    emphasis?: {
-        iconStyle?: ItemStyleOption;
-    };
-    textStyle?: LabelOption;
-    tooltip?: CommonTooltipOption<ToolboxTooltipFormatterParams>;
-    /**
-     * Write all supported features in the final export option.
-     */
-    feature?: Partial<Dictionary<ToolboxFeatureOption>>;
-}
-
-interface TitleOption extends ComponentOption, BoxLayoutOptionMixin, BorderOptionMixin {
-    mainType?: 'title';
-    show?: boolean;
-    text?: string;
-    /**
-     * Link to url
-     */
-    link?: string;
-    target?: 'self' | 'blank';
-    subtext?: string;
-    sublink?: string;
-    subtarget?: 'self' | 'blank';
-    textAlign?: ZRTextAlign;
-    textVerticalAlign?: ZRTextVerticalAlign;
-    /**
-     * @deprecated Use textVerticalAlign instead
-     */
-    textBaseline?: ZRTextVerticalAlign;
-    backgroundColor?: ZRColor;
-    /**
-     * Padding between text and border.
-     * Support to be a single number or an array.
-     */
-    padding?: number | number[];
-    /**
-     * Gap between text and subtext
-     */
-    itemGap?: number;
-    textStyle?: LabelOption;
-    subtextStyle?: LabelOption;
-    /**
-     * If trigger mouse or touch event
-     */
-    triggerEvent?: boolean;
-    /**
-     * Radius of background border.
-     */
-    borderRadius?: number | number[];
-}
-
-interface TimelineControlStyle extends ItemStyleOption {
-    show?: boolean;
-    showPlayBtn?: boolean;
-    showPrevBtn?: boolean;
-    showNextBtn?: boolean;
-    itemSize?: number;
-    itemGap?: number;
-    position?: 'left' | 'right' | 'top' | 'bottom';
-    playIcon?: string;
-    stopIcon?: string;
-    prevIcon?: string;
-    nextIcon?: string;
-    playBtnSize?: number | string;
-    stopBtnSize?: number | string;
-    nextBtnSize?: number | string;
-    prevBtnSize?: number | string;
-}
-interface TimelineCheckpointStyle extends ItemStyleOption, SymbolOptionMixin {
-    animation?: boolean;
-    animationDuration?: number;
-    animationEasing?: ZREasing;
-}
-interface TimelineLineStyleOption extends LineStyleOption {
-    show?: boolean;
-}
-interface TimelineLabelOption extends Omit<LabelOption, 'position'> {
-    show?: boolean;
-    position?: 'auto' | 'left' | 'right' | 'top' | 'bottom' | number;
-    interval?: 'auto' | number;
-    formatter?: string | ((value: string | number, index: number) => string);
-}
-interface TimelineDataItemOption extends SymbolOptionMixin {
-    value?: OptionDataValue;
-    itemStyle?: ItemStyleOption;
-    label?: TimelineLabelOption;
-    checkpointStyle?: TimelineCheckpointStyle;
-    emphasis?: {
-        itemStyle?: ItemStyleOption;
-        label?: TimelineLabelOption;
-        checkpointStyle?: TimelineCheckpointStyle;
-    };
-    progress?: {
-        lineStyle?: TimelineLineStyleOption;
-        itemStyle?: ItemStyleOption;
-        label?: TimelineLabelOption;
-    };
-    tooltip?: boolean;
-}
-interface TimelineOption extends ComponentOption, BoxLayoutOptionMixin, SymbolOptionMixin {
-    mainType?: 'timeline';
-    backgroundColor?: ZRColor;
-    borderColor?: ColorString;
-    borderWidth?: number;
-    tooltip?: CommonTooltipOption<CallbackDataParams> & {
-        trigger?: 'item';
-    };
-    show?: boolean;
-    axisType?: 'category' | 'time' | 'value';
-    currentIndex?: number;
-    autoPlay?: boolean;
-    rewind?: boolean;
-    loop?: boolean;
-    playInterval?: number;
-    realtime?: boolean;
-    controlPosition?: 'left' | 'right' | 'top' | 'bottom';
-    padding?: number | number[];
-    orient?: LayoutOrient;
-    inverse?: boolean;
-    replaceMerge?: GlobalModelSetOptionOpts['replaceMerge'];
-    lineStyle?: TimelineLineStyleOption;
-    itemStyle?: ItemStyleOption;
-    checkpointStyle?: TimelineCheckpointStyle;
-    controlStyle?: TimelineControlStyle;
-    label?: TimelineLabelOption;
-    emphasis?: {
-        lineStyle?: TimelineLineStyleOption;
-        itemStyle?: ItemStyleOption;
-        checkpointStyle?: TimelineCheckpointStyle;
-        controlStyle?: TimelineControlStyle;
-        label?: TimelineLabelOption;
-    };
-    progress?: {
-        lineStyle?: TimelineLineStyleOption;
-        itemStyle?: ItemStyleOption;
-        label?: TimelineLabelOption;
-    };
-    data?: (OptionDataValue | TimelineDataItemOption)[];
-}
-
-interface SliderTimelineOption extends TimelineOption {
-}
-
-interface ScrollableLegendOption extends LegendOption {
-    scrollDataIndex?: number;
-    /**
-     * Gap between each page button
-     */
-    pageButtonItemGap?: number;
-    /**
-     * Gap between page buttons group and legend items.
-     */
-    pageButtonGap?: number;
-    pageButtonPosition?: 'start' | 'end';
-    pageFormatter?: string | ((param: {
-        current: number;
-        total: number;
-    }) => string);
-    pageIcons?: {
-        horizontal?: string[];
-        vertical?: string[];
-    };
-    pageIconColor?: ZRColor;
-    pageIconInactiveColor?: ZRColor;
-    pageIconSize?: number;
-    pageTextStyle?: LabelOption;
-    animationDurationUpdate?: number;
-}
-
-interface DataZoomOption extends ComponentOption {
-    mainType?: 'dataZoom';
-    /**
-     * Default auto by axisIndex
-     */
-    orient?: LayoutOrient;
-    /**
-     * Default the first horizontal category axis.
-     */
-    xAxisIndex?: number | number[];
-    xAxisId?: string | string[];
-    /**
-     * Default the first vertical category axis.
-     */
-    yAxisIndex?: number | number[];
-    yAxisId?: string | string[];
-    radiusAxisIndex?: number | number[];
-    radiusAxisId?: string | string[];
-    angleAxisIndex?: number | number[];
-    angleAxisId?: string | string[];
-    singleAxisIndex?: number | number[];
-    singleAxisId?: string | string[];
-    /**
-     * Possible values: 'filter' or 'empty' or 'weakFilter'.
-     * 'filter': data items which are out of window will be removed. This option is
-     *         applicable when filtering outliers. For each data item, it will be
-     *         filtered if one of the relevant dimensions is out of the window.
-     * 'weakFilter': data items which are out of window will be removed. This option
-     *         is applicable when filtering outliers. For each data item, it will be
-     *         filtered only if all  of the relevant dimensions are out of the same
-     *         side of the window.
-     * 'empty': data items which are out of window will be set to empty.
-     *         This option is applicable when user should not neglect
-     *         that there are some data items out of window.
-     * 'none': Do not filter.
-     * Taking line chart as an example, line will be broken in
-     * the filtered points when filterModel is set to 'empty', but
-     * be connected when set to 'filter'.
-     */
-    filterMode?: 'filter' | 'weakFilter' | 'empty' | 'none';
-    /**
-     * Dispatch action by the fixed rate, avoid frequency.
-     * default 100. Do not throttle when use null/undefined.
-     * If animation === true and animationDurationUpdate > 0,
-     * default value is 100, otherwise 20.
-     */
-    throttle?: number | null | undefined;
-    /**
-     * Start percent. 0 ~ 100
-     */
-    start?: number;
-    /**
-     * End percent. 0 ~ 100
-     */
-    end?: number;
-    /**
-     * Start value. If startValue specified, start is ignored
-     */
-    startValue?: number | string | Date;
-    /**
-     * End value. If endValue specified, end is ignored.
-     */
-    endValue?: number | string | Date;
-    /**
-     * Min span percent, 0 - 100
-     * The range of dataZoom can not be smaller than that.
-     */
-    minSpan?: number;
-    /**
-     * Max span percent, 0 - 100
-     * The range of dataZoom can not be larger than that.
-     */
-    maxSpan?: number;
-    minValueSpan?: number;
-    maxValueSpan?: number;
-    rangeMode?: ['value' | 'percent', 'value' | 'percent'];
-    realtime?: boolean;
-    textStyle?: LabelOption;
-}
-
-interface SliderHandleLabelOption {
-    show?: boolean;
-}
-interface SliderDataZoomOption extends DataZoomOption, BoxLayoutOptionMixin {
-    show?: boolean;
-    /**
-     * Slider dataZoom don't support textStyle
-     */
-    /**
-     * Background of slider zoom component
-     */
-    backgroundColor?: ZRColor;
-    /**
-     * @deprecated Use borderColor instead
-     */
-    /**
-     * border color of the box. For compatibility,
-     * if dataBackgroundColor is set, borderColor
-     * is ignored.
-     */
-    borderColor?: ZRColor;
-    /**
-     * Border radius of the box.
-     */
-    borderRadius?: number | number[];
-    dataBackground?: {
-        lineStyle?: LineStyleOption;
-        areaStyle?: AreaStyleOption;
-    };
-    selectedDataBackground?: {
-        lineStyle?: LineStyleOption;
-        areaStyle?: AreaStyleOption;
-    };
-    /**
-     * Color of selected area.
-     */
-    fillerColor?: ZRColor;
-    /**
-     * @deprecated Use handleStyle instead
-     */
-    handleIcon?: string;
-    handleLabel?: SliderHandleLabelOption;
-    /**
-     * number: height of icon. width will be calculated according to the aspect of icon.
-     * string: percent of the slider height. width will be calculated according to the aspect of icon.
-     */
-    handleSize?: string | number;
-    handleStyle?: ItemStyleOption;
-    /**
-     * Icon to indicate it is a draggable panel.
-     */
-    moveHandleIcon?: string;
-    moveHandleStyle?: ItemStyleOption;
-    /**
-     * Height of handle rect. Can be a percent string relative to the slider height.
-     */
-    moveHandleSize?: number;
-    labelPrecision?: number | 'auto';
-    labelFormatter?: string | ((value: number, valueStr: string) => string);
-    showDetail?: boolean;
-    showDataShadow?: 'auto' | boolean;
-    zoomLock?: boolean;
-    textStyle?: LabelOption;
-    /**
-     * If eable select by brushing
-     */
-    brushSelect?: boolean;
-    brushStyle?: ItemStyleOption;
-    emphasis?: {
-        handleLabel: SliderHandleLabelOption;
-        handleStyle?: ItemStyleOption;
-        moveHandleStyle?: ItemStyleOption;
-    };
-}
-
-interface InsideDataZoomOption extends DataZoomOption {
-    /**
-     * Whether disable this inside zoom.
-     */
-    disabled?: boolean;
-    /**
-     * Whether disable zoom but only pan.
-     */
-    zoomLock?: boolean;
-    zoomOnMouseWheel?: boolean | 'shift' | 'ctrl' | 'alt';
-    moveOnMouseMove?: boolean | 'shift' | 'ctrl' | 'alt';
-    moveOnMouseWheel?: boolean | 'shift' | 'ctrl' | 'alt';
-    preventDefaultMouseMove?: boolean;
-    /**
-     * Inside dataZoom don't support textStyle
-     */
-    textStyle?: never;
-}
-
-interface ContinousVisualMapOption extends VisualMapOption {
-    align?: 'auto' | 'left' | 'right' | 'top' | 'bottom';
-    /**
-     * This prop effect default component type determine
-     * @see echarts/component/visualMap/typeDefaulter.
-     */
-    calculable?: boolean;
-    /**
-     * selected range. In default case `range` is [min, max]
-     * and can auto change along with modification of min max,
-     * until user specified a range.
-     */
-    range?: number[];
-    /**
-     * Whether to enable hover highlight.
-     */
-    hoverLink?: boolean;
-    /**
-     * The extent of hovered data.
-     */
-    hoverLinkDataSize?: number;
-    /**
-     * Whether trigger hoverLink when hover handle.
-     * If not specified, follow the value of `realtime`.
-     */
-    hoverLinkOnHandle?: boolean;
-    handleIcon?: string;
-    handleSize?: string | number;
-    handleStyle?: ItemStyleOption;
-    indicatorIcon?: string;
-    indicatorSize?: string | number;
-    indicatorStyle?: ItemStyleOption;
-    emphasis?: {
-        handleStyle?: ItemStyleOption;
-    };
-}
-
-interface VisualPiece extends VisualOptionPiecewise {
-    min?: number;
-    max?: number;
-    lt?: number;
-    gt?: number;
-    lte?: number;
-    gte?: number;
-    value?: number;
-    label?: string;
-}
-/**
- * Order Rule:
- *
- * option.categories / option.pieces / option.text / option.selected:
- *     If !option.inverse,
- *     Order when vertical: ['top', ..., 'bottom'].
- *     Order when horizontal: ['left', ..., 'right'].
- *     If option.inverse, the meaning of
- *     the order should be reversed.
- *
- * this._pieceList:
- *     The order is always [low, ..., high].
- *
- * Mapping from location to low-high:
- *     If !option.inverse
- *     When vertical, top is high.
- *     When horizontal, right is high.
- *     If option.inverse, reverse.
- */
-interface PiecewiseVisualMapOption extends VisualMapOption {
-    align?: 'auto' | 'left' | 'right';
-    minOpen?: boolean;
-    maxOpen?: boolean;
-    /**
-     * When put the controller vertically, it is the length of
-     * horizontal side of each item. Otherwise, vertical side.
-     * When put the controller vertically, it is the length of
-     * vertical side of each item. Otherwise, horizontal side.
-     */
-    itemWidth?: number;
-    itemHeight?: number;
-    itemSymbol?: string;
-    pieces?: VisualPiece[];
-    /**
-     * category names, like: ['some1', 'some2', 'some3'].
-     * Attr min/max are ignored when categories set. See "Order Rule"
-     */
-    categories?: string[];
-    /**
-     * If set to 5, auto split five pieces equally.
-     * If set to 0 and component type not set, component type will be
-     * determined as "continuous". (It is less reasonable but for ec2
-     * compatibility, see echarts/component/visualMap/typeDefaulter)
-     */
-    splitNumber?: number;
-    /**
-     * Object. If not specified, means selected. When pieces and splitNumber: {'0': true, '5': true}
-     * When categories: {'cate1': false, 'cate3': true} When selected === false, means all unselected.
-     */
-    selected?: Dictionary<boolean>;
-    selectedMode?: 'multiple' | 'single' | boolean;
-    /**
-     * By default, when text is used, label will hide (the logic
-     * is remained for compatibility reason)
-     */
-    showLabel?: boolean;
-    itemGap?: number;
-    hoverLink?: boolean;
-}
-
-interface MarkLineStateOption {
-    lineStyle?: LineStyleOption;
-    /**
-     * itemStyle for symbol
-     */
-    itemStyle?: ItemStyleOption;
-    label?: SeriesLineLabelOption;
-}
-interface MarkLineDataItemOptionBase extends MarkLineStateOption, StatesOptionMixin<MarkLineStateOption, StatesMixinBase> {
-    name?: string;
-}
-interface MarkLine1DDataItemOption extends MarkLineDataItemOptionBase {
-    xAxis?: number | string;
-    yAxis?: number | string;
-    type?: MarkerStatisticType;
-    /**
-     * When using statistic method with type.
-     * valueIndex and valueDim can be specify which dim the statistic is used on.
-     */
-    valueIndex?: number;
-    valueDim?: string;
-    /**
-     * Symbol for both two ends
-     */
-    symbol?: string[] | string;
-    symbolSize?: number[] | number;
-    symbolRotate?: number[] | number;
-    symbolOffset?: number | string | (number | string)[];
-}
-interface MarkLine2DDataItemDimOption extends MarkLineDataItemOptionBase, SymbolOptionMixin, MarkerPositionOption {
-}
-declare type MarkLine2DDataItemOption = [
-    MarkLine2DDataItemDimOption,
-    MarkLine2DDataItemDimOption
-];
-interface MarkLineOption extends MarkerOption, MarkLineStateOption, StatesOptionMixin<MarkLineStateOption, StatesMixinBase> {
-    mainType?: 'markLine';
-    symbol?: string[] | string;
-    symbolSize?: number[] | number;
-    symbolRotate?: number[] | number;
-    symbolOffset?: number | string | (number | string)[] | (number | string)[][];
-    /**
-     * Precision used on statistic method
-     */
-    precision?: number;
-    data?: (MarkLine1DDataItemOption | MarkLine2DDataItemOption)[];
-}
-
-interface MarkPointStateOption {
-    itemStyle?: ItemStyleOption;
-    label?: SeriesLabelOption;
-}
-interface MarkPointDataItemOption extends MarkPointStateOption, StatesOptionMixin<MarkPointStateOption, StatesMixinBase>, SymbolOptionMixin<CallbackDataParams>, MarkerPositionOption {
-    name: string;
-}
-interface MarkPointOption extends MarkerOption, SymbolOptionMixin<CallbackDataParams>, StatesOptionMixin<MarkPointStateOption, StatesMixinBase>, MarkPointStateOption {
-    mainType?: 'markPoint';
-    precision?: number;
-    data?: MarkPointDataItemOption[];
-}
-
-declare type LineDataValue = OptionDataValue | OptionDataValue[];
-interface LineStateOptionMixin {
-    emphasis?: {
-        focus?: DefaultEmphasisFocus;
-        scale?: boolean | number;
-    };
-}
-interface LineStateOption<TCbParams = never> {
-    itemStyle?: ItemStyleOption<TCbParams>;
-    label?: SeriesLabelOption;
-    endLabel?: LineEndLabelOption;
-}
-interface LineDataItemOption extends SymbolOptionMixin, LineStateOption, StatesOptionMixin<LineStateOption, LineStateOptionMixin> {
-    name?: string;
-    value?: LineDataValue;
-}
-interface LineEndLabelOption extends SeriesLabelOption {
-    valueAnimation?: boolean;
-}
-interface LineSeriesOption extends SeriesOption<LineStateOption<CallbackDataParams>, LineStateOptionMixin & {
-    emphasis?: {
-        lineStyle?: Omit<LineStyleOption, 'width'> & {
-            width?: LineStyleOption['width'] | 'bolder';
-        };
-        areaStyle?: AreaStyleOption;
-    };
-    blur?: {
-        lineStyle?: LineStyleOption;
-        areaStyle?: AreaStyleOption;
-    };
-}>, LineStateOption<CallbackDataParams>, SeriesOnCartesianOptionMixin, SeriesOnPolarOptionMixin, SeriesStackOptionMixin, SeriesSamplingOptionMixin, SymbolOptionMixin<CallbackDataParams>, SeriesEncodeOptionMixin {
-    type?: 'line';
-    coordinateSystem?: 'cartesian2d' | 'polar';
-    clip?: boolean;
-    label?: SeriesLabelOption;
-    endLabel?: LineEndLabelOption;
-    lineStyle?: LineStyleOption;
-    areaStyle?: AreaStyleOption & {
-        origin?: 'auto' | 'start' | 'end' | number;
-    };
-    step?: false | 'start' | 'end' | 'middle';
-    smooth?: boolean | number;
-    smoothMonotone?: 'x' | 'y' | 'none';
-    connectNulls?: boolean;
-    showSymbol?: boolean;
-    showAllSymbol?: 'auto' | boolean;
-    data?: (LineDataValue | LineDataItemOption)[];
-    triggerLineEvent?: boolean;
-}
-
-interface ScatterStateOption<TCbParams = never> {
-    itemStyle?: ItemStyleOption<TCbParams>;
-    label?: SeriesLabelOption;
-}
-interface ScatterStatesOptionMixin {
-    emphasis?: {
-        focus?: DefaultEmphasisFocus;
-        scale?: boolean | number;
-    };
-}
-interface ScatterDataItemOption extends SymbolOptionMixin, ScatterStateOption, StatesOptionMixin<ScatterStateOption, ScatterStatesOptionMixin>, OptionDataItemObject<OptionDataValue> {
-}
-interface ScatterSeriesOption extends SeriesOption<ScatterStateOption<CallbackDataParams>, ScatterStatesOptionMixin>, ScatterStateOption<CallbackDataParams>, SeriesOnCartesianOptionMixin, SeriesOnPolarOptionMixin, SeriesOnCalendarOptionMixin, SeriesOnGeoOptionMixin, SeriesOnSingleOptionMixin, SeriesLargeOptionMixin, SeriesStackOptionMixin, SymbolOptionMixin<CallbackDataParams>, SeriesEncodeOptionMixin {
-    type?: 'scatter';
-    coordinateSystem?: string;
-    cursor?: string;
-    clip?: boolean;
-    data?: (ScatterDataItemOption | OptionDataValue | OptionDataValue[])[] | ArrayLike<number>;
-}
-
-interface PieItemStyleOption<TCbParams = never> extends ItemStyleOption<TCbParams> {
-    borderRadius?: (number | string)[] | number | string;
-}
-interface PieCallbackDataParams extends CallbackDataParams {
-    percent: number;
-}
-interface PieStateOption<TCbParams = never> {
-    itemStyle?: PieItemStyleOption<TCbParams>;
-    label?: PieLabelOption;
-    labelLine?: PieLabelLineOption;
-}
-interface PieLabelOption extends Omit<SeriesLabelOption, 'rotate' | 'position'> {
-    rotate?: number | boolean | 'radial' | 'tangential';
-    alignTo?: 'none' | 'labelLine' | 'edge';
-    edgeDistance?: string | number;
-    /**
-     * @deprecated Use `edgeDistance` instead
-     */
-    margin?: string | number;
-    bleedMargin?: number;
-    distanceToLabelLine?: number;
-    position?: SeriesLabelOption['position'] | 'outer' | 'inner' | 'center' | 'outside';
-}
-interface PieLabelLineOption extends LabelLineOption {
-    /**
-     * Max angle between labelLine and surface normal.
-     * 0 - 180
-     */
-    maxSurfaceAngle?: number;
-}
-interface ExtraStateOption {
-    emphasis?: {
-        focus?: DefaultEmphasisFocus;
-        scale?: boolean;
-        scaleSize?: number;
-    };
-}
-interface PieDataItemOption extends OptionDataItemObject<OptionDataValueNumeric>, PieStateOption, StatesOptionMixin<PieStateOption, ExtraStateOption> {
-    cursor?: string;
-}
-interface PieSeriesOption extends Omit<SeriesOption<PieStateOption<PieCallbackDataParams>, ExtraStateOption>, 'labelLine'>, PieStateOption<PieCallbackDataParams>, Omit<CircleLayoutOptionMixin, 'center'>, BoxLayoutOptionMixin, SeriesEncodeOptionMixin {
-    type?: 'pie';
-    roseType?: 'radius' | 'area';
-    center?: string | number | (string | number)[];
-    clockwise?: boolean;
-    startAngle?: number;
-    endAngle?: number | 'auto';
-    padAngle?: number;
-    minAngle?: number;
-    minShowLabelAngle?: number;
-    selectedOffset?: number;
-    avoidLabelOverlap?: boolean;
-    percentPrecision?: number;
-    stillShowZeroSum?: boolean;
-    animationType?: 'expansion' | 'scale';
-    animationTypeUpdate?: 'transition' | 'expansion';
-    showEmptyCircle?: boolean;
-    emptyCircleStyle?: PieItemStyleOption;
-    data?: (OptionDataValueNumeric | OptionDataValueNumeric[] | PieDataItemOption)[];
-}
-
-declare type RadarSeriesDataValue = OptionDataValue[];
-interface RadarStatesMixin {
-    emphasis?: DefaultStatesMixinEmphasis;
-}
-interface RadarSeriesStateOption<TCbParams = never> {
-    lineStyle?: LineStyleOption;
-    areaStyle?: AreaStyleOption;
-    label?: SeriesLabelOption;
-    itemStyle?: ItemStyleOption<TCbParams>;
-}
-interface RadarSeriesDataItemOption extends SymbolOptionMixin, RadarSeriesStateOption<CallbackDataParams>, StatesOptionMixin<RadarSeriesStateOption<CallbackDataParams>, RadarStatesMixin>, OptionDataItemObject<RadarSeriesDataValue> {
-}
-interface RadarSeriesOption extends SeriesOption<RadarSeriesStateOption, RadarStatesMixin>, RadarSeriesStateOption, SymbolOptionMixin<CallbackDataParams>, SeriesEncodeOptionMixin {
-    type?: 'radar';
-    coordinateSystem?: 'radar';
-    radarIndex?: number;
-    radarId?: string;
-    data?: (RadarSeriesDataItemOption | RadarSeriesDataValue)[];
-}
-
-interface CurveLineStyleOption extends LineStyleOption {
-    curveness?: number;
-}
-interface TreeSeriesStateOption<TCbParams = never> {
-    itemStyle?: ItemStyleOption<TCbParams>;
-    /**
-     * Line style of the edge between node and it's parent.
-     */
-    lineStyle?: CurveLineStyleOption;
-    label?: SeriesLabelOption;
-}
-interface TreeStatesMixin {
-    emphasis?: {
-        focus?: DefaultEmphasisFocus | 'ancestor' | 'descendant' | 'relative';
-        scale?: boolean;
-    };
-}
-interface TreeSeriesNodeItemOption extends SymbolOptionMixin<CallbackDataParams>, TreeSeriesStateOption<CallbackDataParams>, StatesOptionMixin<TreeSeriesStateOption<CallbackDataParams>, TreeStatesMixin>, OptionDataItemObject<OptionDataValue> {
-    children?: TreeSeriesNodeItemOption[];
-    collapsed?: boolean;
-    link?: string;
-    target?: string;
-}
-/**
- * Configuration of leaves nodes.
- */
-interface TreeSeriesLeavesOption extends TreeSeriesStateOption, StatesOptionMixin<TreeSeriesStateOption, TreeStatesMixin> {
-}
-interface TreeSeriesOption extends SeriesOption<TreeSeriesStateOption, TreeStatesMixin>, TreeSeriesStateOption, SymbolOptionMixin<CallbackDataParams>, BoxLayoutOptionMixin, RoamOptionMixin {
-    type?: 'tree';
-    layout?: 'orthogonal' | 'radial';
-    edgeShape?: 'polyline' | 'curve';
-    /**
-     * Available when edgeShape is polyline
-     */
-    edgeForkPosition?: string | number;
-    nodeScaleRatio?: number;
-    /**
-     * The orient of orthoginal layout, can be setted to 'LR', 'TB', 'RL', 'BT'.
-     * and the backward compatibility configuration 'horizontal = LR', 'vertical = TB'.
-     */
-    orient?: 'LR' | 'TB' | 'RL' | 'BT' | 'horizontal' | 'vertical';
-    expandAndCollapse?: boolean;
-    /**
-     * The initial expanded depth of tree
-     */
-    initialTreeDepth?: number;
-    leaves?: TreeSeriesLeavesOption;
-    data?: TreeSeriesNodeItemOption[];
-}
-
-declare type TreemapSeriesDataValue = number | number[];
-interface BreadcrumbItemStyleOption extends ItemStyleOption {
-    textStyle?: LabelOption;
-}
-interface TreemapSeriesLabelOption extends SeriesLabelOption {
-    formatter?: string | ((params: CallbackDataParams) => string);
-}
-interface TreemapSeriesItemStyleOption<TCbParams = never> extends ItemStyleOption<TCbParams> {
-    borderRadius?: number | number[];
-    colorAlpha?: number;
-    colorSaturation?: number;
-    borderColorSaturation?: number;
-    gapWidth?: number;
-}
-interface TreePathInfo {
-    name: string;
-    dataIndex: number;
-    value: TreemapSeriesDataValue;
-}
-interface TreemapSeriesCallbackDataParams extends CallbackDataParams {
-    /**
-     * @deprecated
-     */
-    treePathInfo?: TreePathInfo[];
-    treeAncestors?: TreePathInfo[];
-}
-interface ExtraStateOption$1 {
-    emphasis?: {
-        focus?: DefaultEmphasisFocus | 'descendant' | 'ancestor';
-    };
-}
-interface TreemapStateOption<TCbParams = never> {
-    itemStyle?: TreemapSeriesItemStyleOption<TCbParams>;
-    label?: TreemapSeriesLabelOption;
-    upperLabel?: TreemapSeriesLabelOption;
-}
-interface TreemapSeriesVisualOption {
-    /**
-     * Which dimension will be applied with the visual properties.
-     */
-    visualDimension?: number | string;
-    /**
-     * @deprecated Use colorBy instead
-     */
-    colorMappingBy?: 'value' | 'index' | 'id';
-    visualMin?: number;
-    visualMax?: number;
-    colorAlpha?: number[] | 'none';
-    colorSaturation?: number[] | 'none';
-    /**
-     * A node will not be shown when its area size is smaller than this value (unit: px square).
-     */
-    visibleMin?: number;
-    /**
-     * Children will not be shown when area size of a node is smaller than this value (unit: px square).
-     */
-    childrenVisibleMin?: number;
-}
-interface TreemapSeriesLevelOption extends TreemapSeriesVisualOption, TreemapStateOption, StatesOptionMixin<TreemapStateOption, ExtraStateOption$1> {
-    color?: ColorString[] | 'none';
-    decal?: DecalObject[] | 'none';
-}
-interface TreemapSeriesNodeItemOption extends TreemapSeriesVisualOption, TreemapStateOption, StatesOptionMixin<TreemapStateOption, ExtraStateOption$1> {
-    id?: OptionId;
-    name?: OptionName;
-    value?: TreemapSeriesDataValue;
-    children?: TreemapSeriesNodeItemOption[];
-    color?: ColorString[] | 'none';
-    decal?: DecalObject[] | 'none';
-    cursor?: string;
-}
-interface TreemapSeriesOption extends SeriesOption<TreemapStateOption<TreemapSeriesCallbackDataParams>, ExtraStateOption$1>, TreemapStateOption<TreemapSeriesCallbackDataParams>, BoxLayoutOptionMixin, RoamOptionMixin, TreemapSeriesVisualOption {
-    type?: 'treemap';
-    /**
-     * configuration in echarts2
-     * @deprecated
-     */
-    size?: (number | string)[];
-    /**
-     * If sort in desc order.
-     * Default to be desc. asc has strange effect
-     */
-    sort?: boolean | 'asc' | 'desc';
-    /**
-     * Size of clipped window when zooming. 'origin' or 'fullscreen'
-     */
-    clipWindow?: 'origin' | 'fullscreen';
-    squareRatio?: number;
-    /**
-     * Nodes on depth from root are regarded as leaves.
-     * Count from zero (zero represents only view root).
-     */
-    leafDepth?: number;
-    drillDownIcon?: string;
-    /**
-     * Be effective when using zoomToNode. Specify the proportion of the
-     * target node area in the view area.
-     */
-    zoomToNodeRatio?: number;
-    /**
-     * Leaf node click behaviour: 'zoomToNode', 'link', false.
-     * If leafDepth is set and clicking a node which has children but
-     * be on left depth, the behaviour would be changing root. Otherwise
-     * use behaviour defined above.
-     */
-    nodeClick?: 'zoomToNode' | 'link' | false;
-    breadcrumb?: BoxLayoutOptionMixin & {
-        show?: boolean;
-        height?: number;
-        emptyItemWidth?: number;
-        itemStyle?: BreadcrumbItemStyleOption;
-        emphasis?: {
-            disabled?: boolean;
-            focus?: DefaultEmphasisFocus;
-            blurScope?: BlurScope;
-            itemStyle?: BreadcrumbItemStyleOption;
-        };
-    };
-    levels?: TreemapSeriesLevelOption[];
-    data?: TreemapSeriesNodeItemOption[];
-}
-
-declare type GraphDataValue = OptionDataValue | OptionDataValue[];
-interface GraphEdgeLineStyleOption extends LineStyleOption {
-    curveness?: number;
-}
-interface GraphNodeStateOption<TCbParams = never> {
-    itemStyle?: ItemStyleOption<TCbParams>;
-    label?: SeriesLabelOption;
-}
-interface ExtraEmphasisState {
-    focus?: DefaultEmphasisFocus | 'adjacency';
-}
-interface GraphNodeStatesMixin {
-    emphasis?: ExtraEmphasisState;
-}
-interface GraphEdgeStatesMixin {
-    emphasis?: ExtraEmphasisState;
-}
-interface GraphNodeItemOption extends SymbolOptionMixin, GraphNodeStateOption, StatesOptionMixin<GraphNodeStateOption, GraphNodeStatesMixin> {
-    id?: string;
-    name?: string;
-    value?: GraphDataValue;
-    /**
-     * Fixed x position
-     */
-    x?: number;
-    /**
-     * Fixed y position
-     */
-    y?: number;
-    /**
-     * If this node is fixed during force layout.
-     */
-    fixed?: boolean;
-    /**
-     * Index or name of category
-     */
-    category?: number | string;
-    draggable?: boolean;
-    cursor?: string;
-}
-interface GraphEdgeStateOption {
-    lineStyle?: GraphEdgeLineStyleOption;
-    label?: SeriesLineLabelOption;
-}
-interface GraphEdgeItemOption extends GraphEdgeStateOption, StatesOptionMixin<GraphEdgeStateOption, GraphEdgeStatesMixin>, GraphEdgeItemObject<OptionDataValueNumeric> {
-    value?: number;
-    /**
-     * Symbol of both line ends
-     */
-    symbol?: string | string[];
-    symbolSize?: number | number[];
-    ignoreForceLayout?: boolean;
-}
-interface GraphCategoryItemOption extends SymbolOptionMixin, GraphNodeStateOption, StatesOptionMixin<GraphNodeStateOption, GraphNodeStatesMixin> {
-    name?: string;
-    value?: OptionDataValue;
-}
-interface GraphSeriesOption extends SeriesOption<GraphNodeStateOption<CallbackDataParams>, GraphNodeStatesMixin>, SeriesOnCartesianOptionMixin, SeriesOnPolarOptionMixin, SeriesOnCalendarOptionMixin, SeriesOnGeoOptionMixin, SeriesOnSingleOptionMixin, SymbolOptionMixin<CallbackDataParams>, RoamOptionMixin, BoxLayoutOptionMixin {
-    type?: 'graph';
-    coordinateSystem?: string;
-    legendHoverLink?: boolean;
-    layout?: 'none' | 'force' | 'circular';
-    data?: (GraphNodeItemOption | GraphDataValue)[];
-    nodes?: (GraphNodeItemOption | GraphDataValue)[];
-    edges?: GraphEdgeItemOption[];
-    links?: GraphEdgeItemOption[];
-    categories?: GraphCategoryItemOption[];
-    /**
-     * @deprecated
-     */
-    focusNodeAdjacency?: boolean;
-    /**
-     * Symbol size scale ratio in roam
-     */
-    nodeScaleRatio?: 0.6;
-    draggable?: boolean;
-    edgeSymbol?: string | string[];
-    edgeSymbolSize?: number | number[];
-    edgeLabel?: SeriesLineLabelOption;
-    label?: SeriesLabelOption;
-    itemStyle?: ItemStyleOption<CallbackDataParams>;
-    lineStyle?: GraphEdgeLineStyleOption;
-    emphasis?: {
-        focus?: Exclude<GraphNodeItemOption['emphasis'], undefined>['focus'];
-        scale?: boolean | number;
-        label?: SeriesLabelOption;
-        edgeLabel?: SeriesLabelOption;
-        itemStyle?: ItemStyleOption;
-        lineStyle?: LineStyleOption;
-    };
-    blur?: {
-        label?: SeriesLabelOption;
-        edgeLabel?: SeriesLabelOption;
-        itemStyle?: ItemStyleOption;
-        lineStyle?: LineStyleOption;
-    };
-    select?: {
-        label?: SeriesLabelOption;
-        edgeLabel?: SeriesLabelOption;
-        itemStyle?: ItemStyleOption;
-        lineStyle?: LineStyleOption;
-    };
-    circular?: {
-        rotateLabel?: boolean;
-    };
-    force?: {
-        initLayout?: 'circular' | 'none';
-        repulsion?: number | number[];
-        gravity?: number;
-        friction?: number;
-        edgeLength?: number | number[];
-        layoutAnimation?: boolean;
-    };
-    /**
-     * auto curveness for multiple edge, invalid when `lineStyle.curveness` is set
-     */
-    autoCurveness?: boolean | number | number[];
-}
-
-declare type GaugeColorStop = [number, ColorString];
-interface LabelFormatter$1 {
-    (value: number): string;
-}
-interface PointerOption {
-    icon?: string;
-    show?: boolean;
-    /**
-     * If pointer shows above title and detail
-     */
-    showAbove?: boolean;
-    keepAspect?: boolean;
-    itemStyle?: ItemStyleOption;
-    /**
-     * Can be percent
-     */
-    offsetCenter?: (number | string)[];
-    length?: number | string;
-    width?: number;
-}
-interface AnchorOption {
-    show?: boolean;
-    showAbove?: boolean;
-    size?: number;
-    icon?: string;
-    offsetCenter?: (number | string)[];
-    keepAspect?: boolean;
-    itemStyle?: ItemStyleOption;
-}
-interface ProgressOption {
-    show?: boolean;
-    overlap?: boolean;
-    width?: number;
-    roundCap?: boolean;
-    clip?: boolean;
-    itemStyle?: ItemStyleOption;
-}
-interface TitleOption$1 extends LabelOption {
-    /**
-     * [x, y] offset
-     */
-    offsetCenter?: (number | string)[];
-    formatter?: LabelFormatter$1 | string;
-    /**
-     * If do value animtion.
-     */
-    valueAnimation?: boolean;
-}
-interface DetailOption extends LabelOption {
-    /**
-     * [x, y] offset
-     */
-    offsetCenter?: (number | string)[];
-    formatter?: LabelFormatter$1 | string;
-    /**
-     * If do value animtion.
-     */
-    valueAnimation?: boolean;
-}
-interface GaugeStatesMixin {
-    emphasis?: DefaultStatesMixinEmphasis;
-}
-interface GaugeStateOption<TCbParams = never> {
-    itemStyle?: ItemStyleOption<TCbParams>;
-}
-interface GaugeDataItemOption extends GaugeStateOption, StatesOptionMixin<GaugeStateOption<CallbackDataParams>, GaugeStatesMixin> {
-    name?: string;
-    value?: OptionDataValueNumeric;
-    pointer?: PointerOption;
-    progress?: ProgressOption;
-    title?: TitleOption$1;
-    detail?: DetailOption;
-}
-interface GaugeSeriesOption extends SeriesOption<GaugeStateOption, GaugeStatesMixin>, GaugeStateOption<CallbackDataParams>, CircleLayoutOptionMixin, SeriesEncodeOptionMixin {
-    type?: 'gauge';
-    radius?: number | string;
-    startAngle?: number;
-    endAngle?: number;
-    clockwise?: boolean;
-    min?: number;
-    max?: number;
-    splitNumber?: number;
-    itemStyle?: ItemStyleOption;
-    axisLine?: {
-        show?: boolean;
-        roundCap?: boolean;
-        lineStyle?: Omit<LineStyleOption, 'color'> & {
-            color?: GaugeColorStop[];
-        };
-    };
-    progress?: ProgressOption;
-    splitLine?: {
-        show?: boolean;
-        /**
-         * Can be percent
-         */
-        length?: number;
-        distance?: number;
-        lineStyle?: LineStyleOption;
-    };
-    axisTick?: {
-        show?: boolean;
-        splitNumber?: number;
-        /**
-         * Can be percent
-         */
-        length?: number | string;
-        distance?: number;
-        lineStyle?: LineStyleOption;
-    };
-    axisLabel?: Omit<LabelOption, 'rotate'> & {
-        formatter?: LabelFormatter$1 | string;
-        rotate?: 'tangential' | 'radial' | number;
-    };
-    pointer?: PointerOption;
-    anchor?: AnchorOption;
-    title?: TitleOption$1;
-    detail?: DetailOption;
-    data?: (OptionDataValueNumeric | GaugeDataItemOption)[];
-}
-
-declare type FunnelLabelOption = Omit<SeriesLabelOption, 'position'> & {
-    position?: LabelOption['position'] | 'outer' | 'inner' | 'center' | 'rightTop' | 'rightBottom' | 'leftTop' | 'leftBottom';
-};
-interface FunnelStatesMixin {
-    emphasis?: DefaultStatesMixinEmphasis;
-}
-interface FunnelCallbackDataParams extends CallbackDataParams {
-    percent: number;
-}
-interface FunnelStateOption<TCbParams = never> {
-    itemStyle?: ItemStyleOption<TCbParams>;
-    label?: FunnelLabelOption;
-    labelLine?: LabelLineOption;
-}
-interface FunnelDataItemOption extends FunnelStateOption, StatesOptionMixin<FunnelStateOption, FunnelStatesMixin>, OptionDataItemObject<OptionDataValueNumeric> {
-    itemStyle?: ItemStyleOption & {
-        width?: number | string;
-        height?: number | string;
-    };
-}
-interface FunnelSeriesOption extends SeriesOption<FunnelStateOption<FunnelCallbackDataParams>, FunnelStatesMixin>, FunnelStateOption<FunnelCallbackDataParams>, BoxLayoutOptionMixin, SeriesEncodeOptionMixin {
-    type?: 'funnel';
-    min?: number;
-    max?: number;
-    /**
-     * Absolute number or percent string
-     */
-    minSize?: number | string;
-    maxSize?: number | string;
-    sort?: 'ascending' | 'descending' | 'none';
-    orient?: LayoutOrient;
-    gap?: number;
-    funnelAlign?: HorizontalAlign | VerticalAlign;
-    data?: (OptionDataValueNumeric | OptionDataValueNumeric[] | FunnelDataItemOption)[];
-}
-
-declare type ParallelSeriesDataValue = OptionDataValue[];
-interface ParallelStatesMixin {
-    emphasis?: DefaultStatesMixinEmphasis;
-}
-interface ParallelStateOption<TCbParams = never> {
-    lineStyle?: LineStyleOption<(TCbParams extends never ? never : (params: TCbParams) => ZRColor) | ZRColor>;
-    label?: SeriesLabelOption;
-}
-interface ParallelSeriesDataItemOption extends ParallelStateOption, StatesOptionMixin<ParallelStateOption, ParallelStatesMixin> {
-    value?: ParallelSeriesDataValue;
-}
-interface ParallelSeriesOption extends SeriesOption<ParallelStateOption<CallbackDataParams>, ParallelStatesMixin>, ParallelStateOption<CallbackDataParams>, SeriesEncodeOptionMixin {
-    type?: 'parallel';
-    coordinateSystem?: string;
-    parallelIndex?: number;
-    parallelId?: string;
-    inactiveOpacity?: number;
-    activeOpacity?: number;
-    smooth?: boolean | number;
-    realtime?: boolean;
-    tooltip?: SeriesTooltipOption;
-    parallelAxisDefault?: ParallelAxisOption;
-    data?: (ParallelSeriesDataValue | ParallelSeriesDataItemOption)[];
-}
-
-declare type FocusNodeAdjacency = boolean | 'inEdges' | 'outEdges' | 'allEdges';
-interface SankeyNodeStateOption<TCbParams = never> {
-    label?: SeriesLabelOption;
-    itemStyle?: ItemStyleOption<TCbParams>;
-}
-interface SankeyEdgeStateOption {
-    lineStyle?: SankeyEdgeStyleOption;
-}
-interface SankeyBothStateOption<TCbParams> extends SankeyNodeStateOption<TCbParams>, SankeyEdgeStateOption {
-}
-interface SankeyEdgeStyleOption extends LineStyleOption {
-    curveness?: number;
-}
-interface ExtraStateOption$2 {
-    emphasis?: {
-        focus?: DefaultEmphasisFocus | 'adjacency' | 'trajectory';
-    };
-}
-interface SankeyNodeItemOption extends SankeyNodeStateOption, StatesOptionMixin<SankeyNodeStateOption, ExtraStateOption$2>, OptionDataItemObject<OptionDataValue> {
-    id?: string;
-    localX?: number;
-    localY?: number;
-    depth?: number;
-    draggable?: boolean;
-    focusNodeAdjacency?: FocusNodeAdjacency;
-}
-interface SankeyEdgeItemOption extends SankeyEdgeStateOption, StatesOptionMixin<SankeyEdgeStateOption, ExtraStateOption$2>, GraphEdgeItemObject<OptionDataValueNumeric> {
-    focusNodeAdjacency?: FocusNodeAdjacency;
-    edgeLabel?: SeriesLabelOption;
-}
-interface SankeyLevelOption extends SankeyNodeStateOption, SankeyEdgeStateOption {
-    depth: number;
-}
-interface SankeySeriesOption extends SeriesOption<SankeyBothStateOption<CallbackDataParams>, ExtraStateOption$2>, SankeyBothStateOption<CallbackDataParams>, BoxLayoutOptionMixin {
-    type?: 'sankey';
-    /**
-     * color will be linear mapped.
-     */
-    color?: ColorString[];
-    coordinateSystem?: 'view';
-    orient?: LayoutOrient;
-    /**
-     * The width of the node
-     */
-    nodeWidth?: number;
-    /**
-     * The vertical distance between two nodes
-     */
-    nodeGap?: number;
-    /**
-     * Control if the node can move or not
-     */
-    draggable?: boolean;
-    /**
-     * Will be allEdges if true.
-     * @deprecated
-     */
-    focusNodeAdjacency?: FocusNodeAdjacency;
-    /**
-     * The number of iterations to change the position of the node
-     */
-    layoutIterations?: number;
-    nodeAlign?: 'justify' | 'left' | 'right';
-    data?: SankeyNodeItemOption[];
-    nodes?: SankeyNodeItemOption[];
-    edges?: SankeyEdgeItemOption[];
-    links?: SankeyEdgeItemOption[];
-    levels?: SankeyLevelOption[];
-    edgeLabel?: SeriesLabelOption & {
-        position?: 'inside';
-    };
-}
-
-declare type BoxplotDataValue = OptionDataValueNumeric[];
-interface BoxplotStateOption<TCbParams = never> {
-    itemStyle?: ItemStyleOption<TCbParams>;
-    label?: SeriesLabelOption;
-}
-interface BoxplotDataItemOption extends BoxplotStateOption, StatesOptionMixin<BoxplotStateOption, ExtraStateOption$3> {
-    value: BoxplotDataValue;
-}
-interface ExtraStateOption$3 {
-    emphasis?: {
-        focus?: DefaultEmphasisFocus;
-        scale?: boolean;
-    };
-}
-interface BoxplotSeriesOption extends SeriesOption<BoxplotStateOption<CallbackDataParams>, ExtraStateOption$3>, BoxplotStateOption<CallbackDataParams>, SeriesOnCartesianOptionMixin, SeriesEncodeOptionMixin {
-    type?: 'boxplot';
-    coordinateSystem?: 'cartesian2d';
-    layout?: LayoutOrient;
-    /**
-     * [min, max] can be percent of band width.
-     */
-    boxWidth?: (string | number)[];
-    data?: (BoxplotDataValue | BoxplotDataItemOption)[];
-}
-
-declare type CandlestickDataValue = OptionDataValue[];
-interface CandlestickItemStyleOption extends ItemStyleOption {
-    color0?: ZRColor;
-    borderColor0?: ColorString;
-    borderColorDoji?: ZRColor;
-}
-interface CandlestickStateOption {
-    itemStyle?: CandlestickItemStyleOption;
-    label?: SeriesLabelOption;
-}
-interface CandlestickDataItemOption extends CandlestickStateOption, StatesOptionMixin<CandlestickStateOption, ExtraStateOption$4> {
-    value: CandlestickDataValue;
-}
-interface ExtraStateOption$4 {
-    emphasis?: {
-        focus?: DefaultEmphasisFocus;
-        scale?: boolean;
-    };
-}
-interface CandlestickSeriesOption extends SeriesOption<CandlestickStateOption, ExtraStateOption$4>, CandlestickStateOption, SeriesOnCartesianOptionMixin, SeriesLargeOptionMixin, SeriesEncodeOptionMixin {
-    type?: 'candlestick';
-    coordinateSystem?: 'cartesian2d';
-    layout?: LayoutOrient;
-    clip?: boolean;
-    barMaxWidth?: number | string;
-    barMinWidth?: number | string;
-    barWidth?: number | string;
-    data?: (CandlestickDataValue | CandlestickDataItemOption)[];
-}
-
-interface RippleEffectOption {
-    period?: number;
-    /**
-     * Scale of ripple
-     */
-    scale?: number;
-    brushType?: 'fill' | 'stroke';
-    color?: ZRColor;
-    /**
-     * ripple number
-     */
-    number?: number;
-}
-interface SymbolDrawStateOption {
-    itemStyle?: ItemStyleOption;
-    label?: LabelOption;
-}
-interface SymbolDrawItemModelOption extends SymbolOptionMixin<object>, StatesOptionMixin<SymbolDrawStateOption, {
-    emphasis?: {
-        focus?: DefaultEmphasisFocus;
-        scale?: boolean | number;
-    };
-}>, SymbolDrawStateOption {
-    cursor?: string;
-    rippleEffect?: RippleEffectOption;
-}
-
-declare type ScatterDataValue = OptionDataValue | OptionDataValue[];
-interface EffectScatterStatesOptionMixin {
-    emphasis?: {
-        focus?: DefaultEmphasisFocus;
-        scale?: boolean | number;
-    };
-}
-interface EffectScatterStateOption<TCbParams = never> {
-    itemStyle?: ItemStyleOption<TCbParams>;
-    label?: SeriesLabelOption;
-}
-interface EffectScatterDataItemOption extends SymbolOptionMixin, EffectScatterStateOption, StatesOptionMixin<EffectScatterStateOption, EffectScatterStatesOptionMixin> {
-    name?: string;
-    value?: ScatterDataValue;
-    rippleEffect?: SymbolDrawItemModelOption['rippleEffect'];
-}
-interface EffectScatterSeriesOption extends SeriesOption<EffectScatterStateOption<CallbackDataParams>, EffectScatterStatesOptionMixin>, EffectScatterStateOption<CallbackDataParams>, SeriesOnCartesianOptionMixin, SeriesOnPolarOptionMixin, SeriesOnCalendarOptionMixin, SeriesOnGeoOptionMixin, SeriesOnSingleOptionMixin, SymbolOptionMixin<CallbackDataParams>, SeriesEncodeOptionMixin {
-    type?: 'effectScatter';
-    coordinateSystem?: string;
-    effectType?: 'ripple';
-    /**
-     * When to show the effect
-     */
-    showEffectOn?: 'render' | 'emphasis';
-    clip?: boolean;
-    /**
-     * Ripple effect config
-     */
-    rippleEffect?: SymbolDrawItemModelOption['rippleEffect'];
-    data?: (EffectScatterDataItemOption | ScatterDataValue)[];
-}
-
-interface LineDrawStateOption {
-    lineStyle?: LineStyleOption;
-    label?: LineLabelOption;
-}
-interface LineDrawModelOption extends LineDrawStateOption, StatesOptionMixin<LineDrawStateOption, {
-    emphasis?: {
-        focus?: DefaultEmphasisFocus;
-    };
-}> {
-    effect?: {
-        show?: boolean;
-        period?: number;
-        delay?: number | ((idx: number) => number);
-        /**
-         * If move with constant speed px/sec
-         * period will be ignored if this property is > 0,
-         */
-        constantSpeed?: number;
-        symbol?: string;
-        symbolSize?: number | number[];
-        loop?: boolean;
-        roundTrip?: boolean;
-        /**
-         * Length of trail, 0 - 1
-         */
-        trailLength?: number;
-        /**
-         * Default to be same with lineStyle.color
-         */
-        color?: ColorString;
-    };
-}
-
-declare type LinesCoords = number[][];
-declare type LinesValue = OptionDataValue | OptionDataValue[];
-interface LinesLineStyleOption<TClr> extends LineStyleOption<TClr> {
-    curveness?: number;
-}
-interface LinesStatesMixin {
-    emphasis?: DefaultStatesMixinEmphasis;
-}
-interface LinesStateOption<TCbParams = never> {
-    lineStyle?: LinesLineStyleOption<(TCbParams extends never ? never : (params: TCbParams) => ZRColor) | ZRColor>;
-    label?: SeriesLineLabelOption;
-}
-interface LinesDataItemOption extends LinesStateOption, StatesOptionMixin<LinesStateOption, LinesStatesMixin> {
-    name?: string;
-    fromName?: string;
-    toName?: string;
-    symbol?: string[] | string;
-    symbolSize?: number[] | number;
-    coords?: LinesCoords;
-    value?: LinesValue;
-    effect?: LineDrawModelOption['effect'];
-}
-interface LinesSeriesOption extends SeriesOption<LinesStateOption, LinesStatesMixin>, LinesStateOption<CallbackDataParams>, SeriesOnCartesianOptionMixin, SeriesOnGeoOptionMixin, SeriesOnPolarOptionMixin, SeriesOnCalendarOptionMixin, SeriesLargeOptionMixin {
-    type?: 'lines';
-    coordinateSystem?: string;
-    symbol?: string[] | string;
-    symbolSize?: number[] | number;
-    effect?: LineDrawModelOption['effect'];
-    /**
-     * If lines are polyline
-     * polyline not support curveness, label, animation
-     */
-    polyline?: boolean;
-    /**
-     * If clip the overflow.
-     * Available when coordinateSystem is cartesian or polar.
-     */
-    clip?: boolean;
-    data?: LinesDataItemOption[] | ArrayLike<number>;
-    dimensions?: DimensionDefinitionLoose | DimensionDefinitionLoose[];
-}
-
-declare type HeatmapDataValue = OptionDataValue[];
-interface HeatmapStateOption<TCbParams = never> {
-    itemStyle?: ItemStyleOption<TCbParams> & {
-        borderRadius?: number | number[];
-    };
-    label?: SeriesLabelOption;
-}
-interface FunnelStatesMixin$1 {
-    emphasis?: DefaultStatesMixinEmphasis;
-}
-interface HeatmapDataItemOption extends HeatmapStateOption, StatesOptionMixin<HeatmapStateOption, FunnelStatesMixin$1> {
-    value: HeatmapDataValue;
-}
-interface HeatmapSeriesOption extends SeriesOption<HeatmapStateOption<CallbackDataParams>, FunnelStatesMixin$1>, HeatmapStateOption<CallbackDataParams>, SeriesOnCartesianOptionMixin, SeriesOnGeoOptionMixin, SeriesOnCalendarOptionMixin, SeriesEncodeOptionMixin {
-    type?: 'heatmap';
-    coordinateSystem?: 'cartesian2d' | 'geo' | 'calendar';
-    blurSize?: number;
-    pointSize?: number;
-    maxOpacity?: number;
-    minOpacity?: number;
-    data?: (HeatmapDataItemOption | HeatmapDataValue)[];
-}
-
-interface PictorialBarStateOption {
-    itemStyle?: ItemStyleOption;
-    label?: SeriesLabelOption;
-}
-interface PictorialBarSeriesSymbolOption {
-    /**
-     * Customized bar shape
-     */
-    symbol?: string;
-    /**
-     * Can be ['100%', '100%'], null means auto.
-     * The percent will be relative to category width. If no repeat.
-     * Will be relative to symbolBoundingData.
-     */
-    symbolSize?: (number | string)[] | number | string;
-    symbolRotate?: number;
-    /**
-     * Default to be auto
-     */
-    symbolPosition?: 'start' | 'end' | 'center';
-    /**
-     * Can be percent offset relative to the symbolSize
-     */
-    symbolOffset?: (number | string)[] | number | string;
-    /**
-     * start margin and end margin. Can be a number or a percent string relative to symbolSize.
-     * Auto margin by default.
-     */
-    symbolMargin?: (number | string)[] | number | string;
-    /**
-     * true: means auto calculate repeat times and cut by data.
-     * a number: specifies repeat times, and do not cut by data.
-     * 'fixed': means auto calculate repeat times but do not cut by data.
-     *
-     * Otherwise means no repeat
-     */
-    symbolRepeat?: boolean | number | 'fixed';
-    /**
-     * From start to end or end to start.
-     */
-    symbolRepeatDirection?: 'start' | 'end';
-    symbolClip?: boolean;
-    /**
-     * It will define the size of graphic elements.
-     */
-    symbolBoundingData?: number | number[];
-    symbolPatternSize?: number;
-}
-interface ExtraStateOption$5 {
-    emphasis?: {
-        focus?: DefaultEmphasisFocus;
-        scale?: boolean;
-    };
-}
-interface PictorialBarDataItemOption extends PictorialBarSeriesSymbolOption, AnimationOptionMixin, PictorialBarStateOption, StatesOptionMixin<PictorialBarStateOption, ExtraStateOption$5>, OptionDataItemObject<OptionDataValue> {
-    z?: number;
-    cursor?: string;
-}
-interface PictorialBarSeriesOption extends BaseBarSeriesOption<PictorialBarStateOption, ExtraStateOption$5>, PictorialBarStateOption, PictorialBarSeriesSymbolOption, SeriesStackOptionMixin, SeriesEncodeOptionMixin {
-    type?: 'pictorialBar';
-    coordinateSystem?: 'cartesian2d';
-    data?: (PictorialBarDataItemOption | OptionDataValue | OptionDataValue[])[];
-    clip?: boolean;
-}
-
-interface ThemeRiverSeriesLabelOption extends SeriesLabelOption {
-    margin?: number;
-}
-declare type ThemerRiverDataItem = [OptionDataValueDate, OptionDataValueNumeric, string];
-interface ThemeRiverStatesMixin {
-    emphasis?: DefaultStatesMixinEmphasis;
-}
-interface ThemeRiverStateOption<TCbParams = never> {
-    label?: ThemeRiverSeriesLabelOption;
-    itemStyle?: ItemStyleOption<TCbParams>;
-}
-interface ThemeRiverSeriesOption extends SeriesOption<ThemeRiverStateOption<CallbackDataParams>, ThemeRiverStatesMixin>, ThemeRiverStateOption<CallbackDataParams>, SeriesOnSingleOptionMixin, BoxLayoutOptionMixin {
-    type?: 'themeRiver';
-    color?: ZRColor[];
-    coordinateSystem?: 'singleAxis';
-    /**
-     * gap in axis's orthogonal orientation
-     */
-    boundaryGap?: (string | number)[];
-    /**
-     * [date, value, name]
-     */
-    data?: ThemerRiverDataItem[];
-}
-
-interface SunburstItemStyleOption<TCbParams = never> extends ItemStyleOption<TCbParams> {
-    borderRadius?: (number | string)[] | number | string;
-}
-interface SunburstLabelOption extends Omit<SeriesLabelOption<SunburstDataParams>, 'rotate' | 'position'> {
-    rotate?: 'radial' | 'tangential' | number;
-    minAngle?: number;
-    silent?: boolean;
-    position?: SeriesLabelOption['position'] | 'outside';
-}
-interface SunburstDataParams extends CallbackDataParams {
-    treePathInfo: {
-        name: string;
-        dataIndex: number;
-        value: SunburstSeriesNodeItemOption['value'];
-    }[];
-}
-interface SunburstStatesMixin {
-    emphasis?: {
-        focus?: DefaultEmphasisFocus | 'descendant' | 'ancestor' | 'relative';
-    };
-}
-interface SunburstStateOption<TCbParams = never> {
-    itemStyle?: SunburstItemStyleOption<TCbParams>;
-    label?: SunburstLabelOption;
-}
-interface SunburstSeriesNodeItemOption extends SunburstStateOption<SunburstDataParams>, StatesOptionMixin<SunburstStateOption<SunburstDataParams>, SunburstStatesMixin>, OptionDataItemObject<OptionDataValue> {
-    nodeClick?: 'rootToNode' | 'link' | false;
-    link?: string;
-    target?: string;
-    children?: SunburstSeriesNodeItemOption[];
-    collapsed?: boolean;
-    cursor?: string;
-}
-interface SunburstSeriesLevelOption extends SunburstStateOption<SunburstDataParams>, StatesOptionMixin<SunburstStateOption<SunburstDataParams>, SunburstStatesMixin> {
-    radius?: (number | string)[];
-    /**
-     * @deprecated use radius instead
-     */
-    r?: number | string;
-    /**
-     * @deprecated use radius instead
-     */
-    r0?: number | string;
-    highlight?: {
-        itemStyle?: SunburstItemStyleOption;
-        label?: SunburstLabelOption;
-    };
-}
-interface SortParam {
-    dataIndex: number;
-    depth: number;
-    height: number;
-    getValue(): number;
-}
-interface SunburstSeriesOption extends SeriesOption<SunburstStateOption<SunburstDataParams>, SunburstStatesMixin>, SunburstStateOption<SunburstDataParams>, SunburstColorByMixin, CircleLayoutOptionMixin {
-    type?: 'sunburst';
-    clockwise?: boolean;
-    startAngle?: number;
-    minAngle?: number;
-    /**
-     * If still show when all data zero.
-     */
-    stillShowZeroSum?: boolean;
-    /**
-     * Policy of highlighting pieces when hover on one
-     * Valid values: 'none' (for not downplay others), 'descendant',
-     * 'ancestor', 'self'
-     */
-    nodeClick?: 'rootToNode' | 'link' | false;
-    renderLabelForZeroData?: boolean;
-    data?: SunburstSeriesNodeItemOption[];
-    levels?: SunburstSeriesLevelOption[];
-    animationType?: 'expansion' | 'scale';
-    sort?: 'desc' | 'asc' | ((a: SortParam, b: SortParam) => number);
-}
-
-interface GraphicComponentBaseElementOption extends Partial<Pick<Element, TransformProp | 'silent' | 'ignore' | 'textConfig' | 'draggable' | ElementEventNameWithOn>>, 
-/**
- * left/right/top/bottom: (like 12, '22%', 'center', default undefined)
- * If left/right is set, shape.x/shape.cx/position will not be used.
- * If top/bottom is set, shape.y/shape.cy/position will not be used.
- * This mechanism is useful when you want to position a group/element
- * against the right side or the center of this container.
- */
-Partial<Pick<BoxLayoutOptionMixin, 'left' | 'right' | 'top' | 'bottom'>> {
-    /**
-     * element type, mandatory.
-     * Only can be omit if call setOption not at the first time and perform merge.
-     */
-    type?: string;
-    id?: OptionId;
-    name?: string;
-    parentId?: OptionId;
-    parentOption?: GraphicComponentElementOption;
-    children?: GraphicComponentElementOption[];
-    hv?: [boolean, boolean];
-    /**
-     * bounding: (enum: 'all' (default) | 'raw')
-     * Specify how to calculate boundingRect when locating.
-     * 'all': Get uioned and transformed boundingRect
-     *     from both itself and its descendants.
-     *     This mode simplies confining a group of elements in the bounding
-     *     of their ancester container (e.g., using 'right: 0').
-     * 'raw': Only use the boundingRect of itself and before transformed.
-     *     This mode is similar to css behavior, which is useful when you
-     *     want an element to be able to overflow its container. (Consider
-     *     a rotated circle needs to be located in a corner.)
-     */
-    bounding?: 'raw' | 'all';
-    /**
-     * info: custom info. enables user to mount some info on elements and use them
-     * in event handlers. Update them only when user specified, otherwise, remain.
-     */
-    info?: GraphicExtraElementInfo;
-    clipPath?: Omit<GraphicComponentZRPathOption, 'clipPath'> | false;
-    textContent?: Omit<GraphicComponentTextOption, 'clipPath'>;
-    textConfig?: ElementTextConfig;
-    $action?: 'merge' | 'replace' | 'remove';
-    tooltip?: CommonTooltipOption<unknown>;
-    enterAnimation?: AnimationOption$1;
-    updateAnimation?: AnimationOption$1;
-    leaveAnimation?: AnimationOption$1;
-}
-interface GraphicComponentDisplayableOption extends GraphicComponentBaseElementOption, Partial<Pick<Displayable, 'zlevel' | 'z' | 'z2' | 'invisible' | 'cursor'>> {
-    style?: ZRStyleProps;
-    z2?: number;
-}
-interface GraphicComponentGroupOption extends GraphicComponentBaseElementOption, TransitionOptionMixin<GroupProps> {
-    type?: 'group';
-    /**
-     * width/height: (can only be pixel value, default 0)
-     * Is only used to specify container (group) size, if needed. And
-     * cannot be a percentage value (like '33%'). See the reason in the
-     * layout algorithm below.
-     */
-    width?: number;
-    height?: number;
-    children: GraphicComponentElementOption[];
-    keyframeAnimation?: ElementKeyframeAnimationOption<GroupProps> | ElementKeyframeAnimationOption<GroupProps>[];
-}
-interface GraphicComponentZRPathOption extends GraphicComponentDisplayableOption, TransitionOptionMixin<PathProps> {
-    shape?: PathProps['shape'] & TransitionOptionMixin<PathProps['shape']>;
-    style?: PathStyleProps & TransitionOptionMixin<PathStyleProps>;
-    keyframeAnimation?: ElementKeyframeAnimationOption<PathProps> | ElementKeyframeAnimationOption<PathProps>[];
-}
-interface GraphicComponentImageOption extends GraphicComponentDisplayableOption, TransitionOptionMixin<ImageProps> {
-    type?: 'image';
-    style?: ImageStyleProps & TransitionOptionMixin<ImageStyleProps>;
-    keyframeAnimation?: ElementKeyframeAnimationOption<ImageProps> | ElementKeyframeAnimationOption<ImageProps>[];
-}
-interface GraphicComponentTextOption extends Omit<GraphicComponentDisplayableOption, 'textContent' | 'textConfig'>, TransitionOptionMixin<TextProps> {
-    type?: 'text';
-    style?: TextStyleProps & TransitionOptionMixin<TextStyleProps>;
-    keyframeAnimation?: ElementKeyframeAnimationOption<TextProps> | ElementKeyframeAnimationOption<TextProps>[];
-}
-declare type GraphicComponentElementOption = GraphicComponentGroupOption | GraphicComponentZRPathOption | GraphicComponentImageOption | GraphicComponentTextOption;
-declare type GraphicExtraElementInfo = Dictionary<unknown>;
-declare type GraphicComponentLooseOption = (GraphicComponentOption | GraphicComponentElementOption) & {
-    mainType?: 'graphic';
-};
-interface GraphicComponentOption extends ComponentOption, AnimationOptionMixin {
-    elements?: GraphicComponentElementOption[];
-}
-
-declare const ICON_TYPES: readonly ["rect", "polygon", "lineX", "lineY", "keep", "clear"];
-declare type IconType = typeof ICON_TYPES[number];
-interface ToolboxBrushFeatureOption extends ToolboxFeatureOption {
-    type?: IconType[];
-    icon?: {
-        [key in IconType]?: string;
-    };
-    title?: {
-        [key in IconType]?: string;
-    };
-}
-
-interface ToolboxDataViewFeatureOption extends ToolboxFeatureOption {
-    readOnly?: boolean;
-    optionToContent?: (option: ECUnitOption) => string | HTMLElement;
-    contentToOption?: (viewMain: HTMLDivElement, oldOption: ECUnitOption) => ECUnitOption;
-    icon?: string;
-    title?: string;
-    lang?: string[];
-    backgroundColor?: ColorString;
-    textColor?: ColorString;
-    textareaColor?: ColorString;
-    textareaBorderColor?: ColorString;
-    buttonColor?: ColorString;
-    buttonTextColor?: ColorString;
-}
-
-declare const ICON_TYPES$1: readonly ["zoom", "back"];
-declare type IconType$1 = typeof ICON_TYPES$1[number];
-interface ToolboxDataZoomFeatureOption extends ToolboxFeatureOption {
-    type?: IconType$1[];
-    icon?: {
-        [key in IconType$1]?: string;
-    };
-    title?: {
-        [key in IconType$1]?: string;
-    };
-    filterMode?: 'filter' | 'weakFilter' | 'empty' | 'none';
-    xAxisIndex?: ModelFinderIndexQuery;
-    yAxisIndex?: ModelFinderIndexQuery;
-    xAxisId?: ModelFinderIdQuery;
-    yAxisId?: ModelFinderIdQuery;
-    brushStyle?: ItemStyleOption;
-}
-
-declare const ICON_TYPES$2: readonly ["line", "bar", "stack"];
-declare const TITLE_TYPES: readonly ["line", "bar", "stack", "tiled"];
-declare type IconType$2 = typeof ICON_TYPES$2[number];
-declare type TitleType = typeof TITLE_TYPES[number];
-interface ToolboxMagicTypeFeatureOption extends ToolboxFeatureOption {
-    type?: IconType$2[];
-    /**
-     * Icon group
-     */
-    icon?: {
-        [key in IconType$2]?: string;
-    };
-    title?: {
-        [key in TitleType]?: string;
-    };
-    option?: {
-        [key in IconType$2]?: SeriesOption;
-    };
-    /**
-     * Map of seriesType: seriesIndex
-     */
-    seriesIndex?: {
-        line?: number;
-        bar?: number;
-    };
-}
-
-interface ToolboxRestoreFeatureOption extends ToolboxFeatureOption {
-    icon?: string;
-    title?: string;
-}
-
-interface ToolboxSaveAsImageFeatureOption extends ToolboxFeatureOption {
-    icon?: string;
-    title?: string;
-    type?: 'png' | 'jpeg';
-    backgroundColor?: ZRColor;
-    connectedBackgroundColor?: ZRColor;
-    name?: string;
-    excludeComponents?: string[];
-    pixelRatio?: number;
-    lang?: string[];
-}
-
-interface ToolboxComponentOption extends ToolboxOption {
-    feature?: {
-        brush?: ToolboxBrushFeatureOption;
-        dataView?: ToolboxDataViewFeatureOption;
-        dataZoom?: ToolboxDataZoomFeatureOption;
-        magicType?: ToolboxMagicTypeFeatureOption;
-        restore?: ToolboxRestoreFeatureOption;
-        saveAsImage?: ToolboxSaveAsImageFeatureOption;
-        [key: string]: ToolboxFeatureOption | {
-            [key: string]: any;
-        } | undefined;
-    };
-}
-
-declare type DataZoomComponentOption = SliderDataZoomOption | InsideDataZoomOption;
-
-declare type VisualMapComponentOption = ContinousVisualMapOption | PiecewiseVisualMapOption;
-
-declare type LegendComponentOption = LegendOption | ScrollableLegendOption;
-
-declare type SeriesInjectedOption = {
-    markArea?: MarkAreaOption;
-    markLine?: MarkLineOption;
-    markPoint?: MarkPointOption;
-    tooltip?: SeriesTooltipOption;
-};
-declare type LineSeriesOption$1 = LineSeriesOption & SeriesInjectedOption;
-declare type BarSeriesOption$1 = BarSeriesOption & SeriesInjectedOption;
-declare type ScatterSeriesOption$1 = ScatterSeriesOption & SeriesInjectedOption;
-declare type PieSeriesOption$1 = PieSeriesOption & SeriesInjectedOption;
-declare type RadarSeriesOption$1 = RadarSeriesOption & SeriesInjectedOption;
-declare type MapSeriesOption$1 = MapSeriesOption & SeriesInjectedOption;
-declare type TreeSeriesOption$1 = TreeSeriesOption & SeriesInjectedOption;
-declare type TreemapSeriesOption$1 = TreemapSeriesOption & SeriesInjectedOption;
-declare type GraphSeriesOption$1 = GraphSeriesOption & SeriesInjectedOption;
-declare type GaugeSeriesOption$1 = GaugeSeriesOption & SeriesInjectedOption;
-declare type FunnelSeriesOption$1 = FunnelSeriesOption & SeriesInjectedOption;
-declare type ParallelSeriesOption$1 = ParallelSeriesOption & SeriesInjectedOption;
-declare type SankeySeriesOption$1 = SankeySeriesOption & SeriesInjectedOption;
-declare type BoxplotSeriesOption$1 = BoxplotSeriesOption & SeriesInjectedOption;
-declare type CandlestickSeriesOption$1 = CandlestickSeriesOption & SeriesInjectedOption;
-declare type EffectScatterSeriesOption$1 = EffectScatterSeriesOption & SeriesInjectedOption;
-declare type LinesSeriesOption$1 = LinesSeriesOption & SeriesInjectedOption;
-declare type HeatmapSeriesOption$1 = HeatmapSeriesOption & SeriesInjectedOption;
-declare type PictorialBarSeriesOption$1 = PictorialBarSeriesOption & SeriesInjectedOption;
-declare type ThemeRiverSeriesOption$1 = ThemeRiverSeriesOption & SeriesInjectedOption;
-declare type SunburstSeriesOption$1 = SunburstSeriesOption & SeriesInjectedOption;
-declare type CustomSeriesOption$1 = CustomSeriesOption & SeriesInjectedOption;
-/**
- * A map from series 'type' to series option
- * It's used for declaration merging in echarts extensions.
- * For example:
- * ```ts
- * import echarts from 'echarts';
- * declare module 'echarts/types/dist/echarts' {
- *   interface RegisteredSeriesOption {
- *     wordCloud: WordCloudSeriesOption
- *   }
- * }
- * ```
- */
-interface RegisteredSeriesOption {
-    line: LineSeriesOption$1;
-    bar: BarSeriesOption$1;
-    scatter: ScatterSeriesOption$1;
-    pie: PieSeriesOption$1;
-    radar: RadarSeriesOption$1;
-    map: MapSeriesOption$1;
-    tree: TreeSeriesOption$1;
-    treemap: TreemapSeriesOption$1;
-    graph: GraphSeriesOption$1;
-    gauge: GaugeSeriesOption$1;
-    funnel: FunnelSeriesOption$1;
-    parallel: ParallelSeriesOption$1;
-    sankey: SankeySeriesOption$1;
-    boxplot: BoxplotSeriesOption$1;
-    candlestick: CandlestickSeriesOption$1;
-    effectScatter: EffectScatterSeriesOption$1;
-    lines: LinesSeriesOption$1;
-    heatmap: HeatmapSeriesOption$1;
-    pictorialBar: PictorialBarSeriesOption$1;
-    themeRiver: ThemeRiverSeriesOption$1;
-    sunburst: SunburstSeriesOption$1;
-    custom: CustomSeriesOption$1;
-}
-declare type Values<T> = T[keyof T];
-declare type SeriesOption$1 = Values<RegisteredSeriesOption>;
-interface EChartsOption extends ECBasicOption {
-    dataset?: DatasetOption | DatasetOption[];
-    aria?: AriaOption;
-    title?: TitleOption | TitleOption[];
-    grid?: GridOption | GridOption[];
-    radar?: RadarOption | RadarOption[];
-    polar?: PolarOption | PolarOption[];
-    geo?: GeoOption | GeoOption[];
-    angleAxis?: AngleAxisOption | AngleAxisOption[];
-    radiusAxis?: RadiusAxisOption | RadiusAxisOption[];
-    xAxis?: XAXisOption | XAXisOption[];
-    yAxis?: YAXisOption | YAXisOption[];
-    singleAxis?: SingleAxisOption | SingleAxisOption[];
-    parallel?: ParallelCoordinateSystemOption | ParallelCoordinateSystemOption[];
-    parallelAxis?: ParallelAxisOption | ParallelAxisOption[];
-    calendar?: CalendarOption | CalendarOption[];
-    toolbox?: ToolboxComponentOption | ToolboxComponentOption[];
-    tooltip?: TooltipOption | TooltipOption[];
-    axisPointer?: AxisPointerOption | AxisPointerOption[];
-    brush?: BrushOption | BrushOption[];
-    timeline?: TimelineOption | SliderTimelineOption;
-    legend?: LegendComponentOption | (LegendComponentOption)[];
-    dataZoom?: DataZoomComponentOption | (DataZoomComponentOption)[];
-    visualMap?: VisualMapComponentOption | (VisualMapComponentOption)[];
-    graphic?: GraphicComponentLooseOption | GraphicComponentLooseOption[];
-    series?: SeriesOption$1 | SeriesOption$1[];
-    options?: EChartsOption[];
-    baseOption?: EChartsOption;
-}
-
-export { AngleAxisOption as AngleAxisComponentOption, AnimationDelayCallback, AnimationDelayCallbackParam as AnimationDelayCallbackParams, AnimationDurationCallback, AriaOption as AriaComponentOption, Axis, AxisPointerOption as AxisPointerComponentOption, BarSeriesOption$1 as BarSeriesOption, BoxplotSeriesOption$1 as BoxplotSeriesOption, BrushOption as BrushComponentOption, CalendarOption as CalendarComponentOption, CandlestickSeriesOption$1 as CandlestickSeriesOption, ChartView, ZRColor as Color, ComponentModel, ComponentView, ComposeOption, ContinousVisualMapOption as ContinousVisualMapComponentOption, CustomSeriesOption$1 as CustomSeriesOption, CustomSeriesRenderItem, CustomSeriesRenderItemAPI, CustomSeriesRenderItemParams, CustomSeriesRenderItemReturn, DataZoomComponentOption, DatasetOption as DatasetComponentOption, CallbackDataParams as DefaultLabelFormatterCallbackParams, DownplayPayload, ECElementEvent, EChartsType as ECharts, ECBasicOption as EChartsCoreOption, EChartsInitOpts, EChartsOption, EChartsType, EffectScatterSeriesOption$1 as EffectScatterSeriesOption, ElementEvent, FunnelSeriesOption$1 as FunnelSeriesOption, GaugeSeriesOption$1 as GaugeSeriesOption, GeoOption as GeoComponentOption, GraphSeriesOption$1 as GraphSeriesOption, GraphicComponentLooseOption as GraphicComponentOption, GridOption as GridComponentOption, HeatmapSeriesOption$1 as HeatmapSeriesOption, HighlightPayload, ImagePatternObject, InsideDataZoomOption as InsideDataZoomComponentOption, LabelFormatterCallback, LabelLayoutOptionCallback, LabelLayoutOptionCallbackParams, LegendComponentOption, LineSeriesOption$1 as LineSeriesOption, LinearGradientObject, LinesSeriesOption$1 as LinesSeriesOption, SeriesData as List, MapSeriesOption$1 as MapSeriesOption, MarkAreaOption as MarkAreaComponentOption, MarkLineOption as MarkLineComponentOption, MarkPointOption as MarkPointComponentOption, Model, PRIORITY, ParallelCoordinateSystemOption as ParallelComponentOption, ParallelSeriesOption$1 as ParallelSeriesOption, PatternObject, Payload, PictorialBarSeriesOption$1 as PictorialBarSeriesOption, PieSeriesOption$1 as PieSeriesOption, PiecewiseVisualMapOption as PiecewiseVisualMapComponentOption, LegendOption as PlainLegendComponentOption, PolarOption as PolarComponentOption, RadarOption as RadarComponentOption, RadarSeriesOption$1 as RadarSeriesOption, RadialGradientObject, RadiusAxisOption as RadiusAxisComponentOption, RegisteredSeriesOption, ResizeOpts, SVGPatternObject, SankeySeriesOption$1 as SankeySeriesOption, ScatterSeriesOption$1 as ScatterSeriesOption, ScrollableLegendOption as ScrollableLegendComponentOption, SelectChangedPayload, SeriesModel, SeriesOption$1 as SeriesOption, SetOptionOpts, SetOptionTransitionOpt, SetOptionTransitionOptItem, SingleAxisOption as SingleAxisComponentOption, SliderDataZoomOption as SliderDataZoomComponentOption, SunburstSeriesOption$1 as SunburstSeriesOption, ThemeRiverSeriesOption$1 as ThemeRiverSeriesOption, TimelineOption as TimelineComponentOption, TitleOption as TitleComponentOption, ToolboxComponentOption, TooltipFormatterCallback as TooltipComponentFormatterCallback, TopLevelFormatterParams as TooltipComponentFormatterCallbackParams, TooltipOption as TooltipComponentOption, TooltipPositionCallback as TooltipComponentPositionCallback, TooltipPositionCallbackParams as TooltipComponentPositionCallbackParams, TreeSeriesOption$1 as TreeSeriesOption, TreemapSeriesOption$1 as TreemapSeriesOption, VisualMapComponentOption, XAXisOption as XAXisComponentOption, YAXisOption as YAXisComponentOption, color_d as color, connect, dataTool, dependencies, disConnect, disconnect, dispose$1 as dispose, env, extendChartView, extendComponentModel, extendComponentView, extendSeriesModel, format_d as format, getCoordinateSystemDimensions, getInstanceByDom, getInstanceById, getMap, graphic_d as graphic, helper_d as helper, init$1 as init, brushSingle as innerDrawElementOnCanvas, matrix_d as matrix, number_d as number, parseGeoJSON, parseGeoJSON as parseGeoJson, registerAction, registerCoordinateSystem, registerLayout, registerLoading, registerLocale, registerMap, registerPostInit, registerPostUpdate, registerPreprocessor, registerProcessor, registerTheme, registerTransform, registerUpdateLifecycle, registerVisual, setCanvasCreator, setPlatformAPI, throttle, time_d as time, use, util_d$1 as util, vector_d as vector, version$1 as version, util_d as zrUtil, zrender_d as zrender };
+export { AngleAxisOption as AngleAxisComponentOption, AnimationDelayCallback, AnimationDelayCallbackParam as AnimationDelayCallbackParams, AnimationDurationCallback, AriaOption as AriaComponentOption, Axis, AxisBreakChangedEvent, AxisPointerOption as AxisPointerComponentOption, BarSeriesOption, BoxplotSeriesOption$1 as BoxplotSeriesOption, BrushOption as BrushComponentOption, CalendarOption as CalendarComponentOption, CandlestickSeriesOption$1 as CandlestickSeriesOption, ChartView, ChordSeriesOption$1 as ChordSeriesOption, CollapseAxisBreakPayload, ZRColor as Color, ComponentModel, ComponentView, ComposeOption, ContinousVisualMapOption as ContinousVisualMapComponentOption, CustomSeriesOption, CustomSeriesRenderItem, CustomSeriesRenderItemAPI, CustomSeriesRenderItemParams, CustomSeriesRenderItemReturn, DataZoomComponentOption, DatasetOption as DatasetComponentOption, CallbackDataParams as DefaultLabelFormatterCallbackParams, DownplayPayload, ECElementEvent, EChartsType as ECharts, ECBasicOption as EChartsCoreOption, EChartsInitOpts, EChartsOption, EChartsType, EffectScatterSeriesOption$1 as EffectScatterSeriesOption, ElementEvent, ExpandAxisBreakPayload, FunnelSeriesOption$1 as FunnelSeriesOption, GaugeSeriesOption$1 as GaugeSeriesOption, GeoOption as GeoComponentOption, GraphSeriesOption$1 as GraphSeriesOption, GraphicComponentLooseOption as GraphicComponentOption, GridOption as GridComponentOption, HeatmapSeriesOption$1 as HeatmapSeriesOption, HighlightPayload, ImagePatternObject, InsideDataZoomOption as InsideDataZoomComponentOption, LabelFormatterCallback, LabelLayoutOptionCallback, LabelLayoutOptionCallbackParams, LegendComponentOption, LineSeriesOption$1 as LineSeriesOption, LinearGradientObject, LinesSeriesOption$1 as LinesSeriesOption, SeriesData as List, MapSeriesOption$1 as MapSeriesOption, MarkAreaOption as MarkAreaComponentOption, MarkLineOption as MarkLineComponentOption, MarkPointOption as MarkPointComponentOption, MatrixOption as MatrixComponentOption, Model, PRIORITY, ParallelCoordinateSystemOption as ParallelComponentOption, ParallelSeriesOption$1 as ParallelSeriesOption, PatternObject, Payload, PictorialBarSeriesOption$1 as PictorialBarSeriesOption, PieSeriesOption$1 as PieSeriesOption, PiecewiseVisualMapOption as PiecewiseVisualMapComponentOption, LegendOption as PlainLegendComponentOption, PolarOption as PolarComponentOption, RadarOption as RadarComponentOption, RadarSeriesOption$1 as RadarSeriesOption, RadialGradientObject, RadiusAxisOption as RadiusAxisComponentOption, RegisteredSeriesOption, ResizeOpts, SVGPatternObject, SankeySeriesOption$1 as SankeySeriesOption, ScatterSeriesOption$1 as ScatterSeriesOption, ScrollableLegendOption as ScrollableLegendComponentOption, SelectChangedEvent, SelectChangedPayload, SeriesModel, SeriesOption, SetOptionOpts, SetOptionTransitionOpt, SetOptionTransitionOptItem, SetThemeOpts, SingleAxisOption as SingleAxisComponentOption, SliderDataZoomOption as SliderDataZoomComponentOption, SunburstSeriesOption$1 as SunburstSeriesOption, ThemeRiverSeriesOption$1 as ThemeRiverSeriesOption, ThumbnailOption as ThumbnailComponentOption, TimelineOption as TimelineComponentOption, TitleOption as TitleComponentOption, ToggleAxisBreakPayload, ToolboxComponentOption, TooltipFormatterCallback as TooltipComponentFormatterCallback, TopLevelFormatterParams as TooltipComponentFormatterCallbackParams, TooltipOption as TooltipComponentOption, TooltipPositionCallback as TooltipComponentPositionCallback, TooltipPositionCallbackParams as TooltipComponentPositionCallbackParams, TreeSeriesOption$1 as TreeSeriesOption, TreemapSeriesOption$1 as TreemapSeriesOption, VisualMapComponentOption, XAXisOption as XAXisComponentOption, YAXisOption as YAXisComponentOption, color_d as color, connect, dataTool, dependencies, disConnect, disconnect, dispose$1 as dispose, env, extendChartView, extendComponentModel, extendComponentView, extendSeriesModel, format_d as format, getCoordinateSystemDimensions, getInstanceByDom, getInstanceById, getMap, graphic_d as graphic, helper_d as helper, init$1 as init, brushSingle as innerDrawElementOnCanvas, matrix_d as matrix, number_d as number, parseGeoJSON, parseGeoJSON as parseGeoJson, registerAction, registerCoordinateSystem, registerCustomSeries, registerLayout, registerLoading, registerLocale, registerMap, registerPostInit, registerPostUpdate, registerPreprocessor, registerProcessor, registerTheme, registerTransform, registerUpdateLifecycle, registerVisual, setCanvasCreator, setPlatformAPI, throttle, time_d as time, use, util_d$1 as util, vector_d as vector, version$1 as version, util_d as zrUtil, zrender_d as zrender };

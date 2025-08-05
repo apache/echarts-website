@@ -151,7 +151,8 @@ var BaseBarSeriesModel = /** @class */function (_super) {
     large: false,
     largeThreshold: 400,
     progressive: 3e3,
-    progressiveChunkMode: 'mod'
+    progressiveChunkMode: 'mod',
+    defaultBarGap: '10%'
   };
   return BaseBarSeriesModel;
 }(SeriesModel);

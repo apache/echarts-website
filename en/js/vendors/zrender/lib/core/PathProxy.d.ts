@@ -60,6 +60,7 @@ export default class PathProxy {
     private _calculateLength;
     rebuildPath(ctx: PathRebuilder, percent: number): void;
     clone(): PathProxy;
+    canSave(): boolean;
     private static initDefaultProps;
 }
 export interface PathRebuilder {

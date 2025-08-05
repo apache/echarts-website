@@ -90,7 +90,7 @@ export declare type ElementSSRData = zrUtil.HashMap<unknown>;
 export declare type ElementSSRDataGetter<T> = (el: Element) => zrUtil.HashMap<T>;
 export declare function getElementSSRData(el: Element): ElementSSRData;
 export declare function registerSSRDataGetter<T>(getter: ElementSSRDataGetter<T>): void;
-export declare const version = "5.6.1";
+export declare const version = "6.0.0";
 export interface ZRenderType extends ZRender {
 }
 export {};

@@ -44,6 +44,7 @@
 import { __extends } from "tslib";
 import createSeriesData from '../helper/createSeriesData.js';
 import SeriesModel from '../../model/Series.js';
+import tokens from '../../visual/tokens.js';
 var ScatterSeriesModel = /** @class */function (_super) {
   __extends(ScatterSeriesModel, _super);
   function ScatterSeriesModel() {
@@ -81,7 +82,7 @@ var ScatterSeriesModel = /** @class */function (_super) {
     return this.getData().count() > this.getProgressiveThreshold() ? this.id : '';
   };
   ScatterSeriesModel.type = 'series.scatter';
-  ScatterSeriesModel.dependencies = ['grid', 'polar', 'geo', 'singleAxis', 'calendar'];
+  ScatterSeriesModel.dependencies = ['grid', 'polar', 'geo', 'singleAxis', 'calendar', 'matrix'];
   ScatterSeriesModel.defaultOption = {
     coordinateSystem: 'cartesian2d',
     // zlevel: 0,
@@ -105,7 +106,7 @@ var ScatterSeriesModel = /** @class */function (_super) {
     clip: true,
     select: {
       itemStyle: {
-        borderColor: '#212121'
+        borderColor: tokens.color.primary
       }
     },
     universalTransition: {

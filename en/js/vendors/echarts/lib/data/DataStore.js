@@ -418,52 +418,6 @@ var DataStore = /** @class */function () {
     }
     return -1;
   };
-  /**
-   * Retrieve the index of nearest value.
-   * @param dim
-   * @param value
-   * @param [maxDistance=Infinity]
-   * @return If and only if multiple indices have
-   *         the same value, they are put to the result.
-   */
-  DataStore.prototype.indicesOfNearest = function (dim, value, maxDistance) {
-    var chunks = this._chunks;
-    var dimData = chunks[dim];
-    var nearestIndices = [];
-    if (!dimData) {
-      return nearestIndices;
-    }
-    if (maxDistance == null) {
-      maxDistance = Infinity;
-    }
-    var minDist = Infinity;
-    var minDiff = -1;
-    var nearestIndicesLen = 0;
-    // Check the test case of `test/ut/spec/data/SeriesData.js`.
-    for (var i = 0, len = this.count(); i < len; i++) {
-      var dataIndex = this.getRawIndex(i);
-      var diff = value - dimData[dataIndex];
-      var dist = Math.abs(diff);
-      if (dist <= maxDistance) {
-        // When the `value` is at the middle of `this.get(dim, i)` and `this.get(dim, i+1)`,
-        // we'd better not push both of them to `nearestIndices`, otherwise it is easy to
-        // get more than one item in `nearestIndices` (more specifically, in `tooltip`).
-        // So we choose the one that `diff >= 0` in this case.
-        // But if `this.get(dim, i)` and `this.get(dim, j)` get the same value, both of them
-        // should be push to `nearestIndices`.
-        if (dist < minDist || dist === minDist && diff >= 0 && minDiff < 0) {
-          minDist = dist;
-          minDiff = diff;
-          nearestIndicesLen = 0;
-        }
-        if (diff === minDiff) {
-          nearestIndices[nearestIndicesLen++] = i;
-        }
-      }
-    }
-    nearestIndices.length = nearestIndicesLen;
-    return nearestIndices;
-  };
   DataStore.prototype.getIndices = function () {
     var newIndices;
     var indices = this._indices;

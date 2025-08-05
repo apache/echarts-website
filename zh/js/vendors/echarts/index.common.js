@@ -62,7 +62,10 @@ import { install as LegendComponent } from './lib/component/legend/install.js';
 import { install as DataZoomComponent } from './lib/component/dataZoom/install.js';
 import { install as AriaComponent } from './lib/component/aria/install.js';
 import { install as DatasetComponent } from './lib/component/dataset/install.js';
+import { installAxisBreak as AxisBreak } from './lib/component/axis/installBreak.js';
 use([CanvasRenderer]);
 use([SVGRenderer]);
 use([LineChart, BarChart, PieChart, ScatterChart]);
 use([GraphicComponent, TooltipComponent, AxisPointerComponent, LegendComponent, GridComponent, TitleComponent, MarkPointComponent, MarkLineComponent, MarkAreaComponent, DataZoomComponent, ToolboxComponent, AriaComponent, DatasetComponent]);
+// Features
+use([AxisBreak]);

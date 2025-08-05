@@ -76,7 +76,7 @@ export function deprecateLog(str) {
 }
 export function deprecateReplaceLog(oldOpt, newOpt, scope) {
   if (process.env.NODE_ENV !== 'production') {
-    deprecateLog((scope ? "[" + scope + "]" : '') + (oldOpt + " is deprecated, use " + newOpt + " instead."));
+    deprecateLog((scope ? "[" + scope + "]" : '') + (oldOpt + " is deprecated; use " + newOpt + " instead."));
   }
 }
 /**

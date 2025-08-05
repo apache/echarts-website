@@ -68,24 +68,22 @@ var Breadcrumb = /** @class */function () {
     var emphasisModel = model.getModel('emphasis');
     var textStyleModel = normalStyleModel.getModel('textStyle');
     var emphasisTextStyleModel = emphasisModel.getModel(['itemStyle', 'textStyle']);
+    var refContainer = layout.createBoxLayoutReference(seriesModel, api).refContainer;
+    var boxLayoutParams = {
+      left: model.get('left'),
+      right: model.get('right'),
+      top: model.get('top'),
+      bottom: model.get('bottom')
+    };
     var layoutParam = {
-      pos: {
-        left: model.get('left'),
-        right: model.get('right'),
-        top: model.get('top'),
-        bottom: model.get('bottom')
-      },
-      box: {
-        width: api.getWidth(),
-        height: api.getHeight()
-      },
       emptyItemWidth: model.get('emptyItemWidth'),
       totalWidth: 0,
       renderList: []
     };
+    var availableSize = layout.getLayoutRect(boxLayoutParams, refContainer);
     this._prepare(targetNode, layoutParam, textStyleModel);
-    this._renderContent(seriesModel, layoutParam, normalStyleModel, emphasisModel, textStyleModel, emphasisTextStyleModel, onSelect);
-    layout.positionElement(thisGroup, layoutParam.pos, layoutParam.box);
+    this._renderContent(seriesModel, layoutParam, availableSize, normalStyleModel, emphasisModel, textStyleModel, emphasisTextStyleModel, onSelect);
+    layout.positionElement(thisGroup, boxLayoutParams, refContainer);
   };
   /**
    * Prepare render list and total width
@@ -107,12 +105,11 @@ var Breadcrumb = /** @class */function () {
   /**
    * @private
    */
-  Breadcrumb.prototype._renderContent = function (seriesModel, layoutParam, normalStyleModel, emphasisModel, textStyleModel, emphasisTextStyleModel, onSelect) {
+  Breadcrumb.prototype._renderContent = function (seriesModel, layoutParam, availableSize, normalStyleModel, emphasisModel, textStyleModel, emphasisTextStyleModel, onSelect) {
     // Start rendering.
     var lastX = 0;
     var emptyItemWidth = layoutParam.emptyItemWidth;
     var height = seriesModel.get(['breadcrumb', 'height']);
-    var availableSize = layout.getAvailableSize(layoutParam.pos, layoutParam.box);
     var totalWidth = layoutParam.totalWidth;
     var renderList = layoutParam.renderList;
     var emphasisItemStyle = emphasisModel.getModel('itemStyle').getItemStyle();

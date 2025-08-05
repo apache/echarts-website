@@ -42,7 +42,7 @@
 * under the License.
 */
 import { __extends } from "tslib";
-import { hasOwn, assert, isString, retrieve2, retrieve3, defaults, each, indexOf } from 'zrender/lib/core/util.js';
+import { hasOwn, assert, isString, retrieve2, retrieve3, defaults, each, indexOf, map } from 'zrender/lib/core/util.js';
 import * as graphicUtil from '../../util/graphic.js';
 import { setDefaultStateProxy, toggleHoverEmphasis } from '../../util/states.js';
 import * as labelStyleHelper from '../../label/labelStyle.js';
@@ -56,6 +56,7 @@ import prepareGeo from '../../coord/geo/prepareCustom.js';
 import prepareSingleAxis from '../../coord/single/prepareCustom.js';
 import preparePolar from '../../coord/polar/prepareCustom.js';
 import prepareCalendar from '../../coord/calendar/prepareCustom.js';
+import prepareMatrix from '../../coord/matrix/prepareCustom.js';
 import Displayable from 'zrender/lib/graphic/Displayable.js';
 import { convertToEC4StyleForCustomSerise, isEC4CompatibleStyle, convertFromEC4CompatibleStyle, warnDeprecated } from '../../util/styleCompat.js';
 import { throwError } from '../../util/log.js';
@@ -63,6 +64,8 @@ import { createOrUpdatePatternFromDecal } from '../../util/decal.js';
 import { STYLE_VISUAL_TYPE, NON_STYLE_VISUAL_PROPS, customInnerStore } from './CustomSeries.js';
 import { applyLeaveTransition, applyUpdateTransition } from '../../animation/customGraphicTransition.js';
 import { applyKeyframeAnimation, stopPreviousKeyframeAnimationAndRestore } from '../../animation/customGraphicKeyframeAnimation.js';
+import { getCustomSeries } from './customSeriesRegister.js';
+import tokens from '../../visual/tokens.js';
 var EMPHASIS = 'emphasis';
 var NORMAL = 'normal';
 var BLUR = 'blur';
@@ -91,6 +94,8 @@ var attachedTxInfoTmp = {
   select: {}
 };
 /**
+ * FIXME: register rather than import directly, for size.
+ *
  * To reduce total package size of each coordinate systems, the modules `prepareCustom`
  * of each coordinate systems are not required by each coordinate systems directly, but
  * required by the module `custom`.
@@ -106,7 +111,8 @@ var prepareCustoms = {
   geo: prepareGeo,
   single: prepareSingleAxis,
   polar: preparePolar,
-  calendar: prepareCalendar
+  calendar: prepareCalendar,
+  matrix: prepareMatrix
 };
 function isPath(el) {
   return el instanceof graphicUtil.Path;
@@ -235,7 +241,33 @@ function createEl(elOption) {
   } else if (graphicType === 'group') {
     el = new graphicUtil.Group();
   } else if (graphicType === 'compoundPath') {
-    throw new Error('"compoundPath" is not supported yet.');
+    var shape = elOption.shape;
+    if (!shape || !shape.paths) {
+      var errMsg = '';
+      if (process.env.NODE_ENV !== 'production') {
+        errMsg = 'shape.paths must be specified in compoundPath';
+      }
+      throwError(errMsg);
+    }
+    var paths = map(shape.paths, function (path) {
+      if (path.type === 'path') {
+        return graphicUtil.makePath(path.shape.pathData, path, null);
+      }
+      var Clz = graphicUtil.getShapeClass(path.type);
+      if (!Clz) {
+        var errMsg = '';
+        if (process.env.NODE_ENV !== 'production') {
+          errMsg = 'graphic type "' + graphicType + '" can not be found.';
+        }
+        throwError(errMsg);
+      }
+      return new Clz();
+    });
+    el = new graphicUtil.CompoundPath({
+      shape: {
+        paths: paths
+      }
+    });
   } else {
     var Clz = graphicUtil.getShapeClass(graphicType);
     if (!Clz) {
@@ -361,6 +393,15 @@ function updateZForEachState(elDisplayable, elOption, state) {
 }
 function makeRenderItem(customSeries, data, ecModel, api) {
   var renderItem = customSeries.get('renderItem');
+  if (typeof renderItem === 'string') {
+    // Find renderItem in registered custom series
+    var registeredRenderItem = getCustomSeries(renderItem);
+    if (registeredRenderItem) {
+      renderItem = registeredRenderItem;
+    } else if (process.env.NODE_ENV !== 'production') {
+      console.warn("Custom series renderItem '" + renderItem + "' not found.\n                Call 'echarts.registerCustomSeries' to register it.");
+    }
+  }
   var coordSys = customSeries.coordinateSystem;
   var prepareResult = {};
   if (coordSys) {
@@ -395,7 +436,8 @@ function makeRenderItem(customSeries, data, ecModel, api) {
     seriesIndex: customSeries.seriesIndex,
     coordSys: prepareResult.coordSys,
     dataInsideLength: data.count(),
-    encode: wrapEncodeDef(customSeries.getData())
+    encode: wrapEncodeDef(customSeries.getData()),
+    itemPayload: customSeries.get('itemPayload') || {}
   };
   // If someday intending to refactor them to a class, should consider do not
   // break change: currently these attribute member are encapsulated in a closure
@@ -490,7 +532,7 @@ function makeRenderItem(customSeries, data, ecModel, api) {
     visualColor != null && (itemStyle.fill = visualColor);
     opacity != null && (itemStyle.opacity = opacity);
     var opt = {
-      inheritColor: isString(visualColor) ? visualColor : '#000'
+      inheritColor: isString(visualColor) ? visualColor : tokens.color.neutral99
     };
     var labelModel = getLabelModel(dataIndexInside, NORMAL);
     // Now that the feature of "auto adjust text fill/stroke" has been migrated to zrender
@@ -650,6 +692,9 @@ function doCreateOrUpdateEl(api, existsEl, dataIndex, elOption, seriesModel, gro
   } else if (el.disableMorphing) {
     el.disableMorphing = false;
   }
+  if (elOption.tooltipDisabled) {
+    el.tooltipDisabled = true;
+  }
   attachedTxInfoTmp.normal.cfg = attachedTxInfoTmp.normal.conOpt = attachedTxInfoTmp.emphasis.cfg = attachedTxInfoTmp.emphasis.conOpt = attachedTxInfoTmp.blur.cfg = attachedTxInfoTmp.blur.conOpt = attachedTxInfoTmp.select.cfg = attachedTxInfoTmp.select.conOpt = null;
   attachedTxInfoTmp.isLegacy = false;
   doCreateOrUpdateAttachedTx(el, dataIndex, elOption, seriesModel, isInit, attachedTxInfoTmp);
@@ -724,7 +769,7 @@ function doCreateOrUpdateClipPath(el, dataIndex, elOption, seriesModel, isInit) 
 }
 function doCreateOrUpdateAttachedTx(el, dataIndex, elOption, seriesModel, isInit, attachedTxInfo) {
   // Group does not support textContent temporarily until necessary.
-  if (el.isGroup) {
+  if (el.isGroup || el.type === 'compoundPath') {
     return;
   }
   // Normal must be called before emphasis, for `isLegacy` detection.

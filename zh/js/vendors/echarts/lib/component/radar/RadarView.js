@@ -46,7 +46,6 @@ import * as zrUtil from 'zrender/lib/core/util.js';
 import AxisBuilder from '../axis/AxisBuilder.js';
 import * as graphic from '../../util/graphic.js';
 import ComponentView from '../../view/Component.js';
-var axisBuilderAttrs = ['axisLine', 'axisTickLabel', 'axisName'];
 var RadarView = /** @class */function (_super) {
   __extends(RadarView, _super);
   function RadarView() {
@@ -57,15 +56,15 @@ var RadarView = /** @class */function (_super) {
   RadarView.prototype.render = function (radarModel, ecModel, api) {
     var group = this.group;
     group.removeAll();
-    this._buildAxes(radarModel);
+    this._buildAxes(radarModel, api);
     this._buildSplitLineAndArea(radarModel);
   };
-  RadarView.prototype._buildAxes = function (radarModel) {
+  RadarView.prototype._buildAxes = function (radarModel, api) {
     var radar = radarModel.coordinateSystem;
     var indicatorAxes = radar.getIndicatorAxes();
     var axisBuilders = zrUtil.map(indicatorAxes, function (indicatorAxis) {
       var axisName = indicatorAxis.model.get('showName') ? indicatorAxis.name : ''; // hide name
-      var axisBuilder = new AxisBuilder(indicatorAxis.model, {
+      var axisBuilder = new AxisBuilder(indicatorAxis.model, api, {
         axisName: axisName,
         position: [radar.cx, radar.cy],
         rotation: indicatorAxis.angle,
@@ -76,8 +75,8 @@ var RadarView = /** @class */function (_super) {
       return axisBuilder;
     });
     zrUtil.each(axisBuilders, function (axisBuilder) {
-      zrUtil.each(axisBuilderAttrs, axisBuilder.add, axisBuilder);
-      this.group.add(axisBuilder.getGroup());
+      axisBuilder.build();
+      this.group.add(axisBuilder.group);
     }, this);
   };
   RadarView.prototype._buildSplitLineAndArea = function (radarModel) {

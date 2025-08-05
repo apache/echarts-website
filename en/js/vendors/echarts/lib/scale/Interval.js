@@ -46,6 +46,7 @@ import * as numberUtil from '../util/number.js';
 import * as formatUtil from '../util/format.js';
 import Scale from './Scale.js';
 import * as helper from './helper.js';
+import { getScaleBreakHelper } from './break.js';
 var roundNumber = numberUtil.round;
 var IntervalScale = /** @class */function (_super) {
   __extends(IntervalScale, _super);
@@ -58,33 +59,38 @@ var IntervalScale = /** @class */function (_super) {
     return _this;
   }
   IntervalScale.prototype.parse = function (val) {
-    return val;
+    // `Scale#parse` (and its overrids) are typically applied at the axis values input
+    // in echarts option. e.g., `axis.min/max`, `dataZoom.min/max`, etc.
+    // but `series.data` is not included, which uses `dataValueHelper.ts`#`parseDataValue`.
+    // `Scale#parse` originally introduced in fb8c813215098b9d2458966229bb95c510883d5e
+    // at 2016 for dataZoom start/end settings (See `parseAxisModelMinMax`).
+    //
+    // Historically `scale/Interval.ts` returns the input value directly. But numeric
+    // values (such as a number-like string '123') effectively passed through here and
+    // were involved in calculations, which was error-prone and inconsistent with the
+    // declared TS return type. Previously such issues are fixed separately in different
+    // places case by case (such as #2475).
+    //
+    // Now, we perform actual parse to ensure its `number` type here. The parsing rule
+    // follows the series data parsing rule (`dataValueHelper.ts`#`parseDataValue`)
+    // and maintains compatibility as much as possible (thus a more strict parsing
+    // `number.ts`#`numericToNumber` is not used here.)
+    //
+    // FIXME: `ScaleDataValue` also need to be modified to include numeric string type,
+    //  since it effectively does.
+    return val == null || val === '' ? NaN
+    // If string (like '-'), using '+' parse to NaN
+    // If object, also parse to NaN
+    : Number(val);
   };
   IntervalScale.prototype.contain = function (val) {
     return helper.contain(val, this._extent);
   };
   IntervalScale.prototype.normalize = function (val) {
-    return helper.normalize(val, this._extent);
+    return this._calculator.normalize(val, this._extent);
   };
   IntervalScale.prototype.scale = function (val) {
-    return helper.scale(val, this._extent);
-  };
-  IntervalScale.prototype.setExtent = function (start, end) {
-    var thisExtent = this._extent;
-    // start,end may be a Number like '25',so...
-    if (!isNaN(start)) {
-      thisExtent[0] = parseFloat(start);
-    }
-    if (!isNaN(end)) {
-      thisExtent[1] = parseFloat(end);
-    }
-  };
-  IntervalScale.prototype.unionExtent = function (other) {
-    var extent = this._extent;
-    other[0] < extent[0] && (extent[0] = other[0]);
-    other[1] > extent[1] && (extent[1] = other[1]);
-    // unionExtent may called by it's sub classes
-    this.setExtent(extent[0], extent[1]);
+    return this._calculator.scale(val, this._extent);
   };
   IntervalScale.prototype.getInterval = function () {
     return this._interval;
@@ -97,22 +103,28 @@ var IntervalScale = /** @class */function (_super) {
     this._intervalPrecision = helper.getIntervalPrecision(interval);
   };
   /**
-   * @param expandToNicedExtent Whether expand the ticks to niced extent.
+   * @override
    */
-  IntervalScale.prototype.getTicks = function (expandToNicedExtent) {
+  IntervalScale.prototype.getTicks = function (opt) {
+    opt = opt || {};
     var interval = this._interval;
     var extent = this._extent;
     var niceTickExtent = this._niceExtent;
     var intervalPrecision = this._intervalPrecision;
+    var scaleBreakHelper = getScaleBreakHelper();
     var ticks = [];
     // If interval is 0, return [];
     if (!interval) {
       return ticks;
     }
+    if (opt.breakTicks === 'only_break' && scaleBreakHelper) {
+      scaleBreakHelper.addBreaksToTicks(ticks, this._brkCtx.breaks, this._extent);
+      return ticks;
+    }
     // Consider this case: using dataZoom toolbox, zoom and zoom.
     var safeLimit = 10000;
     if (extent[0] < niceTickExtent[0]) {
-      if (expandToNicedExtent) {
+      if (opt.expandToNicedExtent) {
         ticks.push({
           value: roundNumber(niceTickExtent[0] - interval, intervalPrecision)
         });
@@ -122,6 +134,9 @@ var IntervalScale = /** @class */function (_super) {
         });
       }
     }
+    var estimateNiceMultiple = function (tickVal, targetTick) {
+      return Math.round((targetTick - tickVal) / interval);
+    };
     var tick = niceTickExtent[0];
     while (tick <= niceTickExtent[1]) {
       ticks.push({
@@ -129,7 +144,13 @@ var IntervalScale = /** @class */function (_super) {
       });
       // Avoid rounding error
       tick = roundNumber(tick + interval, intervalPrecision);
-      if (tick === ticks[ticks.length - 1].value) {
+      if (this._brkCtx) {
+        var moreMultiple = this._brkCtx.calcNiceTickMultiple(tick, estimateNiceMultiple);
+        if (moreMultiple >= 0) {
+          tick = roundNumber(tick + moreMultiple * interval, intervalPrecision);
+        }
+      }
+      if (ticks.length > 0 && tick === ticks[ticks.length - 1].value) {
         // Consider out of safe float point, e.g.,
         // -3711126.9907707 + 2e-10 === -3711126.9907707
         break;
@@ -142,7 +163,7 @@ var IntervalScale = /** @class */function (_super) {
     // than niceTickExtent[1] and niceTickExtent[1] === extent[1].
     var lastNiceTick = ticks.length ? ticks[ticks.length - 1].value : niceTickExtent[1];
     if (extent[1] > lastNiceTick) {
-      if (expandToNicedExtent) {
+      if (opt.expandToNicedExtent) {
         ticks.push({
           value: roundNumber(lastNiceTick + interval, intervalPrecision)
         });
@@ -152,30 +173,56 @@ var IntervalScale = /** @class */function (_super) {
         });
       }
     }
+    if (scaleBreakHelper) {
+      scaleBreakHelper.pruneTicksByBreak(opt.pruneByBreak, ticks, this._brkCtx.breaks, function (item) {
+        return item.value;
+      }, this._interval, this._extent);
+    }
+    if (opt.breakTicks !== 'none' && scaleBreakHelper) {
+      scaleBreakHelper.addBreaksToTicks(ticks, this._brkCtx.breaks, this._extent);
+    }
     return ticks;
   };
   IntervalScale.prototype.getMinorTicks = function (splitNumber) {
-    var ticks = this.getTicks(true);
+    var ticks = this.getTicks({
+      expandToNicedExtent: true
+    });
+    // NOTE: In log-scale, do not support minor ticks when breaks exist.
+    //  because currently log-scale minor ticks is calculated based on raw values
+    //  rather than log-transformed value, due to an odd effect when breaks exist.
     var minorTicks = [];
     var extent = this.getExtent();
     for (var i = 1; i < ticks.length; i++) {
       var nextTick = ticks[i];
       var prevTick = ticks[i - 1];
+      if (prevTick["break"] || nextTick["break"]) {
+        // Do not build minor ticks to the adjacent ticks to breaks ticks,
+        // since the interval might be irregular.
+        continue;
+      }
       var count = 0;
       var minorTicksGroup = [];
       var interval = nextTick.value - prevTick.value;
       var minorInterval = interval / splitNumber;
+      var minorIntervalPrecision = helper.getIntervalPrecision(minorInterval);
       while (count < splitNumber - 1) {
-        var minorTick = roundNumber(prevTick.value + (count + 1) * minorInterval);
+        var minorTick = roundNumber(prevTick.value + (count + 1) * minorInterval, minorIntervalPrecision);
         // For the first and last interval. The count may be less than splitNumber.
         if (minorTick > extent[0] && minorTick < extent[1]) {
           minorTicksGroup.push(minorTick);
         }
         count++;
       }
+      var scaleBreakHelper = getScaleBreakHelper();
+      scaleBreakHelper && scaleBreakHelper.pruneTicksByBreak('auto', minorTicksGroup, this._getNonTransBreaks(), function (value) {
+        return value;
+      }, this._interval, extent);
       minorTicks.push(minorTicksGroup);
     }
     return minorTicks;
+  };
+  IntervalScale.prototype._getNonTransBreaks = function () {
+    return this._brkCtx ? this._brkCtx.breaks : [];
   };
   /**
    * @param opt.precision If 'auto', use nice presision.
@@ -198,12 +245,18 @@ var IntervalScale = /** @class */function (_super) {
     return formatUtil.addCommas(dataNum);
   };
   /**
+   * FIXME: refactor - disallow override, use composition instead.
+   *
+   * The override of `calcNiceTicks` should ensure these members are provided:
+   *  this._intervalPrecision
+   *  this._interval
+   *
    * @param splitNumber By default `5`.
    */
   IntervalScale.prototype.calcNiceTicks = function (splitNumber, minInterval, maxInterval) {
     splitNumber = splitNumber || 5;
-    var extent = this._extent;
-    var span = extent[1] - extent[0];
+    var extent = this._extent.slice();
+    var span = this._getExtentSpanWithBreaks();
     if (!isFinite(span)) {
       return;
     }
@@ -212,14 +265,16 @@ var IntervalScale = /** @class */function (_super) {
     if (span < 0) {
       span = -span;
       extent.reverse();
+      this._innerSetExtent(extent[0], extent[1]);
+      extent = this._extent.slice();
     }
-    var result = helper.intervalScaleNiceTicks(extent, splitNumber, minInterval, maxInterval);
+    var result = helper.intervalScaleNiceTicks(extent, span, splitNumber, minInterval, maxInterval);
     this._intervalPrecision = result.intervalPrecision;
     this._interval = result.interval;
     this._niceExtent = result.niceTickExtent;
   };
   IntervalScale.prototype.calcNiceExtent = function (opt) {
-    var extent = this._extent;
+    var extent = this._extent.slice();
     // If extent start and end are same, expand them
     if (extent[0] === extent[1]) {
       if (extent[0] !== 0) {
@@ -247,15 +302,18 @@ var IntervalScale = /** @class */function (_super) {
       extent[0] = 0;
       extent[1] = 1;
     }
+    this._innerSetExtent(extent[0], extent[1]);
+    extent = this._extent.slice();
     this.calcNiceTicks(opt.splitNumber, opt.minInterval, opt.maxInterval);
-    // let extent = this._extent;
     var interval = this._interval;
+    var intervalPrecition = this._intervalPrecision;
     if (!opt.fixMin) {
-      extent[0] = roundNumber(Math.floor(extent[0] / interval) * interval);
+      extent[0] = roundNumber(Math.floor(extent[0] / interval) * interval, intervalPrecition);
     }
     if (!opt.fixMax) {
-      extent[1] = roundNumber(Math.ceil(extent[1] / interval) * interval);
+      extent[1] = roundNumber(Math.ceil(extent[1] / interval) * interval, intervalPrecition);
     }
+    this._innerSetExtent(extent[0], extent[1]);
   };
   IntervalScale.prototype.setNiceExtent = function (min, max) {
     this._niceExtent = [min, max];

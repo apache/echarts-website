@@ -44,7 +44,7 @@
 import GeoModel from '../../coord/geo/GeoModel.js';
 import geoCreator from '../../coord/geo/geoCreator.js';
 import { each } from 'zrender/lib/core/util.js';
-import { updateCenterAndZoom } from '../../action/roamHelper.js';
+import { updateCenterAndZoomInAction } from '../../component/helper/roamHelper.js';
 import GeoView from './GeoView.js';
 import geoSourceManager from '../../coord/geo/geoSourceManager.js';
 function registerMap(mapName, geoJson, specialAreas) {
@@ -116,7 +116,21 @@ export function install(registers) {
     event: 'geoRoam',
     update: 'updateTransform'
   }, function (payload, ecModel, api) {
-    var componentType = payload.componentType || 'series';
+    var componentType = payload.componentType;
+    if (!componentType) {
+      // backward compat, but `payload.componentType` is deprecated.
+      if (payload.geoId != null) {
+        componentType = 'geo';
+      } else if (payload.seriesId != null) {
+        componentType = 'series';
+      }
+    }
+    if (!componentType) {
+      componentType = 'series';
+    }
+    // FIXME: payload.geoId/payload.seriesId should be required, but historically
+    //  it is not mandatory, causing that all of the geo or series can be queried below,
+    //  which is not reasonable.
     ecModel.eachComponent({
       mainType: componentType,
       query: payload
@@ -125,7 +139,7 @@ export function install(registers) {
       if (geo.type !== 'geo') {
         return;
       }
-      var res = updateCenterAndZoom(geo, payload, componentModel.get('scaleLimit'), api);
+      var res = updateCenterAndZoomInAction(geo, payload, componentModel.get('scaleLimit'));
       componentModel.setCenter && componentModel.setCenter(res.center);
       componentModel.setZoom && componentModel.setZoom(res.zoom);
       // All map series with same `map` use the same geo coordinate system

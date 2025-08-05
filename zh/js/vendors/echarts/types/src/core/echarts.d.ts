@@ -1,15 +1,16 @@
 import * as zrender from 'zrender/lib/zrender.js';
 import Eventful, { EventCallbackSingleParam } from 'zrender/lib/core/Eventful.js';
 import { GlobalModelSetOptionOpts } from '../model/Global.js';
+import type { CustomSeriesRenderItem } from '../chart/custom/CustomSeries.js';
 import * as modelUtil from '../util/model.js';
 import { CoordinateSystemCreator } from '../coord/CoordinateSystem.js';
-import { Payload, RendererType, ECActionEvent, ActionHandler, ActionInfo, OptionPreprocessor, PostUpdater, LoadingEffectCreator, StageHandlerOverallReset, StageHandler, DimensionDefinitionLoose, ThemeOption, ECBasicOption, ZRColor, ComponentMainType, ScaleDataValue, ZRElementEventName, ECElementEvent, AnimationOption } from '../util/types.js';
+import { Payload, RendererType, ECActionEvent, ActionHandler, ActionInfo, OptionPreprocessor, PostUpdater, LoadingEffectCreator, StageHandlerOverallReset, StageHandler, DimensionDefinitionLoose, ThemeOption, ECBasicOption, ZRColor, ComponentMainType, ScaleDataValue, ZRElementEventName, ECElementEvent, AnimationOption, CoordinateSystemDataLayout, NullUndefined } from '../util/types.js';
 import { registerExternalTransform } from '../data/helper/transform.js';
 import { LocaleOption } from './locale.js';
 import { LifecycleEvents, UpdateLifecycleTransitionItem, UpdateLifecycleTransitionOpt } from './lifecycle.js';
 import type geoSourceManager from '../coord/geo/geoSourceManager.js';
 declare type ModelFinder = modelUtil.ModelFinder;
-export declare const version = "5.6.0";
+export declare const version = "6.0.0";
 export declare const dependencies: {
     zrender: string;
 };
@@ -33,6 +34,7 @@ export declare const PRIORITY: {
     };
 };
 declare const IN_MAIN_PROCESS_KEY: "__flagInMainProcess";
+declare const MAIN_PROCESS_VERSION_KEY: "__mainProcessVersion";
 declare const PENDING_UPDATE: "__pendingUpdate";
 declare const STATUS_NEEDS_UPDATE_KEY: "__needsUpdateStatus";
 declare const CONNECT_STATUS_KEY: "__connectUpdateStatus";
@@ -49,6 +51,9 @@ export interface ResizeOpts {
     width?: number | 'auto';
     height?: number | 'auto';
     animation?: AnimationOption;
+    silent?: boolean;
+}
+export interface SetThemeOpts {
     silent?: boolean;
 }
 interface PostIniter {
@@ -107,6 +112,7 @@ declare class ECharts extends Eventful<ECEventDefinition> {
     private _loadingFX;
     private [PENDING_UPDATE];
     private [IN_MAIN_PROCESS_KEY];
+    private [MAIN_PROCESS_VERSION_KEY];
     private [CONNECT_STATUS_KEY];
     private [STATUS_NEEDS_UPDATE_KEY];
     constructor(dom: HTMLElement, theme?: string | ThemeOption, opts?: EChartsInitOpts);
@@ -133,9 +139,12 @@ declare class ECharts extends Eventful<ECEventDefinition> {
     setOption<Opt extends ECBasicOption>(option: Opt, notMerge?: boolean, lazyUpdate?: boolean): void;
     setOption<Opt extends ECBasicOption>(option: Opt, opts?: SetOptionOpts): void;
     /**
-     * @deprecated
+     * Update theme with name or theme option and repaint the chart.
+     * @param theme Theme name or theme option.
+     * @param opts Optional settings
      */
-    private setTheme;
+    setTheme(theme: string | ThemeOption, opts?: SetThemeOpts): void;
+    private _updateTheme;
     private getModel;
     getOption(): ECBasicOption;
     getWidth(): number;
@@ -173,15 +182,38 @@ declare class ECharts extends Eventful<ECEventDefinition> {
     /**
      * Convert from logical coordinate system to pixel coordinate system.
      * See CoordinateSystem#convertToPixel.
+     *
+     * TODO / PENDING:
+     *  currently `convertToPixel` `convertFromPixel` `convertToLayout` may not be suitable
+     *  for some extremely performance-sensitive scenarios (such as, handling massive amounts of data),
+     *  since it performce "find component" every time.
+     *  And it is not friendly to the nuances between different coordinate systems.
+     *  @see https://github.com/apache/echarts/issues/20985 for details
+     *
+     * @see CoordinateSystem['dataToPoint'] for parameters and return.
+     * @see CoordinateSystemDataCoord
      */
     convertToPixel(finder: ModelFinder, value: ScaleDataValue): number;
     convertToPixel(finder: ModelFinder, value: ScaleDataValue[]): number[];
+    convertToPixel(finder: ModelFinder, value: ScaleDataValue | ScaleDataValue[]): number | number[];
+    convertToPixel(finder: ModelFinder, value: (ScaleDataValue | ScaleDataValue[] | NullUndefined)[]): number | number[];
+    /**
+     * Convert from logical coordinate system to pixel coordinate system.
+     * See CoordinateSystem#convertToPixel.
+     *
+     * @see CoordinateSystem['dataToLayout'] for parameters and return.
+     * @see CoordinateSystemDataCoord
+     */
+    convertToLayout(finder: ModelFinder, value: (ScaleDataValue | NullUndefined) | (ScaleDataValue | ScaleDataValue[] | NullUndefined)[], opt?: unknown): CoordinateSystemDataLayout;
     /**
      * Convert from pixel coordinate system to logical coordinate system.
      * See CoordinateSystem#convertFromPixel.
+     *
+     * @see CoordinateSystem['pointToData'] for parameters and return.
      */
     convertFromPixel(finder: ModelFinder, value: number): number;
     convertFromPixel(finder: ModelFinder, value: number[]): number[];
+    convertFromPixel(finder: ModelFinder, value: number | number[]): number | number[];
     /**
      * Is the specified coordinate systems or components contain the given pixel point.
      * @param {Array|number} value
@@ -321,17 +353,18 @@ export declare function registerUpdateLifecycle<T extends keyof LifecycleEvents>
  *     {type: 'someAction', event: 'someEvent', update: 'updateView'},
  *     function () { ... }
  * );
- *
- * @param {(string|Object)} actionInfo
- * @param {string} actionInfo.type
- * @param {string} [actionInfo.event]
- * @param {string} [actionInfo.update]
- * @param {string} [eventName]
- * @param {Function} action
+ * registerAction({
+ *     type: 'someAction',
+ *     event: 'someEvent',
+ *     update: 'updateView'
+ *     action: function () { ... }
+ *     refineEvent: function () { ... }
+ * });
+ * @see {ActionInfo} for more details.
  */
-export declare function registerAction(type: string, eventName: string, action: ActionHandler): void;
+export declare function registerAction(type: string, eventType: string, action: ActionHandler): void;
 export declare function registerAction(type: string, action: ActionHandler): void;
-export declare function registerAction(actionInfo: ActionInfo, action: ActionHandler): void;
+export declare function registerAction(actionInfo: ActionInfo, action?: ActionHandler): void;
 export declare function registerCoordinateSystem(type: string, coordSysCreator: CoordinateSystemCreator): void;
 /**
  * Get dimensions of specified coordinate system.
@@ -339,6 +372,7 @@ export declare function registerCoordinateSystem(type: string, coordSysCreator: 
  * @return {Array.<string|Object>}
  */
 export declare function getCoordinateSystemDimensions(type: string): DimensionDefinitionLoose[];
+export declare function registerCustomSeries(seriesType: string, renderItem: CustomSeriesRenderItem): void;
 export { registerLocale } from './locale.js';
 /**
  * Layout is a special stage of visual encoding

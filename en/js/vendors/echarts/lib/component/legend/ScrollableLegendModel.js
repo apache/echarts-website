@@ -45,6 +45,7 @@ import { __extends } from "tslib";
 import LegendModel from './LegendModel.js';
 import { mergeLayoutParam, getLayoutParams } from '../../util/layout.js';
 import { inheritDefaultOption } from '../../util/component.js';
+import tokens from '../../visual/tokens.js';
 var ScrollableLegendModel = /** @class */function (_super) {
   __extends(ScrollableLegendModel, _super);
   function ScrollableLegendModel() {
@@ -81,11 +82,11 @@ var ScrollableLegendModel = /** @class */function (_super) {
       horizontal: ['M0,0L12,-10L12,10z', 'M0,0L-12,-10L-12,10z'],
       vertical: ['M0,0L20,0L10,-20z', 'M0,0L20,0L10,20z']
     },
-    pageIconColor: '#2f4554',
-    pageIconInactiveColor: '#aaa',
+    pageIconColor: tokens.color.accent50,
+    pageIconInactiveColor: tokens.color.accent10,
     pageIconSize: 15,
     pageTextStyle: {
-      color: '#333'
+      color: tokens.color.tertiary
     },
     animationDurationUpdate: 800
   });

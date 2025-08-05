@@ -4,6 +4,7 @@ import GlobalModel from '../../model/Global.js';
 interface MarkAreaStateOption {
     itemStyle?: ItemStyleOption;
     label?: SeriesLabelOption;
+    z2?: number;
 }
 interface MarkAreaDataItemOptionBase extends MarkAreaStateOption, StatesOptionMixin<MarkAreaStateOption, StatesMixinBase> {
     name?: string;

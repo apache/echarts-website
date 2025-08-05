@@ -42,6 +42,7 @@
 * under the License.
 */
 import { each, hasOwn } from 'zrender/lib/core/util.js';
+import tokens from '../visual/tokens.js';
 var deprecatedLogs = {};
 /**
  * Whether need to call `convertEC4CompatibleStyle`.
@@ -54,7 +55,7 @@ export function isEC4CompatibleStyle(style, elType, hasOwnTextContentOption, has
   // `legacy: false`, force do not compat.
   // `legacy` not set: auto detect whether legacy.
   //     But in this case we do not compat (difficult to detect and rare case):
-  //     Becuse custom series and graphic component support "merge", users may firstly
+  //     Because custom series and graphic component support "merge", users may firstly
   //     only set `textStrokeWidth` style or secondly only set `text`.
   return style && (style.legacy || style.legacy !== false && !hasOwnTextContentOption && !hasOwnTextConfig && elType !== 'tspan'
   // Difficult to detect whether legacy for a "text" el.
@@ -161,19 +162,19 @@ export function convertToEC4StyleForCustomSerise(itemStl, txStl, txCfg) {
   txCfg.rotation != null && (out.textRotation = txCfg.rotation);
   txCfg.distance != null && (out.textDistance = txCfg.distance);
   var isInside = out.textPosition.indexOf('inside') >= 0;
-  var hostFill = itemStl.fill || '#000';
+  var hostFill = itemStl.fill || tokens.color.neutral99;
   convertToEC4RichItem(out, txStl);
   var textFillNotSet = out.textFill == null;
   if (isInside) {
     if (textFillNotSet) {
-      out.textFill = txCfg.insideFill || '#fff';
+      out.textFill = txCfg.insideFill || tokens.color.neutral00;
       !out.textStroke && txCfg.insideStroke && (out.textStroke = txCfg.insideStroke);
       !out.textStroke && (out.textStroke = hostFill);
       out.textStrokeWidth == null && (out.textStrokeWidth = 2);
     }
   } else {
     if (textFillNotSet) {
-      out.textFill = itemStl.fill || txCfg.outsideFill || '#000';
+      out.textFill = itemStl.fill || txCfg.outsideFill || tokens.color.neutral00;
     }
     !out.textStroke && txCfg.outsideStroke && (out.textStroke = txCfg.outsideStroke);
   }

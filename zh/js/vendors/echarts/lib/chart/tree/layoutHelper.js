@@ -41,21 +41,6 @@
 * specific language governing permissions and limitations
 * under the License.
 */
-/*
-* A third-party license is embedded for some of the code in this file:
-* The tree layoutHelper implementation was originally copied from
-* "d3.js"(https://github.com/d3/d3-hierarchy) with
-* some modifications made for this project.
-* (see more details in the comment of the specific method below.)
-* The use of the source code of this file is also subject to the terms
-* and consitions of the licence of "d3.js" (BSD-3Clause, see
-* </licenses/LICENSE-d3>).
-*/
-/**
- * @file The layout algorithm of node-link tree diagrams. Here we using Reingold-Tilford algorithm to drawing
- *       the tree.
- */
-import * as layout from '../../util/layout.js';
 /**
  * Initialize all computational message for following algorithm.
  */
@@ -152,15 +137,6 @@ export function radialCoordinate(rad, r) {
     x: r * Math.cos(rad),
     y: r * Math.sin(rad)
   };
-}
-/**
- * Get the layout position of the whole view.
- */
-export function getViewRect(seriesModel, api) {
-  return layout.getLayoutRect(seriesModel.getBoxLayoutParams(), {
-    width: api.getWidth(),
-    height: api.getHeight()
-  });
 }
 /**
  * All other shifts, applied to the smaller subtrees between w- and w+, are

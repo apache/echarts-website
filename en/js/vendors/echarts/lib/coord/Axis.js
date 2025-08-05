@@ -43,14 +43,20 @@
 */
 import { each, map } from 'zrender/lib/core/util.js';
 import { linearMap, getPixelPrecision, round } from '../util/number.js';
-import { createAxisTicks, createAxisLabels, calculateCategoryInterval } from './axisTickLabelBuilder.js';
+import { createAxisTicks, createAxisLabels, calculateCategoryInterval, AxisTickLabelComputingKind, createAxisLabelsComputingContext } from './axisTickLabelBuilder.js';
 var NORMALIZED_EXTENT = [0, 1];
 /**
  * Base class of Axis.
+ *
+ * Lifetime: recreate for each main process.
+ * [NOTICE]: Some caches is stored on the axis instance (see `axisTickLabelBuilder.ts`)
+ *  which is based on this lifetime.
  */
 var Axis = /** @class */function () {
   function Axis(dim, scale, extent) {
     this.onBand = false;
+    // Make sure that `extent[0] > extent[1]` only if `inverse: true`.
+    // `inverse` can be inferred by `extent` unless `extent[0] === extent[1]`.
     this.inverse = false;
     this.dim = dim;
     this.scale = scale;
@@ -69,7 +75,7 @@ var Axis = /** @class */function () {
    * If axis extent contain given data
    */
   Axis.prototype.containData = function (data) {
-    return this.scale.contain(data);
+    return this.scale.contain(this.scale.parse(data));
   };
   /**
    * Get coord extent.
@@ -97,7 +103,7 @@ var Axis = /** @class */function () {
   Axis.prototype.dataToCoord = function (data, clamp) {
     var extent = this._extent;
     var scale = this.scale;
-    data = scale.normalize(data);
+    data = scale.normalize(scale.parse(data));
     if (this.onBand && scale.type === 'ordinal') {
       extent = extent.slice();
       fixExtentWithBands(extent, scale.count());
@@ -136,7 +142,10 @@ var Axis = /** @class */function () {
   Axis.prototype.getTicksCoords = function (opt) {
     opt = opt || {};
     var tickModel = opt.tickModel || this.getTickModel();
-    var result = createAxisTicks(this, tickModel);
+    var result = createAxisTicks(this, tickModel, {
+      breakTicks: opt.breakTicks,
+      pruneByBreak: opt.pruneByBreak
+    });
     var ticks = result.ticks;
     var ticksCoords = map(ticks, function (tickVal) {
       return {
@@ -170,8 +179,9 @@ var Axis = /** @class */function () {
     }, this);
     return minorTicksCoords;
   };
-  Axis.prototype.getViewLabels = function () {
-    return createAxisLabels(this).labels;
+  Axis.prototype.getViewLabels = function (ctx) {
+    ctx = ctx || createAxisLabelsComputingContext(AxisTickLabelComputingKind.determine);
+    return createAxisLabels(this, ctx).labels;
   };
   Axis.prototype.getLabelModel = function () {
     return this.model.getModel('axisLabel');
@@ -203,8 +213,9 @@ var Axis = /** @class */function () {
    * Can be overridden, consider other axes like in 3D.
    * @return Auto interval for cateogry axis tick and label
    */
-  Axis.prototype.calculateCategoryInterval = function () {
-    return calculateCategoryInterval(this);
+  Axis.prototype.calculateCategoryInterval = function (ctx) {
+    ctx = ctx || createAxisLabelsComputingContext(AxisTickLabelComputingKind.determine);
+    return calculateCategoryInterval(this, ctx);
   };
   return Axis;
 }();
@@ -234,21 +245,25 @@ function fixOnBandTicksCoords(axis, ticksCoords, alignWithLabel, clamp) {
   var diffSize;
   if (ticksLen === 1) {
     ticksCoords[0].coord = axisExtent[0];
+    ticksCoords[0].onBand = true;
     last = ticksCoords[1] = {
       coord: axisExtent[1],
-      tickValue: ticksCoords[0].tickValue
+      tickValue: ticksCoords[0].tickValue,
+      onBand: true
     };
   } else {
     var crossLen = ticksCoords[ticksLen - 1].tickValue - ticksCoords[0].tickValue;
     var shift_1 = (ticksCoords[ticksLen - 1].coord - ticksCoords[0].coord) / crossLen;
     each(ticksCoords, function (ticksItem) {
       ticksItem.coord -= shift_1 / 2;
+      ticksItem.onBand = true;
     });
     var dataExtent = axis.scale.getExtent();
     diffSize = 1 + dataExtent[1] - ticksCoords[ticksLen - 1].tickValue;
     last = {
       coord: ticksCoords[ticksLen - 1].coord + shift_1 * diffSize,
-      tickValue: dataExtent[1] + 1
+      tickValue: dataExtent[1] + 1,
+      onBand: true
     };
     ticksCoords.push(last);
   }
@@ -259,7 +274,8 @@ function fixOnBandTicksCoords(axis, ticksCoords, alignWithLabel, clamp) {
   }
   if (clamp && littleThan(axisExtent[0], ticksCoords[0].coord)) {
     ticksCoords.unshift({
-      coord: axisExtent[0]
+      coord: axisExtent[0],
+      onBand: true
     });
   }
   if (littleThan(axisExtent[1], last.coord)) {
@@ -267,7 +283,8 @@ function fixOnBandTicksCoords(axis, ticksCoords, alignWithLabel, clamp) {
   }
   if (clamp && littleThan(last.coord, axisExtent[1])) {
     ticksCoords.push({
-      coord: axisExtent[1]
+      coord: axisExtent[1],
+      onBand: true
     });
   }
   function littleThan(a, b) {

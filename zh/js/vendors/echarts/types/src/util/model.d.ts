@@ -2,10 +2,11 @@ import { HashMap } from 'zrender/lib/core/util.js';
 import GlobalModel from '../model/Global.js';
 import ComponentModel, { ComponentModelConstructor } from '../model/Component.js';
 import SeriesData from '../data/SeriesData.js';
-import { ComponentOption, ComponentMainType, ComponentSubType, DisplayStateHostOption, OptionDataItem, OptionDataValue, TooltipRenderMode, Payload, OptionId, InterpolatableValue } from './types.js';
+import { ComponentOption, ComponentMainType, ComponentSubType, DisplayStateHostOption, OptionDataItem, OptionDataValue, TooltipRenderMode, Payload, OptionId, InterpolatableValue, NullUndefined } from './types.js';
 import SeriesModel from '../model/Series.js';
 import CartesianAxisModel from '../coord/cartesian/AxisModel.js';
 import GridModel from '../coord/cartesian/GridModel.js';
+import type Model from '../model/Model.js';
 /**
  * If value is not array, then translate it to array.
  * @param  {*} value
@@ -195,6 +196,9 @@ export declare type ModelFinderObject = {
     gridIndex?: ModelFinderIndexQuery;
     gridId?: ModelFinderIdQuery;
     gridName?: ModelFinderNameQuery;
+    matrixIndex?: ModelFinderIndexQuery;
+    matrixId?: ModelFinderIdQuery;
+    matrixName?: ModelFinderNameQuery;
     dataIndex?: number;
     dataIndexInside?: number;
 };
@@ -279,4 +283,38 @@ export declare function groupData<T, R extends string | number>(array: T[], getK
  *                     Other cases do not supported.
  */
 export declare function interpolateRawValues(data: SeriesData, precision: number | 'auto', sourceValue: InterpolatableValue, targetValue: InterpolatableValue, percent: number): InterpolatableValue;
+/**
+ * Use an iterator to avoid exposing the internal list or duplicating it
+ * for the outside traveller, and no extra heap allocation.
+ * @usage
+ *  for (const it = resetIterator(); it.next();) {
+ *      const item = it.item;
+ *      const key = it.key;
+ *      const itIdx = it.itIdx;
+ *      // ...
+ *  }
+ * @usage
+ *  const it = resetIterator();
+ *  while (it.next()) { ... }
+ * @usage
+ *  for (resetIterator(it); it.next();) { ... }
+ */
+export declare class ListIterator<TItem> {
+    private _idx;
+    private _end;
+    private _list;
+    private _step;
+    item: TItem | NullUndefined;
+    key: number;
+    /**
+     * The loop condition is `idx < end` if `step > 0`;
+     * The loop condition is `idx >= end` if `step < 0`.
+     *
+     * @param end By default `list.length` if `step > 0`; `0` if `step < 0`.
+     * @param step By default `1`.
+     */
+    reset(list: TItem[], start: number, end?: number, step?: number): ListIterator<TItem>;
+    next(): boolean;
+}
+export declare function clearTmpModel(model: Model): void;
 export {};

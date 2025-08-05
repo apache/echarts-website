@@ -43,11 +43,35 @@
 */
 import { __extends } from "tslib";
 import ComponentModel from '../../model/Component.js';
+import { getLayoutParams, mergeLayoutParam } from '../../util/layout.js';
+import tokens from '../../visual/tokens.js';
+// For backward compatibility, do not use a margin. Although the labels might touch the edge of
+// the canvas, the chart canvas probably does not have an border or a different background color within a page.
+export var OUTER_BOUNDS_DEFAULT = {
+  left: 0,
+  right: 0,
+  top: 0,
+  bottom: 0
+};
+export var OUTER_BOUNDS_CLAMP_DEFAULT = ['25%', '25%'];
 var GridModel = /** @class */function (_super) {
   __extends(GridModel, _super);
   function GridModel() {
     return _super !== null && _super.apply(this, arguments) || this;
   }
+  GridModel.prototype.mergeDefaultAndTheme = function (option, ecModel) {
+    var outerBoundsCp = getLayoutParams(option.outerBounds);
+    _super.prototype.mergeDefaultAndTheme.apply(this, arguments);
+    if (outerBoundsCp && option.outerBounds) {
+      mergeLayoutParam(option.outerBounds, outerBoundsCp);
+    }
+  };
+  GridModel.prototype.mergeOption = function (newOption, ecModel) {
+    _super.prototype.mergeOption.apply(this, arguments);
+    if (this.option.outerBounds && newOption.outerBounds) {
+      mergeLayoutParam(this.option.outerBounds, newOption.outerBounds);
+    }
+  };
   GridModel.type = 'grid';
   GridModel.dependencies = ['xAxis', 'yAxis'];
   GridModel.layoutMode = 'box';
@@ -55,17 +79,22 @@ var GridModel = /** @class */function (_super) {
     show: false,
     // zlevel: 0,
     z: 0,
-    left: '10%',
-    top: 60,
+    left: '15%',
+    top: 65,
     right: '10%',
-    bottom: 70,
+    bottom: 80,
     // If grid size contain label
     containLabel: false,
+    outerBoundsMode: 'auto',
+    outerBounds: OUTER_BOUNDS_DEFAULT,
+    outerBoundsContain: 'all',
+    outerBoundsClampWidth: OUTER_BOUNDS_CLAMP_DEFAULT[0],
+    outerBoundsClampHeight: OUTER_BOUNDS_CLAMP_DEFAULT[1],
     // width: {totalWidth} - left - right,
     // height: {totalHeight} - top - bottom,
-    backgroundColor: 'rgba(0,0,0,0)',
+    backgroundColor: tokens.color.transparent,
     borderWidth: 1,
-    borderColor: '#ccc'
+    borderColor: tokens.color.neutral30
   };
   return GridModel;
 }(ComponentModel);

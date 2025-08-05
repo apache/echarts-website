@@ -47,6 +47,7 @@ import * as graphic from '../../util/graphic.js';
 import * as lineContain from 'zrender/lib/contain/line.js';
 import * as quadraticContain from 'zrender/lib/contain/quadratic.js';
 import { getECData } from '../../util/innerStore.js';
+import tokens from '../../visual/tokens.js';
 var LargeLinesPathShape = /** @class */function () {
   function LargeLinesPathShape() {
     this.polyline = false;
@@ -69,7 +70,7 @@ var LargeLinesPath = /** @class */function (_super) {
   };
   LargeLinesPath.prototype.getDefaultStyle = function () {
     return {
-      stroke: '#000',
+      stroke: tokens.color.neutral99,
       fill: null
     };
   };

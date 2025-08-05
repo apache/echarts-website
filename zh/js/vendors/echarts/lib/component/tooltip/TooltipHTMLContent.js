@@ -43,7 +43,7 @@
 */
 import { isString, indexOf, each, bind, isFunction, isArray, isDom, retrieve2 } from 'zrender/lib/core/util.js';
 import { normalizeEvent } from 'zrender/lib/core/event.js';
-import { transformLocalCoord } from 'zrender/lib/core/dom.js';
+import { transformLocalCoord, transformLocalCoordClear } from 'zrender/lib/core/dom.js';
 import env from 'zrender/lib/core/env.js';
 import { convertToColorString, toCamelCase, normalizeCssArray } from '../../util/format.js';
 import { shouldTooltipConfine, toCSSVendorPrefix, getComputedStyle, TRANSFORM_VENDOR, TRANSITION_VENDOR } from './helper.js';
@@ -85,13 +85,17 @@ function assembleArrow(tooltipModel, borderColor, arrowPosition) {
   var styleCss = ["position:absolute;width:" + arrowSize + "px;height:" + arrowSize + "px;z-index:-1;", positionStyle + ";" + transformStyle + ";", "border-bottom:" + borderStyle, "border-right:" + borderStyle, "background-color:" + backgroundColor + ";"];
   return "<div style=\"" + styleCss.join('') + "\"></div>";
 }
-function assembleTransition(duration, onlyFade) {
+function assembleTransition(duration, onlyFadeTransition, enableDisplayTransition) {
   var transitionCurve = 'cubic-bezier(0.23,1,0.32,1)';
-  var transitionOption = " " + duration / 2 + "s " + transitionCurve;
-  var transitionText = "opacity" + transitionOption + ",visibility" + transitionOption;
-  if (!onlyFade) {
+  var transitionOption = '';
+  var transitionText = '';
+  if (enableDisplayTransition) {
+    transitionOption = " " + duration / 2 + "s " + transitionCurve;
+    transitionText = "opacity" + transitionOption + ",visibility" + transitionOption;
+  }
+  if (!onlyFadeTransition) {
     transitionOption = " " + duration + "s " + transitionCurve;
-    transitionText += env.transformSupported ? "," + CSS_TRANSFORM_VENDOR + transitionOption : ",left" + transitionOption + ",top" + transitionOption;
+    transitionText += (transitionText.length ? ',' : '') + (env.transformSupported ? "" + CSS_TRANSFORM_VENDOR + transitionOption : ",left" + transitionOption + ",top" + transitionOption);
   }
   return CSS_TRANSITION_VENDOR + ':' + transitionText;
 }
@@ -134,7 +138,7 @@ function assembleFont(textStyleModel) {
   });
   return cssText.join(';');
 }
-function assembleCssText(tooltipModel, enableTransition, onlyFade) {
+function assembleCssText(tooltipModel, enableTransition, onlyFadeTransition, enableDisplayTransition) {
   var cssText = [];
   var transitionDuration = tooltipModel.get('transitionDuration');
   var backgroundColor = tooltipModel.get('backgroundColor');
@@ -146,8 +150,8 @@ function assembleCssText(tooltipModel, enableTransition, onlyFade) {
   var padding = getPaddingFromTooltipModel(tooltipModel, 'html');
   var boxShadow = shadowOffsetX + "px " + shadowOffsetY + "px " + shadowBlur + "px " + shadowColor;
   cssText.push('box-shadow:' + boxShadow);
-  // Animation transition. Do not animate when transitionDuration is 0.
-  enableTransition && transitionDuration && cssText.push(assembleTransition(transitionDuration, onlyFade));
+  // Animation transition. Do not animate when transitionDuration <= 0.
+  enableTransition && transitionDuration > 0 && cssText.push(assembleTransition(transitionDuration, onlyFadeTransition, enableDisplayTransition));
   if (backgroundColor) {
     cssText.push('background-color:' + backgroundColor);
   }
@@ -268,6 +272,7 @@ var TooltipHTMLContent = /** @class */function () {
     alwaysShowContent && this._moveIfResized();
     // update alwaysShowContent
     this._alwaysShowContent = alwaysShowContent;
+    this._enableDisplayTransition = tooltipModel.get('displayTransition') && tooltipModel.get('transitionDuration') > 0;
     // update className
     this.el.className = tooltipModel.get('className') || '';
     // Hide the tooltip
@@ -283,7 +288,7 @@ var TooltipHTMLContent = /** @class */function () {
     if (!el.innerHTML) {
       style.display = 'none';
     } else {
-      style.cssText = gCssText + assembleCssText(tooltipModel, !this._firstShow, this._longHide)
+      style.cssText = gCssText + assembleCssText(tooltipModel, !this._firstShow, this._longHide, this._enableDisplayTransition)
       // initial transform
       + assembleTransform(styleCoord[0], styleCoord[1], true) + ("border-color:" + convertToColorString(nearPointColor) + ";") + (tooltipModel.get('extraCssText') || '')
       // If mouse occasionally move over the tooltip, a mouseout event will be
@@ -365,8 +370,12 @@ var TooltipHTMLContent = /** @class */function () {
   TooltipHTMLContent.prototype.hide = function () {
     var _this = this;
     var style = this.el.style;
-    style.visibility = 'hidden';
-    style.opacity = '0';
+    if (this._enableDisplayTransition) {
+      style.visibility = 'hidden';
+      style.opacity = '0';
+    } else {
+      style.display = 'none';
+    }
     env.transform3dSupported && (style.willChange = '');
     this._show = false;
     this._longHideTimeout = setTimeout(function () {
@@ -391,8 +400,14 @@ var TooltipHTMLContent = /** @class */function () {
   TooltipHTMLContent.prototype.dispose = function () {
     clearTimeout(this._hideTimeout);
     clearTimeout(this._longHideTimeout);
-    var parentNode = this.el.parentNode;
-    parentNode && parentNode.removeChild(this.el);
+    var zr = this._zr;
+    transformLocalCoordClear(zr && zr.painter && zr.painter.getViewportRoot(), this._container);
+    var el = this.el;
+    if (el) {
+      el.onmouseenter = el.onmousemove = el.onmouseleave = null;
+      var parentNode = el.parentNode;
+      parentNode && parentNode.removeChild(el);
+    }
     this.el = this._container = null;
   };
   return TooltipHTMLContent;

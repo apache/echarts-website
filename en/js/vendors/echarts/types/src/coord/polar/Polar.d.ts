@@ -57,11 +57,11 @@ declare class Polar implements CoordinateSystem, CoordinateSystemMaster {
      * Convert a single data item to (x, y) point.
      * Parameter data is an array which the first element is radius and the second is angle
      */
-    dataToPoint(data: ScaleDataValue[], clamp?: boolean): number[];
+    dataToPoint(data: ScaleDataValue[], clamp?: boolean, out?: number[]): number[];
     /**
      * Convert a (x, y) point to data
      */
-    pointToData(point: number[], clamp?: boolean): number[];
+    pointToData(point: number[], clamp?: boolean, out?: number[]): number[];
     /**
      * Convert a (x, y) point to (radius, angle) coord
      */
@@ -69,7 +69,7 @@ declare class Polar implements CoordinateSystem, CoordinateSystemMaster {
     /**
      * Convert a (radius, angle) coord to (x, y) point
      */
-    coordToPoint(coord: number[]): number[];
+    coordToPoint(coord: number[], out?: number[]): number[];
     /**
      * Get ring area of cartesian.
      * Area will have a contain function to determine if a point is in the coordinate system.

@@ -2,14 +2,22 @@ import * as matrix from './matrix.js';
 import Point from './Point.js';
 var mathMin = Math.min;
 var mathMax = Math.max;
+var mathAbs = Math.abs;
+var XY = ['x', 'y'];
+var WH = ['width', 'height'];
 var lt = new Point();
 var rb = new Point();
 var lb = new Point();
 var rt = new Point();
-var minTv = new Point();
-var maxTv = new Point();
+var _intersectCtx = createIntersectContext();
+var _minTv = _intersectCtx.minTv;
+var _maxTv = _intersectCtx.maxTv;
+var _lenMinMax = [0, 0];
 var BoundingRect = (function () {
     function BoundingRect(x, y, width, height) {
+        BoundingRect.set(this, x, y, width, height);
+    }
+    BoundingRect.set = function (target, x, y, width, height) {
         if (width < 0) {
             x = x + width;
             width = -width;
@@ -18,11 +26,12 @@ var BoundingRect = (function () {
             y = y + height;
             height = -height;
         }
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-    }
+        target.x = x;
+        target.y = y;
+        target.width = width;
+        target.height = height;
+        return target;
+    };
     BoundingRect.prototype.union = function (other) {
         var x = mathMin(other.x, this.x);
         var y = mathMin(other.y, this.y);
@@ -54,88 +63,63 @@ var BoundingRect = (function () {
         matrix.translate(m, m, [b.x, b.y]);
         return m;
     };
-    BoundingRect.prototype.intersect = function (b, mtv) {
-        if (!b) {
+    BoundingRect.prototype.intersect = function (b, mtv, opt) {
+        return BoundingRect.intersect(this, b, mtv, opt);
+    };
+    BoundingRect.intersect = function (a, b, mtv, opt) {
+        if (mtv) {
+            Point.set(mtv, 0, 0);
+        }
+        var outIntersectRect = opt && opt.outIntersectRect || null;
+        var clamp = opt && opt.clamp;
+        if (outIntersectRect) {
+            outIntersectRect.x = outIntersectRect.y = outIntersectRect.width = outIntersectRect.height = NaN;
+        }
+        if (!a || !b) {
             return false;
         }
+        if (!(a instanceof BoundingRect)) {
+            a = BoundingRect.set(_tmpIntersectA, a.x, a.y, a.width, a.height);
+        }
         if (!(b instanceof BoundingRect)) {
-            b = BoundingRect.create(b);
+            b = BoundingRect.set(_tmpIntersectB, b.x, b.y, b.width, b.height);
         }
-        var a = this;
-        var ax0 = a.x;
-        var ax1 = a.x + a.width;
-        var ay0 = a.y;
-        var ay1 = a.y + a.height;
-        var bx0 = b.x;
-        var bx1 = b.x + b.width;
-        var by0 = b.y;
-        var by1 = b.y + b.height;
+        var useMTV = !!mtv;
+        _intersectCtx.reset(opt, useMTV);
+        var touchThreshold = _intersectCtx.touchThreshold;
+        var ax0 = a.x + touchThreshold;
+        var ax1 = a.x + a.width - touchThreshold;
+        var ay0 = a.y + touchThreshold;
+        var ay1 = a.y + a.height - touchThreshold;
+        var bx0 = b.x + touchThreshold;
+        var bx1 = b.x + b.width - touchThreshold;
+        var by0 = b.y + touchThreshold;
+        var by1 = b.y + b.height - touchThreshold;
+        if (ax0 > ax1 || ay0 > ay1 || bx0 > bx1 || by0 > by1) {
+            return false;
+        }
         var overlap = !(ax1 < bx0 || bx1 < ax0 || ay1 < by0 || by1 < ay0);
-        if (mtv) {
-            var dMin = Infinity;
-            var dMax = 0;
-            var d0 = Math.abs(ax1 - bx0);
-            var d1 = Math.abs(bx1 - ax0);
-            var d2 = Math.abs(ay1 - by0);
-            var d3 = Math.abs(by1 - ay0);
-            var dx = Math.min(d0, d1);
-            var dy = Math.min(d2, d3);
-            if (ax1 < bx0 || bx1 < ax0) {
-                if (dx > dMax) {
-                    dMax = dx;
-                    if (d0 < d1) {
-                        Point.set(maxTv, -d0, 0);
-                    }
-                    else {
-                        Point.set(maxTv, d1, 0);
-                    }
-                }
+        if (useMTV || outIntersectRect) {
+            _lenMinMax[0] = Infinity;
+            _lenMinMax[1] = 0;
+            intersectOneDim(ax0, ax1, bx0, bx1, 0, useMTV, outIntersectRect, clamp);
+            intersectOneDim(ay0, ay1, by0, by1, 1, useMTV, outIntersectRect, clamp);
+            if (useMTV) {
+                Point.copy(mtv, overlap
+                    ? (_intersectCtx.useDir ? _intersectCtx.dirMinTv : _minTv)
+                    : _maxTv);
             }
-            else {
-                if (dx < dMin) {
-                    dMin = dx;
-                    if (d0 < d1) {
-                        Point.set(minTv, d0, 0);
-                    }
-                    else {
-                        Point.set(minTv, -d1, 0);
-                    }
-                }
-            }
-            if (ay1 < by0 || by1 < ay0) {
-                if (dy > dMax) {
-                    dMax = dy;
-                    if (d2 < d3) {
-                        Point.set(maxTv, 0, -d2);
-                    }
-                    else {
-                        Point.set(maxTv, 0, d3);
-                    }
-                }
-            }
-            else {
-                if (dx < dMin) {
-                    dMin = dx;
-                    if (d2 < d3) {
-                        Point.set(minTv, 0, d2);
-                    }
-                    else {
-                        Point.set(minTv, 0, -d3);
-                    }
-                }
-            }
-        }
-        if (mtv) {
-            Point.copy(mtv, overlap ? minTv : maxTv);
         }
         return overlap;
     };
-    BoundingRect.prototype.contain = function (x, y) {
-        var rect = this;
+    BoundingRect.contain = function (rect, x, y) {
         return x >= rect.x
             && x <= (rect.x + rect.width)
             && y >= rect.y
             && y <= (rect.y + rect.height);
+    };
+    BoundingRect.prototype.contain = function (x, y) {
+        return BoundingRect.contain(this, x, y);
     };
     BoundingRect.prototype.clone = function () {
         return new BoundingRect(this.x, this.y, this.width, this.height);
@@ -168,6 +152,7 @@ var BoundingRect = (function () {
         target.y = source.y;
         target.width = source.width;
         target.height = source.height;
+        return target;
     };
     BoundingRect.applyTransform = function (target, source, m) {
         if (!m) {
@@ -212,4 +197,125 @@ var BoundingRect = (function () {
     };
     return BoundingRect;
 }());
+var _tmpIntersectA = new BoundingRect(0, 0, 0, 0);
+var _tmpIntersectB = new BoundingRect(0, 0, 0, 0);
+function intersectOneDim(a0, a1, b0, b1, updateDimIdx, useMTV, outIntersectRect, clamp) {
+    var d0 = mathAbs(a1 - b0);
+    var d1 = mathAbs(b1 - a0);
+    var d01min = mathMin(d0, d1);
+    var updateDim = XY[updateDimIdx];
+    var zeroDim = XY[1 - updateDimIdx];
+    var wh = WH[updateDimIdx];
+    if (a1 < b0 || b1 < a0) {
+        if (d0 < d1) {
+            if (useMTV) {
+                _maxTv[updateDim] = -d0;
+            }
+            if (clamp) {
+                outIntersectRect[updateDim] = a1;
+                outIntersectRect[wh] = 0;
+            }
+        }
+        else {
+            if (useMTV) {
+                _maxTv[updateDim] = d1;
+            }
+            if (clamp) {
+                outIntersectRect[updateDim] = a0;
+                outIntersectRect[wh] = 0;
+            }
+        }
+    }
+    else {
+        if (outIntersectRect) {
+            outIntersectRect[updateDim] = mathMax(a0, b0);
+            outIntersectRect[wh] = mathMin(a1, b1) - outIntersectRect[updateDim];
+        }
+        if (useMTV) {
+            if (d01min < _lenMinMax[0] || _intersectCtx.useDir) {
+                _lenMinMax[0] = mathMin(d01min, _lenMinMax[0]);
+                if (d0 < d1 || !_intersectCtx.bidirectional) {
+                    _minTv[updateDim] = d0;
+                    _minTv[zeroDim] = 0;
+                    if (_intersectCtx.useDir) {
+                        _intersectCtx.calcDirMTV();
+                    }
+                }
+                if (d0 >= d1 || !_intersectCtx.bidirectional) {
+                    _minTv[updateDim] = -d1;
+                    _minTv[zeroDim] = 0;
+                    if (_intersectCtx.useDir) {
+                        _intersectCtx.calcDirMTV();
+                    }
+                }
+            }
+        }
+    }
+}
+export function createIntersectContext() {
+    var _direction = 0;
+    var _dirCheckVec = new Point();
+    var _dirTmp = new Point();
+    var _ctx = {
+        minTv: new Point(),
+        maxTv: new Point(),
+        useDir: false,
+        dirMinTv: new Point(),
+        touchThreshold: 0,
+        bidirectional: true,
+        negativeSize: false,
+        reset: function (opt, useMTV) {
+            _ctx.touchThreshold = 0;
+            if (opt && opt.touchThreshold != null) {
+                _ctx.touchThreshold = mathMax(0, opt.touchThreshold);
+            }
+            _ctx.negativeSize = false;
+            if (!useMTV) {
+                return;
+            }
+            _ctx.minTv.set(Infinity, Infinity);
+            _ctx.maxTv.set(0, 0);
+            _ctx.useDir = false;
+            if (opt && opt.direction != null) {
+                _ctx.useDir = true;
+                _ctx.dirMinTv.copy(_ctx.minTv);
+                _dirTmp.copy(_ctx.minTv);
+                _direction = opt.direction;
+                _ctx.bidirectional = opt.bidirectional == null || !!opt.bidirectional;
+                if (!_ctx.bidirectional) {
+                    _dirCheckVec.set(Math.cos(_direction), Math.sin(_direction));
+                }
+            }
+        },
+        calcDirMTV: function () {
+            var minTv = _ctx.minTv;
+            var dirMinTv = _ctx.dirMinTv;
+            var squareMag = minTv.y * minTv.y + minTv.x * minTv.x;
+            var dirSin = Math.sin(_direction);
+            var dirCos = Math.cos(_direction);
+            var dotProd = dirSin * minTv.y + dirCos * minTv.x;
+            if (nearZero(dotProd)) {
+                if (nearZero(minTv.x) && nearZero(minTv.y)) {
+                    dirMinTv.set(0, 0);
+                }
+                return;
+            }
+            _dirTmp.x = squareMag * dirCos / dotProd;
+            _dirTmp.y = squareMag * dirSin / dotProd;
+            if (nearZero(_dirTmp.x) && nearZero(_dirTmp.y)) {
+                dirMinTv.set(0, 0);
+                return;
+            }
+            if ((_ctx.bidirectional
+                || _dirCheckVec.dot(_dirTmp) > 0)
+                && _dirTmp.len() < dirMinTv.len()) {
+                dirMinTv.copy(_dirTmp);
+            }
+        }
+    };
+    function nearZero(val) {
+        return mathAbs(val) < 1e-10;
+    }
+    return _ctx;
+}
 export default BoundingRect;

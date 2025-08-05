@@ -45,6 +45,7 @@ import { __extends } from "tslib";
 import * as zrUtil from 'zrender/lib/core/util.js';
 import * as featureManager from './featureManager.js';
 import ComponentModel from '../../model/Component.js';
+import tokens from '../../visual/tokens.js';
 var ToolboxModel = /** @class */function (_super) {
   __extends(ToolboxModel, _super);
   function ToolboxModel() {
@@ -80,20 +81,20 @@ var ToolboxModel = /** @class */function (_super) {
     // right
     // bottom
     backgroundColor: 'transparent',
-    borderColor: '#ccc',
+    borderColor: tokens.color.border,
     borderRadius: 0,
     borderWidth: 0,
-    padding: 5,
+    padding: tokens.size.m,
     itemSize: 15,
-    itemGap: 8,
+    itemGap: tokens.size.s,
     showTitle: true,
     iconStyle: {
-      borderColor: '#666',
+      borderColor: tokens.color.accent50,
       color: 'none'
     },
     emphasis: {
       iconStyle: {
-        borderColor: '#3E98C5'
+        borderColor: tokens.color.accent50
       }
     },
     // textStyle: {},

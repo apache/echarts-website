@@ -46,6 +46,7 @@ import SeriesModel from '../../model/Series.js';
 import createGraphFromNodeEdge from '../helper/createGraphFromNodeEdge.js';
 import Model from '../../model/Model.js';
 import { createTooltipMarkup } from '../../component/tooltip/tooltipMarkup.js';
+import tokens from '../../visual/tokens.js';
 var SankeySeriesModel = /** @class */function (_super) {
   __extends(SankeySeriesModel, _super);
   function SankeySeriesModel() {
@@ -107,6 +108,12 @@ var SankeySeriesModel = /** @class */function (_super) {
     dataItem.localX = localPosition[0];
     dataItem.localY = localPosition[1];
   };
+  SankeySeriesModel.prototype.setCenter = function (center) {
+    this.option.center = center;
+  };
+  SankeySeriesModel.prototype.setZoom = function (zoom) {
+    this.option.zoom = zoom;
+  };
   /**
    * Return the graphic data structure
    *
@@ -163,10 +170,13 @@ var SankeySeriesModel = /** @class */function (_super) {
     return params;
   };
   SankeySeriesModel.type = 'series.sankey';
+  SankeySeriesModel.layoutMode = 'box';
   SankeySeriesModel.defaultOption = {
     // zlevel: 0,
     z: 2,
-    coordinateSystem: 'view',
+    // `coordinateSystem` can be declared as 'matrix', 'calendar',
+    //  which provides box layout container.
+    coordinateSystemUsage: 'box',
     left: '5%',
     top: '5%',
     right: '20%',
@@ -176,6 +186,11 @@ var SankeySeriesModel = /** @class */function (_super) {
     nodeGap: 8,
     draggable: true,
     layoutIterations: 32,
+    // true | false | 'move' | 'scale', see module:component/helper/RoamController.
+    roam: false,
+    roamTrigger: 'global',
+    center: null,
+    zoom: 1,
     label: {
       show: true,
       position: 'right',
@@ -188,7 +203,7 @@ var SankeySeriesModel = /** @class */function (_super) {
     levels: [],
     nodeAlign: 'justify',
     lineStyle: {
-      color: '#314656',
+      color: tokens.color.neutral50,
       opacity: 0.2,
       curveness: 0.5
     },
@@ -202,7 +217,7 @@ var SankeySeriesModel = /** @class */function (_super) {
     },
     select: {
       itemStyle: {
-        borderColor: '#212121'
+        borderColor: tokens.color.primary
       }
     },
     animationEasing: 'linear',

@@ -7,6 +7,7 @@ export { install as MapChart } from '../chart/map/install.js';
 export { install as TreeChart } from '../chart/tree/install.js';
 export { install as TreemapChart } from '../chart/treemap/install.js';
 export { install as GraphChart } from '../chart/graph/install.js';
+export { install as ChordChart } from '../chart/chord/install.js';
 export { install as GaugeChart } from '../chart/gauge/install.js';
 export { install as FunnelChart } from '../chart/funnel/install.js';
 export { install as ParallelChart } from '../chart/parallel/install.js';
@@ -20,4 +21,4 @@ export { install as PictorialBarChart } from '../chart/bar/installPictorialBar.j
 export { install as ThemeRiverChart } from '../chart/themeRiver/install.js';
 export { install as SunburstChart } from '../chart/sunburst/install.js';
 export { install as CustomChart } from '../chart/custom/install.js';
-export { LineSeriesOption, BarSeriesOption, ScatterSeriesOption, PieSeriesOption, RadarSeriesOption, MapSeriesOption, TreeSeriesOption, TreemapSeriesOption, GraphSeriesOption, GaugeSeriesOption, FunnelSeriesOption, ParallelSeriesOption, SankeySeriesOption, BoxplotSeriesOption, CandlestickSeriesOption, EffectScatterSeriesOption, LinesSeriesOption, HeatmapSeriesOption, PictorialBarSeriesOption, ThemeRiverSeriesOption, SunburstSeriesOption, CustomSeriesOption } from './option.js';
+export { LineSeriesOption, BarSeriesOption, ScatterSeriesOption, PieSeriesOption, RadarSeriesOption, MapSeriesOption, TreeSeriesOption, TreemapSeriesOption, GraphSeriesOption, ChordSeriesOption, GaugeSeriesOption, FunnelSeriesOption, ParallelSeriesOption, SankeySeriesOption, BoxplotSeriesOption, CandlestickSeriesOption, EffectScatterSeriesOption, LinesSeriesOption, HeatmapSeriesOption, PictorialBarSeriesOption, ThemeRiverSeriesOption, SunburstSeriesOption, CustomSeriesOption } from './option.js';

@@ -43,7 +43,7 @@
 */
 import * as echarts from '../../core/echarts.js';
 import { createHashMap, each, hasOwn, keys, map } from 'zrender/lib/core/util.js';
-import { isCartesian2DSeries, findAxisModels } from './cartesianAxisHelper.js';
+import { isCartesian2DDeclaredSeries, findAxisModels, isCartesian2DInjectedAsDataCoordSys } from './cartesianAxisHelper.js';
 import { getDataDimensionsOnAxis, unionAxisExtentFromData } from '../axisHelper.js';
 import { ensureScaleRawExtentInfo } from '../scaleRawExtentInfo.js';
 // A tricky: the priority is just after dataZoom processor.
@@ -53,7 +53,7 @@ echarts.registerProcessor(echarts.PRIORITY.PROCESSOR.FILTER + 10, {
   getTargetSeries: function (ecModel) {
     var seriesModelMap = createHashMap();
     ecModel.eachSeries(function (seriesModel) {
-      isCartesian2DSeries(seriesModel) && seriesModelMap.set(seriesModel.uid, seriesModel);
+      isCartesian2DDeclaredSeries(seriesModel) && seriesModelMap.set(seriesModel.uid, seriesModel);
     });
     return seriesModelMap;
   },
@@ -67,7 +67,12 @@ echarts.registerProcessor(echarts.PRIORITY.PROCESSOR.FILTER + 10, {
 });
 function prepareDataExtentOnAxis(ecModel, axisRecordMap, seriesRecords) {
   ecModel.eachSeries(function (seriesModel) {
-    if (!isCartesian2DSeries(seriesModel)) {
+    // If pie (or other similar series) use cartesian2d, the logic below is
+    // probably wrong, therefore skip it temporarily.
+    // TODO: support union extent in this case.
+    //  e.g. make a fake seriesData by series.coord/series.center, and it can be
+    //  performed by data processing (such as, filter), and applied here.
+    if (!isCartesian2DInjectedAsDataCoordSys(seriesModel)) {
       return;
     }
     var axesModelMap = findAxisModels(seriesModel);

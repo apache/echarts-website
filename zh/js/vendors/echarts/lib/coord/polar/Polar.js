@@ -121,15 +121,18 @@ var Polar = /** @class */function () {
    * Convert a single data item to (x, y) point.
    * Parameter data is an array which the first element is radius and the second is angle
    */
-  Polar.prototype.dataToPoint = function (data, clamp) {
-    return this.coordToPoint([this._radiusAxis.dataToRadius(data[0], clamp), this._angleAxis.dataToAngle(data[1], clamp)]);
+  Polar.prototype.dataToPoint = function (data, clamp, out) {
+    return this.coordToPoint([this._radiusAxis.dataToRadius(data[0], clamp), this._angleAxis.dataToAngle(data[1], clamp)], out);
   };
   /**
    * Convert a (x, y) point to data
    */
-  Polar.prototype.pointToData = function (point, clamp) {
+  Polar.prototype.pointToData = function (point, clamp, out) {
+    out = out || [];
     var coord = this.pointToCoord(point);
-    return [this._radiusAxis.radiusToData(coord[0], clamp), this._angleAxis.angleToData(coord[1], clamp)];
+    out[0] = this._radiusAxis.radiusToData(coord[0], clamp);
+    out[1] = this._angleAxis.angleToData(coord[1], clamp);
+    return out;
   };
   /**
    * Convert a (x, y) point to (radius, angle) coord
@@ -158,13 +161,14 @@ var Polar = /** @class */function () {
   /**
    * Convert a (radius, angle) coord to (x, y) point
    */
-  Polar.prototype.coordToPoint = function (coord) {
+  Polar.prototype.coordToPoint = function (coord, out) {
+    out = out || [];
     var radius = coord[0];
     var radian = coord[1] / 180 * Math.PI;
-    var x = Math.cos(radian) * radius + this.cx;
+    out[0] = Math.cos(radian) * radius + this.cx;
     // Inverse the y
-    var y = -Math.sin(radian) * radius + this.cy;
-    return [x, y];
+    out[1] = -Math.sin(radian) * radius + this.cy;
+    return out;
   };
   /**
    * Get ring area of cartesian.
@@ -197,7 +201,12 @@ var Polar = /** @class */function () {
         // minus a tiny value 1e-4 in double side to avoid being clipped unexpectedly
         // r == r0 contain nothing
         return r !== r0 && d2 - EPSILON <= r * r && d2 + EPSILON >= r0 * r0;
-      }
+      },
+      // As the bounding box
+      x: this.cx - radiusExtent[1],
+      y: this.cy - radiusExtent[1],
+      width: radiusExtent[1] * 2,
+      height: radiusExtent[1] * 2
     };
   };
   Polar.prototype.convertToPixel = function (ecModel, finder, value) {

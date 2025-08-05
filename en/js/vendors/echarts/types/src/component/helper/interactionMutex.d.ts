@@ -1,3 +1,8 @@
-export declare function take(zr: any, resourceKey: any, userKey: any): void;
-export declare function release(zr: any, resourceKey: any, userKey: any): void;
-export declare function isTaken(zr: any, resourceKey: any): boolean;
+import { ZRenderType } from 'zrender/lib/zrender.js';
+declare type InteractionMutexResource = {
+    globalPan: string;
+};
+export declare function take(zr: ZRenderType, resourceKey: keyof InteractionMutexResource, userKey: InteractionMutexResource[keyof InteractionMutexResource]): void;
+export declare function release(zr: ZRenderType, resourceKey: keyof InteractionMutexResource, userKey: InteractionMutexResource[keyof InteractionMutexResource]): void;
+export declare function isTaken(zr: ZRenderType, resourceKey: keyof InteractionMutexResource): boolean;
+export {};

@@ -51,9 +51,9 @@ export * from './lib/export/core.js';
 // not included in this list.
 // ----------------------------------------------
 import { SVGRenderer, CanvasRenderer } from './lib/export/renderers.js';
-import { LineChart, BarChart, PieChart, ScatterChart, RadarChart, MapChart, TreeChart, TreemapChart, GraphChart, GaugeChart, FunnelChart, ParallelChart, SankeyChart, BoxplotChart, CandlestickChart, EffectScatterChart, LinesChart, HeatmapChart, PictorialBarChart, ThemeRiverChart, SunburstChart, CustomChart } from './lib/export/charts.js';
-import { GridComponent, PolarComponent, GeoComponent, SingleAxisComponent, ParallelComponent, CalendarComponent, GraphicComponent, ToolboxComponent, TooltipComponent, AxisPointerComponent, BrushComponent, TitleComponent, TimelineComponent, MarkPointComponent, MarkLineComponent, MarkAreaComponent, LegendComponent, DataZoomComponent, DataZoomInsideComponent, DataZoomSliderComponent, VisualMapComponent, VisualMapContinuousComponent, VisualMapPiecewiseComponent, AriaComponent, DatasetComponent, TransformComponent } from './lib/export/components.js';
-import { UniversalTransition, LabelLayout } from './lib/export/features.js';
+import { LineChart, BarChart, PieChart, ScatterChart, RadarChart, MapChart, TreeChart, TreemapChart, GraphChart, ChordChart, GaugeChart, FunnelChart, ParallelChart, SankeyChart, BoxplotChart, CandlestickChart, EffectScatterChart, LinesChart, HeatmapChart, PictorialBarChart, ThemeRiverChart, SunburstChart, CustomChart } from './lib/export/charts.js';
+import { GridComponent, PolarComponent, GeoComponent, SingleAxisComponent, ParallelComponent, CalendarComponent, MatrixComponent, GraphicComponent, ToolboxComponent, TooltipComponent, AxisPointerComponent, BrushComponent, TitleComponent, TimelineComponent, MarkPointComponent, MarkLineComponent, MarkAreaComponent, LegendComponent, DataZoomComponent, DataZoomInsideComponent, DataZoomSliderComponent, VisualMapComponent, VisualMapContinuousComponent, VisualMapPiecewiseComponent, ThumbnailComponent, AriaComponent, DatasetComponent, TransformComponent } from './lib/export/components.js';
+import { UniversalTransition, LabelLayout, AxisBreak, LegacyGridContainLabel, ScatterJitter } from './lib/export/features.js';
 // -----------------
 // Render engines
 // -----------------
@@ -72,7 +72,7 @@ use([SVGRenderer]);
 //         type: 'line' // or 'bar', 'pie', ...
 //     }]
 // });
-use([LineChart, BarChart, PieChart, ScatterChart, RadarChart, MapChart, TreeChart, TreemapChart, GraphChart, GaugeChart, FunnelChart, ParallelChart, SankeyChart, BoxplotChart, CandlestickChart, EffectScatterChart, LinesChart, HeatmapChart, PictorialBarChart, ThemeRiverChart, SunburstChart, CustomChart]);
+use([LineChart, BarChart, PieChart, ScatterChart, RadarChart, MapChart, TreeChart, TreemapChart, GraphChart, ChordChart, GaugeChart, FunnelChart, ParallelChart, SankeyChart, BoxplotChart, CandlestickChart, EffectScatterChart, LinesChart, HeatmapChart, PictorialBarChart, ThemeRiverChart, SunburstChart, CustomChart]);
 // -------------------
 // Coordinate systems
 // -------------------
@@ -130,6 +130,14 @@ use(ParallelComponent);
 //     }]
 // );
 use(CalendarComponent);
+// `matrix` coordinate system. for example,
+// chart.setOption({
+//     matrix: {...},
+//     series: [{
+//         coordinateSystem: 'matrix'
+//     }]
+// );
+use(MatrixComponent);
 // ------------------
 // Other components
 // ------------------
@@ -221,6 +229,7 @@ use(VisualMapContinuousComponent);
 //     visualMap: {type: 'piecewise'}
 // });
 use(VisualMapPiecewiseComponent);
+use(ThumbnailComponent);
 // `aria` component providing aria, for example:
 // chart.setOption({
 //     aria: {...}
@@ -248,3 +257,6 @@ use(UniversalTransition);
 //     }
 // })
 use(LabelLayout);
+use(AxisBreak);
+use(LegacyGridContainLabel);
+use(ScatterJitter);

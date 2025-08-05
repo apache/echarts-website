@@ -45,6 +45,7 @@ import { getTooltipMarker, encodeHTML, makeValueReadable, convertToColorString }
 import { isString, each, hasOwn, isArray, map, assert, extend } from 'zrender/lib/core/util.js';
 import { SortOrderComparator } from '../../data/helper/dataValueHelper.js';
 import { getRandomIdBase } from '../../util/number.js';
+import tokens from '../../visual/tokens.js';
 var TOOLTIP_LINE_HEIGHT_CSS = 'line-height:1';
 function getTooltipLineHeight(textStyle) {
   var lineHeight = textStyle.lineHeight;
@@ -56,10 +57,10 @@ function getTooltipLineHeight(textStyle) {
 }
 // TODO: more textStyle option
 function getTooltipTextStyle(textStyle, renderMode) {
-  var nameFontColor = textStyle.color || '#6e7079';
+  var nameFontColor = textStyle.color || tokens.color.tertiary;
   var nameFontSize = textStyle.fontSize || 12;
   var nameFontWeight = textStyle.fontWeight || '400';
-  var valueFontColor = textStyle.color || '#464646';
+  var valueFontColor = textStyle.color || tokens.color.secondary;
   var valueFontSize = textStyle.fontSize || 14;
   var valueFontWeight = textStyle.fontWeight || '900';
   if (renderMode === 'html') {
@@ -185,7 +186,7 @@ function buildNameValue(ctx, fragment, topMarginForOuterGap, toolTipTextStyle) {
   if (noName && noValue) {
     return;
   }
-  var markerStr = noMarker ? '' : ctx.markupStyleCreator.makeTooltipMarker(fragment.markerType, fragment.markerColor || '#333', renderMode);
+  var markerStr = noMarker ? '' : ctx.markupStyleCreator.makeTooltipMarker(fragment.markerType, fragment.markerColor || tokens.color.secondary, renderMode);
   var readableName = noName ? '' : makeValueReadable(name, 'ordinal', useUTC);
   var valueTypeOption = fragment.valueType;
   var readableValueList = noValue ? [] : valueFormatter(fragment.value, fragment.dataIndex);

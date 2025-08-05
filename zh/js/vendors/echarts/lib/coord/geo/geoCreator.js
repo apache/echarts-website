@@ -47,6 +47,8 @@ import * as layout from '../../util/layout.js';
 import * as numberUtil from '../../util/number.js';
 import geoSourceManager from './geoSourceManager.js';
 import * as vector from 'zrender/lib/core/vector.js';
+import { injectCoordSysByOption } from '../../core/CoordinateSystem.js';
+import { SINGLE_REFERRING } from '../../util/model.js';
 /**
  * Resize method bound to the geo
  */
@@ -95,15 +97,16 @@ function resizeGeo(geoModel, api) {
   var rect = this.getBoundingRect();
   var centerOption = geoModel.get('layoutCenter');
   var sizeOption = geoModel.get('layoutSize');
-  var viewWidth = api.getWidth();
-  var viewHeight = api.getHeight();
+  // Laying out geo on `dataCoordSys`, such as cartesian, works theoretically but not supported yet.
+  // Therefore here we only handle cases that laying out on `boxCoordSys`, such as matrix/calendar.
+  var refContainer = layout.createBoxLayoutReference(geoModel, api).refContainer;
   var aspect = rect.width / rect.height * this.aspectScale;
   var useCenterAndSize = false;
   var center;
   var size;
   if (centerOption && sizeOption) {
-    center = [numberUtil.parsePercent(centerOption[0], viewWidth), numberUtil.parsePercent(centerOption[1], viewHeight)];
-    size = numberUtil.parsePercent(sizeOption, Math.min(viewWidth, viewHeight));
+    center = [numberUtil.parsePercent(centerOption[0], refContainer.width) + refContainer.x, numberUtil.parsePercent(centerOption[1], refContainer.height) + refContainer.y];
+    size = numberUtil.parsePercent(sizeOption, Math.min(refContainer.width, refContainer.height));
     if (!isNaN(center[0]) && !isNaN(center[1]) && !isNaN(size)) {
       useCenterAndSize = true;
     } else {
@@ -129,13 +132,11 @@ function resizeGeo(geoModel, api) {
     // Use left/top/width/height
     var boxLayoutOption = geoModel.getBoxLayoutParams();
     boxLayoutOption.aspect = aspect;
-    viewRect = layout.getLayoutRect(boxLayoutOption, {
-      width: viewWidth,
-      height: viewHeight
-    });
+    viewRect = layout.getLayoutRect(boxLayoutOption, refContainer);
+    viewRect = layout.applyPreserveAspect(geoModel, viewRect, aspect);
   }
   this.setViewRect(viewRect.x, viewRect.y, viewRect.width, viewRect.height);
-  this.setCenter(geoModel.get('center'), api);
+  this.setCenter(geoModel.get('center'));
   this.setZoom(geoModel.get('zoom'));
 }
 // Back compat for ECharts2, where the coord map is set on map series:
@@ -163,7 +164,9 @@ var GeoCreator = /** @class */function () {
     ecModel.eachComponent('geo', function (geoModel, idx) {
       var mapName = geoModel.get('map');
       var geo = new Geo(mapName + idx, mapName, zrUtil.extend({
-        nameMap: geoModel.get('nameMap')
+        nameMap: geoModel.get('nameMap'),
+        api: api,
+        ecModel: ecModel
       }, getCommonGeoProperties(geoModel)));
       geo.zoomLimit = geoModel.get('scaleLimit');
       geoList.push(geo);
@@ -175,11 +178,15 @@ var GeoCreator = /** @class */function () {
       geo.resize(geoModel, api);
     });
     ecModel.eachSeries(function (seriesModel) {
-      var coordSys = seriesModel.get('coordinateSystem');
-      if (coordSys === 'geo') {
-        var geoIndex = seriesModel.get('geoIndex') || 0;
-        seriesModel.coordinateSystem = geoList[geoIndex];
-      }
+      injectCoordSysByOption({
+        targetModel: seriesModel,
+        coordSysType: 'geo',
+        coordSysProvider: function () {
+          var geoModel = seriesModel.subType === 'map' ? seriesModel.getHostGeoModel() : seriesModel.getReferringComponents('geo', SINGLE_REFERRING).models[0];
+          return geoModel && geoModel.coordinateSystem;
+        },
+        allowNotFound: true
+      });
     });
     // If has map series
     var mapModelGroupBySeries = {};
@@ -195,7 +202,9 @@ var GeoCreator = /** @class */function () {
         return singleMapSeries.get('nameMap');
       });
       var geo = new Geo(mapType, mapType, zrUtil.extend({
-        nameMap: zrUtil.mergeAll(nameMapList)
+        nameMap: zrUtil.mergeAll(nameMapList),
+        api: api,
+        ecModel: ecModel
       }, getCommonGeoProperties(mapSeries[0])));
       geo.zoomLimit = zrUtil.retrieve.apply(null, zrUtil.map(mapSeries, function (singleMapSeries) {
         return singleMapSeries.get('scaleLimit');

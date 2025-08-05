@@ -5,17 +5,15 @@ import GlobalModel from '../../model/Global.js';
 import { AxisPointerElementOptions } from './BaseAxisPointer.js';
 import { AxisBaseModel } from '../../coord/AxisBaseModel.js';
 import ExtensionAPI from '../../core/ExtensionAPI.js';
-import CartesianAxisModel from '../../coord/cartesian/AxisModel.js';
+import type CartesianAxisModel from '../../coord/cartesian/AxisModel.js';
 import Model from '../../model/Model.js';
 import { PathStyleProps } from 'zrender/lib/graphic/Path.js';
-interface LayoutInfo {
+import type SingleAxisModel from '../../coord/single/AxisModel.js';
+export interface AxisTransformedPositionLayoutInfo {
     position: VectorArray;
     rotation: number;
     labelOffset?: number;
-    /**
-     * 1 | -1
-     */
-    labelDirection?: number;
+    labelDirection?: -1 | 1;
     labelMargin?: number;
 }
 declare type AxisPointerModel = Model<CommonAxisPointerOption>;
@@ -32,8 +30,8 @@ export declare function getValueLabel(value: ScaleDataValue, axis: Axis, ecModel
     precision?: number | 'auto';
     formatter?: CommonAxisPointerOption['label']['formatter'];
 }): string;
-export declare function getTransformedPosition(axis: Axis, value: ScaleDataValue, layoutInfo: LayoutInfo): number[];
-export declare function buildCartesianSingleLabelElOption(value: ScaleDataValue, elOption: AxisPointerElementOptions, layoutInfo: LayoutInfo, axisModel: CartesianAxisModel, axisPointerModel: AxisPointerModel, api: ExtensionAPI): void;
+export declare function getTransformedPosition(axis: Axis, value: ScaleDataValue, layoutInfo: AxisTransformedPositionLayoutInfo): number[];
+export declare function buildCartesianSingleLabelElOption(value: ScaleDataValue, elOption: AxisPointerElementOptions, layoutInfo: AxisTransformedPositionLayoutInfo, axisModel: CartesianAxisModel | SingleAxisModel, axisPointerModel: AxisPointerModel, api: ExtensionAPI): void;
 export declare function makeLineShape(p1: number[], p2: number[], xDimIndex?: number): {
     x1: number;
     y1: number;

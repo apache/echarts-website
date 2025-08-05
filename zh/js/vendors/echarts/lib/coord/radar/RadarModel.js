@@ -47,6 +47,7 @@ import axisDefault from '../axisDefault.js';
 import Model from '../../model/Model.js';
 import { AxisModelCommonMixin } from '../axisModelCommonMixin.js';
 import ComponentModel from '../../model/Component.js';
+import tokens from '../../visual/tokens.js';
 var valueAxisDefault = axisDefault.value;
 function defaultsShow(opt, show) {
   return zrUtil.defaults({
@@ -127,10 +128,11 @@ var RadarModel = /** @class */function (_super) {
     // zlevel: 0,
     z: 0,
     center: ['50%', '50%'],
-    radius: '75%',
+    radius: '50%',
     startAngle: 90,
     axisName: {
-      show: true
+      show: true,
+      color: tokens.color.axisLabel
       // formatter: null
       // textStyle: {}
     },
@@ -142,7 +144,7 @@ var RadarModel = /** @class */function (_super) {
     shape: 'polygon',
     axisLine: zrUtil.merge({
       lineStyle: {
-        color: '#bbb'
+        color: tokens.color.neutral20
       }
     }, valueAxisDefault.axisLine),
     axisLabel: defaultsShow(valueAxisDefault.axisLabel, false),

@@ -1,5 +1,7 @@
-import { TextAlign, TextVerticalAlign } from '../../core/types';
-import { TextStyleProps } from '../Text';
+import { TextAlign, TextVerticalAlign, NullUndefined } from '../../core/types';
+import type { DefaultTextStyle, TextStyleProps } from '../Text';
+import type { TSpanStyleProps } from '../TSpan';
+import BoundingRect from '../../core/BoundingRect';
 interface InnerTruncateOption {
     maxIteration?: number;
     minChar?: number;
@@ -19,7 +21,7 @@ export interface PlainTextContentBlock {
     lines: string[];
     isTruncated: boolean;
 }
-export declare function parsePlainText(text: string, style?: TextStyleProps): PlainTextContentBlock;
+export declare function parsePlainText(rawText: unknown, style: Omit<TextStyleProps, 'align' | 'verticalAlign'>, defaultOuterWidth: number | NullUndefined, defaultOuterHeight: number | NullUndefined): PlainTextContentBlock;
 declare class RichTextToken {
     styleName: string;
     text: string;
@@ -52,5 +54,15 @@ export declare class RichTextContentBlock {
     lines: RichTextLine[];
     isTruncated: boolean;
 }
-export declare function parseRichText(text: string, style: TextStyleProps): RichTextContentBlock;
+export declare function parseRichText(rawText: unknown, style: Omit<TextStyleProps, 'align' | 'verticalAlign'>, defaultOuterWidth: number | NullUndefined, defaultOuterHeight: number | NullUndefined, topTextAlign: TextAlign): RichTextContentBlock;
+export declare function calcInnerTextOverflowArea(out: CalcInnerTextOverflowAreaOut, overflowRect: DefaultTextStyle['overflowRect'], baseX: number, baseY: number, textAlign: TextAlign, textVerticalAlign: TextVerticalAlign): void;
+export declare type CalcInnerTextOverflowAreaOut = {
+    baseX: number;
+    baseY: number;
+    outerWidth: number | NullUndefined;
+    outerHeight: number | NullUndefined;
+};
+export declare function tSpanCreateBoundingRect(style: Pick<TSpanStyleProps, 'text' | 'font' | 'x' | 'y' | 'textAlign' | 'textBaseline' | 'lineWidth'>): BoundingRect;
+export declare function tSpanCreateBoundingRect2(style: Pick<TSpanStyleProps, 'x' | 'y' | 'textAlign' | 'textBaseline' | 'lineWidth'>, contentWidth: number, contentHeight: number, forceLineWidth: number | NullUndefined): BoundingRect;
+export declare function tSpanHasStroke(style: TSpanStyleProps): boolean;
 export {};

@@ -44,6 +44,9 @@
 import * as zrUtil from 'zrender/lib/core/util.js';
 import * as layout from '../../util/layout.js';
 import * as numberUtil from '../../util/number.js';
+import BoundingRect from 'zrender/lib/core/BoundingRect.js';
+import { expandOrShrinkRect } from '../../util/graphic.js';
+import { injectCoordSysByOption, simpleCoordSysInjectionProvider } from '../../core/CoordinateSystem.js';
 // (24*60*60*1000)
 var PROXIMATE_ONE_DAY = 86400000;
 var Calendar = /** @class */function () {
@@ -53,6 +56,7 @@ var Calendar = /** @class */function () {
     // Required in createListFromData
     this.getDimensionsInfo = Calendar.getDimensionsInfo;
     this._model = calendarModel;
+    this._update(ecModel, api);
   }
   Calendar.getDimensionsInfo = function () {
     return [{
@@ -122,7 +126,7 @@ var Calendar = /** @class */function () {
     date.setDate(date.getDate() + n);
     return this.getDateInfo(date);
   };
-  Calendar.prototype.update = function (ecModel, api) {
+  Calendar.prototype._update = function (ecModel, api) {
     this._firstDayOfWeek = +this._model.getModel('dayLabel').get('firstDay');
     this._orient = this._model.get('orient');
     this._lineWidth = this._model.getModel('itemStyle').getItemStyle().lineWidth || 0;
@@ -159,7 +163,8 @@ var Calendar = /** @class */function () {
    */
   // TODO Clamp of calendar is not same with cartesian coordinate systems.
   // It will return NaN if data exceeds.
-  Calendar.prototype.dataToPoint = function (data, clamp) {
+  Calendar.prototype.dataToPoint = function (data, clamp, out) {
+    out = out || [];
     zrUtil.isArray(data) && (data = data[0]);
     clamp == null && (clamp = true);
     var dayInfo = this.getDateInfo(data);
@@ -167,14 +172,19 @@ var Calendar = /** @class */function () {
     var date = dayInfo.formatedDate;
     // if not in range return [NaN, NaN]
     if (clamp && !(dayInfo.time >= range.start.time && dayInfo.time < range.end.time + PROXIMATE_ONE_DAY)) {
-      return [NaN, NaN];
+      out[0] = out[1] = NaN;
+      return out;
     }
     var week = dayInfo.day;
     var nthWeek = this._getRangeInfo([range.start.time, date]).nthWeek;
     if (this._orient === 'vertical') {
-      return [this._rect.x + week * this._sw + this._sw / 2, this._rect.y + nthWeek * this._sh + this._sh / 2];
+      out[0] = this._rect.x + week * this._sw + this._sw / 2;
+      out[1] = this._rect.y + nthWeek * this._sh + this._sh / 2;
+    } else {
+      out[0] = this._rect.x + nthWeek * this._sw + this._sw / 2;
+      out[1] = this._rect.y + week * this._sh + this._sh / 2;
     }
-    return [this._rect.x + nthWeek * this._sw + this._sw / 2, this._rect.y + week * this._sh + this._sh / 2];
+    return out;
   };
   /**
    * Convert a (x, y) point to time data
@@ -183,18 +193,25 @@ var Calendar = /** @class */function () {
     var date = this.pointToDate(point);
     return date && date.time;
   };
+  Calendar.prototype.dataToLayout = function (data, clamp, out) {
+    out = out || {};
+    var rect = out.rect = out.rect || {};
+    var contentRect = out.contentRect = out.contentRect || {};
+    var point = this.dataToPoint(data, clamp);
+    rect.x = point[0] - this._sw / 2;
+    rect.y = point[1] - this._sh / 2;
+    rect.width = this._sw;
+    rect.height = this._sh;
+    BoundingRect.copy(contentRect, rect);
+    expandOrShrinkRect(contentRect, this._lineWidth / 2, true, true);
+    return out;
+  };
   /**
    * Convert a time date item to (x, y) four point.
    */
-  Calendar.prototype.dataToRect = function (data, clamp) {
+  Calendar.prototype.dataToCalendarLayout = function (data, clamp) {
     var point = this.dataToPoint(data, clamp);
     return {
-      contentShape: {
-        x: point[0] - (this._sw - this._lineWidth) / 2,
-        y: point[1] - (this._sh - this._lineWidth) / 2,
-        width: this._sw - this._lineWidth,
-        height: this._sh - this._lineWidth
-      },
       center: point,
       tl: [point[0] - this._sw / 2, point[1] - this._sh / 2],
       tr: [point[0] + this._sw / 2, point[1] - this._sh / 2],
@@ -220,6 +237,10 @@ var Calendar = /** @class */function () {
   Calendar.prototype.convertToPixel = function (ecModel, finder, value) {
     var coordSys = getCoordSys(finder);
     return coordSys === this ? coordSys.dataToPoint(value) : null;
+  };
+  Calendar.prototype.convertToLayout = function (ecModel, finder, value) {
+    var coordSys = getCoordSys(finder);
+    return coordSys === this ? coordSys.dataToLayout(value) : null;
   };
   Calendar.prototype.convertFromPixel = function (ecModel, finder, pixel) {
     var coordSys = getCoordSys(finder);
@@ -354,11 +375,13 @@ var Calendar = /** @class */function () {
       calendarList.push(calendar);
       calendarModel.coordinateSystem = calendar;
     });
-    ecModel.eachSeries(function (calendarSeries) {
-      if (calendarSeries.get('coordinateSystem') === 'calendar') {
-        // Inject coordinate system
-        calendarSeries.coordinateSystem = calendarList[calendarSeries.get('calendarIndex') || 0];
-      }
+    // Inject coordinate system
+    ecModel.eachComponent(function (mainType, componentModel) {
+      injectCoordSysByOption({
+        targetModel: componentModel,
+        coordSysType: 'calendar',
+        coordSysProvider: simpleCoordSysInjectionProvider
+      });
     });
     return calendarList;
   };

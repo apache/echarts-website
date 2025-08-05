@@ -46,10 +46,14 @@ import ScatterSeriesModel from './ScatterSeries.js';
 import ScatterView from './ScatterView.js';
 import { install as installGridSimple } from '../../component/grid/installSimple.js';
 import layoutPoints from '../../layout/points.js';
+import jitterLayout from './jitterLayout.js';
 export function install(registers) {
   // In case developer forget to include grid component
   use(installGridSimple);
   registers.registerSeriesModel(ScatterSeriesModel);
   registers.registerChartView(ScatterView);
   registers.registerLayout(layoutPoints('scatter'));
+}
+export function installScatterJitter(registers) {
+  registers.registerLayout(registers.PRIORITY.VISUAL.POST_CHART_LAYOUT, jitterLayout);
 }

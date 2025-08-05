@@ -134,8 +134,8 @@ var ContinuousView = /** @class */function (_super) {
       style: createTextStyle(textStyleModel, {
         x: position[0],
         y: position[1],
-        verticalAlign: orient === 'horizontal' ? 'middle' : align,
-        align: orient === 'horizontal' ? align : 'center',
+        verticalAlign: textStyleModel.get('verticalAlign') || (orient === 'horizontal' ? 'middle' : align),
+        align: textStyleModel.get('align') || (orient === 'horizontal' ? align : 'center'),
         text: text
       })
     }));

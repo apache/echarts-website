@@ -149,11 +149,15 @@ var SeriesData = /** @class */function () {
       if (dimensionInfo.createInvertedIndices) {
         invertedIndicesMap[dimensionName] = [];
       }
+      var dimIdx = i;
+      if (zrUtil.isNumber(dimensionInfo.storeDimIndex)) {
+        dimIdx = dimensionInfo.storeDimIndex;
+      }
       if (otherDims.itemName === 0) {
-        this._nameDimIdx = i;
+        this._nameDimIdx = dimIdx;
       }
       if (otherDims.itemId === 0) {
-        this._idDimIdx = i;
+        this._idDimIdx = dimIdx;
       }
       if (process.env.NODE_ENV !== 'production') {
         zrUtil.assert(assignStoreDimIdx || dimensionInfo.storeDimIndex >= 0);
@@ -598,17 +602,6 @@ var SeriesData = /** @class */function () {
       return INDEX_NOT_FOUND;
     }
     return rawIndex;
-  };
-  /**
-   * Retrieve the index of nearest value
-   * @param dim
-   * @param value
-   * @param [maxDistance=Infinity]
-   * @return If and only if multiple indices has
-   *         the same value, they are put to the result.
-   */
-  SeriesData.prototype.indicesOfNearest = function (dim, value, maxDistance) {
-    return this._store.indicesOfNearest(this._getStoreDimIndex(dim), value, maxDistance);
   };
   SeriesData.prototype.each = function (dims, cb, ctx) {
     'use strict';

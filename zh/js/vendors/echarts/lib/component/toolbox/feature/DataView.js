@@ -48,6 +48,7 @@ import * as zrUtil from 'zrender/lib/core/util.js';
 import { ToolboxFeature } from '../featureManager.js';
 import { addEventListener } from 'zrender/lib/core/event.js';
 import { warn } from '../../../util/log.js';
+import tokens from '../../../visual/tokens.js';
 /* global document */
 var BLOCK_SPLITER = new Array(60).join('-');
 var ITEM_SPLITER = '\t';
@@ -279,7 +280,7 @@ var DataView = /** @class */function (_super) {
     var root = document.createElement('div');
     // use padding to avoid 5px whitespace
     root.style.cssText = 'position:absolute;top:0;bottom:0;left:0;right:0;padding:5px';
-    root.style.backgroundColor = model.get('backgroundColor') || '#fff';
+    root.style.backgroundColor = model.get('backgroundColor') || tokens.color.neutral00;
     // Create elements
     var header = document.createElement('h4');
     var lang = model.get('lang') || [];
@@ -382,12 +383,12 @@ var DataView = /** @class */function (_super) {
       icon: 'M17.5,17.3H33 M17.5,17.3H33 M45.4,29.5h-28 M11.5,2v56H51V14.8L38.4,2H11.5z M38.4,2.2v12.7H51 M45.4,41.7h-28',
       title: ecModel.getLocaleModel().get(['toolbox', 'dataView', 'title']),
       lang: ecModel.getLocaleModel().get(['toolbox', 'dataView', 'lang']),
-      backgroundColor: '#fff',
-      textColor: '#000',
-      textareaColor: '#fff',
-      textareaBorderColor: '#333',
-      buttonColor: '#c23531',
-      buttonTextColor: '#fff'
+      backgroundColor: tokens.color.background,
+      textColor: tokens.color.primary,
+      textareaColor: tokens.color.background,
+      textareaBorderColor: tokens.color.border,
+      buttonColor: tokens.color.accent50,
+      buttonTextColor: tokens.color.neutral00
     };
     return defaultOption;
   };

@@ -95,8 +95,22 @@ export function applyUpdateTransition(el, elOption, animatableModel, opts) {
   var transFromProps = {};
   var propsToSet = {};
   prepareTransformAllPropsFinal(el, elOption, propsToSet);
-  prepareShapeOrExtraAllPropsFinal('shape', elOption, propsToSet);
-  prepareShapeOrExtraAllPropsFinal('extra', elOption, propsToSet);
+  if (el.type === 'compound') {
+    /**
+     * We cannot directly clone shape for compoundPath,
+     * because it makes the path to be an object instead of a Path instance,
+     * and thus missing `buildPath` method.
+     */
+    var paths = el.shape.paths;
+    var optionPaths = elOption.shape.paths;
+    for (var i = 0; i < optionPaths.length; i++) {
+      var path = optionPaths[i];
+      prepareShapeOrExtraAllPropsFinal('shape', path, paths[i]);
+    }
+  } else {
+    prepareShapeOrExtraAllPropsFinal('shape', elOption, propsToSet);
+    prepareShapeOrExtraAllPropsFinal('extra', elOption, propsToSet);
+  }
   if (!isInit && hasAnimation) {
     prepareTransformTransitionFrom(el, elOption, transFromProps);
     prepareShapeOrExtraTransitionFrom('shape', el, elOption, transFromProps);
@@ -156,12 +170,12 @@ export function applyLeaveTransition(el, elOption, animatableModel, onRemove) {
       // TODO Data index?
       var config = getElementAnimationConfig('update', el, elOption, animatableModel, 0);
       config.done = function () {
-        parent_1.remove(el);
+        parent_1 && parent_1.remove(el);
         onRemove && onRemove();
       };
       el.animateTo(leaveToProps, config);
     } else {
-      parent_1.remove(el);
+      parent_1 && parent_1.remove(el);
       onRemove && onRemove();
     }
   }

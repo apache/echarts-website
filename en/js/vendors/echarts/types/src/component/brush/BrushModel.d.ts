@@ -1,4 +1,4 @@
-import { ComponentOption, ZRColor, VisualOptionFixed } from '../../util/types.js';
+import type { ComponentOption, ZRColor, VisualOptionFixed, ColorString } from '../../util/types.js';
 import ComponentModel from '../../model/Component.js';
 import BrushTargetManager from '../helper/BrushTargetManager.js';
 import { BrushCoverCreatorConfig, BrushMode, BrushCoverConfig, BrushDimensionMinMax, BrushAreaRange, BrushTypeUncertain, BrushType } from '../helper/BrushController.js';
@@ -56,6 +56,10 @@ export interface BrushOption extends ComponentOption, ModelFinderObject {
     transformable?: boolean;
     brushMode?: BrushMode;
     removeOnClick?: boolean;
+    /**
+     * @private
+     */
+    defaultOutOfBrushColor?: ColorString;
 }
 declare class BrushModel extends ComponentModel<BrushOption> {
     static type: "brush";

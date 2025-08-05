@@ -46,6 +46,7 @@ import createSeriesData from '../helper/createSeriesData.js';
 import SeriesModel from '../../model/Series.js';
 import { createSymbol } from '../../util/symbol.js';
 import { Group } from '../../util/graphic.js';
+import tokens from '../../visual/tokens.js';
 var LineSeriesModel = /** @class */function (_super) {
   __extends(LineSeriesModel, _super);
   function LineSeriesModel() {
@@ -83,7 +84,7 @@ var LineSeriesModel = /** @class */function (_super) {
     symbol.setOrigin([opt.itemWidth / 2, opt.itemHeight / 2]);
     if (symbolType.indexOf('empty') > -1) {
       symbol.style.stroke = symbol.style.fill;
-      symbol.style.fill = '#fff';
+      symbol.style.fill = tokens.color.neutral00;
       symbol.style.lineWidth = 2;
     }
     return group;
@@ -126,7 +127,7 @@ var LineSeriesModel = /** @class */function (_super) {
     smooth: false,
     smoothMonotone: null,
     symbol: 'emptyCircle',
-    symbolSize: 4,
+    symbolSize: 6,
     symbolRotate: null,
     showSymbol: true,
     // `false`: follow the label interval strategy.

@@ -324,5 +324,5 @@ export function getElementSSRData(el) {
 export function registerSSRDataGetter(getter) {
     ssrDataGetter = getter;
 }
-export var version = '5.6.1';
+export var version = '6.0.0';
 ;

@@ -5,6 +5,7 @@
 import { HashMap } from 'zrender/lib/core/util.js';
 import SeriesModel from './Series.js';
 import type { AxisBaseModel } from '../coord/AxisBaseModel.js';
+import { AxisBaseOptionCommon } from '../coord/axisCommonTypes.js';
 /**
  * @class
  * For example:
@@ -28,8 +29,8 @@ import type { AxisBaseModel } from '../coord/AxisBaseModel.js';
 declare class CoordSysInfo {
     coordSysName: string;
     coordSysDims: string[];
-    axisMap: HashMap<AxisBaseModel<import("../coord/axisCommonTypes").AxisBaseOptionCommon>, string | number>;
-    categoryAxisMap: HashMap<AxisBaseModel<import("../coord/axisCommonTypes").AxisBaseOptionCommon>, string | number>;
+    axisMap: HashMap<AxisBaseModel<AxisBaseOptionCommon>, string | number>;
+    categoryAxisMap: HashMap<AxisBaseModel<AxisBaseOptionCommon>, string | number>;
     firstCategoryDimIndex: number;
     constructor(coordSysName: string);
 }

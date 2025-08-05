@@ -1,8 +1,8 @@
-import BoundingRect, { RectLike } from 'zrender/lib/core/BoundingRect.js';
+import BoundingRect from 'zrender/lib/core/BoundingRect.js';
 import CalendarModel from './CalendarModel.js';
 import GlobalModel from '../../model/Global.js';
 import ExtensionAPI from '../../core/ExtensionAPI.js';
-import { LayoutOrient, ScaleDataValue, OptionDataValueDate } from '../../util/types.js';
+import { LayoutOrient, ScaleDataValue, OptionDataValueDate, CoordinateSystemDataLayout } from '../../util/types.js';
 import { ParsedModelFinder } from '../../util/model.js';
 import { CoordinateSystem, CoordinateSystemMaster } from '../CoordinateSystem.js';
 export interface CalendarParsedDateRangeInfo {
@@ -45,8 +45,7 @@ export interface CalendarParsedDateInfo {
      */
     date: Date;
 }
-export interface CalendarCellRect {
-    contentShape: RectLike;
+interface CalendarCellRect {
     center: number[];
     tl: number[];
     tr: number[];
@@ -93,19 +92,20 @@ declare class Calendar implements CoordinateSystem, CoordinateSystemMaster {
      */
     getDateInfo(date: OptionDataValueDate): CalendarParsedDateInfo;
     getNextNDay(date: OptionDataValueDate, n: number): CalendarParsedDateInfo;
-    update(ecModel: GlobalModel, api: ExtensionAPI): void;
+    private _update;
     /**
      * Convert a time data(time, value) item to (x, y) point.
      */
-    dataToPoint(data: OptionDataValueDate | OptionDataValueDate[], clamp?: boolean): number[];
+    dataToPoint(data: OptionDataValueDate | OptionDataValueDate[], clamp?: boolean, out?: number[]): number[];
     /**
      * Convert a (x, y) point to time data
      */
     pointToData(point: number[]): number;
+    dataToLayout(data: OptionDataValueDate | OptionDataValueDate[], clamp?: boolean, out?: CoordinateSystemDataLayout): CoordinateSystemDataLayout;
     /**
      * Convert a time date item to (x, y) four point.
      */
-    dataToRect(data: OptionDataValueDate | OptionDataValueDate[], clamp?: boolean): CalendarCellRect;
+    dataToCalendarLayout(data: OptionDataValueDate | OptionDataValueDate[], clamp?: boolean): CalendarCellRect;
     /**
      * Convert a (x, y) point to time date
      *
@@ -114,6 +114,7 @@ declare class Calendar implements CoordinateSystem, CoordinateSystemMaster {
      */
     pointToDate(point: number[]): CalendarParsedDateInfo;
     convertToPixel(ecModel: GlobalModel, finder: ParsedModelFinder, value: ScaleDataValue | ScaleDataValue[]): number[];
+    convertToLayout(ecModel: GlobalModel, finder: ParsedModelFinder, value: ScaleDataValue | ScaleDataValue[]): CoordinateSystemDataLayout;
     convertFromPixel(ecModel: GlobalModel, finder: ParsedModelFinder, pixel: number[]): number;
     containPoint(point: number[]): boolean;
     /**

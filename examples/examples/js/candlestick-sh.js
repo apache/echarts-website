@@ -138,7 +138,8 @@ option = {
     }
   },
   legend: {
-    data: ['日K', 'MA5', 'MA10', 'MA20', 'MA30']
+    data: ['日K', 'MA5', 'MA10', 'MA20', 'MA30'],
+    top: 20
   },
   grid: {
     left: '10%',

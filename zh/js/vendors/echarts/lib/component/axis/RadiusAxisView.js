@@ -46,7 +46,6 @@ import * as zrUtil from 'zrender/lib/core/util.js';
 import * as graphic from '../../util/graphic.js';
 import AxisBuilder from './AxisBuilder.js';
 import AxisView from './AxisView.js';
-var axisBuilderAttrs = ['axisLine', 'axisTickLabel', 'axisName'];
 var selfBuilderAttrs = ['splitLine', 'splitArea', 'minorSplitLine'];
 var RadiusAxisView = /** @class */function (_super) {
   __extends(RadiusAxisView, _super);
@@ -56,7 +55,7 @@ var RadiusAxisView = /** @class */function (_super) {
     _this.axisPointerClass = 'PolarAxisPointer';
     return _this;
   }
-  RadiusAxisView.prototype.render = function (radiusAxisModel, ecModel) {
+  RadiusAxisView.prototype.render = function (radiusAxisModel, ecModel, api) {
     this.group.removeAll();
     if (!radiusAxisModel.get('show')) {
       return;
@@ -72,9 +71,9 @@ var RadiusAxisView = /** @class */function (_super) {
     var axisAngle = angleAxis.getExtent()[0];
     var radiusExtent = radiusAxis.getExtent();
     var layout = layoutAxis(polar, radiusAxisModel, axisAngle);
-    var axisBuilder = new AxisBuilder(radiusAxisModel, layout);
-    zrUtil.each(axisBuilderAttrs, axisBuilder.add, axisBuilder);
-    newAxisGroup.add(axisBuilder.getGroup());
+    var axisBuilder = new AxisBuilder(radiusAxisModel, api, layout);
+    axisBuilder.build();
+    newAxisGroup.add(axisBuilder.group);
     graphic.groupTransition(oldAxisGroup, newAxisGroup, radiusAxisModel);
     zrUtil.each(selfBuilderAttrs, function (name) {
       if (radiusAxisModel.get([name, 'show']) && !radiusAxis.scale.isBlank()) {

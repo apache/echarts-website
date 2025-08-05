@@ -7,6 +7,7 @@ import { guid, isObject, keys, extend, indexOf, logError, mixin, isArrayLike, is
 import { LIGHT_LABEL_COLOR, DARK_LABEL_COLOR } from './config.js';
 import { parse, stringify } from './tool/color.js';
 import { REDRAW_BIT } from './graphic/constants.js';
+import { invert } from './core/matrix.js';
 export var PRESERVED_NORMAL_STATE = '__zr_normal__';
 var PRIMARY_STATES_KEYS = TRANSFORMABLE_PROPS.concat(['ignore']);
 var DEFAULT_ANIMATABLE_MAP = reduce(TRANSFORMABLE_PROPS, function (obj, key) {
@@ -15,6 +16,7 @@ var DEFAULT_ANIMATABLE_MAP = reduce(TRANSFORMABLE_PROPS, function (obj, key) {
 }, { ignore: false });
 var tmpTextPosCalcRes = {};
 var tmpBoundingRect = new BoundingRect(0, 0, 0, 0);
+var tmpInnerTextTrans = [];
 var Element = (function () {
     function Element(props) {
         this.id = guid();
@@ -67,8 +69,11 @@ var Element = (function () {
             innerTransformable.parent = isLocal ? this : null;
             var innerOrigin = false;
             innerTransformable.copyTransform(textEl);
-            if (textConfig.position != null) {
-                var layoutRect = tmpBoundingRect;
+            var hasPosition = textConfig.position != null;
+            var autoOverflowArea = textConfig.autoOverflowArea;
+            var layoutRect = void 0;
+            if (autoOverflowArea || hasPosition) {
+                layoutRect = tmpBoundingRect;
                 if (textConfig.layoutRect) {
                     layoutRect.copy(textConfig.layoutRect);
                 }
@@ -78,6 +83,8 @@ var Element = (function () {
                 if (!isLocal) {
                     layoutRect.applyTransform(this.transform);
                 }
+            }
+            if (hasPosition) {
                 if (this.calculateTextPosition) {
                     this.calculateTextPosition(tmpTextPosCalcRes, textConfig, layoutRect);
                 }
@@ -117,10 +124,21 @@ var Element = (function () {
                     innerTransformable.originY = -textOffset[1];
                 }
             }
+            var innerTextDefaultStyle = this._innerTextDefaultStyle || (this._innerTextDefaultStyle = {});
+            if (autoOverflowArea) {
+                var overflowRect = innerTextDefaultStyle.overflowRect =
+                    innerTextDefaultStyle.overflowRect || new BoundingRect(0, 0, 0, 0);
+                innerTransformable.getLocalTransform(tmpInnerTextTrans);
+                invert(tmpInnerTextTrans, tmpInnerTextTrans);
+                BoundingRect.copy(overflowRect, layoutRect);
+                overflowRect.applyTransform(tmpInnerTextTrans);
+            }
+            else {
+                innerTextDefaultStyle.overflowRect = null;
+            }
             var isInside = textConfig.inside == null
                 ? (typeof textConfig.position === 'string' && textConfig.position.indexOf('inside') >= 0)
                 : textConfig.inside;
-            var innerTextDefaultStyle = this._innerTextDefaultStyle || (this._innerTextDefaultStyle = {});
             var textFill = void 0;
             var textStroke = void 0;
             var autoStroke = void 0;
@@ -401,16 +419,15 @@ var Element = (function () {
         }
     };
     Element.prototype.isSilent = function () {
-        var isSilent = this.silent;
-        var ancestor = this.parent;
-        while (!isSilent && ancestor) {
-            if (ancestor.silent) {
-                isSilent = true;
-                break;
+        var el = this;
+        while (el) {
+            if (el.silent) {
+                return true;
             }
-            ancestor = ancestor.parent;
+            var hostEl = el.__hostTarget;
+            el = hostEl ? (el.ignoreHostSilent ? null : hostEl) : el.parent;
         }
-        return isSilent;
+        return false;
     };
     Element.prototype._updateAnimationTargets = function () {
         for (var i = 0; i < this.animators.length; i++) {
@@ -776,11 +793,12 @@ var Element = (function () {
         elProto.name = '';
         elProto.ignore =
             elProto.silent =
-                elProto.isGroup =
-                    elProto.draggable =
-                        elProto.dragging =
-                            elProto.ignoreClip =
-                                elProto.__inHover = false;
+                elProto.ignoreHostSilent =
+                    elProto.isGroup =
+                        elProto.draggable =
+                            elProto.dragging =
+                                elProto.ignoreClip =
+                                    elProto.__inHover = false;
         elProto.__dirty = REDRAW_BIT;
         var logs = {};
         function logDeprecatedError(key, xKey, yKey) {

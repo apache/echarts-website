@@ -42,7 +42,7 @@
 * under the License.
 */
 import { __extends } from "tslib";
-import { isArray, each } from 'zrender/lib/core/util.js';
+import { isArray, each, retrieve2 } from 'zrender/lib/core/util.js';
 import * as vector from 'zrender/lib/core/vector.js';
 import * as symbolUtil from '../../util/symbol.js';
 import ECLinePath from './LinePath.js';
@@ -50,6 +50,7 @@ import * as graphic from '../../util/graphic.js';
 import { toggleHoverEmphasis, enterEmphasis, leaveEmphasis, SPECIAL_STATES } from '../../util/states.js';
 import { getLabelStatesModels, setLabelStyle } from '../../label/labelStyle.js';
 import { round } from '../../util/number.js';
+import tokens from '../../visual/tokens.js';
 var SYMBOL_CATEGORIES = ['fromSymbol', 'toSymbol'];
 function makeSymbolTypeKey(symbolCategory) {
   return '_' + symbolCategory + 'Type';
@@ -119,9 +120,11 @@ var Line = /** @class */function (_super) {
   Line.prototype._createLine = function (lineData, idx, seriesScope) {
     var seriesModel = lineData.hostModel;
     var linePoints = lineData.getItemLayout(idx);
+    var z2 = lineData.getItemVisual(idx, 'z2');
     var line = createLine(linePoints);
     line.shape.percent = 0;
     graphic.initProps(line, {
+      z2: retrieve2(z2, 0),
       shape: {
         percent: 1
       }
@@ -227,7 +230,7 @@ var Line = /** @class */function (_super) {
           return seriesModel.getFormattedLabel(dataIndex, stateName, lineData.dataType);
         }
       },
-      inheritColor: visualColor || '#000',
+      inheritColor: visualColor || tokens.color.neutral99,
       defaultOpacity: lineStyle.opacity,
       defaultText: (rawVal == null ? lineData.getName(idx) : isFinite(rawVal) ? round(rawVal) : rawVal) + ''
     });

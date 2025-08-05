@@ -2,10 +2,7 @@
  * @file The layout algorithm of node-link tree diagrams. Here we using Reingold-Tilford algorithm to drawing
  *       the tree.
  */
-import * as layout from '../../util/layout.js';
 import { TreeNode } from '../../data/Tree.js';
-import TreeSeriesModel from './TreeSeries.js';
-import ExtensionAPI from '../../core/ExtensionAPI.js';
 interface HierNode {
     defaultAncestor: TreeLayoutNode;
     ancestor: TreeLayoutNode;
@@ -54,10 +51,6 @@ export declare function radialCoordinate(rad: number, r: number): {
     x: number;
     y: number;
 };
-/**
- * Get the layout position of the whole view.
- */
-export declare function getViewRect(seriesModel: TreeSeriesModel, api: ExtensionAPI): layout.LayoutRect;
 interface SeparationFunc {
     (node1: TreeLayoutNode, node2: TreeLayoutNode): number;
 }

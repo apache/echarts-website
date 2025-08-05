@@ -57,7 +57,9 @@ export function rectCoordAxisBuildSplitArea(axisView, axisGroup, axisModel, grid
   var gridRect = gridModel.coordinateSystem.getRect();
   var ticksCoords = axis.getTicksCoords({
     tickModel: splitAreaModel,
-    clamp: true
+    clamp: true,
+    breakTicks: 'none',
+    pruneByBreak: 'preserve_extent_bound'
   });
   if (!ticksCoords.length) {
     return;

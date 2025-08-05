@@ -540,3 +540,4 @@ export function hasOwn(own, prop) {
 }
 export function noop() { }
 export var RADIAN_TO_DEGREE = 180 / Math.PI;
+export var EPSILON = Number.EPSILON || Math.pow(2, -52);

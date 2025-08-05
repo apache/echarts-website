@@ -558,10 +558,7 @@ function createScaleByModel(model, axisType) {
   }
 }
 function getViewRect(model, api) {
-  return layout.getLayoutRect(model.getBoxLayoutParams(), {
-    width: api.getWidth(),
-    height: api.getHeight()
-  }, model.get('padding'));
+  return layout.getLayoutRect(model.getBoxLayoutParams(), layout.createBoxLayoutReference(model, api).refContainer, model.get('padding'));
 }
 function makeControlIcon(timelineModel, objPath, rect, opts) {
   var style = opts.style;

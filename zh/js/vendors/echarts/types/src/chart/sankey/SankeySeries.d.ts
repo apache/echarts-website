@@ -1,9 +1,10 @@
 import SeriesModel from '../../model/Series.js';
 import Model from '../../model/Model.js';
-import { SeriesOption, BoxLayoutOptionMixin, OptionDataValue, SeriesLabelOption, ItemStyleOption, LineStyleOption, LayoutOrient, ColorString, StatesOptionMixin, OptionDataItemObject, GraphEdgeItemObject, OptionDataValueNumeric, DefaultEmphasisFocus, CallbackDataParams } from '../../util/types.js';
+import { SeriesOption, BoxLayoutOptionMixin, OptionDataValue, SeriesLabelOption, ItemStyleOption, LineStyleOption, LayoutOrient, ColorString, StatesOptionMixin, OptionDataItemObject, GraphEdgeItemObject, OptionDataValueNumeric, DefaultEmphasisFocus, CallbackDataParams, RoamOptionMixin } from '../../util/types.js';
 import GlobalModel from '../../model/Global.js';
 import SeriesData from '../../data/SeriesData.js';
 import { LayoutRect } from '../../util/layout.js';
+import type View from '../../coord/View.js';
 declare type FocusNodeAdjacency = boolean | 'inEdges' | 'outEdges' | 'allEdges';
 export interface SankeyNodeStateOption<TCbParams = never> {
     label?: SeriesLabelOption;
@@ -37,7 +38,7 @@ export interface SankeyEdgeItemOption extends SankeyEdgeStateOption, StatesOptio
 export interface SankeyLevelOption extends SankeyNodeStateOption, SankeyEdgeStateOption {
     depth: number;
 }
-export interface SankeySeriesOption extends SeriesOption<SankeyBothStateOption<CallbackDataParams>, ExtraStateOption>, SankeyBothStateOption<CallbackDataParams>, BoxLayoutOptionMixin {
+export interface SankeySeriesOption extends SeriesOption<SankeyBothStateOption<CallbackDataParams>, ExtraStateOption>, SankeyBothStateOption<CallbackDataParams>, BoxLayoutOptionMixin, RoamOptionMixin {
     type?: 'sankey';
     /**
      * color will be linear mapped.
@@ -79,6 +80,8 @@ export interface SankeySeriesOption extends SeriesOption<SankeyBothStateOption<C
 declare class SankeySeriesModel extends SeriesModel<SankeySeriesOption> {
     static readonly type = "series.sankey";
     readonly type = "series.sankey";
+    static layoutMode: "box";
+    coordinateSystem: View;
     levelModels: Model<SankeyLevelOption>[];
     layoutInfo: LayoutRect;
     /**
@@ -86,6 +89,8 @@ declare class SankeySeriesModel extends SeriesModel<SankeySeriesOption> {
      */
     getInitialData(option: SankeySeriesOption, ecModel: GlobalModel): SeriesData<Model<any>, import("../../data/SeriesData").DefaultDataVisual>;
     setNodePosition(dataIndex: number, localPosition: number[]): void;
+    setCenter(center: number[]): void;
+    setZoom(zoom: number): void;
     /**
      * Return the graphic data structure
      *

@@ -1,15 +1,20 @@
-import { createAxisLabels, calculateCategoryInterval } from './axisTickLabelBuilder.js';
-import Scale from '../scale/Scale.js';
+import { createAxisLabels, AxisLabelsComputingContext } from './axisTickLabelBuilder.js';
+import Scale, { ScaleGetTicksOpt } from '../scale/Scale.js';
 import { DimensionName, ScaleDataValue, ScaleTick } from '../util/types.js';
 import Model from '../model/Model.js';
 import { AxisBaseOption, CategoryAxisBaseOption, OptionAxisType } from './axisCommonTypes.js';
 import { AxisBaseModel } from './AxisBaseModel.js';
-interface TickCoord {
+export interface AxisTickCoord {
     coord: number;
     tickValue?: ScaleTick['value'];
+    onBand?: boolean;
 }
 /**
  * Base class of Axis.
+ *
+ * Lifetime: recreate for each main process.
+ * [NOTICE]: Some caches is stored on the axis instance (see `axisTickLabelBuilder.ts`)
+ *  which is based on this lifetime.
  */
 declare class Axis {
     /**
@@ -71,9 +76,11 @@ declare class Axis {
     getTicksCoords(opt?: {
         tickModel?: Model;
         clamp?: boolean;
-    }): TickCoord[];
-    getMinorTicksCoords(): TickCoord[][];
-    getViewLabels(): ReturnType<typeof createAxisLabels>['labels'];
+        breakTicks?: ScaleGetTicksOpt['breakTicks'];
+        pruneByBreak?: ScaleGetTicksOpt['pruneByBreak'];
+    }): AxisTickCoord[];
+    getMinorTicksCoords(): AxisTickCoord[][];
+    getViewLabels(ctx?: AxisLabelsComputingContext): ReturnType<typeof createAxisLabels>['labels'];
     getLabelModel(): Model<AxisBaseOption['axisLabel']>;
     /**
      * Notice here we only get the default tick model. For splitLine
@@ -96,6 +103,6 @@ declare class Axis {
      * Can be overridden, consider other axes like in 3D.
      * @return Auto interval for cateogry axis tick and label
      */
-    calculateCategoryInterval(): ReturnType<typeof calculateCategoryInterval>;
+    calculateCategoryInterval(ctx?: AxisLabelsComputingContext): number;
 }
 export default Axis;

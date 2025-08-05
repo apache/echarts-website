@@ -1,3 +1,6 @@
+export declare const mathMin: (...values: number[]) => number;
+export declare const mathMax: (...values: number[]) => number;
+export declare const mathAbs: (x: number) => number;
 /**
  * Linear mapping a value from domain to range
  * @param  val
@@ -7,10 +10,22 @@
  */
 export declare function linearMap(val: number, domain: number[], range: number[], clamp?: boolean): number;
 /**
- * Convert a percent string to absolute number.
- * Returns NaN if percent is not a valid string or number
+ * Preserve the name `parsePercent` for backward compatibility,
+ * and it's effectively published as `echarts.number.parsePercent`.
  */
-export declare function parsePercent(percent: number | string, all: number): number;
+export declare const parsePercent: typeof parsePositionOption;
+/**
+ * @see {parsePositionSizeOption} and also accept a string preset.
+ * @see {PositionSizeOption}
+ */
+export declare function parsePositionOption(option: unknown, percentBase: number, percentOffset?: number): number;
+/**
+ * Accept number, or numeric stirng (`'123'`), or percentage ('100%'), as x/y/width/height pixel number.
+ * If null/undefined or invalid, return NaN.
+ * (But allow JS type coercion (`+option`) due to backward compatibility)
+ * @see {PositionSizeOption}
+ */
+export declare function parsePositionSizeOption(option: unknown, percentBase: number, percentOffset?: number): number;
 /**
  * (1) Fix rounding error of float numbers.
  * (2) Support return string to avoid scientific notation like '3.5e-7'.

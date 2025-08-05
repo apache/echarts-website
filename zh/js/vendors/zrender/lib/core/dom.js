@@ -1,10 +1,22 @@
 import env from './env.js';
 import { buildTransformer } from './fourPointsTransform.js';
+import { each } from './util.js';
 var EVENT_SAVED_PROP = '___zrEVENTSAVED';
 var _calcOut = [];
 export function transformLocalCoord(out, elFrom, elTarget, inX, inY) {
     return transformCoordWithViewport(_calcOut, elFrom, inX, inY, true)
         && transformCoordWithViewport(out, elTarget, _calcOut[0], _calcOut[1]);
+}
+export function transformLocalCoordClear(elFrom, elTarget) {
+    elFrom && dealClear(elFrom);
+    elTarget && dealClear(elTarget);
+    function dealClear(el) {
+        var saved = el[EVENT_SAVED_PROP];
+        if (saved) {
+            saved.clearMarkers && saved.clearMarkers();
+            delete el[EVENT_SAVED_PROP];
+        }
+    }
 }
 export function transformCoordWithViewport(out, el, inX, inY, inverse) {
     if (el.getBoundingClientRect && env.domSupported && !isCanvasEl(el)) {
@@ -49,6 +61,11 @@ function prepareCoordMarkers(el, saved) {
         el.appendChild(marker);
         markers.push(marker);
     }
+    saved.clearMarkers = function () {
+        each(markers, function (marker) {
+            marker.parentNode && marker.parentNode.removeChild(marker);
+        });
+    };
     return markers;
 }
 function preparePointerTransformer(markers, saved, inverse) {

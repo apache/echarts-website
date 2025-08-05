@@ -95,7 +95,10 @@ var SingleAxisModel = /** @class */function (_super) {
         type: 'dashed',
         opacity: 0.2
       }
-    }
+    },
+    jitter: 0,
+    jitterOverlap: true,
+    jitterMargin: 2
   };
   return SingleAxisModel;
 }(ComponentModel);

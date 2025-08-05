@@ -82,9 +82,8 @@ var OrdinalScale = /** @class */function (_super) {
     // val might be float.
     : Math.round(val);
   };
-  OrdinalScale.prototype.contain = function (rank) {
-    rank = this.parse(rank);
-    return scaleHelper.contain(rank, this._extent) && this._ordinalMeta.categories[rank] != null;
+  OrdinalScale.prototype.contain = function (val) {
+    return scaleHelper.contain(val, this._extent) && val >= 0 && val < this._ordinalMeta.categories.length;
   };
   /**
    * Normalize given rank or name to linear [0, 1]
@@ -92,15 +91,15 @@ var OrdinalScale = /** @class */function (_super) {
    * @return normalized value in [0, 1].
    */
   OrdinalScale.prototype.normalize = function (val) {
-    val = this._getTickNumber(this.parse(val));
-    return scaleHelper.normalize(val, this._extent);
+    val = this._getTickNumber(val);
+    return this._calculator.normalize(val, this._extent);
   };
   /**
    * @param val normalized value in [0, 1].
    * @return raw ordinal number.
    */
   OrdinalScale.prototype.scale = function (val) {
-    val = Math.round(scaleHelper.scale(val, this._extent));
+    val = Math.round(this._calculator.scale(val, this._extent));
     return this.getRawOrdinalNumber(val);
   };
   OrdinalScale.prototype.getTicks = function () {
@@ -190,9 +189,6 @@ var OrdinalScale = /** @class */function (_super) {
   };
   OrdinalScale.prototype.count = function () {
     return this._extent[1] - this._extent[0] + 1;
-  };
-  OrdinalScale.prototype.unionExtentFromData = function (data, dim) {
-    this.unionExtent(data.getApproximateExtent(dim));
   };
   /**
    * @override

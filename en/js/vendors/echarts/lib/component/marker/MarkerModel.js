@@ -62,6 +62,7 @@ var MarkerModel = /** @class */function (_super) {
      * If marker model is created by self from series
      */
     _this.createdBySelf = false;
+    _this.preventAutoZ = true;
     return _this;
   }
   /**

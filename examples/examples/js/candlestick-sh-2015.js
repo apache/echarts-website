@@ -29,7 +29,8 @@ const data = rawData.map(function (item) {
 option = {
   legend: {
     data: ['日K', 'MA5', 'MA10', 'MA20', 'MA30'],
-    inactiveColor: '#777'
+    inactiveColor: '#777',
+    top: 20
   },
   tooltip: {
     trigger: 'axis',

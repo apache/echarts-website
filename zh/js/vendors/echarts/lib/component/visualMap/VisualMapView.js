@@ -142,10 +142,8 @@ var VisualMapView = /** @class */function (_super) {
   VisualMapView.prototype.positionGroup = function (group) {
     var model = this.visualMapModel;
     var api = this.api;
-    layout.positionElement(group, model.getBoxLayoutParams(), {
-      width: api.getWidth(),
-      height: api.getHeight()
-    });
+    var refContainer = layout.createBoxLayoutReference(model, api).refContainer;
+    layout.positionElement(group, model.getBoxLayoutParams(), refContainer);
   };
   VisualMapView.prototype.doRender = function (visualMapModel, ecModel, api, payload) {};
   VisualMapView.type = 'visualMap';

@@ -48,6 +48,7 @@ import { defaultEmphasis } from '../../util/model.js';
 import { makeSeriesEncodeForNameBased } from '../../data/helper/sourceHelper.js';
 import LegendVisualProvider from '../../visual/LegendVisualProvider.js';
 import SeriesModel from '../../model/Series.js';
+import tokens from '../../visual/tokens.js';
 var FunnelSeriesModel = /** @class */function (_super) {
   __extends(FunnelSeriesModel, _super);
   function FunnelSeriesModel() {
@@ -91,6 +92,7 @@ var FunnelSeriesModel = /** @class */function (_super) {
   };
   FunnelSeriesModel.type = 'series.funnel';
   FunnelSeriesModel.defaultOption = {
+    coordinateSystemUsage: 'box',
     // zlevel: 0,                  // 一级层叠
     z: 2,
     legendHoverLink: true,
@@ -98,7 +100,7 @@ var FunnelSeriesModel = /** @class */function (_super) {
     left: 80,
     top: 60,
     right: 80,
-    bottom: 60,
+    bottom: 65,
     // width: {totalWidth} - left - right,
     // height: {totalHeight} - top - bottom,
     // 默认取数据最小最大值
@@ -125,7 +127,7 @@ var FunnelSeriesModel = /** @class */function (_super) {
     },
     itemStyle: {
       // color: 各异,
-      borderColor: '#fff',
+      borderColor: tokens.color.neutral00,
       borderWidth: 1
     },
     emphasis: {
@@ -135,7 +137,7 @@ var FunnelSeriesModel = /** @class */function (_super) {
     },
     select: {
       itemStyle: {
-        borderColor: '#212121'
+        borderColor: tokens.color.primary
       }
     }
   };

@@ -51,6 +51,7 @@ import sliderMove from '../../helper/sliderMove.js';
 import { ToolboxFeature } from '../featureManager.js';
 import { makeInternalComponentId, parseFinder } from '../../../util/model.js';
 import { registerInternalOptionCreator } from '../../../model/internalComponentCreator.js';
+import tokens from '../../../visual/tokens.js';
 var each = zrUtil.each;
 var DATA_ZOOM_ID_BASE = makeInternalComponentId('toolbox-dataZoom_');
 var ICON_TYPES = ['zoom', 'back'];
@@ -157,7 +158,7 @@ var DataZoomFeature = /** @class */function (_super) {
       title: ecModel.getLocaleModel().get(['toolbox', 'dataZoom', 'title']),
       brushStyle: {
         borderWidth: 0,
-        color: 'rgba(210,219,238,0.2)'
+        color: tokens.color.backgroundTint
       }
     };
     return defaultOption;

@@ -114,15 +114,6 @@ declare class DataStore {
      * Retrieve the index with given raw data index.
      */
     indexOfRawIndex(rawIndex: number): number;
-    /**
-     * Retrieve the index of nearest value.
-     * @param dim
-     * @param value
-     * @param [maxDistance=Infinity]
-     * @return If and only if multiple indices have
-     *         the same value, they are put to the result.
-     */
-    indicesOfNearest(dim: DimensionIndex, value: number, maxDistance?: number): number[];
     getIndices(): ArrayLike<number>;
     /**
      * Data filter.

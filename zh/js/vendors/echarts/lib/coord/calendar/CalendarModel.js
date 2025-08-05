@@ -45,6 +45,7 @@ import { __extends } from "tslib";
 import * as zrUtil from 'zrender/lib/core/util.js';
 import ComponentModel from '../../model/Component.js';
 import { getLayoutParams, sizeCalculable, mergeLayoutParam } from '../../util/layout.js';
+import tokens from '../../visual/tokens.js';
 var CalendarModel = /** @class */function (_super) {
   __extends(CalendarModel, _super);
   function CalendarModel() {
@@ -72,8 +73,14 @@ var CalendarModel = /** @class */function (_super) {
     return this.option.cellSize;
   };
   CalendarModel.type = 'calendar';
+  CalendarModel.layoutMode = 'box';
   CalendarModel.defaultOption = {
     // zlevel: 0,
+    // TODO: theoretically, the z of the calendar should be lower
+    // than series, but we don't want the series to be displayed
+    // on top of the borders like month split line. To align with
+    // the effect of previous versions, we set the z to 2 for now
+    // until better solution is found.
     z: 2,
     left: 80,
     top: 60,
@@ -84,16 +91,16 @@ var CalendarModel = /** @class */function (_super) {
     splitLine: {
       show: true,
       lineStyle: {
-        color: '#000',
+        color: tokens.color.axisLine,
         width: 1,
         type: 'solid'
       }
     },
     // rect style  temporarily unused emphasis
     itemStyle: {
-      color: '#fff',
+      color: tokens.color.neutral00,
       borderWidth: 1,
-      borderColor: '#ccc'
+      borderColor: tokens.color.neutral10
     },
     // week text style
     dayLabel: {
@@ -101,28 +108,28 @@ var CalendarModel = /** @class */function (_super) {
       firstDay: 0,
       // start end
       position: 'start',
-      margin: '50%',
-      color: '#000'
+      margin: tokens.size.s,
+      color: tokens.color.secondary
     },
     // month text style
     monthLabel: {
       show: true,
       // start end
       position: 'start',
-      margin: 5,
+      margin: tokens.size.s,
       // center or left
       align: 'center',
       formatter: null,
-      color: '#000'
+      color: tokens.color.secondary
     },
     // year text style
     yearLabel: {
       show: true,
       // top bottom left right
       position: null,
-      margin: 30,
+      margin: tokens.size.xl,
       formatter: null,
-      color: '#ccc',
+      color: tokens.color.quaternary,
       fontFamily: 'sans-serif',
       fontWeight: 'bolder',
       fontSize: 20

@@ -44,6 +44,7 @@
 import { __extends } from "tslib";
 import BaseBarSeriesModel from './BaseBarSeries.js';
 import { inheritDefaultOption } from '../../util/component.js';
+import tokens from '../../visual/tokens.js';
 var PictorialBarSeriesModel = /** @class */function (_super) {
   __extends(PictorialBarSeriesModel, _super);
   function PictorialBarSeriesModel() {
@@ -86,7 +87,7 @@ var PictorialBarSeriesModel = /** @class */function (_super) {
     },
     select: {
       itemStyle: {
-        borderColor: '#212121'
+        borderColor: tokens.color.primary
       }
     }
   });

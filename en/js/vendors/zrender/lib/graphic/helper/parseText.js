@@ -1,6 +1,7 @@
 import * as imageHelper from '../helper/image.js';
-import { extend, retrieve2, retrieve3, reduce } from '../../core/util.js';
-import { getLineHeight, getWidth, parsePercent } from '../../contain/text.js';
+import { extend, retrieve2, retrieve3, reduce, } from '../../core/util.js';
+import { adjustTextX, adjustTextY, ensureFontMeasureInfo, getLineHeight, measureCharWidth, measureWidth, parsePercent, } from '../../contain/text.js';
+import BoundingRect from '../../core/BoundingRect.js';
 var STYLE_REG = /\{([a-zA-Z0-9_]+)\|([^}]*)\}/g;
 export function truncateText(text, containerWidth, font, ellipsis, options) {
     var out = {};
@@ -28,18 +29,17 @@ function truncateText2(out, text, containerWidth, font, ellipsis, options) {
 function prepareTruncateOptions(containerWidth, font, ellipsis, options) {
     options = options || {};
     var preparedOpts = extend({}, options);
-    preparedOpts.font = font;
     ellipsis = retrieve2(ellipsis, '...');
     preparedOpts.maxIterations = retrieve2(options.maxIterations, 2);
     var minChar = preparedOpts.minChar = retrieve2(options.minChar, 0);
-    preparedOpts.cnCharWidth = getWidth('国', font);
-    var ascCharWidth = preparedOpts.ascCharWidth = getWidth('a', font);
+    var fontMeasureInfo = preparedOpts.fontMeasureInfo = ensureFontMeasureInfo(font);
+    var ascCharWidth = fontMeasureInfo.asciiCharWidth;
     preparedOpts.placeholder = retrieve2(options.placeholder, '');
     var contentWidth = containerWidth = Math.max(0, containerWidth - 1);
     for (var i = 0; i < minChar && contentWidth >= ascCharWidth; i++) {
         contentWidth -= ascCharWidth;
     }
-    var ellipsisWidth = getWidth(ellipsis, font);
+    var ellipsisWidth = measureWidth(fontMeasureInfo, ellipsis);
     if (ellipsisWidth > contentWidth) {
         ellipsis = '';
         ellipsisWidth = 0;
@@ -53,14 +53,14 @@ function prepareTruncateOptions(containerWidth, font, ellipsis, options) {
 }
 function truncateSingleLine(out, textLine, options) {
     var containerWidth = options.containerWidth;
-    var font = options.font;
     var contentWidth = options.contentWidth;
+    var fontMeasureInfo = options.fontMeasureInfo;
     if (!containerWidth) {
         out.textLine = '';
         out.isTruncated = false;
         return;
     }
-    var lineWidth = getWidth(textLine, font);
+    var lineWidth = measureWidth(fontMeasureInfo, textLine);
     if (lineWidth <= containerWidth) {
         out.textLine = textLine;
         out.isTruncated = false;
@@ -72,12 +72,12 @@ function truncateSingleLine(out, textLine, options) {
             break;
         }
         var subLength = j === 0
-            ? estimateLength(textLine, contentWidth, options.ascCharWidth, options.cnCharWidth)
+            ? estimateLength(textLine, contentWidth, fontMeasureInfo)
             : lineWidth > 0
                 ? Math.floor(textLine.length * contentWidth / lineWidth)
                 : 0;
         textLine = textLine.substr(0, subLength);
-        lineWidth = getWidth(textLine, font);
+        lineWidth = measureWidth(fontMeasureInfo, textLine);
     }
     if (textLine === '') {
         textLine = options.placeholder;
@@ -85,27 +85,34 @@ function truncateSingleLine(out, textLine, options) {
     out.textLine = textLine;
     out.isTruncated = true;
 }
-function estimateLength(text, contentWidth, ascCharWidth, cnCharWidth) {
+function estimateLength(text, contentWidth, fontMeasureInfo) {
     var width = 0;
     var i = 0;
     for (var len = text.length; i < len && width < contentWidth; i++) {
-        var charCode = text.charCodeAt(i);
-        width += (0 <= charCode && charCode <= 127) ? ascCharWidth : cnCharWidth;
+        width += measureCharWidth(fontMeasureInfo, text.charCodeAt(i));
     }
     return i;
 }
-export function parsePlainText(text, style) {
-    text != null && (text += '');
+export function parsePlainText(rawText, style, defaultOuterWidth, defaultOuterHeight) {
+    var text = formatText(rawText);
     var overflow = style.overflow;
     var padding = style.padding;
+    var paddingH = padding ? padding[1] + padding[3] : 0;
+    var paddingV = padding ? padding[0] + padding[2] : 0;
     var font = style.font;
     var truncate = overflow === 'truncate';
     var calculatedLineHeight = getLineHeight(font);
     var lineHeight = retrieve2(style.lineHeight, calculatedLineHeight);
-    var bgColorDrawn = !!(style.backgroundColor);
     var truncateLineOverflow = style.lineOverflow === 'truncate';
     var isTruncated = false;
     var width = style.width;
+    if (width == null && defaultOuterWidth != null) {
+        width = defaultOuterWidth - paddingH;
+    }
+    var height = style.height;
+    if (height == null && defaultOuterHeight != null) {
+        height = defaultOuterHeight - paddingV;
+    }
     var lines;
     if (width != null && (overflow === 'break' || overflow === 'breakAll')) {
         lines = text ? wrapText(text, style.font, width, overflow === 'breakAll', 0).lines : [];
@@ -114,11 +121,14 @@ export function parsePlainText(text, style) {
         lines = text ? text.split('\n') : [];
     }
     var contentHeight = lines.length * lineHeight;
-    var height = retrieve2(style.height, contentHeight);
+    if (height == null) {
+        height = contentHeight;
+    }
     if (contentHeight > height && truncateLineOverflow) {
         var lineCount = Math.floor(height / lineHeight);
         isTruncated = isTruncated || (lines.length > lineCount);
         lines = lines.slice(0, lineCount);
+        contentHeight = lines.length * lineHeight;
     }
     if (text && truncate && width != null) {
         var options = prepareTruncateOptions(width, font, style.ellipsis, {
@@ -134,21 +144,16 @@ export function parsePlainText(text, style) {
     }
     var outerHeight = height;
     var contentWidth = 0;
+    var fontMeasureInfo = ensureFontMeasureInfo(font);
     for (var i = 0; i < lines.length; i++) {
-        contentWidth = Math.max(getWidth(lines[i], font), contentWidth);
+        contentWidth = Math.max(measureWidth(fontMeasureInfo, lines[i]), contentWidth);
     }
     if (width == null) {
         width = contentWidth;
     }
-    var outerWidth = contentWidth;
-    if (padding) {
-        outerHeight += padding[0] + padding[2];
-        outerWidth += padding[1] + padding[3];
-        width += padding[1] + padding[3];
-    }
-    if (bgColorDrawn) {
-        outerWidth = width;
-    }
+    var outerWidth = width;
+    outerHeight += paddingV;
+    outerWidth += paddingH;
     return {
         lines: lines,
         height: height,
@@ -190,14 +195,23 @@ var RichTextContentBlock = (function () {
     return RichTextContentBlock;
 }());
 export { RichTextContentBlock };
-export function parseRichText(text, style) {
+export function parseRichText(rawText, style, defaultOuterWidth, defaultOuterHeight, topTextAlign) {
     var contentBlock = new RichTextContentBlock();
-    text != null && (text += '');
+    var text = formatText(rawText);
     if (!text) {
         return contentBlock;
     }
+    var stlPadding = style.padding;
+    var stlPaddingH = stlPadding ? stlPadding[1] + stlPadding[3] : 0;
+    var stlPaddingV = stlPadding ? stlPadding[0] + stlPadding[2] : 0;
     var topWidth = style.width;
+    if (topWidth == null && defaultOuterWidth != null) {
+        topWidth = defaultOuterWidth - stlPaddingH;
+    }
     var topHeight = style.height;
+    if (topHeight == null && defaultOuterHeight != null) {
+        topHeight = defaultOuterHeight - stlPaddingV;
+    }
     var overflow = style.overflow;
     var wrapInfo = (overflow === 'break' || overflow === 'breakAll') && topWidth != null
         ? { width: topWidth, accumWidth: 0, breakAll: overflow === 'breakAll' }
@@ -218,7 +232,6 @@ export function parseRichText(text, style) {
     var pendingList = [];
     var calculatedHeight = 0;
     var calculatedWidth = 0;
-    var stlPadding = style.padding;
     var truncate = overflow === 'truncate';
     var truncateLine = style.lineOverflow === 'truncate';
     var tmpTruncateOut = {};
@@ -244,7 +257,7 @@ export function parseRichText(text, style) {
             textPadding && (tokenHeight += textPadding[0] + textPadding[2]);
             token.height = tokenHeight;
             token.lineHeight = retrieve3(tokenStyle.lineHeight, style.lineHeight, tokenHeight);
-            token.align = tokenStyle && tokenStyle.align || style.align;
+            token.align = tokenStyle && tokenStyle.align || topTextAlign;
             token.verticalAlign = tokenStyle && tokenStyle.verticalAlign || 'middle';
             if (truncateLine && topHeight != null && calculatedHeight + token.lineHeight > topHeight) {
                 var originalLength = contentBlock.lines.length;
@@ -264,7 +277,7 @@ export function parseRichText(text, style) {
             if (typeof styleTokenWidth === 'string' && styleTokenWidth.charAt(styleTokenWidth.length - 1) === '%') {
                 token.percentWidth = styleTokenWidth;
                 pendingList.push(token);
-                token.contentWidth = getWidth(token.text, font);
+                token.contentWidth = measureWidth(ensureFontMeasureInfo(font), token.text);
             }
             else {
                 if (tokenWidthNotSpecified) {
@@ -288,11 +301,11 @@ export function parseRichText(text, style) {
                         truncateText2(tmpTruncateOut, token.text, remainTruncWidth - paddingH, font, style.ellipsis, { minChar: style.truncateMinChar });
                         token.text = tmpTruncateOut.text;
                         contentBlock.isTruncated = contentBlock.isTruncated || tmpTruncateOut.isTruncated;
-                        token.width = token.contentWidth = getWidth(token.text, font);
+                        token.width = token.contentWidth = measureWidth(ensureFontMeasureInfo(font), token.text);
                     }
                 }
                 else {
-                    token.contentWidth = getWidth(token.text, font);
+                    token.contentWidth = measureWidth(ensureFontMeasureInfo(font), token.text);
                 }
             }
             token.width += paddingH;
@@ -305,10 +318,8 @@ export function parseRichText(text, style) {
     contentBlock.outerHeight = contentBlock.height = retrieve2(topHeight, calculatedHeight);
     contentBlock.contentHeight = calculatedHeight;
     contentBlock.contentWidth = calculatedWidth;
-    if (stlPadding) {
-        contentBlock.outerWidth += stlPadding[1] + stlPadding[3];
-        contentBlock.outerHeight += stlPadding[0] + stlPadding[2];
-    }
+    contentBlock.outerWidth += stlPaddingH;
+    contentBlock.outerHeight += stlPaddingV;
     for (var i = 0; i < pendingList.length; i++) {
         var token = pendingList[i];
         var percentWidth = token.percentWidth;
@@ -344,9 +355,10 @@ function pushTokens(block, str, style, wrapInfo, styleName) {
             strLines = res.lines;
         }
     }
-    else {
+    if (!strLines) {
         strLines = str.split('\n');
     }
+    var fontMeasureInfo = ensureFontMeasureInfo(font);
     for (var i = 0; i < strLines.length; i++) {
         var text = strLines[i];
         var token = new RichTextToken();
@@ -359,7 +371,7 @@ function pushTokens(block, str, style, wrapInfo, styleName) {
         else {
             token.width = linesWidths
                 ? linesWidths[i]
-                : getWidth(text, font);
+                : measureWidth(fontMeasureInfo, text);
         }
         if (!i && !newLine) {
             var tokens = (lines[lines.length - 1] || (lines[0] = new RichTextLine())).tokens;
@@ -400,6 +412,7 @@ function wrapText(text, font, lineWidth, isBreakAll, lastAccumWidth) {
     var currentWord = '';
     var currentWordWidth = 0;
     var accumWidth = 0;
+    var fontMeasureInfo = ensureFontMeasureInfo(font);
     for (var i = 0; i < text.length; i++) {
         var ch = text.charAt(i);
         if (ch === '\n') {
@@ -415,7 +428,7 @@ function wrapText(text, font, lineWidth, isBreakAll, lastAccumWidth) {
             accumWidth = 0;
             continue;
         }
-        var chWidth = getWidth(ch, font);
+        var chWidth = measureCharWidth(fontMeasureInfo, ch.charCodeAt(0));
         var inWord = isBreakAll ? false : !isWordBreakChar(ch);
         if (!lines.length
             ? lastAccumWidth + accumWidth + chWidth > lineWidth
@@ -475,11 +488,6 @@ function wrapText(text, font, lineWidth, isBreakAll, lastAccumWidth) {
             line += ch;
         }
     }
-    if (!lines.length && !line) {
-        line = text;
-        currentWord = '';
-        currentWordWidth = 0;
-    }
     if (currentWord) {
         line += currentWord;
     }
@@ -495,4 +503,50 @@ function wrapText(text, font, lineWidth, isBreakAll, lastAccumWidth) {
         lines: lines,
         linesWidths: linesWidths
     };
+}
+export function calcInnerTextOverflowArea(out, overflowRect, baseX, baseY, textAlign, textVerticalAlign) {
+    out.baseX = baseX;
+    out.baseY = baseY;
+    out.outerWidth = out.outerHeight = null;
+    if (!overflowRect) {
+        return;
+    }
+    var textWidth = overflowRect.width * 2;
+    var textHeight = overflowRect.height * 2;
+    BoundingRect.set(tmpCITCTextRect, adjustTextX(baseX, textWidth, textAlign), adjustTextY(baseY, textHeight, textVerticalAlign), textWidth, textHeight);
+    BoundingRect.intersect(overflowRect, tmpCITCTextRect, null, tmpCITCIntersectRectOpt);
+    var outIntersectRect = tmpCITCIntersectRectOpt.outIntersectRect;
+    out.outerWidth = outIntersectRect.width;
+    out.outerHeight = outIntersectRect.height;
+    out.baseX = adjustTextX(outIntersectRect.x, outIntersectRect.width, textAlign, true);
+    out.baseY = adjustTextY(outIntersectRect.y, outIntersectRect.height, textVerticalAlign, true);
+}
+var tmpCITCTextRect = new BoundingRect(0, 0, 0, 0);
+var tmpCITCIntersectRectOpt = { outIntersectRect: {}, clamp: true };
+function formatText(text) {
+    return text != null ? (text += '') : (text = '');
+}
+export function tSpanCreateBoundingRect(style) {
+    var text = formatText(style.text);
+    var font = style.font;
+    var contentWidth = measureWidth(ensureFontMeasureInfo(font), text);
+    var contentHeight = getLineHeight(font);
+    return tSpanCreateBoundingRect2(style, contentWidth, contentHeight, null);
+}
+export function tSpanCreateBoundingRect2(style, contentWidth, contentHeight, forceLineWidth) {
+    var rect = new BoundingRect(adjustTextX(style.x || 0, contentWidth, style.textAlign), adjustTextY(style.y || 0, contentHeight, style.textBaseline), contentWidth, contentHeight);
+    var lineWidth = forceLineWidth != null
+        ? forceLineWidth
+        : (tSpanHasStroke(style) ? style.lineWidth : 0);
+    if (lineWidth > 0) {
+        rect.x -= lineWidth / 2;
+        rect.y -= lineWidth / 2;
+        rect.width += lineWidth;
+        rect.height += lineWidth;
+    }
+    return rect;
+}
+export function tSpanHasStroke(style) {
+    var stroke = style.stroke;
+    return stroke != null && stroke !== 'none' && style.lineWidth > 0;
 }

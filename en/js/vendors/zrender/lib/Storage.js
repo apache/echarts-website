@@ -48,7 +48,7 @@ var Storage = (function () {
         displayList.length = this._displayListLen;
         timsort(displayList, shapeCompareFunc);
     };
-    Storage.prototype._updateAndAddDisplayable = function (el, clipPaths, includeIgnore) {
+    Storage.prototype._updateAndAddDisplayable = function (el, parentClipPaths, includeIgnore) {
         if (el.ignore && !includeIgnore) {
             return;
         }
@@ -56,25 +56,31 @@ var Storage = (function () {
         el.update();
         el.afterUpdate();
         var userSetClipPath = el.getClipPath();
-        if (el.ignoreClip) {
-            clipPaths = null;
-        }
-        else if (userSetClipPath) {
-            if (clipPaths) {
-                clipPaths = clipPaths.slice();
+        var parentHasClipPaths = parentClipPaths && parentClipPaths.length;
+        var clipPathIdx = 0;
+        var thisClipPaths = el.__clipPaths;
+        if (!el.ignoreClip
+            && (parentHasClipPaths || userSetClipPath)) {
+            if (!thisClipPaths) {
+                thisClipPaths = el.__clipPaths = [];
             }
-            else {
-                clipPaths = [];
+            if (parentHasClipPaths) {
+                for (var idx = 0; idx < parentClipPaths.length; idx++) {
+                    thisClipPaths[clipPathIdx++] = parentClipPaths[idx];
+                }
             }
             var currentClipPath = userSetClipPath;
             var parentClipPath = el;
             while (currentClipPath) {
                 currentClipPath.parent = parentClipPath;
                 currentClipPath.updateTransform();
-                clipPaths.push(currentClipPath);
+                thisClipPaths[clipPathIdx++] = currentClipPath;
                 parentClipPath = currentClipPath;
                 currentClipPath = currentClipPath.getClipPath();
             }
+        }
+        if (thisClipPaths) {
+            thisClipPaths.length = clipPathIdx;
         }
         if (el.childrenRef) {
             var children = el.childrenRef();
@@ -83,18 +89,12 @@ var Storage = (function () {
                 if (el.__dirty) {
                     child.__dirty |= REDRAW_BIT;
                 }
-                this._updateAndAddDisplayable(child, clipPaths, includeIgnore);
+                this._updateAndAddDisplayable(child, thisClipPaths, includeIgnore);
             }
             el.__dirty = 0;
         }
         else {
             var disp = el;
-            if (clipPaths && clipPaths.length) {
-                disp.__clipPaths = clipPaths;
-            }
-            else if (disp.__clipPaths && disp.__clipPaths.length > 0) {
-                disp.__clipPaths = [];
-            }
             if (isNaN(disp.z)) {
                 logInvalidZError();
                 disp.z = 0;
@@ -111,15 +111,15 @@ var Storage = (function () {
         }
         var decalEl = el.getDecalElement && el.getDecalElement();
         if (decalEl) {
-            this._updateAndAddDisplayable(decalEl, clipPaths, includeIgnore);
+            this._updateAndAddDisplayable(decalEl, thisClipPaths, includeIgnore);
         }
         var textGuide = el.getTextGuideLine();
         if (textGuide) {
-            this._updateAndAddDisplayable(textGuide, clipPaths, includeIgnore);
+            this._updateAndAddDisplayable(textGuide, thisClipPaths, includeIgnore);
         }
         var textEl = el.getTextContent();
         if (textEl) {
-            this._updateAndAddDisplayable(textEl, clipPaths, includeIgnore);
+            this._updateAndAddDisplayable(textEl, thisClipPaths, includeIgnore);
         }
     };
     Storage.prototype.addRoot = function (el) {

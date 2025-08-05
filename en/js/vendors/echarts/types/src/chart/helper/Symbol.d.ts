@@ -17,7 +17,7 @@ declare class Symbol extends graphic.Group {
     private _sizeY;
     private _z2;
     constructor(data: SeriesData, idx: number, seriesScope?: SymbolDrawSeriesScope, opts?: SymbolOpts);
-    _createSymbol(symbolType: string, data: SeriesData, idx: number, symbolSize: number[], keepAspect: boolean): void;
+    _createSymbol(symbolType: string, data: SeriesData, idx: number, symbolSize: number[], z2: number, keepAspect: boolean): void;
     /**
      * Stop animation
      * @param {boolean} toLastFrame
@@ -59,5 +59,6 @@ declare class Symbol extends graphic.Group {
         animation?: AnimationOption;
     }): void;
     static getSymbolSize(data: SeriesData, idx: number): [number, number];
+    static getSymbolZ2(data: SeriesData, idx: number): number;
 }
 export default Symbol;

@@ -1,28 +1,29 @@
-import { TimeUnit } from '../util/time.js';
 import IntervalScale from './Interval.js';
-import { TimeScaleTick } from '../util/types.js';
-import { TimeAxisLabelFormatterOption } from '../coord/axisCommonTypes.js';
+import { ScaleGetTicksOpt } from './Scale.js';
+import { TimeScaleTick, ScaleTick, AxisBreakOption } from '../util/types.js';
+import { TimeAxisLabelFormatterParsed } from '../coord/axisCommonTypes.js';
 import { LocaleOption } from '../core/locale.js';
 import Model from '../model/Model.js';
 declare type TimeScaleSetting = {
     locale: Model<LocaleOption>;
     useUTC: boolean;
+    modelAxisBreaks?: AxisBreakOption[];
 };
 declare class TimeScale extends IntervalScale<TimeScaleSetting> {
     static type: string;
     readonly type = "time";
-    _approxInterval: number;
-    _minLevelUnit: TimeUnit;
+    private _approxInterval;
+    private _minLevelUnit;
     constructor(settings?: TimeScaleSetting);
     /**
      * Get label is mainly for other components like dataZoom, tooltip.
      */
     getLabel(tick: TimeScaleTick): string;
-    getFormattedLabel(tick: TimeScaleTick, idx: number, labelFormatter: TimeAxisLabelFormatterOption): string;
+    getFormattedLabel(tick: ScaleTick, idx: number, labelFormatter: TimeAxisLabelFormatterParsed): string;
     /**
      * @override
      */
-    getTicks(): TimeScaleTick[];
+    getTicks(opt?: ScaleGetTicksOpt): TimeScaleTick[];
     calcNiceExtent(opt?: {
         splitNumber?: number;
         fixMin?: boolean;

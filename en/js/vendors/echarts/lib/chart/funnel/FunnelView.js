@@ -125,12 +125,14 @@ var FunnelPiece = /** @class */function (_super) {
         verticalAlign: labelLayout.verticalAlign
       }
     });
+    var labelModel = itemModel.getModel('label');
+    var labelColor = labelModel.get('color');
+    var overrideColor = labelColor === 'inherit' ? visualColor : null;
     polygon.setTextConfig({
       local: true,
       inside: !!labelLayout.inside,
-      insideStroke: visualColor,
-      // insideFill: 'auto',
-      outsideFill: visualColor
+      insideStroke: overrideColor,
+      outsideFill: overrideColor
     });
     var linePoints = labelLayout.linePoints;
     labelLine.setShape({

@@ -1,5 +1,5 @@
 import VisualMapping, { VisualMappingOption } from '../../visual/VisualMapping.js';
-import { ComponentOption, BoxLayoutOptionMixin, LabelOption, ColorString, ZRColor, BorderOptionMixin, OptionDataValue, BuiltinVisualProperty, DimensionIndex } from '../../util/types.js';
+import { ComponentOption, BoxLayoutOptionMixin, LabelOption, ColorString, ZRColor, BorderOptionMixin, OptionDataValue, BuiltinVisualProperty, DimensionIndex, OptionId } from '../../util/types.js';
 import ComponentModel from '../../model/Component.js';
 import Model from '../../model/Model.js';
 import GlobalModel from '../../model/Global.js';
@@ -18,11 +18,12 @@ export interface VisualMapOption<T extends VisualOptionBase = VisualOptionBase> 
     /**
      * 'all' or null/undefined: all series.
      * A number or an array of number: the specified series.
-     * set min: 0, max: 200, only for campatible with ec2.
-     * In fact min max should not have default value.
      */
     seriesIndex?: 'all' | number[] | number;
+    seriesId?: OptionId | OptionId[];
     /**
+     * set min: 0, max: 200, only for campatible with ec2.
+     * In fact min max should not have default value.
      * min value, must specified if pieces is not specified.
      */
     min?: number;
@@ -156,10 +157,9 @@ declare class VisualMapModel<Opts extends VisualMapOption = VisualMapOption> ext
      */
     getItemSymbol(): string;
     /**
-     * @protected
-     * @return {Array.<number>} An array of series indices.
+     * @return An array of series indices.
      */
-    getTargetSeriesIndices(): number[];
+    protected getTargetSeriesIndices(): number[];
     /**
      * @public
      */

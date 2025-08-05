@@ -1,7 +1,9 @@
+import * as graphic from '../../util/graphic.js';
 import ChartView from '../../view/Chart.js';
 import TreeSeriesModel from './TreeSeries.js';
 import GlobalModel from '../../model/Global.js';
 import ExtensionAPI from '../../core/ExtensionAPI.js';
+import { NullUndefined } from '../../util/types.js';
 declare class TreeView extends ChartView {
     static readonly type = "tree";
     readonly type = "tree";
@@ -15,7 +17,7 @@ declare class TreeView extends ChartView {
     init(ecModel: GlobalModel, api: ExtensionAPI): void;
     render(seriesModel: TreeSeriesModel, ecModel: GlobalModel, api: ExtensionAPI): void;
     _updateViewCoordSys(seriesModel: TreeSeriesModel, api: ExtensionAPI): void;
-    _updateController(seriesModel: TreeSeriesModel, ecModel: GlobalModel, api: ExtensionAPI): void;
+    _updateController(seriesModel: TreeSeriesModel, clipRect: graphic.BoundingRect | NullUndefined, ecModel: GlobalModel, api: ExtensionAPI): void;
     _updateNodeAndLinkScale(seriesModel: TreeSeriesModel): void;
     _getNodeGlobalScale(seriesModel: TreeSeriesModel): number;
     dispose(): void;

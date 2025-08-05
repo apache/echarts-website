@@ -46,6 +46,7 @@ import ComponentModel from '../../model/Component.js';
 import SeriesData from '../../data/SeriesData.js';
 import { each, isObject, clone } from 'zrender/lib/core/util.js';
 import { convertOptionIdName, getDataItemValue } from '../../util/model.js';
+import tokens from '../../visual/tokens.js';
 var TimelineModel = /** @class */function (_super) {
   __extends(TimelineModel, _super);
   function TimelineModel() {
@@ -170,7 +171,7 @@ var TimelineModel = /** @class */function (_super) {
     bottom: 0,
     width: null,
     height: 40,
-    padding: 5,
+    padding: tokens.size.m,
     controlPosition: 'left',
     autoPlay: false,
     rewind: false,
@@ -179,7 +180,7 @@ var TimelineModel = /** @class */function (_super) {
     currentIndex: 0,
     itemStyle: {},
     label: {
-      color: '#000'
+      color: tokens.color.secondary
     },
     data: []
   };

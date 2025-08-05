@@ -69,9 +69,7 @@ var SingleAxisPointer = /** @class */function (_super) {
       elOption.pointer = pointerOption;
     }
     var layoutInfo = singleAxisHelper.layout(axisModel);
-    viewHelper.buildCartesianSingleLabelElOption(
-    // @ts-ignore
-    value, elOption, layoutInfo, axisModel, axisPointerModel, api);
+    viewHelper.buildCartesianSingleLabelElOption(value, elOption, layoutInfo, axisModel, axisPointerModel, api);
   };
   /**
    * @override
@@ -80,7 +78,6 @@ var SingleAxisPointer = /** @class */function (_super) {
     var layoutInfo = singleAxisHelper.layout(axisModel, {
       labelInside: false
     });
-    // @ts-ignore
     layoutInfo.labelMargin = axisPointerModel.get(['handle', 'margin']);
     var position = viewHelper.getTransformedPosition(axisModel.axis, value, layoutInfo);
     return {

@@ -47,17 +47,17 @@ import Polar, { polarDimensions } from './Polar.js';
 import { parsePercent } from '../../util/number.js';
 import { createScaleByModel, niceScaleExtent, getDataDimensionsOnAxis } from '../../coord/axisHelper.js';
 import { SINGLE_REFERRING } from '../../util/model.js';
+import { createBoxLayoutReference } from '../../util/layout.js';
 /**
  * Resize method bound to the polar
  */
 function resizePolar(polar, polarModel, api) {
   var center = polarModel.get('center');
-  var width = api.getWidth();
-  var height = api.getHeight();
-  polar.cx = parsePercent(center[0], width);
-  polar.cy = parsePercent(center[1], height);
+  var refContainer = createBoxLayoutReference(polarModel, api).refContainer;
+  polar.cx = parsePercent(center[0], refContainer.width) + refContainer.x;
+  polar.cy = parsePercent(center[1], refContainer.height) + refContainer.y;
   var radiusAxis = polar.getRadiusAxis();
-  var size = Math.min(width, height) / 2;
+  var size = Math.min(refContainer.width, refContainer.height) / 2;
   var radius = polarModel.get('radius');
   if (radius == null) {
     radius = [0, '100%'];

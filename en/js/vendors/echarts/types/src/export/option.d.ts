@@ -8,11 +8,13 @@ import type { SingleAxisOption as SingleAxisComponentOption } from '../coord/sin
 import type { ParallelAxisOption as ParallelAxisComponentOption } from '../coord/parallel/AxisModel.js';
 import type { ParallelCoordinateSystemOption as ParallelComponentOption } from '../coord/parallel/ParallelModel.js';
 import type { CalendarOption as CalendarComponentOption } from '../coord/calendar/CalendarModel.js';
+import type { MatrixOption as MatrixComponentOption } from '../coord/matrix/MatrixModel.js';
 import type { ToolboxOption } from '../component/toolbox/ToolboxModel.js';
 import type { TooltipOption as TooltipComponentOption, TopLevelFormatterParams } from '../component/tooltip/TooltipModel.js';
 import type { AxisPointerOption as AxisPointerComponentOption } from '../component/axisPointer/AxisPointerModel.js';
 import type { BrushOption as BrushComponentOption } from '../component/brush/BrushModel.js';
 import type { TitleOption as TitleComponentOption } from '../component/title/install.js';
+import type { ThumbnailOption as ThumbnailComponentOption } from '../component/thumbnail/ThumbnailModel.js';
 import type { TimelineOption as TimelineComponentOption } from '../component/timeline/TimelineModel.js';
 import type { SliderTimelineOption as TimelineSliderComponentOption } from '../component/timeline/SliderTimelineModel.js';
 import type { LegendOption as PlainLegendComponentOption } from '../component/legend/LegendModel.js';
@@ -33,6 +35,7 @@ import type { MapSeriesOption as MapSeriesOptionInner } from '../chart/map/MapSe
 import type { TreeSeriesOption as TreeSeriesOptionInner } from '../chart/tree/TreeSeries.js';
 import type { TreemapSeriesOption as TreemapSeriesOptionInner } from '../chart/treemap/TreemapSeries.js';
 import type { GraphSeriesOption as GraphSeriesOptionInner } from '../chart/graph/GraphSeries.js';
+import type { ChordSeriesOption as ChordSeriesOptionInner } from '../chart/chord/ChordSeries.js';
 import type { GaugeSeriesOption as GaugeSeriesOptionInner } from '../chart/gauge/GaugeSeries.js';
 import type { FunnelSeriesOption as FunnelSeriesOptionInner } from '../chart/funnel/FunnelSeries.js';
 import type { ParallelSeriesOption as ParallelSeriesOptionInner } from '../chart/parallel/ParallelSeries.js';
@@ -75,7 +78,7 @@ export { ContinousVisualMapComponentOption, PiecewiseVisualMapComponentOption };
 export declare type VisualMapComponentOption = ContinousVisualMapComponentOption | PiecewiseVisualMapComponentOption;
 export { PlainLegendComponentOption, ScrollableLegendComponentOption };
 export declare type LegendComponentOption = PlainLegendComponentOption | ScrollableLegendComponentOption;
-export { GridComponentOption, PolarComponentOption, RadarComponentOption, GeoComponentOption, XAXisComponentOption, YAXisComponentOption, SingleAxisComponentOption, RadiusAxisComponentOption, AngleAxisComponentOption, ParallelComponentOption, CalendarComponentOption, TooltipComponentOption, AxisPointerComponentOption, BrushComponentOption, TitleComponentOption, TimelineComponentOption, MarkLineComponentOption, MarkPointComponentOption, MarkAreaComponentOption, ToolboxComponentOption, GraphicComponentOption, AriaComponentOption, DatasetComponentOption };
+export { GridComponentOption, PolarComponentOption, RadarComponentOption, GeoComponentOption, XAXisComponentOption, YAXisComponentOption, SingleAxisComponentOption, RadiusAxisComponentOption, AngleAxisComponentOption, ParallelComponentOption, CalendarComponentOption, MatrixComponentOption, TooltipComponentOption, AxisPointerComponentOption, BrushComponentOption, TitleComponentOption, TimelineComponentOption, MarkLineComponentOption, MarkPointComponentOption, MarkAreaComponentOption, ToolboxComponentOption, ThumbnailComponentOption, GraphicComponentOption, AriaComponentOption, DatasetComponentOption };
 declare type SeriesInjectedOption = {
     markArea?: MarkAreaComponentOption;
     markLine?: MarkLineComponentOption;
@@ -91,6 +94,7 @@ export declare type MapSeriesOption = MapSeriesOptionInner & SeriesInjectedOptio
 export declare type TreeSeriesOption = TreeSeriesOptionInner & SeriesInjectedOption;
 export declare type TreemapSeriesOption = TreemapSeriesOptionInner & SeriesInjectedOption;
 export declare type GraphSeriesOption = GraphSeriesOptionInner & SeriesInjectedOption;
+export declare type ChordSeriesOption = ChordSeriesOptionInner & SeriesInjectedOption;
 export declare type GaugeSeriesOption = GaugeSeriesOptionInner & SeriesInjectedOption;
 export declare type FunnelSeriesOption = FunnelSeriesOptionInner & SeriesInjectedOption;
 export declare type ParallelSeriesOption = ParallelSeriesOptionInner & SeriesInjectedOption;
@@ -127,6 +131,7 @@ export interface RegisteredSeriesOption {
     tree: TreeSeriesOption;
     treemap: TreemapSeriesOption;
     graph: GraphSeriesOption;
+    chord: ChordSeriesOption;
     gauge: GaugeSeriesOption;
     funnel: FunnelSeriesOption;
     parallel: ParallelSeriesOption;
@@ -159,6 +164,7 @@ export interface EChartsOption extends ECBasicOption {
     parallel?: ParallelComponentOption | ParallelComponentOption[];
     parallelAxis?: ParallelAxisComponentOption | ParallelAxisComponentOption[];
     calendar?: CalendarComponentOption | CalendarComponentOption[];
+    matrix?: MatrixComponentOption | MatrixComponentOption[];
     toolbox?: ToolboxComponentOption | ToolboxComponentOption[];
     tooltip?: TooltipComponentOption | TooltipComponentOption[];
     axisPointer?: AxisPointerComponentOption | AxisPointerComponentOption[];
@@ -167,6 +173,7 @@ export interface EChartsOption extends ECBasicOption {
     legend?: LegendComponentOption | (LegendComponentOption)[];
     dataZoom?: DataZoomComponentOption | (DataZoomComponentOption)[];
     visualMap?: VisualMapComponentOption | (VisualMapComponentOption)[];
+    thumbnail?: ThumbnailComponentOption | (ThumbnailComponentOption)[];
     graphic?: GraphicComponentOption | GraphicComponentOption[];
     series?: SeriesOption | SeriesOption[];
     options?: EChartsOption[];

@@ -79,7 +79,7 @@ var CalendarView = /** @class */function (_super) {
     var sw = coordSys.getCellWidth();
     var sh = coordSys.getCellHeight();
     for (var i = rangeData.start.time; i <= rangeData.end.time; i = coordSys.getNextNDay(i, 1).time) {
-      var point = coordSys.dataToRect([i], false).tl;
+      var point = coordSys.dataToCalendarLayout([i], false).tl;
       // every rect
       var rect = new graphic.Rect({
         shape: {
@@ -118,7 +118,7 @@ var CalendarView = /** @class */function (_super) {
     addPoints(coordSys.getNextNDay(rangeData.end.time, 1).formatedDate);
     function addPoints(date) {
       self._firstDayOfMonth.push(coordSys.getDateInfo(date));
-      self._firstDayPoints.push(coordSys.dataToRect([date], false).tl);
+      self._firstDayPoints.push(coordSys.dataToCalendarLayout([date], false).tl);
       var points = self._getLinePointsOfOneWeek(calendarModel, date, orient);
       self._tlpoints.push(points[0]);
       self._blpoints.push(points[points.length - 1]);
@@ -156,7 +156,7 @@ var CalendarView = /** @class */function (_super) {
     var points = [];
     for (var i = 0; i < 7; i++) {
       var tmpD = coordSys.getNextNDay(parsedDate.time, i);
-      var point = coordSys.dataToRect([tmpD.time], false);
+      var point = coordSys.dataToCalendarLayout([tmpD.time], false);
       points[2 * tmpD.day] = point.tl;
       points[2 * tmpD.day + 1] = point[orient === 'horizontal' ? 'bl' : 'tr'];
     }
@@ -376,7 +376,7 @@ var CalendarView = /** @class */function (_super) {
     var labelSilent = dayLabel.get('silent');
     for (var i = 0; i < 7; i++) {
       var tmpD = coordSys.getNextNDay(start, i);
-      var point = coordSys.dataToRect([tmpD.time], false).center;
+      var point = coordSys.dataToCalendarLayout([tmpD.time], false).center;
       var day = i;
       day = Math.abs((i + firstDayOfWeek) % 7);
       var weekText = new graphic.Text({

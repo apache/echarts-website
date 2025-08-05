@@ -49,6 +49,8 @@ import geoSourceManager from '../../coord/geo/geoSourceManager.js';
 import { makeSeriesEncodeForNameBased } from '../../data/helper/sourceHelper.js';
 import { createTooltipMarkup } from '../../component/tooltip/tooltipMarkup.js';
 import { createSymbol } from '../../util/symbol.js';
+import { CoordinateSystemUsageKind, decideCoordSysUsageKind } from '../../core/CoordinateSystem.js';
+import tokens from '../../visual/tokens.js';
 var MapSeries = /** @class */function (_super) {
   __extends(MapSeries, _super);
   function MapSeries() {
@@ -107,8 +109,17 @@ var MapSeries = /** @class */function (_super) {
    * inner exclusive geo model.
    */
   MapSeries.prototype.getHostGeoModel = function () {
-    var geoIndex = this.option.geoIndex;
-    return geoIndex != null ? this.ecModel.getComponent('geo', geoIndex) : null;
+    if (decideCoordSysUsageKind(this).kind === CoordinateSystemUsageKind.boxCoordSys) {
+      // Always use an internal geo if specify a boxCoordSys.
+      // Notice that currently we do not support laying out a geo based on
+      // another geo, but preserve the possibility.
+      return;
+    }
+    return this.getReferringComponents('geo', {
+      useDefault: false,
+      enableAll: false,
+      enableNone: false
+    }).models[0];
   };
   MapSeries.prototype.getMapType = function () {
     return (this.getHostGeoModel() || this).option.map;
@@ -173,7 +184,7 @@ var MapSeries = /** @class */function (_super) {
     // No rotation because no series visual symbol for map
     if (iconType.indexOf('empty') > -1) {
       icon.style.stroke = icon.style.fill;
-      icon.style.fill = '#fff';
+      icon.style.fill = tokens.color.neutral00;
       icon.style.lineWidth = 2;
     }
     return icon;
@@ -224,30 +235,30 @@ var MapSeries = /** @class */function (_super) {
     selectedMode: true,
     label: {
       show: false,
-      color: '#000'
+      color: tokens.color.tertiary
     },
     // scaleLimit: null,
     itemStyle: {
       borderWidth: 0.5,
-      borderColor: '#444',
-      areaColor: '#eee'
+      borderColor: tokens.color.border,
+      areaColor: tokens.color.background
     },
     emphasis: {
       label: {
         show: true,
-        color: 'rgb(100,0,0)'
+        color: tokens.color.primary
       },
       itemStyle: {
-        areaColor: 'rgba(255,215,0,0.8)'
+        areaColor: tokens.color.highlight
       }
     },
     select: {
       label: {
         show: true,
-        color: 'rgb(100,0,0)'
+        color: tokens.color.primary
       },
       itemStyle: {
-        color: 'rgba(255,215,0,0.8)'
+        color: tokens.color.highlight
       }
     },
     nameProperty: 'name'

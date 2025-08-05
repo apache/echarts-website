@@ -44,7 +44,7 @@
 import { each, isObject, isArray, createHashMap, map, assert, isString, indexOf, isStringSafe, isNumber } from 'zrender/lib/core/util.js';
 import env from 'zrender/lib/core/env.js';
 import { isNumeric, getRandomIdBase, getPrecision, round } from './number.js';
-import { warn } from './log.js';
+import { error, warn } from './log.js';
 function interpolateNumber(p0, p1, percent) {
   return (p1 - p0) * percent + p0;
 }
@@ -553,7 +553,7 @@ export function preParseFinder(finderInput, opt) {
   var others = {};
   var mainTypeSpecified = false;
   each(finder, function (value, key) {
-    // Exclude 'dataIndex' and other illgal keys.
+    // Exclude 'dataIndex' and other illegal keys.
     if (key === 'dataIndex' || key === 'dataIndexInside') {
       others[key] = value;
       return;
@@ -600,15 +600,29 @@ export function queryReferringComponents(ecModel, mainType, userOption, opt) {
     return result;
   }
   if (indexOption === 'none' || indexOption === false) {
-    assert(opt.enableNone, '`"none"` or `false` is not a valid value on index option.');
-    result.models = [];
-    return result;
+    if (opt.enableNone) {
+      result.models = [];
+      return result;
+    } else {
+      // Do not throw; consider if some component previously does not use this method,
+      // and start to use it, need to be fault-tolerant for backward compatibility.
+      if (process.env.NODE_ENV !== 'production') {
+        error('`"none"` or `false` is not a valid value on index option.');
+      }
+      indexOption = -1; // Can not query by index but may still query by id/name if specified.
+    }
   }
   // `queryComponents` will return all components if
   // both all of index/id/name are null/undefined.
   if (indexOption === 'all') {
-    assert(opt.enableAll, '`"all"` is not a valid value on index option.');
-    indexOption = idOption = nameOption = null;
+    if (opt.enableAll) {
+      indexOption = idOption = nameOption = null;
+    } else {
+      if (process.env.NODE_ENV !== 'production') {
+        error('`"all"` is not a valid value on index option.');
+      }
+      indexOption = -1;
+    }
   }
   result.models = ecModel.queryComponents({
     mainType: mainType,
@@ -692,4 +706,53 @@ export function interpolateRawValues(data, precision, sourceValue, targetValue, 
     }
     return interpolated;
   }
+}
+/**
+ * Use an iterator to avoid exposing the internal list or duplicating it
+ * for the outside traveller, and no extra heap allocation.
+ * @usage
+ *  for (const it = resetIterator(); it.next();) {
+ *      const item = it.item;
+ *      const key = it.key;
+ *      const itIdx = it.itIdx;
+ *      // ...
+ *  }
+ * @usage
+ *  const it = resetIterator();
+ *  while (it.next()) { ... }
+ * @usage
+ *  for (resetIterator(it); it.next();) { ... }
+ */
+var ListIterator = /** @class */function () {
+  function ListIterator() {}
+  /**
+   * The loop condition is `idx < end` if `step > 0`;
+   * The loop condition is `idx >= end` if `step < 0`.
+   *
+   * @param end By default `list.length` if `step > 0`; `0` if `step < 0`.
+   * @param step By default `1`.
+   */
+  ListIterator.prototype.reset = function (list, start, end, step) {
+    this._list = list;
+    this._step = step = step || 1;
+    this._idx = start;
+    this._end = end != null ? end : step > 0 ? list.length : 0;
+    this.item = null;
+    this.key = NaN;
+    return this;
+  };
+  ListIterator.prototype.next = function () {
+    if (this._step > 0 ? this._idx < this._end : this._idx >= this._end) {
+      this.item = this._list[this._idx];
+      this.key = this._idx = this._idx + this._step;
+      return true;
+    }
+    return false;
+  };
+  return ListIterator;
+}();
+export { ListIterator };
+export function clearTmpModel(model) {
+  // Clear to avoid memory leak.
+  model.option = model.parentModel = model.ecModel = null;
 }

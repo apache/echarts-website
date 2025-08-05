@@ -44,13 +44,11 @@
 import { __extends } from "tslib";
 import * as zrUtil from 'zrender/lib/core/util.js';
 import * as graphic from '../../util/graphic.js';
-import AxisBuilder from './AxisBuilder.js';
 import AxisView from './AxisView.js';
-import * as cartesianAxisHelper from '../../coord/cartesian/cartesianAxisHelper.js';
 import { rectCoordAxisBuildSplitArea, rectCoordAxisHandleRemove } from './axisSplitHelper.js';
-import { isIntervalOrLogScale } from '../../scale/helper.js';
-var axisBuilderAttrs = ['axisLine', 'axisTickLabel', 'axisName'];
-var selfBuilderAttrs = ['splitArea', 'splitLine', 'minorSplitLine'];
+import { getAxisBreakHelper } from './axisBreakHelper.js';
+import { shouldAxisShow } from '../../coord/axisHelper.js';
+var selfBuilderAttrs = ['splitArea', 'splitLine', 'minorSplitLine', 'breakArea'];
 var CartesianAxisView = /** @class */function (_super) {
   __extends(CartesianAxisView, _super);
   function CartesianAxisView() {
@@ -67,29 +65,13 @@ var CartesianAxisView = /** @class */function (_super) {
     var oldAxisGroup = this._axisGroup;
     this._axisGroup = new graphic.Group();
     this.group.add(this._axisGroup);
-    if (!axisModel.get('show')) {
+    if (!shouldAxisShow(axisModel)) {
       return;
     }
-    var gridModel = axisModel.getCoordSysModel();
-    var layout = cartesianAxisHelper.layout(gridModel, axisModel);
-    var axisBuilder = new AxisBuilder(axisModel, zrUtil.extend({
-      handleAutoShown: function (elementType) {
-        var cartesians = gridModel.coordinateSystem.getCartesians();
-        for (var i = 0; i < cartesians.length; i++) {
-          if (isIntervalOrLogScale(cartesians[i].getOtherAxis(axisModel.axis).scale)) {
-            // Still show axis tick or axisLine if other axis is value / log
-            return true;
-          }
-        }
-        // Not show axisTick or axisLine if other axis is category / time
-        return false;
-      }
-    }, layout));
-    zrUtil.each(axisBuilderAttrs, axisBuilder.add, axisBuilder);
-    this._axisGroup.add(axisBuilder.getGroup());
+    this._axisGroup.add(axisModel.axis.axisBuilder.group);
     zrUtil.each(selfBuilderAttrs, function (name) {
       if (axisModel.get([name, 'show'])) {
-        axisElementBuilders[name](this, this._axisGroup, axisModel, gridModel);
+        axisElementBuilders[name](this, this._axisGroup, axisModel, axisModel.getCoordSysModel(), api);
       }
     }, this);
     // THIS is a special case for bar racing chart.
@@ -108,7 +90,7 @@ var CartesianAxisView = /** @class */function (_super) {
   return CartesianAxisView;
 }(AxisView);
 var axisElementBuilders = {
-  splitLine: function (axisView, axisGroup, axisModel, gridModel) {
+  splitLine: function (axisView, axisGroup, axisModel, gridModel, api) {
     var axis = axisModel.axis;
     if (axis.scale.isBlank()) {
       return;
@@ -123,7 +105,9 @@ var axisElementBuilders = {
     var isHorizontal = axis.isHorizontal();
     var lineCount = 0;
     var ticksCoords = axis.getTicksCoords({
-      tickModel: splitLineModel
+      tickModel: splitLineModel,
+      breakTicks: 'none',
+      pruneByBreak: 'preserve_extent_bound'
     });
     var p1 = [];
     var p2 = [];
@@ -164,7 +148,7 @@ var axisElementBuilders = {
       axisGroup.add(line);
     }
   },
-  minorSplitLine: function (axisView, axisGroup, axisModel, gridModel) {
+  minorSplitLine: function (axisView, axisGroup, axisModel, gridModel, api) {
     var axis = axisModel.axis;
     var minorSplitLineModel = axisModel.getModel('minorSplitLine');
     var lineStyleModel = minorSplitLineModel.getModel('lineStyle');
@@ -208,8 +192,15 @@ var axisElementBuilders = {
       }
     }
   },
-  splitArea: function (axisView, axisGroup, axisModel, gridModel) {
+  splitArea: function (axisView, axisGroup, axisModel, gridModel, api) {
     rectCoordAxisBuildSplitArea(axisView, axisGroup, axisModel, gridModel);
+  },
+  breakArea: function (axisView, axisGroup, axisModel, gridModel, api) {
+    var axisBreakHelper = getAxisBreakHelper();
+    var scale = axisModel.axis.scale;
+    if (axisBreakHelper && scale.type !== 'ordinal') {
+      axisBreakHelper.rectCoordBuildBreakAxis(axisGroup, axisView, axisModel, gridModel.coordinateSystem.getRect(), api);
+    }
   }
 };
 var CartesianXAxisView = /** @class */function (_super) {

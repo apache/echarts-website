@@ -32,7 +32,10 @@ if (typeof wx === 'object' && typeof wx.getSystemInfoSync === 'function') {
 else if (typeof document === 'undefined' && typeof self !== 'undefined') {
     env.worker = true;
 }
-else if (!env.hasGlobalWindow || 'Deno' in window) {
+else if (!env.hasGlobalWindow
+    || 'Deno' in window
+    || (typeof navigator !== 'undefined' && typeof navigator.userAgent === 'string'
+        && navigator.userAgent.indexOf('Node.js') > -1)) {
     env.node = true;
     env.svgSupported = true;
 }
@@ -66,14 +69,16 @@ function detect(ua, env) {
     env.touchEventsSupported = 'ontouchstart' in window && !browser.ie && !browser.edge;
     env.pointerEventsSupported = 'onpointerdown' in window
         && (browser.edge || (browser.ie && +browser.version >= 11));
-    env.domSupported = typeof document !== 'undefined';
-    var style = document.documentElement.style;
-    env.transform3dSupported = ((browser.ie && 'transition' in style)
-        || browser.edge
-        || (('WebKitCSSMatrix' in window) && ('m11' in new WebKitCSSMatrix()))
-        || 'MozPerspective' in style)
-        && !('OTransition' in style);
-    env.transformSupported = env.transform3dSupported
-        || (browser.ie && +browser.version >= 9);
+    var domSupported = env.domSupported = typeof document !== 'undefined';
+    if (domSupported) {
+        var style = document.documentElement.style;
+        env.transform3dSupported = ((browser.ie && 'transition' in style)
+            || browser.edge
+            || (('WebKitCSSMatrix' in window) && ('m11' in new WebKitCSSMatrix()))
+            || 'MozPerspective' in style)
+            && !('OTransition' in style);
+        env.transformSupported = env.transform3dSupported
+            || (browser.ie && +browser.version >= 9);
+    }
 }
 export default env;

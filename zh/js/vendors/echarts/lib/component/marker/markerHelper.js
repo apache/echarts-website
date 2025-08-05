@@ -51,12 +51,13 @@ function hasXOrY(item) {
 function hasXAndY(item) {
   return !isNaN(parseFloat(item.x)) && !isNaN(parseFloat(item.y));
 }
-function markerTypeCalculatorWithExtent(markerType, data, otherDataDim, targetDataDim, otherCoordIndex, targetCoordIndex) {
+function markerTypeCalculatorWithExtent(markerType, data, axisDim, otherDataDim, targetDataDim, otherCoordIndex, targetCoordIndex) {
   var coordArr = [];
   var stacked = isDimensionStacked(data, targetDataDim /* , otherDataDim */);
   var calcDataDim = stacked ? data.getCalculationInfo('stackResultDimension') : targetDataDim;
   var value = numCalculate(data, calcDataDim, markerType);
-  var dataIndex = data.indicesOfNearest(calcDataDim, value)[0];
+  var seriesModel = data.hostModel;
+  var dataIndex = seriesModel.indicesOfNearest(axisDim, calcDataDim, value)[0];
   coordArr[otherCoordIndex] = data.get(otherDataDim, dataIndex);
   coordArr[targetCoordIndex] = data.get(calcDataDim, dataIndex);
   var coordArrValue = data.get(targetDataDim, dataIndex);
@@ -99,7 +100,7 @@ export function dataTransform(seriesModel, item) {
     if (item.type && markerTypeCalculator[item.type] && axisInfo.baseAxis && axisInfo.valueAxis) {
       var otherCoordIndex = indexOf(dims, axisInfo.baseAxis.dim);
       var targetCoordIndex = indexOf(dims, axisInfo.valueAxis.dim);
-      var coordInfo = markerTypeCalculator[item.type](data, axisInfo.baseDataDim, axisInfo.valueDataDim, otherCoordIndex, targetCoordIndex);
+      var coordInfo = markerTypeCalculator[item.type](data, axisInfo.valueAxis.dim, axisInfo.baseDataDim, axisInfo.valueDataDim, otherCoordIndex, targetCoordIndex);
       item.coord = coordInfo[0];
       // Force to use the value of calculated value.
       // let item use the value without stack.
@@ -112,6 +113,13 @@ export function dataTransform(seriesModel, item) {
   // x y is provided
   if (item.coord == null || !isArray(dims)) {
     item.coord = [];
+    var baseAxis = seriesModel.getBaseAxis();
+    if (baseAxis && item.type && markerTypeCalculator[item.type]) {
+      var otherAxis = coordSys.getOtherAxis(baseAxis);
+      if (otherAxis) {
+        item.value = numCalculate(data, data.mapDimension(otherAxis.dim), item.type);
+      }
+    }
   } else {
     // Each coord support max, min, average
     var coord = item.coord;

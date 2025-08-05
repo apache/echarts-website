@@ -46,6 +46,7 @@ import * as zrUtil from 'zrender/lib/core/util.js';
 import Model from '../../model/Model.js';
 import { isNameSpecified } from '../../util/model.js';
 import ComponentModel from '../../model/Component.js';
+import tokens from '../../visual/tokens.js';
 var getDefaultSelectorOptions = function (ecModel, type) {
   if (type === 'all') {
     return {
@@ -245,21 +246,21 @@ var LegendModel = /** @class */function (_super) {
     orient: 'horizontal',
     left: 'center',
     // right: 'center',
-    top: 0,
-    // bottom: null,
+    // top: 0,
+    bottom: tokens.size.m,
     align: 'auto',
-    backgroundColor: 'rgba(0,0,0,0)',
-    borderColor: '#ccc',
+    backgroundColor: tokens.color.transparent,
+    borderColor: tokens.color.border,
     borderRadius: 0,
     borderWidth: 0,
     padding: 5,
-    itemGap: 10,
+    itemGap: 8,
     itemWidth: 25,
     itemHeight: 14,
     symbolRotate: 'inherit',
     symbolKeepAspect: true,
-    inactiveColor: '#ccc',
-    inactiveBorderColor: '#ccc',
+    inactiveColor: tokens.color.disabled,
+    inactiveBorderColor: tokens.color.disabled,
     inactiveBorderWidth: 'auto',
     itemStyle: {
       color: 'inherit',
@@ -274,7 +275,7 @@ var LegendModel = /** @class */function (_super) {
     lineStyle: {
       width: 'auto',
       color: 'inherit',
-      inactiveColor: '#ccc',
+      inactiveColor: tokens.color.disabled,
       inactiveWidth: 2,
       opacity: 'inherit',
       type: 'inherit',
@@ -284,7 +285,7 @@ var LegendModel = /** @class */function (_super) {
       miterLimit: 'inherit'
     },
     textStyle: {
-      color: '#333'
+      color: tokens.color.secondary
     },
     selectedMode: true,
     selector: false,
@@ -294,15 +295,14 @@ var LegendModel = /** @class */function (_super) {
       padding: [3, 5, 3, 5],
       fontSize: 12,
       fontFamily: 'sans-serif',
-      color: '#666',
+      color: tokens.color.tertiary,
       borderWidth: 1,
-      borderColor: '#666'
+      borderColor: tokens.color.border
     },
     emphasis: {
       selectorLabel: {
         show: true,
-        color: '#eee',
-        backgroundColor: '#666'
+        color: tokens.color.quaternary
       }
     },
     selectorPosition: 'auto',
@@ -310,7 +310,8 @@ var LegendModel = /** @class */function (_super) {
     selectorButtonGap: 10,
     tooltip: {
       show: false
-    }
+    },
+    triggerEvent: false
   };
   return LegendModel;
 }(ComponentModel);

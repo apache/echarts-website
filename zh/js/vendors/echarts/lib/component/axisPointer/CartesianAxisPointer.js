@@ -66,19 +66,16 @@ var CartesianAxisPointer = /** @class */function (_super) {
       elOption.graphicKey = pointerOption.type;
       elOption.pointer = pointerOption;
     }
-    var layoutInfo = cartesianAxisHelper.layout(grid.model, axisModel);
-    viewHelper.buildCartesianSingleLabelElOption(
-    // @ts-ignore
-    value, elOption, layoutInfo, axisModel, axisPointerModel, api);
+    var layoutInfo = cartesianAxisHelper.layout(grid.getRect(), axisModel);
+    viewHelper.buildCartesianSingleLabelElOption(value, elOption, layoutInfo, axisModel, axisPointerModel, api);
   };
   /**
    * @override
    */
   CartesianAxisPointer.prototype.getHandleTransform = function (value, axisModel, axisPointerModel) {
-    var layoutInfo = cartesianAxisHelper.layout(axisModel.axis.grid.model, axisModel, {
+    var layoutInfo = cartesianAxisHelper.layout(axisModel.axis.grid.getRect(), axisModel, {
       labelInside: false
     });
-    // @ts-ignore
     layoutInfo.labelMargin = axisPointerModel.get(['handle', 'margin']);
     var pos = viewHelper.getTransformedPosition(axisModel.axis, value, layoutInfo);
     return {

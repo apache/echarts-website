@@ -50,7 +50,7 @@ import * as graphic from '../../util/graphic.js';
 import { toggleHoverEmphasis, setStatesStylesFromModel } from '../../util/states.js';
 import * as markerHelper from './markerHelper.js';
 import MarkerView from './MarkerView.js';
-import { retrieve, mergeAll, map, curry, filter, extend, isString } from 'zrender/lib/core/util.js';
+import { retrieve, mergeAll, map, curry, filter, extend, isString, retrieve2 } from 'zrender/lib/core/util.js';
 import { isCoordinateSystemType } from '../../coord/CoordinateSystem.js';
 import MarkerModel from './MarkerModel.js';
 import { makeInner } from '../../util/model.js';
@@ -58,6 +58,7 @@ import { getVisualFromData } from '../../visual/helper.js';
 import { setLabelStyle, getLabelStatesModels } from '../../label/labelStyle.js';
 import { getECData } from '../../util/innerStore.js';
 import { parseDataValue } from '../../data/helper/dataValueHelper.js';
+import tokens from '../../visual/tokens.js';
 var inner = makeInner();
 var markAreaTransform = function (seriesModel, coordSys, maModel, item) {
   // item may be null
@@ -244,7 +245,9 @@ var MarkAreaView = /** @class */function (_super) {
         points: points,
         allClipped: allClipped
       });
-      var style = areaData.getItemModel(idx).getModel('itemStyle').getItemStyle();
+      var itemModel = areaData.getItemModel(idx);
+      var style = itemModel.getModel('itemStyle').getItemStyle();
+      var z2 = itemModel.get('z2');
       var color = getVisualFromData(seriesData, 'color');
       if (!style.fill) {
         style.fill = color;
@@ -257,11 +260,14 @@ var MarkAreaView = /** @class */function (_super) {
       }
       // Visual
       areaData.setItemVisual(idx, 'style', style);
+      areaData.setItemVisual(idx, 'z2', retrieve2(z2, 0));
     });
     areaData.diff(inner(polygonGroup).data).add(function (idx) {
       var layout = areaData.getItemLayout(idx);
+      var z2 = areaData.getItemVisual(idx, 'z2');
       if (!layout.allClipped) {
         var polygon = new graphic.Polygon({
+          z2: retrieve2(z2, 0),
           shape: {
             points: layout.points
           }
@@ -272,9 +278,11 @@ var MarkAreaView = /** @class */function (_super) {
     }).update(function (newIdx, oldIdx) {
       var polygon = inner(polygonGroup).data.getItemGraphicEl(oldIdx);
       var layout = areaData.getItemLayout(newIdx);
+      var z2 = areaData.getItemVisual(newIdx, 'z2');
       if (!layout.allClipped) {
         if (polygon) {
           graphic.updateProps(polygon, {
+            z2: retrieve2(z2, 0),
             shape: {
               points: layout.points
             }
@@ -303,7 +311,7 @@ var MarkAreaView = /** @class */function (_super) {
         labelFetcher: maModel,
         labelDataIndex: idx,
         defaultText: areaData.getName(idx) || '',
-        inheritColor: isString(style.fill) ? colorUtil.modifyAlpha(style.fill, 1) : '#000'
+        inheritColor: isString(style.fill) ? colorUtil.modifyAlpha(style.fill, 1) : tokens.color.neutral99
       });
       setStatesStylesFromModel(polygon, itemModel);
       toggleHoverEmphasis(polygon, null, null, itemModel.get(['emphasis', 'disabled']));

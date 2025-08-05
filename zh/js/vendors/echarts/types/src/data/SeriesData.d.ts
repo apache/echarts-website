@@ -41,6 +41,7 @@ export interface DefaultDataVisual {
     symbolRotate?: number;
     symbolKeepAspect?: boolean;
     symbolOffset?: string | number | (string | number)[];
+    z2: number;
     liftZ?: number;
     legendIcon?: string;
     legendLineStyle?: LineStyleProps;
@@ -303,15 +304,6 @@ declare class SeriesData<HostModel extends Model = Model, Visual extends Default
      * @return rawIndex
      */
     rawIndexOf(dim: SeriesDimensionName, value: OrdinalNumber): number;
-    /**
-     * Retrieve the index of nearest value
-     * @param dim
-     * @param value
-     * @param [maxDistance=Infinity]
-     * @return If and only if multiple indices has
-     *         the same value, they are put to the result.
-     */
-    indicesOfNearest(dim: DimensionLoose, value: number, maxDistance?: number): number[];
     /**
      * Data iteration
      * @param ctx default this

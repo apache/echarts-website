@@ -196,7 +196,8 @@ function collectSeriesInfo(result, ecModel) {
     var coordSys = seriesModel.coordinateSystem;
     var seriesTooltipTrigger = seriesModel.get(['tooltip', 'trigger'], true);
     var seriesTooltipShow = seriesModel.get(['tooltip', 'show'], true);
-    if (!coordSys || seriesTooltipTrigger === 'none' || seriesTooltipTrigger === false || seriesTooltipTrigger === 'item' || seriesTooltipShow === false || seriesModel.get(['axisPointer', 'show'], true) === false) {
+    if (!coordSys || !coordSys.model // PENDING: radar do not have a model.
+    || seriesTooltipTrigger === 'none' || seriesTooltipTrigger === false || seriesTooltipTrigger === 'item' || seriesTooltipShow === false || seriesModel.get(['axisPointer', 'show'], true) === false) {
       return;
     }
     each(result.coordSysAxesInfo[makeKey(coordSys.model)], function (axisInfo) {

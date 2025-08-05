@@ -7,6 +7,7 @@ import { Constructor } from './util/clazz.js';
 import { SubTypeDefaulter } from './util/component.js';
 import { registerImpl } from './core/impl.js';
 import { registerPainter } from 'zrender/lib/zrender.js';
+import { CustomSeriesRenderItem } from './chart/custom/CustomSeries.js';
 declare const extensionRegisters: {
     registerPreprocessor: typeof registerPreprocessor;
     registerProcessor: typeof registerProcessor;
@@ -48,6 +49,7 @@ declare const extensionRegisters: {
     registerComponentView(ComponentViewClass: typeof ComponentView): void;
     registerSeriesModel(SeriesModelClass: Constructor): void;
     registerChartView(ChartViewClass: typeof ChartView): void;
+    registerCustomSeries(seriesType: string, renderItem: CustomSeriesRenderItem): void;
     registerSubTypeDefaulter(componentType: string, defaulter: SubTypeDefaulter): void;
     registerPainter(painterType: string, PainterCtor: Parameters<typeof registerPainter>[1]): void;
 };

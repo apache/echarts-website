@@ -2,17 +2,12 @@ import * as graphic from '../../util/graphic.js';
 import TreemapSeriesModel, { TreemapSeriesOption } from './TreemapSeries.js';
 import ExtensionAPI from '../../core/ExtensionAPI.js';
 import { TreeNode } from '../../data/Tree.js';
-import { ZRElementEvent, BoxLayoutOptionMixin } from '../../util/types.js';
+import { ZRElementEvent } from '../../util/types.js';
 import Model from '../../model/Model.js';
 interface OnSelectCallback {
     (node: TreeNode, e: ZRElementEvent): void;
 }
 interface LayoutParam {
-    pos: BoxLayoutOptionMixin;
-    box: {
-        width: number;
-        height: number;
-    };
     emptyItemWidth: number;
     totalWidth: number;
     renderList: {
@@ -36,7 +31,10 @@ declare class Breadcrumb {
     /**
      * @private
      */
-    _renderContent(seriesModel: TreemapSeriesModel, layoutParam: LayoutParam, normalStyleModel: BreadcrumbItemStyleModel, emphasisModel: BreadcrumbEmphasisItemStyleModel, textStyleModel: BreadcrumbTextStyleModel, emphasisTextStyleModel: BreadcrumbTextStyleModel, onSelect: OnSelectCallback): void;
+    _renderContent(seriesModel: TreemapSeriesModel, layoutParam: LayoutParam, availableSize: {
+        width: number;
+        height: number;
+    }, normalStyleModel: BreadcrumbItemStyleModel, emphasisModel: BreadcrumbEmphasisItemStyleModel, textStyleModel: BreadcrumbTextStyleModel, emphasisTextStyleModel: BreadcrumbTextStyleModel, onSelect: OnSelectCallback): void;
     remove(): void;
 }
 export default Breadcrumb;

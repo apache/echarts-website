@@ -30,6 +30,7 @@ declare class TooltipHTMLContent {
      * Record long-time hide
      */
     private _longHideTimeout;
+    private _enableDisplayTransition;
     constructor(api: ExtensionAPI, opt: TooltipContentOption);
     /**
      * Update when tooltip is rendered

@@ -49,6 +49,7 @@ import SeriesModel from './model/Series.js';
 import { isFunction, indexOf, isArray, each } from 'zrender/lib/core/util.js';
 import { registerImpl } from './core/impl.js';
 import { registerPainter } from 'zrender/lib/zrender.js';
+import { registerCustomSeries } from './chart/custom/customSeriesRegister.js';
 var extensions = [];
 var extensionRegisters = {
   registerPreprocessor: registerPreprocessor,
@@ -81,6 +82,9 @@ var extensionRegisters = {
   },
   registerChartView: function (ChartViewClass) {
     ChartView.registerClass(ChartViewClass);
+  },
+  registerCustomSeries: function (seriesType, renderItem) {
+    registerCustomSeries(seriesType, renderItem);
   },
   registerSubTypeDefaulter: function (componentType, defaulter) {
     ComponentModel.registerSubTypeDefaulter(componentType, defaulter);

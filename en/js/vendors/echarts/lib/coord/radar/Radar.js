@@ -47,6 +47,7 @@ import IntervalScale from '../../scale/Interval.js';
 import * as numberUtil from '../../util/number.js';
 import { map, each, isString, isNumber } from 'zrender/lib/core/util.js';
 import { alignScaleTicks } from '../axisAlignTicks.js';
+import { createBoxLayoutReference } from '../../util/layout.js';
 var Radar = /** @class */function () {
   function Radar(radarModel, ecModel, api) {
     /**
@@ -108,12 +109,11 @@ var Radar = /** @class */function () {
     return [closestAxisIdx, +(closestAxis && closestAxis.coordToData(radius))];
   };
   Radar.prototype.resize = function (radarModel, api) {
+    var refContainer = createBoxLayoutReference(radarModel, api).refContainer;
     var center = radarModel.get('center');
-    var viewWidth = api.getWidth();
-    var viewHeight = api.getHeight();
-    var viewSize = Math.min(viewWidth, viewHeight) / 2;
-    this.cx = numberUtil.parsePercent(center[0], viewWidth);
-    this.cy = numberUtil.parsePercent(center[1], viewHeight);
+    var viewSize = Math.min(refContainer.width, refContainer.height) / 2;
+    this.cx = numberUtil.parsePercent(center[0], refContainer.width) + refContainer.x;
+    this.cy = numberUtil.parsePercent(center[1], refContainer.height) + refContainer.y;
     this.startAngle = radarModel.get('startAngle') * Math.PI / 180;
     // radius may be single value like `20`, `'80%'`, or array like `[10, '80%']`
     var radius = radarModel.get('radius');

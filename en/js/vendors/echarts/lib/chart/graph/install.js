@@ -51,13 +51,8 @@ import createView from './createView.js';
 import View from '../../coord/View.js';
 import GraphView from './GraphView.js';
 import GraphSeriesModel from './GraphSeries.js';
-import { updateCenterAndZoom } from '../../action/roamHelper.js';
+import { updateCenterAndZoomInAction } from '../../component/helper/roamHelper.js';
 import { noop } from 'zrender/lib/core/util.js';
-var actionInfo = {
-  type: 'graphRoam',
-  event: 'graphRoam',
-  update: 'none'
-};
 export function install(registers) {
   registers.registerChartView(GraphView);
   registers.registerSeriesModel(GraphSeriesModel);
@@ -83,13 +78,26 @@ export function install(registers) {
     update: 'series:unfocusNodeAdjacency'
   }, noop);
   // Register roam action.
-  registers.registerAction(actionInfo, function (payload, ecModel, api) {
+  registers.registerAction({
+    type: 'graphRoam',
+    event: 'graphRoam',
+    update: 'none'
+  }, function (payload, ecModel, api) {
     ecModel.eachComponent({
       mainType: 'series',
       query: payload
     }, function (seriesModel) {
+      var graphView = api.getViewOfSeriesModel(seriesModel);
+      if (graphView) {
+        if (payload.dx != null && payload.dy != null) {
+          graphView.updateViewOnPan(seriesModel, api, payload);
+        }
+        if (payload.zoom != null && payload.originX != null && payload.originY != null) {
+          graphView.updateViewOnZoom(seriesModel, api, payload);
+        }
+      }
       var coordSys = seriesModel.coordinateSystem;
-      var res = updateCenterAndZoom(coordSys, payload, undefined, api);
+      var res = updateCenterAndZoomInAction(coordSys, payload, seriesModel.get('scaleLimit'));
       seriesModel.setCenter && seriesModel.setCenter(res.center);
       seriesModel.setZoom && seriesModel.setZoom(res.zoom);
     });

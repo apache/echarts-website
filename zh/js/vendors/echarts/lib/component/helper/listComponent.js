@@ -41,33 +41,14 @@
 * specific language governing permissions and limitations
 * under the License.
 */
-// @ts-nocheck
-import { getLayoutRect, box as layoutBox, positionElement } from '../../util/layout.js';
 import * as formatUtil from '../../util/format.js';
 import * as graphic from '../../util/graphic.js';
-/**
- * Layout list like component.
- * It will box layout each items in group of component and then position the whole group in the viewport
- * @param {module:zrender/group/Group} group
- * @param {module:echarts/model/Component} componentModel
- * @param {module:echarts/ExtensionAPI}
- */
-export function layout(group, componentModel, api) {
-  var boxLayoutParams = componentModel.getBoxLayoutParams();
-  var padding = componentModel.get('padding');
-  var viewportSize = {
-    width: api.getWidth(),
-    height: api.getHeight()
-  };
-  var rect = getLayoutRect(boxLayoutParams, viewportSize, padding);
-  layoutBox(componentModel.get('orient'), group, componentModel.get('itemGap'), rect.width, rect.height);
-  positionElement(group, boxLayoutParams, viewportSize, padding);
-}
+;
 export function makeBackground(rect, componentModel) {
   var padding = formatUtil.normalizeCssArray(componentModel.get('padding'));
   var style = componentModel.getItemStyle(['color', 'opacity']);
   style.fill = componentModel.get('backgroundColor');
-  rect = new graphic.Rect({
+  var bgRect = new graphic.Rect({
     shape: {
       x: rect.x - padding[3],
       y: rect.y - padding[0],
@@ -83,5 +64,5 @@ export function makeBackground(rect, componentModel) {
   // `subPixelOptimizeRect` may bring some gap between edge of viewpart
   // and background rect when setting like `left: 0`, `top: 0`.
   // graphic.subPixelOptimizeRect(rect);
-  return rect;
+  return bgRect;
 }

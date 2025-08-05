@@ -6,6 +6,7 @@ export { install as GeoComponent } from '../component/geo/install.js';
 export { install as SingleAxisComponent } from '../component/singleAxis/install.js';
 export { install as ParallelComponent } from '../component/parallel/install.js';
 export { install as CalendarComponent } from '../component/calendar/install.js';
+export { install as MatrixComponent } from '../component/matrix/install.js';
 export { install as GraphicComponent } from '../component/graphic/install.js';
 export { install as ToolboxComponent } from '../component/toolbox/install.js';
 export { install as TooltipComponent } from '../component/tooltip/install.js';
@@ -25,7 +26,8 @@ export { install as DataZoomSliderComponent } from '../component/dataZoom/instal
 export { install as VisualMapComponent } from '../component/visualMap/install.js';
 export { install as VisualMapContinuousComponent } from '../component/visualMap/installVisualMapContinuous.js';
 export { install as VisualMapPiecewiseComponent } from '../component/visualMap/installVisualMapPiecewise.js';
+export { install as ThumbnailComponent } from '../component/thumbnail/install.js';
 export { install as AriaComponent } from '../component/aria/install.js';
 export { install as TransformComponent } from '../component/transform/install.js';
 export { install as DatasetComponent } from '../component/dataset/install.js';
-export { GridComponentOption, PolarComponentOption, RadarComponentOption, GeoComponentOption, SingleAxisComponentOption, ParallelComponentOption, CalendarComponentOption, GraphicComponentOption, ToolboxComponentOption, TooltipComponentOption, AxisPointerComponentOption, BrushComponentOption, TitleComponentOption, TimelineComponentOption, MarkPointComponentOption, MarkLineComponentOption, MarkAreaComponentOption, LegendComponentOption, DataZoomComponentOption, VisualMapComponentOption, AriaComponentOption, DatasetComponentOption } from './option.js';
+export { GridComponentOption, PolarComponentOption, RadarComponentOption, GeoComponentOption, SingleAxisComponentOption, ParallelComponentOption, CalendarComponentOption, MatrixComponentOption, GraphicComponentOption, ToolboxComponentOption, TooltipComponentOption, AxisPointerComponentOption, BrushComponentOption, TitleComponentOption, TimelineComponentOption, MarkPointComponentOption, MarkLineComponentOption, MarkAreaComponentOption, LegendComponentOption, DataZoomComponentOption, VisualMapComponentOption, ThumbnailComponentOption, AriaComponentOption, DatasetComponentOption } from './option.js';

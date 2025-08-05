@@ -1,4 +1,4 @@
-import { TextAlign, TextVerticalAlign, ImageLike, Dictionary, MapToType, FontWeight, FontStyle } from '../core/types';
+import { TextAlign, TextVerticalAlign, ImageLike, Dictionary, MapToType, FontWeight, FontStyle, NullUndefined } from '../core/types';
 import TSpan from './TSpan';
 import ZRImage from './Image';
 import Rect from './shape/Rect';
@@ -43,7 +43,7 @@ export interface TextStylePropsPart {
         image: ImageLike | string;
     };
     padding?: number | number[];
-    margin?: number;
+    margin?: number | number[];
     borderColor?: string;
     borderWidth?: number;
     borderRadius?: number | number[];
@@ -75,6 +75,7 @@ export interface TextProps extends DisplayableProps {
 export declare type TextState = Pick<TextProps, DisplayableStatePropNames> & ElementCommonState;
 export declare type DefaultTextStyle = Pick<TextStyleProps, 'fill' | 'stroke' | 'align' | 'verticalAlign'> & {
     autoStroke?: boolean;
+    overflowRect?: BoundingRect | NullUndefined;
 };
 export declare const DEFAULT_TEXT_ANIMATION_PROPS: MapToType<TextProps, boolean>;
 interface ZRText {

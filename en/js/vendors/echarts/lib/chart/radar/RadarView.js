@@ -174,14 +174,21 @@ var RadarView = /** @class */function (_super) {
         var stateIgnore = stateModel.isEmpty() && stateModel.parentModel.isEmpty();
         // Won't be ignore if normal state is not ignore.
         polygon.ensureState(stateName).ignore = stateIgnore && polygonIgnore;
+        var lineStyle = itemModel.getModel([stateName, 'lineStyle']).getLineStyle();
+        polyline.ensureState(stateName).style = lineStyle;
+        var areaStyle = stateModel.getAreaStyle();
+        polygon.ensureState(stateName).style = areaStyle;
+        var itemStateStyle = itemModel.getModel([stateName, 'itemStyle']).getItemStyle();
+        symbolGroup.eachChild(function (symbolPath) {
+          symbolPath.ensureState(stateName).style = zrUtil.clone(itemStateStyle);
+        });
       });
-      polygon.useStyle(zrUtil.defaults(areaStyleModel.getAreaStyle(), {
+      polygon.useStyle(zrUtil.defaults(itemModel.getModel('areaStyle').getAreaStyle(), {
         fill: color,
         opacity: 0.7,
         decal: itemStyle.decal
       }));
       var emphasisModel = itemModel.getModel('emphasis');
-      var itemHoverStyle = emphasisModel.getModel('itemStyle').getItemStyle();
       symbolGroup.eachChild(function (symbolPath) {
         if (symbolPath instanceof ZRImage) {
           var pathStyle = symbolPath.style;
@@ -198,8 +205,6 @@ var RadarView = /** @class */function (_super) {
           symbolPath.setColor(color);
           symbolPath.style.strokeNoScale = true;
         }
-        var pathEmphasisState = symbolPath.ensureState('emphasis');
-        pathEmphasisState.style = zrUtil.clone(itemHoverStyle);
         var defaultText = data.getStore().get(data.getDimensionIndex(symbolPath.__dimIdx), idx);
         (defaultText == null || isNaN(defaultText)) && (defaultText = '');
         setLabelStyle(symbolPath, getLabelStatesModels(itemModel), {

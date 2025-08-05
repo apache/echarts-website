@@ -49,6 +49,7 @@ import * as visualSolution from '../../visual/visualSolution.js';
 import * as modelUtil from '../../util/model.js';
 import * as numberUtil from '../../util/number.js';
 import ComponentModel from '../../model/Component.js';
+import tokens from '../../visual/tokens.js';
 var mapVisual = VisualMapping.mapVisual;
 var eachVisual = VisualMapping.eachVisual;
 var isArray = zrUtil.isArray;
@@ -103,20 +104,25 @@ var VisualMapModel = /** @class */function (_super) {
     return null;
   };
   /**
-   * @protected
-   * @return {Array.<number>} An array of series indices.
+   * @return An array of series indices.
    */
   VisualMapModel.prototype.getTargetSeriesIndices = function () {
+    var optionSeriesId = this.option.seriesId;
     var optionSeriesIndex = this.option.seriesIndex;
-    var seriesIndices = [];
-    if (optionSeriesIndex == null || optionSeriesIndex === 'all') {
-      this.ecModel.eachSeries(function (seriesModel, index) {
-        seriesIndices.push(index);
-      });
-    } else {
-      seriesIndices = modelUtil.normalizeToArray(optionSeriesIndex);
+    if (optionSeriesIndex == null && optionSeriesId == null) {
+      optionSeriesIndex = 'all';
     }
-    return seriesIndices;
+    var seriesModels = modelUtil.queryReferringComponents(this.ecModel, 'series', {
+      index: optionSeriesIndex,
+      id: optionSeriesId
+    }, {
+      useDefault: false,
+      enableAll: true,
+      enableNone: false
+    }).models;
+    return zrUtil.map(seriesModels, function (seriesModel) {
+      return seriesModel.componentIndex;
+    });
   };
   /**
    * @public
@@ -383,7 +389,7 @@ var VisualMapModel = /** @class */function (_super) {
     show: true,
     // zlevel: 0,
     z: 4,
-    seriesIndex: 'all',
+    // seriesIndex: 'all',
     min: 0,
     max: 200,
     left: 0,
@@ -394,17 +400,17 @@ var VisualMapModel = /** @class */function (_super) {
     itemHeight: null,
     inverse: false,
     orient: 'vertical',
-    backgroundColor: 'rgba(0,0,0,0)',
-    borderColor: '#ccc',
-    contentColor: '#5793f3',
-    inactiveColor: '#aaa',
+    backgroundColor: tokens.color.transparent,
+    borderColor: tokens.color.borderTint,
+    contentColor: tokens.color.theme[0],
+    inactiveColor: tokens.color.disabled,
     borderWidth: 0,
-    padding: 5,
+    padding: tokens.size.m,
     // 接受数组分别设定上右下左边距，同css
     textGap: 10,
     precision: 0,
     textStyle: {
-      color: '#333' // 值域文字颜色
+      color: tokens.color.secondary // 值域文字颜色
     }
   };
   return VisualMapModel;

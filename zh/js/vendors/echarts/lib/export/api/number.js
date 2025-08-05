@@ -41,4 +41,4 @@
 * specific language governing permissions and limitations
 * under the License.
 */
-export { linearMap, round, asc, getPrecision, getPrecisionSafe, getPixelPrecision, getPercentWithPrecision, MAX_SAFE_INTEGER, remRadian, isRadianAroundZero, parseDate, quantity, quantityExponent, nice, quantile, reformIntervals, isNumeric, numericToNumber } from '../../util/number.js';
+export { linearMap, round, asc, getPrecision, getPrecisionSafe, getPixelPrecision, getPercentWithPrecision, parsePercent, MAX_SAFE_INTEGER, remRadian, isRadianAroundZero, parseDate, quantity, quantityExponent, nice, quantile, reformIntervals, isNumeric, numericToNumber } from '../../util/number.js';

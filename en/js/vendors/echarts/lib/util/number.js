@@ -57,6 +57,9 @@ var ROUND_SUPPORTED_PRECISION_MAX = 20;
 function _trim(str) {
   return str.replace(/^\s+|\s+$/g, '');
 }
+export var mathMin = Math.min;
+export var mathMax = Math.max;
+export var mathAbs = Math.abs;
 /**
  * Linear mapping a value from domain to range
  * @param  val
@@ -104,34 +107,51 @@ export function linearMap(val, domain, range, clamp) {
   return (val - d0) / subDomain * subRange + r0;
 }
 /**
- * Convert a percent string to absolute number.
- * Returns NaN if percent is not a valid string or number
+ * Preserve the name `parsePercent` for backward compatibility,
+ * and it's effectively published as `echarts.number.parsePercent`.
  */
-export function parsePercent(percent, all) {
-  switch (percent) {
+export var parsePercent = parsePositionOption;
+/**
+ * @see {parsePositionSizeOption} and also accept a string preset.
+ * @see {PositionSizeOption}
+ */
+export function parsePositionOption(option, percentBase, percentOffset) {
+  switch (option) {
     case 'center':
     case 'middle':
-      percent = '50%';
+      option = '50%';
       break;
     case 'left':
     case 'top':
-      percent = '0%';
+      option = '0%';
       break;
     case 'right':
     case 'bottom':
-      percent = '100%';
+      option = '100%';
       break;
   }
-  if (zrUtil.isString(percent)) {
-    if (_trim(percent).match(/%$/)) {
-      return parseFloat(percent) / 100 * all;
+  return parsePositionSizeOption(option, percentBase, percentOffset);
+}
+/**
+ * Accept number, or numeric stirng (`'123'`), or percentage ('100%'), as x/y/width/height pixel number.
+ * If null/undefined or invalid, return NaN.
+ * (But allow JS type coercion (`+option`) due to backward compatibility)
+ * @see {PositionSizeOption}
+ */
+export function parsePositionSizeOption(option, percentBase, percentOffset) {
+  if (zrUtil.isString(option)) {
+    if (_trim(option).match(/%$/)) {
+      return parseFloat(option) / 100 * percentBase + (percentOffset || 0);
     }
-    return parseFloat(percent);
+    return parseFloat(option);
   }
-  return percent == null ? NaN : +percent;
+  // Allow flexible input due to backward compatibility.
+  return option == null ? NaN : +option;
 }
 export function round(x, precision, returnStr) {
   if (precision == null) {
+    // FIXME: the default precision should not be provided, since there is no universally adaptable
+    //  precision. The caller need to input a precision according to the scenarios.
     precision = 10;
   }
   // Avoid range error
@@ -198,7 +218,7 @@ export function getPixelPrecision(dataExtent, pixelExtent) {
   var log = Math.log;
   var LN10 = Math.LN10;
   var dataQuantity = Math.floor(log(dataExtent[1] - dataExtent[0]) / LN10);
-  var sizeQuantity = Math.round(log(Math.abs(pixelExtent[1] - pixelExtent[0])) / LN10);
+  var sizeQuantity = Math.round(log(mathAbs(pixelExtent[1] - pixelExtent[0])) / LN10);
   // toFixed() digits argument must be between 0 and 20.
   var precision = Math.min(Math.max(-dataQuantity + sizeQuantity, 0), 20);
   return !isFinite(precision) ? 20 : precision;

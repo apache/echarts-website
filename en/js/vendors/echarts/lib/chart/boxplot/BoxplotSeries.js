@@ -45,6 +45,7 @@ import { __extends } from "tslib";
 import SeriesModel from '../../model/Series.js';
 import { WhiskerBoxCommonMixin } from '../helper/whiskerBoxCommon.js';
 import { mixin } from 'zrender/lib/core/util.js';
+import tokens from '../../visual/tokens.js';
 var BoxplotSeriesModel = /** @class */function (_super) {
   __extends(BoxplotSeriesModel, _super);
   function BoxplotSeriesModel() {
@@ -87,7 +88,7 @@ var BoxplotSeriesModel = /** @class */function (_super) {
     layout: null,
     boxWidth: [7, 50],
     itemStyle: {
-      color: '#fff',
+      color: tokens.color.neutral00,
       borderWidth: 1
     },
     emphasis: {
@@ -97,7 +98,7 @@ var BoxplotSeriesModel = /** @class */function (_super) {
         shadowBlur: 5,
         shadowOffsetX: 1,
         shadowOffsetY: 1,
-        shadowColor: 'rgba(0,0,0,0.2)'
+        shadowColor: tokens.color.shadow
       }
     },
     animationDuration: 800

@@ -158,6 +158,9 @@ var BarView = /** @class */function (_super) {
     var isChangeOrder = payload && payload.type === 'changeAxisOrder';
     function createBackground(dataIndex) {
       var bgLayout = getLayout[coord.type](data, dataIndex);
+      if (!bgLayout) {
+        return null;
+      }
       var bgEl = createBackgroundEl(coord, isHorizontalOrRadial, bgLayout);
       bgEl.useStyle(backgroundModel.getItemStyle());
       // Only cartesian2d support borderRadius.
@@ -173,6 +176,9 @@ var BarView = /** @class */function (_super) {
     data.diff(oldData).add(function (dataIndex) {
       var itemModel = data.getItemModel(dataIndex);
       var layout = getLayout[coord.type](data, dataIndex, itemModel);
+      if (!layout) {
+        return;
+      }
       if (drawBackground) {
         createBackground(dataIndex);
       }
@@ -216,6 +222,9 @@ var BarView = /** @class */function (_super) {
     }).update(function (newIndex, oldIndex) {
       var itemModel = data.getItemModel(newIndex);
       var layout = getLayout[coord.type](data, newIndex, itemModel);
+      if (!layout) {
+        return;
+      }
       if (drawBackground) {
         var bgEl = void 0;
         if (oldBgEls.length === 0) {
@@ -249,8 +258,15 @@ var BarView = /** @class */function (_super) {
           group.remove(el);
         }
       }
+      var roundCapChanged = el && (el.type === 'sector' && roundCap || el.type === 'sausage' && !roundCap);
+      if (roundCapChanged) {
+        // roundCap changed, there is no way to use animation from a `sector` to a `sausage` shape,
+        // so remove the old one and create a new shape
+        el && removeElementWithFadeOut(el, seriesModel, oldIndex);
+        el = null;
+      }
       if (!el) {
-        el = elementCreator[coord.type](seriesModel, data, newIndex, layout, isHorizontalOrRadial, animationModel, baseAxis.model, !!el, roundCap);
+        el = elementCreator[coord.type](seriesModel, data, newIndex, layout, isHorizontalOrRadial, animationModel, baseAxis.model, true, roundCap);
       } else {
         saveOldStyle(el);
       }
@@ -648,6 +664,9 @@ var getLayout = {
   // when calculating bar background layout.
   cartesian2d: function (data, dataIndex, itemModel) {
     var layout = data.getItemLayout(dataIndex);
+    if (!layout) {
+      return null;
+    }
     var fixedLineWidth = itemModel ? getLineWidth(itemModel, layout) : 0;
     // fix layout with lineWidth
     var signX = layout.width > 0 ? 1 : -1;

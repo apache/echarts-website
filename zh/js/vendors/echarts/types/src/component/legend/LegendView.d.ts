@@ -31,6 +31,7 @@ declare class LegendView extends ComponentView {
     render(legendModel: LegendModel, ecModel: GlobalModel, api: ExtensionAPI): void;
     protected resetInner(): void;
     protected renderInner(itemAlign: LegendOption['align'], legendModel: LegendModel, ecModel: GlobalModel, api: ExtensionAPI, selector: LegendSelectorButtonOption[], orient: LegendOption['orient'], selectorPosition: LegendOption['selectorPosition']): void;
+    private packEventData;
     private _createSelector;
     private _createItem;
     protected layoutInner(legendModel: LegendModel, itemAlign: LegendOption['align'], maxSize: {

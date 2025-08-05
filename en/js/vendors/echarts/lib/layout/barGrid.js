@@ -182,6 +182,7 @@ export function makeColumnLayout(barSeries) {
     seriesModel.get('barMinWidth') || (isInLargeMode(seriesModel) ? 0.5 : 1), bandWidth);
     var barGap = seriesModel.get('barGap');
     var barCategoryGap = seriesModel.get('barCategoryGap');
+    var defaultBarGap = seriesModel.get('defaultBarGap');
     seriesInfoList.push({
       bandWidth: bandWidth,
       barWidth: barWidth,
@@ -189,6 +190,7 @@ export function makeColumnLayout(barSeries) {
       barMinWidth: barMinWidth,
       barGap: barGap,
       barCategoryGap: barCategoryGap,
+      defaultBarGap: defaultBarGap,
       axisKey: getAxisKey(baseAxis),
       stackId: getSeriesStackId(seriesModel)
     });
@@ -206,7 +208,7 @@ function doCalBarWidthAndOffset(seriesInfoList) {
       remainedWidth: bandWidth,
       autoWidthCount: 0,
       categoryGap: null,
-      gap: '20%',
+      gap: seriesInfo.defaultBarGap || 0,
       stacks: {}
     };
     var stacks = columnsOnAxis.stacks;

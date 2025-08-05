@@ -43,26 +43,31 @@
 */
 // FIXME Where to create the simple view coordinate system
 import View from '../../coord/View.js';
-import { getLayoutRect } from '../../util/layout.js';
+import { createBoxLayoutReference, getLayoutRect, applyPreserveAspect } from '../../util/layout.js';
 import * as bbox from 'zrender/lib/core/bbox.js';
 import { extend } from 'zrender/lib/core/util.js';
+import { injectCoordSysByOption } from '../../core/CoordinateSystem.js';
 function getViewRect(seriesModel, api, aspect) {
+  var layoutRef = createBoxLayoutReference(seriesModel, api);
   var option = extend(seriesModel.getBoxLayoutParams(), {
     aspect: aspect
   });
-  return getLayoutRect(option, {
-    width: api.getWidth(),
-    height: api.getHeight()
-  });
+  var viewRect = getLayoutRect(option, layoutRef.refContainer);
+  return applyPreserveAspect(seriesModel, viewRect, aspect);
 }
 export default function createViewCoordSys(ecModel, api) {
   var viewList = [];
   ecModel.eachSeriesByType('graph', function (seriesModel) {
-    var coordSysType = seriesModel.get('coordinateSystem');
-    if (!coordSysType || coordSysType === 'view') {
-      var data_1 = seriesModel.getData();
-      var positions = data_1.mapArray(function (idx) {
-        var itemModel = data_1.getItemModel(idx);
+    injectCoordSysByOption({
+      targetModel: seriesModel,
+      coordSysType: 'view',
+      coordSysProvider: createViewCoordSys,
+      isDefaultDataCoordSys: true
+    });
+    function createViewCoordSys() {
+      var data = seriesModel.getData();
+      var positions = data.mapArray(function (idx) {
+        var itemModel = data.getItemModel(idx);
         return [+itemModel.get('x'), +itemModel.get('y')];
       });
       var min = [];
@@ -87,16 +92,18 @@ export default function createViewCoordSys(ecModel, api) {
       }
       var bbWidth = max[0] - min[0];
       var bbHeight = max[1] - min[1];
-      var viewWidth = viewRect.width;
-      var viewHeight = viewRect.height;
-      var viewCoordSys = seriesModel.coordinateSystem = new View();
+      var viewCoordSys = new View(null, {
+        api: api,
+        ecModel: ecModel
+      });
       viewCoordSys.zoomLimit = seriesModel.get('scaleLimit');
       viewCoordSys.setBoundingRect(min[0], min[1], bbWidth, bbHeight);
-      viewCoordSys.setViewRect(viewRect.x, viewRect.y, viewWidth, viewHeight);
+      viewCoordSys.setViewRect(viewRect.x, viewRect.y, viewRect.width, viewRect.height);
       // Update roam info
-      viewCoordSys.setCenter(seriesModel.get('center'), api);
+      viewCoordSys.setCenter(seriesModel.get('center'));
       viewCoordSys.setZoom(seriesModel.get('zoom'));
       viewList.push(viewCoordSys);
+      return viewCoordSys;
     }
   });
   return viewList;

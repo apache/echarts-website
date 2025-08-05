@@ -46,6 +46,7 @@ import * as zrUtil from 'zrender/lib/core/util.js';
 import VisualMapModel from './VisualMapModel.js';
 import * as numberUtil from '../../util/number.js';
 import { inheritDefaultOption } from '../../util/component.js';
+import tokens from '../../visual/tokens.js';
 // Constant
 var DEFAULT_BAR_BOUND = [20, 140];
 var ContinuousModel = /** @class */function (_super) {
@@ -135,9 +136,8 @@ var ContinuousModel = /** @class */function (_super) {
   ContinuousModel.prototype.getValueState = function (value) {
     var range = this.option.range;
     var dataExtent = this.getExtent();
-    // When range[0] === dataExtent[0], any value larger than dataExtent[0] maps to 'inRange'.
-    // range[1] is processed likewise.
-    return (range[0] <= dataExtent[0] || range[0] <= value) && (range[1] >= dataExtent[1] || value <= range[1]) ? 'inRange' : 'outOfRange';
+    var unboundedRange = zrUtil.retrieve2(this.option.unboundedRange, true);
+    return (unboundedRange && range[0] <= dataExtent[0] || range[0] <= value) && (unboundedRange && range[1] >= dataExtent[1] || value <= range[1]) ? 'inRange' : 'outOfRange';
   };
   ContinuousModel.prototype.findTargetDataIndices = function (range) {
     var result = [];
@@ -209,25 +209,25 @@ var ContinuousModel = /** @class */function (_super) {
     handleIcon: 'path://M-11.39,9.77h0a3.5,3.5,0,0,1-3.5,3.5h-22a3.5,3.5,0,0,1-3.5-3.5h0a3.5,3.5,0,0,1,3.5-3.5h22A3.5,3.5,0,0,1-11.39,9.77Z',
     handleSize: '120%',
     handleStyle: {
-      borderColor: '#fff',
+      borderColor: tokens.color.neutral00,
       borderWidth: 1
     },
     indicatorIcon: 'circle',
     indicatorSize: '50%',
     indicatorStyle: {
-      borderColor: '#fff',
+      borderColor: tokens.color.neutral00,
       borderWidth: 2,
       shadowBlur: 2,
       shadowOffsetX: 1,
       shadowOffsetY: 1,
-      shadowColor: 'rgba(0,0,0,0.2)'
+      shadowColor: tokens.color.shadow
     }
     // emphasis: {
     //     handleStyle: {
     //         shadowBlur: 3,
     //         shadowOffsetX: 1,
     //         shadowOffsetY: 1,
-    //         shadowColor: 'rgba(0,0,0,0.2)'
+    //         shadowColor: tokens.color.shadow
     //     }
     // }
   });

@@ -136,7 +136,17 @@ function createSeriesData(sourceRaw, seriesModel, opt) {
   });
   var data = new SeriesData(schema, seriesModel);
   data.setCalculationInfo(stackCalculationInfo);
-  var dimValueGetter = firstCategoryDimIndex != null && isNeedCompleteOrdinalData(source) ? function (itemOpt, dimName, dataIndex, dimIndex) {
+  var dimValueGetter = firstCategoryDimIndex != null && isNeedCompleteOrdinalData(source)
+  /**
+   * This serves this case:
+   *  var echarts_option = {
+   *      xAxis: { data: ['a', 'b', 'c'] },
+   *      yAxis: {}
+   *      series: { data: [555, 666, 777] }
+   *  };
+   * The `series.data` is completed to:
+   *  [[0, 555], [1, 666], [2, 777]]
+   */ ? function (itemOpt, dimName, dataIndex, dimIndex) {
     // Use dataIndex as ordinal value in categoryAxis
     return dimIndex === firstCategoryDimIndex ? dataIndex : this.defaultDimValueGetter(itemOpt, dimName, dataIndex, dimIndex);
   } : null;

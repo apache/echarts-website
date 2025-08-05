@@ -1,5 +1,5 @@
 import SeriesData from '../../data/SeriesData.js';
-import { SeriesOption, SeriesOnCartesianOptionMixin, SeriesOnPolarOptionMixin, SeriesOnCalendarOptionMixin, SeriesOnGeoOptionMixin, SeriesOnSingleOptionMixin, OptionDataValue, RoamOptionMixin, SeriesLabelOption, ItemStyleOption, LineStyleOption, SymbolOptionMixin, BoxLayoutOptionMixin, Dictionary, SeriesLineLabelOption, StatesOptionMixin, GraphEdgeItemObject, OptionDataValueNumeric, CallbackDataParams, DefaultEmphasisFocus } from '../../util/types.js';
+import { SeriesOption, SeriesOnCartesianOptionMixin, SeriesOnPolarOptionMixin, SeriesOnCalendarOptionMixin, SeriesOnGeoOptionMixin, SeriesOnSingleOptionMixin, OptionDataValue, RoamOptionMixin, SeriesLabelOption, ItemStyleOption, LineStyleOption, SymbolOptionMixin, BoxLayoutOptionMixin, Dictionary, SeriesLineLabelOption, StatesOptionMixin, GraphEdgeItemObject, OptionDataValueNumeric, CallbackDataParams, DefaultEmphasisFocus, PreserveAspectMixin } from '../../util/types.js';
 import SeriesModel from '../../model/Series.js';
 import Graph from '../../data/Graph.js';
 import GlobalModel from '../../model/Global.js';
@@ -63,7 +63,7 @@ export interface GraphCategoryItemOption extends SymbolOptionMixin, GraphNodeSta
     name?: string;
     value?: OptionDataValue;
 }
-export interface GraphSeriesOption extends SeriesOption<GraphNodeStateOption<CallbackDataParams>, GraphNodeStatesMixin>, SeriesOnCartesianOptionMixin, SeriesOnPolarOptionMixin, SeriesOnCalendarOptionMixin, SeriesOnGeoOptionMixin, SeriesOnSingleOptionMixin, SymbolOptionMixin<CallbackDataParams>, RoamOptionMixin, BoxLayoutOptionMixin {
+export interface GraphSeriesOption extends SeriesOption<GraphNodeStateOption<CallbackDataParams>, GraphNodeStatesMixin>, SeriesOnCartesianOptionMixin, SeriesOnPolarOptionMixin, SeriesOnCalendarOptionMixin, SeriesOnGeoOptionMixin, SeriesOnSingleOptionMixin, SymbolOptionMixin<CallbackDataParams>, RoamOptionMixin, BoxLayoutOptionMixin, PreserveAspectMixin {
     type?: 'graph';
     coordinateSystem?: string;
     legendHoverLink?: boolean;

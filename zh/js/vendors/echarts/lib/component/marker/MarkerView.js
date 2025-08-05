@@ -47,6 +47,7 @@ import { createHashMap, each } from 'zrender/lib/core/util.js';
 import MarkerModel from './MarkerModel.js';
 import { makeInner } from '../../util/model.js';
 import { enterBlur, leaveBlur } from '../../util/states.js';
+import { traverseUpdateZ, retrieveZInfo } from '../../util/graphic.js';
 var inner = makeInner();
 var MarkerView = /** @class */function (_super) {
   __extends(MarkerView, _super);
@@ -71,6 +72,7 @@ var MarkerView = /** @class */function (_super) {
     markerGroupMap.each(function (item) {
       !inner(item).keep && _this.group.remove(item.group);
     });
+    updateZ(ecModel, markerGroupMap, this.type);
   };
   MarkerView.prototype.markKeep = function (drawGroup) {
     inner(drawGroup).keep = true;
@@ -92,4 +94,16 @@ var MarkerView = /** @class */function (_super) {
   MarkerView.type = 'marker';
   return MarkerView;
 }(ComponentView);
+function updateZ(ecModel, markerGroupMap, type) {
+  ecModel.eachSeries(function (seriesModel) {
+    var markerModel = MarkerModel.getMarkerModelFromSeries(seriesModel, type);
+    var markerDraw = markerGroupMap.get(seriesModel.id);
+    if (markerModel && markerDraw && markerDraw.group) {
+      var _a = retrieveZInfo(markerModel),
+        z = _a.z,
+        zlevel = _a.zlevel;
+      traverseUpdateZ(markerDraw.group, z, zlevel);
+    }
+  });
+}
 export default MarkerView;

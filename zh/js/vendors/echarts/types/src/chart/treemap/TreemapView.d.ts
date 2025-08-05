@@ -43,13 +43,12 @@ declare class TreemapView extends ChartView {
     private _zoomToNode;
     private _rootToNode;
     /**
-     * @public
-     * @param {number} x Global coord x.
-     * @param {number} y Global coord y.
-     * @return {Object} info If not found, return undefined;
-     * @return {number} info.node Target node.
-     * @return {number} info.offsetX x refer to target node.
-     * @return {number} info.offsetY y refer to target node.
+     * @param x Global coord x.
+     * @param y Global coord y.
+     * @return info If not found, return undefined;
+     * @return info.node Target node.
+     * @return info.offsetX x refer to target node.
+     * @return info.offsetY y refer to target node.
      */
     findTarget(x: number, y: number): FoundTargetInfo;
 }

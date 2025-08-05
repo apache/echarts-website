@@ -62,7 +62,10 @@ export var geo2DDimensions = ['lng', 'lat'];
 var Geo = /** @class */function (_super) {
   __extends(Geo, _super);
   function Geo(name, map, opt) {
-    var _this = _super.call(this, name) || this;
+    var _this = _super.call(this, name, {
+      api: opt.api,
+      ecModel: opt.ecModel
+    }) || this;
     _this.dimensions = geo2DDimensions;
     _this.type = 'geo';
     // Only store specified name coord via `addGeoCoord`.
@@ -171,19 +174,21 @@ var Geo = /** @class */function (_super) {
       return data && this.projectedToPoint(data, noRoam, out);
     }
   };
-  Geo.prototype.pointToData = function (point) {
+  Geo.prototype.pointToData = function (point, reserved, out) {
     var projection = this.projection;
     if (projection) {
       // projection may return null point.
       point = projection.unproject(point);
     }
-    return point && this.pointToProjected(point);
+    // FIXME: if no `point`, should return [NaN, NaN], rather than undefined.
+    //  null/undefined has special meaning in `convertFromPixel`.
+    return point && this.pointToProjected(point, out);
   };
   /**
    * Point to projected data. Same with pointToData when projection is used.
    */
-  Geo.prototype.pointToProjected = function (point) {
-    return _super.prototype.pointToData.call(this, point);
+  Geo.prototype.pointToProjected = function (point, out) {
+    return _super.prototype.pointToData.call(this, point, 0, out);
   };
   Geo.prototype.projectedToPoint = function (projected, noRoam, out) {
     return _super.prototype.dataToPoint.call(this, projected, noRoam, out);

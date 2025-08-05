@@ -32,7 +32,7 @@ export { createSymbol } from '../../util/symbol.js';
  * @param {Object|module:echarts/Model} option If `optoin.type`
  *        is secified, it can only be `'value'` currently.
  */
-export declare function createScale(dataExtent: number[], option: object | AxisBaseModel): import("../../scale/Scale").default<import("zrender/lib/core/types").Dictionary<unknown>>;
+export declare function createScale(dataExtent: number[], option: object | AxisBaseModel): import("../../scale/Scale").default<import("../../scale/Scale").ScaleSettingDefault>;
 /**
  * Mixin common methods to axis model,
  *

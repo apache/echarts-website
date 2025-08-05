@@ -1236,6 +1236,14 @@ span.CodeMirror-selectedtext { background: none; }
     margin: 0;
     padding: 5px 0;
 }
+.doc-content .item-description thead th {
+      position: sticky;
+      top: 0;
+      background: #fffbea;
+}
+.doc-content .item-description th, .doc-content .item-description td {
+      font-size: 14px;
+}
 .doc-content .item-description .hljs {
       background: transparent;
       padding: 0;
@@ -1501,8 +1509,8 @@ span.CodeMirror-selectedtext { background: none; }
 
 @font-face {
   font-family: 'iconfont';
-  src: url(../css/icon.eot);
-  src: url(../css/icon.eot#iefix) format("embedded-opentype"), url(../css/icon.ttf) format("truetype"), url(../css/icon.woff) format("woff"), url(../css/icon.svg) format("svg");
+  src: url(../js/../css/icon.eot);
+  src: url(../js/../css/icon.eot#iefix) format("embedded-opentype"), url(../js/../css/icon.ttf) format("truetype"), url(../js/../css/icon.woff) format("woff"), url(../js/../css/icon.svg) format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -1512,7 +1520,7 @@ span.CodeMirror-selectedtext { background: none; }
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url(../css/SourceCodePro-Regular.woff) format("woff");
+  src: url(../js/../css/SourceCodePro-Regular.woff) format("woff");
 }
 .ec-doc {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "Helvetica Neue", Helvetica, Arial, sans-serif;

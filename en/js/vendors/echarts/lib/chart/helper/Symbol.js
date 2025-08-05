@@ -47,7 +47,7 @@ import * as graphic from '../../util/graphic.js';
 import { getECData } from '../../util/innerStore.js';
 import { enterEmphasis, leaveEmphasis, toggleHoverEmphasis } from '../../util/states.js';
 import { getDefaultLabel } from './labelHelper.js';
-import { extend } from 'zrender/lib/core/util.js';
+import { extend, retrieve2 } from 'zrender/lib/core/util.js';
 import { setLabelStyle, getLabelStatesModels } from '../../label/labelStyle.js';
 import ZRImage from 'zrender/lib/graphic/Image.js';
 import { saveOldStyle } from '../../animation/basicTransition.js';
@@ -58,7 +58,7 @@ var Symbol = /** @class */function (_super) {
     _this.updateData(data, idx, seriesScope, opts);
     return _this;
   }
-  Symbol.prototype._createSymbol = function (symbolType, data, idx, symbolSize, keepAspect) {
+  Symbol.prototype._createSymbol = function (symbolType, data, idx, symbolSize, z2, keepAspect) {
     // Remove paths created before
     this.removeAll();
     // let symbolPath = createSymbol(
@@ -69,7 +69,7 @@ var Symbol = /** @class */function (_super) {
     // the scale is set. So we set width/height as 2. See #4150.
     var symbolPath = createSymbol(symbolType, -1, -1, 2, 2, null, keepAspect);
     symbolPath.attr({
-      z2: 100,
+      z2: retrieve2(z2, 100),
       culling: true,
       scaleX: symbolSize[0] / 2,
       scaleY: symbolSize[1] / 2
@@ -135,11 +135,12 @@ var Symbol = /** @class */function (_super) {
     var symbolType = data.getItemVisual(idx, 'symbol') || 'circle';
     var seriesModel = data.hostModel;
     var symbolSize = Symbol.getSymbolSize(data, idx);
+    var z2 = Symbol.getSymbolZ2(data, idx);
     var isInit = symbolType !== this._symbolType;
     var disableAnimation = opts && opts.disableAnimation;
     if (isInit) {
       var keepAspect = data.getItemVisual(idx, 'symbolKeepAspect');
-      this._createSymbol(symbolType, data, idx, symbolSize, keepAspect);
+      this._createSymbol(symbolType, data, idx, symbolSize, z2, keepAspect);
     } else {
       var symbolPath = this.childAt(0);
       symbolPath.silent = false;
@@ -324,6 +325,9 @@ var Symbol = /** @class */function (_super) {
   };
   Symbol.getSymbolSize = function (data, idx) {
     return normalizeSymbolSize(data.getItemVisual(idx, 'symbolSize'));
+  };
+  Symbol.getSymbolZ2 = function (data, idx) {
+    return data.getItemVisual(idx, 'z2');
   };
   return Symbol;
 }(graphic.Group);

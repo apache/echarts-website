@@ -80,9 +80,8 @@ export function layout(axisModel, opt) {
   if (zrUtil.retrieve(opt.labelInside, axisModel.get(['axisLabel', 'inside']))) {
     layout.labelDirection = -layout.labelDirection;
   }
-  var labelRotation = opt.rotate;
-  labelRotation == null && (labelRotation = axisModel.get(['axisLabel', 'rotate']));
-  layout.labelRotation = axisPosition === 'top' ? -labelRotation : labelRotation;
+  var labelRotate = axisModel.get(['axisLabel', 'rotate']);
+  layout.labelRotate = axisPosition === 'top' ? -labelRotate : labelRotate;
   layout.z2 = 1;
   return layout;
 }

@@ -28,9 +28,22 @@ declare class Grid implements CoordinateSystemMaster {
     getRect(): LayoutRect;
     update(ecModel: GlobalModel, api: ExtensionAPI): void;
     /**
-     * Resize the grid
+     * Resize the grid.
+     *
+     * [NOTE]
+     * If both "grid.containLabel/grid.contain" and pixel-required-data-processing (such as, "dataSampling")
+     * exist, circular dependency occurs in logic.
+     * The final compromised sequence is:
+     *  1. Calculate "axis.extent" (pixel extent) and AffineTransform based on only "grid layout options".
+     *      Not accurate if "grid.containLabel/grid.contain" is required, but it is a compromise to avoid
+     *      circular dependency.
+     *  2. Perform "series data processing" (where "dataSampling" requires "axis.extent").
+     *  3. Calculate "scale.extent" (data extent) based on "processed series data".
+     *  4. Modify "axis.extent" for "grid.containLabel/grid.contain":
+     *      4.1. Calculate "axis labels" based on "scale.extent".
+     *      4.2. Modify "axis.extent" by the bounding rects of "axis labels and names".
      */
-    resize(gridModel: GridModel, api: ExtensionAPI, ignoreContainLabel?: boolean): void;
+    resize(gridModel: GridModel, api: ExtensionAPI, beforeDataProcessing?: boolean): void;
     getAxis(dim: Cartesian2DDimensionName, axisIndex?: number): Axis2D;
     getAxes(): Axis2D[];
     /**
@@ -75,4 +88,6 @@ declare class Grid implements CoordinateSystemMaster {
     };
     static create(ecModel: GlobalModel, api: ExtensionAPI): Grid[];
 }
+export declare type LegacyLayOutGridByContainLabel = (axesList: Axis2D[], gridRect: LayoutRect) => void;
+export declare function registerLegacyGridContainLabelImpl(impl: LegacyLayOutGridByContainLabel): void;
 export default Grid;

@@ -48,8 +48,8 @@ import * as graphic from '../../util/graphic.js';
 import * as singleAxisHelper from '../../coord/single/singleAxisHelper.js';
 import AxisView from './AxisView.js';
 import { rectCoordAxisBuildSplitArea, rectCoordAxisHandleRemove } from './axisSplitHelper.js';
-var axisBuilderAttrs = ['axisLine', 'axisTickLabel', 'axisName'];
-var selfBuilderAttrs = ['splitArea', 'splitLine'];
+import { getAxisBreakHelper } from './axisBreakHelper.js';
+var selfBuilderAttrs = ['splitArea', 'splitLine', 'breakArea'];
 var SingleAxisView = /** @class */function (_super) {
   __extends(SingleAxisView, _super);
   function SingleAxisView() {
@@ -64,13 +64,13 @@ var SingleAxisView = /** @class */function (_super) {
     var oldAxisGroup = this._axisGroup;
     this._axisGroup = new graphic.Group();
     var layout = singleAxisHelper.layout(axisModel);
-    var axisBuilder = new AxisBuilder(axisModel, layout);
-    zrUtil.each(axisBuilderAttrs, axisBuilder.add, axisBuilder);
+    var axisBuilder = new AxisBuilder(axisModel, api, layout);
+    axisBuilder.build();
     group.add(this._axisGroup);
-    group.add(axisBuilder.getGroup());
+    group.add(axisBuilder.group);
     zrUtil.each(selfBuilderAttrs, function (name) {
       if (axisModel.get([name, 'show'])) {
-        axisElementBuilders[name](this, this.group, this._axisGroup, axisModel);
+        axisElementBuilders[name](this, this.group, this._axisGroup, axisModel, api);
       }
     }, this);
     graphic.groupTransition(oldAxisGroup, this._axisGroup, axisModel);
@@ -83,7 +83,7 @@ var SingleAxisView = /** @class */function (_super) {
   return SingleAxisView;
 }(AxisView);
 var axisElementBuilders = {
-  splitLine: function (axisView, group, axisGroup, axisModel) {
+  splitLine: function (axisView, group, axisGroup, axisModel, api) {
     var axis = axisModel.axis;
     if (axis.scale.isBlank()) {
       return;
@@ -98,7 +98,9 @@ var axisElementBuilders = {
     var splitLines = [];
     var lineCount = 0;
     var ticksCoords = axis.getTicksCoords({
-      tickModel: splitLineModel
+      tickModel: splitLineModel,
+      breakTicks: 'none',
+      pruneByBreak: 'preserve_extent_bound'
     });
     var p1 = [];
     var p2 = [];
@@ -139,8 +141,15 @@ var axisElementBuilders = {
       }));
     }
   },
-  splitArea: function (axisView, group, axisGroup, axisModel) {
+  splitArea: function (axisView, group, axisGroup, axisModel, api) {
     rectCoordAxisBuildSplitArea(axisView, axisGroup, axisModel, axisModel);
+  },
+  breakArea: function (axisView, group, axisGroup, axisModel, api) {
+    var axisBreakHelper = getAxisBreakHelper();
+    var scale = axisModel.axis.scale;
+    if (axisBreakHelper && scale.type !== 'ordinal') {
+      axisBreakHelper.rectCoordBuildBreakAxis(group, axisView, axisModel, axisModel.coordinateSystem.getRect(), api);
+    }
   }
 };
 export default SingleAxisView;

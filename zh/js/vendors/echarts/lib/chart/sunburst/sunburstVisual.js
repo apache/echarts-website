@@ -43,10 +43,15 @@
 */
 import { lift } from 'zrender/lib/tool/color.js';
 import { extend, isString } from 'zrender/lib/core/util.js';
+import tokens from '../../visual/tokens.js';
 export default function sunburstVisual(ecModel) {
   var paletteScope = {};
   // Default color strategy
   function pickColor(node, seriesModel, treeHeight) {
+    if (node.depth === 0) {
+      // Don't use palette color for the root node, because it's displayed only when drilling down.
+      return tokens.color.neutral50;
+    }
     // Choose color from palette based on the first level.
     var current = node;
     while (current && current.depth > 1) {

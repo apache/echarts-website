@@ -80,6 +80,7 @@ var BUITIN_COMPONENTS_MAP = {
   singleAxis: 'SingleAxisComponent',
   parallel: 'ParallelComponent',
   calendar: 'CalendarComponent',
+  matrix: 'MatrixComponent',
   graphic: 'GraphicComponent',
   toolbox: 'ToolboxComponent',
   tooltip: 'TooltipComponent',
@@ -111,6 +112,7 @@ var BUILTIN_CHARTS_MAP = {
   tree: 'TreeChart',
   treemap: 'TreemapChart',
   graph: 'GraphChart',
+  chord: 'ChordChart',
   gauge: 'GaugeChart',
   funnel: 'FunnelChart',
   parallel: 'ParallelChart',
@@ -392,6 +394,10 @@ var GlobalModel = /** @class */function (_super) {
     });
     delete option[OPTION_INNER_KEY];
     return option;
+  };
+  GlobalModel.prototype.setTheme = function (theme) {
+    this._theme = new Model(theme);
+    this._resetOption('recreate', null);
   };
   GlobalModel.prototype.getTheme = function () {
     return this._theme;
@@ -687,7 +693,7 @@ function mergeTheme(option, theme) {
   // NOT use `colorLayer` in theme if option has `color`
   var notMergeColorLayer = option.color && !option.colorLayer;
   each(theme, function (themeItem, name) {
-    if (name === 'colorLayer' && notMergeColorLayer) {
+    if (name === 'colorLayer' && notMergeColorLayer || name === 'color' && option.color) {
       return;
     }
     // If it is component model mainType, the model handles that merge later.

@@ -4,10 +4,11 @@ import type Cartesian2D from '../../coord/cartesian/Cartesian2D.js';
 import type Polar from '../../coord/polar/Polar.js';
 import SeriesData from '../../data/SeriesData.js';
 import { BrushCommonSelectorsForSeries } from '../../component/brush/selector.js';
-export declare type PolarBarLabelPosition = SeriesLabelOption['position'] | 'start' | 'insideStart' | 'middle' | 'end' | 'insideEnd';
-export declare type BarSeriesLabelOption = Omit<SeriesLabelOption, 'position'> & {
-    position?: PolarBarLabelPosition | 'outside';
-};
+declare type PolarBarLabelPositionExtra = 'start' | 'insideStart' | 'middle' | 'end' | 'insideEnd';
+export declare type PolarBarLabelPosition = SeriesLabelOption['position'] | PolarBarLabelPositionExtra;
+export declare type BarSeriesLabelOption = SeriesLabelOption<CallbackDataParams, {
+    positionExtra: PolarBarLabelPositionExtra | 'outside';
+}>;
 export interface BarStateOption<TCbParams = never> {
     itemStyle?: BarItemStyleOption<TCbParams>;
     label?: BarSeriesLabelOption;
@@ -31,7 +32,6 @@ export interface BarSeriesOption extends BaseBarSeriesOption<BarStateOption<Call
      */
     roundCap?: boolean;
     showBackground?: boolean;
-    startValue?: number;
     backgroundStyle?: ItemStyleOption & {
         borderRadius?: number | number[];
     };

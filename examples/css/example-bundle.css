@@ -543,29 +543,18 @@
     margin: 3px 0 0 0;
     padding-left: 10px;
 }
-.example-list-item .example-langs {
-    margin-top: 10px;
+.example-list-item .example-new {
+    margin-top: 12px;
     float: right;
-}
-.example-list-item .example-langs > * {
-      display: inline-block;
-      padding: 1px 6px;
-      margin-left: 5px;
-      vertical-align: middle;
-      border-radius: 3px;
-      font-size: 10px;
-      opacity: 0.8;
-}
-.example-list-item .example-langs > *:hover {
-        opacity: 1;
-}
-.example-list-item .example-langs .js {
-      background: #f7df1e;
-      color: #444;
-}
-.example-list-item .example-langs .ts {
-      background: #3178c6;
-      color: #eee;
+    padding: 1px 5px;
+    margin-left: 5px;
+    vertical-align: middle;
+    border-radius: 3px;
+    font-size: 10px;
+    background: #fb628b;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 4px;
 }
 .example-list-item .example-info {
     padding: 5px 0;

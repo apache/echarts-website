@@ -41,8 +41,12 @@
 * specific language governing permissions and limitations
 * under the License.
 */
+import { BoundingRect } from '../../util/graphic.js';
 /**
- * For geo and graph.
+ * [CAVEAT] `updateViewOnPan` and `updateViewOnZoom` modifies the group transform directly,
+ *  but the 'center' and 'zoom' in echarts option and 'View' coordinate system are not updated yet,
+ *  which must be performed later in 'xxxRoam' action by calling `updateCenterAndZoom`.
+ * @see {updateCenterAndZoomInAction}
  */
 export function updateViewOnPan(controllerHost, dx, dy) {
   var target = controllerHost.target;
@@ -50,25 +54,112 @@ export function updateViewOnPan(controllerHost, dx, dy) {
   target.y += dy;
   target.dirty();
 }
-/**
- * For geo and graph.
- */
 export function updateViewOnZoom(controllerHost, zoomDelta, zoomX, zoomY) {
   var target = controllerHost.target;
   var zoomLimit = controllerHost.zoomLimit;
   var newZoom = controllerHost.zoom = controllerHost.zoom || 1;
   newZoom *= zoomDelta;
+  newZoom = clampByZoomLimit(newZoom, zoomLimit);
+  var zoomScale = newZoom / controllerHost.zoom;
+  controllerHost.zoom = newZoom;
+  zoomTransformableByOrigin(target, zoomX, zoomY, zoomScale);
+  target.dirty();
+}
+/**
+ * A abstraction for some similar impl in roaming.
+ */
+export function updateController(seriesModel, api, pointerCheckerEl, controller, controllerHost, clipRect) {
+  var tmpRect = new BoundingRect(0, 0, 0, 0);
+  controller.enable(seriesModel.get('roam'), {
+    api: api,
+    zInfo: {
+      component: seriesModel
+    },
+    triggerInfo: {
+      roamTrigger: seriesModel.get('roamTrigger'),
+      isInSelf: function (e, x, y) {
+        tmpRect.copy(pointerCheckerEl.getBoundingRect());
+        tmpRect.applyTransform(pointerCheckerEl.getComputedTransform());
+        return tmpRect.contain(x, y);
+      },
+      isInClip: function (e, x, y) {
+        return !clipRect || clipRect.contain(x, y);
+      }
+    }
+  });
+  controllerHost.zoomLimit = seriesModel.get('scaleLimit');
+  var coordinate = seriesModel.coordinateSystem;
+  controllerHost.zoom = coordinate ? coordinate.getZoom() : 1;
+  var type = seriesModel.subType + 'Roam';
+  controller.off('pan').off('zoom').on('pan', function (e) {
+    updateViewOnPan(controllerHost, e.dx, e.dy);
+    api.dispatchAction({
+      seriesId: seriesModel.id,
+      type: type,
+      dx: e.dx,
+      dy: e.dy
+    });
+  }).on('zoom', function (e) {
+    /**
+     * FIXME: should do nothing except `api.dispatchAction` here, the other logic
+     *  should be performed in the action handler and `updateTransform`; otherwise,
+     *  they are inconsistent if user triggers this action explicitly.
+     */
+    updateViewOnZoom(controllerHost, e.scale, e.originX, e.originY);
+    api.dispatchAction({
+      seriesId: seriesModel.id,
+      type: type,
+      zoom: e.scale,
+      originX: e.originX,
+      originY: e.originY
+    });
+    // Only update label layout on zoom
+    api.updateLabelLayout();
+  });
+}
+function getCenterCoord(view, point) {
+  // Use projected coord as center because it's linear.
+  return view.pointToProjected ? view.pointToProjected(point) : view.pointToData(point);
+}
+/**
+ * Should be called only in action handler.
+ * @see {updateViewOnPan|updateViewOnZoom}
+ */
+export function updateCenterAndZoomInAction(view, payload, zoomLimit) {
+  var previousZoom = view.getZoom();
+  var center = view.getCenter();
+  var deltaZoom = payload.zoom;
+  var point = view.projectedToPoint ? view.projectedToPoint(center) : view.dataToPoint(center);
+  if (payload.dx != null && payload.dy != null) {
+    point[0] -= payload.dx;
+    point[1] -= payload.dy;
+    view.setCenter(getCenterCoord(view, point));
+  }
+  if (deltaZoom != null) {
+    deltaZoom = clampByZoomLimit(previousZoom * deltaZoom, zoomLimit) / previousZoom;
+    zoomTransformableByOrigin(view, payload.originX, payload.originY, deltaZoom);
+    view.updateTransform();
+    // [NOTICE] Tricky: `getCetnerCoord` uses `this.invTransform` modified by the `updateTransform` above.
+    view.setCenter(getCenterCoord(view, point));
+    view.setZoom(deltaZoom * previousZoom);
+  }
+  return {
+    center: view.getCenter(),
+    zoom: view.getZoom()
+  };
+}
+function zoomTransformableByOrigin(target, originX, originY, deltaZoom) {
+  // Keep the mouse center when scaling.
+  target.x -= (originX - target.x) * (deltaZoom - 1);
+  target.y -= (originY - target.y) * (deltaZoom - 1);
+  target.scaleX *= deltaZoom;
+  target.scaleY *= deltaZoom;
+}
+export function clampByZoomLimit(zoom, zoomLimit) {
   if (zoomLimit) {
     var zoomMin = zoomLimit.min || 0;
     var zoomMax = zoomLimit.max || Infinity;
-    newZoom = Math.max(Math.min(zoomMax, newZoom), zoomMin);
+    zoom = Math.max(Math.min(zoomMax, zoom), zoomMin);
   }
-  var zoomScale = newZoom / controllerHost.zoom;
-  controllerHost.zoom = newZoom;
-  // Keep the mouse center when scaling
-  target.x -= (zoomX - target.x) * (zoomScale - 1);
-  target.y -= (zoomY - target.y) * (zoomScale - 1);
-  target.scaleX *= zoomScale;
-  target.scaleY *= zoomScale;
-  target.dirty();
+  return zoom;
 }

@@ -141,7 +141,7 @@ function containsPoint(coordSysModel, e, x, y) {
 /**
  * Merge roamController settings when multiple dataZooms share one roamController.
  */
-function mergeControllerParams(dataZoomInfoMap) {
+function mergeControllerParams(dataZoomInfoMap, coordSysRecord, api) {
   var controlType;
   // DO NOT use reserved word (true, false, undefined) as key literally. Even if encapsulated
   // as string, it is probably revert to reserved word by compress tool. See #7411.
@@ -172,7 +172,15 @@ function mergeControllerParams(dataZoomInfoMap) {
       zoomOnMouseWheel: true,
       moveOnMouseMove: true,
       moveOnMouseWheel: true,
-      preventDefaultMouseMove: !!preventDefaultMouseMove
+      preventDefaultMouseMove: !!preventDefaultMouseMove,
+      api: api,
+      zInfo: {
+        component: coordSysRecord.model
+      },
+      triggerInfo: {
+        roamTrigger: null,
+        isInSelf: coordSysRecord.containsPoint
+      }
     }
   };
 }
@@ -218,9 +226,8 @@ export function installDataZoomRoamProcessor(registers) {
         disposeCoordSysRecord(coordSysRecordMap, coordSysRecord);
         return;
       }
-      var controllerParams = mergeControllerParams(dataZoomInfoMap);
+      var controllerParams = mergeControllerParams(dataZoomInfoMap, coordSysRecord, api);
       controller.enable(controllerParams.controlType, controllerParams.opt);
-      controller.setPointerChecker(coordSysRecord.containsPoint);
       throttleUtil.createOrUpdate(coordSysRecord, 'dispatchAction', firstDzInfo.model.get('throttle', true), 'fixRate');
     });
   });

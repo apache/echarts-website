@@ -1,5 +1,5 @@
 import { __extends } from "tslib";
-import { parseRichText, parsePlainText } from './helper/parseText.js';
+import { parseRichText, parsePlainText, calcInnerTextOverflowArea, tSpanCreateBoundingRect2, } from './helper/parseText.js';
 import TSpan from './TSpan.js';
 import { retrieve2, each, normalizeCssArray, trim, retrieve3, extend, keys, defaults } from '../core/util.js';
 import { adjustTextX, adjustTextY } from '../contain/text.js';
@@ -12,6 +12,7 @@ var DEFAULT_RICH_TEXT_COLOR = {
     fill: '#000'
 };
 var DEFAULT_STROKE_LINE_WIDTH = 2;
+var tmpCITOverflowAreaOut = {};
 export var DEFAULT_TEXT_ANIMATION_PROPS = {
     style: defaults({
         fill: true,
@@ -185,21 +186,23 @@ var ZRText = (function (_super) {
         var style = this.style;
         var textFont = style.font || DEFAULT_FONT;
         var textPadding = style.padding;
-        var text = getStyleText(style);
-        var contentBlock = parsePlainText(text, style);
-        var needDrawBg = needDrawBackground(style);
-        var bgColorDrawn = !!(style.backgroundColor);
-        var outerHeight = contentBlock.outerHeight;
-        var outerWidth = contentBlock.outerWidth;
-        var contentWidth = contentBlock.contentWidth;
-        var textLines = contentBlock.lines;
-        var lineHeight = contentBlock.lineHeight;
         var defaultStyle = this._defaultStyle;
-        this.isTruncated = !!contentBlock.isTruncated;
         var baseX = style.x || 0;
         var baseY = style.y || 0;
         var textAlign = style.align || defaultStyle.align || 'left';
         var verticalAlign = style.verticalAlign || defaultStyle.verticalAlign || 'top';
+        calcInnerTextOverflowArea(tmpCITOverflowAreaOut, defaultStyle.overflowRect, baseX, baseY, textAlign, verticalAlign);
+        baseX = tmpCITOverflowAreaOut.baseX;
+        baseY = tmpCITOverflowAreaOut.baseY;
+        var text = getStyleText(style);
+        var contentBlock = parsePlainText(text, style, tmpCITOverflowAreaOut.outerWidth, tmpCITOverflowAreaOut.outerHeight);
+        var needDrawBg = needDrawBackground(style);
+        var bgColorDrawn = !!(style.backgroundColor);
+        var outerHeight = contentBlock.outerHeight;
+        var outerWidth = contentBlock.outerWidth;
+        var textLines = contentBlock.lines;
+        var lineHeight = contentBlock.lineHeight;
+        this.isTruncated = !!contentBlock.isTruncated;
         var textX = baseX;
         var textY = adjustTextY(baseY, contentBlock.contentHeight, verticalAlign);
         if (needDrawBg || textPadding) {
@@ -218,6 +221,7 @@ var ZRText = (function (_super) {
             }
         }
         var defaultLineWidth = 0;
+        var usingDefaultStroke = false;
         var useDefaultFill = false;
         var textFill = getFill('fill' in style
             ? style.fill
@@ -226,12 +230,9 @@ var ZRText = (function (_super) {
             ? style.stroke
             : (!bgColorDrawn
                 && (!defaultStyle.autoStroke || useDefaultFill))
-                ? (defaultLineWidth = DEFAULT_STROKE_LINE_WIDTH, defaultStyle.stroke)
+                ? (defaultLineWidth = DEFAULT_STROKE_LINE_WIDTH, usingDefaultStroke = true, defaultStyle.stroke)
                 : null);
         var hasShadow = style.textShadowBlur > 0;
-        var fixedBoundingRect = style.width != null
-            && (style.overflow === 'truncate' || style.overflow === 'break' || style.overflow === 'breakAll');
-        var calculatedLineHeight = contentBlock.calculatedLineHeight;
         for (var i = 0; i < textLines.length; i++) {
             var el = this._getOrCreateChild(TSpan);
             var subElStyle = el.createStyle();
@@ -261,24 +262,25 @@ var ZRText = (function (_super) {
             subElStyle.font = textFont;
             setSeparateFont(subElStyle, style);
             textY += lineHeight;
-            if (fixedBoundingRect) {
-                el.setBoundingRect(new BoundingRect(adjustTextX(subElStyle.x, contentWidth, subElStyle.textAlign), adjustTextY(subElStyle.y, calculatedLineHeight, subElStyle.textBaseline), contentWidth, calculatedLineHeight));
-            }
+            el.setBoundingRect(tSpanCreateBoundingRect2(subElStyle, contentBlock.contentWidth, contentBlock.calculatedLineHeight, usingDefaultStroke ? 0 : null));
         }
     };
     ZRText.prototype._updateRichTexts = function () {
         var style = this.style;
+        var defaultStyle = this._defaultStyle;
+        var textAlign = style.align || defaultStyle.align;
+        var verticalAlign = style.verticalAlign || defaultStyle.verticalAlign;
+        var baseX = style.x || 0;
+        var baseY = style.y || 0;
+        calcInnerTextOverflowArea(tmpCITOverflowAreaOut, defaultStyle.overflowRect, baseX, baseY, textAlign, verticalAlign);
+        baseX = tmpCITOverflowAreaOut.baseX;
+        baseY = tmpCITOverflowAreaOut.baseY;
         var text = getStyleText(style);
-        var contentBlock = parseRichText(text, style);
+        var contentBlock = parseRichText(text, style, tmpCITOverflowAreaOut.outerWidth, tmpCITOverflowAreaOut.outerHeight, textAlign);
         var contentWidth = contentBlock.width;
         var outerWidth = contentBlock.outerWidth;
         var outerHeight = contentBlock.outerHeight;
         var textPadding = style.padding;
-        var baseX = style.x || 0;
-        var baseY = style.y || 0;
-        var defaultStyle = this._defaultStyle;
-        var textAlign = style.align || defaultStyle.align;
-        var verticalAlign = style.verticalAlign || defaultStyle.verticalAlign;
         this.isTruncated = !!contentBlock.isTruncated;
         var boxX = adjustTextX(baseX, outerWidth, textAlign);
         var boxY = adjustTextY(baseY, outerHeight, verticalAlign);
@@ -357,6 +359,7 @@ var ZRText = (function (_super) {
         var defaultStyle = this._defaultStyle;
         var useDefaultFill = false;
         var defaultLineWidth = 0;
+        var usingDefaultStroke = false;
         var textFill = getFill('fill' in tokenStyle ? tokenStyle.fill
             : 'fill' in style ? style.fill
                 : (useDefaultFill = true, defaultStyle.fill));
@@ -364,7 +367,7 @@ var ZRText = (function (_super) {
             : 'stroke' in style ? style.stroke
                 : (!bgColorDrawn
                     && !parentBgColorDrawn
-                    && (!defaultStyle.autoStroke || useDefaultFill)) ? (defaultLineWidth = DEFAULT_STROKE_LINE_WIDTH, defaultStyle.stroke)
+                    && (!defaultStyle.autoStroke || useDefaultFill)) ? (defaultLineWidth = DEFAULT_STROKE_LINE_WIDTH, usingDefaultStroke = true, defaultStyle.stroke)
                     : null);
         var hasShadow = tokenStyle.textShadowBlur > 0
             || style.textShadowBlur > 0;
@@ -391,9 +394,7 @@ var ZRText = (function (_super) {
         if (textFill) {
             subElStyle.fill = textFill;
         }
-        var textWidth = token.contentWidth;
-        var textHeight = token.contentHeight;
-        el.setBoundingRect(new BoundingRect(adjustTextX(subElStyle.x, textWidth, subElStyle.textAlign), adjustTextY(subElStyle.y, textHeight, subElStyle.textBaseline), textWidth, textHeight));
+        el.setBoundingRect(tSpanCreateBoundingRect2(subElStyle, token.contentWidth, token.contentHeight, usingDefaultStroke ? 0 : null));
     };
     ZRText.prototype._renderBackground = function (style, topStyle, x, y, width, height) {
         var textBackgroundColor = style.backgroundColor;

@@ -97,3 +97,4 @@ export declare function disableUserSelect(dom: HTMLElement): void;
 export declare function hasOwn(own: object, prop: string): boolean;
 export declare function noop(): void;
 export declare const RADIAN_TO_DEGREE: number;
+export declare const EPSILON: number;

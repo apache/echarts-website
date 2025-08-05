@@ -41,14 +41,15 @@
 * specific language governing permissions and limitations
 * under the License.
 */
-var _a, _b, _c;
+var _a, _b, _c, _d;
 // TODO
 // ??? refactor? check the outer usage of data provider.
 // merge with defaultDimValueGetter?
-import { isTypedArray, extend, assert, each, isObject, bind } from 'zrender/lib/core/util.js';
+import { isTypedArray, extend, assert, each, isObject, bind, isArray } from 'zrender/lib/core/util.js';
 import { getDataItemValue } from '../../util/model.js';
 import { createSourceFromSeriesDataOption, isSourceInstance } from '../Source.js';
 import { SOURCE_FORMAT_ORIGINAL, SOURCE_FORMAT_OBJECT_ROWS, SOURCE_FORMAT_KEYED_COLUMNS, SOURCE_FORMAT_TYPED_ARRAY, SOURCE_FORMAT_ARRAY_ROWS, SERIES_LAYOUT_BY_COLUMN, SERIES_LAYOUT_BY_ROW } from '../../util/types.js';
+import { error } from '../../util/log.js';
 var providerMethods;
 var mountMethods;
 /**
@@ -62,8 +63,10 @@ var DefaultDataProvider = /** @class */function () {
     // declare source is Source;
     this._source = source;
     var data = this._data = source.data;
+    var sourceFormat = source.sourceFormat;
+    var seriesLayoutBy = source.seriesLayoutBy;
     // Typed array. TODO IE10+?
-    if (source.sourceFormat === SOURCE_FORMAT_TYPED_ARRAY) {
+    if (sourceFormat === SOURCE_FORMAT_TYPED_ARRAY) {
       if (process.env.NODE_ENV !== 'production') {
         if (dimSize == null) {
           throw new Error('Typed array data must specify dimension size');
@@ -72,6 +75,10 @@ var DefaultDataProvider = /** @class */function () {
       this._offset = 0;
       this._dimSize = dimSize;
       this._data = data;
+    }
+    if (process.env.NODE_ENV !== 'production') {
+      var validator = rawSourceDataValidatorMap[getMethodMapKey(sourceFormat, seriesLayoutBy)];
+      validator && validator(data, source.dimensionsDefine);
     }
     mountMethods(this, data, source);
   }
@@ -199,12 +206,28 @@ var DefaultDataProvider = /** @class */function () {
   return DefaultDataProvider;
 }();
 export { DefaultDataProvider };
+var validateSimply = function (rawData) {
+  if (!isArray(rawData)) {
+    error('series.data or dataset.source must be an array.');
+  }
+};
+/**
+ * Only run in dev mode - hint users for debug.
+ */
+var rawSourceDataValidatorMap = (_a = {}, _a[SOURCE_FORMAT_ARRAY_ROWS + '_' + SERIES_LAYOUT_BY_COLUMN] = validateSimply, _a[SOURCE_FORMAT_ARRAY_ROWS + '_' + SERIES_LAYOUT_BY_ROW] = validateSimply, _a[SOURCE_FORMAT_OBJECT_ROWS] = validateSimply, _a[SOURCE_FORMAT_KEYED_COLUMNS] = function (rawData, dimsDef) {
+  for (var i = 0; i < dimsDef.length; i++) {
+    var dimName = dimsDef[i].name;
+    if (dimName == null) {
+      error('dimension name must not be null/undefined.');
+    }
+  }
+}, _a[SOURCE_FORMAT_ORIGINAL] = validateSimply, _a);
 var getItemSimply = function (rawData, startIndex, dimsDef, idx) {
   return rawData[idx];
 };
-var rawSourceItemGetterMap = (_a = {}, _a[SOURCE_FORMAT_ARRAY_ROWS + '_' + SERIES_LAYOUT_BY_COLUMN] = function (rawData, startIndex, dimsDef, idx) {
+var rawSourceItemGetterMap = (_b = {}, _b[SOURCE_FORMAT_ARRAY_ROWS + '_' + SERIES_LAYOUT_BY_COLUMN] = function (rawData, startIndex, dimsDef, idx) {
   return rawData[idx + startIndex];
-}, _a[SOURCE_FORMAT_ARRAY_ROWS + '_' + SERIES_LAYOUT_BY_ROW] = function (rawData, startIndex, dimsDef, idx, out) {
+}, _b[SOURCE_FORMAT_ARRAY_ROWS + '_' + SERIES_LAYOUT_BY_ROW] = function (rawData, startIndex, dimsDef, idx, out) {
   idx += startIndex;
   var item = out || [];
   var data = rawData;
@@ -213,20 +236,15 @@ var rawSourceItemGetterMap = (_a = {}, _a[SOURCE_FORMAT_ARRAY_ROWS + '_' + SERIE
     item[i] = row ? row[idx] : null;
   }
   return item;
-}, _a[SOURCE_FORMAT_OBJECT_ROWS] = getItemSimply, _a[SOURCE_FORMAT_KEYED_COLUMNS] = function (rawData, startIndex, dimsDef, idx, out) {
+}, _b[SOURCE_FORMAT_OBJECT_ROWS] = getItemSimply, _b[SOURCE_FORMAT_KEYED_COLUMNS] = function (rawData, startIndex, dimsDef, idx, out) {
   var item = out || [];
   for (var i = 0; i < dimsDef.length; i++) {
     var dimName = dimsDef[i].name;
-    if (process.env.NODE_ENV !== 'production') {
-      if (dimName == null) {
-        throw new Error();
-      }
-    }
-    var col = rawData[dimName];
+    var col = dimName != null ? rawData[dimName] : null;
     item[i] = col ? col[idx] : null;
   }
   return item;
-}, _a[SOURCE_FORMAT_ORIGINAL] = getItemSimply, _a);
+}, _b[SOURCE_FORMAT_ORIGINAL] = getItemSimply, _b);
 export function getRawSourceItemGetter(sourceFormat, seriesLayoutBy) {
   var method = rawSourceItemGetterMap[getMethodMapKey(sourceFormat, seriesLayoutBy)];
   if (process.env.NODE_ENV !== 'production') {
@@ -237,21 +255,16 @@ export function getRawSourceItemGetter(sourceFormat, seriesLayoutBy) {
 var countSimply = function (rawData, startIndex, dimsDef) {
   return rawData.length;
 };
-var rawSourceDataCounterMap = (_b = {}, _b[SOURCE_FORMAT_ARRAY_ROWS + '_' + SERIES_LAYOUT_BY_COLUMN] = function (rawData, startIndex, dimsDef) {
+var rawSourceDataCounterMap = (_c = {}, _c[SOURCE_FORMAT_ARRAY_ROWS + '_' + SERIES_LAYOUT_BY_COLUMN] = function (rawData, startIndex, dimsDef) {
   return Math.max(0, rawData.length - startIndex);
-}, _b[SOURCE_FORMAT_ARRAY_ROWS + '_' + SERIES_LAYOUT_BY_ROW] = function (rawData, startIndex, dimsDef) {
+}, _c[SOURCE_FORMAT_ARRAY_ROWS + '_' + SERIES_LAYOUT_BY_ROW] = function (rawData, startIndex, dimsDef) {
   var row = rawData[0];
   return row ? Math.max(0, row.length - startIndex) : 0;
-}, _b[SOURCE_FORMAT_OBJECT_ROWS] = countSimply, _b[SOURCE_FORMAT_KEYED_COLUMNS] = function (rawData, startIndex, dimsDef) {
+}, _c[SOURCE_FORMAT_OBJECT_ROWS] = countSimply, _c[SOURCE_FORMAT_KEYED_COLUMNS] = function (rawData, startIndex, dimsDef) {
   var dimName = dimsDef[0].name;
-  if (process.env.NODE_ENV !== 'production') {
-    if (dimName == null) {
-      throw new Error();
-    }
-  }
-  var col = rawData[dimName];
+  var col = dimName != null ? rawData[dimName] : null;
   return col ? col.length : 0;
-}, _b[SOURCE_FORMAT_ORIGINAL] = countSimply, _b);
+}, _c[SOURCE_FORMAT_ORIGINAL] = countSimply, _c);
 export function getRawSourceDataCounter(sourceFormat, seriesLayoutBy) {
   var method = rawSourceDataCounterMap[getMethodMapKey(sourceFormat, seriesLayoutBy)];
   if (process.env.NODE_ENV !== 'production') {
@@ -262,14 +275,14 @@ export function getRawSourceDataCounter(sourceFormat, seriesLayoutBy) {
 var getRawValueSimply = function (dataItem, dimIndex, property) {
   return dataItem[dimIndex];
 };
-var rawSourceValueGetterMap = (_c = {}, _c[SOURCE_FORMAT_ARRAY_ROWS] = getRawValueSimply, _c[SOURCE_FORMAT_OBJECT_ROWS] = function (dataItem, dimIndex, property) {
+var rawSourceValueGetterMap = (_d = {}, _d[SOURCE_FORMAT_ARRAY_ROWS] = getRawValueSimply, _d[SOURCE_FORMAT_OBJECT_ROWS] = function (dataItem, dimIndex, property) {
   return dataItem[property];
-}, _c[SOURCE_FORMAT_KEYED_COLUMNS] = getRawValueSimply, _c[SOURCE_FORMAT_ORIGINAL] = function (dataItem, dimIndex, property) {
+}, _d[SOURCE_FORMAT_KEYED_COLUMNS] = getRawValueSimply, _d[SOURCE_FORMAT_ORIGINAL] = function (dataItem, dimIndex, property) {
   // FIXME: In some case (markpoint in geo (geo-map.html)),
   // dataItem is {coord: [...]}
   var value = getDataItemValue(dataItem);
   return !(value instanceof Array) ? value : value[dimIndex];
-}, _c[SOURCE_FORMAT_TYPED_ARRAY] = getRawValueSimply, _c);
+}, _d[SOURCE_FORMAT_TYPED_ARRAY] = getRawValueSimply, _d);
 export function getRawSourceValueGetter(sourceFormat) {
   var method = rawSourceValueGetterMap[sourceFormat];
   if (process.env.NODE_ENV !== 'production') {

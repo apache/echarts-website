@@ -290,16 +290,19 @@ function createPathOptions(str, opts) {
     var pathProxy = createPathProxyFromString(str);
     var innerOpts = extend({}, opts);
     innerOpts.buildPath = function (path) {
-        if (isPathProxy(path)) {
-            path.setData(pathProxy.data);
+        var beProxy = isPathProxy(path);
+        if (beProxy && path.canSave()) {
+            path.appendPath(pathProxy);
             var ctx = path.getContext();
             if (ctx) {
                 path.rebuildPath(ctx, 1);
             }
         }
         else {
-            var ctx = path;
-            pathProxy.rebuildPath(ctx, 1);
+            var ctx = beProxy ? path.getContext() : path;
+            if (ctx) {
+                pathProxy.rebuildPath(ctx, 1);
+            }
         }
     };
     innerOpts.applyTransform = function (m) {

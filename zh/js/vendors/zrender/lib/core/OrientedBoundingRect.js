@@ -1,8 +1,13 @@
 import Point from './Point.js';
-var extent = [0, 0];
-var extent2 = [0, 0];
-var minTv = new Point();
-var maxTv = new Point();
+import { createIntersectContext } from './BoundingRect.js';
+var mathMin = Math.min;
+var mathMax = Math.max;
+var mathAbs = Math.abs;
+var _extent = [0, 0];
+var _extent2 = [0, 0];
+var _intersectCtx = createIntersectContext();
+var _minTv = _intersectCtx.minTv;
+var _maxTv = _intersectCtx.maxTv;
 var OrientedBoundingRect = (function () {
     function OrientedBoundingRect(rect, transform) {
         this._corners = [];
@@ -42,59 +47,69 @@ var OrientedBoundingRect = (function () {
             this._origin[i] = axes[i].dot(corners[0]);
         }
     };
-    OrientedBoundingRect.prototype.intersect = function (other, mtv) {
+    OrientedBoundingRect.prototype.intersect = function (other, mtv, opt) {
         var overlapped = true;
         var noMtv = !mtv;
-        minTv.set(Infinity, Infinity);
-        maxTv.set(0, 0);
-        if (!this._intersectCheckOneSide(this, other, minTv, maxTv, noMtv, 1)) {
+        if (mtv) {
+            Point.set(mtv, 0, 0);
+        }
+        _intersectCtx.reset(opt, !noMtv);
+        if (!this._intersectCheckOneSide(this, other, noMtv, 1)) {
             overlapped = false;
             if (noMtv) {
                 return overlapped;
             }
         }
-        if (!this._intersectCheckOneSide(other, this, minTv, maxTv, noMtv, -1)) {
+        if (!this._intersectCheckOneSide(other, this, noMtv, -1)) {
             overlapped = false;
             if (noMtv) {
                 return overlapped;
             }
         }
-        if (!noMtv) {
-            Point.copy(mtv, overlapped ? minTv : maxTv);
+        if (!noMtv && !_intersectCtx.negativeSize) {
+            Point.copy(mtv, overlapped
+                ? (_intersectCtx.useDir ? _intersectCtx.dirMinTv : _minTv)
+                : _maxTv);
         }
         return overlapped;
     };
-    OrientedBoundingRect.prototype._intersectCheckOneSide = function (self, other, minTv, maxTv, noMtv, inverse) {
+    OrientedBoundingRect.prototype._intersectCheckOneSide = function (self, other, noMtv, inverse) {
         var overlapped = true;
         for (var i = 0; i < 2; i++) {
-            var axis = this._axes[i];
-            this._getProjMinMaxOnAxis(i, self._corners, extent);
-            this._getProjMinMaxOnAxis(i, other._corners, extent2);
-            if (extent[1] < extent2[0] || extent[0] > extent2[1]) {
+            var axis = self._axes[i];
+            self._getProjMinMaxOnAxis(i, self._corners, _extent);
+            self._getProjMinMaxOnAxis(i, other._corners, _extent2);
+            if (_intersectCtx.negativeSize || _extent[1] < _extent2[0] || _extent[0] > _extent2[1]) {
                 overlapped = false;
-                if (noMtv) {
+                if (_intersectCtx.negativeSize || noMtv) {
                     return overlapped;
                 }
-                var dist0 = Math.abs(extent2[0] - extent[1]);
-                var dist1 = Math.abs(extent[0] - extent2[1]);
-                if (Math.min(dist0, dist1) > maxTv.len()) {
+                var dist0 = mathAbs(_extent2[0] - _extent[1]);
+                var dist1 = mathAbs(_extent[0] - _extent2[1]);
+                if (mathMin(dist0, dist1) > _maxTv.len()) {
                     if (dist0 < dist1) {
-                        Point.scale(maxTv, axis, -dist0 * inverse);
+                        Point.scale(_maxTv, axis, -dist0 * inverse);
                     }
                     else {
-                        Point.scale(maxTv, axis, dist1 * inverse);
+                        Point.scale(_maxTv, axis, dist1 * inverse);
                     }
                 }
             }
-            else if (minTv) {
-                var dist0 = Math.abs(extent2[0] - extent[1]);
-                var dist1 = Math.abs(extent[0] - extent2[1]);
-                if (Math.min(dist0, dist1) < minTv.len()) {
-                    if (dist0 < dist1) {
-                        Point.scale(minTv, axis, dist0 * inverse);
+            else if (!noMtv) {
+                var dist0 = mathAbs(_extent2[0] - _extent[1]);
+                var dist1 = mathAbs(_extent[0] - _extent2[1]);
+                if (_intersectCtx.useDir || mathMin(dist0, dist1) < _minTv.len()) {
+                    if (dist0 < dist1 || !_intersectCtx.bidirectional) {
+                        Point.scale(_minTv, axis, dist0 * inverse);
+                        if (_intersectCtx.useDir) {
+                            _intersectCtx.calcDirMTV();
+                        }
                     }
-                    else {
-                        Point.scale(minTv, axis, -dist1 * inverse);
+                    if (dist0 >= dist1 || !_intersectCtx.bidirectional) {
+                        Point.scale(_minTv, axis, -dist1 * inverse);
+                        if (_intersectCtx.useDir) {
+                            _intersectCtx.calcDirMTV();
+                        }
                     }
                 }
             }
@@ -109,11 +124,12 @@ var OrientedBoundingRect = (function () {
         var max = proj;
         for (var i = 1; i < corners.length; i++) {
             var proj_1 = corners[i].dot(axis) + origin[dim];
-            min = Math.min(proj_1, min);
-            max = Math.max(proj_1, max);
+            min = mathMin(proj_1, min);
+            max = mathMax(proj_1, max);
         }
-        out[0] = min;
-        out[1] = max;
+        out[0] = min + _intersectCtx.touchThreshold;
+        out[1] = max - _intersectCtx.touchThreshold;
+        _intersectCtx.negativeSize = out[1] < out[0];
     };
     return OrientedBoundingRect;
 }());

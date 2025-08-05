@@ -63,6 +63,9 @@ export default function calendarPrepareCustom(coordSys) {
     api: {
       coord: function (data, clamp) {
         return coordSys.dataToPoint(data, clamp);
+      },
+      layout: function (data, clamp) {
+        return coordSys.dataToLayout(data, clamp);
       }
     }
   };

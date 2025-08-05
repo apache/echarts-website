@@ -41,14 +41,15 @@
 * specific language governing permissions and limitations
 * under the License.
 */
-import * as layout from '../../util/layout.js';
 import * as zrUtil from 'zrender/lib/core/util.js';
 import { groupData } from '../../util/model.js';
+import { createBoxLayoutReference, getLayoutRect } from '../../util/layout.js';
 export default function sankeyLayout(ecModel, api) {
   ecModel.eachSeriesByType('sankey', function (seriesModel) {
     var nodeWidth = seriesModel.get('nodeWidth');
     var nodeGap = seriesModel.get('nodeGap');
-    var layoutInfo = getViewRect(seriesModel, api);
+    var refContainer = createBoxLayoutReference(seriesModel, api).refContainer;
+    var layoutInfo = getLayoutRect(seriesModel.getBoxLayoutParams(), refContainer);
     seriesModel.layoutInfo = layoutInfo;
     var width = layoutInfo.width;
     var height = layoutInfo.height;
@@ -63,15 +64,6 @@ export default function sankeyLayout(ecModel, api) {
     var orient = seriesModel.get('orient');
     var nodeAlign = seriesModel.get('nodeAlign');
     layoutSankey(nodes, edges, nodeWidth, nodeGap, width, height, iterations, orient, nodeAlign);
-  });
-}
-/**
- * Get the layout position of the whole view
- */
-function getViewRect(seriesModel, api) {
-  return layout.getLayoutRect(seriesModel.getBoxLayoutParams(), {
-    width: api.getWidth(),
-    height: api.getHeight()
   });
 }
 function layoutSankey(nodes, edges, nodeWidth, nodeGap, width, height, iterations, orient, nodeAlign) {

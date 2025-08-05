@@ -45,6 +45,7 @@ import { __extends } from "tslib";
 import SeriesModel from '../../model/Series.js';
 import createSeriesData from '../helper/createSeriesData.js';
 import CoordinateSystem from '../../core/CoordinateSystem.js';
+import tokens from '../../visual/tokens.js';
 var HeatmapSeriesModel = /** @class */function (_super) {
   __extends(HeatmapSeriesModel, _super);
   function HeatmapSeriesModel() {
@@ -64,7 +65,7 @@ var HeatmapSeriesModel = /** @class */function (_super) {
     }
   };
   HeatmapSeriesModel.type = 'series.heatmap';
-  HeatmapSeriesModel.dependencies = ['grid', 'geo', 'calendar'];
+  HeatmapSeriesModel.dependencies = ['grid', 'geo', 'calendar', 'matrix'];
   HeatmapSeriesModel.defaultOption = {
     coordinateSystem: 'cartesian2d',
     // zlevel: 0,
@@ -80,7 +81,7 @@ var HeatmapSeriesModel = /** @class */function (_super) {
     minOpacity: 0,
     select: {
       itemStyle: {
-        borderColor: '#212121'
+        borderColor: tokens.color.primary
       }
     }
   };

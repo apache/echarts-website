@@ -5,6 +5,7 @@ export declare type ArrayLike<T> = {
     [key: number]: T;
     length: number;
 };
+export declare type NullUndefined = null | undefined;
 export declare type ImageLike = HTMLImageElement | HTMLCanvasElement | HTMLVideoElement;
 export declare type TextVerticalAlign = 'top' | 'middle' | 'bottom';
 export declare type TextAlign = 'left' | 'center' | 'right';

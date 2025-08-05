@@ -20,7 +20,7 @@ declare class HeatmapView extends ChartView {
     incrementalPrepareRender(seriesModel: HeatmapSeriesModel, ecModel: GlobalModel, api: ExtensionAPI): void;
     incrementalRender(params: StageHandlerProgressParams, seriesModel: HeatmapSeriesModel, ecModel: GlobalModel, api: ExtensionAPI): void;
     eachRendered(cb: (el: Element) => boolean | void): void;
-    _renderOnCartesianAndCalendar(seriesModel: HeatmapSeriesModel, api: ExtensionAPI, start: number, end: number, incremental?: boolean): void;
+    _renderOnGridLike(seriesModel: HeatmapSeriesModel, api: ExtensionAPI, start: number, end: number, incremental?: boolean): void;
     _renderOnGeo(geo: GeoLikeCoordSys, seriesModel: HeatmapSeriesModel, visualMapModel: VisualMapModel, api: ExtensionAPI): void;
 }
 export default HeatmapView;

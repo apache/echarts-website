@@ -1,7 +1,7 @@
 import ZRText, { TextStyleProps } from 'zrender/lib/graphic/Text.js';
 import Element, { ElementTextConfig } from 'zrender/lib/Element.js';
 import Model from '../model/Model.js';
-import { LabelOption, DisplayState, TextCommonOption, StatesOptionMixin, DisplayStateNonNormal, ColorString, ZRStyleProps, AnimationOptionMixin, InterpolatableValue } from '../util/types.js';
+import { LabelOption, DisplayState, TextCommonOption, StatesOptionMixin, DisplayStateNonNormal, ColorString, ZRStyleProps, AnimationOptionMixin, InterpolatableValue, LabelCommonOption, TextCommonOptionNuanceBase, TextCommonOptionNuanceDefault, NullUndefined } from '../util/types.js';
 import GlobalModel from '../model/Global.js';
 import SeriesData from '../data/SeriesData.js';
 declare type TextCommonParams = {
@@ -23,6 +23,9 @@ declare type TextCommonParams = {
      * If support legacy 'auto' for 'inherit' usage.
      */
     textStyle?: ZRStyleProps;
+    defaultTextMargin?: number | number[];
+    autoOverflowArea?: ElementTextConfig['autoOverflowArea'];
+    layoutRect?: ElementTextConfig['layoutRect'];
 };
 interface SetLabelStyleOpt<TLabelDataIndex> extends TextCommonParams {
     defaultText?: string | ((labelDataIndex: TLabelDataIndex, opt: SetLabelStyleOpt<TLabelDataIndex>, interpolatedValue?: InterpolatableValue) => string);
@@ -48,6 +51,7 @@ declare type LabelModelForText = Model<Omit<LabelOption, 'position' | 'rotate'> 
 declare type LabelStatesModels<LabelModel> = Partial<Record<DisplayStateNonNormal, LabelModel>> & {
     normal: LabelModel;
 };
+declare type LabelCommonModel<TNuance extends TextCommonOptionNuanceBase = TextCommonOptionNuanceDefault> = Model<LabelCommonOption<TNuance>>;
 export declare function setLabelText(label: ZRText, labelTexts: Record<DisplayState, string>): void;
 /**
  * Set normal styles and emphasis styles about text on target element
@@ -65,9 +69,21 @@ export declare function getLabelStatesModels<LabelName extends string = 'label'>
 /**
  * Set basic textStyle properties.
  */
-export declare function createTextStyle(textStyleModel: Model, specifiedTextStyle?: TextStyleProps, // Fixed style in the code. Can't be set by model.
-opt?: Pick<TextCommonParams, 'inheritColor' | 'disableBox'>, isNotNormal?: boolean, isAttached?: boolean): TextStyleProps;
-export declare function createTextConfig(textStyleModel: Model, opt?: Pick<TextCommonParams, 'defaultOutsidePosition' | 'inheritColor'>, isNotNormal?: boolean): ElementTextConfig;
+export declare function createTextStyle<TNuance extends TextCommonOptionNuanceBase = TextCommonOptionNuanceDefault>(textStyleModel: LabelCommonModel<TNuance>, specifiedTextStyle?: TextStyleProps, // Fixed style in the code. Can't be set by model.
+opt?: Parameters<typeof setTextStyleCommon>[2], isNotNormal?: boolean, isAttached?: boolean): TextStyleProps;
+export declare function createTextConfig(textStyleModel: Model<LabelOption<{
+    positionExtra: 'outside';
+}>>, opt?: Pick<TextCommonParams, 'defaultOutsidePosition' | 'inheritColor' | 'autoOverflowArea' | 'layoutRect'>, isNotNormal?: boolean): ElementTextConfig;
+/**
+ * The uniform entry of set text style, that is, retrieve style definitions
+ * from `model` and set to `textStyle` object.
+ *
+ * Never in merge mode, but in overwrite mode, that is, all of the text style
+ * properties will be set. (Consider the states of normal and emphasis and
+ * default value can be adopted, merge would make the logic too complicated
+ * to manage.)
+ */
+declare function setTextStyleCommon<TNuance extends TextCommonOptionNuanceBase = TextCommonOptionNuanceDefault>(textStyle: TextStyleProps, textStyleModel: LabelCommonModel<TNuance>, opt?: Pick<TextCommonParams, 'inheritColor' | 'defaultOpacity' | 'disableBox' | 'defaultTextMargin'>, isNotNormal?: boolean, isAttached?: boolean): void;
 export declare function getFont(opt: Pick<TextCommonOption, 'fontStyle' | 'fontWeight' | 'fontSize' | 'fontFamily'>, ecModel: GlobalModel): string;
 export declare const labelInner: (hostObj: ZRText) => {
     /**
@@ -106,3 +122,17 @@ export declare const labelInner: (hostObj: ZRText) => {
 };
 export declare function setLabelValueAnimation(label: ZRText, labelStatesModels: LabelStatesModels<LabelModelForText>, value: InterpolatableValue, getDefaultText: (value: InterpolatableValue) => string): void;
 export declare function animateLabelValue(textEl: ZRText, dataIndex: number, data: SeriesData, animatableModel: Model<AnimationOptionMixin>, labelFetcher: SetLabelStyleOpt<number>['labelFetcher']): void;
+/**
+ * PENDING: Temporary impl. unify them?
+ * @see {LabelCommonOption['textMargin']}
+ * @see {LabelCommonOption['minMargin']}
+ */
+export declare const LabelMarginType: {
+    readonly minMargin: 1;
+    readonly textMargin: 2;
+};
+export declare type LabelMarginType = (typeof LabelMarginType)[keyof typeof LabelMarginType];
+export interface LabelExtendedTextStyle extends TextStyleProps {
+    margin: number[] | NullUndefined;
+    __marginType?: LabelMarginType | NullUndefined;
+}

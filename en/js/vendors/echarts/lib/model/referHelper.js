@@ -88,6 +88,7 @@ export function getCoordSysInfoBySeries(seriesModel) {
     return result;
   }
 }
+// TODO: refactor them to static member of each coord sys, rather than hard code here.
 var fetchers = {
   cartesian2d: function (seriesModel, result, axisMap, categoryAxisMap) {
     var xAxisModel = seriesModel.getReferringComponents('xAxis', SINGLE_REFERRING).models[0];
@@ -168,6 +169,21 @@ var fetchers = {
         }
       }
     });
+  },
+  matrix: function (seriesModel, result, axisMap, categoryAxisMap) {
+    var matrixModel = seriesModel.getReferringComponents('matrix', SINGLE_REFERRING).models[0];
+    if (process.env.NODE_ENV !== 'production') {
+      if (!matrixModel) {
+        throw new Error('matrix coordinate system should be specified.');
+      }
+    }
+    result.coordSysDims = ['x', 'y'];
+    var xModel = matrixModel.getDimensionModel('x');
+    var yModel = matrixModel.getDimensionModel('y');
+    axisMap.set('x', xModel);
+    axisMap.set('y', yModel);
+    categoryAxisMap.set('x', xModel);
+    categoryAxisMap.set('y', yModel);
   }
 };
 function isCategory(axisModel) {

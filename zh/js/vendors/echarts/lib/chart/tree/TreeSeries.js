@@ -47,6 +47,7 @@ import Tree from '../../data/Tree.js';
 import Model from '../../model/Model.js';
 import { createTooltipMarkup } from '../../component/tooltip/tooltipMarkup.js';
 import { wrapTreePathInfo } from '../helper/treeHelper.js';
+import tokens from '../../visual/tokens.js';
 var TreeSeriesModel = /** @class */function (_super) {
   __extends(TreeSeriesModel, _super);
   function TreeSeriesModel() {
@@ -142,7 +143,9 @@ var TreeSeriesModel = /** @class */function (_super) {
   TreeSeriesModel.defaultOption = {
     // zlevel: 0,
     z: 2,
-    coordinateSystem: 'view',
+    // `coordinateSystem` can be declared as 'matrix', 'calendar',
+    //  which provides box layout container.
+    coordinateSystemUsage: 'box',
     // the position of the whole view
     left: '12%',
     top: '12%',
@@ -155,6 +158,7 @@ var TreeSeriesModel = /** @class */function (_super) {
     edgeForkPosition: '50%',
     // true | false | 'move' | 'scale', see module:component/helper/RoamController.
     roam: false,
+    roamTrigger: 'global',
     // Symbol size scale ratio in roam
     nodeScaleRatio: 0.4,
     // Default on center of graph
@@ -166,7 +170,7 @@ var TreeSeriesModel = /** @class */function (_super) {
     expandAndCollapse: true,
     initialTreeDepth: 2,
     lineStyle: {
-      color: '#ccc',
+      color: tokens.color.borderTint,
       width: 1.5,
       curveness: 0.5
     },

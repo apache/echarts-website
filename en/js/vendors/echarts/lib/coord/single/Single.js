@@ -46,7 +46,7 @@
  */
 import SingleAxis from './SingleAxis.js';
 import * as axisHelper from '../axisHelper.js';
-import { getLayoutRect } from '../../util/layout.js';
+import { createBoxLayoutReference, getLayoutRect } from '../../util/layout.js';
 import { each } from 'zrender/lib/core/util.js';
 export var singleDimensions = ['single'];
 /**
@@ -97,17 +97,8 @@ var Single = /** @class */function () {
    * Resize the single coordinate system.
    */
   Single.prototype.resize = function (axisModel, api) {
-    this._rect = getLayoutRect({
-      left: axisModel.get('left'),
-      top: axisModel.get('top'),
-      right: axisModel.get('right'),
-      bottom: axisModel.get('bottom'),
-      width: axisModel.get('width'),
-      height: axisModel.get('height')
-    }, {
-      width: api.getWidth(),
-      height: api.getHeight()
-    });
+    var refContainer = createBoxLayoutReference(axisModel, api).refContainer;
+    this._rect = getLayoutRect(axisModel.getBoxLayoutParams(), refContainer);
     this._adjustAxis();
   };
   Single.prototype.getRect = function () {
@@ -172,25 +163,27 @@ var Single = /** @class */function () {
       return axis.contain(axis.toLocalCoord(point[1])) && point[0] >= rect.y && point[0] <= rect.y + rect.height;
     }
   };
-  Single.prototype.pointToData = function (point) {
+  Single.prototype.pointToData = function (point, reserved, out) {
+    out = out || [];
     var axis = this.getAxis();
-    return [axis.coordToData(axis.toLocalCoord(point[axis.orient === 'horizontal' ? 0 : 1]))];
+    out[0] = axis.coordToData(axis.toLocalCoord(point[axis.orient === 'horizontal' ? 0 : 1]));
+    return out;
   };
   /**
    * Convert the series data to concrete point.
    * Can be [val] | val
    */
-  Single.prototype.dataToPoint = function (val) {
+  Single.prototype.dataToPoint = function (val, reserved, out) {
     var axis = this.getAxis();
     var rect = this.getRect();
-    var pt = [];
+    out = out || [];
     var idx = axis.orient === 'horizontal' ? 0 : 1;
     if (val instanceof Array) {
       val = val[0];
     }
-    pt[idx] = axis.toGlobalCoord(axis.dataToCoord(+val));
-    pt[1 - idx] = idx === 0 ? rect.y + rect.height / 2 : rect.x + rect.width / 2;
-    return pt;
+    out[idx] = axis.toGlobalCoord(axis.dataToCoord(+val));
+    out[1 - idx] = idx === 0 ? rect.y + rect.height / 2 : rect.x + rect.width / 2;
+    return out;
   };
   Single.prototype.convertToPixel = function (ecModel, finder, value) {
     var coordSys = getCoordSys(finder);

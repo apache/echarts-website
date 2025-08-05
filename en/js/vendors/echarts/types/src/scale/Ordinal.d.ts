@@ -4,8 +4,7 @@
  */
 import Scale from './Scale.js';
 import OrdinalMeta from '../data/OrdinalMeta.js';
-import SeriesData from '../data/SeriesData.js';
-import { OrdinalRawValue, OrdinalNumber, DimensionLoose, OrdinalSortInfo, OrdinalScaleTick, ScaleTick } from '../util/types.js';
+import { OrdinalRawValue, OrdinalNumber, OrdinalSortInfo, OrdinalScaleTick, ScaleTick } from '../util/types.js';
 import { CategoryAxisBaseOption } from '../coord/axisCommonTypes.js';
 declare type OrdinalScaleSetting = {
     ordinalMeta?: OrdinalMeta | CategoryAxisBaseOption['data'];
@@ -74,13 +73,13 @@ declare class OrdinalScale extends Scale<OrdinalScaleSetting> {
     private _ticksByOrdinalNumber;
     constructor(setting?: OrdinalScaleSetting);
     parse(val: OrdinalRawValue | OrdinalNumber): OrdinalNumber;
-    contain(rank: OrdinalRawValue | OrdinalNumber): boolean;
+    contain(val: OrdinalNumber): boolean;
     /**
      * Normalize given rank or name to linear [0, 1]
      * @param val raw ordinal number.
      * @return normalized value in [0, 1].
      */
-    normalize(val: OrdinalRawValue | OrdinalNumber): number;
+    normalize(val: OrdinalNumber): number;
     /**
      * @param val normalized value in [0, 1].
      * @return raw ordinal number.
@@ -114,7 +113,6 @@ declare class OrdinalScale extends Scale<OrdinalScaleSetting> {
      */
     getLabel(tick: ScaleTick): string;
     count(): number;
-    unionExtentFromData(data: SeriesData, dim: DimensionLoose): void;
     /**
      * @override
      * If value is in extent range

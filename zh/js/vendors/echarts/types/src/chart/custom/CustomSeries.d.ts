@@ -3,7 +3,7 @@ import { ImageProps, ImageStyleProps } from 'zrender/lib/graphic/Image.js';
 import { PathProps, PathStyleProps } from 'zrender/lib/graphic/Path.js';
 import { ZRenderType } from 'zrender/lib/zrender.js';
 import { BarGridLayoutOptionForCustomSeries, BarGridLayoutResult } from '../../layout/barGrid.js';
-import { AnimationOption, BlurScope, CallbackDataParams, Dictionary, DimensionLoose, ItemStyleOption, LabelOption, OptionDataValue, OrdinalRawValue, ParsedValue, SeriesDataType, SeriesEncodeOptionMixin, SeriesOnCalendarOptionMixin, SeriesOnCartesianOptionMixin, SeriesOnGeoOptionMixin, SeriesOnPolarOptionMixin, SeriesOnSingleOptionMixin, SeriesOption, TextCommonOption, ZRStyleProps } from '../../util/types.js';
+import { AnimationOption, BlurScope, CallbackDataParams, CoordinateSystemDataLayout, Dictionary, DimensionLoose, ItemStyleOption, LabelOption, NullUndefined, OptionDataValue, OrdinalRawValue, ParsedValue, SeriesDataType, SeriesEncodeOptionMixin, SeriesOnCalendarOptionMixin, SeriesOnCartesianOptionMixin, SeriesOnGeoOptionMixin, SeriesOnPolarOptionMixin, SeriesOnSingleOptionMixin, SeriesOption, TextCommonOption, ZRStyleProps } from '../../util/types.js';
 import Element from 'zrender/lib/Element.js';
 import SeriesData, { DefaultDataVisual } from '../../data/SeriesData.js';
 import GlobalModel from '../../model/Global.js';
@@ -45,6 +45,7 @@ export interface CustomBaseElementOption extends Partial<Pick<Element, Transform
     info?: CustomExtraElementInfo;
     textContent?: CustomTextOption | false;
     clipPath?: CustomBaseZRPathOption | false;
+    tooltipDisabled?: boolean;
     extra?: Dictionary<unknown> & TransitionOptionMixin;
     during?(params: TransitionBaseDuringAPI): void;
     enterAnimation?: AnimationOption;
@@ -139,7 +140,19 @@ export interface CustomTextOption extends CustomDisplayableOption, TransitionOpt
     select?: CustomTextOptionOnState;
     keyframeAnimation?: ElementKeyframeAnimationOption<TextProps> | ElementKeyframeAnimationOption<TextProps>[];
 }
-export declare type CustomElementOption = CustomPathOption | CustomImageOption | CustomTextOption | CustomGroupOption;
+export interface CustomompoundPathOptionOnState extends CustomDisplayableOptionOnState {
+    style?: PathStyleProps;
+}
+export interface CustomCompoundPathOption extends CustomDisplayableOption, TransitionOptionMixin<PathProps> {
+    type: 'compoundPath';
+    shape?: PathProps['shape'];
+    style?: PathStyleProps & TransitionOptionMixin<PathStyleProps>;
+    emphasis?: CustomompoundPathOptionOnState;
+    blur?: CustomompoundPathOptionOnState;
+    select?: CustomompoundPathOptionOnState;
+    keyframeAnimation?: ElementKeyframeAnimationOption<PathProps> | ElementKeyframeAnimationOption<PathProps>[];
+}
+export declare type CustomElementOption = CustomPathOption | CustomImageOption | CustomTextOption | CustomCompoundPathOption | CustomGroupOption;
 export declare type CustomRootElementOption = CustomElementOption & {
     focus?: 'none' | 'self' | 'series' | ArrayLike<number>;
     blurScope?: BlurScope;
@@ -170,8 +183,9 @@ export interface CustomSeriesRenderItemParamsCoordSys {
     type: string;
 }
 export interface CustomSeriesRenderItemCoordinateSystemAPI {
-    coord(data: OptionDataValue | OptionDataValue[], clamp?: boolean): number[];
+    coord(data: (OptionDataValue | NullUndefined) | (OptionDataValue | NullUndefined)[] | (OptionDataValue | OptionDataValue[] | NullUndefined)[], opt?: unknown): number[];
     size?(dataSize: OptionDataValue | OptionDataValue[], dataItem?: OptionDataValue | OptionDataValue[]): number | number[];
+    layout?(data: (OptionDataValue | NullUndefined) | (OptionDataValue | NullUndefined)[] | (OptionDataValue | OptionDataValue[] | NullUndefined)[], opt?: unknown): CoordinateSystemDataLayout;
 }
 export declare type WrapEncodeDefRet = Dictionary<number[]>;
 export interface CustomSeriesRenderItemParams {
@@ -184,6 +198,7 @@ export interface CustomSeriesRenderItemParams {
     encode: WrapEncodeDefRet;
     dataIndexInside: number;
     dataInsideLength: number;
+    itemPayload: Dictionary<unknown>;
     actionType?: string;
 }
 export declare type CustomSeriesRenderItemReturn = CustomRootElementOption | undefined | null;
@@ -193,6 +208,7 @@ SeriesEncodeOptionMixin, SeriesOnCartesianOptionMixin, SeriesOnPolarOptionMixin,
     type?: 'custom';
     coordinateSystem?: string | 'none';
     renderItem?: CustomSeriesRenderItem;
+    itemPayload?: Dictionary<unknown>;
     /**
      * @deprecated
      */

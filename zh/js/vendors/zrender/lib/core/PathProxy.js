@@ -211,6 +211,9 @@ var PathProxy = (function () {
         return this._len;
     };
     PathProxy.prototype.setData = function (data) {
+        if (!this._saveData) {
+            return;
+        }
         var len = data.length;
         if (!(this.data && this.data.length === len) && hasTypedArray) {
             this.data = new Float32Array(len);
@@ -221,6 +224,9 @@ var PathProxy = (function () {
         this._len = len;
     };
     PathProxy.prototype.appendPath = function (path) {
+        if (!this._saveData) {
+            return;
+        }
         if (!(path instanceof Array)) {
             path = [path];
         }
@@ -230,8 +236,14 @@ var PathProxy = (function () {
         for (var i = 0; i < len; i++) {
             appendSize += path[i].len();
         }
-        if (hasTypedArray && (this.data instanceof Float32Array)) {
+        var oldData = this.data;
+        if (hasTypedArray && (oldData instanceof Float32Array || !oldData)) {
             this.data = new Float32Array(offset + appendSize);
+            if (offset > 0 && oldData) {
+                for (var k = 0; k < offset; k++) {
+                    this.data[k] = oldData[k];
+                }
+            }
         }
         for (var i = 0; i < len; i++) {
             var appendPathData = path[i].data;
@@ -682,6 +694,9 @@ var PathProxy = (function () {
             : Array.prototype.slice.call(data);
         newProxy._len = this._len;
         return newProxy;
+    };
+    PathProxy.prototype.canSave = function () {
+        return !!this._saveData;
     };
     PathProxy.CMD = CMD;
     PathProxy.initDefaultProps = (function () {

@@ -19,7 +19,7 @@ option = {
         {
           value: 200,
           itemStyle: {
-            color: '#a90000'
+            color: '#505372'
           }
         },
         150,

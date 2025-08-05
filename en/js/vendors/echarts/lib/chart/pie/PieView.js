@@ -42,7 +42,7 @@
 * under the License.
 */
 import { __extends } from "tslib";
-import { extend, retrieve3 } from 'zrender/lib/core/util.js';
+import { clone, extend, retrieve3 } from 'zrender/lib/core/util.js';
 import * as graphic from '../../util/graphic.js';
 import { setStatesStylesFromModel, toggleHoverEmphasis } from '../../util/states.js';
 import ChartView from '../../view/Chart.js';
@@ -51,7 +51,7 @@ import { setLabelLineStyle, getLabelLineStatesModels } from '../../label/labelGu
 import { setLabelStyle, getLabelStatesModels } from '../../label/labelStyle.js';
 import { getSectorCornerRadius } from '../helper/sectorHelper.js';
 import { saveOldStyle } from '../../animation/basicTransition.js';
-import { getBasicPieLayout, getSeriesLayoutData } from './pieLayout.js';
+import { getSeriesLayoutData } from './pieLayout.js';
 /**
  * Piece of pie including Sector, Label, LabelLine
  */
@@ -191,7 +191,7 @@ var PiePiece = /** @class */function (_super) {
     labelText.attr({
       z2: 10
     });
-    var labelPosition = seriesModel.get(['label', 'position']);
+    var labelPosition = itemModel.get(['label', 'position']);
     if (labelPosition !== 'outside' && labelPosition !== 'outer') {
       sector.removeTextGuideLine();
     } else {
@@ -240,7 +240,7 @@ var PieView = /** @class */function (_super) {
     if (data.count() === 0 && seriesModel.get('showEmptyCircle')) {
       var layoutData = getSeriesLayoutData(seriesModel);
       var sector = new graphic.Sector({
-        shape: extend(getBasicPieLayout(seriesModel, api), layoutData)
+        shape: clone(layoutData)
       });
       sector.useStyle(seriesModel.getModel('emptyCircleStyle').getItemStyle());
       this._emptyCircleSector = sector;

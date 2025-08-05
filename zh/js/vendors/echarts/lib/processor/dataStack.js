@@ -71,11 +71,27 @@ export default function dataStack(ecModel) {
       if (!stackInfo.stackedDimension || !(stackInfo.isStackedByIndex || stackInfo.stackedByDimension)) {
         return;
       }
-      stackInfoList.length && data.setCalculationInfo('stackedOnSeries', stackInfoList[stackInfoList.length - 1].seriesModel);
       stackInfoList.push(stackInfo);
     }
   });
-  stackInfoMap.each(calculateStack);
+  // Process each stack group
+  stackInfoMap.each(function (stackInfoList) {
+    if (stackInfoList.length === 0) {
+      return;
+    }
+    // Check if stack order needs to be reversed
+    var firstSeries = stackInfoList[0].seriesModel;
+    var stackOrder = firstSeries.get('stackOrder') || 'seriesAsc';
+    if (stackOrder === 'seriesDesc') {
+      stackInfoList.reverse();
+    }
+    // Set stackedOnSeries for each series in the final order
+    each(stackInfoList, function (stackInfo, index) {
+      stackInfo.data.setCalculationInfo('stackedOnSeries', index > 0 ? stackInfoList[index - 1].seriesModel : null);
+    });
+    // Calculate stack values
+    calculateStack(stackInfoList);
+  });
 }
 function calculateStack(stackInfoList) {
   each(stackInfoList, function (targetStackInfo, idxInStack) {

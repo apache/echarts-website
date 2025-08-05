@@ -48,6 +48,9 @@ import ChartView from '../../view/Chart.js';
 import { setLabelStyle, getLabelStatesModels } from '../../label/labelStyle.js';
 import { getECData } from '../../util/innerStore.js';
 import { isString, retrieve3 } from 'zrender/lib/core/util.js';
+import RoamController from '../../component/helper/RoamController.js';
+import * as roamHelper from '../../component/helper/roamHelper.js';
+import View from '../../coord/View.js';
 var SankeyPathShape = /** @class */function () {
   function SankeyPathShape() {
     this.x1 = 0;
@@ -96,13 +99,21 @@ var SankeyView = /** @class */function (_super) {
   function SankeyView() {
     var _this = _super !== null && _super.apply(this, arguments) || this;
     _this.type = SankeyView.type;
+    _this._mainGroup = new graphic.Group();
     _this._focusAdjacencyDisabled = false;
     return _this;
   }
+  SankeyView.prototype.init = function (ecModel, api) {
+    this._controller = new RoamController(api.getZr());
+    this._controllerHost = {
+      target: this.group
+    };
+    this.group.add(this._mainGroup);
+  };
   SankeyView.prototype.render = function (seriesModel, ecModel, api) {
     var sankeyView = this;
     var graph = seriesModel.getGraph();
-    var group = this.group;
+    var mainGroup = this._mainGroup;
     var layoutInfo = seriesModel.layoutInfo;
     // view width
     var width = layoutInfo.width;
@@ -112,9 +123,11 @@ var SankeyView = /** @class */function (_super) {
     var edgeData = seriesModel.getData('edge');
     var orient = seriesModel.get('orient');
     this._model = seriesModel;
-    group.removeAll();
-    group.x = layoutInfo.x;
-    group.y = layoutInfo.y;
+    mainGroup.removeAll();
+    mainGroup.x = layoutInfo.x;
+    mainGroup.y = layoutInfo.y;
+    this._updateViewCoordSys(seriesModel, api);
+    roamHelper.updateController(seriesModel, api, mainGroup, this._controller, this._controllerHost, null);
     // generate a bezire Curve for each edge
     graph.eachEdge(function (edge) {
       var curve = new SankeyPath();
@@ -199,7 +212,7 @@ var SankeyView = /** @class */function (_super) {
         applyCurveStyle(style, orient, edge);
         return style;
       });
-      group.add(curve);
+      mainGroup.add(curve);
       edgeData.setItemGraphicEl(edge.dataIndex, curve);
       var focus = emphasisModel.get('focus');
       toggleHoverEmphasis(curve, focus === 'adjacency' ? edge.getAdjacentDataIndices() : focus === 'trajectory' ? edge.getTrajectoryDataIndices() : focus, emphasisModel.get('blurScope'), emphasisModel.get('disabled'));
@@ -236,7 +249,7 @@ var SankeyView = /** @class */function (_super) {
       rect.setStyle('fill', node.getVisual('color'));
       rect.setStyle('decal', node.getVisual('style').decal);
       setStatesStylesFromModel(rect, itemModel);
-      group.add(rect);
+      mainGroup.add(rect);
       nodeData.setItemGraphicEl(node.dataIndex, rect);
       getECData(rect).dataType = 'node';
       var focus = emphasisModel.get('focus');
@@ -266,13 +279,35 @@ var SankeyView = /** @class */function (_super) {
       }
     });
     if (!this._data && seriesModel.isAnimationEnabled()) {
-      group.setClipPath(createGridClipShape(group.getBoundingRect(), seriesModel, function () {
-        group.removeClipPath();
+      mainGroup.setClipPath(createGridClipShape(mainGroup.getBoundingRect(), seriesModel, function () {
+        mainGroup.removeClipPath();
       }));
     }
     this._data = seriesModel.getData();
   };
-  SankeyView.prototype.dispose = function () {};
+  SankeyView.prototype.dispose = function () {
+    this._controller && this._controller.dispose();
+    this._controllerHost = null;
+  };
+  SankeyView.prototype._updateViewCoordSys = function (seriesModel, api) {
+    var layoutInfo = seriesModel.layoutInfo;
+    var width = layoutInfo.width;
+    var height = layoutInfo.height;
+    var viewCoordSys = seriesModel.coordinateSystem = new View(null, {
+      api: api,
+      ecModel: seriesModel.ecModel
+    });
+    viewCoordSys.zoomLimit = seriesModel.get('scaleLimit');
+    viewCoordSys.setBoundingRect(0, 0, width, height);
+    viewCoordSys.setCenter(seriesModel.get('center'));
+    viewCoordSys.setZoom(seriesModel.get('zoom'));
+    this._controllerHost.target.attr({
+      x: viewCoordSys.x,
+      y: viewCoordSys.y,
+      scaleX: viewCoordSys.scaleX,
+      scaleY: viewCoordSys.scaleY
+    });
+  };
   SankeyView.type = 'sankey';
   return SankeyView;
 }(ChartView);

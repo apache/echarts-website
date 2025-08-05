@@ -179,7 +179,7 @@ function buildPayloadsBySeries(value, axisInfo) {
       dataIndices = result.dataIndices;
       seriesNestestValue = result.nestestValue;
     } else {
-      dataIndices = series.getData().indicesOfNearest(dataDim[0], value,
+      dataIndices = series.indicesOfNearest(dim, dataDim[0], value,
       // Add a threshold to avoid find the wrong dataIndex
       // when data length is not same.
       // false,

@@ -48,7 +48,7 @@ import { invert } from 'zrender/lib/core/matrix.js';
 import { applyTransform } from 'zrender/lib/core/vector.js';
 export var cartesian2DDimensions = ['x', 'y'];
 function canCalculateAffineTransform(scale) {
-  return scale.type === 'interval' || scale.type === 'time';
+  return (scale.type === 'interval' || scale.type === 'time') && !scale.hasBreaks();
 }
 var Cartesian2D = /** @class */function (_super) {
   __extends(Cartesian2D, _super);
@@ -111,7 +111,8 @@ var Cartesian2D = /** @class */function (_super) {
     out = out || [];
     var xVal = data[0];
     var yVal = data[1];
-    // Fast path
+    // [CAVEAT]: Do not add time consuming operation within and before fast path.
+    // Fast path.
     if (this._transform
     // It's supported that if data is like `[Inifity, 123]`, where only Y pixel calculated.
     && xVal != null && isFinite(xVal) && yVal != null && isFinite(yVal)) {
@@ -135,8 +136,8 @@ var Cartesian2D = /** @class */function (_super) {
     out[1] = Math.min(Math.max(Math.min(yAxisExtent[0], yAxisExtent[1]), y), Math.max(yAxisExtent[0], yAxisExtent[1]));
     return out;
   };
-  Cartesian2D.prototype.pointToData = function (point, clamp) {
-    var out = [];
+  Cartesian2D.prototype.pointToData = function (point, clamp, out) {
+    out = out || [];
     if (this._invTransform) {
       return applyTransform(out, point, this._invTransform);
     }

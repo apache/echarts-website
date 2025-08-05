@@ -1,22 +1,72 @@
 import BoundingRect from '../core/BoundingRect.js';
 import LRU from '../core/LRU.js';
 import { DEFAULT_FONT, platformApi } from '../core/platform.js';
-var textWidthCache = {};
 export function getWidth(text, font) {
-    font = font || DEFAULT_FONT;
-    var cacheOfFont = textWidthCache[font];
-    if (!cacheOfFont) {
-        cacheOfFont = textWidthCache[font] = new LRU(500);
+    return measureWidth(ensureFontMeasureInfo(font), text);
+}
+export function ensureFontMeasureInfo(font) {
+    if (!_fontMeasureInfoCache) {
+        _fontMeasureInfoCache = new LRU(100);
     }
-    var width = cacheOfFont.get(text);
+    font = font || DEFAULT_FONT;
+    var measureInfo = _fontMeasureInfoCache.get(font);
+    if (!measureInfo) {
+        measureInfo = {
+            font: font,
+            strWidthCache: new LRU(500),
+            asciiWidthMap: null,
+            asciiWidthMapTried: false,
+            stWideCharWidth: platformApi.measureText('国', font).width,
+            asciiCharWidth: platformApi.measureText('a', font).width
+        };
+        _fontMeasureInfoCache.put(font, measureInfo);
+    }
+    return measureInfo;
+}
+var _fontMeasureInfoCache;
+function tryCreateASCIIWidthMap(font) {
+    if (_getASCIIWidthMapLongCount >= GET_ASCII_WIDTH_LONG_COUNT_MAX) {
+        return;
+    }
+    font = font || DEFAULT_FONT;
+    var asciiWidthMap = [];
+    var start = +(new Date());
+    for (var code = 0; code <= 127; code++) {
+        asciiWidthMap[code] = platformApi.measureText(String.fromCharCode(code), font).width;
+    }
+    var cost = +(new Date()) - start;
+    if (cost > 16) {
+        _getASCIIWidthMapLongCount = GET_ASCII_WIDTH_LONG_COUNT_MAX;
+    }
+    else if (cost > 2) {
+        _getASCIIWidthMapLongCount++;
+    }
+    return asciiWidthMap;
+}
+var _getASCIIWidthMapLongCount = 0;
+var GET_ASCII_WIDTH_LONG_COUNT_MAX = 5;
+export function measureCharWidth(fontMeasureInfo, charCode) {
+    if (!fontMeasureInfo.asciiWidthMapTried) {
+        fontMeasureInfo.asciiWidthMap = tryCreateASCIIWidthMap(fontMeasureInfo.font);
+        fontMeasureInfo.asciiWidthMapTried = true;
+    }
+    return (0 <= charCode && charCode <= 127)
+        ? (fontMeasureInfo.asciiWidthMap != null
+            ? fontMeasureInfo.asciiWidthMap[charCode]
+            : fontMeasureInfo.asciiCharWidth)
+        : fontMeasureInfo.stWideCharWidth;
+}
+export function measureWidth(fontMeasureInfo, text) {
+    var strWidthCache = fontMeasureInfo.strWidthCache;
+    var width = strWidthCache.get(text);
     if (width == null) {
-        width = platformApi.measureText(text, font).width;
-        cacheOfFont.put(text, width);
+        width = platformApi.measureText(text, fontMeasureInfo.font).width;
+        strWidthCache.put(text, width);
     }
     return width;
 }
 export function innerGetBoundingRect(text, font, textAlign, textBaseline) {
-    var width = getWidth(text, font);
+    var width = measureWidth(ensureFontMeasureInfo(font), text);
     var height = getLineHeight(font);
     var x = adjustTextX(0, width, textAlign);
     var y = adjustTextY(0, height, textBaseline);
@@ -38,26 +88,26 @@ export function getBoundingRect(text, font, textAlign, textBaseline) {
         return uniondRect;
     }
 }
-export function adjustTextX(x, width, textAlign) {
+export function adjustTextX(x, width, textAlign, inverse) {
     if (textAlign === 'right') {
-        x -= width;
+        !inverse ? (x -= width) : (x += width);
     }
     else if (textAlign === 'center') {
-        x -= width / 2;
+        !inverse ? (x -= width / 2) : (x += width / 2);
     }
     return x;
 }
-export function adjustTextY(y, height, verticalAlign) {
+export function adjustTextY(y, height, verticalAlign, inverse) {
     if (verticalAlign === 'middle') {
-        y -= height / 2;
+        !inverse ? (y -= height / 2) : (y += height / 2);
     }
     else if (verticalAlign === 'bottom') {
-        y -= height;
+        !inverse ? (y -= height) : (y += height);
     }
     return y;
 }
 export function getLineHeight(font) {
-    return getWidth('国', font);
+    return ensureFontMeasureInfo(font).stWideCharWidth;
 }
 export function measureText(text, font) {
     return platformApi.measureText(text, font);

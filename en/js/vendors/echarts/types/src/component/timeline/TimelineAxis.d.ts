@@ -13,7 +13,9 @@ declare class TimelineAxis extends Axis {
     /**
      * @override
      */
-    getLabelModel(): Model<LabelOption>;
+    getLabelModel(): Model<LabelOption<{
+        positionExtra: never;
+    }>>;
     /**
      * @override
      */

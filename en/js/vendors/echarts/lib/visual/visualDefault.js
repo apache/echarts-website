@@ -45,6 +45,7 @@
  * @file Visual mapping.
  */
 import * as zrUtil from 'zrender/lib/core/util.js';
+import tokens from './tokens.js';
 var visualDefault = {
   /**
    * @public
@@ -57,7 +58,7 @@ var visualDefault = {
 var defaultOption = {
   color: {
     active: ['#006edd', '#e0ffff'],
-    inactive: ['rgba(0,0,0,0)']
+    inactive: [tokens.color.transparent]
   },
   colorHue: {
     active: [0, 360],

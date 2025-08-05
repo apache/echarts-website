@@ -1,5 +1,5 @@
 import * as zrUtil from 'zrender/lib/core/util.js';
-import { DataHost, DimensionName, SeriesOption, ZRColor, ScaleDataValue, SeriesDataType, OptionEncodeValue, ColorBy } from '../util/types.js';
+import { DataHost, DimensionName, SeriesOption, ZRColor, ScaleDataValue, SeriesDataType, OptionEncodeValue, ColorBy, DimensionLoose } from '../util/types.js';
 import ComponentModel from './Component.js';
 import { PaletteMixin } from './mixin/palette.js';
 import { DataFormatMixin } from '../model/mixin/dataFormat.js';
@@ -120,6 +120,18 @@ declare class SeriesModel<Opt extends SeriesOption = SeriesOption> extends Compo
      * @return {type} description
      */
     getBaseAxis(): Axis;
+    /**
+     * Retrieve the index of nearest value in the view coordinate.
+     * Data position is compared with each axis's dataToCoord.
+     *
+     * @param axisDim axis dimension
+     * @param dim data dimension
+     * @param value
+     * @param [maxDistance=Infinity] The maximum distance in view coordinate space
+     * @return If and only if multiple indices has
+     *         the same value, they are put to the result.
+     */
+    indicesOfNearest(axisDim: DimensionName, dim: DimensionLoose, value: number, maxDistance?: number): number[];
     /**
      * Default tooltip formatter
      *

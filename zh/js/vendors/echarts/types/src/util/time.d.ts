@@ -1,5 +1,5 @@
-import { TimeAxisLabelFormatterOption } from './../coord/axisCommonTypes.js';
-import { TimeScaleTick } from './types.js';
+import { TimeAxisLabelFormatterOption, TimeAxisLabelFormatterParsed } from './../coord/axisCommonTypes.js';
+import { ScaleTick } from './types.js';
 import { LocaleOption } from '../core/locale.js';
 import Model from '../model/Model.js';
 export declare const ONE_SECOND = 1000;
@@ -7,16 +7,6 @@ export declare const ONE_MINUTE: number;
 export declare const ONE_HOUR: number;
 export declare const ONE_DAY: number;
 export declare const ONE_YEAR: number;
-export declare const defaultLeveledFormatter: {
-    year: string;
-    month: string;
-    day: string;
-    hour: string;
-    minute: string;
-    second: string;
-    millisecond: string;
-    none: string;
-};
 export declare const fullLeveledFormatter: {
     year: string;
     month: string;
@@ -26,18 +16,28 @@ export declare const fullLeveledFormatter: {
     second: string;
     millisecond: string;
 };
-export declare type PrimaryTimeUnit = 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | 'month' | 'year';
-export declare type TimeUnit = PrimaryTimeUnit | 'half-year' | 'quarter' | 'week' | 'half-week' | 'half-day' | 'quarter-day';
-export declare const primaryTimeUnits: PrimaryTimeUnit[];
-export declare const timeUnits: TimeUnit[];
+export declare type JSDateGetterNames = 'getUTCFullYear' | 'getFullYear' | 'getUTCMonth' | 'getMonth' | 'getUTCDate' | 'getDate' | 'getUTCHours' | 'getHours' | 'getUTCMinutes' | 'getMinutes' | 'getUTCSeconds' | 'getSeconds' | 'getUTCMilliseconds' | 'getMilliseconds';
+export declare type JSDateSetterNames = 'setUTCFullYear' | 'setFullYear' | 'setUTCMonth' | 'setMonth' | 'setUTCDate' | 'setDate' | 'setUTCHours' | 'setHours' | 'setUTCMinutes' | 'setMinutes' | 'setUTCSeconds' | 'setSeconds' | 'setUTCMilliseconds' | 'setMilliseconds';
+export declare type PrimaryTimeUnit = (typeof primaryTimeUnits)[number];
+export declare type TimeUnit = (typeof timeUnits)[number];
+export declare const primaryTimeUnits: readonly ["year", "month", "day", "hour", "minute", "second", "millisecond"];
+export declare const timeUnits: readonly ["year", "half-year", "quarter", "month", "week", "half-week", "day", "half-day", "quarter-day", "hour", "minute", "second", "millisecond"];
+export declare function parseTimeAxisLabelFormatter(formatter: TimeAxisLabelFormatterOption): TimeAxisLabelFormatterParsed;
 export declare function pad(str: string | number, len: number): string;
 export declare function getPrimaryTimeUnit(timeUnit: TimeUnit): PrimaryTimeUnit;
 export declare function isPrimaryTimeUnit(timeUnit: TimeUnit): boolean;
 export declare function getDefaultFormatPrecisionOfInterval(timeUnit: PrimaryTimeUnit): PrimaryTimeUnit;
 export declare function format(time: unknown, template: string, isUTC: boolean, lang?: string | Model<LocaleOption>): string;
-export declare function leveledFormat(tick: TimeScaleTick, idx: number, formatter: TimeAxisLabelFormatterOption, lang: string | Model<LocaleOption>, isUTC: boolean): string;
+export declare function leveledFormat(tick: ScaleTick, idx: number, formatter: TimeAxisLabelFormatterParsed, lang: string | Model<LocaleOption>, isUTC: boolean): string;
 export declare function getUnitFromValue(value: number | string | Date, isUTC: boolean): PrimaryTimeUnit;
-export declare function getUnitValue(value: number | Date, unit: TimeUnit, isUTC: boolean): number;
+/**
+ * e.g.,
+ * If timeUnit is 'year', return the Jan 1st 00:00:00 000 of that year.
+ * If timeUnit is 'day', return the 00:00:00 000 of that day.
+ *
+ * @return The input date.
+ */
+export declare function roundTime(date: Date, timeUnit: PrimaryTimeUnit, isUTC: boolean): Date;
 export declare function fullYearGetterName(isUTC: boolean): "getUTCFullYear" | "getFullYear";
 export declare function monthGetterName(isUTC: boolean): "getUTCMonth" | "getMonth";
 export declare function dateGetterName(isUTC: boolean): "getUTCDate" | "getDate";

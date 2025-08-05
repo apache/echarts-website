@@ -1,6 +1,5 @@
 import { __extends } from "tslib";
 import Definable from './Definable.js';
-import * as zrUtil from '../../core/util.js';
 import { path } from '../graphic.js';
 import { isClipPathChanged } from '../../canvas/helper.js';
 import { getClipPathsKey, getIdURL } from '../../svg/helper.js';
@@ -89,13 +88,14 @@ var ClippathManager = (function (_super) {
     };
     ;
     ClippathManager.prototype.markUsed = function (displayable) {
-        var _this = this;
-        if (displayable.__clipPaths) {
-            zrUtil.each(displayable.__clipPaths, function (clipPath) {
+        var clipPaths = displayable.__clipPaths;
+        if (clipPaths) {
+            for (var idx = 0; idx < clipPaths.length; idx++) {
+                var clipPath = clipPaths[idx];
                 if (clipPath._dom) {
-                    _super.prototype.markDomUsed.call(_this, clipPath._dom);
+                    _super.prototype.markDomUsed.call(this, clipPath._dom);
                 }
-            });
+            }
         }
     };
     ;

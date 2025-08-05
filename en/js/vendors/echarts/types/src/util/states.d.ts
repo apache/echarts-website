@@ -20,6 +20,7 @@ export declare const DOWNPLAY_ACTION_TYPE = "downplay";
 export declare const SELECT_ACTION_TYPE = "select";
 export declare const UNSELECT_ACTION_TYPE = "unselect";
 export declare const TOGGLE_SELECT_ACTION_TYPE = "toggleSelect";
+export declare const SELECT_CHANGED_EVENT_TYPE = "selectchanged";
 export declare function setStatesFlag(el: ECElement, stateName: DisplayState): void;
 /**
  * If we reuse elements when rerender.

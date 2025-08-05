@@ -53,6 +53,7 @@ import ComponentView from '../../view/Component.js';
 import { createSymbol } from '../../util/symbol.js';
 import { createOrUpdatePatternFromDecal } from '../../util/decal.js';
 import { getECData } from '../../util/innerStore.js';
+import tokens from '../../visual/tokens.js';
 var curry = zrUtil.curry;
 var each = zrUtil.each;
 var Group = graphic.Group;
@@ -104,24 +105,23 @@ var LegendView = /** @class */function (_super) {
     }
     this.renderInner(itemAlign, legendModel, ecModel, api, selector, orient, selectorPosition);
     // Perform layout.
+    var refContainer = layoutUtil.createBoxLayoutReference(legendModel, api).refContainer;
     var positionInfo = legendModel.getBoxLayoutParams();
-    var viewportSize = {
-      width: api.getWidth(),
-      height: api.getHeight()
-    };
     var padding = legendModel.get('padding');
-    var maxSize = layoutUtil.getLayoutRect(positionInfo, viewportSize, padding);
+    var maxSize = layoutUtil.getLayoutRect(positionInfo, refContainer, padding);
     var mainRect = this.layoutInner(legendModel, itemAlign, maxSize, isFirstRender, selector, selectorPosition);
     // Place mainGroup, based on the calculated `mainRect`.
     var layoutRect = layoutUtil.getLayoutRect(zrUtil.defaults({
       width: mainRect.width,
       height: mainRect.height
-    }, positionInfo), viewportSize, padding);
+    }, positionInfo), refContainer, padding);
     this.group.x = layoutRect.x - mainRect.x;
     this.group.y = layoutRect.y - mainRect.y;
     this.group.markRedraw();
     // Render background after group is layout.
-    this.group.add(this._backgroundEl = makeBackground(mainRect, legendModel));
+    this.group.add(this._backgroundEl = makeBackground(mainRect,
+    // FXIME: most itemStyle options does not work in background because inherit is not handled yet.
+    legendModel));
   };
   LegendView.prototype.resetInner = function () {
     this.getContentGroup().removeAll();
@@ -132,11 +132,13 @@ var LegendView = /** @class */function (_super) {
     var contentGroup = this.getContentGroup();
     var legendDrawnMap = zrUtil.createHashMap();
     var selectMode = legendModel.get('selectedMode');
+    var triggerEvent = legendModel.get('triggerEvent');
     var excludeSeriesId = [];
     ecModel.eachRawSeries(function (seriesModel) {
       !seriesModel.get('legendHoverLink') && excludeSeriesId.push(seriesModel.id);
     });
     each(legendModel.getData(), function (legendItemModel, dataIndex) {
+      var _this = this;
       var name = legendItemModel.get('name');
       // Use empty string or \n as a newline string
       if (!this.newlineDisabled && (name === '' || name === '\n')) {
@@ -172,10 +174,16 @@ var LegendView = /** @class */function (_super) {
             ecData.ssrType = 'legend';
           });
         }
+        if (triggerEvent) {
+          itemGroup.eachChild(function (child) {
+            _this.packEventData(child, legendModel, seriesModel, dataIndex, name);
+          });
+        }
         legendDrawnMap.set(name, true);
       } else {
         // Legend to control data. In pie and funnel.
         ecModel.eachRawSeries(function (seriesModel) {
+          var _this = this;
           // In case multiple series has same data name
           if (legendDrawnMap.get(name)) {
             return;
@@ -212,6 +220,11 @@ var LegendView = /** @class */function (_super) {
                 ecData.ssrType = 'legend';
               });
             }
+            if (triggerEvent) {
+              itemGroup.eachChild(function (child) {
+                _this.packEventData(child, legendModel, seriesModel, dataIndex, name);
+              });
+            }
             legendDrawnMap.set(name, true);
           }
         }, this);
@@ -226,6 +239,17 @@ var LegendView = /** @class */function (_super) {
       this._createSelector(selector, legendModel, api, orient, selectorPosition);
     }
   };
+  LegendView.prototype.packEventData = function (el, legendModel, seriesModel, dataIndex, name) {
+    var eventData = {
+      componentType: 'legend',
+      componentIndex: legendModel.componentIndex,
+      dataIndex: dataIndex,
+      value: name,
+      seriesIndex: seriesModel.seriesIndex
+    };
+    getECData(el).eventData = eventData;
+  };
+  ;
   LegendView.prototype._createSelector = function (selector, legendModel, api, orient, selectorPosition) {
     var selectorGroup = this.getSelectorGroup();
     each(selector, function createSelectorButton(selectorItem) {
@@ -474,7 +498,7 @@ function getDefaultLegendIcon(opt) {
   icon.setOrigin([opt.itemWidth / 2, opt.itemHeight / 2]);
   if (symboType.indexOf('empty') > -1) {
     icon.style.stroke = icon.style.fill;
-    icon.style.fill = '#fff';
+    icon.style.fill = tokens.color.neutral00;
     icon.style.lineWidth = 2;
   }
   return icon;

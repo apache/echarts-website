@@ -154,6 +154,7 @@ export interface LegendOption extends ComponentOption, LegendStyleOption, BoxLay
      * Tooltip option
      */
     tooltip?: CommonTooltipOption<LegendTooltipFormatterParams>;
+    triggerEvent?: boolean;
 }
 declare class LegendModel<Ops extends LegendOption = LegendOption> extends ComponentModel<Ops> {
     static type: string;

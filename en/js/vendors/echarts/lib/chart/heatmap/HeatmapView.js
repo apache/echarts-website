@@ -118,8 +118,8 @@ var HeatmapView = /** @class */function (_super) {
     this._progressiveEls = null;
     this.group.removeAll();
     var coordSys = seriesModel.coordinateSystem;
-    if (coordSys.type === 'cartesian2d' || coordSys.type === 'calendar') {
-      this._renderOnCartesianAndCalendar(seriesModel, api, 0, seriesModel.getData().count());
+    if (coordSys.type === 'cartesian2d' || coordSys.type === 'calendar' || coordSys.type === 'matrix') {
+      this._renderOnGridLike(seriesModel, api, 0, seriesModel.getData().count());
     } else if (isGeoCoordSys(coordSys)) {
       this._renderOnGeo(coordSys, seriesModel, visualMapOfThisSeries, api);
     }
@@ -135,16 +135,17 @@ var HeatmapView = /** @class */function (_super) {
         this.render(seriesModel, ecModel, api);
       } else {
         this._progressiveEls = [];
-        this._renderOnCartesianAndCalendar(seriesModel, api, params.start, params.end, true);
+        this._renderOnGridLike(seriesModel, api, params.start, params.end, true);
       }
     }
   };
   HeatmapView.prototype.eachRendered = function (cb) {
     graphic.traverseElements(this._progressiveEls || this.group, cb);
   };
-  HeatmapView.prototype._renderOnCartesianAndCalendar = function (seriesModel, api, start, end, incremental) {
+  HeatmapView.prototype._renderOnGridLike = function (seriesModel, api, start, end, incremental) {
     var coordSys = seriesModel.coordinateSystem;
     var isCartesian2d = isCoordinateSystemType(coordSys, 'cartesian2d');
+    var isMatrix = isCoordinateSystemType(coordSys, 'matrix');
     var width;
     var height;
     var xAxisExtent;
@@ -177,7 +178,7 @@ var HeatmapView = /** @class */function (_super) {
     var focus = emphasisModel.get('focus');
     var blurScope = emphasisModel.get('blurScope');
     var emphasisDisabled = emphasisModel.get('disabled');
-    var dataDims = isCartesian2d ? [data.mapDimension('x'), data.mapDimension('y'), data.mapDimension('value')] : [data.mapDimension('time'), data.mapDimension('value')];
+    var dataDims = isCartesian2d || isMatrix ? [data.mapDimension('x'), data.mapDimension('y'), data.mapDimension('value')] : [data.mapDimension('time'), data.mapDimension('value')];
     for (var idx = start; idx < end; idx++) {
       var rect = void 0;
       var style = data.getItemVisual(idx, 'style');
@@ -198,14 +199,30 @@ var HeatmapView = /** @class */function (_super) {
           },
           style: style
         });
-      } else {
-        // Ignore empty data
-        if (isNaN(data.get(dataDims[1], idx))) {
+      } else if (isMatrix) {
+        var shape = coordSys.dataToLayout([data.get(dataDims[0], idx), data.get(dataDims[1], idx)]).rect;
+        if (zrUtil.eqNaN(shape.x)) {
           continue;
         }
         rect = new graphic.Rect({
           z2: 1,
-          shape: coordSys.dataToRect([data.get(dataDims[0], idx)]).contentShape,
+          shape: shape,
+          style: style
+        });
+      } else {
+        // Calendar
+        // Ignore empty data
+        if (isNaN(data.get(dataDims[1], idx))) {
+          continue;
+        }
+        var layout = coordSys.dataToLayout([data.get(dataDims[0], idx)]);
+        var shape = layout.contentRect || layout.rect;
+        if (zrUtil.eqNaN(shape.x) || zrUtil.eqNaN(shape.y)) {
+          continue;
+        }
+        rect = new graphic.Rect({
+          z2: 1,
+          shape: shape,
           style: style
         });
       }

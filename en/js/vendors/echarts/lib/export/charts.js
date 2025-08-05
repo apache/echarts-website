@@ -55,6 +55,7 @@ export { install as MapChart } from '../chart/map/install.js';
 export { install as TreeChart } from '../chart/tree/install.js';
 export { install as TreemapChart } from '../chart/treemap/install.js';
 export { install as GraphChart } from '../chart/graph/install.js';
+export { install as ChordChart } from '../chart/chord/install.js';
 export { install as GaugeChart } from '../chart/gauge/install.js';
 export { install as FunnelChart } from '../chart/funnel/install.js';
 export { install as ParallelChart } from '../chart/parallel/install.js';

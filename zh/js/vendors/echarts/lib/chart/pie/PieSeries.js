@@ -49,6 +49,7 @@ import { getPercentSeats } from '../../util/number.js';
 import { makeSeriesEncodeForNameBased } from '../../data/helper/sourceHelper.js';
 import LegendVisualProvider from '../../visual/LegendVisualProvider.js';
 import SeriesModel from '../../model/Series.js';
+import { registerLayOutOnCoordSysUsage } from '../../core/CoordinateSystem.js';
 var innerData = modelUtil.makeInner();
 var PieSeriesModel = /** @class */function (_super) {
   __extends(PieSeriesModel, _super);
@@ -118,7 +119,7 @@ var PieSeriesModel = /** @class */function (_super) {
     colorBy: 'data',
     // 默认全局居中
     center: ['50%', '50%'],
-    radius: [0, '75%'],
+    radius: [0, '50%'],
     // 默认顺时针
     clockwise: true,
     startAngle: 90,
@@ -139,6 +140,7 @@ var PieSeriesModel = /** @class */function (_super) {
     // If still show when all data zero.
     stillShowZeroSum: true,
     // cursor: null,
+    coordinateSystemUsage: 'box',
     left: 0,
     top: 0,
     right: 0,
@@ -159,7 +161,8 @@ var PieSeriesModel = /** @class */function (_super) {
       // Works only position is 'outer' and alignTo is 'edge'.
       edgeDistance: '25%',
       // Works only position is 'outer' and alignTo is not 'edge'.
-      bleedMargin: 10,
+      // The default `bleedMargin` is auto determined according to view rect size.
+      // bleedMargin: 10,
       // Distance between text and label line.
       distanceToLabelLine: 5
       // formatter: 标签文本格式器，同 tooltip.formatter，不支持异步回调
@@ -172,7 +175,7 @@ var PieSeriesModel = /** @class */function (_super) {
       // 引导线两段中的第一段长度
       length: 15,
       // 引导线两段中的第二段长度
-      length2: 15,
+      length2: 30,
       smooth: false,
       minTurnAngle: 90,
       maxSurfaceAngle: 90,
@@ -212,4 +215,12 @@ var PieSeriesModel = /** @class */function (_super) {
   };
   return PieSeriesModel;
 }(SeriesModel);
+registerLayOutOnCoordSysUsage({
+  fullType: PieSeriesModel.type,
+  getCoord2: function (model) {
+    // Not able to validate `center` type here.
+    // But percentage center, such as '12%', is not allowed in this case.
+    return model.getShallow('center');
+  }
+});
 export default PieSeriesModel;

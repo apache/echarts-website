@@ -267,7 +267,7 @@ function isHover(displayable, x, y) {
                 isSilent = true;
             }
             var hostEl = el.__hostTarget;
-            el = hostEl ? hostEl : el.parent;
+            el = hostEl ? (el.ignoreHostSilent ? null : hostEl) : el.parent;
         }
         return isSilent ? SILENT : true;
     }

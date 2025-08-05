@@ -155,7 +155,6 @@ export function getTransformedPosition(axis, value, layoutInfo) {
   return graphic.applyTransform([axis.dataToCoord(value), (layoutInfo.labelOffset || 0) + (layoutInfo.labelDirection || 1) * (layoutInfo.labelMargin || 0)], transform);
 }
 export function buildCartesianSingleLabelElOption(value, elOption, layoutInfo, axisModel, axisPointerModel, api) {
-  // @ts-ignore
   var textLayout = AxisBuilder.innerTextLayout(layoutInfo.rotation, 0, layoutInfo.labelDirection);
   layoutInfo.labelMargin = axisPointerModel.get(['label', 'margin']);
   buildLabelElOption(elOption, axisModel, axisPointerModel, api, {

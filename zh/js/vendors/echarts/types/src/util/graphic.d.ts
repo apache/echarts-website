@@ -19,7 +19,7 @@ import Arc from 'zrender/lib/graphic/shape/Arc.js';
 import CompoundPath from 'zrender/lib/graphic/CompoundPath.js';
 import LinearGradient from 'zrender/lib/graphic/LinearGradient.js';
 import RadialGradient from 'zrender/lib/graphic/RadialGradient.js';
-import BoundingRect from 'zrender/lib/core/BoundingRect.js';
+import BoundingRect, { RectLike } from 'zrender/lib/core/BoundingRect.js';
 import OrientedBoundingRect from 'zrender/lib/core/OrientedBoundingRect.js';
 import Point from 'zrender/lib/core/Point.js';
 import IncrementalDisplayable from 'zrender/lib/graphic/IncrementalDisplayable.js';
@@ -28,7 +28,7 @@ import { Dictionary } from 'zrender/lib/core/types.js';
 import { DisplayableProps } from 'zrender/lib/graphic/Displayable.js';
 import Element from 'zrender/lib/Element.js';
 import Model from '../model/Model.js';
-import { AnimationOptionMixin, ZRRectLike, CommonTooltipOption } from './types.js';
+import { AnimationOptionMixin, ZRRectLike, CommonTooltipOption, NullUndefined, ComponentOption } from './types.js';
 import ComponentModel from '../model/Component.js';
 import { updateProps, initProps, removeElement, removeElementWithFadeOut, isElementRemoved } from '../animation/basicTransition.js';
 /**
@@ -37,6 +37,8 @@ import { updateProps, initProps, removeElement, removeElementWithFadeOut, isElem
 export { updateProps, initProps, removeElement, removeElementWithFadeOut, isElementRemoved };
 declare type ExtendShapeOpt = Parameters<typeof Path.extend>[0];
 declare type ExtendShapeReturn = ReturnType<typeof Path.extend>;
+export declare const XY: readonly ["x", "y"];
+export declare const WH: readonly ["width", "height"];
 /**
  * Extend shape with parameters
  */
@@ -133,26 +135,18 @@ export declare function subPixelOptimizeLine(shape: {
 /**
  * Sub pixel optimize rect for canvas
  */
-export declare function subPixelOptimizeRect(param: {
-    shape: {
-        x: number;
-        y: number;
-        width: number;
-        height: number;
-    };
-    style: {
-        lineWidth: number;
-    };
+export declare function subPixelOptimizeRect(shape: {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+}, style: {
+    lineWidth?: number;
 }): {
-    shape: {
-        x: number;
-        y: number;
-        width: number;
-        height: number;
-    };
-    style: {
-        lineWidth: number;
-    };
+    x: number;
+    y: number;
+    width: number;
+    height: number;
 };
 /**
  * Sub pixel optimize for canvas
@@ -214,6 +208,33 @@ export declare function linePolygonIntersect(a1x: number, a1y: number, a2x: numb
  * requirement for that. We could do that if required in future.
  */
 export declare function lineLineIntersect(a1x: number, a1y: number, a2x: number, a2y: number, b1x: number, b1y: number, b2x: number, b2y: number): boolean;
+/**
+ * NOTE:
+ *  A negative-width/height rect (due to negative margins) is not supported;
+ *  it will be clampped to zero width/height.
+ *  Although negative-width/height rects can be defined reasonably following the
+ *  similar sense in CSS, but they are rarely used, hard to understand and complicated.
+ *
+ * @param rect Assume its width/height >= 0 if existing.
+ *  x/y/width/height is allowed to be NaN,
+ *  for the case that only x/width or y/height is intended to be computed.
+ * @param delta
+ *  If be `number[]`, should be `[top, right, bottom, left]`,
+ *      which can be used in padding or margin case.
+ *      @see `normalizeCssArray` in `util/format.ts`
+ *  If be `number`, it means [delta, delta, delta, delta],
+ *      which can be used in lineWidth (borderWith) case,
+ *      [NOTICE]: commonly pass lineWidth / 2, following the convention that border is
+ *      half inside half outside of the rect.
+ * @param shrinkOrExpand
+ *  `true` - shrink if `delta[i]` is positive, commmonly used in `padding` case.
+ *  `false` - expand if `delta[i]` is positive, commmonly used in `margin` case. (default)
+ * @param noNegative
+ *  `true` - negative `delta[i]` will be clampped to 0.
+ *  `false` - No clamp to `delta`. (default).
+ * @return The input `rect`.
+ */
+export declare function expandOrShrinkRect<TRect extends RectLike>(rect: TRect, delta: number[] | number | NullUndefined, shrinkOrExpand: boolean, noNegative: boolean, minSize?: number[]): TRect;
 export declare function setTooltipConfig(opt: {
     el: Element;
     componentModel: ComponentModel;
@@ -222,4 +243,37 @@ export declare function setTooltipConfig(opt: {
     formatterParamsExtra?: Dictionary<unknown>;
 }): void;
 export declare function traverseElements(els: Element | Element[] | undefined | null, cb: (el: Element) => boolean | void): void;
+/**
+ * After a boundingRect applying a `transform`, whether to be still parallel screen X and Y.
+ */
+export declare function isBoundingRectAxisAligned(transform: matrix.MatrixArray | NullUndefined): boolean;
+/**
+ * Create or copy to the existing bounding rect to avoid modifying `source`.
+ *
+ * @usage
+ *  out.rect = ensureCopyRect(out.rect, sourceRect);
+ */
+export declare function ensureCopyRect(target: BoundingRect | NullUndefined, source: BoundingRect): BoundingRect;
+/**
+ * Create or copy to the existing transform to avoid modifying `source`.
+ *
+ * [CAUTION]: transform is `NullUndefined` if no transform, following convention of zrender,
+ *  and enable to bypass some unnecessary calculation, since in most cases there is no transform.
+ *
+ * @usage
+ *  out.transform = ensureCopyTransform(out.transform, sourceTransform);
+ */
+export declare function ensureCopyTransform(target: matrix.MatrixArray | NullUndefined, source: matrix.MatrixArray | NullUndefined): matrix.MatrixArray | NullUndefined;
+export declare function retrieveZInfo(model: Model<Partial<Pick<ComponentOption, 'z' | 'zlevel'>>>): {
+    z: ComponentOption['z'];
+    zlevel: ComponentOption['zlevel'];
+};
+/**
+ * Assume all of the elements has the same `z` and `zlevel`.
+ */
+export declare function calcZ2Range(el: Element): {
+    min: number;
+    max: number;
+};
+export declare function traverseUpdateZ(el: Element, z: number, zlevel: number): void;
 export { Group, ZRImage as Image, ZRText as Text, Circle, Ellipse, Sector, Ring, Polygon, Polyline, Rect, Line, BezierCurve, Arc, IncrementalDisplayable, CompoundPath, LinearGradient, RadialGradient, BoundingRect, OrientedBoundingRect, Point, Path };

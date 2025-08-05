@@ -45,6 +45,7 @@ import { __extends } from "tslib";
 import BaseBarSeriesModel from './BaseBarSeries.js';
 import createSeriesData from '../helper/createSeriesData.js';
 import { inheritDefaultOption } from '../../util/component.js';
+import tokens from '../../visual/tokens.js';
 var BarSeriesModel = /** @class */function (_super) {
   __extends(BarSeriesModel, _super);
   function BarSeriesModel() {
@@ -102,7 +103,8 @@ var BarSeriesModel = /** @class */function (_super) {
     },
     select: {
       itemStyle: {
-        borderColor: '#212121'
+        borderColor: tokens.color.primary,
+        borderWidth: 2
       }
     },
     realtimeSort: false

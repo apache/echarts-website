@@ -48,16 +48,24 @@ import SeriesData from '../../data/SeriesData.js';
 import * as markerHelper from './markerHelper.js';
 import MarkerView from './MarkerView.js';
 import MarkerModel from './MarkerModel.js';
-import { isFunction, map, filter, curry, extend } from 'zrender/lib/core/util.js';
+import { isFunction, map, filter, curry, extend, retrieve2 } from 'zrender/lib/core/util.js';
 import { getECData } from '../../util/innerStore.js';
 import { getVisualFromData } from '../../visual/helper.js';
 function updateMarkerLayout(mpData, seriesModel, api) {
   var coordSys = seriesModel.coordinateSystem;
+  var apiWidth = api.getWidth();
+  var apiHeight = api.getHeight();
+  var coordRect = coordSys && coordSys.getArea && coordSys.getArea();
   mpData.each(function (idx) {
     var itemModel = mpData.getItemModel(idx);
+    var isRelativeToCoordinate = itemModel.get('relativeTo') === 'coordinate';
+    var width = isRelativeToCoordinate ? coordRect ? coordRect.width : 0 : apiWidth;
+    var height = isRelativeToCoordinate ? coordRect ? coordRect.height : 0 : apiHeight;
+    var left = isRelativeToCoordinate && coordRect ? coordRect.x : 0;
+    var top = isRelativeToCoordinate && coordRect ? coordRect.y : 0;
     var point;
-    var xPx = numberUtil.parsePercent(itemModel.get('x'), api.getWidth());
-    var yPx = numberUtil.parsePercent(itemModel.get('y'), api.getHeight());
+    var xPx = numberUtil.parsePercent(itemModel.get('x'), width) + left;
+    var yPx = numberUtil.parsePercent(itemModel.get('y'), height) + top;
     if (!isNaN(xPx) && !isNaN(yPx)) {
       point = [xPx, yPx];
     }
@@ -132,11 +140,13 @@ var MarkPointView = /** @class */function (_super) {
         }
       }
       var style = itemModel.getModel('itemStyle').getItemStyle();
+      var z2 = itemModel.get('z2');
       var color = getVisualFromData(seriesData, 'color');
       if (!style.fill) {
         style.fill = color;
       }
       mpData.setItemVisual(idx, {
+        z2: retrieve2(z2, 0),
         symbol: symbol,
         symbolSize: symbolSize,
         symbolRotate: symbolRotate,

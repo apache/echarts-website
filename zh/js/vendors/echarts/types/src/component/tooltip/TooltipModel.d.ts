@@ -18,7 +18,6 @@ export interface TooltipOption extends CommonTooltipOption<TopLevelFormatterPara
      * Trigger only works on coordinate system.
      */
     trigger?: 'item' | 'axis' | 'none';
-    displayMode?: 'single' | 'multipleByCoordSys';
     /**
      * 'auto': use html by default, and use non-html if `document` is not defined
      * 'html': use html for tooltip
@@ -40,6 +39,10 @@ export interface TooltipOption extends CommonTooltipOption<TopLevelFormatterPara
      * Only available when renderMode is html
      */
     className?: string;
+    /**
+     * Default border color to use when there are multiple series
+     */
+    defaultBorderColor?: string;
     order?: TooltipOrderMode;
 }
 declare class TooltipModel extends ComponentModel<TooltipOption> {

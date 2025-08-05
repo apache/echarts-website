@@ -16,7 +16,8 @@ option = {
     }
   },
   legend: {
-    data: ['DQ', 'TY', 'SS', 'QG', 'SY', 'DD']
+    data: ['DQ', 'TY', 'SS', 'QG', 'SY', 'DD'],
+    top: 15
   },
   singleAxis: {
     top: 50,

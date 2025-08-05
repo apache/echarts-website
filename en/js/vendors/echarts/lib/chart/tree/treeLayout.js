@@ -42,14 +42,16 @@
 * under the License.
 */
 import { eachAfter, eachBefore } from './traversalHelper.js';
-import { init, firstWalk, secondWalk, separation as sep, radialCoordinate, getViewRect } from './layoutHelper.js';
+import { init, firstWalk, secondWalk, separation as sep, radialCoordinate } from './layoutHelper.js';
+import { createBoxLayoutReference, getLayoutRect } from '../../util/layout.js';
 export default function treeLayout(ecModel, api) {
   ecModel.eachSeriesByType('tree', function (seriesModel) {
     commonLayout(seriesModel, api);
   });
 }
 function commonLayout(seriesModel, api) {
-  var layoutInfo = getViewRect(seriesModel, api);
+  var refContainer = createBoxLayoutReference(seriesModel, api).refContainer;
+  var layoutInfo = getLayoutRect(seriesModel.getBoxLayoutParams(), refContainer);
   seriesModel.layoutInfo = layoutInfo;
   var layout = seriesModel.get('layout');
   var width = 0;

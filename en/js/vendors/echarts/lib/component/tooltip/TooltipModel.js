@@ -43,6 +43,7 @@
 */
 import { __extends } from "tslib";
 import ComponentModel from '../../model/Component.js';
+import tokens from '../../visual/tokens.js';
 var TooltipModel = /** @class */function (_super) {
   __extends(TooltipModel, _super);
   function TooltipModel() {
@@ -64,18 +65,18 @@ var TooltipModel = /** @class */function (_super) {
     // 'click' | 'mousemove' | 'none'
     triggerOn: 'mousemove|click',
     alwaysShowContent: false,
-    displayMode: 'single',
     renderMode: 'auto',
     // whether restraint content inside viewRect.
     // If renderMode: 'richText', default true.
-    // If renderMode: 'html', defaut false (for backward compat).
+    // If renderMode: 'html', defaults to `false` (for backward compat).
     confine: null,
     showDelay: 0,
     hideDelay: 100,
     // Animation transition time, unit is second
     transitionDuration: 0.4,
+    displayTransition: true,
     enterable: false,
-    backgroundColor: '#fff',
+    backgroundColor: tokens.color.neutral00,
     // box shadow
     shadowBlur: 10,
     shadowColor: 'rgba(0, 0, 0, .2)',
@@ -85,6 +86,7 @@ var TooltipModel = /** @class */function (_super) {
     borderRadius: 4,
     // tooltip border width, unit is px, default is 0 (no border)
     borderWidth: 1,
+    defaultBorderColor: tokens.color.border,
     // Tooltip inside padding, default is 5 for all direction
     // Array is allowed to set up, right, bottom, left, same with css
     // The default value: See `tooltip/tooltipMarkup.ts#getPaddingFromTooltipModel`.
@@ -105,7 +107,7 @@ var TooltipModel = /** @class */function (_super) {
       animationDurationUpdate: 200,
       animationEasingUpdate: 'exponentialOut',
       crossStyle: {
-        color: '#999',
+        color: tokens.color.borderShade,
         width: 1,
         type: 'dashed',
         // TODO formatter
@@ -115,7 +117,7 @@ var TooltipModel = /** @class */function (_super) {
       // otherwise it will always override those styles on option.axisPointer.
     },
     textStyle: {
-      color: '#666',
+      color: tokens.color.tertiary,
       fontSize: 14
     }
   };

@@ -130,10 +130,8 @@ var Parallel = /** @class */function () {
    * Resize the parallel coordinate system.
    */
   Parallel.prototype.resize = function (parallelModel, api) {
-    this._rect = layoutUtil.getLayoutRect(parallelModel.getBoxLayoutParams(), {
-      width: api.getWidth(),
-      height: api.getHeight()
-    });
+    var refContainer = layoutUtil.createBoxLayoutReference(parallelModel, api).refContainer;
+    this._rect = layoutUtil.getLayoutRect(parallelModel.getBoxLayoutParams(), refContainer);
     this._layoutAxes();
   };
   Parallel.prototype.getRect = function () {

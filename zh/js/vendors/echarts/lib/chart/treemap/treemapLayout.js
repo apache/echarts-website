@@ -72,16 +72,12 @@ export default {
   reset: function (seriesModel, ecModel, api, payload) {
     // Layout result in each node:
     // {x, y, width, height, area, borderWidth}
-    var ecWidth = api.getWidth();
-    var ecHeight = api.getHeight();
     var seriesOption = seriesModel.option;
-    var layoutInfo = layout.getLayoutRect(seriesModel.getBoxLayoutParams(), {
-      width: api.getWidth(),
-      height: api.getHeight()
-    });
+    var refContainer = layout.createBoxLayoutReference(seriesModel, api).refContainer;
+    var layoutInfo = layout.getLayoutRect(seriesModel.getBoxLayoutParams(), refContainer);
     var size = seriesOption.size || []; // Compatible with ec2.
-    var containerWidth = parsePercent(retrieveValue(layoutInfo.width, size[0]), ecWidth);
-    var containerHeight = parsePercent(retrieveValue(layoutInfo.height, size[1]), ecHeight);
+    var containerWidth = parsePercent(retrieveValue(layoutInfo.width, size[0]), refContainer.width);
+    var containerHeight = parsePercent(retrieveValue(layoutInfo.height, size[1]), refContainer.height);
     // Fetch payload info.
     var payloadType = payload && payload.type;
     var types = ['treemapZoomToNode', 'treemapRootToNode'];
@@ -130,11 +126,11 @@ export default {
     var treeRoot = seriesModel.getData().tree.root;
     treeRoot.setLayout(calculateRootPosition(layoutInfo, rootRect, targetInfo), true);
     seriesModel.setLayoutInfo(layoutInfo);
-    // FIXME
-    // 现在没有clip功能，暂时取ec高宽。
+    // FIXME: narrow down pruning boungding rect.
+    // Currently ec width/height is used becuases clip is not supported.
     prunning(treeRoot,
     // Transform to base element coordinate system.
-    new BoundingRect(-layoutInfo.x, -layoutInfo.y, ecWidth, ecHeight), viewAbovePath, viewRoot, 0);
+    new BoundingRect(-layoutInfo.x, -layoutInfo.y, api.getWidth(), api.getHeight()), viewAbovePath, viewRoot, 0);
   }
 };
 /**

@@ -3,8 +3,9 @@ import { Region } from './Region.js';
 import { GeoProjection, GeoResource, NameMap } from './geoTypes.js';
 import GlobalModel from '../../model/Global.js';
 import { ParsedModelFinder } from '../../util/model.js';
-import GeoModel from './GeoModel.js';
+import type GeoModel from './GeoModel.js';
 import { resizeGeoType } from './geoCreator.js';
+import type ExtensionAPI from '../../core/ExtensionAPI.js';
 export declare const geo2DDimensions: string[];
 declare class Geo extends View {
     dimensions: string[];
@@ -24,6 +25,8 @@ declare class Geo extends View {
         nameMap?: NameMap;
         nameProperty?: string;
         aspectScale?: number;
+        api: ExtensionAPI;
+        ecModel: GlobalModel;
     });
     protected _transformTo(x: number, y: number, width: number, height: number): void;
     getRegion(name: string): Region;
@@ -37,11 +40,11 @@ declare class Geo extends View {
      */
     getGeoCoord(name: string): number[];
     dataToPoint(data: number[] | string, noRoam?: boolean, out?: number[]): number[];
-    pointToData(point: number[]): number[];
+    pointToData(point: number[], reserved?: unknown, out?: number[]): number[];
     /**
      * Point to projected data. Same with pointToData when projection is used.
      */
-    pointToProjected(point: number[]): number[];
+    pointToProjected(point: number[], out?: number[]): number[];
     projectedToPoint(projected: number[], noRoam?: boolean, out?: number[]): number[];
     convertToPixel(ecModel: GlobalModel, finder: ParsedModelFinder, value: number[]): number[];
     convertFromPixel(ecModel: GlobalModel, finder: ParsedModelFinder, pixel: number[]): number[];

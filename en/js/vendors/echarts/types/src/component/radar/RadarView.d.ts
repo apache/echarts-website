@@ -6,7 +6,7 @@ declare class RadarView extends ComponentView {
     static type: string;
     type: string;
     render(radarModel: RadarModel, ecModel: GlobalModel, api: ExtensionAPI): void;
-    _buildAxes(radarModel: RadarModel): void;
+    _buildAxes(radarModel: RadarModel, api: ExtensionAPI): void;
     _buildSplitLineAndArea(radarModel: RadarModel): void;
 }
 export default RadarView;

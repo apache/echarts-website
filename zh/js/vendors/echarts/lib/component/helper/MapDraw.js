@@ -44,7 +44,6 @@
 import * as zrUtil from 'zrender/lib/core/util.js';
 import RoamController from './RoamController.js';
 import * as roamHelper from '../../component/helper/roamHelper.js';
-import { onIrrelevantElement } from '../../component/helper/cursorHelper.js';
 import * as graphic from '../../util/graphic.js';
 import { toggleHoverEmphasis, enableComponentHighDownFeatures, setDefaultStateProxy } from '../../util/states.js';
 import geoSourceManager from '../../coord/geo/geoSourceManager.js';
@@ -86,15 +85,16 @@ function fixLineStyle(styleHost) {
 }
 var MapDraw = /** @class */function () {
   function MapDraw(api) {
-    var group = new graphic.Group();
+    var group = this.group = new graphic.Group();
+    var transformGroup = this._transformGroup = new graphic.Group();
+    group.add(transformGroup);
     this.uid = getUID('ec_map_draw');
     this._controller = new RoamController(api.getZr());
     this._controllerHost = {
-      target: group
+      target: transformGroup
     };
-    this.group = group;
-    group.add(this._regionsGroup = new graphic.Group());
-    group.add(this._svgGroup = new graphic.Group());
+    transformGroup.add(this._regionsGroup = new graphic.Group());
+    transformGroup.add(this._svgGroup = new graphic.Group());
   }
   MapDraw.prototype.draw = function (mapOrGeoModel, ecModel, api, fromView, payload) {
     var isGeo = mapOrGeoModel.mainType === 'geo';
@@ -111,20 +111,30 @@ var MapDraw = /** @class */function () {
     });
     var geo = mapOrGeoModel.coordinateSystem;
     var regionsGroup = this._regionsGroup;
-    var group = this.group;
+    var transformGroup = this._transformGroup;
     var transformInfo = geo.getTransformInfo();
     var transformInfoRaw = transformInfo.raw;
     var transformInfoRoam = transformInfo.roam;
     // No animation when first draw or in action
     var isFirstDraw = !regionsGroup.childAt(0) || payload;
-    if (isFirstDraw) {
-      group.x = transformInfoRoam.x;
-      group.y = transformInfoRoam.y;
-      group.scaleX = transformInfoRoam.scaleX;
-      group.scaleY = transformInfoRoam.scaleY;
-      group.dirty();
+    var clip = mapOrGeoModel.getShallow('clip', true);
+    var clipRect;
+    if (clip) {
+      clipRect = geo.getViewRect().clone();
+      this.group.setClipPath(new graphic.Rect({
+        shape: clipRect.clone()
+      }));
     } else {
-      graphic.updateProps(group, transformInfoRoam, mapOrGeoModel);
+      this.group.removeClipPath();
+    }
+    if (isFirstDraw) {
+      transformGroup.x = transformInfoRoam.x;
+      transformGroup.y = transformInfoRoam.y;
+      transformGroup.scaleX = transformInfoRoam.scaleX;
+      transformGroup.scaleY = transformInfoRoam.scaleY;
+      transformGroup.dirty();
+    } else {
+      graphic.updateProps(transformGroup, transformInfoRoam, mapOrGeoModel);
     }
     var isVisualEncodedByVisualMap = data && data.getVisual('visualMeta') && data.getVisual('visualMeta').length > 0;
     var viewBuildCtx = {
@@ -141,7 +151,7 @@ var MapDraw = /** @class */function () {
     } else if (geo.resourceType === 'geoSVG') {
       this._buildSVG(viewBuildCtx);
     }
-    this._updateController(mapOrGeoModel, ecModel, api);
+    this._updateController(mapOrGeoModel, clipRect, ecModel, api);
     this._updateMapSelectHandler(mapOrGeoModel, regionsGroup, api, fromView);
   };
   MapDraw.prototype._buildGeoJSON = function (viewBuildCtx) {
@@ -393,16 +403,28 @@ var MapDraw = /** @class */function () {
     this._svgGroup.removeAll();
     this._svgMapName = null;
   };
-  MapDraw.prototype._updateController = function (mapOrGeoModel, ecModel, api) {
+  MapDraw.prototype._updateController = function (mapOrGeoModel, clipRect, ecModel, api) {
     var geo = mapOrGeoModel.coordinateSystem;
     var controller = this._controller;
     var controllerHost = this._controllerHost;
-    // @ts-ignore FIXME:TS
     controllerHost.zoomLimit = mapOrGeoModel.get('scaleLimit');
     controllerHost.zoom = geo.getZoom();
     // roamType is will be set default true if it is null
-    // @ts-ignore FIXME:TS
-    controller.enable(mapOrGeoModel.get('roam') || false);
+    controller.enable(mapOrGeoModel.get('roam') || false, {
+      api: api,
+      zInfo: {
+        component: mapOrGeoModel
+      },
+      triggerInfo: {
+        roamTrigger: mapOrGeoModel.get('roamTrigger'),
+        isInSelf: function (e, x, y) {
+          return geo.containPoint([x, y]);
+        },
+        isInClip: function (e, x, y) {
+          return !clipRect || clipRect.contain(x, y);
+        }
+      }
+    });
     var mainType = mapOrGeoModel.mainType;
     function makeActionBase() {
       var action = {
@@ -436,9 +458,6 @@ var MapDraw = /** @class */function () {
         }
       }));
     }, this);
-    controller.setPointerChecker(function (e, x, y) {
-      return geo.containPoint([x, y]) && !onIrrelevantElement(e, api, mapOrGeoModel);
-    });
   };
   /**
    * FIXME: this is a temporarily workaround.

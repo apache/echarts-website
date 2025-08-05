@@ -136,14 +136,16 @@ var ComponentModel = /** @class */function (_super) {
    */
   ComponentModel.prototype.getDefaultOption = function () {
     var ctor = this.constructor;
-    // If using class declaration, it is different to travel super class
-    // in legacy env and auto merge defaultOption. So if using class
-    // declaration, defaultOption should be merged manually.
     if (!isExtendedClass(ctor)) {
-      // When using ts class, defaultOption must be declared as static.
+      // When using ES class declaration, defaultOption must be declared as static.
+      // And manually inherit the defaultOption from its parent class if needed, such as,
+      //  ```ts
+      //  static defaultOption = inheritDefaultOption(ParentModel.defaultOption, {...});
+      //  ```
       return ctor.defaultOption;
     }
     // FIXME: remove this approach?
+    // Legacy: auto merge defaultOption from ancestor classes if using ParentClass.extend(subProto)
     var fields = inner(this);
     if (!fields.defaultOption) {
       var optList = [];
@@ -179,15 +181,8 @@ var ComponentModel = /** @class */function (_super) {
   };
   ComponentModel.prototype.getBoxLayoutParams = function () {
     // Consider itself having box layout configs.
-    var boxLayoutModel = this;
-    return {
-      left: boxLayoutModel.get('left'),
-      top: boxLayoutModel.get('top'),
-      right: boxLayoutModel.get('right'),
-      bottom: boxLayoutModel.get('bottom'),
-      width: boxLayoutModel.get('width'),
-      height: boxLayoutModel.get('height')
-    };
+    // For backward compatibility, by default do not `ignoreParent`.
+    return layout.getBoxLayoutParams(this, false);
   };
   /**
    * Get key for zlevel.

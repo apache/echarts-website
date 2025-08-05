@@ -46,6 +46,7 @@ import { __extends } from "tslib";
 import Path from 'zrender/lib/graphic/Path.js';
 import PathProxy from 'zrender/lib/core/PathProxy.js';
 import { cubicRootAt, cubicAt } from 'zrender/lib/core/curve.js';
+import tokens from '../../visual/tokens.js';
 var mathMin = Math.min;
 var mathMax = Math.max;
 function isPointNull(x, y) {
@@ -213,7 +214,7 @@ var ECPolyline = /** @class */function (_super) {
   }
   ECPolyline.prototype.getDefaultStyle = function () {
     return {
-      stroke: '#000',
+      stroke: tokens.color.neutral99,
       fill: null
     };
   };

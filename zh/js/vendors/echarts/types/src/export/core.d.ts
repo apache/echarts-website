@@ -1,6 +1,7 @@
 export * from '../core/echarts.js';
 export * from './api.js';
-export { ZRColor as Color, Payload, ECElementEvent, HighlightPayload, DownplayPayload, SelectChangedPayload } from '../util/types.js';
+export { ZRColor as Color, Payload, ECElementEvent, HighlightPayload, DownplayPayload, SelectChangedPayload, SelectChangedEvent, } from '../util/types.js';
+export { AxisBreakChangedEvent, ExpandAxisBreakPayload, CollapseAxisBreakPayload, ToggleAxisBreakPayload, } from '../component/axis/axisAction.js';
 export { LinearGradientObject } from 'zrender/lib/graphic/LinearGradient.js';
 export { RadialGradientObject } from 'zrender/lib/graphic/RadialGradient.js';
 export { PatternObject, ImagePatternObject, SVGPatternObject } from 'zrender/lib/graphic/Pattern.js';

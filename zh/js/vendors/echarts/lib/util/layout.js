@@ -46,6 +46,8 @@ import * as zrUtil from 'zrender/lib/core/util.js';
 import BoundingRect from 'zrender/lib/core/BoundingRect.js';
 import { parsePercent } from './number.js';
 import * as formatUtil from './format.js';
+import { error } from './log.js';
+import { BoxCoordinateSystemCoordFrom, getCoordForBoxCoordSys } from '../core/CoordinateSystem.js';
 var each = zrUtil.each;
 /**
  * @public
@@ -132,33 +134,81 @@ export var vbox = zrUtil.curry(boxLayout, 'vertical');
  * @param {number} [height=Infinity]
  */
 export var hbox = zrUtil.curry(boxLayout, 'horizontal');
-/**
- * If x or x2 is not specified or 'center' 'left' 'right',
- * the width would be as long as possible.
- * If y or y2 is not specified or 'middle' 'top' 'bottom',
- * the height would be as long as possible.
- */
-export function getAvailableSize(positionInfo, containerRect, margin) {
-  var containerWidth = containerRect.width;
-  var containerHeight = containerRect.height;
-  var x = parsePercent(positionInfo.left, containerWidth);
-  var y = parsePercent(positionInfo.top, containerHeight);
-  var x2 = parsePercent(positionInfo.right, containerWidth);
-  var y2 = parsePercent(positionInfo.bottom, containerHeight);
-  (isNaN(x) || isNaN(parseFloat(positionInfo.left))) && (x = 0);
-  (isNaN(x2) || isNaN(parseFloat(positionInfo.right))) && (x2 = containerWidth);
-  (isNaN(y) || isNaN(parseFloat(positionInfo.top))) && (y = 0);
-  (isNaN(y2) || isNaN(parseFloat(positionInfo.bottom))) && (y2 = containerHeight);
-  margin = formatUtil.normalizeCssArray(margin || 0);
+export function getBoxLayoutParams(boxLayoutModel, ignoreParent) {
   return {
-    width: Math.max(x2 - x - margin[1] - margin[3], 0),
-    height: Math.max(y2 - y - margin[0] - margin[2], 0)
+    left: boxLayoutModel.getShallow('left', ignoreParent),
+    top: boxLayoutModel.getShallow('top', ignoreParent),
+    right: boxLayoutModel.getShallow('right', ignoreParent),
+    bottom: boxLayoutModel.getShallow('bottom', ignoreParent),
+    width: boxLayoutModel.getShallow('width', ignoreParent),
+    height: boxLayoutModel.getShallow('height', ignoreParent)
+  };
+}
+function getViewRectAndCenterForCircleLayout(seriesModel, api) {
+  var layoutRef = createBoxLayoutReference(seriesModel, api, {
+    enableLayoutOnlyByCenter: true
+  });
+  var boxLayoutParams = seriesModel.getBoxLayoutParams();
+  var viewRect;
+  var center;
+  if (layoutRef.type === BoxLayoutReferenceType.point) {
+    center = layoutRef.refPoint;
+    // `viewRect` is required in `pie/labelLayout.ts`.
+    viewRect = getLayoutRect(boxLayoutParams, {
+      width: api.getWidth(),
+      height: api.getHeight()
+    });
+  } else {
+    // layoutRef.type === layout.BoxLayoutReferenceType.rect
+    var centerOption = seriesModel.get('center');
+    var centerOptionArr = zrUtil.isArray(centerOption) ? centerOption : [centerOption, centerOption];
+    viewRect = getLayoutRect(boxLayoutParams, layoutRef.refContainer);
+    center = layoutRef.boxCoordFrom === BoxCoordinateSystemCoordFrom.coord2 ? layoutRef.refPoint // option `series.center` has been used as coord.
+    : [parsePercent(centerOptionArr[0], viewRect.width) + viewRect.x, parsePercent(centerOptionArr[1], viewRect.height) + viewRect.y];
+  }
+  return {
+    viewRect: viewRect,
+    center: center
+  };
+}
+export function getCircleLayout(seriesModel, api) {
+  // center can be string or number when coordinateSystem is specified
+  var _a = getViewRectAndCenterForCircleLayout(seriesModel, api),
+    viewRect = _a.viewRect,
+    center = _a.center;
+  var radius = seriesModel.get('radius');
+  if (!zrUtil.isArray(radius)) {
+    radius = [0, radius];
+  }
+  var width = parsePercent(viewRect.width, api.getWidth());
+  var height = parsePercent(viewRect.height, api.getHeight());
+  var size = Math.min(width, height);
+  var r0 = parsePercent(radius[0], size / 2);
+  var r = parsePercent(radius[1], size / 2);
+  return {
+    cx: center[0],
+    cy: center[1],
+    r0: r0,
+    r: r,
+    viewRect: viewRect
   };
 }
 /**
  * Parse position info.
  */
-export function getLayoutRect(positionInfo, containerRect, margin) {
+export function getLayoutRect(positionInfo, containerRect,
+// This is the space from the `containerRect` to the returned bounding rect.
+// Commonly used in option `legend.padding`, `timeline.padding`, `title.padding`,
+//  `visualMap.padding`, ...
+// [NOTICE]:
+//  It's named `margin`, because it's the space that outside the bounding rect. But from
+//  the perspective of the the caller, it's commonly used as the `padding` of a component,
+//  because conventionally background color covers this space.
+// [BEHAVIOR]:
+//  - If width/height is specified, `margin` does not effect them.
+//  - Otherwise, they are calculated based on the rect that `containerRect` shrinked by `margin`.
+//  - left/right/top/bottom are based on the rect that `containerRect` shrinked by `margin`.
+margin) {
   margin = formatUtil.normalizeCssArray(margin || 0);
   var containerWidth = containerRect.width;
   var containerHeight = containerRect.height;
@@ -187,6 +237,9 @@ export function getLayoutRect(positionInfo, containerRect, margin) {
     // Margin is not considered, because there is no case that both
     // using margin and aspect so far.
     if (isNaN(width) && isNaN(height)) {
+      // PENDING: if only `left` or `right` is defined, perhaps it's more preferable to
+      // calculate size based on `containerWidth - left` or `containerWidth - left` here,
+      // but for backward compatibility we do not change it.
       if (aspect > containerWidth / containerHeight) {
         width = containerWidth * 0.8;
       } else {
@@ -237,9 +290,105 @@ export function getLayoutRect(positionInfo, containerRect, margin) {
     // Height may be NaN if only one value is given except height
     height = containerHeight - verticalMargin - top - (bottom || 0);
   }
-  var rect = new BoundingRect(left + margin[3], top + margin[0], width, height);
+  var rect = new BoundingRect((containerRect.x || 0) + left + margin[3], (containerRect.y || 0) + top + margin[0], width, height);
   rect.margin = margin;
   return rect;
+}
+/**
+ * PENDING:
+ *  when preserveAspect: 'cover' and aspect is near Infinity
+ *  or when preserveAspect: 'contain' and aspect is near 0,
+ *  the result width or height is near Inifity. It's logically correct,
+ *  Therefore currently we do not handle it, until bad cases arise.
+ */
+export function applyPreserveAspect(component, layoutRect,
+// That is, `width / height`.
+// Assume `aspect` is positive.
+aspect) {
+  var preserveAspect = component.getShallow('preserveAspect', true);
+  if (!preserveAspect) {
+    return layoutRect;
+  }
+  var actualAspect = layoutRect.width / layoutRect.height;
+  if (Math.abs(Math.atan(aspect) - Math.atan(actualAspect)) < 1e-9) {
+    return layoutRect;
+  }
+  var preserveAspectAlign = component.getShallow('preserveAspectAlign', true);
+  var preserveAspectVerticalAlign = component.getShallow('preserveAspectVerticalAlign', true);
+  var layoutOptInner = {
+    width: layoutRect.width,
+    height: layoutRect.height
+  };
+  var isCover = preserveAspect === 'cover';
+  if (actualAspect > aspect && !isCover || actualAspect < aspect && isCover) {
+    layoutOptInner.width = layoutRect.height * aspect;
+    preserveAspectAlign === 'left' ? layoutOptInner.left = 0 : preserveAspectAlign === 'right' ? layoutOptInner.right = 0 : layoutOptInner.left = 'center';
+  } else {
+    layoutOptInner.height = layoutRect.width / aspect;
+    preserveAspectVerticalAlign === 'top' ? layoutOptInner.top = 0 : preserveAspectVerticalAlign === 'bottom' ? layoutOptInner.bottom = 0 : layoutOptInner.top = 'middle';
+  }
+  return getLayoutRect(layoutOptInner, layoutRect);
+}
+export var BoxLayoutReferenceType = {
+  rect: 1,
+  point: 2
+};
+/**
+ * Uniformly calculate layout reference (rect or center) based on either:
+ *  - viewport:
+ *      - Get `refContainer` as `{x: 0, y: 0, width: api.getWidth(), height: api.getHeight()}`
+ *  - coordinate system, which can serve in several ways:
+ *      - Use `dataToPoint` to get the `refPoint`, such as, in cartesian2d coord sys.
+ *      - Use `dataToLayout` to get the `refContainer`, such as, in matrix coord sys.
+ */
+export function createBoxLayoutReference(model, api, opt) {
+  var refContainer;
+  var refPoint;
+  var layoutRefType;
+  var boxCoordSys = model.boxCoordinateSystem;
+  var boxCoordFrom;
+  if (boxCoordSys) {
+    var _a = getCoordForBoxCoordSys(model),
+      coord = _a.coord,
+      from = _a.from;
+    // Do not use `clamp` in `dataToLayout` and `dataToPoint`, because:
+    //  1. Should support overflow (such as, by dataZoom), where NaN should be in the result.
+    //  2. Be consistent with the way used in `series.data`
+    if (boxCoordSys.dataToLayout) {
+      layoutRefType = BoxLayoutReferenceType.rect;
+      boxCoordFrom = from;
+      var result = boxCoordSys.dataToLayout(coord);
+      refContainer = result.contentRect || result.rect;
+    } else if (opt && opt.enableLayoutOnlyByCenter && boxCoordSys.dataToPoint) {
+      layoutRefType = BoxLayoutReferenceType.point;
+      boxCoordFrom = from;
+      refPoint = boxCoordSys.dataToPoint(coord);
+    } else {
+      if (process.env.NODE_ENV !== 'production') {
+        error(model.type + "[" + model.componentIndex + "]" + (" layout based on " + boxCoordSys.type + " is not supported."));
+      }
+    }
+  }
+  if (layoutRefType == null) {
+    layoutRefType = BoxLayoutReferenceType.rect;
+  }
+  if (layoutRefType === BoxLayoutReferenceType.rect) {
+    if (!refContainer) {
+      refContainer = {
+        x: 0,
+        y: 0,
+        width: api.getWidth(),
+        height: api.getHeight()
+      };
+    }
+    refPoint = [refContainer.x + refContainer.width / 2, refContainer.y + refContainer.height / 2];
+  }
+  return {
+    type: layoutRefType,
+    refContainer: refContainer,
+    refPoint: refPoint,
+    boxCoordFrom: boxCoordFrom
+  };
 }
 /**
  * Position a zr element in viewport
@@ -381,7 +530,7 @@ export function mergeLayoutParam(targetOption, newOption, opt) {
     each(names, function (name) {
       // Consider case: newOption.width is null, which is
       // set by user for removing width setting.
-      hasProp(newOption, name) && (newParams[name] = merged[name] = newOption[name]);
+      zrUtil.hasOwn(newOption, name) && (newParams[name] = merged[name] = newOption[name]);
       hasValue(newParams, name) && newValueCount++;
       hasValue(merged, name) && mergedValueCount++;
     });
@@ -410,16 +559,13 @@ export function mergeLayoutParam(targetOption, newOption, opt) {
       // Chose another param from targetOption by priority.
       for (var i = 0; i < names.length; i++) {
         var name_1 = names[i];
-        if (!hasProp(newParams, name_1) && hasProp(targetOption, name_1)) {
+        if (!zrUtil.hasOwn(newParams, name_1) && zrUtil.hasOwn(targetOption, name_1)) {
           newParams[name_1] = targetOption[name_1];
           break;
         }
       }
       return newParams;
     }
-  }
-  function hasProp(obj, name) {
-    return obj.hasOwnProperty(name);
   }
   function hasValue(obj, name) {
     return obj[name] != null && obj[name] !== 'auto';
@@ -443,7 +589,7 @@ export function getLayoutParams(source) {
  */
 export function copyLayoutParams(target, source) {
   source && target && each(LOCATION_PARAMS, function (name) {
-    source.hasOwnProperty(name) && (target[name] = source[name]);
+    zrUtil.hasOwn(source, name) && (target[name] = source[name]);
   });
   return target;
 }

@@ -43,6 +43,7 @@
 */
 import { __extends } from "tslib";
 import ComponentModel from '../../model/Component.js';
+import tokens from '../../visual/tokens.js';
 var AxisPointerModel = /** @class */function (_super) {
   __extends(AxisPointerModel, _super);
   function AxisPointerModel() {
@@ -70,21 +71,21 @@ var AxisPointerModel = /** @class */function (_super) {
     animation: null,
     animationDurationUpdate: 200,
     lineStyle: {
-      color: '#B9BEC9',
+      color: tokens.color.border,
       width: 1,
       type: 'dashed'
     },
     shadowStyle: {
-      color: 'rgba(210,219,238,0.2)'
+      color: tokens.color.shadowTint
     },
     label: {
       show: true,
       formatter: null,
       precision: 'auto',
       margin: 3,
-      color: '#fff',
+      color: tokens.color.neutral00,
       padding: [5, 7, 5, 7],
-      backgroundColor: 'auto',
+      backgroundColor: tokens.color.accent60,
       borderColor: null,
       borderWidth: 0,
       borderRadius: 3
@@ -98,11 +99,7 @@ var AxisPointerModel = /** @class */function (_super) {
       margin: 50,
       // color: '#1b8bbd'
       // color: '#2f4554'
-      color: '#333',
-      shadowBlur: 3,
-      shadowColor: '#aaa',
-      shadowOffsetX: 0,
-      shadowOffsetY: 2,
+      color: tokens.color.accent40,
       // For mobile performance
       throttle: 40
     }

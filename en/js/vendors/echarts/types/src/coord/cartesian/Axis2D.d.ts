@@ -4,6 +4,7 @@ import Scale from '../../scale/Scale.js';
 import CartesianAxisModel, { CartesianAxisPosition } from './AxisModel.js';
 import Grid from './Grid.js';
 import { OptionAxisType } from '../axisCommonTypes.js';
+import type AxisBuilder from '../../component/axis/AxisBuilder.js';
 interface Axis2D {
     /**
      * Transform global coord to local coord,
@@ -38,6 +39,10 @@ declare class Axis2D extends Axis {
      * Injected outside.
      */
     grid: Grid;
+    /**
+     * Injected outside.
+     */
+    axisBuilder: AxisBuilder;
     constructor(dim: DimensionName, scale: Scale, coordExtent: [number, number], axisType?: OptionAxisType, position?: CartesianAxisPosition);
     /**
      * Implemented in <module:echarts/coord/cartesian/Grid>.

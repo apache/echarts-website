@@ -42,7 +42,7 @@
 * under the License.
 */
 import ZRText from 'zrender/lib/graphic/Text.js';
-import { isFunction, retrieve2, extend, keys, trim } from 'zrender/lib/core/util.js';
+import { isFunction, retrieve2, extend, keys, trim, retrieve3, isNumber, normalizeCssArray } from 'zrender/lib/core/util.js';
 import { SPECIAL_STATES, DISPLAY_STATES } from '../util/states.js';
 import { deprecateReplaceLog } from '../util/log.js';
 import { makeInner, interpolateRawValues } from '../util/model.js';
@@ -200,7 +200,7 @@ export function createTextConfig(textStyleModel, opt, isNotNormal) {
   var labelOffset = textStyleModel.getShallow('offset');
   labelPosition = textStyleModel.getShallow('position') || (isNotNormal ? null : 'inside');
   // 'outside' is not a valid zr textPostion value, but used
-  // in bar series, and magric type should be considered.
+  // in bar series, and magic type should be considered.
   labelPosition === 'outside' && (labelPosition = opt.defaultOutsidePosition || 'top');
   if (labelPosition != null) {
     textConfig.position = labelPosition;
@@ -217,6 +217,12 @@ export function createTextConfig(textStyleModel, opt, isNotNormal) {
   }
   // fill and auto is determined by the color of path fill if it's not specified by developers.
   textConfig.outsideFill = textStyleModel.get('color') === 'inherit' ? opt.inheritColor || null : 'auto';
+  if (opt.autoOverflowArea != null) {
+    textConfig.autoOverflowArea = opt.autoOverflowArea;
+  }
+  if (opt.layoutRect != null) {
+    textConfig.layoutRect = opt.layoutRect;
+  }
   return textConfig;
 }
 /**
@@ -251,16 +257,20 @@ function setTextStyleCommon(textStyle, textStyleModel, opt, isNotNormal, isAttac
   var richResult;
   if (richItemNames) {
     richResult = {};
+    var richInheritPlainLabelOptionName = 'richInheritPlainLabel';
+    var richInheritPlainLabel = retrieve2(textStyleModel.get(richInheritPlainLabelOptionName), ecModel ? ecModel.get(richInheritPlainLabelOptionName) : undefined);
     for (var name_1 in richItemNames) {
       if (richItemNames.hasOwnProperty(name_1)) {
         // Cascade is supported in rich.
         var richTextStyle = textStyleModel.getModel(['rich', name_1]);
         // In rich, never `disableBox`.
-        // FIXME: consider `label: {formatter: '{a|xx}', color: 'blue', rich: {a: {}}}`,
+        // consider `label: {formatter: '{a|xx}', color: 'blue', rich: {a: {}}}`,
         // the default color `'blue'` will not be adopted if no color declared in `rich`.
         // That might confuses users. So probably we should put `textStyleModel` as the
         // root ancestor of the `richTextStyle`. But that would be a break change.
-        setTokenTextStyle(richResult[name_1] = {}, richTextStyle, globalTextStyle, opt, isNotNormal, isAttached, false, true);
+        // Since v6, the rich style inherits plain label by default
+        // but this behavior can be disabled by setting `richInheritPlainLabel` to `false`.
+        setTokenTextStyle(richResult[name_1] = {}, richTextStyle, globalTextStyle, textStyleModel, richInheritPlainLabel, opt, isNotNormal, isAttached, false, true);
       }
     }
   }
@@ -271,11 +281,27 @@ function setTextStyleCommon(textStyle, textStyleModel, opt, isNotNormal, isAttac
   if (overflow) {
     textStyle.overflow = overflow;
   }
-  var margin = textStyleModel.get('minMargin');
-  if (margin != null) {
-    textStyle.margin = margin;
+  var lineOverflow = textStyleModel.get('lineOverflow');
+  if (lineOverflow) {
+    textStyle.lineOverflow = lineOverflow;
   }
-  setTokenTextStyle(textStyle, textStyleModel, globalTextStyle, opt, isNotNormal, isAttached, true, false);
+  var labelTextStyle = textStyle;
+  // `minMargin` has a higher precedence than `textMargin`, because `textMargin` is allowed
+  // to be set in `defaultOption`.
+  var minMargin = textStyleModel.get('minMargin');
+  if (minMargin != null) {
+    // `minMargin` only support number value.
+    minMargin = !isNumber(minMargin) ? 0 : minMargin / 2;
+    labelTextStyle.margin = [minMargin, minMargin, minMargin, minMargin];
+    labelTextStyle.__marginType = LabelMarginType.minMargin;
+  } else {
+    var textMargin = textStyleModel.get('textMargin');
+    if (textMargin != null) {
+      labelTextStyle.margin = normalizeCssArray(textMargin);
+      labelTextStyle.__marginType = LabelMarginType.textMargin;
+    }
+  }
+  setTokenTextStyle(textStyle, textStyleModel, globalTextStyle, null, null, opt, isNotNormal, isAttached, true, false);
 }
 // Consider case:
 // {
@@ -312,7 +338,9 @@ function getRichItemNames(textStyleModel) {
 var TEXT_PROPS_WITH_GLOBAL = ['fontStyle', 'fontWeight', 'fontSize', 'fontFamily', 'textShadowColor', 'textShadowBlur', 'textShadowOffsetX', 'textShadowOffsetY'];
 var TEXT_PROPS_SELF = ['align', 'lineHeight', 'width', 'height', 'tag', 'verticalAlign', 'ellipsis'];
 var TEXT_PROPS_BOX = ['padding', 'borderWidth', 'borderRadius', 'borderDashOffset', 'backgroundColor', 'borderColor', 'shadowColor', 'shadowBlur', 'shadowOffsetX', 'shadowOffsetY'];
-function setTokenTextStyle(textStyle, textStyleModel, globalTextStyle, opt, isNotNormal, isAttached, isBlock, inRich) {
+function setTokenTextStyle(textStyle,
+// FIXME: check/refactor for ellipsis handling of rich text.
+textStyleModel, globalTextStyle, plainTextModel, richInheritPlainLabel, opt, isNotNormal, isAttached, isBlock, inRich) {
   // In merge mode, default value should not be given.
   globalTextStyle = !isNotNormal && globalTextStyle || EMPTY_OBJ;
   var inheritColor = opt && opt.inheritColor;
@@ -350,6 +378,8 @@ function setTokenTextStyle(textStyle, textStyleModel, globalTextStyle, opt, isNo
     strokeColor = strokeColor || globalTextStyle.textBorderColor;
   }
   if (fillColor != null) {
+    // Might not be a string, e.g, it's a function in axisLabel case; but assume that it will
+    // be erased by a correct value outside.
     textStyle.fill = fillColor;
   }
   if (strokeColor != null) {
@@ -385,7 +415,13 @@ function setTokenTextStyle(textStyle, textStyleModel, globalTextStyle, opt, isNo
   // others should remain their original value got from normal style.
   for (var i = 0; i < TEXT_PROPS_WITH_GLOBAL.length; i++) {
     var key = TEXT_PROPS_WITH_GLOBAL[i];
-    var val = retrieve2(textStyleModel.getShallow(key), globalTextStyle[key]);
+    // props width, height, padding, margin, tag, backgroundColor, borderColor,
+    // borderWidth, borderRadius, shadowColor, shadowBlur, shadowOffsetX, shadowOffsetY
+    // may inappropriate to inherit from plainTextStyle.
+    // And if some props is specified in default options, users may have to reset them one by one.
+    // Therefore, we only allow these props to inherit from plainTextStyle.
+    // `richInheritPlainLabel` is switch for backward compatibility
+    var val = richInheritPlainLabel !== false && plainTextModel ? retrieve3(textStyleModel.getShallow(key), plainTextModel.getShallow(key), globalTextStyle[key]) : retrieve2(textStyleModel.getShallow(key), globalTextStyle[key]);
     if (val != null) {
       textStyle[key] = val;
     }
@@ -482,3 +518,12 @@ export function animateLabelValue(textEl, dataIndex, data, animatableModel, labe
     percent: 1
   }, animatableModel, dataIndex, null, during);
 }
+/**
+ * PENDING: Temporary impl. unify them?
+ * @see {LabelCommonOption['textMargin']}
+ * @see {LabelCommonOption['minMargin']}
+ */
+export var LabelMarginType = {
+  minMargin: 1,
+  textMargin: 2
+};

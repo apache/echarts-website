@@ -329,7 +329,7 @@ var GraphNode = /** @class */function () {
   GraphNode.prototype.getTrajectoryDataIndices = function () {
     var connectedEdgesMap = zrUtil.createHashMap();
     var connectedNodesMap = zrUtil.createHashMap();
-    for (var i = 0; i < this.edges.length; i++) {
+    for (var i = 0, len = this.edges.length; i < len; i++) {
       var adjacentEdge = this.edges[i];
       if (adjacentEdge.dataIndex < 0) {
         continue;
@@ -342,9 +342,14 @@ var GraphNode = /** @class */function () {
         var sourceNode = sourceNodesQueue[nodeIteratorIndex];
         nodeIteratorIndex++;
         connectedNodesMap.set(sourceNode.dataIndex, true);
-        for (var j = 0; j < sourceNode.inEdges.length; j++) {
-          connectedEdgesMap.set(sourceNode.inEdges[j].dataIndex, true);
-          sourceNodesQueue.push(sourceNode.inEdges[j].node1);
+        var sourceNodeInEdges = sourceNode.inEdges;
+        for (var j = 0, len_1 = sourceNodeInEdges.length, inEdge = void 0, inEdgeDataIndex = void 0; j < len_1; j++) {
+          inEdge = sourceNodeInEdges[j];
+          inEdgeDataIndex = inEdge.dataIndex;
+          if (inEdgeDataIndex >= 0 && !connectedEdgesMap.hasKey(inEdgeDataIndex)) {
+            connectedEdgesMap.set(inEdgeDataIndex, true);
+            sourceNodesQueue.push(inEdge.node1);
+          }
         }
       }
       nodeIteratorIndex = 0;
@@ -352,9 +357,14 @@ var GraphNode = /** @class */function () {
         var targetNode = targetNodesQueue[nodeIteratorIndex];
         nodeIteratorIndex++;
         connectedNodesMap.set(targetNode.dataIndex, true);
-        for (var j = 0; j < targetNode.outEdges.length; j++) {
-          connectedEdgesMap.set(targetNode.outEdges[j].dataIndex, true);
-          targetNodesQueue.push(targetNode.outEdges[j].node2);
+        var targetNodeOutEdges = targetNode.outEdges;
+        for (var j = 0, len_2 = targetNodeOutEdges.length, outEdge = void 0, outEdgeDataIndex = void 0; j < len_2; j++) {
+          outEdge = targetNodeOutEdges[j];
+          outEdgeDataIndex = outEdge.dataIndex;
+          if (outEdgeDataIndex >= 0 && !connectedEdgesMap.hasKey(outEdgeDataIndex)) {
+            connectedEdgesMap.set(outEdgeDataIndex, true);
+            targetNodesQueue.push(outEdge.node2);
+          }
         }
       }
     }
@@ -398,9 +408,14 @@ var GraphEdge = /** @class */function () {
       var sourceNode = sourceNodes[nodeIteratorIndex];
       nodeIteratorIndex++;
       connectedNodesMap.set(sourceNode.dataIndex, true);
-      for (var j = 0; j < sourceNode.inEdges.length; j++) {
-        connectedEdgesMap.set(sourceNode.inEdges[j].dataIndex, true);
-        sourceNodes.push(sourceNode.inEdges[j].node1);
+      var sourceNodeInEdges = sourceNode.inEdges;
+      for (var j = 0, len = sourceNodeInEdges.length, inEdge = void 0, inEdgeDataIndex = void 0; j < len; j++) {
+        inEdge = sourceNode.inEdges[j];
+        inEdgeDataIndex = inEdge.dataIndex;
+        if (inEdgeDataIndex >= 0 && !connectedEdgesMap.hasKey(inEdgeDataIndex)) {
+          connectedEdgesMap.set(inEdgeDataIndex, true);
+          sourceNodes.push(inEdge.node1);
+        }
       }
     }
     nodeIteratorIndex = 0;
@@ -408,9 +423,14 @@ var GraphEdge = /** @class */function () {
       var targetNode = targetNodes[nodeIteratorIndex];
       nodeIteratorIndex++;
       connectedNodesMap.set(targetNode.dataIndex, true);
-      for (var j = 0; j < targetNode.outEdges.length; j++) {
-        connectedEdgesMap.set(targetNode.outEdges[j].dataIndex, true);
-        targetNodes.push(targetNode.outEdges[j].node2);
+      var targetNodeOutEdges = targetNode.outEdges;
+      for (var j = 0, len = targetNodeOutEdges.length, outEdge = void 0, outEdgeDataIndex = void 0; j < len; j++) {
+        outEdge = targetNode.outEdges[j];
+        outEdgeDataIndex = outEdge.dataIndex;
+        if (outEdgeDataIndex >= 0 && !connectedEdgesMap.hasKey(outEdgeDataIndex)) {
+          connectedEdgesMap.set(outEdgeDataIndex, true);
+          targetNodes.push(outEdge.node2);
+        }
       }
     }
     return {

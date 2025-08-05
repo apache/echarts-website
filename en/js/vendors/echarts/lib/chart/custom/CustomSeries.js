@@ -82,7 +82,7 @@ var CustomSeriesModel = /** @class */function (_super) {
     return params;
   };
   CustomSeriesModel.type = 'series.custom';
-  CustomSeriesModel.dependencies = ['grid', 'polar', 'geo', 'singleAxis', 'calendar'];
+  CustomSeriesModel.dependencies = ['grid', 'polar', 'geo', 'singleAxis', 'calendar', 'matrix'];
   CustomSeriesModel.defaultOption = {
     coordinateSystem: 'cartesian2d',
     // zlevel: 0,

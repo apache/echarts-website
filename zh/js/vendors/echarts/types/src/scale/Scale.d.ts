@@ -1,12 +1,22 @@
 import * as clazzUtil from '../util/clazz.js';
 import { Dictionary } from 'zrender/lib/core/types.js';
 import SeriesData from '../data/SeriesData.js';
-import { DimensionName, ScaleDataValue, OptionDataValue, DimensionLoose, ScaleTick } from '../util/types.js';
+import { DimensionName, ScaleDataValue, DimensionLoose, ScaleTick, AxisBreakOption, NullUndefined, ParsedAxisBreakList } from '../util/types.js';
+import { ScaleCalculator } from './helper.js';
 import { ScaleRawExtentInfo } from '../coord/scaleRawExtentInfo.js';
-declare abstract class Scale<SETTING extends Dictionary<unknown> = Dictionary<unknown>> {
+import { ScaleBreakContext, AxisBreakParsingResult, ParamPruneByBreak } from './break.js';
+export declare type ScaleGetTicksOpt = {
+    expandToNicedExtent?: boolean;
+    pruneByBreak?: ParamPruneByBreak;
+    breakTicks?: 'only_break' | 'none' | NullUndefined;
+};
+export declare type ScaleSettingDefault = Dictionary<unknown>;
+declare abstract class Scale<SETTING extends ScaleSettingDefault = ScaleSettingDefault> {
     type: string;
     private _setting;
     protected _extent: [number, number];
+    protected _brkCtx: ScaleBreakContext | NullUndefined;
+    protected _calculator: ScaleCalculator;
     private _isBlank;
     readonly rawExtentInfo: ScaleRawExtentInfo;
     constructor(setting?: SETTING);
@@ -18,37 +28,54 @@ declare abstract class Scale<SETTING extends Dictionary<unknown> = Dictionary<un
      * before extent set (like in dataZoom), it would be wrong.
      * Nevertheless, parse does not depend on extent generally.
      */
-    abstract parse(val: OptionDataValue): number;
+    abstract parse(val: ScaleDataValue): number;
     /**
      * Whether contain the given value.
      */
-    abstract contain(val: ScaleDataValue): boolean;
+    abstract contain(val: number): boolean;
     /**
      * Normalize value to linear [0, 1], return 0.5 if extent span is 0.
      */
-    abstract normalize(val: ScaleDataValue): number;
+    abstract normalize(val: number): number;
     /**
      * Scale normalized value to extent.
      */
     abstract scale(val: number): number;
     /**
-     * Set extent from data
+     * [CAVEAT]: It should not be overridden!
      */
-    unionExtent(other: [number, number]): void;
+    _innerUnionExtent(other: [number, number]): void;
     /**
      * Set extent from data
      */
     unionExtentFromData(data: SeriesData, dim: DimensionName | DimensionLoose): void;
     /**
-     * Get extent
-     *
+     * Get a new slice of extent.
      * Extent is always in increase order.
      */
     getExtent(): [number, number];
-    /**
-     * Set extent
-     */
     setExtent(start: number, end: number): void;
+    /**
+     * [CAVEAT]: It should not be overridden!
+     */
+    protected _innerSetExtent(start: number, end: number): void;
+    /**
+     * Prerequisite: Scale#parse is ready.
+     */
+    setBreaksFromOption(breakOptionList: AxisBreakOption[]): void;
+    /**
+     * [CAVEAT]: It should not be overridden!
+     */
+    _innerSetBreak(parsed: AxisBreakParsingResult): void;
+    /**
+     * [CAVEAT]: It should not be overridden!
+     */
+    _innerGetBreaks(): ParsedAxisBreakList;
+    /**
+     * Do not expose the internal `_breaks` unless necessary.
+     */
+    hasBreaks(): boolean;
+    protected _getExtentSpanWithBreaks(): number;
     /**
      * If value is in extent range
      */
@@ -84,7 +111,7 @@ declare abstract class Scale<SETTING extends Dictionary<unknown> = Dictionary<un
      * @return label of the tick.
      */
     abstract getLabel(tick: ScaleTick): string;
-    abstract getTicks(): ScaleTick[];
+    abstract getTicks(opt?: ScaleGetTicksOpt): ScaleTick[];
     abstract getMinorTicks(splitNumber: number): number[][];
     static registerClass: clazzUtil.ClassManager['registerClass'];
     static getClass: clazzUtil.ClassManager['getClass'];

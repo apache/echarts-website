@@ -1,7 +1,7 @@
 import ComponentModel from '../../model/Component.js';
 import Model from '../../model/Model.js';
 import Geo from './Geo.js';
-import { ComponentOption, BoxLayoutOptionMixin, ItemStyleOption, ZRColor, LabelOption, DisplayState, RoamOptionMixin, AnimationOptionMixin, StatesOptionMixin, Dictionary, CommonTooltipOption, StatesMixinBase } from '../../util/types.js';
+import { ComponentOption, BoxLayoutOptionMixin, ItemStyleOption, ZRColor, LabelOption, DisplayState, RoamOptionMixin, AnimationOptionMixin, StatesOptionMixin, Dictionary, CommonTooltipOption, StatesMixinBase, PreserveAspectMixin } from '../../util/types.js';
 import { GeoProjection, NameMap } from './geoTypes.js';
 import GlobalModel from '../../model/Global.js';
 export interface GeoItemStyleOption<TCbParams = never> extends ItemStyleOption<TCbParams> {
@@ -35,11 +35,12 @@ export interface GeoTooltipFormatterParams {
     name: string;
     $vars: ['name'];
 }
-export interface GeoCommonOptionMixin extends RoamOptionMixin {
+export interface GeoCommonOptionMixin extends RoamOptionMixin, PreserveAspectMixin {
     map: string;
     aspectScale?: number;
     layoutCenter?: (number | string)[];
     layoutSize?: number | string;
+    clip?: boolean;
     boundingCoords?: number[][];
     nameMap?: NameMap;
     nameProperty?: string;
@@ -60,6 +61,10 @@ export interface GeoOption extends ComponentOption, BoxLayoutOptionMixin, Animat
     selectedMode?: 'single' | 'multiple' | boolean;
     selectedMap?: Dictionary<boolean>;
     tooltip?: CommonTooltipOption<GeoTooltipFormatterParams>;
+    /**
+     * @private
+     */
+    defaultItemStyleColor?: ZRColor;
 }
 declare class GeoModel extends ComponentModel<GeoOption> {
     static type: string;

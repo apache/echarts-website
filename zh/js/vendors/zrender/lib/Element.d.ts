@@ -36,6 +36,7 @@ export interface ElementTextConfig {
     outsideFill?: string;
     outsideStroke?: string;
     inside?: boolean;
+    autoOverflowArea?: boolean;
 }
 export interface ElementTextGuideLineConfig {
     anchor?: Point;
@@ -85,6 +86,7 @@ export interface ElementProps extends Partial<ElementEventHandlerProps>, Partial
     isGroup?: boolean;
     draggable?: boolean | 'horizontal' | 'vertical';
     silent?: boolean;
+    ignoreHostSilent?: boolean;
     ignoreClip?: boolean;
     globalScaleRatio?: number;
     textConfig?: ElementTextConfig;
@@ -114,6 +116,7 @@ declare class Element<Props extends ElementProps = ElementProps> {
     name: string;
     ignore: boolean;
     silent: boolean;
+    ignoreHostSilent: boolean;
     isGroup: boolean;
     draggable: boolean | 'horizontal' | 'vertical';
     dragging: boolean;
@@ -125,6 +128,7 @@ declare class Element<Props extends ElementProps = ElementProps> {
     __dirty: number;
     __isRendered: boolean;
     __inHover: boolean;
+    __clipPaths?: Path[];
     private _clipPath?;
     private _textContent?;
     private _textGuide?;

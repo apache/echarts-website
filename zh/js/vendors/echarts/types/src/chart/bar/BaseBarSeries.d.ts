@@ -27,6 +27,10 @@ export interface BaseBarSeriesOption<StateOption, ExtraStateOption extends State
      */
     barGap?: string | number;
     /**
+     * @private
+     */
+    defaultBarGap?: string | number;
+    /**
      * Gap between each category. Default to be 20%. can be an absolute pixel value.
      */
     barCategoryGap?: string | number;

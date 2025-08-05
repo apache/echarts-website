@@ -43,20 +43,26 @@
 */
 import * as zrUtil from 'zrender/lib/core/util.js';
 import { SINGLE_REFERRING } from '../../util/model.js';
+import AxisBuilder from '../../component/axis/AxisBuilder.js';
+import { isIntervalOrLogScale } from '../../scale/helper.js';
 /**
+ * [__CAUTION__]
+ *  MUST guarantee: if only the input `rect` and `axis.extent` changed,
+ *  only `layout.position` changes.
+ *  This character is replied on `grid.contain` calculation in `AxisBuilder`.
+ *  @see updateCartesianAxisViewCommonPartBuilder
+ *
  * Can only be called after coordinate system creation stage.
  * (Can be called before coordinate system update stage).
  */
-export function layout(gridModel, axisModel, opt) {
+export function layout(rect, axisModel, opt) {
   opt = opt || {};
-  var grid = gridModel.coordinateSystem;
   var axis = axisModel.axis;
   var layout = {};
   var otherAxisOnZeroOf = axis.getAxesOnZeroOf()[0];
   var rawAxisPosition = axis.position;
   var axisPosition = otherAxisOnZeroOf ? 'onZero' : rawAxisPosition;
   var axisDim = axis.dim;
-  var rect = grid.getRect();
   var rectBound = [rect.x, rect.x + rect.width, rect.y, rect.y + rect.height];
   var idx = {
     left: 0,
@@ -97,8 +103,18 @@ export function layout(gridModel, axisModel, opt) {
   layout.z2 = 1;
   return layout;
 }
-export function isCartesian2DSeries(seriesModel) {
+export function isCartesian2DDeclaredSeries(seriesModel) {
   return seriesModel.get('coordinateSystem') === 'cartesian2d';
+}
+/**
+ * Note: If pie (or other similar series) use cartesian2d, here
+ *  option `seriesModel.get('coordinateSystem') === 'cartesian2d'`
+ *  and `seriesModel.coordinateSystem !== cartesian2dCoordSysInstance`
+ *  and `seriesModel.boxCoordinateSystem === cartesian2dCoordSysInstance`,
+ *  the logic below is probably wrong, therefore skip it temporarily.
+ */
+export function isCartesian2DInjectedAsDataCoordSys(seriesModel) {
+  return seriesModel.coordinateSystem && seriesModel.coordinateSystem.type === 'cartesian2d';
 }
 export function findAxisModels(seriesModel) {
   var axisModelMap = {
@@ -116,4 +132,35 @@ export function findAxisModels(seriesModel) {
     axisModelMap[key] = axisModel;
   });
   return axisModelMap;
+}
+export function createCartesianAxisViewCommonPartBuilder(gridRect, cartesians, axisModel, api, ctx, defaultNameMoveOverlap) {
+  var layoutResult = layout(gridRect, axisModel);
+  var axisLineAutoShow = false;
+  var axisTickAutoShow = false;
+  // Not show axisTick or axisLine if other axis is category / time
+  for (var i = 0; i < cartesians.length; i++) {
+    if (isIntervalOrLogScale(cartesians[i].getOtherAxis(axisModel.axis).scale)) {
+      // Still show axis tick or axisLine if other axis is value / log
+      axisLineAutoShow = axisTickAutoShow = true;
+      if (axisModel.axis.type === 'category' && axisModel.axis.onBand) {
+        axisTickAutoShow = false;
+      }
+    }
+  }
+  layoutResult.axisLineAutoShow = axisLineAutoShow;
+  layoutResult.axisTickAutoShow = axisTickAutoShow;
+  layoutResult.defaultNameMoveOverlap = defaultNameMoveOverlap;
+  return new AxisBuilder(axisModel, api, layoutResult, ctx);
+}
+export function updateCartesianAxisViewCommonPartBuilder(axisBuilder, gridRect, axisModel) {
+  var newRaw = layout(gridRect, axisModel);
+  if (process.env.NODE_ENV !== 'production') {
+    var oldRaw_1 = axisBuilder.__getRawCfg();
+    zrUtil.each(zrUtil.keys(newRaw), function (prop) {
+      if (prop !== 'position' && prop !== 'labelOffset') {
+        zrUtil.assert(newRaw[prop] === oldRaw_1[prop]);
+      }
+    });
+  }
+  axisBuilder.updateCfg(newRaw);
 }

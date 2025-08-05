@@ -41,26 +41,22 @@
 * specific language governing permissions and limitations
 * under the License.
 */
-// @ts-nocheck
 import * as echarts from '../../core/echarts.js';
 import { noop } from 'zrender/lib/core/util.js';
-var ATTR = '\0_ec_interaction_mutex';
+import { makeInner } from '../../util/model.js';
+var inner = makeInner();
 export function take(zr, resourceKey, userKey) {
-  var store = getStore(zr);
-  store[resourceKey] = userKey;
+  inner(zr)[resourceKey] = userKey;
 }
 export function release(zr, resourceKey, userKey) {
-  var store = getStore(zr);
+  var store = inner(zr);
   var uKey = store[resourceKey];
   if (uKey === userKey) {
     store[resourceKey] = null;
   }
 }
 export function isTaken(zr, resourceKey) {
-  return !!getStore(zr)[resourceKey];
-}
-function getStore(zr) {
-  return zr[ATTR] || (zr[ATTR] = {});
+  return !!inner(zr)[resourceKey];
 }
 /**
  * payload: {

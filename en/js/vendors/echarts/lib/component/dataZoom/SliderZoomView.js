@@ -55,9 +55,9 @@ import { enableHoverEmphasis } from '../../util/states.js';
 import { createSymbol, symbolBuildProxies } from '../../util/symbol.js';
 import { deprecateLog } from '../../util/log.js';
 import { createTextStyle } from '../../label/labelStyle.js';
+import tokens from '../../visual/tokens.js';
 var Rect = graphic.Rect;
 // Constants
-var DEFAULT_LOCATION_EDGE_GAP = 7;
 var DEFAULT_FRAME_BORDER_WIDTH = 1;
 var DEFAULT_FILLER_SIZE = 30;
 var DEFAULT_MOVE_HANDLE_SIZE = 7;
@@ -134,23 +134,21 @@ var SliderZoomView = /** @class */function (_super) {
     var api = this.api;
     var showMoveHandle = dataZoomModel.get('brushSelect');
     var moveHandleSize = showMoveHandle ? DEFAULT_MOVE_HANDLE_SIZE : 0;
+    var refContainer = layout.createBoxLayoutReference(dataZoomModel, api).refContainer;
     // If some of x/y/width/height are not specified,
     // auto-adapt according to target grid.
     var coordRect = this._findCoordRect();
-    var ecSize = {
-      width: api.getWidth(),
-      height: api.getHeight()
-    };
+    var edgeGap = dataZoomModel.get('defaultLocationEdgeGap', true) || 0;
     // Default align by coordinate system rect.
     var positionInfo = this._orient === HORIZONTAL ? {
       // Why using 'right', because right should be used in vertical,
       // and it is better to be consistent for dealing with position param merge.
-      right: ecSize.width - coordRect.x - coordRect.width,
-      top: ecSize.height - DEFAULT_FILLER_SIZE - DEFAULT_LOCATION_EDGE_GAP - moveHandleSize,
+      right: refContainer.width - coordRect.x - coordRect.width,
+      top: refContainer.height - DEFAULT_FILLER_SIZE - edgeGap - moveHandleSize,
       width: coordRect.width,
       height: DEFAULT_FILLER_SIZE
     } : {
-      right: DEFAULT_LOCATION_EDGE_GAP,
+      right: edgeGap,
       top: coordRect.y,
       width: DEFAULT_FILLER_SIZE,
       height: coordRect.height
@@ -164,7 +162,7 @@ var SliderZoomView = /** @class */function (_super) {
         layoutParams[name] = positionInfo[name];
       }
     });
-    var layoutRect = layout.getLayoutRect(layoutParams, ecSize);
+    var layoutRect = layout.getLayoutRect(layoutParams, refContainer);
     this._location = {
       x: layoutRect.x,
       y: layoutRect.y
@@ -272,6 +270,7 @@ var SliderZoomView = /** @class */function (_super) {
     var polylinePts = this._shadowPolylinePts;
     // Not re-render if data doesn't change.
     if (data !== this._shadowData || otherDim !== this._shadowDim || size[0] !== oldSize[0] || size[1] !== oldSize[1]) {
+      var thisDataExtent_1 = data.getDataExtent(info.thisDim);
       var otherDataExtent_1 = data.getDataExtent(otherDim);
       // Nice extent.
       var otherOffset = (otherDataExtent_1[1] - otherDataExtent_1[0]) * 0.3;
@@ -280,23 +279,28 @@ var SliderZoomView = /** @class */function (_super) {
       var thisShadowExtent = [0, size[0]];
       var areaPoints_1 = [[size[0], 0], [0, 0]];
       var linePoints_1 = [];
-      var step_1 = thisShadowExtent[1] / (data.count() - 1);
-      var thisCoord_1 = 0;
+      var step_1 = thisShadowExtent[1] / Math.max(1, data.count() - 1);
+      var normalizationConstant_1 = size[0] / (thisDataExtent_1[1] - thisDataExtent_1[0]);
+      var isTimeAxis_1 = info.thisAxis.type === 'time';
+      var thisCoord_1 = -step_1;
       // Optimize for large data shadow
       var stride_1 = Math.round(data.count() / size[0]);
       var lastIsEmpty_1;
-      data.each([otherDim], function (value, index) {
+      data.each([info.thisDim, otherDim], function (thisValue, otherValue, index) {
         if (stride_1 > 0 && index % stride_1) {
-          thisCoord_1 += step_1;
+          if (!isTimeAxis_1) {
+            thisCoord_1 += step_1;
+          }
           return;
         }
+        thisCoord_1 = isTimeAxis_1 ? (+thisValue - thisDataExtent_1[0]) * normalizationConstant_1 : thisCoord_1 + step_1;
         // FIXME
         // Should consider axis.min/axis.max when drawing dataShadow.
         // FIXME
         // 应该使用统一的空判断？还是在list里进行空判断？
-        var isEmpty = value == null || isNaN(value) || value === '';
+        var isEmpty = otherValue == null || isNaN(otherValue) || otherValue === '';
         // See #4235.
-        var otherCoord = isEmpty ? 0 : linearMap(value, otherDataExtent_1, otherShadowExtent_1, true);
+        var otherCoord = isEmpty ? 0 : linearMap(otherValue, otherDataExtent_1, otherShadowExtent_1, true);
         // Attempt to draw data shadow precisely when there are empty value.
         if (isEmpty && !lastIsEmpty_1 && index) {
           areaPoints_1.push([areaPoints_1[areaPoints_1.length - 1][0], 0]);
@@ -305,9 +309,10 @@ var SliderZoomView = /** @class */function (_super) {
           areaPoints_1.push([thisCoord_1, 0]);
           linePoints_1.push([thisCoord_1, 0]);
         }
-        areaPoints_1.push([thisCoord_1, otherCoord]);
-        linePoints_1.push([thisCoord_1, otherCoord]);
-        thisCoord_1 += step_1;
+        if (!isEmpty) {
+          areaPoints_1.push([thisCoord_1, otherCoord]);
+          linePoints_1.push([thisCoord_1, otherCoord]);
+        }
         lastIsEmpty_1 = isEmpty;
       });
       polygonPts = this._shadowPolygonPts = areaPoints_1;
@@ -375,10 +380,11 @@ var SliderZoomView = /** @class */function (_super) {
           otherAxisInverse = coordSys.getOtherAxis(thisAxis).inverse;
         }
         otherDim = seriesModel.getData().mapDimension(otherDim);
+        var thisDim = seriesModel.getData().mapDimension(axisDim);
         result = {
           thisAxis: thisAxis,
           series: seriesModel,
-          thisDim: axisDim,
+          thisDim: thisDim,
           otherDim: otherDim,
           otherAxisInverse: otherAxisInverse
         };
@@ -422,7 +428,7 @@ var SliderZoomView = /** @class */function (_super) {
         // deprecated option
         stroke: dataZoomModel.get('dataBackgroundColor') || dataZoomModel.get('borderColor'),
         lineWidth: DEFAULT_FRAME_BORDER_WIDTH,
-        fill: 'rgba(0,0,0,0)'
+        fill: tokens.color.transparent
       }
     }));
     // Left and right handle to resize
@@ -492,7 +498,7 @@ var SliderZoomView = /** @class */function (_super) {
         }
       });
       var iconSize = moveHandleHeight * 0.8;
-      var moveHandleIcon = displayables.moveHandleIcon = createSymbol(dataZoomModel.get('moveHandleIcon'), -iconSize / 2, -iconSize / 2, iconSize, iconSize, '#fff', true);
+      var moveHandleIcon = displayables.moveHandleIcon = createSymbol(dataZoomModel.get('moveHandleIcon'), -iconSize / 2, -iconSize / 2, iconSize, iconSize, tokens.color.neutral00, true);
       moveHandleIcon.silent = true;
       moveHandleIcon.y = size[1] + moveHandleHeight / 2 - 0.5;
       moveHandle_1.ensureState('emphasis').style = dataZoomModel.getModel(['emphasis', 'moveHandleStyle']).getItemStyle();
@@ -515,7 +521,7 @@ var SliderZoomView = /** @class */function (_super) {
     }
     actualMoveZone.attr({
       draggable: true,
-      cursor: getCursor(this._orient),
+      cursor: 'default',
       drift: bind(this._onDragMove, this, 'all'),
       ondragstart: bind(this._showDataInfo, this, true),
       ondragend: bind(this._onDragEnd, this),
@@ -731,8 +737,11 @@ var SliderZoomView = /** @class */function (_super) {
     }
     var viewExtend = this._getViewExtent();
     var percentExtent = [0, 100];
-    this._range = asc([linearMap(brushShape.x, viewExtend, percentExtent, true), linearMap(brushShape.x + brushShape.width, viewExtend, percentExtent, true)]);
-    this._handleEnds = [brushShape.x, brushShape.x + brushShape.width];
+    var handleEnds = this._handleEnds = [brushShape.x, brushShape.x + brushShape.width];
+    var minMaxSpan = this.dataZoomModel.findRepresentativeAxisProxy().getMinMaxSpan();
+    // Restrict range.
+    sliderMove(0, handleEnds, viewExtend, 0, minMaxSpan.minSpan != null ? linearMap(minMaxSpan.minSpan, percentExtent, viewExtend, true) : null, minMaxSpan.maxSpan != null ? linearMap(minMaxSpan.maxSpan, percentExtent, viewExtend, true) : null);
+    this._range = asc([linearMap(handleEnds[0], viewExtend, percentExtent, true), linearMap(handleEnds[1], viewExtend, percentExtent, true)]);
     this._updateView();
     this._dispatchZoomAction(false);
   };

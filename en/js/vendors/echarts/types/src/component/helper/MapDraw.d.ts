@@ -18,6 +18,7 @@ declare class MapDraw {
      * action may be triggered when `pan`, which is unexpected.
      */
     private _mouseDownFlag;
+    private _transformGroup;
     private _regionsGroup;
     private _regionsGroupByName;
     private _svgMapName;

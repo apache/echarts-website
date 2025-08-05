@@ -4,6 +4,7 @@ import { SymbolOptionMixin, ItemStyleOption, SeriesLabelOption, CallbackDataPara
 interface MarkPointStateOption {
     itemStyle?: ItemStyleOption;
     label?: SeriesLabelOption;
+    z2?: number;
 }
 export interface MarkPointDataItemOption extends MarkPointStateOption, StatesOptionMixin<MarkPointStateOption, StatesMixinBase>, SymbolOptionMixin<CallbackDataParams>, MarkerPositionOption {
     name: string;

@@ -262,15 +262,18 @@ var MarkLineView = /** @class */function (_super) {
     });
     // Update visual and layout of line
     lineData.each(function (idx) {
-      var lineStyle = lineData.getItemModel(idx).getModel('lineStyle').getLineStyle();
+      var itemModel = lineData.getItemModel(idx);
+      var lineStyle = itemModel.getModel('lineStyle').getLineStyle();
       // lineData.setItemVisual(idx, {
       //     color: lineColor || fromData.getItemVisual(idx, 'color')
       // });
       lineData.setItemLayout(idx, [fromData.getItemLayout(idx), toData.getItemLayout(idx)]);
+      var z2 = itemModel.get('z2');
       if (lineStyle.stroke == null) {
         lineStyle.stroke = fromData.getItemVisual(idx, 'style').fill;
       }
       lineData.setItemVisual(idx, {
+        z2: retrieve2(z2, 0),
         fromSymbolKeepAspect: fromData.getItemVisual(idx, 'symbolKeepAspect'),
         fromSymbolOffset: fromData.getItemVisual(idx, 'symbolOffset'),
         fromSymbolRotate: fromData.getItemVisual(idx, 'symbolRotate'),

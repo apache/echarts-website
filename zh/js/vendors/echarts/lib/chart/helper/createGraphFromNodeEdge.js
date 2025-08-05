@@ -74,7 +74,7 @@ export default function createGraphFromNodeEdge(nodes, edges, seriesModel, direc
   }
   var coordSys = seriesModel.get('coordinateSystem');
   var nodeData;
-  if (coordSys === 'cartesian2d' || coordSys === 'polar') {
+  if (coordSys === 'cartesian2d' || coordSys === 'polar' || coordSys === 'matrix') {
     nodeData = createSeriesData(nodes, seriesModel);
   } else {
     var coordSysCtor = CoordinateSystem.get(coordSys);

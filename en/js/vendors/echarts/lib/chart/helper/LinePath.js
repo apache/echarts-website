@@ -47,6 +47,7 @@ import { __extends } from "tslib";
  */
 import * as graphic from '../../util/graphic.js';
 import * as vec2 from 'zrender/lib/core/vector.js';
+import tokens from '../../visual/tokens.js';
 var straightLineProto = graphic.Line.prototype;
 var bezierCurveProto = graphic.BezierCurve.prototype;
 var StraightLineShape = /** @class */function () {
@@ -80,7 +81,7 @@ var ECLinePath = /** @class */function (_super) {
   }
   ECLinePath.prototype.getDefaultStyle = function () {
     return {
-      stroke: '#000',
+      stroke: tokens.color.neutral99,
       fill: null
     };
   };

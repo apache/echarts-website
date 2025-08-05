@@ -64,6 +64,7 @@ export var DOWNPLAY_ACTION_TYPE = 'downplay';
 export var SELECT_ACTION_TYPE = 'select';
 export var UNSELECT_ACTION_TYPE = 'unselect';
 export var TOGGLE_SELECT_ACTION_TYPE = 'toggleSelect';
+export var SELECT_CHANGED_EVENT_TYPE = 'selectchanged';
 function hasFillOrStroke(fillOrStroke) {
   return fillOrStroke != null && fillOrStroke !== 'none';
 }

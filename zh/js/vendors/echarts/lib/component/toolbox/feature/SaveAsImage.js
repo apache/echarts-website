@@ -45,6 +45,7 @@ import { __extends } from "tslib";
 /* global window, Uint8Array, document */
 import env from 'zrender/lib/core/env.js';
 import { ToolboxFeature } from '../featureManager.js';
+import tokens from '../../../visual/tokens.js';
 var SaveAsImage = /** @class */function (_super) {
   __extends(SaveAsImage, _super);
   function SaveAsImage() {
@@ -57,7 +58,7 @@ var SaveAsImage = /** @class */function (_super) {
     var type = isSvg ? 'svg' : model.get('type', true) || 'png';
     var url = api.getConnectedDataURL({
       type: type,
-      backgroundColor: model.get('backgroundColor', true) || ecModel.get('backgroundColor') || '#fff',
+      backgroundColor: model.get('backgroundColor', true) || ecModel.get('backgroundColor') || tokens.color.neutral00,
       connectedBackgroundColor: model.get('connectedBackgroundColor'),
       excludeComponents: model.get('excludeComponents'),
       pixelRatio: model.get('pixelRatio')
@@ -131,7 +132,7 @@ var SaveAsImage = /** @class */function (_super) {
       type: 'png',
       // Default use option.backgroundColor
       // backgroundColor: '#fff',
-      connectedBackgroundColor: '#fff',
+      connectedBackgroundColor: tokens.color.neutral00,
       name: '',
       excludeComponents: ['toolbox'],
       // use current pixel ratio of device by default

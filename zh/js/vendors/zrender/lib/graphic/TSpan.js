@@ -1,9 +1,9 @@
 import { __extends } from "tslib";
 import Displayable from './Displayable.js';
-import { getBoundingRect } from '../contain/text.js';
 import { DEFAULT_PATH_STYLE } from './Path.js';
 import { createObject, defaults } from '../core/util.js';
 import { DEFAULT_FONT } from '../core/platform.js';
+import { tSpanCreateBoundingRect, tSpanHasStroke } from './helper/parseText.js';
 export var DEFAULT_TSPAN_STYLE = defaults({
     strokeFirst: true,
     font: DEFAULT_FONT,
@@ -19,9 +19,7 @@ var TSpan = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     TSpan.prototype.hasStroke = function () {
-        var style = this.style;
-        var stroke = style.stroke;
-        return stroke != null && stroke !== 'none' && style.lineWidth > 0;
+        return tSpanHasStroke(this.style);
     };
     TSpan.prototype.hasFill = function () {
         var style = this.style;
@@ -35,21 +33,8 @@ var TSpan = (function (_super) {
         this._rect = rect;
     };
     TSpan.prototype.getBoundingRect = function () {
-        var style = this.style;
         if (!this._rect) {
-            var text = style.text;
-            text != null ? (text += '') : (text = '');
-            var rect = getBoundingRect(text, style.font, style.textAlign, style.textBaseline);
-            rect.x += style.x || 0;
-            rect.y += style.y || 0;
-            if (this.hasStroke()) {
-                var w = style.lineWidth;
-                rect.x -= w / 2;
-                rect.y -= w / 2;
-                rect.width += w;
-                rect.height += w;
-            }
-            this._rect = rect;
+            this._rect = tSpanCreateBoundingRect(this.style);
         }
         return this._rect;
     };

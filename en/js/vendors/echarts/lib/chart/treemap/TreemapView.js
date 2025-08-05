@@ -334,6 +334,7 @@ var TreemapView = /** @class */function (_super) {
     }, this)).start();
   };
   TreemapView.prototype._resetController = function (api) {
+    var _this = this;
     var controller = this._controller;
     var controllerHost = this._controllerHost;
     if (!controllerHost) {
@@ -342,19 +343,30 @@ var TreemapView = /** @class */function (_super) {
       };
       controllerHost = this._controllerHost;
     }
+    var seriesModel = this.seriesModel;
     // Init controller.
     if (!controller) {
       controller = this._controller = new RoamController(api.getZr());
-      controller.enable(this.seriesModel.get('roam'));
-      controllerHost.zoomLimit = this.seriesModel.get('scaleLimit');
-      controllerHost.zoom = this.seriesModel.get('zoom');
       controller.on('pan', bind(this._onPan, this));
       controller.on('zoom', bind(this._onZoom, this));
     }
-    var rect = new BoundingRect(0, 0, api.getWidth(), api.getHeight());
-    controller.setPointerChecker(function (e, x, y) {
-      return rect.contain(x, y);
+    controller.enable(seriesModel.get('roam'), {
+      api: api,
+      zInfo: {
+        component: seriesModel
+      },
+      triggerInfo: {
+        roamTrigger: seriesModel.get('roamTrigger'),
+        isInSelf: function (e, x, y) {
+          var containerGroup = _this._containerGroup;
+          return containerGroup
+          // Currently only x, y exist in tranform.
+          ? containerGroup.getBoundingRect().contain(x - containerGroup.x, y - containerGroup.y) : false;
+        }
+      }
     });
+    controllerHost.zoomLimit = seriesModel.get('scaleLimit');
+    controllerHost.zoom = seriesModel.get('zoom');
   };
   TreemapView.prototype._clearController = function () {
     var controller = this._controller;
@@ -524,13 +536,12 @@ var TreemapView = /** @class */function (_super) {
     });
   };
   /**
-   * @public
-   * @param {number} x Global coord x.
-   * @param {number} y Global coord y.
-   * @return {Object} info If not found, return undefined;
-   * @return {number} info.node Target node.
-   * @return {number} info.offsetX x refer to target node.
-   * @return {number} info.offsetY y refer to target node.
+   * @param x Global coord x.
+   * @param y Global coord y.
+   * @return info If not found, return undefined;
+   * @return info.node Target node.
+   * @return info.offsetX x refer to target node.
+   * @return info.offsetY y refer to target node.
    */
   TreemapView.prototype.findTarget = function (x, y) {
     var targetInfo;
@@ -561,9 +572,6 @@ var TreemapView = /** @class */function (_super) {
   TreemapView.type = 'treemap';
   return TreemapView;
 }(ChartView);
-/**
- * @inner
- */
 function createStorage() {
   return {
     nodeGroup: [],
@@ -572,7 +580,6 @@ function createStorage() {
   };
 }
 /**
- * @inner
  * @return Return undefined means do not travel further.
  */
 function renderNode(seriesModel, thisStorage, oldStorage, reRoot, lastsForAnimation, willInvisibleEls, thisNode, oldNode, parentGroup, depth) {

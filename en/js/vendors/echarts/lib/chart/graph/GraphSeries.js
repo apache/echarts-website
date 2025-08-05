@@ -52,6 +52,7 @@ import SeriesModel from '../../model/Series.js';
 import { createTooltipMarkup } from '../../component/tooltip/tooltipMarkup.js';
 import { defaultSeriesFormatTooltip } from '../../component/tooltip/seriesFormatTooltip.js';
 import { initCurvenessList, createEdgeMapForCurveness } from '../helper/multipleGraphEdgeHelper.js';
+import tokens from '../../visual/tokens.js';
 var GraphSeriesModel = /** @class */function (_super) {
   __extends(GraphSeriesModel, _super);
   function GraphSeriesModel() {
@@ -254,7 +255,8 @@ var GraphSeriesModel = /** @class */function (_super) {
     },
     itemStyle: {},
     lineStyle: {
-      color: '#aaa',
+      // Don't use tokens.color.border because of the opacity
+      color: tokens.color.neutral50,
       width: 1,
       opacity: 0.5
     },
@@ -266,7 +268,7 @@ var GraphSeriesModel = /** @class */function (_super) {
     },
     select: {
       itemStyle: {
-        borderColor: '#212121'
+        borderColor: tokens.color.primary
       }
     }
   };

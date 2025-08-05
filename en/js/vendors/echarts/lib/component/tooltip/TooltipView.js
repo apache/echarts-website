@@ -309,15 +309,20 @@ var TooltipView = /** @class */function (_super) {
       var seriesDispatcher_1;
       var cmptDispatcher_1;
       findEventDispatcher(el, function (target) {
+        if (target.tooltipDisabled) {
+          seriesDispatcher_1 = cmptDispatcher_1 = null;
+          return true;
+        }
+        if (seriesDispatcher_1 || cmptDispatcher_1) {
+          return;
+        }
         // Always show item tooltip if mouse is on the element with dataIndex
         if (getECData(target).dataIndex != null) {
           seriesDispatcher_1 = target;
-          return true;
         }
         // Tooltip provided directly. Like legend.
-        if (getECData(target).tooltipConfig != null) {
+        else if (getECData(target).tooltipConfig != null) {
           cmptDispatcher_1 = target;
-          return true;
         }
       }, true);
       if (seriesDispatcher_1) {
@@ -363,6 +368,9 @@ var TooltipView = /** @class */function (_super) {
         if (!axisModel || axisValue == null) {
           return;
         }
+        // FIXME: when using `tooltip.trigger: 'axis'`, the precision of the axis value displayed in tooltip
+        //  should match the original series values rather than using the default stretegy in Interval.ts
+        //  (getPrecision(interval) + 2); otherwise it may cuase confusion.
         var axisValueLabel = axisPointerViewHelper.getValueLabel(axisValue, axisModel.axis, ecModel, axisItem.seriesDataIndices, axisItem.valueLabelOpt);
         var axisSectionMarkup = createTooltipMarkup('section', {
           header: axisValueLabel,
@@ -544,7 +552,7 @@ var TooltipView = /** @class */function (_super) {
     var formatter = tooltipModel.get('formatter');
     positionExpr = positionExpr || tooltipModel.get('position');
     var html = defaultHtml;
-    var nearPoint = this._getNearestPoint([x, y], params, tooltipModel.get('trigger'), tooltipModel.get('borderColor'));
+    var nearPoint = this._getNearestPoint([x, y], params, tooltipModel.get('trigger'), tooltipModel.get('borderColor'), tooltipModel.get('defaultBorderColor', true));
     var nearPointColor = nearPoint.color;
     if (formatter) {
       if (isString(formatter)) {
@@ -573,10 +581,10 @@ var TooltipView = /** @class */function (_super) {
     tooltipContent.show(tooltipModel, nearPointColor);
     this._updatePosition(tooltipModel, positionExpr, x, y, tooltipContent, params, el);
   };
-  TooltipView.prototype._getNearestPoint = function (point, tooltipDataParams, trigger, borderColor) {
+  TooltipView.prototype._getNearestPoint = function (point, tooltipDataParams, trigger, borderColor, defaultBorderColor) {
     if (trigger === 'axis' || isArray(tooltipDataParams)) {
       return {
-        color: borderColor || (this._renderMode === 'html' ? '#fff' : 'none')
+        color: borderColor || defaultBorderColor
       };
     }
     if (!isArray(tooltipDataParams)) {

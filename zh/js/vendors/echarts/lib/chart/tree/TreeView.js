@@ -51,11 +51,11 @@ import * as bbox from 'zrender/lib/core/bbox.js';
 import View from '../../coord/View.js';
 import * as roamHelper from '../../component/helper/roamHelper.js';
 import RoamController from '../../component/helper/RoamController.js';
-import { onIrrelevantElement } from '../../component/helper/cursorHelper.js';
 import { parsePercent } from '../../util/number.js';
 import ChartView from '../../view/Chart.js';
 import Path from 'zrender/lib/graphic/Path.js';
 import { setStatesStylesFromModel, setStatesFlag, setDefaultStateProxy, HOVER_STATE_BLUR } from '../../util/states.js';
+import tokens from '../../visual/tokens.js';
 var TreeEdgeShape = /** @class */function () {
   function TreeEdgeShape() {
     this.parentPoint = [];
@@ -70,7 +70,7 @@ var TreePath = /** @class */function (_super) {
   }
   TreePath.prototype.getDefaultStyle = function () {
     return {
-      stroke: '#000',
+      stroke: tokens.color.neutral99,
       fill: null
     };
   };
@@ -140,7 +140,7 @@ var TreeView = /** @class */function (_super) {
       group.y = layoutInfo.y;
     }
     this._updateViewCoordSys(seriesModel, api);
-    this._updateController(seriesModel, ecModel, api);
+    this._updateController(seriesModel, null, ecModel, api);
     var oldData = this._data;
     data.diff(oldData).add(function (newIdx) {
       if (symbolNeedsDraw(data, newIdx)) {
@@ -206,12 +206,16 @@ var TreeView = /** @class */function (_super) {
       min[1] = oldMin ? oldMin[1] : min[1] - 1;
       max[1] = oldMax ? oldMax[1] : max[1] + 1;
     }
-    var viewCoordSys = seriesModel.coordinateSystem = new View();
+    var viewCoordSys = seriesModel.coordinateSystem = new View(null, {
+      api: api,
+      ecModel: seriesModel.ecModel
+    });
     viewCoordSys.zoomLimit = seriesModel.get('scaleLimit');
     viewCoordSys.setBoundingRect(min[0], min[1], max[0] - min[0], max[1] - min[1]);
-    viewCoordSys.setCenter(seriesModel.get('center'), api);
+    viewCoordSys.setCenter(seriesModel.get('center'));
     viewCoordSys.setZoom(seriesModel.get('zoom'));
-    // Here we use viewCoordSys just for computing the 'position' and 'scale' of the group
+    // Here we use viewCoordSys just for computing the 'position' and 'scale' of the group,
+    // and 'treeRoam' action.
     this.group.attr({
       x: viewCoordSys.x,
       y: viewCoordSys.y,
@@ -221,39 +225,11 @@ var TreeView = /** @class */function (_super) {
     this._min = min;
     this._max = max;
   };
-  TreeView.prototype._updateController = function (seriesModel, ecModel, api) {
+  TreeView.prototype._updateController = function (seriesModel, clipRect, ecModel, api) {
     var _this = this;
-    var controller = this._controller;
-    var controllerHost = this._controllerHost;
-    var group = this.group;
-    controller.setPointerChecker(function (e, x, y) {
-      var rect = group.getBoundingRect();
-      rect.applyTransform(group.transform);
-      return rect.contain(x, y) && !onIrrelevantElement(e, api, seriesModel);
-    });
-    controller.enable(seriesModel.get('roam'));
-    controllerHost.zoomLimit = seriesModel.get('scaleLimit');
-    controllerHost.zoom = seriesModel.coordinateSystem.getZoom();
-    controller.off('pan').off('zoom').on('pan', function (e) {
-      roamHelper.updateViewOnPan(controllerHost, e.dx, e.dy);
-      api.dispatchAction({
-        seriesId: seriesModel.id,
-        type: 'treeRoam',
-        dx: e.dx,
-        dy: e.dy
-      });
-    }).on('zoom', function (e) {
-      roamHelper.updateViewOnZoom(controllerHost, e.scale, e.originX, e.originY);
-      api.dispatchAction({
-        seriesId: seriesModel.id,
-        type: 'treeRoam',
-        zoom: e.scale,
-        originX: e.originX,
-        originY: e.originY
-      });
+    roamHelper.updateController(seriesModel, api, this.group, this._controller, this._controllerHost, clipRect);
+    this._controller.on('zoom', function (e) {
       _this._updateNodeAndLinkScale(seriesModel);
-      // Only update label layout on zoom
-      api.updateLabelLayout();
     });
   };
   TreeView.prototype._updateNodeAndLinkScale = function (seriesModel) {
@@ -295,7 +271,7 @@ function updateNode(data, dataIndex, symbolEl, group, seriesModel) {
   var node = data.tree.getNodeByDataIndex(dataIndex);
   var itemModel = node.getModel();
   var visualColor = node.getVisual('style').fill;
-  var symbolInnerColor = node.isExpand === false && node.children.length !== 0 ? visualColor : '#fff';
+  var symbolInnerColor = node.isExpand === false && node.children.length !== 0 ? visualColor : tokens.color.neutral00;
   var virtualRoot = data.tree.root;
   var source = node.parentNode === virtualRoot ? node : node.parentNode || node;
   var sourceSymbolEl = data.getItemGraphicEl(source.dataIndex);

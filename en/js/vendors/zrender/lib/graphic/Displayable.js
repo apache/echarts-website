@@ -58,7 +58,7 @@ var Displayable = (function (_super) {
             || (m && !m[0] && !m[3])) {
             return false;
         }
-        if (considerClipPath && this.__clipPaths) {
+        if (considerClipPath && this.__clipPaths && this.__clipPaths.length) {
             for (var i = 0; i < this.__clipPaths.length; ++i) {
                 if (this.__clipPaths[i].isZeroArea()) {
                     return false;

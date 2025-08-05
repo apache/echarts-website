@@ -48,7 +48,6 @@ import BrushController from '../helper/BrushController.js';
 import * as brushHelper from '../helper/brushHelper.js';
 import * as graphic from '../../util/graphic.js';
 import ComponentView from '../../view/Component.js';
-var elementList = ['axisLine', 'axisTickLabel', 'axisName'];
 var ParallelAxisView = /** @class */function (_super) {
   __extends(ParallelAxisView, _super);
   function ParallelAxisView() {
@@ -82,9 +81,9 @@ var ParallelAxisView = /** @class */function (_super) {
     var builderOpt = zrUtil.extend({
       strokeContainThreshold: areaWidth
     }, axisLayout);
-    var axisBuilder = new AxisBuilder(axisModel, builderOpt);
-    zrUtil.each(elementList, axisBuilder.add, axisBuilder);
-    this._axisGroup.add(axisBuilder.getGroup());
+    var axisBuilder = new AxisBuilder(axisModel, api, builderOpt);
+    axisBuilder.build();
+    this._axisGroup.add(axisBuilder.group);
     this._refreshBrushController(builderOpt, areaSelectStyle, axisModel, coordSysModel, areaWidth, api);
     graphic.groupTransition(oldAxisGroup, this._axisGroup, axisModel);
   };

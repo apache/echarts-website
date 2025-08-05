@@ -1,7 +1,16 @@
 import BoundingRect from 'zrender/lib/core/BoundingRect.js';
-import { BoxLayoutOptionMixin, ComponentLayoutMode } from './types.js';
+import { BoxLayoutOptionMixin, CircleLayoutOptionMixin, NullUndefined, ComponentLayoutMode, SeriesOption, PreserveAspectMixin, ComponentOption } from './types.js';
 import Group from 'zrender/lib/graphic/Group.js';
+import { SectorShape } from 'zrender/lib/graphic/shape/Sector.js';
 import Element from 'zrender/lib/Element.js';
+import ExtensionAPI from '../core/ExtensionAPI.js';
+import { BoxCoordinateSystemCoordFrom } from '../core/CoordinateSystem.js';
+import SeriesModel from '../model/Series.js';
+import type Model from '../model/Model.js';
+import type ComponentModel from '../model/Component.js';
+/**
+ * @see {getLayoutRect}
+ */
 export interface LayoutRect extends BoundingRect {
     margin: number[];
 }
@@ -42,21 +51,23 @@ export declare const vbox: (group: Group, gap: number, maxWidth?: number, maxHei
  * @param {number} [height=Infinity]
  */
 export declare const hbox: (group: Group, gap: number, maxWidth?: number, maxHeight?: number) => void;
-/**
- * If x or x2 is not specified or 'center' 'left' 'right',
- * the width would be as long as possible.
- * If y or y2 is not specified or 'middle' 'top' 'bottom',
- * the height would be as long as possible.
- */
-export declare function getAvailableSize(positionInfo: {
-    left?: number | string;
-    top?: number | string;
-    right?: number | string;
-    bottom?: number | string;
-}, containerRect: {
-    width: number;
-    height: number;
-}, margin?: number[] | number): {
+export declare function getBoxLayoutParams(boxLayoutModel: Model<BoxLayoutOptionMixin>, ignoreParent: boolean): {
+    left: import("./types").PositionSizeOption;
+    top: import("./types").PositionSizeOption;
+    right: import("./types").PositionSizeOption;
+    bottom: import("./types").PositionSizeOption;
+    width: import("./types").PositionSizeOption;
+    height: import("./types").PositionSizeOption;
+};
+declare type CircleLayoutSeriesOption = SeriesOption & CircleLayoutOptionMixin<{
+    centerExtra: string | number;
+}>;
+export declare function getCircleLayout<TOption extends CircleLayoutSeriesOption>(seriesModel: SeriesModel<TOption>, api: ExtensionAPI): Pick<SectorShape, 'cx' | 'cy' | 'r' | 'r0'> & {
+    viewRect: LayoutRect;
+};
+declare type GetLayoutRectInputContainerRect = {
+    x?: number;
+    y?: number;
     width: number;
     height: number;
 };
@@ -65,10 +76,44 @@ export declare function getAvailableSize(positionInfo: {
  */
 export declare function getLayoutRect(positionInfo: BoxLayoutOptionMixin & {
     aspect?: number;
-}, containerRect: {
-    width: number;
-    height: number;
-}, margin?: number | number[]): LayoutRect;
+}, containerRect: GetLayoutRectInputContainerRect, margin?: number | number[]): LayoutRect;
+/**
+ * PENDING:
+ *  when preserveAspect: 'cover' and aspect is near Infinity
+ *  or when preserveAspect: 'contain' and aspect is near 0,
+ *  the result width or height is near Inifity. It's logically correct,
+ *  Therefore currently we do not handle it, until bad cases arise.
+ */
+export declare function applyPreserveAspect(component: ComponentModel<ComponentOption & PreserveAspectMixin>, layoutRect: LayoutRect, aspect: number): LayoutRect;
+declare type CreateBoxLayoutReferenceOpt<TEnableByCenter extends boolean = false> = {
+    enableLayoutOnlyByCenter?: TEnableByCenter;
+};
+export declare const BoxLayoutReferenceType: {
+    readonly rect: 1;
+    readonly point: 2;
+};
+export declare type BoxLayoutReferenceType = (typeof BoxLayoutReferenceType)[keyof typeof BoxLayoutReferenceType];
+export declare type BoxLayoutReferenceResult<TEnableByCenter extends boolean = false> = TEnableByCenter extends true ? (BoxLayoutReferenceRectResult | BoxLayoutReferencePointResult) : BoxLayoutReferenceRectResult;
+declare type BoxLayoutReferenceRectResult = {
+    type: typeof BoxLayoutReferenceType.rect;
+    refContainer: LayoutRect;
+    refPoint: number[];
+    boxCoordFrom: BoxCoordinateSystemCoordFrom | NullUndefined;
+};
+declare type BoxLayoutReferencePointResult = {
+    type: typeof BoxLayoutReferenceType.point;
+    refPoint: number[];
+    boxCoordFrom: BoxCoordinateSystemCoordFrom | NullUndefined;
+};
+/**
+ * Uniformly calculate layout reference (rect or center) based on either:
+ *  - viewport:
+ *      - Get `refContainer` as `{x: 0, y: 0, width: api.getWidth(), height: api.getHeight()}`
+ *  - coordinate system, which can serve in several ways:
+ *      - Use `dataToPoint` to get the `refPoint`, such as, in cartesian2d coord sys.
+ *      - Use `dataToLayout` to get the `refContainer`, such as, in matrix coord sys.
+ */
+export declare function createBoxLayoutReference<TEnableByCenter extends boolean = false>(model: ComponentModel, api: ExtensionAPI, opt?: CreateBoxLayoutReferenceOpt<TEnableByCenter>): BoxLayoutReferenceResult<TEnableByCenter>;
 /**
  * Position a zr element in viewport
  *  Group position is specified by either
@@ -109,10 +154,7 @@ export declare function getLayoutRect(positionInfo: BoxLayoutOptionMixin & {
  *               container. (Consider a rotated circle needs to be located in a corner.)
  *               In this mode positionInfo.width/height can only be number.
  */
-export declare function positionElement(el: Element, positionInfo: BoxLayoutOptionMixin, containerRect: {
-    width: number;
-    height: number;
-}, margin?: number[] | number, opt?: {
+export declare function positionElement(el: Element, positionInfo: BoxLayoutOptionMixin, containerRect: GetLayoutRectInputContainerRect, margin?: number[] | number, opt?: {
     hv: [1 | 0 | boolean, 1 | 0 | boolean];
     boundingMode: 'all' | 'raw';
 }, out?: {

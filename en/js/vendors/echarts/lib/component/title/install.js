@@ -46,10 +46,11 @@ import * as zrUtil from 'zrender/lib/core/util.js';
 import * as graphic from '../../util/graphic.js';
 import { getECData } from '../../util/innerStore.js';
 import { createTextStyle } from '../../label/labelStyle.js';
-import { getLayoutRect } from '../../util/layout.js';
+import { createBoxLayoutReference, getLayoutRect } from '../../util/layout.js';
 import ComponentModel from '../../model/Component.js';
 import ComponentView from '../../view/Component.js';
 import { windowOpen } from '../../util/format.js';
+import tokens from '../../visual/tokens.js';
 var TitleModel = /** @class */function (_super) {
   __extends(TitleModel, _super);
   function TitleModel() {
@@ -70,21 +71,21 @@ var TitleModel = /** @class */function (_super) {
     target: 'blank',
     subtext: '',
     subtarget: 'blank',
-    left: 0,
-    top: 0,
-    backgroundColor: 'rgba(0,0,0,0)',
-    borderColor: '#ccc',
+    left: 'center',
+    top: tokens.size.m,
+    backgroundColor: tokens.color.transparent,
+    borderColor: tokens.color.primary,
     borderWidth: 0,
     padding: 5,
     itemGap: 10,
     textStyle: {
       fontSize: 18,
       fontWeight: 'bold',
-      color: '#464646'
+      color: tokens.color.primary
     },
     subtextStyle: {
       fontSize: 12,
-      color: '#6E7079'
+      color: tokens.color.quaternary
     }
   };
   return TitleModel;
@@ -155,10 +156,8 @@ var TitleView = /** @class */function (_super) {
     var layoutOption = titleModel.getBoxLayoutParams();
     layoutOption.width = groupRect.width;
     layoutOption.height = groupRect.height;
-    var layoutRect = getLayoutRect(layoutOption, {
-      width: api.getWidth(),
-      height: api.getHeight()
-    }, titleModel.get('padding'));
+    var layoutRef = createBoxLayoutReference(titleModel, api);
+    var layoutRect = getLayoutRect(layoutOption, layoutRef.refContainer, titleModel.get('padding'));
     // Adjust text align based on position
     if (!textAlign) {
       // Align left if title is on the left. center and right is same

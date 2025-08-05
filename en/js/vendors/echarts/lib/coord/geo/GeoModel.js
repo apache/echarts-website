@@ -48,6 +48,7 @@ import ComponentModel from '../../model/Component.js';
 import Model from '../../model/Model.js';
 import geoCreator from './geoCreator.js';
 import geoSourceManager from './geoSourceManager.js';
+import tokens from '../../visual/tokens.js';
 ;
 var GeoModel = /** @class */function (_super) {
   __extends(GeoModel, _super);
@@ -57,14 +58,14 @@ var GeoModel = /** @class */function (_super) {
     return _this;
   }
   GeoModel.prototype.init = function (option, parentModel, ecModel) {
+    this.mergeDefaultAndTheme(option, ecModel);
     var source = geoSourceManager.getGeoResource(option.map);
     if (source && source.type === 'geoJSON') {
       var itemStyle = option.itemStyle = option.itemStyle || {};
       if (!('color' in itemStyle)) {
-        itemStyle.color = '#eee';
+        itemStyle.color = option.defaultItemStyleColor || tokens.color.backgroundTint;
       }
     }
-    this.mergeDefaultAndTheme(option, ecModel);
     // Default label emphasis `show`
     modelUtil.defaultEmphasis(option, 'label', ['show']);
   };
@@ -172,32 +173,28 @@ var GeoModel = /** @class */function (_super) {
     // selectedMode: false
     label: {
       show: false,
-      color: '#000'
+      color: tokens.color.tertiary
     },
     itemStyle: {
       borderWidth: 0.5,
-      borderColor: '#444'
-      // Default color:
-      // + geoJSON: #eee
-      // + geoSVG: null (use SVG original `fill`)
-      // color: '#eee'
+      borderColor: tokens.color.border
     },
     emphasis: {
       label: {
         show: true,
-        color: 'rgb(100,0,0)'
+        color: tokens.color.primary
       },
       itemStyle: {
-        color: 'rgba(255,215,0,0.8)'
+        color: tokens.color.highlight
       }
     },
     select: {
       label: {
         show: true,
-        color: 'rgb(100,0,0)'
+        color: tokens.color.primary
       },
       itemStyle: {
-        color: 'rgba(255,215,0,0.8)'
+        color: tokens.color.highlight
       }
     },
     regions: []

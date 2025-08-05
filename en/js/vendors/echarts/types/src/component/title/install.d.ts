@@ -1,5 +1,8 @@
 import { ComponentOption, BoxLayoutOptionMixin, ZRTextAlign, ZRTextVerticalAlign, ZRColor, BorderOptionMixin, LabelOption } from '../../util/types.js';
 import { EChartsExtensionInstallRegisters } from '../../extension.js';
+interface TitleTextStyleOption extends LabelOption {
+    width?: number;
+}
 export interface TitleOption extends ComponentOption, BoxLayoutOptionMixin, BorderOptionMixin {
     mainType?: 'title';
     show?: boolean;
@@ -28,8 +31,8 @@ export interface TitleOption extends ComponentOption, BoxLayoutOptionMixin, Bord
      * Gap between text and subtext
      */
     itemGap?: number;
-    textStyle?: LabelOption;
-    subtextStyle?: LabelOption;
+    textStyle?: TitleTextStyleOption;
+    subtextStyle?: TitleTextStyleOption;
     /**
      * If trigger mouse or touch event
      */
@@ -40,3 +43,4 @@ export interface TitleOption extends ComponentOption, BoxLayoutOptionMixin, Bord
     borderRadius?: number | number[];
 }
 export declare function install(registers: EChartsExtensionInstallRegisters): void;
+export {};

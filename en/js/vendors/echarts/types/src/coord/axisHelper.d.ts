@@ -1,9 +1,8 @@
 import Scale from '../scale/Scale.js';
-import BoundingRect from 'zrender/lib/core/BoundingRect.js';
 import Model from '../model/Model.js';
 import { AxisBaseModel } from './AxisBaseModel.js';
-import Axis from './Axis.js';
-import { AxisBaseOption } from './axisCommonTypes.js';
+import type Axis from './Axis.js';
+import { AxisBaseOption, CategoryAxisBaseOption, AxisBaseOptionCommon } from './axisCommonTypes.js';
 import SeriesData from '../data/SeriesData.js';
 import { DimensionName, ScaleTick } from '../util/types.js';
 /**
@@ -38,17 +37,12 @@ export declare function ifAxisCrossZero(axis: Axis): boolean;
  *         return: {string} label string.
  */
 export declare function makeLabelFormatter(axis: Axis): (tick: ScaleTick, idx?: number) => string;
-export declare function getAxisRawValue(axis: Axis, tick: ScaleTick): number | string;
-/**
- * @param axis
- * @return Be null/undefined if no labels.
- */
-export declare function estimateLabelUnionRect(axis: Axis): BoundingRect;
+export declare function getAxisRawValue<TIsCategory extends boolean>(axis: Axis, tick: ScaleTick): TIsCategory extends true ? string : number;
 /**
  * @param model axisLabelModel or axisTickModel
  * @return {number|String} Can be null|'auto'|number|function
  */
-export declare function getOptionCategoryInterval(model: Model<AxisBaseOption['axisLabel']>): number | "auto" | ((index: number, value: string) => boolean);
+export declare function getOptionCategoryInterval(model: Model<AxisBaseOption['axisLabel']>): CategoryAxisBaseOption['axisLabel']['interval'];
 /**
  * Set `categoryInterval` as 0 implicitly indicates that
  * show all labels regardless of overlap.
@@ -57,3 +51,6 @@ export declare function getOptionCategoryInterval(model: Model<AxisBaseOption['a
 export declare function shouldShowAllLabels(axis: Axis): boolean;
 export declare function getDataDimensionsOnAxis(data: SeriesData, axisDim: string): DimensionName[];
 export declare function unionAxisExtentFromData(dataExtent: number[], data: SeriesData, axisDim: string): void;
+export declare function isNameLocationCenter(nameLocation: AxisBaseOptionCommon['nameLocation']): boolean;
+export declare function shouldAxisShow(axisModel: AxisBaseModel): boolean;
+export declare function retrieveAxisBreaksOption(model: AxisBaseModel): AxisBaseOptionCommon['breaks'];

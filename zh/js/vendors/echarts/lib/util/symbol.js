@@ -47,6 +47,7 @@ import * as graphic from './graphic.js';
 import BoundingRect from 'zrender/lib/core/BoundingRect.js';
 import { calculateTextPosition } from 'zrender/lib/contain/text.js';
 import { parsePercent } from './number.js';
+import tokens from '../visual/tokens.js';
 /**
  * Triangle shape
  * @inner
@@ -271,7 +272,7 @@ function symbolPathSetColor(color, innerColor) {
     var symbolStyle = this.style;
     if (this.__isEmptyBrush) {
       symbolStyle.stroke = color;
-      symbolStyle.fill = innerColor || '#fff';
+      symbolStyle.fill = innerColor || tokens.color.neutral00;
       // TODO Same width with lineStyle in LineView
       symbolStyle.lineWidth = 2;
     } else if (this.shape.symbolType === 'line') {

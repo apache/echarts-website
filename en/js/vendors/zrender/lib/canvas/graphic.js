@@ -108,7 +108,7 @@ function brushPath(ctx, el, style, inBatch) {
             strokePattern = (dirtyFlag || !el.__canvasStrokePattern)
                 ? createCanvasPattern(ctx, stroke, el)
                 : el.__canvasStrokePattern;
-            el.__canvasStrokePattern = fillPattern;
+            el.__canvasStrokePattern = strokePattern;
         }
         if (hasFillGradient) {
             ctx.fillStyle = fillGradient;

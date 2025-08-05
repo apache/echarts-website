@@ -47,6 +47,7 @@ import Eventful from 'zrender/lib/core/Eventful.js';
 import * as graphic from '../../util/graphic.js';
 import * as interactionMutex from './interactionMutex.js';
 import DataDiffer from '../../data/DataDiffer.js';
+import tokens from '../../visual/tokens.js';
 var BRUSH_PANEL_GLOBAL = true;
 var mathMin = Math.min;
 var mathMax = Math.max;
@@ -74,8 +75,8 @@ var CURSOR_MAP = {
 var DEFAULT_BRUSH_OPT = {
   brushStyle: {
     lineWidth: 2,
-    stroke: 'rgba(210,219,238,0.3)',
-    fill: '#D2DBEE'
+    stroke: tokens.color.backgroundTint,
+    fill: tokens.color.borderTint
   },
   transformable: true,
   brushMode: 'single',

@@ -61,12 +61,13 @@ import { __extends } from "tslib";
 // (2) By default, the input data string (e.g., '2011-01-02') should be displayed
 // as its original time, without any time difference.
 import * as numberUtil from '../util/number.js';
-import { ONE_SECOND, ONE_MINUTE, ONE_HOUR, ONE_DAY, ONE_YEAR, format, leveledFormat, getUnitValue, timeUnits, fullLeveledFormatter, getPrimaryTimeUnit, isPrimaryTimeUnit, getDefaultFormatPrecisionOfInterval, fullYearGetterName, monthSetterName, fullYearSetterName, dateSetterName, hoursGetterName, hoursSetterName, minutesSetterName, secondsSetterName, millisecondsSetterName, monthGetterName, dateGetterName, minutesGetterName, secondsGetterName, millisecondsGetterName } from '../util/time.js';
+import { ONE_SECOND, ONE_MINUTE, ONE_HOUR, ONE_DAY, ONE_YEAR, format, leveledFormat, timeUnits, fullLeveledFormatter, getPrimaryTimeUnit, isPrimaryTimeUnit, getDefaultFormatPrecisionOfInterval, fullYearGetterName, monthSetterName, fullYearSetterName, dateSetterName, hoursGetterName, hoursSetterName, minutesSetterName, secondsSetterName, millisecondsSetterName, monthGetterName, dateGetterName, minutesGetterName, secondsGetterName, millisecondsGetterName, getUnitFromValue, primaryTimeUnits, roundTime } from '../util/time.js';
 import * as scaleHelper from './helper.js';
 import IntervalScale from './Interval.js';
 import Scale from './Scale.js';
 import { warn } from '../util/log.js';
-import { filter, isNumber, map } from 'zrender/lib/core/util.js';
+import { each, filter, indexOf, isNumber, map } from 'zrender/lib/core/util.js';
+import { getScaleBreakHelper } from './break.js';
 // FIXME 公用？
 var bisect = function (a, x, lo, hi) {
   while (lo < hi) {
@@ -101,29 +102,77 @@ var TimeScale = /** @class */function (_super) {
   /**
    * @override
    */
-  TimeScale.prototype.getTicks = function () {
+  TimeScale.prototype.getTicks = function (opt) {
+    opt = opt || {};
     var interval = this._interval;
     var extent = this._extent;
+    var scaleBreakHelper = getScaleBreakHelper();
     var ticks = [];
     // If interval is 0, return [];
     if (!interval) {
       return ticks;
     }
+    var useUTC = this.getSetting('useUTC');
+    if (scaleBreakHelper && opt.breakTicks === 'only_break') {
+      getScaleBreakHelper().addBreaksToTicks(ticks, this._brkCtx.breaks, this._extent);
+      return ticks;
+    }
+    var extent0Unit = getUnitFromValue(extent[1], useUTC);
     ticks.push({
       value: extent[0],
-      level: 0
+      time: {
+        level: 0,
+        upperTimeUnit: extent0Unit,
+        lowerTimeUnit: extent0Unit
+      }
     });
-    var useUTC = this.getSetting('useUTC');
-    var innerTicks = getIntervalTicks(this._minLevelUnit, this._approxInterval, useUTC, extent);
+    var innerTicks = getIntervalTicks(this._minLevelUnit, this._approxInterval, useUTC, extent, this._getExtentSpanWithBreaks(), this._brkCtx);
     ticks = ticks.concat(innerTicks);
+    var extent1Unit = getUnitFromValue(extent[1], useUTC);
     ticks.push({
       value: extent[1],
-      level: 0
+      time: {
+        level: 0,
+        upperTimeUnit: extent1Unit,
+        lowerTimeUnit: extent1Unit
+      }
     });
+    var isUTC = this.getSetting('useUTC');
+    var upperUnitIndex = primaryTimeUnits.length - 1;
+    var maxLevel = 0;
+    each(ticks, function (tick) {
+      upperUnitIndex = Math.min(upperUnitIndex, indexOf(primaryTimeUnits, tick.time.upperTimeUnit));
+      maxLevel = Math.max(maxLevel, tick.time.level);
+    });
+    if (scaleBreakHelper) {
+      getScaleBreakHelper().pruneTicksByBreak(opt.pruneByBreak, ticks, this._brkCtx.breaks, function (item) {
+        return item.value;
+      }, this._approxInterval, this._extent);
+    }
+    if (scaleBreakHelper && opt.breakTicks !== 'none') {
+      getScaleBreakHelper().addBreaksToTicks(ticks, this._brkCtx.breaks, this._extent, function (trimmedBrk) {
+        // @see `parseTimeAxisLabelFormatterDictionary`.
+        var lowerBrkUnitIndex = Math.max(indexOf(primaryTimeUnits, getUnitFromValue(trimmedBrk.vmin, isUTC)), indexOf(primaryTimeUnits, getUnitFromValue(trimmedBrk.vmax, isUTC)));
+        var upperBrkUnitIndex = 0;
+        for (var unitIdx = 0; unitIdx < primaryTimeUnits.length; unitIdx++) {
+          if (!isPrimaryUnitValueAndGreaterSame(primaryTimeUnits[unitIdx], trimmedBrk.vmin, trimmedBrk.vmax, isUTC)) {
+            upperBrkUnitIndex = unitIdx;
+            break;
+          }
+        }
+        var upperIdx = Math.min(upperBrkUnitIndex, upperUnitIndex);
+        var lowerIdx = Math.max(upperIdx, lowerBrkUnitIndex);
+        return {
+          level: maxLevel,
+          lowerTimeUnit: primaryTimeUnits[lowerIdx],
+          upperTimeUnit: primaryTimeUnits[upperIdx]
+        };
+      });
+    }
     return ticks;
   };
   TimeScale.prototype.calcNiceExtent = function (opt) {
-    var extent = this._extent;
+    var extent = this.getExtent();
     // If extent start and end are same, expand them
     if (extent[0] === extent[1]) {
       // Expand extent
@@ -136,12 +185,12 @@ var TimeScale = /** @class */function (_super) {
       extent[1] = +new Date(d.getFullYear(), d.getMonth(), d.getDate());
       extent[0] = extent[1] - ONE_DAY;
     }
+    this._innerSetExtent(extent[0], extent[1]);
     this.calcNiceTicks(opt.splitNumber, opt.minInterval, opt.maxInterval);
   };
   TimeScale.prototype.calcNiceTicks = function (approxTickNum, minInterval, maxInterval) {
     approxTickNum = approxTickNum || 10;
-    var extent = this._extent;
-    var span = extent[1] - extent[0];
+    var span = this._getExtentSpanWithBreaks();
     this._approxInterval = span / approxTickNum;
     if (minInterval != null && this._approxInterval < minInterval) {
       this._approxInterval = minInterval;
@@ -153,6 +202,7 @@ var TimeScale = /** @class */function (_super) {
     var idx = Math.min(bisect(scaleIntervals, this._approxInterval, 0, scaleIntervalsLen), scaleIntervalsLen - 1);
     // Interval that can be used to calculate ticks
     this._interval = scaleIntervals[idx][1];
+    this._intervalPrecision = scaleHelper.getIntervalPrecision(this._interval);
     // Min level used when picking ticks from top down.
     // We check one more level to avoid the ticks are to sparse in some case.
     this._minLevelUnit = scaleIntervals[Math.max(idx - 1, 0)][0];
@@ -162,13 +212,13 @@ var TimeScale = /** @class */function (_super) {
     return isNumber(val) ? val : +numberUtil.parseDate(val);
   };
   TimeScale.prototype.contain = function (val) {
-    return scaleHelper.contain(this.parse(val), this._extent);
+    return scaleHelper.contain(val, this._extent);
   };
   TimeScale.prototype.normalize = function (val) {
-    return scaleHelper.normalize(this.parse(val), this._extent);
+    return this._calculator.normalize(val, this._extent);
   };
   TimeScale.prototype.scale = function (val) {
-    return scaleHelper.scale(val, this._extent);
+    return this._calculator.scale(val, this._extent);
   };
   TimeScale.type = 'time';
   return TimeScale;
@@ -183,53 +233,48 @@ var scaleIntervals = [
 // Format                           interval
 ['second', ONE_SECOND], ['minute', ONE_MINUTE], ['hour', ONE_HOUR], ['quarter-day', ONE_HOUR * 6], ['half-day', ONE_HOUR * 12], ['day', ONE_DAY * 1.2], ['half-week', ONE_DAY * 3.5], ['week', ONE_DAY * 7], ['month', ONE_DAY * 31], ['quarter', ONE_DAY * 95], ['half-year', ONE_YEAR / 2], ['year', ONE_YEAR] // 1Y
 ];
-function isUnitValueSame(unit, valueA, valueB, isUTC) {
-  var dateA = numberUtil.parseDate(valueA);
-  var dateB = numberUtil.parseDate(valueB);
-  var isSame = function (unit) {
-    return getUnitValue(dateA, unit, isUTC) === getUnitValue(dateB, unit, isUTC);
-  };
-  var isSameYear = function () {
-    return isSame('year');
-  };
-  // const isSameHalfYear = () => isSameYear() && isSame('half-year');
-  // const isSameQuater = () => isSameYear() && isSame('quarter');
-  var isSameMonth = function () {
-    return isSameYear() && isSame('month');
-  };
-  var isSameDay = function () {
-    return isSameMonth() && isSame('day');
-  };
-  // const isSameHalfDay = () => isSameDay() && isSame('half-day');
-  var isSameHour = function () {
-    return isSameDay() && isSame('hour');
-  };
-  var isSameMinute = function () {
-    return isSameHour() && isSame('minute');
-  };
-  var isSameSecond = function () {
-    return isSameMinute() && isSame('second');
-  };
-  var isSameMilliSecond = function () {
-    return isSameSecond() && isSame('millisecond');
-  };
-  switch (unit) {
-    case 'year':
-      return isSameYear();
-    case 'month':
-      return isSameMonth();
-    case 'day':
-      return isSameDay();
-    case 'hour':
-      return isSameHour();
-    case 'minute':
-      return isSameMinute();
-    case 'second':
-      return isSameSecond();
-    case 'millisecond':
-      return isSameMilliSecond();
-  }
+function isPrimaryUnitValueAndGreaterSame(unit, valueA, valueB, isUTC) {
+  return roundTime(new Date(valueA), unit, isUTC).getTime() === roundTime(new Date(valueB), unit, isUTC).getTime();
 }
+// function isUnitValueSame(
+//     unit: PrimaryTimeUnit,
+//     valueA: number,
+//     valueB: number,
+//     isUTC: boolean
+// ): boolean {
+//     const dateA = numberUtil.parseDate(valueA) as any;
+//     const dateB = numberUtil.parseDate(valueB) as any;
+//     const isSame = (unit: PrimaryTimeUnit) => {
+//         return getUnitValue(dateA, unit, isUTC)
+//             === getUnitValue(dateB, unit, isUTC);
+//     };
+//     const isSameYear = () => isSame('year');
+//     // const isSameHalfYear = () => isSameYear() && isSame('half-year');
+//     // const isSameQuater = () => isSameYear() && isSame('quarter');
+//     const isSameMonth = () => isSameYear() && isSame('month');
+//     const isSameDay = () => isSameMonth() && isSame('day');
+//     // const isSameHalfDay = () => isSameDay() && isSame('half-day');
+//     const isSameHour = () => isSameDay() && isSame('hour');
+//     const isSameMinute = () => isSameHour() && isSame('minute');
+//     const isSameSecond = () => isSameMinute() && isSame('second');
+//     const isSameMilliSecond = () => isSameSecond() && isSame('millisecond');
+//     switch (unit) {
+//         case 'year':
+//             return isSameYear();
+//         case 'month':
+//             return isSameMonth();
+//         case 'day':
+//             return isSameDay();
+//         case 'hour':
+//             return isSameHour();
+//         case 'minute':
+//             return isSameMinute();
+//         case 'second':
+//             return isSameSecond();
+//         case 'millisecond':
+//             return isSameMilliSecond();
+//     }
+// }
 // const primaryUnitGetters = {
 //     year: fullYearGetterName(),
 //     month: monthGetterName(),
@@ -301,32 +346,32 @@ function getMinutesAndSecondsInterval(approxInterval, isMinutes) {
 function getMillisecondsInterval(approxInterval) {
   return numberUtil.nice(approxInterval, true);
 }
-function getFirstTimestampOfUnit(date, unitName, isUTC) {
-  var outDate = new Date(date);
-  switch (getPrimaryTimeUnit(unitName)) {
-    case 'year':
-    case 'month':
-      outDate[monthSetterName(isUTC)](0);
-    case 'day':
-      outDate[dateSetterName(isUTC)](1);
-    case 'hour':
-      outDate[hoursSetterName(isUTC)](0);
-    case 'minute':
-      outDate[minutesSetterName(isUTC)](0);
-    case 'second':
-      outDate[secondsSetterName(isUTC)](0);
-      outDate[millisecondsSetterName(isUTC)](0);
-  }
-  return outDate.getTime();
+// e.g., if the input unit is 'day', start calculate ticks from the first day of
+// that month to make ticks "nice".
+function getFirstTimestampOfUnit(timestamp, unitName, isUTC) {
+  var upperUnitIdx = Math.max(0, indexOf(primaryTimeUnits, unitName) - 1);
+  return roundTime(new Date(timestamp), primaryTimeUnits[upperUnitIdx], isUTC).getTime();
 }
-function getIntervalTicks(bottomUnitName, approxInterval, isUTC, extent) {
+function createEstimateNiceMultiple(setMethodName, dateMethodInterval) {
+  var tmpDate = new Date(0);
+  tmpDate[setMethodName](1);
+  var tmpTime = tmpDate.getTime();
+  tmpDate[setMethodName](1 + dateMethodInterval);
+  var approxTimeInterval = tmpDate.getTime() - tmpTime;
+  return function (tickVal, targetValue) {
+    // Only in month that accurate result can not get by division of
+    // timestamp interval, but no need accurate here.
+    return Math.max(0, Math.round((targetValue - tickVal) / approxTimeInterval));
+  };
+}
+function getIntervalTicks(bottomUnitName, approxInterval, isUTC, extent, extentSpanWithBreaks, brkCtx) {
   var safeLimit = 10000;
   var unitNames = timeUnits;
   var iter = 0;
   function addTicksInSpan(interval, minTimestamp, maxTimestamp, getMethodName, setMethodName, isDate, out) {
-    var date = new Date(minTimestamp);
+    var estimateNiceMultiple = createEstimateNiceMultiple(setMethodName, interval);
     var dateTime = minTimestamp;
-    var d = date[getMethodName]();
+    var date = new Date(dateTime);
     // if (isDate) {
     //     d -= 1; // Starts with 0;   PENDING
     // }
@@ -334,9 +379,21 @@ function getIntervalTicks(bottomUnitName, approxInterval, isUTC, extent) {
       out.push({
         value: dateTime
       });
-      d += interval;
-      date[setMethodName](d);
+      if (iter++ > safeLimit) {
+        if (process.env.NODE_ENV !== 'production') {
+          warn('Exceed safe limit in time scale.');
+        }
+        break;
+      }
+      date[setMethodName](date[getMethodName]() + interval);
       dateTime = date.getTime();
+      if (brkCtx) {
+        var moreMultiple = brkCtx.calcNiceTickMultiple(dateTime, estimateNiceMultiple);
+        if (moreMultiple > 0) {
+          date[setMethodName](date[getMethodName]() + moreMultiple * interval);
+          dateTime = date.getTime();
+        }
+      }
     }
     // This extra tick is for calcuating ticks of next level. Will not been added to the final result
     out.push({
@@ -347,13 +404,12 @@ function getIntervalTicks(bottomUnitName, approxInterval, isUTC, extent) {
   function addLevelTicks(unitName, lastLevelTicks, levelTicks) {
     var newAddedTicks = [];
     var isFirstLevel = !lastLevelTicks.length;
-    if (isUnitValueSame(getPrimaryTimeUnit(unitName), extent[0], extent[1], isUTC)) {
+    if (isPrimaryUnitValueAndGreaterSame(getPrimaryTimeUnit(unitName), extent[0], extent[1], isUTC)) {
       return;
     }
     if (isFirstLevel) {
       lastLevelTicks = [{
-        // TODO Optimize. Not include so may ticks.
-        value: getFirstTimestampOfUnit(new Date(extent[0]), unitName, isUTC)
+        value: getFirstTimestampOfUnit(extent[0], unitName, isUTC)
       }, {
         value: extent[1]
       }];
@@ -412,7 +468,12 @@ function getIntervalTicks(bottomUnitName, approxInterval, isUTC, extent) {
           setterName = millisecondsSetterName(isUTC);
           break;
       }
-      addTicksInSpan(interval, startTick, endTick, getterName, setterName, isDate, newAddedTicks);
+      // Notice: This expansion by `getFirstTimestampOfUnit` may cause too many ticks and
+      // iteration. e.g., when three levels of ticks is displayed, which can be caused by
+      // data zoom and axis breaks. Thus trim them here.
+      if (endTick >= extent[0] && startTick <= extent[1]) {
+        addTicksInSpan(interval, startTick, endTick, getterName, setterName, isDate, newAddedTicks);
+      }
       if (unitName === 'year' && levelTicks.length > 1 && i === 0) {
         // Add nearest years to the left extent.
         levelTicks.unshift({
@@ -423,14 +484,12 @@ function getIntervalTicks(bottomUnitName, approxInterval, isUTC, extent) {
     for (var i = 0; i < newAddedTicks.length; i++) {
       levelTicks.push(newAddedTicks[i]);
     }
-    // newAddedTicks.length && console.log(unitName, newAddedTicks);
-    return newAddedTicks;
   }
   var levelsTicks = [];
   var currentLevelTicks = [];
   var tickCount = 0;
   var lastLevelTickCount = 0;
-  for (var i = 0; i < unitNames.length && iter++ < safeLimit; ++i) {
+  for (var i = 0; i < unitNames.length; ++i) {
     var primaryTimeUnit = getPrimaryTimeUnit(unitNames[i]);
     if (!isPrimaryTimeUnit(unitNames[i])) {
       // TODO
@@ -455,7 +514,7 @@ function getIntervalTicks(bottomUnitName, approxInterval, isUTC, extent) {
             }
           }
         }
-        var targetTickNum = (extent[1] - extent[0]) / approxInterval;
+        var targetTickNum = extentSpanWithBreaks / approxInterval;
         // Added too much in this level and not too less in last level
         if (tickCount > targetTickNum * 1.5 && lastLevelTickCount > targetTickNum / 1.5) {
           break;
@@ -470,11 +529,6 @@ function getIntervalTicks(bottomUnitName, approxInterval, isUTC, extent) {
       currentLevelTicks = [];
     }
   }
-  if (process.env.NODE_ENV !== 'production') {
-    if (iter >= safeLimit) {
-      warn('Exceed safe limit.');
-    }
-  }
   var levelsTicksInExtent = filter(map(levelsTicks, function (levelTicks) {
     return filter(levelTicks, function (tick) {
       return tick.value >= extent[0] && tick.value <= extent[1] && !tick.notAdd;
@@ -487,9 +541,14 @@ function getIntervalTicks(bottomUnitName, approxInterval, isUTC, extent) {
   for (var i = 0; i < levelsTicksInExtent.length; ++i) {
     var levelTicks = levelsTicksInExtent[i];
     for (var k = 0; k < levelTicks.length; ++k) {
+      var unit = getUnitFromValue(levelTicks[k].value, isUTC);
       ticks.push({
         value: levelTicks[k].value,
-        level: maxLevel - i
+        time: {
+          level: maxLevel - i,
+          upperTimeUnit: unit,
+          lowerTimeUnit: unit
+        }
       });
     }
   }

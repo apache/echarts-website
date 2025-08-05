@@ -41,10 +41,11 @@ interface ExtraStateOption {
 export interface PieDataItemOption extends OptionDataItemObject<OptionDataValueNumeric>, PieStateOption, StatesOptionMixin<PieStateOption, ExtraStateOption> {
     cursor?: string;
 }
-export interface PieSeriesOption extends Omit<SeriesOption<PieStateOption<PieCallbackDataParams>, ExtraStateOption>, 'labelLine'>, PieStateOption<PieCallbackDataParams>, Omit<CircleLayoutOptionMixin, 'center'>, BoxLayoutOptionMixin, SeriesEncodeOptionMixin {
+export interface PieSeriesOption extends Omit<SeriesOption<PieStateOption<PieCallbackDataParams>, ExtraStateOption>, 'labelLine'>, PieStateOption<PieCallbackDataParams>, CircleLayoutOptionMixin<{
+    centerExtra: string | number;
+}>, BoxLayoutOptionMixin, SeriesEncodeOptionMixin {
     type?: 'pie';
     roseType?: 'radius' | 'area';
-    center?: string | number | (string | number)[];
     clockwise?: boolean;
     startAngle?: number;
     endAngle?: number | 'auto';

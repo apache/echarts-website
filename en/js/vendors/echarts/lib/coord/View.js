@@ -51,10 +51,12 @@ import * as matrix from 'zrender/lib/core/matrix.js';
 import BoundingRect from 'zrender/lib/core/BoundingRect.js';
 import Transformable from 'zrender/lib/core/Transformable.js';
 import { parsePercent } from '../util/number.js';
+import { clone } from 'zrender/lib/core/util.js';
+import { clampByZoomLimit } from '../component/helper/roamHelper.js';
 var v2ApplyTransform = vector.applyTransform;
 var View = /** @class */function (_super) {
   __extends(View, _super);
-  function View(name) {
+  function View(name, opt) {
     var _this = _super.call(this) || this;
     _this.type = 'view';
     _this.dimensions = ['x', 'y'];
@@ -69,18 +71,21 @@ var View = /** @class */function (_super) {
      */
     _this._rawTransformable = new Transformable();
     _this.name = name;
+    _this._opt = opt;
     return _this;
   }
   View.prototype.setBoundingRect = function (x, y, width, height) {
     this._rect = new BoundingRect(x, y, width, height);
+    this._updateCenterAndZoom();
     return this._rect;
   };
-  /**
-   * @return {module:zrender/core/BoundingRect}
-   */
   View.prototype.getBoundingRect = function () {
     return this._rect;
   };
+  /**
+   * If no need to transform `View['_rect']` to `View['_viewRect']`, the calling of
+   * `setViewRect` can be omitted.
+   */
   View.prototype.setViewRect = function (x, y, width, height) {
     this._transformTo(x, y, width, height);
     this._viewRect = new BoundingRect(x, y, width, height);
@@ -99,27 +104,27 @@ var View = /** @class */function (_super) {
     this._updateTransform();
   };
   /**
-   * Set center of view
+   * [NOTICE]
+   *  The definition of this center has always been irrelevant to some other series center like
+   *  'series-pie.center' - this center is a point on the same coord sys as `View['_rect'].x/y`,
+   *  rather than canvas viewport, and the unit is not necessarily pixel (e.g., in geo case).
+   *  @see {View['_center']} for details.
    */
-  View.prototype.setCenter = function (centerCoord, api) {
-    if (!centerCoord) {
-      return;
+  View.prototype.setCenter = function (centerCoord) {
+    // #16904 introcuded percentage string here, such as '33%'. But it was based on canvas
+    // width/height, which is not reasonable - the unit may incorrect, and it is unpredictable if
+    // the `View['_rect']` is not calculated based on the current canvas rect. Therefore the percentage
+    // value is changed to based on `View['_rect'].width/height` since v6. Under this definition, users
+    // can use '0%' to map the top-left of `View['_rect']` to the center of `View['_viewRect']`.
+    var opt = this._opt;
+    if (opt && opt.api && opt.ecModel && opt.ecModel.getShallow('legacyViewCoordSysCenterBase') && centerCoord) {
+      centerCoord = [parsePercent(centerCoord[0], opt.api.getWidth()), parsePercent(centerCoord[1], opt.api.getWidth())];
     }
-    this._center = [parsePercent(centerCoord[0], api.getWidth()), parsePercent(centerCoord[1], api.getHeight())];
+    this._centerOption = clone(centerCoord);
     this._updateCenterAndZoom();
   };
   View.prototype.setZoom = function (zoom) {
-    zoom = zoom || 1;
-    var zoomLimit = this.zoomLimit;
-    if (zoomLimit) {
-      if (zoomLimit.max != null) {
-        zoom = Math.min(zoomLimit.max, zoom);
-      }
-      if (zoomLimit.min != null) {
-        zoom = Math.max(zoomLimit.min, zoom);
-      }
-    }
-    this._zoom = zoom;
+    this._zoom = clampByZoomLimit(zoom || 1, this.zoomLimit);
     this._updateCenterAndZoom();
   };
   /**
@@ -142,9 +147,15 @@ var View = /** @class */function (_super) {
     return this._roamTransformable.getLocalTransform();
   };
   /**
-   * Remove roam
+   * Ensure this method is idempotent, since it should be called when
+   * every relevant prop (e.g. _centerOption/_zoom/_rect/_viewRect) changed.
    */
   View.prototype._updateCenterAndZoom = function () {
+    var centerOption = this._centerOption;
+    var rect = this._rect;
+    if (centerOption && rect) {
+      this._center = [parsePercent(centerOption[0], rect.width, rect.x), parsePercent(centerOption[1], rect.height, rect.y)];
+    }
     // Must update after view transform updated
     var rawTransformMatrix = this._rawTransformable.getLocalTransform();
     var roamTransform = this._roamTransformable;
@@ -222,9 +233,10 @@ var View = /** @class */function (_super) {
   /**
    * Convert a (x, y) point to (lon, lat) data
    */
-  View.prototype.pointToData = function (point) {
+  View.prototype.pointToData = function (point, reserved, out) {
+    out = out || [];
     var invTransform = this.invTransform;
-    return invTransform ? v2ApplyTransform([], point, invTransform) : [point[0], point[1]];
+    return invTransform ? v2ApplyTransform(out, point, invTransform) : (out[0] = point[0], out[1] = point[1], out);
   };
   View.prototype.convertToPixel = function (ecModel, finder, value) {
     var coordSys = getCoordSys(finder);

@@ -42,6 +42,7 @@
 * under the License.
 */
 import * as zrUtil from 'zrender/lib/core/util.js';
+import tokens from '../visual/tokens.js';
 var defaultOption = {
   show: true,
   // zlevel: 0,
@@ -60,7 +61,9 @@ var defaultOption = {
     placeholder: '.'
   },
   // Use global text style by default.
-  nameTextStyle: {},
+  nameTextStyle: {
+    // textMargin: never, // The default value will be specified based on `nameLocation`.
+  },
   // The gap between axisName and axisLine.
   nameGap: 15,
   // Default `false` to support tooltip.
@@ -76,13 +79,14 @@ var defaultOption = {
     onZero: true,
     onZeroAxisIndex: null,
     lineStyle: {
-      color: '#6E7079',
+      color: tokens.color.axisLine,
       width: 1,
       type: 'solid'
     },
     // The arrow at both ends the the axis.
     symbol: ['none', 'none'],
-    symbolSize: [10, 15]
+    symbolSize: [10, 15],
+    breakLine: true
   },
   axisTick: {
     show: true,
@@ -105,14 +109,21 @@ var defaultOption = {
     showMaxLabel: null,
     margin: 8,
     // formatter: null,
-    fontSize: 12
+    fontSize: 12,
+    color: tokens.color.axisLabel,
+    // In scenarios like axis labels, when labels text's progression direction matches the label
+    // layout direction (e.g., when all letters are in a single line), extra start/end margin is
+    // needed to prevent the text from appearing visually joined. In the other case, when lables
+    // are stacked (e.g., having rotation or horizontal labels on yAxis), the layout needs to be
+    // compact, so NO extra top/bottom margin should be applied.
+    textMargin: [0, 3]
   },
   splitLine: {
     show: true,
     showMinLine: true,
     showMaxLine: true,
     lineStyle: {
-      color: ['#E0E6F1'],
+      color: tokens.color.axisSplitLine,
       width: 1,
       type: 'solid'
     }
@@ -120,8 +131,28 @@ var defaultOption = {
   splitArea: {
     show: false,
     areaStyle: {
-      color: ['rgba(250,250,250,0.2)', 'rgba(210,219,238,0.2)']
+      color: [tokens.color.backgroundTint, tokens.color.backgroundTransparent]
     }
+  },
+  breakArea: {
+    show: true,
+    itemStyle: {
+      color: tokens.color.neutral00,
+      // Break border color should be darker than the splitLine
+      // because it has opacity and should be more prominent
+      borderColor: tokens.color.border,
+      borderWidth: 1,
+      borderType: [3, 3],
+      opacity: 0.6
+    },
+    zigzagAmplitude: 4,
+    zigzagMinSpan: 4,
+    zigzagMaxSpan: 20,
+    zigzagZ: 100,
+    expandOnClick: true
+  },
+  breakLabelLayout: {
+    moveOverlap: 'auto'
   }
 };
 var categoryAxis = zrUtil.merge({
@@ -129,6 +160,9 @@ var categoryAxis = zrUtil.merge({
   boundaryGap: true,
   // Set false to faster category collection.
   deduplication: null,
+  jitter: 0,
+  jitterOverlap: true,
+  jitterMargin: 2,
   // splitArea: {
   // show: false
   // },
@@ -138,7 +172,8 @@ var categoryAxis = zrUtil.merge({
   axisTick: {
     // If tick is align with label when boundaryGap is true
     alignWithLabel: false,
-    interval: 'auto'
+    interval: 'auto',
+    show: 'auto'
   },
   axisLabel: {
     interval: 'auto'
@@ -172,7 +207,7 @@ var valueAxis = zrUtil.merge({
   minorSplitLine: {
     show: false,
     lineStyle: {
-      color: '#F4F7FD',
+      color: tokens.color.axisMinorSplitLine,
       width: 1
     }
   }

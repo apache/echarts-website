@@ -43,6 +43,7 @@
 */
 /* global Uint8ClampedArray */
 import { platformApi } from 'zrender/lib/core/platform.js';
+import tokens from '../../visual/tokens.js';
 var GRADIENT_LEVELS = 256;
 var HeatmapLayer = /** @class */function () {
   function HeatmapLayer() {
@@ -135,7 +136,7 @@ var HeatmapLayer = /** @class */function () {
     ctx.shadowBlur = this.blurSize;
     // draw the shadow in black, and use alpha and shadow blur to generate
     // color in color map
-    ctx.shadowColor = '#000';
+    ctx.shadowColor = tokens.color.neutral99;
     // draw circle in the left to the canvas
     ctx.beginPath();
     ctx.arc(-r, r, this.pointSize, 0, Math.PI * 2, true);

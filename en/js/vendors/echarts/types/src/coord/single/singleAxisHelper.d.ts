@@ -1,15 +1,15 @@
 import SingleAxisModel from './AxisModel.js';
+import { AxisBuilderCfg } from '../../component/axis/AxisBuilder.js';
 interface LayoutResult {
-    position: [number, number];
-    rotation: number;
-    labelRotation: number;
-    labelDirection: number;
-    tickDirection: number;
-    nameDirection: number;
+    position: AxisBuilderCfg['position'];
+    rotation: AxisBuilderCfg['rotation'];
+    labelRotate: AxisBuilderCfg['labelRotate'];
+    labelDirection: AxisBuilderCfg['labelDirection'];
+    tickDirection: AxisBuilderCfg['tickDirection'];
+    nameDirection: AxisBuilderCfg['nameDirection'];
     z2: number;
 }
 export declare function layout(axisModel: SingleAxisModel, opt?: {
     labelInside?: boolean;
-    rotate?: number;
 }): LayoutResult;
 export {};

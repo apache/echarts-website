@@ -13,6 +13,7 @@ import LinearGradient from '../graphic/LinearGradient.js';
 import RadialGradient from '../graphic/RadialGradient.js';
 import TSpan from '../graphic/TSpan.js';
 import { parseXML } from './parseXML.js';
+import * as colorTool from './color.js';
 ;
 var nodeParsers;
 var INHERITABLE_STYLE_ATTRIBUTES_MAP = {
@@ -399,6 +400,16 @@ function parseGradientColorStops(xmlNode, gradient) {
             var stopColor = styleVals.stopColor
                 || stop.getAttribute('stop-color')
                 || '#000000';
+            var stopOpacity = styleVals.stopOpacity
+                || stop.getAttribute('stop-opacity');
+            if (stopOpacity) {
+                var rgba = colorTool.parse(stopColor);
+                var stopColorOpacity = rgba && rgba[3];
+                if (stopColorOpacity) {
+                    rgba[3] *= colorTool.parseCssFloat(stopOpacity);
+                    stopColor = colorTool.stringify(rgba, 'rgba');
+                }
+            }
             gradient.colorStops.push({
                 offset: offset,
                 color: stopColor

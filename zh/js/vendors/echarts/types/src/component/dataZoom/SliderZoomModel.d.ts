@@ -73,6 +73,11 @@ export interface SliderDataZoomOption extends DataZoomOption, BoxLayoutOptionMix
         handleStyle?: ItemStyleOption;
         moveHandleStyle?: ItemStyleOption;
     };
+    /**
+     * @private
+     * Distance between the slider and the edge of the chart.
+     */
+    defaultLocationEdgeGap?: number;
 }
 declare class SliderZoomModel extends DataZoomModel<SliderDataZoomOption> {
     static readonly type = "dataZoom.slider";

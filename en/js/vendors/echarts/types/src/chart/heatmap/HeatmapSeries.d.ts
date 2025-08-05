@@ -5,6 +5,7 @@ import SeriesData from '../../data/SeriesData.js';
 import type Geo from '../../coord/geo/Geo.js';
 import type Cartesian2D from '../../coord/cartesian/Cartesian2D.js';
 import type Calendar from '../../coord/calendar/Calendar.js';
+import Matrix from '../../coord/matrix/Matrix.js';
 declare type HeatmapDataValue = OptionDataValue[];
 export interface HeatmapStateOption<TCbParams = never> {
     itemStyle?: ItemStyleOption<TCbParams> & {
@@ -12,15 +13,15 @@ export interface HeatmapStateOption<TCbParams = never> {
     };
     label?: SeriesLabelOption;
 }
-interface FunnelStatesMixin {
+interface HeatmapStatesMixin {
     emphasis?: DefaultStatesMixinEmphasis;
 }
-export interface HeatmapDataItemOption extends HeatmapStateOption, StatesOptionMixin<HeatmapStateOption, FunnelStatesMixin> {
+export interface HeatmapDataItemOption extends HeatmapStateOption, StatesOptionMixin<HeatmapStateOption, HeatmapStatesMixin> {
     value: HeatmapDataValue;
 }
-export interface HeatmapSeriesOption extends SeriesOption<HeatmapStateOption<CallbackDataParams>, FunnelStatesMixin>, HeatmapStateOption<CallbackDataParams>, SeriesOnCartesianOptionMixin, SeriesOnGeoOptionMixin, SeriesOnCalendarOptionMixin, SeriesEncodeOptionMixin {
+export interface HeatmapSeriesOption extends SeriesOption<HeatmapStateOption<CallbackDataParams>, HeatmapStatesMixin>, HeatmapStateOption<CallbackDataParams>, SeriesOnCartesianOptionMixin, SeriesOnGeoOptionMixin, SeriesOnCalendarOptionMixin, SeriesEncodeOptionMixin {
     type?: 'heatmap';
-    coordinateSystem?: 'cartesian2d' | 'geo' | 'calendar';
+    coordinateSystem?: 'cartesian2d' | 'geo' | 'calendar' | 'matrix';
     blurSize?: number;
     pointSize?: number;
     maxOpacity?: number;
@@ -31,7 +32,7 @@ declare class HeatmapSeriesModel extends SeriesModel<HeatmapSeriesOption> {
     static readonly type = "series.heatmap";
     readonly type = "series.heatmap";
     static readonly dependencies: string[];
-    coordinateSystem: Cartesian2D | Geo | Calendar;
+    coordinateSystem: Cartesian2D | Geo | Calendar | Matrix;
     getInitialData(option: HeatmapSeriesOption, ecModel: GlobalModel): SeriesData;
     preventIncremental(): boolean;
     static defaultOption: HeatmapSeriesOption;

@@ -3,6 +3,7 @@ import Calendar from './Calendar.js';
 import { ComponentOption, BoxLayoutOptionMixin, LayoutOrient, LineStyleOption, ItemStyleOption, LabelOption, OptionDataValueDate } from '../../util/types.js';
 import GlobalModel from '../../model/Global.js';
 import Model from '../../model/Model.js';
+import { CoordinateSystemHostModel } from '../CoordinateSystem.js';
 export interface CalendarMonthLabelFormatterCallbackParams {
     nameMap: string;
     yyyy: string;
@@ -101,10 +102,11 @@ export interface CalendarOption extends ComponentOption, BoxLayoutOptionMixin {
         formatter?: string | ((params: CalendarYearLabelFormatterCallbackParams) => string);
     };
 }
-declare class CalendarModel extends ComponentModel<CalendarOption> {
+declare class CalendarModel extends ComponentModel<CalendarOption> implements CoordinateSystemHostModel {
     static type: string;
     type: string;
     coordinateSystem: Calendar;
+    static layoutMode: "box";
     /**
      * @override
      */

@@ -45,6 +45,7 @@ import SankeyView from './SankeyView.js';
 import SankeySeriesModel from './SankeySeries.js';
 import sankeyLayout from './sankeyLayout.js';
 import sankeyVisual from './sankeyVisual.js';
+import { updateCenterAndZoomInAction } from '../../component/helper/roamHelper.js';
 export function install(registers) {
   registers.registerChartView(SankeyView);
   registers.registerSeriesModel(SankeySeriesModel);
@@ -62,6 +63,22 @@ export function install(registers) {
       query: payload
     }, function (seriesModel) {
       seriesModel.setNodePosition(payload.dataIndex, [payload.localX, payload.localY]);
+    });
+  });
+  registers.registerAction({
+    type: 'sankeyRoam',
+    event: 'sankeyRoam',
+    update: 'none'
+  }, function (payload, ecModel, api) {
+    ecModel.eachComponent({
+      mainType: 'series',
+      subType: 'sankey',
+      query: payload
+    }, function (seriesModel) {
+      var coordSys = seriesModel.coordinateSystem;
+      var res = updateCenterAndZoomInAction(coordSys, payload, seriesModel.get('scaleLimit'));
+      seriesModel.setCenter(res.center);
+      seriesModel.setZoom(res.zoom);
     });
   });
 }

@@ -22,5 +22,6 @@ declare abstract class ExtensionAPI {
     abstract getViewOfComponentModel(componentModel: ComponentModel): ComponentView;
     abstract getViewOfSeriesModel(seriesModel: SeriesModel): ChartView;
     abstract getModel(): GlobalModel;
+    abstract getMainProcessVersion(): number;
 }
 export default ExtensionAPI;

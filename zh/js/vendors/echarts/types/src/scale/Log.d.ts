@@ -1,27 +1,25 @@
-import Scale from './Scale.js';
+import { ScaleGetTicksOpt } from './Scale.js';
 import IntervalScale from './Interval.js';
+import { DimensionLoose, DimensionName, ParsedAxisBreakList, AxisBreakOption, ScaleTick } from '../util/types.js';
 import SeriesData from '../data/SeriesData.js';
-import { DimensionName, ScaleTick } from '../util/types.js';
-declare class LogScale extends Scale {
+declare class LogScale extends IntervalScale {
     static type: string;
     readonly type = "log";
     base: number;
     private _originalScale;
     private _fixMin;
     private _fixMax;
-    private _interval;
-    private _niceExtent;
     /**
      * @param Whether expand the ticks to niced extent.
      */
-    getTicks(expandToNicedExtent?: boolean): ScaleTick[];
+    getTicks(opt?: ScaleGetTicksOpt): ScaleTick[];
+    protected _getNonTransBreaks(): ParsedAxisBreakList;
     setExtent(start: number, end: number): void;
     /**
      * @return {number} end
      */
     getExtent(): [number, number];
-    unionExtent(extent: [number, number]): void;
-    unionExtentFromData(data: SeriesData, dim: DimensionName): void;
+    unionExtentFromData(data: SeriesData, dim: DimensionName | DimensionLoose): void;
     /**
      * Update interval and extent of intervals for nice ticks
      * @param approxTickNum default 10 Given approx tick number
@@ -34,11 +32,9 @@ declare class LogScale extends Scale {
         minInterval?: number;
         maxInterval?: number;
     }): void;
-    parse(val: any): number;
     contain(val: number): boolean;
     normalize(val: number): number;
     scale(val: number): number;
-    getMinorTicks: IntervalScale['getMinorTicks'];
-    getLabel: IntervalScale['getLabel'];
+    setBreaksFromOption(breakOptionList: AxisBreakOption[]): void;
 }
 export default LogScale;

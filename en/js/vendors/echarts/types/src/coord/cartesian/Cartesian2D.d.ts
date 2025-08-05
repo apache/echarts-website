@@ -27,7 +27,7 @@ declare class Cartesian2D extends Cartesian<Axis2D> implements CoordinateSystem 
     containZone(data1: ScaleDataValue[], data2: ScaleDataValue[]): boolean;
     dataToPoint(data: ScaleDataValue[], clamp?: boolean, out?: number[]): number[];
     clampData(data: ScaleDataValue[], out?: number[]): number[];
-    pointToData(point: number[], clamp?: boolean): number[];
+    pointToData(point: number[], clamp?: boolean, out?: number[]): number[];
     getOtherAxis(axis: Axis2D): Axis2D;
     /**
      * Get rect area of cartesian.

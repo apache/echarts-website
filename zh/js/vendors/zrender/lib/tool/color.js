@@ -1,5 +1,5 @@
 import LRU from '../core/LRU.js';
-import { extend, isGradientObject, isString, map } from '../core/util.js';
+import { extend, isFunction, isGradientObject, isString, map } from '../core/util.js';
 var kCSSColorTable = {
     'transparent': [0, 0, 0, 0], 'aliceblue': [240, 248, 255, 1],
     'antiquewhite': [250, 235, 215, 1], 'aqua': [0, 255, 255, 1],
@@ -87,14 +87,14 @@ function clampCssAngle(i) {
 function clampCssFloat(f) {
     return f < 0 ? 0 : f > 1 ? 1 : f;
 }
-function parseCssInt(val) {
+export function parseCssInt(val) {
     var str = val;
     if (str.length && str.charAt(str.length - 1) === '%') {
         return clampCssByte(parseFloat(str) / 100 * 255);
     }
     return clampCssByte(parseInt(str, 10));
 }
-function parseCssFloat(val) {
+export function parseCssFloat(val) {
     var str = val;
     if (str.length && str.charAt(str.length - 1) === '%') {
         return clampCssFloat(parseFloat(str) / 100);
@@ -370,9 +370,9 @@ export function modifyHSL(color, h, s, l) {
     var colorArr = parse(color);
     if (color) {
         colorArr = rgba2hsla(colorArr);
-        h != null && (colorArr[0] = clampCssAngle(h));
-        s != null && (colorArr[1] = parseCssFloat(s));
-        l != null && (colorArr[2] = parseCssFloat(l));
+        h != null && (colorArr[0] = clampCssAngle(isFunction(h) ? h(colorArr[0]) : h));
+        s != null && (colorArr[1] = parseCssFloat(isFunction(s) ? s(colorArr[1]) : s));
+        l != null && (colorArr[2] = parseCssFloat(isFunction(l) ? l(colorArr[2]) : l));
         return stringify(hsla2rgba(colorArr), 'rgba');
     }
 }

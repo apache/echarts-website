@@ -89,7 +89,9 @@ var AngleAxisView = /** @class */function (_super) {
     var angleAxis = angleAxisModel.axis;
     var polar = angleAxis.polar;
     var radiusExtent = polar.getRadiusAxis().getExtent();
-    var ticksAngles = angleAxis.getTicksCoords();
+    var ticksAngles = angleAxis.getTicksCoords({
+      breakTicks: 'none'
+    });
     var minorTickAngles = angleAxis.getMinorTicksCoords();
     var labels = zrUtil.map(angleAxis.getViewLabels(), function (labelItem) {
       labelItem = zrUtil.clone(labelItem);
@@ -220,6 +222,18 @@ var angelAxisElementsBuilders = {
         })
       });
       group.add(textEl);
+      graphic.setTooltipConfig({
+        el: textEl,
+        componentModel: angleAxisModel,
+        itemName: labelItem.formattedLabel,
+        formatterParamsExtra: {
+          isTruncated: function () {
+            return textEl.isTruncated;
+          },
+          value: labelItem.rawLabel,
+          tickIndex: idx
+        }
+      });
       // Pack data for mouse event
       if (triggerEvent) {
         var eventData = AxisBuilder.makeAxisEventDataBase(angleAxisModel);
