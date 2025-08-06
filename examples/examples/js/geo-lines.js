@@ -2,6 +2,7 @@
 title: Migration
 category: map
 titleCN: 模拟迁徙
+noExplore: true
 */
 var geoCoordMap = {
   上海: [121.4648, 31.2891],

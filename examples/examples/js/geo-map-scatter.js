@@ -2,6 +2,7 @@
 title: map and scatter share a geo
 category: map
 titleCN: map and scatter share a geo
+noExplore: true
 */
 var data = [
   { name: '海门', value: 9 },

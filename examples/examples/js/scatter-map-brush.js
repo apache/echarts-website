@@ -2,6 +2,7 @@
 title: Scatter Map Brush
 category: scatter
 titleCN: Scatter Map Brush
+noExplore: true
 */
 const geoCoordMap = {
   海门: [121.15, 31.89],

@@ -419,6 +419,16 @@
           background: #3178c6;
           color: #fff;
 }
+#editor-control-panel .example-version-since {
+    display: inline-block;
+    padding: 1px 5px;
+    vertical-align: middle;
+    font-size: 10px;
+    background: #409eff;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 2px;
+}
 #editor-control-panel .editor-controls .el-switch__label {
     margin-top: -3px;
 }
@@ -543,13 +553,12 @@
     margin: 3px 0 0 0;
     padding-left: 10px;
 }
-.example-list-item .example-new {
+.example-list-item .example-version-since {
     margin-top: 12px;
     float: right;
     padding: 1px 5px;
     margin-left: 5px;
     vertical-align: middle;
-    border-radius: 3px;
     font-size: 10px;
     background: #fb628b;
     color: #fff;
