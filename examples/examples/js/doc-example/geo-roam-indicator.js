@@ -13,31 +13,43 @@ function updateChart() {
       id: 'my_geo',
       map: 'iceland',
       aspectScale: Math.cos((65 * Math.PI) / 180),
+      animation: false,
       preserveAspect: app.config.preserveAspect,
       preserveAspectAlign: app.config.preserveAspectAlign,
       preserveAspectVerticalAlign: app.config.preserveAspectVerticalAlign,
       clip: app.config.clip,
-      roam: true,
-      // Note: if `clip: true; roamTrigger: 'global'`,
-      //  roaming can only be triggered inside the clip area.
-      roamTrigger: app.config.roamTrigger,
       // These props determine a rectangular area for the geo component:
       left: app.config['geo.left'],
       right: app.config['geo.right'],
       top: app.config['geo.top'],
-      bottom: app.config['geo.bottom']
+      bottom: app.config['geo.bottom'],
+      // Roaming related props:
+      roam: true,
+      // Note: if `clip: true; roamTrigger: 'global'`,
+      //  roaming can only be triggered inside the clip area.
+      roamTrigger: app.config.roamTrigger,
+      // center and zoom:
+      center: [
+        app.config['geo.center[0]%'] + '%',
+        app.config['geo.center[1]%'] + '%'
+      ],
+      zoom: app.config['geo.zoom']
     }
   };
+  function handleFinished() {
+    myChart.off('finished', handleFinished);
+    setTimeout(function () {
+      updateIndicators();
+    }, 0);
+  }
+  myChart.on('finished', handleFinished);
   myChart.setOption(option);
-  setTimeout(function () {
-    updateIndicators();
-  });
 }
 function initChart() {
   myChart.on('georoam', function () {
     updateIndicators();
   });
-  myChart.on('resize', function () {
+  window.addEventListener('resize', function () {
     updateIndicators();
   });
   updateChart();
@@ -216,6 +228,12 @@ function initFloatingControlPanelAndContext() {
   app.configParameters['geo.top'] = { min: 0, max: 500 };
   app.config['geo.bottom'] = 100;
   app.configParameters['geo.bottom'] = { min: 0, max: 500 };
+  app.config['geo.center[0]%'] = 50;
+  app.configParameters['geo.center[0]%'] = { min: 0, max: 100 };
+  app.config['geo.center[1]%'] = 50;
+  app.configParameters['geo.center[1]%'] = { min: 0, max: 100 };
+  app.config['geo.zoom'] = 1;
+  app.configParameters['geo.zoom'] = { min: 0.1, max: 10, step: 0.1 };
   app.config.onChange = function () {
     updateChart();
   };

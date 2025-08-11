@@ -479,6 +479,7 @@ option = {
     tooltip: {},
     legend: {
       left: 'right',
+      top: 10,
       data: ['第一产业', '第二产业', '第三产业'],
       selected: {
         GDP: false,

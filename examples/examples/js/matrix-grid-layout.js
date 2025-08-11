@@ -1,155 +1,370 @@
 /*
-title: Tiny Charts in Matrix (Line Charts)
+title: Responsive grid layout based on matrix
 category: matrix
-titleCN: 矩阵坐标系中的微型折线图
-difficulty: 2
+titleCN: 矩阵中响应式网格布局
+difficulty: 3
 since: 6.0.0
 */
-const _matrixDimensionData = {
-  x: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
-  y: [
-    { value: '8:00\n~\n10:00' },
-    { value: '10:00\n~\n12:00' },
-    { value: '12:00\n~\n14:00', size: 55 },
-    { value: '14:00\n~\n16:00' },
-    { value: '16:00\n~\n18:00' },
-    { value: '18:00\n~\n20:00' }
-  ]
-};
-const _yBreakTimeIndex = 2; // '12:00 - 14:00',
-const _seriesFakeDataLength = 365;
-option = {
-  matrix: {
-    x: {
-      data: _matrixDimensionData.x,
-      levelSize: 40,
-      label: {
-        fontSize: 16,
-        color: '#555'
-      }
+/**
+ * Use a matrix coordinate system to layout multiple charts and components,
+ * following the similar idea of CSS grid layout, and provide responsiveness
+ * by media queries.
+ */
+let _idBase = 1;
+const _mediaDefinitionList = [
+  {
+    // When the canvas width is less than 500px,
+    query: { maxWidth: 500 },
+    matrix: {
+      // Define column and rows
+      x: { data: Array(1).fill(null) },
+      y: { data: Array(10).fill(null) }
     },
-    y: {
-      data: _matrixDimensionData.y,
-      levelSize: 70,
-      label: {
-        fontSize: 14,
-        color: '#777'
-      }
+    // Place sections into the matrix cell determined by the coords.
+    // key: sectionId, value: coord.
+    sectionCoordMap: {
+      section_title_1: [0, 0],
+      section_header_1: [0, [1, 2]],
+      section_sidebar_1: [0, [3, 4]],
+      section_main_content_area_1: [0, [5, 7]],
+      section_footer_1: [0, [8, 9]]
+    }
+  },
+  {
+    // The default (with no `query`)
+    matrix: {
+      // Define column and rows
+      x: { data: Array(4).fill(null) },
+      y: { data: Array(10).fill(null) }
     },
-    corner: {
-      data: [
-        {
-          coord: [-1, -1],
-          value: 'Time'
-        }
+    sectionCoordMap: {
+      section_title_1: [[0, 3], 0],
+      section_header_1: [
+        [0, 3],
+        [1, 2]
       ],
-      label: {
-        fontSize: 16,
-        color: '#777'
-      }
-    },
-    body: {
-      data: [
+      section_sidebar_1: [0, [3, 9]],
+      section_main_content_area_1: [
+        [1, 3],
+        [3, 7]
+      ],
+      section_footer_1: [
+        [1, 3],
+        [8, 9]
+      ]
+    }
+  }
+];
+/**
+ * Each section contains some charts and components.
+ */
+const _sectionDefinitionMap = {
+  section_title_1: {
+    option: {
+      title: [
         {
-          coord: [null, _yBreakTimeIndex],
-          coordClamp: true,
-          mergeCells: true,
-          value: 'Break',
-          label: {
-            color: '#999',
-            fontSize: 16
-          }
+          coordinateSystem: 'matrix',
+          text: 'Resize the Canvas to Check the Responsiveness',
+          left: 'center',
+          top: 10
         }
       ]
-    },
-    top: 30,
-    bottom: 80,
-    width: '90%',
-    left: 'center'
-  },
-  tooltip: {
-    trigger: 'axis'
-  },
-  dataZoom: {
-    type: 'slider',
-    xAxisIndex: 'all',
-    left: '10%',
-    right: '10%',
-    bottom: 30,
-    height: 30,
-    throttle: 120
-  },
-  grid: [],
-  xAxis: [],
-  yAxis: [],
-  series: []
-};
-eachMatrixCell((xval, yval, xidx, yidx) => {
-  const id = makeId(xidx, yidx);
-  option.grid.push({
-    id: id,
-    coordinateSystem: 'matrix',
-    coord: [xval, yval],
-    top: 10,
-    bottom: 10,
-    left: 'center',
-    width: '90%',
-    containLabel: true
-  });
-  option.xAxis.push({
-    type: 'category',
-    id: id,
-    gridId: id,
-    scale: true,
-    axisTick: { show: false },
-    axisLabel: { show: false },
-    axisLine: { show: false },
-    splitLine: { show: false }
-  });
-  option.yAxis.push({
-    id: id,
-    gridId: id,
-    interval: Number.MAX_SAFE_INTEGER,
-    scale: true,
-    axisLabel: {
-      showMaxLabel: true,
-      fontSize: 9
-    },
-    axisLine: { show: false },
-    axisTick: { show: false }
-  });
-  option.series.push({
-    xAxisId: id,
-    yAxisId: id,
-    type: 'line',
-    symbol: 'none',
-    lineStyle: {
-      lineWidth: 1
-    },
-    data: generateFakeSeriesData(_seriesFakeDataLength, xidx, yidx)
-  });
-});
-// ------ Helpers Start ------
-function makeId(xidx, yidx) {
-  return `${xidx}|${yidx}`;
-}
-function eachMatrixCell(cb) {
-  _matrixDimensionData.y.forEach((yvalItem, yidx) => {
-    const yval = yvalItem.value;
-    if (yidx === _yBreakTimeIndex) {
-      return;
     }
-    _matrixDimensionData.x.forEach((xval, xidx) => {
-      cb(xval, yval, xidx, yidx);
+  },
+  section_header_1: {
+    option: {
+      title: [
+        {
+          coordinateSystem: 'matrix',
+          text: 'Header Section',
+          textStyle: { fontSize: 14 },
+          left: 'center',
+          top: 5
+        }
+      ],
+      xAxis: {
+        type: 'time',
+        id: 'header_1',
+        gridId: 'header_1'
+      },
+      yAxis: {
+        id: 'header_1',
+        gridId: 'header_1',
+        splitNumber: 2,
+        splitLine: { show: false }
+      },
+      grid: {
+        id: 'header_1',
+        coordinateSystem: 'matrix',
+        tooltip: {
+          trigger: 'axis'
+        },
+        top: 30,
+        bottom: 10,
+        left: 10,
+        right: 10,
+        outerBounds: {
+          top: 30,
+          left: 20,
+          bottom: 20,
+          right: 20
+        }
+      },
+      series: {
+        type: 'line',
+        id: 'header_1',
+        xAxisId: 'header_1',
+        yAxisId: 'header_1',
+        symbol: 'none',
+        data: generateSingleSeriesData(100, false)
+      }
+    }
+  },
+  section_sidebar_1: {
+    option: {
+      title: {
+        coordinateSystem: 'matrix',
+        text: 'Sidebar Section',
+        textStyle: { fontSize: 14 },
+        left: 'center',
+        top: 15
+      },
+      xAxis: {
+        id: 'sidebar_1',
+        gridId: 'sidebar_1',
+        splitLine: { show: false },
+        axisLabel: {
+          hideOverlap: true
+        }
+      },
+      yAxis: {
+        type: 'time',
+        id: 'sidebar_1',
+        gridId: 'sidebar_1',
+        axisLabel: {
+          hideOverlap: true
+        }
+      },
+      grid: {
+        id: 'sidebar_1',
+        coordinateSystem: 'matrix',
+        tooltip: {
+          trigger: 'axis'
+        },
+        top: 50,
+        bottom: 30,
+        left: 40,
+        right: 30,
+        outerBounds: {
+          top: 30,
+          left: 20,
+          bottom: 20,
+          right: 20
+        }
+      },
+      series: {
+        type: 'bar',
+        id: 'sidebar_1',
+        xAxisId: 'sidebar_1',
+        yAxisId: 'sidebar_1',
+        data: generateSingleSeriesData(10, true)
+      }
+    }
+  },
+  section_main_content_area_1: {
+    option: {
+      title: {
+        text: 'Main Content Area',
+        coordinateSystem: 'matrix',
+        textStyle: { fontSize: 14 },
+        left: 'center',
+        top: 15
+      },
+      xAxis: {
+        type: 'time',
+        id: 'main_content_area_1',
+        gridId: 'main_content_area_1'
+      },
+      yAxis: {
+        id: 'main_content_area_1',
+        gridId: 'main_content_area_1'
+      },
+      grid: {
+        id: 'main_content_area_1',
+        coordinateSystem: 'matrix',
+        tooltip: {
+          trigger: 'axis'
+        },
+        top: 50,
+        bottom: 10,
+        left: 10,
+        right: 10,
+        outerBounds: {
+          top: 30,
+          left: 20,
+          bottom: 20,
+          right: 20
+        }
+      },
+      series: {
+        type: 'line',
+        id: 'main_content_area_1',
+        xAxisId: 'main_content_area_1',
+        yAxisId: 'main_content_area_1',
+        symbol: 'none',
+        data: generateSingleSeriesData(100, false)
+      }
+    }
+  },
+  section_footer_1: {
+    option: {
+      title: {
+        coordinateSystem: 'matrix',
+        text: 'Footer Section',
+        textStyle: { fontSize: 14 },
+        left: 'center',
+        top: 15
+      },
+      xAxis: {
+        type: 'time',
+        id: 'footer_1',
+        gridId: 'footer_1'
+      },
+      yAxis: {
+        id: 'footer_1',
+        gridId: 'footer_1',
+        splitNumber: 2,
+        splitLine: { show: false }
+      },
+      grid: {
+        id: 'footer_1',
+        coordinateSystem: 'matrix',
+        tooltip: {
+          trigger: 'axis'
+        },
+        top: 50,
+        bottom: 10,
+        left: 20,
+        right: 20,
+        outerBounds: {
+          top: 30,
+          left: 20,
+          bottom: 20,
+          right: 20
+        }
+      },
+      series: {
+        type: 'bar',
+        id: 'footer_1',
+        xAxisId: 'footer_1',
+        yAxisId: 'footer_1',
+        data: generateSingleSeriesData(10, false)
+      }
+    }
+  }
+};
+option = {
+  // Use the matrix coordinate system to layout the charts and components.
+  matrix: {
+    x: { show: false, data: [] },
+    y: { show: false, data: [] },
+    body: {
+      itemStyle: { borderColor: 'none' }
+    },
+    backgroundStyle: { borderColor: 'none' },
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0
+  },
+  tooltip: {}
+}; // End of option
+initFloatingControlPanel();
+assembleIntoEChartsOption(option, _sectionDefinitionMap, _mediaDefinitionList);
+console.log(option);
+/**
+ * Merge those definitions into the single echarts option.
+ * @param option The target echarts option to be written to.
+ */
+function assembleIntoEChartsOption(
+  option,
+  sectionDefinitionMap,
+  mediaDefinitionList
+) {
+  option.media = mediaDefinitionList.map(({ query, matrix }) => {
+    return { query, option: { matrix } };
+  });
+  Object.keys(sectionDefinitionMap).forEach((sectionId) => {
+    const section = sectionDefinitionMap[sectionId];
+    const optionIdMapWillSetCoord = {};
+    Object.keys(section.option).forEach((componentMainType) => {
+      option[componentMainType] = normalizeToArray(option[componentMainType]);
+      normalizeToArray(section.option[componentMainType]).forEach(
+        (component) => {
+          component = ensureComponentId(
+            component,
+            sectionId,
+            componentMainType
+          );
+          option[componentMainType].push(component);
+          if (component.coordinateSystem === 'matrix') {
+            optionIdMapWillSetCoord[componentMainType] = normalizeToArray(
+              optionIdMapWillSetCoord[componentMainType]
+            );
+            optionIdMapWillSetCoord[componentMainType].push(component.id);
+          }
+        }
+      );
     });
+    mediaDefinitionList.forEach(
+      ({ query, matrix, sectionCoordMap }, mediaIdx) => {
+        const optionInMedia = option.media[mediaIdx].option;
+        const coord = sectionCoordMap[sectionId];
+        if (!coord) {
+          throw new Error(
+            `Section with id "${sectionId}" not found in media definition index ${mediaIdx}.`
+          );
+        }
+        Object.keys(optionIdMapWillSetCoord).forEach((componentMainType) => {
+          optionIdMapWillSetCoord[componentMainType].forEach((id) => {
+            optionInMedia[componentMainType] = normalizeToArray(
+              optionInMedia[componentMainType]
+            );
+            optionInMedia[componentMainType].push({
+              id: id,
+              coord: coord
+            });
+          });
+        });
+      }
+    );
   });
 }
-function generateFakeSeriesData(dayCount, xidx, yidx) {
+/**
+ * If no component id, generate one, and immutablely return a new component object.
+ */
+function ensureComponentId(component, sectionId, componentMainType) {
+  if (component.id != null) {
+    return component;
+  }
+  component = Object.assign({}, component);
+  component.id = sectionId + '_' + componentMainType + '_' + _idBase++;
+  return component;
+}
+/**
+ * `{}` is converted to `[{}]`; null/undefined is converted to `[]`.
+ */
+function normalizeToArray(value) {
+  return Array.isArray(value) ? value : value != null ? [value] : [];
+}
+/**
+ * Generate some random data for a single series.
+ */
+function generateSingleSeriesData(dayCount, inverseXY) {
   const dayStart = new Date('2025-05-05T00:00:00.000Z'); // Monday
-  dayStart.setDate(xidx + 5);
   const timeStart = dayStart.getTime();
   const sevenDay = 7 * 1000 * 3600 * 24;
-  const cellData = [];
+  const seriesData = [];
   let lastVal = +(Math.random() * 300).toFixed(0);
   let turnCount = null;
   let sign = -1;
@@ -168,7 +383,30 @@ function generateFakeSeriesData(dayCount, xidx, yidx) {
     const val = Math.max(0, (lastVal += delta));
     const xTime = timeStart + idx * sevenDay;
     const dataXVal = echarts.time.format(xTime, '{yyyy}-{MM}-{dd}');
-    cellData.push([dataXVal, val]);
+    const item = [dataXVal, val];
+    if (inverseXY) {
+      item.reverse();
+    }
+    seriesData.push(item);
   }
-  return cellData;
+  return seriesData;
+}
+/**
+ * Note: The floating control panel are not relevant to echarts API,
+ *  just for illustration purposes.
+ */
+function initFloatingControlPanel() {
+  app.config = {};
+  app.configParameters = {};
+  app.config.showMatrixGrid = false;
+  app.configParameters.showMatrixGrid = { options: [false, true] };
+  app.config.onChange = function () {
+    myChart.setOption({
+      matrix: {
+        body: {
+          itemStyle: { borderColor: app.config.showMatrixGrid ? 'red' : 'none' }
+        }
+      }
+    });
+  };
 }

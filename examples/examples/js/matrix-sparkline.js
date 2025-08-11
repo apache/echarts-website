@@ -1,7 +1,7 @@
 /*
-title: Tiny Charts in Matrix (Line Charts)
-category: matrix
-titleCN: 矩阵坐标系中的微型折线图
+title: Mini Line Charts (Sparkline) in Matrix
+category: matrix, line
+titleCN: 矩阵中的微型折线图
 difficulty: 5
 since: 6.0.0
 */
@@ -70,15 +70,22 @@ option = {
   tooltip: {
     trigger: 'axis'
   },
-  dataZoom: {
-    type: 'slider',
-    xAxisIndex: 'all',
-    left: '10%',
-    right: '10%',
-    bottom: 30,
-    height: 30,
-    throttle: 120
-  },
+  dataZoom: [
+    {
+      type: 'slider',
+      xAxisIndex: 'all',
+      left: '10%',
+      right: '10%',
+      bottom: 30,
+      height: 30,
+      throttle: 120
+    },
+    {
+      type: 'inside',
+      xAxisIndex: 'all',
+      throttle: 120
+    }
+  ],
   grid: [],
   xAxis: [],
   yAxis: [],
