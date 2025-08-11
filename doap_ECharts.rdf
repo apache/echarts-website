@@ -38,14 +38,14 @@
     <category rdf:resource="https://projects.apache.org/category/data-visualization" />
     <release>
       <Version>
+        <name>apache-echarts-6.0.0</name>
+        <created>2025-07-30</created>
+        <revision>6.0.0</revision>
+      </Version>
+      <Version>
         <name>apache-echarts-5.6.0</name>
         <created>2024-12-28</created>
         <revision>5.6.0</revision>
-      </Version>
-      <Version>
-        <name>apache-echarts-5.5.1</name>
-        <created>2024-06-27</created>
-        <revision>5.5.1</revision>
       </Version>
     </release>
     <repository>
