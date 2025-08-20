@@ -81,19 +81,10 @@
     width: 80%;
 }
 .property-popup-desc blockquote {
-    font-size: 12px;
-    color: #999;
-    background-color: #fdfdfd;
+    background-color: #f3f3f3;
     border-left: 2px solid #ddd;
     margin-left: 0px;
-    padding: 5px 10px;
-}
-.property-popup-desc blockquote p {
-      margin: 0;
-      font-size: 12px;
-}
-.property-popup-desc blockquote pre {
-      font-size: 12px;
+    padding: 10px 20px;
 }
 .property-popup-desc iframe {
     border: none;
@@ -1171,19 +1162,10 @@ span.CodeMirror-selectedtext { background: none; }
       width: 80%;
 }
 .doc-content .page-description blockquote {
-      font-size: 12px;
-      color: #999;
-      background-color: #fdfdfd;
+      background-color: #f3f3f3;
       border-left: 2px solid #ddd;
       margin-left: 0px;
-      padding: 5px 10px;
-}
-.doc-content .page-description blockquote p {
-        margin: 0;
-        font-size: 12px;
-}
-.doc-content .page-description blockquote pre {
-        font-size: 12px;
+      padding: 10px 20px;
 }
 .doc-content .page-description iframe {
       border: none;
@@ -1254,19 +1236,10 @@ span.CodeMirror-selectedtext { background: none; }
       width: 80%;
 }
 .doc-content .item-description blockquote {
-      font-size: 12px;
-      color: #999;
-      background-color: #fdfdfd;
+      background-color: #f3f3f3;
       border-left: 2px solid #ddd;
       margin-left: 0px;
-      padding: 5px 10px;
-}
-.doc-content .item-description blockquote p {
-        margin: 0;
-        font-size: 12px;
-}
-.doc-content .item-description blockquote pre {
-        font-size: 12px;
+      padding: 10px 20px;
 }
 .doc-content .item-description iframe {
       border: none;
@@ -1423,19 +1396,10 @@ span.CodeMirror-selectedtext { background: none; }
     width: 80%;
 }
 .doc-search-result-item-card blockquote {
-    font-size: 12px;
-    color: #999;
-    background-color: #fdfdfd;
+    background-color: #f3f3f3;
     border-left: 2px solid #ddd;
     margin-left: 0px;
-    padding: 5px 10px;
-}
-.doc-search-result-item-card blockquote p {
-      margin: 0;
-      font-size: 12px;
-}
-.doc-search-result-item-card blockquote pre {
-      font-size: 12px;
+    padding: 10px 20px;
 }
 .doc-search-result-item-card iframe {
     border: none;
