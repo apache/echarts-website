@@ -86,6 +86,13 @@
     margin-left: 0px;
     padding: 10px 20px;
 }
+.property-popup-desc blockquote p {
+      font-size: 13px;
+}
+.property-popup-desc blockquote pre {
+      font-size: 13px;
+      background-color: #fff;
+}
 .property-popup-desc iframe {
     border: none;
     display: block;
@@ -132,6 +139,16 @@
 }
 .property-popup-desc a {
     font-family: 'Source Code Pro', STHeiti, "Microsoft Yahei", "WenQuanYi Micro Hei", sans-serif;
+}
+.property-popup-desc .doc-partial-version {
+    font-size: 12px;
+    background: #f3f3f3;
+    margin: 10px 20px 10px 0;
+    padding: 10px;
+    border-left: 2px solid #ddd;
+}
+.property-popup-desc .doc-partial-version code {
+      color: #0086b3;
 }
 .property-popup-desc pre {
     font-size: 12px;
@@ -1167,6 +1184,13 @@ span.CodeMirror-selectedtext { background: none; }
       margin-left: 0px;
       padding: 10px 20px;
 }
+.doc-content .page-description blockquote p {
+        font-size: 13px;
+}
+.doc-content .page-description blockquote pre {
+        font-size: 13px;
+        background-color: #fff;
+}
 .doc-content .page-description iframe {
       border: none;
       display: block;
@@ -1214,6 +1238,16 @@ span.CodeMirror-selectedtext { background: none; }
 .doc-content .page-description a {
       font-family: 'Source Code Pro', STHeiti, "Microsoft Yahei", "WenQuanYi Micro Hei", sans-serif;
 }
+.doc-content .page-description .doc-partial-version {
+      font-size: 12px;
+      background: #f3f3f3;
+      margin: 10px 20px 10px 0;
+      padding: 10px;
+      border-left: 2px solid #ddd;
+}
+.doc-content .page-description .doc-partial-version code {
+        color: #0086b3;
+}
 .doc-content .item-description {
     margin: 0;
     padding: 5px 0;
@@ -1240,6 +1274,13 @@ span.CodeMirror-selectedtext { background: none; }
       border-left: 2px solid #ddd;
       margin-left: 0px;
       padding: 10px 20px;
+}
+.doc-content .item-description blockquote p {
+        font-size: 13px;
+}
+.doc-content .item-description blockquote pre {
+        font-size: 13px;
+        background-color: #fff;
 }
 .doc-content .item-description iframe {
       border: none;
@@ -1287,6 +1328,16 @@ span.CodeMirror-selectedtext { background: none; }
 }
 .doc-content .item-description a {
       font-family: 'Source Code Pro', STHeiti, "Microsoft Yahei", "WenQuanYi Micro Hei", sans-serif;
+}
+.doc-content .item-description .doc-partial-version {
+      font-size: 12px;
+      background: #f3f3f3;
+      margin: 10px 20px 10px 0;
+      padding: 10px;
+      border-left: 2px solid #ddd;
+}
+.doc-content .item-description .doc-partial-version code {
+        color: #0086b3;
 }
 .doc-content table {
     border: 1px solid #ddd;
@@ -1401,6 +1452,13 @@ span.CodeMirror-selectedtext { background: none; }
     margin-left: 0px;
     padding: 10px 20px;
 }
+.doc-search-result-item-card blockquote p {
+      font-size: 13px;
+}
+.doc-search-result-item-card blockquote pre {
+      font-size: 13px;
+      background-color: #fff;
+}
 .doc-search-result-item-card iframe {
     border: none;
     display: block;
@@ -1447,6 +1505,16 @@ span.CodeMirror-selectedtext { background: none; }
 }
 .doc-search-result-item-card a {
     font-family: 'Source Code Pro', STHeiti, "Microsoft Yahei", "WenQuanYi Micro Hei", sans-serif;
+}
+.doc-search-result-item-card .doc-partial-version {
+    font-size: 12px;
+    background: #f3f3f3;
+    margin: 10px 20px 10px 0;
+    padding: 10px;
+    border-left: 2px solid #ddd;
+}
+.doc-search-result-item-card .doc-partial-version code {
+      color: #0086b3;
 }
 .doc-search-result-item-card iframe, .doc-search-result-item-card pre, .doc-search-result-item-card image {
     display: none;
