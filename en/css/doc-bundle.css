@@ -150,6 +150,21 @@
 .property-popup-desc .doc-partial-version code {
       color: #0086b3;
 }
+.property-popup-desc .doc-partial-security-warning {
+    font-size: 13px;
+    background: #fee2e2;
+    margin: 10px 20px 10px 0;
+    padding: 10px;
+    border-left: 2px solid #f87171;
+    color: #64748b;
+}
+.property-popup-desc .doc-partial-security-warning code {
+      background: #fecaca;
+}
+.property-popup-desc .doc-partial-security-warning .warning-title {
+      font-weight: bold;
+      color: #b91c1c;
+}
 .property-popup-desc pre {
     font-size: 12px;
 }
@@ -1248,6 +1263,21 @@ span.CodeMirror-selectedtext { background: none; }
 .doc-content .page-description .doc-partial-version code {
         color: #0086b3;
 }
+.doc-content .page-description .doc-partial-security-warning {
+      font-size: 13px;
+      background: #fee2e2;
+      margin: 10px 20px 10px 0;
+      padding: 10px;
+      border-left: 2px solid #f87171;
+      color: #64748b;
+}
+.doc-content .page-description .doc-partial-security-warning code {
+        background: #fecaca;
+}
+.doc-content .page-description .doc-partial-security-warning .warning-title {
+        font-weight: bold;
+        color: #b91c1c;
+}
 .doc-content .item-description {
     margin: 0;
     padding: 5px 0;
@@ -1338,6 +1368,21 @@ span.CodeMirror-selectedtext { background: none; }
 }
 .doc-content .item-description .doc-partial-version code {
         color: #0086b3;
+}
+.doc-content .item-description .doc-partial-security-warning {
+      font-size: 13px;
+      background: #fee2e2;
+      margin: 10px 20px 10px 0;
+      padding: 10px;
+      border-left: 2px solid #f87171;
+      color: #64748b;
+}
+.doc-content .item-description .doc-partial-security-warning code {
+        background: #fecaca;
+}
+.doc-content .item-description .doc-partial-security-warning .warning-title {
+        font-weight: bold;
+        color: #b91c1c;
 }
 .doc-content table {
     border: 1px solid #ddd;
@@ -1515,6 +1560,21 @@ span.CodeMirror-selectedtext { background: none; }
 }
 .doc-search-result-item-card .doc-partial-version code {
       color: #0086b3;
+}
+.doc-search-result-item-card .doc-partial-security-warning {
+    font-size: 13px;
+    background: #fee2e2;
+    margin: 10px 20px 10px 0;
+    padding: 10px;
+    border-left: 2px solid #f87171;
+    color: #64748b;
+}
+.doc-search-result-item-card .doc-partial-security-warning code {
+      background: #fecaca;
+}
+.doc-search-result-item-card .doc-partial-security-warning .warning-title {
+      font-weight: bold;
+      color: #b91c1c;
 }
 .doc-search-result-item-card iframe, .doc-search-result-item-card pre, .doc-search-result-item-card image {
     display: none;
