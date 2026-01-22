@@ -1,7 +1,7 @@
 /*
 title: Bar3D - Simplex Noise
 category: bar3D
-titleCN: Bar3D - Simplex Noise
+titleCN: Bar3D - 单纯形噪声
 theme: dark
 */
 $.getScript(CDN_PATH + 'simplex-noise@2.4.0/simplex-noise.js').done(

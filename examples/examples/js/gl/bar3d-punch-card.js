@@ -1,7 +1,7 @@
 /*
 title: Bar3D - Punch Card
 category: bar3D
-titleCN: Bar3D - Punch Card
+titleCN: Bar3D - 打卡统计柱状图
 */
 // prettier-ignore
 var hours = ['12a', '1a', '2a', '3a', '4a', '5a', '6a',

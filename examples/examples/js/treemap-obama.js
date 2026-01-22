@@ -1,7 +1,7 @@
 /*
 title: How $3.7 Trillion is Spent
 category: treemap
-titleCN: How $3.7 Trillion is Spent
+titleCN: 3.7 万亿美元支出构成
 */
 myChart.showLoading();
 const household_america_2012 = 113616229;

@@ -1,7 +1,7 @@
 /*
 title: Wood City
 category: map3D
-titleCN: Wood City
+titleCN: 木质风格城市
 */
 $.getJSON(
   ROOT_PATH + '/data-gl/asset/data/buildings.json',
