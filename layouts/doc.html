@@ -14,4 +14,90 @@
 </script><script src="https://echarts.apache.org/zh/./js/vendors/vue@2.6.14/vue.min.js"></script><script src="https://echarts.apache.org/zh/./js/vendors/element-ui@2.15.14/index.js"></script><script src="https://echarts.apache.org/zh/./js/vendors/codemirror@5.56.0/codemirror.min.js"></script><script src="https://echarts.apache.org/zh/./js/vendors/codemirror@5.56.0/mode/javascript/javascript.js"></script><script src="https://echarts.apache.org/zh/./js/vendors/js-beautify@1.11.0/beautifier.min.js"></script><script src="https://echarts.apache.org/zh/js/doc-bundle.js?_v_=25901f70dd"></script><script type="text/javascript">document.getElementById('nav-doc').className = 'active';
 window.EC_WWW_CDN_PAY_ROOT = 'https://echarts.apache.org';
 </script><script type="text/javascript">window.globalArgsExtra.version = '39b98a9197';
-echartsDoc.init('#ec-doc-main', window.globalArgsExtra);</script></html>
+echartsDoc.init('#ec-doc-main', window.globalArgsExtra);</script>
+<script>
+(function () {
+
+  // Remove existing button if already added
+  const existingButton = document.getElementById('scrollToTop');
+  if (existingButton) {
+    existingButton.remove();
+  }
+
+  // Add styles
+  const scrollButtonStyles = document.createElement('style');
+  scrollButtonStyles.textContent = `
+    #scrollToTop {
+      position: fixed !important;
+      bottom: 30px;
+      right: 30px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #5470c6;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.2s ease;
+      z-index: 9999;
+      font-size: 16px;
+    }
+
+    #scrollToTop.visible {
+      opacity: 1;
+    }
+
+    #scrollToTop:hover {
+      background: #3c66b0;
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+      #scrollToTop {
+        bottom: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+      }
+    }
+  `;
+  document.head.appendChild(scrollButtonStyles);
+
+  // Create button
+  const scrollButton = document.createElement('button');
+  scrollButton.id = 'scrollToTop';
+  scrollButton.textContent = '↑';
+  scrollButton.title = '回到顶部';
+  document.body.appendChild(scrollButton);
+
+  // Find scroll container
+  const scrollContainer = document.querySelector('.page-main');
+
+  if (!scrollContainer) return;
+
+  // Show/hide button based on scroll
+  function updateButtonVisibility() {
+    if (scrollContainer.scrollTop > 300) {
+      scrollButton.classList.add('visible');
+    } else {
+      scrollButton.classList.remove('visible');
+    }
+  }
+
+  // Scroll to top smoothly
+  function scrollToTop() {
+    scrollContainer.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+
+  scrollContainer.addEventListener('scroll', updateButtonVisibility);
+  scrollButton.addEventListener('click', scrollToTop);
+
+  updateButtonVisibility();
+
+})();
+</script></html>
