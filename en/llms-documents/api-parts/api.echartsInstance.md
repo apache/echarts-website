@@ -1,0 +1,1221 @@
+# api.echartsInstance
+
+## group
+- **Type**: `string|number`
+
+Group name to be used in chart [connection](api.echarts.md#connect).
+
+## setOption
+- **Type**: `Function`
+
+```
+(option: Object, notMerge?: boolean, lazyUpdate?: boolean)
+or
+(option: Object, opts?: {
+    notMerge?: boolean;
+    replaceMerge?: string | string[];
+    lazyUpdate?: boolean;
+})
+```
+
+Configuration item, data, universal interface, all parameters and data can all be modified through `setOption`. ECharts will merge new parameters and data, and then refresh chart. If [animation](../option.md#animation) is enabled, ECharts will find the difference between two groups of data and present data changes through proper animation.
+
+**For example:**
+
+**Attention:** Setting configuration item using `addData` and `setSeries` of ECharts 2.x are no longer supported. `setOption` is used for all these cases in ECharts 3. Please refer to the above example.
+
+**Parameters**
+
+Usage:
+
+```
+chart.setOption(option, notMerge, lazyUpdate);
+```
+
+or
+
+```
+chart.setOption(option, {
+    notMerge: ...,
+    lazyUpdate: ...,
+    silent: ...
+});
+```
+
+or
+
+```
+chart.setOption(option, {
+    replaceMerge: ['xAxis', 'yAxis', 'series']
+});
+```
+
+*   `option`: `ECOption`
+    
+    Configuration item and data. Please refer to [configuration item manual](option.html) for more information.
+    
+*   opts
+    
+    *   `notMerge` Optional. Whether not to merge with previous `option`. `false` by default, means merge, see more details in **Component Merging Modes**. If `true`, all of the current components will be removed and new components will be created according to the new `option`.
+        
+    *   `replaceMerge` Optional. Users can specify "component main types" here, which are the properties under the root of the option tree in [configuration item manual](option.html) (e.g., `xAxis`, `series`). The specified types of component will be merged in the mode "replaceMerge". If users intending to remove some part of components, `replaceMerge` can be used. See more details in **Component Merging Modes**.
+        
+    *   `lazyUpdate` Optional. Whether not to update chart immediately. `false` by default, stating update chart synchronously. If `true`, the chart will be updated in the next animation frame.
+        
+    *   `silent` Optional. Whether not to prevent triggering events when calling `setOption`. `false` by default, stating trigger events.
+        
+
+#### Component Merging Modes
+
+Within a specific type of components (more accurately, "component main type". e.g., `xAxis`, `series`):
+
+*   If `opts.notMerge` is set as `true`, the old components will be totally removed and the new component will be created by the incoming `option`.
+*   If `opts.notMerge` is set as `false` or not specified:
+    *   If this component main type is included in `opts.replaceMerge`, these components will be merged in mode `Replace Merge`.
+    *   Otherwise, these components will be merged in mode `Normal Merge`.
+
+What is `Normal Merge` and `Replace Merge`?
+
+##### Normal Merge
+
+Within a specific component main type (e.g., `xAxis`, `series`), each single "component description" (i.e., like `{type: 'xAxis', id: 'xx', name: 'kk', ...}`) in the incoming `option` will be mapped and merged into the existing components one by one if possible. Otherwise create new component on the tail of the list. The detailed rule is as follows:
+
+*   For each single "component description" that has `id` or `name` specified in `option`, firstly find and merge to existing components that has the same `id` or `name` if possible.
+*   Then for each remaining single "component description", find and merge to remaining existing components if possible.
+*   Create new components for the remaining "component descriptions" at the tail.
+
+Features:
+
+*   No existing component will be removed. Only add and update are supported in this mode.
+*   The index of component(componentIndex) will never be changed.
+*   If no `id` and `name` specified in `option` (this is a common case), components can be simply merged intuitively according to where they appear in `option`.
+
+Example:
+
+```
+// Existing components:
+{
+    xAxis: [
+        { id: 'm', interval: 5 },
+        { id: 'n', name: 'nnn', interval: 6 }
+        { id: 'q', interval: 7 }
+    ]
+}
+// Incoming option:
+chart.setOption({
+    xAxis: [
+        // No id given. Will be merged to the first unmatched existing component `id: 'q'`
+        { interval: 77 },
+        // No id given. Will create new component
+        { interval: 88 },
+        // No id given but name given. Will be merged to `name: 'nnn'`
+        { name: 'nnn', interval: 66 },
+        // id given. Will be merged to `id: 'm'`.
+        { id: 'm', interval: 55 }
+    ]
+});
+// Result components:
+{
+    xAxis: [
+        { id: 'm', interval: 55 },
+        { id: 'n', name: 'nnn', interval: 66 },
+        { id: 'q', interval: 77 },
+        { interval: 88 }
+    ]
+}
+```
+
+##### `Replace Merge`
+
+Within a specific component main type (e.g., `xAxis`, `series`), only the existing components that has its `id` declared in the incoming `option` will be kept, other existing components will be removed or replaced with new created component. the detailed rule is as follows:
+
+*   Firstly Find and merge to existing components that has the same `id` in `option` if possible.
+*   Remove the remaining unmatched existing components. (In fact, set to `null` in the component list to make sure there is no change of the indices of the components that not be removed).
+*   Create new components for the remaining "component descriptions", and put them on the places that have been free or appended to the tail.
+
+Features:
+
+*   Enable to remove some of the components, which is not supported in `Normal Merge`.
+*   The indices of the existing components will never be modified. This is to ensure that the existing references by index still works (e.g., `xAxisIndex: 2`).
+*   After replace merged, there might be some "hole", that is, there is no component at some index (because the original component is removed). But this is expectable and controllable by users.
+
+Example:
+
+```
+// Existing components:
+{
+    xAxis: [
+        { id: 'm', interval: 5, min: 1000 },
+        { id: 'n', name: 'nnn', interval: 6, min: 1000 }
+        { id: 'q', interval: 7, min: 1000 }
+    ]
+}
+// Incoming option:
+chart.setOption({
+    xAxis: [
+        { interval: 111 },
+        // id given. Will be merged to the existing `id: 'q'`.
+        { id: 'q', interval: 77 },
+        // id given, but can not find in the existing components.
+        { id: 't', interval: 222 },
+        { interval: 333 }
+    ]
+}, { replaceMerge: 'xAxis' });
+// Result components:
+{
+    xAxis: [
+        // The original component { id: 'm' } has been removed
+        // and replaced to this new component. So `min: 1000` is discarded.
+        { interval: 111 },
+        // The original component { id: 'n' } has been removed
+        // and replaced to this new component. So `min: 1000` is discarded.
+        { id: 't', interval: 222 },
+        // The original component has been merged with this new component.
+        // So `min: 1000` is kept.
+        { id: 'q', interval: 77, min: 1000 },
+        { interval: 333 }
+    ]
+}
+```
+
+##### Remove Component
+
+There are two ways to remove components:
+
+*   Totally removal: use `notMerge: true`, all of the components will be removed.
+*   Partially removal: use `replaceMerge: [...]`, the specified types of components will be removed if no id matched. This mode is useful to keep the state (e.g., highlight / animation / selected area) of the other components while make removal.
+
+## getWidth
+- **Type**: `Function`
+
+```
+() => number
+```
+
+Gets width of ECharts instance container.
+
+## getHeight
+- **Type**: `Function`
+
+```
+() => number
+```
+
+Gets height of ECharts instance container.
+
+## getDom
+- **Type**: `Function`
+
+```
+() => HTMLCanvasElement|HTMLDivElement
+```
+
+Gets DOM element of ECharts instance container.
+
+## getOption
+- **Type**: `Function`
+
+```
+() => Object
+```
+
+Gets `option` object maintained in current instance, which contains configuration item and data merged from previous `setOption` operations by users, along with user interaction states. For example, switching of legend, zooming area of data zoom, and so on. Therefore, a new instance that is exactly the same can be recovered from this option.
+
+**Attention:** Attribute values in each component of the returned option are all in the form of an array, no matter it's single object or array of object when passed by `setOption`. For example:
+
+```
+{
+    title: [{...}],
+    legend: [{...}],
+    grid: [{...}]
+}
+```
+
+Besides, the following style is **not recommended**:
+
+```
+var option = myChart.getOption();
+option.visualMap[0].inRange.color = ...;
+myChart.setOption(option);
+```
+
+This is because `getOption` contains merged values which could be default values, and may overlaps future values. So, we **recommend** the following style when update part of configuration.
+
+```
+myChart.setOption({
+    visualMap: {
+        inRange: {
+            color: ...
+        }
+    }
+})
+```
+
+## setTheme
+- **Type**: `Function`
+
+Since `v6.0.0`
+
+```
+(
+    theme: string | Object,
+    opts?: {
+        silent?: boolean
+    }
+) => void
+```
+
+Sets the theme for the chart instance.
+
+*   `theme`: When `string`: Represents the `themeName` registered via [echarts.registerTheme](api.echarts.md#registerTheme). When `Object`: An anonymous theme object that will be directly applied.
+*   `opts.silent` Specify whether or not to prevent triggering events.
+
+Here is a demo of dynamically setting a theme after initialization:
+
+Method 1: Register and apply a named theme; the theme can be used in multiple charts.
+
+```
+echarts.registerTheme('myTheme', { backgroundColor: 'red' });
+const chart1 = echarts.init(mainDOMElement1);
+chart1.setTheme('myTheme');
+chart1.setOption(...);
+const chart2 = echarts.init(mainDOMElement2);
+chart2.setTheme('myTheme');
+chart2.setOption(...);
+```
+
+Method 2: Apply an anonymous theme directly, which only serves the current chart.
+
+```
+const chart1 = echarts.init(mainDOMElement);
+chart1.setTheme({ backgroundColor: 'red' });
+chart1.setOption(...);
+```
+
+**\[CAVEAT\]:**
+
+In the current implementation, calling `setOption` multiple times in merge mode is not supported when using `setTheme`. That is,
+
+```
+// --- Bad (May be unexpected) ---
+const chart1 = echarts.init(mainDOMElement);
+chart1.setOption(option1);
+chart1.setOption(option2); // call `setOption` in "merge mode"
+chart1.setOption(option3);
+chart1.setTheme('dark');
+// After calling `setTheme`, the previous options (option1 and option2) are discarded.
+// Only the last option (option3) is retained.
+
+// --- Solution ---
+const chart1 = echarts.init(mainDOMElement);
+// Make sure every option contains all the information and using `notMerge mode` in `setOption`.
+chart1.setOption(option1, {notMerge: true});
+chart1.setOption(option2, {notMerge: true});
+chart1.setOption(option3, {notMerge: true});
+chart1.setTheme('dark');
+// The previous options (option1 and option2) are also discarded.
+// But the last option (option3) contains all the information and is retained,
+// so the finall effect is correct.
+```
+
+## resize
+- **Type**: `Function`
+
+```
+(opts?: {
+    width?: number|string,
+    height?: number|string,
+    silent?: boolean,
+    animation?: {
+        duration?: number
+        easing?: string
+    }
+}) => ECharts
+```
+
+Resizes chart, which should be called manually when container size changes.
+
+**Parameters**
+
+*   `opts`
+    
+    Optional. Which may contain:
+    
+    *   `width` Specify width explicitly, in pixel. If setting to `null`/`undefined`/`'auto'`, width of `dom` (instance container) will be used.
+        
+    *   `height` Specify height explicitly, in pixel. If setting to `null`/`undefined`/`'auto'`, height of `dom` (instance container) will be used.
+        
+    *   `silent` Specify whether or not to prevent triggering events.
+        
+    *   `animation` Whether to apply transition animation when resize, including `duration` and `easing`, the default `duration` is 0, that is, no transition animation is applied.
+        
+
+**Tip:**
+
+Sometimes charts may be placed in multiple tabs. Those in hidden labels may fail to initialize due to the ignorance of container width and height. So `resize` should be called manually to get the correct width and height when switching to the corresponding tabs, or specify width/height in `opts` explicitly.
+
+## renderToSVGString
+- **Type**: `Function`
+
+Since `v5.3.0`
+
+```
+(opts?: {
+    useViewBox?: boolean
+}) => string
+```
+
+Render to a SVG string. Available when setting `renderer: 'svg'` to use SVG rendering mode.
+
+Must use this method to render if server-side rendering is enabled with the `ssr` parameter in `echarts.init`
+
+**Parameters**
+
+*   `opts`
+    
+    *   `useViewBox` Whether to add [viewBox](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/viewBox) in the generated SVG string
+
+## dispatchAction
+- **Type**: `Function`
+
+```
+(payload: Object)
+```
+
+Triggers chart action, like chart switch `legendToggleSelect`,zoom data area `dataZoom`, show tooltip `showTip` and so on. See [action](api.action.md) and [events](api.events.md) for more information.
+
+`payload` parameter can trigger multiple actions through `batch` attribute.
+
+**Attention:** In ECharts 2.x, triggering chart actions has a long operation path like `myChart.component.tooltip.showTip`, which may also involve with internal component organization. So, `dispatchAction` is used in this case in ECharts 3.
+
+**For example**
+
+```
+myChart.dispatchAction({
+    type: 'dataZoom',
+    start: 20,
+    end: 30
+});
+// Multiply actions can be dispatched through batch parameter
+myChart.dispatchAction({
+    type: 'dataZoom',
+    batch: [{
+        // first dataZoom component
+        start: 20,
+        end: 30
+    }, {
+        // second dataZoom component
+        dataZoomIndex: 1,
+        start: 10,
+        end: 20
+    }]
+})
+```
+
+## on
+- **Type**: `Function`
+
+```
+(
+    eventName: string,
+    handler: Function,
+    context?: Object
+)
+(
+    eventName: string,
+    query: string|Object,
+    handler: Function,
+    context?: Object
+)
+```
+
+Binds event-handling function.
+
+There are two kinds of events in ECharts, one of which is mouse events, which will be triggered when the mouse clicks certain element in the chart, the other kind will be triggered after [dispatchAction](api.echartsInstance.md#dispatchAction) is called. Every action has a corresponding event. Please refer to [action](api.action.md) and [events](api.events.md) for more information.
+
+If event is triggered externally by [dispatchAction](api.echartsInstance.md#dispatchAction), and there is batch attribute in action to trigger batch action, then the corresponding response event parameters be in batch.
+
+**Parameters**
+
+*   `eventName`
+    
+    Event names are all in lower-cases, for example, `'click'`, `'mousemove'`, `'legendselected'`
+    
+    **Attention:** ECharts 2.x uses attributes like `CLICK` in `config` object as event name. In ECharts 3, lower-case strings are used as event name to align with DOM events.
+    
+*   `query`
+    
+    Condition for filtering, optional. `query` enables only call handlers on graphic elements of specified components. Can be `string` or `Object`.
+    
+    If `string`, the formatter can be 'mainType' or 'mainType.subType'. For example:
+    
+    ```
+      chart.on('click', 'series', function () {...});
+      chart.on('click', 'series.line', function () {...});
+      chart.on('click', 'xAxis.category', function () {...});
+    ```
+    
+    If `Object`, one or more properties below can be included, and any of them is optional.
+    
+    ```
+      {
+          <mainType>Index: number // component index
+          <mainType>Name: string // component name
+          <mainType>Id: string // component id
+          dataIndex: number // data item index
+          name: string // data item name
+          dataType: string // data item type, e.g.,
+                           // 'node' and 'edge' in graph.
+          element: string // element name in custom series
+      }
+    ```
+    
+    For example:
+    
+    ```
+      chart.setOption({
+          // ...
+          series: [{
+              name: 'uuu'
+              // ...
+          }]
+      });
+      chart.on('mouseover', {seriesName: 'uuu'}, function () {
+          // When the graphic elements in the series with name 'uuu' mouse overed, this method is called.
+      });
+    ```
+    
+    For example:
+    
+    ```
+      chart.setOption({
+          // ...
+          series: [{
+              // ...
+          }, {
+              // ...
+              data: [
+                  {name: 'xx', value: 121},
+                  {name: 'yy', value: 33}
+              ]
+          }]
+      });
+      chart.on('mouseover', {seriesIndex: 1, name: 'xx'}, function () {
+          // When the graphic elements of the data item with name 'xx' in the series with index 1 mouse overed, this method is called.
+      });
+    ```
+    
+    For example:
+    
+    ```
+      chart.setOption({
+          // ...
+          series: [{
+              type: 'graph',
+              nodes: [{name: 'a', value: 10}, {name: 'b', value: 20}],
+              edges: [{source: 0, target: 1}]
+          }]
+      });
+      chart.on('click', {dataType: 'node'}, function () {
+          // When the nodes of the graph clicked, this method is called.
+      });
+      chart.on('click', {dataType: 'edge'}, function () {
+          // When the edges of the graph clicked, this method is called.
+      });
+    ```
+    
+    For example:
+    
+    ```
+      chart.setOption({
+          // ...
+          series: {
+              // ...
+              type: 'custom',
+              renderItem: function (params, api) {
+                  return {
+                      type: 'group',
+                      children: [{
+                          type: 'circle',
+                          name: 'my_el',
+                          // ...
+                      }, {
+                          // ...
+                      }]
+                  }
+              },
+              data: [[12, 33]]
+          }
+      })
+      chart.on('click', {targetName: 'my_el'}, function () {
+          // When the element with name 'my_el' clicked, this method is called.
+      });
+    ```
+    
+*   `handler`
+    
+    Event-handling function, whose format is as following:
+    
+    ```
+    (event: Object)
+    ```
+    
+*   `context`
+    
+    Optional; context of callback function, what `this` refers to.
+
+## off
+- **Type**: `Function`
+
+```
+(eventName?: string, handler?: Function)
+```
+
+Unbind event-handler function.
+
+**parameter:**
+
+*   `eventName` Event name.
+    
+    Optional. If no `eventName` is provided, all listeners of all events will be unbound.
+    
+*   `handler` The event handler function to be unbound.
+    
+    Optional. If no `handler` is provided, all listeners of the specified `eventName` will be unbound.
+
+## convertToPixel
+- **Type**: `Function`
+
+```
+(
+    // `finder` is used to indicate in which coordinate system or axis or series
+    // conversion is performed.
+    // Generally, it is identified by xxxIndex or xxxId or xxxName.
+    finder: {
+        xAxisIndex?: number,
+        xAxisId?: string | number,
+        xAxisName?: string,
+        yAxisIndex?: number,
+        yAxisId?: string | number,
+        yAxisName?: string,
+        gridIndex?: number,
+        gridId?: string | number,
+        gridName?: string,
+
+        polarIndex?: number,
+        polarId?: string | number,
+        polarName?: string,
+
+        geoIndex?: number,
+        geoId?: string | number,
+        geoName?: string,
+
+        singleAxisIndex?: number,
+        singleAxisId?: string | number,
+        singleAxisName?: string,
+
+        calendarIndex?: number,
+        calendarId?: string | number,
+        calendarName?: string,
+
+        matrixIndex?: number,
+        matrixId?: string | number,
+        matrixName?: string,
+
+        seriesIndex?: number,
+        seriesId?: string | number,
+        seriesName?: string,
+    },
+    // The coord (on the specified coordinate system or axis or series) to be converted.
+    coord:
+          [(number | string), (number | string)]
+        | [
+            [(number | string), (number | string)],
+            [(number | string), (number | string)]
+          ]
+        | (number | string),
+    // Extra opt, defined by each coordinate systems.
+    opt?: unknown
+) =>
+    // The result pixel values on canvas, where [0, 0] is on the left-top of
+    // the main dom of echarts instance.
+    [number, number] | number
+```
+
+Convert the `coord` on coordinate system or axis or series (i.e., [cartesian2d (grid)](../option-parts/option.grid.md), [only xAxis](../option-parts/option.xAxis.md), [only yAxis](../option-parts/option.yAxis.md), [polar](../option-parts/option.polar.md), [geo](../option-parts/option.geo.md), [series.map](../option-parts/option.series-map.md), [singleAxis](../option-parts/option.singleAxis.md), [calender](../option-parts/option.calendar.md), [matrix](../option-parts/option.matrix.md)) to pixel on canvas.
+
+The format of the input `coord` and return type are defined by each coordinate system or axis or series:
+
+*   In [cartesian2d (grid)](../option-parts/option.grid.md):
+    
+    The input `coord` is an two-item array, where `value[0]` and `value[1]` correspond to [xAxis](../option-parts/option.xAxis.md) and [yAxis](../option-parts/option.yAxis.md). The data types varies in terms of [axis.type](../option.md#~xAxis.type):
+    
+    *   If [axis.type](../option.md#~xAxis.type) is `'value'`, `'log'`, the input `coord` should be `[number, number]`.
+    *   If [axis.type](../option.md#~xAxis.type) is `'category'`, the input `coord` can be `[(number | string), (number | string)]`, where `string` represents the original string in `series.data`, and `number` represents an ordinal number converted from the original string (be a non-negative integer that increases starting from `0`).
+    *   If [axis.type](../option.md#~xAxis.type) is `'time'`, the input `coord` can be `[(number | string | Date), (number | string | Date)]`, where `number` represents a timestamp, and `string | Date` represents any time format that can be parsed by [method `parseDate` in `echarts/src/util/number.ts`](https://github.com/apache/echarts/blob/master/src/util/number.ts).
+        
+        For example,
+        
+        ```
+        // [300, 900] means [coord on xAxis, coord on yAxis].
+        // Notice, there might be more than one xAxis or yAxis in a grid, and each a pair of
+        // xAxis-yAxis constitutes a cartesian.
+        // Perform conversion in the cartesian consist of the third xAxis and the yAxis with id 'y1'.
+        chart.convertToPixel({xAxisIndex: 2, yAxisId: 'y1'}, [300, 900]);
+        // Perform conversion in the first cartesian of the grid with id 'g1'.
+        chart.convertToPixel({gridId: 'g1'}, [300, 900]);
+        ```
+        
+*   [only yAxis](../option-parts/option.xAxis.md) or [only yAxis](../option-parts/option.yAxis.md):
+    
+    For example, convert a axis coord to pixel value:
+    
+    ```
+      // In the xAxis with id 'x0' (type: number),
+      // convert coord 3000 to the horizontal pixel coordinate:
+      result = chart.convertToPixel({xAxisId: 'x0'}, 3000); // A pixel number will be returned.
+      // In the second yAxis (type: category),
+      // convert 'my category' to the vertical pixel coordinate:
+      result = chart.convertToPixel({yAxisIndex: 1}, 'my category'); // A pixel number will be returned.
+    ```
+    
+*   In [polar](../option-parts/option.polar.md):
+    
+    It can be analogous to the `cartesian2d (grid)` case. But only support querying by `polarIndex`/`polarId`/`polarName`, but not support querying by `angleAxis` and `radiusAxis`.
+    
+*   In [geo](../option-parts/option.geo.md):
+    
+    The input `coord` can be `[number, number]`, indicating `[longitude, latitude]` if the [map](../option-parts/option.geo.md#map) is `GeoJSON`, or `[x_on_SVG, y_on_SVG]` if the [map](../option-parts/option.geo.md#map) is `SVG`.
+    
+    It can also be a `string`, indicating a `name` in `GeoJSON` (i.e., `features[i].properties.name`, see details in [registerMap](api.echarts.md#registerMap)) or `SVG` (i.e., see "Named Element" in [SVG Base Map](https://echarts.apache.org/handbook/en/how-to/component-types/geo/svg-base-map)), and return the pixel point of the center of that area.
+    
+    For example,
+    
+    ```
+      // [128.3324, 89.5344] represents [longitude, latitude].
+      // Perform conversion in the first geo coordinate system:
+      result = chart.convertToPixel('geo', [128.3324, 89.5344]); // The parameter 'geo' means {geoIndex: 0}.
+      // Perform conversion in the second geo coordinate system:
+      result = chart.convertToPixel({geoIndex: 1}, [128.3324, 89.5344]);
+      // Perform conversion in the geo coordinate system with id 'bb':
+      result = chart.convertToPixel({geoId: 'bb'}, [128.3324, 89.5344]);
+      // Input a name in `features[i].properties.name:"Bern"` in `GeoJSON`
+      // or a shape with `name="Bern"` in SVG:
+      result = chart.convertToPixel({geoId: 'bb'}, 'Bern');
+    ```
+    
+*   In [series.map](../option-parts/option.series-map.md):
+    
+    It can be analogous to the `geo` case. For example,
+    
+    ```
+      result = chart.convertToPixel({seriesId: 'my_map'}, [128.3324, 89.5344]);
+    ```
+    
+*   In [singleAxis](../option-parts/option.singleAxis.md):
+    
+    It can be analogous to the `only xAxis` or `only yAxis` cases. For example,
+    
+    ```
+      result = chart.convertToPixel({singleAxisIndex: 0}, 333); // `axis.type` is `'value'`.
+      result = chart.convertToPixel({singleAxisIndex: 1}, 'my category'); // `axis.type` is `'category'`.
+    ```
+    
+*   In [calendar](../option-parts/option.calendar.md):
+    
+    The input `coord` can be `number | string | Date`, where `number` represents a timestamp, and `string | Date` represents any time format that can be parsed by [method `parseDate` in `echarts/src/util/number.ts`](https://github.com/apache/echarts/blob/master/src/util/number.ts). For example,
+    
+    ```
+      result = chart.convertToLayout({calendarIndex: 0}, '2021-01-01');
+      result = chart.convertToLayout({calendarIndex: 0}, new Date(1609459200000));
+      result = chart.convertToLayout({calendarIndex: 0}, 1609459200000);
+    ```
+    
+
+*   In [matrix](../option-parts/option.matrix.md):
+    
+    The input `coord` identifies a rectangle, whose the center point is return. See more details in [matrix.body.data.coord](../option-parts/option.matrix.md#body.data.coord). For example,
+    
+    ```
+      chart.setOption({
+          matrix: {
+              x: {data: ['AA', 'BB', 'CC', 'DD']},
+              y: {data: ['MM', 'NN']}
+          }
+      });
+      result = chart.convertToPixel({matrixIndex: 0}, ['AA', 'NN']);
+      result = chart.convertToLayout({matrixIndex: 0}, ['AA', 'NN']);
+      // The rectangle can cross multiple cells:
+      result = chart.convertToPixel({matrixIndex: 0}, [['AA', 'CC'], 'MM']);
+      result = chart.convertToLayout({matrixIndex: 0}, [['AA', 'CC'], 'MM']);
+      // This is the ordinal number (non-negative, starting from 0) corresponding to
+      // the string name above.
+      result = chart.convertToPixel({matrixIndex: 0}, [1, 2]);
+      result = chart.convertToLayout({matrixIndex: 0}, [1, 2]);
+      result = chart.convertToPixel({matrixIndex: 0}, [[1, 3], [0, 1]]);
+      result = chart.convertToLayout({matrixIndex: 0}, [[1, 3], [0, 1]]);
+    ```
+    
+    The input `opt` is optional:
+    
+    ```
+      opt?: {
+          // Options:
+          //  - `0`/`null`/`undefined` (default) means no clamp, that is, if the input
+          //    `coord[0]` or `coord[1]` is `null`/`undefined`/`NaN`/"out of boundary",
+          //    the corresponding result part is `NaN`, rather than clamp to the boundary
+          //    of the matrix.
+          //  - Otherwise, clamp, that is, clamp to the boundary of the matrix, where
+          //    - `1`: Clampping in the area of the entire matrix.
+          //    - `2`: Clampping in the area of matrix body.
+          //    - `3`: Clampping in the area of matrix corner.
+          // Note:
+          //  - this argument is supported in both
+          //    `convertToPixel`, `convertToLayout` and `convertFromPixel`
+          //  - X and Y is considered separately, that is, the result can be
+          //    `rect: {x: NaN, width: NaN, y: 123, width: 456}` if only x is out of range.
+          clamp?: null | undefined | 0 | 1 | 2 | 3;
+    
+          // If the result rectangular intersects with merged cells
+          // (i.e., `matrix['body'/'corner'].data.mergeCells: true`), whether to expand it
+          // to cover all of the merge cells. Be `false` by default.
+          ignoreMergeCells?: boolean;
+      }
+    
+      // For example:
+      const {rect, matrixXYLocatorRange} = chart.convertToLayout(
+          {matrixIndex: 0},
+          [10000, 2],
+          {clamp: 0}
+      );
+      // `rect` is `{x: NaN, y: 10, width: NaN, height: 100}`.
+      // `matrixXYLocatorRange` is `[[NaN, NaN], [2, 2]]`.
+      const {rect, matrixXYLocatorRange} = chart.convertToLayout(
+          {matrixIndex: 0},
+          [10000, 2],
+          {clamp: 1}
+      );
+      // `rect` is `{x: 20, y: 10, width: 200, height: 100}`.
+      // `matrixXYLocatorRange` is `[[0, 3], [2, 2]]`.
+    ```
+    
+
+*   In [series.graph](../option-parts/option.series-graph.md):
+    
+    For example,
+    
+    ```
+      // Since every graph series maintains a coordinate system for itself, we
+      // specify the graph series in `finder`.
+      // The input `coord` (e.g., [2000, 3500]) is in the graph original coordinates,
+      // that is in the same coord space as we used in `series.data[i].x` and
+      // `series.data[i].y`.
+      result = chart.convertToPixel({seriesIndex: 0}, [2000, 3500]);
+      result = chart.convertToPixel({seriesId: 'k2'}, [100, 500]);
+    ```
+    
+*   Other cases:
+    
+    In a coordinate system (cartesian, geo, graph, ...) that contains the given series, convert a point to pixel coordinate:
+    
+    ```
+      // Perform convert in the coordinate system that contains the first series.
+      result = chart.convertToPixel({seriesIndex: 0}, [128.3324, 89.5344]);
+      // Perform convert in the coordinate system that contains the series with id 'k2'.
+      result = chart.convertToPixel({seriesId: 'k2'}, [128.3324, 89.5344]);
+    ```
+
+## convertToLayout
+- **Type**: `Function`
+
+Since `v6.0.0`
+
+```
+(
+    // `finder` is used to indicate in which coordinate system
+    // conversion is performed.
+    // Generally, it is identified by xxxIndex or xxxId or xxxName.
+    finder: {
+        calendarIndex?: number,
+        calendarId?: string | number,
+        calendarName?: string,
+
+        matrixIndex?: number,
+        matrixId?: string | number,
+        matrixName?: string,
+    },
+    // The coord (on the specified coordinate system or axis or series) to be converted.
+    coord:
+          [(number | string), (number | string)]
+        | [
+            [(number | string), (number | string)],
+            [(number | string), (number | string)]
+          ]
+        | (number | string),
+    // Extra opt, defined by each coordinate systems.
+    opt?: unknown
+) =>
+    {
+        rect?: {x: number; y: number; width: number; height: number};
+        contentRect?: {x: number; y: number; width: number; height: number};
+        matrixXYLocatorRange?: [[number, number], [number, number]];
+    }
+```
+
+Convert the `coord` on coordinate system (i.e., [calender](../option-parts/option.calendar.md), [matrix](../option-parts/option.matrix.md)) to layout info.
+
+The format of the input `coord` and return type are defined by each coordinate system:
+
+*   In [calendar](../option-parts/option.calendar.md):
+    
+    The input `coord` can be `number | string | Date`, where `number` represents a timestamp, and `string | Date` represents any time format that can be parsed by [method `parseDate` in `echarts/src/util/number.ts`](https://github.com/apache/echarts/blob/master/src/util/number.ts). For example,
+    
+    ```
+      result = chart.convertToLayout({calendarIndex: 0}, '2021-01-01');
+      result = chart.convertToLayout({calendarIndex: 0}, new Date(1609459200000));
+      result = chart.convertToLayout({calendarIndex: 0}, 1609459200000);
+    ```
+    
+    The return type is:
+    
+    ```
+      interface CoordinateSystemDataLayout {
+          // The cell rect for a data item. Whether cell border exists is
+          // not considered, that is, the adjacent cell rectangles touch.
+          rect: {x: number, y: number, width: number, height: number};
+          // Shinked from `rect` to exclude border width.
+          contentRect: {x: number, y: number, width: number, height: number};
+      }
+    ```
+    
+*   In [matrix](../option-parts/option.matrix.md):
+    
+    The input `coord` identifies a rectangle, whose the center point is return. See more details in [matrix.body.data.coord](../option-parts/option.matrix.md#body.data.coord). For example,
+    
+    ```
+      chart.setOption({
+          matrix: {
+              x: {data: ['AA', 'BB', 'CC', 'DD']},
+              y: {data: ['MM', 'NN']}
+          }
+      });
+      result = chart.convertToPixel({matrixIndex: 0}, ['AA', 'NN']);
+      result = chart.convertToLayout({matrixIndex: 0}, ['AA', 'NN']);
+      // The rectangle can cross multiple cells:
+      result = chart.convertToPixel({matrixIndex: 0}, [['AA', 'CC'], 'MM']);
+      result = chart.convertToLayout({matrixIndex: 0}, [['AA', 'CC'], 'MM']);
+      // This is the ordinal number (non-negative, starting from 0) corresponding to
+      // the string name above.
+      result = chart.convertToPixel({matrixIndex: 0}, [1, 2]);
+      result = chart.convertToLayout({matrixIndex: 0}, [1, 2]);
+      result = chart.convertToPixel({matrixIndex: 0}, [[1, 3], [0, 1]]);
+      result = chart.convertToLayout({matrixIndex: 0}, [[1, 3], [0, 1]]);
+    ```
+    
+    The input `opt` is optional:
+    
+    ```
+      opt?: {
+          // Options:
+          //  - `0`/`null`/`undefined` (default) means no clamp, that is, if the input
+          //    `coord[0]` or `coord[1]` is `null`/`undefined`/`NaN`/"out of boundary",
+          //    the corresponding result part is `NaN`, rather than clamp to the boundary
+          //    of the matrix.
+          //  - Otherwise, clamp, that is, clamp to the boundary of the matrix, where
+          //    - `1`: Clampping in the area of the entire matrix.
+          //    - `2`: Clampping in the area of matrix body.
+          //    - `3`: Clampping in the area of matrix corner.
+          // Note:
+          //  - this argument is supported in both
+          //    `convertToPixel`, `convertToLayout` and `convertFromPixel`
+          //  - X and Y is considered separately, that is, the result can be
+          //    `rect: {x: NaN, width: NaN, y: 123, width: 456}` if only x is out of range.
+          clamp?: null | undefined | 0 | 1 | 2 | 3;
+    
+          // If the result rectangular intersects with merged cells
+          // (i.e., `matrix['body'/'corner'].data.mergeCells: true`), whether to expand it
+          // to cover all of the merge cells. Be `false` by default.
+          ignoreMergeCells?: boolean;
+      }
+    
+      // For example:
+      const {rect, matrixXYLocatorRange} = chart.convertToLayout(
+          {matrixIndex: 0},
+          [10000, 2],
+          {clamp: 0}
+      );
+      // `rect` is `{x: NaN, y: 10, width: NaN, height: 100}`.
+      // `matrixXYLocatorRange` is `[[NaN, NaN], [2, 2]]`.
+      const {rect, matrixXYLocatorRange} = chart.convertToLayout(
+          {matrixIndex: 0},
+          [10000, 2],
+          {clamp: 1}
+      );
+      // `rect` is `{x: 20, y: 10, width: 200, height: 100}`.
+      // `matrixXYLocatorRange` is `[[0, 3], [2, 2]]`.
+    ```
+    
+    The return type is:
+    
+    ```
+      interface CoordinateSystemDataLayout {
+          // The cell rect for a data item. Whether cell border exists is
+          // not considered, that is, the adjacent cell rectangles touch.
+          rect: {x: number, y: number, width: number, height: number};
+          // Note: The `contentRect` that exclude border width and padding is
+          // not provided, as matrix coordinate system support that the
+          // result crosses multiple cells.
+    
+          // The range of ordinal numbers of X(col) and Y(row) of `rect`.
+          // It means `[[minXOrdinal, maxXOrdinal], [minYOrdinal, maxYOrdinal]]`
+          matrixXYLocatorRange: [[number, number], [number, number]];
+      }
+    ```
+
+## convertFromPixel
+- **Type**: `Function`
+
+```
+(
+    // `finder` is used to indicate in which coordinate system or axis or series
+    // conversion is performed.
+    // Generally, it is identified by xxxIndex or xxxId or xxxName.
+    finder: {
+        xAxisIndex?: number,
+        xAxisId?: string | number,
+        xAxisName?: string,
+        yAxisIndex?: number,
+        yAxisId?: string | number,
+        yAxisName?: string,
+        gridIndex?: number,
+        gridId?: string | number,
+        gridName?: string,
+
+        polarIndex?: number,
+        polarId?: string | number,
+        polarName?: string,
+
+        geoIndex?: number,
+        geoId?: string | number,
+        geoName?: string,
+
+        singleAxisIndex?: number,
+        singleAxisId?: string | number,
+        singleAxisName?: string,
+
+        calendarIndex?: number,
+        calendarId?: string | number,
+        calendarName?: string,
+
+        matrixIndex?: number,
+        matrixId?: string | number,
+        matrixName?: string,
+
+        seriesIndex?: number,
+        seriesId?: string | number,
+        seriesName?: string,
+    },
+    // The pixel values on canvas to be converted, where [0, 0] is on the left-top of
+    // the main dom of echarts instance.
+    value: [number, number] | number,
+    // Extra opt, defined by each coordinate systems.
+    opt?: unknown
+) =>
+    // The result coord
+      [number, number]
+    | [[number, number], [number, number]]
+    | number
+```
+
+Convert a point from pixel coordinate to logical coordinate (e.g., in geo, cartesian, graph, ...).
+
+This method is the inverse operation of [convertToPixel](api.echartsInstance.md#convertToPixel), where the examples can be referred.
+
+## containPixel
+- **Type**: `Function`
+
+```
+(
+    // `finder` is used to indicate in which coordinate system or axis or series
+    // conversion is performed.
+    // Generally, it is identified by xxxIndex or xxxId or xxxName.
+    finder: {
+        xAxisIndex?: number,
+        xAxisId?: string,
+        xAxisName?: string,
+        yAxisIndex?: number,
+        yAxisId?: string,
+        yAxisName?: string,
+        gridIndex?: number,
+        gridId?: string,
+        gridName?: string
+
+        geoIndex?: number,
+        geoId?: string,
+        geoName?: string,
+
+        matrixIndex?: number,
+        matrixId?: string,
+        matrixName?: string
+
+        seriesIndex?: number,
+        seriesId?: string,
+        seriesName?: string,
+    },
+    // The value to be judged, in pixel coordinate system, where the origin ([0, 0])
+    // is on the left-top of the main dom of echarts instance.
+    value: Array
+) => boolean
+```
+
+Determine whether the given point is in the given coordinate systems or series.
+
+These coordinate systems or series are supported currently: [grid](../option-parts/option.grid.md), [polar](../option-parts/option.polar.md), [geo](../option-parts/option.geo.md), [matrix](../option-parts/option.matrix.md), [series-map](../option-parts/option.series-map.md), [series-graph](../option-parts/option.series-graph.md), [series-pie](../option-parts/option.series-pie.md).
+
+For example:
+
+```
+// Determine whether point [23, 44] is in the geo whose geoIndex 0.
+result = chart.containPixel('geo', [23, 44]); // Parameter 'geo' means {geoIndex: 0}
+// Determine whether point [23, 44] is in the grid whose gridId is 'z'.
+result = chart.containPixel({gridId: 'z'}, [23, 44]);
+// Determine whether point [23, 44] is in series whose index are 1, 4 or 5.
+result = chart.containPixel({seriesIndex: [1, 4, 5]}, [23, 44]);
+// Determine whether point [23, 44] is in series whose index are 1, 4 or 5,
+// or is in grid whose name is 'a'.
+result = chart.containPixel({seriesIndex: [1, 4, 5], gridName: 'a'}, [23, 44]);
+```
+
+## showLoading
+- **Type**: `Function`
+
+```
+(type?: string, opts?: Object)
+```
+
+Shows loading animation. You can call this interface manually before data is loaded, and call [hideLoading](api.echartsInstance.md#hideLoading) to hide loading animation after data is loaded.
+
+**parameter:**
+
+*   `type`
+    
+    Optional; type of loading animation; only `'default'` is supported by far.
+    
+*   `opts`
+    
+    Optional; configuration item of loading animation, which is related to `type`. Following shows the available configuration items and their default values:
+    
+    ```
+    default: {
+      text: 'loading',
+      color: '#c23531',
+      textColor: '#000',
+      maskColor: 'rgba(255, 255, 255, 0.8)',
+      zlevel: 0,
+    
+      // Font size. Available since `v4.8.0`.
+      fontSize: 12,
+      // Show an animated "spinner" or not. Available since `v4.8.0`.
+      showSpinner: true,
+      // Radius of the "spinner". Available since `v4.8.0`.
+      spinnerRadius: 10,
+      // Line width of the "spinner". Available since `v4.8.0`.
+      lineWidth: 5,
+      // Font thick weight. Available since `v5.0.1`.
+      fontWeight: 'normal',
+      // Font style. Available since `v5.0.1`.
+      fontStyle: 'normal',
+      // Font family. Available since `v5.0.1`.
+      fontFamily: 'sans-serif'
+    }
+    ```
+
+## hideLoading
+- **Type**: `Function`
+
+Hides animation loading effect.
+
+## getDataURL
+- **Type**: `Function`
+
+```
+(opts: {
+    // Exporting format, can be png, jpg, svg.
+    // NOTE: png, jpg is only available for canvas renderer. svg is only available for svg renderer.
+    type?: string,
+    // Resolution ratio of exporting image, 1 by default.
+    pixelRatio?: number,
+    // Background color of exporting image, use backgroundColor in option by default.
+    backgroundColor?: string,
+    // Excluded components list. e.g. ['toolbox']
+    excludeComponents?: Array.<string>
+}) => string
+```
+
+Exports chart image; returns a base64 URL; can be set to `src` of `Image`.
+
+**For example:**
+
+```
+var img = new Image();
+img.src = myChart.getDataURL({
+    pixelRatio: 2,
+    backgroundColor: '#fff'
+});
+```
+
+## getConnectedDataURL
+- **Type**: `*`
+
+```
+(opts: {
+    // Exporting format, can be either png, or jpeg
+    type?: string,
+    // Resolution ratio of exporting image, 1 by default.
+    pixelRatio?: number,
+    // Background color of exporting image, use backgroundColor in option by default.
+    backgroundColor?: string,
+    // Excluded components list. e.g. ['toolbox']
+    excludeComponents?: Array.<string>
+}) => string
+```
+
+Exports connected chart image; returns a base64 url; can be set to `src` of `Image`. Position of charts in exported image are related to that of the container.
+
+## appendData
+- **Type**: `*`
+
+```
+(opts: {
+    // Specify which series the data will be appended to.
+    seriesIndex?: number,
+    // The data to be appended.
+    data?: Array|TypedArray
+}) => string
+```
+
+The method is used in rendering millions of data (e.g. rendering geo data). In these scenarios, the entire size of data is probably up to 10 or 100 MB, even using binary format. So chunked load data and rendering is required. When using `appendData`, the graphic elements that have been rendered will not be cleared, but keep rendering new graphic elements.
+
+Notice:
+
+*   Currently, when a series is using `dataset`, it is not supported to use `appendData`.
+*   Currently, not all types of series support incremental rendering when using `appendData`. Only these types of series support it: scatter and lines of pure echarts, and scatterGL, linesGL and polygons3D of echarts-gl.
+
+## clear
+- **Type**: `*`
+
+Clears current instance; removes all components and series in current instance.
+
+## isDisposed
+- **Type**: `*`
+
+```
+() => boolean
+```
+
+Returns whether current instance has been disposed.
+
+## dispose
+- **Type**: `*`
+
+Disposes instance. Once disposed, the instance can not be used again.

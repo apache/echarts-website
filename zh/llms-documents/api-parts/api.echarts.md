@@ -1,0 +1,521 @@
+# api.echarts
+
+## init
+- **Type**: `Function`
+
+```
+(dom?: HTMLDivElement|HTMLCanvasElement, theme?: Object|string, opts?: {
+    devicePixelRatio?: number,
+    renderer?: string,
+    useDirtyRect?: boolean,     // 从 `5.0.0` 开始支持
+    useCoarsePointer?: boolean, // 从 `5.4.0` 开始支持
+    pointerSize?: number,       // 从 `5.4.0` 开始支持
+    ssr?: boolean,              // 从 `5.3.0` 开始支持
+    width?: number|string,
+    height?: number|string,
+    locale?: string             // 从 `5.0.0` 开始支持
+}) => ECharts
+```
+
+创建一个 ECharts 实例，返回 [echartsInstance](api.echartsInstance.md)，不能在单个容器上初始化多个 ECharts 实例。
+
+**参数解释**
+
+*   `dom`
+    
+    实例容器，一般是一个具有高宽的 DIV 元素。只有在设置`opts.ssr`开启了服务端渲染后该参数才是可选。
+    
+    也支持直接使用`canvas`元素作为容器，这样绘制完图表可以直接将 canvas 作为图片应用到其它地方，例如在 WebGL 中作为贴图，这跟使用 [getDataURL](api.echartsInstance.md#getDataURL) 生成图片链接相比可以支持图表的实时刷新。
+    
+*   `theme`
+    
+    应用的主题。可以是一个主题的配置对象，也可以是使用已经通过 [echarts.registerTheme](api.echarts.md#registerTheme) 注册的主题名称。参见 [ECharts 中的样式简介](https://echarts.apache.org/handbook/zh/concepts/style)。
+    
+*   `opts`
+    
+    附加参数。有下面几个可选项：
+    
+    *   `devicePixelRatio`设备像素比，默认取浏览器的值`window.devicePixelRatio`。
+    *   `renderer` 渲染模式，支持`'canvas'`或者`'svg'`。参见 [使用 Canvas 或者 SVG 渲染](https://echarts.apache.org/handbook/zh/best-practices/canvas-vs-svg)。
+    *   `ssr` 是否使用服务端渲染，只有在 SVG 渲染模式有效。开启后不再会每帧自动渲染，必须要调用 [renderToSVGString](api.echartsInstance.md#renderToSVGString) 方法才能得到渲染后 SVG 字符串。参见[服务端渲染 ECharts 图表](https://echarts.apache.org/handbook/zh/how-to/cross-platform/server)。
+    *   `useDirtyRect`是否开启脏矩形渲染，只有在 Canvas 渲染模式有效，默认为`false`。参见 [ECharts 5 新特性](https://echarts.apache.org/handbook/zh/basics/release-note/v5-feature)。
+    *   `useCoarsePointer` 是否扩大可点击元素的响应范围。`null` 表示对移动设备开启；`true` 表示总是开启；`false` 表示总是不开启。参见[增加交互响应范围](https://echarts.apache.org/handbook/zh/how-to/interaction/coarse-pointer)。
+    *   `pointerSize` 扩大元素响应范围的像素大小，配合 `opts.useCoarsePointer`使用。
+    *   `width` 可显式指定实例宽度，单位为像素。如果传入值为`null`/`undefined`/`'auto'`，则表示自动取 `dom`（实例容器）的宽度。
+    *   `height` 可显式指定实例高度，单位为像素。如果传入值为`null`/`undefined`/`'auto'`，则表示自动取 `dom`（实例容器）的高度。
+    *   `locale` 使用的语言，内置 `'ZH'` 和 `'EN'` 两个语言，也可以使用 [echarts.registerLocale](api.echarts.md#registerLocale) 方法注册新的语言包。目前支持的语言见 [src/i18n](https://github.com/apache/echarts/tree/release/src/i18n)。
+        
+        如果不指定主题，也需在传入`opts`前先传入`null`，如：
+        
+        ```
+        const chart = echarts.init(dom, null, {renderer: 'svg'});
+        ```
+        
+
+**注：** 如果容器是隐藏的，ECharts 可能会获取不到 DIV 的高宽导致初始化失败，这时候可以明确指定 DIV 的`style.width`和`style.height`，或者在`div`显示后手动调用 [resize](api.echartsInstance.md#resize) 调整尺寸。
+
+在使用服务端渲染的模式下，必须通过`opts.width`和`opts.height`设置高和宽。
+
+## connect
+- **Type**: `Function`
+
+```
+(group:string|Array)
+```
+
+多个图表实例实现联动。
+
+**参数：**
+
+*   `group` group 的 id，或者图表实例的数组。
+
+**示例：**
+
+```
+// 分别设置每个实例的 group id
+chart1.group = 'group1';
+chart2.group = 'group1';
+echarts.connect('group1');
+// 或者可以直接传入需要联动的实例数组
+echarts.connect([chart1, chart2]);
+```
+
+## disconnect
+- **Type**: `Function`
+
+```
+(group:string)
+```
+
+解除图表实例的联动，如果只需要移除单个实例，可以将通过将该图表实例 `group` 设为空。
+
+**参数：**
+
+*   `group`
+    
+    group 的 id。
+
+## dispose
+- **Type**: `Function`
+
+```
+(target: ECharts|HTMLDivElement|HTMLCanvasElement)
+```
+
+销毁实例，实例销毁后无法再被使用。
+
+## getInstanceByDom
+- **Type**: `Function`
+
+```
+(target: HTMLDivElement|HTMLCanvasElement) => ECharts
+```
+
+获取 dom 容器上的实例。
+
+## use
+- **Type**: `Function`
+
+从 `v5.0.1` 开始支持
+
+使用组件，配合新的按需引入的接口使用。
+
+注意：该方法必须在`echarts.init`之前使用。
+
+```
+// 引入 echarts 核心模块，核心模块提供了 echarts 使用必须要的接口。
+import * as echarts from 'echarts/core';
+// 引入柱状图图表，图表后缀都为 Chart
+import {
+    BarChart
+} from 'echarts/charts';
+// 引入直角坐标系组件，组件后缀都为 Component
+import {
+    GridComponent
+} from 'echarts/components';
+// 引入 Canvas 渲染器，注意引入 CanvasRenderer 或者 SVGRenderer 是必须的一步
+import {
+    CanvasRenderer
+} from 'echarts/renderers';
+
+// 注册必须的组件
+echarts.use(
+    [GridComponent, BarChart, CanvasRenderer]
+);
+```
+
+更详细的使用方式见 [在项目中引入 Apache ECharts](https://echarts.apache.org/handbook/zh/basics/import) 一文
+
+## registerMap
+- **Type**: `Function`
+
+```
+(
+    mapName: string,
+    opt: {
+        geoJSON: Object | string;
+        specialAreas?: Object;
+    }
+)
+| (
+    mapName: string,
+    opt: {
+        svg: Object | string;
+    }
+)
+| (
+    mapName: string,
+    geoJSON: Object | string,
+    specialAreas?: Object
+)
+```
+
+注册可用的地图，只在 [geo](../option-parts/option.geo.md) 组件或者 [map](../option-parts/option.series-map.md) 图表类型中使用。
+
+使用方法见 [option.geo](../option-parts/option.geo.md#map)。
+
+**参数：**
+
+*   **@param `mapName`:**
+    
+    地图名称，在 [geo](../option-parts/option.geo.md) 组件或者 [map](../option-parts/option.series-map.md) 图表类型中设置的 `map` 对应的就是该值。
+    
+
+*   **@param `opt.geoJSON`:**
+    
+    可选。GeoJSON 格式的数据，具体格式见 [https://geojson.org/](https://geojson.org/)。可以是 JSON 字符串，也可以是解析得到的对象。这个参数也可以写为 `geoJson`，效果相同。
+    
+    例如，一个极小的 GeoJSON：
+    
+    ```
+      const geoJSONSample = {
+          "type": "FeatureCollection",
+          "features": [
+              {
+                  "type": "Feature",
+                  "geometry": {
+                      "type": "Polygon",
+                      "coordinates": [
+                          [[2000, 2000], [5000, 2000], [5000, 5000], [2000, 5000]]
+                      ]
+                  },
+                  "properties": {
+                      "name": "Some Place",
+                      "cp": [220, 2100]
+                  }
+              }
+          ]
+      };
+      echarts.registerMap('my_geo_sample', geoJSONSample);
+    ```
+    
+    注：
+    
+    *   GeoJSON 中的 `features[i].properties.name` 被 ECharts 默认使用来索引这个区域，或者显示图标文字。也可以使用其他属性名，参见 [geo.nameProperty](../option-parts/option.geo.md#nameProperty)。 Note:
+    *   GeoJSON 中的 `features[i].properties.cp` 是个 ECharts 可识别的可选属性。它提供了标签的位置坐标。如果没有提供，标签自动放置在相应区域的中心。
+*   **@param `opt.svg`:**
+    
+    可选。从 `v5.1.0` 开始支持SVG 格式的数据。可以是字符串，也可以是解析得到的 SVG DOM 对象。更多信息参见 [SVG 底图](https://echarts.apache.org/handbook/zh/how-to/component-types/geo/svg-base-map)。
+    
+    例如，一个极小的 SVG：
+    
+    ```
+      const mySVG = `<?xml version="1.0" encoding="utf-8"?>
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:ooo="http://xml.openoffice.org/svg/export" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.2" fill-rule="evenodd" xml:space="preserve">
+      <path name="left_rect" d="M 0,0 L 0,100 100,100 100,0 Z" fill="#765" stroke="rgb(56,93,138)" stroke-width="0" stroke-linecap="square" stroke-linejoin="miter"/>
+      </svg>`;
+      echarts.registerMap('my_geo_sample', {svg: mySVG});
+    ```
+    
+*   **@param `opt.specialAreas`:**
+    
+    可选。将地图中的部分区域缩放到合适的位置，可以使得整个地图的显示更加好看。只在 `geoJSON` 中生效，`svg` 中不生效。
+    
+    [specialAreas 示例](https://echarts.apache.org/examples/zh/editor.html?c=map-usa)：
+    
+    ```
+      echarts.registerMap('USA', usaJson, {
+          // 把阿拉斯加移到美国主大陆左下方
+          Alaska: {
+              // 左上角经度
+              left: -131,
+              // 左上角纬度
+              top: 25,
+              // 经度横跨的范围
+              width: 15
+          },
+          // 夏威夷
+          Hawaii: {
+              left: -110,
+              top: 28,
+              width: 5
+          },
+          // 波多黎各
+          'Puerto Rico': {
+              left: -76,
+              top: 26,
+              width: 2
+          }
+      });
+    ```
+    
+
+注：如果你在项目中使用了按需引入，从 v5.3.0 开始 `registerMap` 必须要在`MapChart` 或 `GeoComponent` 被 `import`（ES module import）后才能使用。
+
+## getMap
+- **Type**: `Function`
+
+```
+(mapName: string) => Object
+```
+
+获取已注册的地图，返回的对象类型如下
+
+```
+{
+    // 地图的 geoJSON 数据
+    geoJSON: Object,
+    // 地图的特殊区域，见 registerMap
+    specialAreas: Object
+}
+```
+
+注：
+
+*   `geoJSON` 也可写为 `geoJson`，二者引用的是相同的内容。
+*   对于 `registerMap` 所注册的 SVG ，暂并不支持从此方法中返回。
+*   如果你在项目中使用了按需引入，从 v5.3.0 开始`getMap`必须要在引入地图组件后才能使用。
+
+## registerTheme
+- **Type**: `Function`
+
+从 `v6.0.0` 开始支持
+
+```
+(themeName: string, theme: Object)
+```
+
+注册主题，用于[初始化实例](api.echarts.md#init)的时候指定。
+
+## registerCustomSeries
+- **Type**: `Function`
+
+从 `v6.0.0` 开始支持
+
+```
+(type: string, renderItem: Function)
+```
+
+注册自定义系列。注册后可以通过 [setOption](../api.md#api.html#echartsInstance.setOption) 中使用。
+
+*   `type` 注册的图表类型，也就是之后在 `setOption` 中写的 `series.renderItem`。
+*   `renderItem` 自定义系列的图形渲染逻辑，详见 [series-custom.renderItem](../option-parts/option.series-custom.md#renderItem)。
+
+示例：
+
+```
+const renderItem = (params, api) => {
+    return {
+        type: 'circle',
+        shape: {
+            cx: api.coord([api.value(0), api.value(1)])[0],
+            cy: api.coord([api.value(0), api.value(1)])[1],
+            r: api.value(2) * (params.itemPayload.scale || 1)
+        },
+        style: {
+            fill: api.visual('color'),
+            opacity: params.itemPayload.opacity() || 1,
+        }
+    }
+};
+echarts.registerCustomSeries('bubble', renderItem);
+
+const option = {
+    xAxis: {},
+    yAxis: {},
+    series: {
+        type: 'custom',
+        renderItem: 'bubble',
+        itemPayload: {
+            scale: 2,
+            opacity: () => Math.random() * 0.5 + 0.5
+        },
+        data: [[11, 22, 20], [33, 44, 40], [18, 24, 10]]
+    }
+};
+chart.setOption(option);
+```
+
+[apache/echarts-custom-series](https://github.com/apache/echarts-custom-series) 项目提供了多种可以直接使用的自定义系列。
+
+## registerLocale
+- **Type**: `Function`
+
+从 `v5.0.0` 开始支持
+
+```
+(locale: string, localeCfg: Object)
+```
+
+注册语言包，用于[初始化实例](api.echarts.md#init)的时候指定。语言包格式见 [src/i18n/langEN.ts](https://github.com/apache/echarts/blob/release/src/i18n/langEN.ts)
+
+## setPlatformAPI
+- **Type**: `Function`
+
+从 `v5.3.0` 开始支持
+
+```
+(platformAPI?: {
+    createCanvas(): HTMLCanvasElement
+    measureText(text: string, font?: string): { width: number }
+    loadImage(
+        src: string,
+        onload: () => void,
+        onerror: () => void
+    ): HTMLImageElement
+}) => void
+```
+
+设置平台相关的 API，在 NodeJS 等非浏览器平台的时候可能需要提供。
+
+*   `createCanvas` 创建 Canvas 元素，主要用于测量文本宽度，在没提供`measureText`的时候需要提供。
+*   `measureText` 测量文本宽度，默认会通过`createCanvas`得到 Canvas 元素提供的接口来测量文本宽度，也可以替换成更轻量的实现。
+*   `loadImage` 加载图片，在使用 Canvas 渲染模式的时候并且使用 URL 作为图片的时候需要提供。
+
+## graphic
+- **Type**: `*`
+
+图形相关帮助方法。
+
+### graphic.extendShape
+- **Type**: `Function`
+
+创建一个新的 shape class。
+
+```
+(
+    opts: Object
+) => zrender.graphic.Path
+```
+
+更多的关于参数 `opts` 的细节，请参阅 [zrender.graphic.Path](https://ecomfe.github.io/zrender-doc/public/api.html#zrenderpath)。
+
+### graphic.registerShape
+- **Type**: `Function`
+
+注册一个开发者定义的 shape class。
+
+```
+(
+    name: string,
+    ShapeClass: zrender.graphic.Path
+)
+```
+
+`ShapeClass` 须用 [echarts.graphic.extendShape](api.echarts.md#graphic.extendShape) 生成。 注册后，这个 class 可以用 [echarts.graphic.getShapeClass](api.echarts.md#graphic.getShapeClass) 方法得到。 `registerShape` 会覆盖已注册的 class，如果用相同的 `name` 的话。 注册的 class，可以被用于 [自定义系列（custom series）](../option-parts/option.series-custom.md) 和 [图形组件（graphic component）](../option-parts/option.graphic.md)，声明 `{type: name}` 即可。
+
+例如：
+
+```
+var MyShape = echarts.graphic.extendShape({
+    shape: {
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0
+    },
+    buildPath: function (ctx, shape) {
+        ctx.moveTo(shape.x, shape.y);
+        ctx.lineTo(shape.x + shape.width, shape.y);
+        ctx.lineTo(shape.x, shape.y + shape.height);
+        ctx.lineTo(shape.x + shape.width, shape.y + shape.height);
+        ctx.closePath();
+    }
+});
+echarts.graphic.registerShape('myCustomShape', MyShape);
+
+var option = {
+    series: {
+        type: 'custom',
+        coordinateSystem: 'none',
+        renderItem: function (params, api) {
+            return {
+                type: 'myCustomShape',
+                shape: {
+                    x: api.value(0),
+                    y: api.value(1),
+                    width: api.value(2),
+                    height: api.value(3)
+                },
+                style: {
+                    fill: 'red'
+                }
+            };
+        },
+        data: [[10, 20, 30, 40]]
+    }
+};
+```
+
+### graphic.getShapeClass
+- **Type**: `Function`
+
+得到一个 [注册](api.echarts.md#graphic.registerShape) 好的 class。
+
+```
+(
+    name: String
+) => zrender.graphic.Path
+```
+
+这些内置 shape class 会被默认预先注册进去: `'circle'`, `'sector'`, `'ring'`, `'polygon'`, `'polyline'`, `'rect'`, `'line'`, `'bezierCurve'`, `'arc'`.
+
+### graphic.clipPointsByRect
+- **Type**: `Function`
+
+输入一组点，和一个矩形，返回被矩形截取过的点。
+
+```
+(
+    // 要被截取的点列表，如 [[23, 44], [12, 15], ...]。
+    points: Array.<Array.<number>>,
+    // 用于截取点的矩形。
+    rect: {
+        x: number,
+        y: number,
+        width: number,
+        height: number
+    }
+) => Array.<Array.<number>> // 截取结果。
+```
+
+### graphic.clipRectByRect
+- **Type**: `Function`
+
+输入两个矩形，返回第二个矩形截取第一个矩形的结果。
+
+```
+(
+    // 要被截取的矩形。
+    targetRect: {
+        x: number,
+        y: number,
+        width: number,
+        height: number
+    },
+    // 用于截取点的矩形。
+    rect: {
+        x: number,
+        y: number,
+        width: number,
+        height: number
+    }
+) => { // 截取结果。
+    x: number,
+    y: number,
+    width: number,
+    height: number
+}
+```
+
+注意：如果矩形完全被截干净，会返回 `undefined`。

@@ -1,0 +1,35515 @@
+# option.series-scatter
+
+## id
+- **Type**: `string`
+
+组件 ID。默认不指定。指定则可用于在 option 或者 API 中引用组件。
+
+## name
+- **Type**: `string`
+
+系列名称，用于[tooltip](option.tooltip.md)的显示，[legend](option.legend.md) 的图例筛选，在 `setOption` 更新数据和配置项时用于指定对应的系列。
+
+## colorBy
+- **Type**: `string`
+- **Default**: `'series'`
+
+从 `v5.2.0` 开始支持
+
+从调色盘 [option.color](../option.md#color) 中取色的策略，可取值为：
+
+*   `'series'`：按照系列分配调色盘中的颜色，同一系列中的所有数据都是用相同的颜色；
+*   `'data'`：按照数据项分配调色盘中的颜色，每个数据项都使用不同的颜色。
+
+## coordinateSystem
+- **Type**: `string`
+- **Default**: `'cartesian2d'`
+
+指定另一个坐标系组件，本 `series-scatter` 布局在那个坐标系中。
+
+可选值：
+
+*   `'cartesian2d'`
+    
+    布局在一个二维 [直角坐标系（也称笛卡尔坐标系）](option.grid.md) 中。当一个 ECharts 实例中存在多个 x 坐标轴（`xAxis`）时或者多个 y 坐标轴（`yAxis`）时，须通过 [xAxisIndex](option.series-scatter.md#xAxisIndex) 和 [yAxisIndex](option.series-scatter.md#yAxisIndex) 或者 [xAxisId](option.series-scatter.md#xAxisId) 和 [yAxisId](option.series-scatter.md#yAxisId) 指定所使用的坐标轴。
+    
+    注：一些常用的系列，例如 [折线图（series-line）](option.series-line.md), [柱状图（series-bar）](option.series-bar.md) 等，不能直接布局于 [矩阵坐标系（matrix）](option.matrix.md) 或者 [日历坐标系（calendar）](option.calendar.md) 中，但是他们能布局在 [直角坐标系（grid）](option.grid.md) 中，然后这个 [直角坐标系（grid）](option.grid.md) 可以布局在 [矩阵坐标系（matrix）](option.matrix.md) 或 [日历坐标系（calendar）](option.calendar.md) 中。
+    
+
+*   `'polar'`
+    
+    布局在一个 [极坐标系](option.polar.md) 中。当一个 ECharts 实例中存在多个极坐标系时，须通过 [polarIndex](option.series-scatter.md#polarIndex) 或 [polarId](option.series-scatter.md#polarId) 指定所使用的极坐标系。
+    
+
+*   `'geo'`
+    
+    布局在一个 [地理坐标系](option.geo.md) 中。当一个 ECharts 实例中存在多个地理坐标系时，须通过 [geoIndex](option.series-scatter.md#geoIndex) 或 [geoId](option.series-scatter.md#geoId) 指定所使用的地理坐标系。
+    
+
+*   `'singleAxis'`
+    
+    布局在一个 [单轴坐标系](option.singleAxis.md) 中。当一个 ECharts 实例中存在多个单轴坐标系时，须通过 [singleAxisIndex](option.series-scatter.md#singleAxisIndex) 或 [singleAxisId](option.series-scatter.md#singleAxisId) 指定所使用的单轴标系。
+    
+
+*   `'calendar'`
+    
+    布局在一个 [日历坐标系](option.calendar.md) 中。当一个 ECharts 实例中存在多个日历坐标系时，须通过 [calendarIndex](option.series-scatter.md#calendarIndex) 或 [calendarId](option.series-scatter.md#calendarId) 指定所使用的日历坐标系。
+    
+
+*   `'matrix'`
+    
+    布局在一个 [矩阵坐标系](option.matrix.md)中。当一个 ECharts 实例中存在多个矩阵坐标系时，须通过 [matrixIndex](option.series-scatter.md#matrixIndex) 或 [matrixId](option.series-scatter.md#matrixId) 指定所使用的矩阵坐标系。
+    
+
+**下表总结了“某系列或组件是否支持布局在某坐标系上”：**
+
+最左列列出了要布局的系列和组件（坐标系本身也是组件），最上行列出了所基于的坐标系。
+
+|  | no coord sys | [grid](option.grid.md) (cartesian2d) | [polar](option.polar.md) | [geo](option.geo.md) | [singleAxis](option.singleAxis.md) | [radar](option.radar.md) | [parallel](option.parallel.md) | [calendar](option.calendar.md) | [matrix](option.matrix.md) |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [grid](option.grid.md) (cartesian2d) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
+| [polar](option.polar.md) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
+| [geo](option.geo.md) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
+| [singleAxis](option.singleAxis.md) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
+| [calendar](option.calendar.md) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
+| [matrix](option.matrix.md) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
+| [series-line](option.series-line.md) | ❌ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ (✅ 如果通过其他坐标系，如 [grid](option.grid.md)) | ❌ (✅ 如果通过其他坐标系，如 [grid](option.grid.md)) |
+| [series-bar](option.series-bar.md) | ❌ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ (✅ 如果通过其他坐标系，如 [grid](option.grid.md)) | ❌ (✅ 如果通过其他坐标系，如 [grid](option.grid.md)) |
+| [series-pie](option.series-pie.md) | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ✅ | ✅ |
+| [series-scatter](option.series-scatter.md) | ❌ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ✅ | ✅ |
+| [series-effectScatter](option.series-effectScatter.md) | ❌ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ✅ | ✅ |
+| [series-radar](option.series-radar.md) | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ | ❌ (✅ 如果通过 [radar](option.radar.md) 坐标系) | ❌ (✅ 如果通过 [radar](option.radar.md) 坐标系) |
+| [series-tree](option.series-tree.md) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
+| [series-treemap](option.series-treemap.md) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
+| [series-sunburst](option.series-sunburst.md) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
+| [series-boxplot](option.series-boxplot.md) | ❌ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ (✅ 如果通过其他坐标系，如 [grid](option.grid.md)) | ❌ (✅ 如果通过其他坐标系，如 [grid](option.grid.md)) |
+| [series-candlestick](option.series-candlestick.md) | ❌ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ (✅ 如果通过其他坐标系，如 [grid](option.grid.md)) | ❌ (✅ 如果通过其他坐标系，如 [grid](option.grid.md)) |
+| [series-heatmap](option.series-heatmap.md) | ❌ | ✅ | ❌ | ✅ | ❌ | ❌ | ❌ | ✅ | ✅ |
+| [series-map](option.series-map.md) | ✅ (create a geo coord sys exclusively) | ❌ | ❌ | ✅ | ❌ | ❌ | ❌ | ✅ | ✅ |
+| [series-parallel](option.series-parallel.md) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ (✅ 如果通过 [parallel](option.parallel.md) 坐标系) | ❌ (✅ 如果通过 [parallel](option.parallel.md) 坐标系) |
+| [series-lines](option.series-lines.md) | ❌ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ (✅ 如果通过其他坐标系，如 [geo](option.geo.md)) | ❌ (✅ 如果通过其他坐标系，如 [geo](option.geo.md)) |
+| [series-graph](option.series-graph.md) | ✅ (create a "view" coord sys exclusively) | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ | ✅ | ✅ |
+| [series-sankey](option.series-sankey.md) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
+| [series-funnel](option.series-funnel.md) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
+| [series-gauge](option.series-gauge.md) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
+| [series-pictorialBar](option.series-pictorialBar.md) | ❌ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ (✅ 如果通过其他坐标系，如 [grid](option.grid.md)) | ❌ (✅ 如果通过其他坐标系，如 [grid](option.grid.md)) |
+| [series-themeRiver](option.series-themeRiver.md) | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ | ❌ | ❌ (✅ 如果通过其他坐标系，如 [singleAxis](option.singleAxis.md)) | ❌ (✅ 如果通过其他坐标系，如 [singleAxis](option.singleAxis.md)) |
+| [series-chord](option.series-chord.md) | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ✅ | ✅ |
+| [title](option.title.md) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
+| [legend](option.legend.md) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
+| [dataZoom](../option.md#dataZoom) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
+| [visualMap](../option.md#visualMap) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
+| [toolbox](option.toolbox.md) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
+| [timeline](option.timeline.md) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
+| [thumbnail](option.thumbnail.md) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
+
+也参见 [series-scatter.coordinateSystemUsage](option.series-scatter.md#coordinateSystemUsage)。
+
+## coordinateSystemUsage
+- **Type**: `string`
+- **Default**: `'data'`
+
+从 `v6.0.0` 开始支持
+
+如何在指定的 [坐标系](option.series-scatter.md#coordinateSystem) 上布局本 `series-scatter`。
+
+在大多数情况下，无需显式指定 `coordinateSystemUsage`，除非默认行为不符合预期。
+
+可选值：
+
+*   `'data'`：
+    
+    此系列的每个数据项（例如，每个 `series.data[i]`）将独立地在指定的坐标系进行布局。 注：当前没有任何“非系列组件”支持 `coordinateSystemUsage: 'data'`。
+    
+*   `'box'`：**（不适用于 [series-scatter](option.series-scatter.md)）**
+    
+    此系列或组件作为一个整体，在指定的坐标系中进行布局——即根据坐标系计算整体的包围盒或基础锚点。
+    
+    *   例如，[grid 组件](option.grid.md) 可以布局在 [matrix 坐标系](option.matrix.md) 或 [calendar 坐标系](option.calendar.md) 中，这时其布局矩形是由 [series-scatter.coords](option.series-scatter.md#coords) 在坐标系中计算出来的。参见示例：[矩阵中的微型折线图](https://echarts.apache.org/examples/zh/editor.html?c=matrix-sparkline&edit=1&reset=1)。
+    *   又如，[饼图系列](option.series-pie.md) 或 [和弦图系列](option.series-chord.md) 可以布局在 [geo 坐标系](option.geo.md) 或 [cartesian2d 坐标系](option.grid.md) 中，这时其中心点是由 [series-pie.coords](option.series-pie.md#coords) 或 [series-pie.center](option.series-pie.md#center) 在坐标系中计算出来的。参见示例：[地理坐标系中的饼图](https://echarts.apache.org/examples/zh/editor.html?c=map-iceland-pie&edit=1&reset=1)。
+
+只有少数系列同时支持 `coordinateSystemUsage: 'data'` 和 `coordinateSystemUsage: 'box'`，如：[series-graph](option.series-graph.md)、[series-map](option.series-map.md)。例如，在 [例子 coordinateSystemUsage: 'data'](https://echarts.apache.org/examples/zh/editor.html?c=matrix-graph&edit=1&reset=1) 中，关系图每个节点分别布局在矩阵坐标系中，而在 [例子 coordinateSystemUsage: 'box'](https://echarts.apache.org/examples/zh/editor.html?c=doc-example/matrix-graph-box&edit=1&reset=1) 中，关系图系列整体被布局在一个单元格中。
+
+大多数系列仅支持 `coordinateSystemUsage: 'data'`，例如：[series-line](option.series-line.md)、[series-bar](option.series-bar.md)、[series-scatter](option.series-scatter.md)。
+
+同时，一些系列仅支持 `coordinateSystemUsage: 'box'`，例如：[series-pie](option.series-pie.md)（示例：[地理坐标系中的饼图](https://echarts.apache.org/examples/zh/editor.html?c=map-iceland-pie&edit=1&reset=1)）、[series-tree](option.series-tree.md)、[series-treemap](option.series-treemap.md)、[series-sankey](option.series-sankey.md)。
+
+另参考：[series-scatter.coordinateSystem](option.series-scatter.md#coordinateSystem)。
+
+## coord
+- **Type**: `Array|number|string`
+
+从 `v6.0.0` 开始支持
+
+当 [coordinateSystemUsage](option.series-scatter.md#coordinateSystemUsage) 为 `'box'` 时, `coord` 被输入给坐标系，计算得到布局位置（布局盒或者中心点）。
+
+例子：[矩阵中的微型折线图](https://echarts.apache.org/examples/zh/editor.html?c=matrix-sparkline&edit=1&reset=1), [矩阵中的关系图](https://echarts.apache.org/examples/zh/editor.html?c=doc-example/matrix-graph-box&edit=1&reset=1).
+
+> 注：当 [coordinateSystemUsage](option.series-scatter.md#coordinateSystemUsage) 为 `'data'` 时，输入给坐标系的是 `series.data[i]` 而非此 `coord`。
+
+`coord` 的具体格式定义，取决于每个坐标系，并且，和 [chart.convertToPixel](../api-parts/api.echartsInstance.md#convertToPixel) 的第二个参数相同。
+
+## xAxisIndex
+- **Type**: `number`
+- **Default**: `0`
+
+布局时所基于的 [x 轴](option.xAxis.md) 的 index。当一个 ECharts 实例中存在多个 x 轴时，用其指定所使用的 x 轴。
+
+## xAxisId
+- **Type**: `number`
+- **Default**: `undefined`
+
+布局时所基于的 [x 轴](option.xAxis.md) 的 id。当一个 ECharts 实例中存在多个 x 轴时，用其指定所使用的 x 轴。
+
+## yAxisIndex
+- **Type**: `number`
+- **Default**: `0`
+
+布局时所基于的 [y 轴](option.yAxis.md) 的 index。当一个 ECharts 实例中存在多个 y轴时，用其指定所使用的 y 轴。
+
+## yAxisId
+- **Type**: `number`
+- **Default**: `undefined`
+
+布局时所基于的 [y 轴](option.yAxis.md) 的 id。当一个 ECharts 实例中存在多个 y轴时，用其指定所使用的 x 轴。
+
+## polarIndex
+- **Type**: `number`
+- **Default**: `0`
+
+布局时所基于的 [极坐标系](option.polar.md) 的 index。当一个 ECharts 实例中存在多个极坐标系时，用其指定所使用的坐标系。
+
+## polarId
+- **Type**: `number`
+- **Default**: `undefined`
+
+布局时所基于的 [极坐标系](option.polar.md) 的 id。当一个 ECharts 实例中存在多个极坐标系时，用其指定所使用的坐标系。
+
+## singleAxisIndex
+- **Type**: `number`
+- **Default**: `0`
+
+布局时所基于的 [单轴标系](option.singleAxis.md) 的 index。当一个 ECharts 实例中存在多个单轴坐标系时，用其指定所使用的坐标系。
+
+## singleAxisId
+- **Type**: `number`
+- **Default**: `undefined`
+
+布局时所基于的 [单轴标系](option.singleAxis.md) 的 id。当一个 ECharts 实例中存在多个单轴坐标系时，用其指定所使用的坐标系。
+
+## geoIndex
+- **Type**: `number`
+- **Default**: `0`
+
+布局时所基于的 [地理坐标系](option.geo.md) 的 index。当一个 ECharts 实例中存在多个地理坐标系时，用其指定所使用的坐标系。
+
+**参见示例**: [geo-choropleth-scatter](https://echarts.apache.org/examples/zh/editor.html?c=geo-choropleth-scatter&reset=1&edit=1)
+
+## geoId
+- **Type**: `number`
+- **Default**: `undefined`
+
+布局时所基于的 [地理坐标系](option.geo.md) 的 id。当一个 ECharts 实例中存在多个地理坐标系时，用其指定所使用的坐标系。
+
+**参见示例**: [geo-choropleth-scatter](https://echarts.apache.org/examples/zh/editor.html?c=geo-choropleth-scatter&reset=1&edit=1)
+
+## calendarIndex
+- **Type**: `number`
+- **Default**: `0`
+
+布局时所基于的 [日历坐标系](option.calendar.md) 的 index。当一个 ECharts 实例中存在多个日历坐标系时，用其指定所使用的坐标系。
+
+## calendarId
+- **Type**: `number`
+- **Default**: `undefined`
+
+布局时所基于的 [日历坐标系](option.calendar.md) 的 id。当一个 ECharts 实例中存在多个日历坐标系时，用其指定所使用的坐标系。
+
+## matrixIndex
+- **Type**: `number`
+- **Default**: `0`
+
+布局时所基于的 [矩阵坐标系](option.matrix.md) 的 index。当一个 ECharts 实例中存在多个矩阵坐标系时，用其指定所使用的坐标系。
+
+## matrixId
+- **Type**: `number`
+- **Default**: `undefined`
+
+布局时所基于的 [矩阵坐标系](option.matrix.md) 的 id。当一个 ECharts 实例中存在多个矩阵坐标系时，用其指定所使用的坐标系。
+
+## legendHoverLink
+- **Type**: `boolean`
+- **Default**: `true`
+
+是否启用[图例](option.legend.md) hover 时的联动高亮。
+
+## symbol
+- **Type**: `string|Function`
+- **Default**: `'circle'`
+
+标记的图形。
+
+ECharts 提供的标记类型包括
+
+`'circle'`, `'rect'`, `'roundRect'`, `'triangle'`, `'diamond'`, `'pin'`, `'arrow'`, `'none'`
+
+可以通过 `'image://url'` 设置为图片，其中 URL 为图片的链接，或者 `dataURI`。
+
+URL 为图片链接例如：
+
+```
+'image://http://example.website/a/b.png'
+```
+
+URL 为 `dataURI` 例如：
+
+```
+'image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7'
+```
+
+可以通过 `'path://'` 将图标设置为任意的矢量路径。这种方式相比于使用图片的方式，不用担心因为缩放而产生锯齿或模糊，而且可以设置为任意颜色。路径图形会自适应调整为合适的大小。路径的格式参见 [SVG PathData](http://www.w3.org/TR/SVG/paths.html#PathData)。可以从 Adobe Illustrator 等工具编辑导出。
+
+例如：
+
+```
+'path://M30.9,53.2C16.8,53.2,5.3,41.7,5.3,27.6S16.8,2,30.9,2C45,2,56.4,13.5,56.4,27.6S45,53.2,30.9,53.2z M30.9,3.5C17.6,3.5,6.8,14.4,6.8,27.6c0,13.3,10.8,24.1,24.101,24.1C44.2,51.7,55,40.9,55,27.6C54.9,14.4,44.1,3.5,30.9,3.5z M36.9,35.8c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H36c0.5,0,0.9,0.4,0.9,1V35.8z M27.8,35.8 c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H27c0.5,0,0.9,0.4,0.9,1L27.8,35.8L27.8,35.8z'
+```
+
+如果需要每个数据的图形不一样，可以设置为如下格式的回调函数：
+
+```
+(value: Array|number, params: Object) => string
+```
+
+其中第一个参数 `value` 为 [data](option.series-scatter.md#data) 中的数据值。第二个参数`params` 是其它的数据项参数。
+
+## symbolSize
+- **Type**: `number|Array|Function`
+- **Default**: `10`
+
+标记的大小，可以设置成诸如 `10` 这样单一的数字，也可以用数组分开表示宽和高，例如 `[20, 10]` 表示标记宽为`20`，高为`10`。
+
+如果需要每个数据的图形大小不一样，可以设置为如下格式的回调函数：
+
+```
+(value: Array|number, params: Object) => number|Array
+```
+
+其中第一个参数 `value` 为 [data](option.series-scatter.md#data) 中的数据值。第二个参数`params` 是其它的数据项参数。
+
+## symbolRotate
+- **Type**: `number|Function`
+
+标记的旋转角度（而非弧度）。正值表示逆时针旋转。注意在 `markLine` 中当 `symbol` 为 `'arrow'` 时会忽略 `symbolRotate` 强制设置为切线的角度。
+
+如果需要每个数据的旋转角度不一样，可以设置为如下格式的回调函数：
+
+```
+(value: Array|number, params: Object) => number
+```
+
+其中第一个参数 `value` 为 [data](option.series-scatter.md#data) 中的数据值。第二个参数`params` 是其它的数据项参数。
+
+> 从 4.8.0 开始支持回调函数。
+
+## symbolKeepAspect
+- **Type**: `boolean`
+- **Default**: `false`
+
+如果 `symbol` 是 `path://` 的形式，是否在缩放时保持该图形的长宽比。
+
+## symbolOffset
+- **Type**: `Array`
+- **Default**: `[0, 0]`
+
+标记相对于原本位置的偏移。默认情况下，标记会居中置放在数据对应的位置，但是如果 symbol 是自定义的矢量路径或者图片，就有可能不希望 symbol 居中。这时候可以使用该配置项配置 symbol 相对于原本居中的偏移，可以是绝对的像素值，也可以是相对的百分比。
+
+例如 `[0, '-50%']` 就是把自己向上移动了一半的位置，在 symbol 图形是气泡的时候可以让图形下端的箭头对准数据点。
+
+## large
+- **Type**: `boolean`
+- **Default**: `false`
+
+是否开启大数据量优化，在数据图形特别多而出现卡顿时候可以开启。
+
+开启后配合 `largeThreshold` 在数据量大于指定阈值的时候对绘制进行优化。
+
+缺点：优化后不能自定义设置单个数据项的样式。
+
+## largeThreshold
+- **Type**: `number`
+- **Default**: `2000`
+
+开启绘制优化的阈值。
+
+## cursor
+- **Type**: `string`
+- **Default**: `'pointer'`
+
+鼠标悬浮时在图形元素上时鼠标的样式是什么。同 CSS 的 `cursor`。
+
+## label
+- **Type**: `Object`
+
+图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等。
+
+### label.show
+- **Type**: `boolean`
+- **Default**: `false`
+
+是否显示标签。
+
+### label.position
+- **Type**: `string|Array`
+- **Default**: `'inside'`
+
+标签的位置。
+
+*   可以通过内置的语义声明位置：
+    
+    示例：
+    
+    ```
+      position: 'top'
+    ```
+    
+    支持：`top` / `left` / `right` / `bottom` / `inside` / `insideLeft` / `insideRight` / `insideTop` / `insideBottom` / `insideTopLeft` / `insideBottomLeft` / `insideTopRight` / `insideBottomRight`
+    
+*   也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。
+    
+    示例：
+    
+    ```
+      // 绝对的像素值
+      position: [10, 10],
+      // 相对的百分比
+      position: ['50%', '50%']
+    ```
+    
+
+参见：[label position](https://echarts.apache.org/examples/zh/view.html?c=doc-example/label-position)。
+
+### label.distance
+- **Type**: `number`
+- **Default**: `5`
+
+距离图形元素的距离。
+
+当 position 为字符描述值（如 `'top'`、`'insideRight'`）时候有效。
+
+参见：[label position](https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position)。
+
+### label.rotate
+- **Type**: `number`
+
+标签旋转。从 -90 度到 90 度。正值是逆时针。
+
+参见：[label rotation](https://echarts.apache.org/examples/zh/editor.html?c=bar-label-rotation)。
+
+### label.offset
+- **Type**: `Array`
+
+是否对文字进行偏移。默认不偏移。例如：`[30, 40]` 表示文字在横向上偏移 `30`，纵向上偏移 `40`。
+
+### label.textMargin
+- **Type**: `number|Array`
+
+从 `v6.0.0` 开始支持
+
+标签周围的间距，用于避免标签重叠。单位为像素（px）。
+
+注意：`textMargin` 是作用在标签的本地包围盒上的，也就是说，如果标签设置了旋转（`rotate`），先在未旋转的标签上应用 `textMargin`，再进行旋转。
+
+> 名字是 `textMargin`，因历史原因 `margin` 已被它用。
+
+示例：
+
+```
+// 设置所有方向的间距为 5，等价于 [5, 5, 5, 5]
+textMargin: 5
+// 设置上下间距为 5，左右间距为 10
+textMargin: [5, 10]
+// 分别设置四个方向的间距
+textMargin: [
+    5,  // 上
+    10, // 右
+    5,  // 下
+    10, // 左
+]
+```
+
+### label.minMargin
+- **Type**: `number`
+
+从 `v5.0.0` 开始支持
+
+用于控制标签之间的最小距离，当启用 [labelLayout](../option.md#series.labelLayout) 时可能会用到。
+
+`minMargin` 和 `textMargin` 含义相似，但有细微区别。如果不确定，可使用 `textMargin`，因为它基本包含了 `minMargin` 的能力，并且在某些旋转标签的场景下可以提供更紧凑的布局。
+
+> 区别如下：
+> 
+> *   两个标签之间的最小间隔（如适用）为 `label1.minMargin/2 + label2.minMargin/2`，或 `label1.textMargin[number] + label2.textMargin[number]`。
+> *   如果标签设置了 `rotate`：
+>     *   `minMargin`：先旋转标签，取四个角的 x/y 的 min/max 得到新的矩形（即扩展后的包围盒），最后在新矩形上应用 `minMargin`。
+>     *   `textMargin`：先在标签的包围盒上应用 `textMargin`，再进行旋转。
+> *   数据类型：`minMargin` 只能为 `number`，`textMargin` 可以为 `number | number[]`（类似 CSS margin）。
+
+### label.formatter
+- **Type**: `string|Function`
+
+标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 `\n` 换行。
+
+**字符串模板** 模板变量有：
+
+*   `{a}`：系列名。
+*   `{b}`：数据名。
+*   `{c}`：数据值。
+*   `{@xxx}`：数据中名为 `'xxx'` 的维度的值，如 `{@product}` 表示名为 `'product'` 的维度的值。
+*   `{@[n]}`：数据中维度 `n` 的值，如 `{@[3]}` 表示维度 3 的值，从 0 开始计数。
+
+**示例：**
+
+```
+formatter: '{b}: {@score}'
+```
+
+**回调函数**
+
+回调函数格式：
+
+```
+(params: Object|Array) => string
+```
+
+参数 `params` 是 formatter 需要的单个数据集。格式如下：
+
+```
+{
+    componentType: 'series',
+    // 系列类型
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index
+    seriesIndex: number,
+    // 系列名称
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // 传入的数据值。在多数系列下它和 data 相同。在一些系列下是 data 中的分量（如 map、radar 中）
+    value: number|Array|Object,
+    // 坐标轴 encode 映射信息，
+    // key 为坐标轴（如 'x' 'y' 'radius' 'angle' 等）
+    // value 必然为数组，不会为 null/undefined，表示 dimension index 。
+    // 其内容如：
+    // {
+    //     x: [2] // dimension index 为 2 的数据映射到 x 轴
+    //     y: [0] // dimension index 为 0 的数据映射到 y 轴
+    // }
+    encode: Object,
+    // 维度名列表
+    dimensionNames: Array<String>,
+    // 数据的维度 index，如 0 或 1 或 2 ...
+    // 仅在雷达图中使用。
+    dimensionIndex: number,
+    // 数据图形的颜色
+    color: string
+}
+```
+
+注：encode 和 dimensionNames 的使用方式，例如：
+
+如果数据为：
+
+```
+dataset: {
+    source: [
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.encode.y[0]]
+```
+
+如果数据为：
+
+```
+dataset: {
+    dimensions: ['product', '2015', '2016', '2017'],
+    source: [
+        {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+        {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+        {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+        {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.dimensionNames[params.encode.y[0]]]
+```
+
+### label.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+### label.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+### label.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+### label.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+### label.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+### label.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+### label.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+### label.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+### label.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+### label.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+### label.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+### label.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+### label.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+### label.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+### label.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+### label.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+### label.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+### label.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+### label.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+### label.width
+- **Type**: `number`
+
+文本显示宽度。
+
+### label.height
+- **Type**: `number`
+
+文本显示高度。
+
+### label.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+### label.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+### label.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+### label.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+### label.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+### label.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+### label.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+### label.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+### label.overflow
+- **Type**: `string`
+- **Default**: `'none'`
+
+文字超出宽度是否截断或者换行。配置`width`时有效
+
+*   `'truncate'` 截断，并在末尾显示`ellipsis`配置的文本，默认为`...`
+*   `'break'` 换行
+*   `'breakAll'` 换行，跟`'break'`不同的是，在英语等拉丁文中，`'breakAll'`还会强制单词内换行
+
+### label.ellipsis
+- **Type**: `string`
+- **Default**: `'...'`
+
+在`overflow`配置为`'truncate'`的时候，可以通过该属性配置末尾显示的文本。
+
+### label.rich
+- **Type**: `Object`
+
+在 `rich` 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。
+
+例如：
+
+```
+label: {
+    // 在文本中，可以对部分文本采用 rich 中定义样式。
+    // 这里需要在文本中使用标记符号：
+    // `{styleName|text content text content}` 标记样式名。
+    // 注意，换行仍是使用 '\n'。
+    formatter: [
+        '{a|这段文本采用样式a}',
+        '{b|这段文本采用样式b}这段用默认样式{x|这段用样式x}'
+    ].join('\n'),
+
+    rich: {
+        a: {
+            color: 'red',
+            lineHeight: 10
+        },
+        b: {
+            backgroundColor: {
+                image: 'xxx/xxx.jpg'
+            },
+            height: 40
+        },
+        x: {
+            fontSize: 18,
+            fontFamily: 'Microsoft YaHei',
+            borderColor: '#449933',
+            borderRadius: 4
+        },
+        ...
+    }
+}
+```
+
+详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+
+##### label.rich.<style_name>.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### label.rich.<style_name>.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+##### label.rich.<style_name>.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+##### label.rich.<style_name>.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+##### label.rich.<style_name>.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+##### label.rich.<style_name>.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+##### label.rich.<style_name>.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+##### label.rich.<style_name>.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+##### label.rich.<style_name>.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### label.rich.<style_name>.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### label.rich.<style_name>.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+##### label.rich.<style_name>.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+##### label.rich.<style_name>.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### label.rich.<style_name>.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+##### label.rich.<style_name>.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+##### label.rich.<style_name>.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+##### label.rich.<style_name>.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+##### label.rich.<style_name>.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+##### label.rich.<style_name>.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+##### label.rich.<style_name>.width
+- **Type**: `number|string`
+
+文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+`width` 也可以是百分比字符串，如 `'100%'`。表示的是所在文本块的 `contentWidth`（即不包含文本块的 `padding`）的百分之多少。之所以以 `contentWidth` 做基数，因为每个文本片段只能基于 `content box` 布局。如果以 `outerWidth` 做基数，则百分比的计算在实用中不具有意义，可能会超出。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+##### label.rich.<style_name>.height
+- **Type**: `number|string`
+
+文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+##### label.rich.<style_name>.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### label.rich.<style_name>.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+##### label.rich.<style_name>.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+##### label.rich.<style_name>.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### label.rich.<style_name>.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+##### label.rich.<style_name>.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+##### label.rich.<style_name>.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+##### label.rich.<style_name>.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+### label.richInheritPlainLabel
+- **Type**: `boolean`
+- **Default**: `true`
+
+从 `v6.0.0` 开始支持
+
+富文本样式是否继承普通文本样式。
+
+此配置项用于向历史兼容。
+
+> 从 v6 版本开始，[富文本标签 (label.rich / textStyle.rich)](option.series-scatter.md#label.rich) 部分样式（`fontStyle`, `fontWeight`, `fontSize`, `fontFamily`, `textShadowColor`, `textShadowBlur`, `textShadowOffsetX`, `textShadowOffsetY`）默认继承 [普通文本样式 (label / textStyle)](option.series-scatter.md#label)。你可以设置 `richInheritPlainLabel: false` （可在最外层配置项或与同级文本样式配置项）来禁用此行为。
+> 
+> ```
+> option = {
+>     richInheritPlainLabel: false, // In most cases, this is enough.
+>     xxx1: {
+>         // Can also set it here to only control this label.
+>         label: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     },
+>     xxx2: {
+>         textStyle: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     }
+> }
+> ```
+
+## labelLine
+- **Type**: `Object`
+
+从 `v5.0.0` 开始支持
+
+标签的视觉引导线配置。
+
+### labelLine.show
+- **Type**: `boolean`
+
+是否显示视觉引导线。
+
+### labelLine.showAbove
+- **Type**: `boolean`
+
+从 `v5.0.0` 开始支持
+
+是否显示在图形上方。
+
+### labelLine.length2
+- **Type**: `number`
+
+视觉引导项第二段的长度。
+
+### labelLine.smooth
+- **Type**: `boolean|number`
+- **Default**: `false`
+
+是否平滑视觉引导线，默认不平滑，可以设置成 `true` 平滑显示，也可以设置为 0 到 1 的值，表示平滑程度。
+
+### labelLine.minTurnAngle
+- **Type**: `number`
+
+从 `v5.0.0` 开始支持
+
+通过调整第二段线的长度，限制引导线两端之间最小的夹角，以防止过小的夹角导致显示不美观。
+
+可以设置为 0 - 180 度。
+
+#### labelLine.lineStyle.color
+- **Type**: `Color`
+- **Default**: `"#000"`
+
+线的颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+#### labelLine.lineStyle.width
+- **Type**: `number`
+- **Default**: `1`
+
+线宽。
+
+#### labelLine.lineStyle.type
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+线的类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `dashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+type: [5, 10],
+
+dashOffset: 5
+}
+```
+
+#### labelLine.lineStyle.dashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `type` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+#### labelLine.lineStyle.cap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+#### labelLine.lineStyle.join
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `miterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+#### labelLine.lineStyle.miterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `join` 为 `miter` 时， `miterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+#### labelLine.lineStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+#### labelLine.lineStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+#### labelLine.lineStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+#### labelLine.lineStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+#### labelLine.lineStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+## labelLayout
+- **Type**: `Object|Function`
+
+从 `v5.0.0` 开始支持
+
+标签的统一布局配置。
+
+该配置项是在每个系列默认的标签布局基础上，统一调整标签的`(x, y)`位置，标签对齐等属性以实现想要的标签布局效果。
+
+该配置项也可以是一个有如下参数的回调函数
+
+```
+// 标签对应数据的 dataIndex
+dataIndex: number
+// 标签对应的数据类型，只在关系图中会有 node 和 edge 数据类型的区分
+dataType?: string
+// 标签对应的系列的 index
+seriesIndex: number
+// 标签显示的文本
+text: string
+// 默认的标签的包围盒，由系列默认的标签布局决定
+labelRect: {x: number, y: number, width: number, height: number}
+// 默认的标签水平对齐
+align: 'left' | 'center' | 'right'
+// 默认的标签垂直对齐
+verticalAlign: 'top' | 'middle' | 'bottom'
+// 标签所对应的数据图形的包围盒，可用于定位标签位置
+rect: {x: number, y: number, width: number, height: number}
+// 默认引导线的位置，目前只有饼图(pie)和漏斗图(funnel)有默认标签位置
+// 如果没有该值则为 null
+labelLinePoints?: number[][]
+```
+
+**示例：**
+
+将标签显示在图形右侧 10px 的位置，并且垂直居中：
+
+```
+labelLayout(params) {
+    return {
+        x: params.rect.x + 10,
+        y: params.rect.y + params.rect.height / 2,
+        verticalAlign: 'middle',
+        align: 'left'
+    }
+}
+```
+
+根据图形的包围盒尺寸决定文本尺寸
+
+```
+
+labelLayout(params) {
+    return {
+        fontSize: Math.max(params.rect.width / 10, 5)
+    };
+}
+```
+
+### labelLayout.hideOverlap
+- **Type**: `boolean`
+
+是否隐藏重叠的标签。
+
+下面示例演示了在关系图中开启该配置后，在缩放时可以实现自动的标签隐藏。
+
+### labelLayout.moveOverlap
+- **Type**: `string`
+
+在标签重叠的时候是否挪动标签位置以防止重叠。
+
+目前支持配置为：
+
+*   `'shiftX'` 水平方向依次位移，在水平方向对齐时使用
+*   `'shiftY'` 垂直方向依次位移，在垂直方向对齐时使用
+
+下面是标签右对齐并配置垂直方向依次位移以防止重叠的示例。
+
+### labelLayout.x
+- **Type**: `number|string`
+
+标签的 x 位置。支持绝对的像素值或者`'20%'`这样的相对值。
+
+### labelLayout.y
+- **Type**: `number|string`
+
+标签的 y 位置。支持绝对的像素值或者`'20%'`这样的相对值。
+
+### labelLayout.dx
+- **Type**: `number`
+
+标签在 x 方向上的像素偏移。可以和`x`一起使用。
+
+### labelLayout.dy
+- **Type**: `number`
+
+标签在 y 方向上的像素偏移。可以和`y`一起使用
+
+### labelLayout.rotate
+- **Type**: `number`
+
+标签旋转角度。
+
+### labelLayout.width
+- **Type**: `number`
+
+标签显示的宽度。可以配合`overflow`使用控制标签显示在固定宽度内
+
+### labelLayout.height
+- **Type**: `number`
+
+标签显示的高度。
+
+### labelLayout.align
+- **Type**: `string`
+
+标签水平对齐方式。可以设置`'left'`, `'center'`, `'right'`。
+
+### labelLayout.verticalAlign
+- **Type**: `string`
+
+标签垂直对齐方式。可以设置`'top'`, `'middle'`, `'bottom'`。
+
+### labelLayout.fontSize
+- **Type**: `number`
+
+The text size of the label.
+
+### labelLayout.draggable
+- **Type**: `boolean`
+
+标签是否可以允许用户通过拖拽二次调整位置。
+
+### labelLayout.labelLinePoints
+- **Type**: `Array`
+
+标签引导线三个点的位置。格式为：
+
+```
+[[x, y], [x, y], [x, y]]
+```
+
+在饼图中常用来微调已经计算好的引导线，其它情况一般不建议设置。
+
+## itemStyle
+- **Type**: `Object`
+
+图形样式。
+
+### itemStyle.color
+- **Type**: `Color|Function`
+- **Default**: `自适应`
+
+图形的颜色。 默认从全局调色盘 [option.color](../option.md#color) 获取颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+支持使用回调函数。回调函数格式如下：
+
+```
+(params: Object) => Color
+```
+
+传入的是数据项 `seriesIndex`, `dataIndex`, `data`, `value` 等各个参数。
+
+### itemStyle.borderColor
+- **Type**: `Color`
+- **Default**: `'#000'`
+
+图形的描边颜色。支持的颜色格式同 `color`，不支持回调函数。
+
+### itemStyle.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+描边线宽。为 0 时无描边。
+
+### itemStyle.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+### itemStyle.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+### itemStyle.borderCap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+### itemStyle.borderJoin
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `borderMiterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+### itemStyle.borderMiterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `borderJoin` 为 `miter` 时， `borderMiterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+### itemStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+### itemStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+### itemStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+### itemStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+### itemStyle.opacity
+- **Type**: `number`
+- **Default**: `0.8`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+## emphasis
+- **Type**: `Object`
+
+高亮的图形和标签样式。
+
+### emphasis.disabled
+- **Type**: `boolean`
+- **Default**: `false`
+
+从 `v5.3.0` 开始支持
+
+是否关闭高亮状态。
+
+关闭高亮状态可以在鼠标移到图形上，tooltip 触发，或者图例联动的时候不再触发高亮效果。在图形非常多的时候可以关闭以提升交互流畅性。
+
+### emphasis.scale
+- **Type**: `boolean|number`
+- **Default**: `true`
+
+从 `v5.0.0` 开始支持
+
+是否开启高亮后的放大效果。从 `5.3.2` 版本开始支持 `number`，用以设置高亮放大倍数，默认放大 1.1 倍。
+
+### emphasis.focus
+- **Type**: `string`
+- **Default**: `'none'`
+
+从 `v5.0.0` 开始支持
+
+在高亮图形时，是否淡出其它数据的图形已达到聚焦的效果。支持如下配置：
+
+*   `'none'` 不淡出其它图形，默认使用该配置。
+*   `'self'` 只聚焦（不淡出）当前高亮的数据的图形。
+
+*   `'series'` 聚焦当前高亮的数据所在的系列的所有图形。
+
+**示例：**
+
+下面代码配置了柱状图在高亮一个图形的时候，淡出当前直角坐标系所有其它的系列。
+
+```
+emphasis: {
+    focus: 'series',
+    blurScope: 'coordinateSystem'
+}
+```
+
+### emphasis.blurScope
+- **Type**: `string`
+- **Default**: `'coordinateSystem'`
+
+从 `v5.0.0` 开始支持
+
+在开启`focus`的时候，可以通过`blurScope`配置淡出的范围。支持如下配置
+
+*   `'coordinateSystem'` 淡出范围为坐标系，默认使用该配置。
+*   `'series'` 淡出范围为系列。
+*   `'global'` 淡出范围为全局。
+
+#### emphasis.label.show
+- **Type**: `boolean`
+- **Default**: `false`
+
+是否显示标签。
+
+#### emphasis.label.position
+- **Type**: `string|Array`
+
+标签的位置。
+
+*   可以通过内置的语义声明位置：
+    
+    示例：
+    
+    ```
+      position: 'top'
+    ```
+    
+    支持：`top` / `left` / `right` / `bottom` / `inside` / `insideLeft` / `insideRight` / `insideTop` / `insideBottom` / `insideTopLeft` / `insideBottomLeft` / `insideTopRight` / `insideBottomRight`
+    
+*   也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。
+    
+    示例：
+    
+    ```
+      // 绝对的像素值
+      position: [10, 10],
+      // 相对的百分比
+      position: ['50%', '50%']
+    ```
+    
+
+参见：[label position](https://echarts.apache.org/examples/zh/view.html?c=doc-example/label-position)。
+
+#### emphasis.label.distance
+- **Type**: `number`
+- **Default**: `5`
+
+距离图形元素的距离。
+
+当 position 为字符描述值（如 `'top'`、`'insideRight'`）时候有效。
+
+参见：[label position](https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position)。
+
+#### emphasis.label.rotate
+- **Type**: `number`
+
+标签旋转。从 -90 度到 90 度。正值是逆时针。
+
+参见：[label rotation](https://echarts.apache.org/examples/zh/editor.html?c=bar-label-rotation)。
+
+#### emphasis.label.offset
+- **Type**: `Array`
+
+是否对文字进行偏移。默认不偏移。例如：`[30, 40]` 表示文字在横向上偏移 `30`，纵向上偏移 `40`。
+
+#### emphasis.label.formatter
+- **Type**: `string|Function`
+
+标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 `\n` 换行。
+
+**字符串模板** 模板变量有：
+
+*   `{a}`：系列名。
+*   `{b}`：数据名。
+*   `{c}`：数据值。
+*   `{@xxx}`：数据中名为 `'xxx'` 的维度的值，如 `{@product}` 表示名为 `'product'` 的维度的值。
+*   `{@[n]}`：数据中维度 `n` 的值，如 `{@[3]}` 表示维度 3 的值，从 0 开始计数。
+
+**示例：**
+
+```
+formatter: '{b}: {@score}'
+```
+
+**回调函数**
+
+回调函数格式：
+
+```
+(params: Object|Array) => string
+```
+
+参数 `params` 是 formatter 需要的单个数据集。格式如下：
+
+```
+{
+    componentType: 'series',
+    // 系列类型
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index
+    seriesIndex: number,
+    // 系列名称
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // 传入的数据值。在多数系列下它和 data 相同。在一些系列下是 data 中的分量（如 map、radar 中）
+    value: number|Array|Object,
+    // 坐标轴 encode 映射信息，
+    // key 为坐标轴（如 'x' 'y' 'radius' 'angle' 等）
+    // value 必然为数组，不会为 null/undefined，表示 dimension index 。
+    // 其内容如：
+    // {
+    //     x: [2] // dimension index 为 2 的数据映射到 x 轴
+    //     y: [0] // dimension index 为 0 的数据映射到 y 轴
+    // }
+    encode: Object,
+    // 维度名列表
+    dimensionNames: Array<String>,
+    // 数据的维度 index，如 0 或 1 或 2 ...
+    // 仅在雷达图中使用。
+    dimensionIndex: number,
+    // 数据图形的颜色
+    color: string
+}
+```
+
+注：encode 和 dimensionNames 的使用方式，例如：
+
+如果数据为：
+
+```
+dataset: {
+    source: [
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.encode.y[0]]
+```
+
+如果数据为：
+
+```
+dataset: {
+    dimensions: ['product', '2015', '2016', '2017'],
+    source: [
+        {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+        {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+        {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+        {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.dimensionNames[params.encode.y[0]]]
+```
+
+#### emphasis.label.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+#### emphasis.label.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+#### emphasis.label.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+#### emphasis.label.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+#### emphasis.label.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+#### emphasis.label.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+#### emphasis.label.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+#### emphasis.label.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+#### emphasis.label.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+#### emphasis.label.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+#### emphasis.label.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+#### emphasis.label.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+#### emphasis.label.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+#### emphasis.label.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+#### emphasis.label.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+#### emphasis.label.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+#### emphasis.label.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+#### emphasis.label.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+#### emphasis.label.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+#### emphasis.label.width
+- **Type**: `number`
+
+文本显示宽度。
+
+#### emphasis.label.height
+- **Type**: `number`
+
+文本显示高度。
+
+#### emphasis.label.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+#### emphasis.label.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+#### emphasis.label.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+#### emphasis.label.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+#### emphasis.label.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+#### emphasis.label.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+#### emphasis.label.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+#### emphasis.label.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+#### emphasis.label.overflow
+- **Type**: `string`
+- **Default**: `'none'`
+
+文字超出宽度是否截断或者换行。配置`width`时有效
+
+*   `'truncate'` 截断，并在末尾显示`ellipsis`配置的文本，默认为`...`
+*   `'break'` 换行
+*   `'breakAll'` 换行，跟`'break'`不同的是，在英语等拉丁文中，`'breakAll'`还会强制单词内换行
+
+#### emphasis.label.ellipsis
+- **Type**: `string`
+- **Default**: `'...'`
+
+在`overflow`配置为`'truncate'`的时候，可以通过该属性配置末尾显示的文本。
+
+#### emphasis.label.rich
+- **Type**: `Object`
+
+在 `rich` 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。
+
+例如：
+
+```
+label: {
+    // 在文本中，可以对部分文本采用 rich 中定义样式。
+    // 这里需要在文本中使用标记符号：
+    // `{styleName|text content text content}` 标记样式名。
+    // 注意，换行仍是使用 '\n'。
+    formatter: [
+        '{a|这段文本采用样式a}',
+        '{b|这段文本采用样式b}这段用默认样式{x|这段用样式x}'
+    ].join('\n'),
+
+    rich: {
+        a: {
+            color: 'red',
+            lineHeight: 10
+        },
+        b: {
+            backgroundColor: {
+                image: 'xxx/xxx.jpg'
+            },
+            height: 40
+        },
+        x: {
+            fontSize: 18,
+            fontFamily: 'Microsoft YaHei',
+            borderColor: '#449933',
+            borderRadius: 4
+        },
+        ...
+    }
+}
+```
+
+详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+
+###### emphasis.label.rich.<style_name>.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### emphasis.label.rich.<style_name>.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### emphasis.label.rich.<style_name>.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### emphasis.label.rich.<style_name>.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### emphasis.label.rich.<style_name>.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### emphasis.label.rich.<style_name>.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### emphasis.label.rich.<style_name>.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### emphasis.label.rich.<style_name>.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### emphasis.label.rich.<style_name>.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### emphasis.label.rich.<style_name>.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### emphasis.label.rich.<style_name>.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### emphasis.label.rich.<style_name>.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### emphasis.label.rich.<style_name>.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### emphasis.label.rich.<style_name>.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### emphasis.label.rich.<style_name>.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### emphasis.label.rich.<style_name>.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### emphasis.label.rich.<style_name>.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### emphasis.label.rich.<style_name>.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### emphasis.label.rich.<style_name>.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### emphasis.label.rich.<style_name>.width
+- **Type**: `number|string`
+
+文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+`width` 也可以是百分比字符串，如 `'100%'`。表示的是所在文本块的 `contentWidth`（即不包含文本块的 `padding`）的百分之多少。之所以以 `contentWidth` 做基数，因为每个文本片段只能基于 `content box` 布局。如果以 `outerWidth` 做基数，则百分比的计算在实用中不具有意义，可能会超出。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### emphasis.label.rich.<style_name>.height
+- **Type**: `number|string`
+
+文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### emphasis.label.rich.<style_name>.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### emphasis.label.rich.<style_name>.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### emphasis.label.rich.<style_name>.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### emphasis.label.rich.<style_name>.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### emphasis.label.rich.<style_name>.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### emphasis.label.rich.<style_name>.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### emphasis.label.rich.<style_name>.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### emphasis.label.rich.<style_name>.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+#### emphasis.label.richInheritPlainLabel
+- **Type**: `boolean`
+- **Default**: `true`
+
+从 `v6.0.0` 开始支持
+
+富文本样式是否继承普通文本样式。
+
+此配置项用于向历史兼容。
+
+> 从 v6 版本开始，[富文本标签 (label.rich / textStyle.rich)](option.series-scatter.md#label.rich) 部分样式（`fontStyle`, `fontWeight`, `fontSize`, `fontFamily`, `textShadowColor`, `textShadowBlur`, `textShadowOffsetX`, `textShadowOffsetY`）默认继承 [普通文本样式 (label / textStyle)](option.series-scatter.md#label)。你可以设置 `richInheritPlainLabel: false` （可在最外层配置项或与同级文本样式配置项）来禁用此行为。
+> 
+> ```
+> option = {
+>     richInheritPlainLabel: false, // In most cases, this is enough.
+>     xxx1: {
+>         // Can also set it here to only control this label.
+>         label: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     },
+>     xxx2: {
+>         textStyle: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     }
+> }
+> ```
+
+### emphasis.labelLine
+- **Type**: `Object`
+
+从 `v5.0.0` 开始支持
+
+标签的视觉引导线配置。
+
+#### emphasis.labelLine.show
+- **Type**: `boolean`
+
+是否显示视觉引导线。
+
+##### emphasis.labelLine.lineStyle.color
+- **Type**: `Color`
+- **Default**: `"#000"`
+
+线的颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+##### emphasis.labelLine.lineStyle.width
+- **Type**: `number`
+- **Default**: `1`
+
+线宽。
+
+##### emphasis.labelLine.lineStyle.type
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+线的类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `dashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+type: [5, 10],
+
+dashOffset: 5
+}
+```
+
+##### emphasis.labelLine.lineStyle.dashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `type` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### emphasis.labelLine.lineStyle.cap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+##### emphasis.labelLine.lineStyle.join
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `miterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+##### emphasis.labelLine.lineStyle.miterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `join` 为 `miter` 时， `miterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+##### emphasis.labelLine.lineStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+##### emphasis.labelLine.lineStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+##### emphasis.labelLine.lineStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+##### emphasis.labelLine.lineStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+##### emphasis.labelLine.lineStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+#### emphasis.itemStyle.color
+- **Type**: `Color`
+- **Default**: `自适应`
+
+图形的颜色。从 v5.2.0 开始支持在 `emphasis` 状态中支持设置为 `'inherit'` 取消高亮颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+#### emphasis.itemStyle.borderColor
+- **Type**: `Color`
+- **Default**: `'#000'`
+
+图形的描边颜色。支持的颜色格式同 `color`，不支持回调函数。
+
+#### emphasis.itemStyle.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+描边线宽。为 0 时无描边。
+
+#### emphasis.itemStyle.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+#### emphasis.itemStyle.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+#### emphasis.itemStyle.borderCap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+#### emphasis.itemStyle.borderJoin
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `borderMiterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+#### emphasis.itemStyle.borderMiterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `borderJoin` 为 `miter` 时， `borderMiterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+#### emphasis.itemStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+#### emphasis.itemStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+#### emphasis.itemStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+#### emphasis.itemStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+#### emphasis.itemStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+## blur
+- **Type**: `Object`
+
+从 `v5.0.0` 开始支持
+
+淡出状态的配置。开启 [emphasis.focus](option.series-scatter.md#emphasis.focus) 后有效。
+
+#### blur.label.show
+- **Type**: `boolean`
+- **Default**: `false`
+
+是否显示标签。
+
+#### blur.label.position
+- **Type**: `string|Array`
+
+标签的位置。
+
+*   可以通过内置的语义声明位置：
+    
+    示例：
+    
+    ```
+      position: 'top'
+    ```
+    
+    支持：`top` / `left` / `right` / `bottom` / `inside` / `insideLeft` / `insideRight` / `insideTop` / `insideBottom` / `insideTopLeft` / `insideBottomLeft` / `insideTopRight` / `insideBottomRight`
+    
+*   也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。
+    
+    示例：
+    
+    ```
+      // 绝对的像素值
+      position: [10, 10],
+      // 相对的百分比
+      position: ['50%', '50%']
+    ```
+    
+
+参见：[label position](https://echarts.apache.org/examples/zh/view.html?c=doc-example/label-position)。
+
+#### blur.label.distance
+- **Type**: `number`
+- **Default**: `5`
+
+距离图形元素的距离。
+
+当 position 为字符描述值（如 `'top'`、`'insideRight'`）时候有效。
+
+参见：[label position](https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position)。
+
+#### blur.label.rotate
+- **Type**: `number`
+
+标签旋转。从 -90 度到 90 度。正值是逆时针。
+
+参见：[label rotation](https://echarts.apache.org/examples/zh/editor.html?c=bar-label-rotation)。
+
+#### blur.label.offset
+- **Type**: `Array`
+
+是否对文字进行偏移。默认不偏移。例如：`[30, 40]` 表示文字在横向上偏移 `30`，纵向上偏移 `40`。
+
+#### blur.label.formatter
+- **Type**: `string|Function`
+
+标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 `\n` 换行。
+
+**字符串模板** 模板变量有：
+
+*   `{a}`：系列名。
+*   `{b}`：数据名。
+*   `{c}`：数据值。
+*   `{@xxx}`：数据中名为 `'xxx'` 的维度的值，如 `{@product}` 表示名为 `'product'` 的维度的值。
+*   `{@[n]}`：数据中维度 `n` 的值，如 `{@[3]}` 表示维度 3 的值，从 0 开始计数。
+
+**示例：**
+
+```
+formatter: '{b}: {@score}'
+```
+
+**回调函数**
+
+回调函数格式：
+
+```
+(params: Object|Array) => string
+```
+
+参数 `params` 是 formatter 需要的单个数据集。格式如下：
+
+```
+{
+    componentType: 'series',
+    // 系列类型
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index
+    seriesIndex: number,
+    // 系列名称
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // 传入的数据值。在多数系列下它和 data 相同。在一些系列下是 data 中的分量（如 map、radar 中）
+    value: number|Array|Object,
+    // 坐标轴 encode 映射信息，
+    // key 为坐标轴（如 'x' 'y' 'radius' 'angle' 等）
+    // value 必然为数组，不会为 null/undefined，表示 dimension index 。
+    // 其内容如：
+    // {
+    //     x: [2] // dimension index 为 2 的数据映射到 x 轴
+    //     y: [0] // dimension index 为 0 的数据映射到 y 轴
+    // }
+    encode: Object,
+    // 维度名列表
+    dimensionNames: Array<String>,
+    // 数据的维度 index，如 0 或 1 或 2 ...
+    // 仅在雷达图中使用。
+    dimensionIndex: number,
+    // 数据图形的颜色
+    color: string
+}
+```
+
+注：encode 和 dimensionNames 的使用方式，例如：
+
+如果数据为：
+
+```
+dataset: {
+    source: [
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.encode.y[0]]
+```
+
+如果数据为：
+
+```
+dataset: {
+    dimensions: ['product', '2015', '2016', '2017'],
+    source: [
+        {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+        {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+        {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+        {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.dimensionNames[params.encode.y[0]]]
+```
+
+#### blur.label.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+#### blur.label.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+#### blur.label.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+#### blur.label.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+#### blur.label.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+#### blur.label.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+#### blur.label.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+#### blur.label.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+#### blur.label.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+#### blur.label.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+#### blur.label.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+#### blur.label.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+#### blur.label.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+#### blur.label.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+#### blur.label.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+#### blur.label.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+#### blur.label.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+#### blur.label.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+#### blur.label.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+#### blur.label.width
+- **Type**: `number`
+
+文本显示宽度。
+
+#### blur.label.height
+- **Type**: `number`
+
+文本显示高度。
+
+#### blur.label.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+#### blur.label.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+#### blur.label.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+#### blur.label.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+#### blur.label.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+#### blur.label.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+#### blur.label.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+#### blur.label.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+#### blur.label.overflow
+- **Type**: `string`
+- **Default**: `'none'`
+
+文字超出宽度是否截断或者换行。配置`width`时有效
+
+*   `'truncate'` 截断，并在末尾显示`ellipsis`配置的文本，默认为`...`
+*   `'break'` 换行
+*   `'breakAll'` 换行，跟`'break'`不同的是，在英语等拉丁文中，`'breakAll'`还会强制单词内换行
+
+#### blur.label.ellipsis
+- **Type**: `string`
+- **Default**: `'...'`
+
+在`overflow`配置为`'truncate'`的时候，可以通过该属性配置末尾显示的文本。
+
+#### blur.label.rich
+- **Type**: `Object`
+
+在 `rich` 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。
+
+例如：
+
+```
+label: {
+    // 在文本中，可以对部分文本采用 rich 中定义样式。
+    // 这里需要在文本中使用标记符号：
+    // `{styleName|text content text content}` 标记样式名。
+    // 注意，换行仍是使用 '\n'。
+    formatter: [
+        '{a|这段文本采用样式a}',
+        '{b|这段文本采用样式b}这段用默认样式{x|这段用样式x}'
+    ].join('\n'),
+
+    rich: {
+        a: {
+            color: 'red',
+            lineHeight: 10
+        },
+        b: {
+            backgroundColor: {
+                image: 'xxx/xxx.jpg'
+            },
+            height: 40
+        },
+        x: {
+            fontSize: 18,
+            fontFamily: 'Microsoft YaHei',
+            borderColor: '#449933',
+            borderRadius: 4
+        },
+        ...
+    }
+}
+```
+
+详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+
+###### blur.label.rich.<style_name>.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### blur.label.rich.<style_name>.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### blur.label.rich.<style_name>.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### blur.label.rich.<style_name>.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### blur.label.rich.<style_name>.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### blur.label.rich.<style_name>.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### blur.label.rich.<style_name>.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### blur.label.rich.<style_name>.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### blur.label.rich.<style_name>.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### blur.label.rich.<style_name>.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### blur.label.rich.<style_name>.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### blur.label.rich.<style_name>.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### blur.label.rich.<style_name>.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### blur.label.rich.<style_name>.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### blur.label.rich.<style_name>.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### blur.label.rich.<style_name>.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### blur.label.rich.<style_name>.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### blur.label.rich.<style_name>.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### blur.label.rich.<style_name>.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### blur.label.rich.<style_name>.width
+- **Type**: `number|string`
+
+文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+`width` 也可以是百分比字符串，如 `'100%'`。表示的是所在文本块的 `contentWidth`（即不包含文本块的 `padding`）的百分之多少。之所以以 `contentWidth` 做基数，因为每个文本片段只能基于 `content box` 布局。如果以 `outerWidth` 做基数，则百分比的计算在实用中不具有意义，可能会超出。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### blur.label.rich.<style_name>.height
+- **Type**: `number|string`
+
+文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### blur.label.rich.<style_name>.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### blur.label.rich.<style_name>.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### blur.label.rich.<style_name>.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### blur.label.rich.<style_name>.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### blur.label.rich.<style_name>.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### blur.label.rich.<style_name>.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### blur.label.rich.<style_name>.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### blur.label.rich.<style_name>.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+#### blur.label.richInheritPlainLabel
+- **Type**: `boolean`
+- **Default**: `true`
+
+从 `v6.0.0` 开始支持
+
+富文本样式是否继承普通文本样式。
+
+此配置项用于向历史兼容。
+
+> 从 v6 版本开始，[富文本标签 (label.rich / textStyle.rich)](option.series-scatter.md#label.rich) 部分样式（`fontStyle`, `fontWeight`, `fontSize`, `fontFamily`, `textShadowColor`, `textShadowBlur`, `textShadowOffsetX`, `textShadowOffsetY`）默认继承 [普通文本样式 (label / textStyle)](option.series-scatter.md#label)。你可以设置 `richInheritPlainLabel: false` （可在最外层配置项或与同级文本样式配置项）来禁用此行为。
+> 
+> ```
+> option = {
+>     richInheritPlainLabel: false, // In most cases, this is enough.
+>     xxx1: {
+>         // Can also set it here to only control this label.
+>         label: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     },
+>     xxx2: {
+>         textStyle: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     }
+> }
+> ```
+
+### blur.labelLine
+- **Type**: `Object`
+
+从 `v5.0.0` 开始支持
+
+标签的视觉引导线配置。
+
+#### blur.labelLine.show
+- **Type**: `boolean`
+
+是否显示视觉引导线。
+
+##### blur.labelLine.lineStyle.color
+- **Type**: `Color`
+- **Default**: `"#000"`
+
+线的颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+##### blur.labelLine.lineStyle.width
+- **Type**: `number`
+- **Default**: `1`
+
+线宽。
+
+##### blur.labelLine.lineStyle.type
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+线的类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `dashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+type: [5, 10],
+
+dashOffset: 5
+}
+```
+
+##### blur.labelLine.lineStyle.dashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `type` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### blur.labelLine.lineStyle.cap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+##### blur.labelLine.lineStyle.join
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `miterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+##### blur.labelLine.lineStyle.miterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `join` 为 `miter` 时， `miterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+##### blur.labelLine.lineStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+##### blur.labelLine.lineStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+##### blur.labelLine.lineStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+##### blur.labelLine.lineStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+##### blur.labelLine.lineStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+#### blur.itemStyle.color
+- **Type**: `Color`
+- **Default**: `自适应`
+
+图形的颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+#### blur.itemStyle.borderColor
+- **Type**: `Color`
+- **Default**: `'#000'`
+
+图形的描边颜色。支持的颜色格式同 `color`，不支持回调函数。
+
+#### blur.itemStyle.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+描边线宽。为 0 时无描边。
+
+#### blur.itemStyle.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+#### blur.itemStyle.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+#### blur.itemStyle.borderCap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+#### blur.itemStyle.borderJoin
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `borderMiterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+#### blur.itemStyle.borderMiterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `borderJoin` 为 `miter` 时， `borderMiterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+#### blur.itemStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+#### blur.itemStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+#### blur.itemStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+#### blur.itemStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+#### blur.itemStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+## select
+- **Type**: `Object`
+
+从 `v5.0.0` 开始支持
+
+选中状态的配置。开启 [selectedMode](option.series-scatter.md#selectedMode) 后有效。
+
+### select.disabled
+- **Type**: `boolean`
+- **Default**: `false`
+
+从 `v5.3.0` 开始支持
+
+是否可以被选中。在开启 `selectedMode` 的时候有效，可以用于关闭部分数据。
+
+#### select.label.show
+- **Type**: `boolean`
+- **Default**: `false`
+
+是否显示标签。
+
+#### select.label.position
+- **Type**: `string|Array`
+
+标签的位置。
+
+*   可以通过内置的语义声明位置：
+    
+    示例：
+    
+    ```
+      position: 'top'
+    ```
+    
+    支持：`top` / `left` / `right` / `bottom` / `inside` / `insideLeft` / `insideRight` / `insideTop` / `insideBottom` / `insideTopLeft` / `insideBottomLeft` / `insideTopRight` / `insideBottomRight`
+    
+*   也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。
+    
+    示例：
+    
+    ```
+      // 绝对的像素值
+      position: [10, 10],
+      // 相对的百分比
+      position: ['50%', '50%']
+    ```
+    
+
+参见：[label position](https://echarts.apache.org/examples/zh/view.html?c=doc-example/label-position)。
+
+#### select.label.distance
+- **Type**: `number`
+- **Default**: `5`
+
+距离图形元素的距离。
+
+当 position 为字符描述值（如 `'top'`、`'insideRight'`）时候有效。
+
+参见：[label position](https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position)。
+
+#### select.label.rotate
+- **Type**: `number`
+
+标签旋转。从 -90 度到 90 度。正值是逆时针。
+
+参见：[label rotation](https://echarts.apache.org/examples/zh/editor.html?c=bar-label-rotation)。
+
+#### select.label.offset
+- **Type**: `Array`
+
+是否对文字进行偏移。默认不偏移。例如：`[30, 40]` 表示文字在横向上偏移 `30`，纵向上偏移 `40`。
+
+#### select.label.formatter
+- **Type**: `string|Function`
+
+标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 `\n` 换行。
+
+**字符串模板** 模板变量有：
+
+*   `{a}`：系列名。
+*   `{b}`：数据名。
+*   `{c}`：数据值。
+*   `{@xxx}`：数据中名为 `'xxx'` 的维度的值，如 `{@product}` 表示名为 `'product'` 的维度的值。
+*   `{@[n]}`：数据中维度 `n` 的值，如 `{@[3]}` 表示维度 3 的值，从 0 开始计数。
+
+**示例：**
+
+```
+formatter: '{b}: {@score}'
+```
+
+**回调函数**
+
+回调函数格式：
+
+```
+(params: Object|Array) => string
+```
+
+参数 `params` 是 formatter 需要的单个数据集。格式如下：
+
+```
+{
+    componentType: 'series',
+    // 系列类型
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index
+    seriesIndex: number,
+    // 系列名称
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // 传入的数据值。在多数系列下它和 data 相同。在一些系列下是 data 中的分量（如 map、radar 中）
+    value: number|Array|Object,
+    // 坐标轴 encode 映射信息，
+    // key 为坐标轴（如 'x' 'y' 'radius' 'angle' 等）
+    // value 必然为数组，不会为 null/undefined，表示 dimension index 。
+    // 其内容如：
+    // {
+    //     x: [2] // dimension index 为 2 的数据映射到 x 轴
+    //     y: [0] // dimension index 为 0 的数据映射到 y 轴
+    // }
+    encode: Object,
+    // 维度名列表
+    dimensionNames: Array<String>,
+    // 数据的维度 index，如 0 或 1 或 2 ...
+    // 仅在雷达图中使用。
+    dimensionIndex: number,
+    // 数据图形的颜色
+    color: string
+}
+```
+
+注：encode 和 dimensionNames 的使用方式，例如：
+
+如果数据为：
+
+```
+dataset: {
+    source: [
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.encode.y[0]]
+```
+
+如果数据为：
+
+```
+dataset: {
+    dimensions: ['product', '2015', '2016', '2017'],
+    source: [
+        {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+        {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+        {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+        {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.dimensionNames[params.encode.y[0]]]
+```
+
+#### select.label.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+#### select.label.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+#### select.label.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+#### select.label.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+#### select.label.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+#### select.label.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+#### select.label.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+#### select.label.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+#### select.label.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+#### select.label.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+#### select.label.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+#### select.label.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+#### select.label.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+#### select.label.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+#### select.label.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+#### select.label.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+#### select.label.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+#### select.label.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+#### select.label.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+#### select.label.width
+- **Type**: `number`
+
+文本显示宽度。
+
+#### select.label.height
+- **Type**: `number`
+
+文本显示高度。
+
+#### select.label.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+#### select.label.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+#### select.label.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+#### select.label.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+#### select.label.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+#### select.label.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+#### select.label.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+#### select.label.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+#### select.label.overflow
+- **Type**: `string`
+- **Default**: `'none'`
+
+文字超出宽度是否截断或者换行。配置`width`时有效
+
+*   `'truncate'` 截断，并在末尾显示`ellipsis`配置的文本，默认为`...`
+*   `'break'` 换行
+*   `'breakAll'` 换行，跟`'break'`不同的是，在英语等拉丁文中，`'breakAll'`还会强制单词内换行
+
+#### select.label.ellipsis
+- **Type**: `string`
+- **Default**: `'...'`
+
+在`overflow`配置为`'truncate'`的时候，可以通过该属性配置末尾显示的文本。
+
+#### select.label.rich
+- **Type**: `Object`
+
+在 `rich` 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。
+
+例如：
+
+```
+label: {
+    // 在文本中，可以对部分文本采用 rich 中定义样式。
+    // 这里需要在文本中使用标记符号：
+    // `{styleName|text content text content}` 标记样式名。
+    // 注意，换行仍是使用 '\n'。
+    formatter: [
+        '{a|这段文本采用样式a}',
+        '{b|这段文本采用样式b}这段用默认样式{x|这段用样式x}'
+    ].join('\n'),
+
+    rich: {
+        a: {
+            color: 'red',
+            lineHeight: 10
+        },
+        b: {
+            backgroundColor: {
+                image: 'xxx/xxx.jpg'
+            },
+            height: 40
+        },
+        x: {
+            fontSize: 18,
+            fontFamily: 'Microsoft YaHei',
+            borderColor: '#449933',
+            borderRadius: 4
+        },
+        ...
+    }
+}
+```
+
+详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+
+###### select.label.rich.<style_name>.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### select.label.rich.<style_name>.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### select.label.rich.<style_name>.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### select.label.rich.<style_name>.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### select.label.rich.<style_name>.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### select.label.rich.<style_name>.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### select.label.rich.<style_name>.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### select.label.rich.<style_name>.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### select.label.rich.<style_name>.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### select.label.rich.<style_name>.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### select.label.rich.<style_name>.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### select.label.rich.<style_name>.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### select.label.rich.<style_name>.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### select.label.rich.<style_name>.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### select.label.rich.<style_name>.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### select.label.rich.<style_name>.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### select.label.rich.<style_name>.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### select.label.rich.<style_name>.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### select.label.rich.<style_name>.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### select.label.rich.<style_name>.width
+- **Type**: `number|string`
+
+文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+`width` 也可以是百分比字符串，如 `'100%'`。表示的是所在文本块的 `contentWidth`（即不包含文本块的 `padding`）的百分之多少。之所以以 `contentWidth` 做基数，因为每个文本片段只能基于 `content box` 布局。如果以 `outerWidth` 做基数，则百分比的计算在实用中不具有意义，可能会超出。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### select.label.rich.<style_name>.height
+- **Type**: `number|string`
+
+文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### select.label.rich.<style_name>.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### select.label.rich.<style_name>.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### select.label.rich.<style_name>.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### select.label.rich.<style_name>.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### select.label.rich.<style_name>.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### select.label.rich.<style_name>.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### select.label.rich.<style_name>.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### select.label.rich.<style_name>.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+#### select.label.richInheritPlainLabel
+- **Type**: `boolean`
+- **Default**: `true`
+
+从 `v6.0.0` 开始支持
+
+富文本样式是否继承普通文本样式。
+
+此配置项用于向历史兼容。
+
+> 从 v6 版本开始，[富文本标签 (label.rich / textStyle.rich)](option.series-scatter.md#label.rich) 部分样式（`fontStyle`, `fontWeight`, `fontSize`, `fontFamily`, `textShadowColor`, `textShadowBlur`, `textShadowOffsetX`, `textShadowOffsetY`）默认继承 [普通文本样式 (label / textStyle)](option.series-scatter.md#label)。你可以设置 `richInheritPlainLabel: false` （可在最外层配置项或与同级文本样式配置项）来禁用此行为。
+> 
+> ```
+> option = {
+>     richInheritPlainLabel: false, // In most cases, this is enough.
+>     xxx1: {
+>         // Can also set it here to only control this label.
+>         label: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     },
+>     xxx2: {
+>         textStyle: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     }
+> }
+> ```
+
+### select.labelLine
+- **Type**: `Object`
+
+从 `v5.0.0` 开始支持
+
+标签的视觉引导线配置。
+
+#### select.labelLine.show
+- **Type**: `boolean`
+
+是否显示视觉引导线。
+
+##### select.labelLine.lineStyle.color
+- **Type**: `Color`
+- **Default**: `"#000"`
+
+线的颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+##### select.labelLine.lineStyle.width
+- **Type**: `number`
+- **Default**: `1`
+
+线宽。
+
+##### select.labelLine.lineStyle.type
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+线的类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `dashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+type: [5, 10],
+
+dashOffset: 5
+}
+```
+
+##### select.labelLine.lineStyle.dashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `type` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### select.labelLine.lineStyle.cap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+##### select.labelLine.lineStyle.join
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `miterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+##### select.labelLine.lineStyle.miterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `join` 为 `miter` 时， `miterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+##### select.labelLine.lineStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+##### select.labelLine.lineStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+##### select.labelLine.lineStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+##### select.labelLine.lineStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+##### select.labelLine.lineStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+#### select.itemStyle.color
+- **Type**: `Color`
+- **Default**: `自适应`
+
+图形的颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+#### select.itemStyle.borderColor
+- **Type**: `Color`
+- **Default**: `'#000'`
+
+图形的描边颜色。支持的颜色格式同 `color`，不支持回调函数。
+
+#### select.itemStyle.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+描边线宽。为 0 时无描边。
+
+#### select.itemStyle.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+#### select.itemStyle.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+#### select.itemStyle.borderCap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+#### select.itemStyle.borderJoin
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `borderMiterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+#### select.itemStyle.borderMiterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `borderJoin` 为 `miter` 时， `borderMiterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+#### select.itemStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+#### select.itemStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+#### select.itemStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+#### select.itemStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+#### select.itemStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+## selectedMode
+- **Type**: `boolean|string`
+- **Default**: `false`
+
+从 `v5.0.0` 开始支持
+
+选中模式的配置，表示是否支持多个选中，默认关闭，支持布尔值和字符串，字符串取值可选`'single'`，`'multiple'`，`'series'` 分别表示单选，多选以及选择整个系列。
+
+> 从 v5.3.0 开始支持 `'series'`。
+
+## progressive
+- **Type**: `number`
+- **Default**: `400`
+
+渐进式渲染时每一帧绘制图形数量，设为 0 时不启用渐进式渲染，支持每个系列单独配置。
+
+在图中有数千到几千万图形元素的时候，一下子把图形绘制出来，或者交互重绘的时候可能会造成界面的卡顿甚至假死。ECharts 4 开始全流程支持渐进渲染（progressive rendering），渲染的时候会把创建好的图形分到数帧中渲染，每一帧渲染只渲染指定数量的图形。
+
+该配置项就是用于配置该系列每一帧渲染的图形数，可以根据图表图形复杂度的需要适当调整这个数字使得在不影响交互流畅性的前提下达到绘制速度的最大化。比如在 lines 图或者平行坐标中线宽大于 1 的 polyline 绘制会很慢，这个数字就可以设置小一点，而线宽小于等于 1 的 polyline 绘制非常快，该配置项就可以相对调得比较大。
+
+## progressiveThreshold
+- **Type**: `number`
+- **Default**: `3000`
+
+启用渐进式渲染的图形数量阈值，在单个系列的图形数量超过该阈值时启用渐进式渲染。
+
+## dimensions
+- **Type**: `Array`
+
+使用 dimensions 定义 `series.data` 或者 `dataset.source` 的每个维度的信息。
+
+注意：如果使用了 [dataset](option.dataset.md)，那么可以在 [dataset.dimensions](option.dataset.md#dimensions) 中定义 dimension ，或者在 [dataset.source](option.dataset.md#source) 的第一行/列中给出 dimension 名称。于是就不用在这里指定 dimension。但如果在这里指定了 `dimensions`，那么优先使用这里的。
+
+例如：
+
+```
+option = {
+    dataset: {
+        source: [
+            // 有了上面 dimensions 定义后，下面这五个维度的名称分别为：
+            // 'date', 'open', 'close', 'highest', 'lowest'
+            [12, 44, 55, 66, 2],
+            [23, 6, 16, 23, 1],
+            ...
+        ]
+    },
+    series: {
+        type: 'xxx',
+        // 定义了每个维度的名称。这个名称会被显示到默认的 tooltip 中。
+        dimensions: ['date', 'open', 'close', 'highest', 'lowest']
+    }
+}
+```
+
+```
+series: {
+    type: 'xxx',
+    dimensions: [
+        null,                // 如果此维度不想给出定义，则使用 null 即可
+        {type: 'ordinal'},   // 只定义此维度的类型。
+                             // 'ordinal' 表示离散型，一般文本使用这种类型。
+                             // 如果类型没有被定义，会自动猜测类型。
+        {name: 'good', type: 'number'},
+        'bad'                // 等同于 {name: 'bad'}
+    ]
+}
+```
+
+`dimensions` 数组中的每一项可以是：
+
+*   `string`，如 `'someName'`，等同于 `{name: 'someName'}`
+*   `Object`，属性可以有：
+    *   name: `string`。
+    *   type: `string`，支持
+        *   `number`，默认，表示普通数据。
+        *   `ordinal`，对于类目、文本这些 string 类型的数据，如果需要能在数轴上使用，须是 'ordinal' 类型。ECharts 默认会自动判断这个类型。但是自动判断也是不可能很完备的，所以使用者也可以手动强制指定。
+        *   `float`，即 [Float64Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array)。
+        *   `int`，即 [Int32Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array)。
+        *   `time`，表示时间类型。设置成 'time' 则能支持自动解析数据成时间戳（timestamp），比如该维度的数据是 '2017-05-10'，会自动被解析。时间类型的支持参见 [data](../option.md#series.data)。
+    *   displayName: 一般用于 tooltip 中维度名的展示。`string` 如果没有指定，默认使用 name 来展示。
+
+值得一提的是，当定义了 `dimensions` 后，默认 `tooltip` 中对个维度的显示，会变为『竖排』，从而方便显示每个维度的名称。如果没有定义 `dimensions`，则默认 `tooltip` 会横排显示，且只显示数值没有维度名称可显示。
+
+## encode
+- **Type**: `Object`
+
+可以定义 `data` 的哪个维度被编码成什么。比如：
+
+```
+option = {
+    dataset: {
+        source: [
+            // 每一列称为一个『维度』。
+            // 这里分别是维度 0、1、2、3、4。
+            [12, 44, 55, 66, 2],
+            [23, 6, 16, 23, 1],
+            ...
+        ]
+    },
+    series: {
+        type: 'xxx',
+        encode: {
+            x: [3, 1, 5],      // 表示维度 3、1、5 映射到 x 轴。
+            y: 2,              // 表示维度 2 映射到 y 轴。
+            tooltip: [3, 2, 4] // 表示维度 3、2、4 会在 tooltip 中显示。
+        }
+    }
+}
+```
+
+当使用 [dimensions](../option.md#series.dimensions) 给维度定义名称后，`encode` 中可直接引用名称，例如：
+
+```
+series: {
+    type: 'xxx',
+    dimensions: ['date', 'open', 'close', 'highest', 'lowest'],
+    encode: {
+        x: 'date',
+        y: ['open', 'close', 'highest', 'lowest']
+    }
+}
+```
+
+`encode` 声明的基本结构如下，其中冒号左边是坐标系、标签等特定名称，如 `'x'`, `'y'`, `'tooltip'` 等，冒号右边是数据中的维度名（string 格式）或者维度的序号（number 格式，从 0 开始计数），可以指定一个或多个维度（使用数组）。通常情况下，下面各种信息不需要所有的都写，按需写即可。
+
+下面是 encode 支持的属性：
+
+```
+// 在任何坐标系和系列中，都支持：
+encode: {
+    // 使用 “名为 product 的维度” 和 “名为 score 的维度” 的值在 tooltip 中显示
+    tooltip: ['product', 'score']
+    // 使用第一个维度和第三个维度的维度名连起来作为系列名。（有时候名字比较长，这可以避免在 series.name 重复输入这些名字）
+    seriesName: [1, 3],
+    // 表示使用第二个维度中的值作为 id。这在使用 setOption 动态更新数据时有用处，可以使新老数据用 id 对应起来，从而能够产生合适的数据更新动画。
+    itemId: 2,
+    // 指定数据项的名称使用第三个维度在饼图等图表中有用，可以使这个名字显示在图例（legend）中。
+    itemName: 3,
+    // 指定数据项的组 ID (groupId)。当全局过渡动画功能开启时，setOption 前后拥有相同 groupId 的数据项会进行动画过渡。
+    itemGroupId: 4,
+    // 指定数据项对应的子数据组 ID (childGroupId)，用于实现多层下钻和聚合。详见 childGroupId。
+    // 从 v5.5.0 开始支持
+    itemChildGroupId: 5
+}
+
+// 直角坐标系（grid/cartesian）特有的属性：
+encode: {
+    // 把 “维度1”、“维度5”、“名为 score 的维度” 映射到 X 轴：
+    x: [1, 5, 'score'],
+    // 把“维度0”映射到 Y 轴。
+    y: 0
+}
+
+// 单轴（singleAxis）特有的属性：
+encode: {
+    single: 3
+}
+
+// 极坐标系（polar）特有的属性：
+encode: {
+    radius: 3,
+    angle: 2
+}
+
+// 地理坐标系（geo）特有的属性：
+encode: {
+    lng: 3,
+    lat: 2
+}
+
+// 对于一些没有坐标系的图表，例如饼图、漏斗图等，可以是：
+encode: {
+    value: 3
+}
+```
+
+这是个更丰富的 `encode` 的[示例](https://echarts.apache.org/examples/zh/view.html?c=dataset-encode1&edit=1&reset=1)：
+
+特殊地，在 [自定义系列（custom series）](option.series-custom.md) 中，`encode` 中轴可以不指定或设置为 `null/undefined`，从而使系列免于受这个轴控制，也就是说，轴的范围（extent）不会受此系列数值的影响，轴被 [dataZoom](../option.md#dataZoom) 控制时也不会过滤掉这个系列：
+
+```
+var option = {
+    xAxis: {},
+    yAxis: {},
+    dataZoom: [{
+        xAxisIndex: 0
+    }, {
+        yAxisIndex: 0
+    }],
+    series: {
+        type: 'custom',
+        renderItem: function (params, api) {
+            return {
+                type: 'circle',
+                shape: {
+                    cx: 100, // x 位置永远为 100
+                    cy: api.coord([0, api.value(0)])[1],
+                    r: 30
+                },
+                style: {
+                    fill: 'blue'
+                }
+            };
+        },
+        encode: {
+            // 这样这个系列就不会被 x 轴以及 x
+            // 轴上的 dataZoom 控制了。
+            x: -1,
+            y: 1
+        },
+        data: [ ... ]
+    }
+};
+```
+
+## seriesLayoutBy
+- **Type**: `string`
+- **Default**: `'column'`
+
+当使用 [dataset](option.dataset.md) 时，`seriesLayoutBy` 指定了 `dataset` 中用行还是列对应到系列上，也就是说，系列“排布”到 `dataset` 的行还是列上。可取值：
+
+*   'column'：默认，`dataset` 的列对应于系列，从而 `dataset` 中每一列是一个维度（dimension）。
+*   'row'：`dataset` 的行对应于系列，从而 `dataset` 中每一行是一个维度（dimension）。
+
+参见这个 [示例](https://echarts.apache.org/examples/zh/editor.html?c=dataset-series-layout-by&theme=lite)
+
+## datasetIndex
+- **Type**: `number`
+- **Default**: `0`
+
+如果 [series.data](../option.md#series.data) 没有指定，并且 [dataset](option.dataset.md) 存在，那么就会使用 [dataset](option.dataset.md)。`datasetIndex` 指定本系列使用哪个 [dataset](option.dataset.md)。
+
+## dataGroupId
+- **Type**: `string`
+
+该系列所有数据项的组 ID，优先级低于`groupId`。详见`series.data.groupId`。
+
+## data
+- **Type**: `Array`
+
+系列中的数据内容数组。数组项通常为具体的数据项。
+
+注意，如果系列没有指定 `data`，并且 option 有 [dataset](option.dataset.md)，那么默认使用第一个 [dataset](option.dataset.md)。如果指定了 `data`，则不会再使用 [dataset](option.dataset.md)。
+
+可以使用 `series.datasetIndex` 指定其他的 [dataset](option.dataset.md)。
+
+通常来说，数据用一个二维数组表示。如下，每一列被称为一个『维度』。
+
+```
+series: [{
+    data: [
+        // 维度X   维度Y   其他维度 ...
+        [  3.4,    4.5,   15,   43],
+        [  4.2,    2.3,   20,   91],
+        [  10.8,   9.5,   30,   18],
+        [  7.2,    8.8,   18,   57]
+    ]
+}]
+```
+
+*   在 [直角坐标系 (grid)](option.grid.md) 中『维度X』和『维度Y』会默认对应于 [xAxis](option.xAxis.md) 和 [yAxis](option.yAxis.md)。
+*   在 [极坐标系 (polar)](option.polar.md) 中『维度X』和『维度Y』会默认对应于 [radiusAxis](option.radiusAxis.md) 和 [angleAxis](option.angleAxis.md)。
+*   后面的其他维度是可选的，可以在别处被使用，例如：
+    *   在 [visualMap](../option.md#visualMap) 中可以将一个或多个维度映射到颜色，大小等多个图形属性上。
+    *   在 [series.symbolSize](../option.md#series.symbolSize) 中可以使用回调函数，基于某个维度得到 symbolSize 值。
+    *   使用 [tooltip.formatter](option.tooltip.md#formatter) 或 [series.label.formatter](../option.md#series.label.formatter) 可以把其他维度的值展示出来。
+
+特别地，当只有一个轴为类目轴（axis.type 为 `'category'`）的时候，数据可以简化用一个一维数组表示。例如：
+
+```
+xAxis: {
+    data: ['a', 'b', 'm', 'n']
+},
+series: [{
+    // 与 xAxis.data 一一对应。
+    data: [23,  44,  55,  19]
+    // 它其实是下面这种形式的简化：
+    // data: [[0, 23], [1, 44], [2, 55], [3, 19]]
+}]
+```
+
+**『值』与 [轴类型](option.xAxis.md#type) 的关系：**
+
+*   当某维度对应于数值轴（axis.type 为 `'value'` 或者 `'log'`）的时候：
+    
+    其值可以为 `number`（例如 `12`）。（也可以兼容 `string` 形式的 number，例如 `'12'`）
+    
+*   当某维度对应于类目轴（axis.type 为 `'category'`）的时候：
+    
+    其值须为类目的『序数』（从 `0` 开始）或者类目的『字符串值』。例如：
+    
+    ```
+      xAxis: {
+          type: 'category',
+          data: ['星期一', '星期二', '星期三', '星期四']
+      },
+      yAxis: {
+          type: 'category',
+          data: ['a', 'b', 'm', 'n', 'p', 'q']
+      },
+      series: [{
+          data: [
+              // xAxis    yAxis
+              [  0,        0,    2  ], // 意思是此点位于 xAxis: '星期一', yAxis: 'a'。
+              [  '星期四',  2,    1  ], // 意思是此点位于 xAxis: '星期四', yAxis: 'm'。
+              [  2,       'p',   2  ], // 意思是此点位于 xAxis: '星期三', yAxis: 'p'。
+              [  3,        3,    5  ]
+          ]
+      }]
+    ```
+    
+    双类目轴的示例可以参考 [Github Punchcard](https://echarts.apache.org/examples/zh/editor.html?c=scatter-punchCard) 示例。
+    
+*   当某维度对应于时间轴（type 为 `'time'`）的时候，值可以为：
+    
+    *   一个时间戳，如 `1484141700832`，表示 UTC 时间。
+    *   或者字符串形式的时间描述：
+        *   [ISO 8601](https://www.ecma-international.org/ecma-262/5.1/#sec-15.9.1.15) 的子集，只包含这些形式（这几种格式，除非指明时区，否则均表示本地时间，与 [moment](https://momentjs.com/) 一致）：
+            *   部分年月日时间: `'2012-03'`, `'2012-03-01'`, `'2012-03-01 05'`, `'2012-03-01 05:06'`.
+            *   使用 `'T'` 或空格分割: `'2012-03-01T12:22:33.123'`, `'2012-03-01 12:22:33.123'`.
+            *   时区设定: `'2012-03-01T12:22:33Z'`, `'2012-03-01T12:22:33+8000'`, `'2012-03-01T12:22:33-05:00'`.
+        *   其他的时间字符串，包括（均表示本地时间）: `'2012'`, `'2012-3-1'`, `'2012/3/1'`, `'2012/03/01'`, `'2009/6/12 2:00'`, `'2009/6/12 2:05:08'`, `'2009/6/12 2:05:08.123'`
+    *   或者用户自行初始化的 Date 实例：
+        *   注意，用户自行初始化 Date 实例的时候，[浏览器的行为有差异，不同字符串的表示也不同](https://dygraphs.com/date-formats.html)。
+        *   例如：在 chrome 中，`new Date('2012-01-01')` 表示 UTC 时间的 2012 年 1 月 1 日，而 `new Date('2012-1-1')` 和 `new Date('2012/01/01')` 表示本地时间的 2012 年 1 月 1 日。在 safari 中，不支持 `new Date('2012-1-1')` 这种表示方法。
+        *   所以，使用 `new Date(dataString)` 时，可使用第三方库解析（如 [moment](https://momentjs.com/)），或者使用 `echarts.time.parse`，或者参见 [这里](https://dygraphs.com/date-formats.html)。
+
+**当需要对个别数据进行个性化定义时：**
+
+数组项可用对象，其中的 `value` 像表示具体的数值，如：
+
+```
+[
+    12,
+    34,
+    {
+        value : 56,
+        //自定义标签样式，仅对该数据项有效
+        label: {},
+        //自定义特殊 itemStyle，仅对该数据项有效
+        itemStyle:{}
+    },
+    10
+]
+// 或
+[
+    [12, 33],
+    [34, 313],
+    {
+        value: [56, 44],
+        label: {},
+        itemStyle:{}
+    },
+    [10, 33]
+]
+```
+
+**空值：**
+
+当某数据不存在时（ps：_不存在_不代表值为 0），可以用 `'-'` 或者 `null` 或者 `undefined` 或者 `NaN` 表示。
+
+例如，无数据在折线图中可表现为该点是断开的，在其它图中可表示为图形不存在。
+
+### data.name
+- **Type**: `string`
+
+数据项名称。
+
+### data.value
+- **Type**: `Array`
+
+数据项值。
+
+### data.groupId
+- **Type**: `string`
+
+该数据项的组 ID。当全局过渡动画功能开启时，`setOption` 前后拥有相同组 ID 的数据项会进行动画过渡。
+
+若没有指定`groupId` ，会尝试用`series.dataGroupId`作为该数据项的组 ID；若`series.dataGroupId`也没有指定，则会使用数据项的 ID 作为组 ID。
+
+如果你使用了[dataset](option.dataset.md)组件来表达数据，推荐使用`encode.itemGroupId`来指定哪个维度被编码为组 ID。
+
+### data.childGroupId
+- **Type**: `string`
+
+从 `v5.5.0` 开始支持
+
+该数据项对应的子数据组 ID，用于实现多层下钻和聚合。
+
+通过`groupId`已经可以达到数据下钻和聚合的效果，但只支持一层的下钻和聚合。为了实现多层下钻和聚合，我们又引入了`childGroupId`。
+
+引入`childGroupId`后，不同`option`的数据项之间就能形成逻辑上的父子关系，例如：
+
+```
+data: [                        data: [                        data: [
+  {                              {                              {
+    name: 'Animals',               name: 'Dogs',                  name: 'Corgi',
+    value: 3,                      value: 3,                      value: 5,
+    groupId: 'things',             groupId: 'animals',            groupId: 'dogs'
+    childGroupId: 'animals'        childGroupId: 'dogs'         },
+  },                             },                             {
+  {                              {                                name: 'Bulldog',
+    name: 'Fruits',                name: 'Cats',                  value: 6,
+    value: 3,                      value: 4,                      groupId: 'dogs'
+    groupId: 'things',             groupId: 'animals',          },
+    childGroupId: 'fruits'         childGroupId: 'cats',        {
+  },                             },                               name: 'Shiba Inu',
+  {                              {                                value: 7,
+    name: 'Cars',                  name: 'Birds',                 groupId: 'dogs'
+    value: 2,                      value: 3,                    }
+    groupId: 'things',             groupId: 'animals',        ]
+    childGroupId: 'cars'           childGroupId: 'birds'
+  }                              }
+]                              ]
+```
+
+上面 3 组 data 分别来自 3 个 option ，通过`groupId`和`childGroupId`，它们之间存在了“父-子-孙”的关系。在`setOption`时，Apache ECharts 会尝试寻找前后`option`数据项间的父子关系，若存在父子关系，则会对相关数据项进行下钻或聚合动画的过渡。
+
+没有对应子数据组的数据项不需要指定`childGroupId`。
+
+如果你使用了[dataset](option.dataset.md)组件来表达数据，推荐使用`encode.itemChildGroupId`来指定哪个维度被编码为子数据组 ID。
+
+### data.symbol
+- **Type**: `string`
+
+单个数据标记的图形。
+
+ECharts 提供的标记类型包括
+
+`'circle'`, `'rect'`, `'roundRect'`, `'triangle'`, `'diamond'`, `'pin'`, `'arrow'`, `'none'`
+
+可以通过 `'image://url'` 设置为图片，其中 URL 为图片的链接，或者 `dataURI`。
+
+URL 为图片链接例如：
+
+```
+'image://http://example.website/a/b.png'
+```
+
+URL 为 `dataURI` 例如：
+
+```
+'image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7'
+```
+
+可以通过 `'path://'` 将图标设置为任意的矢量路径。这种方式相比于使用图片的方式，不用担心因为缩放而产生锯齿或模糊，而且可以设置为任意颜色。路径图形会自适应调整为合适的大小。路径的格式参见 [SVG PathData](http://www.w3.org/TR/SVG/paths.html#PathData)。可以从 Adobe Illustrator 等工具编辑导出。
+
+例如：
+
+```
+'path://M30.9,53.2C16.8,53.2,5.3,41.7,5.3,27.6S16.8,2,30.9,2C45,2,56.4,13.5,56.4,27.6S45,53.2,30.9,53.2z M30.9,3.5C17.6,3.5,6.8,14.4,6.8,27.6c0,13.3,10.8,24.1,24.101,24.1C44.2,51.7,55,40.9,55,27.6C54.9,14.4,44.1,3.5,30.9,3.5z M36.9,35.8c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H36c0.5,0,0.9,0.4,0.9,1V35.8z M27.8,35.8 c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H27c0.5,0,0.9,0.4,0.9,1L27.8,35.8L27.8,35.8z'
+```
+
+### data.symbolSize
+- **Type**: `number|Array`
+
+单个数据标记的大小，可以设置成诸如 `10` 这样单一的数字，也可以用数组分开表示宽和高，例如 `[20, 10]` 表示标记宽为`20`，高为`10`。
+
+### data.symbolRotate
+- **Type**: `number`
+
+单个数据标记的旋转角度（而非弧度）。正值表示逆时针旋转。注意在 `markLine` 中当 `symbol` 为 `'arrow'` 时会忽略 `symbolRotate` 强制设置为切线的角度。
+
+### data.symbolKeepAspect
+- **Type**: `boolean`
+- **Default**: `false`
+
+如果 `symbol` 是 `path://` 的形式，是否在缩放时保持该图形的长宽比。
+
+### data.symbolOffset
+- **Type**: `Array`
+- **Default**: `[0, 0]`
+
+单个数据标记相对于原本位置的偏移。默认情况下，标记会居中置放在数据对应的位置，但是如果 symbol 是自定义的矢量路径或者图片，就有可能不希望 symbol 居中。这时候可以使用该配置项配置 symbol 相对于原本居中的偏移，可以是绝对的像素值，也可以是相对的百分比。
+
+例如 `[0, '-50%']` 就是把自己向上移动了一半的位置，在 symbol 图形是气泡的时候可以让图形下端的箭头对准数据点。
+
+#### data.label.show
+- **Type**: `boolean`
+- **Default**: `false`
+
+是否显示标签。
+
+#### data.label.position
+- **Type**: `string|Array`
+- **Default**: `inside`
+
+标签的位置。
+
+*   可以通过内置的语义声明位置：
+    
+    示例：
+    
+    ```
+      position: 'top'
+    ```
+    
+    支持：`top` / `left` / `right` / `bottom` / `inside` / `insideLeft` / `insideRight` / `insideTop` / `insideBottom` / `insideTopLeft` / `insideBottomLeft` / `insideTopRight` / `insideBottomRight`
+    
+*   也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。
+    
+    示例：
+    
+    ```
+      // 绝对的像素值
+      position: [10, 10],
+      // 相对的百分比
+      position: ['50%', '50%']
+    ```
+    
+
+参见：[label position](https://echarts.apache.org/examples/zh/view.html?c=doc-example/label-position)。
+
+#### data.label.distance
+- **Type**: `number`
+- **Default**: `5`
+
+距离图形元素的距离。
+
+当 position 为字符描述值（如 `'top'`、`'insideRight'`）时候有效。
+
+参见：[label position](https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position)。
+
+#### data.label.rotate
+- **Type**: `number`
+
+标签旋转。从 -90 度到 90 度。正值是逆时针。
+
+参见：[label rotation](https://echarts.apache.org/examples/zh/editor.html?c=bar-label-rotation)。
+
+#### data.label.offset
+- **Type**: `Array`
+
+是否对文字进行偏移。默认不偏移。例如：`[30, 40]` 表示文字在横向上偏移 `30`，纵向上偏移 `40`。
+
+#### data.label.textMargin
+- **Type**: `number|Array`
+
+从 `v6.0.0` 开始支持
+
+标签周围的间距，用于避免标签重叠。单位为像素（px）。
+
+注意：`textMargin` 是作用在标签的本地包围盒上的，也就是说，如果标签设置了旋转（`rotate`），先在未旋转的标签上应用 `textMargin`，再进行旋转。
+
+> 名字是 `textMargin`，因历史原因 `margin` 已被它用。
+
+示例：
+
+```
+// 设置所有方向的间距为 5，等价于 [5, 5, 5, 5]
+textMargin: 5
+// 设置上下间距为 5，左右间距为 10
+textMargin: [5, 10]
+// 分别设置四个方向的间距
+textMargin: [
+    5,  // 上
+    10, // 右
+    5,  // 下
+    10, // 左
+]
+```
+
+#### data.label.minMargin
+- **Type**: `number`
+
+从 `v5.0.0` 开始支持
+
+用于控制标签之间的最小距离，当启用 [labelLayout](../option.md#series.labelLayout) 时可能会用到。
+
+`minMargin` 和 `textMargin` 含义相似，但有细微区别。如果不确定，可使用 `textMargin`，因为它基本包含了 `minMargin` 的能力，并且在某些旋转标签的场景下可以提供更紧凑的布局。
+
+> 区别如下：
+> 
+> *   两个标签之间的最小间隔（如适用）为 `label1.minMargin/2 + label2.minMargin/2`，或 `label1.textMargin[number] + label2.textMargin[number]`。
+> *   如果标签设置了 `rotate`：
+>     *   `minMargin`：先旋转标签，取四个角的 x/y 的 min/max 得到新的矩形（即扩展后的包围盒），最后在新矩形上应用 `minMargin`。
+>     *   `textMargin`：先在标签的包围盒上应用 `textMargin`，再进行旋转。
+> *   数据类型：`minMargin` 只能为 `number`，`textMargin` 可以为 `number | number[]`（类似 CSS margin）。
+
+#### data.label.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+#### data.label.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+#### data.label.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+#### data.label.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+#### data.label.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+#### data.label.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+#### data.label.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+#### data.label.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+#### data.label.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+#### data.label.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+#### data.label.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+#### data.label.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+#### data.label.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+#### data.label.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+#### data.label.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+#### data.label.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+#### data.label.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+#### data.label.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+#### data.label.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+#### data.label.width
+- **Type**: `number`
+
+文本显示宽度。
+
+#### data.label.height
+- **Type**: `number`
+
+文本显示高度。
+
+#### data.label.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+#### data.label.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+#### data.label.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+#### data.label.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+#### data.label.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+#### data.label.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+#### data.label.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+#### data.label.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+#### data.label.overflow
+- **Type**: `string`
+- **Default**: `'none'`
+
+文字超出宽度是否截断或者换行。配置`width`时有效
+
+*   `'truncate'` 截断，并在末尾显示`ellipsis`配置的文本，默认为`...`
+*   `'break'` 换行
+*   `'breakAll'` 换行，跟`'break'`不同的是，在英语等拉丁文中，`'breakAll'`还会强制单词内换行
+
+#### data.label.ellipsis
+- **Type**: `string`
+- **Default**: `'...'`
+
+在`overflow`配置为`'truncate'`的时候，可以通过该属性配置末尾显示的文本。
+
+#### data.label.rich
+- **Type**: `Object`
+
+在 `rich` 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。
+
+例如：
+
+```
+label: {
+    // 在文本中，可以对部分文本采用 rich 中定义样式。
+    // 这里需要在文本中使用标记符号：
+    // `{styleName|text content text content}` 标记样式名。
+    // 注意，换行仍是使用 '\n'。
+    formatter: [
+        '{a|这段文本采用样式a}',
+        '{b|这段文本采用样式b}这段用默认样式{x|这段用样式x}'
+    ].join('\n'),
+
+    rich: {
+        a: {
+            color: 'red',
+            lineHeight: 10
+        },
+        b: {
+            backgroundColor: {
+                image: 'xxx/xxx.jpg'
+            },
+            height: 40
+        },
+        x: {
+            fontSize: 18,
+            fontFamily: 'Microsoft YaHei',
+            borderColor: '#449933',
+            borderRadius: 4
+        },
+        ...
+    }
+}
+```
+
+详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+
+###### data.label.rich.<style_name>.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### data.label.rich.<style_name>.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### data.label.rich.<style_name>.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### data.label.rich.<style_name>.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### data.label.rich.<style_name>.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### data.label.rich.<style_name>.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### data.label.rich.<style_name>.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### data.label.rich.<style_name>.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### data.label.rich.<style_name>.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### data.label.rich.<style_name>.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### data.label.rich.<style_name>.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### data.label.rich.<style_name>.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### data.label.rich.<style_name>.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### data.label.rich.<style_name>.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### data.label.rich.<style_name>.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### data.label.rich.<style_name>.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### data.label.rich.<style_name>.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### data.label.rich.<style_name>.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### data.label.rich.<style_name>.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### data.label.rich.<style_name>.width
+- **Type**: `number|string`
+
+文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+`width` 也可以是百分比字符串，如 `'100%'`。表示的是所在文本块的 `contentWidth`（即不包含文本块的 `padding`）的百分之多少。之所以以 `contentWidth` 做基数，因为每个文本片段只能基于 `content box` 布局。如果以 `outerWidth` 做基数，则百分比的计算在实用中不具有意义，可能会超出。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### data.label.rich.<style_name>.height
+- **Type**: `number|string`
+
+文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### data.label.rich.<style_name>.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### data.label.rich.<style_name>.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### data.label.rich.<style_name>.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### data.label.rich.<style_name>.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### data.label.rich.<style_name>.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### data.label.rich.<style_name>.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### data.label.rich.<style_name>.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### data.label.rich.<style_name>.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+#### data.label.richInheritPlainLabel
+- **Type**: `boolean`
+- **Default**: `true`
+
+从 `v6.0.0` 开始支持
+
+富文本样式是否继承普通文本样式。
+
+此配置项用于向历史兼容。
+
+> 从 v6 版本开始，[富文本标签 (label.rich / textStyle.rich)](option.series-scatter.md#label.rich) 部分样式（`fontStyle`, `fontWeight`, `fontSize`, `fontFamily`, `textShadowColor`, `textShadowBlur`, `textShadowOffsetX`, `textShadowOffsetY`）默认继承 [普通文本样式 (label / textStyle)](option.series-scatter.md#label)。你可以设置 `richInheritPlainLabel: false` （可在最外层配置项或与同级文本样式配置项）来禁用此行为。
+> 
+> ```
+> option = {
+>     richInheritPlainLabel: false, // In most cases, this is enough.
+>     xxx1: {
+>         // Can also set it here to only control this label.
+>         label: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     },
+>     xxx2: {
+>         textStyle: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     }
+> }
+> ```
+
+### data.labelLine
+- **Type**: `Object`
+
+从 `v5.0.0` 开始支持
+
+标签的视觉引导线配置。
+
+#### data.labelLine.show
+- **Type**: `boolean`
+
+是否显示视觉引导线。
+
+#### data.labelLine.showAbove
+- **Type**: `boolean`
+
+从 `v5.0.0` 开始支持
+
+是否显示在图形上方。
+
+#### data.labelLine.length2
+- **Type**: `number`
+
+视觉引导项第二段的长度。
+
+#### data.labelLine.smooth
+- **Type**: `boolean|number`
+- **Default**: `false`
+
+是否平滑视觉引导线，默认不平滑，可以设置成 `true` 平滑显示，也可以设置为 0 到 1 的值，表示平滑程度。
+
+#### data.labelLine.minTurnAngle
+- **Type**: `number`
+
+从 `v5.0.0` 开始支持
+
+通过调整第二段线的长度，限制引导线两端之间最小的夹角，以防止过小的夹角导致显示不美观。
+
+可以设置为 0 - 180 度。
+
+##### data.labelLine.lineStyle.color
+- **Type**: `Color`
+- **Default**: `"#000"`
+
+线的颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+##### data.labelLine.lineStyle.width
+- **Type**: `number`
+- **Default**: `1`
+
+线宽。
+
+##### data.labelLine.lineStyle.type
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+线的类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `dashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+type: [5, 10],
+
+dashOffset: 5
+}
+```
+
+##### data.labelLine.lineStyle.dashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `type` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### data.labelLine.lineStyle.cap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+##### data.labelLine.lineStyle.join
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `miterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+##### data.labelLine.lineStyle.miterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `join` 为 `miter` 时， `miterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+##### data.labelLine.lineStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+##### data.labelLine.lineStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+##### data.labelLine.lineStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+##### data.labelLine.lineStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+##### data.labelLine.lineStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+### data.itemStyle
+- **Type**: `Object`
+
+单个数据点（气泡）的样式设置。
+
+#### data.itemStyle.color
+- **Type**: `Color`
+- **Default**: `自适应`
+
+图形的颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+#### data.itemStyle.borderColor
+- **Type**: `Color`
+- **Default**: `'#000'`
+
+图形的描边颜色。支持的颜色格式同 `color`，不支持回调函数。
+
+#### data.itemStyle.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+描边线宽。为 0 时无描边。
+
+#### data.itemStyle.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+#### data.itemStyle.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+#### data.itemStyle.borderCap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+#### data.itemStyle.borderJoin
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `borderMiterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+#### data.itemStyle.borderMiterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `borderJoin` 为 `miter` 时， `borderMiterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+#### data.itemStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+#### data.itemStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+#### data.itemStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+#### data.itemStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+#### data.itemStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+### data.emphasis
+- **Type**: `Object`
+
+单个数据的高亮图形和标签样式。
+
+#### data.emphasis.disabled
+- **Type**: `boolean`
+- **Default**: `false`
+
+从 `v5.3.0` 开始支持
+
+是否关闭高亮状态。
+
+关闭高亮状态可以在鼠标移到图形上，tooltip 触发，或者图例联动的时候不再触发高亮效果。在图形非常多的时候可以关闭以提升交互流畅性。
+
+##### data.emphasis.label.show
+- **Type**: `boolean`
+- **Default**: `false`
+
+是否显示标签。
+
+##### data.emphasis.label.position
+- **Type**: `string|Array`
+
+标签的位置。
+
+*   可以通过内置的语义声明位置：
+    
+    示例：
+    
+    ```
+      position: 'top'
+    ```
+    
+    支持：`top` / `left` / `right` / `bottom` / `inside` / `insideLeft` / `insideRight` / `insideTop` / `insideBottom` / `insideTopLeft` / `insideBottomLeft` / `insideTopRight` / `insideBottomRight`
+    
+*   也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。
+    
+    示例：
+    
+    ```
+      // 绝对的像素值
+      position: [10, 10],
+      // 相对的百分比
+      position: ['50%', '50%']
+    ```
+    
+
+参见：[label position](https://echarts.apache.org/examples/zh/view.html?c=doc-example/label-position)。
+
+##### data.emphasis.label.distance
+- **Type**: `number`
+- **Default**: `5`
+
+距离图形元素的距离。
+
+当 position 为字符描述值（如 `'top'`、`'insideRight'`）时候有效。
+
+参见：[label position](https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position)。
+
+##### data.emphasis.label.rotate
+- **Type**: `number`
+
+标签旋转。从 -90 度到 90 度。正值是逆时针。
+
+参见：[label rotation](https://echarts.apache.org/examples/zh/editor.html?c=bar-label-rotation)。
+
+##### data.emphasis.label.offset
+- **Type**: `Array`
+
+是否对文字进行偏移。默认不偏移。例如：`[30, 40]` 表示文字在横向上偏移 `30`，纵向上偏移 `40`。
+
+##### data.emphasis.label.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### data.emphasis.label.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+##### data.emphasis.label.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+##### data.emphasis.label.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+##### data.emphasis.label.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+##### data.emphasis.label.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+##### data.emphasis.label.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+##### data.emphasis.label.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+##### data.emphasis.label.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### data.emphasis.label.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### data.emphasis.label.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+##### data.emphasis.label.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+##### data.emphasis.label.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### data.emphasis.label.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+##### data.emphasis.label.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+##### data.emphasis.label.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+##### data.emphasis.label.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+##### data.emphasis.label.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+##### data.emphasis.label.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+##### data.emphasis.label.width
+- **Type**: `number`
+
+文本显示宽度。
+
+##### data.emphasis.label.height
+- **Type**: `number`
+
+文本显示高度。
+
+##### data.emphasis.label.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### data.emphasis.label.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+##### data.emphasis.label.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+##### data.emphasis.label.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### data.emphasis.label.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+##### data.emphasis.label.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+##### data.emphasis.label.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+##### data.emphasis.label.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+##### data.emphasis.label.overflow
+- **Type**: `string`
+- **Default**: `'none'`
+
+文字超出宽度是否截断或者换行。配置`width`时有效
+
+*   `'truncate'` 截断，并在末尾显示`ellipsis`配置的文本，默认为`...`
+*   `'break'` 换行
+*   `'breakAll'` 换行，跟`'break'`不同的是，在英语等拉丁文中，`'breakAll'`还会强制单词内换行
+
+##### data.emphasis.label.ellipsis
+- **Type**: `string`
+- **Default**: `'...'`
+
+在`overflow`配置为`'truncate'`的时候，可以通过该属性配置末尾显示的文本。
+
+##### data.emphasis.label.rich
+- **Type**: `Object`
+
+在 `rich` 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。
+
+例如：
+
+```
+label: {
+    // 在文本中，可以对部分文本采用 rich 中定义样式。
+    // 这里需要在文本中使用标记符号：
+    // `{styleName|text content text content}` 标记样式名。
+    // 注意，换行仍是使用 '\n'。
+    formatter: [
+        '{a|这段文本采用样式a}',
+        '{b|这段文本采用样式b}这段用默认样式{x|这段用样式x}'
+    ].join('\n'),
+
+    rich: {
+        a: {
+            color: 'red',
+            lineHeight: 10
+        },
+        b: {
+            backgroundColor: {
+                image: 'xxx/xxx.jpg'
+            },
+            height: 40
+        },
+        x: {
+            fontSize: 18,
+            fontFamily: 'Microsoft YaHei',
+            borderColor: '#449933',
+            borderRadius: 4
+        },
+        ...
+    }
+}
+```
+
+详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+
+###### data.emphasis.label.rich.<style_name>.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### data.emphasis.label.rich.<style_name>.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### data.emphasis.label.rich.<style_name>.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### data.emphasis.label.rich.<style_name>.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### data.emphasis.label.rich.<style_name>.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### data.emphasis.label.rich.<style_name>.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### data.emphasis.label.rich.<style_name>.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### data.emphasis.label.rich.<style_name>.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### data.emphasis.label.rich.<style_name>.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### data.emphasis.label.rich.<style_name>.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### data.emphasis.label.rich.<style_name>.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### data.emphasis.label.rich.<style_name>.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### data.emphasis.label.rich.<style_name>.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### data.emphasis.label.rich.<style_name>.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### data.emphasis.label.rich.<style_name>.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### data.emphasis.label.rich.<style_name>.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### data.emphasis.label.rich.<style_name>.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### data.emphasis.label.rich.<style_name>.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### data.emphasis.label.rich.<style_name>.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### data.emphasis.label.rich.<style_name>.width
+- **Type**: `number|string`
+
+文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+`width` 也可以是百分比字符串，如 `'100%'`。表示的是所在文本块的 `contentWidth`（即不包含文本块的 `padding`）的百分之多少。之所以以 `contentWidth` 做基数，因为每个文本片段只能基于 `content box` 布局。如果以 `outerWidth` 做基数，则百分比的计算在实用中不具有意义，可能会超出。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### data.emphasis.label.rich.<style_name>.height
+- **Type**: `number|string`
+
+文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### data.emphasis.label.rich.<style_name>.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### data.emphasis.label.rich.<style_name>.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### data.emphasis.label.rich.<style_name>.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### data.emphasis.label.rich.<style_name>.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### data.emphasis.label.rich.<style_name>.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### data.emphasis.label.rich.<style_name>.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### data.emphasis.label.rich.<style_name>.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### data.emphasis.label.rich.<style_name>.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+##### data.emphasis.label.richInheritPlainLabel
+- **Type**: `boolean`
+- **Default**: `true`
+
+从 `v6.0.0` 开始支持
+
+富文本样式是否继承普通文本样式。
+
+此配置项用于向历史兼容。
+
+> 从 v6 版本开始，[富文本标签 (label.rich / textStyle.rich)](option.series-scatter.md#label.rich) 部分样式（`fontStyle`, `fontWeight`, `fontSize`, `fontFamily`, `textShadowColor`, `textShadowBlur`, `textShadowOffsetX`, `textShadowOffsetY`）默认继承 [普通文本样式 (label / textStyle)](option.series-scatter.md#label)。你可以设置 `richInheritPlainLabel: false` （可在最外层配置项或与同级文本样式配置项）来禁用此行为。
+> 
+> ```
+> option = {
+>     richInheritPlainLabel: false, // In most cases, this is enough.
+>     xxx1: {
+>         // Can also set it here to only control this label.
+>         label: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     },
+>     xxx2: {
+>         textStyle: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     }
+> }
+> ```
+
+#### data.emphasis.labelLine
+- **Type**: `Object`
+
+从 `v5.0.0` 开始支持
+
+标签的视觉引导线配置。
+
+##### data.emphasis.labelLine.show
+- **Type**: `boolean`
+
+是否显示视觉引导线。
+
+###### data.emphasis.labelLine.lineStyle.color
+- **Type**: `Color`
+- **Default**: `"#000"`
+
+线的颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+###### data.emphasis.labelLine.lineStyle.width
+- **Type**: `number`
+- **Default**: `1`
+
+线宽。
+
+###### data.emphasis.labelLine.lineStyle.type
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+线的类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `dashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+type: [5, 10],
+
+dashOffset: 5
+}
+```
+
+###### data.emphasis.labelLine.lineStyle.dashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `type` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### data.emphasis.labelLine.lineStyle.cap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+###### data.emphasis.labelLine.lineStyle.join
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `miterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+###### data.emphasis.labelLine.lineStyle.miterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `join` 为 `miter` 时， `miterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+###### data.emphasis.labelLine.lineStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+###### data.emphasis.labelLine.lineStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+###### data.emphasis.labelLine.lineStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+###### data.emphasis.labelLine.lineStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+###### data.emphasis.labelLine.lineStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+##### data.emphasis.itemStyle.color
+- **Type**: `Color`
+- **Default**: `自适应`
+
+图形的颜色。从 v5.2.0 开始支持在 `emphasis` 状态中支持设置为 `'inherit'` 取消高亮颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+##### data.emphasis.itemStyle.borderColor
+- **Type**: `Color`
+- **Default**: `'#000'`
+
+图形的描边颜色。支持的颜色格式同 `color`，不支持回调函数。
+
+##### data.emphasis.itemStyle.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+描边线宽。为 0 时无描边。
+
+##### data.emphasis.itemStyle.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+##### data.emphasis.itemStyle.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### data.emphasis.itemStyle.borderCap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+##### data.emphasis.itemStyle.borderJoin
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `borderMiterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+##### data.emphasis.itemStyle.borderMiterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `borderJoin` 为 `miter` 时， `borderMiterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+##### data.emphasis.itemStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+##### data.emphasis.itemStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+##### data.emphasis.itemStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+##### data.emphasis.itemStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+##### data.emphasis.itemStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+### data.blur
+- **Type**: `Object`
+
+从 `v5.0.0` 开始支持
+
+单个数据的淡出图形和标签样式。
+
+##### data.blur.label.show
+- **Type**: `boolean`
+- **Default**: `false`
+
+是否显示标签。
+
+##### data.blur.label.position
+- **Type**: `string|Array`
+
+标签的位置。
+
+*   可以通过内置的语义声明位置：
+    
+    示例：
+    
+    ```
+      position: 'top'
+    ```
+    
+    支持：`top` / `left` / `right` / `bottom` / `inside` / `insideLeft` / `insideRight` / `insideTop` / `insideBottom` / `insideTopLeft` / `insideBottomLeft` / `insideTopRight` / `insideBottomRight`
+    
+*   也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。
+    
+    示例：
+    
+    ```
+      // 绝对的像素值
+      position: [10, 10],
+      // 相对的百分比
+      position: ['50%', '50%']
+    ```
+    
+
+参见：[label position](https://echarts.apache.org/examples/zh/view.html?c=doc-example/label-position)。
+
+##### data.blur.label.distance
+- **Type**: `number`
+- **Default**: `5`
+
+距离图形元素的距离。
+
+当 position 为字符描述值（如 `'top'`、`'insideRight'`）时候有效。
+
+参见：[label position](https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position)。
+
+##### data.blur.label.rotate
+- **Type**: `number`
+
+标签旋转。从 -90 度到 90 度。正值是逆时针。
+
+参见：[label rotation](https://echarts.apache.org/examples/zh/editor.html?c=bar-label-rotation)。
+
+##### data.blur.label.offset
+- **Type**: `Array`
+
+是否对文字进行偏移。默认不偏移。例如：`[30, 40]` 表示文字在横向上偏移 `30`，纵向上偏移 `40`。
+
+##### data.blur.label.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### data.blur.label.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+##### data.blur.label.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+##### data.blur.label.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+##### data.blur.label.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+##### data.blur.label.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+##### data.blur.label.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+##### data.blur.label.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+##### data.blur.label.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### data.blur.label.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### data.blur.label.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+##### data.blur.label.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+##### data.blur.label.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### data.blur.label.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+##### data.blur.label.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+##### data.blur.label.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+##### data.blur.label.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+##### data.blur.label.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+##### data.blur.label.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+##### data.blur.label.width
+- **Type**: `number`
+
+文本显示宽度。
+
+##### data.blur.label.height
+- **Type**: `number`
+
+文本显示高度。
+
+##### data.blur.label.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### data.blur.label.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+##### data.blur.label.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+##### data.blur.label.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### data.blur.label.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+##### data.blur.label.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+##### data.blur.label.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+##### data.blur.label.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+##### data.blur.label.overflow
+- **Type**: `string`
+- **Default**: `'none'`
+
+文字超出宽度是否截断或者换行。配置`width`时有效
+
+*   `'truncate'` 截断，并在末尾显示`ellipsis`配置的文本，默认为`...`
+*   `'break'` 换行
+*   `'breakAll'` 换行，跟`'break'`不同的是，在英语等拉丁文中，`'breakAll'`还会强制单词内换行
+
+##### data.blur.label.ellipsis
+- **Type**: `string`
+- **Default**: `'...'`
+
+在`overflow`配置为`'truncate'`的时候，可以通过该属性配置末尾显示的文本。
+
+##### data.blur.label.rich
+- **Type**: `Object`
+
+在 `rich` 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。
+
+例如：
+
+```
+label: {
+    // 在文本中，可以对部分文本采用 rich 中定义样式。
+    // 这里需要在文本中使用标记符号：
+    // `{styleName|text content text content}` 标记样式名。
+    // 注意，换行仍是使用 '\n'。
+    formatter: [
+        '{a|这段文本采用样式a}',
+        '{b|这段文本采用样式b}这段用默认样式{x|这段用样式x}'
+    ].join('\n'),
+
+    rich: {
+        a: {
+            color: 'red',
+            lineHeight: 10
+        },
+        b: {
+            backgroundColor: {
+                image: 'xxx/xxx.jpg'
+            },
+            height: 40
+        },
+        x: {
+            fontSize: 18,
+            fontFamily: 'Microsoft YaHei',
+            borderColor: '#449933',
+            borderRadius: 4
+        },
+        ...
+    }
+}
+```
+
+详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+
+###### data.blur.label.rich.<style_name>.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### data.blur.label.rich.<style_name>.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### data.blur.label.rich.<style_name>.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### data.blur.label.rich.<style_name>.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### data.blur.label.rich.<style_name>.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### data.blur.label.rich.<style_name>.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### data.blur.label.rich.<style_name>.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### data.blur.label.rich.<style_name>.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### data.blur.label.rich.<style_name>.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### data.blur.label.rich.<style_name>.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### data.blur.label.rich.<style_name>.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### data.blur.label.rich.<style_name>.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### data.blur.label.rich.<style_name>.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### data.blur.label.rich.<style_name>.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### data.blur.label.rich.<style_name>.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### data.blur.label.rich.<style_name>.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### data.blur.label.rich.<style_name>.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### data.blur.label.rich.<style_name>.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### data.blur.label.rich.<style_name>.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### data.blur.label.rich.<style_name>.width
+- **Type**: `number|string`
+
+文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+`width` 也可以是百分比字符串，如 `'100%'`。表示的是所在文本块的 `contentWidth`（即不包含文本块的 `padding`）的百分之多少。之所以以 `contentWidth` 做基数，因为每个文本片段只能基于 `content box` 布局。如果以 `outerWidth` 做基数，则百分比的计算在实用中不具有意义，可能会超出。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### data.blur.label.rich.<style_name>.height
+- **Type**: `number|string`
+
+文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### data.blur.label.rich.<style_name>.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### data.blur.label.rich.<style_name>.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### data.blur.label.rich.<style_name>.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### data.blur.label.rich.<style_name>.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### data.blur.label.rich.<style_name>.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### data.blur.label.rich.<style_name>.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### data.blur.label.rich.<style_name>.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### data.blur.label.rich.<style_name>.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+##### data.blur.label.richInheritPlainLabel
+- **Type**: `boolean`
+- **Default**: `true`
+
+从 `v6.0.0` 开始支持
+
+富文本样式是否继承普通文本样式。
+
+此配置项用于向历史兼容。
+
+> 从 v6 版本开始，[富文本标签 (label.rich / textStyle.rich)](option.series-scatter.md#label.rich) 部分样式（`fontStyle`, `fontWeight`, `fontSize`, `fontFamily`, `textShadowColor`, `textShadowBlur`, `textShadowOffsetX`, `textShadowOffsetY`）默认继承 [普通文本样式 (label / textStyle)](option.series-scatter.md#label)。你可以设置 `richInheritPlainLabel: false` （可在最外层配置项或与同级文本样式配置项）来禁用此行为。
+> 
+> ```
+> option = {
+>     richInheritPlainLabel: false, // In most cases, this is enough.
+>     xxx1: {
+>         // Can also set it here to only control this label.
+>         label: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     },
+>     xxx2: {
+>         textStyle: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     }
+> }
+> ```
+
+#### data.blur.labelLine
+- **Type**: `Object`
+
+从 `v5.0.0` 开始支持
+
+标签的视觉引导线配置。
+
+##### data.blur.labelLine.show
+- **Type**: `boolean`
+
+是否显示视觉引导线。
+
+###### data.blur.labelLine.lineStyle.color
+- **Type**: `Color`
+- **Default**: `"#000"`
+
+线的颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+###### data.blur.labelLine.lineStyle.width
+- **Type**: `number`
+- **Default**: `1`
+
+线宽。
+
+###### data.blur.labelLine.lineStyle.type
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+线的类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `dashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+type: [5, 10],
+
+dashOffset: 5
+}
+```
+
+###### data.blur.labelLine.lineStyle.dashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `type` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### data.blur.labelLine.lineStyle.cap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+###### data.blur.labelLine.lineStyle.join
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `miterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+###### data.blur.labelLine.lineStyle.miterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `join` 为 `miter` 时， `miterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+###### data.blur.labelLine.lineStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+###### data.blur.labelLine.lineStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+###### data.blur.labelLine.lineStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+###### data.blur.labelLine.lineStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+###### data.blur.labelLine.lineStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+##### data.blur.itemStyle.color
+- **Type**: `Color`
+- **Default**: `自适应`
+
+图形的颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+##### data.blur.itemStyle.borderColor
+- **Type**: `Color`
+- **Default**: `'#000'`
+
+图形的描边颜色。支持的颜色格式同 `color`，不支持回调函数。
+
+##### data.blur.itemStyle.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+描边线宽。为 0 时无描边。
+
+##### data.blur.itemStyle.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+##### data.blur.itemStyle.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### data.blur.itemStyle.borderCap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+##### data.blur.itemStyle.borderJoin
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `borderMiterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+##### data.blur.itemStyle.borderMiterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `borderJoin` 为 `miter` 时， `borderMiterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+##### data.blur.itemStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+##### data.blur.itemStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+##### data.blur.itemStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+##### data.blur.itemStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+##### data.blur.itemStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+### data.select
+- **Type**: `Object`
+
+从 `v5.0.0` 开始支持
+
+单个数据的选中图形和标签样式。
+
+#### data.select.disabled
+- **Type**: `boolean`
+- **Default**: `false`
+
+从 `v5.3.0` 开始支持
+
+是否可以被选中。在开启 `selectedMode` 的时候有效，可以用于关闭部分数据。
+
+##### data.select.label.show
+- **Type**: `boolean`
+- **Default**: `false`
+
+是否显示标签。
+
+##### data.select.label.position
+- **Type**: `string|Array`
+
+标签的位置。
+
+*   可以通过内置的语义声明位置：
+    
+    示例：
+    
+    ```
+      position: 'top'
+    ```
+    
+    支持：`top` / `left` / `right` / `bottom` / `inside` / `insideLeft` / `insideRight` / `insideTop` / `insideBottom` / `insideTopLeft` / `insideBottomLeft` / `insideTopRight` / `insideBottomRight`
+    
+*   也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。
+    
+    示例：
+    
+    ```
+      // 绝对的像素值
+      position: [10, 10],
+      // 相对的百分比
+      position: ['50%', '50%']
+    ```
+    
+
+参见：[label position](https://echarts.apache.org/examples/zh/view.html?c=doc-example/label-position)。
+
+##### data.select.label.distance
+- **Type**: `number`
+- **Default**: `5`
+
+距离图形元素的距离。
+
+当 position 为字符描述值（如 `'top'`、`'insideRight'`）时候有效。
+
+参见：[label position](https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position)。
+
+##### data.select.label.rotate
+- **Type**: `number`
+
+标签旋转。从 -90 度到 90 度。正值是逆时针。
+
+参见：[label rotation](https://echarts.apache.org/examples/zh/editor.html?c=bar-label-rotation)。
+
+##### data.select.label.offset
+- **Type**: `Array`
+
+是否对文字进行偏移。默认不偏移。例如：`[30, 40]` 表示文字在横向上偏移 `30`，纵向上偏移 `40`。
+
+##### data.select.label.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### data.select.label.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+##### data.select.label.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+##### data.select.label.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+##### data.select.label.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+##### data.select.label.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+##### data.select.label.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+##### data.select.label.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+##### data.select.label.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### data.select.label.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### data.select.label.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+##### data.select.label.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+##### data.select.label.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### data.select.label.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+##### data.select.label.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+##### data.select.label.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+##### data.select.label.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+##### data.select.label.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+##### data.select.label.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+##### data.select.label.width
+- **Type**: `number`
+
+文本显示宽度。
+
+##### data.select.label.height
+- **Type**: `number`
+
+文本显示高度。
+
+##### data.select.label.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### data.select.label.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+##### data.select.label.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+##### data.select.label.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### data.select.label.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+##### data.select.label.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+##### data.select.label.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+##### data.select.label.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+##### data.select.label.overflow
+- **Type**: `string`
+- **Default**: `'none'`
+
+文字超出宽度是否截断或者换行。配置`width`时有效
+
+*   `'truncate'` 截断，并在末尾显示`ellipsis`配置的文本，默认为`...`
+*   `'break'` 换行
+*   `'breakAll'` 换行，跟`'break'`不同的是，在英语等拉丁文中，`'breakAll'`还会强制单词内换行
+
+##### data.select.label.ellipsis
+- **Type**: `string`
+- **Default**: `'...'`
+
+在`overflow`配置为`'truncate'`的时候，可以通过该属性配置末尾显示的文本。
+
+##### data.select.label.rich
+- **Type**: `Object`
+
+在 `rich` 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。
+
+例如：
+
+```
+label: {
+    // 在文本中，可以对部分文本采用 rich 中定义样式。
+    // 这里需要在文本中使用标记符号：
+    // `{styleName|text content text content}` 标记样式名。
+    // 注意，换行仍是使用 '\n'。
+    formatter: [
+        '{a|这段文本采用样式a}',
+        '{b|这段文本采用样式b}这段用默认样式{x|这段用样式x}'
+    ].join('\n'),
+
+    rich: {
+        a: {
+            color: 'red',
+            lineHeight: 10
+        },
+        b: {
+            backgroundColor: {
+                image: 'xxx/xxx.jpg'
+            },
+            height: 40
+        },
+        x: {
+            fontSize: 18,
+            fontFamily: 'Microsoft YaHei',
+            borderColor: '#449933',
+            borderRadius: 4
+        },
+        ...
+    }
+}
+```
+
+详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+
+###### data.select.label.rich.<style_name>.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### data.select.label.rich.<style_name>.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### data.select.label.rich.<style_name>.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### data.select.label.rich.<style_name>.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### data.select.label.rich.<style_name>.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### data.select.label.rich.<style_name>.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### data.select.label.rich.<style_name>.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### data.select.label.rich.<style_name>.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### data.select.label.rich.<style_name>.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### data.select.label.rich.<style_name>.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### data.select.label.rich.<style_name>.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### data.select.label.rich.<style_name>.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### data.select.label.rich.<style_name>.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### data.select.label.rich.<style_name>.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### data.select.label.rich.<style_name>.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### data.select.label.rich.<style_name>.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### data.select.label.rich.<style_name>.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### data.select.label.rich.<style_name>.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### data.select.label.rich.<style_name>.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### data.select.label.rich.<style_name>.width
+- **Type**: `number|string`
+
+文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+`width` 也可以是百分比字符串，如 `'100%'`。表示的是所在文本块的 `contentWidth`（即不包含文本块的 `padding`）的百分之多少。之所以以 `contentWidth` 做基数，因为每个文本片段只能基于 `content box` 布局。如果以 `outerWidth` 做基数，则百分比的计算在实用中不具有意义，可能会超出。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### data.select.label.rich.<style_name>.height
+- **Type**: `number|string`
+
+文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### data.select.label.rich.<style_name>.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### data.select.label.rich.<style_name>.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### data.select.label.rich.<style_name>.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### data.select.label.rich.<style_name>.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### data.select.label.rich.<style_name>.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### data.select.label.rich.<style_name>.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### data.select.label.rich.<style_name>.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### data.select.label.rich.<style_name>.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+##### data.select.label.richInheritPlainLabel
+- **Type**: `boolean`
+- **Default**: `true`
+
+从 `v6.0.0` 开始支持
+
+富文本样式是否继承普通文本样式。
+
+此配置项用于向历史兼容。
+
+> 从 v6 版本开始，[富文本标签 (label.rich / textStyle.rich)](option.series-scatter.md#label.rich) 部分样式（`fontStyle`, `fontWeight`, `fontSize`, `fontFamily`, `textShadowColor`, `textShadowBlur`, `textShadowOffsetX`, `textShadowOffsetY`）默认继承 [普通文本样式 (label / textStyle)](option.series-scatter.md#label)。你可以设置 `richInheritPlainLabel: false` （可在最外层配置项或与同级文本样式配置项）来禁用此行为。
+> 
+> ```
+> option = {
+>     richInheritPlainLabel: false, // In most cases, this is enough.
+>     xxx1: {
+>         // Can also set it here to only control this label.
+>         label: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     },
+>     xxx2: {
+>         textStyle: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     }
+> }
+> ```
+
+#### data.select.labelLine
+- **Type**: `Object`
+
+从 `v5.0.0` 开始支持
+
+标签的视觉引导线配置。
+
+##### data.select.labelLine.show
+- **Type**: `boolean`
+
+是否显示视觉引导线。
+
+###### data.select.labelLine.lineStyle.color
+- **Type**: `Color`
+- **Default**: `"#000"`
+
+线的颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+###### data.select.labelLine.lineStyle.width
+- **Type**: `number`
+- **Default**: `1`
+
+线宽。
+
+###### data.select.labelLine.lineStyle.type
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+线的类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `dashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+type: [5, 10],
+
+dashOffset: 5
+}
+```
+
+###### data.select.labelLine.lineStyle.dashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `type` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### data.select.labelLine.lineStyle.cap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+###### data.select.labelLine.lineStyle.join
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `miterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+###### data.select.labelLine.lineStyle.miterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `join` 为 `miter` 时， `miterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+###### data.select.labelLine.lineStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+###### data.select.labelLine.lineStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+###### data.select.labelLine.lineStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+###### data.select.labelLine.lineStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+###### data.select.labelLine.lineStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+##### data.select.itemStyle.color
+- **Type**: `Color`
+- **Default**: `自适应`
+
+图形的颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+##### data.select.itemStyle.borderColor
+- **Type**: `Color`
+- **Default**: `'#000'`
+
+图形的描边颜色。支持的颜色格式同 `color`，不支持回调函数。
+
+##### data.select.itemStyle.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+描边线宽。为 0 时无描边。
+
+##### data.select.itemStyle.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+##### data.select.itemStyle.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### data.select.itemStyle.borderCap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+##### data.select.itemStyle.borderJoin
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `borderMiterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+##### data.select.itemStyle.borderMiterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `borderJoin` 为 `miter` 时， `borderMiterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+##### data.select.itemStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+##### data.select.itemStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+##### data.select.itemStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+##### data.select.itemStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+##### data.select.itemStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+### data.tooltip
+- **Type**: `Object`
+
+本系列每个数据项中特定的 tooltip 设定。
+
+#### data.tooltip.position
+- **Type**: `string|Array|Function`
+
+> **注意：**`series.data.tooltip` 仅在 [tooltip.trigger](option.tooltip.md#trigger) 为 `'item'` 时有效。  
+
+提示框浮层的位置，默认不设置时位置会跟随鼠标的位置。
+
+可选：
+
+*   `Array`
+    
+    通过数组表示提示框浮层的位置，支持数字设置绝对位置，百分比设置相对位置。
+    
+    示例:
+    
+    ```
+      // 绝对位置，相对于容器左侧 10px, 上侧 10 px
+      position: [10, 10]
+      // 相对位置，放置在容器正中间
+      position: ['50%', '50%']
+    ```
+    
+*   `Function`
+    
+    回调函数，格式如下：
+    
+    ```
+      (point: Array, params: Object|Array.<Object>, dom: HTMLDomElement, rect: Object, size: Object) => Array
+    ```
+    
+    **参数：**  
+    point: 鼠标位置，如 \[20, 40\]。  
+    params: 同 formatter 的参数相同。  
+    dom: tooltip 的 dom 对象。  
+    rect: 只有鼠标在图形上时有效，是一个用`x`, `y`, `width`, `height`四个属性表达的图形包围盒。  
+    size: 包括 dom 的尺寸和 echarts 容器的当前尺寸，例如：`{contentSize: [width, height], viewSize: [width, height]}`。  
+    
+    **返回值：**  
+    可以是一个表示 tooltip 位置的数组，数组值可以是绝对的像素值，也可以是相 百分比。  
+    也可以是一个对象，如：`{left: 10, top: 30}`，或者 `{right: '20%', bottom: 40}`。  
+    
+    如下示例：
+    
+    ```
+      position: function (point, params, dom, rect, size) {
+          // 固定在顶部
+          return [point[0], '10%'];
+      }
+    ```
+    
+    或者：
+    
+    ```
+      position: function (pos, params, dom, rect, size) {
+          // 鼠标在左侧时 tooltip 显示到右侧，鼠标在右侧时 tooltip 显示到左侧。
+          var obj = {top: 60};
+          obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
+          return obj;
+      }
+    ```
+    
+
+*   `'inside'`
+    
+    鼠标所在图形的内部中心位置，只在 [trigger](option.tooltip.md#trigger) 为`'item'`的时候有效。
+    
+*   `'top'`
+    
+    鼠标所在图形上侧，只在 [trigger](option.tooltip.md#trigger) 为`'item'`的时候有效。
+    
+*   `'left'`
+    
+    鼠标所在图形左侧，只在 [trigger](option.tooltip.md#trigger) 为`'item'`的时候有效。
+    
+*   `'right'`
+    
+    鼠标所在图形右侧，只在 [trigger](option.tooltip.md#trigger) 为`'item'`的时候有效。
+    
+*   `'bottom'`
+    
+    鼠标所在图形底侧，只在 [trigger](option.tooltip.md#trigger) 为`'item'`的时候有效。
+
+#### data.tooltip.formatter
+- **Type**: `string|Function`
+
+> **注意：**`series.data.tooltip` 仅在 [tooltip.trigger](option.tooltip.md#trigger) 为 `'item'` 时有效。  
+
+提示框浮层内容格式器，支持字符串模板和回调函数两种形式。
+
+**1\. 字符串模板**
+
+模板变量有 `{a}`, `{b}`，`{c}`，`{d}`，`{e}`，分别表示系列名，数据名，数据值等。 在 [trigger](option.tooltip.md#trigger) 为 `'axis'` 的时候，会有多个系列的数据，此时可以通过 `{a0}`, `{a1}`, `{a2}` 这种后面加索引的方式表示系列的索引。 不同图表类型下的 `{a}`，`{b}`，`{c}`，`{d}` 含义不一样。 其中变量`{a}`, `{b}`, `{c}`, `{d}`在不同图表类型下代表数据含义为：
+
+*   折线（区域）图、柱状（条形）图、K线图 : `{a}`（系列名称），`{b}`（类目值），`{c}`（数值）, `{d}`（无）
+    
+*   散点图（气泡）图 : `{a}`（系列名称），`{b}`（数据名称），`{c}`（数值数组）, `{d}`（无）
+    
+*   地图 : `{a}`（系列名称），`{b}`（区域名称），`{c}`（合并数值）, `{d}`（无）
+    
+*   饼图、仪表盘、漏斗图: `{a}`（系列名称），`{b}`（数据项名称），`{c}`（数值）, `{d}`（百分比）
+    
+
+更多其它图表模板变量的含义可以见相应的图表的 label.formatter 配置项。
+
+**示例：**
+
+```
+formatter: '{b0}: {c0}<br />{b1}: {c1}'
+```
+
+**2\. 回调函数**
+
+回调函数格式：
+
+```
+(params: Object|Array, ticket: string, callback: (ticket: string, html: string | HTMLElement | HTMLElement[])) => string | HTMLElement | HTMLElement[]
+```
+
+支持返回 HTML 字符串或者创建的 DOM 实例。
+
+\[警告\]: tooltip 是用 HTML 实现的（除非 [tooltip.renderMode](option.tooltip.md#renderMode) 设为 `richText`）。允许用此方式定制 HTML。传入 HTML 前须要对其内容进行正确转义。 使用时必须考虑 **安全风险**。文档 [“安全指南”](https://echarts.apache.org/handbook/zh/best-practices/security) 给出了安全使用建议。
+
+组装 HTML 字符串时，**必须进行 HTML 转义（HTML-escaping）**。例如：
+
+```
+{
+    tooltip: {
+        formatter: params => {
+            const { name, value } = params;
+            // 必须进行 HTML 转义。
+            // 否则，如果 name 或 value 中含有功能性字符，如 '<' '>' 等，
+            // 则可能渲染不正确。
+            // 同时，如果 name 或 value 的值来自于“非受信任”的来源，则可能被注入恶意代码；
+            // 如果未被转义，则会被运行。
+            return echarts.format.encodeHTML(name)
+                + '<b>' + echarts.format.encodeHTML(value) + '</b>';
+            // 注：`echarts.format.encodeHTML` 是个工具函数，把特殊字符
+            //  （'&'、'<'、'>'、'"'、"'"）转换成他们对应的 HTML entities.
+            //  这只是个例子，任何 HTML 转义工具函数都可使用。
+        }
+    }
+}
+```
+
+第一个参数 `params` 是 formatter 需要的数据集。格式如下：
+
+```
+{
+    componentType: 'series',
+    // 系列类型
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index
+    seriesIndex: number,
+    // 系列名称
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // 传入的数据值。在多数系列下它和 data 相同。在一些系列下是 data 中的分量（如 map、radar 中）
+    value: number|Array|Object,
+    // 坐标轴 encode 映射信息，
+    // key 为坐标轴（如 'x' 'y' 'radius' 'angle' 等）
+    // value 必然为数组，不会为 null/undefined，表示 dimension index 。
+    // 其内容如：
+    // {
+    //     x: [2] // dimension index 为 2 的数据映射到 x 轴
+    //     y: [0] // dimension index 为 0 的数据映射到 y 轴
+    // }
+    encode: Object,
+    // 维度名列表
+    dimensionNames: Array<String>,
+    // 数据的维度 index，如 0 或 1 或 2 ...
+    // 仅在雷达图中使用。
+    dimensionIndex: number,
+    // 数据图形的颜色
+    color: string,
+    // 饼图/漏斗图的百分比
+    percent: number,
+    // 旭日图中当前节点的祖先节点（包括自身）
+    treePathInfo: Array,
+    // 树图/矩形树图中当前节点的祖先节点（包括自身）
+    treeAncestors: Array,
+    // 坐标轴标签文本是否溢出隐藏，可以使用此函数判断是否需要弹出提示框
+    isTruncated: Function,
+    // 当前坐标轴标签刻度索引
+    tickIndex: number
+}
+```
+
+注：encode 和 dimensionNames 的使用方式，例如：
+
+如果数据为：
+
+```
+dataset: {
+    source: [
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.encode.y[0]]
+```
+
+如果数据为：
+
+```
+dataset: {
+    dimensions: ['product', '2015', '2016', '2017'],
+    source: [
+        {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+        {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+        {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+        {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.dimensionNames[params.encode.y[0]]]
+```
+
+在 [trigger](option.tooltip.md#trigger) 为 `'axis'` 的时候，或者 tooltip 被 [axisPointer](option.xAxis.md#axisPointer) 触发的时候，`params` 是多个系列的数据数组。其中每项内容格式同上，并且，
+
+```
+{
+    componentType: 'series',
+    // 系列类型
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index
+    seriesIndex: number,
+    // 系列名称
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // 传入的数据值。在多数系列下它和 data 相同。在一些系列下是 data 中的分量（如 map、radar 中）
+    value: number|Array|Object,
+    // 坐标轴 encode 映射信息，
+    // key 为坐标轴（如 'x' 'y' 'radius' 'angle' 等）
+    // value 必然为数组，不会为 null/undefined，表示 dimension index 。
+    // 其内容如：
+    // {
+    //     x: [2] // dimension index 为 2 的数据映射到 x 轴
+    //     y: [0] // dimension index 为 0 的数据映射到 y 轴
+    // }
+    encode: Object,
+    // 维度名列表
+    dimensionNames: Array<String>,
+    // 数据的维度 index，如 0 或 1 或 2 ...
+    // 仅在雷达图中使用。
+    dimensionIndex: number,
+    // 数据图形的颜色
+    color: string
+}
+```
+
+注：encode 和 dimensionNames 的使用方式，例如：
+
+如果数据为：
+
+```
+dataset: {
+    source: [
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.encode.y[0]]
+```
+
+如果数据为：
+
+```
+dataset: {
+    dimensions: ['product', '2015', '2016', '2017'],
+    source: [
+        {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+        {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+        {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+        {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.dimensionNames[params.encode.y[0]]]
+```
+
+第二个参数 `ticket` 是异步回调标识，配合第三个参数 `callback` 使用。 第三个参数 `callback` 是异步回调，在提示框浮层内容是异步获取的时候，可以通过 callback 传入上述的 `ticket` 和 `html` 更新提示框浮层内容。
+
+示例：
+
+```
+formatter: function (params, ticket, callback) {
+    $.get('detail?name=' + params.name, function (content) {
+        callback(ticket, toHTML(content));
+    });
+    return 'Loading';
+}
+```
+
+#### data.tooltip.valueFormatter
+- **Type**: `string`
+
+从 `v5.3.0` 开始支持
+
+tooltip 中数值显示部分的格式化回调函数。
+
+回调函数格式：
+
+```
+(value: number | string, dataIndex: number) => string
+```
+
+`dataIndex` 参数 从 `v5.3.0` 开始支持
+
+示例：
+
+```
+// 添加 $ 前缀
+valueFormatter: (value) => '$' + value.toFixed(2)
+```
+
+> **\[注\]:** 不同于 [tooltip.formater](option.tooltip.md#formatter)，本方式不支持返回原始 HTML。返回内容渲染前会被自动按需转义。
+
+#### data.tooltip.backgroundColor
+- **Type**: `Color`
+- **Default**: `'rgba(50,50,50,0.7)'`
+
+> **注意：**`series.data.tooltip` 仅在 [tooltip.trigger](option.tooltip.md#trigger) 为 `'item'` 时有效。  
+
+提示框浮层的背景颜色。
+
+#### data.tooltip.borderColor
+- **Type**: `Color`
+- **Default**: `'#333'`
+
+> **注意：**`series.data.tooltip` 仅在 [tooltip.trigger](option.tooltip.md#trigger) 为 `'item'` 时有效。  
+
+提示框浮层的边框颜色。
+
+#### data.tooltip.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+> **注意：**`series.data.tooltip` 仅在 [tooltip.trigger](option.tooltip.md#trigger) 为 `'item'` 时有效。  
+
+提示框浮层的边框宽。
+
+#### data.tooltip.padding
+- **Type**: `number`
+- **Default**: `5`
+
+> **注意：**`series.data.tooltip` 仅在 [tooltip.trigger](option.tooltip.md#trigger) 为 `'item'` 时有效。  
+
+提示框浮层内边距，单位px，默认各方向内边距为5，接受数组分别设定上右下左边距。
+
+使用示例：
+
+```
+// 设置内边距为 5
+padding: 5
+// 设置上下的内边距为 5，左右的内边距为 10
+padding: [5, 10]
+// 分别设置四个方向的内边距
+padding: [
+    5,  // 上
+    10, // 右
+    5,  // 下
+    10, // 左
+]
+```
+
+#### data.tooltip.textStyle
+- **Type**: `Object`
+
+> **注意：**`series.data.tooltip` 仅在 [tooltip.trigger](option.tooltip.md#trigger) 为 `'item'` 时有效。  
+
+提示框浮层的文本样式。
+
+##### data.tooltip.textStyle.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+##### data.tooltip.textStyle.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+##### data.tooltip.textStyle.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+##### data.tooltip.textStyle.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+##### data.tooltip.textStyle.fontSize
+- **Type**: `number`
+- **Default**: `14`
+
+文字的字体大小。
+
+##### data.tooltip.textStyle.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+##### data.tooltip.textStyle.width
+- **Type**: `number`
+
+文本显示宽度。
+
+##### data.tooltip.textStyle.height
+- **Type**: `number`
+
+文本显示高度。
+
+##### data.tooltip.textStyle.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+##### data.tooltip.textStyle.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+##### data.tooltip.textStyle.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+##### data.tooltip.textStyle.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### data.tooltip.textStyle.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+##### data.tooltip.textStyle.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+##### data.tooltip.textStyle.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+##### data.tooltip.textStyle.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+##### data.tooltip.textStyle.overflow
+- **Type**: `string`
+- **Default**: `'none'`
+
+文字超出宽度是否截断或者换行。配置`width`时有效
+
+*   `'truncate'` 截断，并在末尾显示`ellipsis`配置的文本，默认为`...`
+*   `'break'` 换行
+*   `'breakAll'` 换行，跟`'break'`不同的是，在英语等拉丁文中，`'breakAll'`还会强制单词内换行
+
+##### data.tooltip.textStyle.ellipsis
+- **Type**: `string`
+- **Default**: `'...'`
+
+在`overflow`配置为`'truncate'`的时候，可以通过该属性配置末尾显示的文本。
+
+#### data.tooltip.extraCssText
+- **Type**: `string`
+
+> **注意：**`series.data.tooltip` 仅在 [tooltip.trigger](option.tooltip.md#trigger) 为 `'item'` 时有效。  
+
+额外附加到浮层的 css 样式。如下为浮层添加阴影的示例：
+
+```
+extraCssText: 'box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);'
+```
+
+\[警告\]: tooltip 是用 HTML 实现的（除非 [tooltip.renderMode](option.tooltip.md#renderMode) 设为 `richText`）。允许用此方式定制 toolbox 外壳的 CSS text。 如果此 CSS text 来自于“不受信任”的来源，必须考虑 **安全风险**。文档 [“安全指南”](https://echarts.apache.org/handbook/zh/best-practices/security) 给出了安全使用建议。
+
+## markPoint
+- **Type**: `Object`
+
+图表标注。
+
+### markPoint.symbol
+- **Type**: `string|Function`
+- **Default**: `'pin'`
+
+标记的图形。
+
+ECharts 提供的标记类型包括
+
+`'circle'`, `'rect'`, `'roundRect'`, `'triangle'`, `'diamond'`, `'pin'`, `'arrow'`, `'none'`
+
+可以通过 `'image://url'` 设置为图片，其中 URL 为图片的链接，或者 `dataURI`。
+
+URL 为图片链接例如：
+
+```
+'image://http://example.website/a/b.png'
+```
+
+URL 为 `dataURI` 例如：
+
+```
+'image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7'
+```
+
+可以通过 `'path://'` 将图标设置为任意的矢量路径。这种方式相比于使用图片的方式，不用担心因为缩放而产生锯齿或模糊，而且可以设置为任意颜色。路径图形会自适应调整为合适的大小。路径的格式参见 [SVG PathData](http://www.w3.org/TR/SVG/paths.html#PathData)。可以从 Adobe Illustrator 等工具编辑导出。
+
+例如：
+
+```
+'path://M30.9,53.2C16.8,53.2,5.3,41.7,5.3,27.6S16.8,2,30.9,2C45,2,56.4,13.5,56.4,27.6S45,53.2,30.9,53.2z M30.9,3.5C17.6,3.5,6.8,14.4,6.8,27.6c0,13.3,10.8,24.1,24.101,24.1C44.2,51.7,55,40.9,55,27.6C54.9,14.4,44.1,3.5,30.9,3.5z M36.9,35.8c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H36c0.5,0,0.9,0.4,0.9,1V35.8z M27.8,35.8 c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H27c0.5,0,0.9,0.4,0.9,1L27.8,35.8L27.8,35.8z'
+```
+
+如果需要每个数据的图形不一样，可以设置为如下格式的回调函数：
+
+```
+(value: Array|number, params: Object) => string
+```
+
+其中第一个参数 `value` 为 [data](option.series-scatter.md#data) 中的数据值。第二个参数`params` 是其它的数据项参数。
+
+### markPoint.symbolSize
+- **Type**: `number|Array|Function`
+- **Default**: `50`
+
+标记的大小，可以设置成诸如 `10` 这样单一的数字，也可以用数组分开表示宽和高，例如 `[20, 10]` 表示标记宽为`20`，高为`10`。
+
+如果需要每个数据的图形大小不一样，可以设置为如下格式的回调函数：
+
+```
+(value: Array|number, params: Object) => number|Array
+```
+
+其中第一个参数 `value` 为 [data](option.series-scatter.md#data) 中的数据值。第二个参数`params` 是其它的数据项参数。
+
+### markPoint.symbolRotate
+- **Type**: `number|Function`
+
+标记的旋转角度（而非弧度）。正值表示逆时针旋转。注意在 `markLine` 中当 `symbol` 为 `'arrow'` 时会忽略 `symbolRotate` 强制设置为切线的角度。
+
+如果需要每个数据的旋转角度不一样，可以设置为如下格式的回调函数：
+
+```
+(value: Array|number, params: Object) => number
+```
+
+其中第一个参数 `value` 为 [data](option.series-scatter.md#data) 中的数据值。第二个参数`params` 是其它的数据项参数。
+
+> 从 4.8.0 开始支持回调函数。
+
+### markPoint.symbolKeepAspect
+- **Type**: `boolean`
+- **Default**: `false`
+
+如果 `symbol` 是 `path://` 的形式，是否在缩放时保持该图形的长宽比。
+
+### markPoint.symbolOffset
+- **Type**: `Array`
+- **Default**: `[0, 0]`
+
+标记相对于原本位置的偏移。默认情况下，标记会居中置放在数据对应的位置，但是如果 symbol 是自定义的矢量路径或者图片，就有可能不希望 symbol 居中。这时候可以使用该配置项配置 symbol 相对于原本居中的偏移，可以是绝对的像素值，也可以是相对的百分比。
+
+例如 `[0, '-50%']` 就是把自己向上移动了一半的位置，在 symbol 图形是气泡的时候可以让图形下端的箭头对准数据点。
+
+### markPoint.silent
+- **Type**: `boolean`
+- **Default**: `false`
+
+图形是否不响应和触发鼠标事件，默认为 false，即响应和触发鼠标事件。
+
+### markPoint.label
+- **Type**: `Object`
+
+标注的文本。
+
+#### markPoint.label.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+是否显示标签。
+
+#### markPoint.label.position
+- **Type**: `string|Array`
+- **Default**: `'inside'`
+
+标签的位置。
+
+*   可以通过内置的语义声明位置：
+    
+    示例：
+    
+    ```
+      position: 'top'
+    ```
+    
+    支持：`top` / `left` / `right` / `bottom` / `inside` / `insideLeft` / `insideRight` / `insideTop` / `insideBottom` / `insideTopLeft` / `insideBottomLeft` / `insideTopRight` / `insideBottomRight`
+    
+*   也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。
+    
+    示例：
+    
+    ```
+      // 绝对的像素值
+      position: [10, 10],
+      // 相对的百分比
+      position: ['50%', '50%']
+    ```
+    
+
+参见：[label position](https://echarts.apache.org/examples/zh/view.html?c=doc-example/label-position)。
+
+#### markPoint.label.distance
+- **Type**: `number`
+- **Default**: `5`
+
+距离图形元素的距离。
+
+当 position 为字符描述值（如 `'top'`、`'insideRight'`）时候有效。
+
+参见：[label position](https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position)。
+
+#### markPoint.label.rotate
+- **Type**: `number`
+
+标签旋转。从 -90 度到 90 度。正值是逆时针。
+
+参见：[label rotation](https://echarts.apache.org/examples/zh/editor.html?c=bar-label-rotation)。
+
+#### markPoint.label.offset
+- **Type**: `Array`
+
+是否对文字进行偏移。默认不偏移。例如：`[30, 40]` 表示文字在横向上偏移 `30`，纵向上偏移 `40`。
+
+#### markPoint.label.formatter
+- **Type**: `string|Function`
+
+标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 `\n` 换行。
+
+**字符串模板** 模板变量有：
+
+*   `{a}`：系列名。
+*   `{b}`：数据名。
+*   `{c}`：数据值。
+*   `{@xxx}`：数据中名为 `'xxx'` 的维度的值，如 `{@product}` 表示名为 `'product'` 的维度的值。
+*   `{@[n]}`：数据中维度 `n` 的值，如 `{@[3]}` 表示维度 3 的值，从 0 开始计数。
+
+**示例：**
+
+```
+formatter: '{b}: {@score}'
+```
+
+**回调函数**
+
+回调函数格式：
+
+```
+(params: Object|Array) => string
+```
+
+参数 `params` 是 formatter 需要的单个数据集。格式如下：
+
+```
+{
+    componentType: 'series',
+    // 系列类型
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index
+    seriesIndex: number,
+    // 系列名称
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // 传入的数据值。在多数系列下它和 data 相同。在一些系列下是 data 中的分量（如 map、radar 中）
+    value: number|Array|Object,
+    // 坐标轴 encode 映射信息，
+    // key 为坐标轴（如 'x' 'y' 'radius' 'angle' 等）
+    // value 必然为数组，不会为 null/undefined，表示 dimension index 。
+    // 其内容如：
+    // {
+    //     x: [2] // dimension index 为 2 的数据映射到 x 轴
+    //     y: [0] // dimension index 为 0 的数据映射到 y 轴
+    // }
+    encode: Object,
+    // 维度名列表
+    dimensionNames: Array<String>,
+    // 数据的维度 index，如 0 或 1 或 2 ...
+    // 仅在雷达图中使用。
+    dimensionIndex: number,
+    // 数据图形的颜色
+    color: string
+}
+```
+
+注：encode 和 dimensionNames 的使用方式，例如：
+
+如果数据为：
+
+```
+dataset: {
+    source: [
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.encode.y[0]]
+```
+
+如果数据为：
+
+```
+dataset: {
+    dimensions: ['product', '2015', '2016', '2017'],
+    source: [
+        {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+        {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+        {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+        {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.dimensionNames[params.encode.y[0]]]
+```
+
+#### markPoint.label.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+#### markPoint.label.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+#### markPoint.label.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+#### markPoint.label.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+#### markPoint.label.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+#### markPoint.label.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+#### markPoint.label.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+#### markPoint.label.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+#### markPoint.label.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+#### markPoint.label.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+#### markPoint.label.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+#### markPoint.label.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+#### markPoint.label.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+#### markPoint.label.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+#### markPoint.label.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+#### markPoint.label.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+#### markPoint.label.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+#### markPoint.label.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+#### markPoint.label.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+#### markPoint.label.width
+- **Type**: `number`
+
+文本显示宽度。
+
+#### markPoint.label.height
+- **Type**: `number`
+
+文本显示高度。
+
+#### markPoint.label.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+#### markPoint.label.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+#### markPoint.label.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+#### markPoint.label.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+#### markPoint.label.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+#### markPoint.label.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+#### markPoint.label.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+#### markPoint.label.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+#### markPoint.label.overflow
+- **Type**: `string`
+- **Default**: `'none'`
+
+文字超出宽度是否截断或者换行。配置`width`时有效
+
+*   `'truncate'` 截断，并在末尾显示`ellipsis`配置的文本，默认为`...`
+*   `'break'` 换行
+*   `'breakAll'` 换行，跟`'break'`不同的是，在英语等拉丁文中，`'breakAll'`还会强制单词内换行
+
+#### markPoint.label.ellipsis
+- **Type**: `string`
+- **Default**: `'...'`
+
+在`overflow`配置为`'truncate'`的时候，可以通过该属性配置末尾显示的文本。
+
+#### markPoint.label.rich
+- **Type**: `Object`
+
+在 `rich` 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。
+
+例如：
+
+```
+label: {
+    // 在文本中，可以对部分文本采用 rich 中定义样式。
+    // 这里需要在文本中使用标记符号：
+    // `{styleName|text content text content}` 标记样式名。
+    // 注意，换行仍是使用 '\n'。
+    formatter: [
+        '{a|这段文本采用样式a}',
+        '{b|这段文本采用样式b}这段用默认样式{x|这段用样式x}'
+    ].join('\n'),
+
+    rich: {
+        a: {
+            color: 'red',
+            lineHeight: 10
+        },
+        b: {
+            backgroundColor: {
+                image: 'xxx/xxx.jpg'
+            },
+            height: 40
+        },
+        x: {
+            fontSize: 18,
+            fontFamily: 'Microsoft YaHei',
+            borderColor: '#449933',
+            borderRadius: 4
+        },
+        ...
+    }
+}
+```
+
+详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+
+###### markPoint.label.rich.<style_name>.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markPoint.label.rich.<style_name>.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### markPoint.label.rich.<style_name>.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### markPoint.label.rich.<style_name>.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### markPoint.label.rich.<style_name>.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### markPoint.label.rich.<style_name>.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### markPoint.label.rich.<style_name>.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### markPoint.label.rich.<style_name>.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### markPoint.label.rich.<style_name>.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markPoint.label.rich.<style_name>.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markPoint.label.rich.<style_name>.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### markPoint.label.rich.<style_name>.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markPoint.label.rich.<style_name>.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markPoint.label.rich.<style_name>.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### markPoint.label.rich.<style_name>.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### markPoint.label.rich.<style_name>.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### markPoint.label.rich.<style_name>.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### markPoint.label.rich.<style_name>.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### markPoint.label.rich.<style_name>.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### markPoint.label.rich.<style_name>.width
+- **Type**: `number|string`
+
+文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+`width` 也可以是百分比字符串，如 `'100%'`。表示的是所在文本块的 `contentWidth`（即不包含文本块的 `padding`）的百分之多少。之所以以 `contentWidth` 做基数，因为每个文本片段只能基于 `content box` 布局。如果以 `outerWidth` 做基数，则百分比的计算在实用中不具有意义，可能会超出。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markPoint.label.rich.<style_name>.height
+- **Type**: `number|string`
+
+文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markPoint.label.rich.<style_name>.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markPoint.label.rich.<style_name>.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### markPoint.label.rich.<style_name>.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### markPoint.label.rich.<style_name>.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markPoint.label.rich.<style_name>.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### markPoint.label.rich.<style_name>.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### markPoint.label.rich.<style_name>.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### markPoint.label.rich.<style_name>.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+#### markPoint.label.richInheritPlainLabel
+- **Type**: `boolean`
+- **Default**: `true`
+
+从 `v6.0.0` 开始支持
+
+富文本样式是否继承普通文本样式。
+
+此配置项用于向历史兼容。
+
+> 从 v6 版本开始，[富文本标签 (label.rich / textStyle.rich)](option.series-scatter.md#label.rich) 部分样式（`fontStyle`, `fontWeight`, `fontSize`, `fontFamily`, `textShadowColor`, `textShadowBlur`, `textShadowOffsetX`, `textShadowOffsetY`）默认继承 [普通文本样式 (label / textStyle)](option.series-scatter.md#label)。你可以设置 `richInheritPlainLabel: false` （可在最外层配置项或与同级文本样式配置项）来禁用此行为。
+> 
+> ```
+> option = {
+>     richInheritPlainLabel: false, // In most cases, this is enough.
+>     xxx1: {
+>         // Can also set it here to only control this label.
+>         label: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     },
+>     xxx2: {
+>         textStyle: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     }
+> }
+> ```
+
+### markPoint.itemStyle
+- **Type**: `Object`
+
+标注的样式。
+
+#### markPoint.itemStyle.color
+- **Type**: `Color`
+- **Default**: `自适应`
+
+图形的颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+#### markPoint.itemStyle.borderColor
+- **Type**: `Color`
+- **Default**: `'#000'`
+
+图形的描边颜色。支持的颜色格式同 `color`，不支持回调函数。
+
+#### markPoint.itemStyle.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+描边线宽。为 0 时无描边。
+
+#### markPoint.itemStyle.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+#### markPoint.itemStyle.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+#### markPoint.itemStyle.borderCap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+#### markPoint.itemStyle.borderJoin
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `borderMiterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+#### markPoint.itemStyle.borderMiterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `borderJoin` 为 `miter` 时， `borderMiterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+#### markPoint.itemStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+#### markPoint.itemStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+#### markPoint.itemStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+#### markPoint.itemStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+#### markPoint.itemStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+### markPoint.emphasis
+- **Type**: `Object`
+
+标注的高亮样式。
+
+#### markPoint.emphasis.disabled
+- **Type**: `boolean`
+- **Default**: `false`
+
+从 `v5.3.0` 开始支持
+
+是否关闭高亮状态。
+
+关闭高亮状态可以在鼠标移到图形上，tooltip 触发，或者图例联动的时候不再触发高亮效果。在图形非常多的时候可以关闭以提升交互流畅性。
+
+##### markPoint.emphasis.label.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+是否显示标签。
+
+##### markPoint.emphasis.label.position
+- **Type**: `string|Array`
+- **Default**: `'inside'`
+
+标签的位置。
+
+*   可以通过内置的语义声明位置：
+    
+    示例：
+    
+    ```
+      position: 'top'
+    ```
+    
+    支持：`top` / `left` / `right` / `bottom` / `inside` / `insideLeft` / `insideRight` / `insideTop` / `insideBottom` / `insideTopLeft` / `insideBottomLeft` / `insideTopRight` / `insideBottomRight`
+    
+*   也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。
+    
+    示例：
+    
+    ```
+      // 绝对的像素值
+      position: [10, 10],
+      // 相对的百分比
+      position: ['50%', '50%']
+    ```
+    
+
+参见：[label position](https://echarts.apache.org/examples/zh/view.html?c=doc-example/label-position)。
+
+##### markPoint.emphasis.label.distance
+- **Type**: `number`
+- **Default**: `5`
+
+距离图形元素的距离。
+
+当 position 为字符描述值（如 `'top'`、`'insideRight'`）时候有效。
+
+参见：[label position](https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position)。
+
+##### markPoint.emphasis.label.rotate
+- **Type**: `number`
+
+标签旋转。从 -90 度到 90 度。正值是逆时针。
+
+参见：[label rotation](https://echarts.apache.org/examples/zh/editor.html?c=bar-label-rotation)。
+
+##### markPoint.emphasis.label.offset
+- **Type**: `Array`
+
+是否对文字进行偏移。默认不偏移。例如：`[30, 40]` 表示文字在横向上偏移 `30`，纵向上偏移 `40`。
+
+##### markPoint.emphasis.label.formatter
+- **Type**: `string|Function`
+
+标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 `\n` 换行。
+
+**字符串模板** 模板变量有：
+
+*   `{a}`：系列名。
+*   `{b}`：数据名。
+*   `{c}`：数据值。
+*   `{@xxx}`：数据中名为 `'xxx'` 的维度的值，如 `{@product}` 表示名为 `'product'` 的维度的值。
+*   `{@[n]}`：数据中维度 `n` 的值，如 `{@[3]}` 表示维度 3 的值，从 0 开始计数。
+
+**示例：**
+
+```
+formatter: '{b}: {@score}'
+```
+
+**回调函数**
+
+回调函数格式：
+
+```
+(params: Object|Array) => string
+```
+
+参数 `params` 是 formatter 需要的单个数据集。格式如下：
+
+```
+{
+    componentType: 'series',
+    // 系列类型
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index
+    seriesIndex: number,
+    // 系列名称
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // 传入的数据值。在多数系列下它和 data 相同。在一些系列下是 data 中的分量（如 map、radar 中）
+    value: number|Array|Object,
+    // 坐标轴 encode 映射信息，
+    // key 为坐标轴（如 'x' 'y' 'radius' 'angle' 等）
+    // value 必然为数组，不会为 null/undefined，表示 dimension index 。
+    // 其内容如：
+    // {
+    //     x: [2] // dimension index 为 2 的数据映射到 x 轴
+    //     y: [0] // dimension index 为 0 的数据映射到 y 轴
+    // }
+    encode: Object,
+    // 维度名列表
+    dimensionNames: Array<String>,
+    // 数据的维度 index，如 0 或 1 或 2 ...
+    // 仅在雷达图中使用。
+    dimensionIndex: number,
+    // 数据图形的颜色
+    color: string
+}
+```
+
+注：encode 和 dimensionNames 的使用方式，例如：
+
+如果数据为：
+
+```
+dataset: {
+    source: [
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.encode.y[0]]
+```
+
+如果数据为：
+
+```
+dataset: {
+    dimensions: ['product', '2015', '2016', '2017'],
+    source: [
+        {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+        {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+        {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+        {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.dimensionNames[params.encode.y[0]]]
+```
+
+##### markPoint.emphasis.label.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### markPoint.emphasis.label.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+##### markPoint.emphasis.label.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+##### markPoint.emphasis.label.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+##### markPoint.emphasis.label.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+##### markPoint.emphasis.label.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+##### markPoint.emphasis.label.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+##### markPoint.emphasis.label.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+##### markPoint.emphasis.label.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### markPoint.emphasis.label.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### markPoint.emphasis.label.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+##### markPoint.emphasis.label.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+##### markPoint.emphasis.label.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### markPoint.emphasis.label.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+##### markPoint.emphasis.label.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+##### markPoint.emphasis.label.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+##### markPoint.emphasis.label.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+##### markPoint.emphasis.label.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+##### markPoint.emphasis.label.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+##### markPoint.emphasis.label.width
+- **Type**: `number`
+
+文本显示宽度。
+
+##### markPoint.emphasis.label.height
+- **Type**: `number`
+
+文本显示高度。
+
+##### markPoint.emphasis.label.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### markPoint.emphasis.label.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+##### markPoint.emphasis.label.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+##### markPoint.emphasis.label.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### markPoint.emphasis.label.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+##### markPoint.emphasis.label.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+##### markPoint.emphasis.label.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+##### markPoint.emphasis.label.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+##### markPoint.emphasis.label.overflow
+- **Type**: `string`
+- **Default**: `'none'`
+
+文字超出宽度是否截断或者换行。配置`width`时有效
+
+*   `'truncate'` 截断，并在末尾显示`ellipsis`配置的文本，默认为`...`
+*   `'break'` 换行
+*   `'breakAll'` 换行，跟`'break'`不同的是，在英语等拉丁文中，`'breakAll'`还会强制单词内换行
+
+##### markPoint.emphasis.label.ellipsis
+- **Type**: `string`
+- **Default**: `'...'`
+
+在`overflow`配置为`'truncate'`的时候，可以通过该属性配置末尾显示的文本。
+
+##### markPoint.emphasis.label.rich
+- **Type**: `Object`
+
+在 `rich` 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。
+
+例如：
+
+```
+label: {
+    // 在文本中，可以对部分文本采用 rich 中定义样式。
+    // 这里需要在文本中使用标记符号：
+    // `{styleName|text content text content}` 标记样式名。
+    // 注意，换行仍是使用 '\n'。
+    formatter: [
+        '{a|这段文本采用样式a}',
+        '{b|这段文本采用样式b}这段用默认样式{x|这段用样式x}'
+    ].join('\n'),
+
+    rich: {
+        a: {
+            color: 'red',
+            lineHeight: 10
+        },
+        b: {
+            backgroundColor: {
+                image: 'xxx/xxx.jpg'
+            },
+            height: 40
+        },
+        x: {
+            fontSize: 18,
+            fontFamily: 'Microsoft YaHei',
+            borderColor: '#449933',
+            borderRadius: 4
+        },
+        ...
+    }
+}
+```
+
+详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+
+###### markPoint.emphasis.label.rich.<style_name>.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markPoint.emphasis.label.rich.<style_name>.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### markPoint.emphasis.label.rich.<style_name>.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### markPoint.emphasis.label.rich.<style_name>.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### markPoint.emphasis.label.rich.<style_name>.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### markPoint.emphasis.label.rich.<style_name>.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### markPoint.emphasis.label.rich.<style_name>.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### markPoint.emphasis.label.rich.<style_name>.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### markPoint.emphasis.label.rich.<style_name>.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markPoint.emphasis.label.rich.<style_name>.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markPoint.emphasis.label.rich.<style_name>.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### markPoint.emphasis.label.rich.<style_name>.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markPoint.emphasis.label.rich.<style_name>.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markPoint.emphasis.label.rich.<style_name>.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### markPoint.emphasis.label.rich.<style_name>.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### markPoint.emphasis.label.rich.<style_name>.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### markPoint.emphasis.label.rich.<style_name>.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### markPoint.emphasis.label.rich.<style_name>.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### markPoint.emphasis.label.rich.<style_name>.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### markPoint.emphasis.label.rich.<style_name>.width
+- **Type**: `number|string`
+
+文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+`width` 也可以是百分比字符串，如 `'100%'`。表示的是所在文本块的 `contentWidth`（即不包含文本块的 `padding`）的百分之多少。之所以以 `contentWidth` 做基数，因为每个文本片段只能基于 `content box` 布局。如果以 `outerWidth` 做基数，则百分比的计算在实用中不具有意义，可能会超出。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markPoint.emphasis.label.rich.<style_name>.height
+- **Type**: `number|string`
+
+文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markPoint.emphasis.label.rich.<style_name>.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markPoint.emphasis.label.rich.<style_name>.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### markPoint.emphasis.label.rich.<style_name>.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### markPoint.emphasis.label.rich.<style_name>.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markPoint.emphasis.label.rich.<style_name>.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### markPoint.emphasis.label.rich.<style_name>.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### markPoint.emphasis.label.rich.<style_name>.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### markPoint.emphasis.label.rich.<style_name>.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+##### markPoint.emphasis.label.richInheritPlainLabel
+- **Type**: `boolean`
+- **Default**: `true`
+
+从 `v6.0.0` 开始支持
+
+富文本样式是否继承普通文本样式。
+
+此配置项用于向历史兼容。
+
+> 从 v6 版本开始，[富文本标签 (label.rich / textStyle.rich)](option.series-scatter.md#label.rich) 部分样式（`fontStyle`, `fontWeight`, `fontSize`, `fontFamily`, `textShadowColor`, `textShadowBlur`, `textShadowOffsetX`, `textShadowOffsetY`）默认继承 [普通文本样式 (label / textStyle)](option.series-scatter.md#label)。你可以设置 `richInheritPlainLabel: false` （可在最外层配置项或与同级文本样式配置项）来禁用此行为。
+> 
+> ```
+> option = {
+>     richInheritPlainLabel: false, // In most cases, this is enough.
+>     xxx1: {
+>         // Can also set it here to only control this label.
+>         label: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     },
+>     xxx2: {
+>         textStyle: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     }
+> }
+> ```
+
+##### markPoint.emphasis.itemStyle.color
+- **Type**: `Color`
+- **Default**: `自适应`
+
+图形的颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+##### markPoint.emphasis.itemStyle.borderColor
+- **Type**: `Color`
+- **Default**: `'#000'`
+
+图形的描边颜色。支持的颜色格式同 `color`，不支持回调函数。
+
+##### markPoint.emphasis.itemStyle.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+描边线宽。为 0 时无描边。
+
+##### markPoint.emphasis.itemStyle.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+##### markPoint.emphasis.itemStyle.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### markPoint.emphasis.itemStyle.borderCap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+##### markPoint.emphasis.itemStyle.borderJoin
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `borderMiterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+##### markPoint.emphasis.itemStyle.borderMiterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `borderJoin` 为 `miter` 时， `borderMiterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+##### markPoint.emphasis.itemStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+##### markPoint.emphasis.itemStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+##### markPoint.emphasis.itemStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+##### markPoint.emphasis.itemStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+##### markPoint.emphasis.itemStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+### markPoint.blur
+- **Type**: `Object`
+
+从 `v5.0.0` 开始支持
+
+标注的淡出样式。淡出的规则跟随所在系列。
+
+##### markPoint.blur.label.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+是否显示标签。
+
+##### markPoint.blur.label.position
+- **Type**: `string|Array`
+- **Default**: `'inside'`
+
+标签的位置。
+
+*   可以通过内置的语义声明位置：
+    
+    示例：
+    
+    ```
+      position: 'top'
+    ```
+    
+    支持：`top` / `left` / `right` / `bottom` / `inside` / `insideLeft` / `insideRight` / `insideTop` / `insideBottom` / `insideTopLeft` / `insideBottomLeft` / `insideTopRight` / `insideBottomRight`
+    
+*   也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。
+    
+    示例：
+    
+    ```
+      // 绝对的像素值
+      position: [10, 10],
+      // 相对的百分比
+      position: ['50%', '50%']
+    ```
+    
+
+参见：[label position](https://echarts.apache.org/examples/zh/view.html?c=doc-example/label-position)。
+
+##### markPoint.blur.label.distance
+- **Type**: `number`
+- **Default**: `5`
+
+距离图形元素的距离。
+
+当 position 为字符描述值（如 `'top'`、`'insideRight'`）时候有效。
+
+参见：[label position](https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position)。
+
+##### markPoint.blur.label.rotate
+- **Type**: `number`
+
+标签旋转。从 -90 度到 90 度。正值是逆时针。
+
+参见：[label rotation](https://echarts.apache.org/examples/zh/editor.html?c=bar-label-rotation)。
+
+##### markPoint.blur.label.offset
+- **Type**: `Array`
+
+是否对文字进行偏移。默认不偏移。例如：`[30, 40]` 表示文字在横向上偏移 `30`，纵向上偏移 `40`。
+
+##### markPoint.blur.label.formatter
+- **Type**: `string|Function`
+
+标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 `\n` 换行。
+
+**字符串模板** 模板变量有：
+
+*   `{a}`：系列名。
+*   `{b}`：数据名。
+*   `{c}`：数据值。
+*   `{@xxx}`：数据中名为 `'xxx'` 的维度的值，如 `{@product}` 表示名为 `'product'` 的维度的值。
+*   `{@[n]}`：数据中维度 `n` 的值，如 `{@[3]}` 表示维度 3 的值，从 0 开始计数。
+
+**示例：**
+
+```
+formatter: '{b}: {@score}'
+```
+
+**回调函数**
+
+回调函数格式：
+
+```
+(params: Object|Array) => string
+```
+
+参数 `params` 是 formatter 需要的单个数据集。格式如下：
+
+```
+{
+    componentType: 'series',
+    // 系列类型
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index
+    seriesIndex: number,
+    // 系列名称
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // 传入的数据值。在多数系列下它和 data 相同。在一些系列下是 data 中的分量（如 map、radar 中）
+    value: number|Array|Object,
+    // 坐标轴 encode 映射信息，
+    // key 为坐标轴（如 'x' 'y' 'radius' 'angle' 等）
+    // value 必然为数组，不会为 null/undefined，表示 dimension index 。
+    // 其内容如：
+    // {
+    //     x: [2] // dimension index 为 2 的数据映射到 x 轴
+    //     y: [0] // dimension index 为 0 的数据映射到 y 轴
+    // }
+    encode: Object,
+    // 维度名列表
+    dimensionNames: Array<String>,
+    // 数据的维度 index，如 0 或 1 或 2 ...
+    // 仅在雷达图中使用。
+    dimensionIndex: number,
+    // 数据图形的颜色
+    color: string
+}
+```
+
+注：encode 和 dimensionNames 的使用方式，例如：
+
+如果数据为：
+
+```
+dataset: {
+    source: [
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.encode.y[0]]
+```
+
+如果数据为：
+
+```
+dataset: {
+    dimensions: ['product', '2015', '2016', '2017'],
+    source: [
+        {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+        {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+        {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+        {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.dimensionNames[params.encode.y[0]]]
+```
+
+##### markPoint.blur.label.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### markPoint.blur.label.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+##### markPoint.blur.label.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+##### markPoint.blur.label.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+##### markPoint.blur.label.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+##### markPoint.blur.label.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+##### markPoint.blur.label.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+##### markPoint.blur.label.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+##### markPoint.blur.label.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### markPoint.blur.label.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### markPoint.blur.label.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+##### markPoint.blur.label.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+##### markPoint.blur.label.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### markPoint.blur.label.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+##### markPoint.blur.label.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+##### markPoint.blur.label.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+##### markPoint.blur.label.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+##### markPoint.blur.label.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+##### markPoint.blur.label.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+##### markPoint.blur.label.width
+- **Type**: `number`
+
+文本显示宽度。
+
+##### markPoint.blur.label.height
+- **Type**: `number`
+
+文本显示高度。
+
+##### markPoint.blur.label.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### markPoint.blur.label.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+##### markPoint.blur.label.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+##### markPoint.blur.label.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### markPoint.blur.label.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+##### markPoint.blur.label.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+##### markPoint.blur.label.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+##### markPoint.blur.label.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+##### markPoint.blur.label.overflow
+- **Type**: `string`
+- **Default**: `'none'`
+
+文字超出宽度是否截断或者换行。配置`width`时有效
+
+*   `'truncate'` 截断，并在末尾显示`ellipsis`配置的文本，默认为`...`
+*   `'break'` 换行
+*   `'breakAll'` 换行，跟`'break'`不同的是，在英语等拉丁文中，`'breakAll'`还会强制单词内换行
+
+##### markPoint.blur.label.ellipsis
+- **Type**: `string`
+- **Default**: `'...'`
+
+在`overflow`配置为`'truncate'`的时候，可以通过该属性配置末尾显示的文本。
+
+##### markPoint.blur.label.rich
+- **Type**: `Object`
+
+在 `rich` 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。
+
+例如：
+
+```
+label: {
+    // 在文本中，可以对部分文本采用 rich 中定义样式。
+    // 这里需要在文本中使用标记符号：
+    // `{styleName|text content text content}` 标记样式名。
+    // 注意，换行仍是使用 '\n'。
+    formatter: [
+        '{a|这段文本采用样式a}',
+        '{b|这段文本采用样式b}这段用默认样式{x|这段用样式x}'
+    ].join('\n'),
+
+    rich: {
+        a: {
+            color: 'red',
+            lineHeight: 10
+        },
+        b: {
+            backgroundColor: {
+                image: 'xxx/xxx.jpg'
+            },
+            height: 40
+        },
+        x: {
+            fontSize: 18,
+            fontFamily: 'Microsoft YaHei',
+            borderColor: '#449933',
+            borderRadius: 4
+        },
+        ...
+    }
+}
+```
+
+详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+
+###### markPoint.blur.label.rich.<style_name>.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markPoint.blur.label.rich.<style_name>.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### markPoint.blur.label.rich.<style_name>.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### markPoint.blur.label.rich.<style_name>.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### markPoint.blur.label.rich.<style_name>.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### markPoint.blur.label.rich.<style_name>.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### markPoint.blur.label.rich.<style_name>.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### markPoint.blur.label.rich.<style_name>.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### markPoint.blur.label.rich.<style_name>.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markPoint.blur.label.rich.<style_name>.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markPoint.blur.label.rich.<style_name>.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### markPoint.blur.label.rich.<style_name>.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markPoint.blur.label.rich.<style_name>.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markPoint.blur.label.rich.<style_name>.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### markPoint.blur.label.rich.<style_name>.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### markPoint.blur.label.rich.<style_name>.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### markPoint.blur.label.rich.<style_name>.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### markPoint.blur.label.rich.<style_name>.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### markPoint.blur.label.rich.<style_name>.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### markPoint.blur.label.rich.<style_name>.width
+- **Type**: `number|string`
+
+文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+`width` 也可以是百分比字符串，如 `'100%'`。表示的是所在文本块的 `contentWidth`（即不包含文本块的 `padding`）的百分之多少。之所以以 `contentWidth` 做基数，因为每个文本片段只能基于 `content box` 布局。如果以 `outerWidth` 做基数，则百分比的计算在实用中不具有意义，可能会超出。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markPoint.blur.label.rich.<style_name>.height
+- **Type**: `number|string`
+
+文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markPoint.blur.label.rich.<style_name>.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markPoint.blur.label.rich.<style_name>.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### markPoint.blur.label.rich.<style_name>.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### markPoint.blur.label.rich.<style_name>.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markPoint.blur.label.rich.<style_name>.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### markPoint.blur.label.rich.<style_name>.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### markPoint.blur.label.rich.<style_name>.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### markPoint.blur.label.rich.<style_name>.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+##### markPoint.blur.label.richInheritPlainLabel
+- **Type**: `boolean`
+- **Default**: `true`
+
+从 `v6.0.0` 开始支持
+
+富文本样式是否继承普通文本样式。
+
+此配置项用于向历史兼容。
+
+> 从 v6 版本开始，[富文本标签 (label.rich / textStyle.rich)](option.series-scatter.md#label.rich) 部分样式（`fontStyle`, `fontWeight`, `fontSize`, `fontFamily`, `textShadowColor`, `textShadowBlur`, `textShadowOffsetX`, `textShadowOffsetY`）默认继承 [普通文本样式 (label / textStyle)](option.series-scatter.md#label)。你可以设置 `richInheritPlainLabel: false` （可在最外层配置项或与同级文本样式配置项）来禁用此行为。
+> 
+> ```
+> option = {
+>     richInheritPlainLabel: false, // In most cases, this is enough.
+>     xxx1: {
+>         // Can also set it here to only control this label.
+>         label: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     },
+>     xxx2: {
+>         textStyle: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     }
+> }
+> ```
+
+##### markPoint.blur.itemStyle.color
+- **Type**: `Color`
+- **Default**: `自适应`
+
+图形的颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+##### markPoint.blur.itemStyle.borderColor
+- **Type**: `Color`
+- **Default**: `'#000'`
+
+图形的描边颜色。支持的颜色格式同 `color`，不支持回调函数。
+
+##### markPoint.blur.itemStyle.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+描边线宽。为 0 时无描边。
+
+##### markPoint.blur.itemStyle.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+##### markPoint.blur.itemStyle.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### markPoint.blur.itemStyle.borderCap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+##### markPoint.blur.itemStyle.borderJoin
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `borderMiterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+##### markPoint.blur.itemStyle.borderMiterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `borderJoin` 为 `miter` 时， `borderMiterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+##### markPoint.blur.itemStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+##### markPoint.blur.itemStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+##### markPoint.blur.itemStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+##### markPoint.blur.itemStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+##### markPoint.blur.itemStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+### markPoint.data
+- **Type**: `Array`
+
+标注的数据数组。每个数组项是一个对象，有下面几种方式指定标注的位置。
+
+1.  通过 [x](option.series-scatter.md#markPoint.data.x), [y](option.series-scatter.md#markPoint.data.y) 属性指定相对容器的屏幕坐标，单位像素，支持百分比。
+
+2.  用 [coord](option.series-scatter.md#markPoint.data.coord) 属性指定数据在相应坐标系上的坐标位置，单个维度支持设置 `'min'`, `'max'`, `'average'`。
+    
+3.  直接用 [type](option.series-scatter.md#markPoint.data.type) 属性标注系列中的最大值，最小值。这时候可以使用 [valueIndex](option.series-scatter.md#markPoint.data.valueIndex) 或者 [valueDim](option.series-scatter.md#markPoint.data.valueDim) 指定是在哪个维度上的最大值、最小值、平均值。
+    
+
+当多个属性同时存在时，优先级按上述的顺序。
+
+**示例：**
+
+```
+data: [
+    {
+        name: '最大值',
+        type: 'max'
+    }, 
+    {
+        name: '某个坐标',
+        coord: [10, 20]
+    }, {
+        name: '固定 x 像素位置',
+        yAxis: 10,
+        x: '90%'
+    }, 
+
+    {
+        name: '某个屏幕坐标',
+        x: 100,
+        y: 100
+    }
+]
+```
+
+#### markPoint.data.name
+- **Type**: `string`
+
+标注名称。定义后可在 [label formatter](option.series-scatter.md#markPoint.data.label.formatter) 中作为**数据名** `{b}` 模板变量使用。
+
+#### markPoint.data.type
+- **Type**: `string`
+
+特殊的标注类型，用于标注最大值最小值等。
+
+**可选:**
+
+*   `'min'` 最小值。
+*   `'max'` 最大值。
+*   `'average'` 平均值。
+
+#### markPoint.data.valueIndex
+- **Type**: `number`
+
+在使用 [type](option.series-scatter.md#markPoint.data.type) 时有效，用于指定在哪个维度上指定最大值最小值，可以是 `0`（xAxis, radiusAxis），`1`（yAxis, angleAxis），默认使用第一个数值轴所在的维度。
+
+#### markPoint.data.valueDim
+- **Type**: `string`
+
+在使用 [type](option.series-scatter.md#markPoint.data.type) 时有效，用于指定在哪个维度上指定最大值最小值。这可以是维度的直接名称，例如折线图时可以是`x`、`angle`等、candlestick 图时可以是`open`、`close`等维度名称。
+
+#### markPoint.data.coord
+- **Type**: `Array`
+
+标注的坐标。坐标格式视系列的坐标系而定，可以是[直角坐标系](option.grid.md)上的 `x`, `y`，也可以是[极坐标系](option.polar.md)上的 `radius`, `angle`。例如 \[121, 2323\]、\['aa', 998\]。
+
+**注：**对于 [axis.type](../option.md#xAixs.type) 为 `'category'` 类型的轴
+
+*   如果 coord 值为 `number`，则表示 [axis.data](option.xAxis.md#data) 的 index。
+*   如果 coord 值为 `string`，则表示 [axis.data](option.xAxis.md#data) 中具体的值。注意使用这种方式时，xAxis.data 不能写成 \[number, number, ...\]，而只能写成 \[string, string, ...\]，否则不能被 markPoint / markLine 用『具体值』索引到。
+
+例如：
+
+```
+{
+    xAxis: {
+        type: 'category',
+        data: ['5', '6', '9', '13', '19', '33']
+        // 注意这里不建议写成 [5, 6, 9, 13, 19, 33]，否则不能被 markPoint / markLine 用『具体值』索引到。
+    },
+    series: {
+        type: 'line',
+        data: [11, 22, 33, 44, 55, 66],
+        markPoint: { // markLine 也是同理
+            data: [{
+                coord: [5, 33.4], // 其中 5 表示 xAxis.data[5]，即 '33' 这个元素。
+                // coord: ['5', 33.4] // 其中 '5' 表示 xAxis.data中的 '5' 这个元素。
+                                      // 注意，使用这种方式时，xAxis.data 不能写成 [number, number, ...]
+                                      // 而只能写成 [string, string, ...]
+            }]
+        }
+    }
+}
+```
+
+#### markPoint.data.x
+- **Type**: `number`
+
+相对容器的屏幕 x 坐标，单位像素。
+
+#### markPoint.data.y
+- **Type**: `number`
+
+相对容器的屏幕 y 坐标，单位像素。
+
+#### markPoint.data.z2
+- **Type**: `number`
+
+从 `v6.0.0` 开始支持
+
+指定图形元素间的覆盖关系。数值越大，越在层叠的上方。
+
+#### markPoint.data.relativeTo
+- **Type**: `string`
+
+从 `v6.0.0` 开始支持
+
+可选值：`'container'` 或 `'coordinate'`。指定 [x](option.series-scatter.md#markPoint.data.x) 和 [y](option.series-scatter.md#markPoint.data.y) 是相对于整个图表容器（`'container'`，默认值）还是直角坐标系（`'coordinate'`）而言的位置。
+
+#### markPoint.data.value
+- **Type**: `number`
+
+标注值，可以不设。
+
+#### markPoint.data.symbol
+- **Type**: `string`
+
+标记的图形。
+
+ECharts 提供的标记类型包括
+
+`'circle'`, `'rect'`, `'roundRect'`, `'triangle'`, `'diamond'`, `'pin'`, `'arrow'`, `'none'`
+
+可以通过 `'image://url'` 设置为图片，其中 URL 为图片的链接，或者 `dataURI`。
+
+URL 为图片链接例如：
+
+```
+'image://http://example.website/a/b.png'
+```
+
+URL 为 `dataURI` 例如：
+
+```
+'image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7'
+```
+
+可以通过 `'path://'` 将图标设置为任意的矢量路径。这种方式相比于使用图片的方式，不用担心因为缩放而产生锯齿或模糊，而且可以设置为任意颜色。路径图形会自适应调整为合适的大小。路径的格式参见 [SVG PathData](http://www.w3.org/TR/SVG/paths.html#PathData)。可以从 Adobe Illustrator 等工具编辑导出。
+
+例如：
+
+```
+'path://M30.9,53.2C16.8,53.2,5.3,41.7,5.3,27.6S16.8,2,30.9,2C45,2,56.4,13.5,56.4,27.6S45,53.2,30.9,53.2z M30.9,3.5C17.6,3.5,6.8,14.4,6.8,27.6c0,13.3,10.8,24.1,24.101,24.1C44.2,51.7,55,40.9,55,27.6C54.9,14.4,44.1,3.5,30.9,3.5z M36.9,35.8c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H36c0.5,0,0.9,0.4,0.9,1V35.8z M27.8,35.8 c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H27c0.5,0,0.9,0.4,0.9,1L27.8,35.8L27.8,35.8z'
+```
+
+#### markPoint.data.symbolSize
+- **Type**: `number|Array`
+
+标记的大小，可以设置成诸如 `10` 这样单一的数字，也可以用数组分开表示宽和高，例如 `[20, 10]` 表示标记宽为`20`，高为`10`。
+
+#### markPoint.data.symbolRotate
+- **Type**: `number`
+
+标记的旋转角度（而非弧度）。正值表示逆时针旋转。注意在 `markLine` 中当 `symbol` 为 `'arrow'` 时会忽略 `symbolRotate` 强制设置为切线的角度。
+
+#### markPoint.data.symbolKeepAspect
+- **Type**: `boolean`
+- **Default**: `false`
+
+如果 `symbol` 是 `path://` 的形式，是否在缩放时保持该图形的长宽比。
+
+#### markPoint.data.symbolOffset
+- **Type**: `Array`
+- **Default**: `[0, 0]`
+
+标记相对于原本位置的偏移。默认情况下，标记会居中置放在数据对应的位置，但是如果 symbol 是自定义的矢量路径或者图片，就有可能不希望 symbol 居中。这时候可以使用该配置项配置 symbol 相对于原本居中的偏移，可以是绝对的像素值，也可以是相对的百分比。
+
+例如 `[0, '-50%']` 就是把自己向上移动了一半的位置，在 symbol 图形是气泡的时候可以让图形下端的箭头对准数据点。
+
+#### markPoint.data.itemStyle
+- **Type**: `Object`
+
+该标注的样式。
+
+##### markPoint.data.itemStyle.color
+- **Type**: `Color`
+- **Default**: `自适应`
+
+图形的颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+##### markPoint.data.itemStyle.borderColor
+- **Type**: `Color`
+- **Default**: `'#000'`
+
+图形的描边颜色。支持的颜色格式同 `color`，不支持回调函数。
+
+##### markPoint.data.itemStyle.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+描边线宽。为 0 时无描边。
+
+##### markPoint.data.itemStyle.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+##### markPoint.data.itemStyle.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### markPoint.data.itemStyle.borderCap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+##### markPoint.data.itemStyle.borderJoin
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `borderMiterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+##### markPoint.data.itemStyle.borderMiterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `borderJoin` 为 `miter` 时， `borderMiterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+##### markPoint.data.itemStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+##### markPoint.data.itemStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+##### markPoint.data.itemStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+##### markPoint.data.itemStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+##### markPoint.data.itemStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+##### markPoint.data.label.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+是否显示标签。
+
+##### markPoint.data.label.position
+- **Type**: `string|Array`
+- **Default**: `'inside'`
+
+标签的位置。
+
+*   可以通过内置的语义声明位置：
+    
+    示例：
+    
+    ```
+      position: 'top'
+    ```
+    
+    支持：`top` / `left` / `right` / `bottom` / `inside` / `insideLeft` / `insideRight` / `insideTop` / `insideBottom` / `insideTopLeft` / `insideBottomLeft` / `insideTopRight` / `insideBottomRight`
+    
+*   也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。
+    
+    示例：
+    
+    ```
+      // 绝对的像素值
+      position: [10, 10],
+      // 相对的百分比
+      position: ['50%', '50%']
+    ```
+    
+
+参见：[label position](https://echarts.apache.org/examples/zh/view.html?c=doc-example/label-position)。
+
+##### markPoint.data.label.distance
+- **Type**: `number`
+- **Default**: `5`
+
+距离图形元素的距离。
+
+当 position 为字符描述值（如 `'top'`、`'insideRight'`）时候有效。
+
+参见：[label position](https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position)。
+
+##### markPoint.data.label.rotate
+- **Type**: `number`
+
+标签旋转。从 -90 度到 90 度。正值是逆时针。
+
+参见：[label rotation](https://echarts.apache.org/examples/zh/editor.html?c=bar-label-rotation)。
+
+##### markPoint.data.label.offset
+- **Type**: `Array`
+
+是否对文字进行偏移。默认不偏移。例如：`[30, 40]` 表示文字在横向上偏移 `30`，纵向上偏移 `40`。
+
+##### markPoint.data.label.formatter
+- **Type**: `string|Function`
+
+标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 `\n` 换行。
+
+**字符串模板** 模板变量有：
+
+*   `{a}`：系列名。
+*   `{b}`：数据名。
+*   `{c}`：数据值。
+*   `{@xxx}`：数据中名为 `'xxx'` 的维度的值，如 `{@product}` 表示名为 `'product'` 的维度的值。
+*   `{@[n]}`：数据中维度 `n` 的值，如 `{@[3]}` 表示维度 3 的值，从 0 开始计数。
+
+**示例：**
+
+```
+formatter: '{b}: {@score}'
+```
+
+**回调函数**
+
+回调函数格式：
+
+```
+(params: Object|Array) => string
+```
+
+参数 `params` 是 formatter 需要的单个数据集。格式如下：
+
+```
+{
+    componentType: 'series',
+    // 系列类型
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index
+    seriesIndex: number,
+    // 系列名称
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // 传入的数据值。在多数系列下它和 data 相同。在一些系列下是 data 中的分量（如 map、radar 中）
+    value: number|Array|Object,
+    // 坐标轴 encode 映射信息，
+    // key 为坐标轴（如 'x' 'y' 'radius' 'angle' 等）
+    // value 必然为数组，不会为 null/undefined，表示 dimension index 。
+    // 其内容如：
+    // {
+    //     x: [2] // dimension index 为 2 的数据映射到 x 轴
+    //     y: [0] // dimension index 为 0 的数据映射到 y 轴
+    // }
+    encode: Object,
+    // 维度名列表
+    dimensionNames: Array<String>,
+    // 数据的维度 index，如 0 或 1 或 2 ...
+    // 仅在雷达图中使用。
+    dimensionIndex: number,
+    // 数据图形的颜色
+    color: string
+}
+```
+
+注：encode 和 dimensionNames 的使用方式，例如：
+
+如果数据为：
+
+```
+dataset: {
+    source: [
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.encode.y[0]]
+```
+
+如果数据为：
+
+```
+dataset: {
+    dimensions: ['product', '2015', '2016', '2017'],
+    source: [
+        {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+        {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+        {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+        {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.dimensionNames[params.encode.y[0]]]
+```
+
+##### markPoint.data.label.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### markPoint.data.label.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+##### markPoint.data.label.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+##### markPoint.data.label.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+##### markPoint.data.label.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+##### markPoint.data.label.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+##### markPoint.data.label.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+##### markPoint.data.label.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+##### markPoint.data.label.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### markPoint.data.label.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### markPoint.data.label.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+##### markPoint.data.label.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+##### markPoint.data.label.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### markPoint.data.label.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+##### markPoint.data.label.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+##### markPoint.data.label.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+##### markPoint.data.label.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+##### markPoint.data.label.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+##### markPoint.data.label.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+##### markPoint.data.label.width
+- **Type**: `number`
+
+文本显示宽度。
+
+##### markPoint.data.label.height
+- **Type**: `number`
+
+文本显示高度。
+
+##### markPoint.data.label.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### markPoint.data.label.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+##### markPoint.data.label.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+##### markPoint.data.label.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### markPoint.data.label.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+##### markPoint.data.label.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+##### markPoint.data.label.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+##### markPoint.data.label.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+##### markPoint.data.label.overflow
+- **Type**: `string`
+- **Default**: `'none'`
+
+文字超出宽度是否截断或者换行。配置`width`时有效
+
+*   `'truncate'` 截断，并在末尾显示`ellipsis`配置的文本，默认为`...`
+*   `'break'` 换行
+*   `'breakAll'` 换行，跟`'break'`不同的是，在英语等拉丁文中，`'breakAll'`还会强制单词内换行
+
+##### markPoint.data.label.ellipsis
+- **Type**: `string`
+- **Default**: `'...'`
+
+在`overflow`配置为`'truncate'`的时候，可以通过该属性配置末尾显示的文本。
+
+##### markPoint.data.label.rich
+- **Type**: `Object`
+
+在 `rich` 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。
+
+例如：
+
+```
+label: {
+    // 在文本中，可以对部分文本采用 rich 中定义样式。
+    // 这里需要在文本中使用标记符号：
+    // `{styleName|text content text content}` 标记样式名。
+    // 注意，换行仍是使用 '\n'。
+    formatter: [
+        '{a|这段文本采用样式a}',
+        '{b|这段文本采用样式b}这段用默认样式{x|这段用样式x}'
+    ].join('\n'),
+
+    rich: {
+        a: {
+            color: 'red',
+            lineHeight: 10
+        },
+        b: {
+            backgroundColor: {
+                image: 'xxx/xxx.jpg'
+            },
+            height: 40
+        },
+        x: {
+            fontSize: 18,
+            fontFamily: 'Microsoft YaHei',
+            borderColor: '#449933',
+            borderRadius: 4
+        },
+        ...
+    }
+}
+```
+
+详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+
+###### markPoint.data.label.rich.<style_name>.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markPoint.data.label.rich.<style_name>.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### markPoint.data.label.rich.<style_name>.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### markPoint.data.label.rich.<style_name>.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### markPoint.data.label.rich.<style_name>.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### markPoint.data.label.rich.<style_name>.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### markPoint.data.label.rich.<style_name>.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### markPoint.data.label.rich.<style_name>.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### markPoint.data.label.rich.<style_name>.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markPoint.data.label.rich.<style_name>.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markPoint.data.label.rich.<style_name>.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### markPoint.data.label.rich.<style_name>.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markPoint.data.label.rich.<style_name>.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markPoint.data.label.rich.<style_name>.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### markPoint.data.label.rich.<style_name>.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### markPoint.data.label.rich.<style_name>.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### markPoint.data.label.rich.<style_name>.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### markPoint.data.label.rich.<style_name>.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### markPoint.data.label.rich.<style_name>.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### markPoint.data.label.rich.<style_name>.width
+- **Type**: `number|string`
+
+文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+`width` 也可以是百分比字符串，如 `'100%'`。表示的是所在文本块的 `contentWidth`（即不包含文本块的 `padding`）的百分之多少。之所以以 `contentWidth` 做基数，因为每个文本片段只能基于 `content box` 布局。如果以 `outerWidth` 做基数，则百分比的计算在实用中不具有意义，可能会超出。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markPoint.data.label.rich.<style_name>.height
+- **Type**: `number|string`
+
+文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markPoint.data.label.rich.<style_name>.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markPoint.data.label.rich.<style_name>.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### markPoint.data.label.rich.<style_name>.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### markPoint.data.label.rich.<style_name>.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markPoint.data.label.rich.<style_name>.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### markPoint.data.label.rich.<style_name>.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### markPoint.data.label.rich.<style_name>.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### markPoint.data.label.rich.<style_name>.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+##### markPoint.data.label.richInheritPlainLabel
+- **Type**: `boolean`
+- **Default**: `true`
+
+从 `v6.0.0` 开始支持
+
+富文本样式是否继承普通文本样式。
+
+此配置项用于向历史兼容。
+
+> 从 v6 版本开始，[富文本标签 (label.rich / textStyle.rich)](option.series-scatter.md#label.rich) 部分样式（`fontStyle`, `fontWeight`, `fontSize`, `fontFamily`, `textShadowColor`, `textShadowBlur`, `textShadowOffsetX`, `textShadowOffsetY`）默认继承 [普通文本样式 (label / textStyle)](option.series-scatter.md#label)。你可以设置 `richInheritPlainLabel: false` （可在最外层配置项或与同级文本样式配置项）来禁用此行为。
+> 
+> ```
+> option = {
+>     richInheritPlainLabel: false, // In most cases, this is enough.
+>     xxx1: {
+>         // Can also set it here to only control this label.
+>         label: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     },
+>     xxx2: {
+>         textStyle: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     }
+> }
+> ```
+
+##### markPoint.data.emphasis.disabled
+- **Type**: `boolean`
+- **Default**: `false`
+
+从 `v5.3.0` 开始支持
+
+是否关闭高亮状态。
+
+关闭高亮状态可以在鼠标移到图形上，tooltip 触发，或者图例联动的时候不再触发高亮效果。在图形非常多的时候可以关闭以提升交互流畅性。
+
+###### markPoint.data.emphasis.label.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+是否显示标签。
+
+###### markPoint.data.emphasis.label.position
+- **Type**: `string|Array`
+- **Default**: `'inside'`
+
+标签的位置。
+
+*   可以通过内置的语义声明位置：
+    
+    示例：
+    
+    ```
+      position: 'top'
+    ```
+    
+    支持：`top` / `left` / `right` / `bottom` / `inside` / `insideLeft` / `insideRight` / `insideTop` / `insideBottom` / `insideTopLeft` / `insideBottomLeft` / `insideTopRight` / `insideBottomRight`
+    
+*   也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。
+    
+    示例：
+    
+    ```
+      // 绝对的像素值
+      position: [10, 10],
+      // 相对的百分比
+      position: ['50%', '50%']
+    ```
+    
+
+参见：[label position](https://echarts.apache.org/examples/zh/view.html?c=doc-example/label-position)。
+
+###### markPoint.data.emphasis.label.distance
+- **Type**: `number`
+- **Default**: `5`
+
+距离图形元素的距离。
+
+当 position 为字符描述值（如 `'top'`、`'insideRight'`）时候有效。
+
+参见：[label position](https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position)。
+
+###### markPoint.data.emphasis.label.rotate
+- **Type**: `number`
+
+标签旋转。从 -90 度到 90 度。正值是逆时针。
+
+参见：[label rotation](https://echarts.apache.org/examples/zh/editor.html?c=bar-label-rotation)。
+
+###### markPoint.data.emphasis.label.offset
+- **Type**: `Array`
+
+是否对文字进行偏移。默认不偏移。例如：`[30, 40]` 表示文字在横向上偏移 `30`，纵向上偏移 `40`。
+
+###### markPoint.data.emphasis.label.formatter
+- **Type**: `string|Function`
+
+标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 `\n` 换行。
+
+**字符串模板** 模板变量有：
+
+*   `{a}`：系列名。
+*   `{b}`：数据名。
+*   `{c}`：数据值。
+*   `{@xxx}`：数据中名为 `'xxx'` 的维度的值，如 `{@product}` 表示名为 `'product'` 的维度的值。
+*   `{@[n]}`：数据中维度 `n` 的值，如 `{@[3]}` 表示维度 3 的值，从 0 开始计数。
+
+**示例：**
+
+```
+formatter: '{b}: {@score}'
+```
+
+**回调函数**
+
+回调函数格式：
+
+```
+(params: Object|Array) => string
+```
+
+参数 `params` 是 formatter 需要的单个数据集。格式如下：
+
+```
+{
+    componentType: 'series',
+    // 系列类型
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index
+    seriesIndex: number,
+    // 系列名称
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // 传入的数据值。在多数系列下它和 data 相同。在一些系列下是 data 中的分量（如 map、radar 中）
+    value: number|Array|Object,
+    // 坐标轴 encode 映射信息，
+    // key 为坐标轴（如 'x' 'y' 'radius' 'angle' 等）
+    // value 必然为数组，不会为 null/undefined，表示 dimension index 。
+    // 其内容如：
+    // {
+    //     x: [2] // dimension index 为 2 的数据映射到 x 轴
+    //     y: [0] // dimension index 为 0 的数据映射到 y 轴
+    // }
+    encode: Object,
+    // 维度名列表
+    dimensionNames: Array<String>,
+    // 数据的维度 index，如 0 或 1 或 2 ...
+    // 仅在雷达图中使用。
+    dimensionIndex: number,
+    // 数据图形的颜色
+    color: string
+}
+```
+
+注：encode 和 dimensionNames 的使用方式，例如：
+
+如果数据为：
+
+```
+dataset: {
+    source: [
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.encode.y[0]]
+```
+
+如果数据为：
+
+```
+dataset: {
+    dimensions: ['product', '2015', '2016', '2017'],
+    source: [
+        {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+        {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+        {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+        {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.dimensionNames[params.encode.y[0]]]
+```
+
+###### markPoint.data.emphasis.label.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markPoint.data.emphasis.label.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### markPoint.data.emphasis.label.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### markPoint.data.emphasis.label.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### markPoint.data.emphasis.label.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### markPoint.data.emphasis.label.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### markPoint.data.emphasis.label.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### markPoint.data.emphasis.label.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### markPoint.data.emphasis.label.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markPoint.data.emphasis.label.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markPoint.data.emphasis.label.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### markPoint.data.emphasis.label.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markPoint.data.emphasis.label.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markPoint.data.emphasis.label.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### markPoint.data.emphasis.label.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### markPoint.data.emphasis.label.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### markPoint.data.emphasis.label.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### markPoint.data.emphasis.label.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### markPoint.data.emphasis.label.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### markPoint.data.emphasis.label.width
+- **Type**: `number`
+
+文本显示宽度。
+
+###### markPoint.data.emphasis.label.height
+- **Type**: `number`
+
+文本显示高度。
+
+###### markPoint.data.emphasis.label.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markPoint.data.emphasis.label.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### markPoint.data.emphasis.label.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### markPoint.data.emphasis.label.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markPoint.data.emphasis.label.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### markPoint.data.emphasis.label.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### markPoint.data.emphasis.label.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### markPoint.data.emphasis.label.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+###### markPoint.data.emphasis.label.overflow
+- **Type**: `string`
+- **Default**: `'none'`
+
+文字超出宽度是否截断或者换行。配置`width`时有效
+
+*   `'truncate'` 截断，并在末尾显示`ellipsis`配置的文本，默认为`...`
+*   `'break'` 换行
+*   `'breakAll'` 换行，跟`'break'`不同的是，在英语等拉丁文中，`'breakAll'`还会强制单词内换行
+
+###### markPoint.data.emphasis.label.ellipsis
+- **Type**: `string`
+- **Default**: `'...'`
+
+在`overflow`配置为`'truncate'`的时候，可以通过该属性配置末尾显示的文本。
+
+###### markPoint.data.emphasis.label.rich
+- **Type**: `Object`
+
+在 `rich` 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。
+
+例如：
+
+```
+label: {
+    // 在文本中，可以对部分文本采用 rich 中定义样式。
+    // 这里需要在文本中使用标记符号：
+    // `{styleName|text content text content}` 标记样式名。
+    // 注意，换行仍是使用 '\n'。
+    formatter: [
+        '{a|这段文本采用样式a}',
+        '{b|这段文本采用样式b}这段用默认样式{x|这段用样式x}'
+    ].join('\n'),
+
+    rich: {
+        a: {
+            color: 'red',
+            lineHeight: 10
+        },
+        b: {
+            backgroundColor: {
+                image: 'xxx/xxx.jpg'
+            },
+            height: 40
+        },
+        x: {
+            fontSize: 18,
+            fontFamily: 'Microsoft YaHei',
+            borderColor: '#449933',
+            borderRadius: 4
+        },
+        ...
+    }
+}
+```
+
+详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+
+###### markPoint.data.emphasis.label.rich.<style_name>.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markPoint.data.emphasis.label.rich.<style_name>.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### markPoint.data.emphasis.label.rich.<style_name>.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### markPoint.data.emphasis.label.rich.<style_name>.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### markPoint.data.emphasis.label.rich.<style_name>.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### markPoint.data.emphasis.label.rich.<style_name>.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### markPoint.data.emphasis.label.rich.<style_name>.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### markPoint.data.emphasis.label.rich.<style_name>.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### markPoint.data.emphasis.label.rich.<style_name>.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markPoint.data.emphasis.label.rich.<style_name>.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markPoint.data.emphasis.label.rich.<style_name>.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### markPoint.data.emphasis.label.rich.<style_name>.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markPoint.data.emphasis.label.rich.<style_name>.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markPoint.data.emphasis.label.rich.<style_name>.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### markPoint.data.emphasis.label.rich.<style_name>.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### markPoint.data.emphasis.label.rich.<style_name>.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### markPoint.data.emphasis.label.rich.<style_name>.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### markPoint.data.emphasis.label.rich.<style_name>.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### markPoint.data.emphasis.label.rich.<style_name>.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### markPoint.data.emphasis.label.rich.<style_name>.width
+- **Type**: `number|string`
+
+文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+`width` 也可以是百分比字符串，如 `'100%'`。表示的是所在文本块的 `contentWidth`（即不包含文本块的 `padding`）的百分之多少。之所以以 `contentWidth` 做基数，因为每个文本片段只能基于 `content box` 布局。如果以 `outerWidth` 做基数，则百分比的计算在实用中不具有意义，可能会超出。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markPoint.data.emphasis.label.rich.<style_name>.height
+- **Type**: `number|string`
+
+文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markPoint.data.emphasis.label.rich.<style_name>.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markPoint.data.emphasis.label.rich.<style_name>.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### markPoint.data.emphasis.label.rich.<style_name>.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### markPoint.data.emphasis.label.rich.<style_name>.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markPoint.data.emphasis.label.rich.<style_name>.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### markPoint.data.emphasis.label.rich.<style_name>.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### markPoint.data.emphasis.label.rich.<style_name>.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### markPoint.data.emphasis.label.rich.<style_name>.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+###### markPoint.data.emphasis.label.richInheritPlainLabel
+- **Type**: `boolean`
+- **Default**: `true`
+
+从 `v6.0.0` 开始支持
+
+富文本样式是否继承普通文本样式。
+
+此配置项用于向历史兼容。
+
+> 从 v6 版本开始，[富文本标签 (label.rich / textStyle.rich)](option.series-scatter.md#label.rich) 部分样式（`fontStyle`, `fontWeight`, `fontSize`, `fontFamily`, `textShadowColor`, `textShadowBlur`, `textShadowOffsetX`, `textShadowOffsetY`）默认继承 [普通文本样式 (label / textStyle)](option.series-scatter.md#label)。你可以设置 `richInheritPlainLabel: false` （可在最外层配置项或与同级文本样式配置项）来禁用此行为。
+> 
+> ```
+> option = {
+>     richInheritPlainLabel: false, // In most cases, this is enough.
+>     xxx1: {
+>         // Can also set it here to only control this label.
+>         label: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     },
+>     xxx2: {
+>         textStyle: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     }
+> }
+> ```
+
+###### markPoint.data.emphasis.itemStyle.color
+- **Type**: `Color`
+- **Default**: `自适应`
+
+图形的颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+###### markPoint.data.emphasis.itemStyle.borderColor
+- **Type**: `Color`
+- **Default**: `'#000'`
+
+图形的描边颜色。支持的颜色格式同 `color`，不支持回调函数。
+
+###### markPoint.data.emphasis.itemStyle.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+描边线宽。为 0 时无描边。
+
+###### markPoint.data.emphasis.itemStyle.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markPoint.data.emphasis.itemStyle.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markPoint.data.emphasis.itemStyle.borderCap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+###### markPoint.data.emphasis.itemStyle.borderJoin
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `borderMiterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+###### markPoint.data.emphasis.itemStyle.borderMiterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `borderJoin` 为 `miter` 时， `borderMiterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+###### markPoint.data.emphasis.itemStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+###### markPoint.data.emphasis.itemStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+###### markPoint.data.emphasis.itemStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+###### markPoint.data.emphasis.itemStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+###### markPoint.data.emphasis.itemStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+### markPoint.z
+- **Type**: `number`
+- **Default**: `5`
+
+从 `v6.0.0` 开始支持
+
+`z`值小的图形会被`z`值大的图形覆盖。
+
+`z`相比`zlevel`优先级更低，而且不会创建新的 Canvas。
+
+### markPoint.animation
+- **Type**: `boolean`
+- **Default**: `true`
+
+是否开启动画。
+
+### markPoint.animationThreshold
+- **Type**: `number`
+- **Default**: `2000`
+
+是否开启动画的阈值，当单个系列显示的图形数量大于这个阈值时会关闭动画。
+
+### markPoint.animationDuration
+- **Type**: `number|Function`
+- **Default**: `1000`
+
+初始动画的时长，支持回调函数，可以通过每个数据返回不同的时长实现更戏剧的初始动画效果：
+
+```
+animationDuration: function (idx) {
+    // 越往后的数据时长越大
+    return idx * 100;
+}
+```
+
+### markPoint.animationEasing
+- **Type**: `string`
+- **Default**: `'cubicOut'`
+
+初始动画的缓动效果。不同的缓动效果可以参考 [缓动示例](https://echarts.apache.org/examples/zh/editor.html?c=line-easing)。
+
+### markPoint.animationDelay
+- **Type**: `number|Function`
+- **Default**: `0`
+
+初始动画的延迟，支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的初始动画效果。
+
+如下示例：
+
+```
+animationDelay: function (idx) {
+    // 越往后的数据延迟越大
+    return idx * 100;
+}
+```
+
+也可以看[该示例](https://echarts.apache.org/examples/zh/editor.html?c=bar-animation-delay)
+
+### markPoint.animationDurationUpdate
+- **Type**: `number|Function`
+- **Default**: `300`
+
+数据更新动画的时长。
+
+支持回调函数，可以通过每个数据返回不同的时长实现更戏剧的更新动画效果：
+
+```
+animationDurationUpdate: function (idx) {
+    // 越往后的数据时长越大
+    return idx * 100;
+}
+```
+
+### markPoint.animationEasingUpdate
+- **Type**: `string`
+- **Default**: `'cubicInOut'`
+
+数据更新动画的缓动效果。
+
+### markPoint.animationDelayUpdate
+- **Type**: `number|Function`
+- **Default**: `0`
+
+数据更新动画的延迟，支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的更新动画效果。
+
+如下示例：
+
+```
+animationDelayUpdate: function (idx) {
+    // 越往后的数据延迟越大
+    return idx * 100;
+}
+```
+
+也可以看[该示例](https://echarts.apache.org/examples/zh/editor.html?c=bar-animation-delay)
+
+## markLine
+- **Type**: `Object`
+
+图表标线。
+
+### markLine.silent
+- **Type**: `boolean`
+- **Default**: `false`
+
+图形是否不响应和触发鼠标事件，默认为 false，即响应和触发鼠标事件。
+
+### markLine.symbol
+- **Type**: `string|Array`
+
+标线两端的标记类型，可以是一个数组分别指定两端，也可以是单个统一指定，具体格式见 [data.symbol](option.series-scatter.md#markLine.data.0.symbol)。
+
+### markLine.symbolSize
+- **Type**: `number|Array`
+
+标线两端的标记大小，可以是一个数组分别指定两端，也可以是单个统一指定。
+
+**注意：** 这里无法像一般的 `symbolSize` 那样通过数组分别指定高宽。
+
+### markLine.symbolOffset
+- **Type**: `number|string|Array`
+
+标线两端的标记相对于原本位置的偏移，可以是一个数组分别指定两端，也可以是单个统一指定。如果希望单独指定两端标记的水平/垂直偏移，也可以是一个二维数组，每个元素为单个标记的偏移量，例：
+
+```
+symbolOffset: [
+    [-10, 20],    // 起始标记偏移
+    ['50%', 100]  // 结束标记偏移
+]
+```
+
+从 `v5.1.0` 开始支持
+
+### markLine.precision
+- **Type**: `number`
+- **Default**: `2`
+
+标线数值的精度，在显示平均值线的时候有用。
+
+### markLine.label
+- **Type**: `Object`
+
+标线的文本。
+
+#### markLine.label.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+是否显示标签。
+
+#### markLine.label.position
+- **Type**: `string`
+- **Default**: `'end'`
+
+标签位置，可选：
+
+*   `'start'` 线的起始点。
+*   `'middle'` 线的中点。
+*   `'end'` 线的结束点。
+
+4.7.0 版本起，支持更多标签位置：`'start'`, `'middle'`, `'end'`, `'insideStartTop'`, `'insideStartBottom'`, `'insideMiddleTop'`, `'insideMiddleBottom'`, `'insideEndTop'`, `'insideEndBottom'`。
+
+其中，`'insideMiddleBottom'` 等同于 `'middle'`。具体位置参见下图。
+
+文字与线的间距可以通过 [label.distance](../option.md#series-.markLine.label.distance) 调整。
+
+#### markLine.label.distance
+- **Type**: `number|Array`
+
+标签与线之间的间距。如果是数组，第一项为横向间距，第二项为纵向间距。如果是数字，则表示横向纵向使用相同的间距。
+
+#### markLine.label.formatter
+- **Type**: `string|Function`
+
+标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 `\n` 换行。
+
+**字符串模板**
+
+**字符串模板** 模板变量有：
+
+*   `{a}`：系列名。
+*   `{b}`：数据名。
+*   `{c}`：数据值。
+*   `{d}`：百分比。
+*   `{@xxx}`：数据中名为 `'xxx'` 的维度的值，如 `{@product}` 表示名为 `'product'` 的维度的值。
+*   `{@[n]}`：数据中维度 `n` 的值，如 `{@[3]}` 表示维度 3 的值，从 0 开始计数。
+
+**示例：**
+
+```
+formatter: '{b}: {d}'
+```
+
+**回调函数**
+
+回调函数格式：
+
+```
+(params: Object|Array) => string
+```
+
+参数 `params` 是 formatter 需要的单个数据集。格式如下：
+
+```
+{
+    componentType: 'series',
+    // 系列类型
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index
+    seriesIndex: number,
+    // 系列名称
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // 传入的数据值。在多数系列下它和 data 相同。在一些系列下是 data 中的分量（如 map、radar 中）
+    value: number|Array|Object,
+    // 坐标轴 encode 映射信息，
+    // key 为坐标轴（如 'x' 'y' 'radius' 'angle' 等）
+    // value 必然为数组，不会为 null/undefined，表示 dimension index 。
+    // 其内容如：
+    // {
+    //     x: [2] // dimension index 为 2 的数据映射到 x 轴
+    //     y: [0] // dimension index 为 0 的数据映射到 y 轴
+    // }
+    encode: Object,
+    // 维度名列表
+    dimensionNames: Array<String>,
+    // 数据的维度 index，如 0 或 1 或 2 ...
+    // 仅在雷达图中使用。
+    dimensionIndex: number,
+    // 数据图形的颜色
+    color: string
+}
+```
+
+注：encode 和 dimensionNames 的使用方式，例如：
+
+如果数据为：
+
+```
+dataset: {
+    source: [
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.encode.y[0]]
+```
+
+如果数据为：
+
+```
+dataset: {
+    dimensions: ['product', '2015', '2016', '2017'],
+    source: [
+        {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+        {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+        {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+        {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.dimensionNames[params.encode.y[0]]]
+```
+
+#### markLine.label.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+#### markLine.label.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+#### markLine.label.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+#### markLine.label.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+#### markLine.label.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+#### markLine.label.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+#### markLine.label.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+#### markLine.label.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+#### markLine.label.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+#### markLine.label.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+#### markLine.label.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+#### markLine.label.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+#### markLine.label.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+#### markLine.label.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+#### markLine.label.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+#### markLine.label.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+#### markLine.label.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+#### markLine.label.width
+- **Type**: `number`
+
+文本显示宽度。
+
+#### markLine.label.height
+- **Type**: `number`
+
+文本显示高度。
+
+#### markLine.label.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+#### markLine.label.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+#### markLine.label.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+#### markLine.label.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+#### markLine.label.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+#### markLine.label.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+#### markLine.label.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+#### markLine.label.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+#### markLine.label.overflow
+- **Type**: `string`
+- **Default**: `'none'`
+
+文字超出宽度是否截断或者换行。配置`width`时有效
+
+*   `'truncate'` 截断，并在末尾显示`ellipsis`配置的文本，默认为`...`
+*   `'break'` 换行
+*   `'breakAll'` 换行，跟`'break'`不同的是，在英语等拉丁文中，`'breakAll'`还会强制单词内换行
+
+#### markLine.label.ellipsis
+- **Type**: `string`
+- **Default**: `'...'`
+
+在`overflow`配置为`'truncate'`的时候，可以通过该属性配置末尾显示的文本。
+
+#### markLine.label.rich
+- **Type**: `Object`
+
+在 `rich` 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。
+
+例如：
+
+```
+label: {
+    // 在文本中，可以对部分文本采用 rich 中定义样式。
+    // 这里需要在文本中使用标记符号：
+    // `{styleName|text content text content}` 标记样式名。
+    // 注意，换行仍是使用 '\n'。
+    formatter: [
+        '{a|这段文本采用样式a}',
+        '{b|这段文本采用样式b}这段用默认样式{x|这段用样式x}'
+    ].join('\n'),
+
+    rich: {
+        a: {
+            color: 'red',
+            lineHeight: 10
+        },
+        b: {
+            backgroundColor: {
+                image: 'xxx/xxx.jpg'
+            },
+            height: 40
+        },
+        x: {
+            fontSize: 18,
+            fontFamily: 'Microsoft YaHei',
+            borderColor: '#449933',
+            borderRadius: 4
+        },
+        ...
+    }
+}
+```
+
+详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+
+###### markLine.label.rich.<style_name>.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.label.rich.<style_name>.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### markLine.label.rich.<style_name>.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### markLine.label.rich.<style_name>.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### markLine.label.rich.<style_name>.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### markLine.label.rich.<style_name>.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### markLine.label.rich.<style_name>.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### markLine.label.rich.<style_name>.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### markLine.label.rich.<style_name>.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.label.rich.<style_name>.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.label.rich.<style_name>.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### markLine.label.rich.<style_name>.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markLine.label.rich.<style_name>.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markLine.label.rich.<style_name>.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### markLine.label.rich.<style_name>.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### markLine.label.rich.<style_name>.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### markLine.label.rich.<style_name>.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### markLine.label.rich.<style_name>.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### markLine.label.rich.<style_name>.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### markLine.label.rich.<style_name>.width
+- **Type**: `number|string`
+
+文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+`width` 也可以是百分比字符串，如 `'100%'`。表示的是所在文本块的 `contentWidth`（即不包含文本块的 `padding`）的百分之多少。之所以以 `contentWidth` 做基数，因为每个文本片段只能基于 `content box` 布局。如果以 `outerWidth` 做基数，则百分比的计算在实用中不具有意义，可能会超出。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markLine.label.rich.<style_name>.height
+- **Type**: `number|string`
+
+文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markLine.label.rich.<style_name>.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.label.rich.<style_name>.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### markLine.label.rich.<style_name>.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### markLine.label.rich.<style_name>.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markLine.label.rich.<style_name>.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### markLine.label.rich.<style_name>.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### markLine.label.rich.<style_name>.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### markLine.label.rich.<style_name>.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+#### markLine.label.richInheritPlainLabel
+- **Type**: `boolean`
+- **Default**: `true`
+
+从 `v6.0.0` 开始支持
+
+富文本样式是否继承普通文本样式。
+
+此配置项用于向历史兼容。
+
+> 从 v6 版本开始，[富文本标签 (label.rich / textStyle.rich)](option.series-scatter.md#label.rich) 部分样式（`fontStyle`, `fontWeight`, `fontSize`, `fontFamily`, `textShadowColor`, `textShadowBlur`, `textShadowOffsetX`, `textShadowOffsetY`）默认继承 [普通文本样式 (label / textStyle)](option.series-scatter.md#label)。你可以设置 `richInheritPlainLabel: false` （可在最外层配置项或与同级文本样式配置项）来禁用此行为。
+> 
+> ```
+> option = {
+>     richInheritPlainLabel: false, // In most cases, this is enough.
+>     xxx1: {
+>         // Can also set it here to only control this label.
+>         label: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     },
+>     xxx2: {
+>         textStyle: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     }
+> }
+> ```
+
+### markLine.lineStyle
+- **Type**: `Object`
+
+标线的样式
+
+#### markLine.lineStyle.color
+- **Type**: `Color`
+- **Default**: `自适应`
+
+线的颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+#### markLine.lineStyle.width
+- **Type**: `number`
+- **Default**: `1`
+
+线宽。
+
+#### markLine.lineStyle.type
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+线的类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `dashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+type: [5, 10],
+
+dashOffset: 5
+}
+```
+
+#### markLine.lineStyle.dashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `type` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+#### markLine.lineStyle.cap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+#### markLine.lineStyle.join
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `miterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+#### markLine.lineStyle.miterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `join` 为 `miter` 时， `miterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+#### markLine.lineStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+#### markLine.lineStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+#### markLine.lineStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+#### markLine.lineStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+#### markLine.lineStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+#### markLine.lineStyle.curveness
+- **Type**: `number`
+- **Default**: `0`
+
+边的曲度，支持从 0 到 1 的值，值越大曲度越大。
+
+### markLine.emphasis
+- **Type**: `Object`
+
+标线的高亮样式。
+
+#### markLine.emphasis.disabled
+- **Type**: `boolean`
+- **Default**: `false`
+
+从 `v5.3.0` 开始支持
+
+是否关闭高亮状态。
+
+关闭高亮状态可以在鼠标移到图形上，tooltip 触发，或者图例联动的时候不再触发高亮效果。在图形非常多的时候可以关闭以提升交互流畅性。
+
+##### markLine.emphasis.label.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+是否显示标签。
+
+##### markLine.emphasis.label.position
+- **Type**: `string`
+- **Default**: `'end'`
+
+标签位置，可选：
+
+*   `'start'` 线的起始点。
+*   `'middle'` 线的中点。
+*   `'end'` 线的结束点。
+
+4.7.0 版本起，支持更多标签位置：`'start'`, `'middle'`, `'end'`, `'insideStartTop'`, `'insideStartBottom'`, `'insideMiddleTop'`, `'insideMiddleBottom'`, `'insideEndTop'`, `'insideEndBottom'`。
+
+其中，`'insideMiddleBottom'` 等同于 `'middle'`。具体位置参见下图。
+
+文字与线的间距可以通过 [label.distance](../option.md#series-.markLine.label.distance) 调整。
+
+##### markLine.emphasis.label.distance
+- **Type**: `number|Array`
+
+标签与线之间的间距。如果是数组，第一项为横向间距，第二项为纵向间距。如果是数字，则表示横向纵向使用相同的间距。
+
+##### markLine.emphasis.label.formatter
+- **Type**: `string|Function`
+
+标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 `\n` 换行。
+
+**字符串模板**
+
+**字符串模板** 模板变量有：
+
+*   `{a}`：系列名。
+*   `{b}`：数据名。
+*   `{c}`：数据值。
+*   `{d}`：百分比。
+*   `{@xxx}`：数据中名为 `'xxx'` 的维度的值，如 `{@product}` 表示名为 `'product'` 的维度的值。
+*   `{@[n]}`：数据中维度 `n` 的值，如 `{@[3]}` 表示维度 3 的值，从 0 开始计数。
+
+**示例：**
+
+```
+formatter: '{b}: {d}'
+```
+
+**回调函数**
+
+回调函数格式：
+
+```
+(params: Object|Array) => string
+```
+
+参数 `params` 是 formatter 需要的单个数据集。格式如下：
+
+```
+{
+    componentType: 'series',
+    // 系列类型
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index
+    seriesIndex: number,
+    // 系列名称
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // 传入的数据值。在多数系列下它和 data 相同。在一些系列下是 data 中的分量（如 map、radar 中）
+    value: number|Array|Object,
+    // 坐标轴 encode 映射信息，
+    // key 为坐标轴（如 'x' 'y' 'radius' 'angle' 等）
+    // value 必然为数组，不会为 null/undefined，表示 dimension index 。
+    // 其内容如：
+    // {
+    //     x: [2] // dimension index 为 2 的数据映射到 x 轴
+    //     y: [0] // dimension index 为 0 的数据映射到 y 轴
+    // }
+    encode: Object,
+    // 维度名列表
+    dimensionNames: Array<String>,
+    // 数据的维度 index，如 0 或 1 或 2 ...
+    // 仅在雷达图中使用。
+    dimensionIndex: number,
+    // 数据图形的颜色
+    color: string
+}
+```
+
+注：encode 和 dimensionNames 的使用方式，例如：
+
+如果数据为：
+
+```
+dataset: {
+    source: [
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.encode.y[0]]
+```
+
+如果数据为：
+
+```
+dataset: {
+    dimensions: ['product', '2015', '2016', '2017'],
+    source: [
+        {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+        {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+        {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+        {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.dimensionNames[params.encode.y[0]]]
+```
+
+##### markLine.emphasis.label.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### markLine.emphasis.label.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+##### markLine.emphasis.label.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+##### markLine.emphasis.label.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+##### markLine.emphasis.label.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+##### markLine.emphasis.label.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+##### markLine.emphasis.label.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### markLine.emphasis.label.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### markLine.emphasis.label.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+##### markLine.emphasis.label.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+##### markLine.emphasis.label.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### markLine.emphasis.label.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+##### markLine.emphasis.label.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+##### markLine.emphasis.label.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+##### markLine.emphasis.label.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+##### markLine.emphasis.label.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+##### markLine.emphasis.label.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+##### markLine.emphasis.label.width
+- **Type**: `number`
+
+文本显示宽度。
+
+##### markLine.emphasis.label.height
+- **Type**: `number`
+
+文本显示高度。
+
+##### markLine.emphasis.label.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### markLine.emphasis.label.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+##### markLine.emphasis.label.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+##### markLine.emphasis.label.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### markLine.emphasis.label.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+##### markLine.emphasis.label.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+##### markLine.emphasis.label.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+##### markLine.emphasis.label.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+##### markLine.emphasis.label.overflow
+- **Type**: `string`
+- **Default**: `'none'`
+
+文字超出宽度是否截断或者换行。配置`width`时有效
+
+*   `'truncate'` 截断，并在末尾显示`ellipsis`配置的文本，默认为`...`
+*   `'break'` 换行
+*   `'breakAll'` 换行，跟`'break'`不同的是，在英语等拉丁文中，`'breakAll'`还会强制单词内换行
+
+##### markLine.emphasis.label.ellipsis
+- **Type**: `string`
+- **Default**: `'...'`
+
+在`overflow`配置为`'truncate'`的时候，可以通过该属性配置末尾显示的文本。
+
+##### markLine.emphasis.label.rich
+- **Type**: `Object`
+
+在 `rich` 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。
+
+例如：
+
+```
+label: {
+    // 在文本中，可以对部分文本采用 rich 中定义样式。
+    // 这里需要在文本中使用标记符号：
+    // `{styleName|text content text content}` 标记样式名。
+    // 注意，换行仍是使用 '\n'。
+    formatter: [
+        '{a|这段文本采用样式a}',
+        '{b|这段文本采用样式b}这段用默认样式{x|这段用样式x}'
+    ].join('\n'),
+
+    rich: {
+        a: {
+            color: 'red',
+            lineHeight: 10
+        },
+        b: {
+            backgroundColor: {
+                image: 'xxx/xxx.jpg'
+            },
+            height: 40
+        },
+        x: {
+            fontSize: 18,
+            fontFamily: 'Microsoft YaHei',
+            borderColor: '#449933',
+            borderRadius: 4
+        },
+        ...
+    }
+}
+```
+
+详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+
+###### markLine.emphasis.label.rich.<style_name>.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.emphasis.label.rich.<style_name>.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### markLine.emphasis.label.rich.<style_name>.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### markLine.emphasis.label.rich.<style_name>.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### markLine.emphasis.label.rich.<style_name>.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### markLine.emphasis.label.rich.<style_name>.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### markLine.emphasis.label.rich.<style_name>.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### markLine.emphasis.label.rich.<style_name>.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### markLine.emphasis.label.rich.<style_name>.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.emphasis.label.rich.<style_name>.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.emphasis.label.rich.<style_name>.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### markLine.emphasis.label.rich.<style_name>.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markLine.emphasis.label.rich.<style_name>.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markLine.emphasis.label.rich.<style_name>.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### markLine.emphasis.label.rich.<style_name>.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### markLine.emphasis.label.rich.<style_name>.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### markLine.emphasis.label.rich.<style_name>.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### markLine.emphasis.label.rich.<style_name>.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### markLine.emphasis.label.rich.<style_name>.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### markLine.emphasis.label.rich.<style_name>.width
+- **Type**: `number|string`
+
+文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+`width` 也可以是百分比字符串，如 `'100%'`。表示的是所在文本块的 `contentWidth`（即不包含文本块的 `padding`）的百分之多少。之所以以 `contentWidth` 做基数，因为每个文本片段只能基于 `content box` 布局。如果以 `outerWidth` 做基数，则百分比的计算在实用中不具有意义，可能会超出。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markLine.emphasis.label.rich.<style_name>.height
+- **Type**: `number|string`
+
+文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markLine.emphasis.label.rich.<style_name>.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.emphasis.label.rich.<style_name>.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### markLine.emphasis.label.rich.<style_name>.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### markLine.emphasis.label.rich.<style_name>.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markLine.emphasis.label.rich.<style_name>.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### markLine.emphasis.label.rich.<style_name>.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### markLine.emphasis.label.rich.<style_name>.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### markLine.emphasis.label.rich.<style_name>.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+##### markLine.emphasis.label.richInheritPlainLabel
+- **Type**: `boolean`
+- **Default**: `true`
+
+从 `v6.0.0` 开始支持
+
+富文本样式是否继承普通文本样式。
+
+此配置项用于向历史兼容。
+
+> 从 v6 版本开始，[富文本标签 (label.rich / textStyle.rich)](option.series-scatter.md#label.rich) 部分样式（`fontStyle`, `fontWeight`, `fontSize`, `fontFamily`, `textShadowColor`, `textShadowBlur`, `textShadowOffsetX`, `textShadowOffsetY`）默认继承 [普通文本样式 (label / textStyle)](option.series-scatter.md#label)。你可以设置 `richInheritPlainLabel: false` （可在最外层配置项或与同级文本样式配置项）来禁用此行为。
+> 
+> ```
+> option = {
+>     richInheritPlainLabel: false, // In most cases, this is enough.
+>     xxx1: {
+>         // Can also set it here to only control this label.
+>         label: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     },
+>     xxx2: {
+>         textStyle: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     }
+> }
+> ```
+
+##### markLine.emphasis.lineStyle.color
+- **Type**: `Color`
+- **Default**: `"#000"`
+
+线的颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+##### markLine.emphasis.lineStyle.width
+- **Type**: `number`
+- **Default**: `1`
+
+线宽。
+
+##### markLine.emphasis.lineStyle.type
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+线的类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `dashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+type: [5, 10],
+
+dashOffset: 5
+}
+```
+
+##### markLine.emphasis.lineStyle.dashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `type` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### markLine.emphasis.lineStyle.cap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+##### markLine.emphasis.lineStyle.join
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `miterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+##### markLine.emphasis.lineStyle.miterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `join` 为 `miter` 时， `miterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+##### markLine.emphasis.lineStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+##### markLine.emphasis.lineStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+##### markLine.emphasis.lineStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+##### markLine.emphasis.lineStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+##### markLine.emphasis.lineStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+### markLine.blur
+- **Type**: `Object`
+
+从 `v5.0.0` 开始支持
+
+标线的淡出样式。淡出的规则跟随所在系列。
+
+##### markLine.blur.label.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+是否显示标签。
+
+##### markLine.blur.label.position
+- **Type**: `string`
+- **Default**: `'end'`
+
+标签位置，可选：
+
+*   `'start'` 线的起始点。
+*   `'middle'` 线的中点。
+*   `'end'` 线的结束点。
+
+4.7.0 版本起，支持更多标签位置：`'start'`, `'middle'`, `'end'`, `'insideStartTop'`, `'insideStartBottom'`, `'insideMiddleTop'`, `'insideMiddleBottom'`, `'insideEndTop'`, `'insideEndBottom'`。
+
+其中，`'insideMiddleBottom'` 等同于 `'middle'`。具体位置参见下图。
+
+文字与线的间距可以通过 [label.distance](../option.md#series-.markLine.label.distance) 调整。
+
+##### markLine.blur.label.distance
+- **Type**: `number|Array`
+
+标签与线之间的间距。如果是数组，第一项为横向间距，第二项为纵向间距。如果是数字，则表示横向纵向使用相同的间距。
+
+##### markLine.blur.label.formatter
+- **Type**: `string|Function`
+
+标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 `\n` 换行。
+
+**字符串模板**
+
+**字符串模板** 模板变量有：
+
+*   `{a}`：系列名。
+*   `{b}`：数据名。
+*   `{c}`：数据值。
+*   `{d}`：百分比。
+*   `{@xxx}`：数据中名为 `'xxx'` 的维度的值，如 `{@product}` 表示名为 `'product'` 的维度的值。
+*   `{@[n]}`：数据中维度 `n` 的值，如 `{@[3]}` 表示维度 3 的值，从 0 开始计数。
+
+**示例：**
+
+```
+formatter: '{b}: {d}'
+```
+
+**回调函数**
+
+回调函数格式：
+
+```
+(params: Object|Array) => string
+```
+
+参数 `params` 是 formatter 需要的单个数据集。格式如下：
+
+```
+{
+    componentType: 'series',
+    // 系列类型
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index
+    seriesIndex: number,
+    // 系列名称
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // 传入的数据值。在多数系列下它和 data 相同。在一些系列下是 data 中的分量（如 map、radar 中）
+    value: number|Array|Object,
+    // 坐标轴 encode 映射信息，
+    // key 为坐标轴（如 'x' 'y' 'radius' 'angle' 等）
+    // value 必然为数组，不会为 null/undefined，表示 dimension index 。
+    // 其内容如：
+    // {
+    //     x: [2] // dimension index 为 2 的数据映射到 x 轴
+    //     y: [0] // dimension index 为 0 的数据映射到 y 轴
+    // }
+    encode: Object,
+    // 维度名列表
+    dimensionNames: Array<String>,
+    // 数据的维度 index，如 0 或 1 或 2 ...
+    // 仅在雷达图中使用。
+    dimensionIndex: number,
+    // 数据图形的颜色
+    color: string
+}
+```
+
+注：encode 和 dimensionNames 的使用方式，例如：
+
+如果数据为：
+
+```
+dataset: {
+    source: [
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.encode.y[0]]
+```
+
+如果数据为：
+
+```
+dataset: {
+    dimensions: ['product', '2015', '2016', '2017'],
+    source: [
+        {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+        {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+        {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+        {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.dimensionNames[params.encode.y[0]]]
+```
+
+##### markLine.blur.label.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### markLine.blur.label.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+##### markLine.blur.label.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+##### markLine.blur.label.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+##### markLine.blur.label.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+##### markLine.blur.label.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+##### markLine.blur.label.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### markLine.blur.label.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### markLine.blur.label.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+##### markLine.blur.label.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+##### markLine.blur.label.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### markLine.blur.label.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+##### markLine.blur.label.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+##### markLine.blur.label.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+##### markLine.blur.label.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+##### markLine.blur.label.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+##### markLine.blur.label.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+##### markLine.blur.label.width
+- **Type**: `number`
+
+文本显示宽度。
+
+##### markLine.blur.label.height
+- **Type**: `number`
+
+文本显示高度。
+
+##### markLine.blur.label.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### markLine.blur.label.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+##### markLine.blur.label.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+##### markLine.blur.label.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### markLine.blur.label.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+##### markLine.blur.label.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+##### markLine.blur.label.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+##### markLine.blur.label.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+##### markLine.blur.label.overflow
+- **Type**: `string`
+- **Default**: `'none'`
+
+文字超出宽度是否截断或者换行。配置`width`时有效
+
+*   `'truncate'` 截断，并在末尾显示`ellipsis`配置的文本，默认为`...`
+*   `'break'` 换行
+*   `'breakAll'` 换行，跟`'break'`不同的是，在英语等拉丁文中，`'breakAll'`还会强制单词内换行
+
+##### markLine.blur.label.ellipsis
+- **Type**: `string`
+- **Default**: `'...'`
+
+在`overflow`配置为`'truncate'`的时候，可以通过该属性配置末尾显示的文本。
+
+##### markLine.blur.label.rich
+- **Type**: `Object`
+
+在 `rich` 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。
+
+例如：
+
+```
+label: {
+    // 在文本中，可以对部分文本采用 rich 中定义样式。
+    // 这里需要在文本中使用标记符号：
+    // `{styleName|text content text content}` 标记样式名。
+    // 注意，换行仍是使用 '\n'。
+    formatter: [
+        '{a|这段文本采用样式a}',
+        '{b|这段文本采用样式b}这段用默认样式{x|这段用样式x}'
+    ].join('\n'),
+
+    rich: {
+        a: {
+            color: 'red',
+            lineHeight: 10
+        },
+        b: {
+            backgroundColor: {
+                image: 'xxx/xxx.jpg'
+            },
+            height: 40
+        },
+        x: {
+            fontSize: 18,
+            fontFamily: 'Microsoft YaHei',
+            borderColor: '#449933',
+            borderRadius: 4
+        },
+        ...
+    }
+}
+```
+
+详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+
+###### markLine.blur.label.rich.<style_name>.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.blur.label.rich.<style_name>.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### markLine.blur.label.rich.<style_name>.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### markLine.blur.label.rich.<style_name>.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### markLine.blur.label.rich.<style_name>.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### markLine.blur.label.rich.<style_name>.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### markLine.blur.label.rich.<style_name>.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### markLine.blur.label.rich.<style_name>.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### markLine.blur.label.rich.<style_name>.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.blur.label.rich.<style_name>.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.blur.label.rich.<style_name>.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### markLine.blur.label.rich.<style_name>.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markLine.blur.label.rich.<style_name>.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markLine.blur.label.rich.<style_name>.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### markLine.blur.label.rich.<style_name>.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### markLine.blur.label.rich.<style_name>.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### markLine.blur.label.rich.<style_name>.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### markLine.blur.label.rich.<style_name>.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### markLine.blur.label.rich.<style_name>.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### markLine.blur.label.rich.<style_name>.width
+- **Type**: `number|string`
+
+文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+`width` 也可以是百分比字符串，如 `'100%'`。表示的是所在文本块的 `contentWidth`（即不包含文本块的 `padding`）的百分之多少。之所以以 `contentWidth` 做基数，因为每个文本片段只能基于 `content box` 布局。如果以 `outerWidth` 做基数，则百分比的计算在实用中不具有意义，可能会超出。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markLine.blur.label.rich.<style_name>.height
+- **Type**: `number|string`
+
+文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markLine.blur.label.rich.<style_name>.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.blur.label.rich.<style_name>.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### markLine.blur.label.rich.<style_name>.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### markLine.blur.label.rich.<style_name>.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markLine.blur.label.rich.<style_name>.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### markLine.blur.label.rich.<style_name>.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### markLine.blur.label.rich.<style_name>.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### markLine.blur.label.rich.<style_name>.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+##### markLine.blur.label.richInheritPlainLabel
+- **Type**: `boolean`
+- **Default**: `true`
+
+从 `v6.0.0` 开始支持
+
+富文本样式是否继承普通文本样式。
+
+此配置项用于向历史兼容。
+
+> 从 v6 版本开始，[富文本标签 (label.rich / textStyle.rich)](option.series-scatter.md#label.rich) 部分样式（`fontStyle`, `fontWeight`, `fontSize`, `fontFamily`, `textShadowColor`, `textShadowBlur`, `textShadowOffsetX`, `textShadowOffsetY`）默认继承 [普通文本样式 (label / textStyle)](option.series-scatter.md#label)。你可以设置 `richInheritPlainLabel: false` （可在最外层配置项或与同级文本样式配置项）来禁用此行为。
+> 
+> ```
+> option = {
+>     richInheritPlainLabel: false, // In most cases, this is enough.
+>     xxx1: {
+>         // Can also set it here to only control this label.
+>         label: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     },
+>     xxx2: {
+>         textStyle: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     }
+> }
+> ```
+
+##### markLine.blur.lineStyle.color
+- **Type**: `Color`
+- **Default**: `"#000"`
+
+线的颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+##### markLine.blur.lineStyle.width
+- **Type**: `number`
+- **Default**: `1`
+
+线宽。
+
+##### markLine.blur.lineStyle.type
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+线的类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `dashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+type: [5, 10],
+
+dashOffset: 5
+}
+```
+
+##### markLine.blur.lineStyle.dashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `type` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### markLine.blur.lineStyle.cap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+##### markLine.blur.lineStyle.join
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `miterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+##### markLine.blur.lineStyle.miterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `join` 为 `miter` 时， `miterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+##### markLine.blur.lineStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+##### markLine.blur.lineStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+##### markLine.blur.lineStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+##### markLine.blur.lineStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+##### markLine.blur.lineStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+### markLine.data
+- **Type**: `*`
+
+标线的数据数组。每个数组项可以是一个两个值的数组，分别表示线的起点和终点，每一项是一个对象，有下面几种方式指定起点或终点的位置。
+
+1.  通过 [x](option.series-scatter.md#markLine.data.0.x), [y](option.series-scatter.md#markLine.data.0.y) 属性指定相对容器的屏幕坐标，单位像素，支持百分比。
+
+2.  用 [coord](option.series-scatter.md#markLine.data.0.coord) 属性指定数据在相应坐标系上的坐标位置，单个维度支持设置 `'min'`, `'max'`, `'average'`。
+    
+3.  直接用 [type](option.series-scatter.md#markLine.data.0.type) 属性标注系列中的最大值，最小值。这时候可以使用 [valueIndex](option.series-scatter.md#markLine.data.0.valueIndex) 或者 [valueDim](option.series-scatter.md#markLine.data.0.valueDim) 指定是在哪个维度上的最大值、最小值、平均值。
+    
+4.  如果是笛卡尔坐标系的话，也可以通过只指定 `xAxis` 或者 `yAxis` 来实现 X 轴或者 Y 轴为某值的标线，见示例 [scatter-weight](https://echarts.apache.org/examples/zh/editor.html?c=scatter-weight)
+    
+
+当多个属性同时存在时，优先级按上述的顺序。
+
+也可以是直接通过 `type` 设置该标线的类型，是最大值的线还是平均线。同样的，这时候可以通过使用 `valueIndex` 指定维度。
+
+```
+data: [
+
+{
+        name: '平均线',
+        // 支持 'average', 'min', 'max'
+        type: 'average'
+    },
+    {
+        name: 'Y 轴值为 100 的水平线',
+        yAxis: 100
+    },
+    [
+        {
+            // 起点和终点的项会共用一个 name
+            name: '最小值到最大值',
+            type: 'min'
+        },
+        {
+            type: 'max'
+        }
+    ],
+[
+        {
+            name: '两个坐标之间的标线',
+            coord: [10, 20]
+        },
+        {
+            coord: [20, 30]
+        }
+    ], [{
+        // 固定起点的 x 像素位置，用于模拟一条指向最大值的水平线
+        yAxis: 'max',
+        x: '90%'
+    }, {
+        type: 'max'
+    }],
+[
+        {
+            name: '两个屏幕坐标之间的标线',
+            x: 100,
+            y: 100
+        },
+        {
+            x: 500,
+            y: 200
+        }
+    ]
+]
+```
+
+#### markLine.data.0
+- **Type**: `Object`
+
+起点的数据。
+
+##### markLine.data.0.type
+- **Type**: `string`
+
+特殊的标注类型，用于标注最大值最小值等。
+
+**可选:**
+
+*   `'min'` 最小值。
+*   `'max'` 最大值。
+*   `'average'` 平均值。
+*   `'median'` 中位数。
+
+##### markLine.data.0.valueIndex
+- **Type**: `number`
+
+在使用 [type](option.series-scatter.md#markLine.data.type) 时有效，用于指定在哪个维度上指定最大值最小值，可以是 `0`（xAxis, radiusAxis），`1`（yAxis, angleAxis），默认使用第一个数值轴所在的维度。
+
+##### markLine.data.0.valueDim
+- **Type**: `string`
+
+在使用 [type](option.series-scatter.md#markLine.data.type) 时有效，用于指定在哪个维度上指定最大值最小值。这可以是维度的直接名称，例如折线图时可以是`x`、`angle`等、candlestick 图时可以是`open`、`close`等维度名称。
+
+##### markLine.data.0.coord
+- **Type**: `Array`
+
+起点或终点的坐标。坐标格式视系列的坐标系而定，可以是[直角坐标系](option.grid.md)上的 `x`, `y`，也可以是[极坐标系](option.polar.md)上的 `radius`, `angle`。
+
+**注：**对于 [axis.type](../option.md#xAixs.type) 为 `'category'` 类型的轴
+
+*   如果 coord 值为 `number`，则表示 [axis.data](option.xAxis.md#data) 的 index。
+*   如果 coord 值为 `string`，则表示 [axis.data](option.xAxis.md#data) 中具体的值。注意使用这种方式时，xAxis.data 不能写成 \[number, number, ...\]，而只能写成 \[string, string, ...\]，否则不能被 markPoint / markLine 用『具体值』索引到。
+
+例如：
+
+```
+{
+    xAxis: {
+        type: 'category',
+        data: ['5', '6', '9', '13', '19', '33']
+        // 注意这里不建议写成 [5, 6, 9, 13, 19, 33]，否则不能被 markPoint / markLine 用『具体值』索引到。
+    },
+    series: {
+        type: 'line',
+        data: [11, 22, 33, 44, 55, 66],
+        markPoint: { // markLine 也是同理
+            data: [{
+                coord: [5, 33.4], // 其中 5 表示 xAxis.data[5]，即 '33' 这个元素。
+                // coord: ['5', 33.4] // 其中 '5' 表示 xAxis.data中的 '5' 这个元素。
+                                      // 注意，使用这种方式时，xAxis.data 不能写成 [number, number, ...]
+                                      // 而只能写成 [string, string, ...]
+            }]
+        }
+    }
+}
+```
+
+##### markLine.data.0.name
+- **Type**: `string`
+- **Default**: `''`
+
+标注名称。定义后可在 [label formatter](option.series-scatter.md#markLine.data.label.formatter) 中作为**数据名** `{b}` 模板变量使用。
+
+##### markLine.data.0.x
+- **Type**: `number`
+
+相对容器的屏幕 x 坐标，单位像素。
+
+##### markLine.data.0.y
+- **Type**: `number`
+
+相对容器的屏幕 y 坐标，单位像素。
+
+##### markLine.data.0.z2
+- **Type**: `number`
+
+从 `v6.0.0` 开始支持
+
+指定图形元素间的覆盖关系。数值越大，越在层叠的上方。
+
+##### markLine.data.0.xAxis
+- **Type**: `number|string`
+
+x 值为给定值的标记线，仅对数据值是一项的设置有效。例如：
+
+```
+data: [{
+    name: 'X 轴值为 100 的竖直线',
+    xAxis: 100
+}]
+```
+
+或对于 `'time'` 类型的 xAxis，可以设置为：
+
+```
+{
+    name: 'X 轴值为 "2020-01-01" 的竖直线',
+    xAxis: '2020-01-01'
+}]
+```
+
+##### markLine.data.0.yAxis
+- **Type**: `number|string`
+
+Y 值为给定值的标记线，仅对数据值是一项的设置有效。例如：
+
+```
+data: [{
+    name: 'Y 轴值为 100 的水平线',
+    yAxis: 100
+}]
+```
+
+或对于 `'time'` 类型的 yAxis，可以设置为：
+
+```
+{
+    name: 'Y 轴值为 "2020-01-01" 的水平线',
+    yAxis: '2020-01-01'
+}]
+```
+
+##### markLine.data.0.value
+- **Type**: `number`
+
+标注值，可以不设。
+
+##### markLine.data.0.symbol
+- **Type**: `string`
+
+起点标记的图形。
+
+ECharts 提供的标记类型包括
+
+`'circle'`, `'rect'`, `'roundRect'`, `'triangle'`, `'diamond'`, `'pin'`, `'arrow'`, `'none'`
+
+可以通过 `'image://url'` 设置为图片，其中 URL 为图片的链接，或者 `dataURI`。
+
+URL 为图片链接例如：
+
+```
+'image://http://example.website/a/b.png'
+```
+
+URL 为 `dataURI` 例如：
+
+```
+'image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7'
+```
+
+可以通过 `'path://'` 将图标设置为任意的矢量路径。这种方式相比于使用图片的方式，不用担心因为缩放而产生锯齿或模糊，而且可以设置为任意颜色。路径图形会自适应调整为合适的大小。路径的格式参见 [SVG PathData](http://www.w3.org/TR/SVG/paths.html#PathData)。可以从 Adobe Illustrator 等工具编辑导出。
+
+例如：
+
+```
+'path://M30.9,53.2C16.8,53.2,5.3,41.7,5.3,27.6S16.8,2,30.9,2C45,2,56.4,13.5,56.4,27.6S45,53.2,30.9,53.2z M30.9,3.5C17.6,3.5,6.8,14.4,6.8,27.6c0,13.3,10.8,24.1,24.101,24.1C44.2,51.7,55,40.9,55,27.6C54.9,14.4,44.1,3.5,30.9,3.5z M36.9,35.8c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H36c0.5,0,0.9,0.4,0.9,1V35.8z M27.8,35.8 c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H27c0.5,0,0.9,0.4,0.9,1L27.8,35.8L27.8,35.8z'
+```
+
+##### markLine.data.0.symbolSize
+- **Type**: `number|Array`
+
+起点标记的大小，可以设置成诸如 `10` 这样单一的数字，也可以用数组分开表示宽和高，例如 `[20, 10]` 表示标记宽为`20`，高为`10`。
+
+##### markLine.data.0.symbolRotate
+- **Type**: `number`
+
+起点标记的旋转角度（而非弧度）。正值表示逆时针旋转。注意在 `markLine` 中当 `symbol` 为 `'arrow'` 时会忽略 `symbolRotate` 强制设置为切线的角度。
+
+##### markLine.data.0.symbolKeepAspect
+- **Type**: `boolean`
+- **Default**: `false`
+
+如果 `symbol` 是 `path://` 的形式，是否在缩放时保持该图形的长宽比。
+
+##### markLine.data.0.symbolOffset
+- **Type**: `Array`
+- **Default**: `[0, 0]`
+
+起点标记相对于原本位置的偏移。默认情况下，标记会居中置放在数据对应的位置，但是如果 symbol 是自定义的矢量路径或者图片，就有可能不希望 symbol 居中。这时候可以使用该配置项配置 symbol 相对于原本居中的偏移，可以是绝对的像素值，也可以是相对的百分比。
+
+例如 `[0, '-50%']` 就是把自己向上移动了一半的位置，在 symbol 图形是气泡的时候可以让图形下端的箭头对准数据点。
+
+##### markLine.data.0.lineStyle
+- **Type**: `Object`
+
+该数据项线的样式，起点和终点项的 `lineStyle`会合并到一起。
+
+###### markLine.data.0.lineStyle.color
+- **Type**: `Color`
+- **Default**: `"#000"`
+
+线的颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+###### markLine.data.0.lineStyle.width
+- **Type**: `number`
+- **Default**: `1`
+
+线宽。
+
+###### markLine.data.0.lineStyle.type
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+线的类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `dashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+type: [5, 10],
+
+dashOffset: 5
+}
+```
+
+###### markLine.data.0.lineStyle.dashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `type` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markLine.data.0.lineStyle.cap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+###### markLine.data.0.lineStyle.join
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `miterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+###### markLine.data.0.lineStyle.miterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `join` 为 `miter` 时， `miterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+###### markLine.data.0.lineStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+###### markLine.data.0.lineStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+###### markLine.data.0.lineStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+###### markLine.data.0.lineStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+###### markLine.data.0.lineStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+###### markLine.data.0.lineStyle.curveness
+- **Type**: `number`
+- **Default**: `0`
+
+边的曲度，支持从 0 到 1 的值，值越大曲度越大。
+
+##### markLine.data.0.label
+- **Type**: `Object`
+
+该数据项标签的样式，起点和终点项的 `label`会合并到一起。
+
+###### markLine.data.0.label.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+是否显示标签。
+
+###### markLine.data.0.label.position
+- **Type**: `string`
+- **Default**: `'end'`
+
+标签位置，可选：
+
+*   `'start'` 线的起始点。
+*   `'middle'` 线的中点。
+*   `'end'` 线的结束点。
+
+4.7.0 版本起，支持更多标签位置：`'start'`, `'middle'`, `'end'`, `'insideStartTop'`, `'insideStartBottom'`, `'insideMiddleTop'`, `'insideMiddleBottom'`, `'insideEndTop'`, `'insideEndBottom'`。
+
+其中，`'insideMiddleBottom'` 等同于 `'middle'`。具体位置参见下图。
+
+文字与线的间距可以通过 [label.distance](../option.md#series-.markLine.label.distance) 调整。
+
+###### markLine.data.0.label.distance
+- **Type**: `number|Array`
+
+标签与线之间的间距。如果是数组，第一项为横向间距，第二项为纵向间距。如果是数字，则表示横向纵向使用相同的间距。
+
+###### markLine.data.0.label.formatter
+- **Type**: `string|Function`
+
+标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 `\n` 换行。
+
+**字符串模板**
+
+**字符串模板** 模板变量有：
+
+*   `{a}`：系列名。
+*   `{b}`：数据名。
+*   `{c}`：数据值。
+*   `{d}`：百分比。
+*   `{@xxx}`：数据中名为 `'xxx'` 的维度的值，如 `{@product}` 表示名为 `'product'` 的维度的值。
+*   `{@[n]}`：数据中维度 `n` 的值，如 `{@[3]}` 表示维度 3 的值，从 0 开始计数。
+
+**示例：**
+
+```
+formatter: '{b}: {d}'
+```
+
+**回调函数**
+
+回调函数格式：
+
+```
+(params: Object|Array) => string
+```
+
+参数 `params` 是 formatter 需要的单个数据集。格式如下：
+
+```
+{
+    componentType: 'series',
+    // 系列类型
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index
+    seriesIndex: number,
+    // 系列名称
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // 传入的数据值。在多数系列下它和 data 相同。在一些系列下是 data 中的分量（如 map、radar 中）
+    value: number|Array|Object,
+    // 坐标轴 encode 映射信息，
+    // key 为坐标轴（如 'x' 'y' 'radius' 'angle' 等）
+    // value 必然为数组，不会为 null/undefined，表示 dimension index 。
+    // 其内容如：
+    // {
+    //     x: [2] // dimension index 为 2 的数据映射到 x 轴
+    //     y: [0] // dimension index 为 0 的数据映射到 y 轴
+    // }
+    encode: Object,
+    // 维度名列表
+    dimensionNames: Array<String>,
+    // 数据的维度 index，如 0 或 1 或 2 ...
+    // 仅在雷达图中使用。
+    dimensionIndex: number,
+    // 数据图形的颜色
+    color: string
+}
+```
+
+注：encode 和 dimensionNames 的使用方式，例如：
+
+如果数据为：
+
+```
+dataset: {
+    source: [
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.encode.y[0]]
+```
+
+如果数据为：
+
+```
+dataset: {
+    dimensions: ['product', '2015', '2016', '2017'],
+    source: [
+        {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+        {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+        {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+        {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.dimensionNames[params.encode.y[0]]]
+```
+
+###### markLine.data.0.label.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.0.label.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### markLine.data.0.label.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### markLine.data.0.label.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### markLine.data.0.label.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### markLine.data.0.label.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### markLine.data.0.label.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.0.label.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.0.label.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### markLine.data.0.label.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markLine.data.0.label.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markLine.data.0.label.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### markLine.data.0.label.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### markLine.data.0.label.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### markLine.data.0.label.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### markLine.data.0.label.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### markLine.data.0.label.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### markLine.data.0.label.width
+- **Type**: `number`
+
+文本显示宽度。
+
+###### markLine.data.0.label.height
+- **Type**: `number`
+
+文本显示高度。
+
+###### markLine.data.0.label.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.0.label.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### markLine.data.0.label.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### markLine.data.0.label.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markLine.data.0.label.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### markLine.data.0.label.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### markLine.data.0.label.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### markLine.data.0.label.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+###### markLine.data.0.label.overflow
+- **Type**: `string`
+- **Default**: `'none'`
+
+文字超出宽度是否截断或者换行。配置`width`时有效
+
+*   `'truncate'` 截断，并在末尾显示`ellipsis`配置的文本，默认为`...`
+*   `'break'` 换行
+*   `'breakAll'` 换行，跟`'break'`不同的是，在英语等拉丁文中，`'breakAll'`还会强制单词内换行
+
+###### markLine.data.0.label.ellipsis
+- **Type**: `string`
+- **Default**: `'...'`
+
+在`overflow`配置为`'truncate'`的时候，可以通过该属性配置末尾显示的文本。
+
+###### markLine.data.0.label.rich
+- **Type**: `Object`
+
+在 `rich` 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。
+
+例如：
+
+```
+label: {
+    // 在文本中，可以对部分文本采用 rich 中定义样式。
+    // 这里需要在文本中使用标记符号：
+    // `{styleName|text content text content}` 标记样式名。
+    // 注意，换行仍是使用 '\n'。
+    formatter: [
+        '{a|这段文本采用样式a}',
+        '{b|这段文本采用样式b}这段用默认样式{x|这段用样式x}'
+    ].join('\n'),
+
+    rich: {
+        a: {
+            color: 'red',
+            lineHeight: 10
+        },
+        b: {
+            backgroundColor: {
+                image: 'xxx/xxx.jpg'
+            },
+            height: 40
+        },
+        x: {
+            fontSize: 18,
+            fontFamily: 'Microsoft YaHei',
+            borderColor: '#449933',
+            borderRadius: 4
+        },
+        ...
+    }
+}
+```
+
+详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+
+###### markLine.data.0.label.rich.<style_name>.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.0.label.rich.<style_name>.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### markLine.data.0.label.rich.<style_name>.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### markLine.data.0.label.rich.<style_name>.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### markLine.data.0.label.rich.<style_name>.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### markLine.data.0.label.rich.<style_name>.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### markLine.data.0.label.rich.<style_name>.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### markLine.data.0.label.rich.<style_name>.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### markLine.data.0.label.rich.<style_name>.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.0.label.rich.<style_name>.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.0.label.rich.<style_name>.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### markLine.data.0.label.rich.<style_name>.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markLine.data.0.label.rich.<style_name>.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markLine.data.0.label.rich.<style_name>.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### markLine.data.0.label.rich.<style_name>.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### markLine.data.0.label.rich.<style_name>.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### markLine.data.0.label.rich.<style_name>.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### markLine.data.0.label.rich.<style_name>.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### markLine.data.0.label.rich.<style_name>.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### markLine.data.0.label.rich.<style_name>.width
+- **Type**: `number|string`
+
+文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+`width` 也可以是百分比字符串，如 `'100%'`。表示的是所在文本块的 `contentWidth`（即不包含文本块的 `padding`）的百分之多少。之所以以 `contentWidth` 做基数，因为每个文本片段只能基于 `content box` 布局。如果以 `outerWidth` 做基数，则百分比的计算在实用中不具有意义，可能会超出。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markLine.data.0.label.rich.<style_name>.height
+- **Type**: `number|string`
+
+文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markLine.data.0.label.rich.<style_name>.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.0.label.rich.<style_name>.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### markLine.data.0.label.rich.<style_name>.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### markLine.data.0.label.rich.<style_name>.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markLine.data.0.label.rich.<style_name>.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### markLine.data.0.label.rich.<style_name>.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### markLine.data.0.label.rich.<style_name>.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### markLine.data.0.label.rich.<style_name>.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+###### markLine.data.0.label.richInheritPlainLabel
+- **Type**: `boolean`
+- **Default**: `true`
+
+从 `v6.0.0` 开始支持
+
+富文本样式是否继承普通文本样式。
+
+此配置项用于向历史兼容。
+
+> 从 v6 版本开始，[富文本标签 (label.rich / textStyle.rich)](option.series-scatter.md#label.rich) 部分样式（`fontStyle`, `fontWeight`, `fontSize`, `fontFamily`, `textShadowColor`, `textShadowBlur`, `textShadowOffsetX`, `textShadowOffsetY`）默认继承 [普通文本样式 (label / textStyle)](option.series-scatter.md#label)。你可以设置 `richInheritPlainLabel: false` （可在最外层配置项或与同级文本样式配置项）来禁用此行为。
+> 
+> ```
+> option = {
+>     richInheritPlainLabel: false, // In most cases, this is enough.
+>     xxx1: {
+>         // Can also set it here to only control this label.
+>         label: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     },
+>     xxx2: {
+>         textStyle: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     }
+> }
+> ```
+
+###### markLine.data.0.emphasis.disabled
+- **Type**: `boolean`
+- **Default**: `false`
+
+从 `v5.3.0` 开始支持
+
+是否关闭高亮状态。
+
+关闭高亮状态可以在鼠标移到图形上，tooltip 触发，或者图例联动的时候不再触发高亮效果。在图形非常多的时候可以关闭以提升交互流畅性。
+
+###### markLine.data.0.emphasis.lineStyle.color
+- **Type**: `Color`
+- **Default**: `"#000"`
+
+线的颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+###### markLine.data.0.emphasis.lineStyle.width
+- **Type**: `number`
+- **Default**: `1`
+
+线宽。
+
+###### markLine.data.0.emphasis.lineStyle.type
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+线的类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `dashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+type: [5, 10],
+
+dashOffset: 5
+}
+```
+
+###### markLine.data.0.emphasis.lineStyle.dashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `type` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markLine.data.0.emphasis.lineStyle.cap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+###### markLine.data.0.emphasis.lineStyle.join
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `miterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+###### markLine.data.0.emphasis.lineStyle.miterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `join` 为 `miter` 时， `miterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+###### markLine.data.0.emphasis.lineStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+###### markLine.data.0.emphasis.lineStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+###### markLine.data.0.emphasis.lineStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+###### markLine.data.0.emphasis.lineStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+###### markLine.data.0.emphasis.lineStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+###### markLine.data.0.emphasis.lineStyle.curveness
+- **Type**: `number`
+- **Default**: `0`
+
+边的曲度，支持从 0 到 1 的值，值越大曲度越大。
+
+###### markLine.data.0.emphasis.label.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+是否显示标签。
+
+###### markLine.data.0.emphasis.label.position
+- **Type**: `string`
+- **Default**: `'end'`
+
+标签位置，可选：
+
+*   `'start'` 线的起始点。
+*   `'middle'` 线的中点。
+*   `'end'` 线的结束点。
+
+4.7.0 版本起，支持更多标签位置：`'start'`, `'middle'`, `'end'`, `'insideStartTop'`, `'insideStartBottom'`, `'insideMiddleTop'`, `'insideMiddleBottom'`, `'insideEndTop'`, `'insideEndBottom'`。
+
+其中，`'insideMiddleBottom'` 等同于 `'middle'`。具体位置参见下图。
+
+文字与线的间距可以通过 [label.distance](../option.md#series-.markLine.label.distance) 调整。
+
+###### markLine.data.0.emphasis.label.distance
+- **Type**: `number|Array`
+
+标签与线之间的间距。如果是数组，第一项为横向间距，第二项为纵向间距。如果是数字，则表示横向纵向使用相同的间距。
+
+###### markLine.data.0.emphasis.label.formatter
+- **Type**: `string|Function`
+
+标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 `\n` 换行。
+
+**字符串模板**
+
+**字符串模板** 模板变量有：
+
+*   `{a}`：系列名。
+*   `{b}`：数据名。
+*   `{c}`：数据值。
+*   `{d}`：百分比。
+*   `{@xxx}`：数据中名为 `'xxx'` 的维度的值，如 `{@product}` 表示名为 `'product'` 的维度的值。
+*   `{@[n]}`：数据中维度 `n` 的值，如 `{@[3]}` 表示维度 3 的值，从 0 开始计数。
+
+**示例：**
+
+```
+formatter: '{b}: {d}'
+```
+
+**回调函数**
+
+回调函数格式：
+
+```
+(params: Object|Array) => string
+```
+
+参数 `params` 是 formatter 需要的单个数据集。格式如下：
+
+```
+{
+    componentType: 'series',
+    // 系列类型
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index
+    seriesIndex: number,
+    // 系列名称
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // 传入的数据值。在多数系列下它和 data 相同。在一些系列下是 data 中的分量（如 map、radar 中）
+    value: number|Array|Object,
+    // 坐标轴 encode 映射信息，
+    // key 为坐标轴（如 'x' 'y' 'radius' 'angle' 等）
+    // value 必然为数组，不会为 null/undefined，表示 dimension index 。
+    // 其内容如：
+    // {
+    //     x: [2] // dimension index 为 2 的数据映射到 x 轴
+    //     y: [0] // dimension index 为 0 的数据映射到 y 轴
+    // }
+    encode: Object,
+    // 维度名列表
+    dimensionNames: Array<String>,
+    // 数据的维度 index，如 0 或 1 或 2 ...
+    // 仅在雷达图中使用。
+    dimensionIndex: number,
+    // 数据图形的颜色
+    color: string
+}
+```
+
+注：encode 和 dimensionNames 的使用方式，例如：
+
+如果数据为：
+
+```
+dataset: {
+    source: [
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.encode.y[0]]
+```
+
+如果数据为：
+
+```
+dataset: {
+    dimensions: ['product', '2015', '2016', '2017'],
+    source: [
+        {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+        {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+        {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+        {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.dimensionNames[params.encode.y[0]]]
+```
+
+###### markLine.data.0.emphasis.label.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.0.emphasis.label.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### markLine.data.0.emphasis.label.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### markLine.data.0.emphasis.label.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### markLine.data.0.emphasis.label.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### markLine.data.0.emphasis.label.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### markLine.data.0.emphasis.label.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.0.emphasis.label.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.0.emphasis.label.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### markLine.data.0.emphasis.label.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markLine.data.0.emphasis.label.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markLine.data.0.emphasis.label.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### markLine.data.0.emphasis.label.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### markLine.data.0.emphasis.label.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### markLine.data.0.emphasis.label.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### markLine.data.0.emphasis.label.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### markLine.data.0.emphasis.label.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### markLine.data.0.emphasis.label.width
+- **Type**: `number`
+
+文本显示宽度。
+
+###### markLine.data.0.emphasis.label.height
+- **Type**: `number`
+
+文本显示高度。
+
+###### markLine.data.0.emphasis.label.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.0.emphasis.label.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### markLine.data.0.emphasis.label.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### markLine.data.0.emphasis.label.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markLine.data.0.emphasis.label.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### markLine.data.0.emphasis.label.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### markLine.data.0.emphasis.label.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### markLine.data.0.emphasis.label.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+###### markLine.data.0.emphasis.label.overflow
+- **Type**: `string`
+- **Default**: `'none'`
+
+文字超出宽度是否截断或者换行。配置`width`时有效
+
+*   `'truncate'` 截断，并在末尾显示`ellipsis`配置的文本，默认为`...`
+*   `'break'` 换行
+*   `'breakAll'` 换行，跟`'break'`不同的是，在英语等拉丁文中，`'breakAll'`还会强制单词内换行
+
+###### markLine.data.0.emphasis.label.ellipsis
+- **Type**: `string`
+- **Default**: `'...'`
+
+在`overflow`配置为`'truncate'`的时候，可以通过该属性配置末尾显示的文本。
+
+###### markLine.data.0.emphasis.label.rich
+- **Type**: `Object`
+
+在 `rich` 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。
+
+例如：
+
+```
+label: {
+    // 在文本中，可以对部分文本采用 rich 中定义样式。
+    // 这里需要在文本中使用标记符号：
+    // `{styleName|text content text content}` 标记样式名。
+    // 注意，换行仍是使用 '\n'。
+    formatter: [
+        '{a|这段文本采用样式a}',
+        '{b|这段文本采用样式b}这段用默认样式{x|这段用样式x}'
+    ].join('\n'),
+
+    rich: {
+        a: {
+            color: 'red',
+            lineHeight: 10
+        },
+        b: {
+            backgroundColor: {
+                image: 'xxx/xxx.jpg'
+            },
+            height: 40
+        },
+        x: {
+            fontSize: 18,
+            fontFamily: 'Microsoft YaHei',
+            borderColor: '#449933',
+            borderRadius: 4
+        },
+        ...
+    }
+}
+```
+
+详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+
+###### markLine.data.0.emphasis.label.rich.<style_name>.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.0.emphasis.label.rich.<style_name>.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### markLine.data.0.emphasis.label.rich.<style_name>.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### markLine.data.0.emphasis.label.rich.<style_name>.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### markLine.data.0.emphasis.label.rich.<style_name>.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### markLine.data.0.emphasis.label.rich.<style_name>.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### markLine.data.0.emphasis.label.rich.<style_name>.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### markLine.data.0.emphasis.label.rich.<style_name>.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### markLine.data.0.emphasis.label.rich.<style_name>.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.0.emphasis.label.rich.<style_name>.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.0.emphasis.label.rich.<style_name>.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### markLine.data.0.emphasis.label.rich.<style_name>.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markLine.data.0.emphasis.label.rich.<style_name>.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markLine.data.0.emphasis.label.rich.<style_name>.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### markLine.data.0.emphasis.label.rich.<style_name>.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### markLine.data.0.emphasis.label.rich.<style_name>.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### markLine.data.0.emphasis.label.rich.<style_name>.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### markLine.data.0.emphasis.label.rich.<style_name>.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### markLine.data.0.emphasis.label.rich.<style_name>.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### markLine.data.0.emphasis.label.rich.<style_name>.width
+- **Type**: `number|string`
+
+文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+`width` 也可以是百分比字符串，如 `'100%'`。表示的是所在文本块的 `contentWidth`（即不包含文本块的 `padding`）的百分之多少。之所以以 `contentWidth` 做基数，因为每个文本片段只能基于 `content box` 布局。如果以 `outerWidth` 做基数，则百分比的计算在实用中不具有意义，可能会超出。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markLine.data.0.emphasis.label.rich.<style_name>.height
+- **Type**: `number|string`
+
+文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markLine.data.0.emphasis.label.rich.<style_name>.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.0.emphasis.label.rich.<style_name>.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### markLine.data.0.emphasis.label.rich.<style_name>.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### markLine.data.0.emphasis.label.rich.<style_name>.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markLine.data.0.emphasis.label.rich.<style_name>.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### markLine.data.0.emphasis.label.rich.<style_name>.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### markLine.data.0.emphasis.label.rich.<style_name>.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### markLine.data.0.emphasis.label.rich.<style_name>.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+###### markLine.data.0.emphasis.label.richInheritPlainLabel
+- **Type**: `boolean`
+- **Default**: `true`
+
+从 `v6.0.0` 开始支持
+
+富文本样式是否继承普通文本样式。
+
+此配置项用于向历史兼容。
+
+> 从 v6 版本开始，[富文本标签 (label.rich / textStyle.rich)](option.series-scatter.md#label.rich) 部分样式（`fontStyle`, `fontWeight`, `fontSize`, `fontFamily`, `textShadowColor`, `textShadowBlur`, `textShadowOffsetX`, `textShadowOffsetY`）默认继承 [普通文本样式 (label / textStyle)](option.series-scatter.md#label)。你可以设置 `richInheritPlainLabel: false` （可在最外层配置项或与同级文本样式配置项）来禁用此行为。
+> 
+> ```
+> option = {
+>     richInheritPlainLabel: false, // In most cases, this is enough.
+>     xxx1: {
+>         // Can also set it here to only control this label.
+>         label: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     },
+>     xxx2: {
+>         textStyle: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     }
+> }
+> ```
+
+##### markLine.data.0.blur
+- **Type**: `Object`
+
+从 `v5.0.0` 开始支持
+
+###### markLine.data.0.blur.lineStyle.color
+- **Type**: `Color`
+- **Default**: `"#000"`
+
+线的颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+###### markLine.data.0.blur.lineStyle.width
+- **Type**: `number`
+- **Default**: `1`
+
+线宽。
+
+###### markLine.data.0.blur.lineStyle.type
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+线的类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `dashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+type: [5, 10],
+
+dashOffset: 5
+}
+```
+
+###### markLine.data.0.blur.lineStyle.dashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `type` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markLine.data.0.blur.lineStyle.cap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+###### markLine.data.0.blur.lineStyle.join
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `miterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+###### markLine.data.0.blur.lineStyle.miterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `join` 为 `miter` 时， `miterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+###### markLine.data.0.blur.lineStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+###### markLine.data.0.blur.lineStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+###### markLine.data.0.blur.lineStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+###### markLine.data.0.blur.lineStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+###### markLine.data.0.blur.lineStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+###### markLine.data.0.blur.lineStyle.curveness
+- **Type**: `number`
+- **Default**: `0`
+
+边的曲度，支持从 0 到 1 的值，值越大曲度越大。
+
+###### markLine.data.0.blur.label.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+是否显示标签。
+
+###### markLine.data.0.blur.label.position
+- **Type**: `string`
+- **Default**: `'end'`
+
+标签位置，可选：
+
+*   `'start'` 线的起始点。
+*   `'middle'` 线的中点。
+*   `'end'` 线的结束点。
+
+4.7.0 版本起，支持更多标签位置：`'start'`, `'middle'`, `'end'`, `'insideStartTop'`, `'insideStartBottom'`, `'insideMiddleTop'`, `'insideMiddleBottom'`, `'insideEndTop'`, `'insideEndBottom'`。
+
+其中，`'insideMiddleBottom'` 等同于 `'middle'`。具体位置参见下图。
+
+文字与线的间距可以通过 [label.distance](../option.md#series-.markLine.label.distance) 调整。
+
+###### markLine.data.0.blur.label.distance
+- **Type**: `number|Array`
+
+标签与线之间的间距。如果是数组，第一项为横向间距，第二项为纵向间距。如果是数字，则表示横向纵向使用相同的间距。
+
+###### markLine.data.0.blur.label.formatter
+- **Type**: `string|Function`
+
+标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 `\n` 换行。
+
+**字符串模板**
+
+**字符串模板** 模板变量有：
+
+*   `{a}`：系列名。
+*   `{b}`：数据名。
+*   `{c}`：数据值。
+*   `{d}`：百分比。
+*   `{@xxx}`：数据中名为 `'xxx'` 的维度的值，如 `{@product}` 表示名为 `'product'` 的维度的值。
+*   `{@[n]}`：数据中维度 `n` 的值，如 `{@[3]}` 表示维度 3 的值，从 0 开始计数。
+
+**示例：**
+
+```
+formatter: '{b}: {d}'
+```
+
+**回调函数**
+
+回调函数格式：
+
+```
+(params: Object|Array) => string
+```
+
+参数 `params` 是 formatter 需要的单个数据集。格式如下：
+
+```
+{
+    componentType: 'series',
+    // 系列类型
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index
+    seriesIndex: number,
+    // 系列名称
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // 传入的数据值。在多数系列下它和 data 相同。在一些系列下是 data 中的分量（如 map、radar 中）
+    value: number|Array|Object,
+    // 坐标轴 encode 映射信息，
+    // key 为坐标轴（如 'x' 'y' 'radius' 'angle' 等）
+    // value 必然为数组，不会为 null/undefined，表示 dimension index 。
+    // 其内容如：
+    // {
+    //     x: [2] // dimension index 为 2 的数据映射到 x 轴
+    //     y: [0] // dimension index 为 0 的数据映射到 y 轴
+    // }
+    encode: Object,
+    // 维度名列表
+    dimensionNames: Array<String>,
+    // 数据的维度 index，如 0 或 1 或 2 ...
+    // 仅在雷达图中使用。
+    dimensionIndex: number,
+    // 数据图形的颜色
+    color: string
+}
+```
+
+注：encode 和 dimensionNames 的使用方式，例如：
+
+如果数据为：
+
+```
+dataset: {
+    source: [
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.encode.y[0]]
+```
+
+如果数据为：
+
+```
+dataset: {
+    dimensions: ['product', '2015', '2016', '2017'],
+    source: [
+        {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+        {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+        {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+        {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.dimensionNames[params.encode.y[0]]]
+```
+
+###### markLine.data.0.blur.label.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.0.blur.label.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### markLine.data.0.blur.label.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### markLine.data.0.blur.label.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### markLine.data.0.blur.label.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### markLine.data.0.blur.label.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### markLine.data.0.blur.label.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.0.blur.label.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.0.blur.label.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### markLine.data.0.blur.label.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markLine.data.0.blur.label.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markLine.data.0.blur.label.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### markLine.data.0.blur.label.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### markLine.data.0.blur.label.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### markLine.data.0.blur.label.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### markLine.data.0.blur.label.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### markLine.data.0.blur.label.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### markLine.data.0.blur.label.width
+- **Type**: `number`
+
+文本显示宽度。
+
+###### markLine.data.0.blur.label.height
+- **Type**: `number`
+
+文本显示高度。
+
+###### markLine.data.0.blur.label.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.0.blur.label.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### markLine.data.0.blur.label.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### markLine.data.0.blur.label.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markLine.data.0.blur.label.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### markLine.data.0.blur.label.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### markLine.data.0.blur.label.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### markLine.data.0.blur.label.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+###### markLine.data.0.blur.label.overflow
+- **Type**: `string`
+- **Default**: `'none'`
+
+文字超出宽度是否截断或者换行。配置`width`时有效
+
+*   `'truncate'` 截断，并在末尾显示`ellipsis`配置的文本，默认为`...`
+*   `'break'` 换行
+*   `'breakAll'` 换行，跟`'break'`不同的是，在英语等拉丁文中，`'breakAll'`还会强制单词内换行
+
+###### markLine.data.0.blur.label.ellipsis
+- **Type**: `string`
+- **Default**: `'...'`
+
+在`overflow`配置为`'truncate'`的时候，可以通过该属性配置末尾显示的文本。
+
+###### markLine.data.0.blur.label.rich
+- **Type**: `Object`
+
+在 `rich` 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。
+
+例如：
+
+```
+label: {
+    // 在文本中，可以对部分文本采用 rich 中定义样式。
+    // 这里需要在文本中使用标记符号：
+    // `{styleName|text content text content}` 标记样式名。
+    // 注意，换行仍是使用 '\n'。
+    formatter: [
+        '{a|这段文本采用样式a}',
+        '{b|这段文本采用样式b}这段用默认样式{x|这段用样式x}'
+    ].join('\n'),
+
+    rich: {
+        a: {
+            color: 'red',
+            lineHeight: 10
+        },
+        b: {
+            backgroundColor: {
+                image: 'xxx/xxx.jpg'
+            },
+            height: 40
+        },
+        x: {
+            fontSize: 18,
+            fontFamily: 'Microsoft YaHei',
+            borderColor: '#449933',
+            borderRadius: 4
+        },
+        ...
+    }
+}
+```
+
+详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+
+###### markLine.data.0.blur.label.rich.<style_name>.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.0.blur.label.rich.<style_name>.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### markLine.data.0.blur.label.rich.<style_name>.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### markLine.data.0.blur.label.rich.<style_name>.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### markLine.data.0.blur.label.rich.<style_name>.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### markLine.data.0.blur.label.rich.<style_name>.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### markLine.data.0.blur.label.rich.<style_name>.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### markLine.data.0.blur.label.rich.<style_name>.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### markLine.data.0.blur.label.rich.<style_name>.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.0.blur.label.rich.<style_name>.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.0.blur.label.rich.<style_name>.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### markLine.data.0.blur.label.rich.<style_name>.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markLine.data.0.blur.label.rich.<style_name>.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markLine.data.0.blur.label.rich.<style_name>.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### markLine.data.0.blur.label.rich.<style_name>.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### markLine.data.0.blur.label.rich.<style_name>.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### markLine.data.0.blur.label.rich.<style_name>.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### markLine.data.0.blur.label.rich.<style_name>.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### markLine.data.0.blur.label.rich.<style_name>.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### markLine.data.0.blur.label.rich.<style_name>.width
+- **Type**: `number|string`
+
+文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+`width` 也可以是百分比字符串，如 `'100%'`。表示的是所在文本块的 `contentWidth`（即不包含文本块的 `padding`）的百分之多少。之所以以 `contentWidth` 做基数，因为每个文本片段只能基于 `content box` 布局。如果以 `outerWidth` 做基数，则百分比的计算在实用中不具有意义，可能会超出。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markLine.data.0.blur.label.rich.<style_name>.height
+- **Type**: `number|string`
+
+文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markLine.data.0.blur.label.rich.<style_name>.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.0.blur.label.rich.<style_name>.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### markLine.data.0.blur.label.rich.<style_name>.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### markLine.data.0.blur.label.rich.<style_name>.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markLine.data.0.blur.label.rich.<style_name>.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### markLine.data.0.blur.label.rich.<style_name>.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### markLine.data.0.blur.label.rich.<style_name>.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### markLine.data.0.blur.label.rich.<style_name>.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+###### markLine.data.0.blur.label.richInheritPlainLabel
+- **Type**: `boolean`
+- **Default**: `true`
+
+从 `v6.0.0` 开始支持
+
+富文本样式是否继承普通文本样式。
+
+此配置项用于向历史兼容。
+
+> 从 v6 版本开始，[富文本标签 (label.rich / textStyle.rich)](option.series-scatter.md#label.rich) 部分样式（`fontStyle`, `fontWeight`, `fontSize`, `fontFamily`, `textShadowColor`, `textShadowBlur`, `textShadowOffsetX`, `textShadowOffsetY`）默认继承 [普通文本样式 (label / textStyle)](option.series-scatter.md#label)。你可以设置 `richInheritPlainLabel: false` （可在最外层配置项或与同级文本样式配置项）来禁用此行为。
+> 
+> ```
+> option = {
+>     richInheritPlainLabel: false, // In most cases, this is enough.
+>     xxx1: {
+>         // Can also set it here to only control this label.
+>         label: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     },
+>     xxx2: {
+>         textStyle: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     }
+> }
+> ```
+
+#### markLine.data.1
+- **Type**: `Object`
+
+终点的数据。
+
+##### markLine.data.1.type
+- **Type**: `string`
+
+特殊的标注类型，用于标注最大值最小值等。
+
+**可选:**
+
+*   `'min'` 最小值。
+*   `'max'` 最大值。
+*   `'average'` 平均值。
+*   `'median'` 中位数。
+
+##### markLine.data.1.valueIndex
+- **Type**: `number`
+
+在使用 [type](option.series-scatter.md#markLine.data.type) 时有效，用于指定在哪个维度上指定最大值最小值，可以是 `0`（xAxis, radiusAxis），`1`（yAxis, angleAxis），默认使用第一个数值轴所在的维度。
+
+##### markLine.data.1.valueDim
+- **Type**: `string`
+
+在使用 [type](option.series-scatter.md#markLine.data.type) 时有效，用于指定在哪个维度上指定最大值最小值。这可以是维度的直接名称，例如折线图时可以是`x`、`angle`等、candlestick 图时可以是`open`、`close`等维度名称。
+
+##### markLine.data.1.coord
+- **Type**: `Array`
+
+起点或终点的坐标。坐标格式视系列的坐标系而定，可以是[直角坐标系](option.grid.md)上的 `x`, `y`，也可以是[极坐标系](option.polar.md)上的 `radius`, `angle`。
+
+**注：**对于 [axis.type](../option.md#xAixs.type) 为 `'category'` 类型的轴
+
+*   如果 coord 值为 `number`，则表示 [axis.data](option.xAxis.md#data) 的 index。
+*   如果 coord 值为 `string`，则表示 [axis.data](option.xAxis.md#data) 中具体的值。注意使用这种方式时，xAxis.data 不能写成 \[number, number, ...\]，而只能写成 \[string, string, ...\]，否则不能被 markPoint / markLine 用『具体值』索引到。
+
+例如：
+
+```
+{
+    xAxis: {
+        type: 'category',
+        data: ['5', '6', '9', '13', '19', '33']
+        // 注意这里不建议写成 [5, 6, 9, 13, 19, 33]，否则不能被 markPoint / markLine 用『具体值』索引到。
+    },
+    series: {
+        type: 'line',
+        data: [11, 22, 33, 44, 55, 66],
+        markPoint: { // markLine 也是同理
+            data: [{
+                coord: [5, 33.4], // 其中 5 表示 xAxis.data[5]，即 '33' 这个元素。
+                // coord: ['5', 33.4] // 其中 '5' 表示 xAxis.data中的 '5' 这个元素。
+                                      // 注意，使用这种方式时，xAxis.data 不能写成 [number, number, ...]
+                                      // 而只能写成 [string, string, ...]
+            }]
+        }
+    }
+}
+```
+
+##### markLine.data.1.name
+- **Type**: `string`
+- **Default**: `''`
+
+标注名称。定义后可在 [label formatter](option.series-scatter.md#markLine.data.label.formatter) 中作为**数据名** `{b}` 模板变量使用。
+
+##### markLine.data.1.x
+- **Type**: `number`
+
+相对容器的屏幕 x 坐标，单位像素。
+
+##### markLine.data.1.y
+- **Type**: `number`
+
+相对容器的屏幕 y 坐标，单位像素。
+
+##### markLine.data.1.z2
+- **Type**: `number`
+
+从 `v6.0.0` 开始支持
+
+指定图形元素间的覆盖关系。数值越大，越在层叠的上方。
+
+##### markLine.data.1.xAxis
+- **Type**: `number|string`
+
+x 值为给定值的标记线，仅对数据值是一项的设置有效。例如：
+
+```
+data: [{
+    name: 'X 轴值为 100 的竖直线',
+    xAxis: 100
+}]
+```
+
+或对于 `'time'` 类型的 xAxis，可以设置为：
+
+```
+{
+    name: 'X 轴值为 "2020-01-01" 的竖直线',
+    xAxis: '2020-01-01'
+}]
+```
+
+##### markLine.data.1.yAxis
+- **Type**: `number|string`
+
+Y 值为给定值的标记线，仅对数据值是一项的设置有效。例如：
+
+```
+data: [{
+    name: 'Y 轴值为 100 的水平线',
+    yAxis: 100
+}]
+```
+
+或对于 `'time'` 类型的 yAxis，可以设置为：
+
+```
+{
+    name: 'Y 轴值为 "2020-01-01" 的水平线',
+    yAxis: '2020-01-01'
+}]
+```
+
+##### markLine.data.1.value
+- **Type**: `number`
+
+标注值，可以不设。
+
+##### markLine.data.1.symbol
+- **Type**: `string`
+
+终点标记的图形。
+
+ECharts 提供的标记类型包括
+
+`'circle'`, `'rect'`, `'roundRect'`, `'triangle'`, `'diamond'`, `'pin'`, `'arrow'`, `'none'`
+
+可以通过 `'image://url'` 设置为图片，其中 URL 为图片的链接，或者 `dataURI`。
+
+URL 为图片链接例如：
+
+```
+'image://http://example.website/a/b.png'
+```
+
+URL 为 `dataURI` 例如：
+
+```
+'image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7'
+```
+
+可以通过 `'path://'` 将图标设置为任意的矢量路径。这种方式相比于使用图片的方式，不用担心因为缩放而产生锯齿或模糊，而且可以设置为任意颜色。路径图形会自适应调整为合适的大小。路径的格式参见 [SVG PathData](http://www.w3.org/TR/SVG/paths.html#PathData)。可以从 Adobe Illustrator 等工具编辑导出。
+
+例如：
+
+```
+'path://M30.9,53.2C16.8,53.2,5.3,41.7,5.3,27.6S16.8,2,30.9,2C45,2,56.4,13.5,56.4,27.6S45,53.2,30.9,53.2z M30.9,3.5C17.6,3.5,6.8,14.4,6.8,27.6c0,13.3,10.8,24.1,24.101,24.1C44.2,51.7,55,40.9,55,27.6C54.9,14.4,44.1,3.5,30.9,3.5z M36.9,35.8c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H36c0.5,0,0.9,0.4,0.9,1V35.8z M27.8,35.8 c0,0.601-0.4,1-0.9,1h-1.3c-0.5,0-0.9-0.399-0.9-1V19.5c0-0.6,0.4-1,0.9-1H27c0.5,0,0.9,0.4,0.9,1L27.8,35.8L27.8,35.8z'
+```
+
+##### markLine.data.1.symbolSize
+- **Type**: `number|Array`
+
+终点标记的大小，可以设置成诸如 `10` 这样单一的数字，也可以用数组分开表示宽和高，例如 `[20, 10]` 表示标记宽为`20`，高为`10`。
+
+##### markLine.data.1.symbolRotate
+- **Type**: `number`
+
+终点标记的旋转角度（而非弧度）。正值表示逆时针旋转。注意在 `markLine` 中当 `symbol` 为 `'arrow'` 时会忽略 `symbolRotate` 强制设置为切线的角度。
+
+##### markLine.data.1.symbolKeepAspect
+- **Type**: `boolean`
+- **Default**: `false`
+
+如果 `symbol` 是 `path://` 的形式，是否在缩放时保持该图形的长宽比。
+
+##### markLine.data.1.symbolOffset
+- **Type**: `Array`
+- **Default**: `[0, 0]`
+
+终点标记相对于原本位置的偏移。默认情况下，标记会居中置放在数据对应的位置，但是如果 symbol 是自定义的矢量路径或者图片，就有可能不希望 symbol 居中。这时候可以使用该配置项配置 symbol 相对于原本居中的偏移，可以是绝对的像素值，也可以是相对的百分比。
+
+例如 `[0, '-50%']` 就是把自己向上移动了一半的位置，在 symbol 图形是气泡的时候可以让图形下端的箭头对准数据点。
+
+##### markLine.data.1.lineStyle
+- **Type**: `Object`
+
+该数据项线的样式，起点和终点项的 `lineStyle`会合并到一起。
+
+###### markLine.data.1.lineStyle.color
+- **Type**: `Color`
+- **Default**: `"#000"`
+
+线的颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+###### markLine.data.1.lineStyle.width
+- **Type**: `number`
+- **Default**: `1`
+
+线宽。
+
+###### markLine.data.1.lineStyle.type
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+线的类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `dashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+type: [5, 10],
+
+dashOffset: 5
+}
+```
+
+###### markLine.data.1.lineStyle.dashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `type` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markLine.data.1.lineStyle.cap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+###### markLine.data.1.lineStyle.join
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `miterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+###### markLine.data.1.lineStyle.miterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `join` 为 `miter` 时， `miterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+###### markLine.data.1.lineStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+###### markLine.data.1.lineStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+###### markLine.data.1.lineStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+###### markLine.data.1.lineStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+###### markLine.data.1.lineStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+###### markLine.data.1.lineStyle.curveness
+- **Type**: `number`
+- **Default**: `0`
+
+边的曲度，支持从 0 到 1 的值，值越大曲度越大。
+
+##### markLine.data.1.label
+- **Type**: `Object`
+
+该数据项标签的样式，起点和终点项的 `label`会合并到一起。
+
+###### markLine.data.1.label.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+是否显示标签。
+
+###### markLine.data.1.label.position
+- **Type**: `string`
+- **Default**: `'end'`
+
+标签位置，可选：
+
+*   `'start'` 线的起始点。
+*   `'middle'` 线的中点。
+*   `'end'` 线的结束点。
+
+4.7.0 版本起，支持更多标签位置：`'start'`, `'middle'`, `'end'`, `'insideStartTop'`, `'insideStartBottom'`, `'insideMiddleTop'`, `'insideMiddleBottom'`, `'insideEndTop'`, `'insideEndBottom'`。
+
+其中，`'insideMiddleBottom'` 等同于 `'middle'`。具体位置参见下图。
+
+文字与线的间距可以通过 [label.distance](../option.md#series-.markLine.label.distance) 调整。
+
+###### markLine.data.1.label.distance
+- **Type**: `number|Array`
+
+标签与线之间的间距。如果是数组，第一项为横向间距，第二项为纵向间距。如果是数字，则表示横向纵向使用相同的间距。
+
+###### markLine.data.1.label.formatter
+- **Type**: `string|Function`
+
+标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 `\n` 换行。
+
+**字符串模板**
+
+**字符串模板** 模板变量有：
+
+*   `{a}`：系列名。
+*   `{b}`：数据名。
+*   `{c}`：数据值。
+*   `{d}`：百分比。
+*   `{@xxx}`：数据中名为 `'xxx'` 的维度的值，如 `{@product}` 表示名为 `'product'` 的维度的值。
+*   `{@[n]}`：数据中维度 `n` 的值，如 `{@[3]}` 表示维度 3 的值，从 0 开始计数。
+
+**示例：**
+
+```
+formatter: '{b}: {d}'
+```
+
+**回调函数**
+
+回调函数格式：
+
+```
+(params: Object|Array) => string
+```
+
+参数 `params` 是 formatter 需要的单个数据集。格式如下：
+
+```
+{
+    componentType: 'series',
+    // 系列类型
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index
+    seriesIndex: number,
+    // 系列名称
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // 传入的数据值。在多数系列下它和 data 相同。在一些系列下是 data 中的分量（如 map、radar 中）
+    value: number|Array|Object,
+    // 坐标轴 encode 映射信息，
+    // key 为坐标轴（如 'x' 'y' 'radius' 'angle' 等）
+    // value 必然为数组，不会为 null/undefined，表示 dimension index 。
+    // 其内容如：
+    // {
+    //     x: [2] // dimension index 为 2 的数据映射到 x 轴
+    //     y: [0] // dimension index 为 0 的数据映射到 y 轴
+    // }
+    encode: Object,
+    // 维度名列表
+    dimensionNames: Array<String>,
+    // 数据的维度 index，如 0 或 1 或 2 ...
+    // 仅在雷达图中使用。
+    dimensionIndex: number,
+    // 数据图形的颜色
+    color: string
+}
+```
+
+注：encode 和 dimensionNames 的使用方式，例如：
+
+如果数据为：
+
+```
+dataset: {
+    source: [
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.encode.y[0]]
+```
+
+如果数据为：
+
+```
+dataset: {
+    dimensions: ['product', '2015', '2016', '2017'],
+    source: [
+        {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+        {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+        {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+        {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.dimensionNames[params.encode.y[0]]]
+```
+
+###### markLine.data.1.label.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.1.label.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### markLine.data.1.label.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### markLine.data.1.label.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### markLine.data.1.label.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### markLine.data.1.label.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### markLine.data.1.label.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.1.label.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.1.label.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### markLine.data.1.label.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markLine.data.1.label.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markLine.data.1.label.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### markLine.data.1.label.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### markLine.data.1.label.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### markLine.data.1.label.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### markLine.data.1.label.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### markLine.data.1.label.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### markLine.data.1.label.width
+- **Type**: `number`
+
+文本显示宽度。
+
+###### markLine.data.1.label.height
+- **Type**: `number`
+
+文本显示高度。
+
+###### markLine.data.1.label.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.1.label.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### markLine.data.1.label.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### markLine.data.1.label.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markLine.data.1.label.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### markLine.data.1.label.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### markLine.data.1.label.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### markLine.data.1.label.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+###### markLine.data.1.label.overflow
+- **Type**: `string`
+- **Default**: `'none'`
+
+文字超出宽度是否截断或者换行。配置`width`时有效
+
+*   `'truncate'` 截断，并在末尾显示`ellipsis`配置的文本，默认为`...`
+*   `'break'` 换行
+*   `'breakAll'` 换行，跟`'break'`不同的是，在英语等拉丁文中，`'breakAll'`还会强制单词内换行
+
+###### markLine.data.1.label.ellipsis
+- **Type**: `string`
+- **Default**: `'...'`
+
+在`overflow`配置为`'truncate'`的时候，可以通过该属性配置末尾显示的文本。
+
+###### markLine.data.1.label.rich
+- **Type**: `Object`
+
+在 `rich` 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。
+
+例如：
+
+```
+label: {
+    // 在文本中，可以对部分文本采用 rich 中定义样式。
+    // 这里需要在文本中使用标记符号：
+    // `{styleName|text content text content}` 标记样式名。
+    // 注意，换行仍是使用 '\n'。
+    formatter: [
+        '{a|这段文本采用样式a}',
+        '{b|这段文本采用样式b}这段用默认样式{x|这段用样式x}'
+    ].join('\n'),
+
+    rich: {
+        a: {
+            color: 'red',
+            lineHeight: 10
+        },
+        b: {
+            backgroundColor: {
+                image: 'xxx/xxx.jpg'
+            },
+            height: 40
+        },
+        x: {
+            fontSize: 18,
+            fontFamily: 'Microsoft YaHei',
+            borderColor: '#449933',
+            borderRadius: 4
+        },
+        ...
+    }
+}
+```
+
+详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+
+###### markLine.data.1.label.rich.<style_name>.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.1.label.rich.<style_name>.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### markLine.data.1.label.rich.<style_name>.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### markLine.data.1.label.rich.<style_name>.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### markLine.data.1.label.rich.<style_name>.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### markLine.data.1.label.rich.<style_name>.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### markLine.data.1.label.rich.<style_name>.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### markLine.data.1.label.rich.<style_name>.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### markLine.data.1.label.rich.<style_name>.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.1.label.rich.<style_name>.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.1.label.rich.<style_name>.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### markLine.data.1.label.rich.<style_name>.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markLine.data.1.label.rich.<style_name>.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markLine.data.1.label.rich.<style_name>.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### markLine.data.1.label.rich.<style_name>.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### markLine.data.1.label.rich.<style_name>.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### markLine.data.1.label.rich.<style_name>.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### markLine.data.1.label.rich.<style_name>.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### markLine.data.1.label.rich.<style_name>.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### markLine.data.1.label.rich.<style_name>.width
+- **Type**: `number|string`
+
+文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+`width` 也可以是百分比字符串，如 `'100%'`。表示的是所在文本块的 `contentWidth`（即不包含文本块的 `padding`）的百分之多少。之所以以 `contentWidth` 做基数，因为每个文本片段只能基于 `content box` 布局。如果以 `outerWidth` 做基数，则百分比的计算在实用中不具有意义，可能会超出。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markLine.data.1.label.rich.<style_name>.height
+- **Type**: `number|string`
+
+文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markLine.data.1.label.rich.<style_name>.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.1.label.rich.<style_name>.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### markLine.data.1.label.rich.<style_name>.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### markLine.data.1.label.rich.<style_name>.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markLine.data.1.label.rich.<style_name>.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### markLine.data.1.label.rich.<style_name>.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### markLine.data.1.label.rich.<style_name>.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### markLine.data.1.label.rich.<style_name>.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+###### markLine.data.1.label.richInheritPlainLabel
+- **Type**: `boolean`
+- **Default**: `true`
+
+从 `v6.0.0` 开始支持
+
+富文本样式是否继承普通文本样式。
+
+此配置项用于向历史兼容。
+
+> 从 v6 版本开始，[富文本标签 (label.rich / textStyle.rich)](option.series-scatter.md#label.rich) 部分样式（`fontStyle`, `fontWeight`, `fontSize`, `fontFamily`, `textShadowColor`, `textShadowBlur`, `textShadowOffsetX`, `textShadowOffsetY`）默认继承 [普通文本样式 (label / textStyle)](option.series-scatter.md#label)。你可以设置 `richInheritPlainLabel: false` （可在最外层配置项或与同级文本样式配置项）来禁用此行为。
+> 
+> ```
+> option = {
+>     richInheritPlainLabel: false, // In most cases, this is enough.
+>     xxx1: {
+>         // Can also set it here to only control this label.
+>         label: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     },
+>     xxx2: {
+>         textStyle: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     }
+> }
+> ```
+
+###### markLine.data.1.emphasis.disabled
+- **Type**: `boolean`
+- **Default**: `false`
+
+从 `v5.3.0` 开始支持
+
+是否关闭高亮状态。
+
+关闭高亮状态可以在鼠标移到图形上，tooltip 触发，或者图例联动的时候不再触发高亮效果。在图形非常多的时候可以关闭以提升交互流畅性。
+
+###### markLine.data.1.emphasis.lineStyle.color
+- **Type**: `Color`
+- **Default**: `"#000"`
+
+线的颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+###### markLine.data.1.emphasis.lineStyle.width
+- **Type**: `number`
+- **Default**: `1`
+
+线宽。
+
+###### markLine.data.1.emphasis.lineStyle.type
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+线的类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `dashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+type: [5, 10],
+
+dashOffset: 5
+}
+```
+
+###### markLine.data.1.emphasis.lineStyle.dashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `type` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markLine.data.1.emphasis.lineStyle.cap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+###### markLine.data.1.emphasis.lineStyle.join
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `miterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+###### markLine.data.1.emphasis.lineStyle.miterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `join` 为 `miter` 时， `miterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+###### markLine.data.1.emphasis.lineStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+###### markLine.data.1.emphasis.lineStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+###### markLine.data.1.emphasis.lineStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+###### markLine.data.1.emphasis.lineStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+###### markLine.data.1.emphasis.lineStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+###### markLine.data.1.emphasis.lineStyle.curveness
+- **Type**: `number`
+- **Default**: `0`
+
+边的曲度，支持从 0 到 1 的值，值越大曲度越大。
+
+###### markLine.data.1.emphasis.label.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+是否显示标签。
+
+###### markLine.data.1.emphasis.label.position
+- **Type**: `string`
+- **Default**: `'end'`
+
+标签位置，可选：
+
+*   `'start'` 线的起始点。
+*   `'middle'` 线的中点。
+*   `'end'` 线的结束点。
+
+4.7.0 版本起，支持更多标签位置：`'start'`, `'middle'`, `'end'`, `'insideStartTop'`, `'insideStartBottom'`, `'insideMiddleTop'`, `'insideMiddleBottom'`, `'insideEndTop'`, `'insideEndBottom'`。
+
+其中，`'insideMiddleBottom'` 等同于 `'middle'`。具体位置参见下图。
+
+文字与线的间距可以通过 [label.distance](../option.md#series-.markLine.label.distance) 调整。
+
+###### markLine.data.1.emphasis.label.distance
+- **Type**: `number|Array`
+
+标签与线之间的间距。如果是数组，第一项为横向间距，第二项为纵向间距。如果是数字，则表示横向纵向使用相同的间距。
+
+###### markLine.data.1.emphasis.label.formatter
+- **Type**: `string|Function`
+
+标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 `\n` 换行。
+
+**字符串模板**
+
+**字符串模板** 模板变量有：
+
+*   `{a}`：系列名。
+*   `{b}`：数据名。
+*   `{c}`：数据值。
+*   `{d}`：百分比。
+*   `{@xxx}`：数据中名为 `'xxx'` 的维度的值，如 `{@product}` 表示名为 `'product'` 的维度的值。
+*   `{@[n]}`：数据中维度 `n` 的值，如 `{@[3]}` 表示维度 3 的值，从 0 开始计数。
+
+**示例：**
+
+```
+formatter: '{b}: {d}'
+```
+
+**回调函数**
+
+回调函数格式：
+
+```
+(params: Object|Array) => string
+```
+
+参数 `params` 是 formatter 需要的单个数据集。格式如下：
+
+```
+{
+    componentType: 'series',
+    // 系列类型
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index
+    seriesIndex: number,
+    // 系列名称
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // 传入的数据值。在多数系列下它和 data 相同。在一些系列下是 data 中的分量（如 map、radar 中）
+    value: number|Array|Object,
+    // 坐标轴 encode 映射信息，
+    // key 为坐标轴（如 'x' 'y' 'radius' 'angle' 等）
+    // value 必然为数组，不会为 null/undefined，表示 dimension index 。
+    // 其内容如：
+    // {
+    //     x: [2] // dimension index 为 2 的数据映射到 x 轴
+    //     y: [0] // dimension index 为 0 的数据映射到 y 轴
+    // }
+    encode: Object,
+    // 维度名列表
+    dimensionNames: Array<String>,
+    // 数据的维度 index，如 0 或 1 或 2 ...
+    // 仅在雷达图中使用。
+    dimensionIndex: number,
+    // 数据图形的颜色
+    color: string
+}
+```
+
+注：encode 和 dimensionNames 的使用方式，例如：
+
+如果数据为：
+
+```
+dataset: {
+    source: [
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.encode.y[0]]
+```
+
+如果数据为：
+
+```
+dataset: {
+    dimensions: ['product', '2015', '2016', '2017'],
+    source: [
+        {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+        {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+        {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+        {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.dimensionNames[params.encode.y[0]]]
+```
+
+###### markLine.data.1.emphasis.label.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.1.emphasis.label.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### markLine.data.1.emphasis.label.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### markLine.data.1.emphasis.label.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### markLine.data.1.emphasis.label.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### markLine.data.1.emphasis.label.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### markLine.data.1.emphasis.label.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.1.emphasis.label.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.1.emphasis.label.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### markLine.data.1.emphasis.label.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markLine.data.1.emphasis.label.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markLine.data.1.emphasis.label.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### markLine.data.1.emphasis.label.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### markLine.data.1.emphasis.label.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### markLine.data.1.emphasis.label.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### markLine.data.1.emphasis.label.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### markLine.data.1.emphasis.label.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### markLine.data.1.emphasis.label.width
+- **Type**: `number`
+
+文本显示宽度。
+
+###### markLine.data.1.emphasis.label.height
+- **Type**: `number`
+
+文本显示高度。
+
+###### markLine.data.1.emphasis.label.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.1.emphasis.label.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### markLine.data.1.emphasis.label.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### markLine.data.1.emphasis.label.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markLine.data.1.emphasis.label.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### markLine.data.1.emphasis.label.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### markLine.data.1.emphasis.label.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### markLine.data.1.emphasis.label.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+###### markLine.data.1.emphasis.label.overflow
+- **Type**: `string`
+- **Default**: `'none'`
+
+文字超出宽度是否截断或者换行。配置`width`时有效
+
+*   `'truncate'` 截断，并在末尾显示`ellipsis`配置的文本，默认为`...`
+*   `'break'` 换行
+*   `'breakAll'` 换行，跟`'break'`不同的是，在英语等拉丁文中，`'breakAll'`还会强制单词内换行
+
+###### markLine.data.1.emphasis.label.ellipsis
+- **Type**: `string`
+- **Default**: `'...'`
+
+在`overflow`配置为`'truncate'`的时候，可以通过该属性配置末尾显示的文本。
+
+###### markLine.data.1.emphasis.label.rich
+- **Type**: `Object`
+
+在 `rich` 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。
+
+例如：
+
+```
+label: {
+    // 在文本中，可以对部分文本采用 rich 中定义样式。
+    // 这里需要在文本中使用标记符号：
+    // `{styleName|text content text content}` 标记样式名。
+    // 注意，换行仍是使用 '\n'。
+    formatter: [
+        '{a|这段文本采用样式a}',
+        '{b|这段文本采用样式b}这段用默认样式{x|这段用样式x}'
+    ].join('\n'),
+
+    rich: {
+        a: {
+            color: 'red',
+            lineHeight: 10
+        },
+        b: {
+            backgroundColor: {
+                image: 'xxx/xxx.jpg'
+            },
+            height: 40
+        },
+        x: {
+            fontSize: 18,
+            fontFamily: 'Microsoft YaHei',
+            borderColor: '#449933',
+            borderRadius: 4
+        },
+        ...
+    }
+}
+```
+
+详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+
+###### markLine.data.1.emphasis.label.rich.<style_name>.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.1.emphasis.label.rich.<style_name>.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### markLine.data.1.emphasis.label.rich.<style_name>.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### markLine.data.1.emphasis.label.rich.<style_name>.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### markLine.data.1.emphasis.label.rich.<style_name>.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### markLine.data.1.emphasis.label.rich.<style_name>.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### markLine.data.1.emphasis.label.rich.<style_name>.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### markLine.data.1.emphasis.label.rich.<style_name>.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### markLine.data.1.emphasis.label.rich.<style_name>.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.1.emphasis.label.rich.<style_name>.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.1.emphasis.label.rich.<style_name>.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### markLine.data.1.emphasis.label.rich.<style_name>.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markLine.data.1.emphasis.label.rich.<style_name>.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markLine.data.1.emphasis.label.rich.<style_name>.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### markLine.data.1.emphasis.label.rich.<style_name>.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### markLine.data.1.emphasis.label.rich.<style_name>.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### markLine.data.1.emphasis.label.rich.<style_name>.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### markLine.data.1.emphasis.label.rich.<style_name>.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### markLine.data.1.emphasis.label.rich.<style_name>.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### markLine.data.1.emphasis.label.rich.<style_name>.width
+- **Type**: `number|string`
+
+文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+`width` 也可以是百分比字符串，如 `'100%'`。表示的是所在文本块的 `contentWidth`（即不包含文本块的 `padding`）的百分之多少。之所以以 `contentWidth` 做基数，因为每个文本片段只能基于 `content box` 布局。如果以 `outerWidth` 做基数，则百分比的计算在实用中不具有意义，可能会超出。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markLine.data.1.emphasis.label.rich.<style_name>.height
+- **Type**: `number|string`
+
+文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markLine.data.1.emphasis.label.rich.<style_name>.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.1.emphasis.label.rich.<style_name>.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### markLine.data.1.emphasis.label.rich.<style_name>.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### markLine.data.1.emphasis.label.rich.<style_name>.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markLine.data.1.emphasis.label.rich.<style_name>.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### markLine.data.1.emphasis.label.rich.<style_name>.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### markLine.data.1.emphasis.label.rich.<style_name>.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### markLine.data.1.emphasis.label.rich.<style_name>.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+###### markLine.data.1.emphasis.label.richInheritPlainLabel
+- **Type**: `boolean`
+- **Default**: `true`
+
+从 `v6.0.0` 开始支持
+
+富文本样式是否继承普通文本样式。
+
+此配置项用于向历史兼容。
+
+> 从 v6 版本开始，[富文本标签 (label.rich / textStyle.rich)](option.series-scatter.md#label.rich) 部分样式（`fontStyle`, `fontWeight`, `fontSize`, `fontFamily`, `textShadowColor`, `textShadowBlur`, `textShadowOffsetX`, `textShadowOffsetY`）默认继承 [普通文本样式 (label / textStyle)](option.series-scatter.md#label)。你可以设置 `richInheritPlainLabel: false` （可在最外层配置项或与同级文本样式配置项）来禁用此行为。
+> 
+> ```
+> option = {
+>     richInheritPlainLabel: false, // In most cases, this is enough.
+>     xxx1: {
+>         // Can also set it here to only control this label.
+>         label: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     },
+>     xxx2: {
+>         textStyle: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     }
+> }
+> ```
+
+##### markLine.data.1.blur
+- **Type**: `Object`
+
+从 `v5.0.0` 开始支持
+
+###### markLine.data.1.blur.lineStyle.color
+- **Type**: `Color`
+- **Default**: `"#000"`
+
+线的颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+###### markLine.data.1.blur.lineStyle.width
+- **Type**: `number`
+- **Default**: `1`
+
+线宽。
+
+###### markLine.data.1.blur.lineStyle.type
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+线的类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `dashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+type: [5, 10],
+
+dashOffset: 5
+}
+```
+
+###### markLine.data.1.blur.lineStyle.dashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `type` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markLine.data.1.blur.lineStyle.cap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+###### markLine.data.1.blur.lineStyle.join
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `miterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+###### markLine.data.1.blur.lineStyle.miterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `join` 为 `miter` 时， `miterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+###### markLine.data.1.blur.lineStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+###### markLine.data.1.blur.lineStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+###### markLine.data.1.blur.lineStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+###### markLine.data.1.blur.lineStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+###### markLine.data.1.blur.lineStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+###### markLine.data.1.blur.lineStyle.curveness
+- **Type**: `number`
+- **Default**: `0`
+
+边的曲度，支持从 0 到 1 的值，值越大曲度越大。
+
+###### markLine.data.1.blur.label.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+是否显示标签。
+
+###### markLine.data.1.blur.label.position
+- **Type**: `string`
+- **Default**: `'end'`
+
+标签位置，可选：
+
+*   `'start'` 线的起始点。
+*   `'middle'` 线的中点。
+*   `'end'` 线的结束点。
+
+4.7.0 版本起，支持更多标签位置：`'start'`, `'middle'`, `'end'`, `'insideStartTop'`, `'insideStartBottom'`, `'insideMiddleTop'`, `'insideMiddleBottom'`, `'insideEndTop'`, `'insideEndBottom'`。
+
+其中，`'insideMiddleBottom'` 等同于 `'middle'`。具体位置参见下图。
+
+文字与线的间距可以通过 [label.distance](../option.md#series-.markLine.label.distance) 调整。
+
+###### markLine.data.1.blur.label.distance
+- **Type**: `number|Array`
+
+标签与线之间的间距。如果是数组，第一项为横向间距，第二项为纵向间距。如果是数字，则表示横向纵向使用相同的间距。
+
+###### markLine.data.1.blur.label.formatter
+- **Type**: `string|Function`
+
+标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 `\n` 换行。
+
+**字符串模板**
+
+**字符串模板** 模板变量有：
+
+*   `{a}`：系列名。
+*   `{b}`：数据名。
+*   `{c}`：数据值。
+*   `{d}`：百分比。
+*   `{@xxx}`：数据中名为 `'xxx'` 的维度的值，如 `{@product}` 表示名为 `'product'` 的维度的值。
+*   `{@[n]}`：数据中维度 `n` 的值，如 `{@[3]}` 表示维度 3 的值，从 0 开始计数。
+
+**示例：**
+
+```
+formatter: '{b}: {d}'
+```
+
+**回调函数**
+
+回调函数格式：
+
+```
+(params: Object|Array) => string
+```
+
+参数 `params` 是 formatter 需要的单个数据集。格式如下：
+
+```
+{
+    componentType: 'series',
+    // 系列类型
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index
+    seriesIndex: number,
+    // 系列名称
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // 传入的数据值。在多数系列下它和 data 相同。在一些系列下是 data 中的分量（如 map、radar 中）
+    value: number|Array|Object,
+    // 坐标轴 encode 映射信息，
+    // key 为坐标轴（如 'x' 'y' 'radius' 'angle' 等）
+    // value 必然为数组，不会为 null/undefined，表示 dimension index 。
+    // 其内容如：
+    // {
+    //     x: [2] // dimension index 为 2 的数据映射到 x 轴
+    //     y: [0] // dimension index 为 0 的数据映射到 y 轴
+    // }
+    encode: Object,
+    // 维度名列表
+    dimensionNames: Array<String>,
+    // 数据的维度 index，如 0 或 1 或 2 ...
+    // 仅在雷达图中使用。
+    dimensionIndex: number,
+    // 数据图形的颜色
+    color: string
+}
+```
+
+注：encode 和 dimensionNames 的使用方式，例如：
+
+如果数据为：
+
+```
+dataset: {
+    source: [
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.encode.y[0]]
+```
+
+如果数据为：
+
+```
+dataset: {
+    dimensions: ['product', '2015', '2016', '2017'],
+    source: [
+        {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+        {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+        {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+        {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.dimensionNames[params.encode.y[0]]]
+```
+
+###### markLine.data.1.blur.label.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.1.blur.label.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### markLine.data.1.blur.label.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### markLine.data.1.blur.label.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### markLine.data.1.blur.label.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### markLine.data.1.blur.label.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### markLine.data.1.blur.label.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.1.blur.label.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.1.blur.label.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### markLine.data.1.blur.label.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markLine.data.1.blur.label.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markLine.data.1.blur.label.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### markLine.data.1.blur.label.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### markLine.data.1.blur.label.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### markLine.data.1.blur.label.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### markLine.data.1.blur.label.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### markLine.data.1.blur.label.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### markLine.data.1.blur.label.width
+- **Type**: `number`
+
+文本显示宽度。
+
+###### markLine.data.1.blur.label.height
+- **Type**: `number`
+
+文本显示高度。
+
+###### markLine.data.1.blur.label.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.1.blur.label.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### markLine.data.1.blur.label.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### markLine.data.1.blur.label.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markLine.data.1.blur.label.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### markLine.data.1.blur.label.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### markLine.data.1.blur.label.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### markLine.data.1.blur.label.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+###### markLine.data.1.blur.label.overflow
+- **Type**: `string`
+- **Default**: `'none'`
+
+文字超出宽度是否截断或者换行。配置`width`时有效
+
+*   `'truncate'` 截断，并在末尾显示`ellipsis`配置的文本，默认为`...`
+*   `'break'` 换行
+*   `'breakAll'` 换行，跟`'break'`不同的是，在英语等拉丁文中，`'breakAll'`还会强制单词内换行
+
+###### markLine.data.1.blur.label.ellipsis
+- **Type**: `string`
+- **Default**: `'...'`
+
+在`overflow`配置为`'truncate'`的时候，可以通过该属性配置末尾显示的文本。
+
+###### markLine.data.1.blur.label.rich
+- **Type**: `Object`
+
+在 `rich` 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。
+
+例如：
+
+```
+label: {
+    // 在文本中，可以对部分文本采用 rich 中定义样式。
+    // 这里需要在文本中使用标记符号：
+    // `{styleName|text content text content}` 标记样式名。
+    // 注意，换行仍是使用 '\n'。
+    formatter: [
+        '{a|这段文本采用样式a}',
+        '{b|这段文本采用样式b}这段用默认样式{x|这段用样式x}'
+    ].join('\n'),
+
+    rich: {
+        a: {
+            color: 'red',
+            lineHeight: 10
+        },
+        b: {
+            backgroundColor: {
+                image: 'xxx/xxx.jpg'
+            },
+            height: 40
+        },
+        x: {
+            fontSize: 18,
+            fontFamily: 'Microsoft YaHei',
+            borderColor: '#449933',
+            borderRadius: 4
+        },
+        ...
+    }
+}
+```
+
+详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+
+###### markLine.data.1.blur.label.rich.<style_name>.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.1.blur.label.rich.<style_name>.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### markLine.data.1.blur.label.rich.<style_name>.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### markLine.data.1.blur.label.rich.<style_name>.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### markLine.data.1.blur.label.rich.<style_name>.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### markLine.data.1.blur.label.rich.<style_name>.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### markLine.data.1.blur.label.rich.<style_name>.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### markLine.data.1.blur.label.rich.<style_name>.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### markLine.data.1.blur.label.rich.<style_name>.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.1.blur.label.rich.<style_name>.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.1.blur.label.rich.<style_name>.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### markLine.data.1.blur.label.rich.<style_name>.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markLine.data.1.blur.label.rich.<style_name>.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markLine.data.1.blur.label.rich.<style_name>.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### markLine.data.1.blur.label.rich.<style_name>.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### markLine.data.1.blur.label.rich.<style_name>.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### markLine.data.1.blur.label.rich.<style_name>.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### markLine.data.1.blur.label.rich.<style_name>.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### markLine.data.1.blur.label.rich.<style_name>.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### markLine.data.1.blur.label.rich.<style_name>.width
+- **Type**: `number|string`
+
+文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+`width` 也可以是百分比字符串，如 `'100%'`。表示的是所在文本块的 `contentWidth`（即不包含文本块的 `padding`）的百分之多少。之所以以 `contentWidth` 做基数，因为每个文本片段只能基于 `content box` 布局。如果以 `outerWidth` 做基数，则百分比的计算在实用中不具有意义，可能会超出。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markLine.data.1.blur.label.rich.<style_name>.height
+- **Type**: `number|string`
+
+文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markLine.data.1.blur.label.rich.<style_name>.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markLine.data.1.blur.label.rich.<style_name>.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### markLine.data.1.blur.label.rich.<style_name>.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### markLine.data.1.blur.label.rich.<style_name>.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markLine.data.1.blur.label.rich.<style_name>.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### markLine.data.1.blur.label.rich.<style_name>.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### markLine.data.1.blur.label.rich.<style_name>.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### markLine.data.1.blur.label.rich.<style_name>.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+###### markLine.data.1.blur.label.richInheritPlainLabel
+- **Type**: `boolean`
+- **Default**: `true`
+
+从 `v6.0.0` 开始支持
+
+富文本样式是否继承普通文本样式。
+
+此配置项用于向历史兼容。
+
+> 从 v6 版本开始，[富文本标签 (label.rich / textStyle.rich)](option.series-scatter.md#label.rich) 部分样式（`fontStyle`, `fontWeight`, `fontSize`, `fontFamily`, `textShadowColor`, `textShadowBlur`, `textShadowOffsetX`, `textShadowOffsetY`）默认继承 [普通文本样式 (label / textStyle)](option.series-scatter.md#label)。你可以设置 `richInheritPlainLabel: false` （可在最外层配置项或与同级文本样式配置项）来禁用此行为。
+> 
+> ```
+> option = {
+>     richInheritPlainLabel: false, // In most cases, this is enough.
+>     xxx1: {
+>         // Can also set it here to only control this label.
+>         label: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     },
+>     xxx2: {
+>         textStyle: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     }
+> }
+> ```
+
+### markLine.z
+- **Type**: `number`
+- **Default**: `5`
+
+从 `v6.0.0` 开始支持
+
+`z`值小的图形会被`z`值大的图形覆盖。
+
+`z`相比`zlevel`优先级更低，而且不会创建新的 Canvas。
+
+### markLine.animation
+- **Type**: `boolean`
+- **Default**: `true`
+
+是否开启动画。
+
+### markLine.animationThreshold
+- **Type**: `number`
+- **Default**: `2000`
+
+是否开启动画的阈值，当单个系列显示的图形数量大于这个阈值时会关闭动画。
+
+### markLine.animationDuration
+- **Type**: `number|Function`
+- **Default**: `1000`
+
+初始动画的时长，支持回调函数，可以通过每个数据返回不同的时长实现更戏剧的初始动画效果：
+
+```
+animationDuration: function (idx) {
+    // 越往后的数据时长越大
+    return idx * 100;
+}
+```
+
+### markLine.animationEasing
+- **Type**: `string`
+- **Default**: `'cubicOut'`
+
+初始动画的缓动效果。不同的缓动效果可以参考 [缓动示例](https://echarts.apache.org/examples/zh/editor.html?c=line-easing)。
+
+### markLine.animationDelay
+- **Type**: `number|Function`
+- **Default**: `0`
+
+初始动画的延迟，支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的初始动画效果。
+
+如下示例：
+
+```
+animationDelay: function (idx) {
+    // 越往后的数据延迟越大
+    return idx * 100;
+}
+```
+
+也可以看[该示例](https://echarts.apache.org/examples/zh/editor.html?c=bar-animation-delay)
+
+### markLine.animationDurationUpdate
+- **Type**: `number|Function`
+- **Default**: `300`
+
+数据更新动画的时长。
+
+支持回调函数，可以通过每个数据返回不同的时长实现更戏剧的更新动画效果：
+
+```
+animationDurationUpdate: function (idx) {
+    // 越往后的数据时长越大
+    return idx * 100;
+}
+```
+
+### markLine.animationEasingUpdate
+- **Type**: `string`
+- **Default**: `'cubicInOut'`
+
+数据更新动画的缓动效果。
+
+### markLine.animationDelayUpdate
+- **Type**: `number|Function`
+- **Default**: `0`
+
+数据更新动画的延迟，支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的更新动画效果。
+
+如下示例：
+
+```
+animationDelayUpdate: function (idx) {
+    // 越往后的数据延迟越大
+    return idx * 100;
+}
+```
+
+也可以看[该示例](https://echarts.apache.org/examples/zh/editor.html?c=bar-animation-delay)
+
+## markArea
+- **Type**: `Object`
+
+图表标域，常用于标记图表中某个范围的数据，例如标出某段时间投放了广告。
+
+### markArea.silent
+- **Type**: `boolean`
+- **Default**: `false`
+
+图形是否不响应和触发鼠标事件，默认为 false，即响应和触发鼠标事件。
+
+### markArea.label
+- **Type**: `Object`
+
+标域文本配置。
+
+#### markArea.label.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+是否显示标签。
+
+#### markArea.label.position
+- **Type**: `string|Array`
+- **Default**: `'top'`
+
+标签的位置。
+
+*   可以通过内置的语义声明位置：
+    
+    示例：
+    
+    ```
+      position: 'top'
+    ```
+    
+    支持：`top` / `left` / `right` / `bottom` / `inside` / `insideLeft` / `insideRight` / `insideTop` / `insideBottom` / `insideTopLeft` / `insideBottomLeft` / `insideTopRight` / `insideBottomRight`
+    
+*   也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。
+    
+    示例：
+    
+    ```
+      // 绝对的像素值
+      position: [10, 10],
+      // 相对的百分比
+      position: ['50%', '50%']
+    ```
+    
+
+参见：[label position](https://echarts.apache.org/examples/zh/view.html?c=doc-example/label-position)。
+
+#### markArea.label.distance
+- **Type**: `number`
+- **Default**: `5`
+
+距离图形元素的距离。
+
+当 position 为字符描述值（如 `'top'`、`'insideRight'`）时候有效。
+
+参见：[label position](https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position)。
+
+#### markArea.label.rotate
+- **Type**: `number`
+
+标签旋转。从 -90 度到 90 度。正值是逆时针。
+
+参见：[label rotation](https://echarts.apache.org/examples/zh/editor.html?c=bar-label-rotation)。
+
+#### markArea.label.offset
+- **Type**: `Array`
+
+是否对文字进行偏移。默认不偏移。例如：`[30, 40]` 表示文字在横向上偏移 `30`，纵向上偏移 `40`。
+
+#### markArea.label.formatter
+- **Type**: `string|Function`
+
+标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 `\n` 换行。
+
+**字符串模板** 模板变量有：
+
+*   `{a}`：系列名。
+*   `{b}`：数据名。
+*   `{c}`：数据值。
+*   `{@xxx}`：数据中名为 `'xxx'` 的维度的值，如 `{@product}` 表示名为 `'product'` 的维度的值。
+*   `{@[n]}`：数据中维度 `n` 的值，如 `{@[3]}` 表示维度 3 的值，从 0 开始计数。
+
+**示例：**
+
+```
+formatter: '{b}: {@score}'
+```
+
+**回调函数**
+
+回调函数格式：
+
+```
+(params: Object|Array) => string
+```
+
+参数 `params` 是 formatter 需要的单个数据集。格式如下：
+
+```
+{
+    componentType: 'series',
+    // 系列类型
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index
+    seriesIndex: number,
+    // 系列名称
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // 传入的数据值。在多数系列下它和 data 相同。在一些系列下是 data 中的分量（如 map、radar 中）
+    value: number|Array|Object,
+    // 坐标轴 encode 映射信息，
+    // key 为坐标轴（如 'x' 'y' 'radius' 'angle' 等）
+    // value 必然为数组，不会为 null/undefined，表示 dimension index 。
+    // 其内容如：
+    // {
+    //     x: [2] // dimension index 为 2 的数据映射到 x 轴
+    //     y: [0] // dimension index 为 0 的数据映射到 y 轴
+    // }
+    encode: Object,
+    // 维度名列表
+    dimensionNames: Array<String>,
+    // 数据的维度 index，如 0 或 1 或 2 ...
+    // 仅在雷达图中使用。
+    dimensionIndex: number,
+    // 数据图形的颜色
+    color: string
+}
+```
+
+注：encode 和 dimensionNames 的使用方式，例如：
+
+如果数据为：
+
+```
+dataset: {
+    source: [
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.encode.y[0]]
+```
+
+如果数据为：
+
+```
+dataset: {
+    dimensions: ['product', '2015', '2016', '2017'],
+    source: [
+        {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+        {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+        {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+        {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.dimensionNames[params.encode.y[0]]]
+```
+
+#### markArea.label.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+#### markArea.label.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+#### markArea.label.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+#### markArea.label.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+#### markArea.label.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+#### markArea.label.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+#### markArea.label.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+#### markArea.label.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+#### markArea.label.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+#### markArea.label.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+#### markArea.label.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+#### markArea.label.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+#### markArea.label.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+#### markArea.label.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+#### markArea.label.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+#### markArea.label.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+#### markArea.label.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+#### markArea.label.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+#### markArea.label.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+#### markArea.label.width
+- **Type**: `number`
+
+文本显示宽度。
+
+#### markArea.label.height
+- **Type**: `number`
+
+文本显示高度。
+
+#### markArea.label.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+#### markArea.label.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+#### markArea.label.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+#### markArea.label.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+#### markArea.label.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+#### markArea.label.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+#### markArea.label.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+#### markArea.label.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+#### markArea.label.overflow
+- **Type**: `string`
+- **Default**: `'none'`
+
+文字超出宽度是否截断或者换行。配置`width`时有效
+
+*   `'truncate'` 截断，并在末尾显示`ellipsis`配置的文本，默认为`...`
+*   `'break'` 换行
+*   `'breakAll'` 换行，跟`'break'`不同的是，在英语等拉丁文中，`'breakAll'`还会强制单词内换行
+
+#### markArea.label.ellipsis
+- **Type**: `string`
+- **Default**: `'...'`
+
+在`overflow`配置为`'truncate'`的时候，可以通过该属性配置末尾显示的文本。
+
+#### markArea.label.rich
+- **Type**: `Object`
+
+在 `rich` 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。
+
+例如：
+
+```
+label: {
+    // 在文本中，可以对部分文本采用 rich 中定义样式。
+    // 这里需要在文本中使用标记符号：
+    // `{styleName|text content text content}` 标记样式名。
+    // 注意，换行仍是使用 '\n'。
+    formatter: [
+        '{a|这段文本采用样式a}',
+        '{b|这段文本采用样式b}这段用默认样式{x|这段用样式x}'
+    ].join('\n'),
+
+    rich: {
+        a: {
+            color: 'red',
+            lineHeight: 10
+        },
+        b: {
+            backgroundColor: {
+                image: 'xxx/xxx.jpg'
+            },
+            height: 40
+        },
+        x: {
+            fontSize: 18,
+            fontFamily: 'Microsoft YaHei',
+            borderColor: '#449933',
+            borderRadius: 4
+        },
+        ...
+    }
+}
+```
+
+详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+
+###### markArea.label.rich.<style_name>.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.label.rich.<style_name>.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### markArea.label.rich.<style_name>.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### markArea.label.rich.<style_name>.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### markArea.label.rich.<style_name>.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### markArea.label.rich.<style_name>.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### markArea.label.rich.<style_name>.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### markArea.label.rich.<style_name>.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### markArea.label.rich.<style_name>.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.label.rich.<style_name>.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.label.rich.<style_name>.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### markArea.label.rich.<style_name>.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markArea.label.rich.<style_name>.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markArea.label.rich.<style_name>.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### markArea.label.rich.<style_name>.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### markArea.label.rich.<style_name>.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### markArea.label.rich.<style_name>.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### markArea.label.rich.<style_name>.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### markArea.label.rich.<style_name>.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### markArea.label.rich.<style_name>.width
+- **Type**: `number|string`
+
+文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+`width` 也可以是百分比字符串，如 `'100%'`。表示的是所在文本块的 `contentWidth`（即不包含文本块的 `padding`）的百分之多少。之所以以 `contentWidth` 做基数，因为每个文本片段只能基于 `content box` 布局。如果以 `outerWidth` 做基数，则百分比的计算在实用中不具有意义，可能会超出。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markArea.label.rich.<style_name>.height
+- **Type**: `number|string`
+
+文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markArea.label.rich.<style_name>.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.label.rich.<style_name>.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### markArea.label.rich.<style_name>.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### markArea.label.rich.<style_name>.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markArea.label.rich.<style_name>.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### markArea.label.rich.<style_name>.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### markArea.label.rich.<style_name>.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### markArea.label.rich.<style_name>.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+#### markArea.label.richInheritPlainLabel
+- **Type**: `boolean`
+- **Default**: `true`
+
+从 `v6.0.0` 开始支持
+
+富文本样式是否继承普通文本样式。
+
+此配置项用于向历史兼容。
+
+> 从 v6 版本开始，[富文本标签 (label.rich / textStyle.rich)](option.series-scatter.md#label.rich) 部分样式（`fontStyle`, `fontWeight`, `fontSize`, `fontFamily`, `textShadowColor`, `textShadowBlur`, `textShadowOffsetX`, `textShadowOffsetY`）默认继承 [普通文本样式 (label / textStyle)](option.series-scatter.md#label)。你可以设置 `richInheritPlainLabel: false` （可在最外层配置项或与同级文本样式配置项）来禁用此行为。
+> 
+> ```
+> option = {
+>     richInheritPlainLabel: false, // In most cases, this is enough.
+>     xxx1: {
+>         // Can also set it here to only control this label.
+>         label: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     },
+>     xxx2: {
+>         textStyle: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     }
+> }
+> ```
+
+### markArea.itemStyle
+- **Type**: `Object`
+
+该标域的样式。
+
+#### markArea.itemStyle.color
+- **Type**: `Color`
+- **Default**: `自适应`
+
+图形的颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+#### markArea.itemStyle.borderColor
+- **Type**: `Color`
+- **Default**: `'#000'`
+
+图形的描边颜色。支持的颜色格式同 `color`，不支持回调函数。
+
+#### markArea.itemStyle.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+描边线宽。为 0 时无描边。
+
+#### markArea.itemStyle.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+#### markArea.itemStyle.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+#### markArea.itemStyle.borderCap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+#### markArea.itemStyle.borderJoin
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `borderMiterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+#### markArea.itemStyle.borderMiterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `borderJoin` 为 `miter` 时， `borderMiterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+#### markArea.itemStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+#### markArea.itemStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+#### markArea.itemStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+#### markArea.itemStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+#### markArea.itemStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+### markArea.emphasis
+- **Type**: `Object`
+
+高亮的标域样式
+
+#### markArea.emphasis.disabled
+- **Type**: `boolean`
+- **Default**: `false`
+
+从 `v5.3.0` 开始支持
+
+是否关闭高亮状态。
+
+关闭高亮状态可以在鼠标移到图形上，tooltip 触发，或者图例联动的时候不再触发高亮效果。在图形非常多的时候可以关闭以提升交互流畅性。
+
+##### markArea.emphasis.label.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+是否显示标签。
+
+##### markArea.emphasis.label.position
+- **Type**: `string|Array`
+- **Default**: `'top'`
+
+标签的位置。
+
+*   可以通过内置的语义声明位置：
+    
+    示例：
+    
+    ```
+      position: 'top'
+    ```
+    
+    支持：`top` / `left` / `right` / `bottom` / `inside` / `insideLeft` / `insideRight` / `insideTop` / `insideBottom` / `insideTopLeft` / `insideBottomLeft` / `insideTopRight` / `insideBottomRight`
+    
+*   也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。
+    
+    示例：
+    
+    ```
+      // 绝对的像素值
+      position: [10, 10],
+      // 相对的百分比
+      position: ['50%', '50%']
+    ```
+    
+
+参见：[label position](https://echarts.apache.org/examples/zh/view.html?c=doc-example/label-position)。
+
+##### markArea.emphasis.label.distance
+- **Type**: `number`
+- **Default**: `5`
+
+距离图形元素的距离。
+
+当 position 为字符描述值（如 `'top'`、`'insideRight'`）时候有效。
+
+参见：[label position](https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position)。
+
+##### markArea.emphasis.label.rotate
+- **Type**: `number`
+
+标签旋转。从 -90 度到 90 度。正值是逆时针。
+
+参见：[label rotation](https://echarts.apache.org/examples/zh/editor.html?c=bar-label-rotation)。
+
+##### markArea.emphasis.label.offset
+- **Type**: `Array`
+
+是否对文字进行偏移。默认不偏移。例如：`[30, 40]` 表示文字在横向上偏移 `30`，纵向上偏移 `40`。
+
+##### markArea.emphasis.label.formatter
+- **Type**: `string|Function`
+
+标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 `\n` 换行。
+
+**字符串模板** 模板变量有：
+
+*   `{a}`：系列名。
+*   `{b}`：数据名。
+*   `{c}`：数据值。
+*   `{@xxx}`：数据中名为 `'xxx'` 的维度的值，如 `{@product}` 表示名为 `'product'` 的维度的值。
+*   `{@[n]}`：数据中维度 `n` 的值，如 `{@[3]}` 表示维度 3 的值，从 0 开始计数。
+
+**示例：**
+
+```
+formatter: '{b}: {@score}'
+```
+
+**回调函数**
+
+回调函数格式：
+
+```
+(params: Object|Array) => string
+```
+
+参数 `params` 是 formatter 需要的单个数据集。格式如下：
+
+```
+{
+    componentType: 'series',
+    // 系列类型
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index
+    seriesIndex: number,
+    // 系列名称
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // 传入的数据值。在多数系列下它和 data 相同。在一些系列下是 data 中的分量（如 map、radar 中）
+    value: number|Array|Object,
+    // 坐标轴 encode 映射信息，
+    // key 为坐标轴（如 'x' 'y' 'radius' 'angle' 等）
+    // value 必然为数组，不会为 null/undefined，表示 dimension index 。
+    // 其内容如：
+    // {
+    //     x: [2] // dimension index 为 2 的数据映射到 x 轴
+    //     y: [0] // dimension index 为 0 的数据映射到 y 轴
+    // }
+    encode: Object,
+    // 维度名列表
+    dimensionNames: Array<String>,
+    // 数据的维度 index，如 0 或 1 或 2 ...
+    // 仅在雷达图中使用。
+    dimensionIndex: number,
+    // 数据图形的颜色
+    color: string
+}
+```
+
+注：encode 和 dimensionNames 的使用方式，例如：
+
+如果数据为：
+
+```
+dataset: {
+    source: [
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.encode.y[0]]
+```
+
+如果数据为：
+
+```
+dataset: {
+    dimensions: ['product', '2015', '2016', '2017'],
+    source: [
+        {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+        {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+        {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+        {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.dimensionNames[params.encode.y[0]]]
+```
+
+##### markArea.emphasis.label.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### markArea.emphasis.label.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+##### markArea.emphasis.label.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+##### markArea.emphasis.label.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+##### markArea.emphasis.label.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+##### markArea.emphasis.label.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+##### markArea.emphasis.label.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+##### markArea.emphasis.label.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+##### markArea.emphasis.label.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### markArea.emphasis.label.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### markArea.emphasis.label.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+##### markArea.emphasis.label.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+##### markArea.emphasis.label.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### markArea.emphasis.label.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+##### markArea.emphasis.label.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+##### markArea.emphasis.label.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+##### markArea.emphasis.label.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+##### markArea.emphasis.label.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+##### markArea.emphasis.label.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+##### markArea.emphasis.label.width
+- **Type**: `number`
+
+文本显示宽度。
+
+##### markArea.emphasis.label.height
+- **Type**: `number`
+
+文本显示高度。
+
+##### markArea.emphasis.label.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### markArea.emphasis.label.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+##### markArea.emphasis.label.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+##### markArea.emphasis.label.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### markArea.emphasis.label.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+##### markArea.emphasis.label.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+##### markArea.emphasis.label.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+##### markArea.emphasis.label.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+##### markArea.emphasis.label.overflow
+- **Type**: `string`
+- **Default**: `'none'`
+
+文字超出宽度是否截断或者换行。配置`width`时有效
+
+*   `'truncate'` 截断，并在末尾显示`ellipsis`配置的文本，默认为`...`
+*   `'break'` 换行
+*   `'breakAll'` 换行，跟`'break'`不同的是，在英语等拉丁文中，`'breakAll'`还会强制单词内换行
+
+##### markArea.emphasis.label.ellipsis
+- **Type**: `string`
+- **Default**: `'...'`
+
+在`overflow`配置为`'truncate'`的时候，可以通过该属性配置末尾显示的文本。
+
+##### markArea.emphasis.label.rich
+- **Type**: `Object`
+
+在 `rich` 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。
+
+例如：
+
+```
+label: {
+    // 在文本中，可以对部分文本采用 rich 中定义样式。
+    // 这里需要在文本中使用标记符号：
+    // `{styleName|text content text content}` 标记样式名。
+    // 注意，换行仍是使用 '\n'。
+    formatter: [
+        '{a|这段文本采用样式a}',
+        '{b|这段文本采用样式b}这段用默认样式{x|这段用样式x}'
+    ].join('\n'),
+
+    rich: {
+        a: {
+            color: 'red',
+            lineHeight: 10
+        },
+        b: {
+            backgroundColor: {
+                image: 'xxx/xxx.jpg'
+            },
+            height: 40
+        },
+        x: {
+            fontSize: 18,
+            fontFamily: 'Microsoft YaHei',
+            borderColor: '#449933',
+            borderRadius: 4
+        },
+        ...
+    }
+}
+```
+
+详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+
+###### markArea.emphasis.label.rich.<style_name>.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.emphasis.label.rich.<style_name>.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### markArea.emphasis.label.rich.<style_name>.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### markArea.emphasis.label.rich.<style_name>.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### markArea.emphasis.label.rich.<style_name>.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### markArea.emphasis.label.rich.<style_name>.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### markArea.emphasis.label.rich.<style_name>.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### markArea.emphasis.label.rich.<style_name>.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### markArea.emphasis.label.rich.<style_name>.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.emphasis.label.rich.<style_name>.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.emphasis.label.rich.<style_name>.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### markArea.emphasis.label.rich.<style_name>.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markArea.emphasis.label.rich.<style_name>.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markArea.emphasis.label.rich.<style_name>.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### markArea.emphasis.label.rich.<style_name>.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### markArea.emphasis.label.rich.<style_name>.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### markArea.emphasis.label.rich.<style_name>.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### markArea.emphasis.label.rich.<style_name>.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### markArea.emphasis.label.rich.<style_name>.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### markArea.emphasis.label.rich.<style_name>.width
+- **Type**: `number|string`
+
+文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+`width` 也可以是百分比字符串，如 `'100%'`。表示的是所在文本块的 `contentWidth`（即不包含文本块的 `padding`）的百分之多少。之所以以 `contentWidth` 做基数，因为每个文本片段只能基于 `content box` 布局。如果以 `outerWidth` 做基数，则百分比的计算在实用中不具有意义，可能会超出。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markArea.emphasis.label.rich.<style_name>.height
+- **Type**: `number|string`
+
+文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markArea.emphasis.label.rich.<style_name>.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.emphasis.label.rich.<style_name>.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### markArea.emphasis.label.rich.<style_name>.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### markArea.emphasis.label.rich.<style_name>.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markArea.emphasis.label.rich.<style_name>.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### markArea.emphasis.label.rich.<style_name>.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### markArea.emphasis.label.rich.<style_name>.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### markArea.emphasis.label.rich.<style_name>.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+##### markArea.emphasis.label.richInheritPlainLabel
+- **Type**: `boolean`
+- **Default**: `true`
+
+从 `v6.0.0` 开始支持
+
+富文本样式是否继承普通文本样式。
+
+此配置项用于向历史兼容。
+
+> 从 v6 版本开始，[富文本标签 (label.rich / textStyle.rich)](option.series-scatter.md#label.rich) 部分样式（`fontStyle`, `fontWeight`, `fontSize`, `fontFamily`, `textShadowColor`, `textShadowBlur`, `textShadowOffsetX`, `textShadowOffsetY`）默认继承 [普通文本样式 (label / textStyle)](option.series-scatter.md#label)。你可以设置 `richInheritPlainLabel: false` （可在最外层配置项或与同级文本样式配置项）来禁用此行为。
+> 
+> ```
+> option = {
+>     richInheritPlainLabel: false, // In most cases, this is enough.
+>     xxx1: {
+>         // Can also set it here to only control this label.
+>         label: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     },
+>     xxx2: {
+>         textStyle: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     }
+> }
+> ```
+
+##### markArea.emphasis.itemStyle.color
+- **Type**: `Color`
+- **Default**: `自适应`
+
+图形的颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+##### markArea.emphasis.itemStyle.borderColor
+- **Type**: `Color`
+- **Default**: `'#000'`
+
+图形的描边颜色。支持的颜色格式同 `color`，不支持回调函数。
+
+##### markArea.emphasis.itemStyle.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+描边线宽。为 0 时无描边。
+
+##### markArea.emphasis.itemStyle.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+##### markArea.emphasis.itemStyle.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### markArea.emphasis.itemStyle.borderCap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+##### markArea.emphasis.itemStyle.borderJoin
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `borderMiterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+##### markArea.emphasis.itemStyle.borderMiterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `borderJoin` 为 `miter` 时， `borderMiterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+##### markArea.emphasis.itemStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+##### markArea.emphasis.itemStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+##### markArea.emphasis.itemStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+##### markArea.emphasis.itemStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+##### markArea.emphasis.itemStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+### markArea.blur
+- **Type**: `Object`
+
+从 `v5.0.0` 开始支持
+
+淡出的标域样式。淡出的规则跟随所在系列。
+
+##### markArea.blur.label.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+是否显示标签。
+
+##### markArea.blur.label.position
+- **Type**: `string|Array`
+- **Default**: `'top'`
+
+标签的位置。
+
+*   可以通过内置的语义声明位置：
+    
+    示例：
+    
+    ```
+      position: 'top'
+    ```
+    
+    支持：`top` / `left` / `right` / `bottom` / `inside` / `insideLeft` / `insideRight` / `insideTop` / `insideBottom` / `insideTopLeft` / `insideBottomLeft` / `insideTopRight` / `insideBottomRight`
+    
+*   也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。
+    
+    示例：
+    
+    ```
+      // 绝对的像素值
+      position: [10, 10],
+      // 相对的百分比
+      position: ['50%', '50%']
+    ```
+    
+
+参见：[label position](https://echarts.apache.org/examples/zh/view.html?c=doc-example/label-position)。
+
+##### markArea.blur.label.distance
+- **Type**: `number`
+- **Default**: `5`
+
+距离图形元素的距离。
+
+当 position 为字符描述值（如 `'top'`、`'insideRight'`）时候有效。
+
+参见：[label position](https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position)。
+
+##### markArea.blur.label.rotate
+- **Type**: `number`
+
+标签旋转。从 -90 度到 90 度。正值是逆时针。
+
+参见：[label rotation](https://echarts.apache.org/examples/zh/editor.html?c=bar-label-rotation)。
+
+##### markArea.blur.label.offset
+- **Type**: `Array`
+
+是否对文字进行偏移。默认不偏移。例如：`[30, 40]` 表示文字在横向上偏移 `30`，纵向上偏移 `40`。
+
+##### markArea.blur.label.formatter
+- **Type**: `string|Function`
+
+标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 `\n` 换行。
+
+**字符串模板** 模板变量有：
+
+*   `{a}`：系列名。
+*   `{b}`：数据名。
+*   `{c}`：数据值。
+*   `{@xxx}`：数据中名为 `'xxx'` 的维度的值，如 `{@product}` 表示名为 `'product'` 的维度的值。
+*   `{@[n]}`：数据中维度 `n` 的值，如 `{@[3]}` 表示维度 3 的值，从 0 开始计数。
+
+**示例：**
+
+```
+formatter: '{b}: {@score}'
+```
+
+**回调函数**
+
+回调函数格式：
+
+```
+(params: Object|Array) => string
+```
+
+参数 `params` 是 formatter 需要的单个数据集。格式如下：
+
+```
+{
+    componentType: 'series',
+    // 系列类型
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index
+    seriesIndex: number,
+    // 系列名称
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // 传入的数据值。在多数系列下它和 data 相同。在一些系列下是 data 中的分量（如 map、radar 中）
+    value: number|Array|Object,
+    // 坐标轴 encode 映射信息，
+    // key 为坐标轴（如 'x' 'y' 'radius' 'angle' 等）
+    // value 必然为数组，不会为 null/undefined，表示 dimension index 。
+    // 其内容如：
+    // {
+    //     x: [2] // dimension index 为 2 的数据映射到 x 轴
+    //     y: [0] // dimension index 为 0 的数据映射到 y 轴
+    // }
+    encode: Object,
+    // 维度名列表
+    dimensionNames: Array<String>,
+    // 数据的维度 index，如 0 或 1 或 2 ...
+    // 仅在雷达图中使用。
+    dimensionIndex: number,
+    // 数据图形的颜色
+    color: string
+}
+```
+
+注：encode 和 dimensionNames 的使用方式，例如：
+
+如果数据为：
+
+```
+dataset: {
+    source: [
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.encode.y[0]]
+```
+
+如果数据为：
+
+```
+dataset: {
+    dimensions: ['product', '2015', '2016', '2017'],
+    source: [
+        {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+        {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+        {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+        {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.dimensionNames[params.encode.y[0]]]
+```
+
+##### markArea.blur.label.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### markArea.blur.label.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+##### markArea.blur.label.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+##### markArea.blur.label.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+##### markArea.blur.label.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+##### markArea.blur.label.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+##### markArea.blur.label.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+##### markArea.blur.label.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+##### markArea.blur.label.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### markArea.blur.label.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### markArea.blur.label.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+##### markArea.blur.label.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+##### markArea.blur.label.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### markArea.blur.label.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+##### markArea.blur.label.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+##### markArea.blur.label.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+##### markArea.blur.label.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+##### markArea.blur.label.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+##### markArea.blur.label.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+##### markArea.blur.label.width
+- **Type**: `number`
+
+文本显示宽度。
+
+##### markArea.blur.label.height
+- **Type**: `number`
+
+文本显示高度。
+
+##### markArea.blur.label.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+##### markArea.blur.label.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+##### markArea.blur.label.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+##### markArea.blur.label.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### markArea.blur.label.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+##### markArea.blur.label.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+##### markArea.blur.label.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+##### markArea.blur.label.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+##### markArea.blur.label.overflow
+- **Type**: `string`
+- **Default**: `'none'`
+
+文字超出宽度是否截断或者换行。配置`width`时有效
+
+*   `'truncate'` 截断，并在末尾显示`ellipsis`配置的文本，默认为`...`
+*   `'break'` 换行
+*   `'breakAll'` 换行，跟`'break'`不同的是，在英语等拉丁文中，`'breakAll'`还会强制单词内换行
+
+##### markArea.blur.label.ellipsis
+- **Type**: `string`
+- **Default**: `'...'`
+
+在`overflow`配置为`'truncate'`的时候，可以通过该属性配置末尾显示的文本。
+
+##### markArea.blur.label.rich
+- **Type**: `Object`
+
+在 `rich` 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。
+
+例如：
+
+```
+label: {
+    // 在文本中，可以对部分文本采用 rich 中定义样式。
+    // 这里需要在文本中使用标记符号：
+    // `{styleName|text content text content}` 标记样式名。
+    // 注意，换行仍是使用 '\n'。
+    formatter: [
+        '{a|这段文本采用样式a}',
+        '{b|这段文本采用样式b}这段用默认样式{x|这段用样式x}'
+    ].join('\n'),
+
+    rich: {
+        a: {
+            color: 'red',
+            lineHeight: 10
+        },
+        b: {
+            backgroundColor: {
+                image: 'xxx/xxx.jpg'
+            },
+            height: 40
+        },
+        x: {
+            fontSize: 18,
+            fontFamily: 'Microsoft YaHei',
+            borderColor: '#449933',
+            borderRadius: 4
+        },
+        ...
+    }
+}
+```
+
+详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+
+###### markArea.blur.label.rich.<style_name>.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.blur.label.rich.<style_name>.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### markArea.blur.label.rich.<style_name>.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### markArea.blur.label.rich.<style_name>.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### markArea.blur.label.rich.<style_name>.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### markArea.blur.label.rich.<style_name>.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### markArea.blur.label.rich.<style_name>.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### markArea.blur.label.rich.<style_name>.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### markArea.blur.label.rich.<style_name>.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.blur.label.rich.<style_name>.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.blur.label.rich.<style_name>.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### markArea.blur.label.rich.<style_name>.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markArea.blur.label.rich.<style_name>.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markArea.blur.label.rich.<style_name>.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### markArea.blur.label.rich.<style_name>.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### markArea.blur.label.rich.<style_name>.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### markArea.blur.label.rich.<style_name>.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### markArea.blur.label.rich.<style_name>.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### markArea.blur.label.rich.<style_name>.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### markArea.blur.label.rich.<style_name>.width
+- **Type**: `number|string`
+
+文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+`width` 也可以是百分比字符串，如 `'100%'`。表示的是所在文本块的 `contentWidth`（即不包含文本块的 `padding`）的百分之多少。之所以以 `contentWidth` 做基数，因为每个文本片段只能基于 `content box` 布局。如果以 `outerWidth` 做基数，则百分比的计算在实用中不具有意义，可能会超出。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markArea.blur.label.rich.<style_name>.height
+- **Type**: `number|string`
+
+文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markArea.blur.label.rich.<style_name>.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.blur.label.rich.<style_name>.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### markArea.blur.label.rich.<style_name>.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### markArea.blur.label.rich.<style_name>.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markArea.blur.label.rich.<style_name>.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### markArea.blur.label.rich.<style_name>.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### markArea.blur.label.rich.<style_name>.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### markArea.blur.label.rich.<style_name>.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+##### markArea.blur.label.richInheritPlainLabel
+- **Type**: `boolean`
+- **Default**: `true`
+
+从 `v6.0.0` 开始支持
+
+富文本样式是否继承普通文本样式。
+
+此配置项用于向历史兼容。
+
+> 从 v6 版本开始，[富文本标签 (label.rich / textStyle.rich)](option.series-scatter.md#label.rich) 部分样式（`fontStyle`, `fontWeight`, `fontSize`, `fontFamily`, `textShadowColor`, `textShadowBlur`, `textShadowOffsetX`, `textShadowOffsetY`）默认继承 [普通文本样式 (label / textStyle)](option.series-scatter.md#label)。你可以设置 `richInheritPlainLabel: false` （可在最外层配置项或与同级文本样式配置项）来禁用此行为。
+> 
+> ```
+> option = {
+>     richInheritPlainLabel: false, // In most cases, this is enough.
+>     xxx1: {
+>         // Can also set it here to only control this label.
+>         label: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     },
+>     xxx2: {
+>         textStyle: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     }
+> }
+> ```
+
+##### markArea.blur.itemStyle.color
+- **Type**: `Color`
+- **Default**: `自适应`
+
+图形的颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+##### markArea.blur.itemStyle.borderColor
+- **Type**: `Color`
+- **Default**: `'#000'`
+
+图形的描边颜色。支持的颜色格式同 `color`，不支持回调函数。
+
+##### markArea.blur.itemStyle.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+描边线宽。为 0 时无描边。
+
+##### markArea.blur.itemStyle.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+##### markArea.blur.itemStyle.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### markArea.blur.itemStyle.borderCap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+##### markArea.blur.itemStyle.borderJoin
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `borderMiterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+##### markArea.blur.itemStyle.borderMiterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `borderJoin` 为 `miter` 时， `borderMiterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+##### markArea.blur.itemStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+##### markArea.blur.itemStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+##### markArea.blur.itemStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+##### markArea.blur.itemStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+##### markArea.blur.itemStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+### markArea.data
+- **Type**: `*`
+
+标域的数据数组。每个数组项是一个两个项的数组，分别表示标域左上角和右下角的位置，每个项支持通过下面几种方式指定自己的位置
+
+1.  通过 [x](option.series-scatter.md#markArea.data.0.x), [y](option.series-scatter.md#markArea.data.0.y) 属性指定相对容器的屏幕坐标，单位像素，支持百分比。
+
+2.  用 [coord](option.series-scatter.md#markArea.data.0.coord) 属性指定数据在相应坐标系上的坐标位置，单个维度支持设置 `'min'`, `'max'`, `'average'`。
+    
+3.  直接用 [type](option.series-scatter.md#markArea.data.0.type) 属性标注系列中的最大值，最小值。这时候可以使用 [valueIndex](option.series-scatter.md#markArea.data.0.valueIndex) 或者 [valueDim](option.series-scatter.md#markPoint.data.0.valueDim) 指定是在哪个维度上的最大值、最小值、平均值。
+    
+4.  如果是笛卡尔坐标系的话，也可以通过只指定 `xAxis` 或者 `yAxis` 来实现 X 轴或者 Y 轴为某值的标域，见示例 [scatter-weight](https://echarts.apache.org/examples/zh/editor.html?c=scatter-weight)
+    
+
+当多个属性同时存在时，优先级按上述的顺序。
+
+```
+data: [
+
+    [
+        {
+            name: '平均值到最大值',
+            type: 'average'
+        },
+        {
+            type: 'max'
+        }
+    ],
+
+    [
+        {
+            name: '两个坐标之间的标域',
+            coord: [10, 20]
+        },
+        {
+            coord: [20, 30]
+        }
+    ], [
+        {
+            name: '60分到80分',
+            yAxis: 60
+        },
+        {
+            yAxis: 80
+        }
+    ], [
+        {
+            name: '所有数据范围区间',
+            coord: ['min', 'min']
+        },
+        {
+            coord: ['max', 'max']
+        }
+    ],
+[
+        {
+            name: '两个屏幕坐标之间的标域',
+            x: 100,
+            y: 100
+        }, {
+            x: '90%',
+            y: '10%'
+        }
+    ]
+]
+```
+
+#### markArea.data.0
+- **Type**: `Object`
+
+标域左上角的数据
+
+##### markArea.data.0.type
+- **Type**: `string`
+
+特殊的标注类型，用于标注最大值最小值等。
+
+**可选:**
+
+*   `'min'` 最小值。
+*   `'max'` 最大值。
+*   `'average'` 平均值。
+
+##### markArea.data.0.valueIndex
+- **Type**: `number`
+
+在使用 [type](option.series-scatter.md#markArea.data.type) 时有效，用于指定在哪个维度上指定最大值最小值，可以是 `0`（xAxis, radiusAxis），`1`（yAxis, angleAxis），默认使用第一个数值轴所在的维度。
+
+##### markArea.data.0.valueDim
+- **Type**: `string`
+
+在使用 [type](option.series-scatter.md#markArea.data.type) 时有效，用于指定在哪个维度上指定最大值最小值。这可以是维度的直接名称，例如折线图时可以是`x`、`angle`等、candlestick 图时可以是`open`、`close`等维度名称。
+
+##### markArea.data.0.coord
+- **Type**: `Array`
+
+起点或终点的坐标。坐标格式视系列的坐标系而定，可以是[直角坐标系](option.grid.md)上的 `x`, `y`，也可以是[极坐标系](option.polar.md)上的 `radius`, `angle`。
+
+##### markArea.data.0.name
+- **Type**: `string`
+- **Default**: `''`
+
+标注名称，将会作为文字显示。定义后可在 [label formatter](option.series-scatter.md#markArea.data.label.formatter) 中作为**数据名** `{b}` 模板变量使用。
+
+##### markArea.data.0.x
+- **Type**: `number`
+
+相对容器的屏幕 x 坐标，单位像素，支持百分比形式，例如 `'20%'`。
+
+##### markArea.data.0.y
+- **Type**: `number`
+
+相对容器的屏幕 y 坐标，单位像素，支持百分比形式，例如 `'20%'`。
+
+##### markArea.data.0.z2
+- **Type**: `number`
+
+从 `v6.0.0` 开始支持
+
+指定图形元素间的覆盖关系。数值越大，越在层叠的上方。
+
+##### markArea.data.0.value
+- **Type**: `number`
+
+标域值，可以不设。
+
+##### markArea.data.0.itemStyle
+- **Type**: `Object`
+
+该数据项区域的样式，起点和终点项的 `itemStyle` 会合并到一起。
+
+###### markArea.data.0.itemStyle.color
+- **Type**: `Color`
+- **Default**: `自适应`
+
+图形的颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+###### markArea.data.0.itemStyle.borderColor
+- **Type**: `Color`
+- **Default**: `'#000'`
+
+图形的描边颜色。支持的颜色格式同 `color`，不支持回调函数。
+
+###### markArea.data.0.itemStyle.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+描边线宽。为 0 时无描边。
+
+###### markArea.data.0.itemStyle.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markArea.data.0.itemStyle.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markArea.data.0.itemStyle.borderCap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+###### markArea.data.0.itemStyle.borderJoin
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `borderMiterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+###### markArea.data.0.itemStyle.borderMiterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `borderJoin` 为 `miter` 时， `borderMiterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+###### markArea.data.0.itemStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+###### markArea.data.0.itemStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+###### markArea.data.0.itemStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+###### markArea.data.0.itemStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+###### markArea.data.0.itemStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+##### markArea.data.0.label
+- **Type**: `Object`
+
+该数据项标签的样式，起点和终点项的 `label` 会合并到一起。
+
+###### markArea.data.0.label.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+是否显示标签。
+
+###### markArea.data.0.label.position
+- **Type**: `string|Array`
+- **Default**: `'top'`
+
+标签的位置。
+
+*   可以通过内置的语义声明位置：
+    
+    示例：
+    
+    ```
+      position: 'top'
+    ```
+    
+    支持：`top` / `left` / `right` / `bottom` / `inside` / `insideLeft` / `insideRight` / `insideTop` / `insideBottom` / `insideTopLeft` / `insideBottomLeft` / `insideTopRight` / `insideBottomRight`
+    
+*   也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。
+    
+    示例：
+    
+    ```
+      // 绝对的像素值
+      position: [10, 10],
+      // 相对的百分比
+      position: ['50%', '50%']
+    ```
+    
+
+参见：[label position](https://echarts.apache.org/examples/zh/view.html?c=doc-example/label-position)。
+
+###### markArea.data.0.label.distance
+- **Type**: `number`
+- **Default**: `5`
+
+距离图形元素的距离。
+
+当 position 为字符描述值（如 `'top'`、`'insideRight'`）时候有效。
+
+参见：[label position](https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position)。
+
+###### markArea.data.0.label.rotate
+- **Type**: `number`
+
+标签旋转。从 -90 度到 90 度。正值是逆时针。
+
+参见：[label rotation](https://echarts.apache.org/examples/zh/editor.html?c=bar-label-rotation)。
+
+###### markArea.data.0.label.offset
+- **Type**: `Array`
+
+是否对文字进行偏移。默认不偏移。例如：`[30, 40]` 表示文字在横向上偏移 `30`，纵向上偏移 `40`。
+
+###### markArea.data.0.label.formatter
+- **Type**: `string|Function`
+
+标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 `\n` 换行。
+
+**字符串模板** 模板变量有：
+
+*   `{a}`：系列名。
+*   `{b}`：数据名。
+*   `{c}`：数据值。
+*   `{@xxx}`：数据中名为 `'xxx'` 的维度的值，如 `{@product}` 表示名为 `'product'` 的维度的值。
+*   `{@[n]}`：数据中维度 `n` 的值，如 `{@[3]}` 表示维度 3 的值，从 0 开始计数。
+
+**示例：**
+
+```
+formatter: '{b}: {@score}'
+```
+
+**回调函数**
+
+回调函数格式：
+
+```
+(params: Object|Array) => string
+```
+
+参数 `params` 是 formatter 需要的单个数据集。格式如下：
+
+```
+{
+    componentType: 'series',
+    // 系列类型
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index
+    seriesIndex: number,
+    // 系列名称
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // 传入的数据值。在多数系列下它和 data 相同。在一些系列下是 data 中的分量（如 map、radar 中）
+    value: number|Array|Object,
+    // 坐标轴 encode 映射信息，
+    // key 为坐标轴（如 'x' 'y' 'radius' 'angle' 等）
+    // value 必然为数组，不会为 null/undefined，表示 dimension index 。
+    // 其内容如：
+    // {
+    //     x: [2] // dimension index 为 2 的数据映射到 x 轴
+    //     y: [0] // dimension index 为 0 的数据映射到 y 轴
+    // }
+    encode: Object,
+    // 维度名列表
+    dimensionNames: Array<String>,
+    // 数据的维度 index，如 0 或 1 或 2 ...
+    // 仅在雷达图中使用。
+    dimensionIndex: number,
+    // 数据图形的颜色
+    color: string
+}
+```
+
+注：encode 和 dimensionNames 的使用方式，例如：
+
+如果数据为：
+
+```
+dataset: {
+    source: [
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.encode.y[0]]
+```
+
+如果数据为：
+
+```
+dataset: {
+    dimensions: ['product', '2015', '2016', '2017'],
+    source: [
+        {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+        {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+        {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+        {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.dimensionNames[params.encode.y[0]]]
+```
+
+###### markArea.data.0.label.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.0.label.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### markArea.data.0.label.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### markArea.data.0.label.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### markArea.data.0.label.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### markArea.data.0.label.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### markArea.data.0.label.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### markArea.data.0.label.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### markArea.data.0.label.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.0.label.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.0.label.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### markArea.data.0.label.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markArea.data.0.label.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markArea.data.0.label.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### markArea.data.0.label.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### markArea.data.0.label.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### markArea.data.0.label.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### markArea.data.0.label.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### markArea.data.0.label.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### markArea.data.0.label.width
+- **Type**: `number`
+
+文本显示宽度。
+
+###### markArea.data.0.label.height
+- **Type**: `number`
+
+文本显示高度。
+
+###### markArea.data.0.label.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.0.label.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### markArea.data.0.label.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### markArea.data.0.label.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markArea.data.0.label.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### markArea.data.0.label.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### markArea.data.0.label.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### markArea.data.0.label.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+###### markArea.data.0.label.overflow
+- **Type**: `string`
+- **Default**: `'none'`
+
+文字超出宽度是否截断或者换行。配置`width`时有效
+
+*   `'truncate'` 截断，并在末尾显示`ellipsis`配置的文本，默认为`...`
+*   `'break'` 换行
+*   `'breakAll'` 换行，跟`'break'`不同的是，在英语等拉丁文中，`'breakAll'`还会强制单词内换行
+
+###### markArea.data.0.label.ellipsis
+- **Type**: `string`
+- **Default**: `'...'`
+
+在`overflow`配置为`'truncate'`的时候，可以通过该属性配置末尾显示的文本。
+
+###### markArea.data.0.label.rich
+- **Type**: `Object`
+
+在 `rich` 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。
+
+例如：
+
+```
+label: {
+    // 在文本中，可以对部分文本采用 rich 中定义样式。
+    // 这里需要在文本中使用标记符号：
+    // `{styleName|text content text content}` 标记样式名。
+    // 注意，换行仍是使用 '\n'。
+    formatter: [
+        '{a|这段文本采用样式a}',
+        '{b|这段文本采用样式b}这段用默认样式{x|这段用样式x}'
+    ].join('\n'),
+
+    rich: {
+        a: {
+            color: 'red',
+            lineHeight: 10
+        },
+        b: {
+            backgroundColor: {
+                image: 'xxx/xxx.jpg'
+            },
+            height: 40
+        },
+        x: {
+            fontSize: 18,
+            fontFamily: 'Microsoft YaHei',
+            borderColor: '#449933',
+            borderRadius: 4
+        },
+        ...
+    }
+}
+```
+
+详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+
+###### markArea.data.0.label.rich.<style_name>.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.0.label.rich.<style_name>.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### markArea.data.0.label.rich.<style_name>.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### markArea.data.0.label.rich.<style_name>.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### markArea.data.0.label.rich.<style_name>.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### markArea.data.0.label.rich.<style_name>.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### markArea.data.0.label.rich.<style_name>.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### markArea.data.0.label.rich.<style_name>.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### markArea.data.0.label.rich.<style_name>.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.0.label.rich.<style_name>.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.0.label.rich.<style_name>.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### markArea.data.0.label.rich.<style_name>.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markArea.data.0.label.rich.<style_name>.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markArea.data.0.label.rich.<style_name>.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### markArea.data.0.label.rich.<style_name>.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### markArea.data.0.label.rich.<style_name>.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### markArea.data.0.label.rich.<style_name>.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### markArea.data.0.label.rich.<style_name>.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### markArea.data.0.label.rich.<style_name>.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### markArea.data.0.label.rich.<style_name>.width
+- **Type**: `number|string`
+
+文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+`width` 也可以是百分比字符串，如 `'100%'`。表示的是所在文本块的 `contentWidth`（即不包含文本块的 `padding`）的百分之多少。之所以以 `contentWidth` 做基数，因为每个文本片段只能基于 `content box` 布局。如果以 `outerWidth` 做基数，则百分比的计算在实用中不具有意义，可能会超出。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markArea.data.0.label.rich.<style_name>.height
+- **Type**: `number|string`
+
+文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markArea.data.0.label.rich.<style_name>.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.0.label.rich.<style_name>.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### markArea.data.0.label.rich.<style_name>.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### markArea.data.0.label.rich.<style_name>.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markArea.data.0.label.rich.<style_name>.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### markArea.data.0.label.rich.<style_name>.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### markArea.data.0.label.rich.<style_name>.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### markArea.data.0.label.rich.<style_name>.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+###### markArea.data.0.label.richInheritPlainLabel
+- **Type**: `boolean`
+- **Default**: `true`
+
+从 `v6.0.0` 开始支持
+
+富文本样式是否继承普通文本样式。
+
+此配置项用于向历史兼容。
+
+> 从 v6 版本开始，[富文本标签 (label.rich / textStyle.rich)](option.series-scatter.md#label.rich) 部分样式（`fontStyle`, `fontWeight`, `fontSize`, `fontFamily`, `textShadowColor`, `textShadowBlur`, `textShadowOffsetX`, `textShadowOffsetY`）默认继承 [普通文本样式 (label / textStyle)](option.series-scatter.md#label)。你可以设置 `richInheritPlainLabel: false` （可在最外层配置项或与同级文本样式配置项）来禁用此行为。
+> 
+> ```
+> option = {
+>     richInheritPlainLabel: false, // In most cases, this is enough.
+>     xxx1: {
+>         // Can also set it here to only control this label.
+>         label: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     },
+>     xxx2: {
+>         textStyle: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     }
+> }
+> ```
+
+###### markArea.data.0.emphasis.disabled
+- **Type**: `boolean`
+- **Default**: `false`
+
+从 `v5.3.0` 开始支持
+
+是否关闭高亮状态。
+
+关闭高亮状态可以在鼠标移到图形上，tooltip 触发，或者图例联动的时候不再触发高亮效果。在图形非常多的时候可以关闭以提升交互流畅性。
+
+###### markArea.data.0.emphasis.itemStyle.color
+- **Type**: `Color`
+- **Default**: `自适应`
+
+图形的颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+###### markArea.data.0.emphasis.itemStyle.borderColor
+- **Type**: `Color`
+- **Default**: `'#000'`
+
+图形的描边颜色。支持的颜色格式同 `color`，不支持回调函数。
+
+###### markArea.data.0.emphasis.itemStyle.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+描边线宽。为 0 时无描边。
+
+###### markArea.data.0.emphasis.itemStyle.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markArea.data.0.emphasis.itemStyle.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markArea.data.0.emphasis.itemStyle.borderCap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+###### markArea.data.0.emphasis.itemStyle.borderJoin
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `borderMiterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+###### markArea.data.0.emphasis.itemStyle.borderMiterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `borderJoin` 为 `miter` 时， `borderMiterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+###### markArea.data.0.emphasis.itemStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+###### markArea.data.0.emphasis.itemStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+###### markArea.data.0.emphasis.itemStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+###### markArea.data.0.emphasis.itemStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+###### markArea.data.0.emphasis.itemStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+###### markArea.data.0.emphasis.label.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+是否显示标签。
+
+###### markArea.data.0.emphasis.label.position
+- **Type**: `string|Array`
+- **Default**: `'top'`
+
+标签的位置。
+
+*   可以通过内置的语义声明位置：
+    
+    示例：
+    
+    ```
+      position: 'top'
+    ```
+    
+    支持：`top` / `left` / `right` / `bottom` / `inside` / `insideLeft` / `insideRight` / `insideTop` / `insideBottom` / `insideTopLeft` / `insideBottomLeft` / `insideTopRight` / `insideBottomRight`
+    
+*   也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。
+    
+    示例：
+    
+    ```
+      // 绝对的像素值
+      position: [10, 10],
+      // 相对的百分比
+      position: ['50%', '50%']
+    ```
+    
+
+参见：[label position](https://echarts.apache.org/examples/zh/view.html?c=doc-example/label-position)。
+
+###### markArea.data.0.emphasis.label.distance
+- **Type**: `number`
+- **Default**: `5`
+
+距离图形元素的距离。
+
+当 position 为字符描述值（如 `'top'`、`'insideRight'`）时候有效。
+
+参见：[label position](https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position)。
+
+###### markArea.data.0.emphasis.label.rotate
+- **Type**: `number`
+
+标签旋转。从 -90 度到 90 度。正值是逆时针。
+
+参见：[label rotation](https://echarts.apache.org/examples/zh/editor.html?c=bar-label-rotation)。
+
+###### markArea.data.0.emphasis.label.offset
+- **Type**: `Array`
+
+是否对文字进行偏移。默认不偏移。例如：`[30, 40]` 表示文字在横向上偏移 `30`，纵向上偏移 `40`。
+
+###### markArea.data.0.emphasis.label.formatter
+- **Type**: `string|Function`
+
+标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 `\n` 换行。
+
+**字符串模板** 模板变量有：
+
+*   `{a}`：系列名。
+*   `{b}`：数据名。
+*   `{c}`：数据值。
+*   `{@xxx}`：数据中名为 `'xxx'` 的维度的值，如 `{@product}` 表示名为 `'product'` 的维度的值。
+*   `{@[n]}`：数据中维度 `n` 的值，如 `{@[3]}` 表示维度 3 的值，从 0 开始计数。
+
+**示例：**
+
+```
+formatter: '{b}: {@score}'
+```
+
+**回调函数**
+
+回调函数格式：
+
+```
+(params: Object|Array) => string
+```
+
+参数 `params` 是 formatter 需要的单个数据集。格式如下：
+
+```
+{
+    componentType: 'series',
+    // 系列类型
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index
+    seriesIndex: number,
+    // 系列名称
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // 传入的数据值。在多数系列下它和 data 相同。在一些系列下是 data 中的分量（如 map、radar 中）
+    value: number|Array|Object,
+    // 坐标轴 encode 映射信息，
+    // key 为坐标轴（如 'x' 'y' 'radius' 'angle' 等）
+    // value 必然为数组，不会为 null/undefined，表示 dimension index 。
+    // 其内容如：
+    // {
+    //     x: [2] // dimension index 为 2 的数据映射到 x 轴
+    //     y: [0] // dimension index 为 0 的数据映射到 y 轴
+    // }
+    encode: Object,
+    // 维度名列表
+    dimensionNames: Array<String>,
+    // 数据的维度 index，如 0 或 1 或 2 ...
+    // 仅在雷达图中使用。
+    dimensionIndex: number,
+    // 数据图形的颜色
+    color: string
+}
+```
+
+注：encode 和 dimensionNames 的使用方式，例如：
+
+如果数据为：
+
+```
+dataset: {
+    source: [
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.encode.y[0]]
+```
+
+如果数据为：
+
+```
+dataset: {
+    dimensions: ['product', '2015', '2016', '2017'],
+    source: [
+        {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+        {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+        {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+        {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.dimensionNames[params.encode.y[0]]]
+```
+
+###### markArea.data.0.emphasis.label.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.0.emphasis.label.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### markArea.data.0.emphasis.label.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### markArea.data.0.emphasis.label.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### markArea.data.0.emphasis.label.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### markArea.data.0.emphasis.label.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### markArea.data.0.emphasis.label.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### markArea.data.0.emphasis.label.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### markArea.data.0.emphasis.label.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.0.emphasis.label.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.0.emphasis.label.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### markArea.data.0.emphasis.label.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markArea.data.0.emphasis.label.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markArea.data.0.emphasis.label.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### markArea.data.0.emphasis.label.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### markArea.data.0.emphasis.label.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### markArea.data.0.emphasis.label.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### markArea.data.0.emphasis.label.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### markArea.data.0.emphasis.label.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### markArea.data.0.emphasis.label.width
+- **Type**: `number`
+
+文本显示宽度。
+
+###### markArea.data.0.emphasis.label.height
+- **Type**: `number`
+
+文本显示高度。
+
+###### markArea.data.0.emphasis.label.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.0.emphasis.label.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### markArea.data.0.emphasis.label.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### markArea.data.0.emphasis.label.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markArea.data.0.emphasis.label.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### markArea.data.0.emphasis.label.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### markArea.data.0.emphasis.label.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### markArea.data.0.emphasis.label.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+###### markArea.data.0.emphasis.label.overflow
+- **Type**: `string`
+- **Default**: `'none'`
+
+文字超出宽度是否截断或者换行。配置`width`时有效
+
+*   `'truncate'` 截断，并在末尾显示`ellipsis`配置的文本，默认为`...`
+*   `'break'` 换行
+*   `'breakAll'` 换行，跟`'break'`不同的是，在英语等拉丁文中，`'breakAll'`还会强制单词内换行
+
+###### markArea.data.0.emphasis.label.ellipsis
+- **Type**: `string`
+- **Default**: `'...'`
+
+在`overflow`配置为`'truncate'`的时候，可以通过该属性配置末尾显示的文本。
+
+###### markArea.data.0.emphasis.label.rich
+- **Type**: `Object`
+
+在 `rich` 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。
+
+例如：
+
+```
+label: {
+    // 在文本中，可以对部分文本采用 rich 中定义样式。
+    // 这里需要在文本中使用标记符号：
+    // `{styleName|text content text content}` 标记样式名。
+    // 注意，换行仍是使用 '\n'。
+    formatter: [
+        '{a|这段文本采用样式a}',
+        '{b|这段文本采用样式b}这段用默认样式{x|这段用样式x}'
+    ].join('\n'),
+
+    rich: {
+        a: {
+            color: 'red',
+            lineHeight: 10
+        },
+        b: {
+            backgroundColor: {
+                image: 'xxx/xxx.jpg'
+            },
+            height: 40
+        },
+        x: {
+            fontSize: 18,
+            fontFamily: 'Microsoft YaHei',
+            borderColor: '#449933',
+            borderRadius: 4
+        },
+        ...
+    }
+}
+```
+
+详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+
+###### markArea.data.0.emphasis.label.rich.<style_name>.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.0.emphasis.label.rich.<style_name>.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### markArea.data.0.emphasis.label.rich.<style_name>.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### markArea.data.0.emphasis.label.rich.<style_name>.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### markArea.data.0.emphasis.label.rich.<style_name>.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### markArea.data.0.emphasis.label.rich.<style_name>.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### markArea.data.0.emphasis.label.rich.<style_name>.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### markArea.data.0.emphasis.label.rich.<style_name>.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### markArea.data.0.emphasis.label.rich.<style_name>.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.0.emphasis.label.rich.<style_name>.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.0.emphasis.label.rich.<style_name>.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### markArea.data.0.emphasis.label.rich.<style_name>.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markArea.data.0.emphasis.label.rich.<style_name>.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markArea.data.0.emphasis.label.rich.<style_name>.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### markArea.data.0.emphasis.label.rich.<style_name>.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### markArea.data.0.emphasis.label.rich.<style_name>.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### markArea.data.0.emphasis.label.rich.<style_name>.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### markArea.data.0.emphasis.label.rich.<style_name>.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### markArea.data.0.emphasis.label.rich.<style_name>.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### markArea.data.0.emphasis.label.rich.<style_name>.width
+- **Type**: `number|string`
+
+文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+`width` 也可以是百分比字符串，如 `'100%'`。表示的是所在文本块的 `contentWidth`（即不包含文本块的 `padding`）的百分之多少。之所以以 `contentWidth` 做基数，因为每个文本片段只能基于 `content box` 布局。如果以 `outerWidth` 做基数，则百分比的计算在实用中不具有意义，可能会超出。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markArea.data.0.emphasis.label.rich.<style_name>.height
+- **Type**: `number|string`
+
+文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markArea.data.0.emphasis.label.rich.<style_name>.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.0.emphasis.label.rich.<style_name>.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### markArea.data.0.emphasis.label.rich.<style_name>.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### markArea.data.0.emphasis.label.rich.<style_name>.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markArea.data.0.emphasis.label.rich.<style_name>.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### markArea.data.0.emphasis.label.rich.<style_name>.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### markArea.data.0.emphasis.label.rich.<style_name>.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### markArea.data.0.emphasis.label.rich.<style_name>.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+###### markArea.data.0.emphasis.label.richInheritPlainLabel
+- **Type**: `boolean`
+- **Default**: `true`
+
+从 `v6.0.0` 开始支持
+
+富文本样式是否继承普通文本样式。
+
+此配置项用于向历史兼容。
+
+> 从 v6 版本开始，[富文本标签 (label.rich / textStyle.rich)](option.series-scatter.md#label.rich) 部分样式（`fontStyle`, `fontWeight`, `fontSize`, `fontFamily`, `textShadowColor`, `textShadowBlur`, `textShadowOffsetX`, `textShadowOffsetY`）默认继承 [普通文本样式 (label / textStyle)](option.series-scatter.md#label)。你可以设置 `richInheritPlainLabel: false` （可在最外层配置项或与同级文本样式配置项）来禁用此行为。
+> 
+> ```
+> option = {
+>     richInheritPlainLabel: false, // In most cases, this is enough.
+>     xxx1: {
+>         // Can also set it here to only control this label.
+>         label: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     },
+>     xxx2: {
+>         textStyle: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     }
+> }
+> ```
+
+##### markArea.data.0.blur
+- **Type**: `Object`
+
+从 `v5.0.0` 开始支持
+
+###### markArea.data.0.blur.itemStyle.color
+- **Type**: `Color`
+- **Default**: `自适应`
+
+图形的颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+###### markArea.data.0.blur.itemStyle.borderColor
+- **Type**: `Color`
+- **Default**: `'#000'`
+
+图形的描边颜色。支持的颜色格式同 `color`，不支持回调函数。
+
+###### markArea.data.0.blur.itemStyle.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+描边线宽。为 0 时无描边。
+
+###### markArea.data.0.blur.itemStyle.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markArea.data.0.blur.itemStyle.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markArea.data.0.blur.itemStyle.borderCap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+###### markArea.data.0.blur.itemStyle.borderJoin
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `borderMiterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+###### markArea.data.0.blur.itemStyle.borderMiterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `borderJoin` 为 `miter` 时， `borderMiterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+###### markArea.data.0.blur.itemStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+###### markArea.data.0.blur.itemStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+###### markArea.data.0.blur.itemStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+###### markArea.data.0.blur.itemStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+###### markArea.data.0.blur.itemStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+###### markArea.data.0.blur.label.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+是否显示标签。
+
+###### markArea.data.0.blur.label.position
+- **Type**: `string|Array`
+- **Default**: `'top'`
+
+标签的位置。
+
+*   可以通过内置的语义声明位置：
+    
+    示例：
+    
+    ```
+      position: 'top'
+    ```
+    
+    支持：`top` / `left` / `right` / `bottom` / `inside` / `insideLeft` / `insideRight` / `insideTop` / `insideBottom` / `insideTopLeft` / `insideBottomLeft` / `insideTopRight` / `insideBottomRight`
+    
+*   也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。
+    
+    示例：
+    
+    ```
+      // 绝对的像素值
+      position: [10, 10],
+      // 相对的百分比
+      position: ['50%', '50%']
+    ```
+    
+
+参见：[label position](https://echarts.apache.org/examples/zh/view.html?c=doc-example/label-position)。
+
+###### markArea.data.0.blur.label.distance
+- **Type**: `number`
+- **Default**: `5`
+
+距离图形元素的距离。
+
+当 position 为字符描述值（如 `'top'`、`'insideRight'`）时候有效。
+
+参见：[label position](https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position)。
+
+###### markArea.data.0.blur.label.rotate
+- **Type**: `number`
+
+标签旋转。从 -90 度到 90 度。正值是逆时针。
+
+参见：[label rotation](https://echarts.apache.org/examples/zh/editor.html?c=bar-label-rotation)。
+
+###### markArea.data.0.blur.label.offset
+- **Type**: `Array`
+
+是否对文字进行偏移。默认不偏移。例如：`[30, 40]` 表示文字在横向上偏移 `30`，纵向上偏移 `40`。
+
+###### markArea.data.0.blur.label.formatter
+- **Type**: `string|Function`
+
+标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 `\n` 换行。
+
+**字符串模板** 模板变量有：
+
+*   `{a}`：系列名。
+*   `{b}`：数据名。
+*   `{c}`：数据值。
+*   `{@xxx}`：数据中名为 `'xxx'` 的维度的值，如 `{@product}` 表示名为 `'product'` 的维度的值。
+*   `{@[n]}`：数据中维度 `n` 的值，如 `{@[3]}` 表示维度 3 的值，从 0 开始计数。
+
+**示例：**
+
+```
+formatter: '{b}: {@score}'
+```
+
+**回调函数**
+
+回调函数格式：
+
+```
+(params: Object|Array) => string
+```
+
+参数 `params` 是 formatter 需要的单个数据集。格式如下：
+
+```
+{
+    componentType: 'series',
+    // 系列类型
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index
+    seriesIndex: number,
+    // 系列名称
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // 传入的数据值。在多数系列下它和 data 相同。在一些系列下是 data 中的分量（如 map、radar 中）
+    value: number|Array|Object,
+    // 坐标轴 encode 映射信息，
+    // key 为坐标轴（如 'x' 'y' 'radius' 'angle' 等）
+    // value 必然为数组，不会为 null/undefined，表示 dimension index 。
+    // 其内容如：
+    // {
+    //     x: [2] // dimension index 为 2 的数据映射到 x 轴
+    //     y: [0] // dimension index 为 0 的数据映射到 y 轴
+    // }
+    encode: Object,
+    // 维度名列表
+    dimensionNames: Array<String>,
+    // 数据的维度 index，如 0 或 1 或 2 ...
+    // 仅在雷达图中使用。
+    dimensionIndex: number,
+    // 数据图形的颜色
+    color: string
+}
+```
+
+注：encode 和 dimensionNames 的使用方式，例如：
+
+如果数据为：
+
+```
+dataset: {
+    source: [
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.encode.y[0]]
+```
+
+如果数据为：
+
+```
+dataset: {
+    dimensions: ['product', '2015', '2016', '2017'],
+    source: [
+        {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+        {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+        {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+        {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.dimensionNames[params.encode.y[0]]]
+```
+
+###### markArea.data.0.blur.label.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.0.blur.label.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### markArea.data.0.blur.label.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### markArea.data.0.blur.label.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### markArea.data.0.blur.label.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### markArea.data.0.blur.label.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### markArea.data.0.blur.label.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### markArea.data.0.blur.label.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### markArea.data.0.blur.label.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.0.blur.label.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.0.blur.label.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### markArea.data.0.blur.label.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markArea.data.0.blur.label.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markArea.data.0.blur.label.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### markArea.data.0.blur.label.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### markArea.data.0.blur.label.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### markArea.data.0.blur.label.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### markArea.data.0.blur.label.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### markArea.data.0.blur.label.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### markArea.data.0.blur.label.width
+- **Type**: `number`
+
+文本显示宽度。
+
+###### markArea.data.0.blur.label.height
+- **Type**: `number`
+
+文本显示高度。
+
+###### markArea.data.0.blur.label.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.0.blur.label.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### markArea.data.0.blur.label.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### markArea.data.0.blur.label.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markArea.data.0.blur.label.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### markArea.data.0.blur.label.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### markArea.data.0.blur.label.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### markArea.data.0.blur.label.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+###### markArea.data.0.blur.label.overflow
+- **Type**: `string`
+- **Default**: `'none'`
+
+文字超出宽度是否截断或者换行。配置`width`时有效
+
+*   `'truncate'` 截断，并在末尾显示`ellipsis`配置的文本，默认为`...`
+*   `'break'` 换行
+*   `'breakAll'` 换行，跟`'break'`不同的是，在英语等拉丁文中，`'breakAll'`还会强制单词内换行
+
+###### markArea.data.0.blur.label.ellipsis
+- **Type**: `string`
+- **Default**: `'...'`
+
+在`overflow`配置为`'truncate'`的时候，可以通过该属性配置末尾显示的文本。
+
+###### markArea.data.0.blur.label.rich
+- **Type**: `Object`
+
+在 `rich` 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。
+
+例如：
+
+```
+label: {
+    // 在文本中，可以对部分文本采用 rich 中定义样式。
+    // 这里需要在文本中使用标记符号：
+    // `{styleName|text content text content}` 标记样式名。
+    // 注意，换行仍是使用 '\n'。
+    formatter: [
+        '{a|这段文本采用样式a}',
+        '{b|这段文本采用样式b}这段用默认样式{x|这段用样式x}'
+    ].join('\n'),
+
+    rich: {
+        a: {
+            color: 'red',
+            lineHeight: 10
+        },
+        b: {
+            backgroundColor: {
+                image: 'xxx/xxx.jpg'
+            },
+            height: 40
+        },
+        x: {
+            fontSize: 18,
+            fontFamily: 'Microsoft YaHei',
+            borderColor: '#449933',
+            borderRadius: 4
+        },
+        ...
+    }
+}
+```
+
+详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+
+###### markArea.data.0.blur.label.rich.<style_name>.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.0.blur.label.rich.<style_name>.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### markArea.data.0.blur.label.rich.<style_name>.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### markArea.data.0.blur.label.rich.<style_name>.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### markArea.data.0.blur.label.rich.<style_name>.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### markArea.data.0.blur.label.rich.<style_name>.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### markArea.data.0.blur.label.rich.<style_name>.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### markArea.data.0.blur.label.rich.<style_name>.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### markArea.data.0.blur.label.rich.<style_name>.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.0.blur.label.rich.<style_name>.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.0.blur.label.rich.<style_name>.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### markArea.data.0.blur.label.rich.<style_name>.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markArea.data.0.blur.label.rich.<style_name>.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markArea.data.0.blur.label.rich.<style_name>.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### markArea.data.0.blur.label.rich.<style_name>.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### markArea.data.0.blur.label.rich.<style_name>.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### markArea.data.0.blur.label.rich.<style_name>.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### markArea.data.0.blur.label.rich.<style_name>.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### markArea.data.0.blur.label.rich.<style_name>.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### markArea.data.0.blur.label.rich.<style_name>.width
+- **Type**: `number|string`
+
+文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+`width` 也可以是百分比字符串，如 `'100%'`。表示的是所在文本块的 `contentWidth`（即不包含文本块的 `padding`）的百分之多少。之所以以 `contentWidth` 做基数，因为每个文本片段只能基于 `content box` 布局。如果以 `outerWidth` 做基数，则百分比的计算在实用中不具有意义，可能会超出。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markArea.data.0.blur.label.rich.<style_name>.height
+- **Type**: `number|string`
+
+文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markArea.data.0.blur.label.rich.<style_name>.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.0.blur.label.rich.<style_name>.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### markArea.data.0.blur.label.rich.<style_name>.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### markArea.data.0.blur.label.rich.<style_name>.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markArea.data.0.blur.label.rich.<style_name>.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### markArea.data.0.blur.label.rich.<style_name>.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### markArea.data.0.blur.label.rich.<style_name>.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### markArea.data.0.blur.label.rich.<style_name>.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+###### markArea.data.0.blur.label.richInheritPlainLabel
+- **Type**: `boolean`
+- **Default**: `true`
+
+从 `v6.0.0` 开始支持
+
+富文本样式是否继承普通文本样式。
+
+此配置项用于向历史兼容。
+
+> 从 v6 版本开始，[富文本标签 (label.rich / textStyle.rich)](option.series-scatter.md#label.rich) 部分样式（`fontStyle`, `fontWeight`, `fontSize`, `fontFamily`, `textShadowColor`, `textShadowBlur`, `textShadowOffsetX`, `textShadowOffsetY`）默认继承 [普通文本样式 (label / textStyle)](option.series-scatter.md#label)。你可以设置 `richInheritPlainLabel: false` （可在最外层配置项或与同级文本样式配置项）来禁用此行为。
+> 
+> ```
+> option = {
+>     richInheritPlainLabel: false, // In most cases, this is enough.
+>     xxx1: {
+>         // Can also set it here to only control this label.
+>         label: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     },
+>     xxx2: {
+>         textStyle: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     }
+> }
+> ```
+
+#### markArea.data.1
+- **Type**: `Object`
+
+标域右下角的数据
+
+##### markArea.data.1.type
+- **Type**: `string`
+
+特殊的标注类型，用于标注最大值最小值等。
+
+**可选:**
+
+*   `'min'` 最小值。
+*   `'max'` 最大值。
+*   `'average'` 平均值。
+
+##### markArea.data.1.valueIndex
+- **Type**: `number`
+
+在使用 [type](option.series-scatter.md#markArea.data.type) 时有效，用于指定在哪个维度上指定最大值最小值，可以是 `0`（xAxis, radiusAxis），`1`（yAxis, angleAxis），默认使用第一个数值轴所在的维度。
+
+##### markArea.data.1.valueDim
+- **Type**: `string`
+
+在使用 [type](option.series-scatter.md#markArea.data.type) 时有效，用于指定在哪个维度上指定最大值最小值。这可以是维度的直接名称，例如折线图时可以是`x`、`angle`等、candlestick 图时可以是`open`、`close`等维度名称。
+
+##### markArea.data.1.coord
+- **Type**: `Array`
+
+起点或终点的坐标。坐标格式视系列的坐标系而定，可以是[直角坐标系](option.grid.md)上的 `x`, `y`，也可以是[极坐标系](option.polar.md)上的 `radius`, `angle`。
+
+##### markArea.data.1.name
+- **Type**: `string`
+- **Default**: `''`
+
+标注名称，将会作为文字显示。定义后可在 [label formatter](option.series-scatter.md#markArea.data.label.formatter) 中作为**数据名** `{b}` 模板变量使用。
+
+##### markArea.data.1.x
+- **Type**: `number`
+
+相对容器的屏幕 x 坐标，单位像素，支持百分比形式，例如 `'20%'`。
+
+##### markArea.data.1.y
+- **Type**: `number`
+
+相对容器的屏幕 y 坐标，单位像素，支持百分比形式，例如 `'20%'`。
+
+##### markArea.data.1.z2
+- **Type**: `number`
+
+从 `v6.0.0` 开始支持
+
+指定图形元素间的覆盖关系。数值越大，越在层叠的上方。
+
+##### markArea.data.1.value
+- **Type**: `number`
+
+标域值，可以不设。
+
+##### markArea.data.1.itemStyle
+- **Type**: `Object`
+
+该数据项区域的样式，起点和终点项的 `itemStyle` 会合并到一起。
+
+###### markArea.data.1.itemStyle.color
+- **Type**: `Color`
+- **Default**: `自适应`
+
+图形的颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+###### markArea.data.1.itemStyle.borderColor
+- **Type**: `Color`
+- **Default**: `'#000'`
+
+图形的描边颜色。支持的颜色格式同 `color`，不支持回调函数。
+
+###### markArea.data.1.itemStyle.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+描边线宽。为 0 时无描边。
+
+###### markArea.data.1.itemStyle.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markArea.data.1.itemStyle.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markArea.data.1.itemStyle.borderCap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+###### markArea.data.1.itemStyle.borderJoin
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `borderMiterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+###### markArea.data.1.itemStyle.borderMiterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `borderJoin` 为 `miter` 时， `borderMiterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+###### markArea.data.1.itemStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+###### markArea.data.1.itemStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+###### markArea.data.1.itemStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+###### markArea.data.1.itemStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+###### markArea.data.1.itemStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+##### markArea.data.1.label
+- **Type**: `Object`
+
+该数据项标签的样式，起点和终点项的 `label` 会合并到一起。
+
+###### markArea.data.1.label.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+是否显示标签。
+
+###### markArea.data.1.label.position
+- **Type**: `string|Array`
+- **Default**: `'top'`
+
+标签的位置。
+
+*   可以通过内置的语义声明位置：
+    
+    示例：
+    
+    ```
+      position: 'top'
+    ```
+    
+    支持：`top` / `left` / `right` / `bottom` / `inside` / `insideLeft` / `insideRight` / `insideTop` / `insideBottom` / `insideTopLeft` / `insideBottomLeft` / `insideTopRight` / `insideBottomRight`
+    
+*   也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。
+    
+    示例：
+    
+    ```
+      // 绝对的像素值
+      position: [10, 10],
+      // 相对的百分比
+      position: ['50%', '50%']
+    ```
+    
+
+参见：[label position](https://echarts.apache.org/examples/zh/view.html?c=doc-example/label-position)。
+
+###### markArea.data.1.label.distance
+- **Type**: `number`
+- **Default**: `5`
+
+距离图形元素的距离。
+
+当 position 为字符描述值（如 `'top'`、`'insideRight'`）时候有效。
+
+参见：[label position](https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position)。
+
+###### markArea.data.1.label.rotate
+- **Type**: `number`
+
+标签旋转。从 -90 度到 90 度。正值是逆时针。
+
+参见：[label rotation](https://echarts.apache.org/examples/zh/editor.html?c=bar-label-rotation)。
+
+###### markArea.data.1.label.offset
+- **Type**: `Array`
+
+是否对文字进行偏移。默认不偏移。例如：`[30, 40]` 表示文字在横向上偏移 `30`，纵向上偏移 `40`。
+
+###### markArea.data.1.label.formatter
+- **Type**: `string|Function`
+
+标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 `\n` 换行。
+
+**字符串模板** 模板变量有：
+
+*   `{a}`：系列名。
+*   `{b}`：数据名。
+*   `{c}`：数据值。
+*   `{@xxx}`：数据中名为 `'xxx'` 的维度的值，如 `{@product}` 表示名为 `'product'` 的维度的值。
+*   `{@[n]}`：数据中维度 `n` 的值，如 `{@[3]}` 表示维度 3 的值，从 0 开始计数。
+
+**示例：**
+
+```
+formatter: '{b}: {@score}'
+```
+
+**回调函数**
+
+回调函数格式：
+
+```
+(params: Object|Array) => string
+```
+
+参数 `params` 是 formatter 需要的单个数据集。格式如下：
+
+```
+{
+    componentType: 'series',
+    // 系列类型
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index
+    seriesIndex: number,
+    // 系列名称
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // 传入的数据值。在多数系列下它和 data 相同。在一些系列下是 data 中的分量（如 map、radar 中）
+    value: number|Array|Object,
+    // 坐标轴 encode 映射信息，
+    // key 为坐标轴（如 'x' 'y' 'radius' 'angle' 等）
+    // value 必然为数组，不会为 null/undefined，表示 dimension index 。
+    // 其内容如：
+    // {
+    //     x: [2] // dimension index 为 2 的数据映射到 x 轴
+    //     y: [0] // dimension index 为 0 的数据映射到 y 轴
+    // }
+    encode: Object,
+    // 维度名列表
+    dimensionNames: Array<String>,
+    // 数据的维度 index，如 0 或 1 或 2 ...
+    // 仅在雷达图中使用。
+    dimensionIndex: number,
+    // 数据图形的颜色
+    color: string
+}
+```
+
+注：encode 和 dimensionNames 的使用方式，例如：
+
+如果数据为：
+
+```
+dataset: {
+    source: [
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.encode.y[0]]
+```
+
+如果数据为：
+
+```
+dataset: {
+    dimensions: ['product', '2015', '2016', '2017'],
+    source: [
+        {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+        {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+        {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+        {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.dimensionNames[params.encode.y[0]]]
+```
+
+###### markArea.data.1.label.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.1.label.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### markArea.data.1.label.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### markArea.data.1.label.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### markArea.data.1.label.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### markArea.data.1.label.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### markArea.data.1.label.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### markArea.data.1.label.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### markArea.data.1.label.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.1.label.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.1.label.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### markArea.data.1.label.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markArea.data.1.label.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markArea.data.1.label.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### markArea.data.1.label.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### markArea.data.1.label.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### markArea.data.1.label.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### markArea.data.1.label.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### markArea.data.1.label.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### markArea.data.1.label.width
+- **Type**: `number`
+
+文本显示宽度。
+
+###### markArea.data.1.label.height
+- **Type**: `number`
+
+文本显示高度。
+
+###### markArea.data.1.label.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.1.label.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### markArea.data.1.label.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### markArea.data.1.label.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markArea.data.1.label.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### markArea.data.1.label.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### markArea.data.1.label.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### markArea.data.1.label.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+###### markArea.data.1.label.overflow
+- **Type**: `string`
+- **Default**: `'none'`
+
+文字超出宽度是否截断或者换行。配置`width`时有效
+
+*   `'truncate'` 截断，并在末尾显示`ellipsis`配置的文本，默认为`...`
+*   `'break'` 换行
+*   `'breakAll'` 换行，跟`'break'`不同的是，在英语等拉丁文中，`'breakAll'`还会强制单词内换行
+
+###### markArea.data.1.label.ellipsis
+- **Type**: `string`
+- **Default**: `'...'`
+
+在`overflow`配置为`'truncate'`的时候，可以通过该属性配置末尾显示的文本。
+
+###### markArea.data.1.label.rich
+- **Type**: `Object`
+
+在 `rich` 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。
+
+例如：
+
+```
+label: {
+    // 在文本中，可以对部分文本采用 rich 中定义样式。
+    // 这里需要在文本中使用标记符号：
+    // `{styleName|text content text content}` 标记样式名。
+    // 注意，换行仍是使用 '\n'。
+    formatter: [
+        '{a|这段文本采用样式a}',
+        '{b|这段文本采用样式b}这段用默认样式{x|这段用样式x}'
+    ].join('\n'),
+
+    rich: {
+        a: {
+            color: 'red',
+            lineHeight: 10
+        },
+        b: {
+            backgroundColor: {
+                image: 'xxx/xxx.jpg'
+            },
+            height: 40
+        },
+        x: {
+            fontSize: 18,
+            fontFamily: 'Microsoft YaHei',
+            borderColor: '#449933',
+            borderRadius: 4
+        },
+        ...
+    }
+}
+```
+
+详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+
+###### markArea.data.1.label.rich.<style_name>.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.1.label.rich.<style_name>.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### markArea.data.1.label.rich.<style_name>.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### markArea.data.1.label.rich.<style_name>.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### markArea.data.1.label.rich.<style_name>.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### markArea.data.1.label.rich.<style_name>.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### markArea.data.1.label.rich.<style_name>.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### markArea.data.1.label.rich.<style_name>.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### markArea.data.1.label.rich.<style_name>.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.1.label.rich.<style_name>.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.1.label.rich.<style_name>.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### markArea.data.1.label.rich.<style_name>.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markArea.data.1.label.rich.<style_name>.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markArea.data.1.label.rich.<style_name>.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### markArea.data.1.label.rich.<style_name>.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### markArea.data.1.label.rich.<style_name>.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### markArea.data.1.label.rich.<style_name>.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### markArea.data.1.label.rich.<style_name>.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### markArea.data.1.label.rich.<style_name>.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### markArea.data.1.label.rich.<style_name>.width
+- **Type**: `number|string`
+
+文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+`width` 也可以是百分比字符串，如 `'100%'`。表示的是所在文本块的 `contentWidth`（即不包含文本块的 `padding`）的百分之多少。之所以以 `contentWidth` 做基数，因为每个文本片段只能基于 `content box` 布局。如果以 `outerWidth` 做基数，则百分比的计算在实用中不具有意义，可能会超出。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markArea.data.1.label.rich.<style_name>.height
+- **Type**: `number|string`
+
+文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markArea.data.1.label.rich.<style_name>.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.1.label.rich.<style_name>.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### markArea.data.1.label.rich.<style_name>.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### markArea.data.1.label.rich.<style_name>.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markArea.data.1.label.rich.<style_name>.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### markArea.data.1.label.rich.<style_name>.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### markArea.data.1.label.rich.<style_name>.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### markArea.data.1.label.rich.<style_name>.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+###### markArea.data.1.label.richInheritPlainLabel
+- **Type**: `boolean`
+- **Default**: `true`
+
+从 `v6.0.0` 开始支持
+
+富文本样式是否继承普通文本样式。
+
+此配置项用于向历史兼容。
+
+> 从 v6 版本开始，[富文本标签 (label.rich / textStyle.rich)](option.series-scatter.md#label.rich) 部分样式（`fontStyle`, `fontWeight`, `fontSize`, `fontFamily`, `textShadowColor`, `textShadowBlur`, `textShadowOffsetX`, `textShadowOffsetY`）默认继承 [普通文本样式 (label / textStyle)](option.series-scatter.md#label)。你可以设置 `richInheritPlainLabel: false` （可在最外层配置项或与同级文本样式配置项）来禁用此行为。
+> 
+> ```
+> option = {
+>     richInheritPlainLabel: false, // In most cases, this is enough.
+>     xxx1: {
+>         // Can also set it here to only control this label.
+>         label: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     },
+>     xxx2: {
+>         textStyle: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     }
+> }
+> ```
+
+###### markArea.data.1.emphasis.disabled
+- **Type**: `boolean`
+- **Default**: `false`
+
+从 `v5.3.0` 开始支持
+
+是否关闭高亮状态。
+
+关闭高亮状态可以在鼠标移到图形上，tooltip 触发，或者图例联动的时候不再触发高亮效果。在图形非常多的时候可以关闭以提升交互流畅性。
+
+###### markArea.data.1.emphasis.itemStyle.color
+- **Type**: `Color`
+- **Default**: `自适应`
+
+图形的颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+###### markArea.data.1.emphasis.itemStyle.borderColor
+- **Type**: `Color`
+- **Default**: `'#000'`
+
+图形的描边颜色。支持的颜色格式同 `color`，不支持回调函数。
+
+###### markArea.data.1.emphasis.itemStyle.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+描边线宽。为 0 时无描边。
+
+###### markArea.data.1.emphasis.itemStyle.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markArea.data.1.emphasis.itemStyle.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markArea.data.1.emphasis.itemStyle.borderCap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+###### markArea.data.1.emphasis.itemStyle.borderJoin
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `borderMiterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+###### markArea.data.1.emphasis.itemStyle.borderMiterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `borderJoin` 为 `miter` 时， `borderMiterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+###### markArea.data.1.emphasis.itemStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+###### markArea.data.1.emphasis.itemStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+###### markArea.data.1.emphasis.itemStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+###### markArea.data.1.emphasis.itemStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+###### markArea.data.1.emphasis.itemStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+###### markArea.data.1.emphasis.label.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+是否显示标签。
+
+###### markArea.data.1.emphasis.label.position
+- **Type**: `string|Array`
+- **Default**: `'top'`
+
+标签的位置。
+
+*   可以通过内置的语义声明位置：
+    
+    示例：
+    
+    ```
+      position: 'top'
+    ```
+    
+    支持：`top` / `left` / `right` / `bottom` / `inside` / `insideLeft` / `insideRight` / `insideTop` / `insideBottom` / `insideTopLeft` / `insideBottomLeft` / `insideTopRight` / `insideBottomRight`
+    
+*   也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。
+    
+    示例：
+    
+    ```
+      // 绝对的像素值
+      position: [10, 10],
+      // 相对的百分比
+      position: ['50%', '50%']
+    ```
+    
+
+参见：[label position](https://echarts.apache.org/examples/zh/view.html?c=doc-example/label-position)。
+
+###### markArea.data.1.emphasis.label.distance
+- **Type**: `number`
+- **Default**: `5`
+
+距离图形元素的距离。
+
+当 position 为字符描述值（如 `'top'`、`'insideRight'`）时候有效。
+
+参见：[label position](https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position)。
+
+###### markArea.data.1.emphasis.label.rotate
+- **Type**: `number`
+
+标签旋转。从 -90 度到 90 度。正值是逆时针。
+
+参见：[label rotation](https://echarts.apache.org/examples/zh/editor.html?c=bar-label-rotation)。
+
+###### markArea.data.1.emphasis.label.offset
+- **Type**: `Array`
+
+是否对文字进行偏移。默认不偏移。例如：`[30, 40]` 表示文字在横向上偏移 `30`，纵向上偏移 `40`。
+
+###### markArea.data.1.emphasis.label.formatter
+- **Type**: `string|Function`
+
+标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 `\n` 换行。
+
+**字符串模板** 模板变量有：
+
+*   `{a}`：系列名。
+*   `{b}`：数据名。
+*   `{c}`：数据值。
+*   `{@xxx}`：数据中名为 `'xxx'` 的维度的值，如 `{@product}` 表示名为 `'product'` 的维度的值。
+*   `{@[n]}`：数据中维度 `n` 的值，如 `{@[3]}` 表示维度 3 的值，从 0 开始计数。
+
+**示例：**
+
+```
+formatter: '{b}: {@score}'
+```
+
+**回调函数**
+
+回调函数格式：
+
+```
+(params: Object|Array) => string
+```
+
+参数 `params` 是 formatter 需要的单个数据集。格式如下：
+
+```
+{
+    componentType: 'series',
+    // 系列类型
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index
+    seriesIndex: number,
+    // 系列名称
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // 传入的数据值。在多数系列下它和 data 相同。在一些系列下是 data 中的分量（如 map、radar 中）
+    value: number|Array|Object,
+    // 坐标轴 encode 映射信息，
+    // key 为坐标轴（如 'x' 'y' 'radius' 'angle' 等）
+    // value 必然为数组，不会为 null/undefined，表示 dimension index 。
+    // 其内容如：
+    // {
+    //     x: [2] // dimension index 为 2 的数据映射到 x 轴
+    //     y: [0] // dimension index 为 0 的数据映射到 y 轴
+    // }
+    encode: Object,
+    // 维度名列表
+    dimensionNames: Array<String>,
+    // 数据的维度 index，如 0 或 1 或 2 ...
+    // 仅在雷达图中使用。
+    dimensionIndex: number,
+    // 数据图形的颜色
+    color: string
+}
+```
+
+注：encode 和 dimensionNames 的使用方式，例如：
+
+如果数据为：
+
+```
+dataset: {
+    source: [
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.encode.y[0]]
+```
+
+如果数据为：
+
+```
+dataset: {
+    dimensions: ['product', '2015', '2016', '2017'],
+    source: [
+        {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+        {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+        {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+        {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.dimensionNames[params.encode.y[0]]]
+```
+
+###### markArea.data.1.emphasis.label.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.1.emphasis.label.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### markArea.data.1.emphasis.label.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### markArea.data.1.emphasis.label.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### markArea.data.1.emphasis.label.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### markArea.data.1.emphasis.label.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### markArea.data.1.emphasis.label.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### markArea.data.1.emphasis.label.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### markArea.data.1.emphasis.label.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.1.emphasis.label.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.1.emphasis.label.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### markArea.data.1.emphasis.label.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markArea.data.1.emphasis.label.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markArea.data.1.emphasis.label.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### markArea.data.1.emphasis.label.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### markArea.data.1.emphasis.label.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### markArea.data.1.emphasis.label.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### markArea.data.1.emphasis.label.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### markArea.data.1.emphasis.label.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### markArea.data.1.emphasis.label.width
+- **Type**: `number`
+
+文本显示宽度。
+
+###### markArea.data.1.emphasis.label.height
+- **Type**: `number`
+
+文本显示高度。
+
+###### markArea.data.1.emphasis.label.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.1.emphasis.label.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### markArea.data.1.emphasis.label.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### markArea.data.1.emphasis.label.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markArea.data.1.emphasis.label.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### markArea.data.1.emphasis.label.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### markArea.data.1.emphasis.label.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### markArea.data.1.emphasis.label.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+###### markArea.data.1.emphasis.label.overflow
+- **Type**: `string`
+- **Default**: `'none'`
+
+文字超出宽度是否截断或者换行。配置`width`时有效
+
+*   `'truncate'` 截断，并在末尾显示`ellipsis`配置的文本，默认为`...`
+*   `'break'` 换行
+*   `'breakAll'` 换行，跟`'break'`不同的是，在英语等拉丁文中，`'breakAll'`还会强制单词内换行
+
+###### markArea.data.1.emphasis.label.ellipsis
+- **Type**: `string`
+- **Default**: `'...'`
+
+在`overflow`配置为`'truncate'`的时候，可以通过该属性配置末尾显示的文本。
+
+###### markArea.data.1.emphasis.label.rich
+- **Type**: `Object`
+
+在 `rich` 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。
+
+例如：
+
+```
+label: {
+    // 在文本中，可以对部分文本采用 rich 中定义样式。
+    // 这里需要在文本中使用标记符号：
+    // `{styleName|text content text content}` 标记样式名。
+    // 注意，换行仍是使用 '\n'。
+    formatter: [
+        '{a|这段文本采用样式a}',
+        '{b|这段文本采用样式b}这段用默认样式{x|这段用样式x}'
+    ].join('\n'),
+
+    rich: {
+        a: {
+            color: 'red',
+            lineHeight: 10
+        },
+        b: {
+            backgroundColor: {
+                image: 'xxx/xxx.jpg'
+            },
+            height: 40
+        },
+        x: {
+            fontSize: 18,
+            fontFamily: 'Microsoft YaHei',
+            borderColor: '#449933',
+            borderRadius: 4
+        },
+        ...
+    }
+}
+```
+
+详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+
+###### markArea.data.1.emphasis.label.rich.<style_name>.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.1.emphasis.label.rich.<style_name>.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### markArea.data.1.emphasis.label.rich.<style_name>.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### markArea.data.1.emphasis.label.rich.<style_name>.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### markArea.data.1.emphasis.label.rich.<style_name>.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### markArea.data.1.emphasis.label.rich.<style_name>.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### markArea.data.1.emphasis.label.rich.<style_name>.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### markArea.data.1.emphasis.label.rich.<style_name>.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### markArea.data.1.emphasis.label.rich.<style_name>.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.1.emphasis.label.rich.<style_name>.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.1.emphasis.label.rich.<style_name>.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### markArea.data.1.emphasis.label.rich.<style_name>.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markArea.data.1.emphasis.label.rich.<style_name>.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markArea.data.1.emphasis.label.rich.<style_name>.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### markArea.data.1.emphasis.label.rich.<style_name>.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### markArea.data.1.emphasis.label.rich.<style_name>.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### markArea.data.1.emphasis.label.rich.<style_name>.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### markArea.data.1.emphasis.label.rich.<style_name>.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### markArea.data.1.emphasis.label.rich.<style_name>.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### markArea.data.1.emphasis.label.rich.<style_name>.width
+- **Type**: `number|string`
+
+文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+`width` 也可以是百分比字符串，如 `'100%'`。表示的是所在文本块的 `contentWidth`（即不包含文本块的 `padding`）的百分之多少。之所以以 `contentWidth` 做基数，因为每个文本片段只能基于 `content box` 布局。如果以 `outerWidth` 做基数，则百分比的计算在实用中不具有意义，可能会超出。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markArea.data.1.emphasis.label.rich.<style_name>.height
+- **Type**: `number|string`
+
+文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markArea.data.1.emphasis.label.rich.<style_name>.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.1.emphasis.label.rich.<style_name>.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### markArea.data.1.emphasis.label.rich.<style_name>.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### markArea.data.1.emphasis.label.rich.<style_name>.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markArea.data.1.emphasis.label.rich.<style_name>.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### markArea.data.1.emphasis.label.rich.<style_name>.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### markArea.data.1.emphasis.label.rich.<style_name>.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### markArea.data.1.emphasis.label.rich.<style_name>.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+###### markArea.data.1.emphasis.label.richInheritPlainLabel
+- **Type**: `boolean`
+- **Default**: `true`
+
+从 `v6.0.0` 开始支持
+
+富文本样式是否继承普通文本样式。
+
+此配置项用于向历史兼容。
+
+> 从 v6 版本开始，[富文本标签 (label.rich / textStyle.rich)](option.series-scatter.md#label.rich) 部分样式（`fontStyle`, `fontWeight`, `fontSize`, `fontFamily`, `textShadowColor`, `textShadowBlur`, `textShadowOffsetX`, `textShadowOffsetY`）默认继承 [普通文本样式 (label / textStyle)](option.series-scatter.md#label)。你可以设置 `richInheritPlainLabel: false` （可在最外层配置项或与同级文本样式配置项）来禁用此行为。
+> 
+> ```
+> option = {
+>     richInheritPlainLabel: false, // In most cases, this is enough.
+>     xxx1: {
+>         // Can also set it here to only control this label.
+>         label: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     },
+>     xxx2: {
+>         textStyle: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     }
+> }
+> ```
+
+##### markArea.data.1.blur
+- **Type**: `Object`
+
+从 `v5.0.0` 开始支持
+
+###### markArea.data.1.blur.itemStyle.color
+- **Type**: `Color`
+- **Default**: `自适应`
+
+图形的颜色。
+
+> 支持使用`rgb(255,255,255)`，`rgba(255,255,255,1)`，`#fff`等方式设置为纯色，也支持设置为渐变色和纹理填充，具体见[option.color](../option.md#color)
+
+###### markArea.data.1.blur.itemStyle.borderColor
+- **Type**: `Color`
+- **Default**: `'#000'`
+
+图形的描边颜色。支持的颜色格式同 `color`，不支持回调函数。
+
+###### markArea.data.1.blur.itemStyle.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+描边线宽。为 0 时无描边。
+
+###### markArea.data.1.blur.itemStyle.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markArea.data.1.blur.itemStyle.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markArea.data.1.blur.itemStyle.borderCap
+- **Type**: `string`
+- **Default**: `'butt'`
+
+从 `v5.0.0` 开始支持
+
+用于指定线段末端的绘制方式，可以是：
+
+*   `'butt'`: 线段末端以方形结束。
+*   `'round'`: 线段末端以圆形结束。
+*   `'square'`: 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+
+默认值为 `'butt'`。 更多详情可以参考 MDN [lineCap](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineCap)。
+
+###### markArea.data.1.blur.itemStyle.borderJoin
+- **Type**: `string`
+- **Default**: `'bevel'`
+
+从 `v5.0.0` 开始支持
+
+用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+
+可以是：
+
+*   `'bevel'`: 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+*   `'round'`: 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+*   `'miter'`: 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `borderMiterLimit` 属性看到效果。
+
+默认值为 `'bevel'`。 更多详情可以参考 MDN [lineJoin](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineJoin)。
+
+###### markArea.data.1.blur.itemStyle.borderMiterLimit
+- **Type**: `number`
+- **Default**: `10`
+
+从 `v5.0.0` 开始支持
+
+用于设置斜接面限制比例。只有当 `borderJoin` 为 `miter` 时， `borderMiterLimit` 才有效。
+
+默认值为 `10`。负数、`0`、`Infinity` 和 `NaN` 均会被忽略。
+
+更多详情可以参考 MDN [miterLimit](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/miterLimit)。
+
+###### markArea.data.1.blur.itemStyle.shadowBlur
+- **Type**: `number`
+
+图形阴影的模糊大小。该属性配合 `shadowColor`,`shadowOffsetX`, `shadowOffsetY` 一起设置图形的阴影效果。
+
+示例：
+
+```
+{
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10
+}
+```
+
+###### markArea.data.1.blur.itemStyle.shadowColor
+- **Type**: `Color`
+
+阴影颜色。支持的格式同`color`。
+
+###### markArea.data.1.blur.itemStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+阴影水平方向上的偏移距离。
+
+###### markArea.data.1.blur.itemStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+阴影垂直方向上的偏移距离。
+
+###### markArea.data.1.blur.itemStyle.opacity
+- **Type**: `number`
+- **Default**: `1`
+
+图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+
+###### markArea.data.1.blur.label.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+是否显示标签。
+
+###### markArea.data.1.blur.label.position
+- **Type**: `string|Array`
+- **Default**: `'top'`
+
+标签的位置。
+
+*   可以通过内置的语义声明位置：
+    
+    示例：
+    
+    ```
+      position: 'top'
+    ```
+    
+    支持：`top` / `left` / `right` / `bottom` / `inside` / `insideLeft` / `insideRight` / `insideTop` / `insideBottom` / `insideTopLeft` / `insideBottomLeft` / `insideTopRight` / `insideBottomRight`
+    
+*   也可以用一个数组表示相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。
+    
+    示例：
+    
+    ```
+      // 绝对的像素值
+      position: [10, 10],
+      // 相对的百分比
+      position: ['50%', '50%']
+    ```
+    
+
+参见：[label position](https://echarts.apache.org/examples/zh/view.html?c=doc-example/label-position)。
+
+###### markArea.data.1.blur.label.distance
+- **Type**: `number`
+- **Default**: `5`
+
+距离图形元素的距离。
+
+当 position 为字符描述值（如 `'top'`、`'insideRight'`）时候有效。
+
+参见：[label position](https://echarts.apache.org/examples/zh/editor.html?c=doc-example/label-position)。
+
+###### markArea.data.1.blur.label.rotate
+- **Type**: `number`
+
+标签旋转。从 -90 度到 90 度。正值是逆时针。
+
+参见：[label rotation](https://echarts.apache.org/examples/zh/editor.html?c=bar-label-rotation)。
+
+###### markArea.data.1.blur.label.offset
+- **Type**: `Array`
+
+是否对文字进行偏移。默认不偏移。例如：`[30, 40]` 表示文字在横向上偏移 `30`，纵向上偏移 `40`。
+
+###### markArea.data.1.blur.label.formatter
+- **Type**: `string|Function`
+
+标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 `\n` 换行。
+
+**字符串模板** 模板变量有：
+
+*   `{a}`：系列名。
+*   `{b}`：数据名。
+*   `{c}`：数据值。
+*   `{@xxx}`：数据中名为 `'xxx'` 的维度的值，如 `{@product}` 表示名为 `'product'` 的维度的值。
+*   `{@[n]}`：数据中维度 `n` 的值，如 `{@[3]}` 表示维度 3 的值，从 0 开始计数。
+
+**示例：**
+
+```
+formatter: '{b}: {@score}'
+```
+
+**回调函数**
+
+回调函数格式：
+
+```
+(params: Object|Array) => string
+```
+
+参数 `params` 是 formatter 需要的单个数据集。格式如下：
+
+```
+{
+    componentType: 'series',
+    // 系列类型
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index
+    seriesIndex: number,
+    // 系列名称
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // 传入的数据值。在多数系列下它和 data 相同。在一些系列下是 data 中的分量（如 map、radar 中）
+    value: number|Array|Object,
+    // 坐标轴 encode 映射信息，
+    // key 为坐标轴（如 'x' 'y' 'radius' 'angle' 等）
+    // value 必然为数组，不会为 null/undefined，表示 dimension index 。
+    // 其内容如：
+    // {
+    //     x: [2] // dimension index 为 2 的数据映射到 x 轴
+    //     y: [0] // dimension index 为 0 的数据映射到 y 轴
+    // }
+    encode: Object,
+    // 维度名列表
+    dimensionNames: Array<String>,
+    // 数据的维度 index，如 0 或 1 或 2 ...
+    // 仅在雷达图中使用。
+    dimensionIndex: number,
+    // 数据图形的颜色
+    color: string
+}
+```
+
+注：encode 和 dimensionNames 的使用方式，例如：
+
+如果数据为：
+
+```
+dataset: {
+    source: [
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.encode.y[0]]
+```
+
+如果数据为：
+
+```
+dataset: {
+    dimensions: ['product', '2015', '2016', '2017'],
+    source: [
+        {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+        {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+        {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+        {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.dimensionNames[params.encode.y[0]]]
+```
+
+###### markArea.data.1.blur.label.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.1.blur.label.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### markArea.data.1.blur.label.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### markArea.data.1.blur.label.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### markArea.data.1.blur.label.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### markArea.data.1.blur.label.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### markArea.data.1.blur.label.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### markArea.data.1.blur.label.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### markArea.data.1.blur.label.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.1.blur.label.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.1.blur.label.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### markArea.data.1.blur.label.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markArea.data.1.blur.label.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markArea.data.1.blur.label.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### markArea.data.1.blur.label.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### markArea.data.1.blur.label.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### markArea.data.1.blur.label.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### markArea.data.1.blur.label.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### markArea.data.1.blur.label.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### markArea.data.1.blur.label.width
+- **Type**: `number`
+
+文本显示宽度。
+
+###### markArea.data.1.blur.label.height
+- **Type**: `number`
+
+文本显示高度。
+
+###### markArea.data.1.blur.label.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.1.blur.label.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### markArea.data.1.blur.label.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### markArea.data.1.blur.label.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markArea.data.1.blur.label.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### markArea.data.1.blur.label.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### markArea.data.1.blur.label.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### markArea.data.1.blur.label.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+###### markArea.data.1.blur.label.overflow
+- **Type**: `string`
+- **Default**: `'none'`
+
+文字超出宽度是否截断或者换行。配置`width`时有效
+
+*   `'truncate'` 截断，并在末尾显示`ellipsis`配置的文本，默认为`...`
+*   `'break'` 换行
+*   `'breakAll'` 换行，跟`'break'`不同的是，在英语等拉丁文中，`'breakAll'`还会强制单词内换行
+
+###### markArea.data.1.blur.label.ellipsis
+- **Type**: `string`
+- **Default**: `'...'`
+
+在`overflow`配置为`'truncate'`的时候，可以通过该属性配置末尾显示的文本。
+
+###### markArea.data.1.blur.label.rich
+- **Type**: `Object`
+
+在 `rich` 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。
+
+例如：
+
+```
+label: {
+    // 在文本中，可以对部分文本采用 rich 中定义样式。
+    // 这里需要在文本中使用标记符号：
+    // `{styleName|text content text content}` 标记样式名。
+    // 注意，换行仍是使用 '\n'。
+    formatter: [
+        '{a|这段文本采用样式a}',
+        '{b|这段文本采用样式b}这段用默认样式{x|这段用样式x}'
+    ].join('\n'),
+
+    rich: {
+        a: {
+            color: 'red',
+            lineHeight: 10
+        },
+        b: {
+            backgroundColor: {
+                image: 'xxx/xxx.jpg'
+            },
+            height: 40
+        },
+        x: {
+            fontSize: 18,
+            fontFamily: 'Microsoft YaHei',
+            borderColor: '#449933',
+            borderRadius: 4
+        },
+        ...
+    }
+}
+```
+
+详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+
+###### markArea.data.1.blur.label.rich.<style_name>.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.1.blur.label.rich.<style_name>.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+###### markArea.data.1.blur.label.rich.<style_name>.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+###### markArea.data.1.blur.label.rich.<style_name>.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+###### markArea.data.1.blur.label.rich.<style_name>.fontSize
+- **Type**: `number`
+- **Default**: `12`
+
+文字的字体大小。
+
+###### markArea.data.1.blur.label.rich.<style_name>.align
+- **Type**: `string`
+
+文字水平对齐方式，默认自动。
+
+可选：
+
+*   `'left'`
+*   `'center'`
+*   `'right'`
+
+`rich` 中如果没有设置 `align`，则会取父层级的 `align`。例如：
+
+```
+{
+    align: right,
+    rich: {
+        a: {
+            // 没有设置 `align`，则 `align` 为 right
+        }
+    }
+}
+```
+
+###### markArea.data.1.blur.label.rich.<style_name>.verticalAlign
+- **Type**: `string`
+
+文字垂直对齐方式，默认自动。
+
+可选：
+
+*   `'top'`
+*   `'middle'`
+*   `'bottom'`
+
+`rich` 中如果没有设置 `verticalAlign`，则会取父层级的 `verticalAlign`。例如：
+
+```
+{
+    verticalAlign: bottom,
+    rich: {
+        a: {
+            // 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom
+        }
+    }
+}
+```
+
+###### markArea.data.1.blur.label.rich.<style_name>.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+###### markArea.data.1.blur.label.rich.<style_name>.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.1.blur.label.rich.<style_name>.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.1.blur.label.rich.<style_name>.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+###### markArea.data.1.blur.label.rich.<style_name>.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+###### markArea.data.1.blur.label.rich.<style_name>.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markArea.data.1.blur.label.rich.<style_name>.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+###### markArea.data.1.blur.label.rich.<style_name>.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+###### markArea.data.1.blur.label.rich.<style_name>.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+###### markArea.data.1.blur.label.rich.<style_name>.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+###### markArea.data.1.blur.label.rich.<style_name>.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+###### markArea.data.1.blur.label.rich.<style_name>.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
+
+###### markArea.data.1.blur.label.rich.<style_name>.width
+- **Type**: `number|string`
+
+文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+`width` 也可以是百分比字符串，如 `'100%'`。表示的是所在文本块的 `contentWidth`（即不包含文本块的 `padding`）的百分之多少。之所以以 `contentWidth` 做基数，因为每个文本片段只能基于 `content box` 布局。如果以 `outerWidth` 做基数，则百分比的计算在实用中不具有意义，可能会超出。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markArea.data.1.blur.label.rich.<style_name>.height
+- **Type**: `number|string`
+
+文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 `backgroundColor`）时，可能会使用它。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+注意，如果不定义 `rich` 属性，则不能指定 `width` 和 `height`。
+
+###### markArea.data.1.blur.label.rich.<style_name>.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+如果设置为 `'inherit'`，则为视觉映射得到的颜色，如系列色。
+
+###### markArea.data.1.blur.label.rich.<style_name>.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+###### markArea.data.1.blur.label.rich.<style_name>.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+###### markArea.data.1.blur.label.rich.<style_name>.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+###### markArea.data.1.blur.label.rich.<style_name>.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+###### markArea.data.1.blur.label.rich.<style_name>.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+###### markArea.data.1.blur.label.rich.<style_name>.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+###### markArea.data.1.blur.label.rich.<style_name>.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+###### markArea.data.1.blur.label.richInheritPlainLabel
+- **Type**: `boolean`
+- **Default**: `true`
+
+从 `v6.0.0` 开始支持
+
+富文本样式是否继承普通文本样式。
+
+此配置项用于向历史兼容。
+
+> 从 v6 版本开始，[富文本标签 (label.rich / textStyle.rich)](option.series-scatter.md#label.rich) 部分样式（`fontStyle`, `fontWeight`, `fontSize`, `fontFamily`, `textShadowColor`, `textShadowBlur`, `textShadowOffsetX`, `textShadowOffsetY`）默认继承 [普通文本样式 (label / textStyle)](option.series-scatter.md#label)。你可以设置 `richInheritPlainLabel: false` （可在最外层配置项或与同级文本样式配置项）来禁用此行为。
+> 
+> ```
+> option = {
+>     richInheritPlainLabel: false, // In most cases, this is enough.
+>     xxx1: {
+>         // Can also set it here to only control this label.
+>         label: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     },
+>     xxx2: {
+>         textStyle: {
+>             richInheritPlainLabel: false,
+>             rich: {/* ... */},
+>         }
+>     }
+> }
+> ```
+
+### markArea.z
+- **Type**: `number`
+- **Default**: `1`
+
+从 `v6.0.0` 开始支持
+
+`z`值小的图形会被`z`值大的图形覆盖。
+
+`z`相比`zlevel`优先级更低，而且不会创建新的 Canvas。
+
+### markArea.animation
+- **Type**: `boolean`
+- **Default**: `false`
+
+是否开启动画。
+
+### markArea.animationThreshold
+- **Type**: `number`
+- **Default**: `2000`
+
+是否开启动画的阈值，当单个系列显示的图形数量大于这个阈值时会关闭动画。
+
+### markArea.animationDuration
+- **Type**: `number|Function`
+- **Default**: `1000`
+
+初始动画的时长，支持回调函数，可以通过每个数据返回不同的时长实现更戏剧的初始动画效果：
+
+```
+animationDuration: function (idx) {
+    // 越往后的数据时长越大
+    return idx * 100;
+}
+```
+
+### markArea.animationEasing
+- **Type**: `string`
+- **Default**: `'cubicOut'`
+
+初始动画的缓动效果。不同的缓动效果可以参考 [缓动示例](https://echarts.apache.org/examples/zh/editor.html?c=line-easing)。
+
+### markArea.animationDelay
+- **Type**: `number|Function`
+- **Default**: `0`
+
+初始动画的延迟，支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的初始动画效果。
+
+如下示例：
+
+```
+animationDelay: function (idx) {
+    // 越往后的数据延迟越大
+    return idx * 100;
+}
+```
+
+也可以看[该示例](https://echarts.apache.org/examples/zh/editor.html?c=bar-animation-delay)
+
+### markArea.animationDurationUpdate
+- **Type**: `number|Function`
+- **Default**: `300`
+
+数据更新动画的时长。
+
+支持回调函数，可以通过每个数据返回不同的时长实现更戏剧的更新动画效果：
+
+```
+animationDurationUpdate: function (idx) {
+    // 越往后的数据时长越大
+    return idx * 100;
+}
+```
+
+### markArea.animationEasingUpdate
+- **Type**: `string`
+- **Default**: `'cubicInOut'`
+
+数据更新动画的缓动效果。
+
+### markArea.animationDelayUpdate
+- **Type**: `number|Function`
+- **Default**: `0`
+
+数据更新动画的延迟，支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的更新动画效果。
+
+如下示例：
+
+```
+animationDelayUpdate: function (idx) {
+    // 越往后的数据延迟越大
+    return idx * 100;
+}
+```
+
+也可以看[该示例](https://echarts.apache.org/examples/zh/editor.html?c=bar-animation-delay)
+
+## clip
+- **Type**: `boolean`
+- **Default**: `true`
+
+从 `v4.4.0` 开始支持
+
+是否裁剪超出坐标系部分的图形，具体裁剪效果根据系列决定：
+
+*   散点图/带有涟漪特效动画的散点（气泡）图：忽略中心点超出坐标系的图形，但是不裁剪单个图形
+*   柱状图：裁掉完全超出的柱子，但是不会裁剪只超出部分的柱子
+*   折线图：裁掉所有超出坐标系的折线部分，拐点图形的逻辑按照散点图处理
+*   路径图：裁掉所有超出坐标系的部分
+*   K 线图：忽略整体都超出坐标系的图形，但是不裁剪单个图形
+*   象形柱图：裁掉所有超出坐标系的部分（从 v5.5.0 开始支持）
+*   自定义系列：裁掉所有超出坐标系的部分
+
+除了象形柱图和自定义系列，其它系列的默认值都为 true，及开启裁剪，如果你觉得不想要裁剪的话，可以设置成 false 关闭。
+
+## zlevel
+- **Type**: `number`
+- **Default**: `0`
+
+散点图所有图形的 zlevel 值。
+
+`zlevel`用于 Canvas 分层，不同`zlevel`值的图形会放置在不同的 Canvas 中，Canvas 分层是一种常见的优化手段。我们可以把一些图形变化频繁（例如有动画）的组件设置成一个单独的`zlevel`。需要注意的是过多的 Canvas 会引起内存开销的增大，在手机端上需要谨慎使用以防崩溃。
+
+`zlevel` 大的 Canvas 会放在 `zlevel` 小的 Canvas 的上面。
+
+## z
+- **Type**: `number`
+- **Default**: `2`
+
+散点图组件的所有图形的`z`值。控制图形的前后顺序。`z`值小的图形会被`z`值大的图形覆盖。
+
+`z`相比`zlevel`优先级更低，而且不会创建新的 Canvas。
+
+## silent
+- **Type**: `boolean`
+- **Default**: `false`
+
+图形是否不响应和触发鼠标事件，默认为 false，即响应和触发鼠标事件。
+
+## animation
+- **Type**: `boolean`
+- **Default**: `true`
+
+是否开启动画。
+
+## animationThreshold
+- **Type**: `number`
+- **Default**: `2000`
+
+是否开启动画的阈值，当单个系列显示的图形数量大于这个阈值时会关闭动画。
+
+## animationDuration
+- **Type**: `number|Function`
+- **Default**: `1000`
+
+初始动画的时长，支持回调函数，可以通过每个数据返回不同的时长实现更戏剧的初始动画效果：
+
+```
+animationDuration: function (idx) {
+    // 越往后的数据时长越大
+    return idx * 100;
+}
+```
+
+## animationEasing
+- **Type**: `string`
+- **Default**: `'cubicOut'`
+
+初始动画的缓动效果。不同的缓动效果可以参考 [缓动示例](https://echarts.apache.org/examples/zh/editor.html?c=line-easing)。
+
+## animationDelay
+- **Type**: `number|Function`
+- **Default**: `0`
+
+初始动画的延迟，支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的初始动画效果。
+
+如下示例：
+
+```
+animationDelay: function (idx) {
+    // 越往后的数据延迟越大
+    return idx * 100;
+}
+```
+
+也可以看[该示例](https://echarts.apache.org/examples/zh/editor.html?c=bar-animation-delay)
+
+## animationDurationUpdate
+- **Type**: `number|Function`
+- **Default**: `300`
+
+数据更新动画的时长。
+
+支持回调函数，可以通过每个数据返回不同的时长实现更戏剧的更新动画效果：
+
+```
+animationDurationUpdate: function (idx) {
+    // 越往后的数据时长越大
+    return idx * 100;
+}
+```
+
+## animationEasingUpdate
+- **Type**: `string`
+- **Default**: `'cubicInOut'`
+
+数据更新动画的缓动效果。
+
+## animationDelayUpdate
+- **Type**: `number|Function`
+- **Default**: `0`
+
+数据更新动画的延迟，支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的更新动画效果。
+
+如下示例：
+
+```
+animationDelayUpdate: function (idx) {
+    // 越往后的数据延迟越大
+    return idx * 100;
+}
+```
+
+也可以看[该示例](https://echarts.apache.org/examples/zh/editor.html?c=bar-animation-delay)
+
+## universalTransition
+- **Type**: `Object`
+
+从 `v5.2.0` 开始支持
+
+全局过渡动画相关的配置。
+
+全局过渡动画（Universal Transition）提供了任意系列之间进行变形动画的功能。开启该功能后，每次`setOption`，相同`id`的系列之间会自动关联进行动画的过渡，更细粒度的关联配置见`universalTransition.seriesKey`配置。
+
+通过配置数据项的`groupId`和`childGroupId`，还可以实现诸如下钻，聚合等一对多或者多对一的动画。
+
+可以直接在系列中配置 `universalTransition: true` 开启该功能。也可以提供一个对象进行更多属性的配置。
+
+### universalTransition.enabled
+- **Type**: `boolean`
+- **Default**: `false`
+
+是否开启全局过渡动画。
+
+### universalTransition.seriesKey
+- **Type**: `string|Array`
+
+`seriesKey`决定了如何关联需要动画的系列，未配置时会默认取系列的`id`。
+
+通常该配置为一个字符串，配置为相同`seriesKey`的系列之间会进行动画的过渡。也可以像下面配置为一个数组：
+
+```
+seriesKey: ['male', 'female']
+```
+
+配置为数组意味着在动画的时候所有数组项指定的系列会合并为当前系列。比如该配置是指`id`或者`seriesKey`为`'male'`和`'female'`的系列会合并成当前系列。
+
+### universalTransition.divideShape
+- **Type**: `string`
+
+`divideShape`决定在一对多或者多对一的动画中，当前系列的图形如何分裂成多个图形。目前支持
+
+*   `'split'` 通过一定的算法将分割图形成为多个。
+*   `'clone'` 从当前图形克隆得到多个。
+
+为了较好的效果，不同的系列会默认有不同的配置，比如散点图这种图形比较小且复杂的默认采用了`'clone'`，而柱状图这种更加规则的则默认是`'split'`。你可以根据你自己的场景需求设置为需要的分裂策略。
+
+### universalTransition.delay
+- **Type**: `Function`
+
+```
+(index: number, count: number) => number
+```
+
+配置一对多或者多对一的动画中每个图形的动画延时，设置不同的动画延时可以给动画带来一定的趣味性。比如下面代码每个图形通过一个随机的延时造成一种错落的效果：
+
+```
+delay: function (index, count) {
+    return Math.random() * 1000;
+}
+```
+
+## tooltip
+- **Type**: `Object`
+
+本系列特定的 tooltip 设定。
+
+### tooltip.position
+- **Type**: `string|Array|Function`
+
+> **注意：**`series.tooltip` 仅在 [tooltip.trigger](option.tooltip.md#trigger) 为 `'item'` 时有效。  
+
+提示框浮层的位置，默认不设置时位置会跟随鼠标的位置。
+
+可选：
+
+*   `Array`
+    
+    通过数组表示提示框浮层的位置，支持数字设置绝对位置，百分比设置相对位置。
+    
+    示例:
+    
+    ```
+      // 绝对位置，相对于容器左侧 10px, 上侧 10 px
+      position: [10, 10]
+      // 相对位置，放置在容器正中间
+      position: ['50%', '50%']
+    ```
+    
+*   `Function`
+    
+    回调函数，格式如下：
+    
+    ```
+      (point: Array, params: Object|Array.<Object>, dom: HTMLDomElement, rect: Object, size: Object) => Array
+    ```
+    
+    **参数：**  
+    point: 鼠标位置，如 \[20, 40\]。  
+    params: 同 formatter 的参数相同。  
+    dom: tooltip 的 dom 对象。  
+    rect: 只有鼠标在图形上时有效，是一个用`x`, `y`, `width`, `height`四个属性表达的图形包围盒。  
+    size: 包括 dom 的尺寸和 echarts 容器的当前尺寸，例如：`{contentSize: [width, height], viewSize: [width, height]}`。  
+    
+    **返回值：**  
+    可以是一个表示 tooltip 位置的数组，数组值可以是绝对的像素值，也可以是相 百分比。  
+    也可以是一个对象，如：`{left: 10, top: 30}`，或者 `{right: '20%', bottom: 40}`。  
+    
+    如下示例：
+    
+    ```
+      position: function (point, params, dom, rect, size) {
+          // 固定在顶部
+          return [point[0], '10%'];
+      }
+    ```
+    
+    或者：
+    
+    ```
+      position: function (pos, params, dom, rect, size) {
+          // 鼠标在左侧时 tooltip 显示到右侧，鼠标在右侧时 tooltip 显示到左侧。
+          var obj = {top: 60};
+          obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
+          return obj;
+      }
+    ```
+    
+
+*   `'inside'`
+    
+    鼠标所在图形的内部中心位置，只在 [trigger](option.tooltip.md#trigger) 为`'item'`的时候有效。
+    
+*   `'top'`
+    
+    鼠标所在图形上侧，只在 [trigger](option.tooltip.md#trigger) 为`'item'`的时候有效。
+    
+*   `'left'`
+    
+    鼠标所在图形左侧，只在 [trigger](option.tooltip.md#trigger) 为`'item'`的时候有效。
+    
+*   `'right'`
+    
+    鼠标所在图形右侧，只在 [trigger](option.tooltip.md#trigger) 为`'item'`的时候有效。
+    
+*   `'bottom'`
+    
+    鼠标所在图形底侧，只在 [trigger](option.tooltip.md#trigger) 为`'item'`的时候有效。
+
+### tooltip.formatter
+- **Type**: `string|Function`
+
+> **注意：**`series.tooltip` 仅在 [tooltip.trigger](option.tooltip.md#trigger) 为 `'item'` 时有效。  
+
+提示框浮层内容格式器，支持字符串模板和回调函数两种形式。
+
+**1\. 字符串模板**
+
+模板变量有 `{a}`, `{b}`，`{c}`，`{d}`，`{e}`，分别表示系列名，数据名，数据值等。 在 [trigger](option.tooltip.md#trigger) 为 `'axis'` 的时候，会有多个系列的数据，此时可以通过 `{a0}`, `{a1}`, `{a2}` 这种后面加索引的方式表示系列的索引。 不同图表类型下的 `{a}`，`{b}`，`{c}`，`{d}` 含义不一样。 其中变量`{a}`, `{b}`, `{c}`, `{d}`在不同图表类型下代表数据含义为：
+
+*   折线（区域）图、柱状（条形）图、K线图 : `{a}`（系列名称），`{b}`（类目值），`{c}`（数值）, `{d}`（无）
+    
+*   散点图（气泡）图 : `{a}`（系列名称），`{b}`（数据名称），`{c}`（数值数组）, `{d}`（无）
+    
+*   地图 : `{a}`（系列名称），`{b}`（区域名称），`{c}`（合并数值）, `{d}`（无）
+    
+*   饼图、仪表盘、漏斗图: `{a}`（系列名称），`{b}`（数据项名称），`{c}`（数值）, `{d}`（百分比）
+    
+
+更多其它图表模板变量的含义可以见相应的图表的 label.formatter 配置项。
+
+**示例：**
+
+```
+formatter: '{b0}: {c0}<br />{b1}: {c1}'
+```
+
+**2\. 回调函数**
+
+回调函数格式：
+
+```
+(params: Object|Array, ticket: string, callback: (ticket: string, html: string | HTMLElement | HTMLElement[])) => string | HTMLElement | HTMLElement[]
+```
+
+支持返回 HTML 字符串或者创建的 DOM 实例。
+
+\[警告\]: tooltip 是用 HTML 实现的（除非 [tooltip.renderMode](option.tooltip.md#renderMode) 设为 `richText`）。允许用此方式定制 HTML。传入 HTML 前须要对其内容进行正确转义。 使用时必须考虑 **安全风险**。文档 [“安全指南”](https://echarts.apache.org/handbook/zh/best-practices/security) 给出了安全使用建议。
+
+组装 HTML 字符串时，**必须进行 HTML 转义（HTML-escaping）**。例如：
+
+```
+{
+    tooltip: {
+        formatter: params => {
+            const { name, value } = params;
+            // 必须进行 HTML 转义。
+            // 否则，如果 name 或 value 中含有功能性字符，如 '<' '>' 等，
+            // 则可能渲染不正确。
+            // 同时，如果 name 或 value 的值来自于“非受信任”的来源，则可能被注入恶意代码；
+            // 如果未被转义，则会被运行。
+            return echarts.format.encodeHTML(name)
+                + '<b>' + echarts.format.encodeHTML(value) + '</b>';
+            // 注：`echarts.format.encodeHTML` 是个工具函数，把特殊字符
+            //  （'&'、'<'、'>'、'"'、"'"）转换成他们对应的 HTML entities.
+            //  这只是个例子，任何 HTML 转义工具函数都可使用。
+        }
+    }
+}
+```
+
+第一个参数 `params` 是 formatter 需要的数据集。格式如下：
+
+```
+{
+    componentType: 'series',
+    // 系列类型
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index
+    seriesIndex: number,
+    // 系列名称
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // 传入的数据值。在多数系列下它和 data 相同。在一些系列下是 data 中的分量（如 map、radar 中）
+    value: number|Array|Object,
+    // 坐标轴 encode 映射信息，
+    // key 为坐标轴（如 'x' 'y' 'radius' 'angle' 等）
+    // value 必然为数组，不会为 null/undefined，表示 dimension index 。
+    // 其内容如：
+    // {
+    //     x: [2] // dimension index 为 2 的数据映射到 x 轴
+    //     y: [0] // dimension index 为 0 的数据映射到 y 轴
+    // }
+    encode: Object,
+    // 维度名列表
+    dimensionNames: Array<String>,
+    // 数据的维度 index，如 0 或 1 或 2 ...
+    // 仅在雷达图中使用。
+    dimensionIndex: number,
+    // 数据图形的颜色
+    color: string,
+    // 饼图/漏斗图的百分比
+    percent: number,
+    // 旭日图中当前节点的祖先节点（包括自身）
+    treePathInfo: Array,
+    // 树图/矩形树图中当前节点的祖先节点（包括自身）
+    treeAncestors: Array,
+    // 坐标轴标签文本是否溢出隐藏，可以使用此函数判断是否需要弹出提示框
+    isTruncated: Function,
+    // 当前坐标轴标签刻度索引
+    tickIndex: number
+}
+```
+
+注：encode 和 dimensionNames 的使用方式，例如：
+
+如果数据为：
+
+```
+dataset: {
+    source: [
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.encode.y[0]]
+```
+
+如果数据为：
+
+```
+dataset: {
+    dimensions: ['product', '2015', '2016', '2017'],
+    source: [
+        {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+        {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+        {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+        {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.dimensionNames[params.encode.y[0]]]
+```
+
+在 [trigger](option.tooltip.md#trigger) 为 `'axis'` 的时候，或者 tooltip 被 [axisPointer](option.xAxis.md#axisPointer) 触发的时候，`params` 是多个系列的数据数组。其中每项内容格式同上，并且，
+
+```
+{
+    componentType: 'series',
+    // 系列类型
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index
+    seriesIndex: number,
+    // 系列名称
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // 传入的数据值。在多数系列下它和 data 相同。在一些系列下是 data 中的分量（如 map、radar 中）
+    value: number|Array|Object,
+    // 坐标轴 encode 映射信息，
+    // key 为坐标轴（如 'x' 'y' 'radius' 'angle' 等）
+    // value 必然为数组，不会为 null/undefined，表示 dimension index 。
+    // 其内容如：
+    // {
+    //     x: [2] // dimension index 为 2 的数据映射到 x 轴
+    //     y: [0] // dimension index 为 0 的数据映射到 y 轴
+    // }
+    encode: Object,
+    // 维度名列表
+    dimensionNames: Array<String>,
+    // 数据的维度 index，如 0 或 1 或 2 ...
+    // 仅在雷达图中使用。
+    dimensionIndex: number,
+    // 数据图形的颜色
+    color: string
+}
+```
+
+注：encode 和 dimensionNames 的使用方式，例如：
+
+如果数据为：
+
+```
+dataset: {
+    source: [
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.encode.y[0]]
+```
+
+如果数据为：
+
+```
+dataset: {
+    dimensions: ['product', '2015', '2016', '2017'],
+    source: [
+        {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+        {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+        {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+        {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.dimensionNames[params.encode.y[0]]]
+```
+
+第二个参数 `ticket` 是异步回调标识，配合第三个参数 `callback` 使用。 第三个参数 `callback` 是异步回调，在提示框浮层内容是异步获取的时候，可以通过 callback 传入上述的 `ticket` 和 `html` 更新提示框浮层内容。
+
+示例：
+
+```
+formatter: function (params, ticket, callback) {
+    $.get('detail?name=' + params.name, function (content) {
+        callback(ticket, toHTML(content));
+    });
+    return 'Loading';
+}
+```
+
+### tooltip.valueFormatter
+- **Type**: `string`
+
+从 `v5.3.0` 开始支持
+
+tooltip 中数值显示部分的格式化回调函数。
+
+回调函数格式：
+
+```
+(value: number | string, dataIndex: number) => string
+```
+
+`dataIndex` 参数 从 `v5.3.0` 开始支持
+
+示例：
+
+```
+// 添加 $ 前缀
+valueFormatter: (value) => '$' + value.toFixed(2)
+```
+
+> **\[注\]:** 不同于 [tooltip.formater](option.tooltip.md#formatter)，本方式不支持返回原始 HTML。返回内容渲染前会被自动按需转义。
+
+### tooltip.backgroundColor
+- **Type**: `Color`
+- **Default**: `'rgba(50,50,50,0.7)'`
+
+> **注意：**`series.tooltip` 仅在 [tooltip.trigger](option.tooltip.md#trigger) 为 `'item'` 时有效。  
+
+提示框浮层的背景颜色。
+
+### tooltip.borderColor
+- **Type**: `Color`
+- **Default**: `'#333'`
+
+> **注意：**`series.tooltip` 仅在 [tooltip.trigger](option.tooltip.md#trigger) 为 `'item'` 时有效。  
+
+提示框浮层的边框颜色。
+
+### tooltip.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+> **注意：**`series.tooltip` 仅在 [tooltip.trigger](option.tooltip.md#trigger) 为 `'item'` 时有效。  
+
+提示框浮层的边框宽。
+
+### tooltip.padding
+- **Type**: `number`
+- **Default**: `5`
+
+> **注意：**`series.tooltip` 仅在 [tooltip.trigger](option.tooltip.md#trigger) 为 `'item'` 时有效。  
+
+提示框浮层内边距，单位px，默认各方向内边距为5，接受数组分别设定上右下左边距。
+
+使用示例：
+
+```
+// 设置内边距为 5
+padding: 5
+// 设置上下的内边距为 5，左右的内边距为 10
+padding: [5, 10]
+// 分别设置四个方向的内边距
+padding: [
+    5,  // 上
+    10, // 右
+    5,  // 下
+    10, // 左
+]
+```
+
+### tooltip.textStyle
+- **Type**: `Object`
+
+> **注意：**`series.tooltip` 仅在 [tooltip.trigger](option.tooltip.md#trigger) 为 `'item'` 时有效。  
+
+提示框浮层的文本样式。
+
+#### tooltip.textStyle.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+#### tooltip.textStyle.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+#### tooltip.textStyle.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+#### tooltip.textStyle.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+#### tooltip.textStyle.fontSize
+- **Type**: `number`
+- **Default**: `14`
+
+文字的字体大小。
+
+#### tooltip.textStyle.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+#### tooltip.textStyle.width
+- **Type**: `number`
+
+文本显示宽度。
+
+#### tooltip.textStyle.height
+- **Type**: `number`
+
+文本显示高度。
+
+#### tooltip.textStyle.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+#### tooltip.textStyle.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+#### tooltip.textStyle.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+#### tooltip.textStyle.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+#### tooltip.textStyle.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+#### tooltip.textStyle.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+#### tooltip.textStyle.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+#### tooltip.textStyle.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+#### tooltip.textStyle.overflow
+- **Type**: `string`
+- **Default**: `'none'`
+
+文字超出宽度是否截断或者换行。配置`width`时有效
+
+*   `'truncate'` 截断，并在末尾显示`ellipsis`配置的文本，默认为`...`
+*   `'break'` 换行
+*   `'breakAll'` 换行，跟`'break'`不同的是，在英语等拉丁文中，`'breakAll'`还会强制单词内换行
+
+#### tooltip.textStyle.ellipsis
+- **Type**: `string`
+- **Default**: `'...'`
+
+在`overflow`配置为`'truncate'`的时候，可以通过该属性配置末尾显示的文本。
+
+### tooltip.extraCssText
+- **Type**: `string`
+
+> **注意：**`series.tooltip` 仅在 [tooltip.trigger](option.tooltip.md#trigger) 为 `'item'` 时有效。  
+
+额外附加到浮层的 css 样式。如下为浮层添加阴影的示例：
+
+```
+extraCssText: 'box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);'
+```
+
+\[警告\]: tooltip 是用 HTML 实现的（除非 [tooltip.renderMode](option.tooltip.md#renderMode) 设为 `richText`）。允许用此方式定制 toolbox 外壳的 CSS text。 如果此 CSS text 来自于“不受信任”的来源，必须考虑 **安全风险**。文档 [“安全指南”](https://echarts.apache.org/handbook/zh/best-practices/security) 给出了安全使用建议。
