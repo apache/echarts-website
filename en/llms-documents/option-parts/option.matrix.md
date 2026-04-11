@@ -779,7 +779,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### x.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -2277,7 +2277,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### y.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -3728,7 +3728,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### body.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -4891,7 +4891,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### corner.label.rich.<style_name>.color
 - **Type**: `Color`

@@ -667,7 +667,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### parallelAxisDefault.nameTextStyle.rich.<style_name>.color
 - **Type**: `Color`
@@ -2388,7 +2388,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### parallelAxisDefault.axisLabel.rich.<style_name>.color
 - **Type**: `Color`
@@ -3125,7 +3125,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### parallelAxisDefault.data.textStyle.rich.<style_name>.color
 - **Type**: `Color`

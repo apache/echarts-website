@@ -1861,7 +1861,7 @@ echarts manages the creation, deletion, animation and interaction with other com
 
 **[More samples of custom series](https://echarts.apache.org/examples/en/index.html#chart-type-custom)**
 
-**[A tutotial of custom series](tutorial.md#Custom%20Series)**
+**[A tutotial of custom series](tutorial.html#Custom%20Series)**
 
   
 **Customize the render logic (in renderItem method)**
@@ -2238,4 +2238,4 @@ Option array used in [timeline](option-parts/option.timeline.md). Each item of t
 ## media
 - **Type**: `Array`
 
-See [Responsive Mobile-End](tutorial.md#Responsive%20Mobile-End) for details.
+See [Responsive Mobile-End](tutorial.html#Responsive%20Mobile-End) for details.

@@ -116,14 +116,14 @@ Note: **_the first row/column_** means that if [series.seriesLayoutBy](../option
 ## transform
 - **Type**: `Array`
 
-See the tutorial of [data transform](../tutorial.md#Data%20Transform).
+See the tutorial of [data transform](tutorial.html#Data%20Transform).
 
 ### transform-filter.config
 - **Type**: `*`
 
 The condition of transform "filter".
 
-See the tutorial of [data transform](../tutorial.md#Data%20Transform).
+See the tutorial of [data transform](tutorial.html#Data%20Transform).
 
 ### transform-filter.print
 - **Type**: `boolean`
@@ -153,7 +153,7 @@ option = {
 
 The condition of transform "sort".
 
-See the tutorial of [data transform](../tutorial.md#Data%20Transform).
+See the tutorial of [data transform](tutorial.html#Data%20Transform).
 
 ### transform-sort.print
 - **Type**: `boolean`
@@ -183,7 +183,7 @@ option = {
 
 Besides built-in transforms (like 'filter', 'sort'), we can also use external transforms to provide more powerful functionalities.
 
-See the tutorial of [data transform](../tutorial.md#Data%20Transform).
+See the tutorial of [data transform](tutorial.html#Data%20Transform).
 
 ### transform-xxx:xxx.type
 - **Type**: `string`
@@ -226,14 +226,14 @@ option = {
 
 Specify the input dataset for [dataset.transform](option.dataset.md#transform). If [dataset.transform](option.dataset.md#transform) specified but both `fromDatasetIndex` and `fromDatasetId` are not specified, `fromDatasetIndex: 0` will be used by default.
 
-See the tutorial of [data transform](../tutorial.md#Data%20Transform).
+See the tutorial of [data transform](tutorial.html#Data%20Transform).
 
 ## fromDatasetId
 - **Type**: `string`
 
 Specify the input dataset for [dataset.transform](option.dataset.md#transform).
 
-See the tutorial of [data transform](../tutorial.md#Data%20Transform).
+See the tutorial of [data transform](tutorial.html#Data%20Transform).
 
 ## fromTransformResult
 - **Type**: `number`
@@ -242,4 +242,4 @@ If a [dataset.transform](option.dataset.md#transform) produces more than one res
 
 In most cases, `fromTransformResult` do not need to be specified because most transforms only produce one result. If `fromTransformResult` is not specified, we use `fromTransformResult: 0` by default.
 
-See the tutorial of [data transform](../tutorial.md#Data%20Transform).
+See the tutorial of [data transform](tutorial.html#Data%20Transform).

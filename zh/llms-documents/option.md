@@ -1837,7 +1837,7 @@ ECharts 2.x 里会用地图上的 `markLine` 去绘制迁徙效果，在 ECharts
 
 **更多的例子参见：[custom examples](https://echarts.apache.org/examples/zh/index.html#chart-type-custom)**
 
-**[这里是个教程](tutorial.md#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B3%BB%E5%88%97)**
+**[这里是个教程](tutorial.html#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B3%BB%E5%88%97)**
 
 **开发者自定义渲染逻辑（renderItem 函数）**
 
@@ -2201,4 +2201,4 @@ const timeStrUTC = echarts.time.format(value, '{yyyy}-{MM}-{dd} {hh}:{mm}:{ss}',
 ## media
 - **Type**: `Array`
 
-请参见 [移动端自适应](tutorial.md#%E7%A7%BB%E5%8A%A8%E7%AB%AF%E8%87%AA%E9%80%82%E5%BA%94)。
+请参见 [移动端自适应](tutorial.html#%E7%A7%BB%E5%8A%A8%E7%AB%AF%E8%87%AA%E9%80%82%E5%BA%94)。

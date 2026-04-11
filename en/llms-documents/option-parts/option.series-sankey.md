@@ -860,7 +860,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ##### edgeLabel.rich.<style_name>.color
 - **Type**: `Color`
@@ -1796,7 +1796,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### levels.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -2653,7 +2653,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### levels.edgeLabel.rich.<style_name>.color
 - **Type**: `Color`
@@ -3630,7 +3630,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### levels.emphasis.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -4487,7 +4487,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### levels.emphasis.edgeLabel.rich.<style_name>.color
 - **Type**: `Color`
@@ -5459,7 +5459,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### levels.blur.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -6316,7 +6316,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### levels.blur.edgeLabel.rich.<style_name>.color
 - **Type**: `Color`
@@ -7296,7 +7296,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### levels.select.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -8153,7 +8153,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### levels.select.edgeLabel.rich.<style_name>.color
 - **Type**: `Color`
@@ -9279,7 +9279,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ##### label.rich.<style_name>.color
 - **Type**: `Color`
@@ -10689,7 +10689,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### emphasis.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -11546,7 +11546,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### emphasis.edgeLabel.rich.<style_name>.color
 - **Type**: `Color`
@@ -12629,7 +12629,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### blur.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -13486,7 +13486,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### blur.edgeLabel.rich.<style_name>.color
 - **Type**: `Color`
@@ -14577,7 +14577,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### select.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -15434,7 +15434,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### select.edgeLabel.rich.<style_name>.color
 - **Type**: `Color`
@@ -16761,7 +16761,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### data.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -17551,7 +17551,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### data.emphasis.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -18582,7 +18582,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### data.blur.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -19621,7 +19621,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### data.select.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -21345,7 +21345,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### links.edgeLabel.rich.<style_name>.color
 - **Type**: `Color`
@@ -22270,7 +22270,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### links.emphasis.edgeLabel.rich.<style_name>.color
 - **Type**: `Color`
@@ -23190,7 +23190,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### links.blur.edgeLabel.rich.<style_name>.color
 - **Type**: `Color`
@@ -24118,7 +24118,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### links.select.edgeLabel.rich.<style_name>.color
 - **Type**: `Color`

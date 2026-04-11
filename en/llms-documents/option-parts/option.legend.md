@@ -1093,7 +1093,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ##### textStyle.rich.<style_name>.color
 - **Type**: `Color`
@@ -2938,7 +2938,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### emphasis.selectorLabel.rich.<style_name>.color
 - **Type**: `Color`
@@ -3720,7 +3720,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ##### selectorLabel.rich.<style_name>.color
 - **Type**: `Color`

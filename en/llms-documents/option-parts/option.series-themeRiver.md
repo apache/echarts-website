@@ -638,7 +638,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ##### label.rich.<style_name>.color
 - **Type**: `Color`
@@ -1981,7 +1981,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### emphasis.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -2994,7 +2994,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### blur.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -4015,7 +4015,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### select.label.rich.<style_name>.color
 - **Type**: `Color`

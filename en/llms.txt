@@ -89,6 +89,6 @@
 - [option.xAxis](llms-documents/option-parts/option.xAxis.md)
 - [option.yAxis](llms-documents/option-parts/option.yAxis.md)
 
-## Tutorial
+## Handbook
 
-- [tutorial](llms-documents/tutorial.md)
+- [ECharts Handbook](https://echarts.apache.org/handbook/en/get-started)

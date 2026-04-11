@@ -634,7 +634,7 @@ label: {
 }
 ```
 
-详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+详情参见教程：[富文本标签](tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
 
 ##### label.rich.<style_name>.color
 - **Type**: `Color`
@@ -1974,7 +1974,7 @@ label: {
 }
 ```
 
-详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+详情参见教程：[富文本标签](tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
 
 ###### emphasis.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -2982,7 +2982,7 @@ label: {
 }
 ```
 
-详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+详情参见教程：[富文本标签](tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
 
 ###### blur.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -3998,7 +3998,7 @@ label: {
 }
 ```
 
-详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+详情参见教程：[富文本标签](tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
 
 ###### select.label.rich.<style_name>.color
 - **Type**: `Color`

@@ -2484,7 +2484,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### markPoint.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -3527,7 +3527,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### markPoint.emphasis.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -4557,7 +4557,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### markPoint.blur.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -5900,7 +5900,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### markPoint.data.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -6799,7 +6799,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### markPoint.data.emphasis.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -7880,7 +7880,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### markLine.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -8838,7 +8838,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### markLine.emphasis.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -9777,7 +9777,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### markLine.blur.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -11105,7 +11105,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### markLine.data.0.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -12053,7 +12053,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### markLine.data.0.emphasis.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -12996,7 +12996,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### markLine.data.0.blur.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -14128,7 +14128,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### markLine.data.1.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -15076,7 +15076,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### markLine.data.1.emphasis.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -16019,7 +16019,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### markLine.data.1.blur.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -17018,7 +17018,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### markArea.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -18061,7 +18061,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### markArea.emphasis.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -19091,7 +19091,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### markArea.blur.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -20383,7 +20383,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### markArea.data.0.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -21416,7 +21416,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### markArea.data.0.emphasis.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -22444,7 +22444,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### markArea.data.0.blur.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -23536,7 +23536,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### markArea.data.1.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -24569,7 +24569,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### markArea.data.1.emphasis.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -25597,7 +25597,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### markArea.data.1.blur.label.rich.<style_name>.color
 - **Type**: `Color`

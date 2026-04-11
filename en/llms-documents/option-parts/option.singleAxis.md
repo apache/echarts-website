@@ -475,7 +475,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ##### nameTextStyle.rich.<style_name>.color
 - **Type**: `Color`
@@ -2196,7 +2196,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ##### axisLabel.rich.<style_name>.color
 - **Type**: `Color`
@@ -3336,7 +3336,7 @@ label: {
 }
 ```
 
-For more details, see [Rich Text](../tutorial.md#Rich%20Text) please.
+For more details, see [Rich Text](tutorial.html#Rich%20Text) please.
 
 ###### data.textStyle.rich.<style_name>.color
 - **Type**: `Color`

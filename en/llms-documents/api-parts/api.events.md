@@ -43,7 +43,7 @@ Event parameters of mouse events are attributes of event object. The following s
 
 Mouse events contain `'click'`, `'dblclick'`, `'mousedown'`, `'mousemove'`, `'mouseup'`, `'mouseover'`, `'mouseout'`, `'globalout'`, `'contextmenu'`.
 
-See [Events and actions in ECharts](../tutorial.md#Events%20and%20actions%20in%20ECharts%0D)
+See [Events and actions in ECharts](tutorial.html#Events%20and%20actions%20in%20ECharts%0D)
 
 ## highlight
 - **Type**: `Event`

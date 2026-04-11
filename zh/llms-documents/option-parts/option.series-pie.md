@@ -1025,7 +1025,7 @@ label: {
 }
 ```
 
-详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+详情参见教程：[富文本标签](tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
 
 ##### label.rich.<style_name>.color
 - **Type**: `Color`
@@ -1395,7 +1395,7 @@ textBorderDashOffset: 5
 
 文字边距，仅当 [label.position](option.series-pie.md#label.position) 为 `'outer'` 并且 [label.alignTo](option.series-pie.md#label.alignTo) 为 `'edge'` 时有效。
 
-通常来说，对于移动端等分辨率较小的情况，`edgeDistance` 值设为比较小的值（比如 `10`）能在有限的空间内显示更多文字，而不是被裁剪为 `...`。但是对于分辨率更大的场景，百分比的值可以避免 label line 过长。如果你需要在不同分辨率下使用，建议使用[响应式图表设计](../tutorial.md#移动端自适应)为不同的分辨率设置不同的 `edgeDistance` 值。
+通常来说，对于移动端等分辨率较小的情况，`edgeDistance` 值设为比较小的值（比如 `10`）能在有限的空间内显示更多文字，而不是被裁剪为 `...`。但是对于分辨率更大的场景，百分比的值可以避免 label line 过长。如果你需要在不同分辨率下使用，建议使用[响应式图表设计](tutorial.html#移动端自适应)为不同的分辨率设置不同的 `edgeDistance` 值。
 
 ### label.bleedMargin
 - **Type**: `number`
@@ -2522,7 +2522,7 @@ label: {
 }
 ```
 
-详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+详情参见教程：[富文本标签](tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
 
 ###### emphasis.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -3611,7 +3611,7 @@ label: {
 }
 ```
 
-详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+详情参见教程：[富文本标签](tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
 
 ###### blur.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -4708,7 +4708,7 @@ label: {
 }
 ```
 
-详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+详情参见教程：[富文本标签](tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
 
 ###### select.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -6104,7 +6104,7 @@ label: {
 }
 ```
 
-详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+详情参见教程：[富文本标签](tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
 
 ###### data.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -7218,7 +7218,7 @@ label: {
 }
 ```
 
-详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+详情参见教程：[富文本标签](tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
 
 ###### data.emphasis.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -8194,7 +8194,7 @@ label: {
 }
 ```
 
-详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+详情参见教程：[富文本标签](tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
 
 ###### data.blur.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -9178,7 +9178,7 @@ label: {
 }
 ```
 
-详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+详情参见教程：[富文本标签](tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
 
 ###### data.select.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -11032,7 +11032,7 @@ label: {
 }
 ```
 
-详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+详情参见教程：[富文本标签](tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
 
 ###### markPoint.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -12067,7 +12067,7 @@ label: {
 }
 ```
 
-详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+详情参见教程：[富文本标签](tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
 
 ###### markPoint.emphasis.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -13089,7 +13089,7 @@ label: {
 }
 ```
 
-详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+详情参见教程：[富文本标签](tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
 
 ###### markPoint.blur.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -14354,7 +14354,7 @@ label: {
 }
 ```
 
-详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+详情参见教程：[富文本标签](tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
 
 ###### markPoint.data.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -15245,7 +15245,7 @@ label: {
 }
 ```
 
-详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+详情参见教程：[富文本标签](tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
 
 ###### markPoint.data.emphasis.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -16328,7 +16328,7 @@ label: {
 }
 ```
 
-详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+详情参见教程：[富文本标签](tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
 
 ###### markLine.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -17287,7 +17287,7 @@ label: {
 }
 ```
 
-详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+详情参见教程：[富文本标签](tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
 
 ###### markLine.emphasis.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -18227,7 +18227,7 @@ label: {
 }
 ```
 
-详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+详情参见教程：[富文本标签](tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
 
 ###### markLine.blur.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -19460,7 +19460,7 @@ label: {
 }
 ```
 
-详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+详情参见教程：[富文本标签](tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
 
 ###### markLine.data.0.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -20409,7 +20409,7 @@ label: {
 }
 ```
 
-详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+详情参见教程：[富文本标签](tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
 
 ###### markLine.data.0.emphasis.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -21353,7 +21353,7 @@ label: {
 }
 ```
 
-详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+详情参见教程：[富文本标签](tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
 
 ###### markLine.data.0.blur.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -22432,7 +22432,7 @@ label: {
 }
 ```
 
-详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+详情参见教程：[富文本标签](tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
 
 ###### markLine.data.1.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -23381,7 +23381,7 @@ label: {
 }
 ```
 
-详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+详情参见教程：[富文本标签](tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
 
 ###### markLine.data.1.emphasis.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -24325,7 +24325,7 @@ label: {
 }
 ```
 
-详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+详情参见教程：[富文本标签](tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
 
 ###### markLine.data.1.blur.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -25318,7 +25318,7 @@ label: {
 }
 ```
 
-详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+详情参见教程：[富文本标签](tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
 
 ###### markArea.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -26353,7 +26353,7 @@ label: {
 }
 ```
 
-详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+详情参见教程：[富文本标签](tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
 
 ###### markArea.emphasis.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -27375,7 +27375,7 @@ label: {
 }
 ```
 
-详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+详情参见教程：[富文本标签](tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
 
 ###### markArea.blur.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -28592,7 +28592,7 @@ label: {
 }
 ```
 
-详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+详情参见教程：[富文本标签](tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
 
 ###### markArea.data.0.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -29617,7 +29617,7 @@ label: {
 }
 ```
 
-详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+详情参见教程：[富文本标签](tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
 
 ###### markArea.data.0.emphasis.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -30637,7 +30637,7 @@ label: {
 }
 ```
 
-详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+详情参见教程：[富文本标签](tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
 
 ###### markArea.data.0.blur.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -31695,7 +31695,7 @@ label: {
 }
 ```
 
-详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+详情参见教程：[富文本标签](tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
 
 ###### markArea.data.1.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -32720,7 +32720,7 @@ label: {
 }
 ```
 
-详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+详情参见教程：[富文本标签](tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
 
 ###### markArea.data.1.emphasis.label.rich.<style_name>.color
 - **Type**: `Color`
@@ -33740,7 +33740,7 @@ label: {
 }
 ```
 
-详情参见教程：[富文本标签](../tutorial.md#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
+详情参见教程：[富文本标签](tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)
 
 ###### markArea.data.1.blur.label.rich.<style_name>.color
 - **Type**: `Color`

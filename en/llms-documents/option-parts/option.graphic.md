@@ -1384,7 +1384,7 @@ The width of the shape of the element.
 
 The height of the shape of the element.
 
-More attributes in `style` (for example, [rich text](../tutorial.md#Rich%20Text)), see the `style` related attributes in [zrender/graphic/Displayable](https://ecomfe.github.io/zrender-doc/public/api.html#zrenderdisplayable).
+More attributes in `style` (for example, [rich text](tutorial.html#Rich%20Text)), see the `style` related attributes in [zrender/graphic/Displayable](https://ecomfe.github.io/zrender-doc/public/api.html#zrenderdisplayable).
 
 Notice, the attribute names of the `style` of graphic elements is derived from `zrender`, which may be different from the attribute names in `echarts label`, `echarts itemStyle`, etc., although they have the same meaning. For example:
 
@@ -2253,7 +2253,7 @@ When [overflow](option.graphic.md#elements-text.style.overflow) is set to `'trun
 
 Text vertical alignment. Optional values: `'top'`, `'middle'`, `'bottom'`.
 
-More attributes in `style` (for example, [rich text](../tutorial.md#Rich%20Text)), see the `style` related attributes in [zrender/graphic/Displayable](https://ecomfe.github.io/zrender-doc/public/api.html#zrenderdisplayable).
+More attributes in `style` (for example, [rich text](tutorial.html#Rich%20Text)), see the `style` related attributes in [zrender/graphic/Displayable](https://ecomfe.github.io/zrender-doc/public/api.html#zrenderdisplayable).
 
 Notice, the attribute names of the `style` of graphic elements is derived from `zrender`, which may be different from the attribute names in `echarts label`, `echarts itemStyle`, etc., although they have the same meaning. For example:
 
@@ -3125,7 +3125,7 @@ We can also specify all of the properties like this:
 ### elements-rect.style
 - **Type**: `Object`
 
-More attributes in `style` (for example, [rich text](../tutorial.md#Rich%20Text)), see the `style` related attributes in [zrender/graphic/Displayable](https://ecomfe.github.io/zrender-doc/public/api.html#zrenderdisplayable).
+More attributes in `style` (for example, [rich text](tutorial.html#Rich%20Text)), see the `style` related attributes in [zrender/graphic/Displayable](https://ecomfe.github.io/zrender-doc/public/api.html#zrenderdisplayable).
 
 Notice, the attribute names of the `style` of graphic elements is derived from `zrender`, which may be different from the attribute names in `echarts label`, `echarts itemStyle`, etc., although they have the same meaning. For example:
 
@@ -3979,7 +3979,7 @@ We can also specify all of the properties like this:
 ### elements-circle.style
 - **Type**: `Object`
 
-More attributes in `style` (for example, [rich text](../tutorial.md#Rich%20Text)), see the `style` related attributes in [zrender/graphic/Displayable](https://ecomfe.github.io/zrender-doc/public/api.html#zrenderdisplayable).
+More attributes in `style` (for example, [rich text](tutorial.html#Rich%20Text)), see the `style` related attributes in [zrender/graphic/Displayable](https://ecomfe.github.io/zrender-doc/public/api.html#zrenderdisplayable).
 
 Notice, the attribute names of the `style` of graphic elements is derived from `zrender`, which may be different from the attribute names in `echarts label`, `echarts itemStyle`, etc., although they have the same meaning. For example:
 
@@ -4839,7 +4839,7 @@ We can also specify all of the properties like this:
 ### elements-ring.style
 - **Type**: `Object`
 
-More attributes in `style` (for example, [rich text](../tutorial.md#Rich%20Text)), see the `style` related attributes in [zrender/graphic/Displayable](https://ecomfe.github.io/zrender-doc/public/api.html#zrenderdisplayable).
+More attributes in `style` (for example, [rich text](tutorial.html#Rich%20Text)), see the `style` related attributes in [zrender/graphic/Displayable](https://ecomfe.github.io/zrender-doc/public/api.html#zrenderdisplayable).
 
 Notice, the attribute names of the `style` of graphic elements is derived from `zrender`, which may be different from the attribute names in `echarts label`, `echarts itemStyle`, etc., although they have the same meaning. For example:
 
@@ -5728,7 +5728,7 @@ We can also specify all of the properties like this:
 ### elements-sector.style
 - **Type**: `Object`
 
-More attributes in `style` (for example, [rich text](../tutorial.md#Rich%20Text)), see the `style` related attributes in [zrender/graphic/Displayable](https://ecomfe.github.io/zrender-doc/public/api.html#zrenderdisplayable).
+More attributes in `style` (for example, [rich text](tutorial.html#Rich%20Text)), see the `style` related attributes in [zrender/graphic/Displayable](https://ecomfe.github.io/zrender-doc/public/api.html#zrenderdisplayable).
 
 Notice, the attribute names of the `style` of graphic elements is derived from `zrender`, which may be different from the attribute names in `echarts label`, `echarts itemStyle`, etc., although they have the same meaning. For example:
 
@@ -6606,7 +6606,7 @@ We can also specify all of the properties like this:
 ### elements-arc.style
 - **Type**: `Object`
 
-More attributes in `style` (for example, [rich text](../tutorial.md#Rich%20Text)), see the `style` related attributes in [zrender/graphic/Displayable](https://ecomfe.github.io/zrender-doc/public/api.html#zrenderdisplayable).
+More attributes in `style` (for example, [rich text](tutorial.html#Rich%20Text)), see the `style` related attributes in [zrender/graphic/Displayable](https://ecomfe.github.io/zrender-doc/public/api.html#zrenderdisplayable).
 
 Notice, the attribute names of the `style` of graphic elements is derived from `zrender`, which may be different from the attribute names in `echarts label`, `echarts itemStyle`, etc., although they have the same meaning. For example:
 
@@ -7464,7 +7464,7 @@ We can also specify all of the properties like this:
 ### elements-polygon.style
 - **Type**: `Object`
 
-More attributes in `style` (for example, [rich text](../tutorial.md#Rich%20Text)), see the `style` related attributes in [zrender/graphic/Displayable](https://ecomfe.github.io/zrender-doc/public/api.html#zrenderdisplayable).
+More attributes in `style` (for example, [rich text](tutorial.html#Rich%20Text)), see the `style` related attributes in [zrender/graphic/Displayable](https://ecomfe.github.io/zrender-doc/public/api.html#zrenderdisplayable).
 
 Notice, the attribute names of the `style` of graphic elements is derived from `zrender`, which may be different from the attribute names in `echarts label`, `echarts itemStyle`, etc., although they have the same meaning. For example:
 
@@ -8322,7 +8322,7 @@ We can also specify all of the properties like this:
 ### elements-polyline.style
 - **Type**: `Object`
 
-More attributes in `style` (for example, [rich text](../tutorial.md#Rich%20Text)), see the `style` related attributes in [zrender/graphic/Displayable](https://ecomfe.github.io/zrender-doc/public/api.html#zrenderdisplayable).
+More attributes in `style` (for example, [rich text](tutorial.html#Rich%20Text)), see the `style` related attributes in [zrender/graphic/Displayable](https://ecomfe.github.io/zrender-doc/public/api.html#zrenderdisplayable).
 
 Notice, the attribute names of the `style` of graphic elements is derived from `zrender`, which may be different from the attribute names in `echarts label`, `echarts itemStyle`, etc., although they have the same meaning. For example:
 
@@ -9190,7 +9190,7 @@ We can also specify all of the properties like this:
 ### elements-line.style
 - **Type**: `Object`
 
-More attributes in `style` (for example, [rich text](../tutorial.md#Rich%20Text)), see the `style` related attributes in [zrender/graphic/Displayable](https://ecomfe.github.io/zrender-doc/public/api.html#zrenderdisplayable).
+More attributes in `style` (for example, [rich text](tutorial.html#Rich%20Text)), see the `style` related attributes in [zrender/graphic/Displayable](https://ecomfe.github.io/zrender-doc/public/api.html#zrenderdisplayable).
 
 Notice, the attribute names of the `style` of graphic elements is derived from `zrender`, which may be different from the attribute names in `echarts label`, `echarts itemStyle`, etc., although they have the same meaning. For example:
 
@@ -10084,7 +10084,7 @@ We can also specify all of the properties like this:
 ### elements-bezierCurve.style
 - **Type**: `Object`
 
-More attributes in `style` (for example, [rich text](../tutorial.md#Rich%20Text)), see the `style` related attributes in [zrender/graphic/Displayable](https://ecomfe.github.io/zrender-doc/public/api.html#zrenderdisplayable).
+More attributes in `style` (for example, [rich text](tutorial.html#Rich%20Text)), see the `style` related attributes in [zrender/graphic/Displayable](https://ecomfe.github.io/zrender-doc/public/api.html#zrenderdisplayable).
 
 Notice, the attribute names of the `style` of graphic elements is derived from `zrender`, which may be different from the attribute names in `echarts label`, `echarts itemStyle`, etc., although they have the same meaning. For example:
 
@@ -10927,7 +10927,7 @@ We can also specify all of the properties like this:
 ### elements-compoundPath.style
 - **Type**: `Object`
 
-More attributes in `style` (for example, [rich text](../tutorial.md#Rich%20Text)), see the `style` related attributes in [zrender/graphic/Displayable](https://ecomfe.github.io/zrender-doc/public/api.html#zrenderdisplayable).
+More attributes in `style` (for example, [rich text](tutorial.html#Rich%20Text)), see the `style` related attributes in [zrender/graphic/Displayable](https://ecomfe.github.io/zrender-doc/public/api.html#zrenderdisplayable).
 
 Notice, the attribute names of the `style` of graphic elements is derived from `zrender`, which may be different from the attribute names in `echarts label`, `echarts itemStyle`, etc., although they have the same meaning. For example:
 
