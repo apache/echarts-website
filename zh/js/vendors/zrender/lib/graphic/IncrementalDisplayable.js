@@ -1,13 +1,14 @@
 import { __extends } from "tslib";
 import Displayble from './Displayable.js';
 import BoundingRect from '../core/BoundingRect.js';
+import { INCREMENTAL_ID_TRUE_COMPAT } from '../core/types.js';
 var m = [];
 var IncrementalDisplayable = (function (_super) {
     __extends(IncrementalDisplayable, _super);
     function IncrementalDisplayable() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.notClear = true;
-        _this.incremental = true;
+        _this.incremental = INCREMENTAL_ID_TRUE_COMPAT;
         _this._displayables = [];
         _this._temporaryDisplayables = [];
         _this._cursor = 0;
@@ -18,6 +19,9 @@ var IncrementalDisplayable = (function (_super) {
     };
     IncrementalDisplayable.prototype.useStyle = function () {
         this.style = {};
+    };
+    IncrementalDisplayable.prototype._useHoverStyle = function () {
+        this.__hoverStyle = null;
     };
     IncrementalDisplayable.prototype.getCursor = function () {
         return this._cursor;

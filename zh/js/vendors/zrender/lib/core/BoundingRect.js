@@ -1,4 +1,5 @@
 import * as matrix from './matrix.js';
+import * as vector from './vector.js';
 import Point from './Point.js';
 var mathMin = Math.min;
 var mathMax = Math.max;
@@ -15,7 +16,7 @@ var _maxTv = _intersectCtx.maxTv;
 var _lenMinMax = [0, 0];
 var BoundingRect = (function () {
     function BoundingRect(x, y, width, height) {
-        BoundingRect.set(this, x, y, width, height);
+        boundingRectSet(this, x, y, width, height);
     }
     BoundingRect.set = function (target, x, y, width, height) {
         if (width < 0) {
@@ -54,14 +55,7 @@ var BoundingRect = (function () {
         BoundingRect.applyTransform(this, this, m);
     };
     BoundingRect.prototype.calculateTransform = function (b) {
-        var a = this;
-        var sx = b.width / a.width;
-        var sy = b.height / a.height;
-        var m = matrix.create();
-        matrix.translate(m, m, [-a.x, -a.y]);
-        matrix.scale(m, m, [sx, sy]);
-        matrix.translate(m, m, [b.x, b.y]);
-        return m;
+        return boundingRectCalculateTransform(matrix.create(), this, b);
     };
     BoundingRect.prototype.intersect = function (b, mtv, opt) {
         return BoundingRect.intersect(this, b, mtv, opt);
@@ -79,10 +73,10 @@ var BoundingRect = (function () {
             return false;
         }
         if (!(a instanceof BoundingRect)) {
-            a = BoundingRect.set(_tmpIntersectA, a.x, a.y, a.width, a.height);
+            a = boundingRectSet(_tmpIntersectA, a.x, a.y, a.width, a.height);
         }
         if (!(b instanceof BoundingRect)) {
-            b = BoundingRect.set(_tmpIntersectB, b.x, b.y, b.width, b.height);
+            b = boundingRectSet(_tmpIntersectB, b.x, b.y, b.width, b.height);
         }
         var useMTV = !!mtv;
         _intersectCtx.reset(opt, useMTV);
@@ -125,7 +119,7 @@ var BoundingRect = (function () {
         return new BoundingRect(this.x, this.y, this.width, this.height);
     };
     BoundingRect.prototype.copy = function (other) {
-        BoundingRect.copy(this, other);
+        boundingRectCopy(this, other);
     };
     BoundingRect.prototype.plain = function () {
         return {
@@ -145,7 +139,7 @@ var BoundingRect = (function () {
         return this.width === 0 || this.height === 0;
     };
     BoundingRect.create = function (rect) {
-        return new BoundingRect(rect.x, rect.y, rect.width, rect.height);
+        return new BoundingRect(rect ? rect.x : 0, rect ? rect.y : 0, rect ? rect.width : 0, rect ? rect.height : 0);
     };
     BoundingRect.copy = function (target, source) {
         target.x = source.x;
@@ -157,7 +151,7 @@ var BoundingRect = (function () {
     BoundingRect.applyTransform = function (target, source, m) {
         if (!m) {
             if (target !== source) {
-                BoundingRect.copy(target, source);
+                boundingRectCopy(target, source);
             }
             return;
         }
@@ -195,10 +189,26 @@ var BoundingRect = (function () {
         target.width = maxX - target.x;
         target.height = maxY - target.y;
     };
+    BoundingRect.calculateTransform = function (out, a, b) {
+        var sx = b.width / a.width;
+        var sy = b.height / a.height;
+        out = matrix.identity(out || []);
+        matrix.translate(out, out, vector.set(_tmpCalcTrans, -a.x, -a.y));
+        matrix.scale(out, out, vector.set(_tmpCalcTrans, sx, sy));
+        matrix.translate(out, out, vector.set(_tmpCalcTrans, b.x, b.y));
+        return out;
+    };
     return BoundingRect;
 }());
+export var boundingRectCreate = BoundingRect.create;
+export var boundingRectSet = BoundingRect.set;
+export var boundingRectCopy = BoundingRect.copy;
+export var boundingRectCalculateTransform = BoundingRect.calculateTransform;
+export var boundingRectApplyTransform = BoundingRect.applyTransform;
+export var boundingRectContain = BoundingRect.contain;
 var _tmpIntersectA = new BoundingRect(0, 0, 0, 0);
 var _tmpIntersectB = new BoundingRect(0, 0, 0, 0);
+var _tmpCalcTrans = [];
 function intersectOneDim(a0, a1, b0, b1, updateDimIdx, useMTV, outIntersectRect, clamp) {
     var d0 = mathAbs(a1 - b0);
     var d1 = mathAbs(b1 - a0);

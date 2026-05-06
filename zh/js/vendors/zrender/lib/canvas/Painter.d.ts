@@ -1,5 +1,6 @@
 import Layer, { LayerConfig } from './Layer';
 import Displayable from '../graphic/Displayable';
+import { ZLevel } from '../core/types';
 import { GradientObject } from '../graphic/Gradient';
 import { ImagePatternObject } from '../graphic/Pattern';
 import Storage from '../Storage';
@@ -10,22 +11,26 @@ interface CanvasPainterOption {
     height?: number | string;
     useDirtyRect?: boolean;
 }
+export declare type CanvasPainterRefreshOpt = {
+    paintAll?: boolean;
+    refresh?: boolean;
+    refreshHover?: boolean;
+};
 export default class CanvasPainter implements PainterBase {
     type: string;
     root: HTMLElement;
     dpr: number;
     storage: Storage;
+    private _i;
     private _singleCanvas;
     private _opts;
-    private _zlevelList;
     private _prevDisplayList;
-    private _layers;
     private _layerConfig;
     private _needsManuallyCompositing;
     private _width;
     private _height;
     private _domRoot;
-    private _hoverlayer;
+    private _hoverLayerDirty;
     private _redrawId;
     private _backgroundColor;
     constructor(root: HTMLElement, storage: Storage, opts: CanvasPainterOption, id: number);
@@ -36,26 +41,25 @@ export default class CanvasPainter implements PainterBase {
         offsetLeft: number;
         offsetTop: number;
     };
-    refresh(paintAll?: boolean): this;
-    refreshHover(): void;
+    refresh(optOrPaintAll?: CanvasPainterRefreshOpt | CanvasPainterRefreshOpt['paintAll']): this;
     private _paintHoverList;
     getHoverLayer(): Layer;
     paintOne(ctx: CanvasRenderingContext2D, el: Displayable): void;
     private _paintList;
     private _compositeManually;
     private _doPaintList;
-    private _doPaintEl;
-    getLayer(zlevel: number, virtual?: boolean): Layer;
-    insertLayer(zlevel: number, layer: Layer): void;
-    eachLayer<T>(cb: (this: T, layer: Layer, z: number) => void, context?: T): void;
-    eachBuiltinLayer<T>(cb: (this: T, layer: Layer, z: number) => void, context?: T): void;
+    private _paintPerCursor;
+    private _paintPerCursorInRect;
+    getLayer(zlevel: ZLevel, virtual?: boolean): Layer;
+    private _ensureLayer;
+    insertLayer(zlevel: ZLevel, layer: Layer): void;
+    private _insertLayer;
+    eachLayer<T>(cb: (this: T, layer: Layer, zlevel: number) => void, context?: T): void;
+    eachBuiltinLayer<T>(cb: (this: T, layer: Layer, zlevel: number) => void, context?: T): void;
     eachOtherLayer<T>(cb: (this: T, layer: Layer, z: number) => void, context?: T): void;
-    getLayers(): {
-        [key: number]: Layer;
-    };
-    _updateLayerStatus(list: Displayable[]): void;
+    getLayers(): Record<string, Layer>;
+    private _updateLayerStatus;
     clear(): this;
-    _clearLayer(layer: Layer): void;
     setBackgroundColor(backgroundColor: string | GradientObject | ImagePatternObject): void;
     configLayer(zlevel: number, config: LayerConfig): void;
     delLayer(zlevel: number): void;

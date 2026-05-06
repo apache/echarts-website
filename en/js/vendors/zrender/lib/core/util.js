@@ -36,7 +36,11 @@ var ctorFunction = function () { }.constructor;
 var protoFunction = ctorFunction ? ctorFunction.prototype : null;
 var protoKey = '__proto__';
 var idStart = 0x0907;
+var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
 export function guid() {
+    if (idStart >= MAX_SAFE_INTEGER) {
+        idStart = 0;
+    }
     return idStart++;
 }
 export function logError() {
@@ -132,6 +136,14 @@ export function extend(target, source) {
         }
     }
     return target;
+}
+export function assignProps(tar, src, props) {
+    tar = (tar || {});
+    for (var idx = 0; idx < props.length; idx++) {
+        var prop = props[idx];
+        tar[prop] = src[prop];
+    }
+    return tar;
 }
 export function defaults(target, source, overlay) {
     var keysArr = keys(source);

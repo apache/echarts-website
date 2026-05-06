@@ -354,7 +354,6 @@ class SVGPainter implements PainterBase {
         return prefix + 'charset=UTF-8,' + encodeURIComponent(str);
     }
 
-    refreshHover = createMethodNotSupport('refreshHover') as PainterBase['refreshHover'];
     configLayer = createMethodNotSupport('configLayer') as PainterBase['configLayer'];
 }
 

@@ -1,4 +1,4 @@
-import { Dictionary, ArrayLike, KeyOfDistributive } from './types';
+import { Dictionary, ArrayLike, KeyOfDistributive, NullUndefined } from './types';
 import { GradientObject } from '../graphic/Gradient';
 import { ImagePatternObject } from '../graphic/Pattern';
 declare const nativeSlice: (start?: number, end?: number) => any[];
@@ -9,6 +9,10 @@ export declare function merge<T extends Dictionary<any>, S extends Dictionary<an
 export declare function merge<T extends any, S extends any>(target: T, source: S, overwrite?: boolean): T | S;
 export declare function mergeAll(targetAndSources: any[], overwrite?: boolean): any;
 export declare function extend<T extends Dictionary<any>, S extends Dictionary<any>>(target: T, source: S): T & S;
+export declare function assignProps<TSrc extends Dictionary<any>, TCommonKey extends keyof TSrc>(tar: NullUndefined, src: TSrc, props: readonly TCommonKey[]): Pick<TSrc, TCommonKey>;
+export declare function assignProps<TTar extends Dictionary<any>, TSrc extends Dictionary<any>, TCommonKey extends keyof TSrc & keyof TTar>(tar: TTar, src: TSrc & {
+    [P in TCommonKey]: TTar[P];
+}, props: readonly TCommonKey[]): TTar;
 export declare function defaults<T extends Dictionary<any>, S extends Dictionary<any>>(target: T, source: S, overlay?: boolean): T & S;
 export declare const createCanvas: () => HTMLCanvasElement;
 export declare function indexOf<T>(array: T[] | readonly T[] | ArrayLike<T>, value: T): number;

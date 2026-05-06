@@ -1,4 +1,5 @@
 import * as matrix from './matrix';
+import * as vector from './vector';
 import Point, { PointLike } from './Point';
 import { NullUndefined } from './types';
 
@@ -28,7 +29,7 @@ class BoundingRect {
     height: number
 
     constructor(x: number, y: number, width: number, height: number) {
-        BoundingRect.set(this, x, y, width, height);
+        boundingRectSet(this, x, y, width, height);
     }
 
     static set<TTarget extends RectLike>(
@@ -86,17 +87,7 @@ class BoundingRect {
     }
 
     calculateTransform(b: RectLike): matrix.MatrixArray {
-        const a = this;
-        const sx = b.width / a.width;
-        const sy = b.height / a.height;
-
-        const m = matrix.create();
-
-        matrix.translate(m, m, [-a.x, -a.y]);
-        matrix.scale(m, m, [sx, sy]);
-        matrix.translate(m, m, [b.x, b.y]);
-
-        return m;
+        return boundingRectCalculateTransform(matrix.create(), this, b);
     }
 
     /**
@@ -141,10 +132,10 @@ class BoundingRect {
 
         // Normalize negative width/height.
         if (!(a instanceof BoundingRect)) {
-            a = BoundingRect.set(_tmpIntersectA, a.x, a.y, a.width, a.height);
+            a = boundingRectSet(_tmpIntersectA, a.x, a.y, a.width, a.height);
         }
         if (!(b instanceof BoundingRect)) {
-            b = BoundingRect.set(_tmpIntersectB, b.x, b.y, b.width, b.height);
+            b = boundingRectSet(_tmpIntersectB, b.x, b.y, b.width, b.height);
         }
 
         const useMTV = !!mtv;
@@ -208,7 +199,7 @@ class BoundingRect {
      * Copy from another rect
      */
     copy(other: RectLike) {
-        BoundingRect.copy(this, other);
+        boundingRectCopy(this, other);
     }
 
     plain(): RectLike {
@@ -234,8 +225,13 @@ class BoundingRect {
         return this.width === 0 || this.height === 0;
     }
 
-    static create(rect: RectLike): BoundingRect {
-        return new BoundingRect(rect.x, rect.y, rect.width, rect.height);
+    static create(rect?: RectLike | NullUndefined): BoundingRect {
+        return new BoundingRect(
+            rect ? rect.x : 0,
+            rect ? rect.y : 0,
+            rect ? rect.width : 0,
+            rect ? rect.height : 0
+        );
     }
 
     static copy<TTarget extends RectLike>(target: TTarget, source: RectLike): TTarget {
@@ -253,7 +249,7 @@ class BoundingRect {
         // And element has no transform
         if (!m) {
             if (target !== source) {
-                BoundingRect.copy(target, source);
+                boundingRectCopy(target, source);
             }
             return;
         }
@@ -296,10 +292,32 @@ class BoundingRect {
         target.width = maxX - target.x;
         target.height = maxY - target.y;
     }
+
+    static calculateTransform(out: matrix.MatrixArray | NullUndefined, a: RectLike, b: RectLike): matrix.MatrixArray {
+        const sx = b.width / a.width;
+        const sy = b.height / a.height;
+
+        out = matrix.identity(out || []);
+
+        matrix.translate(out, out, vector.set(_tmpCalcTrans, -a.x, -a.y));
+        matrix.scale(out, out, vector.set(_tmpCalcTrans, sx, sy));
+        matrix.translate(out, out, vector.set(_tmpCalcTrans, b.x, b.y));
+
+        return out;
+    }
+
 }
+
+export const boundingRectCreate = BoundingRect.create;
+export const boundingRectSet = BoundingRect.set;
+export const boundingRectCopy = BoundingRect.copy;
+export const boundingRectCalculateTransform = BoundingRect.calculateTransform;
+export const boundingRectApplyTransform = BoundingRect.applyTransform;
+export const boundingRectContain = BoundingRect.contain;
 
 const _tmpIntersectA = new BoundingRect(0, 0, 0, 0);
 const _tmpIntersectB = new BoundingRect(0, 0, 0, 0);
+const _tmpCalcTrans: vector.VectorArray = [];
 
 
 function intersectOneDim(

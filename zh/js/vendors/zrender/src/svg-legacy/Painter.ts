@@ -403,7 +403,6 @@ class SVGPainter implements PainterBase {
         const html = encodeURIComponent(outerHTML.replace(/></g, '>\n\r<'));
         return 'data:image/svg+xml;charset=UTF-8,' + html;
     }
-    refreshHover = createMethodNotSupport('refreshHover') as PainterBase['refreshHover'];
     configLayer = createMethodNotSupport('configLayer') as PainterBase['configLayer'];
 }
 

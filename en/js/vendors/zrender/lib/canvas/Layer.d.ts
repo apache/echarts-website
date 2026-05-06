@@ -1,15 +1,30 @@
+import * as util from '../core/util';
 import { ImagePatternObject } from '../graphic/Pattern';
 import CanvasPainter from './Painter';
 import { GradientObject } from '../graphic/Gradient';
+import { IncrementalId, ZLevel, ZLevel2 } from '../core/types';
 import Eventful from '../core/Eventful';
-import { ElementEventCallback } from '../Element';
+import Element, { ElementEventCallback } from '../Element';
 import Displayable from '../graphic/Displayable';
 import BoundingRect from '../core/BoundingRect';
+export declare function isIncrementalLayer(layer: Layer): boolean;
 export interface LayerConfig {
     clearColor?: string | GradientObject | ImagePatternObject;
     motionBlur?: boolean;
     lastFrameAlpha?: number;
 }
+export interface LayerDrawCursor {
+    key: IncrementalId;
+    used: boolean;
+    drawIdx: number;
+    notClearIdx: number;
+    startIdx: number;
+    endIdx: number;
+    endIdxNew: number;
+    first: Element['id'];
+    last: Element['id'];
+}
+declare type LayerDrawCursorStartEnd = Pick<LayerDrawCursor, 'startIdx' | 'endIdx'>;
 export default class Layer extends Eventful {
     id: string;
     dom: HTMLCanvasElement;
@@ -23,21 +38,17 @@ export default class Layer extends Eventful {
     dpr: number;
     virtual: boolean;
     config: {};
-    incremental: boolean;
-    zlevel: number;
+    zlevel: ZLevel;
+    zlevel2: ZLevel2;
     maxRepaintRectCount: number;
     private _paintRects;
     __dirty: boolean;
     __firstTimePaint: boolean;
-    __used: boolean;
-    __drawIndex: number;
-    __startIndex: number;
-    __endIndex: number;
-    __prevStartIndex: number;
-    __prevEndIndex: number;
+    __cursorStack: IncrementalId[];
+    __cursors: util.HashMap<LayerDrawCursor, IncrementalId>;
+    __prevIdx: LayerDrawCursorStartEnd;
     __builtin__: boolean;
     constructor(id: string | HTMLCanvasElement, painter: CanvasPainter, dpr?: number);
-    getElementCount(): number;
     afterBrush(): void;
     initContext(): void;
     setUnpainted(): void;
@@ -65,3 +76,4 @@ export default class Layer extends Eventful {
     ondragover: ElementEventCallback<unknown, this>;
     ondrop: ElementEventCallback<unknown, this>;
 }
+export {};

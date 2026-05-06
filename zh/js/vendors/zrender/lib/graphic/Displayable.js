@@ -1,5 +1,5 @@
 import { __extends } from "tslib";
-import Element from '../Element.js';
+import Element, { IN_HOVER_LAYER_KIND_ONLY_STYLE_CHANGE, } from '../Element.js';
 import BoundingRect from '../core/BoundingRect.js';
 import { keys, extend, createObject } from '../core/util.js';
 import { REDRAW_BIT, STYLE_CHANGED_BIT } from './constants.js';
@@ -44,7 +44,7 @@ var Displayable = (function (_super) {
             this.useStyle({});
         }
     };
-    Displayable.prototype.beforeBrush = function () { };
+    Displayable.prototype.beforeBrush = function (param) { };
     Displayable.prototype.afterBrush = function () { };
     Displayable.prototype.innerBeforeBrush = function () { };
     Displayable.prototype.innerAfterBrush = function () { };
@@ -190,13 +190,11 @@ var Displayable = (function (_super) {
         if (!obj[STYLE_MAGIC_KEY]) {
             obj = this.createStyle(obj);
         }
-        if (this.__inHover) {
-            this.__hoverStyle = obj;
-        }
-        else {
-            this.style = obj;
-        }
+        this.style = obj;
         this.dirtyStyle();
+    };
+    Displayable.prototype._useHoverStyle = function (obj) {
+        this.__hoverStyle = obj;
     };
     Displayable.prototype.isStyleObject = function (obj) {
         return obj[STYLE_MAGIC_KEY];
@@ -212,6 +210,7 @@ var Displayable = (function (_super) {
     Displayable.prototype._applyStateObj = function (stateName, state, normalState, keepCurrentStates, transition, animationCfg) {
         _super.prototype._applyStateObj.call(this, stateName, state, normalState, keepCurrentStates, transition, animationCfg);
         var needsRestoreToNormal = !(state && keepCurrentStates);
+        var inHoverOnlyStyleChange = this.__inHover === IN_HOVER_LAYER_KIND_ONLY_STYLE_CHANGE;
         var targetStyle;
         if (state && state.style) {
             if (transition) {
@@ -255,18 +254,25 @@ var Displayable = (function (_super) {
                 }, animationCfg, this.getAnimationStyleProps());
             }
             else {
-                this.useStyle(targetStyle);
+                if (inHoverOnlyStyleChange) {
+                    this._useHoverStyle(targetStyle);
+                }
+                else {
+                    this.useStyle(targetStyle);
+                }
             }
         }
-        var statesKeys = this.__inHover ? PRIMARY_STATES_KEYS_IN_HOVER_LAYER : PRIMARY_STATES_KEYS;
-        for (var i = 0; i < statesKeys.length; i++) {
-            var key = statesKeys[i];
-            if (state && state[key] != null) {
-                this[key] = state[key];
-            }
-            else if (needsRestoreToNormal) {
-                if (normalState[key] != null) {
-                    this[key] = normalState[key];
+        if (!inHoverOnlyStyleChange) {
+            var statesKeys = this.__inHover ? PRIMARY_STATES_KEYS_IN_HOVER_LAYER : PRIMARY_STATES_KEYS;
+            for (var i = 0; i < statesKeys.length; i++) {
+                var key = statesKeys[i];
+                if (state && state[key] != null) {
+                    this[key] = state[key];
+                }
+                else if (needsRestoreToNormal) {
+                    if (normalState[key] != null) {
+                        this[key] = normalState[key];
+                    }
                 }
             }
         }
@@ -303,7 +309,7 @@ var Displayable = (function (_super) {
         dispProto.culling = false;
         dispProto.cursor = 'pointer';
         dispProto.rectHover = false;
-        dispProto.incremental = false;
+        dispProto.incremental = 0;
         dispProto._rect = null;
         dispProto.dirtyRectTolerance = 0;
         dispProto.__dirty = REDRAW_BIT | STYLE_CHANGED_BIT;

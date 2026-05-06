@@ -2,12 +2,13 @@ import Displayble from './Displayable';
 import BoundingRect from '../core/BoundingRect';
 export default class IncrementalDisplayable extends Displayble {
     notClear: boolean;
-    incremental: boolean;
+    incremental: number;
     private _displayables;
     private _temporaryDisplayables;
     private _cursor;
     traverse<T>(cb: (this: T, el: this) => void, context: T): void;
     useStyle(): void;
+    protected _useHoverStyle(): void;
     getCursor(): number;
     innerAfterBrush(): void;
     clearDisplaybles(): void;

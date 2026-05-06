@@ -17,6 +17,8 @@ var DEFAULT_ANIMATABLE_MAP = reduce(TRANSFORMABLE_PROPS, function (obj, key) {
 var tmpTextPosCalcRes = {};
 var tmpBoundingRect = new BoundingRect(0, 0, 0, 0);
 var tmpInnerTextTrans = [];
+export var IN_HOVER_LAYER_KIND_NO = 0;
+export var IN_HOVER_LAYER_KIND_ONLY_STYLE_CHANGE = 1;
 var Element = (function () {
     function Element(props) {
         this.id = guid();
@@ -326,18 +328,18 @@ var Element = (function () {
         if (!toNormalState) {
             this.saveCurrentToNormalState(state);
         }
-        var useHoverLayer = !!((state && state.hoverLayer) || forceUseHoverLayer);
-        if (useHoverLayer) {
-            this._toggleHoverLayerFlag(true);
-        }
-        this._applyStateObj(stateName, state, this._normalState, keepCurrentStates, !noAnimation && !this.__inHover && animationCfg && animationCfg.duration > 0, animationCfg);
         var textContent = this._textContent;
+        var useHoverLayer = shouldUseHoverLayer(this, textContent, state, forceUseHoverLayer);
+        if (useHoverLayer && !this.__inHover) {
+            this.__inHover = useHoverLayer;
+        }
+        this._applyStateObj(stateName, state, this._normalState, keepCurrentStates, canTransition(this, noAnimation, animationCfg), animationCfg);
         var textGuide = this._textGuide;
         if (textContent) {
-            textContent.useState(stateName, keepCurrentStates, noAnimation, useHoverLayer);
+            textContent.useState(stateName, keepCurrentStates, noAnimation, !!useHoverLayer);
         }
         if (textGuide) {
-            textGuide.useState(stateName, keepCurrentStates, noAnimation, useHoverLayer);
+            textGuide.useState(stateName, keepCurrentStates, noAnimation, !!useHoverLayer);
         }
         if (toNormalState) {
             this.currentStates = [];
@@ -354,7 +356,7 @@ var Element = (function () {
         this._updateAnimationTargets();
         this.markRedraw();
         if (!useHoverLayer && this.__inHover) {
-            this._toggleHoverLayerFlag(false);
+            this.__inHover = IN_HOVER_LAYER_KIND_NO;
             this.__dirty &= ~REDRAW_BIT;
         }
         return state;
@@ -393,27 +395,27 @@ var Element = (function () {
                 }
             }
             var lastStateObj = stateObjects[len - 1];
-            var useHoverLayer = !!((lastStateObj && lastStateObj.hoverLayer) || forceUseHoverLayer);
-            if (useHoverLayer) {
-                this._toggleHoverLayerFlag(true);
+            var textContent = this._textContent;
+            var useHoverLayer = shouldUseHoverLayer(this, textContent, lastStateObj, forceUseHoverLayer);
+            if (useHoverLayer && !this.__inHover) {
+                this.__inHover = useHoverLayer;
             }
             var mergedState = this._mergeStates(stateObjects);
             var animationCfg = this.stateTransition;
             this.saveCurrentToNormalState(mergedState);
-            this._applyStateObj(states.join(','), mergedState, this._normalState, false, !noAnimation && !this.__inHover && animationCfg && animationCfg.duration > 0, animationCfg);
-            var textContent = this._textContent;
+            this._applyStateObj(states.join(','), mergedState, this._normalState, false, canTransition(this, noAnimation, animationCfg), animationCfg);
             var textGuide = this._textGuide;
             if (textContent) {
-                textContent.useStates(states, noAnimation, useHoverLayer);
+                textContent.useStates(states, noAnimation, !!useHoverLayer);
             }
             if (textGuide) {
-                textGuide.useStates(states, noAnimation, useHoverLayer);
+                textGuide.useStates(states, noAnimation, !!useHoverLayer);
             }
             this._updateAnimationTargets();
             this.currentStates = states.slice();
             this.markRedraw();
             if (!useHoverLayer && this.__inHover) {
-                this._toggleHoverLayerFlag(false);
+                this.__inHover = IN_HOVER_LAYER_KIND_NO;
                 this.__dirty &= ~REDRAW_BIT;
             }
         }
@@ -487,6 +489,9 @@ var Element = (function () {
         return mergedState;
     };
     Element.prototype._applyStateObj = function (stateName, state, normalState, keepCurrentStates, transition, animationCfg) {
+        if (this.__inHover === IN_HOVER_LAYER_KIND_ONLY_STYLE_CHANGE) {
+            return;
+        }
         var needsRestoreToNormal = !(state && keepCurrentStates);
         if (state && state.textConfig) {
             this.textConfig = extend({}, keepCurrentStates ? this.textConfig : normalState.textConfig);
@@ -663,17 +668,6 @@ var Element = (function () {
     Element.prototype.dirty = function () {
         this.markRedraw();
     };
-    Element.prototype._toggleHoverLayerFlag = function (inHover) {
-        this.__inHover = inHover;
-        var textContent = this._textContent;
-        var textGuide = this._textGuide;
-        if (textContent) {
-            textContent.__inHover = inHover;
-        }
-        if (textGuide) {
-            textGuide.__inHover = inHover;
-        }
-    };
     Element.prototype.addSelfToZr = function (zr) {
         if (this.__zr === zr) {
             return;
@@ -797,8 +791,8 @@ var Element = (function () {
                     elProto.isGroup =
                         elProto.draggable =
                             elProto.dragging =
-                                elProto.ignoreClip =
-                                    elProto.__inHover = false;
+                                elProto.ignoreClip = false;
+        elProto.__inHover = IN_HOVER_LAYER_KIND_NO;
         elProto.__dirty = REDRAW_BIT;
         var logs = {};
         function logDeprecatedError(key, xKey, yKey) {
@@ -1064,5 +1058,18 @@ function animateToShallow(animatable, topKey, animateObj, target, cfg, animation
         animatable.addAnimator(animator, topKey);
         animators.push(animator);
     }
+}
+function shouldUseHoverLayer(el, textContent, nextState, forceUseHoverLayer) {
+    return (!((nextState && nextState.hoverLayer) || forceUseHoverLayer)
+        || isTextRelatedEl(el)
+        || (textContent && isTextRelatedEl(textContent)))
+        ? IN_HOVER_LAYER_KIND_NO
+        : IN_HOVER_LAYER_KIND_ONLY_STYLE_CHANGE;
+}
+function isTextRelatedEl(el) {
+    return el.type === 'text' || el.type === 'tspan';
+}
+function canTransition(el, noAnimation, animationCfg) {
+    return !noAnimation && !el.__inHover && animationCfg && animationCfg.duration > 0;
 }
 export default Element;

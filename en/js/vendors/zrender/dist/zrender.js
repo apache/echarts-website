@@ -151,11 +151,14 @@
             image.onerror = onerror;
             image.src = src;
             return image;
+        },
+        getTime: function () {
+            return Date.now ? Date.now() : +(new Date());
         }
     };
     function setPlatformAPI(newPlatformApis) {
         for (var key in platformApi) {
-            if (newPlatformApis[key]) {
+            if (platformApi.hasOwnProperty(key) && newPlatformApis[key]) {
                 platformApi[key] = newPlatformApis[key];
             }
         }
@@ -198,7 +201,11 @@
     var protoFunction = ctorFunction ? ctorFunction.prototype : null;
     var protoKey = '__proto__';
     var idStart = 0x0907;
+    var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
     function guid() {
+        if (idStart >= MAX_SAFE_INTEGER) {
+            idStart = 0;
+        }
         return idStart++;
     }
     function logError() {
@@ -294,6 +301,14 @@
             }
         }
         return target;
+    }
+    function assignProps(tar, src, props) {
+        tar = (tar || {});
+        for (var idx = 0; idx < props.length; idx++) {
+            var prop = props[idx];
+            tar[prop] = src[prop];
+        }
+        return tar;
     }
     function defaults(target, source, overlay) {
         var keysArr = keys(source);
@@ -710,6 +725,7 @@
         merge: merge,
         mergeAll: mergeAll,
         extend: extend,
+        assignProps: assignProps,
         defaults: defaults,
         createCanvas: createCanvas,
         indexOf: indexOf,
@@ -1748,7 +1764,7 @@
     var _lenMinMax = [0, 0];
     var BoundingRect = (function () {
         function BoundingRect(x, y, width, height) {
-            BoundingRect.set(this, x, y, width, height);
+            boundingRectSet(this, x, y, width, height);
         }
         BoundingRect.set = function (target, x, y, width, height) {
             if (width < 0) {
@@ -1787,14 +1803,7 @@
             BoundingRect.applyTransform(this, this, m);
         };
         BoundingRect.prototype.calculateTransform = function (b) {
-            var a = this;
-            var sx = b.width / a.width;
-            var sy = b.height / a.height;
-            var m = create$1();
-            translate(m, m, [-a.x, -a.y]);
-            scale$1(m, m, [sx, sy]);
-            translate(m, m, [b.x, b.y]);
-            return m;
+            return boundingRectCalculateTransform(create$1(), this, b);
         };
         BoundingRect.prototype.intersect = function (b, mtv, opt) {
             return BoundingRect.intersect(this, b, mtv, opt);
@@ -1812,10 +1821,10 @@
                 return false;
             }
             if (!(a instanceof BoundingRect)) {
-                a = BoundingRect.set(_tmpIntersectA, a.x, a.y, a.width, a.height);
+                a = boundingRectSet(_tmpIntersectA, a.x, a.y, a.width, a.height);
             }
             if (!(b instanceof BoundingRect)) {
-                b = BoundingRect.set(_tmpIntersectB, b.x, b.y, b.width, b.height);
+                b = boundingRectSet(_tmpIntersectB, b.x, b.y, b.width, b.height);
             }
             var useMTV = !!mtv;
             _intersectCtx.reset(opt, useMTV);
@@ -1858,7 +1867,7 @@
             return new BoundingRect(this.x, this.y, this.width, this.height);
         };
         BoundingRect.prototype.copy = function (other) {
-            BoundingRect.copy(this, other);
+            boundingRectCopy(this, other);
         };
         BoundingRect.prototype.plain = function () {
             return {
@@ -1878,7 +1887,7 @@
             return this.width === 0 || this.height === 0;
         };
         BoundingRect.create = function (rect) {
-            return new BoundingRect(rect.x, rect.y, rect.width, rect.height);
+            return new BoundingRect(rect ? rect.x : 0, rect ? rect.y : 0, rect ? rect.width : 0, rect ? rect.height : 0);
         };
         BoundingRect.copy = function (target, source) {
             target.x = source.x;
@@ -1890,7 +1899,7 @@
         BoundingRect.applyTransform = function (target, source, m) {
             if (!m) {
                 if (target !== source) {
-                    BoundingRect.copy(target, source);
+                    boundingRectCopy(target, source);
                 }
                 return;
             }
@@ -1928,10 +1937,23 @@
             target.width = maxX - target.x;
             target.height = maxY - target.y;
         };
+        BoundingRect.calculateTransform = function (out, a, b) {
+            var sx = b.width / a.width;
+            var sy = b.height / a.height;
+            out = identity(out || []);
+            translate(out, out, set(_tmpCalcTrans, -a.x, -a.y));
+            scale$1(out, out, set(_tmpCalcTrans, sx, sy));
+            translate(out, out, set(_tmpCalcTrans, b.x, b.y));
+            return out;
+        };
         return BoundingRect;
     }());
+    var boundingRectSet = BoundingRect.set;
+    var boundingRectCopy = BoundingRect.copy;
+    var boundingRectCalculateTransform = BoundingRect.calculateTransform;
     var _tmpIntersectA = new BoundingRect(0, 0, 0, 0);
     var _tmpIntersectB = new BoundingRect(0, 0, 0, 0);
+    var _tmpCalcTrans = [];
     function intersectOneDim(a0, a1, b0, b1, updateDimIdx, useMTV, outIntersectRect, clamp) {
         var d0 = mathAbs(a1 - b0);
         var d1 = mathAbs(b1 - a0);
@@ -4329,14 +4351,14 @@
         return res.join(' ');
     }
     var encodeBase64 = (function () {
-        if (env.hasGlobalWindow && isFunction(window.btoa)) {
-            return function (str) {
-                return window.btoa(unescape(encodeURIComponent(str)));
-            };
-        }
-        if (typeof Buffer !== 'undefined') {
+        if (typeof Buffer !== 'undefined' && typeof Buffer.from === 'function') {
             return function (str) {
                 return Buffer.from(str).toString('base64');
+            };
+        }
+        if (typeof btoa === 'function' && typeof unescape === 'function' && typeof encodeURIComponent === 'function') {
+            return function (str) {
+                return btoa(unescape(encodeURIComponent(str)));
             };
         }
         return function (str) {
@@ -5533,7 +5555,7 @@
         function Transformable() {
         }
         Transformable.prototype.getLocalTransform = function (m) {
-            return Transformable.getLocalTransform(this, m);
+            return transformableGetLocalTransform(this, m);
         };
         Transformable.prototype.setPosition = function (arr) {
             this.x = arr[0];
@@ -5588,6 +5610,8 @@
             }
             this.transform = m;
             this._resolveGlobalScaleRatio(m);
+            this.invTransform = this.invTransform || create$1();
+            invert(this.invTransform, m);
         };
         Transformable.prototype._resolveGlobalScaleRatio = function (m) {
             var globalScaleRatio = this.globalScaleRatio;
@@ -5602,8 +5626,6 @@
                 m[2] *= sy;
                 m[3] *= sy;
             }
-            this.invTransform = this.invTransform || create$1();
-            invert(this.invTransform, m);
         };
         Transformable.prototype.getComputedTransform = function () {
             var transformNode = this;
@@ -5751,14 +5773,12 @@
         })();
         return Transformable;
     }());
+    var transformableGetLocalTransform = Transformable.getLocalTransform;
     var TRANSFORMABLE_PROPS = [
         'x', 'y', 'originX', 'originY', 'anchorX', 'anchorY', 'rotation', 'scaleX', 'scaleY', 'skewX', 'skewY'
     ];
     function copyTransform(target, source) {
-        for (var i = 0; i < TRANSFORMABLE_PROPS.length; i++) {
-            var propName = TRANSFORMABLE_PROPS[i];
-            target[propName] = source[propName];
-        }
+        return assignProps(target, source, TRANSFORMABLE_PROPS);
     }
 
     function ensureFontMeasureInfo(font) {
@@ -5959,6 +5979,8 @@
     var tmpTextPosCalcRes = {};
     var tmpBoundingRect = new BoundingRect(0, 0, 0, 0);
     var tmpInnerTextTrans = [];
+    var IN_HOVER_LAYER_KIND_NO = 0;
+    var IN_HOVER_LAYER_KIND_ONLY_STYLE_CHANGE = 1;
     var Element = (function () {
         function Element(props) {
             this.id = guid();
@@ -6268,18 +6290,18 @@
             if (!toNormalState) {
                 this.saveCurrentToNormalState(state);
             }
-            var useHoverLayer = !!((state && state.hoverLayer) || forceUseHoverLayer);
-            if (useHoverLayer) {
-                this._toggleHoverLayerFlag(true);
-            }
-            this._applyStateObj(stateName, state, this._normalState, keepCurrentStates, !noAnimation && !this.__inHover && animationCfg && animationCfg.duration > 0, animationCfg);
             var textContent = this._textContent;
+            var useHoverLayer = shouldUseHoverLayer(this, textContent, state, forceUseHoverLayer);
+            if (useHoverLayer && !this.__inHover) {
+                this.__inHover = useHoverLayer;
+            }
+            this._applyStateObj(stateName, state, this._normalState, keepCurrentStates, canTransition(this, noAnimation, animationCfg), animationCfg);
             var textGuide = this._textGuide;
             if (textContent) {
-                textContent.useState(stateName, keepCurrentStates, noAnimation, useHoverLayer);
+                textContent.useState(stateName, keepCurrentStates, noAnimation, !!useHoverLayer);
             }
             if (textGuide) {
-                textGuide.useState(stateName, keepCurrentStates, noAnimation, useHoverLayer);
+                textGuide.useState(stateName, keepCurrentStates, noAnimation, !!useHoverLayer);
             }
             if (toNormalState) {
                 this.currentStates = [];
@@ -6296,7 +6318,7 @@
             this._updateAnimationTargets();
             this.markRedraw();
             if (!useHoverLayer && this.__inHover) {
-                this._toggleHoverLayerFlag(false);
+                this.__inHover = IN_HOVER_LAYER_KIND_NO;
                 this.__dirty &= ~REDRAW_BIT;
             }
             return state;
@@ -6335,27 +6357,27 @@
                     }
                 }
                 var lastStateObj = stateObjects[len - 1];
-                var useHoverLayer = !!((lastStateObj && lastStateObj.hoverLayer) || forceUseHoverLayer);
-                if (useHoverLayer) {
-                    this._toggleHoverLayerFlag(true);
+                var textContent = this._textContent;
+                var useHoverLayer = shouldUseHoverLayer(this, textContent, lastStateObj, forceUseHoverLayer);
+                if (useHoverLayer && !this.__inHover) {
+                    this.__inHover = useHoverLayer;
                 }
                 var mergedState = this._mergeStates(stateObjects);
                 var animationCfg = this.stateTransition;
                 this.saveCurrentToNormalState(mergedState);
-                this._applyStateObj(states.join(','), mergedState, this._normalState, false, !noAnimation && !this.__inHover && animationCfg && animationCfg.duration > 0, animationCfg);
-                var textContent = this._textContent;
+                this._applyStateObj(states.join(','), mergedState, this._normalState, false, canTransition(this, noAnimation, animationCfg), animationCfg);
                 var textGuide = this._textGuide;
                 if (textContent) {
-                    textContent.useStates(states, noAnimation, useHoverLayer);
+                    textContent.useStates(states, noAnimation, !!useHoverLayer);
                 }
                 if (textGuide) {
-                    textGuide.useStates(states, noAnimation, useHoverLayer);
+                    textGuide.useStates(states, noAnimation, !!useHoverLayer);
                 }
                 this._updateAnimationTargets();
                 this.currentStates = states.slice();
                 this.markRedraw();
                 if (!useHoverLayer && this.__inHover) {
-                    this._toggleHoverLayerFlag(false);
+                    this.__inHover = IN_HOVER_LAYER_KIND_NO;
                     this.__dirty &= ~REDRAW_BIT;
                 }
             }
@@ -6429,6 +6451,9 @@
             return mergedState;
         };
         Element.prototype._applyStateObj = function (stateName, state, normalState, keepCurrentStates, transition, animationCfg) {
+            if (this.__inHover === IN_HOVER_LAYER_KIND_ONLY_STYLE_CHANGE) {
+                return;
+            }
             var needsRestoreToNormal = !(state && keepCurrentStates);
             if (state && state.textConfig) {
                 this.textConfig = extend({}, keepCurrentStates ? this.textConfig : normalState.textConfig);
@@ -6603,17 +6628,6 @@
         Element.prototype.dirty = function () {
             this.markRedraw();
         };
-        Element.prototype._toggleHoverLayerFlag = function (inHover) {
-            this.__inHover = inHover;
-            var textContent = this._textContent;
-            var textGuide = this._textGuide;
-            if (textContent) {
-                textContent.__inHover = inHover;
-            }
-            if (textGuide) {
-                textGuide.__inHover = inHover;
-            }
-        };
         Element.prototype.addSelfToZr = function (zr) {
             if (this.__zr === zr) {
                 return;
@@ -6737,8 +6751,8 @@
                         elProto.isGroup =
                             elProto.draggable =
                                 elProto.dragging =
-                                    elProto.ignoreClip =
-                                        elProto.__inHover = false;
+                                    elProto.ignoreClip = false;
+            elProto.__inHover = IN_HOVER_LAYER_KIND_NO;
             elProto.__dirty = REDRAW_BIT;
             var logs = {};
             function logDeprecatedError(key, xKey, yKey) {
@@ -7005,6 +7019,19 @@
             animators.push(animator);
         }
     }
+    function shouldUseHoverLayer(el, textContent, nextState, forceUseHoverLayer) {
+        return (!((nextState && nextState.hoverLayer) || forceUseHoverLayer)
+            || isTextRelatedEl(el)
+            || (textContent && isTextRelatedEl(textContent)))
+            ? IN_HOVER_LAYER_KIND_NO
+            : IN_HOVER_LAYER_KIND_ONLY_STYLE_CHANGE;
+    }
+    function isTextRelatedEl(el) {
+        return el.type === 'text' || el.type === 'tspan';
+    }
+    function canTransition(el, noAnimation, animationCfg) {
+        return !noAnimation && !el.__inHover && animationCfg && animationCfg.duration > 0;
+    }
 
     var Group = (function (_super) {
         __extends(Group, _super);
@@ -7188,7 +7215,7 @@
     * All rights reserved.
     *
     * LICENSE
-    * https://github.com/ecomfe/zrender/blob/master/LICENSE.txt
+    * https://github.com/ecomfe/zrender/blob/master/LICENSE
     */
     var painterCtors = {};
     var instances = {};
@@ -7220,7 +7247,7 @@
             this._sleepAfterStill = 10;
             this._stillFrameAccum = 0;
             this._needsRefresh = true;
-            this._needsRefreshHover = true;
+            this._needsRefreshHover = false;
             this._darkMode = false;
             opts = opts || {};
             this.dom = dom;
@@ -7257,7 +7284,7 @@
             this.handler = new Handler(storage, painter, handlerProxy, painter.root, pointerSize);
             this.animation = new Animation({
                 stage: {
-                    update: ssrMode ? null : function () { return _this._flush(true); }
+                    update: ssrMode ? null : function () { return _this._flush(false); }
                 }
             });
             if (!ssrMode) {
@@ -7309,16 +7336,26 @@
         ZRender.prototype.isDarkMode = function () {
             return this._darkMode;
         };
-        ZRender.prototype.refreshImmediately = function (fromInside) {
+        ZRender.prototype.refreshImmediately = function (noAnimationUpdate) {
             if (this._disposed) {
                 return;
             }
-            if (!fromInside) {
+            this._refresh({
+                animUpdate: !noAnimationUpdate,
+                refresh: true,
+                refreshHover: false,
+            });
+        };
+        ZRender.prototype._refresh = function (opt) {
+            if (opt.animUpdate) {
                 this.animation.update(true);
             }
-            this._needsRefresh = false;
-            this.painter.refresh();
-            this._needsRefresh = false;
+            this._needsRefresh = this._needsRefreshHover = false;
+            this.painter.refresh({
+                refresh: opt.refresh,
+                refreshHover: opt.refreshHover,
+            });
+            this._needsRefresh = this._needsRefreshHover = false;
         };
         ZRender.prototype.refresh = function () {
             if (this._disposed) {
@@ -7331,18 +7368,20 @@
             if (this._disposed) {
                 return;
             }
-            this._flush(false);
+            this._flush(true);
         };
-        ZRender.prototype._flush = function (fromInside) {
+        ZRender.prototype._flush = function (animationUpdate) {
             var triggerRendered;
             var start = getTime();
-            if (this._needsRefresh) {
+            var needsRefresh = this._needsRefresh;
+            var needsRefreshHover = this._needsRefreshHover;
+            if (needsRefresh || needsRefreshHover) {
                 triggerRendered = true;
-                this.refreshImmediately(fromInside);
-            }
-            if (this._needsRefreshHover) {
-                triggerRendered = true;
-                this.refreshHoverImmediately();
+                this._refresh({
+                    animUpdate: animationUpdate,
+                    refresh: needsRefresh,
+                    refreshHover: needsRefreshHover,
+                });
             }
             var end = getTime();
             if (triggerRendered) {
@@ -7375,10 +7414,11 @@
             if (this._disposed) {
                 return;
             }
-            this._needsRefreshHover = false;
-            if (this.painter.refreshHover && this.painter.getType() === 'canvas') {
-                this.painter.refreshHover();
-            }
+            this._refresh({
+                animUpdate: false,
+                refresh: false,
+                refreshHover: true
+            });
         };
         ZRender.prototype.resize = function (opts) {
             if (this._disposed) {
@@ -7498,7 +7538,7 @@
     function registerSSRDataGetter(getter) {
         ssrDataGetter = getter;
     }
-    var version = '6.0.0';
+    var version = '6.1.0';
 
     var STYLE_MAGIC_KEY = '__zr_style_' + Math.round((Math.random() * 10));
     var DEFAULT_COMMON_STYLE = {
@@ -7541,7 +7581,7 @@
                 this.useStyle({});
             }
         };
-        Displayable.prototype.beforeBrush = function () { };
+        Displayable.prototype.beforeBrush = function (param) { };
         Displayable.prototype.afterBrush = function () { };
         Displayable.prototype.innerBeforeBrush = function () { };
         Displayable.prototype.innerAfterBrush = function () { };
@@ -7687,13 +7727,11 @@
             if (!obj[STYLE_MAGIC_KEY]) {
                 obj = this.createStyle(obj);
             }
-            if (this.__inHover) {
-                this.__hoverStyle = obj;
-            }
-            else {
-                this.style = obj;
-            }
+            this.style = obj;
             this.dirtyStyle();
+        };
+        Displayable.prototype._useHoverStyle = function (obj) {
+            this.__hoverStyle = obj;
         };
         Displayable.prototype.isStyleObject = function (obj) {
             return obj[STYLE_MAGIC_KEY];
@@ -7709,6 +7747,7 @@
         Displayable.prototype._applyStateObj = function (stateName, state, normalState, keepCurrentStates, transition, animationCfg) {
             _super.prototype._applyStateObj.call(this, stateName, state, normalState, keepCurrentStates, transition, animationCfg);
             var needsRestoreToNormal = !(state && keepCurrentStates);
+            var inHoverOnlyStyleChange = this.__inHover === IN_HOVER_LAYER_KIND_ONLY_STYLE_CHANGE;
             var targetStyle;
             if (state && state.style) {
                 if (transition) {
@@ -7752,18 +7791,25 @@
                     }, animationCfg, this.getAnimationStyleProps());
                 }
                 else {
-                    this.useStyle(targetStyle);
+                    if (inHoverOnlyStyleChange) {
+                        this._useHoverStyle(targetStyle);
+                    }
+                    else {
+                        this.useStyle(targetStyle);
+                    }
                 }
             }
-            var statesKeys = this.__inHover ? PRIMARY_STATES_KEYS_IN_HOVER_LAYER : PRIMARY_STATES_KEYS$1;
-            for (var i = 0; i < statesKeys.length; i++) {
-                var key = statesKeys[i];
-                if (state && state[key] != null) {
-                    this[key] = state[key];
-                }
-                else if (needsRestoreToNormal) {
-                    if (normalState[key] != null) {
-                        this[key] = normalState[key];
+            if (!inHoverOnlyStyleChange) {
+                var statesKeys = this.__inHover ? PRIMARY_STATES_KEYS_IN_HOVER_LAYER : PRIMARY_STATES_KEYS$1;
+                for (var i = 0; i < statesKeys.length; i++) {
+                    var key = statesKeys[i];
+                    if (state && state[key] != null) {
+                        this[key] = state[key];
+                    }
+                    else if (needsRestoreToNormal) {
+                        if (normalState[key] != null) {
+                            this[key] = normalState[key];
+                        }
                     }
                 }
             }
@@ -7800,7 +7846,7 @@
             dispProto.culling = false;
             dispProto.cursor = 'pointer';
             dispProto.rectHover = false;
-            dispProto.incremental = false;
+            dispProto.incremental = 0;
             dispProto._rect = null;
             dispProto.dirtyRectTolerance = 0;
             dispProto.__dirty = REDRAW_BIT | STYLE_CHANGED_BIT;
@@ -9354,6 +9400,9 @@
         };
         Path.prototype._applyStateObj = function (stateName, state, normalState, keepCurrentStates, transition, animationCfg) {
             _super.prototype._applyStateObj.call(this, stateName, state, normalState, keepCurrentStates, transition, animationCfg);
+            if (this.__inHover === IN_HOVER_LAYER_KIND_ONLY_STYLE_CHANGE) {
+                return;
+            }
             var needsRestoreToNormal = !(state && keepCurrentStates);
             var targetShape;
             if (state && state.shape) {
@@ -10077,6 +10126,7 @@
         r4 !== 0 && ctx.arc(x + r4, y + height - r4, r4, Math.PI / 2, Math.PI);
         ctx.lineTo(x, y + r1);
         r1 !== 0 && ctx.arc(x + r1, y + r1, r1, Math.PI, Math.PI * 1.5);
+        ctx.closePath();
     }
 
     var round = Math.round;
@@ -13158,13 +13208,19 @@
         return CompoundPath;
     }(Path));
 
+    var INCREMENTAL_ID_FALSE = 0;
+    var INCREMENTAL_ID_TRUE_COMPAT = 1;
+    var ZLEVEL2_NORMAL_ABOVE = 2;
+    var ZLEVEL2_INCREMENTAL = 1;
+    var ZLEVEL2_NORMAL_BELOW = 0;
+
     var m = [];
     var IncrementalDisplayable = (function (_super) {
         __extends(IncrementalDisplayable, _super);
         function IncrementalDisplayable() {
             var _this = _super !== null && _super.apply(this, arguments) || this;
             _this.notClear = true;
-            _this.incremental = true;
+            _this.incremental = INCREMENTAL_ID_TRUE_COMPAT;
             _this._displayables = [];
             _this._temporaryDisplayables = [];
             _this._cursor = 0;
@@ -13175,6 +13231,9 @@
         };
         IncrementalDisplayable.prototype.useStyle = function () {
             this.style = {};
+        };
+        IncrementalDisplayable.prototype._useHoverStyle = function () {
+            this.__hoverStyle = null;
         };
         IncrementalDisplayable.prototype.getCursor = function () {
             return this._cursor;
@@ -14558,7 +14617,7 @@
         var stl = document.defaultView.getComputedStyle(root);
         return ((root[cwh] || parseInt10(stl[wh]) || parseInt10(root.style[wh]))
             - (parseInt10(stl[plt]) || 0)
-            - (parseInt10(stl[prb]) || 0)) | 0;
+            - (parseInt10(stl[prb]) || 0)) || 0;
     }
 
     function normalizeLineDash(lineType, lineWidth) {
@@ -14638,7 +14697,7 @@
             return canvasPattern;
         }
     }
-    function brushPath(ctx, el, style, inBatch) {
+    function brushPath(ctx, el, style, canBatch, scope) {
         var _a;
         var hasStroke = styleHasStroke(style);
         var hasFill = styleHasFill(style);
@@ -14650,7 +14709,7 @@
         }
         var path = el.path || pathProxyForDraw;
         var dirtyFlag = el.__dirty;
-        if (!inBatch) {
+        if (!canBatch) {
             var fill = style.fill;
             var stroke = style.stroke;
             var hasFillGradient = hasFill && !!fill.colorStops;
@@ -14730,7 +14789,7 @@
                 needsRebuild = false;
             }
             path.reset();
-            el.buildPath(path, el.shape, inBatch);
+            el.buildPath(path, el.shape, canBatch);
             path.toStatic();
             el.pathUpdated();
         }
@@ -14741,7 +14800,7 @@
             ctx.setLineDash(lineDash);
             ctx.lineDashOffset = lineDashOffset;
         }
-        if (!inBatch) {
+        if (!canBatch) {
             if (style.strokeFirst) {
                 if (hasStroke) {
                     doStrokePath(ctx, style);
@@ -14758,6 +14817,10 @@
                     doStrokePath(ctx, style);
                 }
             }
+        }
+        else {
+            scope.batchFill = hasFill;
+            scope.batchStroke = hasStroke;
         }
         if (lineDash) {
             ctx.setLineDash([]);
@@ -14882,10 +14945,10 @@
         return styleChanged;
     }
     function bindPathAndTextCommonStyle(ctx, el, prevEl, forceSetAll, scope) {
-        var style = getStyle(el, scope.inHover);
+        var style = el.style;
         var prevStyle = forceSetAll
             ? null
-            : (prevEl && getStyle(prevEl, scope.inHover) || {});
+            : (prevEl && prevEl.style || {});
         if (style === prevStyle) {
             return false;
         }
@@ -14936,7 +14999,7 @@
         return styleChanged;
     }
     function bindImageStyle(ctx, el, prevEl, forceSetAll, scope) {
-        return bindCommonProps(ctx, getStyle(el, scope.inHover), prevEl && getStyle(prevEl, scope.inHover), forceSetAll, scope);
+        return bindCommonProps(ctx, el.style, prevEl && prevEl.style, forceSetAll, scope);
     }
     function setContextTransform(ctx, el) {
         var m = el.transform;
@@ -14990,18 +15053,21 @@
             || style.fillOpacity < 1);
     }
     function flushPathDrawn(ctx, scope) {
-        scope.batchFill && ctx.fill();
-        scope.batchStroke && ctx.stroke();
-        scope.batchFill = '';
-        scope.batchStroke = '';
-    }
-    function getStyle(el, inHover) {
-        return inHover ? (el.__hoverStyle || el.style) : el.style;
+        if (scope.batchFill) {
+            scope.batchFill = false;
+            ctx.fill();
+        }
+        if (scope.batchStroke) {
+            scope.batchStroke = false;
+            ctx.stroke();
+        }
     }
     function brushSingle(ctx, el) {
-        brush(ctx, el, { inHover: false, viewWidth: 0, viewHeight: 0 }, true);
+        var scope = { inHover: false, viewWidth: 0, viewHeight: 0, beforeBrushParam: {} };
+        brush(ctx, el, scope);
+        brushLoopFinalize(ctx, scope);
     }
-    function brush(ctx, el, scope, isLast) {
+    function brush(ctx, el, scope) {
         var m = el.transform;
         if (!el.shouldBePainted(scope.viewWidth, scope.viewHeight, false, false)) {
             el.__dirty &= ~REDRAW_BIT;
@@ -15010,10 +15076,11 @@
         }
         var clipPaths = el.__clipPaths;
         var prevElClipPaths = scope.prevElClipPaths;
+        var style = el.style;
         var forceSetTransform = false;
         var forceSetStyle = false;
         if (!prevElClipPaths || isClipPathChanged(clipPaths, prevElClipPaths)) {
-            if (prevElClipPaths && prevElClipPaths.length) {
+            if (prevElClipPaths) {
                 flushPathDrawn(ctx, scope);
                 ctx.restore();
                 forceSetStyle = forceSetTransform = true;
@@ -15026,14 +15093,15 @@
                 ctx.save();
                 updateClipStatus(clipPaths, ctx, scope);
                 forceSetTransform = true;
+                scope.prevElClipPaths = clipPaths;
             }
-            scope.prevElClipPaths = clipPaths;
         }
         if (scope.allClipped) {
+            el.__dirty &= ~REDRAW_BIT;
             el.__isRendered = false;
             return;
         }
-        el.beforeBrush && el.beforeBrush();
+        el.beforeBrush && el.beforeBrush(scope.beforeBrushParam);
         el.innerBeforeBrush();
         var prevEl = scope.prevEl;
         if (!prevEl) {
@@ -15041,7 +15109,7 @@
         }
         var canBatchPath = el instanceof Path
             && el.autoBatch
-            && canPathBatch(el.style);
+            && canPathBatch(style);
         if (forceSetTransform || isTransformChanged(m, prevEl.transform)) {
             flushPathDrawn(ctx, scope);
             setContextTransform(ctx, el);
@@ -15049,7 +15117,6 @@
         else if (!canBatchPath) {
             flushPathDrawn(ctx, scope);
         }
-        var style = getStyle(el, scope.inHover);
         if (el instanceof Path) {
             if (scope.lastDrawType !== DRAW_TYPE_PATH) {
                 forceSetStyle = true;
@@ -15059,11 +15126,7 @@
             if (!canBatchPath || (!scope.batchFill && !scope.batchStroke)) {
                 ctx.beginPath();
             }
-            brushPath(ctx, el, style, canBatchPath);
-            if (canBatchPath) {
-                scope.batchFill = style.fill || '';
-                scope.batchStroke = style.stroke || '';
-            }
+            brushPath(ctx, el, style, canBatchPath, scope);
         }
         else {
             if (el instanceof TSpan) {
@@ -15090,14 +15153,22 @@
                 brushIncremental(ctx, el, scope);
             }
         }
-        if (canBatchPath && isLast) {
-            flushPathDrawn(ctx, scope);
-        }
         el.innerAfterBrush();
-        el.afterBrush && el.afterBrush();
+        if (el.afterBrush) {
+            if (canBatchPath) {
+                flushPathDrawn(ctx, scope);
+            }
+            el.afterBrush();
+        }
         scope.prevEl = el;
         el.__dirty = 0;
         el.__isRendered = true;
+    }
+    function brushLoopFinalize(ctx, scope) {
+        flushPathDrawn(ctx, scope);
+        if (scope.prevElClipPaths) {
+            ctx.restore();
+        }
     }
     function brushIncremental(ctx, el, scope) {
         var displayables = el.getDisplayables();
@@ -15109,28 +15180,31 @@
             allClipped: false,
             viewWidth: scope.viewWidth,
             viewHeight: scope.viewHeight,
-            inHover: scope.inHover
+            inHover: scope.inHover,
+            beforeBrushParam: {}
         };
         var i;
         var len;
         for (i = el.getCursor(), len = displayables.length; i < len; i++) {
             var displayable = displayables[i];
-            displayable.beforeBrush && displayable.beforeBrush();
+            displayable.beforeBrush && displayable.beforeBrush(scope.beforeBrushParam);
             displayable.innerBeforeBrush();
-            brush(ctx, displayable, innerScope, i === len - 1);
+            brush(ctx, displayable, innerScope);
             displayable.innerAfterBrush();
             displayable.afterBrush && displayable.afterBrush();
             innerScope.prevEl = displayable;
         }
+        brushLoopFinalize(ctx, innerScope);
         for (var i_1 = 0, len_1 = temporalDisplayables.length; i_1 < len_1; i_1++) {
             var displayable = temporalDisplayables[i_1];
-            displayable.beforeBrush && displayable.beforeBrush();
+            displayable.beforeBrush && displayable.beforeBrush(scope.beforeBrushParam);
             displayable.innerBeforeBrush();
-            brush(ctx, displayable, innerScope, i_1 === len_1 - 1);
+            brush(ctx, displayable, innerScope);
             displayable.innerAfterBrush();
             displayable.afterBrush && displayable.afterBrush();
             innerScope.prevEl = displayable;
         }
+        brushLoopFinalize(ctx, innerScope);
         el.clearTemporalDisplayables();
         el.notClear = true;
         ctx.restore();
@@ -15153,6 +15227,16 @@
         newDom.height = height * dpr;
         return newDom;
     }
+    function isIncrementalLayer(layer) {
+        return !layer.__cursors.get(INCREMENTAL_ID_FALSE);
+    }
+    function getStartEndFromCursor(layer) {
+        var cursor = layer.__cursors.get(INCREMENTAL_ID_FALSE);
+        return {
+            startIdx: cursor ? cursor.startIdx : 0,
+            endIdx: cursor ? cursor.endIdx : 0,
+        };
+    }
     var Layer = (function (_super) {
         __extends(Layer, _super);
         function Layer(id, painter, dpr) {
@@ -15162,17 +15246,12 @@
             _this.dpr = 1;
             _this.virtual = false;
             _this.config = {};
-            _this.incremental = false;
             _this.zlevel = 0;
+            _this.zlevel2 = ZLEVEL2_NORMAL_BELOW;
             _this.maxRepaintRectCount = 5;
             _this.__dirty = true;
             _this.__firstTimePaint = true;
-            _this.__used = false;
-            _this.__drawIndex = 0;
-            _this.__startIndex = 0;
-            _this.__endIndex = 0;
-            _this.__prevStartIndex = null;
-            _this.__prevEndIndex = null;
+            _this.__prevIdx = { startIdx: 0, endIdx: 0 };
             var dom;
             dpr = dpr || devicePixelRatio;
             if (typeof id === 'string') {
@@ -15196,12 +15275,8 @@
             _this.dpr = dpr;
             return _this;
         }
-        Layer.prototype.getElementCount = function () {
-            return this.__endIndex - this.__startIndex;
-        };
         Layer.prototype.afterBrush = function () {
-            this.__prevStartIndex = this.__startIndex;
-            this.__prevEndIndex = this.__endIndex;
+            this.__prevIdx = getStartEndFromCursor(this);
         };
         Layer.prototype.initContext = function () {
             this.ctx = this.dom.getContext('2d');
@@ -15277,7 +15352,8 @@
                     }
                 }
             }
-            for (var i = this.__startIndex; i < this.__endIndex; ++i) {
+            var se = getStartEndFromCursor(this);
+            for (var i = se.startIdx; i < se.endIdx; ++i) {
                 var el = displayList[i];
                 if (el) {
                     var shouldPaint = el.shouldBePainted(viewWidth, viewHeight, true, true);
@@ -15295,7 +15371,8 @@
                     }
                 }
             }
-            for (var i = this.__prevStartIndex; i < this.__prevEndIndex; ++i) {
+            var prevIdx = this.__prevIdx;
+            for (var i = prevIdx.startIdx; i < prevIdx.endIdx; ++i) {
                 var el = prevList[i];
                 var shouldPaint = el && el.shouldBePainted(viewWidth, viewHeight, true, true);
                 if (el && (!shouldPaint || !el.__zr) && el.__isRendered) {
@@ -15424,8 +15501,9 @@
 
     var HOVER_LAYER_ZLEVEL = 1e5;
     var CANVAS_ZLEVEL = 314159;
-    var EL_AFTER_INCREMENTAL_INC = 0.01;
-    var INCREMENTAL_INC = 0.001;
+    var HOVER_LAYER_DIRTY_NO = undefined;
+    var HOVER_LAYER_DIRTY_REPAINT_IF_EXISTING = 1;
+    var HOVER_LAYER_DIRTY_REPAINT = 2;
     function isLayerValid(layer) {
         if (!layer) {
             return false;
@@ -15451,15 +15529,70 @@
         ].join(';') + ';';
         return domRoot;
     }
+    function createBuiltinLayer(id, painter, zlevel, zlevel2) {
+        var layer = new Layer(id, painter, painter.dpr);
+        layer.zlevel = zlevel;
+        layer.zlevel2 = zlevel2;
+        layer.__builtin__ = true;
+        resetLayerDrawCursors(layer);
+        return layer;
+    }
+    function resetLayerDrawCursors(layer) {
+        layer.__cursorStack = [];
+        layer.__cursors = createHashMap();
+    }
+    function resetLayerDrawCursor(cursor) {
+        cursor.startIdx = cursor.drawIdx = cursor.endIdx = cursor.endIdxNew = 0;
+        cursor.used = false;
+        cursor.first = cursor.last = NaN;
+        cursor.notClearIdx = -1;
+        return cursor;
+    }
+    function ensureLayerDrawCursor(layer, incrementalCompat) {
+        var cursors = layer.__cursors;
+        var incremental = +incrementalCompat;
+        return cursors.get(incremental)
+            || (layer.__cursorStack.push(incremental),
+                cursors.set(incremental, resetLayerDrawCursor({ key: incremental })));
+    }
+    function eachCursorInLayer(layer, cb) {
+        var cursorStack = layer.__cursorStack;
+        for (var i = 0; i < cursorStack.length; i++) {
+            cb(layer.__cursors.get(cursorStack[i]));
+        }
+    }
+    function ensureLayerListInZLevel(internal, zlevel) {
+        var layers = internal.layers;
+        return layers[zlevel] || (layers[zlevel] = new Array(3));
+    }
+    function eachLayer(internal, cb, filter) {
+        var layerStack = internal.layerStack;
+        for (var i = 0; i < layerStack.length; i++) {
+            var zlevel = layerStack[i].zl;
+            var zlevel2 = layerStack[i].zl2;
+            var layer = internal.layers[zlevel][zlevel2];
+            if (!filter || ((!(filter & EACH_LAYER_BUILTIN) || layer.__builtin__)
+                && (!(filter & EACH_LAYER_NOT_BUILTIN) || !layer.__builtin__)
+                && (!(filter & EACH_LAYER_NOT_HOVER) || layer !== internal.hoverlayer))) {
+                cb(layer, zlevel, zlevel2, i);
+            }
+        }
+    }
+    var EACH_LAYER_BUILTIN = 1;
+    var EACH_LAYER_NOT_BUILTIN = 2;
+    var EACH_LAYER_NOT_HOVER = 4;
+    var EACH_LAYER_BUILTIN_NOT_HOVER = EACH_LAYER_BUILTIN | EACH_LAYER_NOT_HOVER;
     var CanvasPainter = (function () {
         function CanvasPainter(root, storage, opts, id) {
             this.type = 'canvas';
-            this._zlevelList = [];
             this._prevDisplayList = [];
-            this._layers = {};
             this._layerConfig = {};
             this._needsManuallyCompositing = false;
             this.type = 'canvas';
+            this._i = {
+                layerStack: [],
+                layers: [],
+            };
             var singleCanvas = !root.nodeName
                 || root.nodeName.toUpperCase() === 'CANVAS';
             this._opts = opts = extend({}, opts || {});
@@ -15472,9 +15605,7 @@
                 root.innerHTML = '';
             }
             this.storage = storage;
-            var zlevelList = this._zlevelList;
             this._prevDisplayList = [];
-            var layers = this._layers;
             if (!singleCanvas) {
                 this._width = getSize(root, 0, opts);
                 this._height = getSize(root, 1, opts);
@@ -15496,12 +15627,9 @@
                 rootCanvas.height = height * this.dpr;
                 this._width = width;
                 this._height = height;
-                var mainLayer = new Layer(rootCanvas, this, this.dpr);
-                mainLayer.__builtin__ = true;
-                mainLayer.initContext();
-                layers[CANVAS_ZLEVEL] = mainLayer;
-                mainLayer.zlevel = CANVAS_ZLEVEL;
-                zlevelList.push(CANVAS_ZLEVEL);
+                var singleLayer = createBuiltinLayer(rootCanvas, this, CANVAS_ZLEVEL, ZLEVEL2_NORMAL_BELOW);
+                singleLayer.initContext();
+                this._insertLayer(singleLayer, CANVAS_ZLEVEL, ZLEVEL2_NORMAL_BELOW, true);
                 this._domRoot = root;
             }
         }
@@ -15523,253 +15651,271 @@
                 };
             }
         };
-        CanvasPainter.prototype.refresh = function (paintAll) {
-            var list = this.storage.getDisplayList(true);
-            var prevList = this._prevDisplayList;
-            var zlevelList = this._zlevelList;
-            this._redrawId = Math.random();
-            this._paintList(list, prevList, paintAll, this._redrawId);
-            for (var i = 0; i < zlevelList.length; i++) {
-                var z = zlevelList[i];
-                var layer = this._layers[z];
-                if (!layer.__builtin__ && layer.refresh) {
-                    var clearColor = i === 0 ? this._backgroundColor : null;
-                    layer.refresh(clearColor);
-                }
+        CanvasPainter.prototype.refresh = function (optOrPaintAll) {
+            var opt;
+            if (optOrPaintAll && !isObject(optOrPaintAll)) {
+                opt = { paintAll: !!optOrPaintAll };
             }
+            else {
+                opt = optOrPaintAll || {};
+            }
+            var refresh = retrieve2(opt.refresh, true);
+            var refreshHover = retrieve2(opt.refreshHover, false);
+            if (refreshHover) {
+                this._hoverLayerDirty = HOVER_LAYER_DIRTY_REPAINT;
+            }
+            if (!refresh) {
+                if (refreshHover) {
+                    this._paintHoverList(this.storage.getDisplayList(false));
+                }
+                return this;
+            }
+            var list = this.storage.getDisplayList(true);
+            this._updateLayerStatus(list, opt.paintAll);
+            this._redrawId = Math.random();
+            var prevList = this._prevDisplayList;
+            this._paintList(list, prevList, this._redrawId);
+            var bgColor = this._backgroundColor;
+            eachLayer(this._i, function (layer, zlevel, zlevel2, idx) {
+                if (layer.refresh) {
+                    layer.refresh(idx === 0 ? bgColor : null);
+                }
+            }, EACH_LAYER_NOT_BUILTIN);
             if (this._opts.useDirtyRect) {
                 this._prevDisplayList = list.slice();
             }
             return this;
         };
-        CanvasPainter.prototype.refreshHover = function () {
-            this._paintHoverList(this.storage.getDisplayList(false));
-        };
         CanvasPainter.prototype._paintHoverList = function (list) {
-            var len = list.length;
-            var hoverLayer = this._hoverlayer;
-            hoverLayer && hoverLayer.clear();
-            if (!len) {
+            var hoverLayer = this._i.hoverlayer;
+            var hoverLayerDirty = this._hoverLayerDirty;
+            this._hoverLayerDirty = HOVER_LAYER_DIRTY_NO;
+            if (hoverLayerDirty === HOVER_LAYER_DIRTY_NO) {
                 return;
             }
+            if (!hoverLayer && hoverLayerDirty === HOVER_LAYER_DIRTY_REPAINT) {
+                hoverLayer = this._i.hoverlayer = this._ensureLayer(HOVER_LAYER_ZLEVEL);
+            }
+            if (!hoverLayer) {
+                return;
+            }
+            hoverLayer.clear();
             var scope = {
                 inHover: true,
                 viewWidth: this._width,
-                viewHeight: this._height
+                viewHeight: this._height,
+                beforeBrushParam: {},
             };
             var ctx;
-            for (var i = 0; i < len; i++) {
+            for (var i = 0, len = list.length; i < len; i++) {
                 var el = list[i];
-                if (el.__inHover) {
-                    if (!hoverLayer) {
-                        hoverLayer = this._hoverlayer = this.getLayer(HOVER_LAYER_ZLEVEL);
-                    }
-                    if (!ctx) {
-                        ctx = hoverLayer.ctx;
-                        ctx.save();
-                    }
-                    brush(ctx, el, scope, i === len - 1);
+                if (!el.__inHover) {
+                    continue;
+                }
+                if (!ctx) {
+                    ctx = hoverLayer.ctx;
+                    ctx.save();
+                }
+                var hoverStyle = el.__hoverStyle;
+                var originalStyle = void 0;
+                if (hoverStyle) {
+                    originalStyle = el.style;
+                    el.style = hoverStyle;
+                }
+                brush(ctx, el, scope);
+                if (hoverStyle) {
+                    el.style = originalStyle;
                 }
             }
             if (ctx) {
+                brushLoopFinalize(ctx, scope);
                 ctx.restore();
             }
         };
         CanvasPainter.prototype.getHoverLayer = function () {
-            return this.getLayer(HOVER_LAYER_ZLEVEL);
+            return this._ensureLayer(HOVER_LAYER_ZLEVEL);
         };
         CanvasPainter.prototype.paintOne = function (ctx, el) {
             brushSingle(ctx, el);
         };
-        CanvasPainter.prototype._paintList = function (list, prevList, paintAll, redrawId) {
+        CanvasPainter.prototype._paintList = function (list, prevList, redrawId) {
             if (this._redrawId !== redrawId) {
                 return;
             }
-            paintAll = paintAll || false;
-            this._updateLayerStatus(list);
-            var _a = this._doPaintList(list, prevList, paintAll), finished = _a.finished, needsRefreshHover = _a.needsRefreshHover;
+            var finished = this._doPaintList(list, prevList);
             if (this._needsManuallyCompositing) {
                 this._compositeManually();
-            }
-            if (needsRefreshHover) {
-                this._paintHoverList(list);
             }
             if (!finished) {
                 var self_1 = this;
                 requestAnimationFrame$1(function () {
-                    self_1._paintList(list, prevList, paintAll, redrawId);
+                    self_1._paintList(list, prevList, redrawId);
                 });
             }
             else {
-                this.eachLayer(function (layer) {
+                eachLayer(this._i, function (layer) {
                     layer.afterBrush && layer.afterBrush();
-                });
+                }, EACH_LAYER_BUILTIN_NOT_HOVER);
+                this._paintHoverList(list);
             }
         };
         CanvasPainter.prototype._compositeManually = function () {
-            var ctx = this.getLayer(CANVAS_ZLEVEL).ctx;
+            var ctx = this._ensureLayer(CANVAS_ZLEVEL).ctx;
             var width = this._domRoot.width;
             var height = this._domRoot.height;
             ctx.clearRect(0, 0, width, height);
-            this.eachBuiltinLayer(function (layer) {
+            eachLayer(this._i, function (layer) {
                 if (layer.virtual) {
                     ctx.drawImage(layer.dom, 0, 0, width, height);
                 }
-            });
+            }, EACH_LAYER_BUILTIN);
         };
-        CanvasPainter.prototype._doPaintList = function (list, prevList, paintAll) {
-            var _this = this;
-            var layerList = [];
-            var useDirtyRect = this._opts.useDirtyRect;
-            for (var zi = 0; zi < this._zlevelList.length; zi++) {
-                var zlevel = this._zlevelList[zi];
-                var layer = this._layers[zlevel];
-                if (layer.__builtin__
-                    && layer !== this._hoverlayer
-                    && (layer.__dirty || paintAll)) {
-                    layerList.push(layer);
-                }
-            }
+        CanvasPainter.prototype._doPaintList = function (list, prevList) {
+            var painter = this;
             var finished = true;
-            var needsRefreshHover = false;
-            var _loop_1 = function (k) {
-                var layer = layerList[k];
-                var ctx = layer.ctx;
-                var repaintRects = useDirtyRect
-                    && layer.createRepaintRects(list, prevList, this_1._width, this_1._height);
-                var start = paintAll ? layer.__startIndex : layer.__drawIndex;
-                var useTimer = !paintAll && layer.incremental && Date.now;
-                var startTime = useTimer && Date.now();
-                var clearColor = layer.zlevel === this_1._zlevelList[0]
-                    ? this_1._backgroundColor : null;
-                if (layer.__startIndex === layer.__endIndex) {
+            eachLayer(this._i, function (layer) {
+                var needDraw = false;
+                eachCursorInLayer(layer, function (cursor) {
+                    if (cursor.drawIdx < cursor.endIdx
+                        || cursor.notClearIdx >= 0) {
+                        needDraw = true;
+                    }
+                });
+                if (!needDraw && !layer.__dirty) {
+                    return;
+                }
+                var repaintRects = (painter._opts.useDirtyRect && !isIncrementalLayer(layer))
+                    ? layer.createRepaintRects(list, prevList, painter._width, painter._height) : null;
+                var firstLayerKey = painter._i.layerStack[0];
+                var contentRetained = true;
+                if (layer.__dirty) {
+                    contentRetained = false;
+                    layer.__dirty = false;
+                    var clearColor = (layer.zlevel === firstLayerKey.zl && layer.zlevel2 === firstLayerKey.zl2)
+                        ? painter._backgroundColor : null;
                     layer.clear(false, clearColor, repaintRects);
                 }
-                else if (start === layer.__startIndex) {
-                    var firstEl = list[start];
-                    if (!firstEl.incremental || !firstEl.notClear || paintAll) {
-                        layer.clear(false, clearColor, repaintRects);
-                    }
-                }
-                if (start === -1) {
-                    console.error('For some unknown reason. drawIndex is -1');
-                    start = layer.__startIndex;
-                }
-                var i;
-                var repaint = function (repaintRect) {
-                    var scope = {
-                        inHover: false,
-                        allClipped: false,
-                        prevEl: null,
-                        viewWidth: _this._width,
-                        viewHeight: _this._height
-                    };
-                    for (i = start; i < layer.__endIndex; i++) {
-                        var el = list[i];
-                        if (el.__inHover) {
-                            needsRefreshHover = true;
-                        }
-                        _this._doPaintEl(el, layer, useDirtyRect, repaintRect, scope, i === layer.__endIndex - 1);
-                        if (useTimer) {
-                            var dTime = Date.now() - startTime;
-                            if (dTime > 15) {
-                                break;
-                            }
-                        }
-                    }
-                    if (scope.prevElClipPaths) {
-                        ctx.restore();
-                    }
-                };
-                if (repaintRects) {
-                    if (repaintRects.length === 0) {
-                        i = layer.__endIndex;
-                    }
-                    else {
-                        var dpr = this_1.dpr;
-                        for (var r = 0; r < repaintRects.length; ++r) {
-                            var rect = repaintRects[r];
-                            ctx.save();
-                            ctx.beginPath();
-                            ctx.rect(rect.x * dpr, rect.y * dpr, rect.width * dpr, rect.height * dpr);
-                            ctx.clip();
-                            repaint(rect);
-                            ctx.restore();
-                        }
-                    }
-                }
-                else {
-                    ctx.save();
-                    repaint();
-                    ctx.restore();
-                }
-                layer.__drawIndex = i;
-                if (layer.__drawIndex < layer.__endIndex) {
-                    finished = false;
-                }
-            };
-            var this_1 = this;
-            for (var k = 0; k < layerList.length; k++) {
-                _loop_1(k);
-            }
+                eachCursorInLayer(layer, function (cursor) {
+                    var cursorFinished = painter._paintPerCursor(layer, cursor, list, repaintRects, contentRetained);
+                    finished = finished && cursorFinished;
+                });
+            }, EACH_LAYER_BUILTIN_NOT_HOVER);
             if (env.wxa) {
-                each(this._layers, function (layer) {
+                eachLayer(this._i, function (layer) {
                     if (layer && layer.ctx && layer.ctx.draw) {
                         layer.ctx.draw();
                     }
                 });
             }
-            return {
-                finished: finished,
-                needsRefreshHover: needsRefreshHover
-            };
+            return finished;
         };
-        CanvasPainter.prototype._doPaintEl = function (el, currentLayer, useDirtyRect, repaintRect, scope, isLast) {
-            var ctx = currentLayer.ctx;
-            if (useDirtyRect) {
-                var paintRect = el.getPaintRect();
-                if (!repaintRect || paintRect && paintRect.intersect(repaintRect)) {
-                    brush(ctx, el, scope, isLast);
-                    el.setPrevPaintRect(paintRect);
+        CanvasPainter.prototype._paintPerCursor = function (layer, layerCursor, list, repaintRects, contentRetained) {
+            var ctx = layer.ctx;
+            if (repaintRects) {
+                if (!repaintRects.length) {
+                    layerCursor.drawIdx = layerCursor.endIdx;
+                }
+                else {
+                    var dpr = this.dpr;
+                    for (var r = 0; r < repaintRects.length; ++r) {
+                        var rect = repaintRects[r];
+                        ctx.save();
+                        ctx.beginPath();
+                        ctx.rect(rect.x * dpr, rect.y * dpr, rect.width * dpr, rect.height * dpr);
+                        ctx.clip();
+                        this._paintPerCursorInRect(layer, layerCursor, list, rect, contentRetained);
+                        ctx.restore();
+                    }
                 }
             }
             else {
-                brush(ctx, el, scope, isLast);
+                ctx.save();
+                this._paintPerCursorInRect(layer, layerCursor, list, null, contentRetained);
+                ctx.restore();
             }
+            return layerCursor.drawIdx >= layerCursor.endIdx;
+        };
+        CanvasPainter.prototype._paintPerCursorInRect = function (layer, layerCursor, list, repaintRect, contentRetained) {
+            var scope = {
+                inHover: false,
+                allClipped: false,
+                prevEl: null,
+                viewWidth: this._width,
+                viewHeight: this._height,
+                beforeBrushParam: { contentRetained: contentRetained }
+            };
+            var ctx = layer.ctx;
+            var useTimer = isIncrementalLayer(layer);
+            var startTime = useTimer && platformApi.getTime();
+            var drawIdxBegin = layerCursor.drawIdx;
+            var notClearIdx = layerCursor.notClearIdx;
+            var idx = notClearIdx >= 0 ? Math.min(notClearIdx, drawIdxBegin) : drawIdxBegin;
+            for (; idx < layerCursor.endIdx; idx++) {
+                var el = list[idx];
+                if (idx < drawIdxBegin && !el.notClear) {
+                    continue;
+                }
+                if (el.__inHover) {
+                    this._hoverLayerDirty = HOVER_LAYER_DIRTY_REPAINT;
+                }
+                if (repaintRect != null) {
+                    var paintRect = el.getPaintRect();
+                    if (paintRect && paintRect.intersect(repaintRect)) {
+                        brush(ctx, el, scope);
+                        el.setPrevPaintRect(paintRect);
+                    }
+                }
+                else {
+                    brush(ctx, el, scope);
+                }
+                if (useTimer) {
+                    var dTime = platformApi.getTime() - startTime;
+                    if (dTime > 15) {
+                        idx++;
+                        break;
+                    }
+                }
+            }
+            brushLoopFinalize(ctx, scope);
+            layerCursor.drawIdx = Math.max(idx, drawIdxBegin);
         };
         CanvasPainter.prototype.getLayer = function (zlevel, virtual) {
-            if (this._singleCanvas && !this._needsManuallyCompositing) {
+            return this._ensureLayer(zlevel, 0, virtual);
+        };
+        CanvasPainter.prototype._ensureLayer = function (zlevel, zlevel2, virtual) {
+            zlevel2 = zlevel2 || 0;
+            var singleCanvas = this._singleCanvas;
+            if (singleCanvas && !this._needsManuallyCompositing) {
                 zlevel = CANVAS_ZLEVEL;
+                zlevel2 = 0;
             }
-            var layer = this._layers[zlevel];
+            var layer = ensureLayerListInZLevel(this._i, zlevel)[zlevel2];
             if (!layer) {
-                layer = new Layer('zr_' + zlevel, this, this.dpr);
-                layer.zlevel = zlevel;
-                layer.__builtin__ = true;
+                layer = createBuiltinLayer('zr_' + zlevel + '.' + zlevel2, this, zlevel, zlevel2);
                 if (this._layerConfig[zlevel]) {
                     merge(layer, this._layerConfig[zlevel], true);
                 }
-                else if (this._layerConfig[zlevel - EL_AFTER_INCREMENTAL_INC]) {
-                    merge(layer, this._layerConfig[zlevel - EL_AFTER_INCREMENTAL_INC], true);
+                if (virtual
+                    || (singleCanvas && zlevel !== CANVAS_ZLEVEL)) {
+                    layer.virtual = true;
                 }
-                if (virtual) {
-                    layer.virtual = virtual;
-                }
-                this.insertLayer(zlevel, layer);
+                this._insertLayer(layer, zlevel, zlevel2, false);
                 layer.initContext();
             }
             return layer;
         };
         CanvasPainter.prototype.insertLayer = function (zlevel, layer) {
-            var layersMap = this._layers;
-            var zlevelList = this._zlevelList;
-            var len = zlevelList.length;
+            this._insertLayer(layer, zlevel, 0, false);
+        };
+        CanvasPainter.prototype._insertLayer = function (layer, zlevel, zlevel2, suppressDOMInsert) {
+            var internal = this._i;
+            var layersMap = internal.layers;
+            var layerStack = internal.layerStack;
             var domRoot = this._domRoot;
             var prevLayer = null;
-            var i = -1;
-            if (layersMap[zlevel]) {
+            if (layersMap[zlevel] && layersMap[zlevel][zlevel2]) {
                 {
-                    logError('ZLevel ' + zlevel + ' has been used already');
+                    logError('ZLevel ' + zlevel + '.' + zlevel2 + ' has been used already');
                 }
                 return;
             }
@@ -15779,18 +15925,19 @@
                 }
                 return;
             }
-            if (len > 0 && zlevel > zlevelList[0]) {
-                for (i = 0; i < len - 1; i++) {
-                    if (zlevelList[i] < zlevel
-                        && zlevelList[i + 1] > zlevel) {
-                        break;
-                    }
-                }
-                prevLayer = layersMap[zlevelList[i]];
+            var len = layerStack.length;
+            var i = 0;
+            while (i < len
+                && (layerStack[i].zl < zlevel
+                    || (layerStack[i].zl === zlevel && layerStack[i].zl2 < zlevel2))) {
+                i++;
             }
-            zlevelList.splice(i + 1, 0, zlevel);
-            layersMap[zlevel] = layer;
-            if (!layer.virtual) {
+            if (i > 0) {
+                prevLayer = ensureLayerListInZLevel(internal, layerStack[i - 1].zl)[layerStack[i - 1].zl2];
+            }
+            layerStack.splice(i, 0, { zl: zlevel, zl2: zlevel2 });
+            ensureLayerListInZLevel(internal, zlevel)[zlevel2] = layer;
+            if (!suppressDOMInsert && !layer.virtual) {
                 if (prevLayer) {
                     var prevDom = prevLayer.dom;
                     if (prevDom.nextSibling) {
@@ -15812,153 +15959,182 @@
             layer.painter || (layer.painter = this);
         };
         CanvasPainter.prototype.eachLayer = function (cb, context) {
-            var zlevelList = this._zlevelList;
-            for (var i = 0; i < zlevelList.length; i++) {
-                var z = zlevelList[i];
-                cb.call(context, this._layers[z], z);
-            }
+            return eachLayer(this._i, function (layer, zlevel) {
+                cb.call(context, layer, zlevel);
+            });
         };
         CanvasPainter.prototype.eachBuiltinLayer = function (cb, context) {
-            var zlevelList = this._zlevelList;
-            for (var i = 0; i < zlevelList.length; i++) {
-                var z = zlevelList[i];
-                var layer = this._layers[z];
-                if (layer.__builtin__) {
-                    cb.call(context, layer, z);
-                }
-            }
+            return eachLayer(this._i, function (layer, zlevel) {
+                cb.call(context, layer, zlevel);
+            }, EACH_LAYER_BUILTIN);
         };
         CanvasPainter.prototype.eachOtherLayer = function (cb, context) {
-            var zlevelList = this._zlevelList;
-            for (var i = 0; i < zlevelList.length; i++) {
-                var z = zlevelList[i];
-                var layer = this._layers[z];
-                if (!layer.__builtin__) {
-                    cb.call(context, layer, z);
-                }
-            }
+            return eachLayer(this._i, function (layer, zlevel) {
+                cb.call(context, layer, zlevel);
+            }, EACH_LAYER_NOT_BUILTIN);
         };
         CanvasPainter.prototype.getLayers = function () {
-            return this._layers;
-        };
-        CanvasPainter.prototype._updateLayerStatus = function (list) {
-            this.eachBuiltinLayer(function (layer, z) {
-                layer.__dirty = layer.__used = false;
+            var layers = {};
+            eachLayer(this._i, function (layer, zlevel, zlevel2) {
+                layers[layer.id] = layer;
             });
-            function updatePrevLayer(idx) {
-                if (prevLayer) {
-                    if (prevLayer.__endIndex !== idx) {
-                        prevLayer.__dirty = true;
-                    }
-                    prevLayer.__endIndex = idx;
-                }
-            }
-            if (this._singleCanvas) {
-                for (var i_1 = 1; i_1 < list.length; i_1++) {
-                    var el = list[i_1];
-                    if (el.zlevel !== list[i_1 - 1].zlevel || el.incremental) {
-                        this._needsManuallyCompositing = true;
+            return layers;
+        };
+        CanvasPainter.prototype._updateLayerStatus = function (list, paintAll) {
+            var painter = this;
+            if (painter._singleCanvas) {
+                for (var i = 1; i < list.length; i++) {
+                    var el = list[i];
+                    if (el.zlevel !== list[i - 1].zlevel || el.incremental) {
+                        painter._needsManuallyCompositing = true;
                         break;
                     }
                 }
             }
-            var prevLayer = null;
-            var incrementalLayerCount = 0;
-            var prevZlevel;
-            var i;
-            for (i = 0; i < list.length; i++) {
-                var el = list[i];
+            eachLayer(painter._i, function (layer) {
+                layer.__dirty = false;
+                eachCursorInLayer(layer, function (cursor) {
+                    cursor.used = false;
+                    cursor.endIdxNew = 0;
+                    cursor.notClearIdx = -1;
+                });
+            }, EACH_LAYER_BUILTIN_NOT_HOVER);
+            var prevZLevel;
+            var currLayer = null;
+            var currCursor = null;
+            var aboveIncrementalInCurrZLevel = false;
+            for (var idx = 0, len = list.length; idx < len; idx++) {
+                var el = list[idx];
                 var zlevel = el.zlevel;
-                var layer = void 0;
-                if (prevZlevel !== zlevel) {
-                    prevZlevel = zlevel;
-                    incrementalLayerCount = 0;
+                var elIncremental = el.incremental;
+                var zlevel2 = void 0;
+                if (prevZLevel !== zlevel) {
+                    prevZLevel = zlevel;
+                    aboveIncrementalInCurrZLevel = false;
                 }
-                if (el.incremental) {
-                    layer = this.getLayer(zlevel + INCREMENTAL_INC, this._needsManuallyCompositing);
-                    layer.incremental = true;
-                    incrementalLayerCount = 1;
+                if (elIncremental) {
+                    aboveIncrementalInCurrZLevel = true;
+                    zlevel2 = ZLEVEL2_INCREMENTAL;
                 }
                 else {
-                    layer = this.getLayer(zlevel + (incrementalLayerCount > 0 ? EL_AFTER_INCREMENTAL_INC : 0), this._needsManuallyCompositing);
+                    zlevel2 = aboveIncrementalInCurrZLevel ? ZLEVEL2_NORMAL_ABOVE : ZLEVEL2_NORMAL_BELOW;
                 }
-                if (!layer.__builtin__) {
-                    logError('ZLevel ' + zlevel + ' has been used by unkown layer ' + layer.id);
+                if (!currLayer || zlevel !== currLayer.zlevel || zlevel2 !== currLayer.zlevel2) {
+                    currLayer = painter._ensureLayer(zlevel, zlevel2);
+                    currCursor = null;
+                    if (!currLayer.__builtin__) {
+                        logError('ZLevel ' + zlevel + ' has been used by unknown layer ' + currLayer.id);
+                        continue;
+                    }
                 }
-                if (layer !== prevLayer) {
-                    layer.__used = true;
-                    if (layer.__startIndex !== i) {
-                        layer.__dirty = true;
+                if (!currCursor || elIncremental !== currCursor.key) {
+                    currCursor = ensureLayerDrawCursor(currLayer, elIncremental);
+                    if (!currCursor.used) {
+                        currCursor.used = true;
+                        if (!paintAll && currCursor.first === el.id) {
+                            var idxShift = idx - currCursor.startIdx;
+                            currCursor.startIdx = idx;
+                            currCursor.drawIdx += idxShift;
+                            currCursor.endIdx += idxShift;
+                        }
+                        else {
+                            currLayer.__dirty = true;
+                            currCursor.first = el.id;
+                            currCursor.startIdx = currCursor.drawIdx = idx;
+                            currCursor.endIdx = idx + 1;
+                        }
                     }
-                    layer.__startIndex = i;
-                    if (!layer.incremental) {
-                        layer.__drawIndex = i;
-                    }
-                    else {
-                        layer.__drawIndex = -1;
-                    }
-                    updatePrevLayer(i);
-                    prevLayer = layer;
                 }
-                if ((el.__dirty & REDRAW_BIT) && !el.__inHover) {
-                    layer.__dirty = true;
-                    if (layer.incremental && layer.__drawIndex < 0) {
-                        layer.__drawIndex = i;
+                currCursor.endIdxNew = idx + 1;
+                if ((el.__dirty & REDRAW_BIT)
+                    && !el.__inHover) {
+                    if (!elIncremental
+                        || (!el.notClear && idx < currCursor.drawIdx)) {
+                        currLayer.__dirty = true;
+                    }
+                    if (elIncremental && el.notClear && currCursor.notClearIdx < 0) {
+                        currCursor.notClearIdx = idx;
                     }
                 }
             }
-            updatePrevLayer(i);
-            this.eachBuiltinLayer(function (layer, z) {
-                if (!layer.__used && layer.getElementCount() > 0) {
-                    layer.__dirty = true;
-                    layer.__startIndex = layer.__endIndex = layer.__drawIndex = 0;
+            eachLayer(painter._i, function (layer) {
+                var cursorStack = layer.__cursorStack;
+                var cursors = layer.__cursors;
+                for (var i = cursorStack.length - 1; i >= 0; i--) {
+                    var cursor = cursors.get(cursorStack[i]);
+                    if (!cursor.used) {
+                        layer.__dirty = true;
+                        cursors.removeKey(cursorStack[i]);
+                        cursorStack.splice(i, 1);
+                    }
+                    else {
+                        var endIdxNew = cursor.endIdxNew;
+                        if (isIncrementalLayer(layer)
+                            ? endIdxNew < cursor.drawIdx
+                            : (endIdxNew !== cursor.endIdx
+                                || !endIdxNew
+                                || list[endIdxNew - 1].id !== cursor.last)) {
+                            layer.__dirty = true;
+                        }
+                        cursor.endIdx = cursor.endIdxNew;
+                        cursor.last = endIdxNew ? list[endIdxNew - 1].id : NaN;
+                    }
                 }
-                if (layer.__dirty && layer.__drawIndex < 0) {
-                    layer.__drawIndex = layer.__startIndex;
+                if (layer.__dirty) {
+                    eachCursorInLayer(layer, function (cursor) {
+                        cursor.drawIdx = cursor.startIdx;
+                    });
+                    if (painter._hoverLayerDirty === HOVER_LAYER_DIRTY_NO) {
+                        painter._hoverLayerDirty = HOVER_LAYER_DIRTY_REPAINT_IF_EXISTING;
+                    }
                 }
-            });
+            }, EACH_LAYER_BUILTIN_NOT_HOVER);
         };
         CanvasPainter.prototype.clear = function () {
-            this.eachBuiltinLayer(this._clearLayer);
+            eachLayer(this._i, function (layer) {
+                layer.clear();
+                resetLayerDrawCursors(layer);
+            }, EACH_LAYER_BUILTIN);
             return this;
-        };
-        CanvasPainter.prototype._clearLayer = function (layer) {
-            layer.clear();
         };
         CanvasPainter.prototype.setBackgroundColor = function (backgroundColor) {
             this._backgroundColor = backgroundColor;
-            each(this._layers, function (layer) {
+            eachLayer(this._i, function (layer) {
                 layer.setUnpainted();
             });
         };
         CanvasPainter.prototype.configLayer = function (zlevel, config) {
             if (config) {
-                var layerConfig = this._layerConfig;
-                if (!layerConfig[zlevel]) {
-                    layerConfig[zlevel] = config;
+                var layerConfig_1 = this._layerConfig;
+                if (!layerConfig_1[zlevel]) {
+                    layerConfig_1[zlevel] = config;
                 }
                 else {
-                    merge(layerConfig[zlevel], config, true);
+                    merge(layerConfig_1[zlevel], config, true);
                 }
-                for (var i = 0; i < this._zlevelList.length; i++) {
-                    var _zlevel = this._zlevelList[i];
-                    if (_zlevel === zlevel || _zlevel === zlevel + EL_AFTER_INCREMENTAL_INC) {
-                        var layer = this._layers[_zlevel];
-                        merge(layer, layerConfig[zlevel], true);
-                    }
-                }
+                eachLayer(this._i, function (layer, zlevel) {
+                    merge(layer, layerConfig_1[zlevel], true);
+                });
             }
         };
         CanvasPainter.prototype.delLayer = function (zlevel) {
-            var layers = this._layers;
-            var zlevelList = this._zlevelList;
-            var layer = layers[zlevel];
-            if (!layer) {
-                return;
+            var layerStack = this._i.layerStack;
+            var layersMap = this._i.layers;
+            for (var i = layerStack.length - 1; i >= 0; i--) {
+                var key = layerStack[i];
+                if (key.zl === zlevel) {
+                    var layer = layersMap[zlevel][key.zl2];
+                    if (layer.__builtin__) {
+                        continue;
+                    }
+                    layerStack.splice(i, 1);
+                    layersMap[zlevel][key.zl2] = undefined;
+                    if (!layer.virtual) {
+                        var parentNode = layer.dom.parentNode;
+                        parentNode && parentNode.removeChild(layer.dom);
+                    }
+                }
             }
-            layer.dom.parentNode.removeChild(layer.dom);
-            delete layers[zlevel];
-            zlevelList.splice(indexOf(zlevelList, zlevel), 1);
         };
         CanvasPainter.prototype.resize = function (width, height) {
             if (!this._domRoot.style) {
@@ -15967,7 +16143,7 @@
                 }
                 this._width = width;
                 this._height = height;
-                this.getLayer(CANVAS_ZLEVEL).resize(width, height);
+                this._ensureLayer(CANVAS_ZLEVEL).resize(width, height);
             }
             else {
                 var domRoot = this._domRoot;
@@ -15982,12 +16158,10 @@
                 if (this._width !== width || height !== this._height) {
                     domRoot.style.width = width + 'px';
                     domRoot.style.height = height + 'px';
-                    for (var id in this._layers) {
-                        if (this._layers.hasOwnProperty(id)) {
-                            this._layers[id].resize(width, height);
-                        }
-                    }
-                    this.refresh(true);
+                    eachLayer(this._i, function (layer) {
+                        layer.resize(width, height);
+                    });
+                    this.refresh({ paintAll: true });
                 }
                 this._width = width;
                 this._height = height;
@@ -15995,22 +16169,23 @@
             return this;
         };
         CanvasPainter.prototype.clearLayer = function (zlevel) {
-            var layer = this._layers[zlevel];
-            if (layer) {
-                layer.clear();
-            }
+            each(this._i.layers[zlevel], function (layer) {
+                if (layer && !layer.__builtin__) {
+                    layer.clear();
+                }
+            });
         };
         CanvasPainter.prototype.dispose = function () {
             this.root.innerHTML = '';
             this.root =
                 this.storage =
                     this._domRoot =
-                        this._layers = null;
+                        this._i = null;
         };
         CanvasPainter.prototype.getRenderedCanvas = function (opts) {
             opts = opts || {};
             if (this._singleCanvas && !this._compositeManually) {
-                return this._layers[CANVAS_ZLEVEL].dom;
+                return this._i.layers[CANVAS_ZLEVEL][0].dom;
             }
             var imageLayer = new Layer('image', this, opts.pixelRatio || this.dpr);
             imageLayer.initContext();
@@ -16020,7 +16195,7 @@
                 this.refresh();
                 var width_1 = imageLayer.dom.width;
                 var height_1 = imageLayer.dom.height;
-                this.eachLayer(function (layer) {
+                eachLayer(this._i, function (layer) {
                     if (layer.__builtin__) {
                         ctx.drawImage(layer.dom, 0, 0, width_1, height_1);
                     }
@@ -16035,13 +16210,15 @@
                 var scope = {
                     inHover: false,
                     viewWidth: this._width,
-                    viewHeight: this._height
+                    viewHeight: this._height,
+                    beforeBrushParam: {},
                 };
                 var displayList = this.storage.getDisplayList(true);
                 for (var i = 0, len = displayList.length; i < len; i++) {
                     var el = displayList[i];
-                    brush(ctx, el, scope, i === len - 1);
+                    brush(ctx, el, scope);
                 }
+                brushLoopFinalize(ctx, scope);
             }
             return imageLayer.dom;
         };
@@ -17410,7 +17587,6 @@
     var SVGPainter = (function () {
         function SVGPainter(root, storage, opts) {
             this.type = 'svg';
-            this.refreshHover = createMethodNotSupport('refreshHover');
             this.configLayer = createMethodNotSupport('configLayer');
             this.storage = storage;
             this._opts = opts = extend({}, opts);

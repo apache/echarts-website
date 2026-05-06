@@ -4,7 +4,7 @@ import Displayable, { DisplayableProps,
     DisplayableStatePropNames,
     DEFAULT_COMMON_ANIMATION_PROPS
 } from './Displayable';
-import Element, { ElementAnimateConfig } from '../Element';
+import Element, {ElementAnimateConfig, ElementCommonState, IN_HOVER_LAYER_KIND_ONLY_STYLE_CHANGE} from '../Element';
 import PathProxy from '../core/PathProxy';
 import * as pathContain from '../contain/path';
 import { PatternObject } from './Pattern';
@@ -123,7 +123,7 @@ interface Path<Props extends PathProps = PathProps> {
 
 export type PathStatePropNames = DisplayableStatePropNames | 'shape';
 export type PathState = Pick<PathProps, PathStatePropNames> & {
-    hoverLayer?: boolean
+    hoverLayer?: ElementCommonState['hoverLayer']
 }
 
 const pathCopyParams = (TRANSFORMABLE_PROPS as readonly string[]).concat(['invisible',
@@ -145,7 +145,9 @@ class Path<Props extends PathProps = PathProps> extends Displayable<Props> {
 
     style: PathStyleProps
     /**
-     * If element can be batched automatically
+     * Whether elements can be batched (call `fill()` and `stroke()` only once) if possible.
+     * Users should guarantee batched elements are consecutive in display list (sorted by
+     * zlevel, z, z2) and has the same style, otherwise the effect may be unexpected.
      */
     autoBatch: boolean
 
@@ -527,6 +529,11 @@ class Path<Props extends PathProps = PathProps> extends Displayable<Props> {
         animationCfg: ElementAnimateConfig
     ) {
         super._applyStateObj(stateName, state, normalState, keepCurrentStates, transition, animationCfg);
+
+        if (this.__inHover === IN_HOVER_LAYER_KIND_ONLY_STYLE_CHANGE) {
+            return;
+        }
+
         const needsRestoreToNormal = !(state && keepCurrentStates);
         let targetShape: Props['shape'];
         if (state && state.shape) {

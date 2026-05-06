@@ -4,7 +4,7 @@ import Animator, {cloneValue} from './animation/Animator';
 import { ZRenderType } from './zrender';
 import {
     Dictionary, ElementEventName, ZRRawEvent, BuiltinTextPosition, AllPropTypes,
-    TextVerticalAlign, TextAlign, MapToType
+    TextVerticalAlign, TextAlign, MapToType,
 } from './core/types';
 import Path from './graphic/Path';
 import BoundingRect, { RectLike } from './core/BoundingRect';
@@ -288,7 +288,13 @@ export type ElementStatePropNames = (typeof PRIMARY_STATES_KEYS)[number] | 'text
 export type ElementState = Pick<ElementProps, ElementStatePropNames> & ElementCommonState
 
 export type ElementCommonState = {
-    hoverLayer?: boolean
+    /**
+     * NOTICE: Only canvas renderer supports hover layer. Users must not set hoverLayer
+     * flag in non-canvas renderer, otherwise it may cause unexpected behavior.
+     *
+     * A truthy value (regardless of number or boolean) means hover layer is used.
+     */
+    hoverLayer?: boolean | number
 }
 
 export type ElementCalculateTextPosition = (
@@ -300,6 +306,23 @@ export type ElementCalculateTextPosition = (
 const tmpTextPosCalcRes = {} as TextPositionCalculationResult;
 const tmpBoundingRect = new BoundingRect(0, 0, 0, 0);
 const tmpInnerTextTrans: number[] = [];
+
+
+// It indicates a status of the element - whether it should be rendered or have been rendered
+// in a hover layer.
+// It also record the restriction of props changes when entering the hover status.
+// A falsy value means not in haver layer; a truthy value means in haver layer.
+export type InHoverLayerKind =
+    typeof IN_HOVER_LAYER_KIND_NO
+    | typeof IN_HOVER_LAYER_KIND_ONLY_STYLE_CHANGE;
+    // | typeof IN_HOVER_LAYER_KIND_NO_LIMIT;
+// Not in hover layer.
+export const IN_HOVER_LAYER_KIND_NO = 0;
+// In hover layer and only style change when entering hover layer.
+export const IN_HOVER_LAYER_KIND_ONLY_STYLE_CHANGE = 1;
+// In hover layer and no restriction of changing.
+// export const IN_HOVER_LAYER_KIND_NO_LIMIT = 2;
+
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface Element<Props extends ElementProps = ElementProps> extends Transformable,
@@ -391,11 +414,50 @@ class Element<Props extends ElementProps = ElementProps> {
     __isRendered: boolean;
 
     /**
-     * If element has been moved to the hover layer.
+     * Whether this element has been moved to the hover layer.
+     * If so, dirty will only trigger the zrender refresh hover layer.
      *
-     * If so, dirty will only trigger the zrender refresh hover layer
+     * Hover layer is typically useful for progressive rendering case,
+     * where the underlying layers can remain not dirty for most hovering
+     * interactions.
+     *
+     * [HOVER_LAYER_CONSTRAINTS]:
+     *
+     *  The "hover layer" mechanism expects the changes are applied only on a hover layer, while the original
+     *  layer should not be repainted. However, subsequent user operations may still require the original layer
+     *  to be repainted. If the element props have been modified due to hover state switching, the final effect
+     *  will differ unexpectedly after repainting.
+     *  For example, suppose a hover state defines different opacity, color and transform scale. when hovering
+     *  triggers that state, an extra glyph with those props is rendered on the hover layer and overlays the
+     *  the original glyph, but the original layer remains unchanged. The final effect is a visual composition
+     *  of the two. Then if clicking something to trigger a repaint of all layers (e.g., click echarts legend
+     *  to hide and then show them, or triggered by axisPointer, where hover style is expected to keep displaying),
+     *  and if it is rendered on the normal layer differently, the final composition is changed unexpectedly.
+     *
+     *  Several candidate approches may resolve this issue:
+     *  (A) Clone elements for hover layer rendering. This might be a thorough solution, since all of the original
+     *    elements remain intact and can be repainted to the original layer without changes.
+     *  (B) Introduce a separate `__hoverStyle` to keep the original `this.style` unchanged, and only styles
+     *    changes are allowed in entering or leaving hover layer via `useState` and `useStates` while other changes
+     *    are ignored. And for simplicity, and no separate structures are provided for storing other props.
+     *    This approach can resolve many cases, but is still problematic in some cases.
+     *
+     *  PENDING:
+     *    1. Currently we simply implement (B), until some concrete scenarios require (A) in future.
+     *    2. [HOVER_LAYER_CONSTRAINTS_TEXT]
+     *      Consider:
+     *        - Text style change may lead to creating or updating of subText elements (TSpan).
+     *        - An special handling can be make in (B) - if the element is not rendered on the original layer
+     *          (typically due to `ignore: true` or `invisible: true`), it can be rendered to the hover layer
+     *          without the restriction "only style can change". This is useful to the scenario "hover an
+     *          element to show its _textContent".
+     *      All these cases require display list to be re-built, or need a exclusive display list for hover layer,
+     *      and more precise dirty bit (REDRAW_BIT) handling is needed for that.
+     *      But it would introduce considerable complexity. And unlike `Path`, rendering the same text in multiple
+     *      layers may cause undesirable visual effect. Therefore, we do not implement it unless required. Currently
+     *      hover layer is disabled for text. Text must still be rendered, since it may carry important infomation.
      */
-    __inHover: boolean
+    __inHover: InHoverLayerKind
 
     __clipPaths?: Path[]
 
@@ -926,11 +988,11 @@ class Element<Props extends ElementProps = ElementProps> {
             this.saveCurrentToNormalState(state);
         }
 
-        const useHoverLayer = !!((state && state.hoverLayer) || forceUseHoverLayer);
-
-        if (useHoverLayer) {
+        const textContent = this._textContent;
+        const useHoverLayer = shouldUseHoverLayer(this, textContent, state, forceUseHoverLayer);
+        if (useHoverLayer && !this.__inHover) {
             // Enter hover layer before states update.
-            this._toggleHoverLayerFlag(true);
+            this.__inHover = useHoverLayer;
         }
 
         this._applyStateObj(
@@ -938,19 +1000,18 @@ class Element<Props extends ElementProps = ElementProps> {
             state,
             this._normalState,
             keepCurrentStates,
-            !noAnimation && !this.__inHover && animationCfg && animationCfg.duration > 0,
-            animationCfg
+            canTransition(this, noAnimation, animationCfg),
+            animationCfg,
         );
 
         // Also set text content.
-        const textContent = this._textContent;
         const textGuide = this._textGuide;
         if (textContent) {
             // Force textContent use hover layer if self is using it.
-            textContent.useState(stateName, keepCurrentStates, noAnimation, useHoverLayer);
+            textContent.useState(stateName, keepCurrentStates, noAnimation, !!useHoverLayer);
         }
         if (textGuide) {
-            textGuide.useState(stateName, keepCurrentStates, noAnimation, useHoverLayer);
+            textGuide.useState(stateName, keepCurrentStates, noAnimation, !!useHoverLayer);
         }
 
         if (toNormalState) {
@@ -975,7 +1036,7 @@ class Element<Props extends ElementProps = ElementProps> {
 
         if (!useHoverLayer && this.__inHover) {
             // Leave hover layer after states update and markRedraw.
-            this._toggleHoverLayerFlag(false);
+            this.__inHover = IN_HOVER_LAYER_KIND_NO;
             // NOTE: avoid unexpected refresh when moving out from hover layer!!
             // Only clear from hover layer.
             this.__dirty &= ~REDRAW_BIT;
@@ -1025,10 +1086,11 @@ class Element<Props extends ElementProps = ElementProps> {
             }
 
             const lastStateObj = stateObjects[len - 1];
-            const useHoverLayer = !!((lastStateObj && lastStateObj.hoverLayer) || forceUseHoverLayer);
-            if (useHoverLayer) {
+            const textContent = this._textContent;
+            const useHoverLayer = shouldUseHoverLayer(this, textContent, lastStateObj, forceUseHoverLayer);
+            if (useHoverLayer && !this.__inHover) {
                 // Enter hover layer before states update.
-                this._toggleHoverLayerFlag(true);
+                this.__inHover = useHoverLayer;
             }
 
             const mergedState = this._mergeStates(stateObjects);
@@ -1041,17 +1103,16 @@ class Element<Props extends ElementProps = ElementProps> {
                 mergedState,
                 this._normalState,
                 false,
-                !noAnimation && !this.__inHover && animationCfg && animationCfg.duration > 0,
-                animationCfg
+                canTransition(this, noAnimation, animationCfg),
+                animationCfg,
             );
 
-            const textContent = this._textContent;
             const textGuide = this._textGuide;
             if (textContent) {
-                textContent.useStates(states, noAnimation, useHoverLayer);
+                textContent.useStates(states, noAnimation, !!useHoverLayer);
             }
             if (textGuide) {
-                textGuide.useStates(states, noAnimation, useHoverLayer);
+                textGuide.useStates(states, noAnimation, !!useHoverLayer);
             }
 
             this._updateAnimationTargets();
@@ -1062,7 +1123,7 @@ class Element<Props extends ElementProps = ElementProps> {
 
             if (!useHoverLayer && this.__inHover) {
                 // Leave hover layer after states update and markRedraw.
-                this._toggleHoverLayerFlag(false);
+                this.__inHover = IN_HOVER_LAYER_KIND_NO;
                 // NOTE: avoid unexpected refresh when moving out from hover layer!!
                 // Only clear from hover layer.
                 this.__dirty &= ~REDRAW_BIT;
@@ -1176,8 +1237,11 @@ class Element<Props extends ElementProps = ElementProps> {
         transition: boolean,
         animationCfg: ElementAnimateConfig
     ) {
-        const needsRestoreToNormal = !(state && keepCurrentStates);
+        if (this.__inHover === IN_HOVER_LAYER_KIND_ONLY_STYLE_CHANGE) {
+            return;
+        }
 
+        const needsRestoreToNormal = !(state && keepCurrentStates);
         // TODO: Save current state to normal?
         // TODO: Animation
         if (state && state.textConfig) {
@@ -1446,18 +1510,6 @@ class Element<Props extends ElementProps = ElementProps> {
         this.markRedraw();
     }
 
-    private _toggleHoverLayerFlag(inHover: boolean) {
-        this.__inHover = inHover;
-        const textContent = this._textContent;
-        const textGuide = this._textGuide;
-        if (textContent) {
-            textContent.__inHover = inHover;
-        }
-        if (textGuide) {
-            textGuide.__inHover = inHover;
-        }
-    }
-
     /**
      * Add self from zrender instance.
      * Not recursively because it will be invoked when element added to storage.
@@ -1694,8 +1746,9 @@ class Element<Props extends ElementProps = ElementProps> {
         elProto.isGroup =
         elProto.draggable =
         elProto.dragging =
-        elProto.ignoreClip =
-        elProto.__inHover = false;
+        elProto.ignoreClip = false;
+
+        elProto.__inHover = IN_HOVER_LAYER_KIND_NO;
 
         elProto.__dirty = REDRAW_BIT;
 
@@ -2079,5 +2132,41 @@ function animateToShallow<T>(
         animators.push(animator);
     }
 }
+
+function shouldUseHoverLayer(
+    el: Element,
+    textContent: Element,
+    nextState: ElementState,
+    forceUseHoverLayer: boolean
+): InHoverLayerKind {
+    return (
+            !((nextState && nextState.hoverLayer) || forceUseHoverLayer)
+            // PENDING: See HOVER_LAYER_CONSTRAINTS_TEXT for the reasons.
+            || isTextRelatedEl(el)
+            || (textContent && isTextRelatedEl(textContent))
+        )
+        ? IN_HOVER_LAYER_KIND_NO
+        // If using haver layer and previously it is not in a hover layer and invisible.
+        // PENDING: See HOVER_LAYER_CONSTRAINTS_TEXT for the reasons.
+        // : (!el.__inHover && (el.ignore || (el as DisplayableProps).invisible))
+        // ? IN_HOVER_LAYER_KIND_NO_LIMIT
+        // Otherwise (typically, perviously anything has been painted on the original layer),
+        // only styles can be modified. See more detailed reasons in `HOVER_LAYER_CONSTRAINTS`.
+        : IN_HOVER_LAYER_KIND_ONLY_STYLE_CHANGE;
+}
+
+function isTextRelatedEl(el: Element<ElementProps>): boolean {
+    return el.type === 'text' || el.type === 'tspan';
+}
+
+
+function canTransition(
+    el: Element,
+    noAnimation: boolean,
+    animationCfg: ElementAnimateConfig
+): boolean {
+    return !noAnimation && !el.__inHover && animationCfg && animationCfg.duration > 0;
+}
+
 
 export default Element;

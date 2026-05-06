@@ -1,5 +1,6 @@
 import { __extends } from "tslib";
 import Displayable, { DEFAULT_COMMON_STYLE, DEFAULT_COMMON_ANIMATION_PROPS } from './Displayable.js';
+import { IN_HOVER_LAYER_KIND_ONLY_STYLE_CHANGE } from '../Element.js';
 import PathProxy from '../core/PathProxy.js';
 import * as pathContain from '../contain/path.js';
 import { defaults, keys, extend, clone, isString, createObject } from '../core/util.js';
@@ -296,6 +297,9 @@ var Path = (function (_super) {
     };
     Path.prototype._applyStateObj = function (stateName, state, normalState, keepCurrentStates, transition, animationCfg) {
         _super.prototype._applyStateObj.call(this, stateName, state, normalState, keepCurrentStates, transition, animationCfg);
+        if (this.__inHover === IN_HOVER_LAYER_KIND_ONLY_STYLE_CHANGE) {
+            return;
+        }
         var needsRestoreToNormal = !(state && keepCurrentStates);
         var targetShape;
         if (state && state.shape) {

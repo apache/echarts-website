@@ -1,6 +1,7 @@
 import { __extends } from "tslib";
 import * as util from '../core/util.js';
 import { devicePixelRatio } from '../config.js';
+import { INCREMENTAL_ID_FALSE, ZLEVEL2_NORMAL_BELOW } from '../core/types.js';
 import Eventful from '../core/Eventful.js';
 import { getCanvasGradient } from './helper.js';
 import { createCanvasPattern } from './graphic.js';
@@ -24,6 +25,16 @@ function createDom(id, painter, dpr) {
     newDom.height = height * dpr;
     return newDom;
 }
+export function isIncrementalLayer(layer) {
+    return !layer.__cursors.get(INCREMENTAL_ID_FALSE);
+}
+function getStartEndFromCursor(layer) {
+    var cursor = layer.__cursors.get(INCREMENTAL_ID_FALSE);
+    return {
+        startIdx: cursor ? cursor.startIdx : 0,
+        endIdx: cursor ? cursor.endIdx : 0
+    };
+}
 ;
 var Layer = (function (_super) {
     __extends(Layer, _super);
@@ -34,17 +45,12 @@ var Layer = (function (_super) {
         _this.dpr = 1;
         _this.virtual = false;
         _this.config = {};
-        _this.incremental = false;
         _this.zlevel = 0;
+        _this.zlevel2 = ZLEVEL2_NORMAL_BELOW;
         _this.maxRepaintRectCount = 5;
         _this.__dirty = true;
         _this.__firstTimePaint = true;
-        _this.__used = false;
-        _this.__drawIndex = 0;
-        _this.__startIndex = 0;
-        _this.__endIndex = 0;
-        _this.__prevStartIndex = null;
-        _this.__prevEndIndex = null;
+        _this.__prevIdx = { startIdx: 0, endIdx: 0 };
         var dom;
         dpr = dpr || devicePixelRatio;
         if (typeof id === 'string') {
@@ -68,12 +74,8 @@ var Layer = (function (_super) {
         _this.dpr = dpr;
         return _this;
     }
-    Layer.prototype.getElementCount = function () {
-        return this.__endIndex - this.__startIndex;
-    };
     Layer.prototype.afterBrush = function () {
-        this.__prevStartIndex = this.__startIndex;
-        this.__prevEndIndex = this.__endIndex;
+        this.__prevIdx = getStartEndFromCursor(this);
     };
     Layer.prototype.initContext = function () {
         this.ctx = this.dom.getContext('2d');
@@ -149,7 +151,8 @@ var Layer = (function (_super) {
                 }
             }
         }
-        for (var i = this.__startIndex; i < this.__endIndex; ++i) {
+        var se = getStartEndFromCursor(this);
+        for (var i = se.startIdx; i < se.endIdx; ++i) {
             var el = displayList[i];
             if (el) {
                 var shouldPaint = el.shouldBePainted(viewWidth, viewHeight, true, true);
@@ -167,7 +170,8 @@ var Layer = (function (_super) {
                 }
             }
         }
-        for (var i = this.__prevStartIndex; i < this.__prevEndIndex; ++i) {
+        var prevIdx = this.__prevIdx;
+        for (var i = prevIdx.startIdx; i < prevIdx.endIdx; ++i) {
             var el = prevList[i];
             var shouldPaint = el && el.shouldBePainted(viewWidth, viewHeight, true, true);
             if (el && (!shouldPaint || !el.__zr) && el.__isRendered) {

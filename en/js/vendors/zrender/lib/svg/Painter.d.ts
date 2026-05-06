@@ -55,7 +55,6 @@ declare class SVGPainter implements PainterBase {
     dispose(): void;
     clear(): void;
     toDataURL(base64?: boolean): string;
-    refreshHover: () => void;
     configLayer: (zlevel: number, config: import("../core/types").Dictionary<any>) => void;
 }
 export default SVGPainter;

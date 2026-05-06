@@ -5,7 +5,7 @@
 * All rights reserved.
 *
 * LICENSE
-* https://github.com/ecomfe/zrender/blob/master/LICENSE.txt
+* https://github.com/ecomfe/zrender/blob/master/LICENSE
 */
 import env from './core/env.js';
 import * as zrUtil from './core/util.js';
@@ -46,7 +46,7 @@ var ZRender = (function () {
         this._sleepAfterStill = 10;
         this._stillFrameAccum = 0;
         this._needsRefresh = true;
-        this._needsRefreshHover = true;
+        this._needsRefreshHover = false;
         this._darkMode = false;
         opts = opts || {};
         this.dom = dom;
@@ -83,7 +83,7 @@ var ZRender = (function () {
         this.handler = new Handler(storage, painter, handlerProxy, painter.root, pointerSize);
         this.animation = new Animation({
             stage: {
-                update: ssrMode ? null : function () { return _this._flush(true); }
+                update: ssrMode ? null : function () { return _this._flush(false); }
             }
         });
         if (!ssrMode) {
@@ -135,16 +135,26 @@ var ZRender = (function () {
     ZRender.prototype.isDarkMode = function () {
         return this._darkMode;
     };
-    ZRender.prototype.refreshImmediately = function (fromInside) {
+    ZRender.prototype.refreshImmediately = function (noAnimationUpdate) {
         if (this._disposed) {
             return;
         }
-        if (!fromInside) {
+        this._refresh({
+            animUpdate: !noAnimationUpdate,
+            refresh: true,
+            refreshHover: false
+        });
+    };
+    ZRender.prototype._refresh = function (opt) {
+        if (opt.animUpdate) {
             this.animation.update(true);
         }
-        this._needsRefresh = false;
-        this.painter.refresh();
-        this._needsRefresh = false;
+        this._needsRefresh = this._needsRefreshHover = false;
+        this.painter.refresh({
+            refresh: opt.refresh,
+            refreshHover: opt.refreshHover
+        });
+        this._needsRefresh = this._needsRefreshHover = false;
     };
     ZRender.prototype.refresh = function () {
         if (this._disposed) {
@@ -157,18 +167,20 @@ var ZRender = (function () {
         if (this._disposed) {
             return;
         }
-        this._flush(false);
+        this._flush(true);
     };
-    ZRender.prototype._flush = function (fromInside) {
+    ZRender.prototype._flush = function (animationUpdate) {
         var triggerRendered;
         var start = getTime();
-        if (this._needsRefresh) {
+        var needsRefresh = this._needsRefresh;
+        var needsRefreshHover = this._needsRefreshHover;
+        if (needsRefresh || needsRefreshHover) {
             triggerRendered = true;
-            this.refreshImmediately(fromInside);
-        }
-        if (this._needsRefreshHover) {
-            triggerRendered = true;
-            this.refreshHoverImmediately();
+            this._refresh({
+                animUpdate: animationUpdate,
+                refresh: needsRefresh,
+                refreshHover: needsRefreshHover
+            });
         }
         var end = getTime();
         if (triggerRendered) {
@@ -201,10 +213,11 @@ var ZRender = (function () {
         if (this._disposed) {
             return;
         }
-        this._needsRefreshHover = false;
-        if (this.painter.refreshHover && this.painter.getType() === 'canvas') {
-            this.painter.refreshHover();
-        }
+        this._refresh({
+            animUpdate: false,
+            refresh: false,
+            refreshHover: true
+        });
     };
     ZRender.prototype.resize = function (opts) {
         if (this._disposed) {
@@ -324,5 +337,5 @@ export function getElementSSRData(el) {
 export function registerSSRDataGetter(getter) {
     ssrDataGetter = getter;
 }
-export var version = '6.0.0';
+export var version = '6.1.0';
 ;

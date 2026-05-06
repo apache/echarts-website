@@ -1,6 +1,5 @@
-import { RADIAN_TO_DEGREE, retrieve2, logError, isFunction } from '../core/util.js';
+import { RADIAN_TO_DEGREE, retrieve2, logError } from '../core/util.js';
 import { parse } from '../tool/color.js';
-import env from '../core/env.js';
 var mathRound = Math.round;
 export function normalizeColor(color) {
     var opacity;
@@ -134,14 +133,14 @@ export function getSRTTransformString(transform) {
     return res.join(' ');
 }
 export var encodeBase64 = (function () {
-    if (env.hasGlobalWindow && isFunction(window.btoa)) {
-        return function (str) {
-            return window.btoa(unescape(encodeURIComponent(str)));
-        };
-    }
-    if (typeof Buffer !== 'undefined') {
+    if (typeof Buffer !== 'undefined' && typeof Buffer.from === 'function') {
         return function (str) {
             return Buffer.from(str).toString('base64');
+        };
+    }
+    if (typeof btoa === 'function' && typeof unescape === 'function' && typeof encodeURIComponent === 'function') {
+        return function (str) {
+            return btoa(unescape(encodeURIComponent(str)));
         };
     }
     return function (str) {

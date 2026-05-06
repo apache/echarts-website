@@ -845,6 +845,25 @@ var option = {
 [open, close, lowest, highest] （即：[开盘值, 收盘值, 最低值, 最高值]）
 ```
 
+也就是说，`candlestick` 默认维度顺序是 **OCLH**。如果你的原始数据是 **OHLC**（`[open, highest, lowest, close]`），可以通过 [series.encode](option.series-candlestick.md#encode) 显式指定维度映射来调整。这对 [dataset](option.dataset.md) 和 [series.data](option.series-candlestick.md#data) 两种写法都支持。
+
+例如，OHLC 数据可这样映射：
+
+```
+series: [{
+    type: 'candlestick',
+    data: [
+        // [date, open, high, low, close]
+        ['2025-05-01', 2320.26, 2362.94, 2287.3, 2320.26],
+        ['2025-05-02', 2300, 2308.38, 2288.26, 2291.3]
+    ],
+    encode: {
+        x: 0,
+        y: [1, 4, 3, 2] // 不修改 data，而是通过 encode 将 OHLC 映射到 OCLH
+    }
+}]
+```
+
 ### data.name
 - **Type**: `string`
 
@@ -853,11 +872,13 @@ var option = {
 ### data.value
 - **Type**: `Array`
 
-数据项值。
+数据项值。默认维度顺序为 **OCLH**。
 
 ```
 [open, close, lowest, highest] （即：[开盘值, 收盘值, 最低值, 最高值]）
 ```
+
+如需调整默认维度顺序，参见上文 [series-candlestick.data](option.series-candlestick.md#data)。
 
 ### data.groupId
 - **Type**: `string`

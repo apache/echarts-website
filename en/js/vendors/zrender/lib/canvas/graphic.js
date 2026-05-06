@@ -59,7 +59,7 @@ export function createCanvasPattern(ctx, pattern, el) {
         return canvasPattern;
     }
 }
-function brushPath(ctx, el, style, inBatch) {
+function brushPath(ctx, el, style, canBatch, scope) {
     var _a;
     var hasStroke = styleHasStroke(style);
     var hasFill = styleHasFill(style);
@@ -71,7 +71,7 @@ function brushPath(ctx, el, style, inBatch) {
     }
     var path = el.path || pathProxyForDraw;
     var dirtyFlag = el.__dirty;
-    if (!inBatch) {
+    if (!canBatch) {
         var fill = style.fill;
         var stroke = style.stroke;
         var hasFillGradient = hasFill && !!fill.colorStops;
@@ -151,7 +151,7 @@ function brushPath(ctx, el, style, inBatch) {
             needsRebuild = false;
         }
         path.reset();
-        el.buildPath(path, el.shape, inBatch);
+        el.buildPath(path, el.shape, canBatch);
         path.toStatic();
         el.pathUpdated();
     }
@@ -162,7 +162,7 @@ function brushPath(ctx, el, style, inBatch) {
         ctx.setLineDash(lineDash);
         ctx.lineDashOffset = lineDashOffset;
     }
-    if (!inBatch) {
+    if (!canBatch) {
         if (style.strokeFirst) {
             if (hasStroke) {
                 doStrokePath(ctx, style);
@@ -179,6 +179,10 @@ function brushPath(ctx, el, style, inBatch) {
                 doStrokePath(ctx, style);
             }
         }
+    }
+    else {
+        scope.batchFill = hasFill;
+        scope.batchStroke = hasStroke;
     }
     if (lineDash) {
         ctx.setLineDash([]);
@@ -303,10 +307,10 @@ function bindCommonProps(ctx, style, prevStyle, forceSetAll, scope) {
     return styleChanged;
 }
 function bindPathAndTextCommonStyle(ctx, el, prevEl, forceSetAll, scope) {
-    var style = getStyle(el, scope.inHover);
+    var style = el.style;
     var prevStyle = forceSetAll
         ? null
-        : (prevEl && getStyle(prevEl, scope.inHover) || {});
+        : (prevEl && prevEl.style || {});
     if (style === prevStyle) {
         return false;
     }
@@ -357,7 +361,7 @@ function bindPathAndTextCommonStyle(ctx, el, prevEl, forceSetAll, scope) {
     return styleChanged;
 }
 function bindImageStyle(ctx, el, prevEl, forceSetAll, scope) {
-    return bindCommonProps(ctx, getStyle(el, scope.inHover), prevEl && getStyle(prevEl, scope.inHover), forceSetAll, scope);
+    return bindCommonProps(ctx, el.style, prevEl && prevEl.style, forceSetAll, scope);
 }
 function setContextTransform(ctx, el) {
     var m = el.transform;
@@ -411,18 +415,21 @@ function canPathBatch(style) {
         || style.fillOpacity < 1);
 }
 function flushPathDrawn(ctx, scope) {
-    scope.batchFill && ctx.fill();
-    scope.batchStroke && ctx.stroke();
-    scope.batchFill = '';
-    scope.batchStroke = '';
-}
-function getStyle(el, inHover) {
-    return inHover ? (el.__hoverStyle || el.style) : el.style;
+    if (scope.batchFill) {
+        scope.batchFill = false;
+        ctx.fill();
+    }
+    if (scope.batchStroke) {
+        scope.batchStroke = false;
+        ctx.stroke();
+    }
 }
 export function brushSingle(ctx, el) {
-    brush(ctx, el, { inHover: false, viewWidth: 0, viewHeight: 0 }, true);
+    var scope = { inHover: false, viewWidth: 0, viewHeight: 0, beforeBrushParam: {} };
+    brush(ctx, el, scope);
+    brushLoopFinalize(ctx, scope);
 }
-export function brush(ctx, el, scope, isLast) {
+export function brush(ctx, el, scope) {
     var m = el.transform;
     if (!el.shouldBePainted(scope.viewWidth, scope.viewHeight, false, false)) {
         el.__dirty &= ~REDRAW_BIT;
@@ -431,10 +438,11 @@ export function brush(ctx, el, scope, isLast) {
     }
     var clipPaths = el.__clipPaths;
     var prevElClipPaths = scope.prevElClipPaths;
+    var style = el.style;
     var forceSetTransform = false;
     var forceSetStyle = false;
     if (!prevElClipPaths || isClipPathChanged(clipPaths, prevElClipPaths)) {
-        if (prevElClipPaths && prevElClipPaths.length) {
+        if (prevElClipPaths) {
             flushPathDrawn(ctx, scope);
             ctx.restore();
             forceSetStyle = forceSetTransform = true;
@@ -447,14 +455,15 @@ export function brush(ctx, el, scope, isLast) {
             ctx.save();
             updateClipStatus(clipPaths, ctx, scope);
             forceSetTransform = true;
+            scope.prevElClipPaths = clipPaths;
         }
-        scope.prevElClipPaths = clipPaths;
     }
     if (scope.allClipped) {
+        el.__dirty &= ~REDRAW_BIT;
         el.__isRendered = false;
         return;
     }
-    el.beforeBrush && el.beforeBrush();
+    el.beforeBrush && el.beforeBrush(scope.beforeBrushParam);
     el.innerBeforeBrush();
     var prevEl = scope.prevEl;
     if (!prevEl) {
@@ -462,7 +471,7 @@ export function brush(ctx, el, scope, isLast) {
     }
     var canBatchPath = el instanceof Path
         && el.autoBatch
-        && canPathBatch(el.style);
+        && canPathBatch(style);
     if (forceSetTransform || isTransformChanged(m, prevEl.transform)) {
         flushPathDrawn(ctx, scope);
         setContextTransform(ctx, el);
@@ -470,7 +479,6 @@ export function brush(ctx, el, scope, isLast) {
     else if (!canBatchPath) {
         flushPathDrawn(ctx, scope);
     }
-    var style = getStyle(el, scope.inHover);
     if (el instanceof Path) {
         if (scope.lastDrawType !== DRAW_TYPE_PATH) {
             forceSetStyle = true;
@@ -480,11 +488,7 @@ export function brush(ctx, el, scope, isLast) {
         if (!canBatchPath || (!scope.batchFill && !scope.batchStroke)) {
             ctx.beginPath();
         }
-        brushPath(ctx, el, style, canBatchPath);
-        if (canBatchPath) {
-            scope.batchFill = style.fill || '';
-            scope.batchStroke = style.stroke || '';
-        }
+        brushPath(ctx, el, style, canBatchPath, scope);
     }
     else {
         if (el instanceof TSpan) {
@@ -511,14 +515,22 @@ export function brush(ctx, el, scope, isLast) {
             brushIncremental(ctx, el, scope);
         }
     }
-    if (canBatchPath && isLast) {
-        flushPathDrawn(ctx, scope);
-    }
     el.innerAfterBrush();
-    el.afterBrush && el.afterBrush();
+    if (el.afterBrush) {
+        if (canBatchPath) {
+            flushPathDrawn(ctx, scope);
+        }
+        el.afterBrush();
+    }
     scope.prevEl = el;
     el.__dirty = 0;
     el.__isRendered = true;
+}
+export function brushLoopFinalize(ctx, scope) {
+    flushPathDrawn(ctx, scope);
+    if (scope.prevElClipPaths) {
+        ctx.restore();
+    }
 }
 function brushIncremental(ctx, el, scope) {
     var displayables = el.getDisplayables();
@@ -530,28 +542,31 @@ function brushIncremental(ctx, el, scope) {
         allClipped: false,
         viewWidth: scope.viewWidth,
         viewHeight: scope.viewHeight,
-        inHover: scope.inHover
+        inHover: scope.inHover,
+        beforeBrushParam: {}
     };
     var i;
     var len;
     for (i = el.getCursor(), len = displayables.length; i < len; i++) {
         var displayable = displayables[i];
-        displayable.beforeBrush && displayable.beforeBrush();
+        displayable.beforeBrush && displayable.beforeBrush(scope.beforeBrushParam);
         displayable.innerBeforeBrush();
-        brush(ctx, displayable, innerScope, i === len - 1);
+        brush(ctx, displayable, innerScope);
         displayable.innerAfterBrush();
         displayable.afterBrush && displayable.afterBrush();
         innerScope.prevEl = displayable;
     }
+    brushLoopFinalize(ctx, innerScope);
     for (var i_1 = 0, len_1 = temporalDisplayables.length; i_1 < len_1; i_1++) {
         var displayable = temporalDisplayables[i_1];
-        displayable.beforeBrush && displayable.beforeBrush();
+        displayable.beforeBrush && displayable.beforeBrush(scope.beforeBrushParam);
         displayable.innerBeforeBrush();
-        brush(ctx, displayable, innerScope, i_1 === len_1 - 1);
+        brush(ctx, displayable, innerScope);
         displayable.innerAfterBrush();
         displayable.afterBrush && displayable.afterBrush();
         innerScope.prevEl = displayable;
     }
+    brushLoopFinalize(ctx, innerScope);
     el.clearTemporalDisplayables();
     el.notClear = true;
     ctx.restore();

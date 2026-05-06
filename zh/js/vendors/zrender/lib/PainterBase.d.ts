@@ -1,12 +1,13 @@
 import { GradientObject } from './graphic/Gradient';
 import { PatternObject } from './graphic/Pattern';
-import { Dictionary } from './core/types';
+import { Dictionary, NullUndefined } from './core/types';
+import { CanvasPainterRefreshOpt } from './canvas/Painter';
 export interface PainterBase {
     type: string;
     root?: HTMLElement;
     ssrOnly?: boolean;
     resize(width?: number | string, height?: number | string): void;
-    refresh(): void;
+    refresh(opt?: CanvasPainterRefreshOpt | NullUndefined): void;
     clear(): void;
     renderToString?(): string;
     getType: () => string;
@@ -18,7 +19,6 @@ export interface PainterBase {
         offsetLeft: number;
         offsetTop: number;
     };
-    refreshHover(): void;
     configLayer(zlevel: number, config: Dictionary<any>): void;
     setBackgroundColor(backgroundColor: string | GradientObject | PatternObject): void;
 }

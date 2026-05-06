@@ -101,9 +101,12 @@ declare const PRIMARY_STATES_KEYS: ["x" | "y" | "originX" | "originY" | "anchorX
 export declare type ElementStatePropNames = (typeof PRIMARY_STATES_KEYS)[number] | 'textConfig';
 export declare type ElementState = Pick<ElementProps, ElementStatePropNames> & ElementCommonState;
 export declare type ElementCommonState = {
-    hoverLayer?: boolean;
+    hoverLayer?: boolean | number;
 };
 export declare type ElementCalculateTextPosition = (out: TextPositionCalculationResult, style: ElementTextConfig, rect: RectLike) => TextPositionCalculationResult;
+export declare type InHoverLayerKind = typeof IN_HOVER_LAYER_KIND_NO | typeof IN_HOVER_LAYER_KIND_ONLY_STYLE_CHANGE;
+export declare const IN_HOVER_LAYER_KIND_NO = 0;
+export declare const IN_HOVER_LAYER_KIND_ONLY_STYLE_CHANGE = 1;
 interface Element<Props extends ElementProps = ElementProps> extends Transformable, Eventful<{
     [key in ElementEventName]: (e: ElementEvent) => void | boolean;
 } & {
@@ -127,7 +130,7 @@ declare class Element<Props extends ElementProps = ElementProps> {
     __zr: ZRenderType;
     __dirty: number;
     __isRendered: boolean;
-    __inHover: boolean;
+    __inHover: InHoverLayerKind;
     __clipPaths?: Path[];
     private _clipPath?;
     private _textContent?;
@@ -192,7 +195,6 @@ declare class Element<Props extends ElementProps = ElementProps> {
     removeTextGuideLine(): void;
     markRedraw(): void;
     dirty(): void;
-    private _toggleHoverLayerFlag;
     addSelfToZr(zr: ZRenderType): void;
     removeSelfFromZr(zr: ZRenderType): void;
     animate(key?: string, loop?: boolean, allowDiscreteAnimation?: boolean): Animator<any>;

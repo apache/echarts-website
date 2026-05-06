@@ -58,7 +58,6 @@ function getSvgElement(displayable) {
 var SVGPainter = (function () {
     function SVGPainter(root, storage, opts, zrId) {
         this.type = 'svg';
-        this.refreshHover = createMethodNotSupport('refreshHover');
         this.configLayer = createMethodNotSupport('configLayer');
         this.root = root;
         this.storage = storage;

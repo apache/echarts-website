@@ -1,4 +1,5 @@
 import * as matrix from './matrix';
+import { assignProps } from './util';
 import * as vector from './vector';
 
 const mIdentity = matrix.identity;
@@ -54,7 +55,7 @@ class Transformable {
      * Get computed local transform
      */
     getLocalTransform(m?: matrix.MatrixArray) {
-        return Transformable.getLocalTransform(this, m);
+        return transformableGetLocalTransform(this, m);
     }
 
     /**
@@ -140,6 +141,9 @@ class Transformable {
         this.transform = m;
 
         this._resolveGlobalScaleRatio(m);
+
+        this.invTransform = this.invTransform || matrix.create();
+        matrix.invert(this.invTransform, m);
     }
 
     private _resolveGlobalScaleRatio(m: matrix.MatrixArray) {
@@ -156,9 +160,6 @@ class Transformable {
             m[2] *= sy;
             m[3] *= sy;
         }
-
-        this.invTransform = this.invTransform || matrix.create();
-        matrix.invert(this.invTransform, m);
     }
 
     /**
@@ -341,6 +342,7 @@ class Transformable {
         m[4] += ox + x;
         m[5] += oy + y;
 
+        // NOTICE: All of `m[0~5]` must be set, since `m` may be reused.
         return m;
     }
 
@@ -361,20 +363,23 @@ class Transformable {
     })()
 };
 
+export const transformableGetLocalTransform = Transformable.getLocalTransform;
+
+export function transformableCreate(): Transformable {
+    return new Transformable();
+}
+
 export const TRANSFORMABLE_PROPS = [
     'x', 'y', 'originX', 'originY', 'anchorX', 'anchorY', 'rotation', 'scaleX', 'scaleY', 'skewX', 'skewY'
 ] as const;
 
 export type TransformProp = (typeof TRANSFORMABLE_PROPS)[number]
 
-export function copyTransform(
-    target: Partial<Pick<Transformable, TransformProp>>,
+export function copyTransform<TOut extends Partial<Pick<Transformable, TransformProp>>>(
+    target: TOut,
     source: Pick<Transformable, TransformProp>
-) {
-    for (let i = 0; i < TRANSFORMABLE_PROPS.length; i++) {
-        const propName = TRANSFORMABLE_PROPS[i];
-        target[propName] = source[propName];
-    }
+): TOut {
+    return assignProps(target, source, TRANSFORMABLE_PROPS);
 }
 
 export default Transformable;

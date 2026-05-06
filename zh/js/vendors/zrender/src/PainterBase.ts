@@ -1,6 +1,7 @@
 import { GradientObject } from './graphic/Gradient';
 import { PatternObject } from './graphic/Pattern';
-import { Dictionary } from './core/types';
+import { Dictionary, NullUndefined } from './core/types';
+import { CanvasPainterRefreshOpt } from './canvas/Painter';
 
 // interface PainterOption {
 //     width?: number | string  // Can be 10 / 10px / auto
@@ -20,7 +21,7 @@ export interface PainterBase {
     // constructor(dom: HTMLElement, storage: Storage, opts: PainterOption, id: number): void
 
     resize(width?: number | string, height?: number | string): void
-    refresh(): void
+    refresh(opt?: CanvasPainterRefreshOpt | NullUndefined): void
     clear(): void
 
     // must be given if ssr is true.
@@ -34,8 +35,6 @@ export interface PainterBase {
 
     getViewportRoot: () => HTMLElement
     getViewportRootOffset: () => {offsetLeft: number, offsetTop: number}
-
-    refreshHover(): void
 
     configLayer(zlevel: number, config: Dictionary<any>): void
     setBackgroundColor(backgroundColor: string | GradientObject | PatternObject): void

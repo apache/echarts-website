@@ -156,6 +156,10 @@ class Group extends Element<GroupProps> {
             child.addSelfToZr(zr);
         }
 
+        // NOTE: Group does not mark itself dirty when adding children.
+        // Otherwise, a dirty group will dirty all children in _updateAndAddDisplayable,
+        // which breaks incremental case.
+
         zr && zr.refresh();
     }
 

@@ -35,7 +35,9 @@ declare class Transformable {
     static getLocalTransform(target: Transformable, m?: matrix.MatrixArray): matrix.MatrixArray;
     private static initDefaultProps;
 }
+export declare const transformableGetLocalTransform: typeof Transformable.getLocalTransform;
+export declare function transformableCreate(): Transformable;
 export declare const TRANSFORMABLE_PROPS: readonly ["x", "y", "originX", "originY", "anchorX", "anchorY", "rotation", "scaleX", "scaleY", "skewX", "skewY"];
 export declare type TransformProp = (typeof TRANSFORMABLE_PROPS)[number];
-export declare function copyTransform(target: Partial<Pick<Transformable, TransformProp>>, source: Pick<Transformable, TransformProp>): void;
+export declare function copyTransform<TOut extends Partial<Pick<Transformable, TransformProp>>>(target: TOut, source: Pick<Transformable, TransformProp>): TOut;
 export default Transformable;

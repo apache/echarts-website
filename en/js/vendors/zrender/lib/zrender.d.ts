@@ -5,7 +5,7 @@
 * All rights reserved.
 *
 * LICENSE
-* https://github.com/ecomfe/zrender/blob/master/LICENSE.txt
+* https://github.com/ecomfe/zrender/blob/master/LICENSE
 */
 import * as zrUtil from './core/util';
 import Handler from './Handler';
@@ -44,7 +44,8 @@ declare class ZRender {
     getBackgroundColor(): string | GradientObject | PatternObject;
     setDarkMode(darkMode: boolean): void;
     isDarkMode(): boolean;
-    refreshImmediately(fromInside?: boolean): void;
+    refreshImmediately(noAnimationUpdate?: boolean): void;
+    private _refresh;
     refresh(): void;
     flush(): void;
     private _flush;
@@ -90,7 +91,7 @@ export declare type ElementSSRData = zrUtil.HashMap<unknown>;
 export declare type ElementSSRDataGetter<T> = (el: Element) => zrUtil.HashMap<T>;
 export declare function getElementSSRData(el: Element): ElementSSRData;
 export declare function registerSSRDataGetter<T>(getter: ElementSSRDataGetter<T>): void;
-export declare const version = "6.0.0";
+export declare const version = "6.1.0";
 export interface ZRenderType extends ZRender {
 }
 export {};

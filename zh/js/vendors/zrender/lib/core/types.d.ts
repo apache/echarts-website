@@ -51,4 +51,13 @@ export declare type MapToType<T extends Dictionary<any>, S> = {
 };
 export declare type KeyOfDistributive<T> = T extends unknown ? keyof T : never;
 export declare type WithThisType<Func extends (...args: any) => any, This> = (this: This, ...args: Parameters<Func>) => ReturnType<Func>;
+export declare type IncrementalId = number;
+export declare type IncrementalIdCompat = number | boolean;
+export declare const INCREMENTAL_ID_FALSE = 0;
+export declare const INCREMENTAL_ID_TRUE_COMPAT = 1;
+export declare type ZLevel = number;
+export declare type ZLevel2 = typeof ZLEVEL2_NORMAL_ABOVE | typeof ZLEVEL2_INCREMENTAL | typeof ZLEVEL2_NORMAL_BELOW;
+export declare const ZLEVEL2_NORMAL_ABOVE = 2;
+export declare const ZLEVEL2_INCREMENTAL = 1;
+export declare const ZLEVEL2_NORMAL_BELOW = 0;
 export {};

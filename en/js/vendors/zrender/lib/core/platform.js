@@ -61,11 +61,14 @@ export var platformApi = {
         image.onerror = onerror;
         image.src = src;
         return image;
+    },
+    getTime: function () {
+        return Date.now ? Date.now() : +(new Date());
     }
 };
 export function setPlatformAPI(newPlatformApis) {
     for (var key in platformApi) {
-        if (newPlatformApis[key]) {
+        if (platformApi.hasOwnProperty(key) && newPlatformApis[key]) {
             platformApi[key] = newPlatformApis[key];
         }
     }

@@ -1,4 +1,5 @@
 import * as matrix from './matrix.js';
+import { assignProps } from './util.js';
 import * as vector from './vector.js';
 var mIdentity = matrix.identity;
 var EPSILON = 5e-5;
@@ -13,7 +14,7 @@ var Transformable = (function () {
     function Transformable() {
     }
     Transformable.prototype.getLocalTransform = function (m) {
-        return Transformable.getLocalTransform(this, m);
+        return transformableGetLocalTransform(this, m);
     };
     Transformable.prototype.setPosition = function (arr) {
         this.x = arr[0];
@@ -68,6 +69,8 @@ var Transformable = (function () {
         }
         this.transform = m;
         this._resolveGlobalScaleRatio(m);
+        this.invTransform = this.invTransform || matrix.create();
+        matrix.invert(this.invTransform, m);
     };
     Transformable.prototype._resolveGlobalScaleRatio = function (m) {
         var globalScaleRatio = this.globalScaleRatio;
@@ -82,8 +85,6 @@ var Transformable = (function () {
             m[2] *= sy;
             m[3] *= sy;
         }
-        this.invTransform = this.invTransform || matrix.create();
-        matrix.invert(this.invTransform, m);
     };
     Transformable.prototype.getComputedTransform = function () {
         var transformNode = this;
@@ -232,13 +233,14 @@ var Transformable = (function () {
     return Transformable;
 }());
 ;
+export var transformableGetLocalTransform = Transformable.getLocalTransform;
+export function transformableCreate() {
+    return new Transformable();
+}
 export var TRANSFORMABLE_PROPS = [
     'x', 'y', 'originX', 'originY', 'anchorX', 'anchorY', 'rotation', 'scaleX', 'scaleY', 'skewX', 'skewY'
 ];
 export function copyTransform(target, source) {
-    for (var i = 0; i < TRANSFORMABLE_PROPS.length; i++) {
-        var propName = TRANSFORMABLE_PROPS[i];
-        target[propName] = source[propName];
-    }
+    return assignProps(target, source, TRANSFORMABLE_PROPS);
 }
 export default Transformable;

@@ -431,7 +431,7 @@ This is the position where the polyline branches in the subtree when the shape o
 
 Subtree collapses and expands interaction, `default true`. As the drawing area is limited, and usually the nodes of a tree may be more, so there will be hidden between the nodes. In order to avoid this problem, you can put a temporary unrelated subtree folded away, until you need to start when necessary. Such as the above radial layout tree example, the center of the node is filled with blue is the folded away subtree, you can click to expand it.
 
-**Note: If you configure a custom image as the tag for a node, it is not possible to distinguish whether the current node has a collapsed subtree by the fill color. And currently do not support, upload two pictures, respectively represent the collapsing and expansion state of the node. So, if you want to explicitly show the two states of the node, it is recommended to use `ECharts` regular tag types, such as `emptyCircle`.**
+**Note: The default node symbol is `'emptyCircle'`. With this symbol, the inner fill is used to indicate whether a node has a collapsed subtree, while the outer ring follows [itemStyle.color](option.series-tree.md#itemStyle.color). If you configure a custom image as the node symbol, ECharts can not switch the visual state by changing that inner fill, and currently does not support providing two different images for collapsed and expanded states automatically. So, if you want to explicitly show the two states of the node, it is recommended to use a built-in symbol type such as `'emptyCircle'`.**
 
 ## initialTreeDepth
 - **Type**: `number`
@@ -442,7 +442,15 @@ The initial level (depth) of the tree. The root node is the 0th layer, then the 
 ## itemStyle
 - **Type**: `Object`
 
-The style of each node in the tree, where [itemStyle.color](option.series-tree.md#itemStyle.color) represents the fill color of the node, to distinguish the state of the subtree corresponding to `collapsing` or `expansion`.
+The style of each node in the tree.
+
+By default, `series.tree` uses the hollow symbol `'emptyCircle'`. With that symbol:
+
+*   [itemStyle.color](option.series-tree.md#itemStyle.color) controls the outline color of the node.
+*   The inner fill is used to indicate whether the node has a collapsed subtree.
+*   [itemStyle.borderColor](option.series-tree.md#itemStyle.borderColor) and [itemStyle.borderWidth](option.series-tree.md#itemStyle.borderWidth) do not affect the outer ring in the same way as they do for solid symbols.
+
+If you want [itemStyle.color](option.series-tree.md#itemStyle.color) to behave as the normal fill color, and use [itemStyle.borderColor](option.series-tree.md#itemStyle.borderColor) / [itemStyle.borderWidth](option.series-tree.md#itemStyle.borderWidth) as the border style, set [symbol](option.series-tree.md#symbol) to a solid symbol such as `'circle'`.
 
 ### itemStyle.color
 - **Type**: `Color`

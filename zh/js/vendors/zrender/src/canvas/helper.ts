@@ -123,5 +123,5 @@ export function getSize(
         (root[cwh] || parseInt10(stl[wh]) || parseInt10(root.style[wh]))
         - (parseInt10(stl[plt]) || 0)
         - (parseInt10(stl[prb]) || 0)
-    ) | 0;
+    ) || 0;
 }

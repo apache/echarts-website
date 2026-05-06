@@ -79,6 +79,8 @@ export default class Storage {
 
         displayList.length = this._displayListLen;
 
+        // PENDING: Indicatively, it may cost over 10~20ms when list length is over 1e5.
+        // See PENDING_SEPARATE_DISPLAY_LIST
         timsort(displayList, shapeCompareFunc);
     }
 

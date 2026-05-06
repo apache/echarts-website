@@ -1,6 +1,6 @@
 import Element, { ElementProps, ElementStatePropNames, ElementAnimateConfig, ElementCommonState } from '../Element';
 import BoundingRect from '../core/BoundingRect';
-import { PropType, Dictionary, MapToType } from '../core/types';
+import { PropType, Dictionary, MapToType, IncrementalIdCompat } from '../core/types';
 import Path from './Path';
 import Animator from '../animation/Animator';
 export interface CommonStyleProps {
@@ -22,7 +22,7 @@ export interface DisplayableProps extends ElementProps {
     cursor?: string;
     rectHover?: boolean;
     progressive?: boolean;
-    incremental?: boolean;
+    incremental?: Displayable['incremental'];
     ignoreCoarsePointer?: boolean;
     batch?: boolean;
     invisible?: boolean;
@@ -31,6 +31,9 @@ declare type DisplayableKey = keyof DisplayableProps;
 declare type DisplayablePropertyType = PropType<DisplayableProps, DisplayableKey>;
 export declare type DisplayableStatePropNames = ElementStatePropNames | 'style' | 'z' | 'z2' | 'invisible';
 export declare type DisplayableState = Pick<DisplayableProps, DisplayableStatePropNames> & ElementCommonState;
+export interface BeforeBrushParam {
+    contentRetained?: boolean;
+}
 interface Displayable<Props extends DisplayableProps = DisplayableProps> {
     animate(key?: '', loop?: boolean): Animator<this>;
     animate(key: 'style', loop?: boolean): Animator<this['style']>;
@@ -47,7 +50,9 @@ declare class Displayable<Props extends DisplayableProps = DisplayableProps> ext
     culling: boolean;
     cursor: string;
     rectHover: boolean;
-    incremental: boolean;
+    incremental: IncrementalIdCompat;
+    notClear?: boolean;
+    __layerCleared?: boolean;
     ignoreCoarsePointer?: boolean;
     style: Dictionary<any>;
     protected _normalState: DisplayableState;
@@ -65,7 +70,7 @@ declare class Displayable<Props extends DisplayableProps = DisplayableProps> ext
     __svgEl: SVGElement;
     constructor(props?: Props);
     protected _init(props?: Props): void;
-    beforeBrush(): void;
+    beforeBrush(param: BeforeBrushParam): void;
     afterBrush(): void;
     innerBeforeBrush(): void;
     innerAfterBrush(): void;
@@ -87,6 +92,7 @@ declare class Displayable<Props extends DisplayableProps = DisplayableProps> ext
     styleUpdated(): void;
     createStyle(obj?: Props['style']): Props["style"];
     useStyle(obj: Props['style']): void;
+    protected _useHoverStyle(obj: Props['style']): void;
     isStyleObject(obj: Props['style']): any;
     protected _innerSaveToNormal(toState: DisplayableState): void;
     protected _applyStateObj(stateName: string, state: DisplayableState, normalState: DisplayableState, keepCurrentStates: boolean, transition: boolean, animationCfg: ElementAnimateConfig): void;

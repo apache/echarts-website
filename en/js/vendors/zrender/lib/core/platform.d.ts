@@ -7,6 +7,7 @@ interface Platform {
         width: number;
     };
     loadImage(src: string, onload: () => void | HTMLImageElement['onload'], onerror: () => void | HTMLImageElement['onerror']): HTMLImageElement;
+    getTime(): number;
 }
 export declare const DEFAULT_TEXT_WIDTH_MAP: Record<string, number>;
 export declare const platformApi: Platform;

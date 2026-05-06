@@ -318,7 +318,20 @@ class ZRText extends Displayable<TextProps> implements GroupLike {
 
         // Update children
         if (this.styleChanged()) {
+
+            // PENDING: (See HOVER_LAYER_CONSTRAINTS_TEXT)
+            // let originalStyle;
+            // const hoverStyle = this.__hoverStyle;
+            // if (hoverStyle) {
+            //     originalStyle = this.style;
+            //     this.style = hoverStyle;
+            // }
+
             this._updateSubTexts();
+
+            // if (hoverStyle) {
+            //     this.style = originalStyle;
+            // }
         }
 
         for (let i = 0; i < this._children.length; i++) {
@@ -330,6 +343,9 @@ class ZRText extends Displayable<TextProps> implements GroupLike {
             child.culling = this.culling;
             child.cursor = this.cursor;
             child.invisible = this.invisible;
+
+            // PENDING: (See HOVER_LAYER_CONSTRAINTS_TEXT)
+            // child.__inHover = this.__inHover;
         }
     }
 

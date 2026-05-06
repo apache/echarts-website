@@ -72,4 +72,5 @@ export function buildPath(ctx, shape) {
     r4 !== 0 && ctx.arc(x + r4, y + height - r4, r4, Math.PI / 2, Math.PI);
     ctx.lineTo(x, y + r1);
     r1 !== 0 && ctx.arc(x + r1, y + r1, r1, Math.PI, Math.PI * 1.5);
+    ctx.closePath();
 }

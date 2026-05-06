@@ -1,5 +1,5 @@
 import Displayable, { DisplayableProps, CommonStyleProps, DisplayableStatePropNames } from './Displayable';
-import Element, { ElementAnimateConfig } from '../Element';
+import Element, { ElementAnimateConfig, ElementCommonState } from '../Element';
 import PathProxy from '../core/PathProxy';
 import { PatternObject } from './Pattern';
 import { Dictionary, PropType, MapToType } from '../core/types';
@@ -48,7 +48,7 @@ interface Path<Props extends PathProps = PathProps> {
 }
 export declare type PathStatePropNames = DisplayableStatePropNames | 'shape';
 export declare type PathState = Pick<PathProps, PathStatePropNames> & {
-    hoverLayer?: boolean;
+    hoverLayer?: ElementCommonState['hoverLayer'];
 };
 declare class Path<Props extends PathProps = PathProps> extends Displayable<Props> {
     path: PathProxy;

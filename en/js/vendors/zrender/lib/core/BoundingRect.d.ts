@@ -20,10 +20,17 @@ declare class BoundingRect {
     plain(): RectLike;
     isFinite(): boolean;
     isZero(): boolean;
-    static create(rect: RectLike): BoundingRect;
+    static create(rect?: RectLike | NullUndefined): BoundingRect;
     static copy<TTarget extends RectLike>(target: TTarget, source: RectLike): TTarget;
     static applyTransform(target: RectLike, source: RectLike, m: matrix.MatrixArray): void;
+    static calculateTransform(out: matrix.MatrixArray | NullUndefined, a: RectLike, b: RectLike): matrix.MatrixArray;
 }
+export declare const boundingRectCreate: typeof BoundingRect.create;
+export declare const boundingRectSet: typeof BoundingRect.set;
+export declare const boundingRectCopy: typeof BoundingRect.copy;
+export declare const boundingRectCalculateTransform: typeof BoundingRect.calculateTransform;
+export declare const boundingRectApplyTransform: typeof BoundingRect.applyTransform;
+export declare const boundingRectContain: typeof BoundingRect.contain;
 export declare type RectLike = {
     x: number;
     y: number;

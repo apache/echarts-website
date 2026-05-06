@@ -1,15 +1,18 @@
 import { devicePixelRatio } from '../config.js';
 import * as util from '../core/util.js';
-import Layer from './Layer.js';
+import Layer, { isIncrementalLayer } from './Layer.js';
 import requestAnimationFrame from '../animation/requestAnimationFrame.js';
 import env from '../core/env.js';
-import { brush, brushSingle } from './graphic.js';
+import { ZLEVEL2_INCREMENTAL, ZLEVEL2_NORMAL_ABOVE, ZLEVEL2_NORMAL_BELOW } from '../core/types.js';
+import { brush, brushLoopFinalize, brushSingle } from './graphic.js';
 import { REDRAW_BIT } from '../graphic/constants.js';
 import { getSize } from './helper.js';
+import { platformApi } from '../core/platform.js';
 var HOVER_LAYER_ZLEVEL = 1e5;
 var CANVAS_ZLEVEL = 314159;
-var EL_AFTER_INCREMENTAL_INC = 0.01;
-var INCREMENTAL_INC = 0.001;
+var HOVER_LAYER_DIRTY_NO = undefined;
+var HOVER_LAYER_DIRTY_REPAINT_IF_EXISTING = 1;
+var HOVER_LAYER_DIRTY_REPAINT = 2;
 function isLayerValid(layer) {
     if (!layer) {
         return false;
@@ -35,15 +38,70 @@ function createRoot(width, height) {
     ].join(';') + ';';
     return domRoot;
 }
+function createBuiltinLayer(id, painter, zlevel, zlevel2) {
+    var layer = new Layer(id, painter, painter.dpr);
+    layer.zlevel = zlevel;
+    layer.zlevel2 = zlevel2;
+    layer.__builtin__ = true;
+    resetLayerDrawCursors(layer);
+    return layer;
+}
+function resetLayerDrawCursors(layer) {
+    layer.__cursorStack = [];
+    layer.__cursors = util.createHashMap();
+}
+function resetLayerDrawCursor(cursor) {
+    cursor.startIdx = cursor.drawIdx = cursor.endIdx = cursor.endIdxNew = 0;
+    cursor.used = false;
+    cursor.first = cursor.last = NaN;
+    cursor.notClearIdx = -1;
+    return cursor;
+}
+function ensureLayerDrawCursor(layer, incrementalCompat) {
+    var cursors = layer.__cursors;
+    var incremental = +incrementalCompat;
+    return cursors.get(incremental)
+        || (layer.__cursorStack.push(incremental),
+            cursors.set(incremental, resetLayerDrawCursor({ key: incremental })));
+}
+function eachCursorInLayer(layer, cb) {
+    var cursorStack = layer.__cursorStack;
+    for (var i = 0; i < cursorStack.length; i++) {
+        cb(layer.__cursors.get(cursorStack[i]));
+    }
+}
+function ensureLayerListInZLevel(internal, zlevel) {
+    var layers = internal.layers;
+    return layers[zlevel] || (layers[zlevel] = new Array(3));
+}
+function eachLayer(internal, cb, filter) {
+    var layerStack = internal.layerStack;
+    for (var i = 0; i < layerStack.length; i++) {
+        var zlevel = layerStack[i].zl;
+        var zlevel2 = layerStack[i].zl2;
+        var layer = internal.layers[zlevel][zlevel2];
+        if (!filter || ((!(filter & EACH_LAYER_BUILTIN) || layer.__builtin__)
+            && (!(filter & EACH_LAYER_NOT_BUILTIN) || !layer.__builtin__)
+            && (!(filter & EACH_LAYER_NOT_HOVER) || layer !== internal.hoverlayer))) {
+            cb(layer, zlevel, zlevel2, i);
+        }
+    }
+}
+var EACH_LAYER_BUILTIN = 1;
+var EACH_LAYER_NOT_BUILTIN = 2;
+var EACH_LAYER_NOT_HOVER = 4;
+var EACH_LAYER_BUILTIN_NOT_HOVER = EACH_LAYER_BUILTIN | EACH_LAYER_NOT_HOVER;
 var CanvasPainter = (function () {
     function CanvasPainter(root, storage, opts, id) {
         this.type = 'canvas';
-        this._zlevelList = [];
         this._prevDisplayList = [];
-        this._layers = {};
         this._layerConfig = {};
         this._needsManuallyCompositing = false;
         this.type = 'canvas';
+        this._i = {
+            layerStack: [],
+            layers: []
+        };
         var singleCanvas = !root.nodeName
             || root.nodeName.toUpperCase() === 'CANVAS';
         this._opts = opts = util.extend({}, opts || {});
@@ -56,9 +114,7 @@ var CanvasPainter = (function () {
             root.innerHTML = '';
         }
         this.storage = storage;
-        var zlevelList = this._zlevelList;
         this._prevDisplayList = [];
-        var layers = this._layers;
         if (!singleCanvas) {
             this._width = getSize(root, 0, opts);
             this._height = getSize(root, 1, opts);
@@ -80,12 +136,9 @@ var CanvasPainter = (function () {
             rootCanvas.height = height * this.dpr;
             this._width = width;
             this._height = height;
-            var mainLayer = new Layer(rootCanvas, this, this.dpr);
-            mainLayer.__builtin__ = true;
-            mainLayer.initContext();
-            layers[CANVAS_ZLEVEL] = mainLayer;
-            mainLayer.zlevel = CANVAS_ZLEVEL;
-            zlevelList.push(CANVAS_ZLEVEL);
+            var singleLayer = createBuiltinLayer(rootCanvas, this, CANVAS_ZLEVEL, ZLEVEL2_NORMAL_BELOW);
+            singleLayer.initContext();
+            this._insertLayer(singleLayer, CANVAS_ZLEVEL, ZLEVEL2_NORMAL_BELOW, true);
             this._domRoot = root;
         }
     }
@@ -107,253 +160,271 @@ var CanvasPainter = (function () {
             };
         }
     };
-    CanvasPainter.prototype.refresh = function (paintAll) {
-        var list = this.storage.getDisplayList(true);
-        var prevList = this._prevDisplayList;
-        var zlevelList = this._zlevelList;
-        this._redrawId = Math.random();
-        this._paintList(list, prevList, paintAll, this._redrawId);
-        for (var i = 0; i < zlevelList.length; i++) {
-            var z = zlevelList[i];
-            var layer = this._layers[z];
-            if (!layer.__builtin__ && layer.refresh) {
-                var clearColor = i === 0 ? this._backgroundColor : null;
-                layer.refresh(clearColor);
-            }
+    CanvasPainter.prototype.refresh = function (optOrPaintAll) {
+        var opt;
+        if (optOrPaintAll && !util.isObject(optOrPaintAll)) {
+            opt = { paintAll: !!optOrPaintAll };
         }
+        else {
+            opt = optOrPaintAll || {};
+        }
+        var refresh = util.retrieve2(opt.refresh, true);
+        var refreshHover = util.retrieve2(opt.refreshHover, false);
+        if (refreshHover) {
+            this._hoverLayerDirty = HOVER_LAYER_DIRTY_REPAINT;
+        }
+        if (!refresh) {
+            if (refreshHover) {
+                this._paintHoverList(this.storage.getDisplayList(false));
+            }
+            return this;
+        }
+        var list = this.storage.getDisplayList(true);
+        this._updateLayerStatus(list, opt.paintAll);
+        this._redrawId = Math.random();
+        var prevList = this._prevDisplayList;
+        this._paintList(list, prevList, this._redrawId);
+        var bgColor = this._backgroundColor;
+        eachLayer(this._i, function (layer, zlevel, zlevel2, idx) {
+            if (layer.refresh) {
+                layer.refresh(idx === 0 ? bgColor : null);
+            }
+        }, EACH_LAYER_NOT_BUILTIN);
         if (this._opts.useDirtyRect) {
             this._prevDisplayList = list.slice();
         }
         return this;
     };
-    CanvasPainter.prototype.refreshHover = function () {
-        this._paintHoverList(this.storage.getDisplayList(false));
-    };
     CanvasPainter.prototype._paintHoverList = function (list) {
-        var len = list.length;
-        var hoverLayer = this._hoverlayer;
-        hoverLayer && hoverLayer.clear();
-        if (!len) {
+        var hoverLayer = this._i.hoverlayer;
+        var hoverLayerDirty = this._hoverLayerDirty;
+        this._hoverLayerDirty = HOVER_LAYER_DIRTY_NO;
+        if (hoverLayerDirty === HOVER_LAYER_DIRTY_NO) {
             return;
         }
+        if (!hoverLayer && hoverLayerDirty === HOVER_LAYER_DIRTY_REPAINT) {
+            hoverLayer = this._i.hoverlayer = this._ensureLayer(HOVER_LAYER_ZLEVEL);
+        }
+        if (!hoverLayer) {
+            return;
+        }
+        hoverLayer.clear();
         var scope = {
             inHover: true,
             viewWidth: this._width,
-            viewHeight: this._height
+            viewHeight: this._height,
+            beforeBrushParam: {}
         };
         var ctx;
-        for (var i = 0; i < len; i++) {
+        for (var i = 0, len = list.length; i < len; i++) {
             var el = list[i];
-            if (el.__inHover) {
-                if (!hoverLayer) {
-                    hoverLayer = this._hoverlayer = this.getLayer(HOVER_LAYER_ZLEVEL);
-                }
-                if (!ctx) {
-                    ctx = hoverLayer.ctx;
-                    ctx.save();
-                }
-                brush(ctx, el, scope, i === len - 1);
+            if (!el.__inHover) {
+                continue;
+            }
+            if (!ctx) {
+                ctx = hoverLayer.ctx;
+                ctx.save();
+            }
+            var hoverStyle = el.__hoverStyle;
+            var originalStyle = void 0;
+            if (hoverStyle) {
+                originalStyle = el.style;
+                el.style = hoverStyle;
+            }
+            brush(ctx, el, scope);
+            if (hoverStyle) {
+                el.style = originalStyle;
             }
         }
         if (ctx) {
+            brushLoopFinalize(ctx, scope);
             ctx.restore();
         }
     };
     CanvasPainter.prototype.getHoverLayer = function () {
-        return this.getLayer(HOVER_LAYER_ZLEVEL);
+        return this._ensureLayer(HOVER_LAYER_ZLEVEL);
     };
     CanvasPainter.prototype.paintOne = function (ctx, el) {
         brushSingle(ctx, el);
     };
-    CanvasPainter.prototype._paintList = function (list, prevList, paintAll, redrawId) {
+    CanvasPainter.prototype._paintList = function (list, prevList, redrawId) {
         if (this._redrawId !== redrawId) {
             return;
         }
-        paintAll = paintAll || false;
-        this._updateLayerStatus(list);
-        var _a = this._doPaintList(list, prevList, paintAll), finished = _a.finished, needsRefreshHover = _a.needsRefreshHover;
+        var finished = this._doPaintList(list, prevList);
         if (this._needsManuallyCompositing) {
             this._compositeManually();
-        }
-        if (needsRefreshHover) {
-            this._paintHoverList(list);
         }
         if (!finished) {
             var self_1 = this;
             requestAnimationFrame(function () {
-                self_1._paintList(list, prevList, paintAll, redrawId);
+                self_1._paintList(list, prevList, redrawId);
             });
         }
         else {
-            this.eachLayer(function (layer) {
+            eachLayer(this._i, function (layer) {
                 layer.afterBrush && layer.afterBrush();
-            });
+            }, EACH_LAYER_BUILTIN_NOT_HOVER);
+            this._paintHoverList(list);
         }
     };
     CanvasPainter.prototype._compositeManually = function () {
-        var ctx = this.getLayer(CANVAS_ZLEVEL).ctx;
+        var ctx = this._ensureLayer(CANVAS_ZLEVEL).ctx;
         var width = this._domRoot.width;
         var height = this._domRoot.height;
         ctx.clearRect(0, 0, width, height);
-        this.eachBuiltinLayer(function (layer) {
+        eachLayer(this._i, function (layer) {
             if (layer.virtual) {
                 ctx.drawImage(layer.dom, 0, 0, width, height);
             }
-        });
+        }, EACH_LAYER_BUILTIN);
     };
-    CanvasPainter.prototype._doPaintList = function (list, prevList, paintAll) {
-        var _this = this;
-        var layerList = [];
-        var useDirtyRect = this._opts.useDirtyRect;
-        for (var zi = 0; zi < this._zlevelList.length; zi++) {
-            var zlevel = this._zlevelList[zi];
-            var layer = this._layers[zlevel];
-            if (layer.__builtin__
-                && layer !== this._hoverlayer
-                && (layer.__dirty || paintAll)) {
-                layerList.push(layer);
-            }
-        }
+    CanvasPainter.prototype._doPaintList = function (list, prevList) {
+        var painter = this;
         var finished = true;
-        var needsRefreshHover = false;
-        var _loop_1 = function (k) {
-            var layer = layerList[k];
-            var ctx = layer.ctx;
-            var repaintRects = useDirtyRect
-                && layer.createRepaintRects(list, prevList, this_1._width, this_1._height);
-            var start = paintAll ? layer.__startIndex : layer.__drawIndex;
-            var useTimer = !paintAll && layer.incremental && Date.now;
-            var startTime = useTimer && Date.now();
-            var clearColor = layer.zlevel === this_1._zlevelList[0]
-                ? this_1._backgroundColor : null;
-            if (layer.__startIndex === layer.__endIndex) {
+        eachLayer(this._i, function (layer) {
+            var needDraw = false;
+            eachCursorInLayer(layer, function (cursor) {
+                if (cursor.drawIdx < cursor.endIdx
+                    || cursor.notClearIdx >= 0) {
+                    needDraw = true;
+                }
+            });
+            if (!needDraw && !layer.__dirty) {
+                return;
+            }
+            var repaintRects = (painter._opts.useDirtyRect && !isIncrementalLayer(layer))
+                ? layer.createRepaintRects(list, prevList, painter._width, painter._height) : null;
+            var firstLayerKey = painter._i.layerStack[0];
+            var contentRetained = true;
+            if (layer.__dirty) {
+                contentRetained = false;
+                layer.__dirty = false;
+                var clearColor = (layer.zlevel === firstLayerKey.zl && layer.zlevel2 === firstLayerKey.zl2)
+                    ? painter._backgroundColor : null;
                 layer.clear(false, clearColor, repaintRects);
             }
-            else if (start === layer.__startIndex) {
-                var firstEl = list[start];
-                if (!firstEl.incremental || !firstEl.notClear || paintAll) {
-                    layer.clear(false, clearColor, repaintRects);
-                }
-            }
-            if (start === -1) {
-                console.error('For some unknown reason. drawIndex is -1');
-                start = layer.__startIndex;
-            }
-            var i;
-            var repaint = function (repaintRect) {
-                var scope = {
-                    inHover: false,
-                    allClipped: false,
-                    prevEl: null,
-                    viewWidth: _this._width,
-                    viewHeight: _this._height
-                };
-                for (i = start; i < layer.__endIndex; i++) {
-                    var el = list[i];
-                    if (el.__inHover) {
-                        needsRefreshHover = true;
-                    }
-                    _this._doPaintEl(el, layer, useDirtyRect, repaintRect, scope, i === layer.__endIndex - 1);
-                    if (useTimer) {
-                        var dTime = Date.now() - startTime;
-                        if (dTime > 15) {
-                            break;
-                        }
-                    }
-                }
-                if (scope.prevElClipPaths) {
-                    ctx.restore();
-                }
-            };
-            if (repaintRects) {
-                if (repaintRects.length === 0) {
-                    i = layer.__endIndex;
-                }
-                else {
-                    var dpr = this_1.dpr;
-                    for (var r = 0; r < repaintRects.length; ++r) {
-                        var rect = repaintRects[r];
-                        ctx.save();
-                        ctx.beginPath();
-                        ctx.rect(rect.x * dpr, rect.y * dpr, rect.width * dpr, rect.height * dpr);
-                        ctx.clip();
-                        repaint(rect);
-                        ctx.restore();
-                    }
-                }
-            }
-            else {
-                ctx.save();
-                repaint();
-                ctx.restore();
-            }
-            layer.__drawIndex = i;
-            if (layer.__drawIndex < layer.__endIndex) {
-                finished = false;
-            }
-        };
-        var this_1 = this;
-        for (var k = 0; k < layerList.length; k++) {
-            _loop_1(k);
-        }
+            eachCursorInLayer(layer, function (cursor) {
+                var cursorFinished = painter._paintPerCursor(layer, cursor, list, repaintRects, contentRetained);
+                finished = finished && cursorFinished;
+            });
+        }, EACH_LAYER_BUILTIN_NOT_HOVER);
         if (env.wxa) {
-            util.each(this._layers, function (layer) {
+            eachLayer(this._i, function (layer) {
                 if (layer && layer.ctx && layer.ctx.draw) {
                     layer.ctx.draw();
                 }
             });
         }
-        return {
-            finished: finished,
-            needsRefreshHover: needsRefreshHover
-        };
+        return finished;
     };
-    CanvasPainter.prototype._doPaintEl = function (el, currentLayer, useDirtyRect, repaintRect, scope, isLast) {
-        var ctx = currentLayer.ctx;
-        if (useDirtyRect) {
-            var paintRect = el.getPaintRect();
-            if (!repaintRect || paintRect && paintRect.intersect(repaintRect)) {
-                brush(ctx, el, scope, isLast);
-                el.setPrevPaintRect(paintRect);
+    CanvasPainter.prototype._paintPerCursor = function (layer, layerCursor, list, repaintRects, contentRetained) {
+        var ctx = layer.ctx;
+        if (repaintRects) {
+            if (!repaintRects.length) {
+                layerCursor.drawIdx = layerCursor.endIdx;
+            }
+            else {
+                var dpr = this.dpr;
+                for (var r = 0; r < repaintRects.length; ++r) {
+                    var rect = repaintRects[r];
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.rect(rect.x * dpr, rect.y * dpr, rect.width * dpr, rect.height * dpr);
+                    ctx.clip();
+                    this._paintPerCursorInRect(layer, layerCursor, list, rect, contentRetained);
+                    ctx.restore();
+                }
             }
         }
         else {
-            brush(ctx, el, scope, isLast);
+            ctx.save();
+            this._paintPerCursorInRect(layer, layerCursor, list, null, contentRetained);
+            ctx.restore();
         }
+        return layerCursor.drawIdx >= layerCursor.endIdx;
+    };
+    CanvasPainter.prototype._paintPerCursorInRect = function (layer, layerCursor, list, repaintRect, contentRetained) {
+        var scope = {
+            inHover: false,
+            allClipped: false,
+            prevEl: null,
+            viewWidth: this._width,
+            viewHeight: this._height,
+            beforeBrushParam: { contentRetained: contentRetained }
+        };
+        var ctx = layer.ctx;
+        var useTimer = isIncrementalLayer(layer);
+        var startTime = useTimer && platformApi.getTime();
+        var drawIdxBegin = layerCursor.drawIdx;
+        var notClearIdx = layerCursor.notClearIdx;
+        var idx = notClearIdx >= 0 ? Math.min(notClearIdx, drawIdxBegin) : drawIdxBegin;
+        for (; idx < layerCursor.endIdx; idx++) {
+            var el = list[idx];
+            if (idx < drawIdxBegin && !el.notClear) {
+                continue;
+            }
+            if (el.__inHover) {
+                this._hoverLayerDirty = HOVER_LAYER_DIRTY_REPAINT;
+            }
+            if (repaintRect != null) {
+                var paintRect = el.getPaintRect();
+                if (paintRect && paintRect.intersect(repaintRect)) {
+                    brush(ctx, el, scope);
+                    el.setPrevPaintRect(paintRect);
+                }
+            }
+            else {
+                brush(ctx, el, scope);
+            }
+            if (useTimer) {
+                var dTime = platformApi.getTime() - startTime;
+                if (dTime > 15) {
+                    idx++;
+                    break;
+                }
+            }
+        }
+        brushLoopFinalize(ctx, scope);
+        layerCursor.drawIdx = Math.max(idx, drawIdxBegin);
     };
     CanvasPainter.prototype.getLayer = function (zlevel, virtual) {
-        if (this._singleCanvas && !this._needsManuallyCompositing) {
+        return this._ensureLayer(zlevel, 0, virtual);
+    };
+    CanvasPainter.prototype._ensureLayer = function (zlevel, zlevel2, virtual) {
+        zlevel2 = zlevel2 || 0;
+        var singleCanvas = this._singleCanvas;
+        if (singleCanvas && !this._needsManuallyCompositing) {
             zlevel = CANVAS_ZLEVEL;
+            zlevel2 = 0;
         }
-        var layer = this._layers[zlevel];
+        var layer = ensureLayerListInZLevel(this._i, zlevel)[zlevel2];
         if (!layer) {
-            layer = new Layer('zr_' + zlevel, this, this.dpr);
-            layer.zlevel = zlevel;
-            layer.__builtin__ = true;
+            layer = createBuiltinLayer('zr_' + zlevel + '.' + zlevel2, this, zlevel, zlevel2);
             if (this._layerConfig[zlevel]) {
                 util.merge(layer, this._layerConfig[zlevel], true);
             }
-            else if (this._layerConfig[zlevel - EL_AFTER_INCREMENTAL_INC]) {
-                util.merge(layer, this._layerConfig[zlevel - EL_AFTER_INCREMENTAL_INC], true);
+            if (virtual
+                || (singleCanvas && zlevel !== CANVAS_ZLEVEL)) {
+                layer.virtual = true;
             }
-            if (virtual) {
-                layer.virtual = virtual;
-            }
-            this.insertLayer(zlevel, layer);
+            this._insertLayer(layer, zlevel, zlevel2, false);
             layer.initContext();
         }
         return layer;
     };
     CanvasPainter.prototype.insertLayer = function (zlevel, layer) {
-        var layersMap = this._layers;
-        var zlevelList = this._zlevelList;
-        var len = zlevelList.length;
+        this._insertLayer(layer, zlevel, 0, false);
+    };
+    CanvasPainter.prototype._insertLayer = function (layer, zlevel, zlevel2, suppressDOMInsert) {
+        var internal = this._i;
+        var layersMap = internal.layers;
+        var layerStack = internal.layerStack;
         var domRoot = this._domRoot;
         var prevLayer = null;
-        var i = -1;
-        if (layersMap[zlevel]) {
+        if (layersMap[zlevel] && layersMap[zlevel][zlevel2]) {
             if (process.env.NODE_ENV !== 'production') {
-                util.logError('ZLevel ' + zlevel + ' has been used already');
+                util.logError('ZLevel ' + zlevel + '.' + zlevel2 + ' has been used already');
             }
             return;
         }
@@ -363,18 +434,19 @@ var CanvasPainter = (function () {
             }
             return;
         }
-        if (len > 0 && zlevel > zlevelList[0]) {
-            for (i = 0; i < len - 1; i++) {
-                if (zlevelList[i] < zlevel
-                    && zlevelList[i + 1] > zlevel) {
-                    break;
-                }
-            }
-            prevLayer = layersMap[zlevelList[i]];
+        var len = layerStack.length;
+        var i = 0;
+        while (i < len
+            && (layerStack[i].zl < zlevel
+                || (layerStack[i].zl === zlevel && layerStack[i].zl2 < zlevel2))) {
+            i++;
         }
-        zlevelList.splice(i + 1, 0, zlevel);
-        layersMap[zlevel] = layer;
-        if (!layer.virtual) {
+        if (i > 0) {
+            prevLayer = ensureLayerListInZLevel(internal, layerStack[i - 1].zl)[layerStack[i - 1].zl2];
+        }
+        layerStack.splice(i, 0, { zl: zlevel, zl2: zlevel2 });
+        ensureLayerListInZLevel(internal, zlevel)[zlevel2] = layer;
+        if (!suppressDOMInsert && !layer.virtual) {
             if (prevLayer) {
                 var prevDom = prevLayer.dom;
                 if (prevDom.nextSibling) {
@@ -396,153 +468,182 @@ var CanvasPainter = (function () {
         layer.painter || (layer.painter = this);
     };
     CanvasPainter.prototype.eachLayer = function (cb, context) {
-        var zlevelList = this._zlevelList;
-        for (var i = 0; i < zlevelList.length; i++) {
-            var z = zlevelList[i];
-            cb.call(context, this._layers[z], z);
-        }
+        return eachLayer(this._i, function (layer, zlevel) {
+            cb.call(context, layer, zlevel);
+        });
     };
     CanvasPainter.prototype.eachBuiltinLayer = function (cb, context) {
-        var zlevelList = this._zlevelList;
-        for (var i = 0; i < zlevelList.length; i++) {
-            var z = zlevelList[i];
-            var layer = this._layers[z];
-            if (layer.__builtin__) {
-                cb.call(context, layer, z);
-            }
-        }
+        return eachLayer(this._i, function (layer, zlevel) {
+            cb.call(context, layer, zlevel);
+        }, EACH_LAYER_BUILTIN);
     };
     CanvasPainter.prototype.eachOtherLayer = function (cb, context) {
-        var zlevelList = this._zlevelList;
-        for (var i = 0; i < zlevelList.length; i++) {
-            var z = zlevelList[i];
-            var layer = this._layers[z];
-            if (!layer.__builtin__) {
-                cb.call(context, layer, z);
-            }
-        }
+        return eachLayer(this._i, function (layer, zlevel) {
+            cb.call(context, layer, zlevel);
+        }, EACH_LAYER_NOT_BUILTIN);
     };
     CanvasPainter.prototype.getLayers = function () {
-        return this._layers;
-    };
-    CanvasPainter.prototype._updateLayerStatus = function (list) {
-        this.eachBuiltinLayer(function (layer, z) {
-            layer.__dirty = layer.__used = false;
+        var layers = {};
+        eachLayer(this._i, function (layer, zlevel, zlevel2) {
+            layers[layer.id] = layer;
         });
-        function updatePrevLayer(idx) {
-            if (prevLayer) {
-                if (prevLayer.__endIndex !== idx) {
-                    prevLayer.__dirty = true;
-                }
-                prevLayer.__endIndex = idx;
-            }
-        }
-        if (this._singleCanvas) {
-            for (var i_1 = 1; i_1 < list.length; i_1++) {
-                var el = list[i_1];
-                if (el.zlevel !== list[i_1 - 1].zlevel || el.incremental) {
-                    this._needsManuallyCompositing = true;
+        return layers;
+    };
+    CanvasPainter.prototype._updateLayerStatus = function (list, paintAll) {
+        var painter = this;
+        if (painter._singleCanvas) {
+            for (var i = 1; i < list.length; i++) {
+                var el = list[i];
+                if (el.zlevel !== list[i - 1].zlevel || el.incremental) {
+                    painter._needsManuallyCompositing = true;
                     break;
                 }
             }
         }
-        var prevLayer = null;
-        var incrementalLayerCount = 0;
-        var prevZlevel;
-        var i;
-        for (i = 0; i < list.length; i++) {
-            var el = list[i];
+        eachLayer(painter._i, function (layer) {
+            layer.__dirty = false;
+            eachCursorInLayer(layer, function (cursor) {
+                cursor.used = false;
+                cursor.endIdxNew = 0;
+                cursor.notClearIdx = -1;
+            });
+        }, EACH_LAYER_BUILTIN_NOT_HOVER);
+        var prevZLevel;
+        var currLayer = null;
+        var currCursor = null;
+        var aboveIncrementalInCurrZLevel = false;
+        for (var idx = 0, len = list.length; idx < len; idx++) {
+            var el = list[idx];
             var zlevel = el.zlevel;
-            var layer = void 0;
-            if (prevZlevel !== zlevel) {
-                prevZlevel = zlevel;
-                incrementalLayerCount = 0;
+            var elIncremental = el.incremental;
+            var zlevel2 = void 0;
+            if (prevZLevel !== zlevel) {
+                prevZLevel = zlevel;
+                aboveIncrementalInCurrZLevel = false;
             }
-            if (el.incremental) {
-                layer = this.getLayer(zlevel + INCREMENTAL_INC, this._needsManuallyCompositing);
-                layer.incremental = true;
-                incrementalLayerCount = 1;
+            if (elIncremental) {
+                aboveIncrementalInCurrZLevel = true;
+                zlevel2 = ZLEVEL2_INCREMENTAL;
             }
             else {
-                layer = this.getLayer(zlevel + (incrementalLayerCount > 0 ? EL_AFTER_INCREMENTAL_INC : 0), this._needsManuallyCompositing);
+                zlevel2 = aboveIncrementalInCurrZLevel ? ZLEVEL2_NORMAL_ABOVE : ZLEVEL2_NORMAL_BELOW;
             }
-            if (!layer.__builtin__) {
-                util.logError('ZLevel ' + zlevel + ' has been used by unkown layer ' + layer.id);
+            if (!currLayer || zlevel !== currLayer.zlevel || zlevel2 !== currLayer.zlevel2) {
+                currLayer = painter._ensureLayer(zlevel, zlevel2);
+                currCursor = null;
+                if (!currLayer.__builtin__) {
+                    util.logError('ZLevel ' + zlevel + ' has been used by unknown layer ' + currLayer.id);
+                    continue;
+                }
             }
-            if (layer !== prevLayer) {
-                layer.__used = true;
-                if (layer.__startIndex !== i) {
-                    layer.__dirty = true;
+            if (!currCursor || elIncremental !== currCursor.key) {
+                currCursor = ensureLayerDrawCursor(currLayer, elIncremental);
+                if (!currCursor.used) {
+                    currCursor.used = true;
+                    if (!paintAll && currCursor.first === el.id) {
+                        var idxShift = idx - currCursor.startIdx;
+                        currCursor.startIdx = idx;
+                        currCursor.drawIdx += idxShift;
+                        currCursor.endIdx += idxShift;
+                    }
+                    else {
+                        currLayer.__dirty = true;
+                        currCursor.first = el.id;
+                        currCursor.startIdx = currCursor.drawIdx = idx;
+                        currCursor.endIdx = idx + 1;
+                    }
                 }
-                layer.__startIndex = i;
-                if (!layer.incremental) {
-                    layer.__drawIndex = i;
-                }
-                else {
-                    layer.__drawIndex = -1;
-                }
-                updatePrevLayer(i);
-                prevLayer = layer;
             }
-            if ((el.__dirty & REDRAW_BIT) && !el.__inHover) {
-                layer.__dirty = true;
-                if (layer.incremental && layer.__drawIndex < 0) {
-                    layer.__drawIndex = i;
+            currCursor.endIdxNew = idx + 1;
+            if ((el.__dirty & REDRAW_BIT)
+                && !el.__inHover) {
+                if (!elIncremental
+                    || (!el.notClear && idx < currCursor.drawIdx)) {
+                    currLayer.__dirty = true;
+                }
+                if (elIncremental && el.notClear && currCursor.notClearIdx < 0) {
+                    currCursor.notClearIdx = idx;
                 }
             }
         }
-        updatePrevLayer(i);
-        this.eachBuiltinLayer(function (layer, z) {
-            if (!layer.__used && layer.getElementCount() > 0) {
-                layer.__dirty = true;
-                layer.__startIndex = layer.__endIndex = layer.__drawIndex = 0;
+        eachLayer(painter._i, function (layer) {
+            var cursorStack = layer.__cursorStack;
+            var cursors = layer.__cursors;
+            for (var i = cursorStack.length - 1; i >= 0; i--) {
+                var cursor = cursors.get(cursorStack[i]);
+                if (!cursor.used) {
+                    layer.__dirty = true;
+                    cursors.removeKey(cursorStack[i]);
+                    cursorStack.splice(i, 1);
+                }
+                else {
+                    var endIdxNew = cursor.endIdxNew;
+                    if (isIncrementalLayer(layer)
+                        ? endIdxNew < cursor.drawIdx
+                        : (endIdxNew !== cursor.endIdx
+                            || !endIdxNew
+                            || list[endIdxNew - 1].id !== cursor.last)) {
+                        layer.__dirty = true;
+                    }
+                    cursor.endIdx = cursor.endIdxNew;
+                    cursor.last = endIdxNew ? list[endIdxNew - 1].id : NaN;
+                }
             }
-            if (layer.__dirty && layer.__drawIndex < 0) {
-                layer.__drawIndex = layer.__startIndex;
+            if (layer.__dirty) {
+                eachCursorInLayer(layer, function (cursor) {
+                    cursor.drawIdx = cursor.startIdx;
+                });
+                if (painter._hoverLayerDirty === HOVER_LAYER_DIRTY_NO) {
+                    painter._hoverLayerDirty = HOVER_LAYER_DIRTY_REPAINT_IF_EXISTING;
+                }
             }
-        });
+        }, EACH_LAYER_BUILTIN_NOT_HOVER);
     };
     CanvasPainter.prototype.clear = function () {
-        this.eachBuiltinLayer(this._clearLayer);
+        eachLayer(this._i, function (layer) {
+            layer.clear();
+            resetLayerDrawCursors(layer);
+        }, EACH_LAYER_BUILTIN);
         return this;
-    };
-    CanvasPainter.prototype._clearLayer = function (layer) {
-        layer.clear();
     };
     CanvasPainter.prototype.setBackgroundColor = function (backgroundColor) {
         this._backgroundColor = backgroundColor;
-        util.each(this._layers, function (layer) {
+        eachLayer(this._i, function (layer) {
             layer.setUnpainted();
         });
     };
     CanvasPainter.prototype.configLayer = function (zlevel, config) {
         if (config) {
-            var layerConfig = this._layerConfig;
-            if (!layerConfig[zlevel]) {
-                layerConfig[zlevel] = config;
+            var layerConfig_1 = this._layerConfig;
+            if (!layerConfig_1[zlevel]) {
+                layerConfig_1[zlevel] = config;
             }
             else {
-                util.merge(layerConfig[zlevel], config, true);
+                util.merge(layerConfig_1[zlevel], config, true);
             }
-            for (var i = 0; i < this._zlevelList.length; i++) {
-                var _zlevel = this._zlevelList[i];
-                if (_zlevel === zlevel || _zlevel === zlevel + EL_AFTER_INCREMENTAL_INC) {
-                    var layer = this._layers[_zlevel];
-                    util.merge(layer, layerConfig[zlevel], true);
-                }
-            }
+            eachLayer(this._i, function (layer, zlevel) {
+                util.merge(layer, layerConfig_1[zlevel], true);
+            });
         }
     };
     CanvasPainter.prototype.delLayer = function (zlevel) {
-        var layers = this._layers;
-        var zlevelList = this._zlevelList;
-        var layer = layers[zlevel];
-        if (!layer) {
-            return;
+        var layerStack = this._i.layerStack;
+        var layersMap = this._i.layers;
+        for (var i = layerStack.length - 1; i >= 0; i--) {
+            var key = layerStack[i];
+            if (key.zl === zlevel) {
+                var layer = layersMap[zlevel][key.zl2];
+                if (layer.__builtin__) {
+                    continue;
+                }
+                layerStack.splice(i, 1);
+                layersMap[zlevel][key.zl2] = undefined;
+                if (!layer.virtual) {
+                    var parentNode = layer.dom.parentNode;
+                    parentNode && parentNode.removeChild(layer.dom);
+                }
+            }
         }
-        layer.dom.parentNode.removeChild(layer.dom);
-        delete layers[zlevel];
-        zlevelList.splice(util.indexOf(zlevelList, zlevel), 1);
     };
     CanvasPainter.prototype.resize = function (width, height) {
         if (!this._domRoot.style) {
@@ -551,7 +652,7 @@ var CanvasPainter = (function () {
             }
             this._width = width;
             this._height = height;
-            this.getLayer(CANVAS_ZLEVEL).resize(width, height);
+            this._ensureLayer(CANVAS_ZLEVEL).resize(width, height);
         }
         else {
             var domRoot = this._domRoot;
@@ -566,12 +667,10 @@ var CanvasPainter = (function () {
             if (this._width !== width || height !== this._height) {
                 domRoot.style.width = width + 'px';
                 domRoot.style.height = height + 'px';
-                for (var id in this._layers) {
-                    if (this._layers.hasOwnProperty(id)) {
-                        this._layers[id].resize(width, height);
-                    }
-                }
-                this.refresh(true);
+                eachLayer(this._i, function (layer) {
+                    layer.resize(width, height);
+                });
+                this.refresh({ paintAll: true });
             }
             this._width = width;
             this._height = height;
@@ -579,22 +678,23 @@ var CanvasPainter = (function () {
         return this;
     };
     CanvasPainter.prototype.clearLayer = function (zlevel) {
-        var layer = this._layers[zlevel];
-        if (layer) {
-            layer.clear();
-        }
+        util.each(this._i.layers[zlevel], function (layer) {
+            if (layer && !layer.__builtin__) {
+                layer.clear();
+            }
+        });
     };
     CanvasPainter.prototype.dispose = function () {
         this.root.innerHTML = '';
         this.root =
             this.storage =
                 this._domRoot =
-                    this._layers = null;
+                    this._i = null;
     };
     CanvasPainter.prototype.getRenderedCanvas = function (opts) {
         opts = opts || {};
         if (this._singleCanvas && !this._compositeManually) {
-            return this._layers[CANVAS_ZLEVEL].dom;
+            return this._i.layers[CANVAS_ZLEVEL][0].dom;
         }
         var imageLayer = new Layer('image', this, opts.pixelRatio || this.dpr);
         imageLayer.initContext();
@@ -604,7 +704,7 @@ var CanvasPainter = (function () {
             this.refresh();
             var width_1 = imageLayer.dom.width;
             var height_1 = imageLayer.dom.height;
-            this.eachLayer(function (layer) {
+            eachLayer(this._i, function (layer) {
                 if (layer.__builtin__) {
                     ctx.drawImage(layer.dom, 0, 0, width_1, height_1);
                 }
@@ -619,13 +719,15 @@ var CanvasPainter = (function () {
             var scope = {
                 inHover: false,
                 viewWidth: this._width,
-                viewHeight: this._height
+                viewHeight: this._height,
+                beforeBrushParam: {}
             };
             var displayList = this.storage.getDisplayList(true);
             for (var i = 0, len = displayList.length; i < len; i++) {
                 var el = displayList[i];
-                brush(ctx, el, scope, i === len - 1);
+                brush(ctx, el, scope);
             }
+            brushLoopFinalize(ctx, scope);
         }
         return imageLayer.dom;
     };

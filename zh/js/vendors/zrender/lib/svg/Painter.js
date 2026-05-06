@@ -8,7 +8,6 @@ var svgId = 0;
 var SVGPainter = (function () {
     function SVGPainter(root, storage, opts) {
         this.type = 'svg';
-        this.refreshHover = createMethodNotSupport('refreshHover');
         this.configLayer = createMethodNotSupport('configLayer');
         this.storage = storage;
         this._opts = opts = extend({}, opts);
