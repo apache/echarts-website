@@ -968,7 +968,7 @@ animationDelayUpdate: function (idx) {
 - **Type**: `boolean`
 - **Default**: `false`
 
-鼠标是否可进入提示框浮层中，默认为false，如需详情内交互，如添加链接，按钮，可设置为 `true`。
+鼠标是否可进入提示框浮层中。默认为 `false`。如需在提示框内进行交互，如添加链接或按钮等，可设置为 `true`。
 
 ## renderMode
 - **Type**: `string`

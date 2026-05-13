@@ -1272,6 +1272,7 @@ td.visible-xxxl {
   right: 0;
   bottom: 0;
   left: 0;
+  display: flex;
   overflow-y: auto;
 }
 #example-explore ::-webkit-scrollbar {
@@ -1297,8 +1298,8 @@ td.visible-xxxl {
     background: rgba(0, 0, 0, 0.5) !important;
 }
 #explore-container {
-  margin-left: 220px;
   padding: 10px 10px;
+  flex: 1;
 }
 .example-list-panel {
   margin: 30px 15px 30px 15px;
@@ -1321,7 +1322,6 @@ td.visible-xxxl {
   position: sticky;
   left: 0;
   top: 0;
-  float: left;
   height: calc(100%);
   width: 200px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
