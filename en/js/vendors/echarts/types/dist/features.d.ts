@@ -1,1 +1,1 @@
-export { installAxisBreak as AxisBreak, installLabelLayout as LabelLayout, installLegacyGridContainLabel as LegacyGridContainLabel, installScatterJitter as ScatterJitter, installUniversalTransition as UniversalTransition } from './shared';
+export { installAxisBreak as AxisBreak, installLabelLayout as LabelLayout, installLegacyGridContainLabel as LegacyGridContainLabel, installScatterJitter as ScatterJitter, installUniversalTransition as UniversalTransition } from './shared.js';

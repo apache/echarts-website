@@ -1,3 +1,1 @@
-import GlobalModel from '../../model/Global.js';
-import ExtensionAPI from '../../core/ExtensionAPI.js';
-export default function graphSimpleLayout(ecModel: GlobalModel, api: ExtensionAPI): void;
+export declare const graphSimpleLayoutStageHandler: import("../../util/types").StageHandler;

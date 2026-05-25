@@ -43,7 +43,7 @@
 */
 import * as zrUtil from 'zrender/lib/core/util.js';
 import { encodeHTML } from 'zrender/lib/core/dom.js';
-import { parseDate, isNumeric, numericToNumber } from './number.js';
+import { parseDate, isNumeric, numericToNumber, isNullableNumberFinite } from './number.js';
 import { format as timeFormat, pad } from './time.js';
 import { deprecateReplaceLog } from './log.js';
 /**
@@ -80,7 +80,7 @@ export function makeValueReadable(value, valueType, useUTC) {
     return str && zrUtil.trim(str) ? str : '-';
   }
   function isNumberUserReadable(num) {
-    return !!(num != null && !isNaN(num) && isFinite(num));
+    return isNullableNumberFinite(num);
   }
   var isTypeTime = valueType === 'time';
   var isValueDate = value instanceof Date;

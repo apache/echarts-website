@@ -41,12 +41,16 @@
 * specific language governing permissions and limitations
 * under the License.
 */
+import { addSafe } from '../../util/number.js';
 /**
  * Calculate slider move result.
  * Usage:
  * (1) If both handle0 and handle1 are needed to be moved, set minSpan the same as
  * maxSpan and the same as `Math.abs(handleEnd[1] - handleEnds[0])`.
  * (2) If handle0 is forbidden to cross handle1, set minSpan as `0`.
+ *
+ * [CAVEAT]
+ *  This method is inefficient due to the use of `addSafe`.
  *
  * @param delta Move length.
  * @param handleEnds handleEnds[0] can be bigger then handleEnds[1].
@@ -63,7 +67,9 @@
  */
 export default function sliderMove(delta, handleEnds, extent, handleIndex, minSpan, maxSpan) {
   delta = delta || 0;
-  var extentSpan = extent[1] - extent[0];
+  // Consider `7.1e-9 - 7e-9` get `1.0000000000000007e-10`, so use `addSafe`
+  // to remove rounding error whenever possible.
+  var extentSpan = addSafe(extent[1], -extent[0]);
   // Notice maxSpan and minSpan can be null/undefined.
   if (minSpan != null) {
     minSpan = restrict(minSpan, [0, extentSpan]);
@@ -72,7 +78,7 @@ export default function sliderMove(delta, handleEnds, extent, handleIndex, minSp
     maxSpan = Math.max(maxSpan, minSpan != null ? minSpan : 0);
   }
   if (handleIndex === 'all') {
-    var handleSpan = Math.abs(handleEnds[1] - handleEnds[0]);
+    var handleSpan = Math.abs(addSafe(handleEnds[1], -handleEnds[0]));
     handleSpan = restrict(handleSpan, [0, extentSpan]);
     minSpan = maxSpan = restrict(handleSpan, [minSpan, maxSpan]);
     handleIndex = 0;
@@ -84,19 +90,19 @@ export default function sliderMove(delta, handleEnds, extent, handleIndex, minSp
   // Restrict in extent.
   var extentMinSpan = minSpan || 0;
   var realExtent = extent.slice();
-  originalDistSign.sign < 0 ? realExtent[0] += extentMinSpan : realExtent[1] -= extentMinSpan;
+  originalDistSign.sign < 0 ? realExtent[0] = addSafe(realExtent[0], extentMinSpan) : realExtent[1] = addSafe(realExtent[1], -extentMinSpan);
   handleEnds[handleIndex] = restrict(handleEnds[handleIndex], realExtent);
   // Expand span.
   var currDistSign;
   currDistSign = getSpanSign(handleEnds, handleIndex);
   if (minSpan != null && (currDistSign.sign !== originalDistSign.sign || currDistSign.span < minSpan)) {
     // If minSpan exists, 'cross' is forbidden.
-    handleEnds[1 - handleIndex] = handleEnds[handleIndex] + originalDistSign.sign * minSpan;
+    handleEnds[1 - handleIndex] = addSafe(handleEnds[handleIndex], originalDistSign.sign * minSpan);
   }
   // Shrink span.
   currDistSign = getSpanSign(handleEnds, handleIndex);
   if (maxSpan != null && currDistSign.span > maxSpan) {
-    handleEnds[1 - handleIndex] = handleEnds[handleIndex] + currDistSign.sign * maxSpan;
+    handleEnds[1 - handleIndex] = addSafe(handleEnds[handleIndex], currDistSign.sign * maxSpan);
   }
   return handleEnds;
 }

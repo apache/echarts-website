@@ -41,7 +41,9 @@
 * specific language governing permissions and limitations
 * under the License.
 */
-import { updateCenterAndZoomInAction } from '../../component/helper/roamHelper.js';
+import { registerRoamActionSimply } from '../../component/helper/roamHelper.js';
+import { COMPONENT_MAIN_TYPE_SERIES } from '../../util/types.js';
+import { SERIES_TYPE_TREE } from './TreeSeries.js';
 export function installTreeAction(registers) {
   registers.registerAction({
     type: 'treeExpandAndCollapse',
@@ -49,8 +51,8 @@ export function installTreeAction(registers) {
     update: 'update'
   }, function (payload, ecModel) {
     ecModel.eachComponent({
-      mainType: 'series',
-      subType: 'tree',
+      mainType: COMPONENT_MAIN_TYPE_SERIES,
+      subType: SERIES_TYPE_TREE,
       query: payload
     }, function (seriesModel) {
       var dataIndex = payload.dataIndex;
@@ -59,24 +61,5 @@ export function installTreeAction(registers) {
       node.isExpand = !node.isExpand;
     });
   });
-  registers.registerAction({
-    type: 'treeRoam',
-    event: 'treeRoam',
-    // Here we set 'none' instead of 'update', because roam action
-    // just need to update the transform matrix without having to recalculate
-    // the layout. So don't need to go through the whole update process, such
-    // as 'dataPrcocess', 'coordSystemUpdate', 'layout' and so on.
-    update: 'none'
-  }, function (payload, ecModel, api) {
-    ecModel.eachComponent({
-      mainType: 'series',
-      subType: 'tree',
-      query: payload
-    }, function (seriesModel) {
-      var coordSys = seriesModel.coordinateSystem;
-      var res = updateCenterAndZoomInAction(coordSys, payload, seriesModel.get('scaleLimit'));
-      seriesModel.setCenter(res.center);
-      seriesModel.setZoom(res.zoom);
-    });
-  });
+  registerRoamActionSimply(registers, COMPONENT_MAIN_TYPE_SERIES, SERIES_TYPE_TREE);
 }

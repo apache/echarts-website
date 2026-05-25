@@ -95,7 +95,7 @@ Option:
     
 *   `'time'` Time axis, suitable for continuous time series data. As compared to value axis, it has a better formatting for time and a different tick calculation method. For example, it decides to use month, week, day or hour for tick based on the range of span.
     
-*   `'log'` Log axis, suitable for log data. Stacked bar or line series with `type: 'log'` axes may lead to significant visual errors and may have unintended effects in certain circumstances. Their use should be avoided.
+*   `'log'` Logarithmic axis. It is useful when the data spans a very large range of values or when the important pattern is about multiplicative change rather than additive change.
 
 ## name
 - **Type**: `string`
@@ -865,6 +865,22 @@ For non-category axis, including time, numerical value, and log axes, `boundaryG
 boundaryGap: ['20%', '20%']
 ```
 
+## containShape
+- **Type**: `boolean`
+- **Default**: `true`
+
+Since `v6.1.0`
+
+Whether series shapes should be prevented from overflowing the coordinate system by adding extra margin at the axes edges.
+
+Currently, `containShape` is available only on [bar](option.series-bar.md), [pictorialBar](option.series-pictorialBar.md), [candlestick](option.series-candlestick.md) and [boxplot](option.series-boxplot.md), where shape overflow is typically unexpected.
+
+Note: if a `dataZoom` is applied on a numerical axis (`axis.type: 'value' | 'time' | 'log'`), the extra margin is only added to the edges of a full window (i.e., `dataZoom` end `0%` and end `100%`). For a `dataZoom` is applied on a category axis (`axis.type: 'category'`), the extra margin is always added regardless of `dataZoom` range.
+
+See also [series.clip](option.series-bar.md#clip), which can clip shapes if they overflow the coordinate system.
+
+See also [boundaryGap](option.singleAxis.md#boundaryGap). The functionality of the two options overlaps for historicall reasons. Series shapes may overflow a category axis (`axis.type: 'category'`) only if `boundaryGap: false, containShape: false`.
+
 ## min
 - **Type**: `number|string|Function`
 
@@ -906,6 +922,59 @@ max: function (value) {
 ```
 
 `value` is an object, containing the `min` value and `max` value of the data. This function should return the max value of axis, or return `null`/`undefined` to make echarts use the auto calculated max value (`null`/`undefined` return is only supported since `v4.8.0`).
+
+## dataMin
+- **Type**: `number`
+
+Since `v6.1.0`
+
+Specify the data minimum value to extend the axis range while preserving the nice scale algorithm.
+
+It is available only for value, logarithmic, and time axes, i.e., [type](option.singleAxis.md#type): 'value', 'log', or 'time'.
+
+**How it works:**
+
+`dataMin` works like inserting a virtual data point into your dataset, but this point only participates in axis range calculation and won't be displayed in the chart.
+
+*   When `dataMin` is **less than** the actual data minimum: The axis extends to include this value, using a nice scale value no greater than `dataMin` as the axis minimum
+*   When `dataMin` is **greater than or equal to** the actual data minimum: No effect, the axis is calculated using the original logic
+
+**Use cases:**
+
+*   Ensure the axis includes a reference value (like passing line, target value, etc.)
+*   Reserve visual space for data
+
+**The difference from [min](option.singleAxis.md#min):**
+
+*   `min` fixes the axis minimum value and disables the nice scale algorithm
+*   `dataMin` only affects the axis range while preserving the nice scale algorithm
+
+## dataMax
+- **Type**: `number`
+
+Since `v6.1.0`
+
+Specify the data maximum value to extend the axis range while preserving the nice scale algorithm.
+
+It is available only for value, logarithmic, and time axes, i.e., [type](option.singleAxis.md#type): 'value', 'log', or 'time'.
+
+**How it works:**
+
+`dataMax` works like inserting a virtual data point into your dataset, but this point only participates in axis range calculation and won't be displayed in the chart.
+
+*   When `dataMax` is **greater than** the actual data maximum: The axis extends to include this value, using a nice scale value no less than `dataMax` as the axis maximum
+*   When `dataMax` is **less than or equal to** the actual data maximum: No effect, the axis is calculated using the original logic
+
+**Use cases:**
+
+*   Ensure the Y-axis includes a target value or ceiling
+*   Reserve visual space above the data for better presentation
+*   Maintain consistent axis ranges across multiple charts
+
+**The difference from [max](option.singleAxis.md#max):**
+
+*   `max` fixes the axis maximum value and disables the nice scale algorithm
+*   `dataMax` only affects the axis range while preserving the nice scale algorithm
 
 ## scale
 - **Type**: `boolean`
@@ -973,10 +1042,15 @@ Base of logarithm, which is valid only for numeric axes with [type](option.singl
 
 ## startValue
 - **Type**: `number`
+- **Default**: `0`
 
 Since `v5.5.1`
 
-To specify the start value of the axis.
+Before `v6.1.0` (exclusive), `startValue` is also used as [axis.min](option.yAxis.md#min) if it is not provided. Since `v6.1.0`, the two options are no longer associated.
+
+This is the start value of series shapes. Currently, it can be used only for [bar](option.series-bar.md) and [pictorialBar](option.series-pictorialBar.md).
+
+Note: Currently, `startValue` is not supported to be used together with [stack](option.series-bar.md#stack) -- the effect may be unexpected.
 
 ## silent
 - **Type**: `boolean`
@@ -988,21 +1062,46 @@ Set this to `true`, to prevent interaction with the axis.
 - **Type**: `boolean`
 - **Default**: `false`
 
-Set this to `true` to enable triggering events.
+Whether to enable to dispatch mouse/touch events to user-registered listeners (i.e., `chart.on('xxx', function (event) {})`).
+
+Supported mouse/touch events are `'click'`, `'dblclick'`, `'mouseover'`, `'mouseout'`, `'mousemove'`, `'mousedown'`, `'mouseup'`, `'globalout'`, `'contextmenu'`. Note, both mouse and touch events are unified to the event type `'mouse{xxx}'`.
+
+Values:
+
+*   `true`: Enable to trigger events. But dispatching also requires option `silent` to be falsy.
+*   `false`: Disable to trigger mouse/touch events, even if option `silent` is falsy.
 
 Parameters of the event include:
 
 ```
 {
-    // Component type: xAxis, yAxis, radiusAxis, angleAxis
-    // Each of which has an attribute for index, e.g., xAxisIndex for xAxis
-    componentType: string,
-    // Value on axis before being formatted.
-    // Click on value label to trigger event.
-    value: '',
-    // Name of axis.
-    // Click on label name to trigger event.
-    name: ''
+    // Component type, e.g.,
+    // 'xAxis', 'yAxis', 'radiusAxis', 'angleAxis',
+    // 'singleAxis', 'parallelAxis', 'radar', etc.
+    componentType: string;
+    componentIndex: number;
+    // The same as `componentIndex`.
+    [componentType]Index?: number;
+
+    // The emitter of this event.
+    targetType: 'axisLabel' | 'axisName';
+
+    // A label string formatted by a built-in formatter;
+    // User-provided `axisLabel.formatter` does not affect this value.
+    // Present when `targetType: 'axisLabel'`.
+    value?: string;
+
+    // Present only if this is an axis label for "axis break".
+    break?: {
+        // Parsed break start.
+        start?: number;
+        // Parsed break start.
+        end?: number;
+    };
+
+    // `axis.name`.
+    // Present when `targetType: 'axisName'`.
+    name?: string;
 }
 ```
 
@@ -1578,6 +1677,8 @@ Example:
 formatter: '{value} kg'
 // Use callback.
 formatter: function (value, index, extra?) {
+    // Notice: when using `customValues`, parameter `index` is
+    // provided since `v6.1.0`.
     return value + 'kg';
 }
 ```
@@ -1592,7 +1693,7 @@ The break info can be obtained from the `extra` param:
 
 ```
 type AxisLabelFormatterExtraBreakPart = {
-    // If this label is a axis break start or end.
+    // If this label is an axis break start or end.
     break?: {
         type: 'start' | 'end';
         // The parsed `start`/`end`, always be numbers, and has been
@@ -5665,7 +5766,9 @@ Interface:
 (value: number | string, dataIndex: number) => string
 ```
 
-`dataIndex` is provided since `v5.5.0`
+Since `v5.5.0` `dataIndex` is provided; but not reasonable when `dataZoom` exists, since it is the index after dataZoom filtering.
+
+Since `v6.1.0` `dataIndex` is corrected to the index before `dataZoom` filtering.
 
 Example:
 

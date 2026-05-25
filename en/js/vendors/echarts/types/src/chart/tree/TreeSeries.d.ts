@@ -1,5 +1,5 @@
 import SeriesModel from '../../model/Series.js';
-import { SeriesOption, SymbolOptionMixin, BoxLayoutOptionMixin, RoamOptionMixin, LineStyleOption, ItemStyleOption, SeriesLabelOption, OptionDataValue, StatesOptionMixin, OptionDataItemObject, CallbackDataParams, DefaultEmphasisFocus } from '../../util/types.js';
+import { SeriesOption, SymbolOptionMixin, BoxLayoutOptionMixin, RoamOptionMixin, LineStyleOption, ItemStyleOption, SeriesLabelOption, OptionDataValue, StatesOptionMixin, OptionDataItemObject, CallbackDataParams, DefaultEmphasisFocus, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin, RoamHostModel } from '../../util/types.js';
 import SeriesData from '../../data/SeriesData.js';
 import View from '../../coord/View.js';
 import { LayoutRect } from '../../util/layout.js';
@@ -31,7 +31,7 @@ export interface TreeSeriesNodeItemOption extends SymbolOptionMixin<CallbackData
  */
 export interface TreeSeriesLeavesOption extends TreeSeriesStateOption, StatesOptionMixin<TreeSeriesStateOption, TreeStatesMixin> {
 }
-export interface TreeSeriesOption extends SeriesOption<TreeSeriesStateOption, TreeStatesMixin>, TreeSeriesStateOption, SymbolOptionMixin<CallbackDataParams>, BoxLayoutOptionMixin, RoamOptionMixin {
+export interface TreeSeriesOption extends SeriesOption<TreeSeriesStateOption, TreeStatesMixin>, TreeSeriesStateOption, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin, SymbolOptionMixin<CallbackDataParams>, BoxLayoutOptionMixin, RoamOptionMixin {
     type?: 'tree';
     layout?: 'orthogonal' | 'radial';
     edgeShape?: 'polyline' | 'curve';
@@ -39,7 +39,6 @@ export interface TreeSeriesOption extends SeriesOption<TreeSeriesStateOption, Tr
      * Available when edgeShape is polyline
      */
     edgeForkPosition?: string | number;
-    nodeScaleRatio?: number;
     /**
      * The orient of orthoginal layout, can be setted to 'LR', 'TB', 'RL', 'BT'.
      * and the backward compatibility configuration 'horizontal = LR', 'vertical = TB'.
@@ -62,8 +61,10 @@ export interface TreeSeriesCallbackDataParams extends CallbackDataParams {
     collapsed: boolean;
     treeAncestors?: TreeAncestors[];
 }
-declare class TreeSeriesModel extends SeriesModel<TreeSeriesOption> {
-    static readonly type = "series.tree";
+export declare const SERIES_TYPE_TREE = "tree";
+declare class TreeSeriesModel extends SeriesModel<TreeSeriesOption> implements RoamHostModel {
+    static readonly type: string;
+    readonly type: string;
     static readonly layoutMode = "box";
     coordinateSystem: View;
     layoutInfo: LayoutRect;
@@ -78,10 +79,9 @@ declare class TreeSeriesModel extends SeriesModel<TreeSeriesOption> {
      * @returns {string} orient
      */
     getOrient(): "LR" | "TB" | "RL" | "BT";
-    setZoom(zoom: number): void;
-    setCenter(center: number[]): void;
     formatTooltip(dataIndex: number, multipleSeries: boolean, dataType: string): import("../../component/tooltip/tooltipMarkup").TooltipMarkupNameValueBlock;
     getDataParams(dataIndex: number): TreeSeriesCallbackDataParams;
+    __ownRoamView(): View;
     static defaultOption: TreeSeriesOption;
 }
 export default TreeSeriesModel;

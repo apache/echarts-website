@@ -42,10 +42,13 @@
 * under the License.
 */
 import { normalizeArcAngles } from 'zrender/lib/core/PathProxy.js';
+import { SERIES_TYPE_CHORD } from './ChordSeries.js';
 import { getCircleLayout } from '../../util/layout.js';
+import { createSimpleOverallStageHandler } from '../../util/model.js';
 var RADIAN = Math.PI / 180;
-export default function chordCircularLayout(ecModel, api) {
-  ecModel.eachSeriesByType('chord', function (seriesModel) {
+export var chordCircularLayoutStageHandler = createSimpleOverallStageHandler(SERIES_TYPE_CHORD, chordCircularLayout);
+function chordCircularLayout(ecModel, api) {
+  ecModel.eachSeriesByType(SERIES_TYPE_CHORD, function (seriesModel) {
     chordLayout(seriesModel, api);
   });
 }

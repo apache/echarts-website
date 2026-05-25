@@ -44,13 +44,14 @@
 import { __extends } from "tslib";
 import * as graphic from '../../util/graphic.js';
 import { enterEmphasis, leaveEmphasis, toggleHoverEmphasis, setStatesStylesFromModel } from '../../util/states.js';
+import { SERIES_TYPE_SANKEY } from './SankeySeries.js';
 import ChartView from '../../view/Chart.js';
 import { setLabelStyle, getLabelStatesModels } from '../../label/labelStyle.js';
 import { getECData } from '../../util/innerStore.js';
 import { isString, retrieve3 } from 'zrender/lib/core/util.js';
 import RoamController from '../../component/helper/RoamController.js';
-import * as roamHelper from '../../component/helper/roamHelper.js';
-import View from '../../coord/View.js';
+import { applyViewCoordSysTransToElement, VIEW_COORD_SYS_TRANS_OVERALL } from '../../coord/View.js';
+import { createIsInSelfByPointerCheckerEl, createViewCoordSysSimply, updateRoamControllerSimply } from '../../component/helper/roamHelper.js';
 var SankeyPathShape = /** @class */function () {
   function SankeyPathShape() {
     this.x1 = 0;
@@ -98,20 +99,16 @@ var SankeyView = /** @class */function (_super) {
   __extends(SankeyView, _super);
   function SankeyView() {
     var _this = _super !== null && _super.apply(this, arguments) || this;
-    _this.type = SankeyView.type;
+    _this.type = SERIES_TYPE_SANKEY;
     _this._mainGroup = new graphic.Group();
-    _this._focusAdjacencyDisabled = false;
     return _this;
   }
   SankeyView.prototype.init = function (ecModel, api) {
     this._controller = new RoamController(api.getZr());
-    this._controllerHost = {
-      target: this.group
-    };
     this.group.add(this._mainGroup);
+    this._firstRender = true;
   };
   SankeyView.prototype.render = function (seriesModel, ecModel, api) {
-    var sankeyView = this;
     var graph = seriesModel.getGraph();
     var mainGroup = this._mainGroup;
     var layoutInfo = seriesModel.layoutInfo;
@@ -122,12 +119,11 @@ var SankeyView = /** @class */function (_super) {
     var nodeData = seriesModel.getData();
     var edgeData = seriesModel.getData('edge');
     var orient = seriesModel.get('orient');
-    this._model = seriesModel;
     mainGroup.removeAll();
     mainGroup.x = layoutInfo.x;
     mainGroup.y = layoutInfo.y;
     this._updateViewCoordSys(seriesModel, api);
-    roamHelper.updateController(seriesModel, api, mainGroup, this._controller, this._controllerHost, null);
+    updateRoamControllerSimply(seriesModel, api, this._controller, createIsInSelfByPointerCheckerEl(mainGroup), null);
     // generate a bezire Curve for each edge
     graph.eachEdge(function (edge) {
       var curve = new SankeyPath();
@@ -259,7 +255,7 @@ var SankeyView = /** @class */function (_super) {
       var itemModel = nodeData.getItemModel(dataIndex);
       if (itemModel.get('draggable')) {
         el.drift = function (dx, dy) {
-          sankeyView._focusAdjacencyDisabled = true;
+          // sankeyView._focusAdjacencyDisabled = true;
           this.shape.x += dx;
           this.shape.y += dy;
           this.dirty();
@@ -271,9 +267,9 @@ var SankeyView = /** @class */function (_super) {
             localY: this.shape.y / height
           });
         };
-        el.ondragend = function () {
-          sankeyView._focusAdjacencyDisabled = false;
-        };
+        // el.ondragend = function () {
+        //     sankeyView._focusAdjacencyDisabled = false;
+        // };
         el.draggable = true;
         el.cursor = 'move';
       }
@@ -284,31 +280,22 @@ var SankeyView = /** @class */function (_super) {
       }));
     }
     this._data = seriesModel.getData();
+    this._firstRender = false;
+  };
+  SankeyView.prototype.__updateOnOwnRoam = function (payload, seriesModel, api) {
+    applyViewCoordSysTransToElement(this.group, VIEW_COORD_SYS_TRANS_OVERALL, seriesModel.coordinateSystem, null);
   };
   SankeyView.prototype.dispose = function () {
     this._controller && this._controller.dispose();
-    this._controllerHost = null;
   };
   SankeyView.prototype._updateViewCoordSys = function (seriesModel, api) {
     var layoutInfo = seriesModel.layoutInfo;
-    var width = layoutInfo.width;
-    var height = layoutInfo.height;
-    var viewCoordSys = seriesModel.coordinateSystem = new View(null, {
-      api: api,
-      ecModel: seriesModel.ecModel
-    });
-    viewCoordSys.zoomLimit = seriesModel.get('scaleLimit');
-    viewCoordSys.setBoundingRect(0, 0, width, height);
-    viewCoordSys.setCenter(seriesModel.get('center'));
-    viewCoordSys.setZoom(seriesModel.get('zoom'));
-    this._controllerHost.target.attr({
-      x: viewCoordSys.x,
-      y: viewCoordSys.y,
-      scaleX: viewCoordSys.scaleX,
-      scaleY: viewCoordSys.scaleY
-    });
+    var ownCoordSys = seriesModel.coordinateSystem = createViewCoordSysSimply(seriesModel, api, layoutInfo.x, layoutInfo.y, layoutInfo.width, layoutInfo.height
+    // 0, 0, layoutInfo.width, layoutInfo.height
+    );
+    applyViewCoordSysTransToElement(this.group, VIEW_COORD_SYS_TRANS_OVERALL, ownCoordSys, this._firstRender ? null : seriesModel);
   };
-  SankeyView.type = 'sankey';
+  SankeyView.type = SERIES_TYPE_SANKEY;
   return SankeyView;
 }(ChartView);
 /**

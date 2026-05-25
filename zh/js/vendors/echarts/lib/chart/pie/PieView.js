@@ -46,6 +46,7 @@ import { clone, extend, retrieve3 } from 'zrender/lib/core/util.js';
 import * as graphic from '../../util/graphic.js';
 import { setStatesStylesFromModel, toggleHoverEmphasis } from '../../util/states.js';
 import ChartView from '../../view/Chart.js';
+import { SERIES_TYPE_PIE } from './PieSeries.js';
 import labelLayout from './labelLayout.js';
 import { setLabelLineStyle, getLabelLineStatesModels } from '../../label/labelGuideHelper.js';
 import { setLabelStyle, getLabelStatesModels } from '../../label/labelStyle.js';
@@ -209,11 +210,11 @@ var PiePiece = /** @class */function (_super) {
   };
   return PiePiece;
 }(graphic.Sector);
-// Pie view
 var PieView = /** @class */function (_super) {
   __extends(PieView, _super);
   function PieView() {
     var _this = _super !== null && _super.apply(this, arguments) || this;
+    _this.type = SERIES_TYPE_PIE;
     _this.ignoreLabelLineUpdate = true;
     return _this;
   }
@@ -277,7 +278,7 @@ var PieView = /** @class */function (_super) {
       return radius <= itemLayout.r && radius >= itemLayout.r0;
     }
   };
-  PieView.type = 'pie';
+  PieView.type = SERIES_TYPE_PIE;
   return PieView;
 }(ChartView);
 export default PieView;

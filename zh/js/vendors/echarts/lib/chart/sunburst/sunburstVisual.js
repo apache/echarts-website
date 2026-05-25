@@ -43,8 +43,11 @@
 */
 import { lift } from 'zrender/lib/tool/color.js';
 import { extend, isString } from 'zrender/lib/core/util.js';
+import { SERIES_TYPE_SUNBURST } from './SunburstSeries.js';
 import tokens from '../../visual/tokens.js';
-export default function sunburstVisual(ecModel) {
+import { createSimpleOverallStageHandler } from '../../util/model.js';
+export var sunburstVisualStageHandler = createSimpleOverallStageHandler(SERIES_TYPE_SUNBURST, sunburstVisual);
+function sunburstVisual(ecModel) {
   var paletteScope = {};
   // Default color strategy
   function pickColor(node, seriesModel, treeHeight) {
@@ -64,7 +67,7 @@ export default function sunburstVisual(ecModel) {
     }
     return color;
   }
-  ecModel.eachSeriesByType('sunburst', function (seriesModel) {
+  ecModel.eachSeriesByType(SERIES_TYPE_SUNBURST, function (seriesModel) {
     var data = seriesModel.getData();
     var tree = data.tree;
     tree.eachNode(function (node) {

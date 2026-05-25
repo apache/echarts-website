@@ -263,7 +263,7 @@ export function leveledFormat(tick, idx, formatter, lang, isUTC) {
   } else if (zrUtil.isFunction(formatter)) {
     var extra = {
       time: tick.time,
-      level: tick.time.level
+      level: tick.time ? tick.time.level : 0
     };
     var scaleBreakHelper = getScaleBreakHelper();
     if (scaleBreakHelper) {

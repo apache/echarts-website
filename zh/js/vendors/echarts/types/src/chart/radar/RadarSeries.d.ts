@@ -1,5 +1,5 @@
 import SeriesModel from '../../model/Series.js';
-import { SeriesOption, LineStyleOption, SeriesLabelOption, SymbolOptionMixin, ItemStyleOption, AreaStyleOption, OptionDataValue, StatesOptionMixin, OptionDataItemObject, SeriesEncodeOptionMixin, CallbackDataParams, DefaultStatesMixinEmphasis } from '../../util/types.js';
+import { SeriesOption, LineStyleOption, SeriesLabelOption, SymbolOptionMixin, ItemStyleOption, AreaStyleOption, OptionDataValue, StatesOptionMixin, OptionDataItemObject, SeriesEncodeOptionMixin, CallbackDataParams, DefaultStatesMixinEmphasis, SeriesOnRadarOptionMixin } from '../../util/types.js';
 import GlobalModel from '../../model/Global.js';
 import SeriesData from '../../data/SeriesData.js';
 import Radar from '../../coord/radar/Radar.js';
@@ -15,16 +15,15 @@ export interface RadarSeriesStateOption<TCbParams = never> {
 }
 export interface RadarSeriesDataItemOption extends SymbolOptionMixin, RadarSeriesStateOption<CallbackDataParams>, StatesOptionMixin<RadarSeriesStateOption<CallbackDataParams>, RadarStatesMixin>, OptionDataItemObject<RadarSeriesDataValue> {
 }
-export interface RadarSeriesOption extends SeriesOption<RadarSeriesStateOption, RadarStatesMixin>, RadarSeriesStateOption, SymbolOptionMixin<CallbackDataParams>, SeriesEncodeOptionMixin {
+export interface RadarSeriesOption extends SeriesOption<RadarSeriesStateOption, RadarStatesMixin>, RadarSeriesStateOption, SeriesOnRadarOptionMixin, SymbolOptionMixin<CallbackDataParams>, SeriesEncodeOptionMixin {
     type?: 'radar';
     coordinateSystem?: 'radar';
-    radarIndex?: number;
-    radarId?: string;
     data?: (RadarSeriesDataItemOption | RadarSeriesDataValue)[];
 }
+export declare const SERIES_TYPE_RADAR = "radar";
 declare class RadarSeriesModel extends SeriesModel<RadarSeriesOption> {
-    static readonly type = "series.radar";
-    readonly type = "series.radar";
+    static readonly type: string;
+    readonly type: string;
     static dependencies: string[];
     coordinateSystem: Radar;
     hasSymbolVisual: boolean;

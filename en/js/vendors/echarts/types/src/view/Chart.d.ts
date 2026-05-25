@@ -61,7 +61,9 @@ declare class ChartView {
      */
     downplay(seriesModel: SeriesModel, ecModel: GlobalModel, api: ExtensionAPI, payload: Payload): void;
     /**
-     * Remove self.
+     * `remove` only occurs when series is filtered out, typically by legend.
+     * And theirafter the view can only be rendered again via
+     * `ChartView['render']` or `ChartView['incrementalPrepareRender']`.
      */
     remove(ecModel: GlobalModel, api: ExtensionAPI): void;
     /**
@@ -69,7 +71,6 @@ declare class ChartView {
      */
     dispose(ecModel: GlobalModel, api: ExtensionAPI): void;
     updateView(seriesModel: SeriesModel, ecModel: GlobalModel, api: ExtensionAPI, payload: Payload): void;
-    updateLayout(seriesModel: SeriesModel, ecModel: GlobalModel, api: ExtensionAPI, payload: Payload): void;
     updateVisual(seriesModel: SeriesModel, ecModel: GlobalModel, api: ExtensionAPI, payload: Payload): void;
     /**
      * Traverse the new rendered elements.

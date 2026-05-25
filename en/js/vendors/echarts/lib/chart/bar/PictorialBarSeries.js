@@ -45,6 +45,7 @@ import { __extends } from "tslib";
 import BaseBarSeriesModel from './BaseBarSeries.js';
 import { inheritDefaultOption } from '../../util/component.js';
 import tokens from '../../visual/tokens.js';
+import { SERIES_TYPE_PICTORIAL_BAR } from '../../layout/barCommon.js';
 var PictorialBarSeriesModel = /** @class */function (_super) {
   __extends(PictorialBarSeriesModel, _super);
   function PictorialBarSeriesModel() {
@@ -59,7 +60,7 @@ var PictorialBarSeriesModel = /** @class */function (_super) {
     option.stack = null;
     return _super.prototype.getInitialData.apply(this, arguments);
   };
-  PictorialBarSeriesModel.type = 'series.pictorialBar';
+  PictorialBarSeriesModel.type = 'series.' + SERIES_TYPE_PICTORIAL_BAR;
   PictorialBarSeriesModel.dependencies = ['grid'];
   PictorialBarSeriesModel.defaultOption = inheritDefaultOption(BaseBarSeriesModel.defaultOption, {
     symbol: 'circle',

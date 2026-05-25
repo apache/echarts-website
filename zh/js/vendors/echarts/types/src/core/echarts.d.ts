@@ -7,18 +7,20 @@ import { CoordinateSystemCreator } from '../coord/CoordinateSystem.js';
 import { Payload, RendererType, ECActionEvent, ActionHandler, ActionInfo, OptionPreprocessor, PostUpdater, LoadingEffectCreator, StageHandlerOverallReset, StageHandler, DimensionDefinitionLoose, ThemeOption, ECBasicOption, ZRColor, ComponentMainType, ScaleDataValue, ZRElementEventName, ECElementEvent, AnimationOption, CoordinateSystemDataLayout, NullUndefined } from '../util/types.js';
 import { registerExternalTransform } from '../data/helper/transform.js';
 import { LocaleOption } from './locale.js';
-import { LifecycleEvents, UpdateLifecycleTransitionItem, UpdateLifecycleTransitionOpt } from './lifecycle.js';
+import { LifecycleEvents, UpdateLifecycleTransitionItem, UpdateLifecycleParams, UpdateLifecycleTransitionOpt } from './lifecycle.js';
 import type geoSourceManager from '../coord/geo/geoSourceManager.js';
 declare type ModelFinder = modelUtil.ModelFinder;
-export declare const version = "6.0.0";
+export declare const version = "6.1.0";
 export declare const dependencies: {
     zrender: string;
 };
 export declare const PRIORITY: {
     PROCESSOR: {
-        FILTER: number;
         SERIES_FILTER: number;
+        AXIS_STATISTICS: number;
+        FILTER: number;
         STATISTIC: number;
+        STATISTICS: number;
     };
     VISUAL: {
         LAYOUT: number;
@@ -33,8 +35,75 @@ export declare const PRIORITY: {
         DECAL: number;
     };
 };
-declare const IN_MAIN_PROCESS_KEY: "__flagInMainProcess";
-declare const MAIN_PROCESS_VERSION_KEY: "__mainProcessVersion";
+/**
+ * @tutorial [EC_CYCLE] (ec updating/rendering cycles):
+ *
+ *  - Common Rules:
+ *    - Nested entry is not allowed. If triggering a new run of EC_CYCLE during a
+ *      unfinished run, the new run will be delayed until the current run finishes
+ *      (if triggered by `dispatchAction`), or throw error (if triggered by other API calls).
+ *    - All user-visible ec events are triggered outside EC_CYCLE.
+ *      (i.e. be triggered after `this[IN_EC_CYCLE_KEY]` becoming `false`).
+ *
+ *  - [EC_FULL_UPDATE_CYCLE]:
+ *    - It designates a run of a series of processing/updating/rendering.
+ *    - It is triggered by:
+ *      - `setOption`
+ *      - `dispatchAction`
+ *        (It is typically internally triggered by user inputs; but can also an explicit API call.)
+ *      - `resize`
+ *      - The next "animation frame" if in `lazyMode: true`.
+ *    - A run of EC_FULL_UPDATE_CYCLE comprises:
+ *      - EC_PREPARE (may be absent)
+ *      - EC_FULL_UPDATE:
+ *        - CoordinateSystem['create']
+ *        - Data processing (may be absent) (see `registerProcessor`)
+ *        - CoordinateSystem['update'] (may be absent)
+ *        - Visual encoding (may be absent) (see `registerVisual`)
+ *        - Layout (may be absent) (see `registerLayout`)
+ *        - Rendering (`ComponentView` or `SeriesView`)
+ *
+ *  - [EC_PARTIAL_UPDATE_CYCLE]s:
+ *      - They are shortcuts for performance.
+ *      - They are triggered by:
+ *        - `dispatchAction`
+ *      - These steps are typically omitted:
+ *        - No EC_PREPARE
+ *        - No CoordinateSystem['create'] and CoordinateSystem['update']
+ *      - They require careful implementation, otherwise inconsistency may be introduced.
+ *
+ *  - [EC_PROGRESSIVE_CYCLE]:
+ *    - It also carries out a series of processing/updating/rendering.
+ *    - It is performed in each subsequent "animation frame" until finished.
+ *    - It can be triggered by EC_FULL_UPDATE_CYCLE, EC_PARTIAL_UPDATE_CYCLE or EC_APPEND_DATA_CYCLE.
+ *    - A run of EC_PROGRESSIVE_CYCLE comprises:
+ *      - Data processing (may be absent) (see `registerProcessor`)
+ *      - Visual encoding (may be absent) (see `registerVisual`)
+ *      - Layout (may be absent) (see `registerLayout`)
+ *      - Rendering (`ComponentView` or `SeriesView`)
+ *    - PENDING: currently all data processing tasks (via `registerProcessor`) run in "block" mode.
+ *      (see `performDataProcessorTasks`).
+ *
+ *  - [EC_APPEND_DATA_CYCLE]:
+ *    - See `appendData`. It is only supported for some special cases.
+ *
+ *  - [SERIES_SPECIFIC_CYCLE]s:
+ *    - Series may have specific update/render cycles. For example, graph force layout performs
+ *      layout and rendering in each "animation frame".
+ *
+ *  - Model updating:
+ *    - Model can only be modified at the beginning of ec cycles, including only:
+ *      - EC_PREPARE (see method `prepare()`) in `setOption` call.
+ *      - EC action handlers in `dispatchAction` call.
+ *      - `appendData` (a special case, where only data can be modified).
+ *
+ *  - The lifetime of CoordinateSystem/Axis/Scale instances:
+ *    - They are only re-created per run of EC_FULL_UPDATE_CYCLE.
+ *
+ *  - Global caches: see `cycleCache.ts`
+ */
+declare const IN_EC_CYCLE_KEY: "__flagInMainProcess";
+declare const EC_UPDATE_CYCLE_VERSION_KEY: "__mainProcessVersion";
 declare const PENDING_UPDATE: "__pendingUpdate";
 declare const STATUS_NEEDS_UPDATE_KEY: "__needsUpdateStatus";
 declare const CONNECT_STATUS_KEY: "__connectUpdateStatus";
@@ -59,6 +128,16 @@ export interface SetThemeOpts {
 interface PostIniter {
     (chart: EChartsType): void;
 }
+declare type UpdateMethod = (this: ECharts, payload?: Payload, renderParams?: UpdateLifecycleParams) => void;
+declare let updateMethods: {
+    prepareAndUpdate: UpdateMethod;
+    update: UpdateMethod;
+    updateTransform: UpdateMethod;
+    updateView: UpdateMethod;
+    updateVisual: UpdateMethod;
+    updateLayout: UpdateMethod;
+};
+export declare type ECUpdateMethodName = (keyof typeof updateMethods) | 'none';
 declare type RenderedEventParam = {
     elapsedTime: number;
 };
@@ -110,9 +189,10 @@ declare class ECharts extends Eventful<ECEventDefinition> {
     protected _$eventProcessor: never;
     private _disposed;
     private _loadingFX;
+    private _usingTHL;
     private [PENDING_UPDATE];
-    private [IN_MAIN_PROCESS_KEY];
-    private [MAIN_PROCESS_VERSION_KEY];
+    private [IN_EC_CYCLE_KEY];
+    private [EC_UPDATE_CYCLE_VERSION_KEY];
     private [CONNECT_STATUS_KEY];
     private [STATUS_NEEDS_UPDATE_KEY];
     constructor(dom: HTMLElement, theme?: string | ThemeOption, opts?: EChartsInitOpts);
@@ -333,6 +413,9 @@ export declare function registerTheme(name: string, theme: ThemeOption): void;
  * Register option preprocessor
  */
 export declare function registerPreprocessor(preprocessorFunc: OptionPreprocessor): void;
+/**
+ * NOTICE: Alway run in block way (no progessive is allowed).
+ */
 export declare function registerProcessor(priority: number | StageHandler | StageHandlerOverallReset, processor?: StageHandler | StageHandlerOverallReset): void;
 /**
  * Register postIniter

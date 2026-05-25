@@ -111,12 +111,6 @@ var GeoModel = /** @class */function (_super) {
       return formatter.replace('{a}', name != null ? name : '');
     }
   };
-  GeoModel.prototype.setZoom = function (zoom) {
-    this.option.zoom = zoom;
-  };
-  GeoModel.prototype.setCenter = function (center) {
-    this.option.center = center;
-  };
   // PENGING If selectedMode is null ?
   GeoModel.prototype.select = function (name) {
     var option = this.option;
@@ -142,6 +136,9 @@ var GeoModel = /** @class */function (_super) {
   GeoModel.prototype.isSelected = function (name) {
     var selectedMap = this.option.selectedMap;
     return !!(selectedMap && selectedMap[name]);
+  };
+  GeoModel.prototype.__ownRoamView = function () {
+    return this.coordinateSystem.view;
   };
   GeoModel.type = 'geo';
   GeoModel.layoutMode = 'box';

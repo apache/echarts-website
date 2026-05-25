@@ -1,117 +1,70 @@
 import * as clazzUtil from '../util/clazz.js';
-import { Dictionary } from 'zrender/lib/core/types.js';
-import SeriesData from '../data/SeriesData.js';
-import { DimensionName, ScaleDataValue, DimensionLoose, ScaleTick, AxisBreakOption, NullUndefined, ParsedAxisBreakList } from '../util/types.js';
-import { ScaleCalculator } from './helper.js';
+import { ScaleDataValue, ScaleTick, NullUndefined, ParsedValueNumeric } from '../util/types.js';
 import { ScaleRawExtentInfo } from '../coord/scaleRawExtentInfo.js';
-import { ScaleBreakContext, AxisBreakParsingResult, ParamPruneByBreak } from './break.js';
+import { BreakScaleMapper, ParamPruneByBreak } from './break.js';
+import { AxisScaleType } from '../coord/axisCommonTypes.js';
+import { ScaleMapperGeneric } from './scaleMapper.js';
 export declare type ScaleGetTicksOpt = {
     expandToNicedExtent?: boolean;
     pruneByBreak?: ParamPruneByBreak;
     breakTicks?: 'only_break' | 'none' | NullUndefined;
 };
-export declare type ScaleSettingDefault = Dictionary<unknown>;
-declare abstract class Scale<SETTING extends ScaleSettingDefault = ScaleSettingDefault> {
-    type: string;
-    private _setting;
-    protected _extent: [number, number];
-    protected _brkCtx: ScaleBreakContext | NullUndefined;
-    protected _calculator: ScaleCalculator;
+/**
+ * @see ScaleMapper for the hierarchy structure.
+ */
+interface Scale<This = unknown> extends ScaleMapperGeneric<This> {
+}
+declare abstract class Scale<This = unknown> {
+    type: AxisScaleType;
+    /**
+     * CAUTION: Do not visit it directly - use helper methods in `scale/break.ts` instead.
+     */
+    readonly brk: BreakScaleMapper | NullUndefined;
     private _isBlank;
-    readonly rawExtentInfo: ScaleRawExtentInfo;
-    constructor(setting?: SETTING);
-    getSetting<KEY extends keyof SETTING>(name: KEY): SETTING[KEY];
+    readonly rawExtentInfo: ScaleRawExtentInfo | NullUndefined;
     /**
-     * Parse input val to valid inner number.
-     * Notice: This would be a trap here, If the implementation
-     * of this method depends on extent, and this method is used
-     * before extent set (like in dataZoom), it would be wrong.
-     * Nevertheless, parse does not depend on extent generally.
+     * Parse input `val` (typicall from ec option or API) to its corresponding
+     * numeric representation.
+     *
+     * NOTICE:
+     *  - The implementation must have no side-effect.
+     *  - Must be available in constructor.
+     *  - Must ensure the return is a number.
+     *    `null`/`undefined` is not allowed.
+     *    `NaN` represents invalid data.
+     *  - Regarding `extent`:
+     *    - In `OrdinalScale`, the extent and `ordinalMeta` has been finally determined
+     *      before the constructor being called, and parse can reply on them
+     *    - In other scales, the extent is not finally determined, and `parse` must not
+     *      rely on them, otherwise, the result would be wrong if it is used earlier
+     *      (like in `dataZoom`).
      */
-    abstract parse(val: ScaleDataValue): number;
-    /**
-     * Whether contain the given value.
-     */
-    abstract contain(val: number): boolean;
-    /**
-     * Normalize value to linear [0, 1], return 0.5 if extent span is 0.
-     */
-    abstract normalize(val: number): number;
-    /**
-     * Scale normalized value to extent.
-     */
-    abstract scale(val: number): number;
-    /**
-     * [CAVEAT]: It should not be overridden!
-     */
-    _innerUnionExtent(other: [number, number]): void;
-    /**
-     * Set extent from data
-     */
-    unionExtentFromData(data: SeriesData, dim: DimensionName | DimensionLoose): void;
-    /**
-     * Get a new slice of extent.
-     * Extent is always in increase order.
-     */
-    getExtent(): [number, number];
-    setExtent(start: number, end: number): void;
-    /**
-     * [CAVEAT]: It should not be overridden!
-     */
-    protected _innerSetExtent(start: number, end: number): void;
-    /**
-     * Prerequisite: Scale#parse is ready.
-     */
-    setBreaksFromOption(breakOptionList: AxisBreakOption[]): void;
-    /**
-     * [CAVEAT]: It should not be overridden!
-     */
-    _innerSetBreak(parsed: AxisBreakParsingResult): void;
-    /**
-     * [CAVEAT]: It should not be overridden!
-     */
-    _innerGetBreaks(): ParsedAxisBreakList;
-    /**
-     * Do not expose the internal `_breaks` unless necessary.
-     */
-    hasBreaks(): boolean;
-    protected _getExtentSpanWithBreaks(): number;
-    /**
-     * If value is in extent range
-     */
-    isInExtentRange(value: number): boolean;
+    parse: (val: ScaleDataValue) => ParsedValueNumeric;
     /**
      * When axis extent depends on data and no data exists,
      * axis ticks should not be drawn, which is named 'blank'.
+     *
+     * @final NEVER override!
      */
     isBlank(): boolean;
     /**
      * When axis extent depends on data and no data exists,
      * axis ticks should not be drawn, which is named 'blank'.
+     *
+     * @final NEVER override!
      */
     setBlank(isBlank: boolean): void;
-    /**
-     * Update interval and extent of intervals for nice ticks
-     *
-     * @param splitNumber Approximated tick numbers. Optional.
-     *        The implementation of `niceTicks` should decide tick numbers
-     *        whether `splitNumber` is given.
-     * @param minInterval Optional.
-     * @param maxInterval Optional.
-     */
-    abstract calcNiceTicks(splitNumber?: number, minInterval?: number, maxInterval?: number): void;
-    abstract calcNiceExtent(opt?: {
-        splitNumber?: number;
-        fixMin?: boolean;
-        fixMax?: boolean;
-        minInterval?: number;
-        maxInterval?: number;
-    }): void;
     /**
      * @return label of the tick.
      */
     abstract getLabel(tick: ScaleTick): string;
+    /**
+     * Create ticks. The result can be modified by the caller.
+     */
     abstract getTicks(opt?: ScaleGetTicksOpt): ScaleTick[];
+    /**
+     * Create minor ticks. The result can be modified by the caller.
+     */
     abstract getMinorTicks(splitNumber: number): number[][];
     static registerClass: clazzUtil.ClassManager['registerClass'];
     static getClass: clazzUtil.ClassManager['getClass'];

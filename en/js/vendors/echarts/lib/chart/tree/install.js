@@ -44,12 +44,12 @@
 import TreeView from './TreeView.js';
 import TreeSeriesModel from './TreeSeries.js';
 import treeLayout from './treeLayout.js';
-import treeVisual from './treeVisual.js';
 import { installTreeAction } from './treeAction.js';
+import { treeVisualStageHandler } from './treeVisual.js';
 export function install(registers) {
   registers.registerChartView(TreeView);
   registers.registerSeriesModel(TreeSeriesModel);
   registers.registerLayout(treeLayout);
-  registers.registerVisual(treeVisual);
+  registers.registerVisual(treeVisualStageHandler);
   installTreeAction(registers);
 }

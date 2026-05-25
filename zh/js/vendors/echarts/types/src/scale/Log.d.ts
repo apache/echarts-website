@@ -1,40 +1,39 @@
-import { ScaleGetTicksOpt } from './Scale.js';
+import Scale, { ScaleGetTicksOpt } from './Scale.js';
 import IntervalScale from './Interval.js';
-import { DimensionLoose, DimensionName, ParsedAxisBreakList, AxisBreakOption, ScaleTick } from '../util/types.js';
-import SeriesData from '../data/SeriesData.js';
-declare class LogScale extends IntervalScale {
+import { ScaleTick, NullUndefined, AxisBreakOption } from '../util/types.js';
+import { IntervalScaleGetLabelOpt } from './helper.js';
+import { DecoratedScaleMapperMethods } from './scaleMapper.js';
+declare type LogScaleSetting = {
+    logBase: number | NullUndefined;
+    breakOption: AxisBreakOption[] | NullUndefined;
+};
+/**
+ * @final NEVER inherit me!
+ */
+declare class LogScale extends Scale<LogScale> {
     static type: string;
-    readonly type = "log";
-    base: number;
-    private _originalScale;
-    private _fixMin;
-    private _fixMax;
+    readonly type: "log";
+    readonly base: number;
     /**
-     * @param Whether expand the ticks to niced extent.
+     * `powStub` is used to save original values, i.e., values before logarithm
+     * applied, such as raw extent and raw breaks.
+     * NOTE: Logarithm transform is probably not inversible by rounding error, which
+     * may cause min/max tick is displayed like `5.999999999999999`. The extent in
+     * powStub is used to get the original precise extent for this issue.
+     *
+     * [CAVEAT] `powStub` and `intervalStub` should be modified synchronously.
      */
+    readonly powStub: IntervalScale;
+    /**
+     * `intervalStub` provides linear tick arrangement (logarithm applied).
+     * @see {powStub}
+     */
+    readonly intervalStub: IntervalScale;
+    private _lookup;
+    constructor(setting: LogScaleSetting);
     getTicks(opt?: ScaleGetTicksOpt): ScaleTick[];
-    protected _getNonTransBreaks(): ParsedAxisBreakList;
-    setExtent(start: number, end: number): void;
-    /**
-     * @return {number} end
-     */
-    getExtent(): [number, number];
-    unionExtentFromData(data: SeriesData, dim: DimensionName | DimensionLoose): void;
-    /**
-     * Update interval and extent of intervals for nice ticks
-     * @param approxTickNum default 10 Given approx tick number
-     */
-    calcNiceTicks(approxTickNum: number): void;
-    calcNiceExtent(opt: {
-        splitNumber: number;
-        fixMin?: boolean;
-        fixMax?: boolean;
-        minInterval?: number;
-        maxInterval?: number;
-    }): void;
-    contain(val: number): boolean;
-    normalize(val: number): number;
-    scale(val: number): number;
-    setBreaksFromOption(breakOptionList: AxisBreakOption[]): void;
+    getMinorTicks(splitNumber: number): number[][];
+    getLabel(data: ScaleTick, opt?: IntervalScaleGetLabelOpt): string;
+    static mapperMethods: DecoratedScaleMapperMethods<LogScale>;
 }
 export default LogScale;

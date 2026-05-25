@@ -45,6 +45,7 @@ import { __extends } from "tslib";
 import BaseAxisPointer from './BaseAxisPointer.js';
 import * as viewHelper from './viewHelper.js';
 import * as cartesianAxisHelper from '../../coord/cartesian/cartesianAxisHelper.js';
+import { mathMax, mathMin } from '../../util/number.js';
 var CartesianAxisPointer = /** @class */function (_super) {
   __extends(CartesianAxisPointer, _super);
   function CartesianAxisPointer() {
@@ -57,11 +58,12 @@ var CartesianAxisPointer = /** @class */function (_super) {
     var axis = axisModel.axis;
     var grid = axis.grid;
     var axisPointerType = axisPointerModel.get('type');
+    var thisExtent = axis.getGlobalExtent();
     var otherExtent = getCartesian(grid, axis).getOtherAxis(axis).getGlobalExtent();
     var pixelValue = axis.toGlobalCoord(axis.dataToCoord(value, true));
     if (axisPointerType && axisPointerType !== 'none') {
       var elStyle = viewHelper.buildElStyle(axisPointerModel);
-      var pointerOption = pointerShapeBuilder[axisPointerType](axis, pixelValue, otherExtent);
+      var pointerOption = pointerShapeBuilder[axisPointerType](axis, pixelValue, thisExtent, otherExtent, axisPointerModel.get('seriesDataIndices'), axisPointerModel.ecModel);
       pointerOption.style = elStyle;
       elOption.graphicKey = pointerOption.type;
       elOption.pointer = pointerOption;
@@ -95,8 +97,8 @@ var CartesianAxisPointer = /** @class */function (_super) {
     var dimIndex = axis.dim === 'x' ? 0 : 1;
     var currPosition = [transform.x, transform.y];
     currPosition[dimIndex] += delta[dimIndex];
-    currPosition[dimIndex] = Math.min(axisExtent[1], currPosition[dimIndex]);
-    currPosition[dimIndex] = Math.max(axisExtent[0], currPosition[dimIndex]);
+    currPosition[dimIndex] = mathMin(axisExtent[1], currPosition[dimIndex]);
+    currPosition[dimIndex] = mathMax(axisExtent[0], currPosition[dimIndex]);
     var cursorOtherValue = (otherExtent[1] + otherExtent[0]) / 2;
     var cursorPoint = [cursorOtherValue, cursorOtherValue];
     cursorPoint[dimIndex] = currPosition[dimIndex];
@@ -122,7 +124,7 @@ function getCartesian(grid, axis) {
   return grid.getCartesian(opt);
 }
 var pointerShapeBuilder = {
-  line: function (axis, pixelValue, otherExtent) {
+  line: function (axis, pixelValue, thisExtent, otherExtent) {
     var targetShape = viewHelper.makeLineShape([pixelValue, otherExtent[0]], [pixelValue, otherExtent[1]], getAxisDimIndex(axis));
     return {
       type: 'Line',
@@ -130,12 +132,15 @@ var pointerShapeBuilder = {
       shape: targetShape
     };
   },
-  shadow: function (axis, pixelValue, otherExtent) {
-    var bandWidth = Math.max(1, axis.getBandWidth());
-    var span = otherExtent[1] - otherExtent[0];
+  shadow: function (axis, pixelValue, thisExtent, otherExtent, seriesDataIndices, ecModel) {
+    var bandWidth = viewHelper.calcAxisPointerShadowBandWidth(axis, seriesDataIndices, ecModel);
+    var otherSpan = otherExtent[1] - otherExtent[0];
+    var _a = viewHelper.calcAxisPointerShadowEnds(pixelValue, thisExtent, bandWidth),
+      min = _a[0],
+      max = _a[1];
     return {
       type: 'Rect',
-      shape: viewHelper.makeRectShape([pixelValue - bandWidth / 2, otherExtent[0]], [bandWidth, span], getAxisDimIndex(axis))
+      shape: viewHelper.makeRectShape([min, otherExtent[0]], [max - min, otherSpan], getAxisDimIndex(axis))
     };
   }
 };

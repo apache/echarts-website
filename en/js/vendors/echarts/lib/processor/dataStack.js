@@ -43,12 +43,14 @@
 */
 import { createHashMap, each } from 'zrender/lib/core/util.js';
 import { addSafe } from '../util/number.js';
+import { createSimpleOverallStageHandler2 } from '../util/model.js';
+export var dataStackStageHandler = createSimpleOverallStageHandler2(dataStack);
 // (1) [Caution]: the logic is correct based on the premises:
 //     data processing stage is blocked in stream.
 //     See <module:echarts/stream/Scheduler#performDataProcessorTasks>
 // (2) Only register once when import repeatedly.
 //     Should be executed after series is filtered and before stack calculation.
-export default function dataStack(ecModel) {
+function dataStack(ecModel) {
   var stackInfoMap = createHashMap();
   ecModel.eachSeries(function (seriesModel) {
     var stack = seriesModel.get('stack');

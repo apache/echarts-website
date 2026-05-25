@@ -42,6 +42,7 @@
 * under the License.
 */
 import createRenderPlanner from '../helper/createRenderPlanner.js';
+import { SERIES_TYPE_CANDLESTICK } from './CandlestickSeries.js';
 import { extend } from 'zrender/lib/core/util.js';
 var positiveBorderColorQuery = ['itemStyle', 'borderColor'];
 var negativeBorderColorQuery = ['itemStyle', 'borderColor0'];
@@ -55,7 +56,7 @@ export function getBorderColor(sign, model) {
   return model.get(sign === 0 ? dojiBorderColorQuery : sign > 0 ? positiveBorderColorQuery : negativeBorderColorQuery);
 }
 var candlestickVisual = {
-  seriesType: 'candlestick',
+  seriesType: SERIES_TYPE_CANDLESTICK,
   plan: createRenderPlanner(),
   // For legend.
   performRawSeries: true,

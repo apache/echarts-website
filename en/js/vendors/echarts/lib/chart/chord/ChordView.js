@@ -44,6 +44,7 @@
 import { __extends } from "tslib";
 import * as graphic from '../../util/graphic.js';
 import ChartView from '../../view/Chart.js';
+import { SERIES_TYPE_CHORD } from './ChordSeries.js';
 import ChordPiece from './ChordPiece.js';
 import { ChordEdge } from './ChordEdge.js';
 import { parsePercent } from '../../util/number.js';
@@ -53,7 +54,7 @@ var ChordView = /** @class */function (_super) {
   __extends(ChordView, _super);
   function ChordView() {
     var _this = _super !== null && _super.apply(this, arguments) || this;
-    _this.type = ChordView.type;
+    _this.type = SERIES_TYPE_CHORD;
     return _this;
   }
   ChordView.prototype.init = function (ecModel, api) {};
@@ -134,7 +135,7 @@ var ChordView = /** @class */function (_super) {
     this._edgeData = edgeData;
   };
   ChordView.prototype.dispose = function () {};
-  ChordView.type = 'chord';
+  ChordView.type = SERIES_TYPE_CHORD;
   return ChordView;
 }(ChartView);
 export default ChordView;

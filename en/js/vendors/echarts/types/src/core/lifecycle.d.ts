@@ -25,6 +25,7 @@ export interface UpdateLifecycleParams {
 }
 interface LifecycleEvents {
     'afterinit': [EChartsType];
+    'coordsys:aftercreate': [GlobalModel, ExtensionAPI];
     'series:beforeupdate': [GlobalModel, ExtensionAPI, UpdateLifecycleParams];
     'series:layoutlabels': [GlobalModel, ExtensionAPI, UpdateLifecycleParams];
     'series:transition': [GlobalModel, ExtensionAPI, UpdateLifecycleParams];
@@ -33,6 +34,7 @@ interface LifecycleEvents {
 }
 declare const lifecycle: Eventful<{
     afterinit: (args_0: EChartsType) => boolean | void;
+    'coordsys:aftercreate': (args_0: GlobalModel, args_1: ExtensionAPI) => boolean | void;
     'series:beforeupdate': (args_0: GlobalModel, args_1: ExtensionAPI, args_2: UpdateLifecycleParams) => boolean | void;
     'series:layoutlabels': (args_0: GlobalModel, args_1: ExtensionAPI, args_2: UpdateLifecycleParams) => boolean | void;
     'series:transition': (args_0: GlobalModel, args_1: ExtensionAPI, args_2: UpdateLifecycleParams) => boolean | void;

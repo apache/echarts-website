@@ -4,7 +4,7 @@ import ExtensionAPI from '../../core/ExtensionAPI.js';
 import ChordSeriesModel from './ChordSeries.js';
 declare class ChordView extends ChartView {
     static readonly type = "chord";
-    readonly type: string;
+    readonly type = "chord";
     private _data;
     private _edgeData;
     init(ecModel: GlobalModel, api: ExtensionAPI): void;

@@ -149,6 +149,14 @@ var Task = /** @class */function () {
     }
     return this.unfinished();
   };
+  /**
+   * @tutorial [EC_TASK_DIRTY]
+   *  Task `dirty()` calls typically originate from a trigger of EC_FULL_UPDATE_CYCLE and
+   *  EC_PARTIAL_UPDATE_CYCLE) (See comments in EC_CYCLE. Generally, task dirty propagates
+   *  to downstream tasks.
+   *  Task dirty leads to the `StageHandler['reset']` or `StageHandler['overallReset']` call,
+   *  which discards the previous result and starts over the processing.
+   */
   Task.prototype.dirty = function () {
     this._dirty = true;
     this._onDirty && this._onDirty(this.context);

@@ -361,7 +361,7 @@ var CtxPointToDataAreaType = {
   inCorner: 2,
   outside: 3
 };
-// For handy performance optimization in pointToData.
+// For quick performance optimization in pointToData.
 var _tmpCtxPointToData = {
   x: null,
   y: null,

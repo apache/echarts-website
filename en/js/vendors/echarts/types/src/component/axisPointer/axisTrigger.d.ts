@@ -1,6 +1,6 @@
 import GlobalModel from '../../model/Global.js';
 import ExtensionAPI from '../../core/ExtensionAPI.js';
-import { Payload, CommonAxisPointerOption } from '../../util/types.js';
+import { Payload, CommonAxisPointerOption, ScaleDataValue } from '../../util/types.js';
 import { AxisPointerOption } from './AxisPointerModel.js';
 declare type AxisValue = CommonAxisPointerOption['value'];
 interface DataIndex {
@@ -9,7 +9,7 @@ interface DataIndex {
     dataIndexInside: number;
 }
 export interface DataByAxis {
-    value: string | number;
+    value: ScaleDataValue;
     axisIndex: number;
     axisDim: string;
     axisType: string;
@@ -28,7 +28,7 @@ export interface DataByCoordSys {
     dataByAxis: DataByAxis[];
 }
 interface AxisTriggerPayload extends Payload {
-    currTrigger?: 'click' | 'mousemove' | 'leave';
+    currTrigger?: 'click' | 'mousemove' | 'leave' | 'mousewheel';
     /**
      * x and y, which are mandatory, specify a point to trigger axisPointer and tooltip.
      */

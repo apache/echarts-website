@@ -46,6 +46,8 @@ import SymbolDraw from '../helper/SymbolDraw.js';
 import LargeSymbolDraw from '../helper/LargeSymbolDraw.js';
 import pointsLayout from '../../layout/points.js';
 import ChartView from '../../view/Chart.js';
+import { getIncrementalId } from '../../util/model.js';
+import { createCoordSysClipAreaSimply } from '../helper/createClipPathFromCoordSys.js';
 var ScatterView = /** @class */function (_super) {
   __extends(ScatterView, _super);
   function ScatterView() {
@@ -56,13 +58,7 @@ var ScatterView = /** @class */function (_super) {
   ScatterView.prototype.render = function (seriesModel, ecModel, api) {
     var data = seriesModel.getData();
     var symbolDraw = this._updateSymbolDraw(data, seriesModel);
-    symbolDraw.updateData(data, {
-      // TODO
-      // If this parameter should be a shape or a bounding volume
-      // shape will be more general.
-      // But bounding volume like bounding rect will be much faster in the contain calculation
-      clipShape: this._getClipShape(seriesModel)
-    });
+    symbolDraw.updateData(data, createSymbolDrawOpt(seriesModel));
     this._finished = true;
   };
   ScatterView.prototype.incrementalPrepareRender = function (seriesModel, ecModel, api) {
@@ -72,17 +68,19 @@ var ScatterView = /** @class */function (_super) {
     this._finished = false;
   };
   ScatterView.prototype.incrementalRender = function (taskParams, seriesModel, ecModel) {
-    this._symbolDraw.incrementalUpdate(taskParams, seriesModel.getData(), {
-      clipShape: this._getClipShape(seriesModel)
-    });
+    this._symbolDraw.incrementalUpdate(taskParams, seriesModel.getData(), getIncrementalId(seriesModel), createSymbolDrawOpt(seriesModel));
     this._finished = taskParams.end === seriesModel.getData().count();
   };
+  /**
+   * See also VIEW_COORD_SYS_ANIMATION
+   */
   ScatterView.prototype.updateTransform = function (seriesModel, ecModel, api) {
     var data = seriesModel.getData();
     // Must mark group dirty and make sure the incremental layer will be cleared
     // PENDING
     this.group.dirty();
-    if (!this._finished || data.count() > 1e4) {
+    if (!this._finished) {
+      // FIXME: _finished checking is unnecessary?
       return {
         update: true
       };
@@ -95,19 +93,11 @@ var ScatterView = /** @class */function (_super) {
           count: data.count()
         }, data);
       }
-      this._symbolDraw.updateLayout(data);
+      this._symbolDraw.updateLayout(createSymbolDrawOpt(seriesModel));
     }
   };
   ScatterView.prototype.eachRendered = function (cb) {
     this._symbolDraw && this._symbolDraw.eachRendered(cb);
-  };
-  ScatterView.prototype._getClipShape = function (seriesModel) {
-    if (!seriesModel.get('clip', true)) {
-      return;
-    }
-    var coordSys = seriesModel.coordinateSystem;
-    // PENDING make `0.1` configurable, for example, `clipTolerance`?
-    return coordSys && coordSys.getArea && coordSys.getArea(.1);
   };
   ScatterView.prototype._updateSymbolDraw = function (data, seriesModel) {
     var symbolDraw = this._symbolDraw;
@@ -130,4 +120,13 @@ var ScatterView = /** @class */function (_super) {
   ScatterView.type = 'scatter';
   return ScatterView;
 }(ChartView);
+function createSymbolDrawOpt(seriesModel) {
+  return {
+    // TODO
+    // If this parameter should be a shape or a bounding volume
+    // shape will be more general.
+    // But bounding volume like bounding rect will be much faster in the contain calculation
+    clipShape: createCoordSysClipAreaSimply(seriesModel)
+  };
+}
 export default ScatterView;

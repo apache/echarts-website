@@ -41,6 +41,8 @@
 * specific language governing permissions and limitations
 * under the License.
 */
+import { createSimpleOverallStageHandler } from '../../util/model.js';
+import { SERIES_TYPE_GRAPH } from './GraphSeries.js';
 import { extend } from 'zrender/lib/core/util.js';
 function normalize(a) {
   if (!(a instanceof Array)) {
@@ -48,8 +50,9 @@ function normalize(a) {
   }
   return a;
 }
-export default function graphEdgeVisual(ecModel) {
-  ecModel.eachSeriesByType('graph', function (seriesModel) {
+export var graphEdgeVisualStageHandler = createSimpleOverallStageHandler(SERIES_TYPE_GRAPH, graphEdgeVisual);
+function graphEdgeVisual(ecModel) {
+  ecModel.eachSeriesByType(SERIES_TYPE_GRAPH, function (seriesModel) {
     var graph = seriesModel.getGraph();
     var edgeData = seriesModel.getEdgeData();
     var symbolType = normalize(seriesModel.get('edgeSymbol'));

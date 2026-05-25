@@ -46,6 +46,7 @@ import { getECData } from './innerStore.js';
 import { liftColor } from 'zrender/lib/tool/color.js';
 import { queryDataIndex, makeInner } from './model.js';
 import Path from 'zrender/lib/graphic/Path.js';
+import { getViewOfComponentOrSeries } from '../core/ExtensionAPI.js';
 import { error } from './log.js';
 // Reserve 0 as default.
 var _highlightNextDigit = 1;
@@ -303,8 +304,8 @@ export function allLeaveBlur(api) {
   var allComponentViews = [];
   model.eachComponent(function (componentType, componentModel) {
     var componentStates = getComponentStates(componentModel);
+    var view = getViewOfComponentOrSeries(api, componentModel);
     var isSeries = componentType === 'series';
-    var view = isSeries ? api.getViewOfSeriesModel(componentModel) : api.getViewOfComponentModel(componentModel);
     !isSeries && allComponentViews.push(view);
     if (componentStates.isBlured) {
       // Leave blur anyway

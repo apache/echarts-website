@@ -1,7 +1,5 @@
-import GlobalModel from '../../model/Global.js';
-import ExtensionAPI from '../../core/ExtensionAPI.js';
 import PieSeriesModel from './PieSeries.js';
-export default function pieLayout(seriesType: 'pie', ecModel: GlobalModel, api: ExtensionAPI): void;
+export declare const pieLayoutStageHandler: import("../../util/types").StageHandler;
 export declare const getSeriesLayoutData: (hostObj: PieSeriesModel) => {
     startAngle: number;
     endAngle: number;

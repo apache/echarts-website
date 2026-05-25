@@ -43,12 +43,12 @@
 */
 import LegendModel from './LegendModel.js';
 import LegendView from './LegendView.js';
-import legendFilter from './legendFilter.js';
 import { installLegendAction } from './legendAction.js';
+import { legendFilterStageHandler } from './legendFilter.js';
 export function install(registers) {
   registers.registerComponentModel(LegendModel);
   registers.registerComponentView(LegendView);
-  registers.registerProcessor(registers.PRIORITY.PROCESSOR.SERIES_FILTER, legendFilter);
+  registers.registerProcessor(registers.PRIORITY.PROCESSOR.SERIES_FILTER, legendFilterStageHandler);
   registers.registerSubTypeDefaulter('legend', function () {
     return 'plain';
   });

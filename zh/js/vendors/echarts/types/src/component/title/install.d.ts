@@ -1,9 +1,9 @@
-import { ComponentOption, BoxLayoutOptionMixin, ZRTextAlign, ZRTextVerticalAlign, ZRColor, BorderOptionMixin, LabelOption } from '../../util/types.js';
+import { ComponentOption, BoxLayoutOptionMixin, ZRTextAlign, ZRTextVerticalAlign, ZRColor, BorderOptionMixin, LabelOption, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin } from '../../util/types.js';
 import { EChartsExtensionInstallRegisters } from '../../extension.js';
 interface TitleTextStyleOption extends LabelOption {
     width?: number;
 }
-export interface TitleOption extends ComponentOption, BoxLayoutOptionMixin, BorderOptionMixin {
+export interface TitleOption extends ComponentOption, BoxLayoutOptionMixin, BorderOptionMixin, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin {
     mainType?: 'title';
     show?: boolean;
     text?: string;

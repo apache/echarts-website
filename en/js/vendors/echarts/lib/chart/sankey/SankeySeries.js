@@ -47,6 +47,7 @@ import createGraphFromNodeEdge from '../helper/createGraphFromNodeEdge.js';
 import Model from '../../model/Model.js';
 import { createTooltipMarkup } from '../../component/tooltip/tooltipMarkup.js';
 import tokens from '../../visual/tokens.js';
+export var SERIES_TYPE_SANKEY = 'sankey';
 var SankeySeriesModel = /** @class */function (_super) {
   __extends(SankeySeriesModel, _super);
   function SankeySeriesModel() {
@@ -108,12 +109,6 @@ var SankeySeriesModel = /** @class */function (_super) {
     dataItem.localX = localPosition[0];
     dataItem.localY = localPosition[1];
   };
-  SankeySeriesModel.prototype.setCenter = function (center) {
-    this.option.center = center;
-  };
-  SankeySeriesModel.prototype.setZoom = function (zoom) {
-    this.option.zoom = zoom;
-  };
   /**
    * Return the graphic data structure
    *
@@ -169,7 +164,10 @@ var SankeySeriesModel = /** @class */function (_super) {
     }
     return params;
   };
-  SankeySeriesModel.type = 'series.sankey';
+  SankeySeriesModel.prototype.__ownRoamView = function () {
+    return this.coordinateSystem;
+  };
+  SankeySeriesModel.type = 'series.' + SERIES_TYPE_SANKEY;
   SankeySeriesModel.layoutMode = 'box';
   SankeySeriesModel.defaultOption = {
     // zlevel: 0,

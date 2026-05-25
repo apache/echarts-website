@@ -42,6 +42,7 @@
 * under the License.
 */
 import * as zrUtil from 'zrender/lib/core/util.js';
+import { viewCoordSysGetZoomOption } from '../View.js';
 function dataToCoordSize(dataSize, dataItem) {
   dataItem = dataItem || [0, 0];
   return zrUtil.map([0, 1], function (dimIdx) {
@@ -56,7 +57,8 @@ function dataToCoordSize(dataSize, dataItem) {
   }, this);
 }
 export default function geoPrepareCustom(coordSys) {
-  var rect = coordSys.getBoundingRect();
+  var viewCoordSys = coordSys.view;
+  var rect = viewCoordSys.getBoundingRect();
   return {
     coordSys: {
       type: 'geo',
@@ -64,7 +66,7 @@ export default function geoPrepareCustom(coordSys) {
       y: rect.y,
       width: rect.width,
       height: rect.height,
-      zoom: coordSys.getZoom()
+      zoom: viewCoordSysGetZoomOption(viewCoordSys)
     },
     api: {
       coord: function (data) {

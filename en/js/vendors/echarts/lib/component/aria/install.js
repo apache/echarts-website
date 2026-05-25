@@ -41,9 +41,9 @@
 * specific language governing permissions and limitations
 * under the License.
 */
-import ariaVisual from '../../visual/aria.js';
+import { ariaVisualStageHandler } from '../../visual/aria.js';
 import ariaPreprocessor from './preprocessor.js';
 export function install(registers) {
   registers.registerPreprocessor(ariaPreprocessor);
-  registers.registerVisual(registers.PRIORITY.VISUAL.ARIA, ariaVisual);
+  registers.registerVisual(registers.PRIORITY.VISUAL.ARIA, ariaVisualStageHandler);
 }

@@ -189,7 +189,7 @@ function buildNameValue(ctx, fragment, topMarginForOuterGap, toolTipTextStyle) {
   var markerStr = noMarker ? '' : ctx.markupStyleCreator.makeTooltipMarker(fragment.markerType, fragment.markerColor || tokens.color.secondary, renderMode);
   var readableName = noName ? '' : makeValueReadable(name, 'ordinal', useUTC);
   var valueTypeOption = fragment.valueType;
-  var readableValueList = noValue ? [] : valueFormatter(fragment.value, fragment.dataIndex);
+  var readableValueList = noValue ? [] : valueFormatter(fragment.value, fragment.rawDataIndex);
   var valueAlignRight = !noMarker || !noName;
   // It little weird if only value next to marker but far from marker.
   var valueCloseToMarker = !noMarker && noName;

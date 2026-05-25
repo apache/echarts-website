@@ -1,5 +1,6 @@
 import { StageHandler } from '../../util/types.js';
 import { RectLike } from 'zrender/lib/core/BoundingRect.js';
+import { EChartsExtensionInstallRegisters } from '../../extension.js';
 export interface CandlestickItemLayout {
     sign: number;
     initBaseline: number;
@@ -10,5 +11,5 @@ export interface CandlestickLayoutMeta {
     candleWidth: number;
     isSimpleBox: boolean;
 }
-declare const candlestickLayout: StageHandler;
-export default candlestickLayout;
+export declare const candlestickLayout: StageHandler;
+export declare function registerCandlestickAxisHandlers(registers: EChartsExtensionInstallRegisters): void;

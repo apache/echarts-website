@@ -44,7 +44,7 @@
 import { __extends } from "tslib";
 import { each, createHashMap, merge, assert } from 'zrender/lib/core/util.js';
 import ComponentModel from '../../model/Component.js';
-import { getAxisMainType, DATA_ZOOM_AXIS_DIMENSIONS } from './helper.js';
+import { getAxisMainType, DATA_ZOOM_AXIS_DIMENSIONS, getAxisProxyFromModel } from './helper.js';
 import { MULTIPLE_REFERRING, SINGLE_REFERRING } from '../../util/model.js';
 var DataZoomAxisInfo = /** @class */function () {
   function DataZoomAxisInfo() {
@@ -297,10 +297,7 @@ var DataZoomModel = /** @class */function (_super) {
    * @return If not found, return null/undefined.
    */
   DataZoomModel.prototype.getAxisProxy = function (axisDim, axisIndex) {
-    var axisModel = this.getAxisModel(axisDim, axisIndex);
-    if (axisModel) {
-      return axisModel.__dzAxisProxy;
-    }
+    return getAxisProxyFromModel(this.getAxisModel(axisDim, axisIndex));
   };
   /**
    * @return If not found, return null/undefined.
@@ -346,7 +343,7 @@ var DataZoomModel = /** @class */function (_super) {
   DataZoomModel.prototype.getPercentRange = function () {
     var axisProxy = this.findRepresentativeAxisProxy();
     if (axisProxy) {
-      return axisProxy.getDataPercentWindow();
+      return axisProxy.getWindow().percent;
     }
   };
   /**
@@ -358,10 +355,10 @@ var DataZoomModel = /** @class */function (_super) {
     if (axisDim == null && axisIndex == null) {
       var axisProxy = this.findRepresentativeAxisProxy();
       if (axisProxy) {
-        return axisProxy.getDataValueWindow();
+        return axisProxy.getWindow().value;
       }
     } else {
-      return this.getAxisProxy(axisDim, axisIndex).getDataValueWindow();
+      return this.getAxisProxy(axisDim, axisIndex).getWindow().value;
     }
   };
   /**
@@ -370,7 +367,7 @@ var DataZoomModel = /** @class */function (_super) {
    */
   DataZoomModel.prototype.findRepresentativeAxisProxy = function (axisModel) {
     if (axisModel) {
-      return axisModel.__dzAxisProxy;
+      return getAxisProxyFromModel(axisModel);
     }
     // Find the first hosted axisProxy
     var firstProxy;

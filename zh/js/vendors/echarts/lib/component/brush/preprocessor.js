@@ -42,7 +42,7 @@
 * under the License.
 */
 import * as zrUtil from 'zrender/lib/core/util.js';
-import { normalizeToArray } from '../../util/model.js';
+import { normalizeToArray, removeDuplicates } from '../../util/model.js';
 var DEFAULT_TOOLBOX_BTNS = ['rect', 'polygon', 'keep', 'clear'];
 export default function brushPreprocessor(option, isNew) {
   var brushComponents = normalizeToArray(option ? option.brush : []);
@@ -70,18 +70,10 @@ export default function brushPreprocessor(option, isNew) {
   var toolboxBrush = toolboxFeature.brush || (toolboxFeature.brush = {});
   var brushTypes = toolboxBrush.type || (toolboxBrush.type = []);
   brushTypes.push.apply(brushTypes, brushComponentSpecifiedBtns);
-  removeDuplicate(brushTypes);
+  removeDuplicates(brushTypes, function (item) {
+    return item + '';
+  }, null);
   if (isNew && !brushTypes.length) {
     brushTypes.push.apply(brushTypes, DEFAULT_TOOLBOX_BTNS);
   }
-}
-function removeDuplicate(arr) {
-  var map = {};
-  zrUtil.each(arr, function (val) {
-    map[val] = 1;
-  });
-  arr.length = 0;
-  zrUtil.each(map, function (flag, val) {
-    arr.push(val);
-  });
 }

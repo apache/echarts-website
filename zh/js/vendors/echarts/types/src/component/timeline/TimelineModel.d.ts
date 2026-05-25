@@ -1,6 +1,6 @@
 import ComponentModel from '../../model/Component.js';
 import SeriesData from '../../data/SeriesData.js';
-import { ComponentOption, BoxLayoutOptionMixin, LayoutOrient, SymbolOptionMixin, LineStyleOption, ItemStyleOption, LabelOption, OptionDataValue, ZRColor, ColorString, CommonTooltipOption, CallbackDataParams, ZREasing } from '../../util/types.js';
+import { ComponentOption, BoxLayoutOptionMixin, LayoutOrient, SymbolOptionMixin, LineStyleOption, ItemStyleOption, LabelOption, OptionDataValue, ZRColor, ColorString, CommonTooltipOption, CallbackDataParams, ZREasing, ComponentOnMatrixOptionMixin, ComponentOnCalendarOptionMixin } from '../../util/types.js';
 import Model from '../../model/Model.js';
 import GlobalModel, { GlobalModelSetOptionOpts } from '../../model/Global.js';
 export interface TimelineControlStyle extends ItemStyleOption {
@@ -51,7 +51,7 @@ export interface TimelineDataItemOption extends SymbolOptionMixin {
     };
     tooltip?: boolean;
 }
-export interface TimelineOption extends ComponentOption, BoxLayoutOptionMixin, SymbolOptionMixin {
+export interface TimelineOption extends ComponentOption, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin, BoxLayoutOptionMixin, SymbolOptionMixin {
     mainType?: 'timeline';
     backgroundColor?: ZRColor;
     borderColor?: ColorString;
@@ -127,10 +127,6 @@ declare class TimelineModel extends ComponentModel<TimelineOption> {
      */
     _initData(): void;
     getData(): SeriesData<TimelineModel, import("../../data/SeriesData").DefaultDataVisual>;
-    /**
-     * @public
-     * @return {Array.<string>} categoreis
-     */
     getCategories(): string[];
     /**
      * @protected

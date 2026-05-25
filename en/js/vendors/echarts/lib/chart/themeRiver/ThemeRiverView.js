@@ -49,12 +49,13 @@ import { setLabelStyle, getLabelStatesModels } from '../../label/labelStyle.js';
 import { bind } from 'zrender/lib/core/util.js';
 import DataDiffer from '../../data/DataDiffer.js';
 import ChartView from '../../view/Chart.js';
+import { SERIES_TYPE_THEME_RIVER } from './ThemeRiverSeries.js';
 import { saveOldStyle } from '../../animation/basicTransition.js';
 var ThemeRiverView = /** @class */function (_super) {
   __extends(ThemeRiverView, _super);
   function ThemeRiverView() {
     var _this = _super !== null && _super.apply(this, arguments) || this;
-    _this.type = ThemeRiverView.type;
+    _this.type = SERIES_TYPE_THEME_RIVER;
     _this._layers = [];
     return _this;
   }
@@ -159,7 +160,7 @@ var ThemeRiverView = /** @class */function (_super) {
     this._layersSeries = layersSeries;
     this._layers = newLayersGroups;
   };
-  ThemeRiverView.type = 'themeRiver';
+  ThemeRiverView.type = SERIES_TYPE_THEME_RIVER;
   return ThemeRiverView;
 }(ChartView);
 ;

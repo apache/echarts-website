@@ -42,17 +42,16 @@
 * under the License.
 */
 import { createLegacyDataSelectAction } from '../../legacy/dataSelectAction.js';
-import pieLayout from '../pie/pieLayout.js';
 import dataFilter from '../../processor/dataFilter.js';
-import { curry } from 'zrender/lib/core/util.js';
 import PieView from './PieView.js';
-import PieSeriesModel from './PieSeries.js';
+import PieSeriesModel, { SERIES_TYPE_PIE } from './PieSeries.js';
 import negativeDataFilter from '../../processor/negativeDataFilter.js';
+import { pieLayoutStageHandler } from './pieLayout.js';
 export function install(registers) {
   registers.registerChartView(PieView);
   registers.registerSeriesModel(PieSeriesModel);
-  createLegacyDataSelectAction('pie', registers.registerAction);
-  registers.registerLayout(curry(pieLayout, 'pie'));
-  registers.registerProcessor(dataFilter('pie'));
-  registers.registerProcessor(negativeDataFilter('pie'));
+  createLegacyDataSelectAction(SERIES_TYPE_PIE, registers.registerAction);
+  registers.registerLayout(pieLayoutStageHandler);
+  registers.registerProcessor(dataFilter(SERIES_TYPE_PIE));
+  registers.registerProcessor(negativeDataFilter(SERIES_TYPE_PIE));
 }

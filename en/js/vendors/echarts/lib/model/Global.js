@@ -477,7 +477,7 @@ var GlobalModel = /** @class */function (_super) {
    *     {mainType: 'series',
    *     filter: function (model, index) {...}}
    * );
-   * // result like [component0, componnet1, ...]
+   * // result like [component0, component1, ...]
    */
   GlobalModel.prototype.findComponents = function (condition) {
     var query = condition.query;
@@ -575,9 +575,6 @@ var GlobalModel = /** @class */function (_super) {
   };
   /**
    * Iterate raw series before filtered.
-   *
-   * @param {Function} cb
-   * @param {*} context
    */
   GlobalModel.prototype.eachRawSeries = function (cb, context) {
     each(this._componentsMap.get('series'), function (series) {
@@ -603,6 +600,9 @@ var GlobalModel = /** @class */function (_super) {
   GlobalModel.prototype.eachRawSeriesByType = function (subType, cb, context) {
     return each(this.getSeriesByType(subType), cb, context);
   };
+  /**
+   * It means "filtered out".
+   */
   GlobalModel.prototype.isSeriesFiltered = function (seriesModel) {
     assertSeriesInitialized(this);
     return this._seriesIndicesMap.get(seriesModel.componentIndex) == null;

@@ -61,13 +61,13 @@ var PolarAxisPointer = /** @class */function (_super) {
       this.animationThreshold = Math.PI / 18;
     }
     var polar = axis.polar;
-    var otherAxis = polar.getOtherAxis(axis);
-    var otherExtent = otherAxis.getExtent();
+    var thisExtent = axis.getExtent();
+    var otherExtent = polar.getOtherAxis(axis).getExtent();
     var coordValue = axis.dataToCoord(value);
     var axisPointerType = axisPointerModel.get('type');
     if (axisPointerType && axisPointerType !== 'none') {
       var elStyle = viewHelper.buildElStyle(axisPointerModel);
-      var pointerOption = pointerShapeBuilder[axisPointerType](axis, polar, coordValue, otherExtent);
+      var pointerOption = pointerShapeBuilder[axisPointerType](axis, polar, coordValue, thisExtent, otherExtent, axisPointerModel.get('seriesDataIndices'), axisPointerModel.ecModel);
       pointerOption.style = elStyle;
       elOption.graphicKey = pointerOption.type;
       elOption.pointer = pointerOption;
@@ -114,7 +114,7 @@ function getLabelPosition(value, axisModel, axisPointerModel, polar, labelMargin
   };
 }
 var pointerShapeBuilder = {
-  line: function (axis, polar, coordValue, otherExtent) {
+  line: function (axis, polar, coordValue, thisExtent, otherExtent) {
     return axis.dim === 'angle' ? {
       type: 'Line',
       shape: viewHelper.makeLineShape(polar.coordToPoint([otherExtent[0], coordValue]), polar.coordToPoint([otherExtent[1], coordValue]))
@@ -127,17 +127,25 @@ var pointerShapeBuilder = {
       }
     };
   },
-  shadow: function (axis, polar, coordValue, otherExtent) {
-    var bandWidth = Math.max(1, axis.getBandWidth());
+  shadow: function (axis, polar, coordValue, thisExtent, otherExtent, seriesDataIndices, ecModel) {
     var radian = Math.PI / 180;
-    return axis.dim === 'angle' ? {
+    var bandWidth = viewHelper.calcAxisPointerShadowBandWidth(axis, seriesDataIndices, ecModel);
+    var shape;
+    if (axis.dim === 'angle') {
+      shape = viewHelper.makeSectorShape(polar.cx, polar.cy, otherExtent[0], otherExtent[1],
+      // In ECharts the screen y is negative if angle is positive,
+      // opposite to zrender shape.
+      // No need clamp.
+      (-coordValue - bandWidth / 2) * radian, (-coordValue + bandWidth / 2) * radian);
+    } else {
+      var _a = viewHelper.calcAxisPointerShadowEnds(coordValue, thisExtent, bandWidth),
+        min = _a[0],
+        max = _a[1];
+      shape = viewHelper.makeSectorShape(polar.cx, polar.cy, min, max, 0, Math.PI * 2);
+    }
+    return {
       type: 'Sector',
-      shape: viewHelper.makeSectorShape(polar.cx, polar.cy, otherExtent[0], otherExtent[1],
-      // In ECharts y is negative if angle is positive
-      (-coordValue - bandWidth / 2) * radian, (-coordValue + bandWidth / 2) * radian)
-    } : {
-      type: 'Sector',
-      shape: viewHelper.makeSectorShape(polar.cx, polar.cy, coordValue - bandWidth / 2, coordValue + bandWidth / 2, 0, Math.PI * 2)
+      shape: shape
     };
   }
 };

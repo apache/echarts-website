@@ -24,9 +24,11 @@ declare const extensionRegisters: {
     registerImpl: typeof registerImpl;
     PRIORITY: {
         PROCESSOR: {
-            FILTER: number;
             SERIES_FILTER: number;
+            AXIS_STATISTICS: number;
+            FILTER: number;
             STATISTIC: number;
+            STATISTICS: number;
         };
         VISUAL: {
             LAYOUT: number;

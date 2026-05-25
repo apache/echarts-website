@@ -24,12 +24,12 @@
  */
 
 import ThemeRiverView from './ThemeRiverView.js';
-import ThemeRiverSeriesModel from './ThemeRiverSeries.js';
-import themeRiverLayout from './themeRiverLayout.js';
+import ThemeRiverSeriesModel, { SERIES_TYPE_THEME_RIVER } from './ThemeRiverSeries.js';
 import dataFilter from '../../processor/dataFilter.js';
+import { themeRiverLayoutStageHandler } from './themeRiverLayout.js';
 export function install(registers) {
   registers.registerChartView(ThemeRiverView);
   registers.registerSeriesModel(ThemeRiverSeriesModel);
-  registers.registerLayout(themeRiverLayout);
-  registers.registerProcessor(dataFilter('themeRiver'));
+  registers.registerLayout(themeRiverLayoutStageHandler);
+  registers.registerProcessor(dataFilter(SERIES_TYPE_THEME_RIVER));
 }

@@ -263,7 +263,6 @@ var SeriesModel = /** @class */function (_super) {
    */
   SeriesModel.prototype.getBaseAxis = function () {
     var coordSys = this.coordinateSystem;
-    // @ts-ignore
     return coordSys && coordSys.getBaseAxis && coordSys.getBaseAxis();
   };
   /**
@@ -292,7 +291,11 @@ var SeriesModel = /** @class */function (_super) {
     var minDist = Infinity;
     var minDiff = -1;
     var nearestIndicesLen = 0;
-    data.each(dim, function (dimValue, idx) {
+    // Performance-sensitive on large data (triggered by `tooltip`/`axisPointer` frequently).
+    var dimIdx = data.getDimensionIndex(dim);
+    var store = data.getStore();
+    for (var idx = 0, len = store.count(); idx < len; idx++) {
+      var dimValue = store.get(dimIdx, idx);
       var dataCoord = axis.dataToCoord(dimValue);
       var diff = targetCoord - dataCoord;
       var dist = Math.abs(diff);
@@ -312,7 +315,7 @@ var SeriesModel = /** @class */function (_super) {
           nearestIndices[nearestIndicesLen++] = idx;
         }
       }
-    });
+    }
     nearestIndices.length = nearestIndicesLen;
     return nearestIndices;
   };
@@ -353,6 +356,7 @@ var SeriesModel = /** @class */function (_super) {
     return !!animationEnabled;
   };
   SeriesModel.prototype.restoreData = function () {
+    // See `dataTaskReset`.
     this.dataTask.dirty();
   };
   SeriesModel.prototype.getColorFromPalette = function (name, scope, requestColorNum) {

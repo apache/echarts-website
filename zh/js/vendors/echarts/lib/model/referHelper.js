@@ -70,18 +70,19 @@ import { SINGLE_REFERRING } from '../util/model.js';
  *     // To replace user specified encode.
  * }
  */
-var CoordSysInfo = /** @class */function () {
-  function CoordSysInfo(coordSysName) {
+var SeriesModelCoordSysInfo = /** @class */function () {
+  function SeriesModelCoordSysInfo(coordSysName) {
     this.coordSysDims = [];
     this.axisMap = createHashMap();
     this.categoryAxisMap = createHashMap();
     this.coordSysName = coordSysName;
   }
-  return CoordSysInfo;
+  return SeriesModelCoordSysInfo;
 }();
+export { SeriesModelCoordSysInfo };
 export function getCoordSysInfoBySeries(seriesModel) {
   var coordSysName = seriesModel.get('coordinateSystem');
-  var result = new CoordSysInfo(coordSysName);
+  var result = new SeriesModelCoordSysInfo(coordSysName);
   var fetch = fetchers[coordSysName];
   if (fetch) {
     fetch(seriesModel, result, result.axisMap, result.categoryAxisMap);

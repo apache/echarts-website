@@ -115,7 +115,7 @@ declare class VisualMapping {
      * @public
      * @return {Array.<string>}
      */
-    static listVisualTypes(): ("symbol" | "color" | "opacity" | "decal" | "symbolSize" | "liftZ" | "colorAlpha" | "colorLightness" | "colorSaturation" | "colorHue")[];
+    static listVisualTypes(): ("symbol" | "color" | "opacity" | "decal" | "symbolSize" | "liftZ" | "colorHue" | "colorSaturation" | "colorLightness" | "colorAlpha")[];
     /**
      * @public
      */

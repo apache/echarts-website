@@ -1,48 +1,68 @@
-import Scale, { ScaleGetTicksOpt, ScaleSettingDefault } from './Scale.js';
-import { ScaleTick, ParsedAxisBreakList, ScaleDataValue } from '../util/types.js';
-declare class IntervalScale<SETTING extends ScaleSettingDefault = ScaleSettingDefault> extends Scale<SETTING> {
-    static type: string;
-    type: string;
-    protected _interval: number;
-    protected _niceExtent: [number, number];
-    protected _intervalPrecision: number;
-    parse(val: ScaleDataValue): number;
-    contain(val: number): boolean;
-    normalize(val: number): number;
-    scale(val: number): number;
-    getInterval(): number;
-    setInterval(interval: number): void;
+import Scale, { ScaleGetTicksOpt } from './Scale.js';
+import { IntervalScaleGetLabelOpt } from './helper.js';
+import { ScaleTick, ScaleDataValue, NullUndefined, AxisBreakOption } from '../util/types.js';
+import { AxisBreakParsingResult } from './break.js';
+import { ScaleMapperGeneric } from './scaleMapper.js';
+export declare type IntervalScaleConfig = {
+    interval: IntervalScaleConfigParsed['interval'];
+    intervalPrecision?: IntervalScaleConfigParsed['intervalPrecision'] | NullUndefined;
+    intervalCount?: IntervalScaleConfigParsed['intervalCount'] | NullUndefined;
+    niceExtent?: IntervalScaleConfigParsed['niceExtent'] | NullUndefined;
+};
+declare type IntervalScaleConfigParsed = {
     /**
-     * @override
+     * Step of ticks.
+     */
+    interval: number;
+    intervalPrecision: number;
+    /**
+     * `_intervalCount` effectively specifies the number of "nice segments". This is for special cases,
+     * such as `alignTicks: true` and min max are fixed. In this case, `_interval` may be specified with
+     * a "not-nice" value and needs to be rounded with `_intervalPrecision` for better appearance. Then
+     * merely accumulating `_interval` may generate incorrect number of ticks due to cumulative errors.
+     * So `_intervalCount` is required to specify the expected nice ticks number.
+     * Should ensure `_intervalCount >= -1`,
+     *  where `-1` means no nice tick (e.g., `_extent: [5.2, 5.8], _interval: 1`),
+     *  and `0` means only one nice tick (e.g., `_extent: [5, 5.8], _interval: 1`).
+     * @see setInterval
+     */
+    intervalCount: number | NullUndefined;
+    /**
+     * Should ensure:
+     *  `_extent[0] <= _niceExtent[0] && _niceExtent[1] <= _extent[1]`
+     * But NOTICE:
+     *  `_niceExtent[0] - _niceExtent[1] <= _interval`, rather than always `< 0`,
+     *  because `_niceExtent` is typically calculated by
+     *  `[ Math.ceil(_extent[0] / _interval) * _interval, Math.floor(_extent[1] / _interval) * _interval ]`.
+     *  e.g., `_extent: [5.2, 5.8]` with interval `1` will get `_niceExtent: [6, 5]`.
+     *  e.g., `_extent: [5, 5.8]` with interval `1` will get `_niceExtent: [5, 5]`.
+     *  e.g., `_extent: [5.7, 5.7]` with interval `1` will get `_niceExtent: [6, 5]`.
+     * @see setInterval
+     */
+    niceExtent: number[] | NullUndefined;
+};
+declare type IntervalScaleSetting = {
+    breakOption?: AxisBreakOption[] | NullUndefined;
+    breakParsed?: AxisBreakParsingResult | NullUndefined;
+};
+/**
+ * @final NEVER inherit me!
+ */
+interface IntervalScale extends ScaleMapperGeneric<IntervalScale> {
+}
+declare class IntervalScale extends Scale<IntervalScale> {
+    static type: string;
+    type: "interval";
+    private _cfg;
+    constructor(setting?: IntervalScaleSetting);
+    static parse(val: ScaleDataValue): number;
+    getConfig(): IntervalScaleConfigParsed;
+    setConfig(cfg: IntervalScaleConfig): void;
+    /**
+     * In ascending order.
      */
     getTicks(opt?: ScaleGetTicksOpt): ScaleTick[];
     getMinorTicks(splitNumber: number): number[][];
-    protected _getNonTransBreaks(): ParsedAxisBreakList;
-    /**
-     * @param opt.precision If 'auto', use nice presision.
-     * @param opt.pad returns 1.50 but not 1.5 if precision is 2.
-     */
-    getLabel(data: ScaleTick, opt?: {
-        precision?: 'auto' | number;
-        pad?: boolean;
-    }): string;
-    /**
-     * FIXME: refactor - disallow override, use composition instead.
-     *
-     * The override of `calcNiceTicks` should ensure these members are provided:
-     *  this._intervalPrecision
-     *  this._interval
-     *
-     * @param splitNumber By default `5`.
-     */
-    calcNiceTicks(splitNumber?: number, minInterval?: number, maxInterval?: number): void;
-    calcNiceExtent(opt: {
-        splitNumber: number;
-        fixMin?: boolean;
-        fixMax?: boolean;
-        minInterval?: number;
-        maxInterval?: number;
-    }): void;
-    setNiceExtent(min: number, max: number): void;
+    getLabel(tick: ScaleTick, opt?: IntervalScaleGetLabelOpt): string;
 }
 export default IntervalScale;

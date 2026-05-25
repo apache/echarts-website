@@ -51,15 +51,28 @@
 */
 import * as zrUtil from 'zrender/lib/core/util.js';
 var RADIAN_EPSILON = 1e-4;
-// Although chrome already enlarge this number to 100 for `toFixed`, but
-// we sill follow the spec for compatibility.
-var ROUND_SUPPORTED_PRECISION_MAX = 20;
+// A `RangeError` may be thrown if `n` is out of this range when calling `toFixed(n)`.
+// Although Chrome and ES2017+ have enlarged this number to 100, but we sill follow
+// the ES3~ES6 spec (0 <= n <= 20) for backward and cross-platform compatibility.
+var TO_FIXED_SUPPORTED_PRECISION_MAX = 20;
+// For rounding error like `2.9999999999999996`, with respect to IEEE754 64bit float.
+// NOTICE: It only works when the expected result is a rational number with low
+// precision. See method `round` for details.
+export var DEFAULT_PRECISION_FOR_ROUNDING_ERROR = 14;
 function _trim(str) {
   return str.replace(/^\s+|\s+$/g, '');
 }
 export var mathMin = Math.min;
 export var mathMax = Math.max;
 export var mathAbs = Math.abs;
+export var mathRound = Math.round;
+export var mathFloor = Math.floor;
+export var mathCeil = Math.ceil;
+export var mathPow = Math.pow;
+export var mathLog = Math.log;
+export var mathLN10 = Math.LN10;
+export var mathPI = Math.PI;
+export var mathRandom = Math.random;
 /**
  * Linear mapping a value from domain to range
  * @param  val
@@ -133,14 +146,17 @@ export function parsePositionOption(option, percentBase, percentOffset) {
   return parsePositionSizeOption(option, percentBase, percentOffset);
 }
 /**
- * Accept number, or numeric stirng (`'123'`), or percentage ('100%'), as x/y/width/height pixel number.
+ * Accept number, or numeric string (`'123'`), or percentage ('100%'), as x/y/width/height pixel number.
  * If null/undefined or invalid, return NaN.
  * (But allow JS type coercion (`+option`) due to backward compatibility)
  * @see {PositionSizeOption}
  */
-export function parsePositionSizeOption(option, percentBase, percentOffset) {
+export function parsePositionSizeOption(option, percentBase,
+// Typical usage of `percentOffset`: percent value is based on an specific rect rather than canvas viewport:
+//  `parsePercent(percentOrAbsoluteLeft, rect.width, rect.x)`
+percentOffset) {
   if (zrUtil.isString(option)) {
-    if (_trim(option).match(/%$/)) {
+    if (isOptionStringPercent(option)) {
       return parseFloat(option) / 100 * percentBase + (percentOffset || 0);
     }
     return parseFloat(option);
@@ -148,17 +164,36 @@ export function parsePositionSizeOption(option, percentBase, percentOffset) {
   // Allow flexible input due to backward compatibility.
   return option == null ? NaN : +option;
 }
+/**
+ * Perserve the same rule with `parsePositionSizeOption`.
+ */
+export function isPositionSizeOptionPercent(option) {
+  return zrUtil.isString(option) && isOptionStringPercent(option);
+}
+function isOptionStringPercent(option) {
+  return !!_trim(option).match(/%$/);
+}
 export function round(x, precision, returnStr) {
-  if (precision == null) {
-    // FIXME: the default precision should not be provided, since there is no universally adaptable
-    //  precision. The caller need to input a precision according to the scenarios.
-    precision = 10;
+  if (process.env.NODE_ENV !== 'production') {
+    // NOTICE: We should not provided a default precision, since there is no universally adaptable
+    // precision. The caller need to input a precision according to the scenarios.
+    zrUtil.assert(precision != null);
+  }
+  if (isNaN(precision)) {
+    // precision utils (such as getAcceptableTickPrecision) may return NaN.
+    return returnStr ? '' + x : +x;
   }
   // Avoid range error
-  precision = Math.min(Math.max(0, precision), ROUND_SUPPORTED_PRECISION_MAX);
+  precision = mathMin(mathMax(0, precision), TO_FIXED_SUPPORTED_PRECISION_MAX);
   // PENDING: 1.005.toFixed(2) is '1.00' rather than '1.01'
   x = (+x).toFixed(precision);
   return returnStr ? x : +x;
+}
+export function roundLegacy(x, precision, returnStr) {
+  if (precision == null) {
+    precision = 10;
+  }
+  return round(x, precision, returnStr);
 }
 /**
  * Inplacd asc sort arr.
@@ -172,6 +207,8 @@ export function asc(arr) {
 }
 /**
  * Get precision.
+ * e.g. `getPrecisionSafe(100.123)` return `3`.
+ * e.g. `getPrecisionSafe(100)` return `0`.
  */
 export function getPrecision(val) {
   val = +val;
@@ -190,7 +227,7 @@ export function getPrecision(val) {
   if (val > 1e-14) {
     var e = 1;
     for (var i = 0; i < 15; i++, e *= 10) {
-      if (Math.round(val * e) / e === val) {
+      if (mathRound(val * e) / e === val) {
         return i;
       }
     }
@@ -199,6 +236,8 @@ export function getPrecision(val) {
 }
 /**
  * Get precision with slow but safe method
+ * e.g. `getPrecisionSafe(100.123)` return `3`.
+ * e.g. `getPrecisionSafe(100)` return `0`.
  */
 export function getPrecisionSafe(val) {
   // toLowerCase for: '3.4E-12'
@@ -209,19 +248,65 @@ export function getPrecisionSafe(val) {
   var significandPartLen = eIndex > 0 ? eIndex : str.length;
   var dotIndex = str.indexOf('.');
   var decimalPartLen = dotIndex < 0 ? 0 : significandPartLen - 1 - dotIndex;
-  return Math.max(0, decimalPartLen - exp);
+  return mathMax(0, decimalPartLen - exp);
 }
 /**
- * Minimal dicernible data precisioin according to a single pixel.
+ * @deprecated Use `getAcceptableTickPrecision` instead. See bad case in `test/ut/spec/util/number.test.ts`
+ * NOTE: originally introduced in commit `ff93e3e7f9ff24902e10d4469fd3187393b05feb`
+ *
+ * Minimal discernible data precision according to a single pixel.
  */
 export function getPixelPrecision(dataExtent, pixelExtent) {
-  var log = Math.log;
-  var LN10 = Math.LN10;
-  var dataQuantity = Math.floor(log(dataExtent[1] - dataExtent[0]) / LN10);
-  var sizeQuantity = Math.round(log(mathAbs(pixelExtent[1] - pixelExtent[0])) / LN10);
+  var dataQuantity = mathFloor(mathLog(dataExtent[1] - dataExtent[0]) / mathLN10);
+  var sizeQuantity = mathRound(mathLog(mathAbs(pixelExtent[1] - pixelExtent[0])) / mathLN10);
   // toFixed() digits argument must be between 0 and 20.
-  var precision = Math.min(Math.max(-dataQuantity + sizeQuantity, 0), 20);
-  return !isFinite(precision) ? 20 : precision;
+  var precision = mathMin(mathMax(-dataQuantity + sizeQuantity, 0), TO_FIXED_SUPPORTED_PRECISION_MAX);
+  return !isFinite(precision) ? TO_FIXED_SUPPORTED_PRECISION_MAX : precision;
+}
+/**
+ * This method chooses a reasonable "data" precision that can be used in `round` method.
+ * A reasonable precision is suitable for display; it may cause cumulative error but acceptable.
+ *
+ * "data" is linearly mapped to pixel according to the ratio determined by `dataSpan` and `pxSpan`.
+ * The diff from the original "data" to the rounded "data" (with the result precision) should be
+ * equal or less than `pxDiffAcceptable`, which is typically `1` pixel.
+ * And the result precision should be as small as possible for a concise display.
+ *
+ * [NOTICE]: using arbitrary parameters is NOT preferable - a discernible misalign (e.g., over 1px)
+ *  may occur, especially when `splitLine` is displayed.
+ *
+ * PENDING: Only the linear case is addressed for now; other mapping methods (like logarithm) will
+ *  not be covered until necessary.
+ */
+export function getAcceptableTickPrecision(dataExtent,
+// Typically, `Math.abs(pixelExtent[1] - pixelExtent[0])`.
+pxSpan,
+// By default, `1`.
+pxDiffAcceptable
+// Return a precision >= 0
+// This precision can be used in method `round`.
+// Return `NaN` for edge case or illegal inputs. Callers need to handle that.
+) {
+  var dataSpan = mathAbs(dataExtent[1] - dataExtent[0]);
+  if (!isFinite(dataSpan) || dataSpan === 0) {
+    return NaN;
+  }
+  // Formula for choosing an acceptable precision:
+  //  Let `pxDiff = abs(dataSpan - round(dataSpan, precision))`.
+  //  We require `pxDiff <= dataSpan * pxDiffAcceptable / pxSpan`.
+  //  Consider the nature of "round", the max `pxDiff` is: `pow(10, -precision) / 2`,
+  //  Hence: `pow(10, -precision) / 2 <= dataSpan * pxDiffAcceptable / pxSpan`
+  //  Hence: `precision >= -log10(2 * dataSpan * pxDiffAcceptable / pxSpan)`
+  var dataExp2 = mathLog(2 * mathAbs(pxDiffAcceptable || 1) * mathAbs(dataSpan)) / mathLN10;
+  var pxExp = mathLog(mathAbs(pxSpan)) / mathLN10;
+  // PENDING: Rounding error generally does not matter; do not fix it before `Math.ceil`
+  // until bad case occur.
+  var precision = mathMax(0, mathCeil(-dataExp2 + pxExp));
+  if (!isFinite(precision)) {
+    // If dataSpan is near `0`, the result should not be too big or even `Infinity`.
+    precision = NaN;
+  }
+  return precision;
 }
 /**
  * Get a data of given precision, assuring the sum of percentages
@@ -258,14 +343,14 @@ export function getPercentSeats(valueList, precision) {
   if (sum === 0) {
     return [];
   }
-  var digits = Math.pow(10, precision);
+  var digits = mathPow(10, precision);
   var votesPerQuota = zrUtil.map(valueList, function (val) {
     return (isNaN(val) ? 0 : val) / sum * digits * 100;
   });
   var targetSeats = digits * 100;
   var seats = zrUtil.map(votesPerQuota, function (votes) {
     // Assign automatic seats.
-    return Math.floor(votes);
+    return mathFloor(votes);
   });
   var currentSum = zrUtil.reduce(seats, function (acc, val) {
     return acc + val;
@@ -298,20 +383,20 @@ export function getPercentSeats(valueList, precision) {
  * See <http://0.30000000000000004.com/>
  */
 export function addSafe(val0, val1) {
-  var maxPrecision = Math.max(getPrecision(val0), getPrecision(val1));
+  var maxPrecision = mathMax(getPrecision(val0), getPrecision(val1));
   // const multiplier = Math.pow(10, maxPrecision);
-  // return (Math.round(val0 * multiplier) + Math.round(val1 * multiplier)) / multiplier;
+  // return (mathRound(val0 * multiplier) + mathRound(val1 * multiplier)) / multiplier;
   var sum = val0 + val1;
   // // PENDING: support more?
-  return maxPrecision > ROUND_SUPPORTED_PRECISION_MAX ? sum : round(sum, maxPrecision);
+  return maxPrecision > TO_FIXED_SUPPORTED_PRECISION_MAX ? sum : round(sum, maxPrecision);
 }
 // Number.MAX_SAFE_INTEGER, ie do not support.
-export var MAX_SAFE_INTEGER = 9007199254740991;
+export var MAX_SAFE_INTEGER = mathPow(2, 53) - 1;
 /**
  * To 0 - 2 * PI, considering negative radian.
  */
 export function remRadian(radian) {
-  var pi2 = Math.PI * 2;
+  var pi2 = mathPI * 2;
   return (radian % pi2 + pi2) % pi2;
 }
 /**
@@ -376,7 +461,7 @@ export function parseDate(value) {
   } else if (value == null) {
     return new Date(NaN);
   }
-  return new Date(Math.round(value));
+  return new Date(mathRound(value));
 }
 /**
  * Quantity of a number. e.g. 0.1, 1, 10, 100
@@ -385,47 +470,65 @@ export function parseDate(value) {
  * @return
  */
 export function quantity(val) {
-  return Math.pow(10, quantityExponent(val));
+  return mathPow(10, quantityExponent(val));
 }
 /**
  * Exponent of the quantity of a number
- * e.g., 1234 equals to 1.234*10^3, so quantityExponent(1234) is 3
+ * e.g., 9876 equals to 9.876*10^3, so quantityExponent(9876) is 3
+ * e.g., 0.09876 equals to 9.876*10^-2, so quantityExponent(0.09876) is -2
  *
  * @param val non-negative value
  * @return
  */
 export function quantityExponent(val) {
   if (val === 0) {
+    // PENDING: like IEEE754 use exponent `0` in this case.
+    // but methematically, exponent of zero is `-Infinity`.
     return 0;
   }
-  var exp = Math.floor(Math.log(val) / Math.LN10);
+  var exp = mathFloor(mathLog(val) / mathLN10);
   /**
    * exp is expected to be the rounded-down result of the base-10 log of val.
    * But due to the precision loss with Math.log(val), we need to restore it
    * using 10^exp to make sure we can get val back from exp. #11249
    */
-  if (val / Math.pow(10, exp) >= 10) {
+  if (val / mathPow(10, exp) >= 10) {
     exp++;
   }
   return exp;
 }
+export var NICE_MODE_ROUND = 1;
+export var NICE_MODE_MIN = 2;
 /**
- * find a “nice” number approximately equal to x. Round the number if round = true,
- * take ceiling if round = false. The primary observation is that the “nicest”
+ * find a “nice” number approximately equal to x. Round the number if 'round',
+ * take ceiling if 'round'. The primary observation is that the “nicest”
  * numbers in decimal are 1, 2, and 5, and all power-of-ten multiples of these numbers.
  *
  * See "Nice Numbers for Graph Labels" of Graphic Gems.
  *
  * @param  val Non-negative value.
- * @param  round
  * @return Niced number
  */
-export function nice(val, round) {
+export function nice(val,
+// All non-`NICE_MODE_MIN`-truthy values means `NICE_MODE_ROUND`, for backward compatibility.
+mode) {
+  // Consider the scientific notation of `val`:
+  //  - `exponent` is its exponent.
+  //  - `f` is its coefficient. `1 <= f < 10`.
+  //  e.g., if `val` is `0.0054321`, `exponent` is `-3`, `f` is `5.4321`,
+  //      The result is `0.005` on NICE_MODE_ROUND.
+  //  e.g., if `val` is `987.12345`, `exponent` is `2`, `f` is `9.8712345`,
+  //      The result is `1000` on NICE_MODE_ROUND.
+  //  e.g., if `val` is `0`,
+  //      The result is `1`.
   var exponent = quantityExponent(val);
-  var exp10 = Math.pow(10, exponent);
-  var f = val / exp10; // 1 <= f < 10
+  // No rounding error in Math.pow(10, integer).
+  var exp10 = mathPow(10, exponent);
+  var f = val / exp10;
   var nf;
-  if (round) {
+  if (mode === NICE_MODE_MIN) {
+    nf = 1;
+  } else if (mode) {
     if (f < 1.5) {
       nf = 1;
     } else if (f < 2.5) {
@@ -451,9 +554,8 @@ export function nice(val, round) {
     }
   }
   val = nf * exp10;
-  // Fix 3 * 0.1 === 0.30000000000000004 issue (see IEEE 754).
-  // 20 is the uppper bound of toFixed.
-  return exponent >= -20 ? +val.toFixed(exponent < 0 ? -exponent : 0) : val;
+  // Fix IEEE 754 float rounding error
+  return round(val, -exponent);
 }
 /**
  * This code was copied from "d3.js"
@@ -463,7 +565,7 @@ export function nice(val, round) {
  */
 export function quantile(ascArr, p) {
   var H = (ascArr.length - 1) * p + 1;
-  var h = Math.floor(H);
+  var h = mathFloor(H);
   var v = +ascArr[h - 1];
   var e = H - h;
   return e ? v + e * (ascArr[h] - v) : v;
@@ -552,7 +654,7 @@ export function isNumeric(val) {
  * @return An positive integer.
  */
 export function getRandomIdBase() {
-  return Math.round(Math.random() * 9);
+  return mathRound(mathRandom() * 9);
 }
 /**
  * Get the greatest common divisor.
@@ -580,4 +682,13 @@ export function getLeastCommonMultiple(a, b) {
     return a;
   }
   return a * b / getGreatestCommonDividor(a, b);
+}
+/**
+ * NOTICE: Assume the input `val` is number or null/undefined, no type check, no support of BitInt.
+ * Therefore, it is NOT suitable for processing user input, but sufficient for
+ * internal usage in most cases.
+ * For platform-agnosticism, `Number.isFinite` is not used.
+ */
+export function isNullableNumberFinite(val) {
+  return val != null && isFinite(val);
 }

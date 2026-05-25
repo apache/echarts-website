@@ -1,7 +1,7 @@
 import VisualMapModel, { VisualMapOption } from './VisualMapModel.js';
 import { ItemStyleOption } from '../../util/types.js';
 declare type VisualState = VisualMapModel['stateList'][number];
-export interface ContinousVisualMapOption extends VisualMapOption {
+export interface ContinuousVisualMapOption extends VisualMapOption {
     align?: 'auto' | 'left' | 'right' | 'top' | 'bottom';
     /**
      * This prop effect default component type determine
@@ -55,13 +55,17 @@ export interface ContinousVisualMapOption extends VisualMapOption {
         handleStyle?: ItemStyleOption;
     };
 }
-declare class ContinuousModel extends VisualMapModel<ContinousVisualMapOption> {
+/**
+ * @deprecated Use `ContinuousVisualMapOption` instead.
+ */
+export declare type ContinousVisualMapOption = ContinuousVisualMapOption;
+declare class ContinuousModel extends VisualMapModel<ContinuousVisualMapOption> {
     static type: "visualMap.continuous";
     type: "visualMap.continuous";
     /**
      * @override
      */
-    optionUpdated(newOption: ContinousVisualMapOption, isInit: boolean): void;
+    optionUpdated(newOption: ContinuousVisualMapOption, isInit: boolean): void;
     /**
      * @protected
      * @override
@@ -102,6 +106,6 @@ declare class ContinuousModel extends VisualMapModel<ContinousVisualMapOption> {
         }[];
         outerColors: string[];
     };
-    static defaultOption: ContinousVisualMapOption;
+    static defaultOption: ContinuousVisualMapOption;
 }
 export default ContinuousModel;

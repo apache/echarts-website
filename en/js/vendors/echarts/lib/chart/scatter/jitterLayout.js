@@ -42,32 +42,67 @@
 * under the License.
 */
 import { needFixJitter, fixJitter } from '../../util/jitter.js';
-export default function jitterLayout(ecModel) {
-  ecModel.eachSeriesByType('scatter', function (seriesModel) {
-    var coordSys = seriesModel.coordinateSystem;
-    if (coordSys && (coordSys.type === 'cartesian2d' || coordSys.type === 'single')) {
-      var baseAxis_1 = coordSys.getBaseAxis ? coordSys.getBaseAxis() : null;
-      var hasJitter = baseAxis_1 && needFixJitter(seriesModel, baseAxis_1);
-      if (hasJitter) {
-        var data_1 = seriesModel.getData();
-        data_1.each(function (idx) {
-          var dim = baseAxis_1.dim;
-          var orient = baseAxis_1.orient;
-          var isSingleY = orient === 'horizontal' && baseAxis_1.type !== 'category' || orient === 'vertical' && baseAxis_1.type === 'category';
-          var layout = data_1.getItemLayout(idx);
-          var rawSize = data_1.getItemVisual(idx, 'symbolSize');
-          var size = rawSize instanceof Array ? (rawSize[1] + rawSize[0]) / 2 : rawSize;
-          if (dim === 'y' || dim === 'single' && isSingleY) {
-            // x is fixed, and y is floating
-            var jittered = fixJitter(baseAxis_1, layout[0], layout[1], size / 2);
-            data_1.setItemLayout(idx, [layout[0], jittered]);
-          } else if (dim === 'x' || dim === 'single' && !isSingleY) {
-            // y is fixed, and x is floating
-            var jittered = fixJitter(baseAxis_1, layout[1], layout[0], size / 2);
-            data_1.setItemLayout(idx, [jittered, layout[1]]);
-          }
-        });
+import createRenderPlanner from '../helper/createRenderPlanner.js';
+import { COORD_SYS_TYPE_CARTESIAN_2D } from '../../coord/cartesian/GridModel.js';
+import { COORD_SYS_TYPE_SINGLE } from '../../coord/single/AxisModel.js';
+import { validateUpstreamOutputRange } from '../../util/model.js';
+export default function jitterLayout() {
+  return {
+    seriesType: 'scatter',
+    plan: createRenderPlanner(),
+    reset: function (seriesModel) {
+      var coordSys = seriesModel.coordinateSystem;
+      if (!coordSys || coordSys.type !== COORD_SYS_TYPE_CARTESIAN_2D && coordSys.type !== COORD_SYS_TYPE_SINGLE) {
+        return;
       }
+      var baseAxis = coordSys.getBaseAxis && coordSys.getBaseAxis();
+      var hasJitter = baseAxis && needFixJitter(seriesModel, baseAxis);
+      if (!hasJitter) {
+        return;
+      }
+      var dim = baseAxis.dim;
+      var orient = baseAxis.orient;
+      var isSingleY = orient === 'horizontal' && baseAxis.type !== 'category' || orient === 'vertical' && baseAxis.type === 'category';
+      var jitterOnY = dim === 'y' || dim === 'single' && isSingleY;
+      var jitterOnX = dim === 'x' || dim === 'single' && !isSingleY;
+      if (!jitterOnY && !jitterOnX) {
+        return;
+      }
+      return {
+        progress: function (params, data) {
+          var points = data.getLayout('points');
+          var hasPoints = !!points;
+          if (process.env.NODE_ENV !== 'production') {
+            hasPoints && validateUpstreamOutputRange(data.getLayout('pointsRange'), params);
+          }
+          for (var i = params.start; i < params.end; i++) {
+            var offset = hasPoints ? (i - params.start) * 2 : -1;
+            var layout = hasPoints ? [points[offset], points[offset + 1]] : data.getItemLayout(i);
+            if (!layout) {
+              continue;
+            }
+            var rawSize = data.getItemVisual(i, 'symbolSize');
+            var size = rawSize instanceof Array ? (rawSize[1] + rawSize[0]) / 2 : rawSize;
+            if (jitterOnY) {
+              // x is fixed, and y is floating
+              var jittered = fixJitter(baseAxis, layout[0], layout[1], size / 2);
+              if (hasPoints) {
+                points[offset + 1] = jittered;
+              } else {
+                layout[1] = jittered;
+              }
+            } else if (jitterOnX) {
+              // y is fixed, and x is floating
+              var jittered = fixJitter(baseAxis, layout[1], layout[0], size / 2);
+              if (hasPoints) {
+                points[offset] = jittered;
+              } else {
+                layout[0] = jittered;
+              }
+            }
+          }
+        }
+      };
     }
-  });
+  };
 }

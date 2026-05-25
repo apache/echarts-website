@@ -107,6 +107,29 @@ var VisualMapModel = /** @class */function (_super) {
    * @return An array of series indices.
    */
   VisualMapModel.prototype.getTargetSeriesIndices = function () {
+    var _this = this;
+    var seriesTargets = this.option.seriesTargets;
+    if (seriesTargets) {
+      // When seriesTargets is provided, collect all target series indices
+      var indices_1 = [];
+      each(seriesTargets, function (target) {
+        if (target.seriesIndex != null) {
+          indices_1.push(target.seriesIndex);
+        } else if (target.seriesId != null) {
+          // Find series by ID
+          var seriesModel_1;
+          _this.ecModel.eachSeries(function (series) {
+            if (series.id === target.seriesId) {
+              seriesModel_1 = series;
+            }
+          });
+          if (seriesModel_1) {
+            indices_1.push(seriesModel_1.componentIndex);
+          }
+        }
+      });
+      return indices_1;
+    }
     var optionSeriesId = this.option.seriesId;
     var optionSeriesIndex = this.option.seriesIndex;
     if (optionSeriesIndex == null && optionSeriesId == null) {
@@ -223,8 +246,22 @@ var VisualMapModel = /** @class */function (_super) {
   //         }
   //     }
   // }
+  VisualMapModel.prototype.getDimension = function (seriesIndex) {
+    var _this = this;
+    var seriesTargets = this.option.seriesTargets;
+    if (seriesTargets) {
+      var target = zrUtil.find(seriesTargets, function (target) {
+        return target.seriesIndex != null && target.seriesIndex === seriesIndex || target.seriesId != null && target.seriesId === _this.ecModel.getSeriesByIndex(seriesIndex).id;
+      });
+      if (target) {
+        return target.dimension;
+      }
+    }
+    return this.option.dimension;
+  };
   VisualMapModel.prototype.getDataDimensionIndex = function (data) {
-    var optDim = this.option.dimension;
+    var seriesIndex = data.hostModel.seriesIndex;
+    var optDim = this.getDimension(seriesIndex);
     if (optDim != null) {
       return data.getDimensionIndex(optDim);
     }

@@ -53,4 +53,9 @@ export declare function makeSectorShape(cx: number, cy: number, r0: number, r: n
     endAngle: number;
     clockwise: boolean;
 };
+export declare function calcAxisPointerShadowBandWidth(axis: Axis, seriesDataIndices: CommonAxisPointerOption['seriesDataIndices'], ecModel: GlobalModel): number;
+/**
+ * Return a [min, max] in pixel clampped by `axisExtent`.
+ */
+export declare function calcAxisPointerShadowEnds(val: number, axisExtent: number[], bandWidth: number): number[];
 export {};

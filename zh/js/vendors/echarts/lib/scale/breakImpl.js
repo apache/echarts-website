@@ -41,37 +41,21 @@
 * specific language governing permissions and limitations
 * under the License.
 */
-import { assert, clone, each, find, isString, map, trim } from 'zrender/lib/core/util.js';
+import { assert, clone, each, filter, find, isString, map, trim } from 'zrender/lib/core/util.js';
 import { error } from '../util/log.js';
 import { registerScaleBreakHelperImpl } from './break.js';
-import { round as fixRound } from '../util/number.js';
-/**
- * @caution
- *  Must not export anything except `installScaleBreakHelper`
- */
-var ScaleBreakContextImpl = /** @class */function () {
-  function ScaleBreakContextImpl() {
-    // [CAVEAT]: Should set only by `ScaleBreakContext#setBreaks`!
-    this.breaks = [];
-    // [CAVEAT]: Should update only by `ScaleBreakContext#update`!
-    // They are the values that scaleExtent[0] and scaleExtent[1] are mapped to a numeric axis
-    // that breaks are applied, primarily for optimization of `Scale#normalize`.
-    this._elapsedExtent = [Infinity, -Infinity];
+import { mathMax, mathMin, mathRound } from '../util/number.js';
+import { decorateScaleMapper, enableScaleMapperFreeze, initLinearScaleMapper, SCALE_EXTENT_KIND_EFFECTIVE, SCALE_MAPPER_DEPTH_OUT_OF_BREAK } from './scaleMapper.js';
+import { isValidBoundsForExtent } from '../util/model.js';
+var BreakScaleMapperImpl = /** @class */function () {
+  function BreakScaleMapperImpl(breakParsed, initialExtent) {
+    decorateScaleMapper(this, BreakScaleMapperImpl.decoratedMethods);
+    this._outOfBrk = initLinearScaleMapper(null, initialExtent);
+    var mapper = this._linear = initLinearScaleMapper(null, initialExtent);
+    enableScaleMapperFreeze(this, mapper);
+    this.breaks = breakParsed && breakParsed.breaks || [];
   }
-  ScaleBreakContextImpl.prototype.setBreaks = function (parsed) {
-    // @ts-ignore
-    this.breaks = parsed.breaks;
-  };
-  /**
-   * [CAVEAT]: Must be called immediately each time scale extent and breaks are updated!
-   */
-  ScaleBreakContextImpl.prototype.update = function (scaleExtent) {
-    updateAxisBreakGapReal(this, scaleExtent);
-    var elapsedExtent = this._elapsedExtent;
-    elapsedExtent[0] = this.elapse(scaleExtent[0]);
-    elapsedExtent[1] = this.elapse(scaleExtent[1]);
-  };
-  ScaleBreakContextImpl.prototype.hasBreaks = function () {
+  BreakScaleMapperImpl.prototype.hasBreaks = function () {
     return !!this.breaks.length;
   };
   /**
@@ -85,128 +69,157 @@ var ScaleBreakContextImpl = /** @class */function () {
    *
    * This method does little work; it is just for unifying and restricting the behavior.
    */
-  ScaleBreakContextImpl.prototype.calcNiceTickMultiple = function (tickVal, estimateNiceMultiple) {
+  BreakScaleMapperImpl.prototype.calcNiceTickMultiple = function (tickVal, estimateNiceMultiple) {
     for (var idx = 0; idx < this.breaks.length; idx++) {
       var brk = this.breaks[idx];
       if (brk.vmin < tickVal && tickVal < brk.vmax) {
         var multiple = estimateNiceMultiple(tickVal, brk.vmax);
         if (process.env.NODE_ENV !== 'production') {
           // If not, it may cause dead loop or not nice tick.
-          assert(multiple >= 0 && Math.round(multiple) === multiple);
+          assert(multiple >= 0 && mathRound(multiple) === multiple);
         }
         return multiple;
       }
     }
     return 0;
   };
-  ScaleBreakContextImpl.prototype.getExtentSpan = function () {
-    return this._elapsedExtent[1] - this._elapsedExtent[0];
-  };
-  ScaleBreakContextImpl.prototype.normalize = function (val) {
-    var elapsedSpan = this._elapsedExtent[1] - this._elapsedExtent[0];
-    // The same logic as `Scale#normalize`.
-    if (elapsedSpan === 0) {
-      return 0.5;
-    }
-    return (this.elapse(val) - this._elapsedExtent[0]) / elapsedSpan;
-  };
-  ScaleBreakContextImpl.prototype.scale = function (val) {
-    return this.unelapse(val * (this._elapsedExtent[1] - this._elapsedExtent[0]) + this._elapsedExtent[0]);
-  };
-  /**
-   * Suppose:
-   *    AXIS_BREAK_LAST_BREAK_END_BASE: 0
-   *    AXIS_BREAK_ELAPSED_BASE: 0
-   *    breaks: [
-   *        {start: -400, end: -300, gap: 27},
-   *        {start: -100, end: 100, gap: 10},
-   *        {start: 200, end: 400, gap: 300},
-   *    ]
-   * The mapping will be:
-   *        |        |
-   *    400 +   ->   +  237
-   *     |  |        |   |  (gap: 300)
-   *    200 +   ->   + -63
-   *        |        |
-   *    100 +   ->   + -163
-   *     |  |        |   |  (gap: 10)
-   *   -100 +   ->   + -173
-   *        |        |
-   *   -300 +   ->   + -373
-   *     |  |        |   |  (gap: 27)
-   *   -400 +   ->   + -400
-   *        |        |
-   *   origianl     elapsed
-   *
-   * Note:
-   *   The mapping has nothing to do with "scale extent".
-   */
-  ScaleBreakContextImpl.prototype.elapse = function (val) {
-    // If the value is in the break, return the normalized value in the break
-    var elapsedVal = AXIS_BREAK_ELAPSED_BASE;
-    var lastBreakEnd = AXIS_BREAK_LAST_BREAK_END_BASE;
-    var stillOver = true;
-    for (var i = 0; i < this.breaks.length; i++) {
-      var brk = this.breaks[i];
-      if (val <= brk.vmax) {
-        if (val > brk.vmin) {
-          elapsedVal += brk.vmin - lastBreakEnd + (val - brk.vmin) / (brk.vmax - brk.vmin) * brk.gapReal;
-        } else {
-          elapsedVal += val - lastBreakEnd;
+  BreakScaleMapperImpl.decoratedMethods = {
+    needTransform: function () {
+      return !this.breaks.length;
+    },
+    getExtent: function () {
+      return this._outOfBrk.getExtent();
+    },
+    getExtentUnsafe: function (kind, depth) {
+      return depth == null || depth === SCALE_MAPPER_DEPTH_OUT_OF_BREAK ? this._outOfBrk.getExtentUnsafe(kind, null) : this._linear.getExtentUnsafe(kind, null);
+    },
+    setExtent: function (start, end) {
+      this.setExtent2(SCALE_EXTENT_KIND_EFFECTIVE, start, end);
+    },
+    setExtent2: function (kind, start, end) {
+      if (isValidBoundsForExtent(start, end)) {
+        if (kind === SCALE_EXTENT_KIND_EFFECTIVE) {
+          updateAxisBreakGapReal(this, [start, end]);
         }
-        lastBreakEnd = brk.vmax;
-        stillOver = false;
-        break;
+        this._outOfBrk.setExtent2(kind, start, end);
+        this._linear.setExtent2(kind, this.transformIn(start, null), this.transformIn(end, null));
       }
-      elapsedVal += brk.vmin - lastBreakEnd + brk.gapReal;
-      lastBreakEnd = brk.vmax;
-    }
-    if (stillOver) {
-      elapsedVal += val - lastBreakEnd;
-    }
-    return elapsedVal;
-  };
-  ScaleBreakContextImpl.prototype.unelapse = function (elapsedVal) {
-    var lastElapsedEnd = AXIS_BREAK_ELAPSED_BASE;
-    var lastBreakEnd = AXIS_BREAK_LAST_BREAK_END_BASE;
-    var stillOver = true;
-    var unelapsedVal = 0;
-    for (var i = 0; i < this.breaks.length; i++) {
-      var brk = this.breaks[i];
-      var elapsedStart = lastElapsedEnd + brk.vmin - lastBreakEnd;
-      var elapsedEnd = elapsedStart + brk.gapReal;
-      if (elapsedVal <= elapsedEnd) {
-        if (elapsedVal > elapsedStart) {
-          unelapsedVal = brk.vmin + (elapsedVal - elapsedStart) / (elapsedEnd - elapsedStart) * (brk.vmax - brk.vmin);
-        } else {
-          unelapsedVal = lastBreakEnd + elapsedVal - lastElapsedEnd;
+    },
+    normalize: function (val) {
+      return this._linear.normalize(this.transformIn(val, null));
+    },
+    scale: function (val) {
+      return this.transformOut(this._linear.scale(val), null);
+    },
+    contain: function (val) {
+      return this._outOfBrk.contain(val);
+    },
+    /**
+     * a.k.a., "elapse"
+     * Suppose:
+     *    AXIS_BREAK_LAST_BREAK_END_BASE: 0
+     *    AXIS_BREAK_ELAPSED_BASE: 0
+     *    breaks: [
+     *        {start: -400, end: -300, gap: 27},
+     *        {start: -100, end: 100, gap: 10},
+     *        {start: 200, end: 400, gap: 300},
+     *    ]
+     * The mapping will be:
+     *        |        |
+     *    400 +   ->   +  237
+     *     |  |        |   |  (gap: 300)
+     *    200 +   ->   + -63
+     *        |        |
+     *    100 +   ->   + -163
+     *     |  |        |   |  (gap: 10)
+     *   -100 +   ->   + -173
+     *        |        |
+     *   -300 +   ->   + -373
+     *     |  |        |   |  (gap: 27)
+     *   -400 +   ->   + -400
+     *        |        |
+     *   origianl     elapsed
+     *
+     * Note:
+     *   `transformIn` and `transformOut` has nothing to do with "scale extent" - out of extent is supported.
+     */
+    transformIn: function (val, opt) {
+      if (opt && opt.depth === SCALE_MAPPER_DEPTH_OUT_OF_BREAK) {
+        return val;
+      }
+      // If the value is in the break, return the normalized value in the break
+      var elapsedVal = AXIS_BREAK_ELAPSED_BASE;
+      var lastBreakEnd = AXIS_BREAK_LAST_BREAK_END_BASE;
+      var stillOver = true;
+      for (var i = 0; i < this.breaks.length; i++) {
+        var brk = this.breaks[i];
+        if (val <= brk.vmax) {
+          if (val > brk.vmin) {
+            elapsedVal += brk.vmin - lastBreakEnd + (val - brk.vmin) / (brk.vmax - brk.vmin) * brk.gapReal;
+          } else {
+            elapsedVal += val - lastBreakEnd;
+          }
+          lastBreakEnd = brk.vmax;
+          stillOver = false;
+          break;
         }
+        elapsedVal += brk.vmin - lastBreakEnd + brk.gapReal;
         lastBreakEnd = brk.vmax;
-        stillOver = false;
-        break;
       }
-      lastElapsedEnd = elapsedEnd;
-      lastBreakEnd = brk.vmax;
+      if (stillOver) {
+        elapsedVal += val - lastBreakEnd;
+      }
+      return elapsedVal;
+    },
+    /**
+     * @see transformIn
+     * a.k.a., "unelapse"
+     */
+    transformOut: function (elapsedVal, opt) {
+      if (opt && opt.depth === SCALE_MAPPER_DEPTH_OUT_OF_BREAK) {
+        return elapsedVal;
+      }
+      var lastElapsedEnd = AXIS_BREAK_ELAPSED_BASE;
+      var lastBreakEnd = AXIS_BREAK_LAST_BREAK_END_BASE;
+      var stillOver = true;
+      var unelapsedVal = 0;
+      for (var i = 0; i < this.breaks.length; i++) {
+        var brk = this.breaks[i];
+        var elapsedStart = lastElapsedEnd + brk.vmin - lastBreakEnd;
+        var elapsedEnd = elapsedStart + brk.gapReal;
+        if (elapsedVal <= elapsedEnd) {
+          if (elapsedVal > elapsedStart) {
+            unelapsedVal = brk.vmin + (elapsedVal - elapsedStart) / (elapsedEnd - elapsedStart) * (brk.vmax - brk.vmin);
+          } else {
+            unelapsedVal = lastBreakEnd + elapsedVal - lastElapsedEnd;
+          }
+          lastBreakEnd = brk.vmax;
+          stillOver = false;
+          break;
+        }
+        lastElapsedEnd = elapsedEnd;
+        lastBreakEnd = brk.vmax;
+      }
+      if (stillOver) {
+        unelapsedVal = lastBreakEnd + elapsedVal - lastElapsedEnd;
+      }
+      return unelapsedVal;
     }
-    if (stillOver) {
-      unelapsedVal = lastBreakEnd + elapsedVal - lastElapsedEnd;
-    }
-    return unelapsedVal;
   };
-  return ScaleBreakContextImpl;
+  return BreakScaleMapperImpl;
 }();
 ;
-function createScaleBreakContext() {
-  return new ScaleBreakContextImpl();
+function createBreakScaleMapper(breakParsed, initialExtent) {
+  return new BreakScaleMapperImpl(breakParsed, initialExtent);
 }
-// Both can start with any finite value, and are not necessaryily equal. But they need to
+// Both can start with any finite value, and are not necessarily equal. But they need to
 // be the same in `axisBreakElapse` and `axisBreakUnelapse` respectively.
 var AXIS_BREAK_ELAPSED_BASE = 0;
 var AXIS_BREAK_LAST_BREAK_END_BASE = 0;
 /**
- * `gapReal` in brkCtx.breaks will be calculated.
+ * `gapReal` in brkMapper.breaks will be calculated.
  */
-function updateAxisBreakGapReal(brkCtx, scaleExtent) {
+function updateAxisBreakGapReal(brkMapper, scaleExtent) {
   // Considered the effect:
   //  - Use dataZoom to move some of the breaks outside the extent.
   //  - Some scenarios that `series.clip: false`.
@@ -273,7 +286,7 @@ function updateAxisBreakGapReal(brkCtx, scaleExtent) {
       tpPrct: init()
     }
   };
-  each(brkCtx.breaks, function (brk) {
+  each(brkMapper.breaks, function (brk) {
     var gapParsed = brk.gapParsed;
     if (gapParsed.type === 'tpPrct') {
       gapPrctSum += gapParsed.val;
@@ -299,12 +312,12 @@ function updateAxisBreakGapReal(brkCtx, scaleExtent) {
     }
   });
   var prctBrksGapRealSum = gapPrctSum * (0 + (scaleExtent[1] - scaleExtent[0]) + (fullyInExtBrksSum.tpAbs.val - fullyInExtBrksSum.tpAbs.span) + (semiInExtBrk.S.tpAbs.has ? (semiInExtBrk.S.tpAbs.val - semiInExtBrk.S.tpAbs.span) * semiInExtBrk.S.tpAbs.inExtFrac : 0) + (semiInExtBrk.E.tpAbs.has ? (semiInExtBrk.E.tpAbs.val - semiInExtBrk.E.tpAbs.span) * semiInExtBrk.E.tpAbs.inExtFrac : 0) - fullyInExtBrksSum.tpPrct.span - (semiInExtBrk.S.tpPrct.has ? semiInExtBrk.S.tpPrct.span * semiInExtBrk.S.tpPrct.inExtFrac : 0) - (semiInExtBrk.E.tpPrct.has ? semiInExtBrk.E.tpPrct.span * semiInExtBrk.E.tpPrct.inExtFrac : 0)) / (1 - fullyInExtBrksSum.tpPrct.val - (semiInExtBrk.S.tpPrct.has ? semiInExtBrk.S.tpPrct.val * semiInExtBrk.S.tpPrct.inExtFrac : 0) - (semiInExtBrk.E.tpPrct.has ? semiInExtBrk.E.tpPrct.val * semiInExtBrk.E.tpPrct.inExtFrac : 0));
-  each(brkCtx.breaks, function (brk) {
+  each(brkMapper.breaks, function (brk) {
     var gapParsed = brk.gapParsed;
     if (gapParsed.type === 'tpPrct') {
       brk.gapReal = gapPrctSum !== 0
       // prctBrksGapRealSum is supposed to be non-negative but add a safe guard
-      ? Math.max(prctBrksGapRealSum, 0) * gapParsed.val / gapPrctSum : 0;
+      ? mathMax(prctBrksGapRealSum, 0) * gapParsed.val / gapPrctSum : 0;
     }
     if (gapParsed.type === 'tpAbs') {
       brk.gapReal = gapParsed.val;
@@ -391,8 +404,8 @@ getTimeProps) {
  * If the intersection is only a point at scaleExtent[0] or scaleExtent[1], return null/undefined.
  */
 function clampBreakByExtent(brk, scaleExtent) {
-  var vmin = Math.max(brk.vmin, scaleExtent[0]);
-  var vmax = Math.min(brk.vmax, scaleExtent[1]);
+  var vmin = mathMax(brk.vmin, scaleExtent[0]);
+  var vmax = mathMin(brk.vmax, scaleExtent[1]);
   return vmin < vmax || vmin === vmax && vmin > scaleExtent[0] && vmin < scaleExtent[1] ? {
     vmin: vmin,
     vmax: vmax,
@@ -403,7 +416,7 @@ function clampBreakByExtent(brk, scaleExtent) {
 }
 function parseAxisBreakOption(
 // raw user input breaks, retrieved from axis model.
-breakOptionList, parse, opt) {
+breakOptionList, scale, opt) {
   var parsedBreaks = [];
   if (!breakOptionList) {
     return {
@@ -432,8 +445,8 @@ breakOptionList, parse, opt) {
     }
     var parsedBrk = {
       breakOption: clone(brkOption),
-      vmin: parse(brkOption.start),
-      vmax: parse(brkOption.end),
+      vmin: scale.parse(brkOption.start),
+      vmax: scale.parse(brkOption.end),
       gapParsed: {
         type: 'tpAbs',
         val: 0
@@ -455,7 +468,7 @@ breakOptionList, parse, opt) {
         }
       }
       if (!isPrct) {
-        var absolute = parse(brkOption.gap);
+        var absolute = scale.parse(brkOption.gap);
         if (!isFinite(absolute) || absolute < 0) {
           if (process.env.NODE_ENV !== 'production') {
             error("Axis breaks gap must positive finite rather than (" + brkOption.gap + ").");
@@ -505,7 +518,7 @@ breakOptionList, parse, opt) {
     lastEnd = brk.vmax;
   });
   return {
-    breaks: parsedBreaks.filter(function (brk) {
+    breaks: filter(parsedBreaks, function (brk) {
       return !!brk;
     })
   };
@@ -550,51 +563,54 @@ function retrieveAxisBreakPairs(itemList, getVisualAxisBreak, returnIdx) {
   });
   return result;
 }
-function getTicksLogTransformBreak(tick, logBase, logOriginalBreaks, fixRoundingError) {
-  var vBreak;
-  var brkRoundingCriterion;
-  if (tick["break"]) {
-    var brk = tick["break"].parsedBreak;
-    var originalBreak = find(logOriginalBreaks, function (brk) {
-      return identifyAxisBreak(brk.breakOption, tick["break"].parsedBreak.breakOption);
-    });
-    var vmin = fixRoundingError(Math.pow(logBase, brk.vmin), originalBreak.vmin);
-    var vmax = fixRoundingError(Math.pow(logBase, brk.vmax), originalBreak.vmax);
-    var gapParsed = {
-      type: brk.gapParsed.type,
-      val: brk.gapParsed.type === 'tpAbs' ? fixRound(Math.pow(logBase, brk.vmin + brk.gapParsed.val)) - vmin : brk.gapParsed.val
-    };
-    vBreak = {
-      type: tick["break"].type,
-      parsedBreak: {
-        breakOption: brk.breakOption,
-        vmin: vmin,
-        vmax: vmax,
-        gapParsed: gapParsed,
-        gapReal: brk.gapReal
-      }
-    };
-    brkRoundingCriterion = originalBreak[tick["break"].type];
+function getTicksBreakOutwardTransform(scale, tick, outermostBreaks, lookup) {
+  if (!tick["break"]) {
+    return;
   }
+  var brk = tick["break"].parsedBreak;
+  var originalBrkItem = find(outermostBreaks, function (brk) {
+    return identifyAxisBreak(brk.breakOption, tick["break"].parsedBreak.breakOption);
+  });
+  // NOTE: `tick.break` may have been clamped by scale extent.
+  var opt = {
+    lookup: lookup,
+    depth: SCALE_MAPPER_DEPTH_OUT_OF_BREAK
+  };
+  var vmin = scale.transformOut(brk.vmin, opt);
+  var vmax = scale.transformOut(brk.vmax, opt);
+  var parsedBreak = {
+    vmin: vmin,
+    vmax: vmax,
+    breakOption: brk.breakOption,
+    gapParsed: clone(originalBrkItem.gapParsed),
+    gapReal: brk.gapReal
+  };
   return {
-    brkRoundingCriterion: brkRoundingCriterion,
-    vBreak: vBreak
+    tickVal: parsedBreak[tick["break"].type],
+    vBreak: {
+      type: tick["break"].type,
+      parsedBreak: parsedBreak
+    }
   };
 }
-function logarithmicParseBreaksFromOption(breakOptionList, logBase, parse) {
-  var opt = {
-    noNegative: true
-  };
-  var parsedOriginal = parseAxisBreakOption(breakOptionList, parse, opt);
-  var parsedLogged = parseAxisBreakOption(breakOptionList, parse, opt);
-  var loggedBase = Math.log(logBase);
-  parsedLogged.breaks = map(parsedLogged.breaks, function (brk) {
-    var vmin = Math.log(brk.vmin) / loggedBase;
-    var vmax = Math.log(brk.vmax) / loggedBase;
+function parseAxisBreakOptionInwardTransform(breakOptionList, scale, parseOpt, lookupStartIdx, out) {
+  out.original = parseAxisBreakOption(breakOptionList, scale, parseOpt);
+  var transformed = out.transformed = parseAxisBreakOption(breakOptionList, scale, parseOpt);
+  var lookup = out.lookup;
+  transformed.breaks = map(transformed.breaks, function (brk, idx) {
+    var transOpt = {
+      depth: SCALE_MAPPER_DEPTH_OUT_OF_BREAK
+    };
+    var vmin = scale.transformIn(brk.vmin, transOpt);
+    var vmax = scale.transformIn(brk.vmax, transOpt);
     var gapParsed = {
       type: brk.gapParsed.type,
-      val: brk.gapParsed.type === 'tpAbs' ? Math.log(brk.vmin + brk.gapParsed.val) / loggedBase - vmin : brk.gapParsed.val
+      val: brk.gapParsed.type === 'tpAbs' ? scale.transformIn(brk.vmin + brk.gapParsed.val, transOpt) - vmin : brk.gapParsed.val
     };
+    lookup.from[lookupStartIdx + idx] = vmin;
+    lookup.to[lookupStartIdx + idx] = brk.vmin;
+    lookup.from[lookupStartIdx + idx + 1] = vmax;
+    lookup.to[lookupStartIdx + idx + 1] = brk.vmax;
     return {
       vmin: vmin,
       vmax: vmax,
@@ -603,10 +619,6 @@ function logarithmicParseBreaksFromOption(breakOptionList, logBase, parse) {
       breakOption: brk.breakOption
     };
   });
-  return {
-    parsedOriginal: parsedOriginal,
-    parsedLogged: parsedLogged
-  };
 }
 var BREAK_MIN_MAX_TO_PARAM = {
   vmin: 'start',
@@ -625,15 +637,15 @@ function makeAxisLabelFormatterParamBreak(extraParam, vBreak) {
 }
 export function installScaleBreakHelper() {
   registerScaleBreakHelperImpl({
-    createScaleBreakContext: createScaleBreakContext,
+    createBreakScaleMapper: createBreakScaleMapper,
     pruneTicksByBreak: pruneTicksByBreak,
     addBreaksToTicks: addBreaksToTicks,
     parseAxisBreakOption: parseAxisBreakOption,
     identifyAxisBreak: identifyAxisBreak,
     serializeAxisBreakIdentifier: serializeAxisBreakIdentifier,
     retrieveAxisBreakPairs: retrieveAxisBreakPairs,
-    getTicksLogTransformBreak: getTicksLogTransformBreak,
-    logarithmicParseBreaksFromOption: logarithmicParseBreaksFromOption,
+    getTicksBreakOutwardTransform: getTicksBreakOutwardTransform,
+    parseAxisBreakOptionInwardTransform: parseAxisBreakOptionInwardTransform,
     makeAxisLabelFormatterParamBreak: makeAxisLabelFormatterParamBreak
   });
 }

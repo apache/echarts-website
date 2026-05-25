@@ -1,20 +1,24 @@
-import BarSeriesModel from '../chart/bar/BarSeries.js';
 import Axis2D from '../coord/cartesian/Axis2D.js';
-import GlobalModel from '../model/Global.js';
-import { StageHandler, Dictionary } from '../util/types.js';
-/**
- * {
- *  [coordSysId]: {
- *      [stackId]: {bandWidth, offset, width}
- *  }
- * }
- */
-declare type BarWidthAndOffset = Dictionary<Dictionary<{
-    bandWidth: number;
-    offset: number;
-    offsetCenter: number;
-    width: number;
-}>>;
+import { StageHandler, NullUndefined } from '../util/types.js';
+import { EChartsExtensionInstallRegisters } from '../extension.js';
+import { AxisBandWidthResult } from '../coord/axisBand.js';
+import { BaseBarSeriesSubType } from './barCommon.js';
+interface BarGridLayoutAxisInfo {
+    seriesInfo: BarGridLayoutAxisSeriesInfo[];
+    bandWidthResult: AxisBandWidthResult;
+}
+interface BarGridLayoutAxisSeriesInfo {
+    barWidth: number;
+    barMaxWidth: number;
+    barMinWidth: number;
+    barGap: number | string;
+    defaultBarGap?: number | string;
+    barCategoryGap: number | string;
+    stackId: StackId;
+}
+declare type StackId = string & {
+    _: 'barGridStackId';
+};
 export interface BarGridLayoutOptionForCustomSeries {
     count: number;
     barWidth?: number | string;
@@ -23,23 +27,33 @@ export interface BarGridLayoutOptionForCustomSeries {
     barGap?: number | string;
     barCategoryGap?: number | string;
 }
-interface LayoutOption extends BarGridLayoutOptionForCustomSeries {
+interface BarGridLayoutOption extends BarGridLayoutOptionForCustomSeries {
     axis: Axis2D;
 }
-export declare type BarGridLayoutResult = BarWidthAndOffset[string][string][];
+declare type BarWidthAndOffsetOnAxis = Record<StackId, BarGridLayoutResultItemInternal>;
+export declare type BarGridColumnLayoutOnAxis = BarGridLayoutAxisInfo & {
+    columnMap: BarWidthAndOffsetOnAxis;
+};
+declare type BarGridLayoutResultItemInternal = {
+    bandWidth: BarGridLayoutAxisInfo['bandWidthResult']['w'];
+    offset: number;
+    width: number;
+};
+declare type BarGridLayoutResultItem = BarGridLayoutResultItemInternal & {
+    offsetCenter: number;
+};
+export declare type BarGridLayoutResultForCustomSeries = BarGridLayoutResultItem[] | NullUndefined;
 /**
- * @return {Object} {width, offset, offsetCenter} If axis.type is not 'category', return undefined.
+ * Return null/undefined if not 'category' axis.
+ *
+ * PENDING: The layout on non-'category' axis relies on `bandWidth`, which is calculated
+ * based on the `linearPositiveMinGap` of series data. This strategy is somewhat heuristic
+ * and will not be public to custom series until required in future. Additionally, more ec
+ * options may be introduced for that, because it requires `requireAxisStatistics` to be
+ * called on custom series that requires this feature.
  */
-export declare function getLayoutOnAxis(opt: LayoutOption): BarGridLayoutResult;
-export declare function prepareLayoutBarSeries(seriesType: string, ecModel: GlobalModel): BarSeriesModel[];
-export declare function makeColumnLayout(barSeries: BarSeriesModel[]): BarWidthAndOffset;
-/**
- * @param barWidthAndOffset The result of makeColumnLayout
- * @param seriesModel If not provided, return all.
- * @return {stackId: {offset, width}} or {offset, width} if seriesModel provided.
- */
-declare function retrieveColumnLayout(barWidthAndOffset: BarWidthAndOffset, axis: Axis2D): typeof barWidthAndOffset[string];
-declare function retrieveColumnLayout(barWidthAndOffset: BarWidthAndOffset, axis: Axis2D, seriesModel: BarSeriesModel): typeof barWidthAndOffset[string][string];
-export { retrieveColumnLayout };
-export declare function layout(seriesType: string, ecModel: GlobalModel): void;
+export declare function computeBarLayoutForCustomSeries(opt: BarGridLayoutOption): BarGridLayoutResultForCustomSeries;
+export declare function createCrossSeriesLayoutHandler(seriesType: BaseBarSeriesSubType): StageHandler;
 export declare function createProgressiveLayout(seriesType: string): StageHandler;
+export declare function registerBarGridAxisHandlers(registers: EChartsExtensionInstallRegisters): void;
+export {};

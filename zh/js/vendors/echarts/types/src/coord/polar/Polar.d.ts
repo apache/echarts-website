@@ -46,7 +46,6 @@ declare class Polar implements CoordinateSystem, CoordinateSystemMaster {
     getOtherAxis(axis: AngleAxis | RadiusAxis): AngleAxis | RadiusAxis;
     /**
      * Base axis will be used on stacking.
-     *
      */
     getBaseAxis(): AngleAxis | RadiusAxis;
     getTooltipAxes(dim: 'radius' | 'angle' | 'auto'): {

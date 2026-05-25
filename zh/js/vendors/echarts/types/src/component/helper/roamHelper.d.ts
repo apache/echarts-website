@@ -1,46 +1,18 @@
-import Element from 'zrender/lib/Element.js';
-import type SeriesModel from '../../model/Series.js';
 import ExtensionAPI from '../../core/ExtensionAPI.js';
 import Group from 'zrender/lib/graphic/Group.js';
-import RoamController from './RoamController.js';
-import type { SeriesOption } from '../../export/option.js';
-import type View from '../../coord/View.js';
-import type { NullUndefined, RoamOptionMixin, Payload } from '../../util/types.js';
+import RoamController, { RoamOption } from './RoamController.js';
+import View from '../../coord/View.js';
+import { NullUndefined, ComponentMainType, ComponentSubType, RoamPayload, RoamHostComponentOrSeries, RoamOptionMixin } from '../../util/types.js';
 import { BoundingRect } from '../../util/graphic.js';
-export interface ZoomLimit {
-    max?: number;
-    min?: number;
-}
-export interface RoamControllerHost {
-    target: Element;
-    zoom?: number;
-    zoomLimit?: ZoomLimit;
-}
+import { EChartsExtensionInstallRegisters } from '../../extension.js';
+import { RectLike } from 'zrender/lib/core/BoundingRect.js';
 /**
- * [CAVEAT] `updateViewOnPan` and `updateViewOnZoom` modifies the group transform directly,
- *  but the 'center' and 'zoom' in echarts option and 'View' coordinate system are not updated yet,
- *  which must be performed later in 'xxxRoam' action by calling `updateCenterAndZoom`.
- * @see {updateCenterAndZoomInAction}
+ * An abstraction for some similar impl in roaming.
+ *
+ * Require action like `registerRoamActionSimply`.
  */
-export declare function updateViewOnPan(controllerHost: RoamControllerHost, dx: number, dy: number): void;
-export declare function updateViewOnZoom(controllerHost: RoamControllerHost, zoomDelta: number, zoomX: number, zoomY: number): void;
-/**
- * A abstraction for some similar impl in roaming.
- */
-export declare function updateController(seriesModel: SeriesModel<SeriesOption & RoamOptionMixin>, api: ExtensionAPI, pointerCheckerEl: Group, controller: RoamController, controllerHost: RoamControllerHost, clipRect: BoundingRect | NullUndefined): void;
-export interface RoamPayload extends Payload {
-    dx: number;
-    dy: number;
-    zoom: number;
-    originX: number;
-    originY: number;
-}
-/**
- * Should be called only in action handler.
- * @see {updateViewOnPan|updateViewOnZoom}
- */
-export declare function updateCenterAndZoomInAction(view: View, payload: RoamPayload, zoomLimit?: ZoomLimit): {
-    center: number[];
-    zoom: number;
-};
-export declare function clampByZoomLimit(zoom: number, zoomLimit: ZoomLimit | NullUndefined): number;
+export declare function updateRoamControllerSimply(componentOrSeries: RoamHostComponentOrSeries, api: ExtensionAPI, controller: RoamController, isInSelf: RoamOption['triggerInfo']['isInSelf'], clipRect: BoundingRect | NullUndefined, extraOnRoam?: ((roamOp: 'zoom' | 'pan') => void) | NullUndefined, roamTypeDefault?: RoamOptionMixin['roam'], geoBackwardCompat?: boolean): void;
+export declare function createIsInSelfByPointerCheckerEl(pointerCheckerEl: Group): RoamOption['triggerInfo']['isInSelf'];
+export declare function registerRoamActionSimply(registers: EChartsExtensionInstallRegisters, mainType: ComponentMainType, subType: ComponentSubType | NullUndefined): void;
+export declare function isRoamPayloadHasZoom(payload: RoamPayload): boolean;
+export declare function createViewCoordSysSimply(componentOrSeries: RoamHostComponentOrSeries, api: ExtensionAPI, x: number, y: number, width: number, height: number, viewRect?: RectLike | NullUndefined): View;

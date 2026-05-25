@@ -54,6 +54,7 @@ export var OUTER_BOUNDS_DEFAULT = {
   bottom: 0
 };
 export var OUTER_BOUNDS_CLAMP_DEFAULT = ['25%', '25%'];
+export var COORD_SYS_TYPE_CARTESIAN_2D = 'cartesian2d';
 var GridModel = /** @class */function (_super) {
   __extends(GridModel, _super);
   function GridModel() {

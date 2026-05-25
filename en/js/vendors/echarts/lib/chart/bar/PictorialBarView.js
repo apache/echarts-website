@@ -53,6 +53,7 @@ import { setLabelStyle, getLabelStatesModels } from '../../label/labelStyle.js';
 import ZRImage from 'zrender/lib/graphic/Image.js';
 import { getECData } from '../../util/innerStore.js';
 import { createClipPath } from '../helper/createClipPathFromCoordSys.js';
+import { SERIES_TYPE_PICTORIAL_BAR } from '../../layout/barCommon.js';
 var BAR_BORDER_WIDTH_QUERY = ['itemStyle', 'borderWidth'];
 // index: +isHorizontal
 var LAYOUT_ATTRS = [{
@@ -71,7 +72,7 @@ var PictorialBarView = /** @class */function (_super) {
   __extends(PictorialBarView, _super);
   function PictorialBarView() {
     var _this = _super !== null && _super.apply(this, arguments) || this;
-    _this.type = PictorialBarView.type;
+    _this.type = SERIES_TYPE_PICTORIAL_BAR;
     return _this;
   }
   PictorialBarView.prototype.render = function (seriesModel, ecModel, api) {
@@ -155,7 +156,7 @@ var PictorialBarView = /** @class */function (_super) {
       group.removeAll();
     }
   };
-  PictorialBarView.type = 'pictorialBar';
+  PictorialBarView.type = SERIES_TYPE_PICTORIAL_BAR;
   return PictorialBarView;
 }(ChartView);
 // Set or calculate default value about symbol, and calculate layout info.

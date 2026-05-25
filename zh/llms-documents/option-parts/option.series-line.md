@@ -292,7 +292,67 @@ URL 为 `dataURI` 例如：
 
 堆叠的组名。在**同一个类目轴（category axis）**上，配置了相同 `stack` 组名的系列会互相堆叠。关于数值的堆叠方式，可参见 [stackStrategy](option.series-line.md#stackStrategy)。
 
-**注意：**堆叠功能只支持被堆叠轴为 `'value'` 或 `'log'` 类型，不支持被堆叠轴为 `'time'` 或 `'category'` 类型。
+[笛卡尔坐标系](option.grid.md) 或 [极坐标系](option.polar.md) 中，两个坐标轴决定了系列的每个图形的位置。讨论 `stack` 时我们可以这样命名它们：
+
+*   **Stacked Axis**：这个坐标轴上的系列值会被堆叠。这里只有 `axis.type: 'value' | 'log'` 的坐标轴能支持堆叠。
+*   **Base Axis**：这个坐标轴上的系列值**不**会被堆叠。但是这个坐标轴影响堆叠的分组策略：
+    *   如果 Base Axis 是 `axis.type: 'category'`: 系列的数据项会根据此坐标轴上的值进行分组。例如，
+        
+        ```
+          option = {
+              xAxis: {type: 'category'},
+              yAxis: {type: 'value'},
+              series: [{
+                  stack: 'ss',
+                  data: [['a', 10], ['b', 20], ['c', 30]]
+              }, {
+                  stack: 'ss',
+                  data: [['b', 900], ['c', 800], ['a', 700]]
+              }, {
+                  stack: 'ss',
+                  data: [['a', 3000], ['c', 4000]]
+              }]
+          };
+          // "Base Axis" 是 xAxis。系列的诸数据项根据 xAxis 上的值
+          // （即 data[i][0]）进行分组。
+          // 堆叠结果为：
+          stackedResult = [{
+              data: [['a', 10], ['b', 20], ['c', 30]]
+          }, {
+              data: [['a', 10 + 700], ['b', 20 + 900], ['c', 30 + 800]]
+          }, {
+              data: [['a', 10 + 700 + 3000], ['b', 20 + 900 + 0], ['c', 30 + 800 + 4000]]
+          }]
+        ```
+        
+    *   如果 Base Axis 是 `axis.type: 'value' | 'time' | 'log'`: 当前只支持根据 data index 对数据项进行分组（出于性能考虑）。**使用者须保证不同系列的 data index 正确对应**。例如，
+        
+        ```
+          option = {
+              xAxis: {type: 'value'},
+              yAxis: {type: 'value'},
+              series: [{
+                  stack: 'ss',
+                  data: [[0.01, 10], [0.05, 20], [0.13, 30]]
+              }, {
+                  stack: 'ss',
+                  data: [[0.01, 700], [0.05, 900], [0.13, 800]]
+              }, {
+                  stack: 'ss',
+                  data: [[0.01, 3000], null, [0.13, 4000]]
+              }]
+          };
+          // "Base Axis" 是 xAxis 。系列的诸数据项根据 data index 进行分组。
+          // 堆叠结果为：
+          stackedResult = [{
+              data: [[0.01, 10], [0.05, 20], [0.13, 30]]
+          }, {
+              data: [[0.01, 10 + 700], [0.05, 20 + 900], [0.13, 30 + 800]]
+          }, {
+              data: [[0.01, 10 + 700 + 3000], [0.05, 20 + 900 + 0], [0.13, 30 + 800 + 4000]]
+          }]
+        ```
+        
 
 下面示例可以通过右上角 [toolbox](option.toolbox.md) 中的堆叠切换看效果：
 
@@ -328,7 +388,7 @@ URL 为 `dataURI` 例如：
 
 ## cursor
 - **Type**: `string`
-- **Default**: `'pointer'`
+- **Default**: `pointer`
 
 鼠标悬浮时在图形元素上时鼠标的样式是什么。同 CSS 的 `cursor`。
 
@@ -344,17 +404,49 @@ URL 为 `dataURI` 例如：
 
 从 `v4.4.0` 开始支持
 
-是否裁剪超出坐标系部分的图形，具体裁剪效果根据系列决定：
+是否基于坐标系区域对系列的图形进行剪裁。
 
-*   散点图/带有涟漪特效动画的散点（气泡）图：忽略中心点超出坐标系的图形，但是不裁剪单个图形
-*   柱状图：裁掉完全超出的柱子，但是不会裁剪只超出部分的柱子
-*   折线图：裁掉所有超出坐标系的折线部分，拐点图形的逻辑按照散点图处理
-*   路径图：裁掉所有超出坐标系的部分
-*   K 线图：忽略整体都超出坐标系的图形，但是不裁剪单个图形
-*   象形柱图：裁掉所有超出坐标系的部分（从 v5.5.0 开始支持）
-*   自定义系列：裁掉所有超出坐标系的部分
+具体裁剪效果是：
 
-除了象形柱图和自定义系列，其它系列的默认值都为 true，及开启裁剪，如果你觉得不想要裁剪的话，可以设置成 false 关闭。
+*   对于折线：剪裁掉折线的超出坐标系的部分。
+*   对于拐点图形：如果图形中心点超出坐标系，则此图形整体不显示；不会裁剪单个图形。
+
+## triggerEvent
+- **Type**: `boolean|string`
+- **Default**: `false`
+
+从 `v6.1.0` 开始支持
+
+鼠标和触摸事件是否发送给开发者注册的监听器（`chart.on('xxx', function (event) {})`）。
+
+支持的鼠标和触摸事件为 `'click'`、`'dblclick'`、`'mouseover'`、`'mouseout'`、`'mousemove'`、`'mousedown'`、`'mouseup'`、`'globalout'`、`'contextmenu'`。注意，鼠标和触摸事件都统一使用名字 `'mouse{xxx}'`。
+
+可取值：
+
+*   `true`: 允许对外发送事件。但是它也需要 `silent` 配置项为 `false` 才能真正发送事件。
+*   `false`: 禁止对外发送事件，哪怕 `silent` 配置项为 `false`。
+    
+*   `'line'`: 只有在线条上交互时派发事件。 Only the line is the interactive element.
+    
+*   `'area'`: 只有在区域（当使用 `areaStyle` 时候存在）上交互时派发事件。
+
+事件的参数包括：
+
+```
+{
+    componentType: 'series';
+    componentSubType: 'line';
+    seriesType: 'line';
+    // 序数（从 0 起），基于 echarts options 的声明。
+    componentIndex: number;
+    // 同 `componentIndex`。
+    seriesIndex: number;
+    // 声明的 `series.name`。
+    seriesName: seriesModel.name;
+    // 为了区分事件触发于 area 还是 line。
+    selfType: 'area' | 'line';
+}
+```
 
 ## triggerLineEvent
 - **Type**: `boolean`
@@ -362,7 +454,9 @@ URL 为 `dataURI` 例如：
 
 从 `v5.2.2` 开始支持
 
-线条和区域面积是否触发事件
+从 `v6.1.0` 开始不推荐使用（deprecated）。Use `triggerEvent` instead.
+
+线条和区域面积是否触发事件。
 
 ## step
 - **Type**: `string|boolean`
@@ -14301,7 +14395,9 @@ tooltip 中数值显示部分的格式化回调函数。
 (value: number | string, dataIndex: number) => string
 ```
 
-`dataIndex` 参数 从 `v5.3.0` 开始支持
+从 `v5.5.0` 开始支持`dataIndex` 参数。但是其值当 `dataZoom` 存在时不合理，因为所取的值是数据被 `dataZoom` 过滤后的 index。
+
+从 `v6.1.0` 开始支持`dataIndex` 参数修正 `dataZoom` 过滤前的 index
 
 示例：
 
@@ -14631,7 +14727,14 @@ URL 为 `dataURI` 例如：
 - **Type**: `boolean`
 - **Default**: `false`
 
-图形是否不响应和触发鼠标事件，默认为 false，即响应和触发鼠标事件。
+图形是否不响应和用户交互（鼠标和触摸事件）。
+
+*   `true`: 图形不响应用户交互。这导致：
+    *   用户交互功能被禁止，例如 `tooltip`、鼠标悬浮时的状态变化（`emphasis`），鼠标悬浮时的联动等。
+    *   对外的鼠标和触摸事件不再发送给开发者注册的监听器（`chart.on('xxx', listener)`）。
+*   `false`:
+    *   用户交互功能不被此配置项禁止，但是是否可交互仍取决于其他相关配置项的设置。
+    *   对外的鼠标和触摸事件不被此配置项禁止，但是是否发送仍取决于其他配置项，一般是 `triggerEvent`（如果支持此配置项的话）。
 
 ### markPoint.label
 - **Type**: `Object`
@@ -20043,7 +20146,14 @@ animationDelayUpdate: function (idx) {
 - **Type**: `boolean`
 - **Default**: `false`
 
-图形是否不响应和触发鼠标事件，默认为 false，即响应和触发鼠标事件。
+图形是否不响应和用户交互（鼠标和触摸事件）。
+
+*   `true`: 图形不响应用户交互。这导致：
+    *   用户交互功能被禁止，例如 `tooltip`、鼠标悬浮时的状态变化（`emphasis`），鼠标悬浮时的联动等。
+    *   对外的鼠标和触摸事件不再发送给开发者注册的监听器（`chart.on('xxx', listener)`）。
+*   `false`:
+    *   用户交互功能不被此配置项禁止，但是是否可交互仍取决于其他相关配置项的设置。
+    *   对外的鼠标和触摸事件不被此配置项禁止，但是是否发送仍取决于其他配置项，一般是 `triggerEvent`（如果支持此配置项的话）。
 
 ### markLine.symbol
 - **Type**: `string|Array`
@@ -29144,7 +29254,14 @@ animationDelayUpdate: function (idx) {
 - **Type**: `boolean`
 - **Default**: `false`
 
-图形是否不响应和触发鼠标事件，默认为 false，即响应和触发鼠标事件。
+图形是否不响应和用户交互（鼠标和触摸事件）。
+
+*   `true`: 图形不响应用户交互。这导致：
+    *   用户交互功能被禁止，例如 `tooltip`、鼠标悬浮时的状态变化（`emphasis`），鼠标悬浮时的联动等。
+    *   对外的鼠标和触摸事件不再发送给开发者注册的监听器（`chart.on('xxx', listener)`）。
+*   `false`:
+    *   用户交互功能不被此配置项禁止，但是是否可交互仍取决于其他相关配置项的设置。
+    *   对外的鼠标和触摸事件不被此配置项禁止，但是是否发送仍取决于其他配置项，一般是 `triggerEvent`（如果支持此配置项的话）。
 
 ### markArea.label
 - **Type**: `Object`
@@ -38666,7 +38783,14 @@ animationDelayUpdate: function (idx) {
 - **Type**: `boolean`
 - **Default**: `false`
 
-图形是否不响应和触发鼠标事件，默认为 false，即响应和触发鼠标事件。
+图形是否不响应和用户交互（鼠标和触摸事件）。
+
+*   `true`: 图形不响应用户交互。这导致：
+    *   用户交互功能被禁止，例如 `tooltip`、鼠标悬浮时的状态变化（`emphasis`），鼠标悬浮时的联动等。
+    *   对外的鼠标和触摸事件不再发送给开发者注册的监听器（`chart.on('xxx', listener)`）。
+*   `false`:
+    *   用户交互功能不被此配置项禁止，但是是否可交互仍取决于其他相关配置项的设置。
+    *   对外的鼠标和触摸事件不被此配置项禁止，但是是否发送仍取决于其他配置项，一般是 `triggerEvent`（如果支持此配置项的话）。
 
 ## animation
 - **Type**: `boolean`
@@ -39154,7 +39278,9 @@ tooltip 中数值显示部分的格式化回调函数。
 (value: number | string, dataIndex: number) => string
 ```
 
-`dataIndex` 参数 从 `v5.3.0` 开始支持
+从 `v5.5.0` 开始支持`dataIndex` 参数。但是其值当 `dataZoom` 存在时不合理，因为所取的值是数据被 `dataZoom` 过滤后的 index。
+
+从 `v6.1.0` 开始支持`dataIndex` 参数修正 `dataZoom` 过滤前的 index
 
 示例：
 

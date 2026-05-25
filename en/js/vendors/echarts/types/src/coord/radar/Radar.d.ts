@@ -6,7 +6,7 @@ import ExtensionAPI from '../../core/ExtensionAPI.js';
 import { ScaleDataValue } from '../../util/types.js';
 import { ParsedModelFinder } from '../../util/model.js';
 declare class Radar implements CoordinateSystem, CoordinateSystemMaster {
-    readonly type: 'radar';
+    readonly type = "radar";
     /**
      *
      * Radar dimensions

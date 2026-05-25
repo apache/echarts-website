@@ -47,9 +47,12 @@ import { circularLayout } from './circularLayoutHelper.js';
 import { linearMap } from '../../util/number.js';
 import * as vec2 from 'zrender/lib/core/vector.js';
 import * as zrUtil from 'zrender/lib/core/util.js';
+import { SERIES_TYPE_GRAPH } from './GraphSeries.js';
 import { getCurvenessForEdge } from '../helper/multipleGraphEdgeHelper.js';
-export default function graphForceLayout(ecModel) {
-  ecModel.eachSeriesByType('graph', function (graphSeries) {
+import { createSimpleOverallStageHandler } from '../../util/model.js';
+export var graphForceLayoutStageHandler = createSimpleOverallStageHandler(SERIES_TYPE_GRAPH, graphForceLayout);
+function graphForceLayout(ecModel) {
+  ecModel.eachSeriesByType(SERIES_TYPE_GRAPH, function (graphSeries) {
     var coordSys = graphSeries.coordinateSystem;
     if (coordSys && coordSys.type !== 'view') {
       return;

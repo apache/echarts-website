@@ -43,8 +43,10 @@
 */
 import * as zrUtil from 'zrender/lib/core/util.js';
 import * as textContain from 'zrender/lib/contain/text.js';
-import { makeInner } from '../util/model.js';
-import { makeLabelFormatter, getOptionCategoryInterval, shouldShowAllLabels } from './axisHelper.js';
+import { makeInner, removeDuplicates, removeDuplicatesGetKeyFromItemItself } from '../util/model.js';
+import { makeLabelFormatter, getOptionCategoryInterval } from './axisHelper.js';
+import { asc } from '../util/number.js';
+import { ordinalScaleCreateTicks } from '../scale/helper.js';
 var modelInner = makeInner();
 var axisInner = makeInner();
 export var AxisTickLabelComputingKind = {
@@ -59,39 +61,19 @@ export function createAxisLabelsComputingContext(kind) {
     kind: kind
   };
 }
-function tickValuesToNumbers(axis, values) {
-  var nums = zrUtil.map(values, function (val) {
-    return axis.scale.parse(val);
-  });
-  if (axis.type === 'time' && nums.length > 0) {
-    // Time axis needs duplicate first/last tick (see TimeScale.getTicks())
-    // The first and last tick/label don't get drawn
-    nums.sort();
-    nums.unshift(nums[0]);
-    nums.push(nums[nums.length - 1]);
-  }
-  return nums;
-}
+/**
+ * CAUTION: Do not modify the result.
+ */
 export function createAxisLabels(axis, ctx) {
   var custom = axis.getLabelModel().get('customValues');
   if (custom) {
-    var labelFormatter_1 = makeLabelFormatter(axis);
-    var extent_1 = axis.scale.getExtent();
-    var tickNumbers = tickValuesToNumbers(axis, custom);
-    var ticks = zrUtil.filter(tickNumbers, function (val) {
-      return val >= extent_1[0] && val <= extent_1[1];
-    });
+    var scale_1 = axis.scale;
     return {
-      labels: zrUtil.map(ticks, function (numval) {
-        var tick = {
-          value: numval
-        };
+      labels: zrUtil.map(parseTickLabelCustomValues(custom, scale_1), function (tick, index) {
         return {
-          formattedLabel: labelFormatter_1(tick),
-          rawLabel: axis.scale.getLabel(tick),
-          tickValue: numval,
-          time: undefined,
-          "break": undefined
+          formattedLabel: makeLabelFormatter(axis)(tick, index),
+          rawLabel: scale_1.getLabel(tick),
+          tick: tick
         };
       })
     };
@@ -100,25 +82,39 @@ export function createAxisLabels(axis, ctx) {
   return axis.type === 'category' ? makeCategoryLabels(axis, ctx) : makeRealNumberLabels(axis);
 }
 /**
+ * CAUTION: Do not modify the result.
+ *
  * @param tickModel For example, can be axisTick, splitLine, splitArea.
  */
 export function createAxisTicks(axis, tickModel, opt) {
+  var scale = axis.scale;
   var custom = axis.getTickModel().get('customValues');
   if (custom) {
-    var extent_2 = axis.scale.getExtent();
-    var tickNumbers = tickValuesToNumbers(axis, custom);
     return {
-      ticks: zrUtil.filter(tickNumbers, function (val) {
-        return val >= extent_2[0] && val <= extent_2[1];
-      })
+      ticks: parseTickLabelCustomValues(custom, scale)
     };
   }
   // Only ordinal scale support tick interval
   return axis.type === 'category' ? makeCategoryTicks(axis, tickModel) : {
-    ticks: zrUtil.map(axis.scale.getTicks(opt), function (tick) {
-      return tick.value;
-    })
+    ticks: scale.getTicks(opt)
   };
+}
+function parseTickLabelCustomValues(customValues, scale) {
+  var extent = scale.getExtent();
+  var tickNumbers = [];
+  zrUtil.each(customValues, function (val) {
+    val = scale.parse(val);
+    if (val >= extent[0] && val <= extent[1]) {
+      tickNumbers.push(val);
+    }
+  });
+  removeDuplicates(tickNumbers, removeDuplicatesGetKeyFromItemItself, null);
+  asc(tickNumbers);
+  return zrUtil.map(tickNumbers, function (tickVal) {
+    return {
+      value: tickVal
+    };
+  });
 }
 function makeCategoryLabels(axis, ctx) {
   var labelModel = axis.getLabelModel();
@@ -144,10 +140,10 @@ function makeCategoryLabelsActually(axis, labelModel, ctx) {
   var labels;
   var numericLabelInterval;
   if (zrUtil.isFunction(optionLabelInterval)) {
-    labels = makeLabelsByCustomizedCategoryInterval(axis, optionLabelInterval);
+    labels = makeTicksLabelsByCategoryIntervalNumOrCb(axis, optionLabelInterval, false);
   } else {
     numericLabelInterval = optionLabelInterval === 'auto' ? makeAutoCategoryInterval(axis, ctx) : optionLabelInterval;
-    labels = makeLabelsByNumericCategoryInterval(axis, numericLabelInterval);
+    labels = makeTicksLabelsByCategoryIntervalNumOrCb(axis, numericLabelInterval, false);
   }
   var result = {
     labels: labels,
@@ -178,7 +174,7 @@ function makeCategoryTicks(axis, tickModel) {
     ticks = [];
   }
   if (zrUtil.isFunction(optionTickInterval)) {
-    ticks = makeLabelsByCustomizedCategoryInterval(axis, optionTickInterval, true);
+    ticks = makeTicksLabelsByCategoryIntervalNumOrCb(axis, optionTickInterval, true);
   }
   // Always use label interval by default despite label show. Consider this
   // scenario, Use multiple grid with the xAxis sync, and only one xAxis shows
@@ -187,11 +183,11 @@ function makeCategoryTicks(axis, tickModel) {
     var labelsResult = makeCategoryLabelsActually(axis, axis.getLabelModel(), createAxisLabelsComputingContext(AxisTickLabelComputingKind.determine));
     tickCategoryInterval = labelsResult.labelCategoryInterval;
     ticks = zrUtil.map(labelsResult.labels, function (labelItem) {
-      return labelItem.tickValue;
+      return labelItem.tick;
     });
   } else {
     tickCategoryInterval = optionTickInterval;
-    ticks = makeLabelsByNumericCategoryInterval(axis, tickCategoryInterval, true);
+    ticks = makeTicksLabelsByCategoryIntervalNumOrCb(axis, tickCategoryInterval, true);
   }
   // Cache to avoid calling interval function repeatedly.
   return axisCacheSet(ticksCache, optionTickInterval, {
@@ -207,9 +203,7 @@ function makeRealNumberLabels(axis) {
       return {
         formattedLabel: labelFormatter(tick, idx),
         rawLabel: axis.scale.getLabel(tick),
-        tickValue: tick.value,
-        time: tick.time,
-        "break": tick["break"]
+        tick: tick
       };
     })
   };
@@ -262,7 +256,7 @@ function makeAutoCategoryInterval(axis, ctx) {
 }
 /**
  * Calculate interval for category axis ticks and labels.
- * Use a stretegy to try to avoid overlapping.
+ * Use a strategy to try to avoid overlapping.
  * To get precise result, at least one of `getRotate` and `isHorizontal`
  * should be implemented in axis.
  */
@@ -364,72 +358,29 @@ function fetchAutoCategoryIntervalCalculationParams(axis) {
     font: labelModel.getFont()
   };
 }
-function makeLabelsByNumericCategoryInterval(axis, categoryInterval, onlyTick) {
+function makeTicksLabelsByCategoryIntervalNumOrCb(axis, categoryInterval, onlyTick) {
   var labelFormatter = makeLabelFormatter(axis);
   var ordinalScale = axis.scale;
-  var ordinalExtent = ordinalScale.getExtent();
-  var labelModel = axis.getLabelModel();
   var result = [];
-  // TODO: axisType: ordinalTime, pick the tick from each month/day/year/...
-  var step = Math.max((categoryInterval || 0) + 1, 1);
-  var startTick = ordinalExtent[0];
-  var tickCount = ordinalScale.count();
-  // Calculate start tick based on zero if possible to keep label consistent
-  // while zooming and moving while interval > 0. Otherwise the selection
-  // of displayable ticks and symbols probably keep changing.
-  // 3 is empirical value.
-  if (startTick !== 0 && step > 1 && tickCount / step > 2) {
-    startTick = Math.round(Math.ceil(startTick / step) * step);
-  }
-  // (1) Only add min max label here but leave overlap checking
-  // to render stage, which also ensure the returned list
-  // suitable for splitLine and splitArea rendering.
-  // (2) Scales except category always contain min max label so
-  // do not need to perform this process.
-  var showAllLabel = shouldShowAllLabels(axis);
-  var includeMinLabel = labelModel.get('showMinLabel') || showAllLabel;
-  var includeMaxLabel = labelModel.get('showMaxLabel') || showAllLabel;
-  if (includeMinLabel && startTick !== ordinalExtent[0]) {
-    addItem(ordinalExtent[0]);
-  }
-  // Optimize: avoid generating large array by `ordinalScale.getTicks()`.
-  var tickValue = startTick;
-  for (; tickValue <= ordinalExtent[1]; tickValue += step) {
-    addItem(tickValue);
-  }
-  if (includeMaxLabel && tickValue - step !== ordinalExtent[1]) {
-    addItem(ordinalExtent[1]);
-  }
-  function addItem(tickValue) {
-    var tickObj = {
-      value: tickValue
-    };
-    result.push(onlyTick ? tickValue : {
-      formattedLabel: labelFormatter(tickObj),
-      rawLabel: ordinalScale.getLabel(tickObj),
-      tickValue: tickValue,
-      time: undefined,
-      "break": undefined
-    });
-  }
-  return result;
-}
-function makeLabelsByCustomizedCategoryInterval(axis, categoryInterval, onlyTick) {
-  var ordinalScale = axis.scale;
-  var labelFormatter = makeLabelFormatter(axis);
-  var result = [];
-  zrUtil.each(ordinalScale.getTicks(), function (tick) {
-    var rawLabel = ordinalScale.getLabel(tick);
-    var tickValue = tick.value;
-    if (categoryInterval(tick.value, rawLabel)) {
-      result.push(onlyTick ? tickValue : {
-        formattedLabel: labelFormatter(tick),
-        rawLabel: rawLabel,
-        tickValue: tickValue,
-        time: undefined,
-        "break": undefined
-      });
+  var categoryIntervalIsCb = zrUtil.isFunction(categoryInterval);
+  ordinalScaleCreateTicks(ordinalScale, categoryIntervalIsCb ? 0 : categoryInterval, function (tickObj, isExtentBoundary) {
+    var tickLabel = ordinalScale.getLabel(tickObj);
+    if (categoryIntervalIsCb) {
+      // When interval is function, a falsy return means ignore the tick.
+      // It is time consuming for large category data.
+      var isOnInterval = !!categoryInterval(tickObj.value, tickLabel);
+      tickObj.offInterval = !isOnInterval;
+      // axis extent min max labels should be always included and the display strategy
+      // is adopted uniformly later in `AxisBuilder`.
+      if (!isOnInterval && !isExtentBoundary) {
+        return;
+      }
     }
+    result.push(onlyTick ? tickObj : {
+      formattedLabel: labelFormatter(tickObj),
+      rawLabel: tickLabel,
+      tick: tickObj
+    });
   });
   return result;
 }

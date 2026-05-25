@@ -146,9 +146,23 @@ declare class ComponentModel<Opt extends ComponentOption = ComponentOption> exte
         height: import("../util/types").PositionSizeOption;
     };
     /**
-     * Get key for zlevel.
-     * If developers don't configure zlevel. We will assign zlevel to series based on the key.
-     * For example, lines with trail effect and progressive series will in an individual zlevel.
+     * If developers don't configure zlevel. We will assign zlevel to series based on the key, if provided.
+     * For example, lines with trail effect is expected to be in an individual zlevel.
+     *
+     * @tutorial [GET_ZLEVEL_KEY_FOR_PROGRESSIVE]
+     * Regarding "progressive rendering", zrender can automatically assign a dedicated "incremental layer"
+     * for `el.incremental` per zlevel. But there is a trade-off:
+     *  - If we do not provide different zlevelKey for different series here, all incremental elements from
+     *    different series will be assigned to one incremental layer, which causes them to cover each other
+     *    in an order depending on progressive steps.
+     *      i.e., seriesA_el1 -covered_by-> seriesB_el1 -covered_by-> seriesC_el1 -> seriesA_el2 -> seriesB_el2 ...
+     *    This order may causes an unexpected visual result: series with small data are likely to be completely
+     *    covered by series with large data. (like in test/scatter-weibo.html)
+     *  - If we assign a different zlevelKey to each series, the "covering issue" above can be resolved,
+     *    but having one HTML Canvas per series may be excessively memory-consuming.
+     *  Therefore, we only automatically assign zlevelKey on `ScatterSeries` and `LinesSeries` for backward
+     *  compatibility, and not to other series. Users can explicitly assign zlevel if they encouter above
+     *  "covering issue".
      */
     getZLevelKey(): string;
     setZLevel(zlevel: number): void;

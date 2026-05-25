@@ -1,6 +1,6 @@
 import Model from '../../model/Model.js';
 import ComponentModel from '../../model/Component.js';
-import { ComponentOption, BoxLayoutOptionMixin, BorderOptionMixin, ColorString, LabelOption, LayoutOrient, CommonTooltipOption, ItemStyleOption, LineStyleOption } from '../../util/types.js';
+import { ComponentOption, BoxLayoutOptionMixin, BorderOptionMixin, ColorString, LabelOption, LayoutOrient, CommonTooltipOption, ItemStyleOption, LineStyleOption, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin } from '../../util/types.js';
 import { Dictionary } from 'zrender/lib/core/types.js';
 import GlobalModel from '../../model/Global.js';
 import { ItemStyleProps } from '../../model/mixin/itemStyle.js';
@@ -90,7 +90,7 @@ export interface LegendSymbolStyleOption {
     itemStyle?: ItemStyleProps;
     lineStyle?: LineStyleProps;
 }
-export interface LegendOption extends ComponentOption, LegendStyleOption, BoxLayoutOptionMixin, BorderOptionMixin {
+export interface LegendOption extends ComponentOption, LegendStyleOption, BoxLayoutOptionMixin, BorderOptionMixin, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin {
     mainType?: 'legend';
     show?: boolean;
     orient?: LayoutOrient;

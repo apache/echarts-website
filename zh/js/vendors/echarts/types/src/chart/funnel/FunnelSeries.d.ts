@@ -1,5 +1,5 @@
 import SeriesModel from '../../model/Series.js';
-import { SeriesOption, BoxLayoutOptionMixin, HorizontalAlign, LabelOption, LabelLineOption, ItemStyleOption, OptionDataValueNumeric, StatesOptionMixin, OptionDataItemObject, LayoutOrient, VerticalAlign, SeriesLabelOption, SeriesEncodeOptionMixin, DefaultStatesMixinEmphasis, CallbackDataParams } from '../../util/types.js';
+import { SeriesOption, BoxLayoutOptionMixin, HorizontalAlign, LabelOption, LabelLineOption, ItemStyleOption, OptionDataValueNumeric, StatesOptionMixin, OptionDataItemObject, LayoutOrient, VerticalAlign, SeriesLabelOption, SeriesEncodeOptionMixin, DefaultStatesMixinEmphasis, CallbackDataParams, ComponentOnMatrixOptionMixin, ComponentOnCalendarOptionMixin } from '../../util/types.js';
 import GlobalModel from '../../model/Global.js';
 import SeriesData from '../../data/SeriesData.js';
 declare type FunnelLabelOption = Omit<SeriesLabelOption, 'position'> & {
@@ -22,7 +22,7 @@ export interface FunnelDataItemOption extends FunnelStateOption, StatesOptionMix
         height?: number | string;
     };
 }
-export interface FunnelSeriesOption extends SeriesOption<FunnelStateOption<FunnelCallbackDataParams>, FunnelStatesMixin>, FunnelStateOption<FunnelCallbackDataParams>, BoxLayoutOptionMixin, SeriesEncodeOptionMixin {
+export interface FunnelSeriesOption extends SeriesOption<FunnelStateOption<FunnelCallbackDataParams>, FunnelStatesMixin>, FunnelStateOption<FunnelCallbackDataParams>, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin, BoxLayoutOptionMixin, SeriesEncodeOptionMixin {
     type?: 'funnel';
     min?: number;
     max?: number;
@@ -37,9 +37,10 @@ export interface FunnelSeriesOption extends SeriesOption<FunnelStateOption<Funne
     funnelAlign?: HorizontalAlign | VerticalAlign;
     data?: (OptionDataValueNumeric | OptionDataValueNumeric[] | FunnelDataItemOption)[];
 }
+export declare const SERIES_TYPE_FUNNEL = "funnel";
 declare class FunnelSeriesModel extends SeriesModel<FunnelSeriesOption> {
-    static type: "series.funnel";
-    type: "series.funnel";
+    static readonly type: string;
+    readonly type: string;
     init(option: FunnelSeriesOption): void;
     getInitialData(this: FunnelSeriesModel, option: FunnelSeriesOption, ecModel: GlobalModel): SeriesData;
     _defaultLabelLine(option: FunnelSeriesOption): void;

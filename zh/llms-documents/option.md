@@ -16,7 +16,9 @@
 
 图例组件展现了不同系列的标记(symbol)，颜色和名字。可以通过点击图例控制哪些系列不显示。
 
-ECharts 3 中单个 echarts 实例中可以存在多个图例组件，会方便多个图例的布局。
+图例项和系列或系列数据项的对应规则，详见 [legend.data](option-parts/option.legend.md#data)。
+
+单个 echarts 实例中可以存在多个图例组件，会方便多个图例的布局。（从 `v3.0.0` 开始支持）。
 
 当图例数量过多时，可以使用 [滚动图例（垂直）](https://echarts.apache.org/examples/zh/editor.html?c=pie-legend&edit=1&reset=1) 或 [滚动图例（水平）](https://echarts.apache.org/examples/zh/editor.html?c=radar2&edit=1&reset=1)，参见：[legend.type](option-parts/option.legend.md#type)
 
@@ -1430,6 +1432,8 @@ W3C 制定了无障碍富互联网应用规范集（[WAI-ARIA](https://www.w3.or
 
 柱状图（或称条形图）是一种通过柱形的高度（横向的情况下则是宽度）来表现数据大小的一种常用图表类型。
 
+当前只支持用在 [直角坐标系（即 grid 组件）](option-parts/option.grid.md) 或 [极坐标](option-parts/option.polar.md) 上。
+
 ## series-pie
 - **Type**: `Object`
 
@@ -1766,7 +1770,7 @@ ECharts 2.x 里会用地图上的 `markLine` 去绘制迁徙效果，在 ECharts
 
 **象形柱图**
 
-象形柱图是可以设置各种具象图形元素（如图片、[SVG PathData](http://www.w3.org/TR/SVG/paths.html#PathData) 等）的柱状图。往往用在信息图中。用于有至少一个类目轴或时间轴的[直角坐标系](option-parts/option.grid.md)上。
+象形柱图是可以设置各种具象图形元素（如图片、[SVG PathData](http://www.w3.org/TR/SVG/paths.html#PathData) 等）的柱状图。往往用在信息图中。目前只支持用于 [直角坐标系（即grid 组件）](option-parts/option.grid.md) 上。
 
 **示例：**
 

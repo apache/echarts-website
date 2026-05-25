@@ -71,6 +71,7 @@ var MatrixDim = /** @class */function () {
     this._model = dimModel;
     this._uniqueValueGen = createUniqueValueGenerator(dim);
     var dimModelData = dimModel.get('data', true);
+    var length = dimModel.get('length', true);
     if (dimModelData != null && !isArray(dimModelData)) {
       if (process.env.NODE_ENV !== 'production') {
         error("Illegal echarts option - matrix." + this.dim + ".data must be an array if specified.");
@@ -78,6 +79,12 @@ var MatrixDim = /** @class */function () {
       dimModelData = [];
     }
     if (dimModelData) {
+      this._initByDimModelData(dimModelData);
+    } else if (length != null) {
+      dimModelData = Array(length);
+      for (var i = 0; i < length; i++) {
+        dimModelData[i] = null;
+      }
       this._initByDimModelData(dimModelData);
     } else {
       this._initBySeriesData();

@@ -46,13 +46,16 @@ import Geo, { geo2DDimensions } from './Geo.js';
 import * as layout from '../../util/layout.js';
 import * as numberUtil from '../../util/number.js';
 import geoSourceManager from './geoSourceManager.js';
+import { buildAllMapSeriesGroups, mapSeriesGroupHasOwnGeo, SERIES_TYPE_MAP } from '../../chart/map/MapSeries.js';
 import * as vector from 'zrender/lib/core/vector.js';
 import { injectCoordSysByOption } from '../../core/CoordinateSystem.js';
 import { SINGLE_REFERRING } from '../../util/model.js';
+import { viewCoordSysSetBoundingRect, viewCoordSysSetRoamOptionFromModel, viewCoordSysSetViewRect } from '../View.js';
 /**
  * Resize method bound to the geo
  */
 function resizeGeo(geoModel, api) {
+  var viewCoordSys = this.view;
   var boundingCoords = geoModel.get('boundingCoords');
   if (boundingCoords != null) {
     var leftTop_1 = boundingCoords[0];
@@ -91,14 +94,14 @@ function resizeGeo(geoModel, api) {
         // Left
         sampleLine(xMin, yMax, xMax, yMin);
       }
-      this.setBoundingRect(leftTop_1[0], leftTop_1[1], rightBottom_1[0] - leftTop_1[0], rightBottom_1[1] - leftTop_1[1]);
+      viewCoordSysSetBoundingRect(viewCoordSys, leftTop_1[0], leftTop_1[1], rightBottom_1[0] - leftTop_1[0], rightBottom_1[1] - leftTop_1[1]);
     }
   }
-  var rect = this.getBoundingRect();
+  var rect = viewCoordSys.getBoundingRect();
   var centerOption = geoModel.get('layoutCenter');
   var sizeOption = geoModel.get('layoutSize');
-  // Laying out geo on `dataCoordSys`, such as cartesian, works theoretically but not supported yet.
-  // Therefore here we only handle cases that laying out on `boxCoordSys`, such as matrix/calendar.
+  // Laying out geo on Cartesian works theoretically but not supported yet.
+  // Currently, we only support to lay out on matrix/calendar.
   var refContainer = layout.createBoxLayoutReference(geoModel, api).refContainer;
   var aspect = rect.width / rect.height * this.aspectScale;
   var useCenterAndSize = false;
@@ -135,9 +138,8 @@ function resizeGeo(geoModel, api) {
     viewRect = layout.getLayoutRect(boxLayoutOption, refContainer);
     viewRect = layout.applyPreserveAspect(geoModel, viewRect, aspect);
   }
-  this.setViewRect(viewRect.x, viewRect.y, viewRect.width, viewRect.height);
-  this.setCenter(geoModel.get('center'));
-  this.setZoom(geoModel.get('zoom'));
+  viewCoordSysSetViewRect(viewCoordSys, viewRect.x, viewRect.y, viewRect.width, viewRect.height);
+  viewCoordSysSetRoamOptionFromModel(viewCoordSys, geoModel);
 }
 // Back compat for ECharts2, where the coord map is set on map series:
 // {type: 'map', geoCoord: {'cityA': [116.46,39.92], 'cityA': [119.12,24.61]}},
@@ -157,7 +159,8 @@ var GeoCreator = /** @class */function () {
       return {
         nameProperty: model.get('nameProperty'),
         aspectScale: model.get('aspectScale'),
-        projection: model.get('projection')
+        projection: model.get('projection'),
+        clip: model.getShallow('clip', true)
       };
     }
     // FIXME Create each time may be slow
@@ -168,7 +171,6 @@ var GeoCreator = /** @class */function () {
         api: api,
         ecModel: ecModel
       }, getCommonGeoProperties(geoModel)));
-      geo.zoomLimit = geoModel.get('scaleLimit');
       geoList.push(geo);
       // setGeoCoords(geo, geoModel);
       geoModel.coordinateSystem = geo;
@@ -182,40 +184,42 @@ var GeoCreator = /** @class */function () {
         targetModel: seriesModel,
         coordSysType: 'geo',
         coordSysProvider: function () {
-          var geoModel = seriesModel.subType === 'map' ? seriesModel.getHostGeoModel() : seriesModel.getReferringComponents('geo', SINGLE_REFERRING).models[0];
+          var geoModel = seriesModel.subType === SERIES_TYPE_MAP ? seriesModel.getHostGeoModel() : seriesModel.getReferringComponents('geo', SINGLE_REFERRING).models[0];
           return geoModel && geoModel.coordinateSystem;
         },
         allowNotFound: true
       });
     });
     // If has map series
-    var mapModelGroupBySeries = {};
-    ecModel.eachSeriesByType('map', function (seriesModel) {
-      if (!seriesModel.getHostGeoModel()) {
-        var mapType = seriesModel.getMapType();
-        mapModelGroupBySeries[mapType] = mapModelGroupBySeries[mapType] || [];
-        mapModelGroupBySeries[mapType].push(seriesModel);
+    zrUtil.each(buildAllMapSeriesGroups(ecModel, true), function (mapSeriesGroup, groupKey) {
+      if (!mapSeriesGroupHasOwnGeo(groupKey)) {
+        return;
       }
-    });
-    zrUtil.each(mapModelGroupBySeries, function (mapSeries, mapType) {
-      var nameMapList = zrUtil.map(mapSeries, function (singleMapSeries) {
-        return singleMapSeries.get('nameMap');
+      var firstDeclaredMapSeries = mapSeriesGroup.r[0];
+      var nameMapList = [];
+      zrUtil.each(mapSeriesGroup.r, function (mapSeries) {
+        nameMapList.push(mapSeries.get('nameMap'));
+        // MAP_SERIES_GROUP must not be set here, as series filtering is not performed.
+        // Clear it first, including series to be filtered.
+        mapSeries.seriesGroup = null;
       });
+      var mapType = groupKey.slice(1);
       var geo = new Geo(mapType, mapType, zrUtil.extend({
         nameMap: zrUtil.mergeAll(nameMapList),
         api: api,
         ecModel: ecModel
-      }, getCommonGeoProperties(mapSeries[0])));
-      geo.zoomLimit = zrUtil.retrieve.apply(null, zrUtil.map(mapSeries, function (singleMapSeries) {
-        return singleMapSeries.get('scaleLimit');
-      }));
+      }, getCommonGeoProperties(firstDeclaredMapSeries)));
+      var scaleLimit;
+      zrUtil.each(mapSeriesGroup.r, function (mapSeries) {
+        scaleLimit = zrUtil.retrieve2(scaleLimit, mapSeries.get('scaleLimit'));
+      });
       geoList.push(geo);
       // Inject resize method
       geo.resize = resizeGeo;
-      geo.resize(mapSeries[0], api);
-      zrUtil.each(mapSeries, function (singleMapSeries) {
-        singleMapSeries.coordinateSystem = geo;
-        setGeoCoords(geo, singleMapSeries);
+      geo.resize(firstDeclaredMapSeries, api);
+      zrUtil.each(mapSeriesGroup.r, function (mapSeries) {
+        mapSeries.coordinateSystem = geo;
+        setGeoCoords(geo, mapSeries);
       });
     });
     return geoList;

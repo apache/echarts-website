@@ -1,6 +1,3 @@
-/**
- * ECharts option manager
- */
 import ExtensionAPI from '../core/ExtensionAPI.js';
 import { OptionPreprocessor, ECUnitOption, ECBasicOption } from '../util/types.js';
 import GlobalModel, { InnerSetOptionOpts } from './Global.js';

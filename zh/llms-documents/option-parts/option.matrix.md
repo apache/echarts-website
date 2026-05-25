@@ -132,9 +132,9 @@ data: [{
 }]
 ```
 
-如果 [matrix.x.data](option.matrix.md#x.data) 没有提供，它会从 `series.data` 或者 `dataset.source` 中自动收集。
+如果 [matrix.x.data](option.matrix.md#x.data) 没有提供，且 [matrix.x.length](option.matrix.md#x.length) 提供了，[matrix.x.data](option.matrix.md#x.data) 会自动基于 [matrix.x.length](option.matrix.md#x.length) 构造出来。
 
-参见 [示例](https://echarts.apache.org/examples/zh/editor.html?c=matrix-mini-bar-data-collection&edit=1&reset=1)。
+否则，如果它们都没有提供，则 [matrix.x.data](option.matrix.md#x.data) 会从 `series.data` 或者 `dataset.source` 中自动收集出来。参见 [示例](https://echarts.apache.org/examples/zh/editor.html?c=matrix-mini-bar-data-collection&edit=1&reset=1)。
 
 在这种情况下，[series.encode](option.series-scatter.md#encode) 可指定从哪个维度收集数据。例如：
 
@@ -235,6 +235,15 @@ var option = {
     },
 }
 ```
+
+### x.length
+- **Type**: `number`
+
+从 `v6.1.0` 开始支持
+
+[matrix.x.data](option.matrix.md#x.data) 可不提供，而只提供 [matrix.x.length](option.matrix.md#x.length) 来决定列数。这种方式方便了无头矩阵（即 [matrix.x.show](option.matrix.md#x.show) 为 `false` 时）的创建，这种情况下只有行列数需要提供。
+
+注：如果提供了 [matrix.x.data](option.matrix.md#x.data)，则 [matrix.x.length](option.matrix.md#x.length)会被忽略。
 
 ### x.label
 - **Type**: `Object`
@@ -1268,7 +1277,14 @@ borderDashOffset: 5
 - **Type**: `boolean`
 - **Default**: `false`
 
-图形是否不响应和触发鼠标事件，默认为 false，即响应和触发鼠标事件。
+图形是否不响应和用户交互（鼠标和触摸事件）。
+
+*   `true`: 图形不响应用户交互。这导致：
+    *   用户交互功能被禁止，例如 `tooltip`、鼠标悬浮时的状态变化（`emphasis`），鼠标悬浮时的联动等。
+    *   对外的鼠标和触摸事件不再发送给开发者注册的监听器（`chart.on('xxx', listener)`）。
+*   `false`:
+    *   用户交互功能不被此配置项禁止，但是是否可交互仍取决于其他相关配置项的设置。
+    *   对外的鼠标和触摸事件不被此配置项禁止，但是是否发送仍取决于其他配置项，一般是 `triggerEvent`（如果支持此配置项的话）。
 
 ### x.cursor
 - **Type**: `string`
@@ -1621,9 +1637,9 @@ data: [{
 }]
 ```
 
-如果 [matrix.y.data](option.matrix.md#y.data) 没有提供，它会从 `series.data` 或者 `dataset.source` 中自动收集。
+如果 [matrix.y.data](option.matrix.md#y.data) 没有提供，且 [matrix.y.length](option.matrix.md#y.length) 提供了，[matrix.y.data](option.matrix.md#y.data) 会自动基于 [matrix.y.length](option.matrix.md#y.length) 构造出来。
 
-参见 [示例](https://echarts.apache.org/examples/zh/editor.html?c=matrix-mini-bar-data-collection&edit=1&reset=1)。
+否则，如果它们都没有提供，则 [matrix.y.data](option.matrix.md#y.data) 会从 `series.data` 或者 `dataset.source` 中自动收集出来。参见 [示例](https://echarts.apache.org/examples/zh/editor.html?c=matrix-mini-bar-data-collection&edit=1&reset=1)。
 
 在这种情况下，[series.encode](option.series-scatter.md#encode) 可指定从哪个维度收集数据。例如：
 
@@ -1724,6 +1740,15 @@ var option = {
     },
 }
 ```
+
+### y.length
+- **Type**: `number`
+
+从 `v6.1.0` 开始支持
+
+[matrix.y.data](option.matrix.md#y.data) 可不提供，而只提供 [matrix.y.length](option.matrix.md#y.length) 来决定行数。这种方式方便了无头矩阵（即 [matrix.y.show](option.matrix.md#y.show) 为 `false` 时）的创建，这种情况下只有行列数需要提供。
+
+注：如果提供了 [matrix.y.data](option.matrix.md#y.data)，则 [matrix.y.length](option.matrix.md#y.length)会被忽略。
 
 ### y.label
 - **Type**: `Object`
@@ -2757,7 +2782,14 @@ borderDashOffset: 5
 - **Type**: `boolean`
 - **Default**: `false`
 
-图形是否不响应和触发鼠标事件，默认为 false，即响应和触发鼠标事件。
+图形是否不响应和用户交互（鼠标和触摸事件）。
+
+*   `true`: 图形不响应用户交互。这导致：
+    *   用户交互功能被禁止，例如 `tooltip`、鼠标悬浮时的状态变化（`emphasis`），鼠标悬浮时的联动等。
+    *   对外的鼠标和触摸事件不再发送给开发者注册的监听器（`chart.on('xxx', listener)`）。
+*   `false`:
+    *   用户交互功能不被此配置项禁止，但是是否可交互仍取决于其他相关配置项的设置。
+    *   对外的鼠标和触摸事件不被此配置项禁止，但是是否发送仍取决于其他配置项，一般是 `triggerEvent`（如果支持此配置项的话）。
 
 ### y.cursor
 - **Type**: `string`
@@ -4196,7 +4228,14 @@ borderDashOffset: 5
 - **Type**: `boolean`
 - **Default**: `false`
 
-图形是否不响应和触发鼠标事件，默认为 false，即响应和触发鼠标事件。
+图形是否不响应和用户交互（鼠标和触摸事件）。
+
+*   `true`: 图形不响应用户交互。这导致：
+    *   用户交互功能被禁止，例如 `tooltip`、鼠标悬浮时的状态变化（`emphasis`），鼠标悬浮时的联动等。
+    *   对外的鼠标和触摸事件不再发送给开发者注册的监听器（`chart.on('xxx', listener)`）。
+*   `false`:
+    *   用户交互功能不被此配置项禁止，但是是否可交互仍取决于其他相关配置项的设置。
+    *   对外的鼠标和触摸事件不被此配置项禁止，但是是否发送仍取决于其他配置项，一般是 `triggerEvent`（如果支持此配置项的话）。
 
 ### body.cursor
 - **Type**: `string`
@@ -5347,7 +5386,14 @@ borderDashOffset: 5
 - **Type**: `boolean`
 - **Default**: `false`
 
-图形是否不响应和触发鼠标事件，默认为 false，即响应和触发鼠标事件。
+图形是否不响应和用户交互（鼠标和触摸事件）。
+
+*   `true`: 图形不响应用户交互。这导致：
+    *   用户交互功能被禁止，例如 `tooltip`、鼠标悬浮时的状态变化（`emphasis`），鼠标悬浮时的联动等。
+    *   对外的鼠标和触摸事件不再发送给开发者注册的监听器（`chart.on('xxx', listener)`）。
+*   `false`:
+    *   用户交互功能不被此配置项禁止，但是是否可交互仍取决于其他相关配置项的设置。
+    *   对外的鼠标和触摸事件不被此配置项禁止，但是是否发送仍取决于其他配置项，一般是 `triggerEvent`（如果支持此配置项的话）。
 
 ### corner.cursor
 - **Type**: `string`
@@ -5516,5 +5562,41 @@ matrix: {
         show: true
     },
     // ...
+}
+```
+
+## triggerEvent
+- **Type**: `boolean`
+- **Default**: `false`
+
+从 `v6.1.0` 开始支持
+
+鼠标和触摸事件是否发送给开发者注册的监听器（`chart.on('xxx', function (event) {})`）。
+
+支持的鼠标和触摸事件为 `'click'`、`'dblclick'`、`'mouseover'`、`'mouseout'`、`'mousemove'`、`'mousedown'`、`'mouseup'`、`'globalout'`、`'contextmenu'`。注意，鼠标和触摸事件都统一使用名字 `'mouse{xxx}'`。
+
+可取值：
+
+*   `true`: 允许对外发送事件。但是它也需要 `silent` 配置项为 `false` 才能真正发送事件。
+*   `false`: 禁止对外发送事件，哪怕 `silent` 配置项为 `false`。
+
+事件对象的内容为：
+
+```
+{
+    componentType: 'matrix';
+    // 图例组件的 index（基于 echarts option）。
+    componentIndex: number;
+    // 同 `componentIndex`。
+    matrixIndex: number;
+
+    targetType: 'x' | 'y' | 'body' | 'corner';
+
+    // 单元格（cell）的内容字符串。
+    name: string;
+    // 单元格（cell）的值（来自 echarts option）。
+    value: textValue;
+    // 单元格（cell）坐标。它实际是 `MatrixXYLocator[]`。
+    coord: number;
 }
 ```

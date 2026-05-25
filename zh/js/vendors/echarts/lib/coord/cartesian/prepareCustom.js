@@ -42,6 +42,7 @@
 * under the License.
 */
 import * as zrUtil from 'zrender/lib/core/util.js';
+import { calcBandWidth } from '../axisBand.js';
 function dataToCoordSize(dataSize, dataItem) {
   // dataItem is necessary in log axis.
   dataItem = dataItem || [0, 0];
@@ -49,7 +50,7 @@ function dataToCoordSize(dataSize, dataItem) {
     var axis = this.getAxis(dim);
     var val = dataItem[dimIdx];
     var halfSize = dataSize[dimIdx] / 2;
-    return axis.type === 'category' ? axis.getBandWidth() : Math.abs(axis.dataToCoord(val - halfSize) - axis.dataToCoord(val + halfSize));
+    return axis.type === 'category' ? calcBandWidth(axis).w : Math.abs(axis.dataToCoord(val - halfSize) - axis.dataToCoord(val + halfSize));
   }, this);
 }
 export default function cartesianPrepareCustom(coordSys) {

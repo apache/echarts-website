@@ -99,6 +99,7 @@ var Polyline = /** @class */function (_super) {
   ;
   Polyline.prototype.updateLayout = function (lineData, idx) {
     var polyline = this.childAt(0);
+    polyline.stopAnimation();
     polyline.setShape('points', lineData.getItemLayout(idx));
   };
   ;

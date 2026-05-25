@@ -42,13 +42,16 @@
 * under the License.
 */
 /**
- * Parallel coordinate system creater.
+ * Parallel coordinate system creator.
  */
 import Parallel from './Parallel.js';
+import { COMPONENT_TYPE_PARALLEL, COORD_SYS_TYPE_PARALLEL } from './ParallelModel.js';
 import { SINGLE_REFERRING } from '../../util/model.js';
+import { each } from 'zrender/lib/core/util.js';
+import { associateSeriesWithAxis } from '../axisStatistics.js';
 function createParallelCoordSys(ecModel, api) {
   var coordSysList = [];
-  ecModel.eachComponent('parallel', function (parallelModel, idx) {
+  ecModel.eachComponent(COMPONENT_TYPE_PARALLEL, function (parallelModel, idx) {
     var coordSys = new Parallel(parallelModel, ecModel, api);
     coordSys.name = 'parallel_' + idx;
     coordSys.resize(parallelModel, api);
@@ -58,9 +61,14 @@ function createParallelCoordSys(ecModel, api) {
   });
   // Inject the coordinateSystems into seriesModel
   ecModel.eachSeries(function (seriesModel) {
-    if (seriesModel.get('coordinateSystem') === 'parallel') {
-      var parallelModel = seriesModel.getReferringComponents('parallel', SINGLE_REFERRING).models[0];
-      seriesModel.coordinateSystem = parallelModel.coordinateSystem;
+    if (seriesModel.get('coordinateSystem') === COORD_SYS_TYPE_PARALLEL) {
+      var parallelModel = seriesModel.getReferringComponents(COMPONENT_TYPE_PARALLEL, SINGLE_REFERRING).models[0];
+      var parallel_1 = seriesModel.coordinateSystem = parallelModel.coordinateSystem;
+      if (parallel_1) {
+        each(parallel_1.dimensions, function (dim) {
+          associateSeriesWithAxis(parallel_1.getAxis(dim), seriesModel, COORD_SYS_TYPE_PARALLEL);
+        });
+      }
     }
   });
   return coordSysList;

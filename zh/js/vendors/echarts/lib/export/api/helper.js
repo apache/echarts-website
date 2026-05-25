@@ -54,6 +54,7 @@ import { getLayoutRect } from '../../util/layout.js';
 import { enableDataStack, isDimensionStacked, getStackedDimension } from '../../data/helper/dataStackHelper.js';
 import { getECData } from '../../util/innerStore.js';
 import { createTextStyle as innerCreateTextStyle } from '../../label/labelStyle.js';
+import { scaleCalcNice2 } from '../../coord/axisNiceTicks.js';
 /**
  * Create a multi dimension List structure from seriesModel.
  */
@@ -83,10 +84,11 @@ export var dataStack = {
  */
 export { createSymbol } from '../../util/symbol.js';
 /**
+ * Externally used by echarts-gl.
  * Create scale
- * @param {Array.<number>} dataExtent
- * @param {Object|module:echarts/Model} option If `optoin.type`
- *        is secified, it can only be `'value'` currently.
+ * @param dataExtent
+ * @param option If `option.type`
+ *        is specified, it can only be `'value'` currently.
  */
 export function createScale(dataExtent, option) {
   var axisModel = option;
@@ -101,20 +103,16 @@ export function createScale(dataExtent, option) {
     // to only use `'value'` axis.
     // zrUtil.mixin(axisModel, AxisModelCommonMixin);
   }
-  var scale = axisHelper.createScaleByModel(axisModel);
-  scale.setExtent(dataExtent[0], dataExtent[1]);
-  axisHelper.niceScaleExtent(scale, axisModel);
+  var axisType = axisHelper.determineAxisType(axisModel);
+  var scale = axisHelper.createScaleByModel(axisModel, axisType, false);
+  if (dataExtent[1] < dataExtent[0]) {
+    dataExtent = dataExtent.slice().reverse();
+  }
+  scaleCalcNice2(scale, axisModel, null, null, dataExtent);
   return scale;
 }
 /**
- * Mixin common methods to axis model,
- *
- * Include methods
- * `getFormattedLabels() => Array.<string>`
- * `getCategories() => Array.<string>`
- * `getMin(origin: boolean) => number`
- * `getMax(origin: boolean) => number`
- * `getNeedCrossZero() => boolean`
+ * Mixin common methods to axis model
  */
 export function mixinAxisModelCommonMethods(Model) {
   zrUtil.mixin(Model, AxisModelCommonMixin);

@@ -48,6 +48,7 @@ import createGraphFromNodeEdge from '../helper/createGraphFromNodeEdge.js';
 import { createTooltipMarkup } from '../../component/tooltip/tooltipMarkup.js';
 import LegendVisualProvider from '../../visual/LegendVisualProvider.js';
 import * as zrUtil from 'zrender/lib/core/util.js';
+export var SERIES_TYPE_CHORD = 'chord';
 var ChordSeriesModel = /** @class */function (_super) {
   __extends(ChordSeriesModel, _super);
   function ChordSeriesModel() {
@@ -145,7 +146,7 @@ var ChordSeriesModel = /** @class */function (_super) {
     }
     return params;
   };
-  ChordSeriesModel.type = 'series.chord';
+  ChordSeriesModel.type = 'series.' + SERIES_TYPE_CHORD;
   ChordSeriesModel.defaultOption = {
     // zlevel: 0,
     z: 2,

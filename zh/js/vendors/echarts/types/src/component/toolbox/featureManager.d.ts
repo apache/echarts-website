@@ -38,8 +38,7 @@ interface ToolboxFeature<Opts extends ToolboxFeatureOption = ToolboxFeatureOptio
     getIcons?(): Dictionary<string>;
     onclick(ecModel: GlobalModel, api: ExtensionAPI, type: string, event: ZRElementEvent): void;
     dispose?(ecModel: GlobalModel, api: ExtensionAPI): void;
-    remove?(ecModel: GlobalModel, api: ExtensionAPI): void;
-    render(featureModel: ToolboxFeatureModel, model: GlobalModel, api: ExtensionAPI, payload: unknown): void;
+    render?(featureModel: ToolboxFeatureModel, model: GlobalModel, api: ExtensionAPI, payload: unknown): void;
     updateView?(featureModel: ToolboxFeatureModel, model: GlobalModel, api: ExtensionAPI, payload: unknown): void;
 }
 declare abstract class ToolboxFeature<Opts extends ToolboxFeatureOption = ToolboxFeatureOption> {
@@ -47,10 +46,6 @@ declare abstract class ToolboxFeature<Opts extends ToolboxFeatureOption = Toolbo
     model: ToolboxFeatureModel<Opts>;
     ecModel: GlobalModel;
     api: ExtensionAPI;
-    /**
-     * If toolbox feature can't be used on some platform.
-     */
-    unusable?: boolean;
 }
 export { ToolboxFeature };
 export interface UserDefinedToolboxFeature {

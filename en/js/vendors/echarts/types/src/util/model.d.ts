@@ -1,12 +1,16 @@
 import { HashMap } from 'zrender/lib/core/util.js';
-import GlobalModel from '../model/Global.js';
+import GlobalModel, { QueryConditionKindA } from '../model/Global.js';
 import ComponentModel, { ComponentModelConstructor } from '../model/Component.js';
 import SeriesData from '../data/SeriesData.js';
-import { ComponentOption, ComponentMainType, ComponentSubType, DisplayStateHostOption, OptionDataItem, OptionDataValue, TooltipRenderMode, Payload, OptionId, InterpolatableValue, NullUndefined } from './types.js';
-import SeriesModel from '../model/Series.js';
-import CartesianAxisModel from '../coord/cartesian/AxisModel.js';
-import GridModel from '../coord/cartesian/GridModel.js';
+import { ComponentOption, ComponentMainType, ComponentSubType, DisplayStateHostOption, OptionDataItem, OptionDataValue, TooltipRenderMode, Payload, OptionId, InterpolatableValue, NullUndefined, SeriesOption, SeriesLargeOptionMixin, StageHandler, StageHandlerOverallReset } from './types.js';
+import type SeriesModel from '../model/Series.js';
+import type CartesianAxisModel from '../coord/cartesian/AxisModel.js';
+import type GridModel from '../coord/cartesian/GridModel.js';
 import type Model from '../model/Model.js';
+import type Displayable from 'zrender/lib/graphic/Displayable.js';
+import type ChartView from '../view/Chart.js';
+import type { Pipeline, PipelineContext } from '../core/Scheduler.js';
+import { TaskProgressParams } from '../core/task.js';
 /**
  * If value is not array, then translate it to array.
  * @param  {*} value
@@ -129,11 +133,15 @@ export declare function queryDataIndex(data: SeriesData, payload: Payload & {
     name?: string | string[];
 }): number | number[];
 /**
+ * [CAVEAT]:
+ *  DO NOT use it in performance-sensitive scenarios.
+ *  Likely a hash map lookup; not inline-cache friendly.
+ *
  * Enable property storage to any host object.
  * Notice: Serialization is not supported.
  *
  * For example:
- * let inner = zrUitl.makeInner();
+ * let inner = makeInner();
  *
  * function some1(hostObj) {
  *      inner(hostObj).someProperty = 1212;
@@ -145,10 +153,8 @@ export declare function queryDataIndex(data: SeriesData, payload: Payload & {
  *      fields.someProperty2 = 'xx';
  *      ...
  * }
- *
- * @return {Function}
  */
-export declare function makeInner<T, Host extends object>(): (hostObj: Host) => T;
+export declare function makeInner<T extends object, Host extends object>(): (hostObj: Host) => T;
 /**
  * If string, e.g., 'geo', means {geoIndex: 0}.
  * If Object, could contain some of these properties below:
@@ -173,9 +179,9 @@ export declare function makeInner<T, Host extends object>(): (hostObj: Host) => 
  * If both `abcIndex`, `abcId`, `abcName` specified, only one work.
  * The priority is: index > id > name, the same with `ecModel.queryComponents`.
  */
-export declare type ModelFinderIndexQuery = number | number[] | 'all' | 'none' | false;
-export declare type ModelFinderIdQuery = OptionId | OptionId[];
-export declare type ModelFinderNameQuery = OptionId | OptionId[];
+export declare type ModelFinderIndexQuery = number | number[] | 'all' | 'none' | false | NullUndefined;
+export declare type ModelFinderIdQuery = OptionId | OptionId[] | NullUndefined;
+export declare type ModelFinderNameQuery = OptionId | OptionId[] | NullUndefined;
 export declare type ModelFinder = string | ModelFinderObject;
 export declare type ModelFinderObject = {
     seriesIndex?: ModelFinderIndexQuery;
@@ -258,6 +264,12 @@ export declare function queryReferringComponents(ecModel: GlobalModel, mainType:
     models: ComponentModel[];
     specified: boolean;
 };
+/**
+ * `{{mainType}Id, {mainType}Index, {mainType}Name}` takes precedence if provided in `payload`;
+ * otherwise, query by `mainType`.
+ * `subType` performs futher filtering if provided.
+ */
+export declare function makeQueryConditionKindA(payload: Payload, mainType: ComponentMainType, subType: ComponentSubType | NullUndefined): QueryConditionKindA;
 export declare function setAttribute(dom: HTMLElement, key: string, value: any): void;
 export declare function getAttribute(dom: HTMLElement, key: string): any;
 export declare function getTooltipRenderMode(renderModeOption: TooltipRenderMode | 'auto'): TooltipRenderMode;
@@ -317,4 +329,83 @@ export declare class ListIterator<TItem> {
     next(): boolean;
 }
 export declare function clearTmpModel(model: Model): void;
+export declare function initExtentForUnion(): [number, number];
+/**
+ * NOTICE:
+ *  - The input `val` must be a number - type checking is not performed.
+ *  - `extent` should be initialized as `initExtentForUnion()`.
+ */
+export declare function unionExtentFromNumber(extent: number[], val: number | NullUndefined): void;
+/**
+ * NOTICE:
+ *  - The input `val` must be a number - type checking is not performed.
+ *  - `extent` should be initialized as `initExtentForUnion()`.
+ */
+export declare function unionExtentStartFromNumber(extent: number[], val: number | NullUndefined): void;
+/**
+ * NOTICE:
+ *  - The input `val` must be a number - type checking is not performed.
+ *  - `extent` should be initialized as `initExtentForUnion()`.
+ */
+export declare function unionExtentEndFromNumber(extent: number[], val: number | NullUndefined): void;
+/**
+ * NOTICE:
+ *  - `extent` should be initialized as `initExtentForUnion()`.
+ */
+export declare function unionExtentFromExtent(tarExtent: number[], srcExtent: number[]): void;
+/**
+ * PENDING: `Infinity` from user data is not necessarily meaningless, but visualizing it requires
+ * special handling and it will not be supported until required. So we simply ignore it here.
+ */
+export declare function isValidNumberForExtent(val: number | NullUndefined): boolean;
+export declare function isValidBoundsForExtent(start: number, end: number): boolean;
+/**
+ * `extent` should be initialized by `initExtentForUnion()`, and unioned by `unionExtent()`.
+ * `extent` may contain `Infinity` / `NaN`, but assume no `null`/`undefined`.
+ */
+export declare function extentHasValue(extent: number[]): boolean;
+/**
+ * NOTE: considered items are null/undefined/NaN - do nothing for this case.
+ */
+export declare function ensureExtentAscSimply(extent: (number | NullUndefined)[]): void;
+/**
+ * A util for ensuring the callback is called only once.
+ * @usage
+ *  const callOnlyOnce = makeCallOnlyOnce(); // Should be static (ESM top level).
+ *  function someFunc(registers: EChartsExtensionInstallRegisters): void {
+ *      callOnlyOnce(registers, function () {
+ *          // Do something immediately and only once per registers.
+ *      }
+ *  }
+ */
+export declare function makeCallOnlyOnce<Host extends object>(): (hostObj: Host, cb: () => void) => void;
+/**
+ * @usage
+ *  - The earlier item takes precedence for duplicate items.
+ *  - The input `arr` will be modified if `resolve` is null/undefined.
+ *  - Callers can use `resolve` to manually modify the `currItem`.
+ *    The input `arr` will not be modified if `resolve` is passed.
+ *    `resolve` will be called on every item.
+ *  - Callers need to handle null/undefined (if existing) in `getKey`.
+ */
+export declare function removeDuplicates<TItem>(arr: (TItem | NullUndefined)[], getKey: (item: TItem) => string, resolve: ((item: TItem, existingCount: number) => void) | NullUndefined): void;
+export declare function removeDuplicatesGetKeyFromValueProp<TValue extends (string | number)>(item: {
+    value: TValue;
+}): string;
+export declare function removeDuplicatesGetKeyFromItemItself<TValue extends (string | number)>(item: TValue): string;
+export declare function getIncrementalId(seriesModel: SeriesModel, useIncremental?: boolean): Displayable['incremental'];
+export declare function preparePipelineContext(seriesModel: SeriesModel<SeriesOption & SeriesLargeOptionMixin>, view: ChartView, pipeline: Pick<Pipeline, 'progressiveEnabled' | 'threshold'>): PipelineContext;
+/**
+ * When some task "blocks" the upstream part of the pipeline, the upstream output (typically, a TypedArray
+ * to carry layout points, e.g., `data.getLayout('points')`) range is from the start to the final end.
+ * A downstream comsumer should either properly record cursors when reading from the upstream output,
+ * or fail fast on that usage.
+ * Otherwise, take the `data.getLayout('points')` as an example, repeatedly merging it with the existing
+ * shape path can create a big path, which degrades performance but is hard to detect.
+ *
+ * This method provides an assertion for that.
+ */
+export declare function validateUpstreamOutputRange(upstreamOutputRange: Pick<TaskProgressParams, 'start' | 'end'>, thisTaskPlannedRange: Pick<TaskProgressParams, 'start' | 'end'>): void;
+export declare function createSimpleOverallStageHandler(seriesType: ComponentSubType, overallReset: StageHandlerOverallReset): StageHandler;
+export declare function createSimpleOverallStageHandler2(overallReset: StageHandlerOverallReset): StageHandler;
 export {};

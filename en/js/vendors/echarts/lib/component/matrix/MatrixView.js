@@ -49,7 +49,9 @@ import * as vectorUtil from 'zrender/lib/core/vector.js';
 import { subPixelOptimize } from 'zrender/lib/graphic/helper/subPixelOptimize.js';
 import { Rect, Line, XY, setTooltipConfig, expandOrShrinkRect } from '../../util/graphic.js';
 import { clearTmpModel, ListIterator } from '../../util/model.js';
-import { clone, retrieve2 } from 'zrender/lib/core/util.js';
+import { getECData } from '../../util/innerStore.js';
+import { clone, retrieve2, isFunction, isString } from 'zrender/lib/core/util.js';
+import { formatTplSimple } from '../../util/format.js';
 import { invert } from 'zrender/lib/core/matrix.js';
 import { setLabelStyle } from '../../label/labelStyle.js';
 var round = Math.round;
@@ -144,7 +146,7 @@ function renderDimensionCells(group, matrixModel, ecModel) {
       var shape = {};
       BoundingRect.copy(shape, dimCell.rect);
       vectorUtil.set(xyLocator, dimCell.id.x, dimCell.id.y);
-      createMatrixCell(xyLocator, matrixModel, group, ecModel, dimCell.option, thisDimBgStyleModel, thisDimLabelModel, thisDimModel, shape, dimCell.option.value, Z2_DIMENSION_CELL_DEFAULT, tooltipOption);
+      createMatrixCell(xyLocator, matrixModel, group, ecModel, dimCell.option, thisDimBgStyleModel, thisDimLabelModel, thisDimModel, shape, dimCell.option.value, Z2_DIMENSION_CELL_DEFAULT, tooltipOption, dimIdx === 0 ? 'x' : 'y');
     }
   }
 }
@@ -182,14 +184,14 @@ function createBodyAndCorner(group, matrixModel, xDim, yDim, ecModel) {
           yLayout.dim.getLayout(shape, 1, xyLocator[1]);
         }
         var bodyCornerCellOption = bodyCornerCell ? bodyCornerCell.option : null;
-        createMatrixCell(xyLocator, matrixModel, group, ecModel, bodyCornerCellOption, parentItemStyleModel, parentLabelModel, parentCellModel, shape, bodyCornerCellOption ? bodyCornerCellOption.value : null, Z2_BODY_CORNER_CELL_DEFAULT, tooltipOption);
+        createMatrixCell(xyLocator, matrixModel, group, ecModel, bodyCornerCellOption, parentItemStyleModel, parentLabelModel, parentCellModel, shape, bodyCornerCellOption ? bodyCornerCellOption.value : null, Z2_BODY_CORNER_CELL_DEFAULT, tooltipOption, bodyCornerOptionRoot);
       }
     }
   } // End of createBodyOrCornerCells
 }
-function createMatrixCell(xyLocator, matrixModel, group, ecModel, cellOption, parentItemStyleModel, parentLabelModel, parentCellModel, shape, textValue, zrCellDefault, tooltipOption) {
+function createMatrixCell(xyLocator, matrixModel, group, ecModel, cellOption, parentItemStyleModel, parentLabelModel, parentCellModel, shape, textValue, zrCellDefault, tooltipOption, targetType) {
   var _a;
-  // Do not use getModel for handy performance optimization.
+  // Do not use getModel - a quick performance optimization.
   _tmpCellItemStyleModel.option = cellOption ? cellOption.itemStyle : null;
   _tmpCellItemStyleModel.parentModel = parentItemStyleModel;
   _tmpCellModel.option = cellOption;
@@ -210,6 +212,25 @@ function createMatrixCell(xyLocator, matrixModel, group, ecModel, cellOption, pa
     _tmpCellLabelModel.parentModel = parentLabelModel;
     // This is to accept `option.textStyle` as the default.
     _tmpCellLabelModel.ecModel = ecModel;
+    var formatter = _tmpCellLabelModel.getShallow('formatter');
+    if (formatter) {
+      var params = {
+        componentType: 'matrix',
+        componentIndex: matrixModel.componentIndex,
+        name: text,
+        value: textValue,
+        coord: xyLocator.slice(),
+        $vars: ['name', 'value', 'coord']
+      };
+      if (isString(formatter)) {
+        text = formatTplSimple(formatter, params);
+      } else if (isFunction(formatter)) {
+        var formattedText = formatter(params);
+        if (formattedText != null) {
+          text = formattedText + '';
+        }
+      }
+    }
     setLabelStyle(cellRect,
     // Currently do not support other states (`emphasis`, `select`, `blur`)
     {
@@ -252,12 +273,12 @@ function createMatrixCell(xyLocator, matrixModel, group, ecModel, cellOption, pa
     });
   }
   // Set silent
+  var triggerEvent = matrixModel.get('triggerEvent', true);
   if (cellText) {
     var labelSilent = _tmpCellLabelModel.get('silent');
-    // auto, tooltip of text cells need silient: false, but non-text cells
-    // do not need a special cursor in most cases.
+    // By default, silent: false is needed for triggerEvent or tooltip interaction.
     if (labelSilent == null) {
-      labelSilent = !tooltipOptionShow;
+      labelSilent = !(triggerEvent || tooltipOptionShow);
     }
     cellText.silent = labelSilent;
     cellText.ignoreHostSilent = true;
@@ -267,9 +288,25 @@ function createMatrixCell(xyLocator, matrixModel, group, ecModel, cellOption, pa
     rectSilent =
     // If no background color in cell, set `rect.silent: false` will cause that only
     // the border response to mouse hovering, which is probably weird.
+    // So we deliberately make rect non-interactive if `silent` is not explicitly specified,
+    // even if `triggerEvent` is set as `true`.
     !cellRect.style || cellRect.style.fill === 'none' || !cellRect.style.fill;
   }
   cellRect.silent = rectSilent;
+  // Both `cellRect` (typically non-transparent) and `cellText` may trigger events, depending on both
+  // `matrix.triggerEvent`, `matrix.xxx.silent` and `matrix.xxx.label.silent` settings.
+  if (triggerEvent && cellRect) {
+    var eventData = {
+      componentType: 'matrix',
+      componentIndex: matrixModel.componentIndex,
+      matrixIndex: matrixModel.componentIndex,
+      targetType: targetType,
+      name: cellText && cellText.style ? cellText.style.text : undefined,
+      value: textValue,
+      coord: xyLocator.slice()
+    };
+    getECData(cellRect).eventData = eventData;
+  }
   clearTmpModel(_tmpCellModel);
   clearTmpModel(_tmpCellItemStyleModel);
   clearTmpModel(_tmpCellLabelModel);

@@ -41,27 +41,28 @@
 * specific language governing permissions and limitations
 * under the License.
 */
-import categoryFilter from './categoryFilter.js';
-import categoryVisual from './categoryVisual.js';
-import edgeVisual from './edgeVisual.js';
-import simpleLayout from './simpleLayout.js';
-import circularLayout from './circularLayout.js';
-import forceLayout from './forceLayout.js';
+import { graphEdgeVisualStageHandler } from './edgeVisual.js';
+import { graphSimpleLayoutStageHandler } from './simpleLayout.js';
+import { graphCircularLayoutStageHandler } from './circularLayout.js';
+import { graphForceLayoutStageHandler } from './forceLayout.js';
 import createView from './createView.js';
 import View from '../../coord/View.js';
 import GraphView from './GraphView.js';
-import GraphSeriesModel from './GraphSeries.js';
-import { updateCenterAndZoomInAction } from '../../component/helper/roamHelper.js';
+import GraphSeriesModel, { SERIES_TYPE_GRAPH } from './GraphSeries.js';
+import { registerRoamActionSimply } from '../../component/helper/roamHelper.js';
 import { noop } from 'zrender/lib/core/util.js';
+import { graphCategoryFilterStageHandler } from './categoryFilter.js';
+import { graphCategoryVisualStageHandler } from './categoryVisual.js';
+import { COMPONENT_MAIN_TYPE_SERIES } from '../../util/types.js';
 export function install(registers) {
   registers.registerChartView(GraphView);
   registers.registerSeriesModel(GraphSeriesModel);
-  registers.registerProcessor(categoryFilter);
-  registers.registerVisual(categoryVisual);
-  registers.registerVisual(edgeVisual);
-  registers.registerLayout(simpleLayout);
-  registers.registerLayout(registers.PRIORITY.VISUAL.POST_CHART_LAYOUT, circularLayout);
-  registers.registerLayout(forceLayout);
+  registers.registerProcessor(graphCategoryFilterStageHandler);
+  registers.registerVisual(graphCategoryVisualStageHandler);
+  registers.registerVisual(graphEdgeVisualStageHandler);
+  registers.registerLayout(graphSimpleLayoutStageHandler);
+  registers.registerLayout(registers.PRIORITY.VISUAL.POST_CHART_LAYOUT, graphCircularLayoutStageHandler);
+  registers.registerLayout(graphForceLayoutStageHandler);
   registers.registerCoordinateSystem('graphView', {
     dimensions: View.dimensions,
     create: createView
@@ -77,29 +78,5 @@ export function install(registers) {
     event: 'unfocusNodeAdjacency',
     update: 'series:unfocusNodeAdjacency'
   }, noop);
-  // Register roam action.
-  registers.registerAction({
-    type: 'graphRoam',
-    event: 'graphRoam',
-    update: 'none'
-  }, function (payload, ecModel, api) {
-    ecModel.eachComponent({
-      mainType: 'series',
-      query: payload
-    }, function (seriesModel) {
-      var graphView = api.getViewOfSeriesModel(seriesModel);
-      if (graphView) {
-        if (payload.dx != null && payload.dy != null) {
-          graphView.updateViewOnPan(seriesModel, api, payload);
-        }
-        if (payload.zoom != null && payload.originX != null && payload.originY != null) {
-          graphView.updateViewOnZoom(seriesModel, api, payload);
-        }
-      }
-      var coordSys = seriesModel.coordinateSystem;
-      var res = updateCenterAndZoomInAction(coordSys, payload, seriesModel.get('scaleLimit'));
-      seriesModel.setCenter && seriesModel.setCenter(res.center);
-      seriesModel.setZoom && seriesModel.setZoom(res.zoom);
-    });
-  });
+  registerRoamActionSimply(registers, COMPONENT_MAIN_TYPE_SERIES, SERIES_TYPE_GRAPH);
 }

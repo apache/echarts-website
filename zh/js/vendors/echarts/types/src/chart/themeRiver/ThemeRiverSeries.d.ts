@@ -29,9 +29,10 @@ export interface ThemeRiverSeriesOption extends SeriesOption<ThemeRiverStateOpti
      */
     data?: ThemerRiverDataItem[];
 }
+export declare const SERIES_TYPE_THEME_RIVER = "themeRiver";
 declare class ThemeRiverSeriesModel extends SeriesModel<ThemeRiverSeriesOption> {
-    static readonly type = "series.themeRiver";
-    readonly type = "series.themeRiver";
+    static readonly type: string;
+    readonly type: string;
     static readonly dependencies: string[];
     nameMap: zrUtil.HashMap<number, string>;
     coordinateSystem: Single;

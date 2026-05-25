@@ -51,7 +51,7 @@ var ThumbnailBridgeImpl = /** @class */function () {
     this._thumbnailModel = thumbnailModel;
   }
   ThumbnailBridgeImpl.prototype.reset = function (api) {
-    this._renderVersion = api.getMainProcessVersion();
+    this._renderVersion = api.getECUpdateCycleVersion();
   };
   ThumbnailBridgeImpl.prototype.renderContent = function (opt) {
     var thumbnailView = opt.api.getViewOfComponentModel(this._thumbnailModel);

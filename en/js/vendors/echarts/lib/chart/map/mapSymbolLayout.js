@@ -41,16 +41,18 @@
 * specific language governing permissions and limitations
 * under the License.
 */
-import * as zrUtil from 'zrender/lib/core/util.js';
-export default function mapSymbolLayout(ecModel) {
-  var processedMapType = {};
-  ecModel.eachSeriesByType('map', function (mapSeries) {
-    var mapType = mapSeries.getMapType();
-    if (mapSeries.getHostGeoModel() || processedMapType[mapType]) {
+import { buildAllMapSeriesGroups, getMainMapSeries, mapSeriesGroupHasOwnGeo, SERIES_TYPE_MAP } from './MapSeries.js';
+import { createSimpleOverallStageHandler } from '../../util/model.js';
+import { each } from 'zrender/lib/core/util.js';
+export var mapSymbolLayoutStageHandler = createSimpleOverallStageHandler(SERIES_TYPE_MAP, mapSymbolLayout);
+function mapSymbolLayout(ecModel) {
+  each(buildAllMapSeriesGroups(ecModel), function (mapSeriesGroup, groupKey) {
+    if (!getMainMapSeries(mapSeriesGroup) || !mapSeriesGroupHasOwnGeo(groupKey)) {
+      // map series on separate geo components only provide "choropleth map", but symbols are ignored.
       return;
     }
     var mapSymbolOffsets = {};
-    zrUtil.each(mapSeries.seriesGroup, function (subMapSeries) {
+    each(mapSeriesGroup.f, function (subMapSeries) {
       var geo = subMapSeries.coordinateSystem;
       var data = subMapSeries.originalData;
       if (subMapSeries.get('showLegendSymbol') && ecModel.getComponent('legend')) {
@@ -74,13 +76,12 @@ export default function mapSymbolLayout(ecModel) {
       }
     });
     // Show label of those region not has legendIcon (which is offset 0)
-    var data = mapSeries.getData();
+    var data = getMainMapSeries(mapSeriesGroup).getData();
     data.each(function (idx) {
       var name = data.getName(idx);
       var layout = data.getItemLayout(idx) || {};
       layout.showLabel = !mapSymbolOffsets[name];
       data.setItemLayout(idx, layout);
     });
-    processedMapType[mapType] = true;
   });
 }

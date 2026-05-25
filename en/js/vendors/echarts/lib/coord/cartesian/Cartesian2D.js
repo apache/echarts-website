@@ -44,17 +44,21 @@
 import { __extends } from "tslib";
 import BoundingRect from 'zrender/lib/core/BoundingRect.js';
 import Cartesian from './Cartesian.js';
+import { COORD_SYS_TYPE_CARTESIAN_2D } from './GridModel.js';
 import { invert } from 'zrender/lib/core/matrix.js';
 import { applyTransform } from 'zrender/lib/core/vector.js';
+import { getScaleExtentForMappingUnsafe } from '../../scale/scaleMapper.js';
+import { hasBreaks } from '../../scale/break.js';
 export var cartesian2DDimensions = ['x', 'y'];
 function canCalculateAffineTransform(scale) {
-  return (scale.type === 'interval' || scale.type === 'time') && !scale.hasBreaks();
+  // Only supported on linear space.
+  return (scale.type === 'interval' || scale.type === 'time') && !hasBreaks(scale);
 }
 var Cartesian2D = /** @class */function (_super) {
   __extends(Cartesian2D, _super);
   function Cartesian2D() {
     var _this = _super !== null && _super.apply(this, arguments) || this;
-    _this.type = 'cartesian2d';
+    _this.type = COORD_SYS_TYPE_CARTESIAN_2D;
     _this.dimensions = cartesian2DDimensions;
     return _this;
   }
@@ -69,8 +73,8 @@ var Cartesian2D = /** @class */function (_super) {
     if (!canCalculateAffineTransform(xAxisScale) || !canCalculateAffineTransform(yAxisScale)) {
       return;
     }
-    var xScaleExtent = xAxisScale.getExtent();
-    var yScaleExtent = yAxisScale.getExtent();
+    var xScaleExtent = getScaleExtentForMappingUnsafe(xAxisScale, null);
+    var yScaleExtent = getScaleExtentForMappingUnsafe(yAxisScale, null);
     var start = this.dataToPoint([xScaleExtent[0], yScaleExtent[0]]);
     var end = this.dataToPoint([xScaleExtent[1], yScaleExtent[1]]);
     var xScaleSpan = xScaleExtent[1] - xScaleExtent[0];
@@ -87,9 +91,17 @@ var Cartesian2D = /** @class */function (_super) {
     this._invTransform = invert([], m);
   };
   /**
-   * Base axis will be used on stacking.
+   * Base axis will be used on stacking and series such as 'bar', 'pictorialBar', etc.
    */
   Cartesian2D.prototype.getBaseAxis = function () {
+    // FIXME:
+    //  (1) We should allow series (e.g., bar) to specify a base axis when
+    //      both axes are type "value", rather than force to xAxis or angleAxis.
+    //      NOTE: At present BoxplotSeries has its own overide `getBaseAxis`.
+    //      `CoordinateSystem['getBaseAxis']` probably should not exist, since it
+    //      may introduce inconsistency with `Series['getBaseAxis']`.
+    //  (2) "base axis" info is required in "createSeriesData" stage for "stack",
+    //      (see `dataStackHelper.ts` for details). Currently it is hard coded there.
     return this.getAxesByScale('ordinal')[0] || this.getAxesByScale('time')[0] || this.getAxis('x');
   };
   Cartesian2D.prototype.containPoint = function (point) {

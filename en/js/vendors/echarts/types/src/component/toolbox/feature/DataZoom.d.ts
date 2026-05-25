@@ -28,7 +28,6 @@ declare class DataZoomFeature extends ToolboxFeature<ToolboxDataZoomFeatureOptio
     _isZoomActive: boolean;
     render(featureModel: ToolboxDataZoomFeatureModel, ecModel: GlobalModel, api: ExtensionAPI, payload: Payload): void;
     onclick(ecModel: GlobalModel, api: ExtensionAPI, type: IconType): void;
-    remove(ecModel: GlobalModel, api: ExtensionAPI): void;
     dispose(ecModel: GlobalModel, api: ExtensionAPI): void;
     private _onBrush;
     _dispatchZoomAction(snapshot: history.DataZoomStoreSnapshot): void;

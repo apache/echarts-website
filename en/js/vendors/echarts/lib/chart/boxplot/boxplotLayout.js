@@ -41,80 +41,64 @@
 * specific language governing permissions and limitations
 * under the License.
 */
-import * as zrUtil from 'zrender/lib/core/util.js';
-import { parsePercent } from '../../util/number.js';
-var each = zrUtil.each;
-export default function boxplotLayout(ecModel) {
-  var groupResult = groupSeriesByAxis(ecModel);
-  each(groupResult, function (groupItem) {
-    var seriesModels = groupItem.seriesModels;
-    if (!seriesModels.length) {
+import { isArray } from 'zrender/lib/core/util.js';
+import { mathMax, mathMin, parsePercent } from '../../util/number.js';
+import { SERIES_TYPE_BOXPLOT } from './BoxplotSeries.js';
+import { countSeriesOnAxisOnKey, eachAxisOnKey, eachSeriesOnAxisOnKey, requireAxisStatistics } from '../../coord/axisStatistics.js';
+import { createSimpleOverallStageHandler, makeCallOnlyOnce } from '../../util/model.js';
+import { registerAxisContainShapeHandler } from '../../coord/scaleRawExtentInfo.js';
+import { calcBandWidth } from '../../coord/axisBand.js';
+import { createBandWidthBasedAxisContainShapeHandler, createMetricsNonOrdinalLinearPositiveMinGap, makeAxisStatKey } from '../helper/axisSnippets.js';
+var callOnlyOnce = makeCallOnlyOnce();
+export var boxplotLayoutStageHandler = createSimpleOverallStageHandler(SERIES_TYPE_BOXPLOT, boxplotLayout);
+function boxplotLayout(ecModel) {
+  var axisStatKey = makeAxisStatKey(SERIES_TYPE_BOXPLOT);
+  eachAxisOnKey(ecModel, axisStatKey, function (axis) {
+    var seriesCount = countSeriesOnAxisOnKey(axis, axisStatKey);
+    if (!seriesCount) {
       return;
     }
-    calculateBase(groupItem);
-    each(seriesModels, function (seriesModel, idx) {
-      layoutSingleSeries(seriesModel, groupItem.boxOffsetList[idx], groupItem.boxWidthList[idx]);
+    var baseResult = calculateBase(axis, seriesCount);
+    eachSeriesOnAxisOnKey(axis, axisStatKey, function (seriesModel) {
+      var seriesIndex = seriesModel.seriesIndex;
+      layoutSingleSeries(seriesModel, baseResult.boxOffsetList[seriesIndex], baseResult.boxWidthList[seriesIndex]);
     });
   });
-}
-/**
- * Group series by axis.
- */
-function groupSeriesByAxis(ecModel) {
-  var result = [];
-  var axisList = [];
-  ecModel.eachSeriesByType('boxplot', function (seriesModel) {
-    var baseAxis = seriesModel.getBaseAxis();
-    var idx = zrUtil.indexOf(axisList, baseAxis);
-    if (idx < 0) {
-      idx = axisList.length;
-      axisList[idx] = baseAxis;
-      result[idx] = {
-        axis: baseAxis,
-        seriesModels: []
-      };
-    }
-    result[idx].seriesModels.push(seriesModel);
-  });
-  return result;
 }
 /**
  * Calculate offset and box width for each series.
  */
-function calculateBase(groupItem) {
-  var baseAxis = groupItem.axis;
-  var seriesModels = groupItem.seriesModels;
-  var seriesCount = seriesModels.length;
-  var boxWidthList = groupItem.boxWidthList = [];
-  var boxOffsetList = groupItem.boxOffsetList = [];
+function calculateBase(baseAxis, seriesCount) {
+  var boxWidthList = [];
+  var boxOffsetList = [];
   var boundList = [];
-  var bandWidth;
-  if (baseAxis.type === 'category') {
-    bandWidth = baseAxis.getBandWidth();
-  } else {
-    var maxDataCount_1 = 0;
-    each(seriesModels, function (seriesModel) {
-      maxDataCount_1 = Math.max(maxDataCount_1, seriesModel.getData().count());
-    });
-    var extent = baseAxis.getExtent();
-    bandWidth = Math.abs(extent[1] - extent[0]) / maxDataCount_1;
-  }
-  each(seriesModels, function (seriesModel) {
+  var bandWidth = calcBandWidth(baseAxis, {
+    fromStat: {
+      key: makeAxisStatKey(SERIES_TYPE_BOXPLOT)
+    },
+    min: 1
+  }).w;
+  eachSeriesOnAxisOnKey(baseAxis, makeAxisStatKey(SERIES_TYPE_BOXPLOT), function (seriesModel) {
     var boxWidthBound = seriesModel.get('boxWidth');
-    if (!zrUtil.isArray(boxWidthBound)) {
+    if (!isArray(boxWidthBound)) {
       boxWidthBound = [boxWidthBound, boxWidthBound];
     }
-    boundList.push([parsePercent(boxWidthBound[0], bandWidth) || 0, parsePercent(boxWidthBound[1], bandWidth) || 0]);
+    boundList[seriesModel.seriesIndex] = [parsePercent(boxWidthBound[0], bandWidth) || 0, parsePercent(boxWidthBound[1], bandWidth) || 0];
   });
   var availableWidth = bandWidth * 0.8 - 2;
   var boxGap = availableWidth / seriesCount * 0.3;
   var boxWidth = (availableWidth - boxGap * (seriesCount - 1)) / seriesCount;
   var base = boxWidth / 2 - availableWidth / 2;
-  each(seriesModels, function (seriesModel, idx) {
-    boxOffsetList.push(base);
+  eachSeriesOnAxisOnKey(baseAxis, makeAxisStatKey(SERIES_TYPE_BOXPLOT), function (seriesModel) {
+    var seriesIndex = seriesModel.seriesIndex;
+    boxOffsetList[seriesIndex] = base;
     base += boxGap + boxWidth;
-    boxWidthList.push(Math.min(Math.max(boxWidth, boundList[idx][0]), boundList[idx][1]));
+    boxWidthList[seriesIndex] = mathMin(mathMax(boxWidth, boundList[seriesIndex][0]), boundList[seriesIndex][1]);
   });
+  return {
+    boxOffsetList: boxOffsetList,
+    boxWidthList: boxWidthList
+  };
 }
 /**
  * Calculate points location for each series.
@@ -123,7 +107,7 @@ function layoutSingleSeries(seriesModel, offset, boxWidth) {
   var coordSys = seriesModel.coordinateSystem;
   var data = seriesModel.getData();
   var halfWidth = boxWidth / 2;
-  var cDimIdx = seriesModel.get('layout') === 'horizontal' ? 0 : 1;
+  var cDimIdx = seriesModel.getWhiskerBoxesLayout() === 'horizontal' ? 0 : 1;
   var vDimIdx = 1 - cDimIdx;
   var coordDims = ['x', 'y'];
   var cDim = data.mapDimension(coordDims[cDimIdx]);
@@ -178,4 +162,15 @@ function layoutSingleSeries(seriesModel, offset, boxWidth) {
     to[cDimIdx] += halfWidth;
     ends.push(from, to);
   }
+}
+export function registerBoxplotAxisHandlers(registers) {
+  callOnlyOnce(registers, function () {
+    var axisStatKey = makeAxisStatKey(SERIES_TYPE_BOXPLOT);
+    requireAxisStatistics(registers, {
+      key: axisStatKey,
+      seriesType: SERIES_TYPE_BOXPLOT,
+      getMetrics: createMetricsNonOrdinalLinearPositiveMinGap
+    });
+    registerAxisContainShapeHandler(axisStatKey, createBandWidthBasedAxisContainShapeHandler(axisStatKey));
+  });
 }

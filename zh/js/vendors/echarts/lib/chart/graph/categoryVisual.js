@@ -41,10 +41,13 @@
 * specific language governing permissions and limitations
 * under the License.
 */
+import { SERIES_TYPE_GRAPH } from './GraphSeries.js';
 import { extend, isString } from 'zrender/lib/core/util.js';
-export default function categoryVisual(ecModel) {
+import { createSimpleOverallStageHandler } from '../../util/model.js';
+export var graphCategoryVisualStageHandler = createSimpleOverallStageHandler(SERIES_TYPE_GRAPH, categoryVisual);
+function categoryVisual(ecModel) {
   var paletteScope = {};
-  ecModel.eachSeriesByType('graph', function (seriesModel) {
+  ecModel.eachSeriesByType(SERIES_TYPE_GRAPH, function (seriesModel) {
     var categoriesData = seriesModel.getCategoriesData();
     var data = seriesModel.getData();
     var categoryNameIdxMap = {};

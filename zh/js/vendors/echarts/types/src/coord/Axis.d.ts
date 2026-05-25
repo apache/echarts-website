@@ -1,19 +1,19 @@
-import { createAxisLabels, AxisLabelsComputingContext } from './axisTickLabelBuilder.js';
+import { AxisLabelsComputingContext, AxisLabelInfoDetermined } from './axisTickLabelBuilder.js';
 import Scale, { ScaleGetTicksOpt } from '../scale/Scale.js';
-import { DimensionName, ScaleDataValue, ScaleTick } from '../util/types.js';
+import { DimensionName, NullUndefined, ScaleDataValue, ScaleTick } from '../util/types.js';
 import Model from '../model/Model.js';
-import { AxisBaseOption, CategoryAxisBaseOption, OptionAxisType } from './axisCommonTypes.js';
+import { AxisBaseOption, AxisTickOptionUnion, CategoryAxisBaseOption, CategoryTickLabelSplitBuildingOption, OptionAxisType } from './axisCommonTypes.js';
 import { AxisBaseModel } from './AxisBaseModel.js';
 export interface AxisTickCoord {
     coord: number;
-    tickValue?: ScaleTick['value'];
+    tickValue: ScaleTick['value'];
     onBand?: boolean;
 }
 /**
  * Base class of Axis.
  *
  * Lifetime: recreate for each main process.
- * [NOTICE]: Some caches is stored on the axis instance (see `axisTickLabelBuilder.ts`)
+ * [NOTICE]: Some caches is stored on the axis instance (e.g., `axisTickLabelBuilder.ts`, `scaleRawExtentInfo.ts`),
  *  which is based on this lifetime.
  */
 declare class Axis {
@@ -31,6 +31,7 @@ declare class Axis {
     model: AxisBaseModel;
     onBand: CategoryAxisBaseOption['boundaryGap'];
     inverse: AxisBaseOption['inverse'];
+    __alignTo: Axis | NullUndefined;
     constructor(dim: DimensionName, scale: Scale, extent: [number, number]);
     /**
      * If axis extent contain given coord
@@ -44,10 +45,6 @@ declare class Axis {
      * Get coord extent.
      */
     getExtent(): [number, number];
-    /**
-     * Get precision used for formatting
-     */
-    getPixelPrecision(dataExtent?: [number, number]): number;
     /**
      * Set coord extent
      */
@@ -69,18 +66,14 @@ declare class Axis {
      * `axis.getTicksCoords` considers `onBand`, which is used by
      * `boundaryGap:true` of category axis and splitLine and splitArea.
      * @param opt.tickModel default: axis.model.getModel('axisTick')
-     * @param opt.clamp If `true`, the first and the last
-     *        tick must be at the axis end points. Otherwise, clip ticks
-     *        that outside the axis extent.
      */
     getTicksCoords(opt?: {
-        tickModel?: Model;
-        clamp?: boolean;
+        tickModel?: Model<CategoryTickLabelSplitBuildingOption>;
         breakTicks?: ScaleGetTicksOpt['breakTicks'];
         pruneByBreak?: ScaleGetTicksOpt['pruneByBreak'];
     }): AxisTickCoord[];
     getMinorTicksCoords(): AxisTickCoord[][];
-    getViewLabels(ctx?: AxisLabelsComputingContext): ReturnType<typeof createAxisLabels>['labels'];
+    getViewLabels(ctx?: AxisLabelsComputingContext): AxisLabelInfoDetermined[];
     getLabelModel(): Model<AxisBaseOption['axisLabel']>;
     /**
      * Notice here we only get the default tick model. For splitLine
@@ -89,9 +82,9 @@ declare class Axis {
      * In GL, this method may be overridden to:
      * `axisModel.getModel('axisTick', grid3DModel.getModel('axisTick'));`
      */
-    getTickModel(): Model;
+    getTickModel(): Model<AxisTickOptionUnion>;
     /**
-     * Get width of band
+     * @deprecated Use `calcBandWidth` instead.
      */
     getBandWidth(): number;
     /**
@@ -101,7 +94,7 @@ declare class Axis {
     /**
      * Only be called in category axis.
      * Can be overridden, consider other axes like in 3D.
-     * @return Auto interval for cateogry axis tick and label
+     * @return Auto interval for category axis tick and label
      */
     calculateCategoryInterval(ctx?: AxisLabelsComputingContext): number;
 }

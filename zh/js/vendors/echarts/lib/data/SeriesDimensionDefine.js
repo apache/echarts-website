@@ -48,6 +48,7 @@ var SeriesDimensionDefine = /** @class */function () {
    */
   function SeriesDimensionDefine(opt) {
     /**
+     * The term "other" means "other than coord".
      * The format of `otherDims` is:
      * ```js
      * {

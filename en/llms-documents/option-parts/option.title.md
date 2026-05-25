@@ -1217,7 +1217,24 @@ Optional values: `'auto'`, `'top'`, `'bottom'`, `'middle'`.
 - **Type**: `boolean`
 - **Default**: `false`
 
-Set this to `true` to enable triggering events
+Whether to enable to dispatch mouse/touch events to user-registered listeners (i.e., `chart.on('xxx', function (event) {})`).
+
+Supported mouse/touch events are `'click'`, `'dblclick'`, `'mouseover'`, `'mouseout'`, `'mousemove'`, `'mousedown'`, `'mouseup'`, `'globalout'`, `'contextmenu'`. Note, both mouse and touch events are unified to the event type `'mouse{xxx}'`.
+
+Values:
+
+*   `true`: Enable to trigger events. But dispatching also requires option `silent` to be falsy.
+*   `false`: Disable to trigger mouse/touch events, even if option `silent` is falsy.
+
+The parameters of the event:
+
+```
+{
+    componentType: 'title';
+    // The index of the title component (base on echarts option)
+    componentIndex: number;
+}
+```
 
 ## padding
 - **Type**: `number|Array`

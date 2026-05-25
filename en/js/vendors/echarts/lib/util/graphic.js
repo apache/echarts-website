@@ -45,7 +45,7 @@ import * as pathTool from 'zrender/lib/tool/path.js';
 import * as matrix from 'zrender/lib/core/matrix.js';
 import * as vector from 'zrender/lib/core/vector.js';
 import Path from 'zrender/lib/graphic/Path.js';
-import Transformable from 'zrender/lib/core/Transformable.js';
+import Transformable, { copyTransform } from 'zrender/lib/core/Transformable.js';
 import ZRImage from 'zrender/lib/graphic/Image.js';
 import Group from 'zrender/lib/graphic/Group.js';
 import ZRText from 'zrender/lib/graphic/Text.js';
@@ -78,6 +78,13 @@ export { updateProps, initProps, removeElement, removeElementWithFadeOut, isElem
 var _customShapeMap = {};
 export var XY = ['x', 'y'];
 export var WH = ['width', 'height'];
+/**
+ * NOTICE: Only canvas renderer can set these hoverLayer flags.
+ * @see ElementCommonState['hoverLayer']
+ */
+export var HOVER_LAYER_NO = 0;
+export var HOVER_LAYER_FROM_THRESHOLD = 1;
+export var HOVER_LAYER_FOR_INCREMENTAL = 2;
 /**
  * Extend shape with parameters
  */
@@ -685,6 +692,8 @@ maxZ2) {
     el.zlevel = zlevel;
     maxZ2 = mathMax(el.z2 || 0, maxZ2);
   }
+  // NOTICE: Do not call any method that can set REDRAW_BIT,
+  // otherwise progressive rendering is broken.
   // always set z and zlevel if label/labelLine exists
   if (label) {
     label.z = z;
@@ -700,6 +709,33 @@ maxZ2) {
     isFinite(maxZ2) && (labelLine.z2 = maxZ2 + (textGuideLineConfig && textGuideLineConfig.showAbove ? 1 : -1));
   }
   return maxZ2;
+}
+export function payloadDisableAnimation(payload) {
+  // Disable animation in `updateProps` of `graphic.ts`.
+  payload.animation = {
+    duration: 0
+  };
+  return payload;
+}
+/**
+ * Decompose an affine matrix to
+ * x/y/scaleX/scaleY/rotation/skewX/skewY
+ */
+export function decomposeTransform(out, mt) {
+  mt ? matrix.copy(tmpDTR.transform, mt) : matrix.identity(tmpDTR.transform);
+  // Use a tmp transformable to avoid effects from parent.
+  tmpDTR.decomposeTransform();
+  copyTransform(out, tmpDTR);
+  return out;
+}
+var tmpDTR = new Transformable();
+tmpDTR.transform = matrix.create();
+/**
+ * If not canvas painter, return null/undefined.
+ */
+export function getCurrentCanvasPainter(api) {
+  var painter = api.getZr().painter;
+  return painter.getType() === 'canvas' ? painter : null;
 }
 // Register built-in shapes. These shapes might be overwritten
 // by users, although we do not recommend that.

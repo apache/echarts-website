@@ -514,19 +514,8 @@ function dispatchSelectAction(seriesName, dataName, api, excludeSeriesId) {
   // TODO highlight immediately may cause animation loss.
   dispatchHighlightAction(seriesName, dataName, api, excludeSeriesId);
 }
-function isUseHoverLayer(api) {
-  var list = api.getZr().storage.getDisplayList();
-  var emphasisState;
-  var i = 0;
-  var len = list.length;
-  while (i < len && !(emphasisState = list[i].states.emphasis)) {
-    i++;
-  }
-  return emphasisState && emphasisState.hoverLayer;
-}
 function dispatchHighlightAction(seriesName, dataName, api, excludeSeriesId) {
-  // If element hover will move to a hoverLayer.
-  if (!isUseHoverLayer(api)) {
+  if (!api.usingTHL()) {
     api.dispatchAction({
       type: 'highlight',
       seriesName: seriesName,
@@ -536,8 +525,7 @@ function dispatchHighlightAction(seriesName, dataName, api, excludeSeriesId) {
   }
 }
 function dispatchDownplayAction(seriesName, dataName, api, excludeSeriesId) {
-  // If element hover will move to a hoverLayer.
-  if (!isUseHoverLayer(api)) {
+  if (!api.usingTHL()) {
     api.dispatchAction({
       type: 'downplay',
       seriesName: seriesName,

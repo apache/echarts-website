@@ -1,9 +1,9 @@
 import DataZoomModel, { DataZoomOption } from './DataZoomModel.js';
-import { BoxLayoutOptionMixin, ZRColor, LineStyleOption, AreaStyleOption, ItemStyleOption, LabelOption } from '../../util/types.js';
+import { BoxLayoutOptionMixin, ZRColor, LineStyleOption, AreaStyleOption, ItemStyleOption, LabelOption, ComponentOnMatrixOptionMixin, ComponentOnCalendarOptionMixin } from '../../util/types.js';
 interface SliderHandleLabelOption {
     show?: boolean;
 }
-export interface SliderDataZoomOption extends DataZoomOption, BoxLayoutOptionMixin {
+export interface SliderDataZoomOption extends DataZoomOption, BoxLayoutOptionMixin, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin {
     show?: boolean;
     /**
      * Slider dataZoom don't support textStyle
@@ -57,6 +57,11 @@ export interface SliderDataZoomOption extends DataZoomOption, BoxLayoutOptionMix
      * Height of handle rect. Can be a percent string relative to the slider height.
      */
     moveHandleSize?: number;
+    /**
+     * The precision only used on displayed labels.
+     * NOTICE: Specifying the "value precision" or "roaming step" is not allowed.
+     *  `getAcceptableTickPrecision` is used for that. See `AxisProxy` for reasons.
+     */
     labelPrecision?: number | 'auto';
     labelFormatter?: string | ((value: number, valueStr: string) => string);
     showDetail?: boolean;
@@ -69,7 +74,7 @@ export interface SliderDataZoomOption extends DataZoomOption, BoxLayoutOptionMix
     brushSelect?: boolean;
     brushStyle?: ItemStyleOption;
     emphasis?: {
-        handleLabel: SliderHandleLabelOption;
+        handleLabel?: SliderHandleLabelOption;
         handleStyle?: ItemStyleOption;
         moveHandleStyle?: ItemStyleOption;
     };

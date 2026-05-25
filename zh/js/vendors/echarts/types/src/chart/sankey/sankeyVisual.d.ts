@@ -1,2 +1,1 @@
-import GlobalModel from '../../model/Global.js';
-export default function sankeyVisual(ecModel: GlobalModel): void;
+export declare const sankeyVisualStageHandler: import("../../util/types").StageHandler;

@@ -149,21 +149,17 @@ var SeriesData = /** @class */function () {
       if (dimensionInfo.createInvertedIndices) {
         invertedIndicesMap[dimensionName] = [];
       }
-      var dimIdx = i;
-      if (zrUtil.isNumber(dimensionInfo.storeDimIndex)) {
-        dimIdx = dimensionInfo.storeDimIndex;
-      }
-      if (otherDims.itemName === 0) {
-        this._nameDimIdx = dimIdx;
-      }
-      if (otherDims.itemId === 0) {
-        this._idDimIdx = dimIdx;
-      }
       if (process.env.NODE_ENV !== 'production') {
         zrUtil.assert(assignStoreDimIdx || dimensionInfo.storeDimIndex >= 0);
       }
       if (assignStoreDimIdx) {
         dimensionInfo.storeDimIndex = i;
+      }
+      if (otherDims.itemName === 0) {
+        this._nameDimIdx = dimensionInfo.storeDimIndex;
+      }
+      if (otherDims.itemId === 0) {
+        this._idDimIdx = dimensionInfo.storeDimIndex;
       }
     }
     this.dimensions = dimensionNames;
@@ -442,23 +438,18 @@ var SeriesData = /** @class */function () {
     prepareInvertedIndex(this);
   };
   /**
-   * PENDING: In fact currently this function is only used to short-circuit
-   * the calling of `scale.unionExtentFromData` when data have been filtered by modules
-   * like "dataZoom". `scale.unionExtentFromData` is used to calculate data extent for series on
-   * an axis, but if a "axis related data filter module" is used, the extent of the axis have
-   * been fixed and no need to calling `scale.unionExtentFromData` actually.
-   * But if we add "custom data filter" in future, which is not "axis related", this method may
-   * be still needed.
-   *
    * Optimize for the scenario that data is filtered by a given extent.
    * Consider that if data amount is more than hundreds of thousand,
    * extent calculation will cost more than 10ms and the cache will
    * be erased because of the filtering.
    */
-  SeriesData.prototype.getApproximateExtent = function (dim) {
-    return this._approximateExtent[dim] || this._store.getDataExtent(this._getStoreDimIndex(dim));
+  SeriesData.prototype.getApproximateExtent = function (dim, filter) {
+    return this._approximateExtent[dim] || this._store.getDataExtent(this._getStoreDimIndex(dim), filter);
   };
   /**
+   * NOTICE: `_approximateExtent` does not support filter. Callers must ensure the input extent
+   * to be handled by `scale.sanitizeExtent`.
+   *
    * Calculate extent on a filtered data might be time consuming.
    * Approximate extent is only used for: calculate extent of filtered data outside.
    */
@@ -535,7 +526,7 @@ var SeriesData = /** @class */function () {
     return this._store.getIndices();
   };
   SeriesData.prototype.getDataExtent = function (dim) {
-    return this._store.getDataExtent(this._getStoreDimIndex(dim));
+    return this._store.getDataExtent(this._getStoreDimIndex(dim), null);
   };
   SeriesData.prototype.getSum = function (dim) {
     return this._store.getSum(this._getStoreDimIndex(dim));

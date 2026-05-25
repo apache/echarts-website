@@ -78,7 +78,7 @@ var ScatterSeriesModel = /** @class */function (_super) {
     return selectors.point(data.getItemLayout(dataIndex));
   };
   ScatterSeriesModel.prototype.getZLevelKey = function () {
-    // Each progressive series has individual key.
+    // PENDING: See `GET_ZLEVEL_KEY_FOR_PROGRESSIVE`
     return this.getData().count() > this.getProgressiveThreshold() ? this.id : '';
   };
   ScatterSeriesModel.type = 'series.scatter';
@@ -89,20 +89,17 @@ var ScatterSeriesModel = /** @class */function (_super) {
     z: 2,
     legendHoverLink: true,
     symbolSize: 10,
-    // symbolRotate: null,  // 图形旋转控制
+    // symbolRotate: null,
     large: false,
     // Available when large is true
     largeThreshold: 2000,
     // cursor: null,
     itemStyle: {
       opacity: 0.8
-      // color: 各异
     },
     emphasis: {
       scale: true
     },
-    // If clip the overflow graphics
-    // Works on cartesian / polar series
     clip: true,
     select: {
       itemStyle: {

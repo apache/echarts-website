@@ -1,8 +1,8 @@
 import SeriesModel from '../../model/Series.js';
 import SeriesData from '../../data/SeriesData.js';
-import { SeriesOption, SeriesOnCartesianOptionMixin, SeriesOnGeoOptionMixin, SeriesOnPolarOptionMixin, SeriesOnCalendarOptionMixin, SeriesLargeOptionMixin, LineStyleOption, OptionDataValue, StatesOptionMixin, SeriesLineLabelOption, DimensionDefinitionLoose, DefaultStatesMixinEmphasis, ZRColor, CallbackDataParams } from '../../util/types.js';
+import { SeriesOption, SeriesOnCartesianOptionMixin, SeriesOnGeoOptionMixin, SeriesOnPolarOptionMixin, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin, SeriesLargeOptionMixin, LineStyleOption, OptionDataValue, StatesOptionMixin, SeriesLineLabelOption, DimensionDefinitionLoose, DefaultStatesMixinEmphasis, ZRColor, CallbackDataParams } from '../../util/types.js';
 import GlobalModel from '../../model/Global.js';
-import type { LineDrawModelOption } from '../helper/LineDraw.js';
+import { LineDrawModelOption } from '../helper/baseDraw.js';
 declare type LinesCoords = number[][];
 declare type LinesValue = OptionDataValue | OptionDataValue[];
 interface LinesLineStyleOption<TClr> extends LineStyleOption<TClr> {
@@ -25,7 +25,7 @@ export interface LinesDataItemOption extends LinesStateOption, StatesOptionMixin
     value?: LinesValue;
     effect?: LineDrawModelOption['effect'];
 }
-export interface LinesSeriesOption extends SeriesOption<LinesStateOption, LinesStatesMixin>, LinesStateOption<CallbackDataParams>, SeriesOnCartesianOptionMixin, SeriesOnGeoOptionMixin, SeriesOnPolarOptionMixin, SeriesOnCalendarOptionMixin, SeriesLargeOptionMixin {
+export interface LinesSeriesOption extends SeriesOption<LinesStateOption, LinesStatesMixin>, LinesStateOption<CallbackDataParams>, SeriesOnCartesianOptionMixin, SeriesOnGeoOptionMixin, SeriesOnPolarOptionMixin, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin, SeriesLargeOptionMixin {
     type?: 'lines';
     coordinateSystem?: string;
     symbol?: string[] | string;
@@ -64,7 +64,7 @@ declare class LinesSeriesModel extends SeriesModel<LinesSeriesOption> {
         count: number;
     };
     getInitialData(option: LinesSeriesOption, ecModel: GlobalModel): SeriesData<this, import("../../data/SeriesData").DefaultDataVisual>;
-    formatTooltip(dataIndex: number, multipleSeries: boolean, dataType: string): string | import("../../component/tooltip/tooltipMarkup").TooltipMarkupNameValueBlock;
+    formatTooltip(dataIndex: number, multipleSeries: boolean, dataType: string): import("../../component/tooltip/tooltipMarkup").TooltipMarkupNameValueBlock;
     preventIncremental(): boolean;
     getProgressive(): number | false;
     getProgressiveThreshold(): number;

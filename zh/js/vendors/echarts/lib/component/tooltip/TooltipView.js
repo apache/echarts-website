@@ -134,6 +134,11 @@ var TooltipView = /** @class */function (_super) {
     var ecModel = this._ecModel;
     var api = this._api;
     var triggerOn = tooltipModel.get('triggerOn');
+    if (tooltipModel.get('trigger') !== 'axis') {
+      // _lastDataByCoordSys and _cbParamsList are used for axis tooltip only.
+      this._lastDataByCoordSys = null;
+      this._cbParamsList = null;
+    }
     // Try to keep the tooltip show when refreshing
     if (this._lastX != null && this._lastY != null
     // When user is willing to control tooltip totally using API,
@@ -255,6 +260,7 @@ var TooltipView = /** @class */function (_super) {
       tooltipContent.hideLater(this._tooltipModel.get('hideDelay'));
     }
     this._lastX = this._lastY = this._lastDataByCoordSys = null;
+    this._cbParamsList = null;
     if (payload.from !== this.uid) {
       this._hide(makeDispatchAction(payload, api));
     }
@@ -306,6 +312,7 @@ var TooltipView = /** @class */function (_super) {
         return;
       }
       this._lastDataByCoordSys = null;
+      this._cbParamsList = null;
       var seriesDispatcher_1;
       var cmptDispatcher_1;
       findEventDispatcher(el, function (target) {
@@ -334,6 +341,7 @@ var TooltipView = /** @class */function (_super) {
       }
     } else {
       this._lastDataByCoordSys = null;
+      this._cbParamsList = null;
       this._hide(dispatchAction);
     }
   };
@@ -365,13 +373,15 @@ var TooltipView = /** @class */function (_super) {
       each(itemCoordSys.dataByAxis, function (axisItem) {
         var axisModel = ecModel.getComponent(axisItem.axisDim + 'Axis', axisItem.axisIndex);
         var axisValue = axisItem.value;
+        var axis = axisModel.axis;
+        var axisValueParsed = axis.scale.parse(axisValue);
         if (!axisModel || axisValue == null) {
           return;
         }
         // FIXME: when using `tooltip.trigger: 'axis'`, the precision of the axis value displayed in tooltip
-        //  should match the original series values rather than using the default stretegy in Interval.ts
-        //  (getPrecision(interval) + 2); otherwise it may cuase confusion.
-        var axisValueLabel = axisPointerViewHelper.getValueLabel(axisValue, axisModel.axis, ecModel, axisItem.seriesDataIndices, axisItem.valueLabelOpt);
+        //  should match the original series values rather than using the default strategy in Interval.ts
+        //  (getPrecision(interval) + 2); otherwise it may cause confusion.
+        var axisValueLabel = axisPointerViewHelper.getValueLabel(axisValue, axis, ecModel, axisItem.seriesDataIndices, axisItem.valueLabelOpt);
         var axisSectionMarkup = createTooltipMarkup('section', {
           header: axisValueLabel,
           noHeader: !trim(axisValueLabel),
@@ -392,7 +402,7 @@ var TooltipView = /** @class */function (_super) {
           cbParams.axisType = axisItem.axisType;
           cbParams.axisId = axisItem.axisId;
           cbParams.axisValue = axisHelper.getAxisRawValue(axisModel.axis, {
-            value: axisValue
+            value: axisValueParsed
           });
           cbParams.axisValueLabel = axisValueLabel;
           // Pre-create marker style for makers. Users can assemble richText
@@ -539,7 +549,7 @@ var TooltipView = /** @class */function (_super) {
     });
   };
   TooltipView.prototype._showTooltipContent = function (
-  // Use Model<TooltipOption> insteadof TooltipModel because this model may be from series or other options.
+  // Use Model<TooltipOption> instead of TooltipModel because this model may be from series or other options.
   // Instead of top level tooltip.
   tooltipModel, defaultHtml, params, asyncTicket, x, y, positionExpr, el, markupStyleCreator) {
     // Reset ticket
@@ -691,6 +701,7 @@ var TooltipView = /** @class */function (_super) {
     // FIXME
     // duplicated hideTip if manuallyHideTip is called from dispatchAction.
     this._lastDataByCoordSys = null;
+    this._cbParamsList = null;
     dispatchAction({
       type: 'hideTip',
       from: this.uid
@@ -703,6 +714,10 @@ var TooltipView = /** @class */function (_super) {
     clear(this, '_updatePosition');
     this._tooltipContent.dispose();
     globalListener.unregister('itemTooltip', api);
+    this._tooltipContent = null;
+    this._tooltipModel = null;
+    this._lastDataByCoordSys = null;
+    this._cbParamsList = null;
   };
   TooltipView.type = 'tooltip';
   return TooltipView;

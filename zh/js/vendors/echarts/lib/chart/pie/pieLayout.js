@@ -42,13 +42,15 @@
 * under the License.
 */
 import { linearMap } from '../../util/number.js';
+import { SERIES_TYPE_PIE } from './PieSeries.js';
 import { normalizeArcAngles } from 'zrender/lib/core/PathProxy.js';
-import { makeInner } from '../../util/model.js';
+import { createSimpleOverallStageHandler, makeInner } from '../../util/model.js';
 import { getCircleLayout } from '../../util/layout.js';
 var PI2 = Math.PI * 2;
 var RADIAN = Math.PI / 180;
-export default function pieLayout(seriesType, ecModel, api) {
-  ecModel.eachSeriesByType(seriesType, function (seriesModel) {
+export var pieLayoutStageHandler = createSimpleOverallStageHandler(SERIES_TYPE_PIE, pieLayout);
+function pieLayout(ecModel, api) {
+  ecModel.eachSeriesByType(SERIES_TYPE_PIE, function (seriesModel) {
     var data = seriesModel.getData();
     var valueDim = data.mapDimension('value');
     var _a = getCircleLayout(seriesModel, api),

@@ -51,3 +51,20 @@ export function registerScaleBreakHelperImpl(impl) {
 export function getScaleBreakHelper() {
   return _impl;
 }
+export function simplyParseBreakOption(scale, opt) {
+  var scaleBreakHelper = getScaleBreakHelper();
+  var breakOption = opt.breakOption;
+  var breakParsed = opt.breakParsed;
+  if (!breakParsed && scaleBreakHelper) {
+    breakParsed = scaleBreakHelper.parseAxisBreakOption(breakOption, scale);
+  }
+  return breakParsed;
+}
+export function getBreaksUnsafe(scale) {
+  var brk = scale.brk;
+  return brk ? brk.breaks : [];
+}
+export function hasBreaks(scale) {
+  var brk = scale.brk;
+  return brk ? brk.hasBreaks() : false;
+}

@@ -27,21 +27,15 @@ export declare const dataStack: {
  */
 export { createSymbol } from '../../util/symbol.js';
 /**
+ * Externally used by echarts-gl.
  * Create scale
- * @param {Array.<number>} dataExtent
- * @param {Object|module:echarts/Model} option If `optoin.type`
- *        is secified, it can only be `'value'` currently.
+ * @param dataExtent
+ * @param option If `option.type`
+ *        is specified, it can only be `'value'` currently.
  */
-export declare function createScale(dataExtent: number[], option: object | AxisBaseModel): import("../../scale/Scale").default<import("../../scale/Scale").ScaleSettingDefault>;
+export declare function createScale(dataExtent: number[], option: object | AxisBaseModel): import("../../scale/Scale").default<unknown>;
 /**
- * Mixin common methods to axis model,
- *
- * Include methods
- * `getFormattedLabels() => Array.<string>`
- * `getCategories() => Array.<string>`
- * `getMin(origin: boolean) => number`
- * `getMax(origin: boolean) => number`
- * `getNeedCrossZero() => boolean`
+ * Mixin common methods to axis model
  */
 export declare function mixinAxisModelCommonMethods(Model: Model): void;
 export { getECData };

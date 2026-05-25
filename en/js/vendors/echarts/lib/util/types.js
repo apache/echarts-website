@@ -42,7 +42,8 @@
 * under the License.
 */
 import { createHashMap } from 'zrender/lib/core/util.js';
-;
+export var UNDEFINED_STR = 'undefined';
+export var COMPONENT_MAIN_TYPE_SERIES = 'series';
 ;
 ;
 export var VISUAL_DIMENSIONS = createHashMap(['tooltip', 'label', 'itemName', 'itemId', 'itemGroupId', 'itemChildGroupId', 'seriesName']);
@@ -58,3 +59,4 @@ export var SERIES_LAYOUT_BY_ROW = 'row';
 ;
 ;
 ;
+export var ROAM_ACTION_TYPE_SUFFIX = 'Roam';

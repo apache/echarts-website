@@ -45,25 +45,24 @@ import { __extends } from "tslib";
 import SymbolDraw from '../helper/SymbolDraw.js';
 import LineDraw from '../helper/LineDraw.js';
 import RoamController from '../../component/helper/RoamController.js';
-import { updateViewOnZoom, updateViewOnPan } from '../../component/helper/roamHelper.js';
+import { isRoamPayloadHasZoom, updateRoamControllerSimply } from '../../component/helper/roamHelper.js';
 import * as graphic from '../../util/graphic.js';
 import adjustEdge from './adjustEdge.js';
 import { getNodeGlobalScale } from './graphHelper.js';
 import ChartView from '../../view/Chart.js';
+import { SERIES_TYPE_GRAPH } from './GraphSeries.js';
+import { applyViewCoordSysTransToElement, getOwnRoamViewCoordSys, VIEW_COORD_SYS_TRANS_OVERALL, viewCoordSysCopyOverallMatrix } from '../../coord/View.js';
 import { getECData } from '../../util/innerStore.js';
 import { simpleLayoutEdge } from './simpleLayoutHelper.js';
 import { circularLayout, rotateNodeLabel } from './circularLayoutHelper.js';
 import { clone, extend } from 'zrender/lib/core/util.js';
 import ECLinePath from '../helper/LinePath.js';
 import { getThumbnailBridge } from '../../component/helper/thumbnailBridge.js';
-function isViewCoordSys(coordSys) {
-  return coordSys.type === 'view';
-}
 var GraphView = /** @class */function (_super) {
   __extends(GraphView, _super);
   function GraphView() {
     var _this = _super !== null && _super.apply(this, arguments) || this;
-    _this.type = GraphView.type;
+    _this.type = SERIES_TYPE_GRAPH;
     return _this;
   }
   GraphView.prototype.init = function (ecModel, api) {
@@ -72,9 +71,6 @@ var GraphView = /** @class */function (_super) {
     var group = this.group;
     var mainGroup = new graphic.Group();
     this._controller = new RoamController(api.getZr());
-    this._controllerHost = {
-      target: mainGroup
-    };
     mainGroup.add(symbolDraw.group);
     mainGroup.add(lineDraw.group);
     group.add(mainGroup);
@@ -85,29 +81,20 @@ var GraphView = /** @class */function (_super) {
   };
   GraphView.prototype.render = function (seriesModel, ecModel, api) {
     var _this = this;
-    var coordSys = seriesModel.coordinateSystem;
+    var ownCoordSys = getOwnRoamViewCoordSys(seriesModel);
     var isForceLayout = false;
     this._model = seriesModel;
     this._api = api;
     this._active = true;
+    var mainGroup = this._mainGroup;
     var thumbnailInfo = this._getThumbnailInfo();
     if (thumbnailInfo) {
       thumbnailInfo.bridge.reset(api);
     }
     var symbolDraw = this._symbolDraw;
     var lineDraw = this._lineDraw;
-    if (isViewCoordSys(coordSys)) {
-      var groupNewProp = {
-        x: coordSys.x,
-        y: coordSys.y,
-        scaleX: coordSys.scaleX,
-        scaleY: coordSys.scaleY
-      };
-      if (this._firstRender) {
-        this._mainGroup.attr(groupNewProp);
-      } else {
-        graphic.updateProps(this._mainGroup, groupNewProp, seriesModel);
-      }
+    if (ownCoordSys) {
+      applyViewCoordSysTransToElement(mainGroup, VIEW_COORD_SYS_TRANS_OVERALL, ownCoordSys, this._firstRender ? null : seriesModel);
     }
     // Fix edge contact point with node
     adjustEdge(seriesModel.getGraph(), getNodeGlobalScale(seriesModel));
@@ -117,7 +104,11 @@ var GraphView = /** @class */function (_super) {
     // TODO: TYPE
     lineDraw.updateData(edgeData);
     this._updateNodeAndLinkScale();
-    this._updateController(null, seriesModel, api);
+    if (ownCoordSys) {
+      updateRoamControllerSimply(seriesModel, api, this._controller, function (e, x, y) {
+        return seriesModel.coordinateSystem.containPoint([x, y]);
+      }, null);
+    }
     clearTimeout(this._layoutTimeout);
     var forceLayout = seriesModel.forceLayout;
     var layoutAnimation = seriesModel.get(['force', 'layoutAnimation']);
@@ -204,7 +195,6 @@ var GraphView = /** @class */function (_super) {
   GraphView.prototype.dispose = function () {
     this.remove();
     this._controller && this._controller.dispose();
-    this._controllerHost = null;
   };
   GraphView.prototype._startForceLayoutIteration = function (forceLayout, api, layoutAnimation) {
     var self = this;
@@ -220,75 +210,22 @@ var GraphView = /** @class */function (_super) {
       });
     })();
   };
-  GraphView.prototype._updateController = function (clipRect, seriesModel, api) {
-    var controller = this._controller;
-    var controllerHost = this._controllerHost;
-    var coordSys = seriesModel.coordinateSystem;
-    if (!isViewCoordSys(coordSys)) {
-      controller.disable();
-      return;
-    }
-    controller.enable(seriesModel.get('roam'), {
-      api: api,
-      zInfo: {
-        component: seriesModel
-      },
-      triggerInfo: {
-        roamTrigger: seriesModel.get('roamTrigger'),
-        isInSelf: function (e, x, y) {
-          return coordSys.containPoint([x, y]);
-        },
-        isInClip: function (e, x, y) {
-          return !clipRect || clipRect.contain(x, y);
-        }
-      }
-    });
-    controllerHost.zoomLimit = seriesModel.get('scaleLimit');
-    controllerHost.zoom = coordSys.getZoom();
-    controller.off('pan').off('zoom').on('pan', function (e) {
-      api.dispatchAction({
-        seriesId: seriesModel.id,
-        type: 'graphRoam',
-        dx: e.dx,
-        dy: e.dy
-      });
-    }).on('zoom', function (e) {
-      api.dispatchAction({
-        seriesId: seriesModel.id,
-        type: 'graphRoam',
-        zoom: e.scale,
-        originX: e.originX,
-        originY: e.originY
-      });
-    });
-  };
   /**
-   * A performance shortcut - called by action handler to update the view directly
-   * without any data/visual processing (which are assumed to be unchanged), while
-   * ensuring consistent behavior between internal and external action triggers.
+   * @implements RoamHostView['__updateOnOwnRoam']
    */
-  GraphView.prototype.updateViewOnPan = function (seriesModel, api, params) {
-    if (!this._active) {
+  GraphView.prototype.__updateOnOwnRoam = function (payload, seriesModel, api) {
+    var ownCoordSys = getOwnRoamViewCoordSys(seriesModel);
+    if (!this._active || !ownCoordSys) {
       return;
     }
-    updateViewOnPan(this._controllerHost, params.dx, params.dy);
-    this._updateThumbnailWindow();
-  };
-  /**
-   * A performance shortcut - called by action handler to update the view directly
-   * without any data/visual processing (which are assumed to be unchanged), while
-   * ensuring consistent behavior between internal and external action triggers.
-   */
-  GraphView.prototype.updateViewOnZoom = function (seriesModel, api, params) {
-    if (!this._active) {
-      return;
+    applyViewCoordSysTransToElement(this._mainGroup, VIEW_COORD_SYS_TRANS_OVERALL, ownCoordSys, null);
+    if (isRoamPayloadHasZoom(payload)) {
+      this._updateNodeAndLinkScale();
+      adjustEdge(seriesModel.getGraph(), getNodeGlobalScale(seriesModel));
+      this._lineDraw.updateLayout();
+      // Only update label layout on zoom
+      api.updateLabelLayout();
     }
-    updateViewOnZoom(this._controllerHost, params.zoom, params.originX, params.originY);
-    this._updateNodeAndLinkScale();
-    adjustEdge(seriesModel.getGraph(), getNodeGlobalScale(seriesModel));
-    this._lineDraw.updateLayout();
-    // Only update label layout on zoom
-    api.updateLabelLayout();
     this._updateThumbnailWindow();
   };
   GraphView.prototype._updateNodeAndLinkScale = function () {
@@ -337,7 +274,7 @@ var GraphView = /** @class */function (_super) {
   GraphView.prototype._updateThumbnailWindow = function () {
     var info = this._getThumbnailInfo();
     if (info) {
-      info.bridge.updateWindow(info.coordSys.transform, this._api);
+      info.bridge.updateWindow(viewCoordSysCopyOverallMatrix(null, info.coordSys), this._api);
     }
   };
   GraphView.prototype._renderThumbnail = function (seriesModel, api, symbolDraw, lineDraw) {
@@ -352,7 +289,7 @@ var GraphView = /** @class */function (_super) {
     var symbolGroup = new graphic.Group();
     bridgeGroup.add(symbolGroup);
     bridgeGroup.add(lineGroup);
-    // TODO: reuse elemenents for performance in large graph?
+    // TODO: reuse elements for performance in large graph?
     for (var i = 0; i < symbolNodes.length; i++) {
       var node = symbolNodes[i];
       var sub = node.children()[0];
@@ -390,10 +327,10 @@ var GraphView = /** @class */function (_super) {
       roamType: seriesModel.get('roam'),
       viewportRect: null,
       group: bridgeGroup,
-      targetTrans: info.coordSys.transform
+      targetTrans: viewCoordSysCopyOverallMatrix(null, info.coordSys)
     });
   };
-  GraphView.type = 'graph';
+  GraphView.type = SERIES_TYPE_GRAPH;
   return GraphView;
 }(ChartView);
 export default GraphView;

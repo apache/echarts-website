@@ -22,11 +22,9 @@ declare class CoordinateSystemManager {
     static register: (type: string, creator: CoordinateSystemCreator) => void;
     static get: (type: string) => CoordinateSystemCreator;
 }
-export declare const BoxCoordinateSystemCoordFrom: {
-    readonly coord: 1;
-    readonly coord2: 2;
-};
-export declare type BoxCoordinateSystemCoordFrom = (typeof BoxCoordinateSystemCoordFrom)[keyof typeof BoxCoordinateSystemCoordFrom];
+export declare const BOX_COORD_SYS_COORD_FROM_PROP_COORD: 1;
+export declare const BOX_COORD_SYS_COORD_FROM_PROP_COORD2: 2;
+export declare type BoxCoordinateSystemCoordFrom = typeof BOX_COORD_SYS_COORD_FROM_PROP_COORD | typeof BOX_COORD_SYS_COORD_FROM_PROP_COORD2;
 declare type BoxCoordinateSystemGetCoord2 = (model: ComponentModel) => CoordinateSystemDataCoord;
 /**
  * @see_also `createBoxLayoutReference`
@@ -39,67 +37,75 @@ export declare function registerLayOutOnCoordSysUsage(opt: {
 /**
  * @return Be an object, but never be NullUndefined.
  */
-export declare function getCoordForBoxCoordSys(model: ComponentModel): {
+export declare function getCoordForCoordSysUsageKindBox(model: ComponentModel): {
     coord: CoordinateSystemDataCoord | NullUndefined;
     from: BoxCoordinateSystemCoordFrom;
 };
 /**
- * - "dataCoordSys": each data item is laid out based on a coord sys.
- * - "boxCoordSys": the overall bounding rect or anchor point is calculated based on a coord sys.
+ * - `COORD_SYS_USAGE_KIND_DATA`: each data item is laid out based on a coord sys.
+ * - `COORD_SYS_USAGE_KIND_BOX`: the overall bounding rect or anchor point is calculated based on a coord sys.
  *   e.g.,
  *      grid rect (cartesian rect) is calculate based on matrix/calendar coord sys;
  *      pie center is calculated based on calendar/cartesian;
  *
  * The default value (if not declared in option `coordinateSystemUsage`):
- *  For series, use `dataCoordSys`, since this is the most case and backward compatible.
- *  For non-series components, use `boxCoordSys`, since `dataCoordSys` is not applicable.
+ *  For series, use `COORD_SYS_USAGE_KIND_DATA`, since this is the most common case and backward compatible.
+ *  For non-series components, use `COORD_SYS_USAGE_KIND_BOX`, since `COORD_SYS_USAGE_KIND_DATA` is not applicable.
  */
-export declare const CoordinateSystemUsageKind: {
-    readonly none: 0;
-    readonly dataCoordSys: 1;
-    readonly boxCoordSys: 2;
-};
-export declare type CoordinateSystemUsageKind = (typeof CoordinateSystemUsageKind)[keyof typeof CoordinateSystemUsageKind];
+export declare const COORD_SYS_USAGE_KIND_NONE: 0;
+export declare const COORD_SYS_USAGE_KIND_DATA: 1;
+export declare const COORD_SYS_USAGE_KIND_BOX: 2;
+export declare type CoordinateSystemUsageKind = typeof COORD_SYS_USAGE_KIND_NONE | typeof COORD_SYS_USAGE_KIND_DATA | typeof COORD_SYS_USAGE_KIND_BOX;
 export declare function decideCoordSysUsageKind(model: ComponentModel, printError?: boolean): {
     kind: CoordinateSystemUsageKind;
     coordSysType: string | NullUndefined;
 };
 /**
  * These cases are considered:
- *  (A) Most series can use only "dataCoordSys", but "boxCoordSys" is not applicable:
+ *  (A) Most series can use only "COORD_SYS_USAGE_KIND_DATA", but "COORD_SYS_USAGE_KIND_BOX" is not applicable:
  *    - e.g., series.heatmap, series.line, series.bar, series.scatter, ...
- *  (B) Some series and most components can use only "boxCoordSys", but "dataCoordSys" is not applicable:
+ *  (B) Some series and most components can use only "COORD_SYS_USAGE_KIND_BOX", but "COORD_SYS_USAGE_KIND_DATA"
+ *    is not applicable:
  *    - e.g., series.pie, series.funnel, ...
  *    - e.g., grid, polar, geo, title, ...
- *  (C) Several series can use both "boxCoordSys" and "dataCoordSys", even at the same time:
+ *  (C) Several series can use both "COORD_SYS_USAGE_KIND_BOX" and "COORD_SYS_USAGE_KIND_DATA", even at the same time:
  *    - e.g., series.graph, series.map
- *      - If graph or map series use a "boxCoordSys", it creates a internal "dataCoordSys" to lay out its data.
- *      - Graph series can use matrix coord sys as either the "dataCoordSys" (each item layout on one cell)
- *        or "boxCoordSys" (the entire series are layout within one cell).
+ *      - If graph or map series use "COORD_SYS_USAGE_KIND_BOX", it creates a internal coord sys as
+ *        "COORD_SYS_USAGE_KIND_DATA" to lay out its data.
+ *      - Graph series can use matrix coord sys as either the "COORD_SYS_USAGE_KIND_DATA" (each item layout
+ *        on one cell) or "COORD_SYS_USAGE_KIND_BOX" (the entire series are layout within one cell).
  *    - To achieve this effect,
  *      `series.coordinateSystemUsage: 'box'` needs to be specified explicitly.
  *
  * Check these echarts option settings:
  *  - If `series: {type: 'bar'}`:
- *      dataCoordSys: "cartesian2d", boxCoordSys: "none".
+ *      COORD_SYS_USAGE_KIND_DATA: "cartesian2d",
+ *      COORD_SYS_USAGE_KIND_BOX: "none".
  *      (since `coordinateSystem: 'cartesian2d'` is the default option in bar.)
  *  - If `grid: {coordinateSystem: 'matrix'}`
- *      dataCoordSys: "none", boxCoordSys: "matrix".
+ *      COORD_SYS_USAGE_KIND_DATA: "none",
+ *      COORD_SYS_USAGE_KIND_BOX: "matrix".
  *  - If `series: {type: 'pie', coordinateSystem: 'matrix'}`:
- *      dataCoordSys: "none", boxCoordSys: "matrix".
+ *      COORD_SYS_USAGE_KIND_DATA: "none",
+ *      COORD_SYS_USAGE_KIND_BOX: "matrix".
  *      (since `coordinateSystemUsage: 'box'` is the default option in pie.)
  *  - If `series: {type: 'graph', coordinateSystem: 'matrix'}`:
- *      dataCoordSys: "matrix", boxCoordSys: "none"
+ *      COORD_SYS_USAGE_KIND_DATA: "matrix",
+ *      COORD_SYS_USAGE_KIND_BOX: "none"
  *  - If `series: {type: 'graph', coordinateSystem: 'matrix', coordinateSystemUsage: 'box'}`:
- *      dataCoordSys: "an internal view", boxCoordSys: "the internal view is laid out on a matrix"
+ *      COORD_SYS_USAGE_KIND_DATA: "an internal view",
+ *      COORD_SYS_USAGE_KIND_BOX: "the internal view is laid out on a matrix"
  *  - If `series: {type: 'map'}`:
- *      dataCoordSys: "a internal geo", boxCoordSys: "none"
+ *      COORD_SYS_USAGE_KIND_DATA: "a internal geo",
+ *      COORD_SYS_USAGE_KIND_BOX: "none"
  *  - If `series: {type: 'map', coordinateSystem: 'geo', geoIndex: 0}`:
- *      dataCoordSys: "a geo", boxCoordSys: "none"
+ *      COORD_SYS_USAGE_KIND_DATA: "a geo",
+ *      COORD_SYS_USAGE_KIND_BOX: "none"
  *  - If `series: {type: 'map', coordinateSystem: 'matrix'}`:
  *      not_applicable
  *  - If `series: {type: 'map', coordinateSystem: 'matrix', coordinateSystemUsage: 'box'}`:
- *      dataCoordSys: "an internal geo", boxCoordSys: "the internal geo is laid out on a matrix"
+ *      COORD_SYS_USAGE_KIND_DATA: "an internal geo",
+ *      COORD_SYS_USAGE_KIND_BOX: "the internal geo is laid out on a matrix"
  *
  * @usage
  * For case (A) & (B),
@@ -108,8 +114,6 @@ export declare function decideCoordSysUsageKind(model: ComponentModel, printErro
  *  call `injectCoordSysByOption({coordSysType: 'aaa', ...})` once for each series/components,
  *  and then call `injectCoordSysByOption({coordSysType: 'bbb', ..., isDefaultDataCoordSys: true})`
  *  once for each series/components.
- *
- * @return Whether injected.
  */
 export declare function injectCoordSysByOption(opt: {
     targetModel: ComponentModel;
@@ -117,7 +121,7 @@ export declare function injectCoordSysByOption(opt: {
     coordSysProvider: CoordSysInjectionProvider;
     isDefaultDataCoordSys?: boolean;
     allowNotFound?: boolean;
-}): boolean;
+}): CoordinateSystemUsageKind;
 declare type CoordSysInjectionProvider = (coordSysType: string, injectTargetModel: ComponentModel) => CoordinateSystem | NullUndefined;
 export declare const simpleCoordSysInjectionProvider: CoordSysInjectionProvider;
 export default CoordinateSystemManager;

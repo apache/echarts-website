@@ -1,5 +1,3 @@
-import LineDraw from '../helper/LineDraw.js';
-import LargeLineDraw from '../helper/LargeLineDraw.js';
 import ChartView from '../../view/Chart.js';
 import LinesSeriesModel from './LinesSeries.js';
 import GlobalModel from '../../model/Global.js';
@@ -7,6 +5,7 @@ import ExtensionAPI from '../../core/ExtensionAPI.js';
 import { StageHandlerProgressParams } from '../../util/types.js';
 import SeriesData from '../../data/SeriesData.js';
 import Element from 'zrender/lib/Element.js';
+import { ILineDraw } from '../helper/baseDraw.js';
 declare class LinesView extends ChartView {
     static readonly type = "lines";
     readonly type = "lines";
@@ -23,7 +22,7 @@ declare class LinesView extends ChartView {
     updateTransform(seriesModel: LinesSeriesModel, ecModel: GlobalModel, api: ExtensionAPI): {
         readonly update: true;
     };
-    _updateLineDraw(data: SeriesData, seriesModel: LinesSeriesModel): LineDraw | LargeLineDraw;
+    _updateLineDraw(data: SeriesData, seriesModel: LinesSeriesModel): ILineDraw;
     private _showEffect;
     _clearLayer(api: ExtensionAPI): void;
     remove(ecModel: GlobalModel, api: ExtensionAPI): void;

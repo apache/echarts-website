@@ -257,8 +257,7 @@ export function fixValue(axisModel) {
   if (status == null) {
     option.status = useHandle ? 'show' : 'hide';
   }
-  var extent = scale.getExtent().slice();
-  extent[0] > extent[1] && extent.reverse();
+  var extent = scale.getExtent();
   if (
   // Pick a value on axis when initializing.
   value == null

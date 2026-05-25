@@ -1,11 +1,13 @@
 import ComponentModel from '../../model/Component.js';
-import Parallel from './Parallel.js';
-import { DimensionName, ComponentOption, BoxLayoutOptionMixin } from '../../util/types.js';
+import type Parallel from './Parallel.js';
+import { DimensionName, ComponentOption, BoxLayoutOptionMixin, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin } from '../../util/types.js';
 import ParallelAxisModel, { ParallelAxisOption } from './AxisModel.js';
 import GlobalModel from '../../model/Global.js';
 import SeriesModel from '../../model/Series.js';
+export declare const COORD_SYS_TYPE_PARALLEL = "parallel";
+export declare const COMPONENT_TYPE_PARALLEL = "parallel";
 export declare type ParallelLayoutDirection = 'horizontal' | 'vertical';
-export interface ParallelCoordinateSystemOption extends ComponentOption, BoxLayoutOptionMixin {
+export interface ParallelCoordinateSystemOption extends ComponentOption, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin, BoxLayoutOptionMixin {
     mainType?: 'parallel';
     layout?: ParallelLayoutDirection;
     axisExpandable?: boolean;

@@ -53,12 +53,14 @@ import polarCreator from '../../coord/polar/polarCreator.js';
 import AngleAxisView from '../axis/AngleAxisView.js';
 import RadiusAxisView from '../axis/RadiusAxisView.js';
 import ComponentView from '../../view/Component.js';
-import { curry } from 'zrender/lib/core/util.js';
-import barLayoutPolar from '../../layout/barPolar.js';
+import { barLayoutPolarStageHandler, registerBarPolarAxisHandlers } from '../../layout/barPolar.js';
+import { SERIES_TYPE_BAR } from '../../layout/barCommon.js';
 var angleAxisExtraOption = {
   startAngle: 90,
   clockwise: true,
   splitNumber: 12,
+  // A round axis is not suitable for `containShape` in most cases.
+  containShape: false,
   axisLabel: {
     rotate: 0
   }
@@ -87,5 +89,6 @@ export function install(registers) {
   axisModelCreator(registers, 'radius', RadiusAxisModel, radiusAxisExtraOption);
   registers.registerComponentView(AngleAxisView);
   registers.registerComponentView(RadiusAxisView);
-  registers.registerLayout(curry(barLayoutPolar, 'bar'));
+  registers.registerLayout(barLayoutPolarStageHandler);
+  registerBarPolarAxisHandlers(registers, SERIES_TYPE_BAR);
 }

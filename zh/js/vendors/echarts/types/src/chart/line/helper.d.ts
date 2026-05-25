@@ -15,4 +15,5 @@ interface CoordInfo {
 }
 export declare function prepareDataCoordInfo(coordSys: Cartesian2D | Polar, data: SeriesData, valueOrigin?: LineSeriesOption['areaStyle']['origin']): CoordInfo;
 export declare function getStackedOnPoint(dataCoordInfo: CoordInfo, coordSys: Cartesian2D | Polar, data: SeriesData, idx: number): number[];
+export declare function isPointIllegal(xOrY: number, yOrX: number): boolean;
 export {};

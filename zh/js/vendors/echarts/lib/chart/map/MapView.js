@@ -45,13 +45,14 @@ import { __extends } from "tslib";
 import * as graphic from '../../util/graphic.js';
 import MapDraw from '../../component/helper/MapDraw.js';
 import ChartView from '../../view/Chart.js';
+import { getMainMapSeries, mapSeriesNeedsDrawMap, SERIES_TYPE_MAP } from './MapSeries.js';
 import { setLabelStyle, getLabelStatesModels } from '../../label/labelStyle.js';
 import { setStatesFlag, Z2_EMPHASIS_LIFT } from '../../util/states.js';
 var MapView = /** @class */function (_super) {
   __extends(MapView, _super);
   function MapView() {
     var _this = _super !== null && _super.apply(this, arguments) || this;
-    _this.type = MapView.type;
+    _this.type = SERIES_TYPE_MAP;
     return _this;
   }
   MapView.prototype.render = function (mapModel, ecModel, api, payload) {
@@ -64,37 +65,45 @@ var MapView = /** @class */function (_super) {
     if (mapModel.getHostGeoModel()) {
       return;
     }
-    if (this._mapDraw && payload && payload.type === 'geoRoam') {
-      this._mapDraw.resetForLabelLayout();
+    var mapDraw = this._mapDraw;
+    if (mapDraw && payload && payload.type === 'geoRoam') {
+      mapDraw.resetForLabelLayout();
     }
     // Not update map if it is an roam action from self
     if (!(payload && payload.type === 'geoRoam' && payload.componentType === 'series' && payload.seriesId === mapModel.id)) {
-      if (mapModel.needsDrawMap) {
-        var mapDraw = this._mapDraw || new MapDraw(api);
+      if (mapSeriesNeedsDrawMap(mapModel)) {
+        mapDraw = mapDraw || (this._mapDraw = new MapDraw(api));
         group.add(mapDraw.group);
         mapDraw.draw(mapModel, ecModel, api, this, payload);
-        this._mapDraw = mapDraw;
       } else {
-        // Remove drawn map
-        this._mapDraw && this._mapDraw.remove();
-        this._mapDraw = null;
+        this._clearMapDraw();
       }
     } else {
-      var mapDraw = this._mapDraw;
       mapDraw && group.add(mapDraw.group);
     }
-    mapModel.get('showLegendSymbol') && ecModel.getComponent('legend') && this._renderSymbols(mapModel, ecModel, api);
+    mapModel.get('showLegendSymbol') && ecModel.getComponent('legend') && this._renderSymbols(mapModel);
+  };
+  /**
+   * @implements RoamHostView['__updateOnOwnRoam']
+   */
+  MapView.prototype.__updateOnOwnRoam = function (payload, model, api) {
+    var mapDraw = this._mapDraw;
+    if (mapSeriesNeedsDrawMap(model) && mapDraw) {
+      mapDraw.__updateOnOwnRoam(model);
+    }
   };
   MapView.prototype.remove = function () {
-    this._mapDraw && this._mapDraw.remove();
-    this._mapDraw = null;
+    this._clearMapDraw();
     this.group.removeAll();
   };
   MapView.prototype.dispose = function () {
+    this._clearMapDraw();
+  };
+  MapView.prototype._clearMapDraw = function () {
     this._mapDraw && this._mapDraw.remove();
     this._mapDraw = null;
   };
-  MapView.prototype._renderSymbols = function (mapModel, ecModel, api) {
+  MapView.prototype._renderSymbols = function (mapModel) {
     var originalData = mapModel.originalData;
     var group = this.group;
     originalData.each(originalData.mapDimension('value'), function (value, originalDataIndex) {
@@ -137,7 +146,8 @@ var MapView = /** @class */function (_super) {
       // For backward compatibility, we follow the rule that render label `A` by the
       // settings on series `X` but render label `C` by the settings on series `Y`.
       if (!offset) {
-        var fullData = mapModel.mainSeries.getData();
+        // `mapModel.seriesGroup.f` must not be empty here.
+        var fullData = getMainMapSeries(mapModel.seriesGroup).getData();
         var name_1 = originalData.getName(originalDataIndex);
         var fullIndex_1 = fullData.indexOfName(name_1);
         var itemModel = originalData.getItemModel(originalDataIndex);
@@ -171,7 +181,7 @@ var MapView = /** @class */function (_super) {
       group.add(circle);
     });
   };
-  MapView.type = 'map';
+  MapView.type = SERIES_TYPE_MAP;
   return MapView;
 }(ChartView);
 export default MapView;

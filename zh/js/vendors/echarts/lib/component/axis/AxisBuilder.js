@@ -50,16 +50,17 @@ import { isRadianAroundZero, remRadian } from '../../util/number.js';
 import { createSymbol, normalizeSymbolOffset } from '../../util/symbol.js';
 import * as matrixUtil from 'zrender/lib/core/matrix.js';
 import { applyTransform as v2ApplyTransform } from 'zrender/lib/core/vector.js';
-import { isNameLocationCenter, shouldShowAllLabels } from '../../coord/axisHelper.js';
+import { getTickValueOutermost, isNameLocationCenter, shouldShowAllLabels } from '../../coord/axisHelper.js';
 import { hideOverlap, labelIntersect, computeLabelGeometry2, ensureLabelLayoutWithGeometry, labelLayoutApplyTranslation, setLabelLayoutDirty, newLabelLayoutWithGeometry } from '../../label/labelLayoutHelper.js';
 import { makeInner } from '../../util/model.js';
 import { getAxisBreakHelper } from './axisBreakHelper.js';
 import { AXIS_BREAK_EXPAND_ACTION_TYPE } from './axisAction.js';
-import { getScaleBreakHelper } from '../../scale/break.js';
+import { getScaleBreakHelper, hasBreaks } from '../../scale/break.js';
 import BoundingRect from 'zrender/lib/core/BoundingRect.js';
 import Point from 'zrender/lib/core/Point.js';
 import { copyTransform } from 'zrender/lib/core/Transformable.js';
 import { AxisTickLabelComputingKind, createAxisLabelsComputingContext } from '../../coord/axisTickLabelBuilder.js';
+import { isOrdinalScale, isTimeScale } from '../../scale/helper.js';
 var PI = Math.PI;
 var DEFAULT_CENTER_NAME_MARGIN_LEVELS = [[1, 2, 1, 2], [5, 3, 5, 3], [8, 3, 8, 3]];
 var DEFAULT_ENDS_NAME_MARGIN_LEVELS = [[0, 1, 0, 1], [0, 3, 0, 3], [0, 3, 0, 3]];
@@ -379,7 +380,7 @@ var builders = {
       z2: 1,
       style: lineStyle
     };
-    if (axisModel.get(['axisLine', 'breakLine']) && axisModel.axis.scale.hasBreaks()) {
+    if (axisModel.get(['axisLine', 'breakLine']) && hasBreaks(axisModel.axis.scale)) {
       getAxisBreakHelper().buildAxisBreakLine(axisModel, group, transformGroup, pathBaseProp);
     } else {
       var line = new graphic.Line(extend({
@@ -645,19 +646,38 @@ function endTextLayout(rotation, textPosition, textRotate, extent) {
  * Assume `labelLayoutList` have been sorted by value ascending order.
  */
 function fixMinMaxLabelShow(axisModel, labelLayoutList, optionHideOverlap) {
-  if (shouldShowAllLabels(axisModel.axis)) {
+  var axis = axisModel.axis;
+  var customValuesOption = axisModel.get(['axisLabel', 'customValues']);
+  if (shouldShowAllLabels(axis)) {
     return;
   }
   // FIXME
   // Have not consider onBand yet, where tick els is more than label els.
   // Assert no ignore in labels.
-  function deal(showMinMaxLabel, outmostLabelIdx, innerLabelIdx) {
+  function deal(showMinMaxLabelOption, outmostLabelIdx, innerLabelIdx) {
     var outmostLabelLayout = ensureLabelLayoutWithGeometry(labelLayoutList[outmostLabelIdx]);
     var innerLabelLayout = ensureLabelLayoutWithGeometry(labelLayoutList[innerLabelIdx]);
+    var scale = axis.scale;
     if (!outmostLabelLayout || !innerLabelLayout) {
       return;
     }
-    if (showMinMaxLabel === false || outmostLabelLayout.suggestIgnore) {
+    if (showMinMaxLabelOption == null) {
+      if (!optionHideOverlap && customValuesOption) {
+        // In this case, users are unlikely to expect labels to be hidden.
+        return;
+      }
+      var tick = getLabelInner(outmostLabelLayout.label).labelInfo.tick;
+      if (
+      // TimeScale does not expand extent to "nice", so eliminate labels that are not nice.
+      isTimeScale(scale) && tick.notNice
+      // Category axis does not expect tick that out of axisLabel.internal to be displayed
+      // unless required.
+      || isOrdinalScale(scale) && tick.offInterval) {
+        ignoreEl(outmostLabelLayout.label);
+        return;
+      }
+    }
+    if (showMinMaxLabelOption === false || outmostLabelLayout.suggestIgnore) {
       ignoreEl(outmostLabelLayout.label);
       return;
     }
@@ -689,7 +709,7 @@ function fixMinMaxLabelShow(axisModel, labelLayoutList, optionHideOverlap) {
     if (labelIntersect(outmostLabelLayout, innerLabelLayout, null, {
       touchThreshold: touchThreshold
     })) {
-      if (showMinMaxLabel) {
+      if (showMinMaxLabelOption) {
         ignoreEl(innerLabelLayout.label);
       } else {
         ignoreEl(outmostLabelLayout.label);
@@ -699,16 +719,18 @@ function fixMinMaxLabelShow(axisModel, labelLayoutList, optionHideOverlap) {
   // If min or max are user set, we need to check
   // If the tick on min(max) are overlap on their neighbour tick
   // If they are overlapped, we need to hide the min(max) tick label
-  var showMinLabel = axisModel.get(['axisLabel', 'showMinLabel']);
-  var showMaxLabel = axisModel.get(['axisLabel', 'showMaxLabel']);
+  var showMinLabelOption = axisModel.get(['axisLabel', 'showMinLabel']);
+  var showMaxLabelOption = axisModel.get(['axisLabel', 'showMaxLabel']);
   var labelsLen = labelLayoutList.length;
-  deal(showMinLabel, 0, 1);
-  deal(showMaxLabel, labelsLen - 1, labelsLen - 2);
+  deal(showMinLabelOption, 0, 1);
+  deal(showMaxLabelOption, labelsLen - 1, labelsLen - 2);
 }
-// PENDING: Is it necessary to display a tick while the corresponding label is ignored?
+// Under default settings, it is visually odd to display a tick without its label,
+// since ticks extend from axis line towards labels and serve as visual guide.
+// PENDING: Is there opposite cases?
 function syncLabelIgnoreToMajorTicks(cfg, labelLayoutList, tickEls) {
   if (cfg.showMinorTicks) {
-    // It probably unreaasonable to hide major ticks when show minor ticks.
+    // It probably unreasonable to hide major ticks when show minor ticks.
     return;
   }
   each(labelLayoutList, function (labelLayout) {
@@ -719,7 +741,7 @@ function syncLabelIgnoreToMajorTicks(cfg, labelLayoutList, tickEls) {
         // PENDING: measure?
         var tickInner = getTickInner(tickEl);
         var labelInner = getLabelInner(labelLayout.label);
-        if (tickInner.tickValue != null && !tickInner.onBand && tickInner.tickValue === labelInner.tickValue) {
+        if (tickInner.tickValue != null && !tickInner.onBand && tickInner.tickValue === labelInner.labelInfo.tick.value) {
           ignoreEl(tickEl);
           return;
         }
@@ -859,10 +881,11 @@ function buildAxisLabel(cfg, local, group, kind, axisModel, api) {
   var z2Max = -Infinity;
   each(labels, function (labelItem, index) {
     var _a;
-    var tickValue = axis.scale.type === 'ordinal' ? axis.scale.getRawOrdinalNumber(labelItem.tickValue) : labelItem.tickValue;
+    var labelItemTick = labelItem.tick;
     var formattedLabel = labelItem.formattedLabel;
     var rawLabel = labelItem.rawLabel;
     var itemLabelModel = labelModel;
+    var tickValue = getTickValueOutermost(axis.scale, labelItemTick);
     if (rawCategoryData && rawCategoryData[tickValue]) {
       var rawCategoryItem = rawCategoryData[tickValue];
       if (isObject(rawCategoryItem) && rawCategoryItem.textStyle) {
@@ -876,7 +899,7 @@ function buildAxisLabel(cfg, local, group, kind, axisModel, api) {
     var verticalAlign = itemLabelModel.getShallow('verticalAlign', true) || itemLabelModel.getShallow('baseline', true) || labelLayout.textVerticalAlign;
     var verticalAlignMin = retrieve2(itemLabelModel.getShallow('verticalAlignMinLabel', true), verticalAlign);
     var verticalAlignMax = retrieve2(itemLabelModel.getShallow('verticalAlignMaxLabel', true), verticalAlign);
-    var z2 = 10 + (((_a = labelItem.time) === null || _a === void 0 ? void 0 : _a.level) || 0);
+    var z2 = 10 + (((_a = labelItemTick.time) === null || _a === void 0 ? void 0 : _a.level) || 0);
     z2Min = Math.min(z2Min, z2);
     z2Max = Math.max(z2Max, z2);
     var textEl = new graphic.Text({
@@ -907,8 +930,7 @@ function buildAxisLabel(cfg, local, group, kind, axisModel, api) {
     });
     textEl.anid = 'label_' + tickValue;
     var inner = getLabelInner(textEl);
-    inner["break"] = labelItem["break"];
-    inner.tickValue = tickValue;
+    inner.labelInfo = labelItem;
     inner.layoutRotation = labelLayout.rotation;
     graphic.setTooltipConfig({
       el: textEl,
@@ -928,19 +950,21 @@ function buildAxisLabel(cfg, local, group, kind, axisModel, api) {
       eventData.targetType = 'axisLabel';
       eventData.value = rawLabel;
       eventData.tickIndex = index;
-      if (labelItem["break"]) {
+      var labelItemTickBreak = labelItem.tick["break"];
+      if (labelItemTickBreak) {
+        var labelItemTickBreakParsedBreak = labelItemTickBreak.parsedBreak;
         eventData["break"] = {
           // type: labelItem.break.type,
-          start: labelItem["break"].parsedBreak.vmin,
-          end: labelItem["break"].parsedBreak.vmax
+          start: labelItemTickBreakParsedBreak.vmin,
+          end: labelItemTickBreakParsedBreak.vmax
         };
       }
       if (axis.type === 'category') {
         eventData.dataIndex = tickValue;
       }
       getECData(textEl).eventData = eventData;
-      if (labelItem["break"]) {
-        addBreakEventHandler(axisModel, api, textEl, labelItem["break"]);
+      if (labelItemTickBreak) {
+        addBreakEventHandler(axisModel, api, textEl, labelItemTickBreak);
       }
     }
     labelEls.push(textEl);
@@ -949,7 +973,7 @@ function buildAxisLabel(cfg, local, group, kind, axisModel, api) {
   var labelLayoutList = map(labelEls, function (label) {
     return {
       label: label,
-      priority: getLabelInner(label)["break"] ? label.z2 + (z2Max - z2Min + 1) // Make break labels be highest priority.
+      priority: getLabelInner(label).labelInfo.tick["break"] ? label.z2 + (z2Max - z2Min + 1) // Make break labels be highest priority.
       : label.z2,
       defaultAttr: {
         ignore: label.ignore
@@ -983,7 +1007,8 @@ function updateAxisLabelChangableProps(cfg, axisModel, labelLayoutList, transfor
     // But `ignore:true` may be set subsequently for overlap handling, thus reset it here.
     labelEl.ignore = false;
     copyTransform(_tmpLayoutEl, _tmpLayoutElReset);
-    _tmpLayoutEl.x = axisModel.axis.dataToCoord(inner.tickValue);
+    var axis = axisModel.axis;
+    _tmpLayoutEl.x = axis.dataToCoord(getTickValueOutermost(axis.scale, inner.labelInfo.tick));
     _tmpLayoutEl.y = cfg.labelOffset + cfg.labelDirection * labelMargin;
     _tmpLayoutEl.rotation = inner.layoutRotation;
     transformGroup.add(_tmpLayoutEl);
@@ -1020,7 +1045,7 @@ function adjustBreakLabels(axisModel, axisRotation, labelLayoutList) {
     return;
   }
   var breakLabelIndexPairs = scaleBreakHelper.retrieveAxisBreakPairs(labelLayoutList, function (layoutInfo) {
-    return layoutInfo && getLabelInner(layoutInfo.label)["break"];
+    return layoutInfo && getLabelInner(layoutInfo.label).labelInfo.tick["break"];
   }, true);
   var moveOverlap = axisModel.get(['breakLabelLayout', 'moveOverlap'], true);
   if (moveOverlap === true || moveOverlap === 'auto') {

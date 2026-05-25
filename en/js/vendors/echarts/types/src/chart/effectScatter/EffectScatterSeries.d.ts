@@ -1,9 +1,9 @@
 import SeriesModel from '../../model/Series.js';
-import { SeriesOption, SeriesOnPolarOptionMixin, SeriesOnCartesianOptionMixin, SeriesOnCalendarOptionMixin, SeriesOnGeoOptionMixin, SeriesOnSingleOptionMixin, SymbolOptionMixin, OptionDataValue, ItemStyleOption, SeriesLabelOption, StatesOptionMixin, SeriesEncodeOptionMixin, CallbackDataParams, DefaultEmphasisFocus } from '../../util/types.js';
+import { SeriesOption, SeriesOnPolarOptionMixin, SeriesOnCartesianOptionMixin, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin, SeriesOnGeoOptionMixin, SeriesOnSingleOptionMixin, SymbolOptionMixin, OptionDataValue, ItemStyleOption, SeriesLabelOption, StatesOptionMixin, SeriesEncodeOptionMixin, CallbackDataParams, DefaultEmphasisFocus } from '../../util/types.js';
 import GlobalModel from '../../model/Global.js';
 import SeriesData from '../../data/SeriesData.js';
-import type { SymbolDrawItemModelOption } from '../helper/SymbolDraw.js';
 import { BrushCommonSelectorsForSeries } from '../../component/brush/selector.js';
+import { SymbolDrawItemModelOption } from '../helper/baseDraw.js';
 declare type ScatterDataValue = OptionDataValue | OptionDataValue[];
 interface EffectScatterStatesOptionMixin {
     emphasis?: {
@@ -20,7 +20,7 @@ export interface EffectScatterDataItemOption extends SymbolOptionMixin, EffectSc
     value?: ScatterDataValue;
     rippleEffect?: SymbolDrawItemModelOption['rippleEffect'];
 }
-export interface EffectScatterSeriesOption extends SeriesOption<EffectScatterStateOption<CallbackDataParams>, EffectScatterStatesOptionMixin>, EffectScatterStateOption<CallbackDataParams>, SeriesOnCartesianOptionMixin, SeriesOnPolarOptionMixin, SeriesOnCalendarOptionMixin, SeriesOnGeoOptionMixin, SeriesOnSingleOptionMixin, SymbolOptionMixin<CallbackDataParams>, SeriesEncodeOptionMixin {
+export interface EffectScatterSeriesOption extends SeriesOption<EffectScatterStateOption<CallbackDataParams>, EffectScatterStatesOptionMixin>, EffectScatterStateOption<CallbackDataParams>, SeriesOnCartesianOptionMixin, SeriesOnPolarOptionMixin, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin, SeriesOnGeoOptionMixin, SeriesOnSingleOptionMixin, SymbolOptionMixin<CallbackDataParams>, SeriesEncodeOptionMixin {
     type?: 'effectScatter';
     coordinateSystem?: string;
     effectType?: 'ripple';

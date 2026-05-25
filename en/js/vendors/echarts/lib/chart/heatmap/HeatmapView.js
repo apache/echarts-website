@@ -47,8 +47,10 @@ import { toggleHoverEmphasis } from '../../util/states.js';
 import HeatmapLayer from './HeatmapLayer.js';
 import * as zrUtil from 'zrender/lib/core/util.js';
 import ChartView from '../../view/Chart.js';
-import { isCoordinateSystemType } from '../../coord/CoordinateSystem.js';
+import { isCoordinateSystemType, isGeoLikeCoordSys } from '../../coord/CoordinateSystem.js';
 import { setLabelStyle, getLabelStatesModels } from '../../label/labelStyle.js';
+import { calcBandWidth } from '../../coord/axisBand.js';
+import { getIncrementalId } from '../../util/model.js';
 function getIsInPiecewiseRange(dataExtent, pieceList, selected) {
   var dataSpan = dataExtent[1] - dataExtent[0];
   pieceList = zrUtil.map(pieceList, function (piece) {
@@ -88,11 +90,6 @@ function getIsInContinuousRange(dataExtent, range) {
     return val >= range[0] && val <= range[1];
   };
 }
-function isGeoCoordSys(coordSys) {
-  var dimensions = coordSys.dimensions;
-  // Not use coordSys.type === 'geo' because coordSys maybe extended
-  return dimensions[0] === 'lng' && dimensions[1] === 'lat';
-}
 var HeatmapView = /** @class */function (_super) {
   __extends(HeatmapView, _super);
   function HeatmapView() {
@@ -120,7 +117,7 @@ var HeatmapView = /** @class */function (_super) {
     var coordSys = seriesModel.coordinateSystem;
     if (coordSys.type === 'cartesian2d' || coordSys.type === 'calendar' || coordSys.type === 'matrix') {
       this._renderOnGridLike(seriesModel, api, 0, seriesModel.getData().count());
-    } else if (isGeoCoordSys(coordSys)) {
+    } else if (isGeoLikeCoordSys(coordSys)) {
       this._renderOnGeo(coordSys, seriesModel, visualMapOfThisSeries, api);
     }
   };
@@ -131,7 +128,7 @@ var HeatmapView = /** @class */function (_super) {
     var coordSys = seriesModel.coordinateSystem;
     if (coordSys) {
       // geo does not support incremental rendering?
-      if (isGeoCoordSys(coordSys)) {
+      if (isGeoLikeCoordSys(coordSys)) {
         this.render(seriesModel, ecModel, api);
       } else {
         this._progressiveEls = [];
@@ -142,7 +139,7 @@ var HeatmapView = /** @class */function (_super) {
   HeatmapView.prototype.eachRendered = function (cb) {
     graphic.traverseElements(this._progressiveEls || this.group, cb);
   };
-  HeatmapView.prototype._renderOnGridLike = function (seriesModel, api, start, end, incremental) {
+  HeatmapView.prototype._renderOnGridLike = function (seriesModel, api, start, end, useIncremental) {
     var coordSys = seriesModel.coordinateSystem;
     var isCartesian2d = isCoordinateSystemType(coordSys, 'cartesian2d');
     var isMatrix = isCoordinateSystemType(coordSys, 'matrix');
@@ -162,8 +159,8 @@ var HeatmapView = /** @class */function (_super) {
         }
       }
       // add 0.5px to avoid the gaps
-      width = xAxis.getBandWidth() + .5;
-      height = yAxis.getBandWidth() + .5;
+      width = calcBandWidth(xAxis).w + .5;
+      height = calcBandWidth(yAxis).w + .5;
       xAxisExtent = xAxis.scale.getExtent();
       yAxisExtent = yAxis.scale.getExtent();
     }
@@ -260,11 +257,11 @@ var HeatmapView = /** @class */function (_super) {
       rect.ensureState('blur').style = blurStyle;
       rect.ensureState('select').style = selectStyle;
       toggleHoverEmphasis(rect, focus, blurScope, emphasisDisabled);
-      rect.incremental = incremental;
+      rect.incremental = getIncrementalId(seriesModel, useIncremental);
       // PENDING
-      if (incremental) {
+      if (useIncremental) {
         // Rect must use hover layer if it's incremental.
-        rect.states.emphasis.hoverLayer = true;
+        rect.states.emphasis.hoverLayer = graphic.HOVER_LAYER_FOR_INCREMENTAL;
       }
       group.add(rect);
       data.setItemGraphicEl(idx, rect);

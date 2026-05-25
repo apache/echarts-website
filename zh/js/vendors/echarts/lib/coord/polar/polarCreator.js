@@ -41,13 +41,16 @@
 * specific language governing permissions and limitations
 * under the License.
 */
-// TODO Axis scale
 import * as zrUtil from 'zrender/lib/core/util.js';
 import Polar, { polarDimensions } from './Polar.js';
 import { parsePercent } from '../../util/number.js';
-import { createScaleByModel, niceScaleExtent, getDataDimensionsOnAxis } from '../../coord/axisHelper.js';
+import { createScaleByModel, determineAxisType, isAxisOnBand } from '../../coord/axisHelper.js';
+import { COMPONENT_TYPE_POLAR, COORD_SYS_TYPE_POLAR } from './PolarModel.js';
 import { SINGLE_REFERRING } from '../../util/model.js';
 import { createBoxLayoutReference } from '../../util/layout.js';
+import { scaleCalcNice } from '../axisNiceTicks.js';
+import { AXIS_EXTENT_INFO_BUILD_FROM_COORD_SYS_UPDATE, scaleRawExtentInfoCreate } from '../scaleRawExtentInfo.js';
+import { associateSeriesWithAxis } from '../axisStatistics.js';
 /**
  * Resize method bound to the polar
  */
@@ -75,22 +78,10 @@ function updatePolarScale(ecModel, api) {
   var polar = this;
   var angleAxis = polar.getAngleAxis();
   var radiusAxis = polar.getRadiusAxis();
-  // Reset scale
-  angleAxis.scale.setExtent(Infinity, -Infinity);
-  radiusAxis.scale.setExtent(Infinity, -Infinity);
-  ecModel.eachSeries(function (seriesModel) {
-    if (seriesModel.coordinateSystem === polar) {
-      var data_1 = seriesModel.getData();
-      zrUtil.each(getDataDimensionsOnAxis(data_1, 'radius'), function (dim) {
-        radiusAxis.scale.unionExtentFromData(data_1, dim);
-      });
-      zrUtil.each(getDataDimensionsOnAxis(data_1, 'angle'), function (dim) {
-        angleAxis.scale.unionExtentFromData(data_1, dim);
-      });
-    }
-  });
-  niceScaleExtent(angleAxis.scale, angleAxis.model);
-  niceScaleExtent(radiusAxis.scale, radiusAxis.model);
+  scaleRawExtentInfoCreate(angleAxis, AXIS_EXTENT_INFO_BUILD_FROM_COORD_SYS_UPDATE);
+  scaleRawExtentInfoCreate(radiusAxis, AXIS_EXTENT_INFO_BUILD_FROM_COORD_SYS_UPDATE);
+  scaleCalcNice(angleAxis);
+  scaleCalcNice(radiusAxis);
   // Fix extent of category angle axis
   if (angleAxis.type === 'category' && !angleAxis.onBand) {
     var extent = angleAxis.getExtent();
@@ -107,9 +98,9 @@ function isAngleAxisModel(axisModel) {
  */
 function setAxis(axis, axisModel) {
   var _a;
-  axis.type = axisModel.get('type');
-  axis.scale = createScaleByModel(axisModel);
-  axis.onBand = axisModel.get('boundaryGap') && axis.type === 'category';
+  axis.type = determineAxisType(axisModel);
+  axis.scale = createScaleByModel(axisModel, axis.type, false);
+  axis.onBand = isAxisOnBand(axis.scale, axisModel);
   axis.inverse = axisModel.get('inverse');
   if (isAngleAxisModel(axisModel)) {
     axis.inverse = axis.inverse !== axisModel.get('clockwise');
@@ -125,7 +116,7 @@ var polarCreator = {
   dimensions: polarDimensions,
   create: function (ecModel, api) {
     var polarList = [];
-    ecModel.eachComponent('polar', function (polarModel, idx) {
+    ecModel.eachComponent(COMPONENT_TYPE_POLAR, function (polarModel, idx) {
       var polar = new Polar(idx + '');
       // Inject resize and update method
       polar.update = updatePolarScale;
@@ -142,14 +133,18 @@ var polarCreator = {
     });
     // Inject coordinateSystem to series
     ecModel.eachSeries(function (seriesModel) {
-      if (seriesModel.get('coordinateSystem') === 'polar') {
-        var polarModel = seriesModel.getReferringComponents('polar', SINGLE_REFERRING).models[0];
+      if (seriesModel.get('coordinateSystem') === COORD_SYS_TYPE_POLAR) {
+        var polarModel = seriesModel.getReferringComponents(COMPONENT_TYPE_POLAR, SINGLE_REFERRING).models[0];
         if (process.env.NODE_ENV !== 'production') {
           if (!polarModel) {
             throw new Error('Polar "' + zrUtil.retrieve(seriesModel.get('polarIndex'), seriesModel.get('polarId'), 0) + '" not found');
           }
         }
-        seriesModel.coordinateSystem = polarModel.coordinateSystem;
+        var polar = seriesModel.coordinateSystem = polarModel.coordinateSystem;
+        if (polar) {
+          associateSeriesWithAxis(polar.getRadiusAxis(), seriesModel, COORD_SYS_TYPE_POLAR);
+          associateSeriesWithAxis(polar.getAngleAxis(), seriesModel, COORD_SYS_TYPE_POLAR);
+        }
       }
     });
     return polarList;

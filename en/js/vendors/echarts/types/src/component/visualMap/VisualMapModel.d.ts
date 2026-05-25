@@ -1,5 +1,6 @@
 import VisualMapping, { VisualMappingOption } from '../../visual/VisualMapping.js';
-import { ComponentOption, BoxLayoutOptionMixin, LabelOption, ColorString, ZRColor, BorderOptionMixin, OptionDataValue, BuiltinVisualProperty, DimensionIndex, OptionId } from '../../util/types.js';
+import * as modelUtil from '../../util/model.js';
+import { ComponentOption, BoxLayoutOptionMixin, LabelOption, ColorString, ZRColor, BorderOptionMixin, OptionDataValue, BuiltinVisualProperty, DimensionIndex, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin, OptionId } from '../../util/types.js';
 import ComponentModel from '../../model/Component.js';
 import Model from '../../model/Model.js';
 import GlobalModel from '../../model/Global.js';
@@ -10,7 +11,7 @@ declare type VisualOptionBase = {
 };
 declare type LabelFormatter = (min: OptionDataValue, max?: OptionDataValue) => string;
 declare type VisualState = VisualMapModel['stateList'][number];
-export interface VisualMapOption<T extends VisualOptionBase = VisualOptionBase> extends ComponentOption, BoxLayoutOptionMixin, BorderOptionMixin {
+export interface VisualMapOption<T extends VisualOptionBase = VisualOptionBase> extends ComponentOption, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin, BoxLayoutOptionMixin, BorderOptionMixin {
     mainType?: 'visualMap';
     show?: boolean;
     align?: string;
@@ -19,8 +20,8 @@ export interface VisualMapOption<T extends VisualOptionBase = VisualOptionBase> 
      * 'all' or null/undefined: all series.
      * A number or an array of number: the specified series.
      */
-    seriesIndex?: 'all' | number[] | number;
-    seriesId?: OptionId | OptionId[];
+    seriesIndex?: modelUtil.ModelFinderIndexQuery;
+    seriesId?: modelUtil.ModelFinderIdQuery;
     /**
      * set min: 0, max: 200, only for campatible with ec2.
      * In fact min max should not have default value.
@@ -35,6 +36,15 @@ export interface VisualMapOption<T extends VisualOptionBase = VisualOptionBase> 
      * Dimension to be encoded
      */
     dimension?: number;
+    /**
+     * Series targets with specific dimensions
+     * When provided, seriesIndex, seriesId, and dimension are ignored
+     */
+    seriesTargets?: {
+        seriesIndex?: number;
+        seriesId?: OptionId;
+        dimension: number;
+    }[];
     /**
      * Visual configuration for the data in selection
      */
@@ -117,10 +127,10 @@ declare class VisualMapModel<Opts extends VisualMapOption = VisualMapOption> ext
             decal?: VisualMapping;
             symbolSize?: VisualMapping;
             liftZ?: VisualMapping;
-            colorAlpha?: VisualMapping;
-            colorLightness?: VisualMapping;
-            colorSaturation?: VisualMapping;
             colorHue?: VisualMapping;
+            colorSaturation?: VisualMapping;
+            colorLightness?: VisualMapping;
+            colorAlpha?: VisualMapping;
         } & {
             __alphaForOpacity?: VisualMapping;
         };
@@ -133,10 +143,10 @@ declare class VisualMapModel<Opts extends VisualMapOption = VisualMapOption> ext
             decal?: VisualMapping;
             symbolSize?: VisualMapping;
             liftZ?: VisualMapping;
-            colorAlpha?: VisualMapping;
-            colorLightness?: VisualMapping;
-            colorSaturation?: VisualMapping;
             colorHue?: VisualMapping;
+            colorSaturation?: VisualMapping;
+            colorLightness?: VisualMapping;
+            colorAlpha?: VisualMapping;
         } & {
             __alphaForOpacity?: VisualMapping;
         };
@@ -192,6 +202,7 @@ declare class VisualMapModel<Opts extends VisualMapOption = VisualMapOption> ext
      *
      * Return  Concrete dimension. If null/undefined is returned, no dimension is used.
      */
+    getDimension(seriesIndex: number): number;
     getDataDimensionIndex(data: SeriesData): DimensionIndex;
     getExtent(): [number, number];
     completeVisualOption(): void;

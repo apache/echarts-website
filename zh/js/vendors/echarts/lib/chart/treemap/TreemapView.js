@@ -55,6 +55,7 @@ import * as matrix from 'zrender/lib/core/matrix.js';
 import * as animationUtil from '../../util/animation.js';
 import makeStyleMapper from '../../model/mixin/makeStyleMapper.js';
 import ChartView from '../../view/Chart.js';
+import { calculateCurrentZoom, treemapClampZoom } from './treemapLayout.js';
 import Displayable from 'zrender/lib/graphic/Displayable.js';
 import { makeInner, convertOptionIdName } from '../../util/model.js';
 import { windowOpen } from '../../util/format.js';
@@ -158,13 +159,6 @@ var TreemapView = /** @class */function (_super) {
     var willDeleteEls = clearStorage(oldStorage);
     this._oldTree = thisTree;
     this._storage = thisStorage;
-    if (this._controllerHost) {
-      var _oldRootLayout = this.seriesModel.layoutInfo;
-      var rootLayout = thisTree.root.getLayout();
-      if (rootLayout.width === _oldRootLayout.width && rootLayout.height === _oldRootLayout.height) {
-        this._controllerHost.zoom = 1;
-      }
-    }
     return {
       lastsForAnimation: lastsForAnimation,
       willDeleteEls: willDeleteEls,
@@ -335,15 +329,8 @@ var TreemapView = /** @class */function (_super) {
   };
   TreemapView.prototype._resetController = function (api) {
     var _this = this;
-    var controller = this._controller;
-    var controllerHost = this._controllerHost;
-    if (!controllerHost) {
-      this._controllerHost = {
-        target: this.group
-      };
-      controllerHost = this._controllerHost;
-    }
     var seriesModel = this.seriesModel;
+    var controller = this._controller;
     // Init controller.
     if (!controller) {
       controller = this._controller = new RoamController(api.getZr());
@@ -365,12 +352,9 @@ var TreemapView = /** @class */function (_super) {
         }
       }
     });
-    controllerHost.zoomLimit = seriesModel.get('scaleLimit');
-    controllerHost.zoom = seriesModel.get('zoom');
   };
   TreemapView.prototype._clearController = function () {
     var controller = this._controller;
-    this._controllerHost = null;
     if (controller) {
       controller.dispose();
       controller = null;
@@ -404,9 +388,10 @@ var TreemapView = /** @class */function (_super) {
     var mouseX = e.originX;
     var mouseY = e.originY;
     var zoomDelta = e.scale;
+    var seriesModel = this.seriesModel;
     if (this._state !== 'animating') {
       // These param must not be cached.
-      var root = this.seriesModel.getData().tree.root;
+      var root = seriesModel.getData().tree.root;
       if (!root) {
         return;
       }
@@ -415,20 +400,11 @@ var TreemapView = /** @class */function (_super) {
         return;
       }
       var rect = new BoundingRect(rootLayout.x, rootLayout.y, rootLayout.width, rootLayout.height);
-      // scaleLimit
-      var zoomLimit = null;
-      var _controllerHost = this._controllerHost;
-      zoomLimit = _controllerHost.zoomLimit;
-      var newZoom = _controllerHost.zoom = _controllerHost.zoom || 1;
-      newZoom *= zoomDelta;
-      if (zoomLimit) {
-        var zoomMin = zoomLimit.min || 0;
-        var zoomMax = zoomLimit.max || Infinity;
-        newZoom = Math.max(Math.min(zoomMax, newZoom), zoomMin);
-      }
-      var zoomScale = newZoom / _controllerHost.zoom;
-      _controllerHost.zoom = newZoom;
-      var layoutInfo = this.seriesModel.layoutInfo;
+      var layoutInfo = seriesModel.layoutInfo;
+      var currZoom = calculateCurrentZoom(layoutInfo, rootLayout);
+      var newZoom = currZoom * zoomDelta;
+      newZoom = treemapClampZoom(newZoom, seriesModel);
+      var zoomScale = newZoom / currZoom;
       // Transform mouse coord from global to containerGroup.
       mouseX -= layoutInfo.x;
       mouseY -= layoutInfo.y;

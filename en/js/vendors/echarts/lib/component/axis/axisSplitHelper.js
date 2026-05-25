@@ -50,14 +50,12 @@ export function rectCoordAxisBuildSplitArea(axisView, axisGroup, axisModel, grid
   if (axis.scale.isBlank()) {
     return;
   }
-  // TODO: TYPE
   var splitAreaModel = axisModel.getModel('splitArea');
   var areaStyleModel = splitAreaModel.getModel('areaStyle');
   var areaColors = areaStyleModel.get('color');
   var gridRect = gridModel.coordinateSystem.getRect();
   var ticksCoords = axis.getTicksCoords({
     tickModel: splitAreaModel,
-    clamp: true,
     breakTicks: 'none',
     pruneByBreak: 'preserve_extent_bound'
   });

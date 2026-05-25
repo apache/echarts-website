@@ -1,4 +1,4 @@
-import { ParsedValue, DimensionType } from '../../util/types.js';
+import { ParsedValue, DimensionType, NullUndefined } from '../../util/types.js';
 /**
  * Convert raw the value in to inner value in List.
  *
@@ -72,4 +72,29 @@ export declare type RelationalOperator = OrderRelationOperator | 'eq' | 'ne';
  * @return If `op` is not `RelationalOperator`, return null;
  */
 export declare function createFilterComparator(op: string, rval?: unknown): FilterComparator;
+export declare type DataSanitizationFilter = {
+    g?: number;
+    ge?: number;
+    l?: number;
+    le?: number;
+};
+declare type DataSanitizationFilterParsed = {
+    key: string;
+    g: number;
+    ge: number;
+    l: number;
+    le: number;
+};
+/**
+ * @usage
+ *  const filterParsed = parseSanitizationFilter(filter);
+ *  for( ... ) {
+ *      const val = ...;
+ *      if (!filter || passesFilter(filterParsed, val)) {
+ *          // normal handling
+ *      }
+ *  }
+ */
+export declare function parseSanitizationFilter(filter: DataSanitizationFilter | NullUndefined): DataSanitizationFilterParsed;
+export declare function passesSanitizationFilter(filterParsed: DataSanitizationFilterParsed, value: number): boolean;
 export {};

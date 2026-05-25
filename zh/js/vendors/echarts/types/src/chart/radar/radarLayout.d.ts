@@ -1,2 +1,1 @@
-import GlobalModel from '../../model/Global.js';
-export default function radarLayout(ecModel: GlobalModel): void;
+export declare const radarLayoutStageHandler: import("../../util/types").StageHandler;

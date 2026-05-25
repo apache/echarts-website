@@ -42,16 +42,18 @@
 * under the License.
 */
 import { assert, clone, createHashMap, isFunction, keys, map, reduce } from 'zrender/lib/core/util.js';
-import { parseDataValue } from './helper/dataValueHelper.js';
+import { UNDEFINED_STR } from '../util/types.js';
+import { parseDataValue, parseSanitizationFilter, passesSanitizationFilter } from './helper/dataValueHelper.js';
 import { shouldRetrieveDataByName } from './Source.js';
-var UNDEFINED = 'undefined';
+import { initExtentForUnion } from '../util/model.js';
+import { asc } from '../util/number.js';
 /* global Float64Array, Int32Array, Uint32Array, Uint16Array */
 // Caution: MUST not use `new CtorUint32Array(arr, 0, len)`, because the Ctor of array is
 // different from the Ctor of typed array.
-export var CtorUint32Array = typeof Uint32Array === UNDEFINED ? Array : Uint32Array;
-export var CtorUint16Array = typeof Uint16Array === UNDEFINED ? Array : Uint16Array;
-export var CtorInt32Array = typeof Int32Array === UNDEFINED ? Array : Int32Array;
-export var CtorFloat64Array = typeof Float64Array === UNDEFINED ? Array : Float64Array;
+export var CtorUint32Array = typeof Uint32Array === UNDEFINED_STR ? Array : Uint32Array;
+export var CtorUint16Array = typeof Uint16Array === UNDEFINED_STR ? Array : Uint16Array;
+export var CtorInt32Array = typeof Int32Array === UNDEFINED_STR ? Array : Int32Array;
+export var CtorFloat64Array = typeof Float64Array === UNDEFINED_STR ? Array : Float64Array;
 /**
  * Multi dimensional data store
  */
@@ -67,10 +69,6 @@ var defaultDimValueGetters;
 function getIndicesCtor(rawCount) {
   // The possible max value in this._indicies is always this._rawCount despite of filtering.
   return rawCount > 65535 ? CtorUint32Array : CtorUint16Array;
-}
-;
-function getInitialExtent() {
-  return [Infinity, -Infinity];
 }
 ;
 function cloneChunk(originalChunk) {
@@ -105,7 +103,10 @@ var DataStore = /** @class */function () {
     this._chunks = [];
     // It will not be calculated until needed.
     this._rawExtent = [];
+    // structure:
+    //  `const extentOnFilterOnDimension = this._extent[dim][extentFilterKey]`
     this._extent = [];
+    // Count after filtered.
     this._count = 0;
     this._rawCount = 0;
     this._calcDimNameToIdx = createHashMap();
@@ -175,7 +176,7 @@ var DataStore = /** @class */function () {
     };
     calcDimNameToIdx.set(dimName, calcDimIdx);
     this._chunks[calcDimIdx] = new dataCtors[type || 'float'](this._rawCount);
-    this._rawExtent[calcDimIdx] = getInitialExtent();
+    this._rawExtent[calcDimIdx] = initExtentForUnion();
     return calcDimIdx;
   };
   DataStore.prototype.collectOrdinalMeta = function (dimIdx, ordinalMeta) {
@@ -187,11 +188,12 @@ var DataStore = /** @class */function () {
     if (offset === 0) {
       // We need to reset the rawExtent if collect is from start.
       // Because this dimension may be guessed as number and calcuating a wrong extent.
-      rawExtents[dimIdx] = getInitialExtent();
+      rawExtents[dimIdx] = initExtentForUnion();
     }
     var dimRawExtent = rawExtents[dimIdx];
     // Parse from previous data offset. len may be changed after appendData
     for (var i = offset; i < len; i++) {
+      // See also CATEGORY_AXIS_MODEL_DATA_IS_EMPTY_ARRAY.
       var val = chunk[i] = ordinalMeta.parseAndCollect(chunk[i]);
       if (!isNaN(val)) {
         dimRawExtent[0] = Math.min(val, dimRawExtent[0]);
@@ -272,7 +274,7 @@ var DataStore = /** @class */function () {
     for (var i = 0; i < dimLen; i++) {
       var dim = dimensions[i];
       if (!rawExtent[i]) {
-        rawExtent[i] = getInitialExtent();
+        rawExtent[i] = initExtentForUnion();
       }
       prepareStore(chunks, i, dim.type, end, append);
     }
@@ -380,12 +382,10 @@ var DataStore = /** @class */function () {
     });
     // TODO
     // Use quick select?
-    var sortedDimDataArray = dimDataArray.sort(function (a, b) {
-      return a - b;
-    });
+    asc(dimDataArray);
     var len = this.count();
     // calculate median
-    return len === 0 ? 0 : len % 2 === 1 ? sortedDimDataArray[(len - 1) / 2] : (sortedDimDataArray[len / 2] + sortedDimDataArray[len / 2 - 1]) / 2;
+    return len === 0 ? 0 : len % 2 === 1 ? dimDataArray[(len - 1) / 2] : (dimDataArray[len / 2] + dimDataArray[len / 2 - 1]) / 2;
   };
   /**
    * Retrieve the index with given raw data index.
@@ -443,7 +443,7 @@ var DataStore = /** @class */function () {
     return newIndices;
   };
   /**
-   * Data filter.
+   * [NOTICE]: Performance-sensitive for large data.
    */
   DataStore.prototype.filter = function (dims, cb) {
     if (!this._count) {
@@ -619,7 +619,7 @@ var DataStore = /** @class */function () {
     var values = [];
     var rawExtent = target._rawExtent;
     for (var i = 0; i < dims.length; i++) {
-      rawExtent[dims[i]] = getInitialExtent();
+      rawExtent[dims[i]] = initExtentForUnion();
     }
     for (var dataIndex = 0; dataIndex < dataCount; dataIndex++) {
       var rawIndex = target.getRawIndex(dataIndex);
@@ -629,7 +629,7 @@ var DataStore = /** @class */function () {
       values[dimSize] = dataIndex;
       var retValue = cb && cb.apply(null, values);
       if (retValue != null) {
-        // a number or string (in oridinal dimension)?
+        // a number or string (in ordinal dimension)?
         if (typeof retValue !== 'object') {
           tmpRetValue[0] = retValue;
           retValue = tmpRetValue;
@@ -792,7 +792,7 @@ var DataStore = /** @class */function () {
     var frameSize = Math.floor(1 / rate);
     var dimStore = targetStorage[dimension];
     var len = this.count();
-    var rawExtentOnDim = target._rawExtent[dimension] = getInitialExtent();
+    var rawExtentOnDim = target._rawExtent[dimension] = initExtentForUnion();
     var newIndices = new (getIndicesCtor(this._rawCount))(Math.ceil(len / frameSize));
     var offset = 0;
     for (var i = 0; i < len; i += frameSize) {
@@ -826,8 +826,8 @@ var DataStore = /** @class */function () {
    * Data iteration
    * @param ctx default this
    * @example
-   *  list.each('x', function (x, idx) {});
-   *  list.each(['x', 'y'], function (x, y, idx) {});
+   *  list.each(0, function (x, idx) {});
+   *  list.each([0, 1], function (x, y, idx) {});
    *  list.each(function (idx) {})
    */
   DataStore.prototype.each = function (dims, cb) {
@@ -861,13 +861,10 @@ var DataStore = /** @class */function () {
       }
     }
   };
-  /**
-   * Get extent of data in one dimension
-   */
-  DataStore.prototype.getDataExtent = function (dim) {
+  DataStore.prototype.getDataExtent = function (dim, filter) {
     // Make sure use concrete dim as cache name.
     var dimData = this._chunks[dim];
-    var initialExtent = getInitialExtent();
+    var initialExtent = initExtentForUnion();
     if (!dimData) {
       return initialExtent;
     }
@@ -876,27 +873,42 @@ var DataStore = /** @class */function () {
     // Consider the most cases when using data zoom, `getDataExtent`
     // happened before filtering. We cache raw extent, which is not
     // necessary to be cleared and recalculated when restore data.
-    var useRaw = !this._indices;
-    var dimExtent;
+    var useRaw = !this._indices && !filter;
     if (useRaw) {
       return this._rawExtent[dim].slice();
     }
-    dimExtent = this._extent[dim];
+    // NOTE:
+    //  - In logarithm axis, zero should be excluded, therefore the `extent[0]` should be less or equal
+    //    than the min positive data item, which requires the special handling here.
+    //  - "Filter non-positive values for logarithm axis" can also be implemented in a data processor
+    //    but that requires more complicated code to not break all streams under the current architecture,
+    //    therefore we simply implement it here.
+    //  - Performance is sensitive for large data, therefore inline filters rather than cb is used here.
+    var thisExtent = this._extent;
+    var dimExtentRecord = thisExtent[dim] || (thisExtent[dim] = {});
+    var filterParsed = parseSanitizationFilter(filter);
+    var filterKey = filterParsed.key;
+    var dimExtent = dimExtentRecord[filterKey];
     if (dimExtent) {
       return dimExtent.slice();
     }
-    dimExtent = initialExtent;
-    var min = dimExtent[0];
-    var max = dimExtent[1];
+    var min = initialExtent[0];
+    var max = initialExtent[1];
     for (var i = 0; i < currEnd; i++) {
+      // NOTICE: Manually inline some code for performance of large data.
       var rawIdx = this.getRawIndex(i);
       var value = dimData[rawIdx];
-      value < min && (min = value);
-      value > max && (max = value);
+      // NOTE: in most cases, filter does not exist.
+      if (!filter || passesSanitizationFilter(filterParsed, value)) {
+        if (value < min) {
+          min = value;
+        }
+        if (value > max) {
+          max = value;
+        }
+      }
     }
-    dimExtent = [min, max];
-    this._extent[dim] = dimExtent;
-    return dimExtent;
+    return dimExtentRecord[filterKey] = [min, max];
   };
   /**
    * Get raw data item

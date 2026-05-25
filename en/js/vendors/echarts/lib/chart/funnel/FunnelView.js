@@ -45,6 +45,7 @@ import { __extends } from "tslib";
 import * as graphic from '../../util/graphic.js';
 import { setStatesStylesFromModel, toggleHoverEmphasis } from '../../util/states.js';
 import ChartView from '../../view/Chart.js';
+import { SERIES_TYPE_FUNNEL } from './FunnelSeries.js';
 import { setLabelLineStyle, getLabelLineStatesModels } from '../../label/labelGuideHelper.js';
 import { setLabelStyle, getLabelStatesModels } from '../../label/labelStyle.js';
 import { saveOldStyle } from '../../animation/basicTransition.js';
@@ -166,7 +167,7 @@ var FunnelView = /** @class */function (_super) {
   __extends(FunnelView, _super);
   function FunnelView() {
     var _this = _super !== null && _super.apply(this, arguments) || this;
-    _this.type = FunnelView.type;
+    _this.type = SERIES_TYPE_FUNNEL;
     _this.ignoreLabelLineUpdate = true;
     return _this;
   }
@@ -194,7 +195,7 @@ var FunnelView = /** @class */function (_super) {
     this._data = null;
   };
   FunnelView.prototype.dispose = function () {};
-  FunnelView.type = 'funnel';
+  FunnelView.type = SERIES_TYPE_FUNNEL;
   return FunnelView;
 }(ChartView);
 export default FunnelView;

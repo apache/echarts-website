@@ -290,7 +290,68 @@ Whether to enable highlighting chart when [legend](option.legend.md) is being ho
 
 Name of the stack group. Series with the same `stack` name on the **same category axis** will be stacked on top of each other. See [stackStrategy](option.series-line.md#stackStrategy) for customizing how values are stacked.
 
-**Notice:** Stacking **only supports the stacked axis being of type** `'value'` or `'log'`. Axes of type `'time'` and `'category'` are **not supported** as the stacked axis.
+Two axes in the [Cartesian](option.grid.md) or [polar](option.polar.md) coordinate system determine the layout of series glyphs. In terms of `stack`, we can name the two axes as follows:
+
+*   **Stacked Axis**: Series values on this axis are stacked. Only `axis.type: 'value' | 'log'` are supported to stack.
+*   **Base Axis**: Series values on this axis are **not** stacked, but this axis affects the stack grouping strategy:
+    *   If "Base Axis" is `axis.type: 'category'`: Series data items are grouped by the values on this axis. For example,
+        
+        ```
+          option = {
+              xAxis: {type: 'category'},
+              yAxis: {type: 'value'},
+              series: [{
+                  stack: 'ss',
+                  data: [['a', 10], ['b', 20], ['c', 30]]
+              }, {
+                  stack: 'ss',
+                  data: [['b', 900], ['c', 800], ['a', 700]]
+              }, {
+                  stack: 'ss',
+                  data: [['a', 3000], ['c', 4000]]
+              }]
+          };
+          // "Base Axis" is xAxis, and series are grouped by values
+          // on xAxis (i.e., data[i][0]).
+          // It generates a stacked result like:
+          stackedResult = [{
+              data: [['a', 10], ['b', 20], ['c', 30]]
+          }, {
+              data: [['a', 10 + 700], ['b', 20 + 900], ['c', 30 + 800]]
+          }, {
+              data: [['a', 10 + 700 + 3000], ['b', 20 + 900 + 0], ['c', 30 + 800 + 4000]]
+          }]
+        ```
+        
+    *   If "Base Axis" is `axis.type: 'value' | 'time' | 'log'`: Currently we only support to group series data items by data index for performance considerations. **Users should ensure data indices between different series correspond correctly**. For example,
+        
+        ```
+          option = {
+              xAxis: {type: 'value'},
+              yAxis: {type: 'value'},
+              series: [{
+                  stack: 'ss',
+                  data: [[0.01, 10], [0.05, 20], [0.13, 30]]
+              }, {
+                  stack: 'ss',
+                  data: [[0.01, 700], [0.05, 900], [0.13, 800]]
+              }, {
+                  stack: 'ss',
+                  data: [[0.01, 3000], null, [0.13, 4000]]
+              }]
+          };
+          // "Base Axis" is xAxis, and series are grouped by data index
+          // regardless of values on xAxis (i.e., data[i][0]).
+          // It generates a stacked result like:
+          stackedResult = [{
+              data: [[0.01, 10], [0.05, 20], [0.13, 30]]
+          }, {
+              data: [[0.01, 10 + 700], [0.05, 20 + 900], [0.13, 30 + 800]]
+          }, {
+              data: [[0.01, 10 + 700 + 3000], [0.05, 20 + 900 + 0], [0.13, 30 + 800 + 4000]]
+          }]
+        ```
+        
 
 You can view the effect of the example below by switching stacks in the [toolbox](option.toolbox.md) in the top-right corner.
 
@@ -326,9 +387,9 @@ Stack order. Optional values:
 
 ## cursor
 - **Type**: `string`
-- **Default**: `'pointer'`
+- **Default**: `pointer`
 
-The mouse style when mouse hovers on an element, the same as `cursor` property in `CSS`.
+The mouse style when mouse hovers over an element, the same as `cursor` property in `CSS`.
 
 ## connectNulls
 - **Type**: `boolean`
@@ -342,17 +403,49 @@ Whether to connect the line across null points.
 
 Since `v4.4.0`
 
-If clip the overflow on the coordinate system. Clip results varies between series:
+Whether to clip series shapes overflowing the coordinate system.
 
-*   Scatter/EffectScatter：Ignore the symbols exceeds the coordinate system. Not clip the elements.
-*   Bar：Clip all the overflowed. With bar width kept.
-*   Line：Clip the overflowed line.
-*   Lines: Clip all the overflowed.
-*   Candlestick: Ignore the elements exceeds the coordinate system.
-*   PictorialBar: Clip all the overflowed. (Supported since v5.5.0)
-*   Custom: Clip all the olverflowed.
+The detailed clipping behavior is:
 
-All these series have default value `true` except pictorialBar and custom series. Set it to `false` if you don't want to clip.
+*   For the line: Overflowing parts of a line is clipped.
+*   For data point symbols: A symbol is removed only if the center is outside the coordinate system, otherwise it is fully visible, regardless of partial overflow.
+
+## triggerEvent
+- **Type**: `boolean|string`
+- **Default**: `false`
+
+Since `v6.1.0`
+
+Whether to enable to dispatch mouse/touch events to user-registered listeners (i.e., `chart.on('xxx', function (event) {})`).
+
+Supported mouse/touch events are `'click'`, `'dblclick'`, `'mouseover'`, `'mouseout'`, `'mousemove'`, `'mousedown'`, `'mouseup'`, `'globalout'`, `'contextmenu'`. Note, both mouse and touch events are unified to the event type `'mouse{xxx}'`.
+
+Values:
+
+*   `true`: Enable to trigger events. But dispatching also requires option `silent` to be falsy.
+*   `false`: Disable to trigger mouse/touch events, even if option `silent` is falsy.
+    
+*   `'line'`: Only the line is the emitter.
+    
+*   `'area'`: Only the area (present when using `areaStyle`), is the emitter.
+
+The parameters of the event include:
+
+```
+{
+    componentType: 'series';
+    componentSubType: 'line';
+    seriesType: 'line';
+    // The index with respect to the declaration in echarts option.
+    componentIndex: number;
+    // The same as `componentIndex`.
+    seriesIndex: number;
+    // The declared `series.name`.
+    seriesName: string;
+    // For determining this event is triggered by area or line
+    selfType: 'area' | 'line';
+}
+```
 
 ## triggerLineEvent
 - **Type**: `boolean`
@@ -360,7 +453,9 @@ All these series have default value `true` except pictorialBar and custom series
 
 Since `v5.2.2`
 
-Whether `line` and `area` can trigger the event.
+Deprecated since `v6.1.0`. Use `triggerEvent` instead.
+
+Whether the line and the area can trigger the event.
 
 ## step
 - **Type**: `string|boolean`
@@ -14363,7 +14458,9 @@ Interface:
 (value: number | string, dataIndex: number) => string
 ```
 
-`dataIndex` is provided since `v5.5.0`
+Since `v5.5.0` `dataIndex` is provided; but not reasonable when `dataZoom` exists, since it is the index after dataZoom filtering.
+
+Since `v6.1.0` `dataIndex` is corrected to the index before `dataZoom` filtering.
 
 Example:
 
@@ -14695,7 +14792,14 @@ For example, `[0, '-50%']` means to move upside side position of symbol height. 
 - **Type**: `boolean`
 - **Default**: `false`
 
-Whether to ignore mouse events. Default value is false, for triggering and responding to mouse events.
+Whether to ignore user interactions (typically, mouse or touch events).
+
+*   `true`: Elements do not respond to mouse and touch interactions. As a result:
+    *   Interactive features are disabled, such as `tooltip`, hover state changing (i.e., `emphasis`), hover linking, etc.
+    *   Mouse/touch events are not dispatched to user-registered listeners (i.e., `chart.on('xxx', listener)`).
+*   `false`:
+    *   Interactive features are not disabled by this option, but they still depend on other relevant options to be enabled.
+    *   Mouse/touch events are not prevented by this option, but they still depend on other relevent options (typically, `triggerEvent`, if supported).
 
 ### markPoint.label
 - **Type**: `Object`
@@ -20143,7 +20247,14 @@ Use a line in the chart to illustrate.
 - **Type**: `boolean`
 - **Default**: `false`
 
-Whether to ignore mouse events. Default value is false, for triggering and responding to mouse events.
+Whether to ignore user interactions (typically, mouse or touch events).
+
+*   `true`: Elements do not respond to mouse and touch interactions. As a result:
+    *   Interactive features are disabled, such as `tooltip`, hover state changing (i.e., `emphasis`), hover linking, etc.
+    *   Mouse/touch events are not dispatched to user-registered listeners (i.e., `chart.on('xxx', listener)`).
+*   `false`:
+    *   Interactive features are not disabled by this option, but they still depend on other relevant options to be enabled.
+    *   Mouse/touch events are not prevented by this option, but they still depend on other relevent options (typically, `triggerEvent`, if supported).
 
 ### markLine.symbol
 - **Type**: `string|Array`
@@ -29229,7 +29340,14 @@ Used to mark an area in chart. For example, mark a time interval.
 - **Type**: `boolean`
 - **Default**: `false`
 
-Whether to ignore mouse events. Default value is false, for triggering and responding to mouse events.
+Whether to ignore user interactions (typically, mouse or touch events).
+
+*   `true`: Elements do not respond to mouse and touch interactions. As a result:
+    *   Interactive features are disabled, such as `tooltip`, hover state changing (i.e., `emphasis`), hover linking, etc.
+    *   Mouse/touch events are not dispatched to user-registered listeners (i.e., `chart.on('xxx', listener)`).
+*   `false`:
+    *   Interactive features are not disabled by this option, but they still depend on other relevant options to be enabled.
+    *   Mouse/touch events are not prevented by this option, but they still depend on other relevent options (typically, `triggerEvent`, if supported).
 
 ### markArea.label
 - **Type**: `Object`
@@ -38820,7 +38938,14 @@ Canvases with bigger `zlevel` will be placed on Canvases with smaller `zlevel`.
 - **Type**: `boolean`
 - **Default**: `false`
 
-Whether to ignore mouse events. Default value is false, for triggering and responding to mouse events.
+Whether to ignore user interactions (typically, mouse or touch events).
+
+*   `true`: Elements do not respond to mouse and touch interactions. As a result:
+    *   Interactive features are disabled, such as `tooltip`, hover state changing (i.e., `emphasis`), hover linking, etc.
+    *   Mouse/touch events are not dispatched to user-registered listeners (i.e., `chart.on('xxx', listener)`).
+*   `false`:
+    *   Interactive features are not disabled by this option, but they still depend on other relevant options to be enabled.
+    *   Mouse/touch events are not prevented by this option, but they still depend on other relevent options (typically, `triggerEvent`, if supported).
 
 ## animation
 - **Type**: `boolean`
@@ -39309,7 +39434,9 @@ Interface:
 (value: number | string, dataIndex: number) => string
 ```
 
-`dataIndex` is provided since `v5.5.0`
+Since `v5.5.0` `dataIndex` is provided; but not reasonable when `dataZoom` exists, since it is the index after dataZoom filtering.
+
+Since `v6.1.0` `dataIndex` is corrected to the index before `dataZoom` filtering.
 
 Example:
 

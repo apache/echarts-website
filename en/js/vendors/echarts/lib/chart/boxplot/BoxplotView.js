@@ -42,17 +42,20 @@
 * under the License.
 */
 import { __extends } from "tslib";
-import * as zrUtil from 'zrender/lib/core/util.js';
 import ChartView from '../../view/Chart.js';
 import * as graphic from '../../util/graphic.js';
 import { setStatesStylesFromModel, toggleHoverEmphasis } from '../../util/states.js';
 import Path from 'zrender/lib/graphic/Path.js';
+import { SERIES_TYPE_BOXPLOT } from './BoxplotSeries.js';
 import { saveOldStyle } from '../../animation/basicTransition.js';
+import { resolveNormalBoxClipping } from '../helper/whiskerBoxCommon.js';
+import { createClipPath, SHAPE_CLIP_KIND_FULLY_CLIPPED, SHAPE_CLIP_KIND_NOT_CLIPPED, SHAPE_CLIP_KIND_PARTIALLY_CLIPPED, updateClipPath } from '../helper/createClipPathFromCoordSys.js';
+import { map } from 'zrender/lib/core/util.js';
 var BoxplotView = /** @class */function (_super) {
   __extends(BoxplotView, _super);
   function BoxplotView() {
     var _this = _super !== null && _super.apply(this, arguments) || this;
-    _this.type = BoxplotView.type;
+    _this.type = SERIES_TYPE_BOXPLOT;
     return _this;
   }
   BoxplotView.prototype.render = function (seriesModel, ecModel, api) {
@@ -64,11 +67,24 @@ var BoxplotView = /** @class */function (_super) {
     if (!this._data) {
       group.removeAll();
     }
-    var constDim = seriesModel.get('layout') === 'horizontal' ? 1 : 0;
+    var constDim = seriesModel.getWhiskerBoxesLayout() === 'horizontal' ? 1 : 0;
+    var needClip = seriesModel.get('clip', true);
+    var coordSys = seriesModel.coordinateSystem;
+    var clipArea = coordSys.getArea && coordSys.getArea();
+    var clipPath = needClip && createClipPath(coordSys, false, seriesModel);
     data.diff(oldData).add(function (newIdx) {
       if (data.hasValue(newIdx)) {
         var itemLayout = data.getItemLayout(newIdx);
+        var clipKind = needClip ? resolveNormalBoxClipping(clipArea, itemLayout) : SHAPE_CLIP_KIND_NOT_CLIPPED;
+        if (clipKind === SHAPE_CLIP_KIND_FULLY_CLIPPED) {
+          return;
+        }
         var symbolEl = createNormalBox(itemLayout, data, newIdx, constDim, true);
+        // One axis tick can corresponds to a group of box items (from different series),
+        // so it may be visually misleading when a group of items are partially outside
+        // but no clipping is applied.
+        // Consider performance of zr Element['clipPath'], only set to partially clipped elements.
+        updateClipPath(clipKind === SHAPE_CLIP_KIND_PARTIALLY_CLIPPED, symbolEl, clipPath);
         data.setItemGraphicEl(newIdx, symbolEl);
         group.add(symbolEl);
       }
@@ -80,12 +96,19 @@ var BoxplotView = /** @class */function (_super) {
         return;
       }
       var itemLayout = data.getItemLayout(newIdx);
+      var clipKind = needClip ? resolveNormalBoxClipping(clipArea, itemLayout) : SHAPE_CLIP_KIND_NOT_CLIPPED;
+      if (clipKind === SHAPE_CLIP_KIND_FULLY_CLIPPED) {
+        group.remove(symbolEl);
+        return;
+      }
       if (!symbolEl) {
         symbolEl = createNormalBox(itemLayout, data, newIdx, constDim);
       } else {
         saveOldStyle(symbolEl);
         updateNormalBoxData(itemLayout, symbolEl, data, newIdx);
       }
+      // See `updateClipPath` in `add`.
+      updateClipPath(clipKind === SHAPE_CLIP_KIND_PARTIALLY_CLIPPED, symbolEl, clipPath);
       group.add(symbolEl);
       data.setItemGraphicEl(newIdx, symbolEl);
     }).remove(function (oldIdx) {
@@ -102,7 +125,7 @@ var BoxplotView = /** @class */function (_super) {
       el && group.remove(el);
     });
   };
-  BoxplotView.type = 'boxplot';
+  BoxplotView.type = SERIES_TYPE_BOXPLOT;
   return BoxplotView;
 }(ChartView);
 var BoxPathShape = /** @class */function () {
@@ -163,7 +186,7 @@ function updateNormalBoxData(itemLayout, el, data, dataIndex, isInit) {
   toggleHoverEmphasis(el, emphasisModel.get('focus'), emphasisModel.get('blurScope'), emphasisModel.get('disabled'));
 }
 function transInit(points, dim, itemLayout) {
-  return zrUtil.map(points, function (point) {
+  return map(points, function (point) {
     point = point.slice();
     point[dim] = itemLayout.initBaseline;
     return point;

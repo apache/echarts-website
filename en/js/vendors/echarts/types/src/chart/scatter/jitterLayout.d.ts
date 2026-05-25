@@ -1,2 +1,2 @@
-import type GlobalModel from '../../model/Global.js';
-export default function jitterLayout(ecModel: GlobalModel): void;
+import type { StageHandler } from '../../util/types.js';
+export default function jitterLayout(): StageHandler;

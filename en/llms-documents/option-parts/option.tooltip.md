@@ -1384,7 +1384,9 @@ Interface:
 (value: number | string, dataIndex: number) => string
 ```
 
-`dataIndex` is provided since `v5.5.0`
+Since `v5.5.0` `dataIndex` is provided; but not reasonable when `dataZoom` exists, since it is the index after dataZoom filtering.
+
+Since `v6.1.0` `dataIndex` is corrected to the index before `dataZoom` filtering.
 
 Example:
 

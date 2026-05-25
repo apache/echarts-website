@@ -45,28 +45,24 @@
  * Parallel Coordinates
  * <https://en.wikipedia.org/wiki/Parallel_coordinates>
  */
-import * as zrUtil from 'zrender/lib/core/util.js';
+import { each, createHashMap, clone } from 'zrender/lib/core/util.js';
 import * as matrix from 'zrender/lib/core/matrix.js';
 import * as layoutUtil from '../../util/layout.js';
 import * as axisHelper from '../../coord/axisHelper.js';
 import ParallelAxis from './ParallelAxis.js';
 import * as graphic from '../../util/graphic.js';
-import * as numberUtil from '../../util/number.js';
+import { mathCeil, mathFloor, mathMax, mathMin, mathPI, round } from '../../util/number.js';
 import sliderMove from '../../component/helper/sliderMove.js';
-var each = zrUtil.each;
-var mathMin = Math.min;
-var mathMax = Math.max;
-var mathFloor = Math.floor;
-var mathCeil = Math.ceil;
-var round = numberUtil.round;
-var PI = Math.PI;
+import { COORD_SYS_TYPE_PARALLEL } from './ParallelModel.js';
+import { scaleCalcNice } from '../axisNiceTicks.js';
+import { AXIS_EXTENT_INFO_BUILD_FROM_COORD_SYS_UPDATE, scaleRawExtentInfoCreate } from '../scaleRawExtentInfo.js';
 var Parallel = /** @class */function () {
   function Parallel(parallelModel, ecModel, api) {
-    this.type = 'parallel';
+    this.type = COORD_SYS_TYPE_PARALLEL;
     /**
      * key: dimension
      */
-    this._axesMap = zrUtil.createHashMap();
+    this._axesMap = createHashMap();
     /**
      * key: dimension
      * value: {position: [], rotation, }
@@ -82,9 +78,9 @@ var Parallel = /** @class */function () {
     each(dimensions, function (dim, idx) {
       var axisIndex = parallelAxisIndex[idx];
       var axisModel = ecModel.getComponent('parallelAxis', axisIndex);
-      var axis = this._axesMap.set(dim, new ParallelAxis(dim, axisHelper.createScaleByModel(axisModel), [0, 0], axisModel.get('type'), axisIndex));
-      var isCategory = axis.type === 'category';
-      axis.onBand = isCategory && axisModel.get('boundaryGap');
+      var axisType = axisHelper.determineAxisType(axisModel);
+      var axis = this._axesMap.set(dim, new ParallelAxis(dim, axisHelper.createScaleByModel(axisModel, axisType, false), [0, 0], axisType, axisIndex));
+      axis.onBand = axisHelper.isAxisOnBand(axis.scale, axisModel);
       axis.inverse = axisModel.get('inverse');
       // Injection
       axisModel.axis = axis;
@@ -96,7 +92,11 @@ var Parallel = /** @class */function () {
    * Update axis scale after data processed
    */
   Parallel.prototype.update = function (ecModel, api) {
-    this._updateAxesFromSeries(this._model, ecModel);
+    each(this.dimensions, function (dim) {
+      var axis = this._axesMap.get(dim);
+      scaleRawExtentInfoCreate(axis, AXIS_EXTENT_INFO_BUILD_FROM_COORD_SYS_UPDATE);
+      scaleCalcNice(axis);
+    }, this);
   };
   Parallel.prototype.containPoint = function (point) {
     var layoutInfo = this._makeLayoutInfo();
@@ -109,22 +109,6 @@ var Parallel = /** @class */function () {
   };
   Parallel.prototype.getModel = function () {
     return this._model;
-  };
-  /**
-   * Update properties from series
-   */
-  Parallel.prototype._updateAxesFromSeries = function (parallelModel, ecModel) {
-    ecModel.eachSeries(function (seriesModel) {
-      if (!parallelModel.contains(seriesModel, ecModel)) {
-        return;
-      }
-      var data = seriesModel.getData();
-      each(this.dimensions, function (dim) {
-        var axis = this._axesMap.get(dim);
-        axis.scale.unionExtentFromData(data, data.mapDimension(dim));
-        axisHelper.niceScaleExtent(axis.scale, axis.model);
-      }, this);
-    }, this);
   };
   /**
    * Resize the parallel coordinate system.
@@ -211,7 +195,7 @@ var Parallel = /** @class */function () {
         }
       };
       var rotationTable = {
-        horizontal: PI / 2,
+        horizontal: mathPI / 2,
         vertical: 0
       };
       var position = [positionTable[layout].x + rect.x, positionTable[layout].y + rect.y];
@@ -259,7 +243,7 @@ var Parallel = /** @class */function () {
     var dimensions = this.dimensions;
     var dataDimensions = [];
     var axisModels = [];
-    zrUtil.each(dimensions, function (axisDim) {
+    each(dimensions, function (axisDim) {
       dataDimensions.push(data.mapDimension(axisDim));
       axisModels.push(axesMap.get(axisDim).model);
     });
@@ -308,7 +292,7 @@ var Parallel = /** @class */function () {
    * Get axis layout.
    */
   Parallel.prototype.getAxisLayout = function (dim) {
-    return zrUtil.clone(this._axesLayout[dim]);
+    return clone(this._axesLayout[dim]);
   };
   /**
    * @return {Object} {axisExpandWindow, delta, behavior: 'jump' | 'slide' | 'none'}.

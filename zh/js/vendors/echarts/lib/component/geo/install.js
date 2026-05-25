@@ -43,10 +43,13 @@
 */
 import GeoModel from '../../coord/geo/GeoModel.js';
 import geoCreator from '../../coord/geo/geoCreator.js';
+import { COMPONENT_MAIN_TYPE_SERIES } from '../../util/types.js';
 import { each } from 'zrender/lib/core/util.js';
-import { updateCenterAndZoomInAction } from '../../component/helper/roamHelper.js';
+import { mapSeriesNeedsDrawMap } from '../../chart/map/MapSeries.js';
 import GeoView from './GeoView.js';
 import geoSourceManager from '../../coord/geo/geoSourceManager.js';
+import { makeQueryConditionKindA } from '../../util/model.js';
+import { ownRoamModelCoordSysUpdateInAction, ownRoamViewUpdateDirectlyInAction } from '../../coord/View.js';
 function registerMap(mapName, geoJson, specialAreas) {
   geoSourceManager.registerMap(mapName, geoJson, specialAreas);
 }
@@ -116,40 +119,23 @@ export function install(registers) {
     event: 'geoRoam',
     update: 'updateTransform'
   }, function (payload, ecModel, api) {
-    var componentType = payload.componentType;
-    if (!componentType) {
-      // backward compat, but `payload.componentType` is deprecated.
-      if (payload.geoId != null) {
-        componentType = 'geo';
-      } else if (payload.seriesId != null) {
-        componentType = 'series';
-      }
+    // `payload.componentType` is supported only for backward compatibility.
+    var mainType = payload.componentType || (payload.geoId != null || payload.geoName != null || payload.geoIndex != null ? 'geo' : COMPONENT_MAIN_TYPE_SERIES);
+    var isSeries = mainType === COMPONENT_MAIN_TYPE_SERIES;
+    if (mainType !== 'geo' && !isSeries) {
+      return;
     }
-    if (!componentType) {
-      componentType = 'series';
-    }
-    // FIXME: payload.geoId/payload.seriesId should be required, but historically
-    //  it is not mandatory, causing that all of the geo or series can be queried below,
-    //  which is not reasonable.
-    ecModel.eachComponent({
-      mainType: componentType,
-      query: payload
-    }, function (componentModel) {
-      var geo = componentModel.coordinateSystem;
-      if (geo.type !== 'geo') {
+    var subType = isSeries ? 'map' : null;
+    ecModel.eachComponent(makeQueryConditionKindA(payload, mainType, subType), function (componentOrSeries) {
+      if (isSeries
+      // Only when `needsDrawMap: true`, the `MapSeries` host geo coord sys and call `MapDraw`.
+      && !mapSeriesNeedsDrawMap(componentOrSeries)) {
         return;
       }
-      var res = updateCenterAndZoomInAction(geo, payload, componentModel.get('scaleLimit'));
-      componentModel.setCenter && componentModel.setCenter(res.center);
-      componentModel.setZoom && componentModel.setZoom(res.zoom);
-      // All map series with same `map` use the same geo coordinate system
-      // So the center and zoom must be in sync. Include the series not selected by legend
-      if (componentType === 'series') {
-        each(componentModel.seriesGroup, function (seriesModel) {
-          seriesModel.setCenter(res.center);
-          seriesModel.setZoom(res.zoom);
-        });
-      }
+      // Since 'updateTransform' is used, geo model and view update firstly here, and then series
+      // and components laid out on this VIEW_COORD_SYS update in `View['updateTransform']`.
+      ownRoamModelCoordSysUpdateInAction(payload, componentOrSeries, isSeries ? componentOrSeries.seriesGroup.r : null);
+      ownRoamViewUpdateDirectlyInAction(payload, componentOrSeries, ecModel, api);
     });
   });
 }

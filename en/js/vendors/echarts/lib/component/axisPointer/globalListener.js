@@ -46,13 +46,6 @@ import env from 'zrender/lib/core/env.js';
 import { makeInner } from '../../util/model.js';
 var inner = makeInner();
 var each = zrUtil.each;
-/**
- * @param {string} key
- * @param {module:echarts/ExtensionAPI} api
- * @param {Function} handler
- *      param: {string} currTrigger
- *      param: {Array.<number>} point
- */
 export function register(key, api, handler) {
   if (env.node) {
     return;
@@ -70,6 +63,10 @@ function initGlobalListeners(zr, api) {
   inner(zr).initialized = true;
   useHandler('click', zrUtil.curry(doEnter, 'click'));
   useHandler('mousemove', zrUtil.curry(doEnter, 'mousemove'));
+  // For example, dataZoom may update series layout while mousewheel,
+  // axisPointer and tooltip need to follow that updates, otherwise,
+  // highlighted items (by axisPointer) may have no chance to downplay.
+  useHandler('mousewheel', zrUtil.curry(doEnter, 'mousewheel'));
   // useHandler('mouseout', onLeave);
   useHandler('globalout', onLeave);
   function useHandler(eventType, cb) {

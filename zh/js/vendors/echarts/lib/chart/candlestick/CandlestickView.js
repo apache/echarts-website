@@ -47,9 +47,12 @@ import ChartView from '../../view/Chart.js';
 import * as graphic from '../../util/graphic.js';
 import { setStatesStylesFromModel, toggleHoverEmphasis } from '../../util/states.js';
 import Path from 'zrender/lib/graphic/Path.js';
-import { createClipPath } from '../helper/createClipPathFromCoordSys.js';
+import { createClipPath, SHAPE_CLIP_KIND_FULLY_CLIPPED, SHAPE_CLIP_KIND_NOT_CLIPPED, SHAPE_CLIP_KIND_PARTIALLY_CLIPPED, updateClipPath } from '../helper/createClipPathFromCoordSys.js';
+import { SERIES_TYPE_CANDLESTICK } from './CandlestickSeries.js';
 import { saveOldStyle } from '../../animation/basicTransition.js';
 import { getBorderColor, getColor } from './candlestickVisual.js';
+import { resolveNormalBoxClipping } from '../helper/whiskerBoxCommon.js';
+import { getIncrementalId } from '../../util/model.js';
 var SKIP_PROPS = ['color', 'borderColor'];
 var CandlestickView = /** @class */function (_super) {
   __extends(CandlestickView, _super);
@@ -89,26 +92,33 @@ var CandlestickView = /** @class */function (_super) {
     var oldData = this._data;
     var group = this.group;
     var isSimpleBox = data.getLayout('isSimpleBox');
-    var needsClip = seriesModel.get('clip', true);
-    var coord = seriesModel.coordinateSystem;
-    var clipArea = coord.getArea && coord.getArea();
+    var needClip = seriesModel.get('clip', true);
+    var coordSys = seriesModel.coordinateSystem;
+    var clipArea = coordSys.getArea && coordSys.getArea();
+    var clipPath = needClip && createClipPath(coordSys, false, seriesModel);
     // There is no old data only when first rendering or switching from
     // stream mode to normal mode, where previous elements should be removed.
     if (!this._data) {
       group.removeAll();
     }
+    var transPointDim = getTransPointDimension(seriesModel);
     data.diff(oldData).add(function (newIdx) {
       if (data.hasValue(newIdx)) {
         var itemLayout = data.getItemLayout(newIdx);
-        if (needsClip && isNormalBoxClipped(clipArea, itemLayout)) {
+        var clipKind = needClip ? resolveNormalBoxClipping(clipArea, itemLayout) : SHAPE_CLIP_KIND_NOT_CLIPPED;
+        if (clipKind === SHAPE_CLIP_KIND_FULLY_CLIPPED) {
           return;
         }
-        var el = createNormalBox(itemLayout, newIdx, true);
+        var el = createNormalBox(itemLayout, newIdx, transPointDim, true);
         graphic.initProps(el, {
           shape: {
             points: itemLayout.ends
           }
         }, seriesModel, newIdx);
+        // When an item is partially inside and partially outside the Cartesian bounding rect,
+        // the disappearance of the entire item may confuse users. Therefore, clipping is needed.
+        // Consider performance of zr Element['clipPath'], only set to partially clipped elements.
+        updateClipPath(clipKind === SHAPE_CLIP_KIND_PARTIALLY_CLIPPED, el, clipPath);
         setBoxCommon(el, data, newIdx, isSimpleBox);
         group.add(el);
         data.setItemGraphicEl(newIdx, el);
@@ -121,12 +131,13 @@ var CandlestickView = /** @class */function (_super) {
         return;
       }
       var itemLayout = data.getItemLayout(newIdx);
-      if (needsClip && isNormalBoxClipped(clipArea, itemLayout)) {
+      var clipKind = needClip ? resolveNormalBoxClipping(clipArea, itemLayout) : SHAPE_CLIP_KIND_NOT_CLIPPED;
+      if (clipKind === SHAPE_CLIP_KIND_FULLY_CLIPPED) {
         group.remove(el);
         return;
       }
       if (!el) {
-        el = createNormalBox(itemLayout, newIdx);
+        el = createNormalBox(itemLayout, newIdx, transPointDim);
       } else {
         graphic.updateProps(el, {
           shape: {
@@ -136,6 +147,8 @@ var CandlestickView = /** @class */function (_super) {
         saveOldStyle(el);
       }
       setBoxCommon(el, data, newIdx, isSimpleBox);
+      // See `updateClipPath` in `add`.
+      updateClipPath(clipKind === SHAPE_CLIP_KIND_PARTIALLY_CLIPPED, el, clipPath);
       group.add(el);
       data.setItemGraphicEl(newIdx, el);
     }).remove(function (oldIdx) {
@@ -148,21 +161,18 @@ var CandlestickView = /** @class */function (_super) {
     this._clear();
     createLarge(seriesModel, this.group);
     var clipPath = seriesModel.get('clip', true) ? createClipPath(seriesModel.coordinateSystem, false, seriesModel) : null;
-    if (clipPath) {
-      this.group.setClipPath(clipPath);
-    } else {
-      this.group.removeClipPath();
-    }
+    updateClipPath(!!clipPath, this.group, clipPath);
   };
   CandlestickView.prototype._incrementalRenderNormal = function (params, seriesModel) {
     var data = seriesModel.getData();
     var isSimpleBox = data.getLayout('isSimpleBox');
+    var transPointDim = getTransPointDimension(seriesModel);
     var dataIndex;
     while ((dataIndex = params.next()) != null) {
       var itemLayout = data.getItemLayout(dataIndex);
-      var el = createNormalBox(itemLayout, dataIndex);
+      var el = createNormalBox(itemLayout, dataIndex, transPointDim);
       setBoxCommon(el, data, dataIndex, isSimpleBox);
-      el.incremental = true;
+      el.incremental = getIncrementalId(seriesModel);
       this.group.add(el);
       this._progressiveEls.push(el);
     }
@@ -175,9 +185,10 @@ var CandlestickView = /** @class */function (_super) {
   };
   CandlestickView.prototype._clear = function () {
     this.group.removeAll();
+    updateClipPath(false, this.group, null);
     this._data = null;
   };
-  CandlestickView.type = 'candlestick';
+  CandlestickView.type = SERIES_TYPE_CANDLESTICK;
   return CandlestickView;
 }(ChartView);
 var NormalBoxPathShape = /** @class */function () {
@@ -213,30 +224,21 @@ var NormalBoxPath = /** @class */function (_super) {
   };
   return NormalBoxPath;
 }(Path);
-function createNormalBox(itemLayout, dataIndex, isInit) {
+function createNormalBox(itemLayout, dataIndex, constDim, isInit) {
   var ends = itemLayout.ends;
   return new NormalBoxPath({
     shape: {
-      points: isInit ? transInit(ends, itemLayout) : ends
+      points: isInit ? transInit(ends, constDim, itemLayout) : ends
     },
     z2: 100
   });
-}
-function isNormalBoxClipped(clipArea, itemLayout) {
-  var clipped = true;
-  for (var i = 0; i < itemLayout.ends.length; i++) {
-    // If any point are in the region.
-    if (clipArea.contain(itemLayout.ends[i][0], itemLayout.ends[i][1])) {
-      clipped = false;
-      break;
-    }
-  }
-  return clipped;
 }
 function setBoxCommon(el, data, dataIndex, isSimpleBox) {
   var itemModel = data.getItemModel(dataIndex);
   el.useStyle(data.getItemVisual(dataIndex, 'style'));
   el.style.strokeNoScale = true;
+  var cursorStyle = itemModel.getShallow('cursor');
+  cursorStyle && el.attr('cursor', cursorStyle);
   el.__simpleBox = isSimpleBox;
   setStatesStylesFromModel(el, itemModel);
   var sign = data.getItemLayout(dataIndex).sign;
@@ -251,12 +253,15 @@ function setBoxCommon(el, data, dataIndex, isSimpleBox) {
   var emphasisModel = itemModel.getModel('emphasis');
   toggleHoverEmphasis(el, emphasisModel.get('focus'), emphasisModel.get('blurScope'), emphasisModel.get('disabled'));
 }
-function transInit(points, itemLayout) {
+function transInit(points, dim, itemLayout) {
   return zrUtil.map(points, function (point) {
     point = point.slice();
-    point[1] = itemLayout.initBaseline;
+    point[dim] = itemLayout.initBaseline;
     return point;
   });
+}
+function getTransPointDimension(seriesModel) {
+  return seriesModel.getWhiskerBoxesLayout() === 'horizontal' ? 1 : 0;
 }
 var LargeBoxPathShape = /** @class */function () {
   function LargeBoxPathShape() {}
@@ -319,11 +324,12 @@ function createLarge(seriesModel, group, progressiveEls, incremental) {
   setLargeStyle(-1, elN, seriesModel, data);
   setLargeStyle(0, elDoji, seriesModel, data);
   if (incremental) {
-    elP.incremental = true;
-    elN.incremental = true;
+    elP.incremental = getIncrementalId(seriesModel);
+    elN.incremental = getIncrementalId(seriesModel);
+    elDoji.incremental = getIncrementalId(seriesModel);
   }
   if (progressiveEls) {
-    progressiveEls.push(elP, elN);
+    progressiveEls.push(elP, elN, elDoji);
   }
 }
 function setLargeStyle(sign, el, seriesModel, data) {
@@ -337,5 +343,7 @@ function setLargeStyle(sign, el, seriesModel, data) {
   el.useStyle(itemStyle);
   el.style.fill = null;
   el.style.stroke = borderColor;
+  var cursorStyle = seriesModel.get('cursor');
+  cursorStyle && el.attr('cursor', cursorStyle);
 }
 export default CandlestickView;

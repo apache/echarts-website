@@ -46,7 +46,7 @@ import SeriesDimensionDefine from '../SeriesDimensionDefine.js';
 import { createHashMap, defaults, each, extend, isObject, isString } from 'zrender/lib/core/util.js';
 import { createSourceFromSeriesDataOption, isSourceInstance } from '../Source.js';
 import { CtorInt32Array } from '../DataStore.js';
-import { normalizeToArray } from '../../util/model.js';
+import { normalizeToArray, removeDuplicates } from '../../util/model.js';
 import { BE_ORDINAL, guessOrdinal } from './sourceHelper.js';
 import { createDimNameMap, ensureSourceDimNameMap, SeriesDataSchema, shouldOmitUnusedDimensions } from './SeriesDataSchema.js';
 /**
@@ -265,27 +265,20 @@ source, opt) {
       return item0.storeDimIndex - item1.storeDimIndex;
     });
   }
-  removeDuplication(resultList);
+  removeDuplicates(resultList, function (item) {
+    return item.name;
+  }, function (item, existingCount) {
+    if (existingCount > 0) {
+      // Starts from 0.
+      item.name = item.name + (existingCount - 1);
+    }
+  });
   return new SeriesDataSchema({
     source: source,
     dimensions: resultList,
     fullDimensionCount: dimCount,
     dimensionOmitted: omitUnusedDimensions
   });
-}
-function removeDuplication(result) {
-  var duplicationMap = createHashMap();
-  for (var i = 0; i < result.length; i++) {
-    var dim = result[i];
-    var dimOriginalName = dim.name;
-    var count = duplicationMap.get(dimOriginalName) || 0;
-    if (count > 0) {
-      // Starts from 0.
-      dim.name = dimOriginalName + (count - 1);
-    }
-    count++;
-    duplicationMap.set(dimOriginalName, count);
-  }
 }
 // ??? TODO
 // Originally detect dimCount by data[0]. Should we

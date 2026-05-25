@@ -42,7 +42,10 @@
 * under the License.
 */
 import { indexOf, createHashMap, assert } from 'zrender/lib/core/util.js';
+import { makeInner } from '../../util/model.js';
+import { getCachePerECPrepare } from '../../util/cycleCache.js';
 export var DATA_ZOOM_AXIS_DIMENSIONS = ['x', 'y', 'radius', 'angle', 'single'];
+var ecModelCacheInner = makeInner();
 // Supported coords.
 // FIXME: polar has been broken (but rarely used).
 var SERIES_COORDS = ['cartesian2d', 'polar', 'singleAxis'];
@@ -169,4 +172,34 @@ export function collectReferCoordSysModelInfo(dataZoomModel) {
     coordSysInfo.axisModels.push(axisModel);
   });
   return coordSysInfoWrap;
+}
+function ensureAxisProxyMap(ecModel) {
+  // Consider some axes may be deleted, and dataZoom options may be changed at and only at each run of
+  // "ec prepare", we save axis proxies to a cache that is auto-cleared for each run of "ec prepare".
+  var store = ecModelCacheInner(getCachePerECPrepare(ecModel));
+  return store.axisProxyMap || (store.axisProxyMap = createHashMap());
+}
+export function getAxisProxyFromModel(axisModel) {
+  if (!axisModel) {
+    return;
+  }
+  if (process.env.NODE_ENV !== 'production') {
+    assert(axisModel.ecModel);
+  }
+  return ensureAxisProxyMap(axisModel.ecModel).get(axisModel.uid);
+}
+export function setAxisProxyToModel(axisModel, axisProxy) {
+  if (process.env.NODE_ENV !== 'production') {
+    assert(axisModel.ecModel);
+  }
+  ensureAxisProxyMap(axisModel.ecModel).set(axisModel.uid, axisProxy);
+}
+/**
+ * NOTICE: If `axis_a` aligns to `axis_b`, but they are not controlled by
+ * the same `dataZoom`, do not consider `axis_b` as `alignTo` and
+ * then do not input it into `AxisProxy#reset`.
+ */
+export function getAlignTo(dataZoomModel, axisProxy) {
+  var alignToAxis = axisProxy.getAxisModel().axis.__alignTo;
+  return alignToAxis && dataZoomModel.getAxisProxy(alignToAxis.dim, alignToAxis.model.componentIndex) ? getAxisProxyFromModel(alignToAxis.model) : null;
 }

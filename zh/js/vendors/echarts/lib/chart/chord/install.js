@@ -43,12 +43,12 @@
 */
 import ChordView from './ChordView.js';
 import ChordSeriesModel from './ChordSeries.js';
-import chordLayout from './chordLayout.js';
 import dataFilter from '../../processor/dataFilter.js';
+import { chordCircularLayoutStageHandler } from './chordLayout.js';
 export function install(registers) {
   registers.registerChartView(ChordView);
   registers.registerSeriesModel(ChordSeriesModel);
-  registers.registerLayout(registers.PRIORITY.VISUAL.POST_CHART_LAYOUT, chordLayout);
+  registers.registerLayout(registers.PRIORITY.VISUAL.POST_CHART_LAYOUT, chordCircularLayoutStageHandler);
   // Add data filter processor
   registers.registerProcessor(dataFilter('chord'));
 }

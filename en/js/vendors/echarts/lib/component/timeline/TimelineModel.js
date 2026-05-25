@@ -146,10 +146,6 @@ var TimelineModel = /** @class */function (_super) {
   TimelineModel.prototype.getData = function () {
     return this._data;
   };
-  /**
-   * @public
-   * @return {Array.<string>} categoreis
-   */
   TimelineModel.prototype.getCategories = function () {
     if (this.get('axisType') === 'category') {
       return this._names.slice();

@@ -44,7 +44,7 @@
 import brushPreprocessor from './preprocessor.js';
 import BrushView from './BrushView.js';
 import BrushModel from './BrushModel.js';
-import brushVisual from './visualEncoding.js';
+import { brushVisualStageHandler } from './visualEncoding.js';
 // TODO
 import BrushFeature from '../toolbox/feature/Brush.js';
 import { registerFeature } from '../toolbox/featureManager.js';
@@ -53,7 +53,7 @@ export function install(registers) {
   registers.registerComponentView(BrushView);
   registers.registerComponentModel(BrushModel);
   registers.registerPreprocessor(brushPreprocessor);
-  registers.registerVisual(registers.PRIORITY.VISUAL.BRUSH, brushVisual);
+  registers.registerVisual(registers.PRIORITY.VISUAL.BRUSH, brushVisualStageHandler);
   registers.registerAction({
     type: 'brush',
     event: 'brush',

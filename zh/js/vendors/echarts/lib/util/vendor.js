@@ -41,15 +41,63 @@
 * specific language governing permissions and limitations
 * under the License.
 */
-import { isArray } from 'zrender/lib/core/util.js';
-/* global Float32Array */
-var supportFloat32Array = typeof Float32Array !== 'undefined';
-var Float32ArrayCtor = !supportFloat32Array ? Array : Float32Array;
-export function createFloat32Array(arg) {
-  if (isArray(arg)) {
-    // Return self directly if don't support TypedArray.
-    return supportFloat32Array ? new Float32Array(arg) : arg;
+import { assert } from 'zrender/lib/core/util.js';
+import { error } from './log.js';
+import { UNDEFINED_STR } from './types.js';
+import { MAX_SAFE_INTEGER } from './number.js';
+/* global Int8Array, Int16Array, Int32Array, Uint8Array, Uint16Array, Uint32Array,
+   Uint8ClampedArray, Float32Array, Float64Array */
+export var Int8ArrayCtor = typeof Int8Array !== UNDEFINED_STR ? Int8Array : undefined;
+export var Int16ArrayCtor = typeof Int16Array !== UNDEFINED_STR ? Int16Array : undefined;
+export var Int32ArrayCtor = typeof Int32Array !== UNDEFINED_STR ? Int32Array : undefined;
+export var Uint8ArrayCtor = typeof Uint8Array !== UNDEFINED_STR ? Uint8Array : undefined;
+export var Uint16ArrayCtor = typeof Uint16Array !== UNDEFINED_STR ? Uint16Array : undefined;
+export var Uint32ArrayCtor = typeof Uint32Array !== UNDEFINED_STR ? Uint32Array : undefined;
+export var Uint8ClampedArrayCtor = typeof Uint8ClampedArray !== UNDEFINED_STR ? Uint8ClampedArray : undefined;
+export var Float32ArrayCtor = typeof Float32Array !== UNDEFINED_STR ? Float32Array : undefined;
+export var Float64ArrayCtor = typeof Float64Array !== UNDEFINED_STR ? Float64Array : undefined;
+export function createFloat32Array(capacity) {
+  return tryEnsureTypedArray({
+    ctor: Float32ArrayCtor
+  }, capacity).arr;
+}
+export function tryEnsureTypedArray(tyArr,
+// Can add more types if needed.
+// NOTICE: Callers need to manage data length themselves.
+// Do not consider `capacity` as the data length.
+capacity) {
+  if (process.env.NODE_ENV !== 'production') {
+    assert(capacity != null && isFinite(capacity) && capacity >= 0 && tyArr.hasOwnProperty('ctor'));
   }
-  // Else is number
-  return new Float32ArrayCtor(arg);
+  var existingArr = tyArr.arr;
+  var ctor = tyArr.ctor;
+  if (capacity > MAX_SAFE_INTEGER) {
+    capacity = MAX_SAFE_INTEGER;
+  }
+  if (!existingArr || tyArr.typed && existingArr.length < capacity) {
+    var nextArr = void 0;
+    if (ctor) {
+      try {
+        // A large contiguous memory allocation may cause OOM.
+        nextArr = new ctor(capacity);
+        tyArr.typed = true;
+        existingArr && nextArr.set(existingArr);
+      } catch (e) {
+        if (process.env.NODE_ENV !== 'production') {
+          error(e);
+        }
+      }
+    }
+    if (!nextArr) {
+      nextArr = [];
+      tyArr.typed = false;
+      if (existingArr) {
+        for (var i = 0, len = existingArr.length; i < len; i++) {
+          nextArr[i] = existingArr[i];
+        }
+      }
+    }
+    tyArr.arr = nextArr;
+  }
+  return tyArr;
 }

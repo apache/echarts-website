@@ -43,7 +43,9 @@
 */
 import * as layout from '../../util/layout.js';
 import { parsePercent, linearMap } from '../../util/number.js';
-import { isFunction } from 'zrender/lib/core/util.js';
+import { SERIES_TYPE_FUNNEL } from './FunnelSeries.js';
+import { indexOf, isFunction, isString } from 'zrender/lib/core/util.js';
+import { createSimpleOverallStageHandler } from '../../util/model.js';
 function getSortedIndices(data, sort) {
   var valueDim = data.mapDimension('value');
   var valueArr = data.mapArray(valueDim, function (val) {
@@ -66,7 +68,7 @@ function getSortedIndices(data, sort) {
 }
 function labelLayout(data) {
   var seriesModel = data.hostModel;
-  var orient = seriesModel.get('orient');
+  var isHorizontal = isOrientHorizontal(seriesModel);
   data.each(function (idx) {
     var itemModel = data.getItemModel(idx);
     var labelModel = itemModel.getModel('label');
@@ -100,14 +102,18 @@ function labelLayout(data) {
       var x2 = void 0;
       var y2 = void 0;
       var labelLineLen = labelLineModel.get('length');
-      if (process.env.NODE_ENV !== 'production') {
-        if (orient === 'vertical' && ['top', 'bottom'].indexOf(labelPosition) > -1) {
+      if (isString(labelPosition)) {
+        if (!isHorizontal && indexOf(['top', 'bottom'], labelPosition) > -1) {
           labelPosition = 'left';
-          console.warn('Position error: Funnel chart on vertical orient dose not support top and bottom.');
+          if (process.env.NODE_ENV !== 'production') {
+            console.warn('Position error: Funnel chart on vertical orient dose not support top and bottom.');
+          }
         }
-        if (orient === 'horizontal' && ['left', 'right'].indexOf(labelPosition) > -1) {
+        if (isHorizontal && indexOf(['left', 'right'], labelPosition) > -1) {
           labelPosition = 'bottom';
-          console.warn('Position error: Funnel chart on horizontal orient dose not support left and right.');
+          if (process.env.NODE_ENV !== 'production') {
+            console.warn('Position error: Funnel chart on horizontal orient dose not support left and right.');
+          }
         }
       }
       if (labelPosition === 'left') {
@@ -140,9 +146,9 @@ function labelLayout(data) {
         textAlign = 'center';
       } else if (labelPosition === 'rightTop') {
         // RightTop side
-        x1 = orient === 'horizontal' ? points[3][0] : points[1][0];
-        y1 = orient === 'horizontal' ? points[3][1] : points[1][1];
-        if (orient === 'horizontal') {
+        x1 = isHorizontal ? points[3][0] : points[1][0];
+        y1 = isHorizontal ? points[3][1] : points[1][1];
+        if (isHorizontal) {
           y2 = y1 - labelLineLen;
           textY = y2 - 5;
           textAlign = 'center';
@@ -155,7 +161,7 @@ function labelLayout(data) {
         // RightBottom side
         x1 = points[2][0];
         y1 = points[2][1];
-        if (orient === 'horizontal') {
+        if (isHorizontal) {
           y2 = y1 + labelLineLen;
           textY = y2 + 5;
           textAlign = 'center';
@@ -167,8 +173,8 @@ function labelLayout(data) {
       } else if (labelPosition === 'leftTop') {
         // LeftTop side
         x1 = points[0][0];
-        y1 = orient === 'horizontal' ? points[0][1] : points[1][1];
-        if (orient === 'horizontal') {
+        y1 = isHorizontal ? points[0][1] : points[1][1];
+        if (isHorizontal) {
           y2 = y1 - labelLineLen;
           textY = y2 - 5;
           textAlign = 'center';
@@ -179,9 +185,9 @@ function labelLayout(data) {
         }
       } else if (labelPosition === 'leftBottom') {
         // LeftBottom side
-        x1 = orient === 'horizontal' ? points[1][0] : points[3][0];
-        y1 = orient === 'horizontal' ? points[1][1] : points[2][1];
-        if (orient === 'horizontal') {
+        x1 = isHorizontal ? points[1][0] : points[3][0];
+        y1 = isHorizontal ? points[1][1] : points[2][1];
+        if (isHorizontal) {
           y2 = y1 + labelLineLen;
           textY = y2 + 5;
           textAlign = 'center';
@@ -194,7 +200,7 @@ function labelLayout(data) {
         // Right side or Bottom side
         x1 = (points[1][0] + points[2][0]) / 2;
         y1 = (points[1][1] + points[2][1]) / 2;
-        if (orient === 'horizontal') {
+        if (isHorizontal) {
           y2 = y1 + labelLineLen;
           textY = y2 + 5;
           textAlign = 'center';
@@ -204,7 +210,7 @@ function labelLayout(data) {
           textAlign = 'left';
         }
       }
-      if (orient === 'horizontal') {
+      if (isHorizontal) {
         x2 = x1;
         textX = x2;
       } else {
@@ -223,20 +229,21 @@ function labelLayout(data) {
     };
   });
 }
-export default function funnelLayout(ecModel, api) {
-  ecModel.eachSeriesByType('funnel', function (seriesModel) {
+export var funnelLayoutStageHandler = createSimpleOverallStageHandler(SERIES_TYPE_FUNNEL, funnelLayout);
+function funnelLayout(ecModel, api) {
+  ecModel.eachSeriesByType(SERIES_TYPE_FUNNEL, function (seriesModel) {
     var data = seriesModel.getData();
     var valueDim = data.mapDimension('value');
     var sort = seriesModel.get('sort');
     var layoutRef = layout.createBoxLayoutReference(seriesModel, api);
     var viewRect = layout.getLayoutRect(seriesModel.getBoxLayoutParams(), layoutRef.refContainer);
-    var orient = seriesModel.get('orient');
+    var isHorizontal = isOrientHorizontal(seriesModel);
     var viewWidth = viewRect.width;
     var viewHeight = viewRect.height;
     var indices = getSortedIndices(data, sort);
     var x = viewRect.x;
     var y = viewRect.y;
-    var sizeExtent = orient === 'horizontal' ? [parsePercent(seriesModel.get('minSize'), viewHeight), parsePercent(seriesModel.get('maxSize'), viewHeight)] : [parsePercent(seriesModel.get('minSize'), viewWidth), parsePercent(seriesModel.get('maxSize'), viewWidth)];
+    var sizeExtent = isHorizontal ? [parsePercent(seriesModel.get('minSize'), viewHeight), parsePercent(seriesModel.get('maxSize'), viewHeight)] : [parsePercent(seriesModel.get('minSize'), viewWidth), parsePercent(seriesModel.get('maxSize'), viewWidth)];
     var dataExtent = data.getDataExtent(valueDim);
     var min = seriesModel.get('min');
     var max = seriesModel.get('max');
@@ -248,11 +255,11 @@ export default function funnelLayout(ecModel, api) {
     }
     var funnelAlign = seriesModel.get('funnelAlign');
     var gap = seriesModel.get('gap');
-    var viewSize = orient === 'horizontal' ? viewWidth : viewHeight;
+    var viewSize = isHorizontal ? viewWidth : viewHeight;
     var itemSize = (viewSize - gap * (data.count() - 1)) / data.count();
     var getLinePoints = function (idx, offset) {
       // End point index is data.count() and we assign it 0
-      if (orient === 'horizontal') {
+      if (isHorizontal) {
         var val_1 = data.get(valueDim, idx) || 0;
         var itemHeight = linearMap(val_1, [min, max], sizeExtent, true);
         var y0 = void 0;
@@ -289,7 +296,7 @@ export default function funnelLayout(ecModel, api) {
       // From bottom to top
       itemSize = -itemSize;
       gap = -gap;
-      if (orient === 'horizontal') {
+      if (isHorizontal) {
         x += viewWidth;
       } else {
         y += viewHeight;
@@ -300,7 +307,7 @@ export default function funnelLayout(ecModel, api) {
       var idx = indices[i];
       var nextIdx = indices[i + 1];
       var itemModel = data.getItemModel(idx);
-      if (orient === 'horizontal') {
+      if (isHorizontal) {
         var width = itemModel.get(['itemStyle', 'width']);
         if (width == null) {
           width = itemSize;
@@ -336,4 +343,7 @@ export default function funnelLayout(ecModel, api) {
     }
     labelLayout(data);
   });
+}
+function isOrientHorizontal(seriesModel) {
+  return seriesModel.get('orient') === 'horizontal';
 }

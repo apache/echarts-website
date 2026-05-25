@@ -43,6 +43,7 @@
 */
 import { makeInner } from '../util/model.js';
 import LabelManager from './LabelManager.js';
+import { each } from 'zrender/lib/core/util.js';
 var getLabelManager = makeInner();
 export function installLabelLayout(registers) {
   registers.registerUpdateLifecycle('series:beforeupdate', function (ecModel, api, params) {
@@ -55,7 +56,7 @@ export function installLabelLayout(registers) {
   });
   registers.registerUpdateLifecycle('series:layoutlabels', function (ecModel, api, params) {
     var labelManager = getLabelManager(api).labelManager;
-    params.updatedSeries.forEach(function (series) {
+    each(params.updatedSeries, function (series) {
       labelManager.addLabelsOfSeries(api.getViewOfSeriesModel(series));
     });
     labelManager.updateLayoutConfig(api);

@@ -16,7 +16,9 @@ Legend component.
 
 Legend component shows symbol, color and name of different series. You can click legends to toggle displaying series in the chart.
 
-In ECharts 3, a single echarts instance may contain multiple legend components, which makes it easier for the layout of multiple legend components.
+See [legend.data](option-parts/option.legend.md#data) for the matching rules between legend items and series or series data items.
+
+A single echarts instance may contain multiple legend components, which makes it easier for the layout of multiple legend components. (since `v3.0.0`)
 
 If there have to be too many legend items, [vertically scrollable legend](https://echarts.apache.org/examples/en/editor.html?c=pie-legend&edit=1&reset=1) or [horizontally scrollable legend](https://echarts.apache.org/examples/en/editor.html?c=radar2&edit=1&reset=1) are options to paginate them. Check [legend.type](option-parts/option.legend.md#type) please.
 
@@ -111,9 +113,9 @@ Its behaviours vary according to filtering mode settings ([dataZoom.filterMode](
 
 Possible values:
 
-*   'filter': data that outside the window will be **filtered**, which may lead to some changes of windows of other axes. For each data item, it will be filtered if one of the relevant dimensions is out of the window.
+*   'filter': data that outside the window will be **filtered out**, which may lead to some changes of windows of other axes. For each data item, it will be filtered out if one of the relevant dimensions is out of the window.
     
-*   'weakFilter': data that outside the window will be **filtered**, which may lead to some changes of windows of other axes. For each data item, it will be filtered only if all of the relevant dimensions are out of the same side of the window.
+*   'weakFilter': data that outside the window will be **filtered out**, which may lead to some changes of windows of other axes. For each data item, it will be filtered out only if all of the relevant dimensions are out of the same side of the window.
     
 *   'empty': data that outside the window will be **set to NaN**, which will not lead to changes of windows of other axes.
     
@@ -170,9 +172,9 @@ In the sample above, `dataZoomX` is set as `filterMode: 'filter'`. When use drag
 ```
 [
     [12, 24, 36],
-    // [90, 80, 70] This item is filtered, as 90 is out of the window.
+    // [90, 80, 70] This item is filtered out, as 90 is out of the window.
     [3, 9, 27]
-    // [1, 11, 111] This item is filtered, as 1 is out of the window.
+    // [1, 11, 111] This item is filtered out, as 1 is out of the window.
 ]
 ```
 
@@ -1460,7 +1462,7 @@ Broken line chart relates all the data points [symbol](option-parts/option.serie
 
 **bar chart**
 
-Bar chart shows different data through the height of a bar, which is used in [rectangular coordinate](option-parts/option.grid.md) with at least 1 category axis.
+Bar chart shows different data through the height of a bar. Currently it can only be used in [Cartesian coordinate system (i.e., grid component)](option-parts/option.grid.md) or [polar coordinate system](option-parts/option.polar.md).
 
 ## series-pie
 - **Type**: `Object`
@@ -1790,7 +1792,7 @@ In addition, the edge between two small rectangles in the diagram encodes the `l
 
 Pictorial bar chart is a type of bar chart that customized glyph (like images, [SVG PathData](http://www.w3.org/TR/SVG/paths.html#PathData)) can be used instead of rectangular bar. This kind of chart is usually used in infographic.
 
-Pictorial bar chart can only be used in [rectangular coordinate](option-parts/option.grid.md) with at least 1 category axis.
+Pictorial bar chart can only be used in [Cartesian coordinate system (i.e., grid component)](option-parts/option.grid.md).
 
 **Example:**
 

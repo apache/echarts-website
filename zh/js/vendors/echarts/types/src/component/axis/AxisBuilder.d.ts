@@ -1,11 +1,12 @@
 import * as graphic from '../../util/graphic.js';
 import { AxisBaseModel } from '../../coord/AxisBaseModel.js';
-import { VisualAxisBreak, ParsedAxisBreak, NullUndefined, DimensionName } from '../../util/types.js';
+import { ParsedAxisBreak, NullUndefined, DimensionName } from '../../util/types.js';
 import { AxisBaseOption, AxisBaseOptionCommon } from '../../coord/axisCommonTypes.js';
 import { LabelLayoutWithGeometry } from '../../label/labelLayoutHelper.js';
 import ExtensionAPI from '../../core/ExtensionAPI.js';
 import BoundingRect from 'zrender/lib/core/BoundingRect.js';
 import Point from 'zrender/lib/core/Point.js';
+import { AxisLabelInfoDetermined } from '../../coord/axisTickLabelBuilder.js';
 declare type AxisIndexKey = 'xAxisIndex' | 'yAxisIndex' | 'radiusAxisIndex' | 'angleAxisIndex' | 'singleAxisIndex';
 declare type AxisEventData = {
     componentType: string;
@@ -24,8 +25,7 @@ declare type AxisEventData = {
     [key in AxisIndexKey]?: number;
 };
 export declare const getLabelInner: (hostObj: graphic.Text) => {
-    break: VisualAxisBreak;
-    tickValue: number;
+    labelInfo: AxisLabelInfoDetermined;
     layoutRotation: number;
 };
 /**

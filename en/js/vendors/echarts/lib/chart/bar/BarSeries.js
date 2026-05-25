@@ -46,6 +46,8 @@ import BaseBarSeriesModel from './BaseBarSeries.js';
 import createSeriesData from '../helper/createSeriesData.js';
 import { inheritDefaultOption } from '../../util/component.js';
 import tokens from '../../visual/tokens.js';
+import { preparePipelineContext } from '../../util/model.js';
+import { SERIES_TYPE_BAR } from '../../layout/barCommon.js';
 var BarSeriesModel = /** @class */function (_super) {
   __extends(BarSeriesModel, _super);
   function BarSeriesModel() {
@@ -67,21 +69,20 @@ var BarSeriesModel = /** @class */function (_super) {
     return this.get('large') ? this.get('progressive') : false;
   };
   /**
-   * @override
+   * @implement
    */
-  BarSeriesModel.prototype.getProgressiveThreshold = function () {
+  BarSeriesModel.prototype.__preparePipelineContext = function (view, pipeline) {
+    var context = preparePipelineContext(this, view, pipeline);
     // Do not support progressive in normal mode.
-    var progressiveThreshold = this.get('progressiveThreshold');
-    var largeThreshold = this.get('largeThreshold');
-    if (largeThreshold > progressiveThreshold) {
-      progressiveThreshold = largeThreshold;
+    if (context.progressiveRender) {
+      context.large = true;
     }
-    return progressiveThreshold;
+    return context;
   };
   BarSeriesModel.prototype.brushSelector = function (dataIndex, data, selectors) {
     return selectors.rect(data.getItemLayout(dataIndex));
   };
-  BarSeriesModel.type = 'series.bar';
+  BarSeriesModel.type = 'series.' + SERIES_TYPE_BAR;
   BarSeriesModel.dependencies = ['grid', 'polar'];
   BarSeriesModel.defaultOption = inheritDefaultOption(BaseBarSeriesModel.defaultOption, {
     // If clipped

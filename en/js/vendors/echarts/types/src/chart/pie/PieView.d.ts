@@ -4,7 +4,8 @@ import ExtensionAPI from '../../core/ExtensionAPI.js';
 import { Payload } from '../../util/types.js';
 import PieSeriesModel from './PieSeries.js';
 declare class PieView extends ChartView {
-    static type: string;
+    static readonly type = "pie";
+    readonly type = "pie";
     ignoreLabelLineUpdate: boolean;
     private _data;
     private _emptyCircleSector;

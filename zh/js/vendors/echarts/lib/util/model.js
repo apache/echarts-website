@@ -41,7 +41,7 @@
 * specific language governing permissions and limitations
 * under the License.
 */
-import { each, isObject, isArray, createHashMap, map, assert, isString, indexOf, isStringSafe, isNumber } from 'zrender/lib/core/util.js';
+import { each, isObject, isArray, createHashMap, map, assert, isString, indexOf, isStringSafe, isNumber, hasOwn, retrieve2 } from 'zrender/lib/core/util.js';
 import env from 'zrender/lib/core/env.js';
 import { isNumeric, getRandomIdBase, getPrecision, round } from './number.js';
 import { error, warn } from './log.js';
@@ -490,11 +490,15 @@ export function queryDataIndex(data, payload) {
   }
 }
 /**
+ * [CAVEAT]:
+ *  DO NOT use it in performance-sensitive scenarios.
+ *  Likely a hash map lookup; not inline-cache friendly.
+ *
  * Enable property storage to any host object.
  * Notice: Serialization is not supported.
  *
  * For example:
- * let inner = zrUitl.makeInner();
+ * let inner = makeInner();
  *
  * function some1(hostObj) {
  *      inner(hostObj).someProperty = 1212;
@@ -506,8 +510,6 @@ export function queryDataIndex(data, payload) {
  *      fields.someProperty2 = 'xx';
  *      ...
  * }
- *
- * @return {Function}
  */
 export function makeInner() {
   var key = '__ec_inner_' + innerUniqueIndex++;
@@ -632,6 +634,31 @@ export function queryReferringComponents(ecModel, mainType, userOption, opt) {
   });
   return result;
 }
+/**
+ * `{{mainType}Id, {mainType}Index, {mainType}Name}` takes precedence if provided in `payload`;
+ * otherwise, query by `mainType`.
+ * `subType` performs futher filtering if provided.
+ */
+export function makeQueryConditionKindA(payload,
+// `mainType` is mandatory to restrict the range of query,
+// since `payload` in an user input.
+mainType,
+// subType may be '' by `parseClassType`
+subType) {
+  if (process.env.NODE_ENV !== 'production') {
+    assert(mainType);
+  }
+  var query = {};
+  query[mainType + 'Id'] = payload[mainType + 'Id'];
+  query[mainType + 'Index'] = payload[mainType + 'Index'];
+  query[mainType + 'Name'] = payload[mainType + 'Name'];
+  var condition = {
+    mainType: mainType,
+    query: query
+  };
+  subType && (condition.subType = subType); // subType is determined by `hasOwnProperty`.
+  return condition;
+}
 export function setAttribute(dom, key, value) {
   dom.setAttribute ? dom.setAttribute(key, value) : dom[key] = value;
 }
@@ -755,4 +782,186 @@ export { ListIterator };
 export function clearTmpModel(model) {
   // Clear to avoid memory leak.
   model.option = model.parentModel = model.ecModel = null;
+}
+export function initExtentForUnion() {
+  return [Infinity, -Infinity];
+}
+/**
+ * NOTICE:
+ *  - The input `val` must be a number - type checking is not performed.
+ *  - `extent` should be initialized as `initExtentForUnion()`.
+ */
+export function unionExtentFromNumber(extent, val) {
+  if (isValidNumberForExtent(val)) {
+    val < extent[0] && (extent[0] = val);
+    val > extent[1] && (extent[1] = val);
+  }
+}
+/**
+ * NOTICE:
+ *  - The input `val` must be a number - type checking is not performed.
+ *  - `extent` should be initialized as `initExtentForUnion()`.
+ */
+export function unionExtentStartFromNumber(extent, val) {
+  if (isValidNumberForExtent(val) && val < extent[0]) {
+    extent[0] = val;
+  }
+}
+/**
+ * NOTICE:
+ *  - The input `val` must be a number - type checking is not performed.
+ *  - `extent` should be initialized as `initExtentForUnion()`.
+ */
+export function unionExtentEndFromNumber(extent, val) {
+  if (isValidNumberForExtent(val) && val > extent[1]) {
+    extent[1] = val;
+  }
+}
+/**
+ * NOTICE:
+ *  - `extent` should be initialized as `initExtentForUnion()`.
+ */
+export function unionExtentFromExtent(tarExtent, srcExtent) {
+  // Accept both or neither.
+  if (isValidBoundsForExtent(srcExtent[0], srcExtent[1])) {
+    srcExtent[0] < tarExtent[0] && (tarExtent[0] = srcExtent[0]);
+    srcExtent[1] > tarExtent[1] && (tarExtent[1] = srcExtent[1]);
+  }
+}
+/**
+ * PENDING: `Infinity` from user data is not necessarily meaningless, but visualizing it requires
+ * special handling and it will not be supported until required. So we simply ignore it here.
+ */
+export function isValidNumberForExtent(val) {
+  // Considered that number could be `NaN` and `Infinity` and should not write into the extent.
+  // Note that `Infinity` is the initialized value from `initExtentForUnion` and may be inputted.
+  return val != null && isFinite(val);
+}
+export function isValidBoundsForExtent(start, end) {
+  return isValidNumberForExtent(start) && isValidNumberForExtent(end) && start <= end;
+}
+/**
+ * `extent` should be initialized by `initExtentForUnion()`, and unioned by `unionExtent()`.
+ * `extent` may contain `Infinity` / `NaN`, but assume no `null`/`undefined`.
+ */
+export function extentHasValue(extent) {
+  // Also considered extent may have `NaN` and `Infinity`.
+  var span = extent[1] - extent[0];
+  return isFinite(span) && span >= 0;
+}
+/**
+ * NOTE: considered items are null/undefined/NaN - do nothing for this case.
+ */
+export function ensureExtentAscSimply(extent) {
+  if (isValidBoundsForExtent(extent[0], extent[1]) && extent[0] > extent[1]) {
+    extent[0] = extent[1];
+  }
+}
+/**
+ * A util for ensuring the callback is called only once.
+ * @usage
+ *  const callOnlyOnce = makeCallOnlyOnce(); // Should be static (ESM top level).
+ *  function someFunc(registers: EChartsExtensionInstallRegisters): void {
+ *      callOnlyOnce(registers, function () {
+ *          // Do something immediately and only once per registers.
+ *      }
+ *  }
+ */
+export function makeCallOnlyOnce() {
+  var hiddenKey = '__ec_once_' + onceUniqueIndex++;
+  return function (hostObj, cb) {
+    if (process.env.NODE_ENV !== 'production') {
+      assert(hostObj);
+    }
+    if (!hasOwn(hostObj, hiddenKey)) {
+      hostObj[hiddenKey] = 1;
+      cb();
+    }
+  };
+}
+var onceUniqueIndex = getRandomIdBase();
+/**
+ * @usage
+ *  - The earlier item takes precedence for duplicate items.
+ *  - The input `arr` will be modified if `resolve` is null/undefined.
+ *  - Callers can use `resolve` to manually modify the `currItem`.
+ *    The input `arr` will not be modified if `resolve` is passed.
+ *    `resolve` will be called on every item.
+ *  - Callers need to handle null/undefined (if existing) in `getKey`.
+ */
+export function removeDuplicates(arr, getKey,
+// `existingCount`: the count before this item is added.
+resolve) {
+  var dupMap = createHashMap();
+  var writeIdx = 0;
+  each(arr, function (item) {
+    var key = getKey(item);
+    if (process.env.NODE_ENV !== 'production') {
+      assert(isString(key));
+    }
+    var count = dupMap.get(key) || 0;
+    if (resolve) {
+      resolve(item, count);
+    }
+    if (!count && !resolve) {
+      arr[writeIdx++] = item;
+    }
+    dupMap.set(key, count + 1);
+  });
+  if (!resolve) {
+    arr.length = writeIdx;
+  }
+}
+export function removeDuplicatesGetKeyFromValueProp(item) {
+  if (process.env.NODE_ENV !== 'production') {
+    assert(item.value != null);
+  }
+  return item.value + '';
+}
+export function removeDuplicatesGetKeyFromItemItself(item) {
+  if (process.env.NODE_ENV !== 'production') {
+    assert(item != null);
+  }
+  return item + '';
+}
+export function getIncrementalId(seriesModel, useIncremental) {
+  // 0 means disable incremental.
+  // 1 is preserved for backward compatibility.
+  return retrieve2(useIncremental, true) ? seriesModel.seriesIndex + 2 : 0;
+}
+export function preparePipelineContext(seriesModel, view, pipeline) {
+  var dataLen = seriesModel.getData().count();
+  return {
+    progressiveRender: pipeline.progressiveEnabled && view.incrementalPrepareRender && dataLen >= pipeline.threshold,
+    large: seriesModel.get('large') && dataLen >= seriesModel.get('largeThreshold'),
+    // TODO: modDataCount should not updated if `appendData`, otherwise cause whole repaint.
+    // see `test/candlestick-large3.html`
+    modDataCount: seriesModel.get('progressiveChunkMode') === 'mod' ? seriesModel.getData().count() : null
+  };
+}
+/**
+ * When some task "blocks" the upstream part of the pipeline, the upstream output (typically, a TypedArray
+ * to carry layout points, e.g., `data.getLayout('points')`) range is from the start to the final end.
+ * A downstream comsumer should either properly record cursors when reading from the upstream output,
+ * or fail fast on that usage.
+ * Otherwise, take the `data.getLayout('points')` as an example, repeatedly merging it with the existing
+ * shape path can create a big path, which degrades performance but is hard to detect.
+ *
+ * This method provides an assertion for that.
+ */
+export function validateUpstreamOutputRange(
+// null/undefined is not allowed, otherwise bug-prone.
+upstreamOutputRange, thisTaskPlannedRange) {
+  assert(upstreamOutputRange.start === thisTaskPlannedRange.start && upstreamOutputRange.end === thisTaskPlannedRange.end);
+}
+export function createSimpleOverallStageHandler(seriesType, overallReset) {
+  return {
+    seriesType: seriesType,
+    overallReset: overallReset
+  };
+}
+export function createSimpleOverallStageHandler2(overallReset) {
+  return {
+    overallReset: overallReset
+  };
 }

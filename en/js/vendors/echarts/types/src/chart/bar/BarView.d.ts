@@ -5,8 +5,8 @@ import { StageHandlerProgressParams, Payload } from '../../util/types.js';
 import BarSeriesModel from './BarSeries.js';
 import Element from 'zrender/lib/Element.js';
 declare class BarView extends ChartView {
-    static type: "bar";
-    type: "bar";
+    static readonly type = "bar";
+    readonly type = "bar";
     private _data;
     private _isLargeDraw;
     private _isFirstFrame;

@@ -42,17 +42,17 @@
 * under the License.
 */
 import { use } from '../../extension.js';
-import radarLayout from '../radar/radarLayout.js';
 import dataFilter from '../../processor/dataFilter.js';
 import backwardCompat from '../radar/backwardCompat.js';
 import RadarView from './RadarView.js';
 import RadarSeriesModel from './RadarSeries.js';
 import { install as installRadarComponent } from '../../component/radar/install.js';
+import { radarLayoutStageHandler } from './radarLayout.js';
 export function install(registers) {
   use(installRadarComponent);
   registers.registerChartView(RadarView);
   registers.registerSeriesModel(RadarSeriesModel);
-  registers.registerLayout(radarLayout);
+  registers.registerLayout(radarLayoutStageHandler);
   registers.registerProcessor(dataFilter('radar'));
   registers.registerPreprocessor(backwardCompat);
 }

@@ -47,6 +47,7 @@ import * as axisPointerModelHelper from './modelHelper.js';
 import * as eventTool from 'zrender/lib/core/event.js';
 import * as throttleUtil from '../../util/throttle.js';
 import { makeInner } from '../../util/model.js';
+import { calcBandWidth } from '../../coord/axisBand.js';
 var inner = makeInner();
 var clone = zrUtil.clone;
 var bind = zrUtil.bind;
@@ -140,7 +141,7 @@ var BaseAxisPointer = /** @class */function () {
     }
     if (animation === 'auto' || animation == null) {
       var animationThreshold = this.animationThreshold;
-      if (isCategoryAxis && axis.getBandWidth() > animationThreshold) {
+      if (isCategoryAxis && calcBandWidth(axis).w > animationThreshold) {
         return true;
       }
       // It is important to auto animation when snap used. Consider if there is
@@ -161,7 +162,7 @@ var BaseAxisPointer = /** @class */function () {
    * @protected
    */
   BaseAxisPointer.prototype.makeElOption = function (elOption, value, axisModel, axisPointerModel, api) {
-    // Should be implemenented by sub-class.
+    // Should be implemented by sub-class.
   };
   /**
    * @protected

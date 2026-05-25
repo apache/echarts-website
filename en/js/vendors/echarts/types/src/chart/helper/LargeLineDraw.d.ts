@@ -3,6 +3,8 @@ import SeriesData from '../../data/SeriesData.js';
 import { StageHandlerProgressParams, LineStyleOption } from '../../util/types.js';
 import Model from '../../model/Model.js';
 import Element from 'zrender/lib/Element.js';
+import Displayable from 'zrender/lib/graphic/Displayable.js';
+import { ILineDraw } from './baseDraw.js';
 interface LargeLinesCommonOption {
     polyline?: boolean;
     lineStyle?: LineStyleOption & {
@@ -15,21 +17,15 @@ interface LargeLinesCommonOption {
 declare type LargeLinesData = SeriesData<Model<LargeLinesCommonOption> & {
     seriesIndex?: number;
 }>;
-declare class LargeLineDraw {
+declare class LargeLineDraw implements ILineDraw {
     group: graphic.Group;
     private _newAdded;
     /**
      * Update symbols draw by new data
      */
     updateData(data: LargeLinesData): void;
-    /**
-     * @override
-     */
     incrementalPrepareUpdate(data: LargeLinesData): void;
-    /**
-     * @override
-     */
-    incrementalUpdate(taskParams: StageHandlerProgressParams, data: LargeLinesData): void;
+    incrementalUpdate(taskParams: StageHandlerProgressParams, data: LargeLinesData, incrementalId: Displayable['incremental']): void;
     /**
      * @override
      */

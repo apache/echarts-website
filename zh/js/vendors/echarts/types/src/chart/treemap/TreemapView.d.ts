@@ -15,7 +15,6 @@ declare class TreemapView extends ChartView {
     private _containerGroup;
     private _breadcrumb;
     private _controller;
-    private _controllerHost;
     private _oldTree;
     private _state;
     private _storage;

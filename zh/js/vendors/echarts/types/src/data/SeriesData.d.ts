@@ -4,7 +4,7 @@ import DataDiffer from './DataDiffer.js';
 import { DataProvider } from './helper/dataProvider.js';
 import { DimensionSummary } from './helper/dimensionHelper.js';
 import SeriesDimensionDefine from './SeriesDimensionDefine.js';
-import { ArrayLike, Dictionary, FunctionPropertyNames } from 'zrender/lib/core/types.js';
+import { ArrayLike, Dictionary, FunctionPropertyNames, NullUndefined } from 'zrender/lib/core/types.js';
 import Element from 'zrender/lib/Element.js';
 import { DimensionIndex, DimensionName, DimensionLoose, OptionDataItem, ParsedValue, ParsedValueNumeric, SeriesDataType, OptionSourceData, DecalObject, OrdinalNumber } from '../util/types.js';
 import type Graph from './Graph.js';
@@ -14,6 +14,7 @@ import { Source } from './Source.js';
 import { LineStyleProps } from '../model/mixin/lineStyle.js';
 import DataStore, { DimValueGetter } from './DataStore.js';
 import { SeriesDataSchema } from './helper/SeriesDataSchema.js';
+import { DataSanitizationFilter } from './helper/dataValueHelper.js';
 declare type ItrParamDims = DimensionLoose | Array<DimensionLoose>;
 declare type CtxOrList<Ctx> = unknown extends Ctx ? SeriesData : Ctx;
 declare type EachCb0<Ctx> = (this: CtxOrList<Ctx>, idx: number) => void;
@@ -224,21 +225,16 @@ declare class SeriesData<HostModel extends Model = Model, Visual extends Default
     private _shouldMakeIdFromName;
     private _doInit;
     /**
-     * PENDING: In fact currently this function is only used to short-circuit
-     * the calling of `scale.unionExtentFromData` when data have been filtered by modules
-     * like "dataZoom". `scale.unionExtentFromData` is used to calculate data extent for series on
-     * an axis, but if a "axis related data filter module" is used, the extent of the axis have
-     * been fixed and no need to calling `scale.unionExtentFromData` actually.
-     * But if we add "custom data filter" in future, which is not "axis related", this method may
-     * be still needed.
-     *
      * Optimize for the scenario that data is filtered by a given extent.
      * Consider that if data amount is more than hundreds of thousand,
      * extent calculation will cost more than 10ms and the cache will
      * be erased because of the filtering.
      */
-    getApproximateExtent(dim: SeriesDimensionLoose): [number, number];
+    getApproximateExtent(dim: SeriesDimensionLoose, filter: DataSanitizationFilter | NullUndefined): [number, number];
     /**
+     * NOTICE: `_approximateExtent` does not support filter. Callers must ensure the input extent
+     * to be handled by `scale.sanitizeExtent`.
+     *
      * Calculate extent on a filtered data might be time consuming.
      * Approximate extent is only used for: calculate extent of filtered data outside.
      */
@@ -310,6 +306,8 @@ declare class SeriesData<HostModel extends Model = Model, Visual extends Default
      * @example
      *  list.each('x', function (x, idx) {});
      *  list.each(['x', 'y'], function (x, y, idx) {});
+     *  list.each(0, function (x, idx) {});
+     *  list.each([0, 1], function (x, y, idx) {});
      *  list.each(function (idx) {})
      */
     each<Ctx>(cb: EachCb0<Ctx>, ctx?: Ctx, ctxCompat?: Ctx): void;

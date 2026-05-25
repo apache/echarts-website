@@ -68,6 +68,11 @@ var LargeLinesPath = /** @class */function (_super) {
     this.notClear = false;
     this._off = 0;
   };
+  LargeLinesPath.prototype.beforeBrush = function (param) {
+    if (param && !param.contentRetained) {
+      this.reset();
+    }
+  };
   LargeLinesPath.prototype.getDefaultStyle = function () {
     return {
       stroke: tokens.color.neutral99,
@@ -210,18 +215,12 @@ var LargeLineDraw = /** @class */function () {
     this._setCommon(lineEl, data);
   };
   ;
-  /**
-   * @override
-   */
   LargeLineDraw.prototype.incrementalPrepareUpdate = function (data) {
     this.group.removeAll();
     this._clear();
   };
   ;
-  /**
-   * @override
-   */
-  LargeLineDraw.prototype.incrementalUpdate = function (taskParams, data) {
+  LargeLineDraw.prototype.incrementalUpdate = function (taskParams, data, incrementalId) {
     var lastAdded = this._newAdded[0];
     var linePoints = data.getLayout('linesPoints');
     var oldSegs = lastAdded && lastAdded.shape.segs;
@@ -240,7 +239,7 @@ var LargeLineDraw = /** @class */function () {
       // Clear
       this._newAdded = [];
       var lineEl = this._create();
-      lineEl.incremental = true;
+      lineEl.incremental = incrementalId;
       lineEl.setShape({
         segs: linePoints
       });

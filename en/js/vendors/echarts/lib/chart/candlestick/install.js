@@ -45,11 +45,12 @@ import CandlestickView from './CandlestickView.js';
 import CandlestickSeriesModel from './CandlestickSeries.js';
 import preprocessor from './preprocessor.js';
 import candlestickVisual from './candlestickVisual.js';
-import candlestickLayout from './candlestickLayout.js';
+import { candlestickLayout, registerCandlestickAxisHandlers } from './candlestickLayout.js';
 export function install(registers) {
   registers.registerChartView(CandlestickView);
   registers.registerSeriesModel(CandlestickSeriesModel);
   registers.registerPreprocessor(preprocessor);
   registers.registerVisual(candlestickVisual);
   registers.registerLayout(candlestickLayout);
+  registerCandlestickAxisHandlers(registers);
 }

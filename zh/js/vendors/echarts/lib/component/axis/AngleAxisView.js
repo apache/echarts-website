@@ -49,6 +49,7 @@ import Model from '../../model/Model.js';
 import AxisView from './AxisView.js';
 import AxisBuilder from './AxisBuilder.js';
 import { getECData } from '../../util/innerStore.js';
+import { getTickValueOutermost } from '../../coord/axisHelper.js';
 var elementList = ['axisLine', 'axisLabel', 'axisTick', 'minorTick', 'splitLine', 'minorSplitLine', 'splitArea'];
 function getAxisLineShape(polar, rExtent, angle) {
   rExtent[1] > rExtent[0] && (rExtent = rExtent.slice().reverse());
@@ -93,12 +94,15 @@ var AngleAxisView = /** @class */function (_super) {
       breakTicks: 'none'
     });
     var minorTickAngles = angleAxis.getMinorTicksCoords();
-    var labels = zrUtil.map(angleAxis.getViewLabels(), function (labelItem) {
+    var labels = [];
+    zrUtil.each(angleAxis.getViewLabels(), function (labelItem) {
+      if (labelItem.tick.offInterval) {
+        return;
+      }
       labelItem = zrUtil.clone(labelItem);
       var scale = angleAxis.scale;
-      var tickValue = scale.type === 'ordinal' ? scale.getRawOrdinalNumber(labelItem.tickValue) : labelItem.tickValue;
-      labelItem.coord = angleAxis.dataToCoord(tickValue);
-      return labelItem;
+      labelItem.coord = angleAxis.dataToCoord(getTickValueOutermost(scale, labelItem.tick));
+      labels.push(labelItem);
     });
     fixAngleOverlap(labels);
     fixAngleOverlap(ticksAngles);
@@ -197,7 +201,7 @@ var angelAxisElementsBuilders = {
     // Use length of ticksAngles because it may remove the last tick to avoid overlapping
     zrUtil.each(labels, function (labelItem, idx) {
       var labelModel = commonLabelModel;
-      var tickValue = labelItem.tickValue;
+      var tickValue = labelItem.tick.value;
       var r = radiusExtent[getRadiusIdx(polar)];
       var p = polar.coordToPoint([r + labelMargin, labelItem.coord]);
       var cx = polar.cx;

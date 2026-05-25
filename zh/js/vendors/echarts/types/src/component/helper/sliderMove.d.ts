@@ -5,6 +5,9 @@
  * maxSpan and the same as `Math.abs(handleEnd[1] - handleEnds[0])`.
  * (2) If handle0 is forbidden to cross handle1, set minSpan as `0`.
  *
+ * [CAVEAT]
+ *  This method is inefficient due to the use of `addSafe`.
+ *
  * @param delta Move length.
  * @param handleEnds handleEnds[0] can be bigger then handleEnds[1].
  *              handleEnds will be modified in this method.

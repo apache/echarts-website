@@ -1,6 +1,6 @@
 import SeriesModel from '../../model/Series.js';
 import { TreeNode } from '../../data/Tree.js';
-import { SeriesOption, CircleLayoutOptionMixin, SeriesLabelOption, ItemStyleOption, OptionDataValue, CallbackDataParams, StatesOptionMixin, OptionDataItemObject, DefaultEmphasisFocus, SunburstColorByMixin } from '../../util/types.js';
+import { SeriesOption, CircleLayoutOptionMixin, SeriesLabelOption, ItemStyleOption, OptionDataValue, CallbackDataParams, StatesOptionMixin, OptionDataItemObject, DefaultEmphasisFocus, SunburstColorByMixin, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin } from '../../util/types.js';
 import GlobalModel from '../../model/Global.js';
 import SeriesData from '../../data/SeriesData.js';
 import Model from '../../model/Model.js';
@@ -58,7 +58,7 @@ interface SortParam {
     height: number;
     getValue(): number;
 }
-export interface SunburstSeriesOption extends SeriesOption<SunburstStateOption<SunburstDataParams>, SunburstStatesMixin>, SunburstStateOption<SunburstDataParams>, SunburstColorByMixin, CircleLayoutOptionMixin {
+export interface SunburstSeriesOption extends SeriesOption<SunburstStateOption<SunburstDataParams>, SunburstStatesMixin>, SunburstStateOption<SunburstDataParams>, SunburstColorByMixin, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin, CircleLayoutOptionMixin {
     type?: 'sunburst';
     clockwise?: boolean;
     startAngle?: number;
@@ -82,9 +82,10 @@ export interface SunburstSeriesOption extends SeriesOption<SunburstStateOption<S
 interface SunburstSeriesModel {
     getFormattedLabel(dataIndex: number, state?: 'emphasis' | 'normal' | 'highlight' | 'blur' | 'select'): string;
 }
+export declare const SERIES_TYPE_SUNBURST = "sunburst";
 declare class SunburstSeriesModel extends SeriesModel<SunburstSeriesOption> {
-    static readonly type = "series.sunburst";
-    readonly type = "series.sunburst";
+    static readonly type: string;
+    readonly type: string;
     ignoreStyleOnData: boolean;
     private _viewRoot;
     private _levelModels;

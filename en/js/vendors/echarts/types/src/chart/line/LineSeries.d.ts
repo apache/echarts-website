@@ -53,7 +53,17 @@ export interface LineSeriesOption extends SeriesOption<LineStateOption<CallbackD
     showSymbol?: boolean;
     showAllSymbol?: 'auto' | boolean;
     data?: (LineDataValue | LineDataItemOption)[];
+    /**
+     * @deprecated
+     * This option has been deprecated since v6.0.1.
+     * Use `triggerEvent: 'line'` for only line event or `triggerEvent: true` for both line and area event.
+     */
     triggerLineEvent?: boolean;
+    /**
+    * Whether to trigger event when hovering on the line or the area
+    * @since v6.0.1
+    */
+    triggerEvent?: boolean | 'line' | 'area';
 }
 declare class LineSeriesModel extends SeriesModel<LineSeriesOption> {
     static readonly type = "series.line";

@@ -42,7 +42,9 @@
 * under the License.
 */
 import { createOrUpdatePatternFromDecal } from '../util/decal.js';
-export default function decalVisual(ecModel, api) {
+import { createSimpleOverallStageHandler2 } from '../util/model.js';
+export var decalVisualStageHandler = createSimpleOverallStageHandler2(decalVisual);
+function decalVisual(ecModel, api) {
   ecModel.eachRawSeries(function (seriesModel) {
     if (ecModel.isSeriesFiltered(seriesModel)) {
       return;

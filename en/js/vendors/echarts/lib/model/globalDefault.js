@@ -46,7 +46,6 @@ import tokens from '../visual/tokens.js';
 var platform = '';
 // Navigator not exists in node
 if (typeof navigator !== 'undefined') {
-  /* global navigator */
   platform = navigator.platform || '';
 }
 var decalColor = 'rgba(0, 0, 0, 0.2)';

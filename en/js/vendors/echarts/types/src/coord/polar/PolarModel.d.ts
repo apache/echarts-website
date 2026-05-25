@@ -1,13 +1,15 @@
-import { ComponentOption, CircleLayoutOptionMixin } from '../../util/types.js';
+import { ComponentOption, CircleLayoutOptionMixin, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin } from '../../util/types.js';
 import ComponentModel from '../../model/Component.js';
-import Polar from './Polar.js';
+import type Polar from './Polar.js';
 import { AngleAxisModel, RadiusAxisModel } from './AxisModel.js';
-export interface PolarOption extends ComponentOption, CircleLayoutOptionMixin {
+export interface PolarOption extends ComponentOption, CircleLayoutOptionMixin, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin {
     mainType?: 'polar';
 }
+export declare const COORD_SYS_TYPE_POLAR = "polar";
+export declare const COMPONENT_TYPE_POLAR = "polar";
 declare class PolarModel extends ComponentModel<PolarOption> {
-    static type: "polar";
-    type: "polar";
+    static type: string;
+    type: string;
     static dependencies: string[];
     coordinateSystem: Polar;
     findAxisModel(axisType: 'angleAxis'): AngleAxisModel;

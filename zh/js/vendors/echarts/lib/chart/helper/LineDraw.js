@@ -89,12 +89,12 @@ var LineDraw = /** @class */function () {
     this.group.removeAll();
   };
   ;
-  LineDraw.prototype.incrementalUpdate = function (taskParams, lineData) {
+  LineDraw.prototype.incrementalUpdate = function (taskParams, lineData, incrementalId) {
     this._progressiveEls = [];
     function updateIncrementalAndHover(el) {
       if (!el.isGroup && !isEffectObject(el)) {
-        el.incremental = true;
-        el.ensureState('emphasis').hoverLayer = true;
+        el.incremental = incrementalId;
+        el.ensureState('emphasis').hoverLayer = graphic.HOVER_LAYER_FOR_INCREMENTAL;
       }
     }
     for (var idx = taskParams.start; idx < taskParams.end; idx++) {

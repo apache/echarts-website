@@ -1453,7 +1453,9 @@ tooltip 中数值显示部分的格式化回调函数。
 (value: number | string, dataIndex: number) => string
 ```
 
-`dataIndex` 参数 从 `v5.3.0` 开始支持
+从 `v5.5.0` 开始支持`dataIndex` 参数。但是其值当 `dataZoom` 存在时不合理，因为所取的值是数据被 `dataZoom` 过滤后的 index。
+
+从 `v6.1.0` 开始支持`dataIndex` 参数修正 `dataZoom` 过滤前的 index
 
 示例：
 

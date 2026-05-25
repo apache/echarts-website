@@ -50,11 +50,14 @@ import { makeSeriesEncodeForNameBased } from '../../data/helper/sourceHelper.js'
 import LegendVisualProvider from '../../visual/LegendVisualProvider.js';
 import SeriesModel from '../../model/Series.js';
 import { registerLayOutOnCoordSysUsage } from '../../core/CoordinateSystem.js';
+export var SERIES_TYPE_PIE = 'pie';
 var innerData = modelUtil.makeInner();
 var PieSeriesModel = /** @class */function (_super) {
   __extends(PieSeriesModel, _super);
   function PieSeriesModel() {
-    return _super !== null && _super.apply(this, arguments) || this;
+    var _this = _super !== null && _super.apply(this, arguments) || this;
+    _this.type = PieSeriesModel.type;
+    return _this;
   }
   /**
    * @overwrite
@@ -111,7 +114,7 @@ var PieSeriesModel = /** @class */function (_super) {
     labelLineNormalOpt.show = labelLineNormalOpt.show && option.label.show;
     labelLineEmphasisOpt.show = labelLineEmphasisOpt.show && option.emphasis.label.show;
   };
-  PieSeriesModel.type = 'series.pie';
+  PieSeriesModel.type = 'series.' + SERIES_TYPE_PIE;
   PieSeriesModel.defaultOption = {
     // zlevel: 0,
     z: 2,

@@ -1,5 +1,5 @@
 import SeriesModel from '../../model/Series.js';
-import { SeriesOption, SeriesEncodeOptionMixin, LineStyleOption, SeriesLabelOption, SeriesTooltipOption, OptionDataValue, StatesOptionMixin, DefaultStatesMixinEmphasis, ZRColor, CallbackDataParams } from '../../util/types.js';
+import { SeriesOption, SeriesEncodeOptionMixin, LineStyleOption, SeriesLabelOption, SeriesTooltipOption, OptionDataValue, StatesOptionMixin, DefaultStatesMixinEmphasis, ZRColor, CallbackDataParams, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin } from '../../util/types.js';
 import GlobalModel from '../../model/Global.js';
 import SeriesData from '../../data/SeriesData.js';
 import { ParallelActiveState, ParallelAxisOption } from '../../coord/parallel/AxisModel.js';
@@ -15,7 +15,7 @@ export interface ParallelStateOption<TCbParams = never> {
 export interface ParallelSeriesDataItemOption extends ParallelStateOption, StatesOptionMixin<ParallelStateOption, ParallelStatesMixin> {
     value?: ParallelSeriesDataValue;
 }
-export interface ParallelSeriesOption extends SeriesOption<ParallelStateOption<CallbackDataParams>, ParallelStatesMixin>, ParallelStateOption<CallbackDataParams>, SeriesEncodeOptionMixin {
+export interface ParallelSeriesOption extends SeriesOption<ParallelStateOption<CallbackDataParams>, ParallelStatesMixin>, ParallelStateOption<CallbackDataParams>, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin, SeriesEncodeOptionMixin {
     type?: 'parallel';
     coordinateSystem?: string;
     parallelIndex?: number;

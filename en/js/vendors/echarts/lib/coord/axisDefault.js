@@ -76,7 +76,7 @@ var defaultOption = {
   axisPointer: {},
   axisLine: {
     show: true,
-    onZero: true,
+    onZero: 'auto',
     onZeroAxisIndex: null,
     lineStyle: {
       color: tokens.color.axisLine,
@@ -215,9 +215,9 @@ var valueAxis = zrUtil.merge({
 var timeAxis = zrUtil.merge({
   splitNumber: 6,
   axisLabel: {
-    // To eliminate labels that are not nice
-    showMinLabel: false,
-    showMaxLabel: false,
+    // The default value of TimeScale is determined in `AxisBuilder`
+    // showMinLabel: false,
+    // showMaxLabel: false,
     rich: {
       primary: {
         fontWeight: 'bold'

@@ -3,7 +3,7 @@ import type { PolarOption as PolarComponentOption } from '../coord/polar/PolarMo
 import type { RadarOption as RadarComponentOption } from '../coord/radar/RadarModel.js';
 import type { GeoOption as GeoComponentOption } from '../coord/geo/GeoModel.js';
 import type { RadiusAxisOption as RadiusAxisComponentOption, AngleAxisOption as AngleAxisComponentOption } from '../coord/polar/AxisModel.js';
-import type { XAXisOption as XAXisComponentOption, YAXisOption as YAXisComponentOption } from '../coord/cartesian/AxisModel.js';
+import type { XAXisOption as XAXisComponentOption, YAXisOption as YAXisComponentOption, XAXisOption as XAxisComponentOption, YAXisOption as YAxisComponentOption } from '../coord/cartesian/AxisModel.js';
 import type { SingleAxisOption as SingleAxisComponentOption } from '../coord/single/AxisModel.js';
 import type { ParallelAxisOption as ParallelAxisComponentOption } from '../coord/parallel/AxisModel.js';
 import type { ParallelCoordinateSystemOption as ParallelComponentOption } from '../coord/parallel/ParallelModel.js';
@@ -21,7 +21,7 @@ import type { LegendOption as PlainLegendComponentOption } from '../component/le
 import type { ScrollableLegendOption as ScrollableLegendComponentOption } from '../component/legend/ScrollableLegendModel.js';
 import type { SliderDataZoomOption as SliderDataZoomComponentOption } from '../component/dataZoom/SliderZoomModel.js';
 import type { InsideDataZoomOption as InsideDataZoomComponentOption } from '../component/dataZoom/InsideZoomModel.js';
-import type { ContinousVisualMapOption as ContinousVisualMapComponentOption } from '../component/visualMap/ContinuousModel.js';
+import type { ContinuousVisualMapOption as ContinuousVisualMapComponentOption } from '../component/visualMap/ContinuousModel.js';
 import type { PiecewiseVisualMapOption as PiecewiseVisualMapComponentOption } from '../component/visualMap/PiecewiseModel.js';
 import type { MarkLineOption as MarkLineComponentOption } from '../component/marker/MarkLineModel.js';
 import type { MarkPointOption as MarkPointComponentOption } from '../component/marker/MarkPointModel.js';
@@ -74,11 +74,15 @@ interface ToolboxComponentOption extends ToolboxOption {
 }
 export { SliderDataZoomComponentOption, InsideDataZoomComponentOption };
 export declare type DataZoomComponentOption = SliderDataZoomComponentOption | InsideDataZoomComponentOption;
-export { ContinousVisualMapComponentOption, PiecewiseVisualMapComponentOption };
-export declare type VisualMapComponentOption = ContinousVisualMapComponentOption | PiecewiseVisualMapComponentOption;
+export { ContinuousVisualMapComponentOption, PiecewiseVisualMapComponentOption };
+/**
+ * @deprecated Use `ContinuousVisualMapComponentOption` instead.
+ */
+export declare type ContinousVisualMapComponentOption = ContinuousVisualMapComponentOption;
+export declare type VisualMapComponentOption = ContinuousVisualMapComponentOption | PiecewiseVisualMapComponentOption;
 export { PlainLegendComponentOption, ScrollableLegendComponentOption };
 export declare type LegendComponentOption = PlainLegendComponentOption | ScrollableLegendComponentOption;
-export { GridComponentOption, PolarComponentOption, RadarComponentOption, GeoComponentOption, XAXisComponentOption, YAXisComponentOption, SingleAxisComponentOption, RadiusAxisComponentOption, AngleAxisComponentOption, ParallelComponentOption, CalendarComponentOption, MatrixComponentOption, TooltipComponentOption, AxisPointerComponentOption, BrushComponentOption, TitleComponentOption, TimelineComponentOption, MarkLineComponentOption, MarkPointComponentOption, MarkAreaComponentOption, ToolboxComponentOption, ThumbnailComponentOption, GraphicComponentOption, AriaComponentOption, DatasetComponentOption };
+export { GridComponentOption, PolarComponentOption, RadarComponentOption, GeoComponentOption, XAXisComponentOption, YAXisComponentOption, XAxisComponentOption, YAxisComponentOption, SingleAxisComponentOption, RadiusAxisComponentOption, AngleAxisComponentOption, ParallelComponentOption, CalendarComponentOption, MatrixComponentOption, TooltipComponentOption, AxisPointerComponentOption, BrushComponentOption, TitleComponentOption, TimelineComponentOption, MarkLineComponentOption, MarkPointComponentOption, MarkAreaComponentOption, ToolboxComponentOption, ThumbnailComponentOption, GraphicComponentOption, AriaComponentOption, DatasetComponentOption };
 declare type SeriesInjectedOption = {
     markArea?: MarkAreaComponentOption;
     markLine?: MarkLineComponentOption;

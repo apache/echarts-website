@@ -41,150 +41,155 @@
 * specific language governing permissions and limitations
 * under the License.
 */
-import * as zrUtil from 'zrender/lib/core/util.js';
-import { parsePercent } from '../util/number.js';
+import { mathAbs, mathMax, mathMin, mathPI, parsePercent } from '../util/number.js';
 import { isDimensionStacked } from '../data/helper/dataStackHelper.js';
+import AngleAxis from '../coord/polar/AngleAxis.js';
+import RadiusAxis from '../coord/polar/RadiusAxis.js';
+import { calcBandWidth } from '../coord/axisBand.js';
+import { createBandWidthBasedAxisContainShapeHandler, makeAxisStatKey2 } from '../chart/helper/axisSnippets.js';
+import { createSimpleOverallStageHandler, makeCallOnlyOnce } from '../util/model.js';
+import { registerAxisContainShapeHandler } from '../coord/scaleRawExtentInfo.js';
+import { getStartValue, requireAxisStatisticsForBaseBar, SERIES_TYPE_BAR } from './barCommon.js';
+import { eachAxisOnKey, eachSeriesOnAxisOnKey } from '../coord/axisStatistics.js';
+import { COORD_SYS_TYPE_POLAR } from '../coord/polar/PolarModel.js';
+import { assert, each } from 'zrender/lib/core/util.js';
+var callOnlyOnce = makeCallOnlyOnce();
 function getSeriesStackId(seriesModel) {
   return seriesModel.get('stack') || '__ec_stack_' + seriesModel.seriesIndex;
 }
-function getAxisKey(polar, axis) {
-  return axis.dim + polar.model.componentIndex;
-}
-function barLayoutPolar(seriesType, ecModel, api) {
-  var lastStackCoords = {};
-  var barWidthAndOffset = calRadialBar(zrUtil.filter(ecModel.getSeriesByType(seriesType), function (seriesModel) {
-    return !ecModel.isSeriesFiltered(seriesModel) && seriesModel.coordinateSystem && seriesModel.coordinateSystem.type === 'polar';
-  }));
-  ecModel.eachSeriesByType(seriesType, function (seriesModel) {
-    // Check series coordinate, do layout for polar only
-    if (seriesModel.coordinateSystem.type !== 'polar') {
-      return;
+export var barLayoutPolarStageHandler = createSimpleOverallStageHandler(SERIES_TYPE_BAR, barLayoutPolar);
+function barLayoutPolar(ecModel) {
+  var axisStatKey = makeAxisStatKey2(SERIES_TYPE_BAR, COORD_SYS_TYPE_POLAR);
+  eachAxisOnKey(ecModel, axisStatKey, function (axis) {
+    if (process.env.NODE_ENV !== 'production') {
+      assert(axis instanceof AngleAxis || axis instanceof RadiusAxis);
     }
-    var data = seriesModel.getData();
-    var polar = seriesModel.coordinateSystem;
-    var baseAxis = polar.getBaseAxis();
-    var axisKey = getAxisKey(polar, baseAxis);
-    var stackId = getSeriesStackId(seriesModel);
-    var columnLayoutInfo = barWidthAndOffset[axisKey][stackId];
-    var columnOffset = columnLayoutInfo.offset;
-    var columnWidth = columnLayoutInfo.width;
-    var valueAxis = polar.getOtherAxis(baseAxis);
-    var cx = seriesModel.coordinateSystem.cx;
-    var cy = seriesModel.coordinateSystem.cy;
-    var barMinHeight = seriesModel.get('barMinHeight') || 0;
-    var barMinAngle = seriesModel.get('barMinAngle') || 0;
-    lastStackCoords[stackId] = lastStackCoords[stackId] || [];
-    var valueDim = data.mapDimension(valueAxis.dim);
-    var baseDim = data.mapDimension(baseAxis.dim);
-    var stacked = isDimensionStacked(data, valueDim /* , baseDim */);
-    var clampLayout = baseAxis.dim !== 'radius' || !seriesModel.get('roundCap', true);
-    var valueAxisModel = valueAxis.model;
-    var startValue = valueAxisModel.get('startValue');
-    var valueAxisStart = valueAxis.dataToCoord(startValue || 0);
-    for (var idx = 0, len = data.count(); idx < len; idx++) {
-      var value = data.get(valueDim, idx);
-      var baseValue = data.get(baseDim, idx);
-      var sign = value >= 0 ? 'p' : 'n';
-      var baseCoord = valueAxisStart;
-      // Because of the barMinHeight, we can not use the value in
-      // stackResultDimension directly.
-      // Only ordinal axis can be stacked.
-      if (stacked) {
-        if (!lastStackCoords[stackId][baseValue]) {
-          lastStackCoords[stackId][baseValue] = {
-            p: valueAxisStart,
-            n: valueAxisStart // Negative stack
-          };
-        }
-        // Should also consider #4243
-        baseCoord = lastStackCoords[stackId][baseValue][sign];
-      }
-      var r0 = void 0;
-      var r = void 0;
-      var startAngle = void 0;
-      var endAngle = void 0;
-      // radial sector
-      if (valueAxis.dim === 'radius') {
-        var radiusSpan = valueAxis.dataToCoord(value) - valueAxisStart;
-        var angle = baseAxis.dataToCoord(baseValue);
-        if (Math.abs(radiusSpan) < barMinHeight) {
-          radiusSpan = (radiusSpan < 0 ? -1 : 1) * barMinHeight;
-        }
-        r0 = baseCoord;
-        r = baseCoord + radiusSpan;
-        startAngle = angle - columnOffset;
-        endAngle = startAngle - columnWidth;
-        stacked && (lastStackCoords[stackId][baseValue][sign] = r);
-      }
-      // tangential sector
-      else {
-        var angleSpan = valueAxis.dataToCoord(value, clampLayout) - valueAxisStart;
-        var radius = baseAxis.dataToCoord(baseValue);
-        if (Math.abs(angleSpan) < barMinAngle) {
-          angleSpan = (angleSpan < 0 ? -1 : 1) * barMinAngle;
-        }
-        r0 = radius + columnOffset;
-        r = r0 + columnWidth;
-        startAngle = baseCoord;
-        endAngle = baseCoord + angleSpan;
-        // if the previous stack is at the end of the ring,
-        // add a round to differentiate it from origin
-        // let extent = angleAxis.getExtent();
-        // let stackCoord = angle;
-        // if (stackCoord === extent[0] && value > 0) {
-        //     stackCoord = extent[1];
-        // }
-        // else if (stackCoord === extent[1] && value < 0) {
-        //     stackCoord = extent[0];
-        // }
-        stacked && (lastStackCoords[stackId][baseValue][sign] = endAngle);
-      }
-      data.setItemLayout(idx, {
-        cx: cx,
-        cy: cy,
-        r0: r0,
-        r: r,
-        // Consider that positive angle is anti-clockwise,
-        // while positive radian of sector is clockwise
-        startAngle: -startAngle * Math.PI / 180,
-        endAngle: -endAngle * Math.PI / 180,
-        /**
-         * Keep the same logic with bar in catesion: use end value to
-         * control direction. Notice that if clockwise is true (by
-         * default), the sector will always draw clockwisely, no matter
-         * whether endAngle is greater or less than startAngle.
-         */
-        clockwise: startAngle >= endAngle
-      });
-    }
+    var barWidthAndOffset = calcRadialBar(axis, SERIES_TYPE_BAR);
+    var lastStackCoords = {};
+    eachSeriesOnAxisOnKey(axis, axisStatKey, function (seriesModel) {
+      layoutPerAxisPerSeries(axis, seriesModel, barWidthAndOffset, lastStackCoords);
+    });
   });
+}
+function layoutPerAxisPerSeries(baseAxis, seriesModel, barWidthAndOffset, lastStackCoords) {
+  var data = seriesModel.getData();
+  var stackId = getSeriesStackId(seriesModel);
+  var columnLayoutInfo = barWidthAndOffset[stackId];
+  var columnOffset = columnLayoutInfo.offset;
+  var columnWidth = columnLayoutInfo.width;
+  var polar = seriesModel.coordinateSystem;
+  if (process.env.NODE_ENV !== 'production') {
+    assert(polar.type === COORD_SYS_TYPE_POLAR);
+  }
+  var valueAxis = polar.getOtherAxis(baseAxis);
+  var cx = polar.cx;
+  var cy = polar.cy;
+  var barMinHeight = seriesModel.get('barMinHeight') || 0;
+  var barMinAngle = seriesModel.get('barMinAngle') || 0;
+  lastStackCoords[stackId] = lastStackCoords[stackId] || [];
+  var valueDim = data.mapDimension(valueAxis.dim);
+  var baseDim = data.mapDimension(baseAxis.dim);
+  var stacked = isDimensionStacked(data, valueDim /* , baseDim */);
+  var clampLayout = baseAxis.dim !== 'radius' || !seriesModel.get('roundCap', true);
+  var valueAxisStart = valueAxis.dataToCoord(getStartValue(valueAxis));
+  for (var idx = 0, len = data.count(); idx < len; idx++) {
+    var value = data.get(valueDim, idx);
+    var baseValue = data.get(baseDim, idx);
+    var sign = value >= 0 ? 'p' : 'n';
+    var baseCoord = valueAxisStart;
+    // Because of the barMinHeight, we can not use the value in
+    // stackResultDimension directly.
+    if (stacked) {
+      // FIXME: follow the same logic in `barGrid.ts`:
+      //  Use stackResultDimension, and lastStackCoords is not needed.
+      if (!lastStackCoords[stackId][baseValue]) {
+        lastStackCoords[stackId][baseValue] = {
+          p: valueAxisStart,
+          n: valueAxisStart // Negative stack
+        };
+      }
+      // Should also consider #4243
+      baseCoord = lastStackCoords[stackId][baseValue][sign];
+    }
+    var r0 = void 0;
+    var r = void 0;
+    var startAngle = void 0;
+    var endAngle = void 0;
+    // radial sector
+    if (valueAxis.dim === 'radius') {
+      var radiusSpan = valueAxis.dataToCoord(value) - valueAxisStart;
+      var angle = baseAxis.dataToCoord(baseValue);
+      if (mathAbs(radiusSpan) < barMinHeight) {
+        radiusSpan = (radiusSpan < 0 ? -1 : 1) * barMinHeight;
+      }
+      r0 = baseCoord;
+      r = baseCoord + radiusSpan;
+      startAngle = angle - columnOffset;
+      endAngle = startAngle - columnWidth;
+      stacked && (lastStackCoords[stackId][baseValue][sign] = r);
+    }
+    // tangential sector
+    else {
+      var angleSpan = valueAxis.dataToCoord(value, clampLayout) - valueAxisStart;
+      var radius = baseAxis.dataToCoord(baseValue);
+      if (mathAbs(angleSpan) < barMinAngle) {
+        angleSpan = (angleSpan < 0 ? -1 : 1) * barMinAngle;
+      }
+      r0 = radius + columnOffset;
+      r = r0 + columnWidth;
+      startAngle = baseCoord;
+      endAngle = baseCoord + angleSpan;
+      // if the previous stack is at the end of the ring,
+      // add a round to differentiate it from origin
+      // let extent = angleAxis.getExtent();
+      // let stackCoord = angle;
+      // if (stackCoord === extent[0] && value > 0) {
+      //     stackCoord = extent[1];
+      // }
+      // else if (stackCoord === extent[1] && value < 0) {
+      //     stackCoord = extent[0];
+      // }
+      stacked && (lastStackCoords[stackId][baseValue][sign] = endAngle);
+    }
+    data.setItemLayout(idx, {
+      cx: cx,
+      cy: cy,
+      r0: r0,
+      r: r,
+      // Consider that positive angle is anti-clockwise,
+      // while positive radian of sector is clockwise
+      startAngle: -startAngle * mathPI / 180,
+      endAngle: -endAngle * mathPI / 180,
+      /**
+       * Keep the same logic with bar in catesion: use end value to
+       * control direction. Notice that if clockwise is true (by
+       * default), the sector will always draw clockwisely, no matter
+       * whether endAngle is greater or less than startAngle.
+       */
+      clockwise: startAngle >= endAngle
+    });
+  }
 }
 /**
  * Calculate bar width and offset for radial bar charts
  */
-function calRadialBar(barSeries) {
-  // Columns info on each category axis. Key is polar name
-  var columnsMap = {};
-  zrUtil.each(barSeries, function (seriesModel, idx) {
-    var data = seriesModel.getData();
-    var polar = seriesModel.coordinateSystem;
-    var baseAxis = polar.getBaseAxis();
-    var axisKey = getAxisKey(polar, baseAxis);
-    var axisExtent = baseAxis.getExtent();
-    var bandWidth = baseAxis.type === 'category' ? baseAxis.getBandWidth() : Math.abs(axisExtent[1] - axisExtent[0]) / data.count();
-    var columnsOnAxis = columnsMap[axisKey] || {
-      bandWidth: bandWidth,
-      remainedWidth: bandWidth,
-      autoWidthCount: 0,
-      categoryGap: '20%',
-      gap: '30%',
-      stacks: {}
-    };
-    var stacks = columnsOnAxis.stacks;
-    columnsMap[axisKey] = columnsOnAxis;
+function calcRadialBar(axis, seriesType) {
+  var axisStatKey = makeAxisStatKey2(seriesType, COORD_SYS_TYPE_POLAR);
+  var bandWidth = calcBandWidth(axis, {
+    fromStat: {
+      key: axisStatKey
+    },
+    min: 1
+  }).w;
+  var remainedWidth = bandWidth;
+  var autoWidthCount = 0;
+  var categoryGapOption = '20%';
+  var gapOption = '30%';
+  var stacks = {};
+  eachSeriesOnAxisOnKey(axis, axisStatKey, function (seriesModel) {
     var stackId = getSeriesStackId(seriesModel);
     if (!stacks[stackId]) {
-      columnsOnAxis.autoWidthCount++;
+      autoWidthCount++;
     }
     stacks[stackId] = stacks[stackId] || {
       width: 0,
@@ -192,65 +197,66 @@ function calRadialBar(barSeries) {
     };
     var barWidth = parsePercent(seriesModel.get('barWidth'), bandWidth);
     var barMaxWidth = parsePercent(seriesModel.get('barMaxWidth'), bandWidth);
-    var barGap = seriesModel.get('barGap');
-    var barCategoryGap = seriesModel.get('barCategoryGap');
+    var barGapOption = seriesModel.get('barGap');
+    var barCategoryGapOption = seriesModel.get('barCategoryGap');
     if (barWidth && !stacks[stackId].width) {
-      barWidth = Math.min(columnsOnAxis.remainedWidth, barWidth);
+      barWidth = mathMin(remainedWidth, barWidth);
       stacks[stackId].width = barWidth;
-      columnsOnAxis.remainedWidth -= barWidth;
+      remainedWidth -= barWidth;
     }
     barMaxWidth && (stacks[stackId].maxWidth = barMaxWidth);
-    barGap != null && (columnsOnAxis.gap = barGap);
-    barCategoryGap != null && (columnsOnAxis.categoryGap = barCategoryGap);
+    // For historical design, use the last series declared that.
+    barGapOption != null && (gapOption = barGapOption);
+    barCategoryGapOption != null && (categoryGapOption = barCategoryGapOption);
   });
   var result = {};
-  zrUtil.each(columnsMap, function (columnsOnAxis, coordSysName) {
-    result[coordSysName] = {};
-    var stacks = columnsOnAxis.stacks;
-    var bandWidth = columnsOnAxis.bandWidth;
-    var categoryGap = parsePercent(columnsOnAxis.categoryGap, bandWidth);
-    var barGapPercent = parsePercent(columnsOnAxis.gap, 1);
-    var remainedWidth = columnsOnAxis.remainedWidth;
-    var autoWidthCount = columnsOnAxis.autoWidthCount;
-    var autoWidth = (remainedWidth - categoryGap) / (autoWidthCount + (autoWidthCount - 1) * barGapPercent);
-    autoWidth = Math.max(autoWidth, 0);
-    // Find if any auto calculated bar exceeded maxBarWidth
-    zrUtil.each(stacks, function (column, stack) {
-      var maxWidth = column.maxWidth;
-      if (maxWidth && maxWidth < autoWidth) {
-        maxWidth = Math.min(maxWidth, remainedWidth);
-        if (column.width) {
-          maxWidth = Math.min(maxWidth, column.width);
-        }
-        remainedWidth -= maxWidth;
-        column.width = maxWidth;
-        autoWidthCount--;
+  var categoryGap = parsePercent(categoryGapOption, bandWidth);
+  var barGapPercent = parsePercent(gapOption, 1);
+  var autoWidth = (remainedWidth - categoryGap) / (autoWidthCount + (autoWidthCount - 1) * barGapPercent);
+  autoWidth = mathMax(autoWidth, 0);
+  // Find if any auto calculated bar exceeded maxBarWidth
+  each(stacks, function (column, stack) {
+    var maxWidth = column.maxWidth;
+    if (maxWidth && maxWidth < autoWidth) {
+      maxWidth = mathMin(maxWidth, remainedWidth);
+      if (column.width) {
+        maxWidth = mathMin(maxWidth, column.width);
       }
-    });
-    // Recalculate width again
-    autoWidth = (remainedWidth - categoryGap) / (autoWidthCount + (autoWidthCount - 1) * barGapPercent);
-    autoWidth = Math.max(autoWidth, 0);
-    var widthSum = 0;
-    var lastColumn;
-    zrUtil.each(stacks, function (column, idx) {
-      if (!column.width) {
-        column.width = autoWidth;
-      }
-      lastColumn = column;
-      widthSum += column.width * (1 + barGapPercent);
-    });
-    if (lastColumn) {
-      widthSum -= lastColumn.width * barGapPercent;
+      remainedWidth -= maxWidth;
+      column.width = maxWidth;
+      autoWidthCount--;
     }
-    var offset = -widthSum / 2;
-    zrUtil.each(stacks, function (column, stackId) {
-      result[coordSysName][stackId] = result[coordSysName][stackId] || {
-        offset: offset,
-        width: column.width
-      };
-      offset += column.width * (1 + barGapPercent);
-    });
+  });
+  // Recalculate width again
+  autoWidth = (remainedWidth - categoryGap) / (autoWidthCount + (autoWidthCount - 1) * barGapPercent);
+  autoWidth = mathMax(autoWidth, 0);
+  var widthSum = 0;
+  var lastColumn;
+  each(stacks, function (column, idx) {
+    if (!column.width) {
+      column.width = autoWidth;
+    }
+    lastColumn = column;
+    widthSum += column.width * (1 + barGapPercent);
+  });
+  if (lastColumn) {
+    widthSum -= lastColumn.width * barGapPercent;
+  }
+  var offset = -widthSum / 2;
+  each(stacks, function (column, stackId) {
+    result[stackId] = result[stackId] || {
+      offset: offset,
+      width: column.width
+    };
+    offset += column.width * (1 + barGapPercent);
   });
   return result;
 }
-export default barLayoutPolar;
+export function registerBarPolarAxisHandlers(registers, seriesType // Currently only 'bar' is supported.
+) {
+  callOnlyOnce(registers, function () {
+    var axisStatKey = makeAxisStatKey2(seriesType, COORD_SYS_TYPE_POLAR);
+    requireAxisStatisticsForBaseBar(registers, axisStatKey, seriesType, COORD_SYS_TYPE_POLAR);
+    registerAxisContainShapeHandler(axisStatKey, createBandWidthBasedAxisContainShapeHandler(axisStatKey));
+  });
+}

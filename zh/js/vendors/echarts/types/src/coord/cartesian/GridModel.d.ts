@@ -1,6 +1,6 @@
 import ComponentModel from '../../model/Component.js';
-import { ComponentOption, BoxLayoutOptionMixin, ZRColor, ShadowOptionMixin, NullUndefined } from '../../util/types.js';
-import Grid from './Grid.js';
+import { ComponentOption, BoxLayoutOptionMixin, ZRColor, ShadowOptionMixin, NullUndefined, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin } from '../../util/types.js';
+import type Grid from './Grid.js';
 import { CoordinateSystemHostModel } from '../CoordinateSystem.js';
 import type GlobalModel from '../../model/Global.js';
 export declare const OUTER_BOUNDS_DEFAULT: {
@@ -10,7 +10,8 @@ export declare const OUTER_BOUNDS_DEFAULT: {
     bottom: number;
 };
 export declare const OUTER_BOUNDS_CLAMP_DEFAULT: string[];
-export interface GridOption extends ComponentOption, BoxLayoutOptionMixin, ShadowOptionMixin {
+export declare const COORD_SYS_TYPE_CARTESIAN_2D = "cartesian2d";
+export interface GridOption extends ComponentOption, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin, BoxLayoutOptionMixin, ShadowOptionMixin {
     mainType?: 'grid';
     show?: boolean;
     /**

@@ -84,12 +84,33 @@ export interface CoordinateSystem {
     containPoint(point: number[]): boolean;
     getAxes?: () => Axis[];
     getAxis?: (dim?: DimensionName) => Axis;
+    /**
+     * FIXME: Remove this method? See details in `Cartesian2D['getBaseAxis']`
+     */
     getBaseAxis?: () => Axis;
     getOtherAxis?: (baseAxis: Axis) => Axis;
     clampData?: (data: ScaleDataValue[], out?: number[]) => number[];
-    getRoamTransform?: () => MatrixArray;
     getArea?: (tolerance?: number) => CoordinateSystemClipArea;
+    shouldClip?: () => boolean;
+    /**
+     * Optional; e.g. only for `GeoLikeCoordSys`.
+     * External geo like extensions are required to implements it.
+     * This is a rect in data space.
+     * For historicall reason, the name is `getBoundingRect` - preserve it for backward compatibility.
+     * @see VIEW_COORD_SYS_TRANS_RAW
+     */
     getBoundingRect?: () => BoundingRect;
+    /**
+     * Optional; e.g. only for `GeoLikeCoordSys`.
+     * External geo like extensions are required to implements it.
+     * @see VIEW_COORD_SYS_TRANS_RAW
+     */
+    getViewRect?: () => BoundingRect;
+    /**
+     * Optional; e.g. only for `GeoLikeCoordSys`.
+     * External geo like extensions are required to implements it.
+     */
+    getRoamTransform?: () => MatrixArray;
     getAxesByScale?: (scaleType: string) => Axis[];
     prepareCustoms?: PrepareCustomInfo;
 }
@@ -111,3 +132,8 @@ export interface CoordinateSystemClipArea {
     contain(x: number, y: number): boolean;
 }
 export declare function isCoordinateSystemType<T extends CoordinateSystem, S = T['type']>(coordSys: CoordinateSystem, type: S): coordSys is T;
+export interface GeoLikeCoordSys extends CoordinateSystem {
+    dimensions: ['lng', 'lat'];
+    getViewRect: CoordinateSystem['getViewRect'];
+}
+export declare function isGeoLikeCoordSys(coordSys: CoordinateSystem): coordSys is GeoLikeCoordSys;

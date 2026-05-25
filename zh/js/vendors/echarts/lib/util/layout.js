@@ -47,7 +47,7 @@ import BoundingRect from 'zrender/lib/core/BoundingRect.js';
 import { parsePercent } from './number.js';
 import * as formatUtil from './format.js';
 import { error } from './log.js';
-import { BoxCoordinateSystemCoordFrom, getCoordForBoxCoordSys } from '../core/CoordinateSystem.js';
+import { BOX_COORD_SYS_COORD_FROM_PROP_COORD2, getCoordForCoordSysUsageKindBox } from '../core/CoordinateSystem.js';
 var each = zrUtil.each;
 /**
  * @public
@@ -163,7 +163,7 @@ function getViewRectAndCenterForCircleLayout(seriesModel, api) {
     var centerOption = seriesModel.get('center');
     var centerOptionArr = zrUtil.isArray(centerOption) ? centerOption : [centerOption, centerOption];
     viewRect = getLayoutRect(boxLayoutParams, layoutRef.refContainer);
-    center = layoutRef.boxCoordFrom === BoxCoordinateSystemCoordFrom.coord2 ? layoutRef.refPoint // option `series.center` has been used as coord.
+    center = layoutRef.boxCoordFrom === BOX_COORD_SYS_COORD_FROM_PROP_COORD2 ? layoutRef.refPoint // option `series.center` has been used as coord.
     : [parsePercent(centerOptionArr[0], viewRect.width) + viewRect.x, parsePercent(centerOptionArr[1], viewRect.height) + viewRect.y];
   }
   return {
@@ -348,7 +348,7 @@ export function createBoxLayoutReference(model, api, opt) {
   var boxCoordSys = model.boxCoordinateSystem;
   var boxCoordFrom;
   if (boxCoordSys) {
-    var _a = getCoordForBoxCoordSys(model),
+    var _a = getCoordForCoordSysUsageKindBox(model),
       coord = _a.coord,
       from = _a.from;
     // Do not use `clamp` in `dataToLayout` and `dataToPoint`, because:

@@ -42,9 +42,10 @@
 * under the License.
 */
 import { createHashMap, each } from 'zrender/lib/core/util.js';
-import { getAxisMainType } from './helper.js';
+import { getAxisMainType, getAlignTo, getAxisProxyFromModel, setAxisProxyToModel } from './helper.js';
 import AxisProxy from './AxisProxy.js';
 var dataZoomProcessor = {
+  dirtyOnOverallProgress: true,
   // `dataZoomProcessor` will only be performed in needed series. Consider if
   // there is a line series and a pie series, it is better not to update the
   // line series if only pie series is needed to be updated.
@@ -58,19 +59,15 @@ var dataZoomProcessor = {
       });
     }
     // FIXME: it brings side-effect to `getTargetSeries`.
-    // Prepare axis proxies.
-    eachAxisModel(function (axisDim, axisIndex, axisModel, dataZoomModel) {
-      // dispose all last axis proxy, in case that some axis are deleted.
-      axisModel.__dzAxisProxy = null;
-    });
     var proxyList = [];
     eachAxisModel(function (axisDim, axisIndex, axisModel, dataZoomModel) {
-      // Different dataZooms may constrol the same axis. In that case,
+      // Different dataZooms may control the same axis. In that case,
       // an axisProxy serves both of them.
-      if (!axisModel.__dzAxisProxy) {
+      if (!getAxisProxyFromModel(axisModel)) {
         // Use the first dataZoomModel as the main model of axisProxy.
-        axisModel.__dzAxisProxy = new AxisProxy(axisDim, axisIndex, dataZoomModel, ecModel);
-        proxyList.push(axisModel.__dzAxisProxy);
+        var axisProxy = new AxisProxy(axisDim, axisIndex, dataZoomModel, ecModel);
+        proxyList.push(axisProxy);
+        setAxisProxyToModel(axisModel, axisProxy);
       }
     });
     var seriesModelMap = createHashMap();
@@ -89,8 +86,18 @@ var dataZoomProcessor = {
       // We calculate window and reset axis here but not in model
       // init stage and not after action dispatch handler, because
       // reset should be called after seriesData.restoreData.
+      var axisProxyNeedAlign = [];
       dataZoomModel.eachTargetAxis(function (axisDim, axisIndex) {
-        dataZoomModel.getAxisProxy(axisDim, axisIndex).reset(dataZoomModel);
+        var axisProxy = dataZoomModel.getAxisProxy(axisDim, axisIndex);
+        var alignToAxisProxy = getAlignTo(dataZoomModel, axisProxy);
+        if (alignToAxisProxy) {
+          axisProxyNeedAlign.push([axisProxy, alignToAxisProxy]);
+        } else {
+          axisProxy.reset(dataZoomModel, null);
+        }
+      });
+      each(axisProxyNeedAlign, function (item) {
+        item[0].reset(dataZoomModel, item[1].getWindow().percentInverted);
       });
       // Caution: data zoom filtering is order sensitive when using
       // percent range and no min/max/scale set on axis.
@@ -115,13 +122,14 @@ var dataZoomProcessor = {
       // is able to get them from chart.getOption().
       var axisProxy = dataZoomModel.findRepresentativeAxisProxy();
       if (axisProxy) {
-        var percentRange = axisProxy.getDataPercentWindow();
-        var valueRange = axisProxy.getDataValueWindow();
+        var _a = axisProxy.getWindow(),
+          percent = _a.percent,
+          value = _a.value;
         dataZoomModel.setCalculatedRange({
-          start: percentRange[0],
-          end: percentRange[1],
-          startValue: valueRange[0],
-          endValue: valueRange[1]
+          start: percent[0],
+          end: percent[1],
+          startValue: value[0],
+          endValue: value[1]
         });
       }
     });

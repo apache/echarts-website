@@ -47,10 +47,6 @@ declare class Parallel implements CoordinateSystemMaster, CoordinateSystem {
     containPoint(point: number[]): boolean;
     getModel(): ParallelModel;
     /**
-     * Update properties from series
-     */
-    private _updateAxesFromSeries;
-    /**
      * Resize the parallel coordinate system.
      */
     resize(parallelModel: ParallelModel, api: ExtensionAPI): void;

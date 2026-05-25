@@ -42,14 +42,14 @@
 * under the License.
 */
 // Only create one roam controller for each coordinate system.
-// one roam controller might be refered by two inside data zoom
+// one roam controller might be referred by two inside data zoom
 // components (for example, one for x and one for y). When user
 // pan or zoom, only dispatch one action for those data zoom
 // components.
 import RoamController from '../../component/helper/RoamController.js';
 import * as throttleUtil from '../../util/throttle.js';
 import { makeInner } from '../../util/model.js';
-import { each, curry, createHashMap } from 'zrender/lib/core/util.js';
+import { each, curry, createHashMap, retrieve2 } from 'zrender/lib/core/util.js';
 import { collectReferCoordSysModelInfo } from './helper.js';
 var inner = makeInner();
 export function setViewInfoToCoordSysRecord(api, dataZoomModel, getRange) {
@@ -153,6 +153,8 @@ function mergeControllerParams(dataZoomInfoMap, coordSysRecord, api) {
     'type_undefined': -1
   };
   var preventDefaultMouseMove = true;
+  var cursorGrab;
+  var cursorGrabbing;
   dataZoomInfoMap.each(function (dataZoomInfo) {
     var dataZoomModel = dataZoomInfo.model;
     var oneType = dataZoomModel.get('disabled', true) ? false : dataZoomModel.get('zoomLock', true) ? 'move' : true;
@@ -162,6 +164,10 @@ function mergeControllerParams(dataZoomInfoMap, coordSysRecord, api) {
     // Prevent default move event by default. If one false, do not prevent. Otherwise
     // users may be confused why it does not work when multiple insideZooms exist.
     preventDefaultMouseMove = preventDefaultMouseMove && dataZoomModel.get('preventDefaultMouseMove', true);
+    // Intuitively, use the last declared setting in ec option when this axis is covered
+    // by multiple `dataZoom`s.
+    cursorGrab = retrieve2(dataZoomModel.get('cursorGrab', true), cursorGrab);
+    cursorGrabbing = retrieve2(dataZoomModel.get('cursorGrabbing', true), cursorGrabbing);
   });
   return {
     controlType: controlType,
@@ -180,12 +186,14 @@ function mergeControllerParams(dataZoomInfoMap, coordSysRecord, api) {
       triggerInfo: {
         roamTrigger: null,
         isInSelf: coordSysRecord.containsPoint
-      }
+      },
+      cursorGrab: cursorGrab,
+      cursorGrabbing: cursorGrabbing
     }
   };
 }
 export function installDataZoomRoamProcessor(registers) {
-  registers.registerProcessor(registers.PRIORITY.PROCESSOR.FILTER, function (ecModel, api) {
+  registers.registerUpdateLifecycle('coordsys:aftercreate', function (ecModel, api) {
     var apiInner = inner(api);
     var coordSysRecordMap = apiInner.coordSysRecordMap || (apiInner.coordSysRecordMap = createHashMap());
     coordSysRecordMap.each(function (coordSysRecord) {
@@ -211,7 +219,7 @@ export function installDataZoomRoamProcessor(registers) {
       });
     });
     // (1) Merge dataZoom settings for each coord sys and set to the roam controller.
-    // (2) Clear coord sys if not refered by any dataZoom.
+    // (2) Clear coord sys if not referred by any dataZoom.
     coordSysRecordMap.each(function (coordSysRecord) {
       var controller = coordSysRecord.controller;
       var firstDzInfo;

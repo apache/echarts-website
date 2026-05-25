@@ -49,6 +49,7 @@ import { makeSeriesEncodeForNameBased } from '../../data/helper/sourceHelper.js'
 import LegendVisualProvider from '../../visual/LegendVisualProvider.js';
 import SeriesModel from '../../model/Series.js';
 import tokens from '../../visual/tokens.js';
+export var SERIES_TYPE_FUNNEL = 'funnel';
 var FunnelSeriesModel = /** @class */function (_super) {
   __extends(FunnelSeriesModel, _super);
   function FunnelSeriesModel() {
@@ -90,7 +91,7 @@ var FunnelSeriesModel = /** @class */function (_super) {
     params.$vars.push('percent');
     return params;
   };
-  FunnelSeriesModel.type = 'series.funnel';
+  FunnelSeriesModel.type = 'series.' + SERIES_TYPE_FUNNEL;
   FunnelSeriesModel.defaultOption = {
     coordinateSystemUsage: 'box',
     // zlevel: 0,                  // 一级层叠

@@ -41,7 +41,9 @@
 * specific language governing permissions and limitations
 * under the License.
 */
-export default function legendFilter(ecModel) {
+import { createSimpleOverallStageHandler2 } from '../../util/model.js';
+export var legendFilterStageHandler = createSimpleOverallStageHandler2(legendFilter);
+function legendFilter(ecModel) {
   var legendModels = ecModel.findComponents({
     mainType: 'legend'
   });

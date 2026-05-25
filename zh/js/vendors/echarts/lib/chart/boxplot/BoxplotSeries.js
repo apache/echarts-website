@@ -46,6 +46,7 @@ import SeriesModel from '../../model/Series.js';
 import { WhiskerBoxCommonMixin } from '../helper/whiskerBoxCommon.js';
 import { mixin } from 'zrender/lib/core/util.js';
 import tokens from '../../visual/tokens.js';
+export var SERIES_TYPE_BOXPLOT = 'boxplot';
 var BoxplotSeriesModel = /** @class */function (_super) {
   __extends(BoxplotSeriesModel, _super);
   function BoxplotSeriesModel() {
@@ -78,7 +79,7 @@ var BoxplotSeriesModel = /** @class */function (_super) {
     _this.visualDrawType = 'stroke';
     return _this;
   }
-  BoxplotSeriesModel.type = 'series.boxplot';
+  BoxplotSeriesModel.type = 'series.' + SERIES_TYPE_BOXPLOT;
   BoxplotSeriesModel.dependencies = ['xAxis', 'yAxis', 'grid'];
   BoxplotSeriesModel.defaultOption = {
     // zlevel: 0,
@@ -86,6 +87,7 @@ var BoxplotSeriesModel = /** @class */function (_super) {
     coordinateSystem: 'cartesian2d',
     legendHoverLink: true,
     layout: null,
+    clip: true,
     boxWidth: [7, 50],
     itemStyle: {
       color: tokens.color.neutral00,

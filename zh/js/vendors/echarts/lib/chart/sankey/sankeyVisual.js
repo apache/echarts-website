@@ -43,8 +43,11 @@
 */
 import * as zrUtil from 'zrender/lib/core/util.js';
 import VisualMapping from '../../visual/VisualMapping.js';
-export default function sankeyVisual(ecModel) {
-  ecModel.eachSeriesByType('sankey', function (seriesModel) {
+import { SERIES_TYPE_SANKEY } from './SankeySeries.js';
+import { createSimpleOverallStageHandler } from '../../util/model.js';
+export var sankeyVisualStageHandler = createSimpleOverallStageHandler(SERIES_TYPE_SANKEY, sankeyVisual);
+function sankeyVisual(ecModel) {
+  ecModel.eachSeriesByType(SERIES_TYPE_SANKEY, function (seriesModel) {
     var graph = seriesModel.getGraph();
     var nodes = graph.nodes;
     var edges = graph.edges;

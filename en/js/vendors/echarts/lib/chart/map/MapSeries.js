@@ -49,17 +49,14 @@ import geoSourceManager from '../../coord/geo/geoSourceManager.js';
 import { makeSeriesEncodeForNameBased } from '../../data/helper/sourceHelper.js';
 import { createTooltipMarkup } from '../../component/tooltip/tooltipMarkup.js';
 import { createSymbol } from '../../util/symbol.js';
-import { CoordinateSystemUsageKind, decideCoordSysUsageKind } from '../../core/CoordinateSystem.js';
+import { COORD_SYS_USAGE_KIND_BOX, decideCoordSysUsageKind } from '../../core/CoordinateSystem.js';
 import tokens from '../../visual/tokens.js';
+export var SERIES_TYPE_MAP = 'map';
 var MapSeries = /** @class */function (_super) {
   __extends(MapSeries, _super);
   function MapSeries() {
     var _this = _super !== null && _super.apply(this, arguments) || this;
     _this.type = MapSeries.type;
-    // Only first map series of same mapType will drawMap.
-    _this.needsDrawMap = false;
-    // Group of all map series with same mapType
-    _this.seriesGroup = [];
     _this.getTooltipPosition = function (dataIndex) {
       if (dataIndex != null) {
         var name_1 = this.getData().getName(dataIndex);
@@ -109,8 +106,8 @@ var MapSeries = /** @class */function (_super) {
    * inner exclusive geo model.
    */
   MapSeries.prototype.getHostGeoModel = function () {
-    if (decideCoordSysUsageKind(this).kind === CoordinateSystemUsageKind.boxCoordSys) {
-      // Always use an internal geo if specify a boxCoordSys.
+    if (decideCoordSysUsageKind(this).kind === COORD_SYS_USAGE_KIND_BOX) {
+      // Always use an internal geo if specify as `COORD_SYS_USAGE_KIND_BOX`.
       // Notice that currently we do not support laying out a geo based on
       // another geo, but preserve the possibility.
       return;
@@ -147,19 +144,18 @@ var MapSeries = /** @class */function (_super) {
    * Map tooltip formatter
    */
   MapSeries.prototype.formatTooltip = function (dataIndex, multipleSeries, dataType) {
-    // FIXME orignalData and data is a bit confusing
+    // FIXME originalData and data is a bit confusing
     var data = this.getData();
     var value = this.getRawValue(dataIndex);
     var name = data.getName(dataIndex);
-    var seriesGroup = this.seriesGroup;
     var seriesNames = [];
-    for (var i = 0; i < seriesGroup.length; i++) {
-      var otherIndex = seriesGroup[i].originalData.indexOfName(name);
+    zrUtil.each(this.seriesGroup.f, function (mapSeries) {
+      var otherIndex = mapSeries.originalData.indexOfName(name);
       var valueDim = data.mapDimension('value');
-      if (!isNaN(seriesGroup[i].originalData.get(valueDim, otherIndex))) {
-        seriesNames.push(seriesGroup[i].name);
+      if (!isNaN(mapSeries.originalData.get(valueDim, otherIndex))) {
+        seriesNames.push(mapSeries.name);
       }
-    }
+    });
     return createTooltipMarkup('section', {
       header: seriesNames.join(', '),
       noHeader: !seriesNames.length,
@@ -168,12 +164,6 @@ var MapSeries = /** @class */function (_super) {
         value: value
       })]
     });
-  };
-  MapSeries.prototype.setZoom = function (zoom) {
-    this.option.zoom = zoom;
-  };
-  MapSeries.prototype.setCenter = function (center) {
-    this.option.center = center;
   };
   MapSeries.prototype.getLegendIcon = function (opt) {
     var iconType = opt.icon || 'roundRect';
@@ -189,7 +179,10 @@ var MapSeries = /** @class */function (_super) {
     }
     return icon;
   };
-  MapSeries.type = 'series.map';
+  MapSeries.prototype.__ownRoamView = function () {
+    return mapSeriesNeedsDrawMap(this) ? this.coordinateSystem.view : null;
+  };
+  MapSeries.type = 'series.' + SERIES_TYPE_MAP;
   MapSeries.dependencies = ['geo'];
   MapSeries.layoutMode = 'box';
   MapSeries.defaultOption = {
@@ -265,4 +258,46 @@ var MapSeries = /** @class */function (_super) {
   };
   return MapSeries;
 }(SeriesModel);
+/**
+ * Has exclusive geo, rahter than depends on a separate geo componet.
+ */
+export function mapSeriesGroupHasOwnGeo(groupKey) {
+  return groupKey.indexOf('i') === 0;
+}
+export function mapSeriesNeedsDrawMap(mapSeries) {
+  // Within a MAP_SERIES_GROUP, only `mainSeries` has `needsDrawMap: true`.
+  return getMainMapSeries(mapSeries.seriesGroup) === mapSeries && !mapSeries.getHostGeoModel();
+}
+export function getMainMapSeries(mapSeriesGroup) {
+  // The first series after filtering in a MAP_SERIES_GROUP.
+  return mapSeriesGroup.f[0];
+}
+/**
+ * @tutorial [MAP_SERIES_GROUP]
+ *  - For map series that reference external geo components (typically via `geoIndex` or `geoId` in ec option),
+ *    a map series group is all map series that reference to the same geo component.
+ *  - For other map series,
+ *    a map series group is all map series that use the same `map` in ec option.
+ *  NOTICE: series filtering (typically by legend) matters:
+ *   If this method is executed before series filtering, all series are included,
+ *   otherwise, series filtered out are excluded.
+ *   When legend disables the original first series, the original second series takes the responsibility
+ *   to render map (via its `MapDraw`).
+ */
+export function buildAllMapSeriesGroups(ecModel, beforeSeriesFiltering) {
+  var allMapSeriesGroups = {};
+  ecModel.eachRawSeriesByType(SERIES_TYPE_MAP, function (seriesModel) {
+    var hostGeoModel = seriesModel.getHostGeoModel();
+    var key = hostGeoModel ? 'o' + hostGeoModel.id : 'i' + seriesModel.getMapType();
+    var group = allMapSeriesGroups[key] = allMapSeriesGroups[key] || {
+      f: [],
+      r: []
+    };
+    if (!ecModel.isSeriesFiltered(seriesModel) && !beforeSeriesFiltering) {
+      group.f.push(seriesModel);
+    }
+    group.r.push(seriesModel);
+  });
+  return allMapSeriesGroups;
+}
 export default MapSeries;

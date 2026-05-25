@@ -668,7 +668,7 @@ The format of the input `coord` and return type are defined by each coordinate s
         
 *   [only yAxis](../option-parts/option.xAxis.md) or [only yAxis](../option-parts/option.yAxis.md):
     
-    For example, convert a axis coord to pixel value:
+    For example, convert an axis coord to pixel value:
     
     ```
       // In the xAxis with id 'x0' (type: number),

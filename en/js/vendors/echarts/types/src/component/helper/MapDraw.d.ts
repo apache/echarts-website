@@ -1,16 +1,15 @@
 import * as graphic from '../../util/graphic.js';
 import ExtensionAPI from '../../core/ExtensionAPI.js';
 import GeoModel from '../../coord/geo/GeoModel.js';
-import MapSeries from '../../chart/map/MapSeries.js';
 import GlobalModel from '../../model/Global.js';
 import { Payload } from '../../util/types.js';
 import GeoView from '../geo/GeoView.js';
 import MapView from '../../chart/map/MapView.js';
 import Element from 'zrender/lib/Element.js';
+import { MapOrGeoModel } from '../../coord/geo/geoCreator.js';
 declare class MapDraw {
     private uid;
     private _controller;
-    private _controllerHost;
     readonly group: graphic.Group;
     /**
      * This flag is used to make sure that only one among
@@ -26,7 +25,8 @@ declare class MapDraw {
     private _svgGraphicRecord;
     private _svgDispatcherMap;
     constructor(api: ExtensionAPI);
-    draw(mapOrGeoModel: GeoModel | MapSeries, ecModel: GlobalModel, api: ExtensionAPI, fromView: MapView | GeoView, payload: Payload): void;
+    draw(mapOrGeoModel: MapOrGeoModel, ecModel: GlobalModel, api: ExtensionAPI, fromView: MapView | GeoView, payload: Payload): void;
+    __updateOnOwnRoam(mapOrGeoModel: MapOrGeoModel): void;
     private _buildGeoJSON;
     private _buildSVG;
     private _enableBlurEntireSVG;
@@ -35,7 +35,6 @@ declare class MapDraw {
     private _svgResourceChanged;
     private _useSVG;
     private _freeSVG;
-    private _updateController;
     /**
      * FIXME: this is a temporarily workaround.
      * When `geoRoam` the elements need to be reset in `MapView['render']`, because the props like

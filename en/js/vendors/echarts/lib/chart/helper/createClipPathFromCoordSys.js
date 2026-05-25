@@ -43,8 +43,8 @@
 */
 import * as graphic from '../../util/graphic.js';
 import { round } from '../../util/number.js';
-import { isFunction } from 'zrender/lib/core/util.js';
-function createGridClipPath(cartesian, hasAnimation, seriesModel, done, during) {
+import { assert, isFunction } from 'zrender/lib/core/util.js';
+export function createGridClipPath(cartesian, hasAnimation, seriesModel, done, during) {
   var rect = cartesian.getArea();
   var x = rect.x;
   var y = rect.y;
@@ -100,7 +100,7 @@ function createGridClipPath(cartesian, hasAnimation, seriesModel, done, during) 
   }
   return clipPath;
 }
-function createPolarClipPath(polar, hasAnimation, seriesModel) {
+export function createPolarClipPath(polar, hasAnimation, seriesModel) {
   var sectorArea = polar.getArea();
   // Avoid float number rounding error for symbol on the edge of axis extent.
   var r0 = round(sectorArea.r0, 1);
@@ -132,7 +132,7 @@ function createPolarClipPath(polar, hasAnimation, seriesModel) {
   }
   return clipPath;
 }
-function createClipPath(coordSys, hasAnimation, seriesModel, done, during) {
+export function createClipPath(coordSys, hasAnimation, seriesModel, done, during) {
   if (!coordSys) {
     return null;
   } else if (coordSys.type === 'polar') {
@@ -142,4 +142,25 @@ function createClipPath(coordSys, hasAnimation, seriesModel, done, during) {
   }
   return null;
 }
-export { createGridClipPath, createPolarClipPath, createClipPath };
+export var SHAPE_CLIP_KIND_NOT_CLIPPED = 0;
+export var SHAPE_CLIP_KIND_PARTIALLY_CLIPPED = 1;
+export var SHAPE_CLIP_KIND_FULLY_CLIPPED = 2;
+export function updateClipPath(clip, symbolEl, clipPath) {
+  if (clip) {
+    if (process.env.NODE_ENV !== 'production') {
+      assert(clipPath);
+    }
+    symbolEl.setClipPath(clipPath);
+  } else {
+    symbolEl.removeClipPath();
+  }
+}
+export function createCoordSysClipAreaSimply(seriesModel) {
+  var coordSys = seriesModel.coordinateSystem;
+  if (seriesModel.get('clip', true) && coordSys
+  // The effect would be odd if geo is not clip but series is clipped.
+  && (!coordSys.shouldClip || coordSys.shouldClip())) {
+    // PENDING make `0.1` configurable, for example, `clipTolerance`?
+    return coordSys.getArea && coordSys.getArea(.1);
+  }
+}

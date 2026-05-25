@@ -43,11 +43,12 @@
 */
 import BoxplotSeriesModel from './BoxplotSeries.js';
 import BoxplotView from './BoxplotView.js';
-import boxplotLayout from './boxplotLayout.js';
+import { boxplotLayoutStageHandler, registerBoxplotAxisHandlers } from './boxplotLayout.js';
 import { boxplotTransform } from './boxplotTransform.js';
 export function install(registers) {
   registers.registerSeriesModel(BoxplotSeriesModel);
   registers.registerChartView(BoxplotView);
-  registers.registerLayout(boxplotLayout);
+  registers.registerLayout(boxplotLayoutStageHandler);
   registers.registerTransform(boxplotTransform);
+  registerBoxplotAxisHandlers(registers);
 }

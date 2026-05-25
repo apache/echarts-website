@@ -43,11 +43,11 @@
 */
 import { __extends } from "tslib";
 import * as zrUtil from 'zrender/lib/core/util.js';
-import BoundingRect from 'zrender/lib/core/BoundingRect.js';
-import View from '../View.js';
+import View, { useLegacyViewCoordSysCenterBase, viewCoordSysCopyViewRect, viewCoordSysSetBoundingRect } from '../View.js';
 import geoSourceManager from './geoSourceManager.js';
 import { SINGLE_REFERRING } from '../../util/model.js';
 import { warn } from '../../util/log.js';
+import Transformable from 'zrender/lib/core/Transformable.js';
 var GEO_DEFAULT_PARAMS = {
   'geoJSON': {
     aspectScale: 0.75,
@@ -60,23 +60,25 @@ var GEO_DEFAULT_PARAMS = {
 };
 export var geo2DDimensions = ['lng', 'lat'];
 var Geo = /** @class */function (_super) {
-  __extends(Geo, _super);
+  __extends(Geo, _super); // See VIEW_COORD_SYS_TRANS_OVERALL_BACKWARD_COMPATIBILITY
   function Geo(name, map, opt) {
-    var _this = _super.call(this, name, {
-      api: opt.api,
-      ecModel: opt.ecModel
-    }) || this;
+    var _this = _super.call(this) || this;
     _this.dimensions = geo2DDimensions;
     _this.type = 'geo';
     // Only store specified name coord via `addGeoCoord`.
     _this._nameCoordMap = zrUtil.createHashMap();
-    _this.map = map;
+    _this.name = name;
     var projection = opt.projection;
     var source = geoSourceManager.load(map, opt.nameMap, opt.nameProperty);
     var resource = geoSourceManager.getGeoResource(map);
     var resourceType = _this.resourceType = resource ? resource.type : null;
     var regions = _this.regions = source.regions;
     var defaultParams = GEO_DEFAULT_PARAMS[resource.type];
+    _this._clip = opt.clip;
+    // Not invert longitude if projection exits.
+    var invertLongitute = projection ? false : defaultParams.invertLongitute;
+    _this.view = new View(invertLongitute, useLegacyViewCoordSysCenterBase(opt.ecModel, opt.api), _this);
+    _this.map = map;
     _this._regionsMap = source.regionsMap;
     _this.regions = source.regions;
     if (process.env.NODE_ENV !== 'production' && projection) {
@@ -106,34 +108,13 @@ var Geo = /** @class */function (_super) {
     } else {
       boundingRect = source.boundingRect;
     }
-    _this.setBoundingRect(boundingRect.x, boundingRect.y, boundingRect.width, boundingRect.height);
+    viewCoordSysSetBoundingRect(_this.view, boundingRect.x, boundingRect.y, boundingRect.width, boundingRect.height);
     // aspectScale and invertLongitute actually is the parameters default raw projection.
     // So we ignore them if projection is given.
     // Ignore default aspect scale if projection exits.
     _this.aspectScale = projection ? 1 : zrUtil.retrieve2(opt.aspectScale, defaultParams.aspectScale);
-    // Not invert longitude if projection exits.
-    _this._invertLongitute = projection ? false : defaultParams.invertLongitute;
     return _this;
   }
-  Geo.prototype._transformTo = function (x, y, width, height) {
-    var rect = this.getBoundingRect();
-    var invertLongitute = this._invertLongitute;
-    rect = rect.clone();
-    if (invertLongitute) {
-      // Longitude is inverted.
-      rect.y = -rect.y - rect.height;
-    }
-    var rawTransformable = this._rawTransformable;
-    rawTransformable.transform = rect.calculateTransform(new BoundingRect(x, y, width, height));
-    var rawParent = rawTransformable.parent;
-    rawTransformable.parent = null;
-    rawTransformable.decomposeTransform();
-    rawTransformable.parent = rawParent;
-    if (invertLongitute) {
-      rawTransformable.scaleY = -rawTransformable.scaleY;
-    }
-    this._updateTransform();
-  };
   Geo.prototype.getRegion = function (name) {
     return this._regionsMap.get(name);
   };
@@ -171,7 +152,7 @@ var Geo = /** @class */function (_super) {
         // projection may return null point.
         data = projection.project(data);
       }
-      return data && this.projectedToPoint(data, noRoam, out);
+      return data && this.view.dataToPoint(data, noRoam, out);
     }
   };
   Geo.prototype.pointToData = function (point, reserved, out) {
@@ -182,16 +163,7 @@ var Geo = /** @class */function (_super) {
     }
     // FIXME: if no `point`, should return [NaN, NaN], rather than undefined.
     //  null/undefined has special meaning in `convertFromPixel`.
-    return point && this.pointToProjected(point, out);
-  };
-  /**
-   * Point to projected data. Same with pointToData when projection is used.
-   */
-  Geo.prototype.pointToProjected = function (point, out) {
-    return _super.prototype.pointToData.call(this, point, 0, out);
-  };
-  Geo.prototype.projectedToPoint = function (projected, noRoam, out) {
-    return _super.prototype.dataToPoint.call(this, projected, noRoam, out);
+    return point && this.view.pointToData(point, out);
   };
   Geo.prototype.convertToPixel = function (ecModel, finder, value) {
     var coordSys = getCoordSys(finder);
@@ -201,10 +173,43 @@ var Geo = /** @class */function (_super) {
     var coordSys = getCoordSys(finder);
     return coordSys === this ? coordSys.pointToData(pixel) : null;
   };
+  Geo.prototype.containPoint = function (point) {
+    return this.view.containPoint(point);
+  };
+  Geo.prototype.getArea = function (tolerance) {
+    tolerance = tolerance || 0;
+    var rect = viewCoordSysCopyViewRect(null, this.view);
+    rect.x -= tolerance;
+    rect.y -= tolerance;
+    rect.width += 2 * tolerance;
+    rect.height += 2 * tolerance;
+    return rect;
+  };
+  Geo.prototype.shouldClip = function () {
+    return this._clip;
+  };
+  /**
+   * @implements CoordinateSystem['getBoundingRect']
+   */
+  Geo.prototype.getBoundingRect = function () {
+    return this.view.getBoundingRect();
+  };
+  /**
+   * @implements CoordinateSystem['getViewRect']
+   */
+  Geo.prototype.getViewRect = function () {
+    return this.view.getViewRect();
+  };
+  /**
+   * @implements CoordinateSystem['getRoamTransform']
+   */
+  Geo.prototype.getRoamTransform = function () {
+    return this.view.getRoamTransform();
+  };
   return Geo;
-}(View);
+}(Transformable // See VIEW_COORD_SYS_TRANS_OVERALL_BACKWARD_COMPATIBILITY
+);
 ;
-zrUtil.mixin(Geo, View);
 function getCoordSys(finder) {
   var geoModel = finder.geoModel;
   var seriesModel = finder.seriesModel;

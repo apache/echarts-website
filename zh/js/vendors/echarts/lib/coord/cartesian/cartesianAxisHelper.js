@@ -164,3 +164,6 @@ export function updateCartesianAxisViewCommonPartBuilder(axisBuilder, gridRect, 
   }
   axisBuilder.updateCfg(newRaw);
 }
+export function getCartesianAxisHashKey(axis) {
+  return axis.dim + '_' + axis.index;
+}

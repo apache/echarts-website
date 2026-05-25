@@ -190,6 +190,14 @@ Since `v6.0.0`
 
 The id of the [matrix coordinate system](option.matrix.md) to base on. When mutiple `matrix` exist within an ECharts instance, use this to specify the corresponding `matrix`.
 
+## clockwise
+- **Type**: `boolean`
+- **Default**: `false`
+
+Since `v6.1.0`
+
+Whether to clockwise layout indicator axis.
+
 ## startAngle
 - **Type**: `number`
 - **Default**: `90`
@@ -908,21 +916,46 @@ Set this to `true`, to prevent interaction with the axis.
 - **Type**: `boolean`
 - **Default**: `false`
 
-Set this to `true` to enable triggering events.
+Whether to enable to dispatch mouse/touch events to user-registered listeners (i.e., `chart.on('xxx', function (event) {})`).
+
+Supported mouse/touch events are `'click'`, `'dblclick'`, `'mouseover'`, `'mouseout'`, `'mousemove'`, `'mousedown'`, `'mouseup'`, `'globalout'`, `'contextmenu'`. Note, both mouse and touch events are unified to the event type `'mouse{xxx}'`.
+
+Values:
+
+*   `true`: Enable to trigger events. But dispatching also requires option `silent` to be falsy.
+*   `false`: Disable to trigger mouse/touch events, even if option `silent` is falsy.
 
 Parameters of the event include:
 
 ```
 {
-    // Component type: xAxis, yAxis, radiusAxis, angleAxis
-    // Each of which has an attribute for index, e.g., xAxisIndex for xAxis
-    componentType: string,
-    // Value on axis before being formatted.
-    // Click on value label to trigger event.
-    value: '',
-    // Name of axis.
-    // Click on label name to trigger event.
-    name: ''
+    // Component type, e.g.,
+    // 'xAxis', 'yAxis', 'radiusAxis', 'angleAxis',
+    // 'singleAxis', 'parallelAxis', 'radar', etc.
+    componentType: string;
+    componentIndex: number;
+    // The same as `componentIndex`.
+    [componentType]Index?: number;
+
+    // The emitter of this event.
+    targetType: 'axisLabel' | 'axisName';
+
+    // A label string formatted by a built-in formatter;
+    // User-provided `axisLabel.formatter` does not affect this value.
+    // Present when `targetType: 'axisLabel'`.
+    value?: string;
+
+    // Present only if this is an axis label for "axis break".
+    break?: {
+        // Parsed break start.
+        start?: number;
+        // Parsed break start.
+        end?: number;
+    };
+
+    // `axis.name`.
+    // Present when `targetType: 'axisName'`.
+    name?: string;
 }
 ```
 
@@ -1281,6 +1314,8 @@ Example:
 formatter: '{value} kg'
 // Use callback.
 formatter: function (value, index, extra?) {
+    // Notice: when using `customValues`, parameter `index` is
+    // provided since `v6.1.0`.
     return value + 'kg';
 }
 ```
@@ -1295,7 +1330,7 @@ The break info can be obtained from the `extra` param:
 
 ```
 type AxisLabelFormatterExtraBreakPart = {
-    // If this label is a axis break start or end.
+    // If this label is an axis break start or end.
     break?: {
         type: 'start' | 'end';
         // The parsed `start`/`end`, always be numbers, and has been

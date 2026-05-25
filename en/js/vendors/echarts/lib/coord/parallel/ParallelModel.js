@@ -44,6 +44,8 @@
 import { __extends } from "tslib";
 import * as zrUtil from 'zrender/lib/core/util.js';
 import ComponentModel from '../../model/Component.js';
+export var COORD_SYS_TYPE_PARALLEL = 'parallel';
+export var COMPONENT_TYPE_PARALLEL = COORD_SYS_TYPE_PARALLEL;
 var ParallelModel = /** @class */function (_super) {
   __extends(ParallelModel, _super);
   function ParallelModel() {
@@ -90,7 +92,7 @@ var ParallelModel = /** @class */function (_super) {
       parallelAxisIndex.push(axisModel.componentIndex);
     });
   };
-  ParallelModel.type = 'parallel';
+  ParallelModel.type = COMPONENT_TYPE_PARALLEL;
   ParallelModel.dependencies = ['parallelAxis'];
   ParallelModel.layoutMode = 'box';
   ParallelModel.defaultOption = {

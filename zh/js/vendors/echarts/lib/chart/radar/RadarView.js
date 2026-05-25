@@ -47,6 +47,7 @@ import { setStatesStylesFromModel, toggleHoverEmphasis } from '../../util/states
 import * as zrUtil from 'zrender/lib/core/util.js';
 import * as symbolUtil from '../../util/symbol.js';
 import ChartView from '../../view/Chart.js';
+import { SERIES_TYPE_RADAR } from './RadarSeries.js';
 import { setLabelStyle, getLabelStatesModels } from '../../label/labelStyle.js';
 import ZRImage from 'zrender/lib/graphic/Image.js';
 import { saveOldStyle } from '../../animation/basicTransition.js';
@@ -54,7 +55,7 @@ var RadarView = /** @class */function (_super) {
   __extends(RadarView, _super);
   function RadarView() {
     var _this = _super !== null && _super.apply(this, arguments) || this;
-    _this.type = RadarView.type;
+    _this.type = SERIES_TYPE_RADAR;
     return _this;
   }
   RadarView.prototype.render = function (seriesModel, ecModel, api) {
@@ -224,7 +225,7 @@ var RadarView = /** @class */function (_super) {
     this.group.removeAll();
     this._data = null;
   };
-  RadarView.type = 'radar';
+  RadarView.type = SERIES_TYPE_RADAR;
   return RadarView;
 }(ChartView);
 export default RadarView;

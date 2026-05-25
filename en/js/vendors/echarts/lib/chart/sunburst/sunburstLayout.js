@@ -43,10 +43,13 @@
 */
 import { parsePercent } from '../../util/number.js';
 import * as zrUtil from 'zrender/lib/core/util.js';
+import { SERIES_TYPE_SUNBURST } from './SunburstSeries.js';
+import { createSimpleOverallStageHandler } from '../../util/model.js';
 // let PI2 = Math.PI * 2;
 var RADIAN = Math.PI / 180;
-export default function sunburstLayout(seriesType, ecModel, api) {
-  ecModel.eachSeriesByType(seriesType, function (seriesModel) {
+export var sunburstLayoutStageHandler = createSimpleOverallStageHandler(SERIES_TYPE_SUNBURST, sunburstLayout);
+function sunburstLayout(ecModel, api) {
+  ecModel.eachSeriesByType(SERIES_TYPE_SUNBURST, function (seriesModel) {
     var center = seriesModel.get('center');
     var radius = seriesModel.get('radius');
     if (!zrUtil.isArray(radius)) {

@@ -1,5 +1,6 @@
-import { DimensionIndex, DimensionName, OptionDataItem, ParsedValue, ParsedValueNumeric } from '../util/types.js';
+import { DimensionIndex, DimensionName, NullUndefined, OptionDataItem, ParsedValue, ParsedValueNumeric } from '../util/types.js';
 import { DataProvider } from './helper/dataProvider.js';
+import { DataSanitizationFilter } from './helper/dataValueHelper.js';
 import OrdinalMeta from './OrdinalMeta.js';
 import { Source } from './Source.js';
 export declare const CtorUint32Array: ArrayConstructor | Uint32ArrayConstructor;
@@ -116,7 +117,7 @@ declare class DataStore {
     indexOfRawIndex(rawIndex: number): number;
     getIndices(): ArrayLike<number>;
     /**
-     * Data filter.
+     * [NOTICE]: Performance-sensitive for large data.
      */
     filter(dims: DimensionIndex[], cb: FilterCb): DataStore;
     /**
@@ -156,15 +157,12 @@ declare class DataStore {
      * Data iteration
      * @param ctx default this
      * @example
-     *  list.each('x', function (x, idx) {});
-     *  list.each(['x', 'y'], function (x, y, idx) {});
+     *  list.each(0, function (x, idx) {});
+     *  list.each([0, 1], function (x, y, idx) {});
      *  list.each(function (idx) {})
      */
     each(dims: DimensionIndex[], cb: EachCb): void;
-    /**
-     * Get extent of data in one dimension
-     */
-    getDataExtent(dim: DimensionIndex): [number, number];
+    getDataExtent(dim: DimensionIndex, filter: DataSanitizationFilter | NullUndefined): [number, number];
     /**
      * Get raw data index.
      * Do not initialize.

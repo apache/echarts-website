@@ -1,8 +1,10 @@
 import SeriesModel from '../../model/Series.js';
+import { WhiskerBoxCommonMixin } from '../helper/whiskerBoxCommon.js';
 import { SeriesOption, SeriesOnCartesianOptionMixin, LayoutOrient, ItemStyleOption, ZRColor, ColorString, SeriesLabelOption, SeriesLargeOptionMixin, StatesOptionMixin, SeriesEncodeOptionMixin, DefaultEmphasisFocus, OptionDataValue } from '../../util/types.js';
 import SeriesData from '../../data/SeriesData.js';
 import Cartesian2D from '../../coord/cartesian/Cartesian2D.js';
 import { BrushCommonSelectorsForSeries } from '../../component/brush/selector.js';
+import type Axis2D from '../../coord/cartesian/Axis2D.js';
 declare type CandlestickDataValue = OptionDataValue[];
 interface CandlestickItemStyleOption extends ItemStyleOption {
     color0?: ZRColor;
@@ -14,6 +16,7 @@ export interface CandlestickStateOption {
     label?: SeriesLabelOption;
 }
 export interface CandlestickDataItemOption extends CandlestickStateOption, StatesOptionMixin<CandlestickStateOption, ExtraStateOption> {
+    cursor?: string;
     value: CandlestickDataValue;
 }
 interface ExtraStateOption {
@@ -32,9 +35,10 @@ export interface CandlestickSeriesOption extends SeriesOption<CandlestickStateOp
     barWidth?: number | string;
     data?: (CandlestickDataValue | CandlestickDataItemOption)[];
 }
+export declare const SERIES_TYPE_CANDLESTICK = "candlestick";
 declare class CandlestickSeriesModel extends SeriesModel<CandlestickSeriesOption> {
-    static readonly type = "series.candlestick";
-    readonly type = "series.candlestick";
+    static readonly type: string;
+    readonly type: string;
     static readonly dependencies: string[];
     coordinateSystem: Cartesian2D;
     dimensions: string[];
@@ -49,5 +53,8 @@ declare class CandlestickSeriesModel extends SeriesModel<CandlestickSeriesOption
      */
     getShadowDim(): string;
     brushSelector(dataIndex: number, data: SeriesData, selectors: BrushCommonSelectorsForSeries): boolean;
+}
+interface CandlestickSeriesModel extends WhiskerBoxCommonMixin<CandlestickSeriesOption> {
+    getBaseAxis(): Axis2D;
 }
 export default CandlestickSeriesModel;

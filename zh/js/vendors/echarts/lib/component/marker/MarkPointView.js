@@ -175,7 +175,8 @@ function createData(coordSys, seriesModel, mpModel) {
   var coordDimsInfos;
   if (coordSys) {
     coordDimsInfos = map(coordSys && coordSys.dimensions, function (coordDim) {
-      var info = seriesModel.getData().getDimensionInfo(seriesModel.getData().mapDimension(coordDim)) || {};
+      var data = seriesModel.getData();
+      var info = data.getDimensionInfo(data.mapDimension(coordDim)) || {};
       // In map series data don't have lng and lat dimension. Fallback to same with coordSys
       return extend(extend({}, info), {
         name: coordDim,

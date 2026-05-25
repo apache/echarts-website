@@ -25,7 +25,7 @@ declare class LineView extends ChartView {
     _coordSys: Cartesian2D | Polar;
     _endLabel: graphic.Text;
     _polyline: ECPolyline;
-    _polygon: ECPolygon;
+    _polygon?: ECPolygon;
     _stackedOnPoints: ArrayLike<number>;
     _points: ArrayLike<number>;
     _step: LineSeriesOption['step'];

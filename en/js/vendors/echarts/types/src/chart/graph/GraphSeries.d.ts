@@ -1,5 +1,5 @@
 import SeriesData from '../../data/SeriesData.js';
-import { SeriesOption, SeriesOnCartesianOptionMixin, SeriesOnPolarOptionMixin, SeriesOnCalendarOptionMixin, SeriesOnGeoOptionMixin, SeriesOnSingleOptionMixin, OptionDataValue, RoamOptionMixin, SeriesLabelOption, ItemStyleOption, LineStyleOption, SymbolOptionMixin, BoxLayoutOptionMixin, Dictionary, SeriesLineLabelOption, StatesOptionMixin, GraphEdgeItemObject, OptionDataValueNumeric, CallbackDataParams, DefaultEmphasisFocus, PreserveAspectMixin } from '../../util/types.js';
+import { SeriesOption, SeriesOnCartesianOptionMixin, SeriesOnPolarOptionMixin, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin, SeriesOnGeoOptionMixin, SeriesOnSingleOptionMixin, OptionDataValue, RoamOptionMixin, SeriesLabelOption, ItemStyleOption, LineStyleOption, SymbolOptionMixin, BoxLayoutOptionMixin, Dictionary, SeriesLineLabelOption, StatesOptionMixin, GraphEdgeItemObject, OptionDataValueNumeric, CallbackDataParams, DefaultEmphasisFocus, PreserveAspectMixin, RoamHostModel } from '../../util/types.js';
 import SeriesModel from '../../model/Series.js';
 import Graph from '../../data/Graph.js';
 import GlobalModel from '../../model/Global.js';
@@ -63,7 +63,7 @@ export interface GraphCategoryItemOption extends SymbolOptionMixin, GraphNodeSta
     name?: string;
     value?: OptionDataValue;
 }
-export interface GraphSeriesOption extends SeriesOption<GraphNodeStateOption<CallbackDataParams>, GraphNodeStatesMixin>, SeriesOnCartesianOptionMixin, SeriesOnPolarOptionMixin, SeriesOnCalendarOptionMixin, SeriesOnGeoOptionMixin, SeriesOnSingleOptionMixin, SymbolOptionMixin<CallbackDataParams>, RoamOptionMixin, BoxLayoutOptionMixin, PreserveAspectMixin {
+export interface GraphSeriesOption extends SeriesOption<GraphNodeStateOption<CallbackDataParams>, GraphNodeStatesMixin>, SeriesOnCartesianOptionMixin, SeriesOnPolarOptionMixin, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin, SeriesOnGeoOptionMixin, SeriesOnSingleOptionMixin, SymbolOptionMixin<CallbackDataParams>, RoamOptionMixin, BoxLayoutOptionMixin, PreserveAspectMixin {
     type?: 'graph';
     coordinateSystem?: string;
     legendHoverLink?: boolean;
@@ -77,10 +77,6 @@ export interface GraphSeriesOption extends SeriesOption<GraphNodeStateOption<Cal
      * @deprecated
      */
     focusNodeAdjacency?: boolean;
-    /**
-     * Symbol size scale ratio in roam
-     */
-    nodeScaleRatio?: 0.6;
     draggable?: boolean;
     edgeSymbol?: string | string[];
     edgeSymbolSize?: number | number[];
@@ -124,9 +120,10 @@ export interface GraphSeriesOption extends SeriesOption<GraphNodeStateOption<Cal
      */
     autoCurveness?: boolean | number | number[];
 }
-declare class GraphSeriesModel extends SeriesModel<GraphSeriesOption> {
-    static readonly type = "series.graph";
-    readonly type = "series.graph";
+export declare const SERIES_TYPE_GRAPH = "graph";
+declare class GraphSeriesModel extends SeriesModel<GraphSeriesOption> implements RoamHostModel {
+    static readonly type: string;
+    readonly type: string;
     static readonly dependencies: string[];
     private _categoriesData;
     private _categoriesModels;
@@ -145,9 +142,8 @@ declare class GraphSeriesModel extends SeriesModel<GraphSeriesOption> {
     getCategoriesData(): SeriesData;
     formatTooltip(dataIndex: number, multipleSeries: boolean, dataType: string): import("../../component/tooltip/tooltipMarkup").TooltipMarkupSection | import("../../component/tooltip/tooltipMarkup").TooltipMarkupNameValueBlock;
     _updateCategoriesData(): void;
-    setZoom(zoom: number): void;
-    setCenter(center: number[]): void;
     isAnimationEnabled(): boolean;
+    __ownRoamView(): import("../../coord/View").default;
     static defaultOption: GraphSeriesOption;
 }
 export default GraphSeriesModel;

@@ -1337,9 +1337,9 @@ See this example [example](https://echarts.apache.org/examples/en/editor.html?c=
 
 ### elements-image.cursor
 - **Type**: `string`
-- **Default**: `'pointer'`
+- **Default**: `pointer`
 
-The mouse style when mouse hovers on an element, the same as `cursor` property in `CSS`.
+The mouse style when mouse hovers over an element, the same as `cursor` property in `CSS`.
 
 ### elements-image.draggable
 - **Type**: `boolean|string`
@@ -2166,9 +2166,9 @@ See this example [example](https://echarts.apache.org/examples/en/editor.html?c=
 
 ### elements-text.cursor
 - **Type**: `string`
-- **Default**: `'pointer'`
+- **Default**: `pointer`
 
-The mouse style when mouse hovers on an element, the same as `cursor` property in `CSS`.
+The mouse style when mouse hovers over an element, the same as `cursor` property in `CSS`.
 
 ### elements-text.draggable
 - **Type**: `boolean|string`
@@ -3035,9 +3035,9 @@ See this example [example](https://echarts.apache.org/examples/en/editor.html?c=
 
 ### elements-rect.cursor
 - **Type**: `string`
-- **Default**: `'pointer'`
+- **Default**: `pointer`
 
-The mouse style when mouse hovers on an element, the same as `cursor` property in `CSS`.
+The mouse style when mouse hovers over an element, the same as `cursor` property in `CSS`.
 
 ### elements-rect.draggable
 - **Type**: `boolean|string`
@@ -3907,9 +3907,9 @@ See this example [example](https://echarts.apache.org/examples/en/editor.html?c=
 
 ### elements-circle.cursor
 - **Type**: `string`
-- **Default**: `'pointer'`
+- **Default**: `pointer`
 
-The mouse style when mouse hovers on an element, the same as `cursor` property in `CSS`.
+The mouse style when mouse hovers over an element, the same as `cursor` property in `CSS`.
 
 ### elements-circle.draggable
 - **Type**: `boolean|string`
@@ -4761,9 +4761,9 @@ See this example [example](https://echarts.apache.org/examples/en/editor.html?c=
 
 ### elements-ring.cursor
 - **Type**: `string`
-- **Default**: `'pointer'`
+- **Default**: `pointer`
 
-The mouse style when mouse hovers on an element, the same as `cursor` property in `CSS`.
+The mouse style when mouse hovers over an element, the same as `cursor` property in `CSS`.
 
 ### elements-ring.draggable
 - **Type**: `boolean|string`
@@ -5621,9 +5621,9 @@ See this example [example](https://echarts.apache.org/examples/en/editor.html?c=
 
 ### elements-sector.cursor
 - **Type**: `string`
-- **Default**: `'pointer'`
+- **Default**: `pointer`
 
-The mouse style when mouse hovers on an element, the same as `cursor` property in `CSS`.
+The mouse style when mouse hovers over an element, the same as `cursor` property in `CSS`.
 
 ### elements-sector.draggable
 - **Type**: `boolean|string`
@@ -6510,9 +6510,9 @@ See this example [example](https://echarts.apache.org/examples/en/editor.html?c=
 
 ### elements-arc.cursor
 - **Type**: `string`
-- **Default**: `'pointer'`
+- **Default**: `pointer`
 
-The mouse style when mouse hovers on an element, the same as `cursor` property in `CSS`.
+The mouse style when mouse hovers over an element, the same as `cursor` property in `CSS`.
 
 ### elements-arc.draggable
 - **Type**: `boolean|string`
@@ -7388,9 +7388,9 @@ See this example [example](https://echarts.apache.org/examples/en/editor.html?c=
 
 ### elements-polygon.cursor
 - **Type**: `string`
-- **Default**: `'pointer'`
+- **Default**: `pointer`
 
-The mouse style when mouse hovers on an element, the same as `cursor` property in `CSS`.
+The mouse style when mouse hovers over an element, the same as `cursor` property in `CSS`.
 
 ### elements-polygon.draggable
 - **Type**: `boolean|string`
@@ -8246,9 +8246,9 @@ See this example [example](https://echarts.apache.org/examples/en/editor.html?c=
 
 ### elements-polyline.cursor
 - **Type**: `string`
-- **Default**: `'pointer'`
+- **Default**: `pointer`
 
-The mouse style when mouse hovers on an element, the same as `cursor` property in `CSS`.
+The mouse style when mouse hovers over an element, the same as `cursor` property in `CSS`.
 
 ### elements-polyline.draggable
 - **Type**: `boolean|string`
@@ -9104,9 +9104,9 @@ See this example [example](https://echarts.apache.org/examples/en/editor.html?c=
 
 ### elements-line.cursor
 - **Type**: `string`
-- **Default**: `'pointer'`
+- **Default**: `pointer`
 
-The mouse style when mouse hovers on an element, the same as `cursor` property in `CSS`.
+The mouse style when mouse hovers over an element, the same as `cursor` property in `CSS`.
 
 ### elements-line.draggable
 - **Type**: `boolean|string`
@@ -9972,9 +9972,9 @@ See this example [example](https://echarts.apache.org/examples/en/editor.html?c=
 
 ### elements-bezierCurve.cursor
 - **Type**: `string`
-- **Default**: `'pointer'`
+- **Default**: `pointer`
 
-The mouse style when mouse hovers on an element, the same as `cursor` property in `CSS`.
+The mouse style when mouse hovers over an element, the same as `cursor` property in `CSS`.
 
 ### elements-bezierCurve.draggable
 - **Type**: `boolean|string`
@@ -10868,9 +10868,9 @@ See this example [example](https://echarts.apache.org/examples/en/editor.html?c=
 
 ### elements-compoundPath.cursor
 - **Type**: `string`
-- **Default**: `'pointer'`
+- **Default**: `pointer`
 
-The mouse style when mouse hovers on an element, the same as `cursor` property in `CSS`.
+The mouse style when mouse hovers over an element, the same as `cursor` property in `CSS`.
 
 ### elements-compoundPath.draggable
 - **Type**: `boolean|string`

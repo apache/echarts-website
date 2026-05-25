@@ -44,6 +44,8 @@
 import { eachAfter, eachBefore } from './traversalHelper.js';
 import { init, firstWalk, secondWalk, separation as sep, radialCoordinate } from './layoutHelper.js';
 import { createBoxLayoutReference, getLayoutRect } from '../../util/layout.js';
+// NOTE: preserve it as a function rather than StageHandler as a test case of
+// `Scheduler['wrapStageHandler']` and `detectSeriseType`.
 export default function treeLayout(ecModel, api) {
   ecModel.eachSeriesByType('tree', function (seriesModel) {
     commonLayout(seriesModel, api);

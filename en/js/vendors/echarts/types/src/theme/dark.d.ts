@@ -36,6 +36,16 @@ declare const theme: {
         iconStyle: {
             borderColor: string;
         };
+        feature: {
+            dataView: {
+                backgroundColor: string;
+                textColor: string;
+                textareaColor: string;
+                textareaBorderColor: string;
+                buttonColor: string;
+                buttonTextColor: string;
+            };
+        };
     };
     tooltip: {
         backgroundColor: string;

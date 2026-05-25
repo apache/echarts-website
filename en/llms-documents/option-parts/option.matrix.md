@@ -132,9 +132,9 @@ data: [{
 }]
 ```
 
-If [matrix.x.data](option.matrix.md#x.data) is not provided, it will be collected from `series.data` or `dataset.soruce`.
+If [matrix.x.data](option.matrix.md#x.data) is not provided, and [matrix.x.length](option.matrix.md#x.length) is provided, a [matrix.x.data](option.matrix.md#x.data) is automatically composed according to [matrix.x.length](option.matrix.md#x.length).
 
-See [matrix data collection example](https://echarts.apache.org/examples/en/editor.html?c=matrix-mini-bar-data-collection&edit=1&reset=1).
+Otherwise, if either of them are provided, [matrix.x.data](option.matrix.md#x.data) will be automatically collected from `series.data` or `dataset.source`. See [matrix data collection example](https://echarts.apache.org/examples/en/editor.html?c=matrix-mini-bar-data-collection&edit=1&reset=1).
 
 And in this case [series.encode](option.series-scatter.md#encode) can be used to specify the dimension from which value is collected. For example,
 
@@ -235,6 +235,15 @@ For example:
     },
 }
 ```
+
+### x.length
+- **Type**: `number`
+
+Since `v6.1.0`
+
+Users can omit [matrix.x.data](option.matrix.md#x.data) but only provide a [matrix.x.length](option.matrix.md#x.length), which defines the column number. This is useful for headless matrix (i.e., [matrix.x.show](option.matrix.md#x.show) is `false`), where only column and row number need to be specified.
+
+Note: [matrix.x.length](option.matrix.md#x.length) is ignored if [matrix.x.data](option.matrix.md#x.data) is specified.
 
 ### x.label
 - **Type**: `Object`
@@ -1277,7 +1286,14 @@ Opacity of the component. Supports value from 0 to 1, and the component will not
 - **Type**: `boolean`
 - **Default**: `false`
 
-Whether to ignore mouse events. Default value is false, for triggering and responding to mouse events.
+Whether to ignore user interactions (typically, mouse or touch events).
+
+*   `true`: Elements do not respond to mouse and touch interactions. As a result:
+    *   Interactive features are disabled, such as `tooltip`, hover state changing (i.e., `emphasis`), hover linking, etc.
+    *   Mouse/touch events are not dispatched to user-registered listeners (i.e., `chart.on('xxx', listener)`).
+*   `false`:
+    *   Interactive features are not disabled by this option, but they still depend on other relevant options to be enabled.
+    *   Mouse/touch events are not prevented by this option, but they still depend on other relevent options (typically, `triggerEvent`, if supported).
 
 ### x.cursor
 - **Type**: `string`
@@ -1630,9 +1646,9 @@ data: [{
 }]
 ```
 
-If [matrix.y.data](option.matrix.md#y.data) is not provided, it will be collected from `series.data` or `dataset.soruce`.
+If [matrix.y.data](option.matrix.md#y.data) is not provided, and [matrix.y.length](option.matrix.md#y.length) is provided, a [matrix.y.data](option.matrix.md#y.data) is automatically composed according to [matrix.y.length](option.matrix.md#y.length).
 
-See [matrix data collection example](https://echarts.apache.org/examples/en/editor.html?c=matrix-mini-bar-data-collection&edit=1&reset=1).
+Otherwise, if either of them are provided, [matrix.y.data](option.matrix.md#y.data) will be automatically collected from `series.data` or `dataset.source`. See [matrix data collection example](https://echarts.apache.org/examples/en/editor.html?c=matrix-mini-bar-data-collection&edit=1&reset=1).
 
 And in this case [series.encode](option.series-scatter.md#encode) can be used to specify the dimension from which value is collected. For example,
 
@@ -1733,6 +1749,15 @@ For example:
     },
 }
 ```
+
+### y.length
+- **Type**: `number`
+
+Since `v6.1.0`
+
+Users can omit [matrix.y.data](option.matrix.md#y.data) but only provide a [matrix.y.length](option.matrix.md#y.length), which defines the row number. This is useful for headless matrix (i.e., [matrix.y.show](option.matrix.md#y.show) is `false`), where only column and row number need to be specified.
+
+Note: [matrix.y.length](option.matrix.md#y.length) is ignored if [matrix.y.data](option.matrix.md#y.data) is specified.
 
 ### y.label
 - **Type**: `Object`
@@ -2775,7 +2800,14 @@ Opacity of the component. Supports value from 0 to 1, and the component will not
 - **Type**: `boolean`
 - **Default**: `false`
 
-Whether to ignore mouse events. Default value is false, for triggering and responding to mouse events.
+Whether to ignore user interactions (typically, mouse or touch events).
+
+*   `true`: Elements do not respond to mouse and touch interactions. As a result:
+    *   Interactive features are disabled, such as `tooltip`, hover state changing (i.e., `emphasis`), hover linking, etc.
+    *   Mouse/touch events are not dispatched to user-registered listeners (i.e., `chart.on('xxx', listener)`).
+*   `false`:
+    *   Interactive features are not disabled by this option, but they still depend on other relevant options to be enabled.
+    *   Mouse/touch events are not prevented by this option, but they still depend on other relevent options (typically, `triggerEvent`, if supported).
 
 ### y.cursor
 - **Type**: `string`
@@ -4226,7 +4258,14 @@ Opacity of the component. Supports value from 0 to 1, and the component will not
 - **Type**: `boolean`
 - **Default**: `false`
 
-Whether to ignore mouse events. Default value is false, for triggering and responding to mouse events.
+Whether to ignore user interactions (typically, mouse or touch events).
+
+*   `true`: Elements do not respond to mouse and touch interactions. As a result:
+    *   Interactive features are disabled, such as `tooltip`, hover state changing (i.e., `emphasis`), hover linking, etc.
+    *   Mouse/touch events are not dispatched to user-registered listeners (i.e., `chart.on('xxx', listener)`).
+*   `false`:
+    *   Interactive features are not disabled by this option, but they still depend on other relevant options to be enabled.
+    *   Mouse/touch events are not prevented by this option, but they still depend on other relevent options (typically, `triggerEvent`, if supported).
 
 ### body.cursor
 - **Type**: `string`
@@ -5389,7 +5428,14 @@ Opacity of the component. Supports value from 0 to 1, and the component will not
 - **Type**: `boolean`
 - **Default**: `false`
 
-Whether to ignore mouse events. Default value is false, for triggering and responding to mouse events.
+Whether to ignore user interactions (typically, mouse or touch events).
+
+*   `true`: Elements do not respond to mouse and touch interactions. As a result:
+    *   Interactive features are disabled, such as `tooltip`, hover state changing (i.e., `emphasis`), hover linking, etc.
+    *   Mouse/touch events are not dispatched to user-registered listeners (i.e., `chart.on('xxx', listener)`).
+*   `false`:
+    *   Interactive features are not disabled by this option, but they still depend on other relevant options to be enabled.
+    *   Mouse/touch events are not prevented by this option, but they still depend on other relevent options (typically, `triggerEvent`, if supported).
 
 ### corner.cursor
 - **Type**: `string`
@@ -5559,5 +5605,41 @@ matrix: {
         show: true
     },
     // ...
+}
+```
+
+## triggerEvent
+- **Type**: `boolean`
+- **Default**: `false`
+
+Since `v6.1.0`
+
+Whether to enable to dispatch mouse/touch events to user-registered listeners (i.e., `chart.on('xxx', function (event) {})`).
+
+Supported mouse/touch events are `'click'`, `'dblclick'`, `'mouseover'`, `'mouseout'`, `'mousemove'`, `'mousedown'`, `'mouseup'`, `'globalout'`, `'contextmenu'`. Note, both mouse and touch events are unified to the event type `'mouse{xxx}'`.
+
+Values:
+
+*   `true`: Enable to trigger events. But dispatching also requires option `silent` to be falsy.
+*   `false`: Disable to trigger mouse/touch events, even if option `silent` is falsy.
+
+Parameters of the event include:
+
+```
+{
+    componentType: 'matrix';
+    // legend component index. (based on echarts option)
+    componentIndex: number;
+    // The same as `componentIndex`.
+    matrixIndex: number;
+
+    targetType: 'x' | 'y' | 'body' | 'corner';
+
+    // Displayed cell text.
+    name: string;
+    // Cell value (provided by echarts option).
+    value: textValue;
+    // Cell coord. That is `MatrixXYLocator[]`.
+    coord: number;
 }
 ```

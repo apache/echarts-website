@@ -1476,11 +1476,109 @@ For example:
 ## data
 - **Type**: `Array`
 
-Data array of legend. An array item is usually a `name` representing string. (If it is a [pie chart](option.series-pie.md), it could also be the `name` of a single data in the pie chart) of a series. Legend component would automatically calculate the color and icon according to series. Special string `''` (null string) or `'\n'` (new line string) can be used for a new line.
+**Explicitly Specify `legend.data`:**
 
-If `data` is not specified, it will be auto collected from series. For most of series, it will be collected from [series.name](../option.md#series.name) or the dimension name specified by `seriesName` of [series.encode](../option.md#series.encode). For some types of series like [pie](option.series-pie.md) and [funnel](option.series-funnel.md), it will be collected from the name field of `series.data`.
+`legend.data` is an array. An array item can be a string (representing `name`) or an object (containing a `name` field).
 
-If you need to set the style for a single item, you may also set the configuration of it. In this case, `name` attribute is used to represent name of `series`.
+If the `name` of an array item is a special string `''` or `'\n'`, this array item is only used to create a line break.
+
+```
+legend: {
+    data: ['a', 'b', '\n', 'c', 'd']
+    // The final displayed items are (line wrapped):
+    //  'a' 'b'
+    //  'c' 'd'
+}
+```
+
+If the `name` of an array item dose not match any `LEGEND_TARGET`, this legend item is ignored. (See also the description of `LEGEND_TARGET` below.)
+
+  
+
+**Automatically Collect `legend.data`:**
+
+If `legend.data` is not explicitly specified, it is automatically collected from `series` or `dataset`.
+
+*   It is basically collected from [series.name](../option.md#series.name).
+*   It can also collect from `dataset` according to the dimension specified in `seriesName` field in [series.encode](../option.md#series.encode).
+*   Some series supports `LEGEND_CONTROL_SERIES_DATA_ITEM` (see details below). It is collected from the `name` field (if present) of each `series.data` item. For a single series, if these `name`s from `series.data` are collected, series name is no longer collected.
+
+Some examples:
+
+```
+option = {
+    legend: {/* No `legend.data` field is specified. */},
+    xAxis: {},
+    yAxis: {},
+    series: [{
+        type: 'line', name: 'lineA', data: [11, 22]
+    }, {
+        type: 'line', name: 'lineB', data: [111, 222]
+    }, {
+        type: 'pie', name: 'pieC',
+        data: [
+            {name: 'pieItemA', value: 9},
+            {name: 'pieItemB', value: 8},
+            {name: 'pieItemC', value: 7},
+        ]
+    }],
+}
+// The final displayed legend items are:
+//  'lineA' 'lineB' 'pieItemA' 'pieItemB' 'pieItemC'
+```
+
+```
+option = {
+    legend: {/* No `legend.data` field is specified. */},
+    dataset: {
+        source: [
+            [null, 'nameH', 'nameI', 'nameJ', 'nameK'],
+            ['2012-01', 32, 65, 71, 31],
+            ['2012-02', 41, 67, 89, 23],
+            ['2012-03', 58, 61, 97, 12],
+            ['2012-04', 67, 73, 105, 9],
+            ['2012-05', 72, 67, 122, 18],
+        ]
+    },
+    xAxis: {type: 'category'},
+    yAxis: {},
+    series: [{
+        type: 'bar',
+        // Retrieve `seriesName` from dataset column with index 1; get 'nameH'.
+        encode: {x: 0, y: 1, seriesName: 1}
+    }, {
+        type: 'bar',
+        // Retrieve `seriesName` from dataset column with index 3; get 'nameJ'.
+        encode: { x: 0, y: 3, seriesName: 3 }
+    }, {
+        type: 'bar',
+        // Retrieve `seriesName` from dataset column with index 3; get 'nameI'.
+        encode: { x: 0, y: 2, seriesName: 2 }
+    }]
+};
+// The final displayed legend items are:
+//  'nameH' 'nameJ' 'nameI'
+```
+
+  
+
+**LEGEND\_TARGET and LEGEND\_MATCHING\_RULES:**
+
+A legend item can control the visibility of a entire series or a series data item (see `LEGEND_CONTROL_SERIES_DATA_ITEM` below). They can be called as `LEGEND_TARGET`. A `LEGEND_TARGET` is under control if and only if the `name` from `legend.data` (either explicitly specified or automatically collected) matches the name from `LEGEND_TARGET`, i.e., matches series names or series data item names.
+
+This mapping is allowed to be many-to-many. For example, if multiple series share the same series name, they can be controlled by a single legend item.
+
+  
+
+**LEGEND\_CONTROL\_SERIES\_DATA\_ITEM:**
+
+These series support that legend items control each series data items: [pie](option.series-pie.md), [funnel](option.series-funnel.md), [chord](option.series-chord.md), [graph](option.series-graph.md), [radar](option.series-radar.md) and [themeRiver](option.series-themeRiver.md). They are matched according to `name` fields of legend items and series data items.
+
+  
+
+**Legend Item Styles:**
+
+If you need to set the style for a single item, you may also set the configuration of it.
 
 Example:
 
@@ -4102,4 +4200,30 @@ The gap between selector button and legend component.
 
 Since `v6.0.0`
 
-Set this to `true` to enable triggering events.
+Whether to enable to dispatch mouse/touch events to user-registered listeners (i.e., `chart.on('xxx', function (event) {})`).
+
+Supported mouse/touch events are `'click'`, `'dblclick'`, `'mouseover'`, `'mouseout'`, `'mousemove'`, `'mousedown'`, `'mouseup'`, `'globalout'`, `'contextmenu'`. Note, both mouse and touch events are unified to the event type `'mouse{xxx}'`.
+
+Values:
+
+*   `true`: Enable to trigger events. But dispatching also requires option `silent` to be falsy.
+*   `false`: Disable to trigger mouse/touch events, even if option `silent` is falsy.
+
+Parameters of the event include:
+
+```
+{
+    componentType: 'legend';
+    // legend component index. (based on echarts option)
+    componentIndex: number;
+    // The `name` of this legend item, which controls the
+    // visibility of LEGEND_TARGET.
+    // See `legend.data` for more details.
+    value: string;
+    // The index of the triggering legend item.
+    dataIndex: number;
+    // The index of the first series that matches
+    // this legend item. (based on echarts option)
+    seriesIndex: number;
+}
+```

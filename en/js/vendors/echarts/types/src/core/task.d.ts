@@ -72,6 +72,14 @@ export declare class Task<Ctx extends TaskContext> {
      * @return whether unfinished.
      */
     perform(performArgs?: PerformArgs): boolean;
+    /**
+     * @tutorial [EC_TASK_DIRTY]
+     *  Task `dirty()` calls typically originate from a trigger of EC_FULL_UPDATE_CYCLE and
+     *  EC_PARTIAL_UPDATE_CYCLE) (See comments in EC_CYCLE. Generally, task dirty propagates
+     *  to downstream tasks.
+     *  Task dirty leads to the `StageHandler['reset']` or `StageHandler['overallReset']` call,
+     *  which discards the previous result and starts over the processing.
+     */
     dirty(): void;
     private _doProgress;
     private _doReset;

@@ -43,16 +43,15 @@
 */
 import dataZoomProcessor from './dataZoomProcessor.js';
 import installDataZoomAction from './dataZoomAction.js';
-var installed = false;
+import { makeCallOnlyOnce } from '../../util/model.js';
+var callOnlyOnce = makeCallOnlyOnce();
 export default function installCommon(registers) {
-  if (installed) {
-    return;
-  }
-  installed = true;
-  registers.registerProcessor(registers.PRIORITY.PROCESSOR.FILTER, dataZoomProcessor);
-  installDataZoomAction(registers);
-  registers.registerSubTypeDefaulter('dataZoom', function () {
-    // Default 'slider' when no type specified.
-    return 'slider';
+  callOnlyOnce(registers, function () {
+    registers.registerProcessor(registers.PRIORITY.PROCESSOR.FILTER, dataZoomProcessor);
+    installDataZoomAction(registers);
+    registers.registerSubTypeDefaulter('dataZoom', function () {
+      // Default 'slider' when no type specified.
+      return 'slider';
+    });
   });
 }

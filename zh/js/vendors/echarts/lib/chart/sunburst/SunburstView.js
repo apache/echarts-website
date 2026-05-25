@@ -46,13 +46,14 @@ import * as zrUtil from 'zrender/lib/core/util.js';
 import ChartView from '../../view/Chart.js';
 import SunburstPiece from './SunburstPiece.js';
 import DataDiffer from '../../data/DataDiffer.js';
+import { SERIES_TYPE_SUNBURST } from './SunburstSeries.js';
 import { ROOT_TO_NODE_ACTION } from './sunburstAction.js';
 import { windowOpen } from '../../util/format.js';
 var SunburstView = /** @class */function (_super) {
   __extends(SunburstView, _super);
   function SunburstView() {
     var _this = _super !== null && _super.apply(this, arguments) || this;
-    _this.type = SunburstView.type;
+    _this.type = SERIES_TYPE_SUNBURST;
     return _this;
   }
   SunburstView.prototype.render = function (seriesModel, ecModel, api,
@@ -200,7 +201,7 @@ var SunburstView = /** @class */function (_super) {
       return radius <= itemLayout.r && radius >= itemLayout.r0;
     }
   };
-  SunburstView.type = 'sunburst';
+  SunburstView.type = SERIES_TYPE_SUNBURST;
   return SunburstView;
 }(ChartView);
 export default SunburstView;

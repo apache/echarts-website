@@ -47,14 +47,16 @@
 import SingleAxis from './SingleAxis.js';
 import * as axisHelper from '../axisHelper.js';
 import { createBoxLayoutReference, getLayoutRect } from '../../util/layout.js';
-import { each } from 'zrender/lib/core/util.js';
+import { COORD_SYS_TYPE_SINGLE } from './AxisModel.js';
+import { scaleCalcNice } from '../axisNiceTicks.js';
+import { AXIS_EXTENT_INFO_BUILD_FROM_COORD_SYS_UPDATE, scaleRawExtentInfoCreate } from '../scaleRawExtentInfo.js';
 export var singleDimensions = ['single'];
 /**
  * Create a single coordinates system.
  */
 var Single = /** @class */function () {
   function Single(axisModel, ecModel, api) {
-    this.type = 'single';
+    this.type = COORD_SYS_TYPE_SINGLE;
     this.dimension = 'single';
     /**
      * Add it just for draw tooltip.
@@ -69,9 +71,9 @@ var Single = /** @class */function () {
    */
   Single.prototype._init = function (axisModel, ecModel, api) {
     var dim = this.dimension;
-    var axis = new SingleAxis(dim, axisHelper.createScaleByModel(axisModel), [0, 0], axisModel.get('type'), axisModel.get('position'));
-    var isCategory = axis.type === 'category';
-    axis.onBand = isCategory && axisModel.get('boundaryGap');
+    var axisType = axisHelper.determineAxisType(axisModel);
+    var axis = new SingleAxis(dim, axisHelper.createScaleByModel(axisModel, axisType, true), [0, 0], axisType, axisModel.get('position'));
+    axis.onBand = axisHelper.isAxisOnBand(axis.scale, axisModel);
     axis.inverse = axisModel.get('inverse');
     axis.orient = axisModel.get('orient');
     axisModel.axis = axis;
@@ -83,15 +85,9 @@ var Single = /** @class */function () {
    * Update axis scale after data processed
    */
   Single.prototype.update = function (ecModel, api) {
-    ecModel.eachSeries(function (seriesModel) {
-      if (seriesModel.coordinateSystem === this) {
-        var data_1 = seriesModel.getData();
-        each(data_1.mapDimensionsAll(this.dimension), function (dim) {
-          this._axis.scale.unionExtentFromData(data_1, dim);
-        }, this);
-        axisHelper.niceScaleExtent(this._axis.scale, this._axis.model);
-      }
-    }, this);
+    var axis = this._axis;
+    scaleRawExtentInfoCreate(axis, AXIS_EXTENT_INFO_BUILD_FROM_COORD_SYS_UPDATE);
+    scaleCalcNice(axis);
   };
   /**
    * Resize the single coordinate system.

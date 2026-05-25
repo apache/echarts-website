@@ -47,7 +47,7 @@ import * as graphicUtil from '../../util/graphic.js';
 import { setDefaultStateProxy, toggleHoverEmphasis } from '../../util/states.js';
 import * as labelStyleHelper from '../../label/labelStyle.js';
 import { getDefaultLabel } from '../helper/labelHelper.js';
-import { getLayoutOnAxis } from '../../layout/barGrid.js';
+import { computeBarLayoutForCustomSeries } from '../../layout/barGrid.js';
 import DataDiffer from '../../data/DataDiffer.js';
 import ChartView from '../../view/Chart.js';
 import { createClipPath } from '../helper/createClipPathFromCoordSys.js';
@@ -66,6 +66,7 @@ import { applyLeaveTransition, applyUpdateTransition } from '../../animation/cus
 import { applyKeyframeAnimation, stopPreviousKeyframeAnimationAndRestore } from '../../animation/customGraphicKeyframeAnimation.js';
 import { getCustomSeries } from './customSeriesRegister.js';
 import tokens from '../../visual/tokens.js';
+import { getIncrementalId } from '../../util/model.js';
 var EMPHASIS = 'emphasis';
 var NORMAL = 'normal';
 var BLUR = 'blur';
@@ -181,8 +182,8 @@ var CustomChartView = /** @class */function (_super) {
     var progressiveEls = this._progressiveEls = [];
     function setIncrementalAndHoverLayer(el) {
       if (!el.isGroup) {
-        el.incremental = true;
-        el.ensureState('emphasis').hoverLayer = true;
+        el.incremental = getIncrementalId(customSeries);
+        el.ensureState('emphasis').hoverLayer = graphicUtil.HOVER_LAYER_FOR_INCREMENTAL;
       }
     }
     for (var idx = params.start; idx < params.end; idx++) {
@@ -607,7 +608,7 @@ function makeRenderItem(customSeries, data, ecModel, api) {
   function barLayout(opt) {
     if (coordSys.type === 'cartesian2d') {
       var baseAxis = coordSys.getBaseAxis();
-      return getLayoutOnAxis(defaults({
+      return computeBarLayoutForCustomSeries(defaults({
         axis: baseAxis
       }, opt));
     }

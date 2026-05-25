@@ -41,84 +41,98 @@
 * specific language governing permissions and limitations
 * under the License.
 */
-// @ts-nocheck
-/* global BMap */
-import { util as zrUtil, graphic, matrix } from 'echarts';
-function BMapCoordSys(bmap, api) {
-  this._bmap = bmap;
-  this.dimensions = ['lng', 'lat'];
-  this._mapOffset = [0, 0];
-  this._api = api;
-  this._projection = new BMap.MercatorProjection();
+/* global document */
+import { util as zrUtil, graphic, matrix, registerCoordinateSystem } from 'echarts';
+import { COMPONENT_MAIN_TYPE_BMAP } from './BMapModel.js';
+var COORD_SYS_BMAP = COMPONENT_MAIN_TYPE_BMAP;
+function makeDimensions() {
+  return ['lng', 'lat'];
 }
-BMapCoordSys.prototype.type = 'bmap';
-BMapCoordSys.prototype.dimensions = ['lng', 'lat'];
-BMapCoordSys.prototype.setZoom = function (zoom) {
-  this._zoom = zoom;
-};
-BMapCoordSys.prototype.setCenter = function (center) {
-  this._center = this._projection.lngLatToPoint(new BMap.Point(center[0], center[1]));
-};
-BMapCoordSys.prototype.setMapOffset = function (mapOffset) {
-  this._mapOffset = mapOffset;
-};
-BMapCoordSys.prototype.getBMap = function () {
-  return this._bmap;
-};
-BMapCoordSys.prototype.dataToPoint = function (data) {
-  var point = new BMap.Point(data[0], data[1]);
-  // TODO mercator projection is toooooooo slow
-  // let mercatorPoint = this._projection.lngLatToPoint(point);
-  // let width = this._api.getZr().getWidth();
-  // let height = this._api.getZr().getHeight();
-  // let divider = Math.pow(2, 18 - 10);
-  // return [
-  //     Math.round((mercatorPoint.x - this._center.x) / divider + width / 2),
-  //     Math.round((this._center.y - mercatorPoint.y) / divider + height / 2)
-  // ];
-  var px = this._bmap.pointToOverlayPixel(point);
-  var mapOffset = this._mapOffset;
-  return [px.x - mapOffset[0], px.y - mapOffset[1]];
-};
-BMapCoordSys.prototype.pointToData = function (pt) {
-  var mapOffset = this._mapOffset;
-  pt = this._bmap.overlayPixelToPoint({
-    x: pt[0] + mapOffset[0],
-    y: pt[1] + mapOffset[1]
-  });
-  return [pt.lng, pt.lat];
-};
-BMapCoordSys.prototype.getViewRect = function () {
-  var api = this._api;
-  return new graphic.BoundingRect(0, 0, api.getWidth(), api.getHeight());
-};
-BMapCoordSys.prototype.getRoamTransform = function () {
-  return matrix.create();
-};
-BMapCoordSys.prototype.prepareCustoms = function () {
-  var rect = this.getViewRect();
-  return {
-    coordSys: {
-      // The name exposed to user is always 'cartesian2d' but not 'grid'.
-      type: 'bmap',
-      x: rect.x,
-      y: rect.y,
-      width: rect.width,
-      height: rect.height
-    },
-    api: {
-      coord: zrUtil.bind(this.dataToPoint, this),
-      size: zrUtil.bind(dataToCoordSize, this)
-    }
+var BMapCoordSys = /** @class */function () {
+  function BMapCoordSys(bmap, api) {
+    this.dimensions = makeDimensions();
+    this.type = COORD_SYS_BMAP;
+    this._mapOffset = [0, 0];
+    this._projection = new BMap.MercatorProjection();
+    this._bmap = bmap;
+    this._api = api;
+  }
+  BMapCoordSys.prototype.setZoom = function (zoom) {
+    this._zoom = zoom;
   };
-};
-BMapCoordSys.prototype.convertToPixel = function (ecModel, finder, value) {
-  // here we ignore finder as only one bmap component is allowed
-  return this.dataToPoint(value);
-};
-BMapCoordSys.prototype.convertFromPixel = function (ecModel, finder, value) {
-  return this.pointToData(value);
-};
+  BMapCoordSys.prototype.setCenter = function (center) {
+    this._center = this._projection.lngLatToPoint(new BMap.Point(center[0], center[1]));
+  };
+  BMapCoordSys.prototype.setMapOffset = function (mapOffset) {
+    this._mapOffset = mapOffset;
+  };
+  BMapCoordSys.prototype.getBMap = function () {
+    return this._bmap;
+  };
+  BMapCoordSys.prototype.dataToPoint = function (data) {
+    var point = new BMap.Point(data[0], data[1]);
+    // TODO mercator projection is toooooooo slow
+    // let mercatorPoint = this._projection.lngLatToPoint(point);
+    // let width = this._api.getZr().getWidth();
+    // let height = this._api.getZr().getHeight();
+    // let divider = Math.pow(2, 18 - 10);
+    // return [
+    //     Math.round((mercatorPoint.x - this._center.x) / divider + width / 2),
+    //     Math.round((this._center.y - mercatorPoint.y) / divider + height / 2)
+    // ];
+    var px = this._bmap.pointToOverlayPixel(point);
+    var mapOffset = this._mapOffset;
+    return [px.x - mapOffset[0], px.y - mapOffset[1]];
+  };
+  BMapCoordSys.prototype.pointToData = function (point) {
+    var mapOffset = this._mapOffset;
+    var pt = this._bmap.overlayPixelToPoint({
+      x: point[0] + mapOffset[0],
+      y: point[1] + mapOffset[1]
+    });
+    return [pt.lng, pt.lat];
+  };
+  BMapCoordSys.prototype.containPoint = function (point) {
+    // Currently, bmap takes the entire canvas.
+    return true;
+  };
+  BMapCoordSys.prototype.getViewRect = function () {
+    var api = this._api;
+    return new graphic.BoundingRect(0, 0, api.getWidth(), api.getHeight());
+  };
+  BMapCoordSys.prototype.getRoamTransform = function () {
+    return matrix.create();
+  };
+  BMapCoordSys.prototype.prepareCustoms = function () {
+    var rect = this.getViewRect();
+    return {
+      coordSys: {
+        // The name exposed to user is always 'cartesian2d' but not 'grid'.
+        type: COORD_SYS_BMAP,
+        x: rect.x,
+        y: rect.y,
+        width: rect.width,
+        height: rect.height
+      },
+      api: {
+        coord: zrUtil.bind(this.dataToPoint, this),
+        size: zrUtil.bind(dataToCoordSize, this)
+      }
+    };
+  };
+  BMapCoordSys.prototype.convertToPixel = function (ecModel, finder, value) {
+    // here we ignore finder as only one bmap component is allowed
+    return this.dataToPoint(value);
+  };
+  BMapCoordSys.prototype.convertFromPixel = function (ecModel, finder, value) {
+    return this.pointToData(value);
+  };
+  // For deciding which dimensions to use when creating list data
+  BMapCoordSys.dimensions = makeDimensions();
+  return BMapCoordSys;
+}();
+export { BMapCoordSys };
+BMapCoordSys.prototype.dimensions = makeDimensions(); // For backward compatibility.
 function dataToCoordSize(dataSize, dataItem) {
   dataItem = dataItem || [0, 0];
   return zrUtil.map([0, 1], function (dimIdx) {
@@ -133,17 +147,12 @@ function dataToCoordSize(dataSize, dataItem) {
   }, this);
 }
 var Overlay;
-// For deciding which dimensions to use when creating list data
-BMapCoordSys.dimensions = BMapCoordSys.prototype.dimensions;
 function createOverlayCtor() {
   function Overlay(root) {
     this._root = root;
   }
   Overlay.prototype = new BMap.Overlay();
   /**
-   * 初始化
-   *
-   * @param {BMap.Map} map
    * @override
    */
   Overlay.prototype.initialize = function (map) {
@@ -160,7 +169,7 @@ BMapCoordSys.create = function (ecModel, api) {
   var bmapCoordSys;
   var root = api.getDom();
   // TODO Dispose
-  ecModel.eachComponent('bmap', function (bmapModel) {
+  ecModel.eachComponent(COMPONENT_MAIN_TYPE_BMAP, function (bmapModel) {
     var painter = api.getZr().painter;
     var viewportRoot = painter.getViewportRoot();
     if (typeof BMap === 'undefined') {
@@ -225,11 +234,11 @@ BMapCoordSys.create = function (ecModel, api) {
     bmapModel.coordinateSystem = bmapCoordSys;
   });
   ecModel.eachSeries(function (seriesModel) {
-    if (seriesModel.get('coordinateSystem') === 'bmap') {
+    if (seriesModel.get('coordinateSystem') === COORD_SYS_BMAP) {
       seriesModel.coordinateSystem = bmapCoordSys;
     }
   });
   // return created coordinate systems
   return bmapCoordSys && [bmapCoordSys];
 };
-export default BMapCoordSys;
+registerCoordinateSystem('bmap', BMapCoordSys);

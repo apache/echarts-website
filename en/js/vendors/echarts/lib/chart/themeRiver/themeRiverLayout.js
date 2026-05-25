@@ -43,8 +43,11 @@
 */
 import * as zrUtil from 'zrender/lib/core/util.js';
 import * as numberUtil from '../../util/number.js';
-export default function themeRiverLayout(ecModel, api) {
-  ecModel.eachSeriesByType('themeRiver', function (seriesModel) {
+import { SERIES_TYPE_THEME_RIVER } from './ThemeRiverSeries.js';
+import { createSimpleOverallStageHandler } from '../../util/model.js';
+export var themeRiverLayoutStageHandler = createSimpleOverallStageHandler(SERIES_TYPE_THEME_RIVER, themeRiverLayout);
+function themeRiverLayout(ecModel, api) {
+  ecModel.eachSeriesByType(SERIES_TYPE_THEME_RIVER, function (seriesModel) {
     var data = seriesModel.getData();
     var single = seriesModel.coordinateSystem;
     var layoutInfo = {};

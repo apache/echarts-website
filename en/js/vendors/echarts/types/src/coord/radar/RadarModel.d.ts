@@ -1,9 +1,13 @@
 import ComponentModel from '../../model/Component.js';
-import { ComponentOption, CircleLayoutOptionMixin, LabelOption, ColorString } from '../../util/types.js';
+import { ComponentOption, CircleLayoutOptionMixin, LabelOption, ColorString, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin } from '../../util/types.js';
 import { AxisBaseOption, CategoryAxisBaseOption, ValueAxisBaseOption } from '../axisCommonTypes.js';
 import { AxisBaseModel } from '../AxisBaseModel.js';
-import Radar from './Radar.js';
+import type Radar from './Radar.js';
 import { CoordinateSystemHostModel } from '../../coord/CoordinateSystem.js';
+export declare const COORD_SYS_TYPE_RADAR = "radar";
+export declare const COMPONENT_TYPE_RADAR = "radar";
+export declare const SERIES_TYPE_RADAR = "radar";
+export declare const RADAR_DEFAULT_SPLIT_NUMBER = 5;
 export interface RadarIndicatorOption {
     name?: string;
     /**
@@ -15,9 +19,10 @@ export interface RadarIndicatorOption {
     color?: ColorString;
     axisType?: 'value' | 'log';
 }
-export interface RadarOption extends ComponentOption, CircleLayoutOptionMixin {
+export interface RadarOption extends ComponentOption, CircleLayoutOptionMixin, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin {
     mainType?: 'radar';
     startAngle?: number;
+    clockwise?: boolean;
     shape?: 'polygon' | 'circle';
     axisLine?: AxisBaseOption['axisLine'];
     axisTick?: AxisBaseOption['axisTick'];

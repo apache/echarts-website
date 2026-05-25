@@ -53,7 +53,9 @@ var AxisPointerView = /** @class */function (_super) {
   }
   AxisPointerView.prototype.render = function (globalAxisPointerModel, ecModel, api) {
     var globalTooltipModel = ecModel.getComponent('tooltip');
-    var triggerOn = globalAxisPointerModel.get('triggerOn') || globalTooltipModel && globalTooltipModel.get('triggerOn') || 'mousemove|click';
+    var triggerOn = globalAxisPointerModel.get('triggerOn')
+    // mousewheel can change view by dataZoom.
+    || globalTooltipModel && globalTooltipModel.get('triggerOn') || 'mousemove|click|mousewheel';
     // Register global listener in AxisPointerView to enable
     // AxisPointerView to be independent to Tooltip.
     globalListener.register('axisPointer', api, function (currTrigger, e, dispatchAction) {

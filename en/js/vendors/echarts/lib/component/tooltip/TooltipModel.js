@@ -63,7 +63,7 @@ var TooltipModel = /** @class */function (_super) {
     // 'item' | 'axis' | 'none'
     trigger: 'item',
     // 'click' | 'mousemove' | 'none'
-    triggerOn: 'mousemove|click',
+    triggerOn: 'mousemove|click|mousewheel',
     alwaysShowContent: false,
     renderMode: 'auto',
     // whether restraint content inside viewRect.

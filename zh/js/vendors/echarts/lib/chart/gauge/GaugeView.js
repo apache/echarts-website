@@ -47,7 +47,7 @@ import * as graphic from '../../util/graphic.js';
 import { setStatesStylesFromModel, toggleHoverEmphasis } from '../../util/states.js';
 import { createTextStyle, setLabelValueAnimation, animateLabelValue } from '../../label/labelStyle.js';
 import ChartView from '../../view/Chart.js';
-import { parsePercent, round, linearMap } from '../../util/number.js';
+import { parsePercent, round, linearMap, DEFAULT_PRECISION_FOR_ROUNDING_ERROR } from '../../util/number.js';
 import Sausage from '../../util/shape/sausage.js';
 import { createSymbol } from '../../util/symbol.js';
 import ZRImage from 'zrender/lib/graphic/Image.js';
@@ -209,7 +209,9 @@ var GaugeView = /** @class */function (_super) {
       // Label
       if (labelModel.get('show')) {
         var distance = labelModel.get('distance') + splitLineDistance;
-        var label = formatLabel(round(i / splitNumber * (maxVal - minVal) + minVal), labelModel.get('formatter'));
+        var label = formatLabel(
+        // multiply firstly to avoid rounding error.
+        round(i * (maxVal - minVal) / splitNumber + minVal, DEFAULT_PRECISION_FOR_ROUNDING_ERROR), labelModel.get('formatter'));
         var autoColor = getColor(i / splitNumber);
         var textStyleX = unitX * (r - splitLineLen - distance) + cx;
         var textStyleY = unitY * (r - splitLineLen - distance) + cy;
@@ -414,6 +416,7 @@ var GaugeView = /** @class */function (_super) {
         var focus = emphasisModel.get('focus');
         var blurScope = emphasisModel.get('blurScope');
         var emphasisDisabled = emphasisModel.get('disabled');
+        var autoColor = getColor(linearMap(data.get(valueDim, idx), valueExtent, [0, 1], true));
         if (showPointer) {
           var pointer = data.getItemGraphicEl(idx);
           var symbolStyle = data.getItemVisual(idx, 'style');
@@ -433,7 +436,7 @@ var GaugeView = /** @class */function (_super) {
           }
           pointer.setStyle(itemModel.getModel(['pointer', 'itemStyle']).getItemStyle());
           if (pointer.style.fill === 'auto') {
-            pointer.setStyle('fill', getColor(linearMap(data.get(valueDim, idx), valueExtent, [0, 1], true)));
+            pointer.setStyle('fill', autoColor);
           }
           pointer.z2EmphasisLift = 0;
           setStatesStylesFromModel(pointer, itemModel);
@@ -443,6 +446,9 @@ var GaugeView = /** @class */function (_super) {
           var progress = progressList[idx];
           progress.useStyle(data.getItemVisual(idx, 'style'));
           progress.setStyle(itemModel.getModel(['progress', 'itemStyle']).getItemStyle());
+          if (progress.style.fill === 'auto') {
+            progress.setStyle('fill', autoColor);
+          }
           progress.z2EmphasisLift = 0;
           setStatesStylesFromModel(progress, itemModel);
           toggleHoverEmphasis(progress, focus, blurScope, emphasisDisabled);

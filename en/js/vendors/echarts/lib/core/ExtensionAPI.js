@@ -42,6 +42,7 @@
 * under the License.
 */
 import * as zrUtil from 'zrender/lib/core/util.js';
+import { COMPONENT_MAIN_TYPE_SERIES } from '../util/types.js';
 var availableMethods = ['getDom', 'getZr', 'getWidth', 'getHeight', 'getDevicePixelRatio', 'dispatchAction', 'isSSR', 'isDisposed', 'on', 'off', 'getDataURL', 'getConnectedDataURL',
 // 'getModel',
 'getOption',
@@ -56,4 +57,7 @@ var ExtensionAPI = /** @class */function () {
   }
   return ExtensionAPI;
 }();
+export function getViewOfComponentOrSeries(api, componentOrSeries) {
+  return componentOrSeries.mainType === COMPONENT_MAIN_TYPE_SERIES ? api.getViewOfSeriesModel(componentOrSeries) : api.getViewOfComponentModel(componentOrSeries);
+}
 export default ExtensionAPI;

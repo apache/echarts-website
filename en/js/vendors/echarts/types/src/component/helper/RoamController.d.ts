@@ -22,6 +22,11 @@ export interface RoamOption {
      * If fixed the page when pan
      */
     preventDefaultMouseMove?: boolean;
+    /**
+     * Cursor styles
+     */
+    cursorGrab?: string;
+    cursorGrabbing?: string;
 }
 declare type RoamBehavior = 'zoomOnMouseWheel' | 'moveOnMouseMove' | 'moveOnMouseWheel';
 export interface RoamEventParams {

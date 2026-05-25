@@ -42,6 +42,8 @@
 * under the License.
 */
 import * as zrUtil from 'zrender/lib/core/util.js';
+import { buildAllMapSeriesGroups, getMainMapSeries, SERIES_TYPE_MAP } from './MapSeries.js';
+import { createSimpleOverallStageHandler } from '../../util/model.js';
 // FIXME 公用？
 function dataStatistics(datas, statisticType) {
   var dataNameMap = {};
@@ -79,26 +81,24 @@ function dataStatistics(datas, statisticType) {
     return len === 0 ? NaN : result;
   });
 }
-export default function mapDataStatistic(ecModel) {
-  var seriesGroups = {};
-  ecModel.eachSeriesByType('map', function (seriesModel) {
-    var hostGeoModel = seriesModel.getHostGeoModel();
-    var key = hostGeoModel ? 'o' + hostGeoModel.id : 'i' + seriesModel.getMapType();
-    (seriesGroups[key] = seriesGroups[key] || []).push(seriesModel);
-  });
-  zrUtil.each(seriesGroups, function (seriesList, key) {
-    var data = dataStatistics(zrUtil.map(seriesList, function (seriesModel) {
+export var mapDataStatisticStageHandler = createSimpleOverallStageHandler(SERIES_TYPE_MAP, mapDataStatistic);
+function mapDataStatistic(ecModel) {
+  zrUtil.each(buildAllMapSeriesGroups(ecModel), function (seriesGroup) {
+    var mainSeries = getMainMapSeries(seriesGroup);
+    if (!mainSeries) {
+      return;
+    }
+    var data = dataStatistics(zrUtil.map(seriesGroup.f, function (seriesModel) {
       return seriesModel.getData();
-    }), seriesList[0].get('mapValueCalculation'));
-    for (var i = 0; i < seriesList.length; i++) {
-      seriesList[i].originalData = seriesList[i].getData();
-    }
-    // FIXME Put where?
-    for (var i = 0; i < seriesList.length; i++) {
-      seriesList[i].seriesGroup = seriesList;
-      seriesList[i].needsDrawMap = i === 0 && !seriesList[i].getHostGeoModel();
-      seriesList[i].setData(data.cloneShallow());
-      seriesList[i].mainSeries = seriesList[0];
-    }
+    }),
+    // PENDING: It has long been using `seriesGroup[0]` here, but if the first map series
+    // is filtered out by legend, `seriesGroup[0]` is the second series in ec option, therefore,
+    // this definition is not reasonable enough for users.
+    mainSeries.get('mapValueCalculation'));
+    zrUtil.each(seriesGroup.f, function (series) {
+      series.seriesGroup = seriesGroup;
+      series.originalData = series.getData();
+      series.setData(data.cloneShallow());
+    });
   });
 }

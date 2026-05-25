@@ -49,6 +49,7 @@ import { ToolboxFeature } from '../featureManager.js';
 import { addEventListener } from 'zrender/lib/core/event.js';
 import { warn } from '../../../util/log.js';
 import tokens from '../../../visual/tokens.js';
+import { getCartesianAxisHashKey } from '../../../coord/cartesian/cartesianAxisHelper.js';
 /* global document */
 var BLOCK_SPLITER = new Array(60).join('-');
 var ITEM_SPLITER = '\t';
@@ -64,10 +65,10 @@ function groupSeries(ecModel) {
   ecModel.eachRawSeries(function (seriesModel) {
     var coordSys = seriesModel.coordinateSystem;
     if (coordSys && (coordSys.type === 'cartesian2d' || coordSys.type === 'polar')) {
-      // TODO: TYPE Consider polar? Include polar may increase unecessary bundle size.
+      // TODO: TYPE Consider polar? Include polar may increase unnecessary bundle size.
       var baseAxis = coordSys.getBaseAxis();
       if (baseAxis.type === 'category') {
-        var key = baseAxis.dim + '_' + baseAxis.index;
+        var key = getCartesianAxisHashKey(baseAxis);
         if (!seriesGroupByCategoryAxis[key]) {
           seriesGroupByCategoryAxis[key] = {
             categoryAxis: baseAxis,
@@ -367,11 +368,8 @@ var DataView = /** @class */function (_super) {
     container.appendChild(root);
     this._dom = root;
   };
-  DataView.prototype.remove = function (ecModel, api) {
-    this._dom && api.getDom().removeChild(this._dom);
-  };
   DataView.prototype.dispose = function (ecModel, api) {
-    this.remove(ecModel, api);
+    this._dom && api.getDom().removeChild(this._dom);
   };
   DataView.getDefaultOption = function (ecModel) {
     var defaultOption = {

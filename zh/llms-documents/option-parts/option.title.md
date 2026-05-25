@@ -1217,7 +1217,24 @@ textBorderDashOffset: 5
 - **Type**: `boolean`
 - **Default**: `false`
 
-是否触发事件。
+鼠标和触摸事件是否发送给开发者注册的监听器（`chart.on('xxx', function (event) {})`）。
+
+支持的鼠标和触摸事件为 `'click'`、`'dblclick'`、`'mouseover'`、`'mouseout'`、`'mousemove'`、`'mousedown'`、`'mouseup'`、`'globalout'`、`'contextmenu'`。注意，鼠标和触摸事件都统一使用名字 `'mouse{xxx}'`。
+
+可取值：
+
+*   `true`: 允许对外发送事件。但是它也需要 `silent` 配置项为 `false` 才能真正发送事件。
+*   `false`: 禁止对外发送事件，哪怕 `silent` 配置项为 `false`。
+
+事件对象的内容为：
+
+```
+{
+    componentType: 'title';
+    // title 组件的 index（基于 echarts option）。
+    componentIndex: number;
+}
+```
 
 ## padding
 - **Type**: `number|Array`

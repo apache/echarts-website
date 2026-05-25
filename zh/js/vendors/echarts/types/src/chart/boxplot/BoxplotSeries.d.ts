@@ -21,15 +21,17 @@ export interface BoxplotSeriesOption extends SeriesOption<BoxplotStateOption<Cal
     type?: 'boxplot';
     coordinateSystem?: 'cartesian2d';
     layout?: LayoutOrient;
+    clip?: boolean;
     /**
      * [min, max] can be percent of band width.
      */
     boxWidth?: (string | number)[];
     data?: (BoxplotDataValue | BoxplotDataItemOption)[];
 }
+export declare const SERIES_TYPE_BOXPLOT = "boxplot";
 declare class BoxplotSeriesModel extends SeriesModel<BoxplotSeriesOption> {
-    static readonly type = "series.boxplot";
-    readonly type = "series.boxplot";
+    static readonly type: string;
+    readonly type: string;
     static readonly dependencies: string[];
     coordinateSystem: Cartesian2D;
     /**

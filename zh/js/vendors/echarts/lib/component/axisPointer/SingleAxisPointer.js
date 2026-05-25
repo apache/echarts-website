@@ -58,12 +58,14 @@ var SingleAxisPointer = /** @class */function (_super) {
   SingleAxisPointer.prototype.makeElOption = function (elOption, value, axisModel, axisPointerModel, api) {
     var axis = axisModel.axis;
     var coordSys = axis.coordinateSystem;
-    var otherExtent = getGlobalExtent(coordSys, 1 - getPointDimIndex(axis));
+    var pointDimIndex = getPointDimIndex(axis);
+    var thisExtent = getGlobalExtent(coordSys, pointDimIndex);
+    var otherExtent = getGlobalExtent(coordSys, 1 - pointDimIndex);
     var pixelValue = coordSys.dataToPoint(value)[0];
     var axisPointerType = axisPointerModel.get('type');
     if (axisPointerType && axisPointerType !== 'none') {
       var elStyle = viewHelper.buildElStyle(axisPointerModel);
-      var pointerOption = pointerShapeBuilder[axisPointerType](axis, pixelValue, otherExtent);
+      var pointerOption = pointerShapeBuilder[axisPointerType](axis, pixelValue, thisExtent, otherExtent, axisPointerModel.get('seriesDataIndices'), axisPointerModel.ecModel);
       pointerOption.style = elStyle;
       elOption.graphicKey = pointerOption.type;
       elOption.pointer = pointerOption;
@@ -115,7 +117,7 @@ var SingleAxisPointer = /** @class */function (_super) {
   return SingleAxisPointer;
 }(BaseAxisPointer);
 var pointerShapeBuilder = {
-  line: function (axis, pixelValue, otherExtent) {
+  line: function (axis, pixelValue, thisExtent, otherExtent) {
     var targetShape = viewHelper.makeLineShape([pixelValue, otherExtent[0]], [pixelValue, otherExtent[1]], getPointDimIndex(axis));
     return {
       type: 'Line',
@@ -123,12 +125,15 @@ var pointerShapeBuilder = {
       shape: targetShape
     };
   },
-  shadow: function (axis, pixelValue, otherExtent) {
-    var bandWidth = axis.getBandWidth();
+  shadow: function (axis, pixelValue, thisExtent, otherExtent, seriesDataIndices, ecModel) {
+    var bandWidth = viewHelper.calcAxisPointerShadowBandWidth(axis, seriesDataIndices, ecModel);
     var span = otherExtent[1] - otherExtent[0];
+    var _a = viewHelper.calcAxisPointerShadowEnds(pixelValue, thisExtent, bandWidth),
+      min = _a[0],
+      max = _a[1];
     return {
       type: 'Rect',
-      shape: viewHelper.makeRectShape([pixelValue - bandWidth / 2, otherExtent[0]], [bandWidth, span], getPointDimIndex(axis))
+      shape: viewHelper.makeRectShape([min, otherExtent[0]], [max - min, span], getPointDimIndex(axis))
     };
   }
 };

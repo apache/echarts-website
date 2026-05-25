@@ -48,10 +48,12 @@ import Model from '../../model/Model.js';
 import { createTooltipMarkup } from '../../component/tooltip/tooltipMarkup.js';
 import { wrapTreePathInfo } from '../helper/treeHelper.js';
 import tokens from '../../visual/tokens.js';
+export var SERIES_TYPE_TREE = 'tree';
 var TreeSeriesModel = /** @class */function (_super) {
   __extends(TreeSeriesModel, _super);
   function TreeSeriesModel() {
     var _this = _super !== null && _super.apply(this, arguments) || this;
+    _this.type = TreeSeriesModel.type;
     _this.hasSymbolVisual = true;
     // Do it self.
     _this.ignoreStyleOnData = true;
@@ -106,12 +108,6 @@ var TreeSeriesModel = /** @class */function (_super) {
     }
     return orient;
   };
-  TreeSeriesModel.prototype.setZoom = function (zoom) {
-    this.option.zoom = zoom;
-  };
-  TreeSeriesModel.prototype.setCenter = function (center) {
-    this.option.center = center;
-  };
   TreeSeriesModel.prototype.formatTooltip = function (dataIndex, multipleSeries, dataType) {
     var tree = this.getData().tree;
     var realRoot = tree.root.children[0];
@@ -136,7 +132,10 @@ var TreeSeriesModel = /** @class */function (_super) {
     params.collapsed = !node.isExpand;
     return params;
   };
-  TreeSeriesModel.type = 'series.tree';
+  TreeSeriesModel.prototype.__ownRoamView = function () {
+    return this.coordinateSystem;
+  };
+  TreeSeriesModel.type = 'series.' + SERIES_TYPE_TREE;
   // can support the position parameters 'left', 'top','right','bottom', 'width',
   // 'height' in the setOption() with 'merge' mode normal.
   TreeSeriesModel.layoutMode = 'box';

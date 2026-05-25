@@ -50,7 +50,7 @@ import tokens from '../../visual/tokens.js';
 import { createBoxLayoutReference, getBoxLayoutParams, getLayoutRect } from '../../util/layout.js';
 import { expandOrShrinkRect, Rect, Group, traverseUpdateZ, retrieveZInfo } from '../../util/graphic.js';
 import { applyTransform } from 'zrender/lib/core/vector.js';
-import View from '../../coord/View.js';
+import View, { VIEW_COORD_SYS_TRANS_RAW, viewCoordSysCopyTrans, viewCoordSysSetBoundingRect, viewCoordSysSetViewRect, viewCoordSysCopyOverallMatrix } from '../../coord/View.js';
 import { bind, defaults, extend } from 'zrender/lib/core/util.js';
 var ThumbnailView = /** @class */function (_super) {
   __extends(ThumbnailView, _super);
@@ -69,7 +69,7 @@ var ThumbnailView = /** @class */function (_super) {
       this._clear();
       return;
     }
-    this._renderVersion = api.getMainProcessVersion();
+    this._renderVersion = api.getECUpdateCycleVersion();
     var group = this.group;
     group.removeAll();
     var itemStyleModel = thumbnailModel.getModel('itemStyle');
@@ -143,15 +143,16 @@ var ThumbnailView = /** @class */function (_super) {
     var bridgeRect = bridgeGroup.getBoundingRect();
     targetGroup.add(bridgeGroup);
     this._bgRect.z2 = bridgeRendered.z2Range.min - 10;
-    coordSys.setBoundingRect(bridgeRect.x, bridgeRect.y, bridgeRect.width, bridgeRect.height);
-    // Use `getLayoutRect` is just to find an approperiate rect in thumbnail.
+    viewCoordSysSetBoundingRect(coordSys, bridgeRect.x, bridgeRect.y, bridgeRect.width, bridgeRect.height);
+    // Use `getLayoutRect` is just to find an appropriate rect in thumbnail.
     var viewRect = getLayoutRect({
       left: 'center',
       top: 'center',
       aspect: bridgeRect.width / bridgeRect.height
     }, contentRect);
-    coordSys.setViewRect(viewRect.x, viewRect.y, viewRect.width, viewRect.height);
-    bridgeGroup.attr(coordSys.getTransformInfo().raw);
+    viewCoordSysSetViewRect(coordSys, viewRect.x, viewRect.y, viewRect.width, viewRect.height);
+    viewCoordSysCopyTrans(bridgeGroup, coordSys, VIEW_COORD_SYS_TRANS_RAW);
+    bridgeGroup.dirty();
     this._windowRect.z2 = bridgeRendered.z2Range.max + 10;
     this._resetRoamController(bridgeRendered.roamType);
   };
@@ -174,7 +175,7 @@ var ThumbnailView = /** @class */function (_super) {
       return;
     }
     var invTargetTrans = matrix.invert([], bridgeRendered.targetTrans);
-    var transTargetToThis = matrix.mul([], this._coordSys.transform, invTargetTrans);
+    var transTargetToThis = matrix.mul([], viewCoordSysCopyOverallMatrix(null, this._coordSys), invTargetTrans);
     this._transThisToTarget = matrix.invert([], transTargetToThis);
     var viewportRect = bridgeRendered.viewportRect;
     if (!viewportRect) {
@@ -213,6 +214,10 @@ var ThumbnailView = /** @class */function (_super) {
       }
     });
     roamController.off('pan').off('zoom').on('pan', bind(this._onPan, this)).on('zoom', bind(this._onZoom, this));
+    // PENDING: Currently roaming animation (when roaming args are changed;
+    // e.g., `center` and `zoom` are changed) is not supported in thumbnail.
+    // Animation should be able to be interrupted on pan and zoom, and synchronize
+    // back to the target. See VIEW_COORD_SYS_ANIMATION.
   };
   ThumbnailView.prototype._onPan = function (event) {
     var trans = this._transThisToTarget;

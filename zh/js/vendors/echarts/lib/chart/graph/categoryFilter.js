@@ -41,15 +41,18 @@
 * specific language governing permissions and limitations
 * under the License.
 */
+import { SERIES_TYPE_GRAPH } from './GraphSeries.js';
 import { isNumber } from 'zrender/lib/core/util.js';
-export default function categoryFilter(ecModel) {
+import { createSimpleOverallStageHandler } from '../../util/model.js';
+export var graphCategoryFilterStageHandler = createSimpleOverallStageHandler(SERIES_TYPE_GRAPH, categoryFilter);
+function categoryFilter(ecModel) {
   var legendModels = ecModel.findComponents({
     mainType: 'legend'
   });
   if (!legendModels || !legendModels.length) {
     return;
   }
-  ecModel.eachSeriesByType('graph', function (graphSeries) {
+  ecModel.eachSeriesByType(SERIES_TYPE_GRAPH, function (graphSeries) {
     var categoriesData = graphSeries.getCategoriesData();
     var graph = graphSeries.getGraph();
     var data = graph.data;

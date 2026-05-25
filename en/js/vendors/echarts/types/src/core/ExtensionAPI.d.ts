@@ -22,6 +22,15 @@ declare abstract class ExtensionAPI {
     abstract getViewOfComponentModel(componentModel: ComponentModel): ComponentView;
     abstract getViewOfSeriesModel(seriesModel: SeriesModel): ChartView;
     abstract getModel(): GlobalModel;
-    abstract getMainProcessVersion(): number;
+    abstract getECUpdateCycleVersion(): number;
+    /**
+     * PENDING: a temporary method - may be refactored.
+     * Whether a "threshold hoverLayer" is used.
+     * `true` means using hover layer due to over `hoverLayerThreshold`.
+     * Otherwise, if `false`, hover layer may be still used due to progressive (incremental),
+     * but this method does not need to cover this case.
+     */
+    abstract usingTHL(): boolean;
 }
+export declare function getViewOfComponentOrSeries(api: ExtensionAPI, componentOrSeries: ComponentModel): ChartView | ComponentView;
 export default ExtensionAPI;

@@ -1,5 +1,5 @@
 import SeriesModel from '../../model/Series.js';
-import { SeriesOption, SeriesOnCartesianOptionMixin, SeriesOnPolarOptionMixin, SeriesOnCalendarOptionMixin, SeriesOnGeoOptionMixin, SeriesOnSingleOptionMixin, OptionDataValue, ItemStyleOption, SeriesLabelOption, SeriesLargeOptionMixin, SeriesStackOptionMixin, SymbolOptionMixin, StatesOptionMixin, OptionDataItemObject, SeriesEncodeOptionMixin, CallbackDataParams, DefaultEmphasisFocus } from '../../util/types.js';
+import { SeriesOption, SeriesOnCartesianOptionMixin, SeriesOnPolarOptionMixin, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin, SeriesOnGeoOptionMixin, SeriesOnSingleOptionMixin, OptionDataValue, ItemStyleOption, SeriesLabelOption, SeriesLargeOptionMixin, SeriesStackOptionMixin, SymbolOptionMixin, StatesOptionMixin, OptionDataItemObject, SeriesEncodeOptionMixin, CallbackDataParams, DefaultEmphasisFocus } from '../../util/types.js';
 import GlobalModel from '../../model/Global.js';
 import SeriesData from '../../data/SeriesData.js';
 import { BrushCommonSelectorsForSeries } from '../../component/brush/selector.js';
@@ -15,7 +15,7 @@ interface ScatterStatesOptionMixin {
 }
 export interface ScatterDataItemOption extends SymbolOptionMixin, ScatterStateOption, StatesOptionMixin<ScatterStateOption, ScatterStatesOptionMixin>, OptionDataItemObject<OptionDataValue> {
 }
-export interface ScatterSeriesOption extends SeriesOption<ScatterStateOption<CallbackDataParams>, ScatterStatesOptionMixin>, ScatterStateOption<CallbackDataParams>, SeriesOnCartesianOptionMixin, SeriesOnPolarOptionMixin, SeriesOnCalendarOptionMixin, SeriesOnGeoOptionMixin, SeriesOnSingleOptionMixin, SeriesLargeOptionMixin, SeriesStackOptionMixin, SymbolOptionMixin<CallbackDataParams>, SeriesEncodeOptionMixin {
+export interface ScatterSeriesOption extends SeriesOption<ScatterStateOption<CallbackDataParams>, ScatterStatesOptionMixin>, ScatterStateOption<CallbackDataParams>, SeriesOnCartesianOptionMixin, SeriesOnPolarOptionMixin, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin, SeriesOnGeoOptionMixin, SeriesOnSingleOptionMixin, SeriesLargeOptionMixin, SeriesStackOptionMixin, SymbolOptionMixin<CallbackDataParams>, SeriesEncodeOptionMixin {
     type?: 'scatter';
     coordinateSystem?: string;
     cursor?: string;

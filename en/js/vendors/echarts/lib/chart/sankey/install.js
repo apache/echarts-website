@@ -42,15 +42,16 @@
 * under the License.
 */
 import SankeyView from './SankeyView.js';
-import SankeySeriesModel from './SankeySeries.js';
-import sankeyLayout from './sankeyLayout.js';
-import sankeyVisual from './sankeyVisual.js';
-import { updateCenterAndZoomInAction } from '../../component/helper/roamHelper.js';
+import SankeySeriesModel, { SERIES_TYPE_SANKEY } from './SankeySeries.js';
+import { COMPONENT_MAIN_TYPE_SERIES } from '../../util/types.js';
+import { registerRoamActionSimply } from '../../component/helper/roamHelper.js';
+import { sankeyLayoutStageHandler } from './sankeyLayout.js';
+import { sankeyVisualStageHandler } from './sankeyVisual.js';
 export function install(registers) {
   registers.registerChartView(SankeyView);
   registers.registerSeriesModel(SankeySeriesModel);
-  registers.registerLayout(sankeyLayout);
-  registers.registerVisual(sankeyVisual);
+  registers.registerLayout(sankeyLayoutStageHandler);
+  registers.registerVisual(sankeyVisualStageHandler);
   registers.registerAction({
     type: 'dragNode',
     event: 'dragnode',
@@ -58,27 +59,12 @@ export function install(registers) {
     update: 'update'
   }, function (payload, ecModel) {
     ecModel.eachComponent({
-      mainType: 'series',
-      subType: 'sankey',
+      mainType: COMPONENT_MAIN_TYPE_SERIES,
+      subType: SERIES_TYPE_SANKEY,
       query: payload
     }, function (seriesModel) {
       seriesModel.setNodePosition(payload.dataIndex, [payload.localX, payload.localY]);
     });
   });
-  registers.registerAction({
-    type: 'sankeyRoam',
-    event: 'sankeyRoam',
-    update: 'none'
-  }, function (payload, ecModel, api) {
-    ecModel.eachComponent({
-      mainType: 'series',
-      subType: 'sankey',
-      query: payload
-    }, function (seriesModel) {
-      var coordSys = seriesModel.coordinateSystem;
-      var res = updateCenterAndZoomInAction(coordSys, payload, seriesModel.get('scaleLimit'));
-      seriesModel.setCenter(res.center);
-      seriesModel.setZoom(res.zoom);
-    });
-  });
+  registerRoamActionSimply(registers, COMPONENT_MAIN_TYPE_SERIES, SERIES_TYPE_SANKEY);
 }

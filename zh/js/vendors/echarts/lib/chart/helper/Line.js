@@ -232,7 +232,10 @@ var Line = /** @class */function (_super) {
       },
       inheritColor: visualColor || tokens.color.neutral99,
       defaultOpacity: lineStyle.opacity,
-      defaultText: (rawVal == null ? lineData.getName(idx) : isFinite(rawVal) ? round(rawVal) : rawVal) + ''
+      defaultText: (rawVal == null ? lineData.getName(idx) : isFinite(rawVal)
+      // PENDING: the `rawVal` is not supposed to be rounded. But this rounding was introduced
+      // in the early stages, so changing it would likely be breaking.
+      ? round(rawVal, 10) : rawVal) + ''
     });
     var label = this.getTextContent();
     // Always set `textStyle` even if `normalStyle.text` is null, because default
@@ -263,6 +266,7 @@ var Line = /** @class */function (_super) {
     leaveEmphasis(this);
   };
   Line.prototype.updateLayout = function (lineData, idx) {
+    this.childOfName('line').stopAnimation();
     this.setLinePoints(lineData.getItemLayout(idx));
   };
   Line.prototype.setLinePoints = function (points) {

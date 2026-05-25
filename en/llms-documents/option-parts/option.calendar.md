@@ -1238,7 +1238,14 @@ This option is just for backward compatibility.
 
 Since `v5.6.0`
 
-Whether to ignore mouse events. Default value is false, for triggering and responding to mouse events.
+Whether to ignore user interactions (typically, mouse or touch events).
+
+*   `true`: Elements do not respond to mouse and touch interactions. As a result:
+    *   Interactive features are disabled, such as `tooltip`, hover state changing (i.e., `emphasis`), hover linking, etc.
+    *   Mouse/touch events are not dispatched to user-registered listeners (i.e., `chart.on('xxx', listener)`).
+*   `false`:
+    *   Interactive features are not disabled by this option, but they still depend on other relevant options to be enabled.
+    *   Mouse/touch events are not prevented by this option, but they still depend on other relevent options (typically, `triggerEvent`, if supported).
 
 ## monthLabel
 - **Type**: `Object`
@@ -2056,7 +2063,14 @@ This option is just for backward compatibility.
 
 Since `v5.6.0`
 
-Whether to ignore mouse events. Default value is false, for triggering and responding to mouse events.
+Whether to ignore user interactions (typically, mouse or touch events).
+
+*   `true`: Elements do not respond to mouse and touch interactions. As a result:
+    *   Interactive features are disabled, such as `tooltip`, hover state changing (i.e., `emphasis`), hover linking, etc.
+    *   Mouse/touch events are not dispatched to user-registered listeners (i.e., `chart.on('xxx', listener)`).
+*   `false`:
+    *   Interactive features are not disabled by this option, but they still depend on other relevant options to be enabled.
+    *   Mouse/touch events are not prevented by this option, but they still depend on other relevent options (typically, `triggerEvent`, if supported).
 
 ## yearLabel
 - **Type**: `Object`
@@ -2829,10 +2843,24 @@ This option is just for backward compatibility.
 
 Since `v5.6.0`
 
-Whether to ignore mouse events. Default value is false, for triggering and responding to mouse events.
+Whether to ignore user interactions (typically, mouse or touch events).
+
+*   `true`: Elements do not respond to mouse and touch interactions. As a result:
+    *   Interactive features are disabled, such as `tooltip`, hover state changing (i.e., `emphasis`), hover linking, etc.
+    *   Mouse/touch events are not dispatched to user-registered listeners (i.e., `chart.on('xxx', listener)`).
+*   `false`:
+    *   Interactive features are not disabled by this option, but they still depend on other relevant options to be enabled.
+    *   Mouse/touch events are not prevented by this option, but they still depend on other relevent options (typically, `triggerEvent`, if supported).
 
 ## silent
 - **Type**: `boolean`
 - **Default**: `false`
 
-Whether to ignore mouse events. Default value is false, for triggering and responding to mouse events.
+Whether to ignore user interactions (typically, mouse or touch events).
+
+*   `true`: Elements do not respond to mouse and touch interactions. As a result:
+    *   Interactive features are disabled, such as `tooltip`, hover state changing (i.e., `emphasis`), hover linking, etc.
+    *   Mouse/touch events are not dispatched to user-registered listeners (i.e., `chart.on('xxx', listener)`).
+*   `false`:
+    *   Interactive features are not disabled by this option, but they still depend on other relevant options to be enabled.
+    *   Mouse/touch events are not prevented by this option, but they still depend on other relevent options (typically, `triggerEvent`, if supported).

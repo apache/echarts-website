@@ -1,5 +1,5 @@
 import SeriesModel from '../../model/Series.js';
-import { SeriesOption, CallbackDataParams, CircleLayoutOptionMixin, LabelLineOption, ItemStyleOption, BoxLayoutOptionMixin, OptionDataValueNumeric, SeriesEncodeOptionMixin, OptionDataItemObject, StatesOptionMixin, SeriesLabelOption, DefaultEmphasisFocus } from '../../util/types.js';
+import { SeriesOption, CallbackDataParams, CircleLayoutOptionMixin, LabelLineOption, ItemStyleOption, BoxLayoutOptionMixin, OptionDataValueNumeric, SeriesEncodeOptionMixin, OptionDataItemObject, StatesOptionMixin, SeriesLabelOption, DefaultEmphasisFocus, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin, SeriesOnGeoOptionMixin, SeriesOnCartesianOptionMixin } from '../../util/types.js';
 import type SeriesData from '../../data/SeriesData.js';
 interface PieItemStyleOption<TCbParams = never> extends ItemStyleOption<TCbParams> {
     borderRadius?: (number | string)[] | number | string;
@@ -13,7 +13,7 @@ export interface PieStateOption<TCbParams = never> {
     labelLine?: PieLabelLineOption;
 }
 interface PieLabelOption extends Omit<SeriesLabelOption, 'rotate' | 'position'> {
-    rotate?: number | boolean | 'radial' | 'tangential';
+    rotate?: number | boolean | 'radial' | 'tangential' | 'tangential-noflip';
     alignTo?: 'none' | 'labelLine' | 'edge';
     edgeDistance?: string | number;
     /**
@@ -43,7 +43,7 @@ export interface PieDataItemOption extends OptionDataItemObject<OptionDataValueN
 }
 export interface PieSeriesOption extends Omit<SeriesOption<PieStateOption<PieCallbackDataParams>, ExtraStateOption>, 'labelLine'>, PieStateOption<PieCallbackDataParams>, CircleLayoutOptionMixin<{
     centerExtra: string | number;
-}>, BoxLayoutOptionMixin, SeriesEncodeOptionMixin {
+}>, SeriesOnGeoOptionMixin, SeriesOnCartesianOptionMixin, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin, BoxLayoutOptionMixin, SeriesEncodeOptionMixin {
     type?: 'pie';
     roseType?: 'radius' | 'area';
     clockwise?: boolean;
@@ -62,8 +62,10 @@ export interface PieSeriesOption extends Omit<SeriesOption<PieStateOption<PieCal
     emptyCircleStyle?: PieItemStyleOption;
     data?: (OptionDataValueNumeric | OptionDataValueNumeric[] | PieDataItemOption)[];
 }
+export declare const SERIES_TYPE_PIE = "pie";
 declare class PieSeriesModel extends SeriesModel<PieSeriesOption> {
-    static type: "series.pie";
+    static readonly type: string;
+    readonly type: string;
     /**
      * @overwrite
      */

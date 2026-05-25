@@ -1,14 +1,18 @@
-import Axis from './Axis.js';
-import { AxisBaseModel } from './AxisBaseModel.js';
-import { NullUndefined, ScaleTick, VisualAxisBreak } from '../util/types.js';
+import type Axis from './Axis.js';
+import Model from '../model/Model.js';
+import { CategoryTickLabelSplitBuildingOption } from './axisCommonTypes.js';
+import { ScaleTick } from '../util/types.js';
 import { ScaleGetTicksOpt } from '../scale/Scale.js';
-declare type AxisLabelInfoDetermined = {
+export declare type AxisLabelInfoDetermined = {
     formattedLabel: string;
     rawLabel: string;
-    tickValue: number;
-    time: ScaleTick['time'] | NullUndefined;
-    break: VisualAxisBreak | NullUndefined;
+    tick: ScaleTick;
 };
+interface AxisCategoryTicksCreated {
+    ticks: ScaleTick[];
+    tickCategoryInterval?: number;
+}
+declare type AxisTicksCreated = AxisCategoryTicksCreated;
 export declare const AxisTickLabelComputingKind: {
     readonly estimate: 1;
     readonly determine: 2;
@@ -21,19 +25,21 @@ export interface AxisLabelsComputingContext {
     kind: AxisTickLabelComputingKind;
 }
 export declare function createAxisLabelsComputingContext(kind: AxisTickLabelComputingKind): AxisLabelsComputingContext;
+/**
+ * CAUTION: Do not modify the result.
+ */
 export declare function createAxisLabels(axis: Axis, ctx: AxisLabelsComputingContext): {
     labels: AxisLabelInfoDetermined[];
 };
 /**
+ * CAUTION: Do not modify the result.
+ *
  * @param tickModel For example, can be axisTick, splitLine, splitArea.
  */
-export declare function createAxisTicks(axis: Axis, tickModel: AxisBaseModel, opt?: Pick<ScaleGetTicksOpt, 'breakTicks' | 'pruneByBreak'>): {
-    ticks: number[];
-    tickCategoryInterval?: number;
-};
+export declare function createAxisTicks(axis: Axis, tickModel: Model<CategoryTickLabelSplitBuildingOption>, opt?: Pick<ScaleGetTicksOpt, 'breakTicks' | 'pruneByBreak'>): AxisTicksCreated;
 /**
  * Calculate interval for category axis ticks and labels.
- * Use a stretegy to try to avoid overlapping.
+ * Use a strategy to try to avoid overlapping.
  * To get precise result, at least one of `getRotate` and `isHorizontal`
  * should be implemented in axis.
  */

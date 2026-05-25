@@ -43,18 +43,25 @@
 */
 import { subPixelOptimize } from '../../util/graphic.js';
 import createRenderPlanner from '../helper/createRenderPlanner.js';
-import { parsePercent } from '../../util/number.js';
+import { mathMax, mathMin, parsePercent } from '../../util/number.js';
 import { map, retrieve2 } from 'zrender/lib/core/util.js';
+import { SERIES_TYPE_CANDLESTICK } from './CandlestickSeries.js';
 import { createFloat32Array } from '../../util/vendor.js';
-var candlestickLayout = {
-  seriesType: 'candlestick',
+import { makeCallOnlyOnce } from '../../util/model.js';
+import { requireAxisStatistics } from '../../coord/axisStatistics.js';
+import { registerAxisContainShapeHandler } from '../../coord/scaleRawExtentInfo.js';
+import { createBandWidthBasedAxisContainShapeHandler, createMetricsNonOrdinalLinearPositiveMinGap, makeAxisStatKey } from '../helper/axisSnippets.js';
+import { calcBandWidth } from '../../coord/axisBand.js';
+var callOnlyOnce = makeCallOnlyOnce();
+export var candlestickLayout = {
+  seriesType: SERIES_TYPE_CANDLESTICK,
   plan: createRenderPlanner(),
   reset: function (seriesModel) {
     var coordSys = seriesModel.coordinateSystem;
     var data = seriesModel.getData();
     var candleWidth = calculateCandleWidth(seriesModel, data);
-    var cDimIdx = 0;
-    var vDimIdx = 1;
+    var cDimIdx = seriesModel.getWhiskerBoxesLayout() === 'horizontal' ? 0 : 1;
+    var vDimIdx = 1 - cDimIdx;
     var coordDims = ['x', 'y'];
     var cDimI = data.getDimensionIndex(data.mapDimension(coordDims[cDimIdx]));
     var vDimsI = map(data.mapDimensionsAll(coordDims[vDimIdx]), data.getDimensionIndex, data);
@@ -82,8 +89,8 @@ var candlestickLayout = {
         var closeVal = store.get(closeDimI, dataIndex);
         var lowestVal = store.get(lowestDimI, dataIndex);
         var highestVal = store.get(highestDimI, dataIndex);
-        var ocLow = Math.min(openVal, closeVal);
-        var ocHigh = Math.max(openVal, closeVal);
+        var ocLow = mathMin(openVal, closeVal);
+        var ocHigh = mathMax(openVal, closeVal);
         var ocLowPoint = getPoint(ocLow, axisDimVal);
         var ocHighPoint = getPoint(ocHigh, axisDimVal);
         var lowestPoint = getPoint(lowestVal, axisDimVal);
@@ -192,13 +199,27 @@ function getSign(store, dataIndex, openVal, closeVal, closeDimI, hasDojiColor) {
 }
 function calculateCandleWidth(seriesModel, data) {
   var baseAxis = seriesModel.getBaseAxis();
-  var extent;
-  var bandWidth = baseAxis.type === 'category' ? baseAxis.getBandWidth() : (extent = baseAxis.getExtent(), Math.abs(extent[1] - extent[0]) / data.count());
+  var bandWidth = calcBandWidth(baseAxis, {
+    fromStat: {
+      key: makeAxisStatKey(SERIES_TYPE_CANDLESTICK)
+    },
+    min: 1
+  }).w;
   var barMaxWidth = parsePercent(retrieve2(seriesModel.get('barMaxWidth'), bandWidth), bandWidth);
   var barMinWidth = parsePercent(retrieve2(seriesModel.get('barMinWidth'), 1), bandWidth);
   var barWidth = seriesModel.get('barWidth');
   return barWidth != null ? parsePercent(barWidth, bandWidth)
   // Put max outer to ensure bar visible in spite of overlap.
-  : Math.max(Math.min(bandWidth / 2, barMaxWidth), barMinWidth);
+  : mathMax(mathMin(bandWidth / 2, barMaxWidth), barMinWidth);
 }
-export default candlestickLayout;
+export function registerCandlestickAxisHandlers(registers) {
+  callOnlyOnce(registers, function () {
+    var axisStatKey = makeAxisStatKey(SERIES_TYPE_CANDLESTICK);
+    requireAxisStatistics(registers, {
+      key: axisStatKey,
+      seriesType: SERIES_TYPE_CANDLESTICK,
+      getMetrics: createMetricsNonOrdinalLinearPositiveMinGap
+    });
+    registerAxisContainShapeHandler(axisStatKey, createBandWidthBasedAxisContainShapeHandler(axisStatKey));
+  });
+}

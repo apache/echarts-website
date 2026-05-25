@@ -45,6 +45,7 @@ import { __extends } from "tslib";
 import SeriesModel from '../../model/Series.js';
 import { WhiskerBoxCommonMixin } from '../helper/whiskerBoxCommon.js';
 import { mixin } from 'zrender/lib/core/util.js';
+export var SERIES_TYPE_CANDLESTICK = 'candlestick';
 var CandlestickSeriesModel = /** @class */function (_super) {
   __extends(CandlestickSeriesModel, _super);
   function CandlestickSeriesModel() {
@@ -76,7 +77,7 @@ var CandlestickSeriesModel = /** @class */function (_super) {
     var itemLayout = data.getItemLayout(dataIndex);
     return itemLayout && selectors.rect(itemLayout.brushRect);
   };
-  CandlestickSeriesModel.type = 'series.candlestick';
+  CandlestickSeriesModel.type = 'series.' + SERIES_TYPE_CANDLESTICK;
   CandlestickSeriesModel.dependencies = ['xAxis', 'yAxis', 'grid'];
   CandlestickSeriesModel.defaultOption = {
     // zlevel: 0,

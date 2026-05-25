@@ -26,7 +26,7 @@ import { AxisBaseOptionCommon } from '../coord/axisCommonTypes.js';
  *     // To replace user specified encode.
  * }
  */
-declare class CoordSysInfo {
+export declare class SeriesModelCoordSysInfo {
     coordSysName: string;
     coordSysDims: string[];
     axisMap: HashMap<AxisBaseModel<AxisBaseOptionCommon>, string | number>;
@@ -34,5 +34,4 @@ declare class CoordSysInfo {
     firstCategoryDimIndex: number;
     constructor(coordSysName: string);
 }
-export declare function getCoordSysInfoBySeries(seriesModel: SeriesModel): CoordSysInfo;
-export {};
+export declare function getCoordSysInfoBySeries(seriesModel: SeriesModel): SeriesModelCoordSysInfo;

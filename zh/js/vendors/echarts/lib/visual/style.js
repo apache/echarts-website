@@ -128,9 +128,8 @@ var seriesStyleTask = {
 var sharedModel = new Model();
 var dataStyleTask = {
   createOnAllSeries: true,
-  performRawSeries: true,
   reset: function (seriesModel, ecModel) {
-    if (seriesModel.ignoreStyleOnData || ecModel.isSeriesFiltered(seriesModel)) {
+    if (seriesModel.ignoreStyleOnData) {
       return;
     }
     var data = seriesModel.getData();
@@ -168,20 +167,13 @@ var dataColorPaletteTask = {
     // Pie and funnel are using different scopes.
     var paletteScopeGroupByType = createHashMap();
     ecModel.eachSeries(function (seriesModel) {
-      var colorBy = seriesModel.getColorBy();
-      if (seriesModel.isColorBySeries()) {
-        return;
+      if (!seriesModel.isColorBySeries()) {
+        var key = seriesModel.type + '-' + seriesModel.getColorBy();
+        inner(seriesModel).scope = paletteScopeGroupByType.get(key) || paletteScopeGroupByType.set(key, {});
       }
-      var key = seriesModel.type + '-' + colorBy;
-      var colorScope = paletteScopeGroupByType.get(key);
-      if (!colorScope) {
-        colorScope = {};
-        paletteScopeGroupByType.set(key, colorScope);
-      }
-      inner(seriesModel).scope = colorScope;
     });
     ecModel.eachSeries(function (seriesModel) {
-      if (seriesModel.isColorBySeries() || ecModel.isSeriesFiltered(seriesModel)) {
+      if (seriesModel.isColorBySeries()) {
         return;
       }
       var dataAll = seriesModel.getRawData();

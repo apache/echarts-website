@@ -1,7 +1,7 @@
 import ComponentModel from '../../model/Component.js';
 import Model from '../../model/Model.js';
 import Geo from './Geo.js';
-import { ComponentOption, BoxLayoutOptionMixin, ItemStyleOption, ZRColor, LabelOption, DisplayState, RoamOptionMixin, AnimationOptionMixin, StatesOptionMixin, Dictionary, CommonTooltipOption, StatesMixinBase, PreserveAspectMixin } from '../../util/types.js';
+import { ComponentOption, BoxLayoutOptionMixin, ItemStyleOption, ZRColor, LabelOption, DisplayState, RoamOptionMixin, AnimationOptionMixin, StatesOptionMixin, Dictionary, CommonTooltipOption, StatesMixinBase, PreserveAspectMixin, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin, RoamHostModel } from '../../util/types.js';
 import { GeoProjection, NameMap } from './geoTypes.js';
 import GlobalModel from '../../model/Global.js';
 export interface GeoItemStyleOption<TCbParams = never> extends ItemStyleOption<TCbParams> {
@@ -36,7 +36,7 @@ export interface GeoTooltipFormatterParams {
     $vars: ['name'];
 }
 export interface GeoCommonOptionMixin extends RoamOptionMixin, PreserveAspectMixin {
-    map: string;
+    map?: string;
     aspectScale?: number;
     layoutCenter?: (number | string)[];
     layoutSize?: number | string;
@@ -52,7 +52,7 @@ export interface GeoCommonOptionMixin extends RoamOptionMixin, PreserveAspectMix
      */
     projection?: GeoProjection;
 }
-export interface GeoOption extends ComponentOption, BoxLayoutOptionMixin, AnimationOptionMixin, GeoCommonOptionMixin, StatesOptionMixin<GeoStateOption, StatesMixinBase>, GeoStateOption {
+export interface GeoOption extends ComponentOption, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin, BoxLayoutOptionMixin, AnimationOptionMixin, GeoCommonOptionMixin, StatesOptionMixin<GeoStateOption, StatesMixinBase>, GeoStateOption {
     mainType?: 'geo';
     show?: boolean;
     silent?: boolean;
@@ -66,7 +66,7 @@ export interface GeoOption extends ComponentOption, BoxLayoutOptionMixin, Animat
      */
     defaultItemStyleColor?: ZRColor;
 }
-declare class GeoModel extends ComponentModel<GeoOption> {
+declare class GeoModel extends ComponentModel<GeoOption> implements RoamHostModel {
     static type: string;
     readonly type: string;
     coordinateSystem: Geo;
@@ -84,11 +84,10 @@ declare class GeoModel extends ComponentModel<GeoOption> {
      * @param name Region name
      */
     getFormattedLabel(name: string, status?: DisplayState): string;
-    setZoom(zoom: number): void;
-    setCenter(center: number[]): void;
     select(name?: string): void;
     unSelect(name?: string): void;
     toggleSelected(name?: string): void;
     isSelected(name?: string): boolean;
+    __ownRoamView(): import("../View").default;
 }
 export default GeoModel;

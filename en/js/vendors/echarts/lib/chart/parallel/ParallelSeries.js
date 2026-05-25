@@ -97,7 +97,7 @@ var ParallelSeriesModel = /** @class */function (_super) {
         show: false
       }
     },
-    progressive: 500,
+    progressive: 300,
     smooth: false,
     animationEasing: 'linear'
   };

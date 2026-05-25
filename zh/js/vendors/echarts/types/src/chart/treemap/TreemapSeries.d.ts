@@ -1,7 +1,7 @@
 import SeriesModel from '../../model/Series.js';
 import { TreeNode } from '../../data/Tree.js';
 import Model from '../../model/Model.js';
-import { SeriesOption, BoxLayoutOptionMixin, ItemStyleOption, LabelOption, RoamOptionMixin, CallbackDataParams, ColorString, StatesOptionMixin, OptionId, OptionName, DecalObject, SeriesLabelOption, DefaultEmphasisFocus, BlurScope } from '../../util/types.js';
+import { SeriesOption, BoxLayoutOptionMixin, ItemStyleOption, LabelOption, RoamOptionMixin, CallbackDataParams, ColorString, StatesOptionMixin, OptionId, OptionName, DecalObject, SeriesLabelOption, DefaultEmphasisFocus, BlurScope, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin } from '../../util/types.js';
 import GlobalModel from '../../model/Global.js';
 import { LayoutRect } from '../../util/layout.js';
 import SeriesData from '../../data/SeriesData.js';
@@ -76,13 +76,8 @@ export interface TreemapSeriesNodeItemOption extends TreemapSeriesVisualOption, 
     decal?: DecalObject[] | 'none';
     cursor?: string;
 }
-export interface TreemapSeriesOption extends SeriesOption<TreemapStateOption<TreemapSeriesCallbackDataParams>, ExtraStateOption>, TreemapStateOption<TreemapSeriesCallbackDataParams>, BoxLayoutOptionMixin, RoamOptionMixin, TreemapSeriesVisualOption {
+export interface TreemapSeriesOption extends SeriesOption<TreemapStateOption<TreemapSeriesCallbackDataParams>, ExtraStateOption>, TreemapStateOption<TreemapSeriesCallbackDataParams>, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin, BoxLayoutOptionMixin, RoamOptionMixin, TreemapSeriesVisualOption {
     type?: 'treemap';
-    /**
-     * configuration in echarts2
-     * @deprecated
-     */
-    size?: (number | string)[];
     /**
      * If sort in desc order.
      * Default to be desc. asc has strange effect

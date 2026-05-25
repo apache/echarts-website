@@ -7,6 +7,7 @@ import { EChartsType } from './echarts.js';
 import SeriesModel from '../model/Series.js';
 import ChartView from '../view/Chart.js';
 import SeriesData from '../data/SeriesData.js';
+import { ZRenderType } from 'zrender/lib/zrender.js';
 export declare type GeneralTask = Task<TaskContext>;
 export declare type SeriesTask = Task<SeriesTaskContext>;
 export declare type OverallTask = Task<OverallTaskContext> & {
@@ -60,7 +61,7 @@ interface OverallTaskContext extends TaskContext {
 }
 interface StubTaskContext extends TaskContext {
     model: SeriesModel;
-    overallProgress: boolean;
+    dirtyOnOverallProgress: StageHandler['dirtyOnOverallProgress'];
 }
 declare class Scheduler {
     readonly ecInstance: EChartsType;
@@ -87,7 +88,7 @@ declare class Scheduler {
      * `updateStreamModes` use `seriesModel.getData()`.
      */
     updateStreamModes(seriesModel: SeriesModel<SeriesOption & SeriesLargeOptionMixin>, view: ChartView): void;
-    restorePipelines(ecModel: GlobalModel): void;
+    restorePipelines(zr: ZRenderType, ecModel: GlobalModel): void;
     prepareStageTasks(): void;
     prepareView(view: ChartView, model: SeriesModel, ecModel: GlobalModel, api: ExtensionAPI): void;
     performDataProcessorTasks(ecModel: GlobalModel, payload?: Payload): void;

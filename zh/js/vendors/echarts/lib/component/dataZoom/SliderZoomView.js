@@ -47,15 +47,16 @@ import * as eventTool from 'zrender/lib/core/event.js';
 import * as graphic from '../../util/graphic.js';
 import * as throttle from '../../util/throttle.js';
 import DataZoomView from './DataZoomView.js';
-import { linearMap, asc, parsePercent } from '../../util/number.js';
+import { linearMap, asc, parsePercent, round } from '../../util/number.js';
 import * as layout from '../../util/layout.js';
 import sliderMove from '../helper/sliderMove.js';
-import { getAxisMainType, collectReferCoordSysModelInfo } from './helper.js';
+import { getAxisMainType, collectReferCoordSysModelInfo, getAlignTo } from './helper.js';
 import { enableHoverEmphasis } from '../../util/states.js';
 import { createSymbol, symbolBuildProxies } from '../../util/symbol.js';
 import { deprecateLog } from '../../util/log.js';
 import { createTextStyle } from '../../label/labelStyle.js';
 import tokens from '../../visual/tokens.js';
+import { isOrdinalScale, isTimeScale } from '../../scale/helper.js';
 var Rect = graphic.Rect;
 // Constants
 var DEFAULT_FRAME_BORDER_WIDTH = 1;
@@ -199,8 +200,10 @@ var SliderZoomView = /** @class */function (_super) {
     });
     // Position barGroup
     var rect = thisGroup.getBoundingRect([sliderGroup]);
-    thisGroup.x = location.x - rect.x;
-    thisGroup.y = location.y - rect.y;
+    var rectX = isNaN(rect.x) ? 0 : rect.x;
+    var rectY = isNaN(rect.y) ? 0 : rect.y;
+    thisGroup.x = location.x - rectX;
+    thisGroup.y = location.y - rectY;
     thisGroup.markRedraw();
   };
   SliderZoomView.prototype._getViewExtent = function () {
@@ -447,8 +450,8 @@ var SliderZoomView = /** @class */function (_super) {
         draggable: true,
         drift: bind(this._onDragMove, this, handleIndex),
         ondragend: bind(this._onDragEnd, this),
-        onmouseover: bind(this._showDataInfo, this, true),
-        onmouseout: bind(this._showDataInfo, this, false),
+        onmouseover: bind(this._onOverDataInfoTriggerArea, this, true),
+        onmouseout: bind(this._onOverDataInfoTriggerArea, this, false),
         z2: 5
       });
       var bRect = path.getBoundingRect();
@@ -521,12 +524,12 @@ var SliderZoomView = /** @class */function (_super) {
     }
     actualMoveZone.attr({
       draggable: true,
-      cursor: 'default',
-      drift: bind(this._onDragMove, this, 'all'),
-      ondragstart: bind(this._showDataInfo, this, true),
-      ondragend: bind(this._onDragEnd, this),
-      onmouseover: bind(this._showDataInfo, this, true),
-      onmouseout: bind(this._showDataInfo, this, false)
+      cursor: 'grab',
+      drift: bind(this._onActualMoveZoneDrift, this),
+      ondragstart: bind(this._onActualMoveZoneDragStart, this),
+      ondragend: bind(this._onActualMoveZoneDragEnd, this),
+      onmouseover: bind(this._onOverDataInfoTriggerArea, this, true),
+      onmouseout: bind(this._onOverDataInfoTriggerArea, this, false)
     });
   };
   SliderZoomView.prototype._resetInterval = function () {
@@ -603,24 +606,35 @@ var SliderZoomView = /** @class */function (_super) {
   };
   SliderZoomView.prototype._updateDataInfo = function (nonRealtime) {
     var dataZoomModel = this.dataZoomModel;
-    var displaybles = this._displayables;
-    var handleLabels = displaybles.handleLabels;
+    var displayables = this._displayables;
+    var handleLabels = displayables.handleLabels;
     var orient = this._orient;
     var labelTexts = ['', ''];
-    // FIXME
-    // date型，支持formatter，autoformatter（ec2 date.getAutoFormatter）
     if (dataZoomModel.get('showDetail')) {
       var axisProxy = dataZoomModel.findRepresentativeAxisProxy();
+      var scale = axisProxy.getAxisModel().axis.scale;
       if (axisProxy) {
-        var axis = axisProxy.getAxisModel().axis;
         var range = this._range;
-        var dataInterval = nonRealtime
-        // See #4434, data and axis are not processed and reset yet in non-realtime mode.
-        ? axisProxy.calculateDataWindow({
-          start: range[0],
-          end: range[1]
-        }).valueWindow : axisProxy.getDataValueWindow();
-        labelTexts = [this._formatLabel(dataInterval[0], axis), this._formatLabel(dataInterval[1], axis)];
+        var window_1;
+        if (nonRealtime) {
+          // See #4434, data and axis are not processed and reset yet in non-realtime mode.
+          var calcWinInput = {
+            start: range[0],
+            end: range[1]
+          };
+          var alignTo = getAlignTo(dataZoomModel, axisProxy);
+          if (alignTo) {
+            var alignToWindow = alignTo.calculateDataWindow(calcWinInput).percentInverted;
+            calcWinInput = {
+              start: alignToWindow[0],
+              end: alignToWindow[1]
+            };
+          }
+          window_1 = axisProxy.calculateDataWindow(calcWinInput);
+        } else {
+          window_1 = axisProxy.getWindow();
+        }
+        labelTexts = [formatLabel(dataZoomModel, 0, window_1, scale), formatLabel(dataZoomModel, 1, window_1, scale)];
       }
     }
     var orderedHandleEnds = asc(this._handleEnds.slice());
@@ -630,7 +644,7 @@ var SliderZoomView = /** @class */function (_super) {
       // Label
       // Text should not transform by barGroup.
       // Ignore handlers transform
-      var barTransform = graphic.getTransform(displaybles.handles[handleIndex].parent, this.group);
+      var barTransform = graphic.getTransform(displayables.handles[handleIndex].parent, this.group);
       var direction = graphic.transformDirection(handleIndex === 0 ? 'right' : 'left', barTransform);
       var offset = this._handleWidth / 2 + LABEL_GAP;
       var textPoint = graphic.applyTransform([orderedHandleEnds[handleIndex] + (handleIndex === 0 ? -offset : offset), this._size[1] / 2], barTransform);
@@ -643,21 +657,9 @@ var SliderZoomView = /** @class */function (_super) {
       });
     }
   };
-  SliderZoomView.prototype._formatLabel = function (value, axis) {
-    var dataZoomModel = this.dataZoomModel;
-    var labelFormatter = dataZoomModel.get('labelFormatter');
-    var labelPrecision = dataZoomModel.get('labelPrecision');
-    if (labelPrecision == null || labelPrecision === 'auto') {
-      labelPrecision = axis.getPixelPrecision();
-    }
-    var valueStr = value == null || isNaN(value) ? ''
-    // FIXME Glue code
-    : axis.type === 'category' || axis.type === 'time' ? axis.scale.getLabel({
-      value: Math.round(value)
-    })
-    // param of toFixed should less then 20.
-    : value.toFixed(Math.min(labelPrecision, 20));
-    return isFunction(labelFormatter) ? labelFormatter(value, valueStr) : isString(labelFormatter) ? labelFormatter.replace('{value}', valueStr) : valueStr;
+  SliderZoomView.prototype._onOverDataInfoTriggerArea = function (isOver) {
+    this._isOverDataInfoTriggerArea = isOver;
+    this._showDataInfo(isOver);
   };
   /**
    * @param isEmphasis true: show, false: hide
@@ -676,6 +678,18 @@ var SliderZoomView = /** @class */function (_super) {
     // Highlight move handle
     displayables.moveHandle && this.api[toShow ? 'enterEmphasis' : 'leaveEmphasis'](displayables.moveHandle, 1);
   };
+  SliderZoomView.prototype._onActualMoveZoneDrift = function (dx, dy, event) {
+    this.api.getZr().setCursorStyle('grabbing');
+    this._onDragMove('all', dx, dy, event);
+  };
+  SliderZoomView.prototype._onActualMoveZoneDragStart = function (event) {
+    event.target.attr('cursor', 'grabbing');
+    this._showDataInfo(true);
+  };
+  SliderZoomView.prototype._onActualMoveZoneDragEnd = function (event) {
+    event.target.attr('cursor', 'grab');
+    this._onDragEnd();
+  };
   SliderZoomView.prototype._onDragMove = function (handleIndex, dx, dy, event) {
     this._dragging = true;
     // For mobile device, prevent screen slider on the button.
@@ -692,7 +706,10 @@ var SliderZoomView = /** @class */function (_super) {
   };
   SliderZoomView.prototype._onDragEnd = function () {
     this._dragging = false;
-    this._showDataInfo(false);
+    if (!this._isOverDataInfoTriggerArea) {
+      // Drag end may occur on draggable bars, where data info should be still shown.
+      this._showDataInfo(false);
+    }
     // While in realtime mode and stream mode, dispatch action when
     // drag end will cause the whole view rerender, which is unnecessary.
     var realtime = this.dataZoomModel.get('realtime');
@@ -814,6 +831,21 @@ var SliderZoomView = /** @class */function (_super) {
   SliderZoomView.type = 'dataZoom.slider';
   return SliderZoomView;
 }(DataZoomView);
+function formatLabel(dataZoomModel, extentIdx, window, scale) {
+  var labelFormatter = dataZoomModel.get('labelFormatter');
+  var labelPrecision = dataZoomModel.get('labelPrecision');
+  if (labelPrecision == null || labelPrecision === 'auto') {
+    labelPrecision = window.valuePrecision;
+  }
+  // Do not display values out of `SCALE_EXTENT_KIND_EFFECTIVE` - generally they are meaningless.
+  // For example, `scaleExtent[0]` is often `0`, and negative values are unlikely to be meaningful.
+  // That is, "nice" expansion and `SCALE_EXTENT_KIND_MAPPING` expansion are always not display in labels.
+  var value = window.value[extentIdx];
+  var valueStr = value == null || isNaN(value) ? '' : isOrdinalScale(scale) || isTimeScale(scale) ? scale.getLabel({
+    value: Math.round(value)
+  }) : isFinite(labelPrecision) ? round(value, labelPrecision, true) : value + '';
+  return isFunction(labelFormatter) ? labelFormatter(value, valueStr) : isString(labelFormatter) ? labelFormatter.replace('{value}', valueStr) : valueStr;
+}
 function getOtherDim(thisDim) {
   // FIXME
   // 这个逻辑和getOtherAxis里一致，但是写在这里是否不好

@@ -41,17 +41,14 @@
 * specific language governing permissions and limitations
 * under the License.
 */
+import { calcCompensationScaleToPreserveNodeSize, isViewCoordSys } from '../../coord/View.js';
 export function getNodeGlobalScale(seriesModel) {
   var coordSys = seriesModel.coordinateSystem;
-  if (coordSys.type !== 'view') {
-    return 1;
-  }
-  var nodeScaleRatio = seriesModel.option.nodeScaleRatio;
-  var groupZoom = coordSys.scaleX;
-  // Scale node when zoom changes
-  var roamZoom = coordSys.getZoom();
-  var nodeScale = (roamZoom - 1) * nodeScaleRatio + 1;
-  return nodeScale / groupZoom;
+  return isViewCoordSys(coordSys) ? calcCompensationScaleToPreserveNodeSize(coordSys, seriesModel)
+  // Geo coord sys do not use `Transformable`.
+  // PENDING: historially `nodeScaleRatio` has not been applied on
+  // geo based graph series.
+  : 1;
 }
 export function getSymbolSize(node) {
   var symbolSize = node.getVisual('symbolSize');

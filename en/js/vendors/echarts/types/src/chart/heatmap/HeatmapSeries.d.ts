@@ -1,5 +1,5 @@
 import SeriesModel from '../../model/Series.js';
-import { SeriesOption, SeriesOnCartesianOptionMixin, SeriesOnGeoOptionMixin, ItemStyleOption, SeriesLabelOption, OptionDataValue, StatesOptionMixin, SeriesEncodeOptionMixin, SeriesOnCalendarOptionMixin, DefaultStatesMixinEmphasis, CallbackDataParams } from '../../util/types.js';
+import { SeriesOption, SeriesOnCartesianOptionMixin, SeriesOnGeoOptionMixin, ItemStyleOption, SeriesLabelOption, OptionDataValue, StatesOptionMixin, SeriesEncodeOptionMixin, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin, DefaultStatesMixinEmphasis, CallbackDataParams } from '../../util/types.js';
 import GlobalModel from '../../model/Global.js';
 import SeriesData from '../../data/SeriesData.js';
 import type Geo from '../../coord/geo/Geo.js';
@@ -19,7 +19,7 @@ interface HeatmapStatesMixin {
 export interface HeatmapDataItemOption extends HeatmapStateOption, StatesOptionMixin<HeatmapStateOption, HeatmapStatesMixin> {
     value: HeatmapDataValue;
 }
-export interface HeatmapSeriesOption extends SeriesOption<HeatmapStateOption<CallbackDataParams>, HeatmapStatesMixin>, HeatmapStateOption<CallbackDataParams>, SeriesOnCartesianOptionMixin, SeriesOnGeoOptionMixin, SeriesOnCalendarOptionMixin, SeriesEncodeOptionMixin {
+export interface HeatmapSeriesOption extends SeriesOption<HeatmapStateOption<CallbackDataParams>, HeatmapStatesMixin>, HeatmapStateOption<CallbackDataParams>, SeriesOnCartesianOptionMixin, SeriesOnGeoOptionMixin, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin, SeriesEncodeOptionMixin {
     type?: 'heatmap';
     coordinateSystem?: 'cartesian2d' | 'geo' | 'calendar' | 'matrix';
     blurSize?: number;

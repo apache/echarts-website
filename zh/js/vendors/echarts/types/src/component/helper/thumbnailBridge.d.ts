@@ -3,7 +3,7 @@ import type ComponentModel from '../../model/Component.js';
 import { NullUndefined, RoamOptionMixin } from '../../util/types.js';
 import ExtensionAPI from '../../core/ExtensionAPI.js';
 import BoundingRect from 'zrender/lib/core/BoundingRect.js';
-import type View from '../../coord/View.js';
+import { MatrixArray } from 'zrender/lib/core/matrix.js';
 export declare function getThumbnailBridge(model: ComponentModel): ThumbnailBridge | NullUndefined;
 export declare function injectThumbnailBridge(model: ComponentModel, thumbnailBridge: ThumbnailBridge | NullUndefined): void;
 /**
@@ -11,7 +11,7 @@ export declare function injectThumbnailBridge(model: ComponentModel, thumbnailBr
  * in their local unit (e.g., geo in longitude-latitude) to screen coord.
  * Typically it is `View['transform']` if `coord/View` is used.
  */
-export declare type ThumbnailTargetTransformRawToViewport = View['transform'];
+export declare type ThumbnailTargetTransformRawToViewport = MatrixArray;
 export interface ThumbnailBridge {
     /**
      * Must be called in `ChartView['render']`/`ComponentView['render']`

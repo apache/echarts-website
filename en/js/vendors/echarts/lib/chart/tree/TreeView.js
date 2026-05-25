@@ -48,14 +48,15 @@ import { getECData } from '../../util/innerStore.js';
 import SymbolClz from '../helper/Symbol.js';
 import { radialCoordinate } from './layoutHelper.js';
 import * as bbox from 'zrender/lib/core/bbox.js';
-import View from '../../coord/View.js';
-import * as roamHelper from '../../component/helper/roamHelper.js';
+import { applyViewCoordSysTransToElement, calcCompensationScaleToPreserveNodeSize, VIEW_COORD_SYS_TRANS_OVERALL } from '../../coord/View.js';
 import RoamController from '../../component/helper/RoamController.js';
 import { parsePercent } from '../../util/number.js';
 import ChartView from '../../view/Chart.js';
+import { SERIES_TYPE_TREE } from './TreeSeries.js';
 import Path from 'zrender/lib/graphic/Path.js';
 import { setStatesStylesFromModel, setStatesFlag, setDefaultStateProxy, HOVER_STATE_BLUR } from '../../util/states.js';
 import tokens from '../../visual/tokens.js';
+import { createIsInSelfByPointerCheckerEl, createViewCoordSysSimply, isRoamPayloadHasZoom, updateRoamControllerSimply } from '../../component/helper/roamHelper.js';
 var TreeEdgeShape = /** @class */function () {
   function TreeEdgeShape() {
     this.parentPoint = [];
@@ -116,16 +117,14 @@ var TreeView = /** @class */function (_super) {
   __extends(TreeView, _super);
   function TreeView() {
     var _this = _super !== null && _super.apply(this, arguments) || this;
-    _this.type = TreeView.type;
+    _this.type = SERIES_TYPE_TREE;
     _this._mainGroup = new graphic.Group();
     return _this;
   }
   TreeView.prototype.init = function (ecModel, api) {
     this._controller = new RoamController(api.getZr());
-    this._controllerHost = {
-      target: this.group
-    };
     this.group.add(this._mainGroup);
+    this._firstRender = true;
   };
   TreeView.prototype.render = function (seriesModel, ecModel, api) {
     var data = seriesModel.getData();
@@ -140,7 +139,7 @@ var TreeView = /** @class */function (_super) {
       group.y = layoutInfo.y;
     }
     this._updateViewCoordSys(seriesModel, api);
-    this._updateController(seriesModel, null, ecModel, api);
+    updateRoamControllerSimply(seriesModel, api, this._controller, createIsInSelfByPointerCheckerEl(this.group), null);
     var oldData = this._data;
     data.diff(oldData).add(function (newIdx) {
       if (symbolNeedsDraw(data, newIdx)) {
@@ -166,7 +165,6 @@ var TreeView = /** @class */function (_super) {
         removeNode(oldData, oldIdx, symbolEl, group, seriesModel);
       }
     }).execute();
-    this._nodeScaleRatio = seriesModel.get('nodeScaleRatio');
     this._updateNodeAndLinkScale(seriesModel);
     if (seriesModel.get('expandAndCollapse') === true) {
       data.eachItemGraphicEl(function (el, dataIndex) {
@@ -180,6 +178,13 @@ var TreeView = /** @class */function (_super) {
       });
     }
     this._data = data;
+    this._firstRender = false;
+  };
+  TreeView.prototype.__updateOnOwnRoam = function (payload, seriesModel, api) {
+    applyViewCoordSysTransToElement(this.group, VIEW_COORD_SYS_TRANS_OVERALL, seriesModel.coordinateSystem, null);
+    if (isRoamPayloadHasZoom(payload)) {
+      this._updateNodeAndLinkScale(seriesModel);
+    }
   };
   TreeView.prototype._updateViewCoordSys = function (seriesModel, api) {
     var data = seriesModel.getData();
@@ -206,60 +211,28 @@ var TreeView = /** @class */function (_super) {
       min[1] = oldMin ? oldMin[1] : min[1] - 1;
       max[1] = oldMax ? oldMax[1] : max[1] + 1;
     }
-    var viewCoordSys = seriesModel.coordinateSystem = new View(null, {
-      api: api,
-      ecModel: seriesModel.ecModel
-    });
-    viewCoordSys.zoomLimit = seriesModel.get('scaleLimit');
-    viewCoordSys.setBoundingRect(min[0], min[1], max[0] - min[0], max[1] - min[1]);
-    viewCoordSys.setCenter(seriesModel.get('center'));
-    viewCoordSys.setZoom(seriesModel.get('zoom'));
     // Here we use viewCoordSys just for computing the 'position' and 'scale' of the group,
     // and 'treeRoam' action.
-    this.group.attr({
-      x: viewCoordSys.x,
-      y: viewCoordSys.y,
-      scaleX: viewCoordSys.scaleX,
-      scaleY: viewCoordSys.scaleY
-    });
+    var ownCoordSys = seriesModel.coordinateSystem = createViewCoordSysSimply(seriesModel, api, min[0], min[1], max[0] - min[0], max[1] - min[1]);
+    applyViewCoordSysTransToElement(this.group, VIEW_COORD_SYS_TRANS_OVERALL, ownCoordSys, this._firstRender ? null : seriesModel);
     this._min = min;
     this._max = max;
   };
-  TreeView.prototype._updateController = function (seriesModel, clipRect, ecModel, api) {
-    var _this = this;
-    roamHelper.updateController(seriesModel, api, this.group, this._controller, this._controllerHost, clipRect);
-    this._controller.on('zoom', function (e) {
-      _this._updateNodeAndLinkScale(seriesModel);
-    });
-  };
   TreeView.prototype._updateNodeAndLinkScale = function (seriesModel) {
     var data = seriesModel.getData();
-    var nodeScale = this._getNodeGlobalScale(seriesModel);
+    var nodeScale = calcCompensationScaleToPreserveNodeSize(seriesModel.coordinateSystem, seriesModel);
     data.eachItemGraphicEl(function (el, idx) {
       el.setSymbolScale(nodeScale);
     });
   };
-  TreeView.prototype._getNodeGlobalScale = function (seriesModel) {
-    var coordSys = seriesModel.coordinateSystem;
-    if (coordSys.type !== 'view') {
-      return 1;
-    }
-    var nodeScaleRatio = this._nodeScaleRatio;
-    var groupZoom = coordSys.scaleX || 1;
-    // Scale node when zoom changes
-    var roamZoom = coordSys.getZoom();
-    var nodeScale = (roamZoom - 1) * nodeScaleRatio + 1;
-    return nodeScale / groupZoom;
-  };
   TreeView.prototype.dispose = function () {
     this._controller && this._controller.dispose();
-    this._controllerHost = null;
   };
   TreeView.prototype.remove = function () {
     this._mainGroup.removeAll();
     this._data = null;
   };
-  TreeView.type = 'tree';
+  TreeView.type = SERIES_TYPE_TREE;
   return TreeView;
 }(ChartView);
 function symbolNeedsDraw(data, dataIndex) {
@@ -532,7 +505,7 @@ function removeNode(data, dataIndex, symbolEl, group, seriesModel) {
     animation: removeAnimationOpt
   });
   // remove edge as parent node
-  node.children.forEach(function (childNode) {
+  zrUtil.each(node.children, function (childNode) {
     removeNodeEdge(childNode, data, group, seriesModel, removeAnimationOpt);
   });
   // remove edge as child node

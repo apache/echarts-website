@@ -7,7 +7,7 @@ import Model from '../model/Model.js';
 import GlobalModel from './Global.js';
 import { CoordinateSystem } from '../coord/CoordinateSystem.js';
 import { ExtendableConstructor, Constructor } from '../util/clazz.js';
-import { PipelineContext, SeriesTask } from '../core/Scheduler.js';
+import { PipelineContext, SeriesTask, Pipeline } from '../core/Scheduler.js';
 import LegendVisualProvider from '../visual/LegendVisualProvider.js';
 import SeriesData from '../data/SeriesData.js';
 import Axis from '../coord/Axis.js';
@@ -19,13 +19,25 @@ import { ECSymbol } from '../util/symbol.js';
 import { Group } from '../util/graphic.js';
 import { LegendIconParams } from '../component/legend/LegendModel.js';
 import { dimPermutations } from '../component/marker/MarkAreaView.js';
+import type ChartView from '../view/Chart.js';
 export declare const SERIES_UNIVERSAL_TRANSITION_PROP = "__universalTransitionEnabled";
+/**
+ * NOTICE:
+ *  - prefix `__` can be used to avoid conflicts with possible outside subclasses.
+ *  - All of these methods are optional - null-check is needed.
+ */
 interface SeriesModel {
-    /**
-     * Convenient for override in extended class.
-     * Implement it if needed.
-     */
     preventIncremental(): boolean;
+    __preparePipelineContext(view: ChartView, pipeline: Pick<Pipeline, 'progressiveEnabled' | 'threshold'>): PipelineContext;
+    /**
+     * If `true`, a default `startValue` (`0`) is used if not specified in ec option,
+     * and axis extent will union it.
+     * Otherwise, `startValue` will be included in the union of axis extent only if
+     * it is explicitly specified in ec option.
+     *
+     * @see {AxisBaseOptionCommon['startValue']} for more info.
+     */
+    __requireStartValue(axis: Axis): boolean;
     /**
      * See tooltip.
      * Implement it if needed.

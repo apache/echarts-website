@@ -42,8 +42,11 @@
 * under the License.
 */
 import * as zrUtil from 'zrender/lib/core/util.js';
-export default function radarLayout(ecModel) {
-  ecModel.eachSeriesByType('radar', function (seriesModel) {
+import { SERIES_TYPE_RADAR } from './RadarSeries.js';
+import { createSimpleOverallStageHandler } from '../../util/model.js';
+export var radarLayoutStageHandler = createSimpleOverallStageHandler(SERIES_TYPE_RADAR, radarLayout);
+function radarLayout(ecModel) {
+  ecModel.eachSeriesByType(SERIES_TYPE_RADAR, function (seriesModel) {
     var data = seriesModel.getData();
     var points = [];
     var coordSys = seriesModel.coordinateSystem;

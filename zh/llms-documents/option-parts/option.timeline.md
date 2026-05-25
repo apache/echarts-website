@@ -563,6 +563,8 @@ dashOffset: 5
 formatter: '{value} kg'
 // 使用函数模板，函数参数分别为刻度数值（类目），刻度的索引
 formatter: function (value, index, extra?) {
+    // 注意：当使用 `customValues` 时，自从 `v6.1.0`，
+    // 这里才会提供 `index`。
     return value + 'kg';
 }
 ```
@@ -2396,6 +2398,8 @@ borderDashOffset: 5
 formatter: '{value} kg'
 // 使用函数模板，函数参数分别为刻度数值（类目），刻度的索引
 formatter: function (value, index, extra?) {
+    // 注意：当使用 `customValues` 时，自从 `v6.1.0`，
+    // 这里才会提供 `index`。
     return value + 'kg';
 }
 ```
@@ -3314,6 +3318,8 @@ textBorderDashOffset: 5
 formatter: '{value} kg'
 // 使用函数模板，函数参数分别为刻度数值（类目），刻度的索引
 formatter: function (value, index, extra?) {
+    // 注意：当使用 `customValues` 时，自从 `v6.1.0`，
+    // 这里才会提供 `index`。
     return value + 'kg';
 }
 ```

@@ -54,7 +54,7 @@ export interface TooltipMarkupNameValueBlock extends TooltipMarkupBlock {
     valueType?: DimensionType | DimensionType[];
     noName?: boolean;
     noValue?: boolean;
-    dataIndex?: number;
+    rawDataIndex?: number;
     valueFormatter?: CommonTooltipOption<unknown>['valueFormatter'];
 }
 /**

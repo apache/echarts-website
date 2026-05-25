@@ -1,10 +1,11 @@
-import { Payload } from '../../util/types.js';
+import { NullUndefined, Payload } from '../../util/types.js';
 import GlobalModel from '../../model/Global.js';
 import DataZoomModel from './DataZoomModel.js';
 import { HashMap } from 'zrender/lib/core/util.js';
 import SeriesModel from '../../model/Series.js';
 import { CoordinateSystemHostModel } from '../../coord/CoordinateSystem.js';
 import { AxisBaseModel } from '../../coord/AxisBaseModel.js';
+import type AxisProxy from './AxisProxy.js';
 export interface DataZoomPayloadBatchItem {
     dataZoomId: string;
     start?: number;
@@ -54,4 +55,12 @@ export declare function collectReferCoordSysModelInfo(dataZoomModel: DataZoomMod
     infoList: DataZoomReferCoordSysInfo[];
     infoMap: HashMap<DataZoomReferCoordSysInfo, string>;
 };
+export declare function getAxisProxyFromModel(axisModel: AxisBaseModel | NullUndefined): AxisProxy | NullUndefined;
+export declare function setAxisProxyToModel(axisModel: AxisBaseModel, axisProxy: AxisProxy): void;
+/**
+ * NOTICE: If `axis_a` aligns to `axis_b`, but they are not controlled by
+ * the same `dataZoom`, do not consider `axis_b` as `alignTo` and
+ * then do not input it into `AxisProxy#reset`.
+ */
+export declare function getAlignTo(dataZoomModel: DataZoomModel, axisProxy: AxisProxy): AxisProxy | NullUndefined;
 export {};

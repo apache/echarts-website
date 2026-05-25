@@ -48,6 +48,7 @@ import Tree from '../../data/Tree.js';
 import { wrapTreePathInfo } from '../helper/treeHelper.js';
 import Model from '../../model/Model.js';
 import enableAriaDecalForTree from '../helper/enableAriaDecalForTree.js';
+export var SERIES_TYPE_SUNBURST = 'sunburst';
 var SunburstSeriesModel = /** @class */function (_super) {
   __extends(SunburstSeriesModel, _super);
   function SunburstSeriesModel() {
@@ -108,7 +109,7 @@ var SunburstSeriesModel = /** @class */function (_super) {
   SunburstSeriesModel.prototype.enableAriaDecal = function () {
     enableAriaDecalForTree(this);
   };
-  SunburstSeriesModel.type = 'series.sunburst';
+  SunburstSeriesModel.type = 'series.' + SERIES_TYPE_SUNBURST;
   SunburstSeriesModel.defaultOption = {
     // zlevel: 0,
     z: 2,

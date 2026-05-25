@@ -28,9 +28,11 @@ import { Dictionary } from 'zrender/lib/core/types.js';
 import { DisplayableProps } from 'zrender/lib/graphic/Displayable.js';
 import Element from 'zrender/lib/Element.js';
 import Model from '../model/Model.js';
-import { AnimationOptionMixin, ZRRectLike, CommonTooltipOption, NullUndefined, ComponentOption } from './types.js';
+import { AnimationOptionMixin, ZRRectLike, CommonTooltipOption, NullUndefined, ComponentOption, Payload } from './types.js';
 import ComponentModel from '../model/Component.js';
 import { updateProps, initProps, removeElement, removeElementWithFadeOut, isElementRemoved } from '../animation/basicTransition.js';
+import type ExtensionAPI from '../core/ExtensionAPI.js';
+import type CanvasPainter from 'zrender/lib/canvas/Painter.js';
 /**
  * @deprecated export for compatitable reason
  */
@@ -39,6 +41,13 @@ declare type ExtendShapeOpt = Parameters<typeof Path.extend>[0];
 declare type ExtendShapeReturn = ReturnType<typeof Path.extend>;
 export declare const XY: readonly ["x", "y"];
 export declare const WH: readonly ["width", "height"];
+/**
+ * NOTICE: Only canvas renderer can set these hoverLayer flags.
+ * @see ElementCommonState['hoverLayer']
+ */
+export declare const HOVER_LAYER_NO = 0;
+export declare const HOVER_LAYER_FROM_THRESHOLD = 1;
+export declare const HOVER_LAYER_FOR_INCREMENTAL = 2;
 /**
  * Extend shape with parameters
  */
@@ -276,4 +285,14 @@ export declare function calcZ2Range(el: Element): {
     max: number;
 };
 export declare function traverseUpdateZ(el: Element, z: number, zlevel: number): void;
+export declare function payloadDisableAnimation<TPayload extends Payload>(payload: TPayload): TPayload;
+/**
+ * Decompose an affine matrix to
+ * x/y/scaleX/scaleY/rotation/skewX/skewY
+ */
+export declare function decomposeTransform(out: Transformable, mt: matrix.MatrixArray | NullUndefined): Transformable;
+/**
+ * If not canvas painter, return null/undefined.
+ */
+export declare function getCurrentCanvasPainter(api: ExtensionAPI): CanvasPainter | NullUndefined;
 export { Group, ZRImage as Image, ZRText as Text, Circle, Ellipse, Sector, Ring, Polygon, Polyline, Rect, Line, BezierCurve, Arc, IncrementalDisplayable, CompoundPath, LinearGradient, RadialGradient, BoundingRect, OrientedBoundingRect, Point, Path };

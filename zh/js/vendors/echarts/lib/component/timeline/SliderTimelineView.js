@@ -52,14 +52,13 @@ import TimelineAxis from './TimelineAxis.js';
 import { createSymbol, normalizeSymbolOffset, normalizeSymbolSize } from '../../util/symbol.js';
 import * as numberUtil from '../../util/number.js';
 import { merge, each, extend, isString, bind, defaults, retrieve2 } from 'zrender/lib/core/util.js';
-import OrdinalScale from '../../scale/Ordinal.js';
-import TimeScale from '../../scale/Time.js';
-import IntervalScale from '../../scale/Interval.js';
 import { parsePercent } from 'zrender/lib/contain/text.js';
 import { makeInner } from '../../util/model.js';
 import { getECData } from '../../util/innerStore.js';
 import { enableHoverEmphasis } from '../../util/states.js';
 import { createTooltipMarkup } from '../tooltip/tooltipMarkup.js';
+import { createScaleByModel } from '../../coord/axisHelper.js';
+import { scaleCalcNiceDirectly } from '../../coord/axisNiceTicks.js';
 var PI = Math.PI;
 var labelDataIndexStore = makeInner();
 var SliderTimelineView = /** @class */function (_super) {
@@ -259,8 +258,11 @@ var SliderTimelineView = /** @class */function (_super) {
   };
   SliderTimelineView.prototype._createAxis = function (layoutInfo, timelineModel) {
     var data = timelineModel.getData();
-    var axisType = timelineModel.get('axisType');
-    var scale = createScaleByModel(timelineModel, axisType);
+    var axisType = timelineModel.get('axisType') || timelineModel.get('type');
+    if (axisType !== 'category' && axisType !== 'time') {
+      axisType = 'value';
+    }
+    var scale = createScaleByModel(timelineModel, axisType, false);
     // Customize scale. The `tickValue` is `dataIndex`.
     scale.getTicks = function () {
       return data.mapArray(['value'], function (value) {
@@ -271,7 +273,9 @@ var SliderTimelineView = /** @class */function (_super) {
     };
     var dataExtent = data.getDataExtent('value');
     scale.setExtent(dataExtent[0], dataExtent[1]);
-    scale.calcNiceTicks();
+    scaleCalcNiceDirectly(scale, {
+      fixMinMax: [true, true]
+    });
     var axis = new TimelineAxis('value', scale, layoutInfo.axisExtent, axisType);
     axis.model = timelineModel;
     return axis;
@@ -358,13 +362,16 @@ var SliderTimelineView = /** @class */function (_super) {
     var labels = axis.getViewLabels();
     this._tickLabels = [];
     each(labels, function (labelItem) {
+      if (labelItem.tick.offInterval) {
+        return;
+      }
       // The tickValue is dataIndex, see the customized scale.
-      var dataIndex = labelItem.tickValue;
+      var dataIndex = labelItem.tick.value;
       var itemModel = data.getItemModel(dataIndex);
       var normalLabelModel = itemModel.getModel('label');
       var hoverLabelModel = itemModel.getModel(['emphasis', 'label']);
       var progressLabelModel = itemModel.getModel(['progress', 'label']);
-      var tickCoord = axis.dataToCoord(labelItem.tickValue);
+      var tickCoord = axis.dataToCoord(dataIndex);
       var textEl = new graphic.Text({
         x: tickCoord,
         y: 0,
@@ -536,27 +543,6 @@ var SliderTimelineView = /** @class */function (_super) {
   SliderTimelineView.type = 'timeline.slider';
   return SliderTimelineView;
 }(TimelineView);
-function createScaleByModel(model, axisType) {
-  axisType = axisType || model.get('type');
-  if (axisType) {
-    switch (axisType) {
-      // Buildin scale
-      case 'category':
-        return new OrdinalScale({
-          ordinalMeta: model.getCategories(),
-          extent: [Infinity, -Infinity]
-        });
-      case 'time':
-        return new TimeScale({
-          locale: model.ecModel.getLocaleModel(),
-          useUTC: model.ecModel.get('useUTC')
-        });
-      default:
-        // default to be value
-        return new IntervalScale();
-    }
-  }
-}
 function getViewRect(model, api) {
   return layout.getLayoutRect(model.getBoxLayoutParams(), layout.createBoxLayoutReference(model, api).refContainer, model.get('padding'));
 }

@@ -96,7 +96,7 @@ export function defaultSeriesFormatTooltip(opt) {
       noName: !trim(inlineName),
       value: inlineValue,
       valueType: inlineValueType,
-      dataIndex: dataIndex
+      rawDataIndex: data.getRawIndex(dataIndex)
     })].concat(subBlocks || [])
   });
 }

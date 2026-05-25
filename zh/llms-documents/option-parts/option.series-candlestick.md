@@ -1630,7 +1630,9 @@ tooltip 中数值显示部分的格式化回调函数。
 (value: number | string, dataIndex: number) => string
 ```
 
-`dataIndex` 参数 从 `v5.3.0` 开始支持
+从 `v5.5.0` 开始支持`dataIndex` 参数。但是其值当 `dataZoom` 存在时不合理，因为所取的值是数据被 `dataZoom` 过滤后的 index。
+
+从 `v6.1.0` 开始支持`dataIndex` 参数修正 `dataZoom` 过滤前的 index
 
 示例：
 
@@ -1960,7 +1962,14 @@ URL 为 `dataURI` 例如：
 - **Type**: `boolean`
 - **Default**: `false`
 
-图形是否不响应和触发鼠标事件，默认为 false，即响应和触发鼠标事件。
+图形是否不响应和用户交互（鼠标和触摸事件）。
+
+*   `true`: 图形不响应用户交互。这导致：
+    *   用户交互功能被禁止，例如 `tooltip`、鼠标悬浮时的状态变化（`emphasis`），鼠标悬浮时的联动等。
+    *   对外的鼠标和触摸事件不再发送给开发者注册的监听器（`chart.on('xxx', listener)`）。
+*   `false`:
+    *   用户交互功能不被此配置项禁止，但是是否可交互仍取决于其他相关配置项的设置。
+    *   对外的鼠标和触摸事件不被此配置项禁止，但是是否发送仍取决于其他配置项，一般是 `triggerEvent`（如果支持此配置项的话）。
 
 ### markPoint.label
 - **Type**: `Object`
@@ -7372,7 +7381,14 @@ animationDelayUpdate: function (idx) {
 - **Type**: `boolean`
 - **Default**: `false`
 
-图形是否不响应和触发鼠标事件，默认为 false，即响应和触发鼠标事件。
+图形是否不响应和用户交互（鼠标和触摸事件）。
+
+*   `true`: 图形不响应用户交互。这导致：
+    *   用户交互功能被禁止，例如 `tooltip`、鼠标悬浮时的状态变化（`emphasis`），鼠标悬浮时的联动等。
+    *   对外的鼠标和触摸事件不再发送给开发者注册的监听器（`chart.on('xxx', listener)`）。
+*   `false`:
+    *   用户交互功能不被此配置项禁止，但是是否可交互仍取决于其他相关配置项的设置。
+    *   对外的鼠标和触摸事件不被此配置项禁止，但是是否发送仍取决于其他配置项，一般是 `triggerEvent`（如果支持此配置项的话）。
 
 ### markLine.symbol
 - **Type**: `string|Array`
@@ -16473,7 +16489,14 @@ animationDelayUpdate: function (idx) {
 - **Type**: `boolean`
 - **Default**: `false`
 
-图形是否不响应和触发鼠标事件，默认为 false，即响应和触发鼠标事件。
+图形是否不响应和用户交互（鼠标和触摸事件）。
+
+*   `true`: 图形不响应用户交互。这导致：
+    *   用户交互功能被禁止，例如 `tooltip`、鼠标悬浮时的状态变化（`emphasis`），鼠标悬浮时的联动等。
+    *   对外的鼠标和触摸事件不再发送给开发者注册的监听器（`chart.on('xxx', listener)`）。
+*   `false`:
+    *   用户交互功能不被此配置项禁止，但是是否可交互仍取决于其他相关配置项的设置。
+    *   对外的鼠标和触摸事件不被此配置项禁止，但是是否发送仍取决于其他配置项，一般是 `triggerEvent`（如果支持此配置项的话）。
 
 ### markArea.label
 - **Type**: `Object`
@@ -25979,17 +26002,11 @@ animationDelayUpdate: function (idx) {
 
 从 `v4.5.0` 开始支持
 
-是否裁剪超出坐标系部分的图形，具体裁剪效果根据系列决定：
+是否基于坐标系区域对系列的图形进行剪裁。
 
-*   散点图/带有涟漪特效动画的散点（气泡）图：忽略中心点超出坐标系的图形，但是不裁剪单个图形
-*   柱状图：裁掉完全超出的柱子，但是不会裁剪只超出部分的柱子
-*   折线图：裁掉所有超出坐标系的折线部分，拐点图形的逻辑按照散点图处理
-*   路径图：裁掉所有超出坐标系的部分
-*   K 线图：忽略整体都超出坐标系的图形，但是不裁剪单个图形
-*   象形柱图：裁掉所有超出坐标系的部分（从 v5.5.0 开始支持）
-*   自定义系列：裁掉所有超出坐标系的部分
+具体裁剪效果是：
 
-除了象形柱图和自定义系列，其它系列的默认值都为 true，及开启裁剪，如果你觉得不想要裁剪的话，可以设置成 false 关闭。
+自 `v6.1.0`，任一图形超出坐标系的部分会被剪裁掉。 `v6.1.0` 前（不含），任一图形如果中心超出坐标系则被整体剪裁掉，否则整体保留哪怕部分超出。
 
 ## zlevel
 - **Type**: `number`
@@ -26013,7 +26030,14 @@ K线图组件的所有图形的`z`值。控制图形的前后顺序。`z`值小�
 - **Type**: `boolean`
 - **Default**: `false`
 
-图形是否不响应和触发鼠标事件，默认为 false，即响应和触发鼠标事件。
+图形是否不响应和用户交互（鼠标和触摸事件）。
+
+*   `true`: 图形不响应用户交互。这导致：
+    *   用户交互功能被禁止，例如 `tooltip`、鼠标悬浮时的状态变化（`emphasis`），鼠标悬浮时的联动等。
+    *   对外的鼠标和触摸事件不再发送给开发者注册的监听器（`chart.on('xxx', listener)`）。
+*   `false`:
+    *   用户交互功能不被此配置项禁止，但是是否可交互仍取决于其他相关配置项的设置。
+    *   对外的鼠标和触摸事件不被此配置项禁止，但是是否发送仍取决于其他配置项，一般是 `triggerEvent`（如果支持此配置项的话）。
 
 ## animationDuration
 - **Type**: `number|Function`
@@ -26451,7 +26475,9 @@ tooltip 中数值显示部分的格式化回调函数。
 (value: number | string, dataIndex: number) => string
 ```
 
-`dataIndex` 参数 从 `v5.3.0` 开始支持
+从 `v5.5.0` 开始支持`dataIndex` 参数。但是其值当 `dataZoom` 存在时不合理，因为所取的值是数据被 `dataZoom` 过滤后的 index。
+
+从 `v6.1.0` 开始支持`dataIndex` 参数修正 `dataZoom` 过滤前的 index
 
 示例：
 
@@ -26688,3 +26714,11 @@ extraCssText: 'box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);'
 ```
 
 \[警告\]: tooltip 是用 HTML 实现的（除非 [tooltip.renderMode](option.tooltip.md#renderMode) 设为 `richText`）。允许用此方式定制 toolbox 外壳的 CSS text。 如果此 CSS text 来自于“不受信任”的来源，必须考虑 **安全风险**。文档 [“安全指南”](https://echarts.apache.org/handbook/zh/best-practices/security) 给出了安全使用建议。
+
+## cursor
+- **Type**: `string`
+- **Default**: `pointer`
+
+从 `v6.1.0` 开始支持
+
+鼠标悬浮时在图形元素上时鼠标的样式是什么。同 CSS 的 `cursor`。

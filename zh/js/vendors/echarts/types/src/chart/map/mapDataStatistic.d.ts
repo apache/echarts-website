@@ -1,2 +1,1 @@
-import GlobalModel from '../../model/Global.js';
-export default function mapDataStatistic(ecModel: GlobalModel): void;
+export declare const mapDataStatisticStageHandler: import("../../util/types").StageHandler;

@@ -1,5 +1,5 @@
 import SeriesModel from '../../model/Series.js';
-import { SeriesOption, CircleLayoutOptionMixin, LineStyleOption, ColorString, LabelOption, ItemStyleOption, OptionDataValueNumeric, StatesOptionMixin, SeriesEncodeOptionMixin, DefaultStatesMixinEmphasis, CallbackDataParams } from '../../util/types.js';
+import { SeriesOption, CircleLayoutOptionMixin, LineStyleOption, ColorString, LabelOption, ItemStyleOption, OptionDataValueNumeric, StatesOptionMixin, SeriesEncodeOptionMixin, DefaultStatesMixinEmphasis, CallbackDataParams, ComponentOnMatrixOptionMixin, ComponentOnCalendarOptionMixin } from '../../util/types.js';
 import GlobalModel from '../../model/Global.js';
 import SeriesData from '../../data/SeriesData.js';
 declare type GaugeColorStop = [number, ColorString];
@@ -75,7 +75,7 @@ export interface GaugeDataItemOption extends GaugeStateOption, StatesOptionMixin
     title?: TitleOption;
     detail?: DetailOption;
 }
-export interface GaugeSeriesOption extends SeriesOption<GaugeStateOption, GaugeStatesMixin>, GaugeStateOption<CallbackDataParams>, CircleLayoutOptionMixin, SeriesEncodeOptionMixin {
+export interface GaugeSeriesOption extends SeriesOption<GaugeStateOption, GaugeStatesMixin>, GaugeStateOption<CallbackDataParams>, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin, CircleLayoutOptionMixin, SeriesEncodeOptionMixin {
     type?: 'gauge';
     radius?: number | string;
     startAngle?: number;

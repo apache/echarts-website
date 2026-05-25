@@ -101,17 +101,19 @@ var RoamController = /** @class */function (_super) {
         moveOnMouseWheel: false,
         preventDefaultMouseMove: true,
         zInfoParsed: zInfoParsed,
-        triggerInfo: triggerInfo
+        triggerInfo: triggerInfo,
+        cursorGrab: 'grab',
+        cursorGrabbing: 'grabbing'
       });
       if (controlType == null) {
         controlType = true;
       }
-      // A handy optimization for repeatedly calling `enable` during roaming.
+      // A quick optimization for repeatedly calling `enable` during roaming.
       // Assert `disable` is only affected by `controlType`.
       if (!this._enabled || this._controlType !== controlType) {
-        this._enabled = true;
         // Disable previous first
         this.disable();
+        this._enabled = true;
         if (controlType === true || controlType === 'move' || controlType === 'pan') {
           addRoamZrListener(zr, 'mousedown', mousedownHandler, zInfoParsed);
           addRoamZrListener(zr, 'mousemove', mousemoveHandler, zInfoParsed);
@@ -124,12 +126,14 @@ var RoamController = /** @class */function (_super) {
       }
     };
     _this.disable = function () {
-      this._enabled = false;
-      removeRoamZrListener(zr, 'mousedown', mousedownHandler);
-      removeRoamZrListener(zr, 'mousemove', mousemoveHandler);
-      removeRoamZrListener(zr, 'mouseup', mouseupHandler);
-      removeRoamZrListener(zr, 'mousewheel', mousewheelHandler);
-      removeRoamZrListener(zr, 'pinch', pinchHandler);
+      if (this._enabled) {
+        this._enabled = false;
+        removeRoamZrListener(zr, 'mousedown', mousedownHandler);
+        removeRoamZrListener(zr, 'mousemove', mousemoveHandler);
+        removeRoamZrListener(zr, 'mouseup', mouseupHandler);
+        removeRoamZrListener(zr, 'mousewheel', mousewheelHandler);
+        removeRoamZrListener(zr, 'pinch', pinchHandler);
+      }
     };
     return _this;
   }
@@ -170,7 +174,7 @@ var RoamController = /** @class */function (_super) {
     if (!target && this._checkPointer(e, x, y)) {
       // To indicate users that this area is draggable, otherwise users probably cannot kwown
       // that when hovering out of the shape but still inside the bounding rect.
-      return 'grab';
+      return this._opt.cursorGrab;
     }
     if (forReverse) {
       return target && target.cursor || 'default';
@@ -215,7 +219,7 @@ var RoamController = /** @class */function (_super) {
       }
       return;
     }
-    zr.setCursorStyle('grabbing');
+    zr.setCursorStyle(this._opt.cursorGrabbing);
     var oldX = this._x;
     var oldY = this._y;
     var dx = x - oldX;

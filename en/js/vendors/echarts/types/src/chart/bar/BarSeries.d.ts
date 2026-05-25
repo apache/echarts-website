@@ -4,6 +4,8 @@ import type Cartesian2D from '../../coord/cartesian/Cartesian2D.js';
 import type Polar from '../../coord/polar/Polar.js';
 import SeriesData from '../../data/SeriesData.js';
 import { BrushCommonSelectorsForSeries } from '../../component/brush/selector.js';
+import type { Pipeline } from '../../core/Scheduler.js';
+import type ChartView from '../../view/Chart.js';
 declare type PolarBarLabelPositionExtra = 'start' | 'insideStart' | 'middle' | 'end' | 'insideEnd';
 export declare type PolarBarLabelPosition = SeriesLabelOption['position'] | PolarBarLabelPositionExtra;
 export declare type BarSeriesLabelOption = SeriesLabelOption<CallbackDataParams, {
@@ -49,9 +51,9 @@ declare class BarSeriesModel extends BaseBarSeriesModel<BarSeriesOption> {
      */
     getProgressive(): number | false;
     /**
-     * @override
+     * @implement
      */
-    getProgressiveThreshold(): number;
+    __preparePipelineContext(view: ChartView, pipeline: Pick<Pipeline, 'progressiveEnabled' | 'threshold'>): import("../../core/Scheduler").PipelineContext;
     brushSelector(dataIndex: number, data: SeriesData, selectors: BrushCommonSelectorsForSeries): boolean;
     static defaultOption: BarSeriesOption;
 }

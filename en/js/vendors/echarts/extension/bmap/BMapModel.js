@@ -41,13 +41,18 @@
 * specific language governing permissions and limitations
 * under the License.
 */
-// @ts-nocheck
-import * as echarts from 'echarts';
+import { extendComponentModel } from 'echarts';
 function v2Equal(a, b) {
   return a && b && a[0] === b[0] && a[1] === b[1];
 }
-export default echarts.extendComponentModel({
-  type: 'bmap',
+export var COMPONENT_MAIN_TYPE_BMAP = 'bmap';
+var proto = {
+  type: COMPONENT_MAIN_TYPE_BMAP,
+  __bmap: undefined,
+  __mapOffset: undefined,
+  __mapStyle: undefined,
+  __mapStyle2: undefined,
+  coordinateSystem: undefined,
   getBMap: function () {
     // __bmap is injected when creating BMapCoordSys
     return this.__bmap;
@@ -71,4 +76,5 @@ export default echarts.extendComponentModel({
     mapOptions: {},
     roam: false
   }
-});
+};
+extendComponentModel(proto);

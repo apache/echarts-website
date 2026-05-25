@@ -43,16 +43,13 @@
 */
 import SunburstView from './SunburstView.js';
 import SunburstSeriesModel from './SunburstSeries.js';
-import sunburstLayout from './sunburstLayout.js';
-import sunburstVisual from './sunburstVisual.js';
-import dataFilter from '../../processor/dataFilter.js';
-import { curry } from 'zrender/lib/core/util.js';
+import { sunburstVisualStageHandler } from './sunburstVisual.js';
 import { installSunburstAction } from './sunburstAction.js';
+import { sunburstLayoutStageHandler } from './sunburstLayout.js';
 export function install(registers) {
   registers.registerChartView(SunburstView);
   registers.registerSeriesModel(SunburstSeriesModel);
-  registers.registerLayout(curry(sunburstLayout, 'sunburst'));
-  registers.registerProcessor(curry(dataFilter, 'sunburst'));
-  registers.registerVisual(sunburstVisual);
+  registers.registerLayout(sunburstLayoutStageHandler);
+  registers.registerVisual(sunburstVisualStageHandler);
   installSunburstAction(registers);
 }

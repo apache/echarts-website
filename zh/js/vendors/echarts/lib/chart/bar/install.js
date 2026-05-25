@@ -41,19 +41,19 @@
 * specific language governing permissions and limitations
 * under the License.
 */
-import * as zrUtil from 'zrender/lib/core/util.js';
-import { layout, createProgressiveLayout } from '../../layout/barGrid.js';
+import { createCrossSeriesLayoutHandler, createProgressiveLayout, registerBarGridAxisHandlers } from '../../layout/barGrid.js';
 import dataSample from '../../processor/dataSample.js';
 import BarSeries from './BarSeries.js';
 import BarView from './BarView.js';
+import { SERIES_TYPE_BAR } from '../../layout/barCommon.js';
 export function install(registers) {
   registers.registerChartView(BarView);
   registers.registerSeriesModel(BarSeries);
-  registers.registerLayout(registers.PRIORITY.VISUAL.LAYOUT, zrUtil.curry(layout, 'bar'));
+  registers.registerLayout(registers.PRIORITY.VISUAL.LAYOUT, createCrossSeriesLayoutHandler(SERIES_TYPE_BAR));
   // Do layout after other overall layout, which can prepare some information.
-  registers.registerLayout(registers.PRIORITY.VISUAL.PROGRESSIVE_LAYOUT, createProgressiveLayout('bar'));
+  registers.registerLayout(registers.PRIORITY.VISUAL.PROGRESSIVE_LAYOUT, createProgressiveLayout(SERIES_TYPE_BAR));
   // Down sample after filter
-  registers.registerProcessor(registers.PRIORITY.PROCESSOR.STATISTIC, dataSample('bar'));
+  registers.registerProcessor(registers.PRIORITY.PROCESSOR.STATISTIC, dataSample(SERIES_TYPE_BAR));
   /**
    * @payload
    * @property {string} [componentType=series]
@@ -78,4 +78,5 @@ export function install(registers) {
       }
     });
   });
+  registerBarGridAxisHandlers(registers);
 }

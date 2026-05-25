@@ -135,7 +135,7 @@ var LineSeriesModel = /** @class */function (_super) {
     // `'auto'`: If possible, show all symbols, otherwise
     //           follow the label interval strategy.
     showAllSymbol: 'auto',
-    // Whether to connect break point.
+    // Whether to connect break point. (non-finite values)
     connectNulls: false,
     // Sampling for large data. Can be: 'average', 'max', 'min', 'sum', 'lttb'.
     sampling: 'none',
@@ -146,7 +146,11 @@ var LineSeriesModel = /** @class */function (_super) {
     universalTransition: {
       divideShape: 'clone'
     },
-    triggerLineEvent: false
+    /**
+     * @deprecated
+     */
+    triggerLineEvent: false,
+    triggerEvent: false
   };
   return LineSeriesModel;
 }(SeriesModel);

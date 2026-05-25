@@ -4,15 +4,22 @@
  */
 import Scale from './Scale.js';
 import OrdinalMeta from '../data/OrdinalMeta.js';
-import { OrdinalRawValue, OrdinalNumber, OrdinalSortInfo, OrdinalScaleTick, ScaleTick } from '../util/types.js';
+import { OrdinalNumber, OrdinalSortInfo, ScaleTick } from '../util/types.js';
 import { CategoryAxisBaseOption } from '../coord/axisCommonTypes.js';
+import { DecoratedScaleMapperMethods, ScaleMapper, ScaleMapperGeneric } from './scaleMapper.js';
 declare type OrdinalScaleSetting = {
     ordinalMeta?: OrdinalMeta | CategoryAxisBaseOption['data'];
-    extent?: [number, number];
+    extent?: number[];
 };
-declare class OrdinalScale extends Scale<OrdinalScaleSetting> {
+/**
+ * @final NEVER inherit me!
+ */
+interface OrdinalScale extends ScaleMapperGeneric<OrdinalScale> {
+    _mapper: ScaleMapper;
+}
+declare class OrdinalScale extends Scale<OrdinalScale> {
     static type: string;
-    readonly type = "ordinal";
+    readonly type: "ordinal";
     private _ordinalMeta;
     /**
      * For example:
@@ -56,7 +63,13 @@ declare class OrdinalScale extends Scale<OrdinalScaleSetting> {
      *     1, // ordinalNumber: 5, yValue: 220
      * ]
      * ```
-     * The index of this array is from `0` to `ordinalMeta.categories.length`.
+     * NOTICE:
+     *  - The index of `_ordinalNumbersByTick` is "tick number", i.e., `tick.value`,
+     *    rather than the index of `scale.getTicks()`. They are not the same when
+     *    `_extent[0]` is delibrately set to be not zero, or `axisTick/axisLabel.interval` > 0.
+     *  - Currently we only support that the index of `_ordinalNumbersByTick` is
+     *    from `0` to `ordinalMeta.categories.length - 1`.
+     *  - `OrdinalNumber` is always from `0` to `ordinalMeta.categories.length - 1`.
      *
      * @see `Ordinal['getRawOrdinalNumber']`
      * @see `OrdinalSortInfo`
@@ -64,28 +77,22 @@ declare class OrdinalScale extends Scale<OrdinalScaleSetting> {
     private _ordinalNumbersByTick;
     /**
      * This is the inverted map of `_ordinalNumbersByTick`.
-     * The index of this array is from `0` to `ordinalMeta.categories.length`.
+     * The index is `OrdinalNumber`, which is from `0` to `ordinalMeta.categories.length - 1`.
+     * after `_ticksByOrdinalNumber` is initialized.
      *
      * @see `Ordinal['_ordinalNumbersByTick']`
      * @see `Ordinal['_getTickNumber']`
      * @see `OrdinalSortInfo`
      */
     private _ticksByOrdinalNumber;
-    constructor(setting?: OrdinalScaleSetting);
-    parse(val: OrdinalRawValue | OrdinalNumber): OrdinalNumber;
-    contain(val: OrdinalNumber): boolean;
+    constructor(setting: OrdinalScaleSetting);
+    private static parse;
+    static decoratedMethods: DecoratedScaleMapperMethods<OrdinalScale>;
     /**
-     * Normalize given rank or name to linear [0, 1]
-     * @param val raw ordinal number.
-     * @return normalized value in [0, 1].
+     * PENDING: currently this method is not used.
+     * `makeCategoryTicks` is effectively used.
      */
-    normalize(val: OrdinalNumber): number;
-    /**
-     * @param val normalized value in [0, 1].
-     * @return raw ordinal number.
-     */
-    scale(val: number): OrdinalNumber;
-    getTicks(): OrdinalScaleTick[];
+    getTicks(): ScaleTick[];
     getMinorTicks(splitNumber: number): number[][];
     /**
      * @see `Ordinal['_ordinalNumbersByTick']`
@@ -95,8 +102,7 @@ declare class OrdinalScale extends Scale<OrdinalScaleSetting> {
     /**
      * @usage
      * ```js
-     * const ordinalNumber = ordinalScale.getRawOrdinalNumber(tickVal);
-     *
+     * const ordinalNumber = ordinalScale.getRawOrdinalNumber(tick.value);
      * // case0
      * const rawOrdinalValue = axisModel.getCategories()[ordinalNumber];
      * // case1
@@ -105,21 +111,19 @@ declare class OrdinalScale extends Scale<OrdinalScaleSetting> {
      * const coord = axis.dataToCoord(ordinalNumber);
      * ```
      *
-     * @param {OrdinalNumber} tickNumber index of display
+     * value may be out of range, e.g., when axis max is larger than `ordinalMeta.categories.length`,
+     * where ordinal numbers are used as tick value directly.
      */
-    getRawOrdinalNumber(tickNumber: number): OrdinalNumber;
+    getRawOrdinalNumber(tickValue: ScaleTick['value']): OrdinalNumber;
     /**
      * Get item on tick
      */
     getLabel(tick: ScaleTick): string;
-    count(): number;
     /**
-     * @override
-     * If value is in extent range
+     * NOTICE: This is different from `.getOrdinalMeta().length` when extent
+     * is specified by `xxxAxis.min/max` or by `dataZoom`.
      */
-    isInExtentRange(value: OrdinalNumber): boolean;
+    count(): number;
     getOrdinalMeta(): OrdinalMeta;
-    calcNiceTicks(): void;
-    calcNiceExtent(): void;
 }
 export default OrdinalScale;

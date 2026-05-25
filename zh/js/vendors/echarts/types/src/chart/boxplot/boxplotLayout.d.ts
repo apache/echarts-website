@@ -1,6 +1,7 @@
-import type GlobalModel from '../../model/Global.js';
+import { EChartsExtensionInstallRegisters } from '../../extension.js';
 export interface BoxplotItemLayout {
     ends: number[][];
     initBaseline: number;
 }
-export default function boxplotLayout(ecModel: GlobalModel): void;
+export declare const boxplotLayoutStageHandler: import("../../util/types").StageHandler;
+export declare function registerBoxplotAxisHandlers(registers: EChartsExtensionInstallRegisters): void;

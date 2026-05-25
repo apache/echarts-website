@@ -41,14 +41,18 @@
 * specific language governing permissions and limitations
 * under the License.
 */
+import { calcBandWidth } from '../coord/axisBand.js';
 import Axis2D from '../coord/cartesian/Axis2D.js';
+import { COORD_SYS_TYPE_CARTESIAN_2D } from '../coord/cartesian/GridModel.js';
+import { COORD_SYS_TYPE_SINGLE } from '../coord/single/AxisModel.js';
+import { isOrdinalScale } from '../scale/helper.js';
 import { makeInner } from './model.js';
 export function needFixJitter(seriesModel, axis) {
   var coordinateSystem = seriesModel.coordinateSystem;
   var coordType = coordinateSystem && coordinateSystem.type;
   var baseAxis = coordinateSystem && coordinateSystem.getBaseAxis && coordinateSystem.getBaseAxis();
   var scaleType = baseAxis && baseAxis.scale && baseAxis.scale.type;
-  var seriesValid = coordType === 'cartesian2d' && scaleType === 'ordinal' || coordType === 'single';
+  var seriesValid = coordType === COORD_SYS_TYPE_CARTESIAN_2D && scaleType === 'ordinal' || coordType === COORD_SYS_TYPE_SINGLE;
   var axisValid = axis.model.get('jitter') > 0;
   return seriesValid && axisValid;
 }
@@ -65,24 +69,23 @@ var inner = makeInner();
 export function fixJitter(fixedAxis, fixedCoord, floatCoord, radius) {
   if (fixedAxis instanceof Axis2D) {
     var scaleType = fixedAxis.scale.type;
-    if (scaleType !== 'category' && scaleType !== 'ordinal') {
+    if (scaleType !== 'ordinal') {
       return floatCoord;
     }
   }
   var axisModel = fixedAxis.model;
   var jitter = axisModel.get('jitter');
+  if (!(jitter > 0)) {
+    return floatCoord;
+  }
   var jitterOverlap = axisModel.get('jitterOverlap');
   var jitterMargin = axisModel.get('jitterMargin') || 0;
   // Get band width to limit jitter range
-  var bandWidth = fixedAxis.scale.type === 'ordinal' ? fixedAxis.getBandWidth() : null;
-  if (jitter > 0) {
-    if (jitterOverlap) {
-      return fixJitterIgnoreOverlaps(floatCoord, jitter, bandWidth, radius);
-    } else {
-      return fixJitterAvoidOverlaps(fixedAxis, fixedCoord, floatCoord, radius, jitter, jitterMargin);
-    }
+  var bandWidth = isOrdinalScale(fixedAxis.scale) ? calcBandWidth(fixedAxis).w : null;
+  if (jitterOverlap) {
+    return fixJitterIgnoreOverlaps(floatCoord, jitter, bandWidth, radius);
   }
-  return floatCoord;
+  return fixJitterAvoidOverlaps(fixedAxis, fixedCoord, floatCoord, radius, jitter, jitterMargin);
 }
 function fixJitterIgnoreOverlaps(floatCoord, jitter, bandWidth, radius) {
   // Don't clamp single axis
@@ -104,7 +107,7 @@ function fixJitterAvoidOverlaps(fixedAxis, fixedCoord, floatCoord, radius, jitte
   var overlapB = placeJitterOnDirection(items, fixedCoord, floatCoord, radius, jitter, margin, -1);
   var minFloat = Math.abs(overlapA - floatCoord) < Math.abs(overlapB - floatCoord) ? overlapA : overlapB;
   // Clamp only category axis
-  var bandWidth = fixedAxis.scale.type === 'ordinal' ? fixedAxis.getBandWidth() : null;
+  var bandWidth = isOrdinalScale(fixedAxis.scale) ? calcBandWidth(fixedAxis).w : null;
   var distance = Math.abs(minFloat - floatCoord);
   if (distance > jitter / 2 || bandWidth && distance > bandWidth / 2 - radius) {
     // If the new item is moved too far, then give up.

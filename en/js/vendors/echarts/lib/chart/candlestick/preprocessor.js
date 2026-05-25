@@ -42,6 +42,7 @@
 * under the License.
 */
 import * as zrUtil from 'zrender/lib/core/util.js';
+import { SERIES_TYPE_CANDLESTICK } from './CandlestickSeries.js';
 export default function candlestickPreprocessor(option) {
   if (!option || !zrUtil.isArray(option.series)) {
     return;
@@ -49,7 +50,7 @@ export default function candlestickPreprocessor(option) {
   // Translate 'k' to 'candlestick'.
   zrUtil.each(option.series, function (seriesItem) {
     if (zrUtil.isObject(seriesItem) && seriesItem.type === 'k') {
-      seriesItem.type = 'candlestick';
+      seriesItem.type = SERIES_TYPE_CANDLESTICK;
     }
   });
 }

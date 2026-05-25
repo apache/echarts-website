@@ -5,6 +5,7 @@ import AxisBuilder, { AxisBuilderCfg, AxisBuilderSharedContext } from '../../com
 import type Cartesian2D from './Cartesian2D.js';
 import ExtensionAPI from '../../core/ExtensionAPI.js';
 import { NullUndefined } from 'zrender/lib/core/types.js';
+import type Axis2D from './Axis2D.js';
 interface CartesianAxisLayout {
     position: AxisBuilderCfg['position'];
     rotation: AxisBuilderCfg['rotation'];
@@ -43,4 +44,6 @@ export declare function findAxisModels(seriesModel: SeriesModel): {
 };
 export declare function createCartesianAxisViewCommonPartBuilder(gridRect: LayoutRect, cartesians: Cartesian2D[], axisModel: CartesianAxisModel, api: ExtensionAPI, ctx: AxisBuilderSharedContext | NullUndefined, defaultNameMoveOverlap: boolean | NullUndefined): AxisBuilder;
 export declare function updateCartesianAxisViewCommonPartBuilder(axisBuilder: AxisBuilder, gridRect: LayoutRect, axisModel: CartesianAxisModel): void;
+export declare type CartesianAxisHashKey = string;
+export declare function getCartesianAxisHashKey(axis: Axis2D): CartesianAxisHashKey;
 export {};

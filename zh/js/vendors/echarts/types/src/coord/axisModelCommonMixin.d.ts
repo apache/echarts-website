@@ -6,7 +6,7 @@ interface AxisModelCommonMixin<Opt extends AxisBaseOption> extends Pick<Model<Op
     axis: Axis;
 }
 declare class AxisModelCommonMixin<Opt extends AxisBaseOption> {
-    getNeedCrossZero(): boolean;
+    needIncludeZero(): boolean;
     /**
      * Should be implemented by each axis model if necessary.
      * @return coordinate system model

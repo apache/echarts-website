@@ -42,12 +42,12 @@
 * under the License.
 */
 import FunnelView from './FunnelView.js';
-import FunnelSeriesModel from './FunnelSeries.js';
-import funnelLayout from './funnelLayout.js';
+import FunnelSeriesModel, { SERIES_TYPE_FUNNEL } from './FunnelSeries.js';
 import dataFilter from '../../processor/dataFilter.js';
+import { funnelLayoutStageHandler } from './funnelLayout.js';
 export function install(registers) {
   registers.registerChartView(FunnelView);
   registers.registerSeriesModel(FunnelSeriesModel);
-  registers.registerLayout(funnelLayout);
-  registers.registerProcessor(dataFilter('funnel'));
+  registers.registerLayout(funnelLayoutStageHandler);
+  registers.registerProcessor(dataFilter(SERIES_TYPE_FUNNEL));
 }

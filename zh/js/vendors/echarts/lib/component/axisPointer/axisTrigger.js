@@ -45,6 +45,7 @@ import { makeInner } from '../../util/model.js';
 import * as modelHelper from './modelHelper.js';
 import findPointFromSeries from './findPointFromSeries.js';
 import { each, curry, bind, extend } from 'zrender/lib/core/util.js';
+import { isNullableNumberFinite } from '../../util/number.js';
 var inner = makeInner();
 /**
  * Basic logic: check all axis, if they do not demand show/highlight,
@@ -189,7 +190,7 @@ function buildPayloadsBySeries(value, axisInfo) {
       }
       seriesNestestValue = series.getData().get(dataDim[0], dataIndices[0]);
     }
-    if (seriesNestestValue == null || !isFinite(seriesNestestValue)) {
+    if (!isNullableNumberFinite(seriesNestestValue)) {
       return;
     }
     var diff = value - seriesNestestValue;
@@ -251,7 +252,7 @@ function showTooltip(dataByCoordSys, axisInfo, payloadInfo, value) {
     axisType: axisModel.type,
     axisId: axisModel.id,
     value: value,
-    // Caustion: viewHelper.getValueLabel is actually on "view stage", which
+    // Caution: viewHelper.getValueLabel is actually on "view stage", which
     // depends that all models have been updated. So it should not be performed
     // here. Considering axisPointerModel used here is volatile, which is hard
     // to be retrieve in TooltipView, we prepare parameters here.
@@ -318,7 +319,7 @@ function dispatchTooltipActually(dataByCoordSys, point, payload, dispatchAction)
 function dispatchHighDownActually(axesInfo, dispatchAction, api) {
   // FIXME
   // highlight status modification should be a stage of main process?
-  // (Consider confilct (e.g., legend and axisPointer) and setOption)
+  // (Consider conflict (e.g., legend and axisPointer) and setOption)
   var zr = api.getZr();
   var highDownKey = 'axisPointerLastHighlights';
   var lastHighlights = inner(zr)[highDownKey] || {};
@@ -328,18 +329,25 @@ function dispatchHighDownActually(axesInfo, dispatchAction, api) {
   each(axesInfo, function (axisInfo, key) {
     var option = axisInfo.axisPointerModel.option;
     option.status === 'show' && axisInfo.triggerEmphasis && each(option.seriesDataIndices, function (batchItem) {
-      var key = batchItem.seriesIndex + ' | ' + batchItem.dataIndex;
-      newHighlights[key] = batchItem;
+      newHighlights[batchItem.seriesIndex + '|' + batchItem.dataIndex] = batchItem;
     });
   });
   // Diff.
   var toHighlight = [];
   var toDownplay = [];
+  function makeHighDownItem(batchItem) {
+    // `dataIndexInside` should be removed, since the last recorded `dataIndexInside` may have
+    // been changed if `dataZoomInside` changed the view. Only `dataIndex` will suffice.
+    return {
+      seriesIndex: batchItem.seriesIndex,
+      dataIndex: batchItem.dataIndex
+    };
+  }
   each(lastHighlights, function (batchItem, key) {
-    !newHighlights[key] && toDownplay.push(batchItem);
+    !newHighlights[key] && toDownplay.push(makeHighDownItem(batchItem));
   });
   each(newHighlights, function (batchItem, key) {
-    !lastHighlights[key] && toHighlight.push(batchItem);
+    !lastHighlights[key] && toHighlight.push(makeHighDownItem(batchItem));
   });
   toDownplay.length && api.dispatchAction({
     type: 'downplay',

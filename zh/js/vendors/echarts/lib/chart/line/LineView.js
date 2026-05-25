@@ -51,7 +51,7 @@ import * as graphic from '../../util/graphic.js';
 import * as modelUtil from '../../util/model.js';
 import { ECPolyline, ECPolygon } from './poly.js';
 import ChartView from '../../view/Chart.js';
-import { prepareDataCoordInfo, getStackedOnPoint } from './helper.js';
+import { prepareDataCoordInfo, getStackedOnPoint, isPointIllegal } from './helper.js';
 import { createGridClipPath, createPolarClipPath } from '../helper/createClipPathFromCoordSys.js';
 import { isCoordinateSystemType } from '../../coord/CoordinateSystem.js';
 import { setStatesStylesFromModel, setStatesFlag, toggleHoverEmphasis, SPECIAL_STATES } from '../../util/states.js';
@@ -60,7 +60,9 @@ import { getDefaultLabel, getDefaultInterpolatedLabel } from '../helper/labelHel
 import { getECData } from '../../util/innerStore.js';
 import { createFloat32Array } from '../../util/vendor.js';
 import { convertToColorString } from '../../util/format.js';
+import { warnDeprecated } from '../../util/styleCompat.js';
 import { lerp } from 'zrender/lib/tool/color.js';
+import { getTickValueOutermost } from '../../coord/axisHelper.js';
 function isPointsSame(points1, points2) {
   if (points1.length !== points2.length) {
     return;
@@ -72,40 +74,34 @@ function isPointsSame(points1, points2) {
   }
   return true;
 }
-function bboxFromPoints(points) {
-  var minX = Infinity;
-  var minY = Infinity;
-  var maxX = -Infinity;
-  var maxY = -Infinity;
+function xyExtentFromPoints(points) {
+  var xExtent = modelUtil.initExtentForUnion();
+  var yExtent = modelUtil.initExtentForUnion();
   for (var i = 0; i < points.length;) {
     var x = points[i++];
     var y = points[i++];
-    if (!isNaN(x)) {
-      minX = Math.min(x, minX);
-      maxX = Math.max(x, maxX);
-    }
-    if (!isNaN(y)) {
-      minY = Math.min(y, minY);
-      maxY = Math.max(y, maxY);
+    if (!isPointIllegal(x, y)) {
+      modelUtil.unionExtentFromNumber(xExtent, x);
+      modelUtil.unionExtentFromNumber(yExtent, y);
     }
   }
-  return [[minX, minY], [maxX, maxY]];
+  return [xExtent, yExtent];
 }
 function getBoundingDiff(points1, points2) {
-  var _a = bboxFromPoints(points1),
-    min1 = _a[0],
-    max1 = _a[1];
-  var _b = bboxFromPoints(points2),
-    min2 = _b[0],
-    max2 = _b[1];
+  var _a = xyExtentFromPoints(points1),
+    xExtent1 = _a[0],
+    yExtent1 = _a[1];
+  var _b = xyExtentFromPoints(points2),
+    xExtent2 = _b[0],
+    yExtent2 = _b[1];
   // Get a max value from each corner of two boundings.
-  return Math.max(Math.abs(min1[0] - min2[0]), Math.abs(min1[1] - min2[1]), Math.abs(max1[0] - max2[0]), Math.abs(max1[1] - max2[1]));
+  return Math.max(Math.abs(xExtent1[0] - xExtent2[0]), Math.abs(yExtent1[0] - yExtent2[0]), Math.abs(xExtent1[1] - xExtent2[1]), Math.abs(yExtent1[1] - yExtent2[1]));
 }
 function getSmooth(smooth) {
   return zrUtil.isNumber(smooth) ? smooth : smooth ? 0.5 : 0;
 }
 function getStackedOnPoints(coordSys, data, dataCoordInfo) {
-  if (!dataCoordInfo.valueDim) {
+  if (dataCoordInfo.valueDim == null) {
     return [];
   }
   var len = data.count();
@@ -144,7 +140,7 @@ function turnPointsIntoStep(points, basePoints, coordSys, stepTurnAt, connectNul
        * should stay the same as the lines above. See #20021
        */
       var reference = basePoints || points;
-      if (!isNaN(reference[i]) && !isNaN(reference[i + 1])) {
+      if (!isPointIllegal(reference[i], reference[i + 1])) {
         filteredPoints.push(points[i], points[i + 1]);
       }
     }
@@ -331,8 +327,9 @@ function getIsIgnoreFunc(seriesModel, data, coordSys) {
   var categoryDataDim = data.mapDimension(categoryAxis.dim);
   var labelMap = {};
   zrUtil.each(categoryAxis.getViewLabels(), function (labelItem) {
-    var ordinalNumber = categoryAxis.scale.getRawOrdinalNumber(labelItem.tickValue);
-    labelMap[ordinalNumber] = 1;
+    if (!labelItem.tick.offInterval) {
+      labelMap[getTickValueOutermost(categoryAxis.scale, labelItem.tick)] = 1;
+    }
   });
   return function (dataIndex) {
     return !labelMap.hasOwnProperty(data.get(categoryDataDim, dataIndex));
@@ -360,13 +357,10 @@ function canShowAllSymbolForCategory(categoryAxis, data) {
   }
   return true;
 }
-function isPointNull(x, y) {
-  return isNaN(x) || isNaN(y);
-}
 function getLastIndexNotNull(points) {
   var len = points.length / 2;
   for (; len > 0; len--) {
-    if (!isPointNull(points[len * 2 - 2], points[len * 2 - 1])) {
+    if (!isPointIllegal(points[len * 2 - 2], points[len * 2 - 1])) {
       break;
     }
   }
@@ -384,7 +378,7 @@ function getIndexRange(points, xOrY, dim) {
   var nextIndex = -1;
   for (var i = 0; i < len; i++) {
     b = points[i * 2 + dimIdx];
-    if (isNaN(b) || isNaN(points[i * 2 + 1 - dimIdx])) {
+    if (isPointIllegal(b, points[i * 2 + 1 - dimIdx])) {
       continue;
     }
     if (i === 0) {
@@ -692,20 +686,27 @@ var LineView = /** @class */function (_super) {
     this._points = points;
     this._step = step;
     this._valueOrigin = valueOrigin;
-    if (seriesModel.get('triggerLineEvent')) {
-      this.packEventData(seriesModel, polyline);
-      polygon && this.packEventData(seriesModel, polygon);
+    var triggerEvent = seriesModel.get('triggerEvent');
+    var triggerLineEvent = seriesModel.get('triggerLineEvent');
+    if (process.env.NODE_ENV !== 'production') {
+      triggerLineEvent && warnDeprecated('triggerLineEvent', 'Use the `triggerEvent` option instead.');
     }
+    var shouldTriggerLineEvent = triggerLineEvent === true || triggerEvent === true || triggerEvent === 'line';
+    var shouldTriggerAreaEvent = triggerLineEvent === true || triggerEvent === true || triggerEvent === 'area';
+    this.packEventData(seriesModel, polyline, shouldTriggerLineEvent);
+    polygon && this.packEventData(seriesModel, polygon, shouldTriggerAreaEvent);
   };
-  LineView.prototype.packEventData = function (seriesModel, el) {
-    getECData(el).eventData = {
+  LineView.prototype.packEventData = function (seriesModel, el, enable) {
+    getECData(el).eventData = enable ? {
       componentType: 'series',
       componentSubType: 'line',
       componentIndex: seriesModel.componentIndex,
       seriesIndex: seriesModel.seriesIndex,
       seriesName: seriesModel.name,
-      seriesType: 'line'
-    };
+      seriesType: 'line',
+      // for determining this event is triggered by area or line
+      selfType: el === this._polygon ? 'area' : 'line'
+    } : null;
   };
   LineView.prototype.highlight = function (seriesModel, ecModel, api, payload) {
     var data = seriesModel.getData();
@@ -718,7 +719,7 @@ var LineView = /** @class */function (_super) {
         // Create a temporary symbol if it is not exists
         var x = points[dataIndex * 2];
         var y = points[dataIndex * 2 + 1];
-        if (isNaN(x) || isNaN(y)) {
+        if (isPointIllegal(x, y)) {
           // Null data
           return;
         }

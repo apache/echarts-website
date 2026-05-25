@@ -1,13 +1,15 @@
 import * as featureManager from './featureManager.js';
 import ComponentModel from '../../model/Component.js';
-import { ComponentOption, BoxLayoutOptionMixin, LayoutOrient, ZRColor, BorderOptionMixin, ItemStyleOption, LabelOption, CommonTooltipOption, Dictionary } from '../../util/types.js';
+import { ComponentOption, BoxLayoutOptionMixin, LayoutOrient, ZRColor, BorderOptionMixin, ItemStyleOption, LabelOption, CommonTooltipOption, Dictionary, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin } from '../../util/types.js';
+import type GlobalModel from '../../model/Global.js';
+import type Model from '../../model/Model.js';
 export interface ToolboxTooltipFormatterParams {
     componentType: 'toolbox';
     name: string;
     title: string;
     $vars: ['name', 'title'];
 }
-export interface ToolboxOption extends ComponentOption, BoxLayoutOptionMixin, BorderOptionMixin {
+export interface ToolboxOption extends ComponentOption, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin, BoxLayoutOptionMixin, BorderOptionMixin {
     mainType?: 'toolbox';
     show?: boolean;
     orient?: LayoutOrient;
@@ -35,6 +37,8 @@ declare class ToolboxModel extends ComponentModel<ToolboxOption> {
         readonly type: "box";
         readonly ignoreSize: true;
     };
+    private _themeFeatureOption;
+    init(option: ToolboxOption, parentModel: Model, ecModel: GlobalModel): void;
     optionUpdated(): void;
     static defaultOption: ToolboxOption;
 }

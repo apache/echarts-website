@@ -1,2 +1,1 @@
-import GlobalModel from '../../model/Global.js';
-export default function categoryFilter(ecModel: GlobalModel): void;
+export declare const graphCategoryFilterStageHandler: import("../../util/types").StageHandler;

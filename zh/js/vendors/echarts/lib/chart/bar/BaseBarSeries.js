@@ -135,6 +135,12 @@ var BaseBarSeriesModel = /** @class */function (_super) {
     }
     return [NaN, NaN];
   };
+  /**
+   * @implements
+   */
+  BaseBarSeriesModel.prototype.__requireStartValue = function (axis) {
+    return this.getBaseAxis() !== axis;
+  };
   BaseBarSeriesModel.type = 'series.__base_bar__';
   BaseBarSeriesModel.defaultOption = {
     // zlevel: 0,

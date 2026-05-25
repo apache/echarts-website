@@ -42,10 +42,13 @@
 * under the License.
 */
 import * as zrUtil from 'zrender/lib/core/util.js';
-import { groupData } from '../../util/model.js';
+import { createSimpleOverallStageHandler, groupData } from '../../util/model.js';
+import { SERIES_TYPE_SANKEY } from './SankeySeries.js';
 import { createBoxLayoutReference, getLayoutRect } from '../../util/layout.js';
-export default function sankeyLayout(ecModel, api) {
-  ecModel.eachSeriesByType('sankey', function (seriesModel) {
+import { asc } from '../../util/number.js';
+export var sankeyLayoutStageHandler = createSimpleOverallStageHandler(SERIES_TYPE_SANKEY, sankeyLayout);
+function sankeyLayout(ecModel, api) {
+  ecModel.eachSeriesByType(SERIES_TYPE_SANKEY, function (seriesModel) {
     var nodeWidth = seriesModel.get('nodeWidth');
     var nodeGap = seriesModel.get('nodeGap');
     var refContainer = createBoxLayoutReference(seriesModel, api).refContainer;
@@ -133,11 +136,11 @@ function computeNodeBreadths(nodes, edges, nodeWidth, width, height, orient, nod
       }, true);
       for (var edgeIdx = 0; edgeIdx < node.outEdges.length; edgeIdx++) {
         var edge = node.outEdges[edgeIdx];
-        var indexEdge = edges.indexOf(edge);
+        var indexEdge = zrUtil.indexOf(edges, edge);
         remainEdges[indexEdge] = 0;
         var targetNode = edge.node2;
-        var nodeIndex = nodes.indexOf(targetNode);
-        if (--indegreeArr[nodeIndex] === 0 && nextTargetNode.indexOf(targetNode) < 0) {
+        var nodeIndex = zrUtil.indexOf(nodes, targetNode);
+        if (--indegreeArr[nodeIndex] === 0 && zrUtil.indexOf(nextTargetNode, targetNode) < 0) {
           nextTargetNode.push(targetNode);
         }
       }
@@ -175,7 +178,7 @@ function adjustNodeWithNodeAlign(nodes, nodeAlign, orient, maxDepth) {
         }, true);
         for (var j = 0; j < node.inEdges.length; j++) {
           var edge = node.inEdges[j];
-          if (nextSourceNode.indexOf(edge.node1) < 0) {
+          if (zrUtil.indexOf(nextSourceNode, edge.node1) < 0) {
             nextSourceNode.push(edge.node1);
           }
         }
@@ -257,9 +260,7 @@ function prepareNodesByBreadth(nodes, orient) {
   var groupResult = groupData(nodes, function (node) {
     return node.getLayout()[keyAttr];
   });
-  groupResult.keys.sort(function (a, b) {
-    return a - b;
-  });
+  asc(groupResult.keys);
   zrUtil.each(groupResult.keys, function (key) {
     nodesByBreadth.push(groupResult.buckets.get(key));
   });

@@ -52,9 +52,14 @@ import { ToolboxFeature } from '../featureManager.js';
 import { makeInternalComponentId, parseFinder } from '../../../util/model.js';
 import { registerInternalOptionCreator } from '../../../model/internalComponentCreator.js';
 import tokens from '../../../visual/tokens.js';
+import { getAcceptableTickPrecision, round } from '../../../util/number.js';
 var each = zrUtil.each;
 var DATA_ZOOM_ID_BASE = makeInternalComponentId('toolbox-dataZoom_');
 var ICON_TYPES = ['zoom', 'back'];
+var XY2WH = {
+  x: 'width',
+  y: 'height'
+};
 var DataZoomFeature = /** @class */function (_super) {
   __extends(DataZoomFeature, _super);
   function DataZoomFeature() {
@@ -70,9 +75,6 @@ var DataZoomFeature = /** @class */function (_super) {
   };
   DataZoomFeature.prototype.onclick = function (ecModel, api, type) {
     handlers[type].call(this);
-  };
-  DataZoomFeature.prototype.remove = function (ecModel, api) {
-    this._brushController && this._brushController.unmount();
   };
   DataZoomFeature.prototype.dispose = function (ecModel, api) {
     this._brushController && this._brushController.dispose();
@@ -92,32 +94,36 @@ var DataZoomFeature = /** @class */function (_super) {
       if (coordSys.type !== 'cartesian2d') {
         return;
       }
+      var coordSysRect = coordSys.master.getRect().clone();
       var brushType = area.brushType;
       if (brushType === 'rect') {
-        setBatch('x', coordSys, coordRange[0]);
-        setBatch('y', coordSys, coordRange[1]);
+        setBatch('x', coordSys, coordSysRect, coordRange[0]);
+        setBatch('y', coordSys, coordSysRect, coordRange[1]);
       } else {
         setBatch({
           lineX: 'x',
           lineY: 'y'
-        }[brushType], coordSys, coordRange);
+        }[brushType], coordSys, coordSysRect, coordRange);
       }
     });
     history.push(ecModel, snapshot);
     this._dispatchZoomAction(snapshot);
-    function setBatch(dimName, coordSys, minMax) {
+    function setBatch(dimName, coordSys, coordSysRect, minMax) {
       var axis = coordSys.getAxis(dimName);
       var axisModel = axis.model;
       var dataZoomModel = findDataZoom(dimName, axisModel, ecModel);
       // Restrict range.
       var minMaxSpan = dataZoomModel.findRepresentativeAxisProxy(axisModel).getMinMaxSpan();
+      var scaleExtent = axis.scale.getExtent();
       if (minMaxSpan.minValueSpan != null || minMaxSpan.maxValueSpan != null) {
-        minMax = sliderMove(0, minMax.slice(), axis.scale.getExtent(), 0, minMaxSpan.minValueSpan, minMaxSpan.maxValueSpan);
+        minMax = sliderMove(0, minMax.slice(), scaleExtent, 0, minMaxSpan.minValueSpan, minMaxSpan.maxValueSpan);
       }
+      // Round for displayable.
+      var precision = getAcceptableTickPrecision(scaleExtent, coordSysRect[XY2WH[dimName]], 0.5);
       dataZoomModel && (snapshot[dataZoomModel.id] = {
         dataZoomId: dataZoomModel.id,
-        startValue: minMax[0],
-        endValue: minMax[1]
+        startValue: isFinite(precision) ? round(minMax[0], precision) : minMax[0],
+        endValue: isFinite(precision) ? round(minMax[1], precision) : minMax[1]
       });
     }
     function findDataZoom(dimName, axisModel, ecModel) {

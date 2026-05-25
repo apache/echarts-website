@@ -42,9 +42,10 @@
 * under the License.
 */
 import { each, indexOf, curry, assert, map, createHashMap } from 'zrender/lib/core/util.js';
-import * as graphic from '../../util/graphic.js';
 import * as brushHelper from './brushHelper.js';
-import { parseFinder as modelUtilParseFinder } from '../../util/model.js';
+import { parseFinder as modelUtilParseFinder, initExtentForUnion } from '../../util/model.js';
+import { viewCoordSysCopyBoundingRect, viewCoordSysCopyOverallMatrix } from '../../coord/View.js';
+import { boundingRectApplyTransform } from 'zrender/lib/core/BoundingRect.js';
 // FIXME
 // how to genarialize to more coordinate systems.
 var INCLUDE_FINDER_MAIN_TYPES = ['grid', 'xAxis', 'yAxis', 'geo', 'graph', 'polar', 'radiusAxis', 'angleAxis', 'bmap'];
@@ -260,10 +261,9 @@ var panelRectBuilders = {
     return this.coordSys.master.getRect().clone();
   },
   geo: function () {
-    var coordSys = this.coordSys;
-    var rect = coordSys.getBoundingRect().clone();
-    // geo roam and zoom transform
-    rect.applyTransform(graphic.getTransform(coordSys));
+    var viewCoordSys = this.coordSys.view;
+    var rect = viewCoordSysCopyBoundingRect(null, viewCoordSys);
+    boundingRectApplyTransform(rect, rect, viewCoordSysCopyOverallMatrix(null, viewCoordSys));
     return rect;
   }
 };
@@ -280,7 +280,7 @@ var coordConvert = {
     };
   },
   polygon: function (to, coordSys, rangeOrCoordRange, clamp) {
-    var xyMinMax = [[Infinity, -Infinity], [Infinity, -Infinity]];
+    var xyMinMax = [initExtentForUnion(), initExtentForUnion()];
     var values = map(rangeOrCoordRange, function (item) {
       var p = to ? coordSys.pointToData(item, clamp) : coordSys.dataToPoint(item, clamp);
       xyMinMax[0][0] = Math.min(xyMinMax[0][0], p[0]);

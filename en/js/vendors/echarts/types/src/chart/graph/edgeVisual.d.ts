@@ -1,2 +1,1 @@
-import GlobalModel from '../../model/Global.js';
-export default function graphEdgeVisual(ecModel: GlobalModel): void;
+export declare const graphEdgeVisualStageHandler: import("../../util/types").StageHandler;

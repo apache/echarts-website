@@ -24,6 +24,7 @@ declare class Grid implements CoordinateSystemMaster {
     name: string;
     static dimensions: string[];
     readonly dimensions: string[];
+    static dimIdxMap: import("zrender/lib/core/util").HashMap<number, string>;
     constructor(gridModel: GridModel, ecModel: GlobalModel, api: ExtensionAPI);
     getRect(): LayoutRect;
     update(ecModel: GlobalModel, api: ExtensionAPI): void;
@@ -75,10 +76,6 @@ declare class Grid implements CoordinateSystemMaster {
      * Initialize cartesian coordinate systems
      */
     private _initCartesian;
-    /**
-     * Update cartesian properties from series.
-     */
-    private _updateScale;
     /**
      * @param dim 'x' or 'y' or 'auto' or null/undefined
      */

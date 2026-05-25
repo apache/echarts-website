@@ -44,3 +44,8 @@
 export function isCoordinateSystemType(coordSys, type) {
   return coordSys.type === type;
 }
+export function isGeoLikeCoordSys(coordSys) {
+  var dimensions = coordSys.dimensions;
+  // Not use coordSys.type === 'geo' because coordSys maybe extended
+  return dimensions[0] === 'lng' && dimensions[1] === 'lat' && !!coordSys.getViewRect;
+}

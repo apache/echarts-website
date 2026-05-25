@@ -44,15 +44,15 @@
 import { use } from '../../extension.js';
 import MapView from './MapView.js';
 import MapSeries from './MapSeries.js';
-import mapDataStatistic from './mapDataStatistic.js';
-import mapSymbolLayout from './mapSymbolLayout.js';
 import { createLegacyDataSelectAction } from '../../legacy/dataSelectAction.js';
 import { install as installGeo } from '../../component/geo/install.js';
+import { mapSymbolLayoutStageHandler } from './mapSymbolLayout.js';
+import { mapDataStatisticStageHandler } from './mapDataStatistic.js';
 export function install(registers) {
   use(installGeo);
   registers.registerChartView(MapView);
   registers.registerSeriesModel(MapSeries);
-  registers.registerLayout(mapSymbolLayout);
-  registers.registerProcessor(registers.PRIORITY.PROCESSOR.STATISTIC, mapDataStatistic);
+  registers.registerLayout(mapSymbolLayoutStageHandler);
+  registers.registerProcessor(registers.PRIORITY.PROCESSOR.STATISTIC, mapDataStatisticStageHandler);
   createLegacyDataSelectAction('map', registers.registerAction);
 }

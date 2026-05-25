@@ -26797,7 +26797,9 @@ tooltip 中数值显示部分的格式化回调函数。
 (value: number | string, dataIndex: number) => string
 ```
 
-`dataIndex` 参数 从 `v5.3.0` 开始支持
+从 `v5.5.0` 开始支持`dataIndex` 参数。但是其值当 `dataZoom` 存在时不合理，因为所取的值是数据被 `dataZoom` 过滤后的 index。
+
+从 `v6.1.0` 开始支持`dataIndex` 参数修正 `dataZoom` 过滤前的 index
 
 示例：
 
@@ -27037,7 +27039,7 @@ extraCssText: 'box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);'
 
 ### data.cursor
 - **Type**: `string`
-- **Default**: `'pointer'`
+- **Default**: `pointer`
 
 从 `v5.6.0` 开始支持
 
@@ -27047,7 +27049,14 @@ extraCssText: 'box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);'
 - **Type**: `boolean`
 - **Default**: `false`
 
-图形是否不响应和触发鼠标事件，默认为 false，即响应和触发鼠标事件。
+图形是否不响应和用户交互（鼠标和触摸事件）。
+
+*   `true`: 图形不响应用户交互。这导致：
+    *   用户交互功能被禁止，例如 `tooltip`、鼠标悬浮时的状态变化（`emphasis`），鼠标悬浮时的联动等。
+    *   对外的鼠标和触摸事件不再发送给开发者注册的监听器（`chart.on('xxx', listener)`）。
+*   `false`:
+    *   用户交互功能不被此配置项禁止，但是是否可交互仍取决于其他相关配置项的设置。
+    *   对外的鼠标和触摸事件不被此配置项禁止，但是是否发送仍取决于其他配置项，一般是 `triggerEvent`（如果支持此配置项的话）。
 
 ## animationDuration
 - **Type**: `number|Function`
@@ -27428,7 +27437,9 @@ tooltip 中数值显示部分的格式化回调函数。
 (value: number | string, dataIndex: number) => string
 ```
 
-`dataIndex` 参数 从 `v5.3.0` 开始支持
+从 `v5.5.0` 开始支持`dataIndex` 参数。但是其值当 `dataZoom` 存在时不合理，因为所取的值是数据被 `dataZoom` 过滤后的 index。
+
+从 `v6.1.0` 开始支持`dataIndex` 参数修正 `dataZoom` 过滤前的 index
 
 示例：
 
@@ -27668,7 +27679,7 @@ extraCssText: 'box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);'
 
 ## cursor
 - **Type**: `string`
-- **Default**: `'pointer'`
+- **Default**: `pointer`
 
 从 `v5.6.0` 开始支持
 

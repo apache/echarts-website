@@ -41,15 +41,19 @@
 * specific language governing permissions and limitations
 * under the License.
 */
-// TODO clockwise
 import IndicatorAxis from './IndicatorAxis.js';
 import IntervalScale from '../../scale/Interval.js';
 import * as numberUtil from '../../util/number.js';
+import { COMPONENT_TYPE_RADAR, COORD_SYS_TYPE_RADAR, RADAR_DEFAULT_SPLIT_NUMBER, SERIES_TYPE_RADAR } from './RadarModel.js';
 import { map, each, isString, isNumber } from 'zrender/lib/core/util.js';
-import { alignScaleTicks } from '../axisAlignTicks.js';
+import { scaleCalcAlign } from '../axisAlignTicks.js';
 import { createBoxLayoutReference } from '../../util/layout.js';
+import { AXIS_EXTENT_INFO_BUILD_FROM_COORD_SYS_UPDATE, scaleRawExtentInfoCreate } from '../scaleRawExtentInfo.js';
+import { ensureValidSplitNumber } from '../../scale/helper.js';
+import { associateSeriesWithAxis } from '../axisStatistics.js';
 var Radar = /** @class */function () {
   function Radar(radarModel, ecModel, api) {
+    this.type = COORD_SYS_TYPE_RADAR;
     /**
      *
      * Radar dimensions
@@ -111,6 +115,7 @@ var Radar = /** @class */function () {
   Radar.prototype.resize = function (radarModel, api) {
     var refContainer = createBoxLayoutReference(radarModel, api).refContainer;
     var center = radarModel.get('center');
+    var clockwise = radarModel.get('clockwise') || false;
     var viewSize = Math.min(refContainer.width, refContainer.height) / 2;
     this.cx = numberUtil.parsePercent(center[0], refContainer.width) + refContainer.x;
     this.cy = numberUtil.parsePercent(center[1], refContainer.height) + refContainer.y;
@@ -122,9 +127,10 @@ var Radar = /** @class */function () {
     }
     this.r0 = numberUtil.parsePercent(radius[0], viewSize);
     this.r = numberUtil.parsePercent(radius[1], viewSize);
+    var sign = clockwise ? -1 : 1;
     each(this._indicatorAxes, function (indicatorAxis, idx) {
       indicatorAxis.setExtent(this.r0, this.r);
-      var angle = this.startAngle + idx * Math.PI * 2 / this._indicatorAxes.length;
+      var angle = this.startAngle + sign * idx * Math.PI * 2 / this._indicatorAxes.length;
       // Normalize to [-PI, PI]
       angle = Math.atan2(Math.sin(angle), Math.cos(angle));
       indicatorAxis.angle = angle;
@@ -133,27 +139,16 @@ var Radar = /** @class */function () {
   Radar.prototype.update = function (ecModel, api) {
     var indicatorAxes = this._indicatorAxes;
     var radarModel = this._model;
-    each(indicatorAxes, function (indicatorAxis) {
-      indicatorAxis.scale.setExtent(Infinity, -Infinity);
-    });
-    ecModel.eachSeriesByType('radar', function (radarSeries, idx) {
-      if (radarSeries.get('coordinateSystem') !== 'radar'
-      // @ts-ignore
-      || ecModel.getComponent('radar', radarSeries.get('radarIndex')) !== radarModel) {
-        return;
-      }
-      var data = radarSeries.getData();
-      each(indicatorAxes, function (indicatorAxis) {
-        indicatorAxis.scale.unionExtentFromData(data, data.mapDimension(indicatorAxis.dim));
-      });
-    }, this);
-    var splitNumber = radarModel.get('splitNumber');
+    var splitNumber = ensureValidSplitNumber(radarModel.get('splitNumber'), RADAR_DEFAULT_SPLIT_NUMBER);
     var dummyScale = new IntervalScale();
     dummyScale.setExtent(0, splitNumber);
-    dummyScale.setInterval(1);
+    dummyScale.setConfig({
+      interval: 1
+    });
     // Force all the axis fixing the maxSplitNumber.
-    each(indicatorAxes, function (indicatorAxis, idx) {
-      alignScaleTicks(indicatorAxis.scale, indicatorAxis.model, dummyScale);
+    each(indicatorAxes, function (indicatorAxis) {
+      scaleRawExtentInfoCreate(indicatorAxis, AXIS_EXTENT_INFO_BUILD_FROM_COORD_SYS_UPDATE);
+      scaleCalcAlign(indicatorAxis, dummyScale);
     });
   };
   Radar.prototype.convertToPixel = function (ecModel, finder, value) {
@@ -170,16 +165,21 @@ var Radar = /** @class */function () {
   };
   Radar.create = function (ecModel, api) {
     var radarList = [];
-    ecModel.eachComponent('radar', function (radarModel) {
+    ecModel.eachComponent(COMPONENT_TYPE_RADAR, function (radarModel) {
       var radar = new Radar(radarModel, ecModel, api);
       radarList.push(radar);
       radarModel.coordinateSystem = radar;
     });
-    ecModel.eachSeriesByType('radar', function (radarSeries) {
-      if (radarSeries.get('coordinateSystem') === 'radar') {
+    ecModel.eachSeriesByType(SERIES_TYPE_RADAR, function (radarSeries) {
+      if (radarSeries.get('coordinateSystem') === COORD_SYS_TYPE_RADAR) {
         // Inject coordinate system
         // @ts-ignore
-        radarSeries.coordinateSystem = radarList[radarSeries.get('radarIndex') || 0];
+        var radar = radarSeries.coordinateSystem = radarList[radarSeries.get('radarIndex') || 0];
+        if (radar) {
+          each(radar.getIndicatorAxes(), function (indicatorAxis) {
+            associateSeriesWithAxis(indicatorAxis, radarSeries, COORD_SYS_TYPE_RADAR);
+          });
+        }
       }
     });
     return radarList;

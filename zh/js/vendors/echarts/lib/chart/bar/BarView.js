@@ -59,33 +59,15 @@ import { warn } from '../../util/log.js';
 import { createSectorCalculateTextPosition, setSectorTextRotation } from '../../label/sectorLabel.js';
 import { saveOldStyle } from '../../animation/basicTransition.js';
 import { getSectorCornerRadius } from '../helper/sectorHelper.js';
+import { getIncrementalId } from '../../util/model.js';
+import { SERIES_TYPE_BAR } from '../../layout/barCommon.js';
 var mathMax = Math.max;
 var mathMin = Math.min;
-function getClipArea(coord, data) {
-  var coordSysClipArea = coord.getArea && coord.getArea();
-  if (isCoordinateSystemType(coord, 'cartesian2d')) {
-    var baseAxis = coord.getBaseAxis();
-    // When boundaryGap is false or using time axis. bar may exceed the grid.
-    // We should not clip this part.
-    // See test/bar2.html
-    if (baseAxis.type !== 'category' || !baseAxis.onBand) {
-      var expandWidth = data.getLayout('bandWidth');
-      if (baseAxis.isHorizontal()) {
-        coordSysClipArea.x -= expandWidth;
-        coordSysClipArea.width += expandWidth * 2;
-      } else {
-        coordSysClipArea.y -= expandWidth;
-        coordSysClipArea.height += expandWidth * 2;
-      }
-    }
-  }
-  return coordSysClipArea;
-}
 var BarView = /** @class */function (_super) {
   __extends(BarView, _super);
   function BarView() {
     var _this = _super.call(this) || this;
-    _this.type = BarView.type;
+    _this.type = SERIES_TYPE_BAR;
     _this._isFirstFrame = true;
     return _this;
   }
@@ -110,7 +92,7 @@ var BarView = /** @class */function (_super) {
     this._updateLargeClip(seriesModel);
   };
   BarView.prototype.incrementalRender = function (params, seriesModel) {
-    // Reset
+    // Reset for eachRendered
     this._progressiveEls = [];
     // Do not support progressive in normal mode.
     this._incrementalRenderLarge(params, seriesModel);
@@ -143,11 +125,13 @@ var BarView = /** @class */function (_super) {
       this._enableRealtimeSort(realtimeSortCfg, data, api);
     }
     var needsClip = seriesModel.get('clip', true) || realtimeSortCfg;
-    var coordSysClipArea = getClipArea(coord, data);
+    // Both `cartesian2d` and `polar` has `getArea()`.
+    var coordSysClipArea = coord.getArea();
     // If there is clipPath created in large mode. Remove it.
     group.removeClipPath();
     // We don't use clipPath in normal mode because we needs a perfect animation
     // And don't want the label are clipped.
+    // Instead, `Clipper` is used in normal mode.
     var roundCap = seriesModel.get('roundCap', true);
     var drawBackground = seriesModel.get('showBackground', true);
     var backgroundModel = seriesModel.getModel('backgroundStyle');
@@ -481,11 +465,11 @@ var BarView = /** @class */function (_super) {
     this.group.remove(this._backgroundGroup);
     this._backgroundGroup = null;
   };
-  BarView.type = 'bar';
+  BarView.type = SERIES_TYPE_BAR;
   return BarView;
 }(ChartView);
 var clip = {
-  cartesian2d: function (coordSysBoundingRect, layout) {
+  cartesian2d: function (coordSysClipArea, layout) {
     var signWidth = layout.width < 0 ? -1 : 1;
     var signHeight = layout.height < 0 ? -1 : 1;
     // Needs positive width and height
@@ -497,11 +481,11 @@ var clip = {
       layout.y += layout.height;
       layout.height = -layout.height;
     }
-    var coordSysX2 = coordSysBoundingRect.x + coordSysBoundingRect.width;
-    var coordSysY2 = coordSysBoundingRect.y + coordSysBoundingRect.height;
-    var x = mathMax(layout.x, coordSysBoundingRect.x);
+    var coordSysX2 = coordSysClipArea.x + coordSysClipArea.width;
+    var coordSysY2 = coordSysClipArea.y + coordSysClipArea.height;
+    var x = mathMax(layout.x, coordSysClipArea.x);
     var x2 = mathMin(layout.x + layout.width, coordSysX2);
-    var y = mathMax(layout.y, coordSysBoundingRect.y);
+    var y = mathMax(layout.y, coordSysClipArea.y);
     var y2 = mathMin(layout.y + layout.height, coordSysY2);
     var xClipped = x2 < x;
     var yClipped = y2 < y;
@@ -724,7 +708,7 @@ function updateStyle(el, data, dataIndex, itemModel, layout, seriesModel, isHori
   el.useStyle(style);
   var cursorStyle = itemModel.getShallow('cursor');
   cursorStyle && el.attr('cursor', cursorStyle);
-  var labelPositionOutside = isPolar ? isHorizontalOrRadial ? layout.r >= layout.r0 ? 'endArc' : 'startArc' : layout.endAngle >= layout.startAngle ? 'endAngle' : 'startAngle' : isHorizontalOrRadial ? layout.height >= 0 ? 'bottom' : 'top' : layout.width >= 0 ? 'right' : 'left';
+  var labelPositionOutside = isPolar ? isHorizontalOrRadial ? layout.r >= layout.r0 ? 'endArc' : 'startArc' : layout.endAngle >= layout.startAngle ? 'endAngle' : 'startAngle' : isHorizontalOrRadial ? getLabelPositionForHorizontal(layout, seriesModel.coordinateSystem) : getLabelPositionForVertical(layout, seriesModel.coordinateSystem);
   var labelStatesModels = getLabelStatesModels(itemModel);
   setLabelStyle(el, labelStatesModels, {
     labelFetcher: seriesModel,
@@ -810,12 +794,13 @@ function createLarge(seriesModel, group, progressiveEls, incremental) {
   var barWidth = data.getLayout('size');
   var backgroundModel = seriesModel.getModel('backgroundStyle');
   var bgPoints = data.getLayout('largeBackgroundPoints');
+  var incrementalId = incremental ? getIncrementalId(seriesModel) : 0;
   if (bgPoints) {
     var bgEl = new LargePath({
       shape: {
         points: bgPoints
       },
-      incremental: !!incremental,
+      incremental: incrementalId,
       silent: true,
       z2: 0
     });
@@ -830,7 +815,7 @@ function createLarge(seriesModel, group, progressiveEls, incremental) {
     shape: {
       points: data.getLayout('largePoints')
     },
-    incremental: !!incremental,
+    incremental: incrementalId,
     ignoreCoarsePointer: true,
     z2: 1
   });
@@ -839,7 +824,7 @@ function createLarge(seriesModel, group, progressiveEls, incremental) {
   el.barWidth = barWidth;
   group.add(el);
   el.useStyle(data.getVisual('style'));
-  // Stroke is rendered first to avoid overlapping with fill
+  // Stroke is rendered first to avoid overlapping with fill. See #20465
   el.style.stroke = null;
   // Enable tooltip and user mouse/touch event handlers.
   getECData(el).seriesIndex = seriesModel.seriesIndex;
@@ -909,5 +894,21 @@ function createBackgroundEl(coord, isHorizontalOrRadial, layout) {
     silent: true,
     z2: 0
   });
+}
+function getLabelPositionForHorizontal(layout, coordSys) {
+  if (layout.height === 0) {
+    // For zero height, determine position based on axis inverse status
+    var valueAxis = coordSys.getOtherAxis(coordSys.getBaseAxis());
+    return valueAxis.inverse ? 'bottom' : 'top';
+  }
+  return layout.height > 0 ? 'bottom' : 'top';
+}
+function getLabelPositionForVertical(layout, coordSys) {
+  if (layout.width === 0) {
+    // For zero width, determine position based on axis inverse status
+    var valueAxis = coordSys.getOtherAxis(coordSys.getBaseAxis());
+    return valueAxis.inverse ? 'left' : 'right';
+  }
+  return layout.width >= 0 ? 'right' : 'left';
 }
 export default BarView;

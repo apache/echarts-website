@@ -53,6 +53,8 @@ import { createTooltipMarkup } from '../../component/tooltip/tooltipMarkup.js';
 import { defaultSeriesFormatTooltip } from '../../component/tooltip/seriesFormatTooltip.js';
 import { initCurvenessList, createEdgeMapForCurveness } from '../helper/multipleGraphEdgeHelper.js';
 import tokens from '../../visual/tokens.js';
+import { isViewCoordSys } from '../../coord/View.js';
+export var SERIES_TYPE_GRAPH = 'graph';
 var GraphSeriesModel = /** @class */function (_super) {
   __extends(GraphSeriesModel, _super);
   function GraphSeriesModel() {
@@ -179,18 +181,18 @@ var GraphSeriesModel = /** @class */function (_super) {
       return categoriesData.getItemModel(idx);
     });
   };
-  GraphSeriesModel.prototype.setZoom = function (zoom) {
-    this.option.zoom = zoom;
-  };
-  GraphSeriesModel.prototype.setCenter = function (center) {
-    this.option.center = center;
-  };
   GraphSeriesModel.prototype.isAnimationEnabled = function () {
     return _super.prototype.isAnimationEnabled.call(this)
     // Not enable animation when do force layout
     && !(this.get('layout') === 'force' && this.get(['force', 'layoutAnimation']));
   };
-  GraphSeriesModel.type = 'series.graph';
+  GraphSeriesModel.prototype.__ownRoamView = function () {
+    // Be an exclusive coord sys of graph series iff it is a `View` coord sys.
+    // Otherwise graph series is based on an external geo or Cartesian.
+    var coordSys = this.coordinateSystem;
+    return isViewCoordSys(coordSys) && coordSys;
+  };
+  GraphSeriesModel.type = 'series.' + SERIES_TYPE_GRAPH;
   GraphSeriesModel.dependencies = ['grid', 'polar', 'geo', 'singleAxis', 'calendar'];
   GraphSeriesModel.defaultOption = {
     // zlevel: 0,

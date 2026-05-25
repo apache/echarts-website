@@ -228,18 +228,30 @@ var LinesSeriesModel = /** @class */function (_super) {
   };
   LinesSeriesModel.prototype.formatTooltip = function (dataIndex, multipleSeries, dataType) {
     var data = this.getData();
+    var value = this.getRawValue(dataIndex);
     var itemModel = data.getItemModel(dataIndex);
-    var name = itemModel.get('name');
-    if (name) {
-      return name;
+    var itemName = itemModel.get('name');
+    if (!itemName) {
+      var fromName = itemModel.get('fromName');
+      var toName = itemModel.get('toName');
+      var nameArr = [];
+      fromName != null && nameArr.push(fromName);
+      toName != null && nameArr.push(toName);
+      itemName = nameArr.join(' > ');
     }
-    var fromName = itemModel.get('fromName');
-    var toName = itemModel.get('toName');
-    var nameArr = [];
-    fromName != null && nameArr.push(fromName);
-    toName != null && nameArr.push(toName);
     return createTooltipMarkup('nameValue', {
-      name: nameArr.join(' > ')
+      name: itemName,
+      value: value,
+      // NOTE: here `value` may be `coords` (an 2D-array) if ec option is like
+      //  series: {
+      //      type: 'lines',
+      //      data: [
+      //          [[2.122232, 100.1133], [5.122232, 104.1133]],
+      //          [[22.122232, 0.1133], [25.122232, 4.1133]],
+      //      ]
+      //  }
+      // Do not display `value` in that case.
+      noValue: value == null || isNaN(value)
     });
   };
   LinesSeriesModel.prototype.preventIncremental = function () {
@@ -262,9 +274,8 @@ var LinesSeriesModel = /** @class */function (_super) {
   LinesSeriesModel.prototype.getZLevelKey = function () {
     var effectModel = this.getModel('effect');
     var trailLength = effectModel.get('trailLength');
-    return this.getData().count() > this.getProgressiveThreshold()
-    // Each progressive series has individual key.
-    ? this.id : effectModel.get('show') && trailLength > 0 ? trailLength + '' : '';
+    return this.getData().count() > this.getProgressiveThreshold() ? this.id // PENDING: See `GET_ZLEVEL_KEY_FOR_PROGRESSIVE`
+    : effectModel.get('show') && trailLength > 0 ? trailLength + '' : '';
   };
   LinesSeriesModel.type = 'series.lines';
   LinesSeriesModel.dependencies = ['grid', 'polar', 'geo', 'calendar'];

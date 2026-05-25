@@ -70,10 +70,12 @@ export function install(registers) {
   });
   // This process should proformed after coordinate systems created
   // and series data processed. So put it on statistic processing stage.
-  registers.registerProcessor(registers.PRIORITY.PROCESSOR.STATISTIC, function (ecModel, api) {
-    // Build axisPointerModel, mergin tooltip.axisPointer model for each axis.
-    // allAxesInfo should be updated when setOption performed.
-    ecModel.getComponent('axisPointer').coordSysAxesInfo = collect(ecModel, api);
+  registers.registerProcessor(registers.PRIORITY.PROCESSOR.STATISTIC, {
+    overallReset: function (ecModel, api) {
+      // Build axisPointerModel, mergin tooltip.axisPointer model for each axis.
+      // allAxesInfo should be updated when setOption performed.
+      ecModel.getComponent('axisPointer').coordSysAxesInfo = collect(ecModel, api);
+    }
   });
   // Broadcast to all views.
   registers.registerAction({

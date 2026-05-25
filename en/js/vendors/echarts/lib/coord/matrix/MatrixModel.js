@@ -101,7 +101,8 @@ var defaultMatrixOption = {
     color: 'none',
     borderColor: tokens.color.axisLine,
     borderWidth: 1
-  }
+  },
+  triggerEvent: false
 };
 var MatrixModel = /** @class */function (_super) {
   __extends(MatrixModel, _super);

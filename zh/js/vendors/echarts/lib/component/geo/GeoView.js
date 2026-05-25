@@ -74,6 +74,15 @@ var GeoView = /** @class */function (_super) {
     this.group.add(mapDraw.group);
     this.updateSelectStatus(geoModel, ecModel, api);
   };
+  /**
+   * @implements RoamHostView['__updateOnOwnRoam']
+   */
+  GeoView.prototype.__updateOnOwnRoam = function (payload, model, api) {
+    var mapDraw = this._mapDraw;
+    if (mapDraw) {
+      mapDraw.__updateOnOwnRoam(model);
+    }
+  };
   GeoView.prototype._handleRegionClick = function (e) {
     var eventData;
     findEventDispatcher(e.target, function (current) {

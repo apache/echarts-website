@@ -1,3 +1,1 @@
-import ExtensionAPI from '../core/ExtensionAPI.js';
-import GlobalModel from '../model/Global.js';
-export default function decalVisual(ecModel: GlobalModel, api: ExtensionAPI): void;
+export declare const decalVisualStageHandler: import("../util/types").StageHandler;

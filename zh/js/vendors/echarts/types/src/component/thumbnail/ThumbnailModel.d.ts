@@ -1,12 +1,12 @@
 import ComponentModel from '../../model/Component.js';
-import { BorderOptionMixin, BoxLayoutOptionMixin, ComponentOption, ItemStyleOption, NullUndefined } from '../../util/types.js';
+import { BoxLayoutOptionMixin, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin, ComponentOption, ItemStyleOption, NullUndefined } from '../../util/types.js';
 import { ThumbnailBridgeImpl } from './ThumbnailBridgeImpl.js';
 /**
  * [NOTE]: thumbnail is implemented as a component, rather than internal data strucutrue,
  *  due to the possibility of serveing geo and related series with a single thumbnail,
  *  and enable to apply some common layout feature, such as matrix coord sys.
  */
-export interface ThumbnailOption extends ComponentOption, BoxLayoutOptionMixin, BorderOptionMixin {
+export interface ThumbnailOption extends ComponentOption, BoxLayoutOptionMixin, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin {
     mainType?: 'thumbnail';
     show?: boolean;
     itemStyle?: ItemStyleOption;

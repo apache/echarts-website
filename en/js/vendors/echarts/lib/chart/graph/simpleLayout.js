@@ -43,8 +43,11 @@
 */
 import { each } from 'zrender/lib/core/util.js';
 import { simpleLayout, simpleLayoutEdge } from './simpleLayoutHelper.js';
-export default function graphSimpleLayout(ecModel, api) {
-  ecModel.eachSeriesByType('graph', function (seriesModel) {
+import { SERIES_TYPE_GRAPH } from './GraphSeries.js';
+import { createSimpleOverallStageHandler } from '../../util/model.js';
+export var graphSimpleLayoutStageHandler = createSimpleOverallStageHandler(SERIES_TYPE_GRAPH, graphSimpleLayout);
+function graphSimpleLayout(ecModel, api) {
+  ecModel.eachSeriesByType(SERIES_TYPE_GRAPH, function (seriesModel) {
     var layout = seriesModel.get('layout');
     var coordSys = seriesModel.coordinateSystem;
     if (coordSys && coordSys.type !== 'view') {

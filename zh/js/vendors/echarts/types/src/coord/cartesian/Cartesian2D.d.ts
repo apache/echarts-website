@@ -19,7 +19,7 @@ declare class Cartesian2D extends Cartesian<Axis2D> implements CoordinateSystem 
      */
     calcAffineTransform(): void;
     /**
-     * Base axis will be used on stacking.
+     * Base axis will be used on stacking and series such as 'bar', 'pictorialBar', etc.
      */
     getBaseAxis(): Axis2D;
     containPoint(point: number[]): boolean;

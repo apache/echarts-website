@@ -1,4 +1,4 @@
-import { SeriesOption, SeriesOnCartesianOptionMixin, SeriesOnPolarOptionMixin, SeriesOnCalendarOptionMixin, SeriesOnGeoOptionMixin, SeriesOnSingleOptionMixin, OptionDataValue, RoamOptionMixin, SeriesLabelOption, ItemStyleOption, LineStyleOption, SymbolOptionMixin, BoxLayoutOptionMixin, CircleLayoutOptionMixin, SeriesLineLabelOption, StatesOptionMixin, GraphEdgeItemObject, OptionDataValueNumeric, CallbackDataParams, DefaultEmphasisFocus } from '../../util/types.js';
+import { SeriesOption, SeriesOnCartesianOptionMixin, SeriesOnPolarOptionMixin, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin, SeriesOnGeoOptionMixin, SeriesOnSingleOptionMixin, OptionDataValue, RoamOptionMixin, SeriesLabelOption, ItemStyleOption, LineStyleOption, SymbolOptionMixin, BoxLayoutOptionMixin, CircleLayoutOptionMixin, SeriesLineLabelOption, StatesOptionMixin, GraphEdgeItemObject, OptionDataValueNumeric, CallbackDataParams, DefaultEmphasisFocus } from '../../util/types.js';
 import SeriesModel from '../../model/Series.js';
 import GlobalModel from '../../model/Global.js';
 import SeriesData from '../../data/SeriesData.js';
@@ -51,7 +51,7 @@ export interface ChordEdgeStateOption {
 export interface ChordEdgeItemOption extends ChordEdgeStateOption, StatesOptionMixin<ChordEdgeStateOption, ChordEdgeStatesMixin>, GraphEdgeItemObject<OptionDataValueNumeric> {
     value?: number;
 }
-export interface ChordSeriesOption extends SeriesOption<ChordNodeStateOption<CallbackDataParams>, ChordStatesMixin>, SeriesOnCartesianOptionMixin, SeriesOnPolarOptionMixin, SeriesOnCalendarOptionMixin, SeriesOnGeoOptionMixin, SeriesOnSingleOptionMixin, SymbolOptionMixin<CallbackDataParams>, RoamOptionMixin, BoxLayoutOptionMixin, CircleLayoutOptionMixin {
+export interface ChordSeriesOption extends SeriesOption<ChordNodeStateOption<CallbackDataParams>, ChordStatesMixin>, SeriesOnCartesianOptionMixin, SeriesOnPolarOptionMixin, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin, SeriesOnGeoOptionMixin, SeriesOnSingleOptionMixin, SymbolOptionMixin<CallbackDataParams>, RoamOptionMixin, BoxLayoutOptionMixin, CircleLayoutOptionMixin {
     type?: 'chord';
     coordinateSystem?: 'none';
     legendHoverLink?: boolean;
@@ -89,8 +89,9 @@ export interface ChordSeriesOption extends SeriesOption<ChordNodeStateOption<Cal
         lineStyle?: LineStyleOption;
     };
 }
+export declare const SERIES_TYPE_CHORD = "chord";
 declare class ChordSeriesModel extends SeriesModel<ChordSeriesOption> {
-    static type: string;
+    static readonly type: string;
     readonly type: string;
     init(option: ChordSeriesOption): void;
     mergeOption(option: ChordSeriesOption): void;

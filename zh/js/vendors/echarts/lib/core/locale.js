@@ -53,8 +53,7 @@ var DEFAULT_LOCALE = LOCALE_EN;
 var localeStorage = {};
 var localeModels = {};
 export var SYSTEM_LANG = !env.domSupported ? DEFAULT_LOCALE : function () {
-  var langStr = (/* eslint-disable-next-line */
-  document.documentElement.lang || navigator.language || navigator.browserLanguage || DEFAULT_LOCALE).toUpperCase();
+  var langStr = (document.documentElement.lang || navigator.language || navigator.browserLanguage || DEFAULT_LOCALE).toUpperCase();
   return langStr.indexOf(LOCALE_ZH) > -1 ? LOCALE_ZH : DEFAULT_LOCALE;
 }();
 export function registerLocale(locale, localeObj) {

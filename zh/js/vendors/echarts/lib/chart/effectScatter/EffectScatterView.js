@@ -47,6 +47,7 @@ import EffectSymbol from '../helper/EffectSymbol.js';
 import * as matrix from 'zrender/lib/core/matrix.js';
 import pointsLayout from '../../layout/points.js';
 import ChartView from '../../view/Chart.js';
+import { createCoordSysClipAreaSimply } from '../helper/createClipPathFromCoordSys.js';
 var EffectScatterView = /** @class */function (_super) {
   __extends(EffectScatterView, _super);
   function EffectScatterView() {
@@ -60,15 +61,8 @@ var EffectScatterView = /** @class */function (_super) {
   EffectScatterView.prototype.render = function (seriesModel, ecModel, api) {
     var data = seriesModel.getData();
     var effectSymbolDraw = this._symbolDraw;
-    effectSymbolDraw.updateData(data, {
-      clipShape: this._getClipShape(seriesModel)
-    });
+    effectSymbolDraw.updateData(data, createSymbolDrawOpt(seriesModel));
     this.group.add(effectSymbolDraw.group);
-  };
-  EffectScatterView.prototype._getClipShape = function (seriesModel) {
-    var coordSys = seriesModel.coordinateSystem;
-    var clipArea = coordSys && coordSys.getArea && coordSys.getArea();
-    return seriesModel.get('clip', true) ? clipArea : null;
   };
   EffectScatterView.prototype.updateTransform = function (seriesModel, ecModel, api) {
     var data = seriesModel.getData();
@@ -81,7 +75,7 @@ var EffectScatterView = /** @class */function (_super) {
         count: data.count()
       }, data);
     }
-    this._symbolDraw.updateLayout();
+    this._symbolDraw.updateLayout(createSymbolDrawOpt(seriesModel));
   };
   EffectScatterView.prototype._updateGroupTransform = function (seriesModel) {
     var coordSys = seriesModel.coordinateSystem;
@@ -96,4 +90,9 @@ var EffectScatterView = /** @class */function (_super) {
   EffectScatterView.type = 'effectScatter';
   return EffectScatterView;
 }(ChartView);
+function createSymbolDrawOpt(seriesModel) {
+  return {
+    clipShape: createCoordSysClipAreaSimply(seriesModel)
+  };
+}
 export default EffectScatterView;

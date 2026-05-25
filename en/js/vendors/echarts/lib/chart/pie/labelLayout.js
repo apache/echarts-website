@@ -378,13 +378,13 @@ export default function pieLabelLayout(seriesModel) {
     } else if (rotate === 'radial' || rotate === true) {
       var radialAngle = nx < 0 ? -midAngle + PI : -midAngle;
       labelRotate = radialAngle;
-    } else if (rotate === 'tangential' && labelPosition !== 'outside' && labelPosition !== 'outer') {
+    } else if (rotate === 'tangential' || rotate === 'tangential-noflip' && labelPosition !== 'outside' && labelPosition !== 'outer') {
       var rad = Math.atan2(nx, ny);
       if (rad < 0) {
         rad = PI * 2 + rad;
       }
       var isDown = ny > 0;
-      if (isDown) {
+      if (isDown && rotate !== 'tangential-noflip') {
         rad = PI + rad;
       }
       labelRotate = rad - PI;

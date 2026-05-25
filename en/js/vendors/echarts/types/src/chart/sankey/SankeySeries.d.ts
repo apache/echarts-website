@@ -1,6 +1,6 @@
 import SeriesModel from '../../model/Series.js';
 import Model from '../../model/Model.js';
-import { SeriesOption, BoxLayoutOptionMixin, OptionDataValue, SeriesLabelOption, ItemStyleOption, LineStyleOption, LayoutOrient, ColorString, StatesOptionMixin, OptionDataItemObject, GraphEdgeItemObject, OptionDataValueNumeric, DefaultEmphasisFocus, CallbackDataParams, RoamOptionMixin } from '../../util/types.js';
+import { SeriesOption, BoxLayoutOptionMixin, OptionDataValue, SeriesLabelOption, ItemStyleOption, LineStyleOption, LayoutOrient, ColorString, StatesOptionMixin, OptionDataItemObject, GraphEdgeItemObject, OptionDataValueNumeric, DefaultEmphasisFocus, CallbackDataParams, RoamOptionMixin, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin, RoamHostModel } from '../../util/types.js';
 import GlobalModel from '../../model/Global.js';
 import SeriesData from '../../data/SeriesData.js';
 import { LayoutRect } from '../../util/layout.js';
@@ -38,7 +38,7 @@ export interface SankeyEdgeItemOption extends SankeyEdgeStateOption, StatesOptio
 export interface SankeyLevelOption extends SankeyNodeStateOption, SankeyEdgeStateOption {
     depth: number;
 }
-export interface SankeySeriesOption extends SeriesOption<SankeyBothStateOption<CallbackDataParams>, ExtraStateOption>, SankeyBothStateOption<CallbackDataParams>, BoxLayoutOptionMixin, RoamOptionMixin {
+export interface SankeySeriesOption extends SeriesOption<SankeyBothStateOption<CallbackDataParams>, ExtraStateOption>, SankeyBothStateOption<CallbackDataParams>, BoxLayoutOptionMixin, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin, RoamOptionMixin {
     type?: 'sankey';
     /**
      * color will be linear mapped.
@@ -77,9 +77,10 @@ export interface SankeySeriesOption extends SeriesOption<SankeyBothStateOption<C
         position?: 'inside';
     };
 }
-declare class SankeySeriesModel extends SeriesModel<SankeySeriesOption> {
-    static readonly type = "series.sankey";
-    readonly type = "series.sankey";
+export declare const SERIES_TYPE_SANKEY = "sankey";
+declare class SankeySeriesModel extends SeriesModel<SankeySeriesOption> implements RoamHostModel {
+    static readonly type: string;
+    readonly type: string;
     static layoutMode: "box";
     coordinateSystem: View;
     levelModels: Model<SankeyLevelOption>[];
@@ -89,8 +90,6 @@ declare class SankeySeriesModel extends SeriesModel<SankeySeriesOption> {
      */
     getInitialData(option: SankeySeriesOption, ecModel: GlobalModel): SeriesData<Model<any>, import("../../data/SeriesData").DefaultDataVisual>;
     setNodePosition(dataIndex: number, localPosition: number[]): void;
-    setCenter(center: number[]): void;
-    setZoom(zoom: number): void;
     /**
      * Return the graphic data structure
      *
@@ -106,6 +105,7 @@ declare class SankeySeriesModel extends SeriesModel<SankeySeriesOption> {
     formatTooltip(dataIndex: number, multipleSeries: boolean, dataType: 'node' | 'edge'): import("../../component/tooltip/tooltipMarkup").TooltipMarkupNameValueBlock;
     optionUpdated(): void;
     getDataParams(dataIndex: number, dataType: 'node' | 'edge'): CallbackDataParams;
+    __ownRoamView(): View;
     static defaultOption: SankeySeriesOption;
 }
 export default SankeySeriesModel;

@@ -41,9 +41,12 @@
 * specific language governing permissions and limitations
 * under the License.
 */
+import { createSimpleOverallStageHandler } from '../../util/model.js';
+import { SERIES_TYPE_TREE } from './TreeSeries.js';
 import { extend } from 'zrender/lib/core/util.js';
-export default function treeVisual(ecModel) {
-  ecModel.eachSeriesByType('tree', function (seriesModel) {
+export var treeVisualStageHandler = createSimpleOverallStageHandler(SERIES_TYPE_TREE, treeVisual);
+function treeVisual(ecModel) {
+  ecModel.eachSeriesByType(SERIES_TYPE_TREE, function (seriesModel) {
     var data = seriesModel.getData();
     var tree = data.tree;
     tree.eachNode(function (node) {

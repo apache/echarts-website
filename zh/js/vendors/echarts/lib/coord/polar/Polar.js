@@ -43,11 +43,12 @@
 */
 import RadiusAxis from './RadiusAxis.js';
 import AngleAxis from './AngleAxis.js';
+import { COORD_SYS_TYPE_POLAR } from './PolarModel.js';
 export var polarDimensions = ['radius', 'angle'];
 var Polar = /** @class */function () {
   function Polar(name) {
     this.dimensions = polarDimensions;
-    this.type = 'polar';
+    this.type = COORD_SYS_TYPE_POLAR;
     /**
      * x of polar center
      */
@@ -105,7 +106,6 @@ var Polar = /** @class */function () {
   };
   /**
    * Base axis will be used on stacking.
-   *
    */
   Polar.prototype.getBaseAxis = function () {
     return this.getAxesByScale('ordinal')[0] || this.getAxesByScale('time')[0] || this.getAngleAxis();
@@ -122,7 +122,9 @@ var Polar = /** @class */function () {
    * Parameter data is an array which the first element is radius and the second is angle
    */
   Polar.prototype.dataToPoint = function (data, clamp, out) {
-    return this.coordToPoint([this._radiusAxis.dataToRadius(data[0], clamp), this._angleAxis.dataToAngle(data[1], clamp)], out);
+    return this.coordToPoint([
+    // Must be the same order as polarDimensions
+    this._radiusAxis.dataToRadius(data[0], clamp), this._angleAxis.dataToAngle(data[1], clamp)], out);
   };
   /**
    * Convert a (x, y) point to data
@@ -130,6 +132,7 @@ var Polar = /** @class */function () {
   Polar.prototype.pointToData = function (point, clamp, out) {
     out = out || [];
     var coord = this.pointToCoord(point);
+    // Must be the same order as polarDimensions
     out[0] = this._radiusAxis.radiusToData(coord[0], clamp);
     out[1] = this._angleAxis.angleToData(coord[1], clamp);
     return out;

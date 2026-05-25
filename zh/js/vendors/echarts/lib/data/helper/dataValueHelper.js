@@ -44,6 +44,7 @@
 import { parseDate, numericToNumber } from '../../util/number.js';
 import { createHashMap, trim, hasOwn, isString, isNumber } from 'zrender/lib/core/util.js';
 import { throwError } from '../../util/log.js';
+// --------- START: Parsers --------
 /**
  * Convert raw the value in to inner value in List.
  *
@@ -236,3 +237,49 @@ var FilterEqualityComparator = /** @class */function () {
 export function createFilterComparator(op, rval) {
   return op === 'eq' || op === 'ne' ? new FilterEqualityComparator(op === 'eq', rval) : hasOwn(ORDER_COMPARISON_OP_MAP, op) ? new FilterOrderComparator(op, rval) : null;
 }
+/**
+ * @usage
+ *  const filterParsed = parseSanitizationFilter(filter);
+ *  for( ... ) {
+ *      const val = ...;
+ *      if (!filter || passesFilter(filterParsed, val)) {
+ *          // normal handling
+ *      }
+ *  }
+ */
+export function parseSanitizationFilter(filter) {
+  var filterKey = '';
+  var filterG = -Infinity;
+  var filterGE = -Infinity;
+  var filterL = Infinity;
+  var filterLE = Infinity;
+  if (filter) {
+    if (filter.g != null) {
+      filterKey += 'G' + filter.g;
+      filterG = filter.g;
+    }
+    if (filter.ge != null) {
+      filterKey += 'GE' + filter.ge;
+      filterGE = filter.ge;
+    }
+    if (filter.l != null) {
+      filterKey += 'L' + filter.l;
+      filterL = filter.l;
+    }
+    if (filter.le != null) {
+      filterKey += 'LE' + filter.le;
+      filterLE = filter.le;
+    }
+  }
+  return {
+    key: filterKey,
+    g: filterG,
+    ge: filterGE,
+    l: filterL,
+    le: filterLE
+  };
+}
+export function passesSanitizationFilter(filterParsed, value) {
+  return value > filterParsed.g && value >= filterParsed.ge && value < filterParsed.l && value <= filterParsed.le;
+}
+// --------- END: Data store sanitization filters ---------

@@ -4,6 +4,7 @@ import GlobalModel from '../../model/Global.js';
 import ExtensionAPI from '../../core/ExtensionAPI.js';
 import { TreeNode } from '../../data/Tree.js';
 import { TreemapRenderPayload, TreemapMovePayload, TreemapZoomToNodePayload } from './treemapAction.js';
+import { RoamOptionMixin } from '../../util/types.js';
 export interface TreemapLayoutNode extends TreeNode {
     parentNode: TreemapLayoutNode;
     children: TreemapLayoutNode[];
@@ -28,3 +29,5 @@ declare const _default: {
  * @public
  */
 export default _default;
+export declare function calculateCurrentZoom(baseSize: Pick<RectLike, 'width' | 'height'>, currSize: Pick<RectLike, 'width' | 'height'>): RoamOptionMixin['zoom'];
+export declare function treemapClampZoom(zoom: number, seriesModel: TreemapSeriesModel): number;

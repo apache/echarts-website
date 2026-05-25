@@ -25,6 +25,7 @@ declare class SliderZoomView extends DataZoomView {
     private _brushStartTime;
     private _dragging;
     private _brushing;
+    private _isOverDataInfoTriggerArea;
     private _dataShadowInfo;
     private _shadowData;
     private _shadowDim;
@@ -50,11 +51,14 @@ declare class SliderZoomView extends DataZoomView {
     private _updateInterval;
     private _updateView;
     private _updateDataInfo;
-    private _formatLabel;
+    private _onOverDataInfoTriggerArea;
     /**
      * @param isEmphasis true: show, false: hide
      */
     private _showDataInfo;
+    private _onActualMoveZoneDrift;
+    private _onActualMoveZoneDragStart;
+    private _onActualMoveZoneDragEnd;
     private _onDragMove;
     private _onDragEnd;
     private _onClickPanel;

@@ -42,10 +42,10 @@
 * under the License.
 */
 import { __extends } from "tslib";
-import * as zrUtil from 'zrender/lib/core/util.js';
 import * as featureManager from './featureManager.js';
 import ComponentModel from '../../model/Component.js';
 import tokens from '../../visual/tokens.js';
+import { each, extend, merge } from 'zrender/lib/core/util.js';
 var ToolboxModel = /** @class */function (_super) {
   __extends(ToolboxModel, _super);
   function ToolboxModel() {
@@ -53,18 +53,44 @@ var ToolboxModel = /** @class */function (_super) {
     _this.type = ToolboxModel.type;
     return _this;
   }
+  ToolboxModel.prototype.init = function (option, parentModel, ecModel) {
+    // An historical behavior:
+    //  An initial ec option
+    //       chart.setOption( {toolbox: {feature: { featureA: {}, featureB: {}, }} } )
+    //  indicates the declared toolbox features need to be enabled regardless of whether property
+    //  "show" is explicity specified. But the subsequent `setOption` in merge mode requires property
+    //  "show: false" to be explicity specified if intending to remove features, for example:
+    //       chart.setOption( {toolbox: {feature: { featureA: {show: false}, featureC: {} } )
+    // We keep backward compatibility and perform specific processing to prevent theme
+    // settings from breaking it.
+    var toolboxOptionInTheme = ecModel.getTheme().get('toolbox');
+    var themeFeatureOption = toolboxOptionInTheme ? toolboxOptionInTheme.feature : null;
+    if (themeFeatureOption) {
+      // Use extend - the first level of the feature option will be modified later.
+      this._themeFeatureOption = extend({}, themeFeatureOption);
+      toolboxOptionInTheme.feature = {};
+    }
+    _super.prototype.init.call(this, option, parentModel, ecModel); // merge theme is performed inside it.
+    if (themeFeatureOption) {
+      toolboxOptionInTheme.feature = themeFeatureOption; // Recover
+    }
+  };
   ToolboxModel.prototype.optionUpdated = function () {
-    _super.prototype.optionUpdated.apply(this, arguments);
-    var ecModel = this.ecModel;
-    zrUtil.each(this.option.feature, function (featureOpt, featureName) {
+    each(this.option.feature, function (featureOpt, featureName) {
+      var themeFeatureOption = this._themeFeatureOption;
       var Feature = featureManager.getFeature(featureName);
       if (Feature) {
         if (Feature.getDefaultOption) {
-          Feature.defaultOption = Feature.getDefaultOption(ecModel);
+          Feature.defaultOption = Feature.getDefaultOption(this.ecModel);
         }
-        zrUtil.merge(featureOpt, Feature.defaultOption);
+        if (themeFeatureOption && themeFeatureOption[featureName]) {
+          merge(featureOpt, themeFeatureOption[featureName]);
+          // Follow the previous behavior, theme is only be merged once.
+          themeFeatureOption[featureName] = null;
+        }
+        merge(featureOpt, Feature.defaultOption);
       }
-    });
+    }, this);
   };
   ToolboxModel.type = 'toolbox';
   ToolboxModel.layoutMode = {
@@ -94,7 +120,7 @@ var ToolboxModel = /** @class */function (_super) {
     },
     emphasis: {
       iconStyle: {
-        borderColor: tokens.color.accent50
+        borderColor: tokens.color.accent70
       }
     },
     // textStyle: {},

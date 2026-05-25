@@ -55,5 +55,5 @@ export function install(registers) {
   registers.registerLayout(layoutPoints('scatter'));
 }
 export function installScatterJitter(registers) {
-  registers.registerLayout(registers.PRIORITY.VISUAL.POST_CHART_LAYOUT, jitterLayout);
+  registers.registerLayout(registers.PRIORITY.VISUAL.POST_CHART_LAYOUT, jitterLayout());
 }

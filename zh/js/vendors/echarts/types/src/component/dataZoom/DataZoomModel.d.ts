@@ -6,6 +6,7 @@ import Model from '../../model/Model.js';
 import GlobalModel from '../../model/Global.js';
 import { AxisBaseModel } from '../../coord/AxisBaseModel.js';
 import { DataZoomAxisDimension } from './helper.js';
+import { ModelFinderIndexQuery, ModelFinderIdQuery } from '../../util/model.js';
 export interface DataZoomOption extends ComponentOption {
     mainType?: 'dataZoom';
     /**
@@ -15,19 +16,19 @@ export interface DataZoomOption extends ComponentOption {
     /**
      * Default the first horizontal category axis.
      */
-    xAxisIndex?: number | number[];
-    xAxisId?: string | string[];
+    xAxisIndex?: ModelFinderIndexQuery;
+    xAxisId?: ModelFinderIdQuery;
     /**
      * Default the first vertical category axis.
      */
-    yAxisIndex?: number | number[];
-    yAxisId?: string | string[];
-    radiusAxisIndex?: number | number[];
-    radiusAxisId?: string | string[];
-    angleAxisIndex?: number | number[];
-    angleAxisId?: string | string[];
-    singleAxisIndex?: number | number[];
-    singleAxisId?: string | string[];
+    yAxisIndex?: ModelFinderIndexQuery;
+    yAxisId?: ModelFinderIdQuery;
+    radiusAxisIndex?: ModelFinderIndexQuery;
+    radiusAxisId?: ModelFinderIdQuery;
+    angleAxisIndex?: ModelFinderIndexQuery;
+    angleAxisId?: ModelFinderIdQuery;
+    singleAxisIndex?: ModelFinderIndexQuery;
+    singleAxisId?: ModelFinderIdQuery;
     /**
      * Possible values: 'filter' or 'empty' or 'weakFilter'.
      * 'filter': data items which are out of window will be removed. This option is
@@ -86,13 +87,10 @@ export interface DataZoomOption extends ComponentOption {
     textStyle?: LabelOption;
 }
 declare type RangeOption = Pick<DataZoomOption, 'start' | 'end' | 'startValue' | 'endValue'>;
-export declare type DataZoomExtendedAxisBaseModel = AxisBaseModel & {
-    __dzAxisProxy: AxisProxy;
-};
 declare class DataZoomAxisInfo {
     indexList: number[];
     indexMap: boolean[];
-    add(axisCmptIdx: number): void;
+    add(axisCmptIdx: ComponentModel['componentIndex']): void;
 }
 export declare type DataZoomTargetAxisInfoMap = HashMap<DataZoomAxisInfo, DataZoomAxisDimension>;
 declare class DataZoomModel<Opts extends DataZoomOption = DataZoomOption> extends ComponentModel<Opts> {

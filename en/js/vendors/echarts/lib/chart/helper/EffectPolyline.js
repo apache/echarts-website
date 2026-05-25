@@ -87,7 +87,7 @@ var EffectPolyline = /** @class */function (_super) {
   ;
   // Override
   EffectPolyline.prototype._updateSymbolPosition = function (symbol) {
-    var t = symbol.__t < 1 ? symbol.__t : 2 - symbol.__t;
+    var t = symbol.__t <= 1 ? symbol.__t : 2 - symbol.__t;
     var points = this._points;
     var offsets = this._offsets;
     var len = points.length;
@@ -121,8 +121,8 @@ var EffectPolyline = /** @class */function (_super) {
     var p1 = points[frame + 1];
     symbol.x = p0[0] * (1 - p) + p * p1[0];
     symbol.y = p0[1] * (1 - p) + p * p1[1];
-    var tx = symbol.__t < 1 ? p1[0] - p0[0] : p0[0] - p1[0];
-    var ty = symbol.__t < 1 ? p1[1] - p0[1] : p0[1] - p1[1];
+    var tx = symbol.__t <= 1 ? p1[0] - p0[0] : p0[0] - p1[0];
+    var ty = symbol.__t <= 1 ? p1[1] - p0[1] : p0[1] - p1[1];
     symbol.rotation = -Math.atan2(ty, tx) - Math.PI / 2;
     this._lastFrame = frame;
     this._lastFramePercent = t;

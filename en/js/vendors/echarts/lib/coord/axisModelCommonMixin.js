@@ -44,9 +44,8 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 var AxisModelCommonMixin = /** @class */function () {
   function AxisModelCommonMixin() {}
-  AxisModelCommonMixin.prototype.getNeedCrossZero = function () {
-    var option = this.option;
-    return !option.scale;
+  AxisModelCommonMixin.prototype.needIncludeZero = function () {
+    return !this.option.scale;
   };
   /**
    * Should be implemented by each axis model if necessary.

@@ -15,6 +15,7 @@ export interface MatrixOption extends ComponentOption, BoxLayoutOptionMixin {
     backgroundStyle?: ItemStyleOption;
     borderZ2?: number;
     tooltip?: CommonTooltipOption<MatrixTooltipFormatterParams>;
+    triggerEvent?: boolean;
 }
 interface MatrixBodyCornerBaseOption extends MatrixCellStyleOption {
     /**
@@ -109,11 +110,12 @@ interface MatrixDimensionOption extends MatrixCellStyleOption, MatrixDimensionLe
     type?: 'category';
     show?: boolean;
     data?: MatrixDimensionCellLooseOption[];
+    length?: number;
     levels?: (MatrixDimensionLevelOption | NullUndefined)[];
     dividerLineStyle?: LineStyleOption;
 }
 export interface MatrixDimensionCellOption extends MatrixBaseCellOption {
-    value?: string;
+    value?: string | NullUndefined;
     size?: PositionSizeOption;
     children?: MatrixDimensionCellOption[];
 }
@@ -123,13 +125,24 @@ export interface MatrixDimensionLevelOption {
 }
 export interface MatrixDimensionModel extends Model<MatrixDimensionOption> {
 }
+export interface MatrixLabelOption extends LabelOption {
+    formatter?: string | ((params: MatrixLabelFormatterParams) => string);
+}
+export interface MatrixLabelFormatterParams {
+    componentType: 'matrix';
+    componentIndex: number;
+    name: string;
+    value: unknown;
+    coord: MatrixXYLocator[];
+    $vars: readonly ['name', 'value', 'coord'];
+}
 /**
  * Two levels of cascade inheritance:
  *  - priority-high: style options defined in `matrix.x/y/coner/body.data[i]` (in cell)
  *  - priority-low: style options defined in `matrix.x/y/coner/body`
  */
 export interface MatrixCellStyleOption {
-    label?: LabelOption;
+    label?: MatrixLabelOption;
     itemStyle?: ItemStyleOption;
     cursor?: string;
     silent?: boolean | NullUndefined;

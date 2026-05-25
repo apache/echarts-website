@@ -42,6 +42,7 @@
 * under the License.
 */
 import * as zrUtil from 'zrender/lib/core/util.js';
+import { calcBandWidth } from '../axisBand.js';
 // import AngleAxis from './AngleAxis.js';
 function dataToCoordSize(dataSize, dataItem) {
   // dataItem is necessary in log axis.
@@ -52,7 +53,7 @@ function dataToCoordSize(dataSize, dataItem) {
     var axis = this[getterName]();
     var val = dataItem[dimIdx];
     var halfSize = dataSize[dimIdx] / 2;
-    var result = axis.type === 'category' ? axis.getBandWidth() : Math.abs(axis.dataToCoord(val - halfSize) - axis.dataToCoord(val + halfSize));
+    var result = axis.type === 'category' ? calcBandWidth(axis).w : Math.abs(axis.dataToCoord(val - halfSize) - axis.dataToCoord(val + halfSize));
     if (dim === 'Angle') {
       result = result * Math.PI / 180;
     }

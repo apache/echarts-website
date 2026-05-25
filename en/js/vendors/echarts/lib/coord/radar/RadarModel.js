@@ -48,7 +48,12 @@ import Model from '../../model/Model.js';
 import { AxisModelCommonMixin } from '../axisModelCommonMixin.js';
 import ComponentModel from '../../model/Component.js';
 import tokens from '../../visual/tokens.js';
+import { getUID } from '../../util/component.js';
 var valueAxisDefault = axisDefault.value;
+export var COORD_SYS_TYPE_RADAR = 'radar';
+export var COMPONENT_TYPE_RADAR = COORD_SYS_TYPE_RADAR;
+export var SERIES_TYPE_RADAR = COORD_SYS_TYPE_RADAR;
+export var RADAR_DEFAULT_SPLIT_NUMBER = 5;
 function defaultsShow(opt, show) {
   return zrUtil.defaults({
     show: show
@@ -64,6 +69,7 @@ var RadarModel = /** @class */function (_super) {
   RadarModel.prototype.optionUpdated = function () {
     var boundaryGap = this.get('boundaryGap');
     var splitNumber = this.get('splitNumber');
+    var clockwise = this.get('clockwise');
     var scale = this.get('scale');
     var axisLine = this.get('axisLine');
     var axisTick = this.get('axisTick');
@@ -91,6 +97,7 @@ var RadarModel = /** @class */function (_super) {
       var innerIndicatorOpt = zrUtil.merge(zrUtil.clone(indicatorOpt), {
         boundaryGap: boundaryGap,
         splitNumber: splitNumber,
+        clockwise: clockwise,
         scale: scale,
         axisLine: axisLine,
         axisTick: axisTick,
@@ -116,6 +123,9 @@ var RadarModel = /** @class */function (_super) {
       // For triggerEvent.
       model.mainType = 'radar';
       model.componentIndex = this.componentIndex;
+      // FIXME: construct an AxisBaseModel directly, rather than mixin.
+      // @ts-ignore
+      model.uid = getUID('ec_radar');
       return model;
     }, this);
     this._indicatorModels = indicatorModels;
@@ -123,13 +133,14 @@ var RadarModel = /** @class */function (_super) {
   RadarModel.prototype.getIndicatorModels = function () {
     return this._indicatorModels;
   };
-  RadarModel.type = 'radar';
+  RadarModel.type = COMPONENT_TYPE_RADAR;
   RadarModel.defaultOption = {
     // zlevel: 0,
     z: 0,
     center: ['50%', '50%'],
     radius: '50%',
     startAngle: 90,
+    clockwise: false,
     axisName: {
       show: true,
       color: tokens.color.axisLabel
@@ -137,7 +148,7 @@ var RadarModel = /** @class */function (_super) {
       // textStyle: {}
     },
     boundaryGap: [0, 0],
-    splitNumber: 5,
+    splitNumber: RADAR_DEFAULT_SPLIT_NUMBER,
     axisNameGap: 15,
     scale: false,
     // Polygon or circle

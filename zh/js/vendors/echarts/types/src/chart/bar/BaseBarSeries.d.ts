@@ -3,6 +3,7 @@ import { SeriesOption, SeriesOnCartesianOptionMixin, SeriesOnPolarOptionMixin, S
 import GlobalModel from '../../model/Global.js';
 import SeriesData from '../../data/SeriesData.js';
 import { dimPermutations } from '../../component/marker/MarkAreaView.js';
+import type Axis from '../../coord/Axis.js';
 export interface BaseBarSeriesOption<StateOption, ExtraStateOption extends StatesMixinBase = DefaultStatesMixin> extends SeriesOption<StateOption, ExtraStateOption>, SeriesOnCartesianOptionMixin, SeriesOnPolarOptionMixin {
     /**
      * Min height of bar
@@ -42,6 +43,10 @@ declare class BaseBarSeriesModel<Opts extends BaseBarSeriesOption<unknown> = Bas
     type: string;
     getInitialData(option: Opts, ecModel: GlobalModel): SeriesData;
     getMarkerPosition(value: ScaleDataValue[], dims?: typeof dimPermutations[number], startingAtTick?: boolean): number[];
+    /**
+     * @implements
+     */
+    __requireStartValue(axis: Axis): boolean;
     static defaultOption: BaseBarSeriesOption<unknown, unknown>;
 }
 export default BaseBarSeriesModel;

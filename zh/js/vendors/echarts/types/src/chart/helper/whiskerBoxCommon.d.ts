@@ -4,18 +4,20 @@ import type SeriesModel from '../../model/Series.js';
 import type SeriesData from '../../data/SeriesData.js';
 import type Axis2D from '../../coord/cartesian/Axis2D.js';
 import { CoordDimensionDefinition } from '../../data/helper/createDimensions.js';
+import { CoordinateSystemClipArea } from '../../coord/CoordinateSystem.js';
+import { ShapeClipKind } from './createClipPathFromCoordSys.js';
 interface CommonOption extends SeriesOption, SeriesOnCartesianOptionMixin {
     layout?: LayoutOrient;
 }
-interface WhiskerBoxCommonMixin<Opts extends CommonOption> extends SeriesModel<Opts> {
+export interface WhiskerBoxCommonMixin<Opts extends CommonOption> extends SeriesModel<Opts> {
 }
-declare class WhiskerBoxCommonMixin<Opts extends CommonOption> {
-    /**
-     * @private
-     * @type {string}
-     */
-    _baseAxisDim: string;
+export declare class WhiskerBoxCommonMixin<Opts extends CommonOption> {
+    private _baseAxisDim;
     defaultValueDimensions: CoordDimensionDefinition['dimsDef'];
+    /**
+     * Computed layout.
+     */
+    private _layout;
     /**
      * @private
      */
@@ -29,5 +31,13 @@ declare class WhiskerBoxCommonMixin<Opts extends CommonOption> {
      * @override
      */
     getBaseAxis(): Axis2D;
+    getWhiskerBoxesLayout(): LayoutOrient;
 }
-export { WhiskerBoxCommonMixin };
+/**
+ * PENDING: We do not use zr Element clipPath due to performance consideration,
+ * although it may be further optimized.
+ */
+export declare function resolveNormalBoxClipping(clipArea: CoordinateSystemClipArea, itemLayout: {
+    ends: number[][];
+}): ShapeClipKind;
+export {};

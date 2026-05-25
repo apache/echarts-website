@@ -1,3 +1,1 @@
-import GlobalModel from '../../model/Global.js';
-import ExtensionAPI from '../../core/ExtensionAPI.js';
-export default function chordCircularLayout(ecModel: GlobalModel, api: ExtensionAPI): void;
+export declare const chordCircularLayoutStageHandler: import("../../util/types").StageHandler;

@@ -41,8 +41,8 @@
 * specific language governing permissions and limitations
 * under the License.
 */
-// @ts-nocheck
-import * as echarts from 'echarts';
+import { extendComponentView, util as zrUtil } from 'echarts';
+import { COMPONENT_MAIN_TYPE_BMAP } from './BMapModel.js';
 function isEmptyObject(obj) {
   for (var key in obj) {
     if (obj.hasOwnProperty(key)) {
@@ -51,14 +51,16 @@ function isEmptyObject(obj) {
   }
   return true;
 }
-export default echarts.extendComponentView({
-  type: 'bmap',
+var proto = {
+  type: COMPONENT_MAIN_TYPE_BMAP,
+  _oldMoveHandler: undefined,
+  _oldZoomEndHandler: undefined,
   render: function (bMapModel, ecModel, api) {
     var rendering = true;
     var bmap = bMapModel.getBMap();
     var viewportRoot = api.getZr().painter.getViewportRoot();
     var coordSys = bMapModel.coordinateSystem;
-    var moveHandler = function (type, target) {
+    var moveHandler = function () {
       if (rendering) {
         return;
       }
@@ -125,7 +127,7 @@ export default echarts.extendComponentView({
     if (JSON.stringify(originalStyle) !== mapStyleStr) {
       // FIXME May have blank tile when dragging if setMapStyle
       if (!isEmptyObject(newMapStyle)) {
-        bmap.setMapStyle(echarts.util.clone(newMapStyle));
+        bmap.setMapStyle(zrUtil.clone(newMapStyle));
       }
       bMapModel.__mapStyle = JSON.parse(mapStyleStr);
     }
@@ -137,10 +139,11 @@ export default echarts.extendComponentView({
     if (JSON.stringify(originalStyle2) !== mapStyleStr2) {
       // FIXME May have blank tile when dragging if setMapStyle
       if (!isEmptyObject(newMapStyle2)) {
-        bmap.setMapStyleV2(echarts.util.clone(newMapStyle2));
+        bmap.setMapStyleV2(zrUtil.clone(newMapStyle2));
       }
       bMapModel.__mapStyle2 = JSON.parse(mapStyleStr2);
     }
     rendering = false;
   }
-});
+};
+extendComponentView(proto);

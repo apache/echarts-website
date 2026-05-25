@@ -42,7 +42,10 @@
 * under the License.
 */
 import { circularLayout } from './circularLayoutHelper.js';
-export default function graphCircularLayout(ecModel) {
+import { SERIES_TYPE_GRAPH } from './GraphSeries.js';
+import { createSimpleOverallStageHandler } from '../../util/model.js';
+export var graphCircularLayoutStageHandler = createSimpleOverallStageHandler(SERIES_TYPE_GRAPH, graphCircularLayout);
+function graphCircularLayout(ecModel) {
   ecModel.eachSeriesByType('graph', function (seriesModel) {
     if (seriesModel.get('layout') === 'circular') {
       circularLayout(seriesModel, 'symbolSize');

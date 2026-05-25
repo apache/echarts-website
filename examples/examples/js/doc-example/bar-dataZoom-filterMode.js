@@ -8,6 +8,7 @@ $.get(
         trigger: 'item'
       },
       legend: {
+        top: 5,
         data: ['Growth', 'Budget 2011', 'Budget 2012'],
         itemGap: 5
       },

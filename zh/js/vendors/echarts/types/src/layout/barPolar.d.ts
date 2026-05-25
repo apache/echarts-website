@@ -1,4 +1,3 @@
-import GlobalModel from '../model/Global.js';
-import ExtensionAPI from '../core/ExtensionAPI.js';
-declare function barLayoutPolar(seriesType: string, ecModel: GlobalModel, api: ExtensionAPI): void;
-export default barLayoutPolar;
+import { EChartsExtensionInstallRegisters } from '../extension.js';
+export declare const barLayoutPolarStageHandler: import("../util/types").StageHandler;
+export declare function registerBarPolarAxisHandlers(registers: EChartsExtensionInstallRegisters, seriesType: 'bar'): void;

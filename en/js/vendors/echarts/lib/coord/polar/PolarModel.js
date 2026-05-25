@@ -43,6 +43,8 @@
 */
 import { __extends } from "tslib";
 import ComponentModel from '../../model/Component.js';
+export var COORD_SYS_TYPE_POLAR = 'polar';
+export var COMPONENT_TYPE_POLAR = COORD_SYS_TYPE_POLAR;
 var PolarModel = /** @class */function (_super) {
   __extends(PolarModel, _super);
   function PolarModel() {
@@ -60,7 +62,7 @@ var PolarModel = /** @class */function (_super) {
     }, this);
     return foundAxisModel;
   };
-  PolarModel.type = 'polar';
+  PolarModel.type = COORD_SYS_TYPE_POLAR;
   PolarModel.dependencies = ['radiusAxis', 'angleAxis'];
   PolarModel.defaultOption = {
     // zlevel: 0,

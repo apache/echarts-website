@@ -43,7 +43,7 @@
 */
 import { separateMorph, combineMorph, morphPath, isCombineMorphing } from 'zrender/lib/tool/morphPath.js';
 import { Path } from '../util/graphic.js';
-import { defaults, isArray } from 'zrender/lib/core/util.js';
+import { defaults, extend, isArray } from 'zrender/lib/core/util.js';
 import { getAnimationConfig } from './basicTransition.js';
 import { clonePath } from 'zrender/lib/tool/path.js';
 function isMultiple(elements) {
@@ -112,7 +112,7 @@ export function applyMorphAnimation(from, to, divideShape, seriesModel, dataInde
     return;
   }
   var animationDelay = seriesModel.getModel('universalTransition').get('delay');
-  var animationCfg = Object.assign({
+  var animationCfg = extend({
     // Need to setToFinal so the further calculation based on the style can be correct.
     // Like emphasis color.
     setToFinal: true

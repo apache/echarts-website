@@ -47,6 +47,7 @@ import createSeriesDataSimply from '../helper/createSeriesDataSimply.js';
 import * as zrUtil from 'zrender/lib/core/util.js';
 import LegendVisualProvider from '../../visual/LegendVisualProvider.js';
 import { createTooltipMarkup, retrieveVisualColorForTooltipMarker } from '../../component/tooltip/tooltipMarkup.js';
+export var SERIES_TYPE_RADAR = 'radar';
 var RadarSeriesModel = /** @class */function (_super) {
   __extends(RadarSeriesModel, _super);
   function RadarSeriesModel() {
@@ -105,7 +106,7 @@ var RadarSeriesModel = /** @class */function (_super) {
       }
     }
   };
-  RadarSeriesModel.type = 'series.radar';
+  RadarSeriesModel.type = 'series.' + SERIES_TYPE_RADAR;
   RadarSeriesModel.dependencies = ['radar'];
   RadarSeriesModel.defaultOption = {
     // zlevel: 0,

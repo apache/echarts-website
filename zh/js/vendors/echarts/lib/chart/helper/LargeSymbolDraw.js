@@ -47,6 +47,7 @@ import { __extends } from "tslib";
 import * as graphic from '../../util/graphic.js';
 import { createSymbol } from '../../util/symbol.js';
 import { getECData } from '../../util/innerStore.js';
+import { validateUpstreamOutputRange } from '../../util/model.js';
 var BOOST_SIZE_THRESHOLD = 4;
 var LargeSymbolPathShape = /** @class */function () {
   function LargeSymbolPathShape() {}
@@ -66,6 +67,11 @@ var LargeSymbolPath = /** @class */function (_super) {
   LargeSymbolPath.prototype.reset = function () {
     this.notClear = false;
     this._off = 0;
+  };
+  LargeSymbolPath.prototype.beforeBrush = function (param) {
+    if (param && !param.contentRetained) {
+      this.reset();
+    }
   };
   LargeSymbolPath.prototype.buildPath = function (path, shape) {
     var points = shape.points;
@@ -201,13 +207,18 @@ var LargeSymbolDraw = /** @class */function () {
    */
   LargeSymbolDraw.prototype.updateData = function (data, opt) {
     this._clear();
+    this._data = data;
     var symbolEl = this._create();
     symbolEl.setShape({
       points: data.getLayout('points')
     });
     this._setCommon(symbolEl, data, opt);
   };
-  LargeSymbolDraw.prototype.updateLayout = function (data) {
+  LargeSymbolDraw.prototype.updateLayout = function (opt) {
+    var data = this._data;
+    if (!data) {
+      return;
+    }
     var points = data.getLayout('points');
     this.group.eachChild(function (child) {
       if (child.startIndex != null) {
@@ -218,15 +229,19 @@ var LargeSymbolDraw = /** @class */function () {
       child.setShape('points', points);
       // Reset draw cursor.
       child.reset();
+      child.stopAnimation();
     });
   };
   LargeSymbolDraw.prototype.incrementalPrepareUpdate = function (data) {
     this._clear();
   };
-  LargeSymbolDraw.prototype.incrementalUpdate = function (taskParams, data, opt) {
+  LargeSymbolDraw.prototype.incrementalUpdate = function (taskParams, data, incrementalId, opt) {
     var lastAdded = this._newAdded[0];
     var points = data.getLayout('points');
     var oldPoints = lastAdded && lastAdded.shape.points;
+    if (process.env.NODE_ENV !== 'production') {
+      validateUpstreamOutputRange(data.getLayout('pointsRange'), taskParams);
+    }
     // Merging the exists. Each element has 1e4 points.
     // Consider the performance balance between too much elements and too much points in one shape(may affect hover optimization)
     if (oldPoints && oldPoints.length < 2e4) {
@@ -241,12 +256,11 @@ var LargeSymbolDraw = /** @class */function () {
         points: newPoints
       });
     } else {
-      // Clear
       this._newAdded = [];
       var symbolEl = this._create();
       symbolEl.startIndex = taskParams.start;
       symbolEl.endIndex = taskParams.end;
-      symbolEl.incremental = true;
+      symbolEl.incremental = incrementalId;
       symbolEl.setShape({
         points: points
       });

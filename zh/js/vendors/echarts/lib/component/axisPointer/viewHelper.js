@@ -49,6 +49,8 @@ import * as matrix from 'zrender/lib/core/matrix.js';
 import * as axisHelper from '../../coord/axisHelper.js';
 import AxisBuilder from '../axis/AxisBuilder.js';
 import { createTextStyle } from '../../label/labelStyle.js';
+import { calcBandWidth } from '../../coord/axisBand.js';
+import { mathMax, mathMin } from '../../util/number.js';
 export function buildElStyle(axisPointerModel) {
   var axisPointerType = axisPointerModel.get('type');
   var styleModel = axisPointerModel.getModel(axisPointerType + 'Style');
@@ -191,4 +193,20 @@ export function makeSectorShape(cx, cy, r0, r, startAngle, endAngle) {
     endAngle: endAngle,
     clockwise: true
   };
+}
+export function calcAxisPointerShadowBandWidth(axis, seriesDataIndices, ecModel) {
+  return calcBandWidth(axis, {
+    fromStat: {
+      sers: zrUtil.map(seriesDataIndices, function (item) {
+        return ecModel.getSeriesByIndex(item.seriesIndex);
+      })
+    },
+    min: 1
+  }).w;
+}
+/**
+ * Return a [min, max] in pixel clampped by `axisExtent`.
+ */
+export function calcAxisPointerShadowEnds(val, axisExtent, bandWidth) {
+  return [mathMax(mathMin(axisExtent[0], axisExtent[1]), val - bandWidth / 2), mathMin(val + bandWidth / 2, mathMax(axisExtent[0], axisExtent[1]))];
 }

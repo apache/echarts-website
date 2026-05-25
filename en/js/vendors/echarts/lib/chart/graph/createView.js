@@ -41,12 +41,11 @@
 * specific language governing permissions and limitations
 * under the License.
 */
-// FIXME Where to create the simple view coordinate system
-import View from '../../coord/View.js';
 import { createBoxLayoutReference, getLayoutRect, applyPreserveAspect } from '../../util/layout.js';
 import * as bbox from 'zrender/lib/core/bbox.js';
 import { extend } from 'zrender/lib/core/util.js';
 import { injectCoordSysByOption } from '../../core/CoordinateSystem.js';
+import { createViewCoordSysSimply } from '../../component/helper/roamHelper.js';
 function getViewRect(seriesModel, api, aspect) {
   var layoutRef = createBoxLayoutReference(seriesModel, api);
   var option = extend(seriesModel.getBoxLayoutParams(), {
@@ -85,23 +84,14 @@ export default function createViewCoordSys(ecModel, api) {
       var aspect = (max[0] - min[0]) / (max[1] - min[1]);
       // FIXME If get view rect after data processed?
       var viewRect = getViewRect(seriesModel, api, aspect);
-      // Position may be NaN, use view rect instead
+      // Position may be NaN (e.g., in force layout), use view rect instead
       if (isNaN(aspect)) {
         min = [viewRect.x, viewRect.y];
         max = [viewRect.x + viewRect.width, viewRect.y + viewRect.height];
       }
       var bbWidth = max[0] - min[0];
       var bbHeight = max[1] - min[1];
-      var viewCoordSys = new View(null, {
-        api: api,
-        ecModel: ecModel
-      });
-      viewCoordSys.zoomLimit = seriesModel.get('scaleLimit');
-      viewCoordSys.setBoundingRect(min[0], min[1], bbWidth, bbHeight);
-      viewCoordSys.setViewRect(viewRect.x, viewRect.y, viewRect.width, viewRect.height);
-      // Update roam info
-      viewCoordSys.setCenter(seriesModel.get('center'));
-      viewCoordSys.setZoom(seriesModel.get('zoom'));
+      var viewCoordSys = createViewCoordSysSimply(seriesModel, api, min[0], min[1], bbWidth, bbHeight, viewRect);
       viewList.push(viewCoordSys);
       return viewCoordSys;
     }

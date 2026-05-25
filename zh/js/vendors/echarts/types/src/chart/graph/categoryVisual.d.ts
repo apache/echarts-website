@@ -1,2 +1,1 @@
-import GlobalModel from '../../model/Global.js';
-export default function categoryVisual(ecModel: GlobalModel): void;
+export declare const graphCategoryVisualStageHandler: import("../../util/types").StageHandler;

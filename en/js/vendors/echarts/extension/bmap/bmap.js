@@ -41,22 +41,20 @@
 * specific language governing permissions and limitations
 * under the License.
 */
-// @ts-nocheck
 /**
  * BMap component extension
  */
 import * as echarts from 'echarts';
-import BMapCoordSys from './BMapCoordSys.js';
-import './BMapModel.js';
+import './BMapCoordSys.js';
+import { COMPONENT_MAIN_TYPE_BMAP } from './BMapModel.js';
 import './BMapView.js';
-echarts.registerCoordinateSystem('bmap', BMapCoordSys);
 // Action
 echarts.registerAction({
   type: 'bmapRoam',
   event: 'bmapRoam',
   update: 'updateLayout'
 }, function (payload, ecModel) {
-  ecModel.eachComponent('bmap', function (bMapModel) {
+  ecModel.eachComponent(COMPONENT_MAIN_TYPE_BMAP, function (bMapModel) {
     var bmap = bMapModel.getBMap();
     var center = bmap.getCenter();
     bMapModel.setCenterAndZoom([center.lng, center.lat], bmap.getZoom());

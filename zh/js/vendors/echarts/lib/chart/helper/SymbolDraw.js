@@ -46,11 +46,11 @@ import SymbolClz from './Symbol.js';
 import { isObject } from 'zrender/lib/core/util.js';
 import { getLabelStatesModels } from '../../label/labelStyle.js';
 function symbolNeedsDraw(data, point, idx, opt) {
-  return point && !isNaN(point[0]) && !isNaN(point[1]) && !(opt.isIgnore && opt.isIgnore(idx))
+  return point && !isNaN(point[0]) && !isNaN(point[1]) && !(opt && opt.isIgnore && opt.isIgnore(idx))
   // We do not set clipShape on group, because it will cut part of
   // the symbol element shape. We use the same clip shape here as
   // the line clip.
-  && !(opt.clipShape && !opt.clipShape.contain(point[0], point[1])) && data.getItemVisual(idx, 'symbol') !== 'none';
+  && !(opt && opt.clipShape && !opt.clipShape.contain(point[0], point[1])) && data.getItemVisual(idx, 'symbol') !== 'none';
 }
 function normalizeUpdateOpt(opt) {
   if (opt != null && !isObject(opt)) {
@@ -75,6 +75,13 @@ function makeSeriesScope(data) {
     cursorStyle: seriesModel.get('cursor')
   };
 }
+function createEl(SymbolCtor, data, newIdx, seriesScope, symbolUpdateOpt, point, group) {
+  var symbolEl = new SymbolCtor(data, newIdx, seriesScope, symbolUpdateOpt);
+  symbolEl.setPosition(point);
+  data.setItemGraphicEl(newIdx, symbolEl);
+  group.add(symbolEl);
+  return symbolEl;
+}
 var SymbolDraw = /** @class */function () {
   function SymbolDraw(SymbolCtor) {
     this.group = new graphic.Group();
@@ -92,7 +99,7 @@ var SymbolDraw = /** @class */function () {
     var oldData = this._data;
     var SymbolCtor = this._SymbolCtor;
     var disableAnimation = opt.disableAnimation;
-    var seriesScope = makeSeriesScope(data);
+    var seriesScope = this._seriesScope = makeSeriesScope(data);
     var symbolUpdateOpt = {
       disableAnimation: disableAnimation
     };
@@ -107,10 +114,7 @@ var SymbolDraw = /** @class */function () {
     data.diff(oldData).add(function (newIdx) {
       var point = getSymbolPoint(newIdx);
       if (symbolNeedsDraw(data, point, newIdx, opt)) {
-        var symbolEl = new SymbolCtor(data, newIdx, seriesScope, symbolUpdateOpt);
-        symbolEl.setPosition(point);
-        data.setItemGraphicEl(newIdx, symbolEl);
-        group.add(symbolEl);
+        createEl(SymbolCtor, data, newIdx, seriesScope, symbolUpdateOpt, point, group);
       }
     }).update(function (newIdx, oldIdx) {
       var symbolEl = oldData.getItemGraphicEl(oldIdx);
@@ -148,16 +152,33 @@ var SymbolDraw = /** @class */function () {
     this._data = data;
   };
   ;
-  SymbolDraw.prototype.updateLayout = function () {
-    var _this = this;
+  SymbolDraw.prototype.updateLayout = function (opt) {
     var data = this._data;
-    if (data) {
-      // Not use animation
-      data.eachItemGraphicEl(function (el, idx) {
-        var point = _this._getSymbolPoint(idx);
+    if (!data) {
+      return;
+    }
+    var symbolDraw = this;
+    var store = data.getStore();
+    for (var idx = 0, len = store.count(); idx < len; idx++) {
+      var el = data.getItemGraphicEl(idx);
+      var point = symbolDraw._getSymbolPoint(idx);
+      // FIXME: [FIXME_SYMBOL_CLIP_CONSIDERING_COORD_SYS_ALIGNMENT_DURING_ANIMATION]
+      //  See VIEW_COORD_SYS animation (by center/zoom change) and FIXME_VIEW_COORD_SYS_SYNC_BACK.
+      //  If we create symbols when roaming them into the clip area, they can not be laid out
+      //  based on the intermediate state but can only based on the final state of VIEW_COORD_SYS,
+      //  and introduce visual artifacts.
+      // Consider clip, need to handle create or remove.
+      if (symbolNeedsDraw(data, point, idx, opt)) {
+        el = el || createEl(symbolDraw._SymbolCtor, data, idx, symbolDraw._seriesScope, {
+          disableAnimation: true
+        }, point, symbolDraw.group);
+        el.stopAnimation();
         el.setPosition(point);
         el.markRedraw();
-      });
+      } else if (el) {
+        symbolDraw.group.remove(el);
+        data.setItemGraphicEl(idx, null);
+      }
     }
   };
   ;
@@ -167,17 +188,14 @@ var SymbolDraw = /** @class */function () {
     this.group.removeAll();
   };
   ;
-  /**
-   * Update symbols draw by new data
-   */
-  SymbolDraw.prototype.incrementalUpdate = function (taskParams, data, opt) {
+  SymbolDraw.prototype.incrementalUpdate = function (taskParams, data, incrementalId, opt) {
     // Clear
     this._progressiveEls = [];
     opt = normalizeUpdateOpt(opt);
     function updateIncrementalAndHover(el) {
       if (!el.isGroup) {
-        el.incremental = true;
-        el.ensureState('emphasis').hoverLayer = true;
+        el.incremental = incrementalId;
+        el.ensureState('emphasis').hoverLayer = graphic.HOVER_LAYER_FOR_INCREMENTAL;
       }
     }
     for (var idx = taskParams.start; idx < taskParams.end; idx++) {

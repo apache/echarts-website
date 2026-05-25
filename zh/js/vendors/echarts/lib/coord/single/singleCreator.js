@@ -45,13 +45,15 @@
  * Single coordinate system creator.
  */
 import Single, { singleDimensions } from './Single.js';
+import { COMPONENT_TYPE_SINGLE_AXIS, COORD_SYS_TYPE_SINGLE, COORD_SYS_TYPE_SINGLE_AXIS_COMPATIBLE } from './AxisModel.js';
 import { SINGLE_REFERRING } from '../../util/model.js';
+import { associateSeriesWithAxis } from '../axisStatistics.js';
 /**
  * Create single coordinate system and inject it into seriesModel.
  */
 function create(ecModel, api) {
   var singles = [];
-  ecModel.eachComponent('singleAxis', function (axisModel, idx) {
+  ecModel.eachComponent(COMPONENT_TYPE_SINGLE_AXIS, function (axisModel, idx) {
     var single = new Single(axisModel, ecModel, api);
     single.name = 'single_' + idx;
     single.resize(axisModel, api);
@@ -59,9 +61,12 @@ function create(ecModel, api) {
     singles.push(single);
   });
   ecModel.eachSeries(function (seriesModel) {
-    if (seriesModel.get('coordinateSystem') === 'singleAxis') {
-      var singleAxisModel = seriesModel.getReferringComponents('singleAxis', SINGLE_REFERRING).models[0];
-      seriesModel.coordinateSystem = singleAxisModel && singleAxisModel.coordinateSystem;
+    if (seriesModel.get('coordinateSystem') === COORD_SYS_TYPE_SINGLE_AXIS_COMPATIBLE) {
+      var singleAxisModel = seriesModel.getReferringComponents(COMPONENT_TYPE_SINGLE_AXIS, SINGLE_REFERRING).models[0];
+      var single = seriesModel.coordinateSystem = singleAxisModel && singleAxisModel.coordinateSystem;
+      if (single) {
+        associateSeriesWithAxis(single.getAxis(), seriesModel, COORD_SYS_TYPE_SINGLE);
+      }
     }
   });
   return singles;

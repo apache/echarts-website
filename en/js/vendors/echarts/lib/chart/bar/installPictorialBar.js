@@ -43,12 +43,13 @@
 */
 import PictorialBarView from './PictorialBarView.js';
 import PictorialBarSeriesModel from './PictorialBarSeries.js';
-import { createProgressiveLayout, layout } from '../../layout/barGrid.js';
-import { curry } from 'zrender/lib/core/util.js';
+import { createProgressiveLayout, createCrossSeriesLayoutHandler, registerBarGridAxisHandlers } from '../../layout/barGrid.js';
+import { SERIES_TYPE_PICTORIAL_BAR } from '../../layout/barCommon.js';
 export function install(registers) {
   registers.registerChartView(PictorialBarView);
   registers.registerSeriesModel(PictorialBarSeriesModel);
-  registers.registerLayout(registers.PRIORITY.VISUAL.LAYOUT, curry(layout, 'pictorialBar'));
+  registers.registerLayout(registers.PRIORITY.VISUAL.LAYOUT, createCrossSeriesLayoutHandler(SERIES_TYPE_PICTORIAL_BAR));
   // Do layout after other overall layout, which can prepare some information.
-  registers.registerLayout(registers.PRIORITY.VISUAL.PROGRESSIVE_LAYOUT, createProgressiveLayout('pictorialBar'));
+  registers.registerLayout(registers.PRIORITY.VISUAL.PROGRESSIVE_LAYOUT, createProgressiveLayout(SERIES_TYPE_PICTORIAL_BAR));
+  registerBarGridAxisHandlers(registers);
 }

@@ -51,6 +51,7 @@ import { groupData, SINGLE_REFERRING } from '../../util/model.js';
 import LegendVisualProvider from '../../visual/LegendVisualProvider.js';
 import { createTooltipMarkup } from '../../component/tooltip/tooltipMarkup.js';
 var DATA_NAME_INDEX = 2;
+export var SERIES_TYPE_THEME_RIVER = 'themeRiver';
 var ThemeRiverSeriesModel = /** @class */function (_super) {
   __extends(ThemeRiverSeriesModel, _super);
   function ThemeRiverSeriesModel() {
@@ -231,7 +232,7 @@ var ThemeRiverSeriesModel = /** @class */function (_super) {
       value: value
     });
   };
-  ThemeRiverSeriesModel.type = 'series.themeRiver';
+  ThemeRiverSeriesModel.type = 'series.' + SERIES_TYPE_THEME_RIVER;
   ThemeRiverSeriesModel.dependencies = ['singleAxis'];
   ThemeRiverSeriesModel.defaultOption = {
     // zlevel: 0,

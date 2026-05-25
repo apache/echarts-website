@@ -19,7 +19,6 @@ export interface ToolboxDataViewFeatureOption extends ToolboxFeatureOption {
 declare class DataView extends ToolboxFeature<ToolboxDataViewFeatureOption> {
     private _dom;
     onclick(ecModel: GlobalModel, api: ExtensionAPI): void;
-    remove(ecModel: GlobalModel, api: ExtensionAPI): void;
     dispose(ecModel: GlobalModel, api: ExtensionAPI): void;
     static getDefaultOption(ecModel: GlobalModel): ToolboxDataViewFeatureOption;
 }

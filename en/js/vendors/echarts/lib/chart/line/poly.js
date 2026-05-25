@@ -47,11 +47,9 @@ import Path from 'zrender/lib/graphic/Path.js';
 import PathProxy from 'zrender/lib/core/PathProxy.js';
 import { cubicRootAt, cubicAt } from 'zrender/lib/core/curve.js';
 import tokens from '../../visual/tokens.js';
+import { isPointIllegal } from './helper.js';
 var mathMin = Math.min;
 var mathMax = Math.max;
-function isPointNull(x, y) {
-  return isNaN(x) || isNaN(y);
-}
 /**
  * Draw smoothed line in non-monotone, in may cause undesired curve in extreme
  * situations. This should be used when points are non-monotone neither in x or
@@ -72,7 +70,7 @@ function drawSegment(ctx, points, start, segLen, allLen, dir, smooth, smoothMono
     if (idx >= allLen || idx < 0) {
       break;
     }
-    if (isPointNull(x, y)) {
+    if (isPointIllegal(x, y)) {
       if (connectNulls) {
         idx += dir;
         continue;
@@ -110,7 +108,7 @@ function drawSegment(ctx, points, start, segLen, allLen, dir, smooth, smoothMono
         var tmpK = k + 1;
         if (connectNulls) {
           // Find next point not null
-          while (isPointNull(nextX, nextY) && tmpK < segLen) {
+          while (isPointIllegal(nextX, nextY) && tmpK < segLen) {
             tmpK++;
             nextIdx += dir;
             nextX = points[nextIdx * 2];
@@ -123,7 +121,7 @@ function drawSegment(ctx, points, start, segLen, allLen, dir, smooth, smoothMono
         var nextCpx0 = void 0;
         var nextCpy0 = void 0;
         // Is last point
-        if (tmpK >= segLen || isPointNull(nextX, nextY)) {
+        if (tmpK >= segLen || isPointIllegal(nextX, nextY)) {
           cpx1 = x;
           cpy1 = y;
         } else {
@@ -229,12 +227,12 @@ var ECPolyline = /** @class */function (_super) {
     if (shape.connectNulls) {
       // Must remove first and last null values avoid draw error in polygon
       for (; len > 0; len--) {
-        if (!isPointNull(points[len * 2 - 2], points[len * 2 - 1])) {
+        if (!isPointIllegal(points[len * 2 - 2], points[len * 2 - 1])) {
           break;
         }
       }
       for (; i < len; i++) {
-        if (!isPointNull(points[i * 2], points[i * 2 + 1])) {
+        if (!isPointIllegal(points[i * 2], points[i * 2 + 1])) {
           break;
         }
       }
@@ -332,12 +330,12 @@ var ECPolygon = /** @class */function (_super) {
     if (shape.connectNulls) {
       // Must remove first and last null values avoid draw error in polygon
       for (; len > 0; len--) {
-        if (!isPointNull(points[len * 2 - 2], points[len * 2 - 1])) {
+        if (!isPointIllegal(points[len * 2 - 2], points[len * 2 - 1])) {
           break;
         }
       }
       for (; i < len; i++) {
-        if (!isPointNull(points[i * 2], points[i * 2 + 1])) {
+        if (!isPointIllegal(points[i * 2], points[i * 2 + 1])) {
           break;
         }
       }

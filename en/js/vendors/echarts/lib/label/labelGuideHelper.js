@@ -428,13 +428,10 @@ function setLabelLineState(labelLine, ignore, stateName, stateModel) {
   stateObj.ignore = ignore;
   // Set smooth
   var smooth = stateModel.get('smooth');
-  if (smooth && smooth === true) {
-    smooth = 0.3;
-  }
+  smooth = smooth === true ? 0.3 : Math.max(+smooth, 0) || 0;
   stateObj.shape = stateObj.shape || {};
-  if (smooth > 0) {
-    stateObj.shape.smooth = smooth;
-  }
+  // always set the `smooth` property
+  stateObj.shape.smooth = smooth;
   var styleObj = stateModel.getModel('lineStyle').getLineStyle();
   isNormal ? labelLine.useStyle(styleObj) : stateObj.style = styleObj;
 }

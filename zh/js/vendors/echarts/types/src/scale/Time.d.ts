@@ -1,40 +1,43 @@
-import IntervalScale from './Interval.js';
-import { ScaleGetTicksOpt } from './Scale.js';
-import { TimeScaleTick, ScaleTick, AxisBreakOption } from '../util/types.js';
+import { TimeUnit } from '../util/time.js';
+import Scale, { ScaleGetTicksOpt } from './Scale.js';
+import { TimeScaleTick, ScaleTick, AxisBreakOption, NullUndefined } from '../util/types.js';
 import { TimeAxisLabelFormatterParsed } from '../coord/axisCommonTypes.js';
 import { LocaleOption } from '../core/locale.js';
 import Model from '../model/Model.js';
+import type { ScaleCalcNiceMethod } from '../coord/axisNiceTicks.js';
+import { ScaleMapperGeneric } from './scaleMapper.js';
 declare type TimeScaleSetting = {
     locale: Model<LocaleOption>;
     useUTC: boolean;
-    modelAxisBreaks?: AxisBreakOption[];
+    breakOption: AxisBreakOption[] | NullUndefined;
 };
-declare class TimeScale extends IntervalScale<TimeScaleSetting> {
+/**
+ * @final NEVER inherit me!
+ */
+interface TimeScale extends ScaleMapperGeneric<TimeScale> {
+}
+declare class TimeScale extends Scale<TimeScale> {
     static type: string;
-    readonly type = "time";
+    readonly type: "time";
+    private _locale;
+    private _useUTC;
     private _approxInterval;
+    private _interval;
     private _minLevelUnit;
-    constructor(settings?: TimeScaleSetting);
+    constructor(setting: TimeScaleSetting);
     /**
      * Get label is mainly for other components like dataZoom, tooltip.
      */
-    getLabel(tick: TimeScaleTick): string;
+    getLabel(tick: ScaleTick): string;
     getFormattedLabel(tick: ScaleTick, idx: number, labelFormatter: TimeAxisLabelFormatterParsed): string;
-    /**
-     * @override
-     */
     getTicks(opt?: ScaleGetTicksOpt): TimeScaleTick[];
-    calcNiceExtent(opt?: {
-        splitNumber?: number;
-        fixMin?: boolean;
-        fixMax?: boolean;
-        minInterval?: number;
-        maxInterval?: number;
+    getMinorTicks(splitNumber: number): number[][];
+    setTimeInterval(opt: {
+        interval: number;
+        approxInterval: number;
+        minLevelUnit: TimeUnit;
     }): void;
-    calcNiceTicks(approxTickNum: number, minInterval: number, maxInterval: number): void;
-    parse(val: number | string | Date): number;
-    contain(val: number): boolean;
-    normalize(val: number): number;
-    scale(val: number): number;
+    static parse(val: number | string | Date): number;
 }
+export declare const calcNiceForTimeScale: ScaleCalcNiceMethod;
 export default TimeScale;

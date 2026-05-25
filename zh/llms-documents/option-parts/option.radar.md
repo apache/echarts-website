@@ -190,6 +190,14 @@ center: ['50%', '50%']
 
 布局时所基于的 [矩阵坐标系](option.matrix.md) 的 id。当一个 ECharts 实例中存在多个矩阵坐标系时，用其指定所使用的坐标系。
 
+## clockwise
+- **Type**: `boolean`
+- **Default**: `false`
+
+从 `v6.1.0` 开始支持
+
+是否以顺时针排布指示器轴。
+
 ## startAngle
 - **Type**: `number`
 - **Default**: `90`
@@ -908,19 +916,46 @@ textBorderDashOffset: 5
 - **Type**: `boolean`
 - **Default**: `false`
 
-坐标轴的标签是否响应和触发鼠标事件，默认不响应。
+鼠标和触摸事件是否发送给开发者注册的监听器（`chart.on('xxx', function (event) {})`）。
+
+支持的鼠标和触摸事件为 `'click'`、`'dblclick'`、`'mouseover'`、`'mouseout'`、`'mousemove'`、`'mousedown'`、`'mouseup'`、`'globalout'`、`'contextmenu'`。注意，鼠标和触摸事件都统一使用名字 `'mouse{xxx}'`。
+
+可取值：
+
+*   `true`: 允许对外发送事件。但是它也需要 `silent` 配置项为 `false` 才能真正发送事件。
+*   `false`: 禁止对外发送事件，哪怕 `silent` 配置项为 `false`。
 
 事件参数如下：
 
 ```
 {
-    // 组件类型，xAxis, yAxis, radiusAxis, angleAxis
-    // 对应组件类型都会有一个属性表示组件的 index，例如 xAxis 就是 xAxisIndex
-    componentType: string,
-    // 未格式化过的刻度值, 点击刻度标签有效
-    value: '',
-    // 坐标轴名称, 点击坐标轴名称有效
-    name: ''
+    // Component type. 例如：
+    // 'xAxis'、'yAxis'、'radiusAxis'、'angleAxis'、
+    // 'singleAxis'、'parallelAxis'、'radar' 等。
+    componentType: string;
+    componentIndex: number;
+    // 和 `componentIndex` 相同。
+    [componentType]Index?: number;
+
+    // 事件的触发者。
+    targetType: 'axisLabel' | 'axisName';
+
+    // 被内置的 formatter 格式化过的标签字符串。
+    // 但是用户提供的 `axisLabel.formatter` 并不影响这个值。
+    // 仅当 `targetType: 'axisLabel'` 时存在。
+    value?: string;
+
+    // 仅当此标签为断轴（"axis break"）标签时存在。
+    break?: {
+        // 断轴起始值。
+        start?: number;
+        // 断轴终止值。
+        end?: number;
+    };
+
+    // 即 `axis.name`。
+    // 仅当 `targetType: 'axisName'` 时存在。
+    name?: string;
 }
 ```
 
@@ -1281,6 +1316,8 @@ axisTick: {
 formatter: '{value} kg'
 // 使用函数模板，函数参数分别为刻度数值（类目），刻度的索引
 formatter: function (value, index, extra?) {
+    // 注意：当使用 `customValues` 时，自从 `v6.1.0`，
+    // 这里才会提供 `index`。
     return value + 'kg';
 }
 ```

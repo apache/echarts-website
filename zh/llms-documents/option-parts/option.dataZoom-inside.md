@@ -380,3 +380,19 @@ option = {
 - **Default**: `true`
 
 是否阻止 mousemove 事件的默认行为。
+
+## cursorGrab
+- **Type**: `string`
+- **Default**: `grab`
+
+从 `v6.1.0` 开始支持
+
+鼠标悬浮时在可拖拽的区域上时鼠标的样式是什么。同 CSS 的 `cursor`。
+
+## cursorGrabbing
+- **Type**: `string`
+- **Default**: `grabbing`
+
+从 `v6.1.0` 开始支持
+
+鼠标拖拽时鼠标的样式是什么。同 CSS 的 `cursor`。

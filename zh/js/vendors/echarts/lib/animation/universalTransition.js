@@ -242,7 +242,7 @@ function transitionBetween(oldList, newList, api) {
   // find all groupIds and childGroupIds from oldDiffItems
   var oldGroupIds = createHashMap();
   var oldChildGroupIds = createHashMap();
-  oldDiffItems.forEach(function (item) {
+  each(oldDiffItems, function (item) {
     item.groupId && oldGroupIds.set(item.groupId, true);
     item.childGroupId && oldChildGroupIds.set(item.childGroupId, true);
   });

@@ -98,7 +98,9 @@ var ChartView = /** @class */function () {
     toggleHighlight(data, payload, 'normal');
   };
   /**
-   * Remove self.
+   * `remove` only occurs when series is filtered out, typically by legend.
+   * And theirafter the view can only be rendered again via
+   * `ChartView['render']` or `ChartView['incrementalPrepareRender']`.
    */
   ChartView.prototype.remove = function (ecModel, api) {
     this.group.removeAll();
@@ -111,9 +113,9 @@ var ChartView = /** @class */function () {
     this.render(seriesModel, ecModel, api, payload);
   };
   // FIXME never used?
-  ChartView.prototype.updateLayout = function (seriesModel, ecModel, api, payload) {
-    this.render(seriesModel, ecModel, api, payload);
-  };
+  // updateLayout(seriesModel: SeriesModel, ecModel: GlobalModel, api: ExtensionAPI, payload: Payload): void {
+  //     this.render(seriesModel, ecModel, api, payload);
+  // }
   // FIXME never used?
   ChartView.prototype.updateVisual = function (seriesModel, ecModel, api, payload) {
     this.render(seriesModel, ecModel, api, payload);
@@ -153,6 +155,9 @@ function toggleHighlight(data, payload, state) {
       elSetState(data.getItemGraphicEl(dataIdx), state, highlightDigit);
     });
   } else {
+    // In progressive mode, `data._graphicEls` has typically no items,
+    // thereby skipping this hover style changing.
+    // PENDING: more robust approaches?
     data.eachItemGraphicEl(function (el) {
       elSetState(el, state, highlightDigit);
     });

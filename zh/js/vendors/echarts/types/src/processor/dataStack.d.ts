@@ -1,2 +1,1 @@
-import GlobalModel from '../model/Global.js';
-export default function dataStack(ecModel: GlobalModel): void;
+export declare const dataStackStageHandler: import("../util/types").StageHandler;

@@ -1,6 +1,16 @@
+import { NullUndefined } from './types.js';
+export declare const DEFAULT_PRECISION_FOR_ROUNDING_ERROR = 14;
 export declare const mathMin: (...values: number[]) => number;
 export declare const mathMax: (...values: number[]) => number;
 export declare const mathAbs: (x: number) => number;
+export declare const mathRound: (x: number) => number;
+export declare const mathFloor: (x: number) => number;
+export declare const mathCeil: (x: number) => number;
+export declare const mathPow: (x: number, y: number) => number;
+export declare const mathLog: (x: number) => number;
+export declare const mathLN10: number;
+export declare const mathPI: number;
+export declare const mathRandom: () => number;
 /**
  * Linear mapping a value from domain to range
  * @param  val
@@ -20,19 +30,53 @@ export declare const parsePercent: typeof parsePositionOption;
  */
 export declare function parsePositionOption(option: unknown, percentBase: number, percentOffset?: number): number;
 /**
- * Accept number, or numeric stirng (`'123'`), or percentage ('100%'), as x/y/width/height pixel number.
+ * Accept number, or numeric string (`'123'`), or percentage ('100%'), as x/y/width/height pixel number.
  * If null/undefined or invalid, return NaN.
  * (But allow JS type coercion (`+option`) due to backward compatibility)
  * @see {PositionSizeOption}
  */
 export declare function parsePositionSizeOption(option: unknown, percentBase: number, percentOffset?: number): number;
 /**
- * (1) Fix rounding error of float numbers.
- * (2) Support return string to avoid scientific notation like '3.5e-7'.
+ * Perserve the same rule with `parsePositionSizeOption`.
  */
-export declare function round(x: number | string, precision?: number): number;
+export declare function isPositionSizeOptionPercent(option: unknown): boolean;
+/**
+ * [Feature_1] Round at specified precision.
+ *  FIXME: this is not a general-purpose rounding implementation yet due to `TO_FIXED_SUPPORTED_PRECISION_MAX`.
+ *  e.g., `round(1.25 * 1e-150, 151)` has no overflow in IEEE754 64bit float, but can not be handled by
+ *  this method.
+ *
+ * [Feature_2] Support return string to avoid scientific notation like '3.5e-7'.
+ *
+ * [Feature_3] Fix rounding error of float numbers !!!ONLY SUITABLE FOR SPECIAL CASES!!!.
+ *  [CAVEAT]:
+ *      Rounding is NEVER a general-purpose solution for rounding errors.
+ *      Consider a case: `expect=123.99994999`, `actual=123.99995000` (suppose rounding error occurs).
+ *          Calling `round(expect, 4)` gets `123.9999`.
+ *          Calling `round(actual, 4)` gets `124.0000`.
+ *          A unacceptable result arises, even if the original difference is only `0.00000001` (tiny
+ *          and not strongly correlated with the digit pattern).
+ *      So the rounding approach works only if:
+ *          The digit next to the `precision` won't cross the rounding boundary. Typically, it works if
+ *          the digit next to the `precision` is expected to be `0`, and the rounding error is small
+ *          enough and impossible to affect that digit (`roundingError < Math.pow(10, -precision) / 2`).
+ *      The quantity of a rounding error can be roughly estimated by formula:
+ *          `minPrecisionRoundingErrorMayOccur ~= max(0, floor(14 - quantityExponent(val)))`
+ *          MEMO: This is derived from:
+ *              Let ` EXP52B10 = log10(pow(2, 52)) = 15.65355977452702 `
+ *                  (`52` is IEEE754 float64 mantissa bits count)
+ *              We require: ` abs(val) * pow(10, precision) < pow(10, EXP52B10) `
+ *              Hence: ` precision < EXP52B10 - log10(abs(val)) `
+ *              Hence: ` precision = floor( EXP52B10 - log10(abs(val)) ) `
+ *              Since: ` quantityExponent(val) = floor(log10(abs(val))) `
+ *              Hence: ` precision ~= floor(EXP52B10 - 1 - quantityExponent(val))
+ */
+export declare function round(x: number | string, precision: number): number;
 export declare function round(x: number | string, precision: number, returnStr: false): number;
 export declare function round(x: number | string, precision: number, returnStr: true): string;
+export declare function roundLegacy(x: number | string, precision?: number): number;
+export declare function roundLegacy(x: number | string, precision: number, returnStr: false): number;
+export declare function roundLegacy(x: number | string, precision: number, returnStr: true): string;
 /**
  * Inplacd asc sort arr.
  * The input arr will be modified.
@@ -40,16 +84,39 @@ export declare function round(x: number | string, precision: number, returnStr: 
 export declare function asc<T extends number[]>(arr: T): T;
 /**
  * Get precision.
+ * e.g. `getPrecisionSafe(100.123)` return `3`.
+ * e.g. `getPrecisionSafe(100)` return `0`.
  */
 export declare function getPrecision(val: string | number): number;
 /**
  * Get precision with slow but safe method
+ * e.g. `getPrecisionSafe(100.123)` return `3`.
+ * e.g. `getPrecisionSafe(100)` return `0`.
  */
 export declare function getPrecisionSafe(val: string | number): number;
 /**
- * Minimal dicernible data precisioin according to a single pixel.
+ * @deprecated Use `getAcceptableTickPrecision` instead. See bad case in `test/ut/spec/util/number.test.ts`
+ * NOTE: originally introduced in commit `ff93e3e7f9ff24902e10d4469fd3187393b05feb`
+ *
+ * Minimal discernible data precision according to a single pixel.
  */
 export declare function getPixelPrecision(dataExtent: [number, number], pixelExtent: [number, number]): number;
+/**
+ * This method chooses a reasonable "data" precision that can be used in `round` method.
+ * A reasonable precision is suitable for display; it may cause cumulative error but acceptable.
+ *
+ * "data" is linearly mapped to pixel according to the ratio determined by `dataSpan` and `pxSpan`.
+ * The diff from the original "data" to the rounded "data" (with the result precision) should be
+ * equal or less than `pxDiffAcceptable`, which is typically `1` pixel.
+ * And the result precision should be as small as possible for a concise display.
+ *
+ * [NOTICE]: using arbitrary parameters is NOT preferable - a discernible misalign (e.g., over 1px)
+ *  may occur, especially when `splitLine` is displayed.
+ *
+ * PENDING: Only the linear case is addressed for now; other mapping methods (like logarithm) will
+ *  not be covered until necessary.
+ */
+export declare function getAcceptableTickPrecision(dataExtent: number[], pxSpan: number, pxDiffAcceptable: number | NullUndefined): number;
 /**
  * Get a data of given precision, assuring the sum of percentages
  * in valueList is 1.
@@ -78,7 +145,7 @@ export declare function getPercentSeats(valueList: number[], precision: number):
  * See <http://0.30000000000000004.com/>
  */
 export declare function addSafe(val0: number, val1: number): number;
-export declare const MAX_SAFE_INTEGER = 9007199254740991;
+export declare const MAX_SAFE_INTEGER: number;
 /**
  * To 0 - 2 * PI, considering negative radian.
  */
@@ -114,24 +181,26 @@ export declare function parseDate(value: unknown): Date;
 export declare function quantity(val: number): number;
 /**
  * Exponent of the quantity of a number
- * e.g., 1234 equals to 1.234*10^3, so quantityExponent(1234) is 3
+ * e.g., 9876 equals to 9.876*10^3, so quantityExponent(9876) is 3
+ * e.g., 0.09876 equals to 9.876*10^-2, so quantityExponent(0.09876) is -2
  *
  * @param val non-negative value
  * @return
  */
 export declare function quantityExponent(val: number): number;
+export declare const NICE_MODE_ROUND: 1;
+export declare const NICE_MODE_MIN: 2;
 /**
- * find a “nice” number approximately equal to x. Round the number if round = true,
- * take ceiling if round = false. The primary observation is that the “nicest”
+ * find a “nice” number approximately equal to x. Round the number if 'round',
+ * take ceiling if 'round'. The primary observation is that the “nicest”
  * numbers in decimal are 1, 2, and 5, and all power-of-ten multiples of these numbers.
  *
  * See "Nice Numbers for Graph Labels" of Graphic Gems.
  *
  * @param  val Non-negative value.
- * @param  round
  * @return Niced number
  */
-export declare function nice(val: number, round?: boolean): number;
+export declare function nice(val: number, mode?: boolean | typeof NICE_MODE_ROUND | typeof NICE_MODE_MIN): number;
 /**
  * This code was copied from "d3.js"
  * <https://github.com/d3/d3/blob/9cc9a875e636a1dcf36cc1e07bdf77e1ad6e2c74/src/arrays/quantile.js>.
@@ -207,4 +276,11 @@ export declare function getGreatestCommonDividor(a: number, b: number): number;
  * @param {number} b the other number
  */
 export declare function getLeastCommonMultiple(a: number, b: number): number;
+/**
+ * NOTICE: Assume the input `val` is number or null/undefined, no type check, no support of BitInt.
+ * Therefore, it is NOT suitable for processing user input, but sufficient for
+ * internal usage in most cases.
+ * For platform-agnosticism, `Number.isFinite` is not used.
+ */
+export declare function isNullableNumberFinite(val: number | NullUndefined): boolean;
 export {};

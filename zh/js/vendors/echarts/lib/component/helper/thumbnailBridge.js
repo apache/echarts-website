@@ -47,7 +47,7 @@ import { makeInner } from '../../util/model.js';
  *  This file should be decoupled from them for sake of the size consideration.
  */
 /**
- * FIXME: This is a temporary implmentation. May need refactor to decouple
+ * FIXME: This is a temporary implementation. May need refactor to decouple
  *  the direct call from series.graph to thumbnail.
  */
 var inner = makeInner();

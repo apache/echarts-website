@@ -46,7 +46,7 @@ import { createTask } from './task.js';
 import { getUID } from '../util/component.js';
 import GlobalModel from '../model/Global.js';
 import ExtensionAPI from './ExtensionAPI.js';
-import { normalizeToArray } from '../util/model.js';
+import { normalizeToArray, preparePipelineContext } from '../util/model.js';
 ;
 var Scheduler = /** @class */function () {
   function Scheduler(ecInstance, api, dataProcessorHandlers, visualHandlers) {
@@ -73,7 +73,7 @@ var Scheduler = /** @class */function () {
     // if a data processor depends on a component (e.g., dataZoomProcessor depends
     // on the settings of `dataZoom`), it should be re-performed if the component
     // is modified by `setOption`.
-    // (2) If a processor depends on sevral series, speicified by its `getTargetSeries`,
+    // (2) If a processor depends on several series, specified by its `getTargetSeries`,
     // it should be re-performed when the result array of `getTargetSeries` changed.
     // We use `dependencies` to cover these issues.
     // (3) How to update target series when coordinate system related components modified.
@@ -122,29 +122,20 @@ var Scheduler = /** @class */function () {
    */
   Scheduler.prototype.updateStreamModes = function (seriesModel, view) {
     var pipeline = this._pipelineMap.get(seriesModel.uid);
-    var data = seriesModel.getData();
-    var dataLen = data.count();
     // `progressiveRender` means that can render progressively in each
     // animation frame. Note that some types of series do not provide
     // `view.incrementalPrepareRender` but support `chart.appendData`. We
     // use the term `incremental` but not `progressive` to describe the
-    // case that `chart.appendData`.
-    var progressiveRender = pipeline.progressiveEnabled && view.incrementalPrepareRender && dataLen >= pipeline.threshold;
-    var large = seriesModel.get('large') && dataLen >= seriesModel.get('largeThreshold');
-    // TODO: modDataCount should not updated if `appendData`, otherwise cause whole repaint.
-    // see `test/candlestick-large3.html`
-    var modDataCount = seriesModel.get('progressiveChunkMode') === 'mod' ? dataLen : null;
-    seriesModel.pipelineContext = pipeline.context = {
-      progressiveRender: progressiveRender,
-      modDataCount: modDataCount,
-      large: large
-    };
+    // case `chart.appendData`.
+    // Regarding zrender, both echarts "progressive" and "incremental" use `el.incremental: true`.
+    var context = seriesModel.__preparePipelineContext ? seriesModel.__preparePipelineContext(view, pipeline) : preparePipelineContext(seriesModel, view, pipeline);
+    seriesModel.pipelineContext = pipeline.context = context;
   };
-  Scheduler.prototype.restorePipelines = function (ecModel) {
+  Scheduler.prototype.restorePipelines = function (zr, ecModel) {
     var scheduler = this;
     var pipelineMap = scheduler._pipelineMap = createHashMap();
     ecModel.eachSeries(function (seriesModel) {
-      var progressive = seriesModel.getProgressive();
+      var progressive = zr.painter.type === 'canvas' && seriesModel.getProgressive();
       var pipelineId = seriesModel.uid;
       pipelineMap.set(pipelineId, {
         id: pipelineId,
@@ -167,7 +158,7 @@ var Scheduler = /** @class */function () {
       var record = stageTaskMap.get(handler.uid) || stageTaskMap.set(handler.uid, {});
       var errMsg = '';
       if (process.env.NODE_ENV !== 'production') {
-        // Currently do not need to support to sepecify them both.
+        // Currently do not need to support to specify them both.
         errMsg = '"reset" and "overallReset" must not be both specified.';
       }
       assert(!(handler.reset && handler.overallReset), errMsg);
@@ -336,14 +327,12 @@ var Scheduler = /** @class */function () {
     var newAgentStubMap = overallTask.agentStubMap = createHashMap();
     var seriesType = stageHandler.seriesType;
     var getTargetSeries = stageHandler.getTargetSeries;
-    var overallProgress = true;
+    var dirtyOnOverallProgress = stageHandler.dirtyOnOverallProgress;
     var shouldOverallTaskDirty = false;
     // FIXME:TS never used, so comment it
     // let modifyOutputEnd = stageHandler.modifyOutputEnd;
     // An overall task with seriesType detected or has `getTargetSeries`, we add
-    // stub in each pipelines, it will set the overall task dirty when the pipeline
-    // progress. Moreover, to avoid call the overall task each frame (too frequent),
-    // we set the pipeline block.
+    // stub in each pipelines to receive dirty info from upstream.
     var errMsg = '';
     if (process.env.NODE_ENV !== 'production') {
       errMsg = '"createOnAllSeries" is not supported for "overallReset", ' + 'because it will block all streams.';
@@ -353,13 +342,7 @@ var Scheduler = /** @class */function () {
       ecModel.eachRawSeriesByType(seriesType, createStub);
     } else if (getTargetSeries) {
       getTargetSeries(ecModel, api).each(createStub);
-    }
-    // Otherwise, (usually it is legacy case), the overall task will only be
-    // executed when upstream is dirty. Otherwise the progressive rendering of all
-    // pipelines will be disabled unexpectedly. But it still needs stubs to receive
-    // dirty info from upstream.
-    else {
-      overallProgress = false;
+    } else {
       each(ecModel.getSeries(), createStub);
     }
     function createStub(seriesModel) {
@@ -373,12 +356,12 @@ var Scheduler = /** @class */function () {
       })));
       stub.context = {
         model: seriesModel,
-        overallProgress: overallProgress
+        dirtyOnOverallProgress: dirtyOnOverallProgress
         // FIXME:TS never used, so comment it
         // modifyOutputEnd: modifyOutputEnd
       };
       stub.agent = overallTask;
-      stub.__block = overallProgress;
+      stub.__block = dirtyOnOverallProgress;
       scheduler._pipe(seriesModel, stub);
     }
     if (shouldOverallTaskDirty) {
@@ -412,7 +395,7 @@ function overallTaskReset(context) {
   context.overallReset(context.ecModel, context.api, context.payload);
 }
 function stubReset(context) {
-  return context.overallProgress && stubProgress;
+  return context.dirtyOnOverallProgress && stubProgress;
 }
 function stubProgress() {
   this.agent.dirty();

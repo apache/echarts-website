@@ -8,6 +8,7 @@ export declare const AXIS_TYPES: {
     readonly log: 1;
 };
 export declare type OptionAxisType = keyof typeof AXIS_TYPES;
+export declare type AxisScaleType = 'ordinal' | 'interval' | 'log' | 'time';
 export interface AxisBaseOptionCommon extends ComponentOption, AnimationOptionMixin {
     type?: OptionAxisType;
     show?: boolean;
@@ -70,7 +71,7 @@ export interface AxisBaseOptionCommon extends ComponentOption, AnimationOptionMi
     min?: ScaleDataValue | 'dataMin' | ((extent: {
         min: number;
         max: number;
-    }) => ScaleDataValue);
+    }) => ScaleDataValue | NullUndefined);
     /**
      * Max value of the axis. can be:
      * + ScaleDataValue
@@ -80,7 +81,17 @@ export interface AxisBaseOptionCommon extends ComponentOption, AnimationOptionMi
     max?: ScaleDataValue | 'dataMax' | ((extent: {
         min: number;
         max: number;
-    }) => ScaleDataValue);
+    }) => ScaleDataValue | NullUndefined);
+    /**
+     * This is the start value of shape, such as bar. 0 by default.
+     * `startValue` will be included in axis scale extent union.
+     *
+     * PENDING:
+     *  - Currently, LineSeries with areaStyle does not use this `startValue`.
+     *    They can be supported if required.
+     *  - The current behavior is problematic in "stack" case. (See `test/bar-startValue.html`).
+     *    But no need to support it until concrete requirements arise.
+     */
     startValue?: number;
     jitter?: number;
     jitterOverlap?: boolean;
@@ -92,15 +103,21 @@ export interface AxisBaseOptionCommon extends ComponentOption, AnimationOptionMi
         zigzagAmplitude?: number;
         zigzagMinSpan?: number;
         zigzagMaxSpan?: number;
-        zigzagZ: number;
+        zigzagZ?: number;
         expandOnClick?: boolean;
     };
     breakLabelLayout?: {
         moveOverlap?: 'auto' | boolean;
     };
+    containShape?: boolean;
 }
+/**
+ * The gap at both ends of the axis. `[GAP, GAP]`.
+ */
+declare type NumericAxisBoundaryGapOption = [NumericAxisBoundaryGapOptionItemValue, NumericAxisBoundaryGapOptionItemValue];
+export declare type NumericAxisBoundaryGapOptionItemValue = number | string | NullUndefined;
 export interface NumericAxisBaseOptionCommon extends AxisBaseOptionCommon {
-    boundaryGap?: [number | string, number | string];
+    boundaryGap?: NumericAxisBoundaryGapOption;
     /**
      * AxisTick and axisLabel and splitLine are calculated based on splitNumber.
      */
@@ -124,6 +141,16 @@ export interface NumericAxisBaseOptionCommon extends AxisBaseOptionCommon {
      * Will be ignored if interval is set.
      */
     alignTicks?: boolean;
+    /**
+     * Data min value to be included in axis extent calculation.
+     * The final min value will be the minimum of this value and the data min.
+     */
+    dataMin?: ScaleDataValue;
+    /**
+     * Data max value to be included in axis extent calculation.
+     * The final max value will be the maximum of this value and the data max.
+     */
+    dataMax?: ScaleDataValue;
 }
 export interface CategoryAxisBaseOption extends AxisBaseOptionCommon {
     type?: 'category';
@@ -136,7 +163,7 @@ export interface CategoryAxisBaseOption extends AxisBaseOptionCommon {
     deduplication?: boolean;
     axisTick?: AxisBaseOptionCommon['axisTick'] & {
         alignWithLabel?: boolean;
-        interval?: 'auto' | number | ((index: number, value: string) => boolean);
+        interval?: CategoryTickLabelSplitIntervalOption;
     };
 }
 export interface ValueAxisBaseOption extends NumericAxisBaseOptionCommon {
@@ -144,7 +171,7 @@ export interface ValueAxisBaseOption extends NumericAxisBaseOptionCommon {
     axisLabel?: AxisLabelOption<'value'>;
     /**
      * Optional value can be:
-     * + `false`: always include value 0.
+     * + `false`: always include value 0 if not conflict with `axis.min/max` setting.
      * + `true`: the axis may not contain zero position.
      */
     scale?: boolean;
@@ -158,12 +185,13 @@ export interface TimeAxisBaseOption extends NumericAxisBaseOptionCommon {
     type?: 'time';
     axisLabel?: AxisLabelOption<'time'>;
 }
+export declare type AxisTickOptionUnion = AxisBaseOptionCommon['axisTick'] | CategoryAxisBaseOption['axisTick'];
 interface AxisNameTextStyleOption extends LabelCommonOption {
     rich?: RichTextOption;
 }
 interface AxisLineOption {
     show?: boolean | 'auto';
-    onZero?: boolean;
+    onZero?: boolean | 'auto';
     onZeroAxisIndex?: number;
     symbol?: string | [string, string];
     symbolSize?: number[];
@@ -176,7 +204,7 @@ interface AxisTickOption {
     inside?: boolean;
     length?: number;
     lineStyle?: LineStyleOption;
-    customValues?: (number | string | Date)[];
+    customValues?: AxisTickLabelCustomValuesOption;
 }
 export declare type AxisLabelValueFormatter = (value: number, index: number, extra: AxisLabelFormatterExtraParams | NullUndefined) => string;
 export declare type AxisLabelCategoryFormatter = (value: string, index: number, extra: NullUndefined) => string;
@@ -221,8 +249,8 @@ interface AxisLabelBaseOption extends LabelCommonOption<AxisLabelBaseOptionNuanc
     show?: boolean;
     inside?: boolean;
     rotate?: number;
-    showMinLabel?: boolean;
-    showMaxLabel?: boolean;
+    showMinLabel?: AxisShowMinMaxLabelOption;
+    showMaxLabel?: AxisShowMinMaxLabelOption;
     alignMinLabel?: TextAlign;
     alignMaxLabel?: TextAlign;
     verticalAlignMinLabel?: TextVerticalAlign;
@@ -232,11 +260,13 @@ interface AxisLabelBaseOption extends LabelCommonOption<AxisLabelBaseOptionNuanc
      * If hide overlapping labels.
      */
     hideOverlap?: boolean;
-    customValues?: (number | string | Date)[];
+    customValues?: AxisTickLabelCustomValuesOption;
 }
+export declare type AxisShowMinMaxLabelOption = boolean | NullUndefined;
+export declare type AxisTickLabelCustomValuesOption = (number | string | Date)[];
 interface AxisLabelOption<TType extends OptionAxisType> extends AxisLabelBaseOption {
     formatter?: LabelFormatters[TType];
-    interval?: TType extends 'category' ? ('auto' | number | ((index: number, value: string) => boolean)) : unknown;
+    interval?: CategoryTickLabelSplitIntervalOption;
 }
 interface MinorTickOption {
     show?: boolean;
@@ -246,7 +276,7 @@ interface MinorTickOption {
 }
 interface SplitLineOption {
     show?: boolean;
-    interval?: 'auto' | number | ((index: number, value: string) => boolean);
+    interval?: CategoryTickLabelSplitIntervalOption;
     showMinLine?: boolean;
     showMaxLine?: boolean;
     lineStyle?: LineStyleOption<ZRColor | ZRColor[]>;
@@ -257,8 +287,19 @@ interface MinorSplitLineOption {
 }
 interface SplitAreaOption {
     show?: boolean;
-    interval?: 'auto' | number | ((index: number, value: string) => boolean);
+    interval?: CategoryTickLabelSplitIntervalOption;
     areaStyle?: AreaStyleOption<ZRColor[]>;
 }
+/**
+ * `0` means show all; `1` means show one every other one; `2` means show one out of
+ * every three; and so one.
+ */
+declare type CategoryTickLabelSplitIntervalOption = 'auto' | number | CategoryTickLabelSplitIntervalCb | NullUndefined;
+export declare type CategoryTickLabelSplitIntervalCb = (linearTickValue: number, // tick value before sorted. "sort" means `OrdinalScale['setSortInfo']`.
+rawLabel: string) => boolean;
+export declare type CategoryTickLabelSplitBuildingOption = {
+    show?: boolean;
+    interval?: CategoryTickLabelSplitIntervalOption;
+};
 export declare type AxisBaseOption = ValueAxisBaseOption | LogAxisBaseOption | CategoryAxisBaseOption | TimeAxisBaseOption;
 export {};

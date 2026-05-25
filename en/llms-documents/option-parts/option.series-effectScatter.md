@@ -381,9 +381,9 @@ For example, `[0, '-50%']` means to move upside side position of symbol height. 
 
 ## cursor
 - **Type**: `string`
-- **Default**: `'pointer'`
+- **Default**: `pointer`
 
-The mouse style when mouse hovers on an element, the same as `cursor` property in `CSS`.
+The mouse style when mouse hovers over an element, the same as `cursor` property in `CSS`.
 
 ## label
 - **Type**: `Object`
@@ -10417,7 +10417,9 @@ Interface:
 (value: number | string, dataIndex: number) => string
 ```
 
-`dataIndex` is provided since `v5.5.0`
+Since `v5.5.0` `dataIndex` is provided; but not reasonable when `dataZoom` exists, since it is the index after dataZoom filtering.
+
+Since `v6.1.0` `dataIndex` is corrected to the index before `dataZoom` filtering.
 
 Example:
 
@@ -10749,7 +10751,14 @@ For example, `[0, '-50%']` means to move upside side position of symbol height. 
 - **Type**: `boolean`
 - **Default**: `false`
 
-Whether to ignore mouse events. Default value is false, for triggering and responding to mouse events.
+Whether to ignore user interactions (typically, mouse or touch events).
+
+*   `true`: Elements do not respond to mouse and touch interactions. As a result:
+    *   Interactive features are disabled, such as `tooltip`, hover state changing (i.e., `emphasis`), hover linking, etc.
+    *   Mouse/touch events are not dispatched to user-registered listeners (i.e., `chart.on('xxx', listener)`).
+*   `false`:
+    *   Interactive features are not disabled by this option, but they still depend on other relevant options to be enabled.
+    *   Mouse/touch events are not prevented by this option, but they still depend on other relevent options (typically, `triggerEvent`, if supported).
 
 ### markPoint.label
 - **Type**: `Object`
@@ -16197,7 +16206,14 @@ Use a line in the chart to illustrate.
 - **Type**: `boolean`
 - **Default**: `false`
 
-Whether to ignore mouse events. Default value is false, for triggering and responding to mouse events.
+Whether to ignore user interactions (typically, mouse or touch events).
+
+*   `true`: Elements do not respond to mouse and touch interactions. As a result:
+    *   Interactive features are disabled, such as `tooltip`, hover state changing (i.e., `emphasis`), hover linking, etc.
+    *   Mouse/touch events are not dispatched to user-registered listeners (i.e., `chart.on('xxx', listener)`).
+*   `false`:
+    *   Interactive features are not disabled by this option, but they still depend on other relevant options to be enabled.
+    *   Mouse/touch events are not prevented by this option, but they still depend on other relevent options (typically, `triggerEvent`, if supported).
 
 ### markLine.symbol
 - **Type**: `string|Array`
@@ -25283,7 +25299,14 @@ Used to mark an area in chart. For example, mark a time interval.
 - **Type**: `boolean`
 - **Default**: `false`
 
-Whether to ignore mouse events. Default value is false, for triggering and responding to mouse events.
+Whether to ignore user interactions (typically, mouse or touch events).
+
+*   `true`: Elements do not respond to mouse and touch interactions. As a result:
+    *   Interactive features are disabled, such as `tooltip`, hover state changing (i.e., `emphasis`), hover linking, etc.
+    *   Mouse/touch events are not dispatched to user-registered listeners (i.e., `chart.on('xxx', listener)`).
+*   `false`:
+    *   Interactive features are not disabled by this option, but they still depend on other relevant options to be enabled.
+    *   Mouse/touch events are not prevented by this option, but they still depend on other relevent options (typically, `triggerEvent`, if supported).
 
 ### markArea.label
 - **Type**: `Object`
@@ -34858,17 +34881,11 @@ See [this example](https://echarts.apache.org/examples/en/editor.html?c=bar-anim
 
 Since `v5.1.0`
 
-If clip the overflow on the coordinate system. Clip results varies between series:
+Whether to clip series shapes overflowing the coordinate system.
 
-*   Scatter/EffectScatter：Ignore the symbols exceeds the coordinate system. Not clip the elements.
-*   Bar：Clip all the overflowed. With bar width kept.
-*   Line：Clip the overflowed line.
-*   Lines: Clip all the overflowed.
-*   Candlestick: Ignore the elements exceeds the coordinate system.
-*   PictorialBar: Clip all the overflowed. (Supported since v5.5.0)
-*   Custom: Clip all the olverflowed.
+The detailed clipping behavior is:
 
-All these series have default value `true` except pictorialBar and custom series. Set it to `false` if you don't want to clip.
+A scatter symbol is removed only if the center is outside the coordinate system. Otherwise, the shape is fully visible, regardless of partial overflow.
 
 ## zlevel
 - **Type**: `number`
@@ -34892,7 +34909,14 @@ Canvases with bigger `zlevel` will be placed on Canvases with smaller `zlevel`.
 - **Type**: `boolean`
 - **Default**: `false`
 
-Whether to ignore mouse events. Default value is false, for triggering and responding to mouse events.
+Whether to ignore user interactions (typically, mouse or touch events).
+
+*   `true`: Elements do not respond to mouse and touch interactions. As a result:
+    *   Interactive features are disabled, such as `tooltip`, hover state changing (i.e., `emphasis`), hover linking, etc.
+    *   Mouse/touch events are not dispatched to user-registered listeners (i.e., `chart.on('xxx', listener)`).
+*   `false`:
+    *   Interactive features are not disabled by this option, but they still depend on other relevant options to be enabled.
+    *   Mouse/touch events are not prevented by this option, but they still depend on other relevent options (typically, `triggerEvent`, if supported).
 
 ## animation
 - **Type**: `boolean`
@@ -35324,7 +35348,9 @@ Interface:
 (value: number | string, dataIndex: number) => string
 ```
 
-`dataIndex` is provided since `v5.5.0`
+Since `v5.5.0` `dataIndex` is provided; but not reasonable when `dataZoom` exists, since it is the index after dataZoom filtering.
+
+Since `v6.1.0` `dataIndex` is corrected to the index before `dataZoom` filtering.
 
 Example:
 

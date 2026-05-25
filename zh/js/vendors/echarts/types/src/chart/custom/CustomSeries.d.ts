@@ -2,8 +2,8 @@ import Displayable from 'zrender/lib/graphic/Displayable.js';
 import { ImageProps, ImageStyleProps } from 'zrender/lib/graphic/Image.js';
 import { PathProps, PathStyleProps } from 'zrender/lib/graphic/Path.js';
 import { ZRenderType } from 'zrender/lib/zrender.js';
-import { BarGridLayoutOptionForCustomSeries, BarGridLayoutResult } from '../../layout/barGrid.js';
-import { AnimationOption, BlurScope, CallbackDataParams, CoordinateSystemDataLayout, Dictionary, DimensionLoose, ItemStyleOption, LabelOption, NullUndefined, OptionDataValue, OrdinalRawValue, ParsedValue, SeriesDataType, SeriesEncodeOptionMixin, SeriesOnCalendarOptionMixin, SeriesOnCartesianOptionMixin, SeriesOnGeoOptionMixin, SeriesOnPolarOptionMixin, SeriesOnSingleOptionMixin, SeriesOption, TextCommonOption, ZRStyleProps } from '../../util/types.js';
+import { BarGridLayoutOptionForCustomSeries, BarGridLayoutResultForCustomSeries } from '../../layout/barGrid.js';
+import { AnimationOption, BlurScope, CallbackDataParams, CoordinateSystemDataLayout, Dictionary, DimensionLoose, ItemStyleOption, LabelOption, NullUndefined, OptionDataValue, OrdinalRawValue, ParsedValue, SeriesDataType, SeriesEncodeOptionMixin, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin, SeriesOnCartesianOptionMixin, SeriesOnGeoOptionMixin, SeriesOnPolarOptionMixin, SeriesOnSingleOptionMixin, SeriesOption, TextCommonOption, ZRStyleProps } from '../../util/types.js';
 import Element from 'zrender/lib/Element.js';
 import SeriesData, { DefaultDataVisual } from '../../data/SeriesData.js';
 import GlobalModel from '../../model/Global.js';
@@ -175,7 +175,7 @@ export interface CustomSeriesRenderItemAPI extends CustomSeriesRenderItemCoordin
      */
     styleEmphasis(userProps?: ZRStyleProps, dataIndexInside?: number): ZRStyleProps;
     visual<VT extends NonStyleVisualProps | StyleVisualProps>(visualType: VT, dataIndexInside?: number): VT extends NonStyleVisualProps ? DefaultDataVisual[VT] : VT extends StyleVisualProps ? PathStyleProps[typeof STYLE_VISUAL_TYPE[VT]] : void;
-    barLayout(opt: BarGridLayoutOptionForCustomSeries): BarGridLayoutResult;
+    barLayout(opt: BarGridLayoutOptionForCustomSeries): BarGridLayoutResultForCustomSeries;
     currentSeriesIndices(): number[];
     font(opt: Pick<TextCommonOption, 'fontStyle' | 'fontWeight' | 'fontSize' | 'fontFamily'>): string;
 }
@@ -204,7 +204,7 @@ export interface CustomSeriesRenderItemParams {
 export declare type CustomSeriesRenderItemReturn = CustomRootElementOption | undefined | null;
 export declare type CustomSeriesRenderItem = (params: CustomSeriesRenderItemParams, api: CustomSeriesRenderItemAPI) => CustomSeriesRenderItemReturn;
 export interface CustomSeriesOption extends SeriesOption<unknown>, // don't support StateOption in custom series.
-SeriesEncodeOptionMixin, SeriesOnCartesianOptionMixin, SeriesOnPolarOptionMixin, SeriesOnSingleOptionMixin, SeriesOnGeoOptionMixin, SeriesOnCalendarOptionMixin {
+SeriesEncodeOptionMixin, SeriesOnCartesianOptionMixin, SeriesOnPolarOptionMixin, SeriesOnSingleOptionMixin, SeriesOnGeoOptionMixin, ComponentOnCalendarOptionMixin, ComponentOnMatrixOptionMixin {
     type?: 'custom';
     coordinateSystem?: string | 'none';
     renderItem?: CustomSeriesRenderItem;

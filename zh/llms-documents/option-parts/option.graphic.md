@@ -1313,7 +1313,7 @@ type TransformProp =
 
 ### elements-image.cursor
 - **Type**: `string`
-- **Default**: `'pointer'`
+- **Default**: `pointer`
 
 鼠标悬浮时在图形元素上时鼠标的样式是什么。同 CSS 的 `cursor`。
 
@@ -2127,7 +2127,7 @@ type TransformProp =
 
 ### elements-text.cursor
 - **Type**: `string`
-- **Default**: `'pointer'`
+- **Default**: `pointer`
 
 鼠标悬浮时在图形元素上时鼠标的样式是什么。同 CSS 的 `cursor`。
 
@@ -2981,7 +2981,7 @@ type TransformProp =
 
 ### elements-rect.cursor
 - **Type**: `string`
-- **Default**: `'pointer'`
+- **Default**: `pointer`
 
 鼠标悬浮时在图形元素上时鼠标的样式是什么。同 CSS 的 `cursor`。
 
@@ -3835,7 +3835,7 @@ type TransformProp =
 
 ### elements-circle.cursor
 - **Type**: `string`
-- **Default**: `'pointer'`
+- **Default**: `pointer`
 
 鼠标悬浮时在图形元素上时鼠标的样式是什么。同 CSS 的 `cursor`。
 
@@ -4671,7 +4671,7 @@ type TransformProp =
 
 ### elements-ring.cursor
 - **Type**: `string`
-- **Default**: `'pointer'`
+- **Default**: `pointer`
 
 鼠标悬浮时在图形元素上时鼠标的样式是什么。同 CSS 的 `cursor`。
 
@@ -5513,7 +5513,7 @@ type TransformProp =
 
 ### elements-sector.cursor
 - **Type**: `string`
-- **Default**: `'pointer'`
+- **Default**: `pointer`
 
 鼠标悬浮时在图形元素上时鼠标的样式是什么。同 CSS 的 `cursor`。
 
@@ -6384,7 +6384,7 @@ type TransformProp =
 
 ### elements-arc.cursor
 - **Type**: `string`
-- **Default**: `'pointer'`
+- **Default**: `pointer`
 
 鼠标悬浮时在图形元素上时鼠标的样式是什么。同 CSS 的 `cursor`。
 
@@ -7244,7 +7244,7 @@ type TransformProp =
 
 ### elements-polygon.cursor
 - **Type**: `string`
-- **Default**: `'pointer'`
+- **Default**: `pointer`
 
 鼠标悬浮时在图形元素上时鼠标的样式是什么。同 CSS 的 `cursor`。
 
@@ -8082,7 +8082,7 @@ type TransformProp =
 
 ### elements-polyline.cursor
 - **Type**: `string`
-- **Default**: `'pointer'`
+- **Default**: `pointer`
 
 鼠标悬浮时在图形元素上时鼠标的样式是什么。同 CSS 的 `cursor`。
 
@@ -8920,7 +8920,7 @@ type TransformProp =
 
 ### elements-line.cursor
 - **Type**: `string`
-- **Default**: `'pointer'`
+- **Default**: `pointer`
 
 鼠标悬浮时在图形元素上时鼠标的样式是什么。同 CSS 的 `cursor`。
 
@@ -9770,7 +9770,7 @@ type TransformProp =
 
 ### elements-compoundPath.cursor
 - **Type**: `string`
-- **Default**: `'pointer'`
+- **Default**: `pointer`
 
 鼠标悬浮时在图形元素上时鼠标的样式是什么。同 CSS 的 `cursor`。
 
@@ -10593,7 +10593,7 @@ type TransformProp =
 
 ### elements-bezierCurve.cursor
 - **Type**: `string`
-- **Default**: `'pointer'`
+- **Default**: `pointer`
 
 鼠标悬浮时在图形元素上时鼠标的样式是什么。同 CSS 的 `cursor`。
 

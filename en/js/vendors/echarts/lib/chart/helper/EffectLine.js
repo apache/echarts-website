@@ -165,7 +165,7 @@ var EffectLine = /** @class */function (_super) {
     var p1 = symbol.__p1;
     var p2 = symbol.__p2;
     var cp1 = symbol.__cp1;
-    var t = symbol.__t < 1 ? symbol.__t : 2 - symbol.__t;
+    var t = symbol.__t <= 1 ? symbol.__t : 2 - symbol.__t;
     var pos = [symbol.x, symbol.y];
     var lastPos = pos.slice();
     var quadraticAt = curveUtil.quadraticAt;
@@ -173,8 +173,8 @@ var EffectLine = /** @class */function (_super) {
     pos[0] = quadraticAt(p1[0], cp1[0], p2[0], t);
     pos[1] = quadraticAt(p1[1], cp1[1], p2[1], t);
     // Tangent
-    var tx = symbol.__t < 1 ? quadraticDerivativeAt(p1[0], cp1[0], p2[0], t) : quadraticDerivativeAt(p2[0], cp1[0], p1[0], 1 - t);
-    var ty = symbol.__t < 1 ? quadraticDerivativeAt(p1[1], cp1[1], p2[1], t) : quadraticDerivativeAt(p2[1], cp1[1], p1[1], 1 - t);
+    var tx = symbol.__t <= 1 ? quadraticDerivativeAt(p1[0], cp1[0], p2[0], t) : quadraticDerivativeAt(p2[0], cp1[0], p1[0], 1 - t);
+    var ty = symbol.__t <= 1 ? quadraticDerivativeAt(p1[1], cp1[1], p2[1], t) : quadraticDerivativeAt(p2[1], cp1[1], p1[1], 1 - t);
     symbol.rotation = -Math.atan2(ty, tx) - Math.PI / 2;
     // enable continuity trail for 'line', 'rect', 'roundRect' symbolType
     if (this._symbolType === 'line' || this._symbolType === 'rect' || this._symbolType === 'roundRect') {

@@ -51,6 +51,8 @@ import LargeLineDraw from '../helper/LargeLineDraw.js';
 import linesLayout from './linesLayout.js';
 import { createClipPath } from '../helper/createClipPathFromCoordSys.js';
 import ChartView from '../../view/Chart.js';
+import { getIncrementalId } from '../../util/model.js';
+import { getCurrentCanvasPainter } from '../../util/graphic.js';
 var LinesView = /** @class */function (_super) {
   __extends(LinesView, _super);
   function LinesView() {
@@ -67,18 +69,18 @@ var LinesView = /** @class */function (_super) {
     // Avoid the drag cause ghost shadow
     // FIXME Better way ?
     // SVG doesn't support
-    var isSvg = zr.painter.getType() === 'svg';
-    if (!isSvg) {
+    var isCanvas = !!getCurrentCanvasPainter(api);
+    if (isCanvas) {
       zr.painter.getLayer(zlevel).clear(true);
     }
     // Config layer with motion blur
-    if (this._lastZlevel != null && !isSvg) {
+    if (this._lastZlevel != null && isCanvas) {
       zr.configLayer(this._lastZlevel, {
         motionBlur: false
       });
     }
     if (this._showEffect(seriesModel) && trailLength > 0) {
-      if (!isSvg) {
+      if (isCanvas) {
         zr.configLayer(zlevel, {
           motionBlur: true,
           lastFrameAlpha: Math.max(Math.min(trailLength / 10 + 0.9, 1), 0)
@@ -105,7 +107,7 @@ var LinesView = /** @class */function (_super) {
     this._finished = false;
   };
   LinesView.prototype.incrementalRender = function (taskParams, seriesModel, ecModel) {
-    this._lineDraw.incrementalUpdate(taskParams, seriesModel.getData());
+    this._lineDraw.incrementalUpdate(taskParams, seriesModel.getData(), getIncrementalId(seriesModel));
     this._finished = taskParams.end === seriesModel.getData().count();
   };
   LinesView.prototype.eachRendered = function (cb) {
@@ -113,9 +115,10 @@ var LinesView = /** @class */function (_super) {
   };
   LinesView.prototype.updateTransform = function (seriesModel, ecModel, api) {
     var data = seriesModel.getData();
-    var pipelineContext = seriesModel.pipelineContext;
-    if (!this._finished || pipelineContext.large || pipelineContext.progressiveRender) {
-      // TODO Don't have to do update in large mode. Only do it when there are millions of data.
+    var lineDraw = this._lineDraw;
+    if (!this._finished || !lineDraw
+    // TODO Don't have to do update in large mode. Only do it when there are millions of data.
+    || !lineDraw.updateLayout) {
       return {
         update: true
       };
@@ -130,8 +133,7 @@ var LinesView = /** @class */function (_super) {
           count: data.count()
         }, data);
       }
-      // Not in large mode
-      this._lineDraw.updateLayout();
+      lineDraw.updateLayout();
       this._clearLayer(api);
     }
   };
@@ -163,10 +165,9 @@ var LinesView = /** @class */function (_super) {
   };
   LinesView.prototype._clearLayer = function (api) {
     // Not use motion when dragging or zooming
-    var zr = api.getZr();
-    var isSvg = zr.painter.getType() === 'svg';
-    if (!isSvg && this._lastZlevel != null) {
-      zr.painter.getLayer(this._lastZlevel).clear(true);
+    var painter = getCurrentCanvasPainter(api);
+    if (painter && this._lastZlevel != null) {
+      painter.getLayer(this._lastZlevel).clear(true);
     }
   };
   LinesView.prototype.remove = function (ecModel, api) {
