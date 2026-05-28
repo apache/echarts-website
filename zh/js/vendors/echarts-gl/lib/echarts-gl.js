@@ -26,9 +26,13 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-import * as echarts from 'echarts/lib/echarts';
+import * as echartsNS from 'echarts/lib/echarts';
+import graphicGL from './util/graphicGL';
 import LayerGL from './core/LayerGL';
 import backwardCompat from './preprocessor/backwardCompat';
+import { mountEChartsNamespace } from './util/mountEChartsNamespace';
+var echarts = echartsNS;
+mountEChartsNamespace(echarts, 'graphicGL', graphicGL);
 
 function EChartsGL(zr) {
   this._layers = {};
@@ -113,14 +117,14 @@ EChartsGL.prototype.update = function (ecModel, api) {
 
         if (coordSys) {
           if (!coordSys.viewGL) {
-            console.error('Can\'t find viewGL in coordinateSystem of component ' + componentModel.id);
+            console.error("Can't find viewGL in coordinateSystem of component " + componentModel.id);
             return;
           }
 
           viewGL = coordSys.viewGL;
         } else {
           if (!componentModel.viewGL) {
-            console.error('Can\'t find viewGL of component ' + componentModel.id);
+            console.error("Can't find viewGL of component " + componentModel.id);
             return;
           }
 
@@ -141,7 +145,7 @@ EChartsGL.prototype.update = function (ecModel, api) {
 
     if (chartView.__ecgl__) {
       if (coordSys && !coordSys.viewGL && !chartView.viewGL) {
-        console.error('Can\'t find viewGL of series ' + chartView.id);
+        console.error("Can't find viewGL of series " + chartView.id);
         return;
       }
 
@@ -153,13 +157,14 @@ EChartsGL.prototype.update = function (ecModel, api) {
       setSilent(chartView.groupGL, seriesModel.get('silent'));
     }
   });
-}; // Hack original getRenderedCanvas. Will removed after new echarts released
-// TODO
+}; // Ensure GL layers are properly disposed when the painter is torn down.
+// zrender 6's native getRenderedCanvas already handles non-builtin layers
+// (including LayerGL) via renderToCanvas, so we no longer need to override it.
 
 
 echarts.registerPostInit(function (chart) {
   var zr = chart.getZr();
-  var oldDispose = zr.painter.dispose;
+  var originalDispose = zr.painter.dispose;
 
   zr.painter.dispose = function () {
     if (typeof this.eachOtherLayer === 'function') {
@@ -170,77 +175,7 @@ echarts.registerPostInit(function (chart) {
       });
     }
 
-    oldDispose.call(this);
-  };
-
-  zr.painter.getRenderedCanvas = function (opts) {
-    opts = opts || {};
-
-    if (this._singleCanvas) {
-      return this._layers[0].dom;
-    }
-
-    var canvas = document.createElement('canvas');
-    var dpr = opts.pixelRatio || this.dpr;
-    canvas.width = this.getWidth() * dpr;
-    canvas.height = this.getHeight() * dpr;
-    var ctx = canvas.getContext('2d');
-    ctx.dpr = dpr;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    if (opts.backgroundColor) {
-      ctx.fillStyle = opts.backgroundColor;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-    }
-
-    var displayList = this.storage.getDisplayList(true);
-    var scope = {};
-    var zlevel;
-    var self = this;
-
-    function findAndDrawOtherLayer(smaller, larger) {
-      var zlevelList = self._zlevelList;
-
-      if (smaller == null) {
-        smaller = -Infinity;
-      }
-
-      var intermediateLayer;
-
-      for (var i = 0; i < zlevelList.length; i++) {
-        var z = zlevelList[i];
-        var layer = self._layers[z];
-
-        if (!layer.__builtin__ && z > smaller && z < larger) {
-          intermediateLayer = layer;
-          break;
-        }
-      }
-
-      if (intermediateLayer && intermediateLayer.renderToCanvas) {
-        ctx.save();
-        intermediateLayer.renderToCanvas(ctx);
-        ctx.restore();
-      }
-    }
-
-    var layer = {
-      ctx: ctx
-    };
-
-    for (var i = 0; i < displayList.length; i++) {
-      var el = displayList[i];
-
-      if (el.zlevel !== zlevel) {
-        findAndDrawOtherLayer(zlevel, el.zlevel);
-        zlevel = el.zlevel;
-      }
-
-      this._doPaintEl(el, layer, true, null, scope);
-    }
-
-    findAndDrawOtherLayer(zlevel, Infinity);
-    return canvas;
+    originalDispose.call(this);
   };
 });
 echarts.registerPostUpdate(function (ecModel, api) {

@@ -27,11 +27,16 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import * as echarts from 'echarts/lib/echarts';
+import * as echartsNS from 'echarts/lib/echarts';
+import graphicGL from './util/graphicGL';
 import LayerGL from './core/LayerGL';
 import backwardCompat from './preprocessor/backwardCompat';
+import { mountEChartsNamespace } from './util/mountEChartsNamespace';
 
-function EChartsGL (zr) {
+var echarts = echartsNS;
+mountEChartsNamespace(echarts, 'graphicGL', graphicGL);
+
+function EChartsGL(zr) {
     this._layers = {};
 
     this._zr = zr;
@@ -54,8 +59,7 @@ EChartsGL.prototype.update = function (ecModel, api) {
         // Host on coordinate system.
         if (model.coordinateSystem && model.coordinateSystem.model) {
             zlevel = model.get('zlevel');
-        }
-        else {
+        } else {
             zlevel = model.get('zlevel');
         }
 
@@ -96,8 +100,10 @@ EChartsGL.prototype.update = function (ecModel, api) {
         if (groupGL) {
             groupGL.traverse(function (mesh) {
                 if (mesh.isRenderable && mesh.isRenderable()) {
-                    mesh.ignorePicking = mesh.$ignorePicking != null
-                        ? mesh.$ignorePicking : silent;
+                    mesh.ignorePicking =
+                        mesh.$ignorePicking != null
+                            ? mesh.$ignorePicking
+                            : silent;
                 }
             });
         }
@@ -116,14 +122,19 @@ EChartsGL.prototype.update = function (ecModel, api) {
                 var viewGL;
                 if (coordSys) {
                     if (!coordSys.viewGL) {
-                        console.error('Can\'t find viewGL in coordinateSystem of component ' + componentModel.id);
+                        console.error(
+                            "Can't find viewGL in coordinateSystem of component " +
+                            componentModel.id
+                        );
                         return;
                     }
                     viewGL = coordSys.viewGL;
-                }
-                else {
+                } else {
                     if (!componentModel.viewGL) {
-                        console.error('Can\'t find viewGL of component ' + componentModel.id);
+                        console.error(
+                            "Can't find viewGL of component " +
+                            componentModel.id
+                        );
                         return;
                     }
                     viewGL = coordSys.viewGL;
@@ -134,9 +145,8 @@ EChartsGL.prototype.update = function (ecModel, api) {
 
                 layerGL.addView(viewGL);
 
-                view.afterRender && view.afterRender(
-                    componentModel, ecModel, api, layerGL
-                );
+                view.afterRender &&
+                    view.afterRender(componentModel, ecModel, api, layerGL);
 
                 setSilent(view.groupGL, componentModel.get('silent'));
             }
@@ -147,8 +157,8 @@ EChartsGL.prototype.update = function (ecModel, api) {
         var chartView = api.getViewOfSeriesModel(seriesModel);
         var coordSys = seriesModel.coordinateSystem;
         if (chartView.__ecgl__) {
-            if ((coordSys && !coordSys.viewGL) && !chartView.viewGL) {
-                console.error('Can\'t find viewGL of series ' + chartView.id);
+            if (coordSys && !coordSys.viewGL && !chartView.viewGL) {
+                console.error("Can't find viewGL of series " + chartView.id);
                 return;
             }
             var viewGL = (coordSys && coordSys.viewGL) || chartView.viewGL;
@@ -156,21 +166,21 @@ EChartsGL.prototype.update = function (ecModel, api) {
             var layerGL = getLayerGL(seriesModel);
             layerGL.addView(viewGL);
 
-            chartView.afterRender && chartView.afterRender(
-                seriesModel, ecModel, api, layerGL
-            );
+            chartView.afterRender &&
+                chartView.afterRender(seriesModel, ecModel, api, layerGL);
 
             setSilent(chartView.groupGL, seriesModel.get('silent'));
         }
     });
 };
 
-// Hack original getRenderedCanvas. Will removed after new echarts released
-// TODO
+// Ensure GL layers are properly disposed when the painter is torn down.
+// zrender 6's native getRenderedCanvas already handles non-builtin layers
+// (including LayerGL) via renderToCanvas, so we no longer need to override it.
 
 echarts.registerPostInit(function (chart) {
     var zr = chart.getZr();
-    var oldDispose = zr.painter.dispose;
+    var originalDispose = zr.painter.dispose;
 
     zr.painter.dispose = function () {
         if (typeof this.eachOtherLayer === 'function') {
@@ -180,81 +190,18 @@ echarts.registerPostInit(function (chart) {
                 }
             });
         }
-        oldDispose.call(this);
-    }
-    zr.painter.getRenderedCanvas = function (opts) {
-        opts = opts || {};
-        if (this._singleCanvas) {
-            return this._layers[0].dom;
-        }
-
-        var canvas = document.createElement('canvas');
-        var dpr = opts.pixelRatio || this.dpr;
-        canvas.width = this.getWidth() * dpr;
-        canvas.height = this.getHeight() * dpr;
-        var ctx = canvas.getContext('2d');
-        ctx.dpr = dpr;
-
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        if (opts.backgroundColor) {
-            ctx.fillStyle = opts.backgroundColor;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-        }
-
-        var displayList = this.storage.getDisplayList(true);
-
-        var scope = {};
-        var zlevel;
-
-        var self = this;
-        function findAndDrawOtherLayer(smaller, larger) {
-            var zlevelList = self._zlevelList;
-            if (smaller == null) {
-                smaller = -Infinity;
-            }
-            var intermediateLayer;
-            for (var i = 0; i < zlevelList.length; i++) {
-                var z = zlevelList[i];
-                var layer = self._layers[z];
-                if (!layer.__builtin__ && z > smaller && z < larger) {
-                    intermediateLayer = layer;
-                    break;
-                }
-            }
-            if (intermediateLayer && intermediateLayer.renderToCanvas) {
-                ctx.save();
-                intermediateLayer.renderToCanvas(ctx);
-                ctx.restore();
-            }
-        }
-        var layer = {
-            ctx: ctx
-        };
-        for (var i = 0; i < displayList.length; i++) {
-            var el = displayList[i];
-
-            if (el.zlevel !== zlevel) {
-                findAndDrawOtherLayer(zlevel, el.zlevel);
-                zlevel = el.zlevel;
-            }
-            this._doPaintEl(el, layer, true, null, scope);
-        }
-
-        findAndDrawOtherLayer(zlevel, Infinity);
-
-        return canvas;
+        originalDispose.call(this);
     };
 });
 
 echarts.registerPostUpdate(function (ecModel, api) {
     var zr = api.getZr();
 
-    var egl = zr.__egl = zr.__egl || new EChartsGL(zr);
+    var egl = (zr.__egl = zr.__egl || new EChartsGL(zr));
 
     egl.update(ecModel, api);
 });
 
 echarts.registerPreprocessor(backwardCompat);
-
 
 export default EChartsGL;

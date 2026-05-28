@@ -1,7 +1,7 @@
 {
   "name": "echarts-gl",
   "description": "Extension pack of ECharts providing 3D plots and globe visualization",
-  "version": "2.0.9",
+  "version": "2.1.0",
   "maintainers": [
     {
       "name": "Yi Shen"
@@ -15,13 +15,14 @@
   },
   "dependencies": {
     "claygl": "^1.2.1",
-    "zrender": "^5.1.1"
+    "zrender": "^5.1.1 || ^6.0.0"
   },
   "peerDependencies": {
-    "echarts": "^5.1.2"
+    "echarts": "^5.1.2 || ^6.0.0"
   },
   "main": "dist/echarts-gl.js",
   "module": "index.js",
+  "license": "MIT",
   "repository": "https://github.com/ecomfe/echarts-gl",
   "sideEffects": [
     "lib/chart/*.js",
@@ -41,7 +42,7 @@
     "babel-plugin-module-resolver": "^4.1.0",
     "benchmark": "^2.1.3",
     "case-sensitive-paths-webpack-plugin": "^2.1.1",
-    "echarts": "^5.1.2",
+    "echarts": "^5.1.2 || ^6.0.0",
     "fs-extra": "^4.0.2",
     "glob": "^7.1.1",
     "http-server": "^0.10.0",

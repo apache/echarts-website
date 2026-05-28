@@ -172,7 +172,17 @@ export default echarts.ChartView.extend({
         lineMesh.off('mouseout');
         lineMesh.on('mousemove', function (e) {
             var value = coordSys.pointToData(e.point.array);
-            var dataIndex = data.indicesOfNearest('x', value[0])[0];
+
+            // Method `indicesOfNearest` was moved from `SeriesData` to `SeriesModel` since echarts@6.0.0.
+            var dataIndex;
+            if (seriesModel.indicesOfNearest) {
+                dataIndex = seriesModel.indicesOfNearest('x', 'x', value[0])[0];
+            }
+            else {
+                // For backward compatible with echarts@5.6.0 and earlier.
+                dataIndex = data.indicesOfNearest('x', value[0])[0];
+            }
+
             if (dataIndex !== lastDataIndex) {
                 // this._downplay(lastDataIndex);
                 // this._highlight(dataIndex);

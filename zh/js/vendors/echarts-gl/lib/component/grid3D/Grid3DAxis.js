@@ -106,7 +106,9 @@ Grid3DAxis.prototype.update = function (grid3DModel, axisLabelSurface, api) {
     var labels = axis.getViewLabels();
 
     for (var i = 0; i < labels.length; i++) {
-      var tickValue = labels[i].tickValue;
+      var tickValue = echarts.util.isObject(labels[i].tick) ? labels[i].tick.value // Since echarts@6.1.0 .
+      : labels[i].tickValue; // Otherwise, remain backward compatible.
+
       var formattedLabel = labels[i].formattedLabel;
       var rawLabel = labels[i].rawLabel;
       var tickCoord = axis.dataToCoord(tickValue);

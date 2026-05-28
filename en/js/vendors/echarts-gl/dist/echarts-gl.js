@@ -14,7 +14,7 @@ return /******/ (() => { // webpackBootstrap
 
 /***/ "./src/export/all.js":
 /*!*****************************************!*\
-  !*** ./src/export/all.js + 360 modules ***!
+  !*** ./src/export/all.js + 362 modules ***!
   \*****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -569,2006 +569,6 @@ core_util.extend(Base.prototype, mixin_notifier);
 
 /* harmony default export */ const core_Base = (Base);
 
-;// CONCATENATED MODULE: ./node_modules/claygl/src/core/GLInfo.js
-var EXTENSION_LIST = [
-    'OES_texture_float',
-    'OES_texture_half_float',
-    'OES_texture_float_linear',
-    'OES_texture_half_float_linear',
-    'OES_standard_derivatives',
-    'OES_vertex_array_object',
-    'OES_element_index_uint',
-    'WEBGL_compressed_texture_s3tc',
-    'WEBGL_depth_texture',
-    'EXT_texture_filter_anisotropic',
-    'EXT_shader_texture_lod',
-    'WEBGL_draw_buffers',
-    'EXT_frag_depth',
-    'EXT_sRGB',
-    'ANGLE_instanced_arrays'
-];
-
-var PARAMETER_NAMES = [
-    'MAX_TEXTURE_SIZE',
-    'MAX_CUBE_MAP_TEXTURE_SIZE'
-];
-
-function GLInfo(_gl) {
-    var extensions = {};
-    var parameters = {};
-
-    // Get webgl extension
-    for (var i = 0; i < EXTENSION_LIST.length; i++) {
-        var extName = EXTENSION_LIST[i];
-        createExtension(extName);
-    }
-    // Get parameters
-    for (var i = 0; i < PARAMETER_NAMES.length; i++) {
-        var name = PARAMETER_NAMES[i];
-        parameters[name] = _gl.getParameter(_gl[name]);
-    }
-
-    this.getExtension = function (name) {
-        if (!(name in extensions)) {
-            createExtension(name);
-        }
-        return extensions[name];
-    };
-
-    this.getParameter = function (name) {
-        return parameters[name];
-    };
-
-    function createExtension(name) {
-        if (_gl.getExtension) {
-            var ext = _gl.getExtension(name);
-            if (!ext) {
-                ext = _gl.getExtension('MOZ_' + name);
-            }
-            if (!ext) {
-                ext = _gl.getExtension('WEBKIT_' + name);
-            }
-            extensions[name] = ext;
-        }
-    }
-}
-
-/* harmony default export */ const core_GLInfo = (GLInfo);
-
-;// CONCATENATED MODULE: ./node_modules/claygl/src/core/glenum.js
-/**
- * @namespace clay.core.glenum
- * @see http://www.khronos.org/registry/webgl/specs/latest/1.0/#5.14
- */
-/* harmony default export */ const glenum = ({
-    /* ClearBufferMask */
-    DEPTH_BUFFER_BIT               : 0x00000100,
-    STENCIL_BUFFER_BIT             : 0x00000400,
-    COLOR_BUFFER_BIT               : 0x00004000,
-
-    /* BeginMode */
-    POINTS                         : 0x0000,
-    LINES                          : 0x0001,
-    LINE_LOOP                      : 0x0002,
-    LINE_STRIP                     : 0x0003,
-    TRIANGLES                      : 0x0004,
-    TRIANGLE_STRIP                 : 0x0005,
-    TRIANGLE_FAN                   : 0x0006,
-
-    /* AlphaFunction (not supported in ES20) */
-    /*      NEVER */
-    /*      LESS */
-    /*      EQUAL */
-    /*      LEQUAL */
-    /*      GREATER */
-    /*      NOTEQUAL */
-    /*      GEQUAL */
-    /*      ALWAYS */
-
-    /* BlendingFactorDest */
-    ZERO                           : 0,
-    ONE                            : 1,
-    SRC_COLOR                      : 0x0300,
-    ONE_MINUS_SRC_COLOR            : 0x0301,
-    SRC_ALPHA                      : 0x0302,
-    ONE_MINUS_SRC_ALPHA            : 0x0303,
-    DST_ALPHA                      : 0x0304,
-    ONE_MINUS_DST_ALPHA            : 0x0305,
-
-    /* BlendingFactorSrc */
-    /*      ZERO */
-    /*      ONE */
-    DST_COLOR                      : 0x0306,
-    ONE_MINUS_DST_COLOR            : 0x0307,
-    SRC_ALPHA_SATURATE             : 0x0308,
-    /*      SRC_ALPHA */
-    /*      ONE_MINUS_SRC_ALPHA */
-    /*      DST_ALPHA */
-    /*      ONE_MINUS_DST_ALPHA */
-
-    /* BlendEquationSeparate */
-    FUNC_ADD                       : 0x8006,
-    BLEND_EQUATION                 : 0x8009,
-    BLEND_EQUATION_RGB             : 0x8009, /* same as BLEND_EQUATION */
-    BLEND_EQUATION_ALPHA           : 0x883D,
-
-    /* BlendSubtract */
-    FUNC_SUBTRACT                  : 0x800A,
-    FUNC_REVERSE_SUBTRACT          : 0x800B,
-
-    /* Separate Blend Functions */
-    BLEND_DST_RGB                  : 0x80C8,
-    BLEND_SRC_RGB                  : 0x80C9,
-    BLEND_DST_ALPHA                : 0x80CA,
-    BLEND_SRC_ALPHA                : 0x80CB,
-    CONSTANT_COLOR                 : 0x8001,
-    ONE_MINUS_CONSTANT_COLOR       : 0x8002,
-    CONSTANT_ALPHA                 : 0x8003,
-    ONE_MINUS_CONSTANT_ALPHA       : 0x8004,
-    BLEND_COLOR                    : 0x8005,
-
-    /* Buffer Objects */
-    ARRAY_BUFFER                   : 0x8892,
-    ELEMENT_ARRAY_BUFFER           : 0x8893,
-    ARRAY_BUFFER_BINDING           : 0x8894,
-    ELEMENT_ARRAY_BUFFER_BINDING   : 0x8895,
-
-    STREAM_DRAW                    : 0x88E0,
-    STATIC_DRAW                    : 0x88E4,
-    DYNAMIC_DRAW                   : 0x88E8,
-
-    BUFFER_SIZE                    : 0x8764,
-    BUFFER_USAGE                   : 0x8765,
-
-    CURRENT_VERTEX_ATTRIB          : 0x8626,
-
-    /* CullFaceMode */
-    FRONT                          : 0x0404,
-    BACK                           : 0x0405,
-    FRONT_AND_BACK                 : 0x0408,
-
-    /* DepthFunction */
-    /*      NEVER */
-    /*      LESS */
-    /*      EQUAL */
-    /*      LEQUAL */
-    /*      GREATER */
-    /*      NOTEQUAL */
-    /*      GEQUAL */
-    /*      ALWAYS */
-
-    /* EnableCap */
-    /* TEXTURE_2D */
-    CULL_FACE                      : 0x0B44,
-    BLEND                          : 0x0BE2,
-    DITHER                         : 0x0BD0,
-    STENCIL_TEST                   : 0x0B90,
-    DEPTH_TEST                     : 0x0B71,
-    SCISSOR_TEST                   : 0x0C11,
-    POLYGON_OFFSET_FILL            : 0x8037,
-    SAMPLE_ALPHA_TO_COVERAGE       : 0x809E,
-    SAMPLE_COVERAGE                : 0x80A0,
-
-    /* ErrorCode */
-    NO_ERROR                       : 0,
-    INVALID_ENUM                   : 0x0500,
-    INVALID_VALUE                  : 0x0501,
-    INVALID_OPERATION              : 0x0502,
-    OUT_OF_MEMORY                  : 0x0505,
-
-    /* FrontFaceDirection */
-    CW                             : 0x0900,
-    CCW                            : 0x0901,
-
-    /* GetPName */
-    LINE_WIDTH                     : 0x0B21,
-    ALIASED_POINT_SIZE_RANGE       : 0x846D,
-    ALIASED_LINE_WIDTH_RANGE       : 0x846E,
-    CULL_FACE_MODE                 : 0x0B45,
-    FRONT_FACE                     : 0x0B46,
-    DEPTH_RANGE                    : 0x0B70,
-    DEPTH_WRITEMASK                : 0x0B72,
-    DEPTH_CLEAR_VALUE              : 0x0B73,
-    DEPTH_FUNC                     : 0x0B74,
-    STENCIL_CLEAR_VALUE            : 0x0B91,
-    STENCIL_FUNC                   : 0x0B92,
-    STENCIL_FAIL                   : 0x0B94,
-    STENCIL_PASS_DEPTH_FAIL        : 0x0B95,
-    STENCIL_PASS_DEPTH_PASS        : 0x0B96,
-    STENCIL_REF                    : 0x0B97,
-    STENCIL_VALUE_MASK             : 0x0B93,
-    STENCIL_WRITEMASK              : 0x0B98,
-    STENCIL_BACK_FUNC              : 0x8800,
-    STENCIL_BACK_FAIL              : 0x8801,
-    STENCIL_BACK_PASS_DEPTH_FAIL   : 0x8802,
-    STENCIL_BACK_PASS_DEPTH_PASS   : 0x8803,
-    STENCIL_BACK_REF               : 0x8CA3,
-    STENCIL_BACK_VALUE_MASK        : 0x8CA4,
-    STENCIL_BACK_WRITEMASK         : 0x8CA5,
-    VIEWPORT                       : 0x0BA2,
-    SCISSOR_BOX                    : 0x0C10,
-    /*      SCISSOR_TEST */
-    COLOR_CLEAR_VALUE              : 0x0C22,
-    COLOR_WRITEMASK                : 0x0C23,
-    UNPACK_ALIGNMENT               : 0x0CF5,
-    PACK_ALIGNMENT                 : 0x0D05,
-    MAX_TEXTURE_SIZE               : 0x0D33,
-    MAX_VIEWPORT_DIMS              : 0x0D3A,
-    SUBPIXEL_BITS                  : 0x0D50,
-    RED_BITS                       : 0x0D52,
-    GREEN_BITS                     : 0x0D53,
-    BLUE_BITS                      : 0x0D54,
-    ALPHA_BITS                     : 0x0D55,
-    DEPTH_BITS                     : 0x0D56,
-    STENCIL_BITS                   : 0x0D57,
-    POLYGON_OFFSET_UNITS           : 0x2A00,
-    /*      POLYGON_OFFSET_FILL */
-    POLYGON_OFFSET_FACTOR          : 0x8038,
-    TEXTURE_BINDING_2D             : 0x8069,
-    SAMPLE_BUFFERS                 : 0x80A8,
-    SAMPLES                        : 0x80A9,
-    SAMPLE_COVERAGE_VALUE          : 0x80AA,
-    SAMPLE_COVERAGE_INVERT         : 0x80AB,
-
-    /* GetTextureParameter */
-    /*      TEXTURE_MAG_FILTER */
-    /*      TEXTURE_MIN_FILTER */
-    /*      TEXTURE_WRAP_S */
-    /*      TEXTURE_WRAP_T */
-
-    COMPRESSED_TEXTURE_FORMATS     : 0x86A3,
-
-    /* HintMode */
-    DONT_CARE                      : 0x1100,
-    FASTEST                        : 0x1101,
-    NICEST                         : 0x1102,
-
-    /* HintTarget */
-    GENERATE_MIPMAP_HINT            : 0x8192,
-
-    /* DataType */
-    BYTE                           : 0x1400,
-    UNSIGNED_BYTE                  : 0x1401,
-    SHORT                          : 0x1402,
-    UNSIGNED_SHORT                 : 0x1403,
-    INT                            : 0x1404,
-    UNSIGNED_INT                   : 0x1405,
-    FLOAT                          : 0x1406,
-
-    /* PixelFormat */
-    DEPTH_COMPONENT                : 0x1902,
-    ALPHA                          : 0x1906,
-    RGB                            : 0x1907,
-    RGBA                           : 0x1908,
-    LUMINANCE                      : 0x1909,
-    LUMINANCE_ALPHA                : 0x190A,
-
-    /* PixelType */
-    /*      UNSIGNED_BYTE */
-    UNSIGNED_SHORT_4_4_4_4         : 0x8033,
-    UNSIGNED_SHORT_5_5_5_1         : 0x8034,
-    UNSIGNED_SHORT_5_6_5           : 0x8363,
-
-    /* Shaders */
-    FRAGMENT_SHADER                  : 0x8B30,
-    VERTEX_SHADER                    : 0x8B31,
-    MAX_VERTEX_ATTRIBS               : 0x8869,
-    MAX_VERTEX_UNIFORM_VECTORS       : 0x8DFB,
-    MAX_VARYING_VECTORS              : 0x8DFC,
-    MAX_COMBINED_TEXTURE_IMAGE_UNITS : 0x8B4D,
-    MAX_VERTEX_TEXTURE_IMAGE_UNITS   : 0x8B4C,
-    MAX_TEXTURE_IMAGE_UNITS          : 0x8872,
-    MAX_FRAGMENT_UNIFORM_VECTORS     : 0x8DFD,
-    SHADER_TYPE                      : 0x8B4F,
-    DELETE_STATUS                    : 0x8B80,
-    LINK_STATUS                      : 0x8B82,
-    VALIDATE_STATUS                  : 0x8B83,
-    ATTACHED_SHADERS                 : 0x8B85,
-    ACTIVE_UNIFORMS                  : 0x8B86,
-    ACTIVE_ATTRIBUTES                : 0x8B89,
-    SHADING_LANGUAGE_VERSION         : 0x8B8C,
-    CURRENT_PROGRAM                  : 0x8B8D,
-
-    /* StencilFunction */
-    NEVER                          : 0x0200,
-    LESS                           : 0x0201,
-    EQUAL                          : 0x0202,
-    LEQUAL                         : 0x0203,
-    GREATER                        : 0x0204,
-    NOTEQUAL                       : 0x0205,
-    GEQUAL                         : 0x0206,
-    ALWAYS                         : 0x0207,
-
-    /* StencilOp */
-    /*      ZERO */
-    KEEP                           : 0x1E00,
-    REPLACE                        : 0x1E01,
-    INCR                           : 0x1E02,
-    DECR                           : 0x1E03,
-    INVERT                         : 0x150A,
-    INCR_WRAP                      : 0x8507,
-    DECR_WRAP                      : 0x8508,
-
-    /* StringName */
-    VENDOR                         : 0x1F00,
-    RENDERER                       : 0x1F01,
-    VERSION                        : 0x1F02,
-
-    /* TextureMagFilter */
-    NEAREST                        : 0x2600,
-    LINEAR                         : 0x2601,
-
-    /* TextureMinFilter */
-    /*      NEAREST */
-    /*      LINEAR */
-    NEAREST_MIPMAP_NEAREST         : 0x2700,
-    LINEAR_MIPMAP_NEAREST          : 0x2701,
-    NEAREST_MIPMAP_LINEAR          : 0x2702,
-    LINEAR_MIPMAP_LINEAR           : 0x2703,
-
-    /* TextureParameterName */
-    TEXTURE_MAG_FILTER             : 0x2800,
-    TEXTURE_MIN_FILTER             : 0x2801,
-    TEXTURE_WRAP_S                 : 0x2802,
-    TEXTURE_WRAP_T                 : 0x2803,
-
-    /* TextureTarget */
-    TEXTURE_2D                     : 0x0DE1,
-    TEXTURE                        : 0x1702,
-
-    TEXTURE_CUBE_MAP               : 0x8513,
-    TEXTURE_BINDING_CUBE_MAP       : 0x8514,
-    TEXTURE_CUBE_MAP_POSITIVE_X    : 0x8515,
-    TEXTURE_CUBE_MAP_NEGATIVE_X    : 0x8516,
-    TEXTURE_CUBE_MAP_POSITIVE_Y    : 0x8517,
-    TEXTURE_CUBE_MAP_NEGATIVE_Y    : 0x8518,
-    TEXTURE_CUBE_MAP_POSITIVE_Z    : 0x8519,
-    TEXTURE_CUBE_MAP_NEGATIVE_Z    : 0x851A,
-    MAX_CUBE_MAP_TEXTURE_SIZE      : 0x851C,
-
-    /* TextureUnit */
-    TEXTURE0                       : 0x84C0,
-    TEXTURE1                       : 0x84C1,
-    TEXTURE2                       : 0x84C2,
-    TEXTURE3                       : 0x84C3,
-    TEXTURE4                       : 0x84C4,
-    TEXTURE5                       : 0x84C5,
-    TEXTURE6                       : 0x84C6,
-    TEXTURE7                       : 0x84C7,
-    TEXTURE8                       : 0x84C8,
-    TEXTURE9                       : 0x84C9,
-    TEXTURE10                      : 0x84CA,
-    TEXTURE11                      : 0x84CB,
-    TEXTURE12                      : 0x84CC,
-    TEXTURE13                      : 0x84CD,
-    TEXTURE14                      : 0x84CE,
-    TEXTURE15                      : 0x84CF,
-    TEXTURE16                      : 0x84D0,
-    TEXTURE17                      : 0x84D1,
-    TEXTURE18                      : 0x84D2,
-    TEXTURE19                      : 0x84D3,
-    TEXTURE20                      : 0x84D4,
-    TEXTURE21                      : 0x84D5,
-    TEXTURE22                      : 0x84D6,
-    TEXTURE23                      : 0x84D7,
-    TEXTURE24                      : 0x84D8,
-    TEXTURE25                      : 0x84D9,
-    TEXTURE26                      : 0x84DA,
-    TEXTURE27                      : 0x84DB,
-    TEXTURE28                      : 0x84DC,
-    TEXTURE29                      : 0x84DD,
-    TEXTURE30                      : 0x84DE,
-    TEXTURE31                      : 0x84DF,
-    ACTIVE_TEXTURE                 : 0x84E0,
-
-    /* TextureWrapMode */
-    REPEAT                         : 0x2901,
-    CLAMP_TO_EDGE                  : 0x812F,
-    MIRRORED_REPEAT                : 0x8370,
-
-    /* Uniform Types */
-    FLOAT_VEC2                     : 0x8B50,
-    FLOAT_VEC3                     : 0x8B51,
-    FLOAT_VEC4                     : 0x8B52,
-    INT_VEC2                       : 0x8B53,
-    INT_VEC3                       : 0x8B54,
-    INT_VEC4                       : 0x8B55,
-    BOOL                           : 0x8B56,
-    BOOL_VEC2                      : 0x8B57,
-    BOOL_VEC3                      : 0x8B58,
-    BOOL_VEC4                      : 0x8B59,
-    FLOAT_MAT2                     : 0x8B5A,
-    FLOAT_MAT3                     : 0x8B5B,
-    FLOAT_MAT4                     : 0x8B5C,
-    SAMPLER_2D                     : 0x8B5E,
-    SAMPLER_CUBE                   : 0x8B60,
-
-    /* Vertex Arrays */
-    VERTEX_ATTRIB_ARRAY_ENABLED        : 0x8622,
-    VERTEX_ATTRIB_ARRAY_SIZE           : 0x8623,
-    VERTEX_ATTRIB_ARRAY_STRIDE         : 0x8624,
-    VERTEX_ATTRIB_ARRAY_TYPE           : 0x8625,
-    VERTEX_ATTRIB_ARRAY_NORMALIZED     : 0x886A,
-    VERTEX_ATTRIB_ARRAY_POINTER        : 0x8645,
-    VERTEX_ATTRIB_ARRAY_BUFFER_BINDING : 0x889F,
-
-    /* Shader Source */
-    COMPILE_STATUS                 : 0x8B81,
-
-    /* Shader Precision-Specified Types */
-    LOW_FLOAT                      : 0x8DF0,
-    MEDIUM_FLOAT                   : 0x8DF1,
-    HIGH_FLOAT                     : 0x8DF2,
-    LOW_INT                        : 0x8DF3,
-    MEDIUM_INT                     : 0x8DF4,
-    HIGH_INT                       : 0x8DF5,
-
-    /* Framebuffer Object. */
-    FRAMEBUFFER                    : 0x8D40,
-    RENDERBUFFER                   : 0x8D41,
-
-    RGBA4                          : 0x8056,
-    RGB5_A1                        : 0x8057,
-    RGB565                         : 0x8D62,
-    DEPTH_COMPONENT16              : 0x81A5,
-    STENCIL_INDEX                  : 0x1901,
-    STENCIL_INDEX8                 : 0x8D48,
-    DEPTH_STENCIL                  : 0x84F9,
-
-    RENDERBUFFER_WIDTH             : 0x8D42,
-    RENDERBUFFER_HEIGHT            : 0x8D43,
-    RENDERBUFFER_INTERNAL_FORMAT   : 0x8D44,
-    RENDERBUFFER_RED_SIZE          : 0x8D50,
-    RENDERBUFFER_GREEN_SIZE        : 0x8D51,
-    RENDERBUFFER_BLUE_SIZE         : 0x8D52,
-    RENDERBUFFER_ALPHA_SIZE        : 0x8D53,
-    RENDERBUFFER_DEPTH_SIZE        : 0x8D54,
-    RENDERBUFFER_STENCIL_SIZE      : 0x8D55,
-
-    FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE           : 0x8CD0,
-    FRAMEBUFFER_ATTACHMENT_OBJECT_NAME           : 0x8CD1,
-    FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL         : 0x8CD2,
-    FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE : 0x8CD3,
-
-    COLOR_ATTACHMENT0              : 0x8CE0,
-    DEPTH_ATTACHMENT               : 0x8D00,
-    STENCIL_ATTACHMENT             : 0x8D20,
-    DEPTH_STENCIL_ATTACHMENT       : 0x821A,
-
-    NONE                           : 0,
-
-    FRAMEBUFFER_COMPLETE                      : 0x8CD5,
-    FRAMEBUFFER_INCOMPLETE_ATTACHMENT         : 0x8CD6,
-    FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT : 0x8CD7,
-    FRAMEBUFFER_INCOMPLETE_DIMENSIONS         : 0x8CD9,
-    FRAMEBUFFER_UNSUPPORTED                   : 0x8CDD,
-
-    FRAMEBUFFER_BINDING            : 0x8CA6,
-    RENDERBUFFER_BINDING           : 0x8CA7,
-    MAX_RENDERBUFFER_SIZE          : 0x84E8,
-
-    INVALID_FRAMEBUFFER_OPERATION  : 0x0506,
-
-    /* WebGL-specific enums */
-    UNPACK_FLIP_Y_WEBGL            : 0x9240,
-    UNPACK_PREMULTIPLY_ALPHA_WEBGL : 0x9241,
-    CONTEXT_LOST_WEBGL             : 0x9242,
-    UNPACK_COLORSPACE_CONVERSION_WEBGL : 0x9243,
-    BROWSER_DEFAULT_WEBGL          : 0x9244,
-});
-
-;// CONCATENATED MODULE: ./node_modules/claygl/src/core/request.js
-function get(options) {
-
-    var xhr = new XMLHttpRequest();
-
-    xhr.open('get', options.url);
-    // With response type set browser can get and put binary data
-    // https://developer.mozilla.org/en-US/docs/DOM/XMLHttpRequest/Sending_and_Receiving_Binary_Data
-    // Default is text, and it can be set
-    // arraybuffer, blob, document, json, text
-    xhr.responseType = options.responseType || 'text';
-
-    if (options.onprogress) {
-        //https://developer.mozilla.org/en-US/docs/DOM/XMLHttpRequest/Using_XMLHttpRequest
-        xhr.onprogress = function(e) {
-            if (e.lengthComputable) {
-                var percent = e.loaded / e.total;
-                options.onprogress(percent, e.loaded, e.total);
-            }
-            else {
-                options.onprogress(null);
-            }
-        };
-    }
-    xhr.onload = function(e) {
-        if (xhr.status >= 400) {
-            options.onerror && options.onerror();
-        }
-        else {
-            options.onload && options.onload(xhr.response);
-        }
-    };
-    if (options.onerror) {
-        xhr.onerror = options.onerror;
-    }
-    xhr.send(null);
-}
-
-/* harmony default export */ const request = ({
-    get: get
-});
-
-;// CONCATENATED MODULE: ./node_modules/claygl/src/core/vendor.js
-
-
-var supportWebGL;
-
-var vendor = {};
-
-/**
- * If support WebGL
- * @return {boolean}
- */
-vendor.supportWebGL = function () {
-    if (supportWebGL == null) {
-        try {
-            var canvas = document.createElement('canvas');
-            var gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-            if (!gl) {
-                throw new Error();
-            }
-        }
-        catch (e) {
-            supportWebGL = false;
-        }
-
-    }
-    return supportWebGL;
-};
-
-vendor.Int8Array = typeof Int8Array === 'undefined' ? Array : Int8Array;
-
-vendor.Uint8Array = typeof Uint8Array === 'undefined' ? Array : Uint8Array;
-
-vendor.Uint16Array = typeof Uint16Array === 'undefined' ? Array : Uint16Array;
-
-vendor.Uint32Array = typeof Uint32Array === 'undefined' ? Array : Uint32Array;
-
-vendor.Int16Array = typeof Int16Array === 'undefined' ? Array : Int16Array;
-
-vendor.Float32Array = typeof Float32Array === 'undefined' ? Array : Float32Array;
-
-vendor.Float64Array = typeof Float64Array === 'undefined' ? Array : Float64Array;
-
-var g = {};
-if (typeof window !== 'undefined') {
-    g = window;
-}
-else if (typeof __webpack_require__.g !== 'undefined') {
-    g = __webpack_require__.g;
-}
-
-
-vendor.requestAnimationFrame = g.requestAnimationFrame
-    || g.msRequestAnimationFrame
-    || g.mozRequestAnimationFrame
-    || g.webkitRequestAnimationFrame
-    || function (func){ setTimeout(func, 16); };
-
-vendor.createCanvas = function () {
-    return document.createElement('canvas');
-};
-
-vendor.createImage = function () {
-    return new g.Image();
-};
-
-vendor.request = {
-    get: request.get
-};
-
-vendor.addEventListener = function (dom, type, func, useCapture) {
-    dom.addEventListener(type, func, useCapture);
-};
-
-vendor.removeEventListener = function (dom, type, func) {
-    dom.removeEventListener(type, func);
-};
-
-/* harmony default export */ const core_vendor = (vendor);
-
-;// CONCATENATED MODULE: ./node_modules/claygl/src/core/LinkedList.js
-/**
- * Simple double linked list. Compared with array, it has O(1) remove operation.
- * @constructor
- * @alias clay.core.LinkedList
- */
-var LinkedList = function () {
-
-    /**
-     * @type {clay.core.LinkedList.Entry}
-     */
-    this.head = null;
-
-    /**
-     * @type {clay.core.LinkedList.Entry}
-     */
-    this.tail = null;
-
-    this._length = 0;
-};
-
-/**
- * Insert a new value at the tail
- * @param  {} val
- * @return {clay.core.LinkedList.Entry}
- */
-LinkedList.prototype.insert = function (val) {
-    var entry = new LinkedList.Entry(val);
-    this.insertEntry(entry);
-    return entry;
-};
-
-/**
- * Insert a new value at idx
- * @param {number} idx
- * @param  {} val
- * @return {clay.core.LinkedList.Entry}
- */
-LinkedList.prototype.insertAt = function (idx, val) {
-    if (idx < 0) {
-        return;
-    }
-    var next = this.head;
-    var cursor = 0;
-    while (next && cursor != idx) {
-        next = next.next;
-        cursor++;
-    }
-    if (next) {
-        var entry = new LinkedList.Entry(val);
-        var prev = next.prev;
-        if (!prev) { //next is head
-            this.head = entry;
-        }
-        else {
-            prev.next = entry;
-            entry.prev = prev;
-        }
-        entry.next = next;
-        next.prev = entry;
-    }
-    else {
-        this.insert(val);
-    }
-};
-
-LinkedList.prototype.insertBeforeEntry = function (val, next) {
-    var entry = new LinkedList.Entry(val);
-    var prev = next.prev;
-    if (!prev) { //next is head
-        this.head = entry;
-    }
-    else {
-        prev.next = entry;
-        entry.prev = prev;
-    }
-    entry.next = next;
-    next.prev = entry;
-
-    this._length++;
-};
-
-/**
- * Insert an entry at the tail
- * @param  {clay.core.LinkedList.Entry} entry
- */
-LinkedList.prototype.insertEntry = function (entry) {
-    if (!this.head) {
-        this.head = this.tail = entry;
-    }
-    else {
-        this.tail.next = entry;
-        entry.prev = this.tail;
-        this.tail = entry;
-    }
-    this._length++;
-};
-
-/**
- * Remove entry.
- * @param  {clay.core.LinkedList.Entry} entry
- */
-LinkedList.prototype.remove = function (entry) {
-    var prev = entry.prev;
-    var next = entry.next;
-    if (prev) {
-        prev.next = next;
-    }
-    else {
-        // Is head
-        this.head = next;
-    }
-    if (next) {
-        next.prev = prev;
-    }
-    else {
-        // Is tail
-        this.tail = prev;
-    }
-    entry.next = entry.prev = null;
-    this._length--;
-};
-
-/**
- * Remove entry at index.
- * @param  {number} idx
- * @return {}
- */
-LinkedList.prototype.removeAt = function (idx) {
-    if (idx < 0) {
-        return;
-    }
-    var curr = this.head;
-    var cursor = 0;
-    while (curr && cursor != idx) {
-        curr = curr.next;
-        cursor++;
-    }
-    if (curr) {
-        this.remove(curr);
-        return curr.value;
-    }
-};
-/**
- * Get head value
- * @return {}
- */
-LinkedList.prototype.getHead = function () {
-    if (this.head) {
-        return this.head.value;
-    }
-};
-/**
- * Get tail value
- * @return {}
- */
-LinkedList.prototype.getTail = function () {
-    if (this.tail) {
-        return this.tail.value;
-    }
-};
-/**
- * Get value at idx
- * @param {number} idx
- * @return {}
- */
-LinkedList.prototype.getAt = function (idx) {
-    if (idx < 0) {
-        return;
-    }
-    var curr = this.head;
-    var cursor = 0;
-    while (curr && cursor != idx) {
-        curr = curr.next;
-        cursor++;
-    }
-    return curr.value;
-};
-
-/**
- * @param  {} value
- * @return {number}
- */
-LinkedList.prototype.indexOf = function (value) {
-    var curr = this.head;
-    var cursor = 0;
-    while (curr) {
-        if (curr.value === value) {
-            return cursor;
-        }
-        curr = curr.next;
-        cursor++;
-    }
-};
-
-/**
- * @return {number}
- */
-LinkedList.prototype.length = function () {
-    return this._length;
-};
-
-/**
- * If list is empty
- */
-LinkedList.prototype.isEmpty = function () {
-    return this._length === 0;
-};
-
-/**
- * @param  {Function} cb
- * @param  {} context
- */
-LinkedList.prototype.forEach = function (cb, context) {
-    var curr = this.head;
-    var idx = 0;
-    var haveContext = typeof(context) != 'undefined';
-    while (curr) {
-        if (haveContext) {
-            cb.call(context, curr.value, idx);
-        }
-        else {
-            cb(curr.value, idx);
-        }
-        curr = curr.next;
-        idx++;
-    }
-};
-
-/**
- * Clear the list
- */
-LinkedList.prototype.clear = function () {
-    this.tail = this.head = null;
-    this._length = 0;
-};
-
-/**
- * @constructor
- * @param {} val
- */
-LinkedList.Entry = function (val) {
-    /**
-     * @type {}
-     */
-    this.value = val;
-
-    /**
-     * @type {clay.core.LinkedList.Entry}
-     */
-    this.next = null;
-
-    /**
-     * @type {clay.core.LinkedList.Entry}
-     */
-    this.prev = null;
-};
-
-/* harmony default export */ const core_LinkedList = (LinkedList);
-
-;// CONCATENATED MODULE: ./node_modules/claygl/src/core/LRU.js
-
-
-/**
- * LRU Cache
- * @constructor
- * @alias clay.core.LRU
- */
-var LRU = function (maxSize) {
-
-    this._list = new core_LinkedList();
-
-    this._map = {};
-
-    this._maxSize = maxSize || 10;
-};
-
-/**
- * Set cache max size
- * @param {number} size
- */
-LRU.prototype.setMaxSize = function (size) {
-    this._maxSize = size;
-};
-
-/**
- * @param  {string} key
- * @param  {} value
- */
-LRU.prototype.put = function (key, value) {
-    if (!this._map.hasOwnProperty(key)) {
-        var len = this._list.length();
-        if (len >= this._maxSize && len > 0) {
-            // Remove the least recently used
-            var leastUsedEntry = this._list.head;
-            this._list.remove(leastUsedEntry);
-            delete this._map[leastUsedEntry.key];
-        }
-
-        var entry = this._list.insert(value);
-        entry.key = key;
-        this._map[key] = entry;
-    }
-};
-
-/**
- * @param  {string} key
- * @return {}
- */
-LRU.prototype.get = function (key) {
-    var entry = this._map[key];
-    if (this._map.hasOwnProperty(key)) {
-        // Put the latest used entry in the tail
-        if (entry !== this._list.tail) {
-            this._list.remove(entry);
-            this._list.insertEntry(entry);
-        }
-
-        return entry.value;
-    }
-};
-
-/**
- * @param {string} key
- */
-LRU.prototype.remove = function (key) {
-    var entry = this._map[key];
-    if (typeof(entry) !== 'undefined') {
-        delete this._map[key];
-        this._list.remove(entry);
-    }
-};
-
-/**
- * Clear the cache
- */
-LRU.prototype.clear = function () {
-    this._list.clear();
-    this._map = {};
-};
-
-/* harmony default export */ const core_LRU = (LRU);
-
-;// CONCATENATED MODULE: ./node_modules/claygl/src/core/color.js
-/**
- * @namespace clay.core.color
- */
-
-
-var colorUtil = {};
-
-var kCSSColorTable = {
-    'transparent': [0,0,0,0], 'aliceblue': [240,248,255,1],
-    'antiquewhite': [250,235,215,1], 'aqua': [0,255,255,1],
-    'aquamarine': [127,255,212,1], 'azure': [240,255,255,1],
-    'beige': [245,245,220,1], 'bisque': [255,228,196,1],
-    'black': [0,0,0,1], 'blanchedalmond': [255,235,205,1],
-    'blue': [0,0,255,1], 'blueviolet': [138,43,226,1],
-    'brown': [165,42,42,1], 'burlywood': [222,184,135,1],
-    'cadetblue': [95,158,160,1], 'chartreuse': [127,255,0,1],
-    'chocolate': [210,105,30,1], 'coral': [255,127,80,1],
-    'cornflowerblue': [100,149,237,1], 'cornsilk': [255,248,220,1],
-    'crimson': [220,20,60,1], 'cyan': [0,255,255,1],
-    'darkblue': [0,0,139,1], 'darkcyan': [0,139,139,1],
-    'darkgoldenrod': [184,134,11,1], 'darkgray': [169,169,169,1],
-    'darkgreen': [0,100,0,1], 'darkgrey': [169,169,169,1],
-    'darkkhaki': [189,183,107,1], 'darkmagenta': [139,0,139,1],
-    'darkolivegreen': [85,107,47,1], 'darkorange': [255,140,0,1],
-    'darkorchid': [153,50,204,1], 'darkred': [139,0,0,1],
-    'darksalmon': [233,150,122,1], 'darkseagreen': [143,188,143,1],
-    'darkslateblue': [72,61,139,1], 'darkslategray': [47,79,79,1],
-    'darkslategrey': [47,79,79,1], 'darkturquoise': [0,206,209,1],
-    'darkviolet': [148,0,211,1], 'deeppink': [255,20,147,1],
-    'deepskyblue': [0,191,255,1], 'dimgray': [105,105,105,1],
-    'dimgrey': [105,105,105,1], 'dodgerblue': [30,144,255,1],
-    'firebrick': [178,34,34,1], 'floralwhite': [255,250,240,1],
-    'forestgreen': [34,139,34,1], 'fuchsia': [255,0,255,1],
-    'gainsboro': [220,220,220,1], 'ghostwhite': [248,248,255,1],
-    'gold': [255,215,0,1], 'goldenrod': [218,165,32,1],
-    'gray': [128,128,128,1], 'green': [0,128,0,1],
-    'greenyellow': [173,255,47,1], 'grey': [128,128,128,1],
-    'honeydew': [240,255,240,1], 'hotpink': [255,105,180,1],
-    'indianred': [205,92,92,1], 'indigo': [75,0,130,1],
-    'ivory': [255,255,240,1], 'khaki': [240,230,140,1],
-    'lavender': [230,230,250,1], 'lavenderblush': [255,240,245,1],
-    'lawngreen': [124,252,0,1], 'lemonchiffon': [255,250,205,1],
-    'lightblue': [173,216,230,1], 'lightcoral': [240,128,128,1],
-    'lightcyan': [224,255,255,1], 'lightgoldenrodyellow': [250,250,210,1],
-    'lightgray': [211,211,211,1], 'lightgreen': [144,238,144,1],
-    'lightgrey': [211,211,211,1], 'lightpink': [255,182,193,1],
-    'lightsalmon': [255,160,122,1], 'lightseagreen': [32,178,170,1],
-    'lightskyblue': [135,206,250,1], 'lightslategray': [119,136,153,1],
-    'lightslategrey': [119,136,153,1], 'lightsteelblue': [176,196,222,1],
-    'lightyellow': [255,255,224,1], 'lime': [0,255,0,1],
-    'limegreen': [50,205,50,1], 'linen': [250,240,230,1],
-    'magenta': [255,0,255,1], 'maroon': [128,0,0,1],
-    'mediumaquamarine': [102,205,170,1], 'mediumblue': [0,0,205,1],
-    'mediumorchid': [186,85,211,1], 'mediumpurple': [147,112,219,1],
-    'mediumseagreen': [60,179,113,1], 'mediumslateblue': [123,104,238,1],
-    'mediumspringgreen': [0,250,154,1], 'mediumturquoise': [72,209,204,1],
-    'mediumvioletred': [199,21,133,1], 'midnightblue': [25,25,112,1],
-    'mintcream': [245,255,250,1], 'mistyrose': [255,228,225,1],
-    'moccasin': [255,228,181,1], 'navajowhite': [255,222,173,1],
-    'navy': [0,0,128,1], 'oldlace': [253,245,230,1],
-    'olive': [128,128,0,1], 'olivedrab': [107,142,35,1],
-    'orange': [255,165,0,1], 'orangered': [255,69,0,1],
-    'orchid': [218,112,214,1], 'palegoldenrod': [238,232,170,1],
-    'palegreen': [152,251,152,1], 'paleturquoise': [175,238,238,1],
-    'palevioletred': [219,112,147,1], 'papayawhip': [255,239,213,1],
-    'peachpuff': [255,218,185,1], 'peru': [205,133,63,1],
-    'pink': [255,192,203,1], 'plum': [221,160,221,1],
-    'powderblue': [176,224,230,1], 'purple': [128,0,128,1],
-    'red': [255,0,0,1], 'rosybrown': [188,143,143,1],
-    'royalblue': [65,105,225,1], 'saddlebrown': [139,69,19,1],
-    'salmon': [250,128,114,1], 'sandybrown': [244,164,96,1],
-    'seagreen': [46,139,87,1], 'seashell': [255,245,238,1],
-    'sienna': [160,82,45,1], 'silver': [192,192,192,1],
-    'skyblue': [135,206,235,1], 'slateblue': [106,90,205,1],
-    'slategray': [112,128,144,1], 'slategrey': [112,128,144,1],
-    'snow': [255,250,250,1], 'springgreen': [0,255,127,1],
-    'steelblue': [70,130,180,1], 'tan': [210,180,140,1],
-    'teal': [0,128,128,1], 'thistle': [216,191,216,1],
-    'tomato': [255,99,71,1], 'turquoise': [64,224,208,1],
-    'violet': [238,130,238,1], 'wheat': [245,222,179,1],
-    'white': [255,255,255,1], 'whitesmoke': [245,245,245,1],
-    'yellow': [255,255,0,1], 'yellowgreen': [154,205,50,1]
-};
-
-function clampCssByte(i) {  // Clamp to integer 0 .. 255.
-    i = Math.round(i);  // Seems to be what Chrome does (vs truncation).
-    return i < 0 ? 0 : i > 255 ? 255 : i;
-}
-
-function clampCssAngle(i) {  // Clamp to integer 0 .. 360.
-    i = Math.round(i);  // Seems to be what Chrome does (vs truncation).
-    return i < 0 ? 0 : i > 360 ? 360 : i;
-}
-
-function clampCssFloat(f) {  // Clamp to float 0.0 .. 1.0.
-    return f < 0 ? 0 : f > 1 ? 1 : f;
-}
-
-function parseCssInt(str) {  // int or percentage.
-    if (str.length && str.charAt(str.length - 1) === '%') {
-        return clampCssByte(parseFloat(str) / 100 * 255);
-    }
-    return clampCssByte(parseInt(str, 10));
-}
-
-function parseCssFloat(str) {  // float or percentage.
-    if (str.length && str.charAt(str.length - 1) === '%') {
-        return clampCssFloat(parseFloat(str) / 100);
-    }
-    return clampCssFloat(parseFloat(str));
-}
-
-function cssHueToRgb(m1, m2, h) {
-    if (h < 0) {
-        h += 1;
-    }
-    else if (h > 1) {
-        h -= 1;
-    }
-
-    if (h * 6 < 1) {
-        return m1 + (m2 - m1) * h * 6;
-    }
-    if (h * 2 < 1) {
-        return m2;
-    }
-    if (h * 3 < 2) {
-        return m1 + (m2 - m1) * (2/3 - h) * 6;
-    }
-    return m1;
-}
-
-function lerpNumber(a, b, p) {
-    return a + (b - a) * p;
-}
-
-function setRgba(out, r, g, b, a) {
-    out[0] = r; out[1] = g; out[2] = b; out[3] = a;
-    return out;
-}
-function copyRgba(out, a) {
-    out[0] = a[0]; out[1] = a[1]; out[2] = a[2]; out[3] = a[3];
-    return out;
-}
-
-var colorCache = new core_LRU(20);
-var lastRemovedArr = null;
-
-function putToCache(colorStr, rgbaArr) {
-    // Reuse removed array
-    if (lastRemovedArr) {
-        copyRgba(lastRemovedArr, rgbaArr);
-    }
-    lastRemovedArr = colorCache.put(colorStr, lastRemovedArr || (rgbaArr.slice()));
-}
-
-/**
- * @name clay.core.color.parse
- * @param {string} colorStr
- * @param {Array.<number>} out
- * @return {Array.<number>}
- */
-colorUtil.parse = function (colorStr, rgbaArr) {
-    if (!colorStr) {
-        return;
-    }
-    rgbaArr = rgbaArr || [];
-
-    var cached = colorCache.get(colorStr);
-    if (cached) {
-        return copyRgba(rgbaArr, cached);
-    }
-
-    // colorStr may be not string
-    colorStr = colorStr + '';
-    // Remove all whitespace, not compliant, but should just be more accepting.
-    var str = colorStr.replace(/ /g, '').toLowerCase();
-
-    // Color keywords (and transparent) lookup.
-    if (str in kCSSColorTable) {
-        copyRgba(rgbaArr, kCSSColorTable[str]);
-        putToCache(colorStr, rgbaArr);
-        return rgbaArr;
-    }
-
-    // #abc and #abc123 syntax.
-    if (str.charAt(0) === '#') {
-        if (str.length === 4) {
-            var iv = parseInt(str.substr(1), 16);  // TODO(deanm): Stricter parsing.
-            if (!(iv >= 0 && iv <= 0xfff)) {
-                setRgba(rgbaArr, 0, 0, 0, 1);
-                return;  // Covers NaN.
-            }
-            setRgba(rgbaArr,
-                ((iv & 0xf00) >> 4) | ((iv & 0xf00) >> 8),
-                (iv & 0xf0) | ((iv & 0xf0) >> 4),
-                (iv & 0xf) | ((iv & 0xf) << 4),
-                1
-            );
-            putToCache(colorStr, rgbaArr);
-            return rgbaArr;
-        }
-        else if (str.length === 7) {
-            var iv = parseInt(str.substr(1), 16);  // TODO(deanm): Stricter parsing.
-            if (!(iv >= 0 && iv <= 0xffffff)) {
-                setRgba(rgbaArr, 0, 0, 0, 1);
-                return;  // Covers NaN.
-            }
-            setRgba(rgbaArr,
-                (iv & 0xff0000) >> 16,
-                (iv & 0xff00) >> 8,
-                iv & 0xff,
-                1
-            );
-            putToCache(colorStr, rgbaArr);
-            return rgbaArr;
-        }
-
-        return;
-    }
-    var op = str.indexOf('('), ep = str.indexOf(')');
-    if (op !== -1 && ep + 1 === str.length) {
-        var fname = str.substr(0, op);
-        var params = str.substr(op + 1, ep - (op + 1)).split(',');
-        var alpha = 1;  // To allow case fallthrough.
-        switch (fname) {
-            case 'rgba':
-                if (params.length !== 4) {
-                    setRgba(rgbaArr, 0, 0, 0, 1);
-                    return;
-                }
-                alpha = parseCssFloat(params.pop()); // jshint ignore:line
-            // Fall through.
-            case 'rgb':
-                if (params.length !== 3) {
-                    setRgba(rgbaArr, 0, 0, 0, 1);
-                    return;
-                }
-                setRgba(rgbaArr,
-                    parseCssInt(params[0]),
-                    parseCssInt(params[1]),
-                    parseCssInt(params[2]),
-                    alpha
-                );
-                putToCache(colorStr, rgbaArr);
-                return rgbaArr;
-            case 'hsla':
-                if (params.length !== 4) {
-                    setRgba(rgbaArr, 0, 0, 0, 1);
-                    return;
-                }
-                params[3] = parseCssFloat(params[3]);
-                hsla2rgba(params, rgbaArr);
-                putToCache(colorStr, rgbaArr);
-                return rgbaArr;
-            case 'hsl':
-                if (params.length !== 3) {
-                    setRgba(rgbaArr, 0, 0, 0, 1);
-                    return;
-                }
-                hsla2rgba(params, rgbaArr);
-                putToCache(colorStr, rgbaArr);
-                return rgbaArr;
-            default:
-                return;
-        }
-    }
-
-    setRgba(rgbaArr, 0, 0, 0, 1);
-    return;
-};
-
-colorUtil.parseToFloat = function (colorStr, rgbaArr) {
-    rgbaArr = colorUtil.parse(colorStr, rgbaArr);
-    if (!rgbaArr) {
-        return;
-    }
-    rgbaArr[0] /= 255;
-    rgbaArr[1] /= 255;
-    rgbaArr[2] /= 255;
-    return rgbaArr;
-}
-
-/**
- * @name clay.core.color.hsla2rgba
- * @param {Array.<number>} hsla
- * @param {Array.<number>} rgba
- * @return {Array.<number>} rgba
- */
-function hsla2rgba(hsla, rgba) {
-    var h = (((parseFloat(hsla[0]) % 360) + 360) % 360) / 360;  // 0 .. 1
-    // NOTE(deanm): According to the CSS spec s/l should only be
-    // percentages, but we don't bother and let float or percentage.
-    var s = parseCssFloat(hsla[1]);
-    var l = parseCssFloat(hsla[2]);
-    var m2 = l <= 0.5 ? l * (s + 1) : l + s - l * s;
-    var m1 = l * 2 - m2;
-
-    rgba = rgba || [];
-    setRgba(rgba,
-        clampCssByte(cssHueToRgb(m1, m2, h + 1 / 3) * 255),
-        clampCssByte(cssHueToRgb(m1, m2, h) * 255),
-        clampCssByte(cssHueToRgb(m1, m2, h - 1 / 3) * 255),
-        1
-    );
-
-    if (hsla.length === 4) {
-        rgba[3] = hsla[3];
-    }
-
-    return rgba;
-}
-
-/**
- * @name clay.core.color.rgba2hsla
- * @param {Array.<number>} rgba
- * @return {Array.<number>} hsla
- */
-function rgba2hsla(rgba) {
-    if (!rgba) {
-        return;
-    }
-
-    // RGB from 0 to 255
-    var R = rgba[0] / 255;
-    var G = rgba[1] / 255;
-    var B = rgba[2] / 255;
-
-    var vMin = Math.min(R, G, B); // Min. value of RGB
-    var vMax = Math.max(R, G, B); // Max. value of RGB
-    var delta = vMax - vMin; // Delta RGB value
-
-    var L = (vMax + vMin) / 2;
-    var H;
-    var S;
-    // HSL results from 0 to 1
-    if (delta === 0) {
-        H = 0;
-        S = 0;
-    }
-    else {
-        if (L < 0.5) {
-            S = delta / (vMax + vMin);
-        }
-        else {
-            S = delta / (2 - vMax - vMin);
-        }
-
-        var deltaR = (((vMax - R) / 6) + (delta / 2)) / delta;
-        var deltaG = (((vMax - G) / 6) + (delta / 2)) / delta;
-        var deltaB = (((vMax - B) / 6) + (delta / 2)) / delta;
-
-        if (R === vMax) {
-            H = deltaB - deltaG;
-        }
-        else if (G === vMax) {
-            H = (1 / 3) + deltaR - deltaB;
-        }
-        else if (B === vMax) {
-            H = (2 / 3) + deltaG - deltaR;
-        }
-
-        if (H < 0) {
-            H += 1;
-        }
-
-        if (H > 1) {
-            H -= 1;
-        }
-    }
-
-    var hsla = [H * 360, S, L];
-
-    if (rgba[3] != null) {
-        hsla.push(rgba[3]);
-    }
-
-    return hsla;
-}
-
-/**
- * @name clay.core.color.lift
- * @param {string} color
- * @param {number} level
- * @return {string}
- */
-colorUtil.lift = function (color, level) {
-    var colorArr = colorUtil.parse(color);
-    if (colorArr) {
-        for (var i = 0; i < 3; i++) {
-            if (level < 0) {
-                colorArr[i] = colorArr[i] * (1 - level) | 0;
-            }
-            else {
-                colorArr[i] = ((255 - colorArr[i]) * level + colorArr[i]) | 0;
-            }
-        }
-        return colorUtil.stringify(colorArr, colorArr.length === 4 ? 'rgba' : 'rgb');
-    }
-}
-
-/**
- * @name clay.core.color.toHex
- * @param {string} color
- * @return {string}
- */
-colorUtil.toHex = function (color) {
-    var colorArr = colorUtil.parse(color);
-    if (colorArr) {
-        return ((1 << 24) + (colorArr[0] << 16) + (colorArr[1] << 8) + (+colorArr[2])).toString(16).slice(1);
-    }
-};
-
-/**
- * Map value to color. Faster than lerp methods because color is represented by rgba array.
- * @name clay.core.color
- * @param {number} normalizedValue A float between 0 and 1.
- * @param {Array.<Array.<number>>} colors List of rgba color array
- * @param {Array.<number>} [out] Mapped gba color array
- * @return {Array.<number>} will be null/undefined if input illegal.
- */
-colorUtil.fastLerp = function (normalizedValue, colors, out) {
-    if (!(colors && colors.length)
-        || !(normalizedValue >= 0 && normalizedValue <= 1)
-    ) {
-        return;
-    }
-
-    out = out || [];
-
-    var value = normalizedValue * (colors.length - 1);
-    var leftIndex = Math.floor(value);
-    var rightIndex = Math.ceil(value);
-    var leftColor = colors[leftIndex];
-    var rightColor = colors[rightIndex];
-    var dv = value - leftIndex;
-    out[0] = clampCssByte(lerpNumber(leftColor[0], rightColor[0], dv));
-    out[1] = clampCssByte(lerpNumber(leftColor[1], rightColor[1], dv));
-    out[2] = clampCssByte(lerpNumber(leftColor[2], rightColor[2], dv));
-    out[3] = clampCssFloat(lerpNumber(leftColor[3], rightColor[3], dv));
-
-    return out;
-}
-
-colorUtil.fastMapToColor = colorUtil.fastLerp;
-
-/**
- * @param {number} normalizedValue A float between 0 and 1.
- * @param {Array.<string>} colors Color list.
- * @param {boolean=} fullOutput Default false.
- * @return {(string|Object)} Result color. If fullOutput,
- *                           return {color: ..., leftIndex: ..., rightIndex: ..., value: ...},
- */
-colorUtil.lerp = function (normalizedValue, colors, fullOutput) {
-    if (!(colors && colors.length)
-        || !(normalizedValue >= 0 && normalizedValue <= 1)
-    ) {
-        return;
-    }
-
-    var value = normalizedValue * (colors.length - 1);
-    var leftIndex = Math.floor(value);
-    var rightIndex = Math.ceil(value);
-    var leftColor = colorUtil.parse(colors[leftIndex]);
-    var rightColor = colorUtil.parse(colors[rightIndex]);
-    var dv = value - leftIndex;
-
-    var color = colorUtil.stringify(
-        [
-            clampCssByte(lerpNumber(leftColor[0], rightColor[0], dv)),
-            clampCssByte(lerpNumber(leftColor[1], rightColor[1], dv)),
-            clampCssByte(lerpNumber(leftColor[2], rightColor[2], dv)),
-            clampCssFloat(lerpNumber(leftColor[3], rightColor[3], dv))
-        ],
-        'rgba'
-    );
-
-    return fullOutput
-        ? {
-            color: color,
-            leftIndex: leftIndex,
-            rightIndex: rightIndex,
-            value: value
-        }
-        : color;
-}
-
-/**
- * @deprecated
- */
-colorUtil.mapToColor = colorUtil.lerp;
-
-/**
- * @name clay.core.color
- * @param {string} color
- * @param {number=} h 0 ~ 360, ignore when null.
- * @param {number=} s 0 ~ 1, ignore when null.
- * @param {number=} l 0 ~ 1, ignore when null.
- * @return {string} Color string in rgba format.
- */
-colorUtil.modifyHSL = function (color, h, s, l) {
-    color = colorUtil.parse(color);
-
-    if (color) {
-        color = rgba2hsla(color);
-        h != null && (color[0] = clampCssAngle(h));
-        s != null && (color[1] = parseCssFloat(s));
-        l != null && (color[2] = parseCssFloat(l));
-
-        return colorUtil.stringify(hsla2rgba(color), 'rgba');
-    }
-}
-
-/**
- * @param {string} color
- * @param {number=} alpha 0 ~ 1
- * @return {string} Color string in rgba format.
- */
-colorUtil.modifyAlpha = function (color, alpha) {
-    color = colorUtil.parse(color);
-
-    if (color && alpha != null) {
-        color[3] = clampCssFloat(alpha);
-        return colorUtil.stringify(color, 'rgba');
-    }
-}
-
-/**
- * @param {Array.<number>} arrColor like [12,33,44,0.4]
- * @param {string} type 'rgba', 'hsva', ...
- * @return {string} Result color. (If input illegal, return undefined).
- */
-colorUtil.stringify = function (arrColor, type) {
-    if (!arrColor || !arrColor.length) {
-        return;
-    }
-    var colorStr = arrColor[0] + ',' + arrColor[1] + ',' + arrColor[2];
-    if (type === 'rgba' || type === 'hsva' || type === 'hsla') {
-        colorStr += ',' + arrColor[3];
-    }
-    return type + '(' + colorStr + ')';
-};
-
-
-
-/* harmony default export */ const color = (colorUtil);
-;// CONCATENATED MODULE: ./node_modules/claygl/src/Material.js
-
-
-
-var parseColor = color.parseToFloat;
-
-var programKeyCache = {};
-
-function getDefineCode(defines) {
-    var defineKeys = Object.keys(defines);
-    defineKeys.sort();
-    var defineStr = [];
-    // Custom Defines
-    for (var i = 0; i < defineKeys.length; i++) {
-        var key = defineKeys[i];
-        var value = defines[key];
-        if (value === null) {
-            defineStr.push(key);
-        }
-        else{
-            defineStr.push(key + ' ' + value.toString());
-        }
-    }
-    return defineStr.join('\n');
-}
-
-function getProgramKey(vertexDefines, fragmentDefines, enabledTextures) {
-    enabledTextures.sort();
-    var defineStr = [];
-    for (var i = 0; i < enabledTextures.length; i++) {
-        var symbol = enabledTextures[i];
-        defineStr.push(symbol);
-    }
-    var key = getDefineCode(vertexDefines) + '\n'
-        + getDefineCode(fragmentDefines) + '\n'
-        + defineStr.join('\n');
-
-    if (programKeyCache[key]) {
-        return programKeyCache[key];
-    }
-
-    var id = core_util.genGUID();
-    programKeyCache[key] = id;
-    return id;
-}
-
-/**
- * Material defines the appearance of mesh surface, like `color`, `roughness`, `metalness`, etc.
- * It contains a {@link clay.Shader} and corresponding uniforms.
- *
- * Here is a basic example to create a standard material
-```js
-var material = new clay.Material({
-    shader: new clay.Shader(
-        clay.Shader.source('clay.vertex'),
-        clay.Shader.source('clay.fragment')
-    )
-});
-```
- * @constructor clay.Material
- * @extends clay.core.Base
- */
-var Material = core_Base.extend(function () {
-    return /** @lends clay.Material# */ {
-        /**
-         * @type {string}
-         */
-        name: '',
-
-        /**
-         * @type {Object}
-         */
-        // uniforms: null,
-
-        /**
-         * @type {clay.Shader}
-         */
-        // shader: null,
-
-        /**
-         * @type {boolean}
-         */
-        depthTest: true,
-
-        /**
-         * @type {boolean}
-         */
-        depthMask: true,
-
-        /**
-         * @type {boolean}
-         */
-        transparent: false,
-        /**
-         * Blend func is a callback function when the material
-         * have custom blending
-         * The gl context will be the only argument passed in tho the
-         * blend function
-         * Detail of blend function in WebGL:
-         * http://www.khronos.org/registry/gles/specs/2.0/es_full_spec_2.0.25.pdf
-         *
-         * Example :
-         * function(_gl) {
-         *  _gl.blendEquation(_gl.FUNC_ADD);
-         *  _gl.blendFunc(_gl.SRC_ALPHA, _gl.ONE_MINUS_SRC_ALPHA);
-         * }
-         */
-        blend: null,
-
-        /**
-         * If update texture status automatically.
-         */
-        autoUpdateTextureStatus: true,
-
-        uniforms: {},
-        vertexDefines: {},
-        fragmentDefines: {},
-        _textureStatus: {},
-
-        // shadowTransparentMap : null
-
-        // PENDING enable the uniform that only used in shader.
-        _enabledUniforms: null,
-    };
-}, function () {
-    if (!this.name) {
-        this.name = 'MATERIAL_' + this.__uid__;
-    }
-
-    if (this.shader) {
-        // Keep status, mainly preset uniforms, vertexDefines and fragmentDefines
-        this.attachShader(this.shader, true);
-    }
-},
-/** @lends clay.Material.prototype */
-{
-    precision: 'highp',
-
-    /**
-     * Set material uniform
-     * @example
-     *  mat.setUniform('color', [1, 1, 1, 1]);
-     * @param {string} symbol
-     * @param {number|array|clay.Texture|ArrayBufferView} value
-     */
-    setUniform: function (symbol, value) {
-        if (value === undefined) {
-            console.warn('Uniform value "' + symbol + '" is undefined');
-        }
-        var uniform = this.uniforms[symbol];
-        if (uniform) {
-
-            if (typeof value === 'string') {
-                // Try to parse as a color. Invalid color string will return null.
-                value = parseColor(value) || value;
-            }
-
-            uniform.value = value;
-
-            if (this.autoUpdateTextureStatus && uniform.type === 't') {
-                if (value) {
-                    this.enableTexture(symbol);
-                }
-                else {
-                    this.disableTexture(symbol);
-                }
-            }
-        }
-    },
-
-    /**
-     * @param {Object} obj
-     */
-    setUniforms: function(obj) {
-        for (var key in obj) {
-            var val = obj[key];
-            this.setUniform(key, val);
-        }
-    },
-
-    /**
-     * @param  {string}  symbol
-     * @return {boolean}
-     */
-    isUniformEnabled: function (symbol) {
-        return this._enabledUniforms.indexOf(symbol) >= 0;
-    },
-
-    getEnabledUniforms: function () {
-        return this._enabledUniforms;
-    },
-    getTextureUniforms: function () {
-        return this._textureUniforms;
-    },
-
-    /**
-     * Alias of setUniform and setUniforms
-     * @param {object|string} symbol
-     * @param {number|array|clay.Texture|ArrayBufferView} [value]
-     */
-    set: function (symbol, value) {
-        if (typeof(symbol) === 'object') {
-            for (var key in symbol) {
-                var val = symbol[key];
-                this.setUniform(key, val);
-            }
-        }
-        else {
-            this.setUniform(symbol, value);
-        }
-    },
-    /**
-     * Get uniform value
-     * @param  {string} symbol
-     * @return {number|array|clay.Texture|ArrayBufferView}
-     */
-    get: function (symbol) {
-        var uniform = this.uniforms[symbol];
-        if (uniform) {
-            return uniform.value;
-        }
-    },
-    /**
-     * Attach a shader instance
-     * @param  {clay.Shader} shader
-     * @param  {boolean} keepStatus If try to keep uniform and texture
-     */
-    attachShader: function(shader, keepStatus) {
-        var originalUniforms = this.uniforms;
-
-        // Ignore if uniform can use in shader.
-        this.uniforms = shader.createUniforms();
-        this.shader = shader;
-
-        var uniforms = this.uniforms;
-        this._enabledUniforms = Object.keys(uniforms);
-        // Make sure uniforms are set in same order to avoid texture slot wrong
-        this._enabledUniforms.sort();
-        this._textureUniforms = this._enabledUniforms.filter(function (uniformName) {
-            var type = this.uniforms[uniformName].type;
-            return type === 't' || type === 'tv';
-        }, this);
-
-        var originalVertexDefines = this.vertexDefines;
-        var originalFragmentDefines = this.fragmentDefines;
-
-        this.vertexDefines = core_util.clone(shader.vertexDefines);
-        this.fragmentDefines = core_util.clone(shader.fragmentDefines);
-
-        if (keepStatus) {
-            for (var symbol in originalUniforms) {
-                if (uniforms[symbol]) {
-                    uniforms[symbol].value = originalUniforms[symbol].value;
-                }
-            }
-
-            core_util.defaults(this.vertexDefines, originalVertexDefines);
-            core_util.defaults(this.fragmentDefines, originalFragmentDefines);
-        }
-
-        var textureStatus = {};
-        for (var key in shader.textures) {
-            textureStatus[key] = {
-                shaderType: shader.textures[key].shaderType,
-                type: shader.textures[key].type,
-                enabled: (keepStatus && this._textureStatus[key]) ? this._textureStatus[key].enabled : false
-            };
-        }
-
-        this._textureStatus = textureStatus;
-
-        this._programKey = '';
-    },
-
-    /**
-     * Clone a new material and keep uniforms, shader will not be cloned
-     * @return {clay.Material}
-     */
-    clone: function () {
-        var material = new this.constructor({
-            name: this.name,
-            shader: this.shader
-        });
-        for (var symbol in this.uniforms) {
-            material.uniforms[symbol].value = this.uniforms[symbol].value;
-        }
-        material.depthTest = this.depthTest;
-        material.depthMask = this.depthMask;
-        material.transparent = this.transparent;
-        material.blend = this.blend;
-
-        material.vertexDefines = core_util.clone(this.vertexDefines);
-        material.fragmentDefines = core_util.clone(this.fragmentDefines);
-        material.enableTexture(this.getEnabledTextures());
-        material.precision = this.precision;
-
-        return material;
-    },
-
-    /**
-     * Add a #define macro in shader code
-     * @param  {string} shaderType Can be vertex, fragment or both
-     * @param  {string} symbol
-     * @param  {number} [val]
-     */
-    define: function (shaderType, symbol, val) {
-        var vertexDefines = this.vertexDefines;
-        var fragmentDefines = this.fragmentDefines;
-        if (shaderType !== 'vertex' && shaderType !== 'fragment' && shaderType !== 'both'
-            && arguments.length < 3
-        ) {
-            // shaderType default to be 'both'
-            val = symbol;
-            symbol = shaderType;
-            shaderType = 'both';
-        }
-        val = val != null ? val : null;
-        if (shaderType === 'vertex' || shaderType === 'both') {
-            if (vertexDefines[symbol] !== val) {
-                vertexDefines[symbol] = val;
-                // Mark as dirty
-                this._programKey = '';
-            }
-        }
-        if (shaderType === 'fragment' || shaderType === 'both') {
-            if (fragmentDefines[symbol] !== val) {
-                fragmentDefines[symbol] = val;
-                if (shaderType !== 'both') {
-                    this._programKey = '';
-                }
-            }
-        }
-    },
-
-    /**
-     * Remove a #define macro in shader code
-     * @param  {string} shaderType Can be vertex, fragment or both
-     * @param  {string} symbol
-     */
-    undefine: function (shaderType, symbol) {
-        if (shaderType !== 'vertex' && shaderType !== 'fragment' && shaderType !== 'both'
-            && arguments.length < 2
-        ) {
-            // shaderType default to be 'both'
-            symbol = shaderType;
-            shaderType = 'both';
-        }
-        if (shaderType === 'vertex' || shaderType === 'both') {
-            if (this.isDefined('vertex', symbol)) {
-                delete this.vertexDefines[symbol];
-                // Mark as dirty
-                this._programKey = '';
-            }
-        }
-        if (shaderType === 'fragment' || shaderType === 'both') {
-            if (this.isDefined('fragment', symbol)) {
-                delete this.fragmentDefines[symbol];
-                if (shaderType !== 'both') {
-                    this._programKey = '';
-                }
-            }
-        }
-    },
-
-    /**
-     * If macro is defined in shader.
-     * @param  {string} shaderType Can be vertex, fragment or both
-     * @param  {string} symbol
-     */
-    isDefined: function (shaderType, symbol) {
-        // PENDING hasOwnProperty ?
-        switch (shaderType) {
-            case 'vertex':
-                return this.vertexDefines[symbol] !== undefined;
-            case 'fragment':
-                return this.fragmentDefines[symbol] !== undefined;
-        }
-    },
-    /**
-     * Get macro value defined in shader.
-     * @param  {string} shaderType Can be vertex, fragment or both
-     * @param  {string} symbol
-     */
-    getDefine: function (shaderType, symbol) {
-        switch(shaderType) {
-            case 'vertex':
-                return this.vertexDefines[symbol];
-            case 'fragment':
-                return this.fragmentDefines[symbol];
-        }
-    },
-    /**
-     * Enable a texture, actually it will add a #define macro in the shader code
-     * For example, if texture symbol is diffuseMap, it will add a line `#define DIFFUSEMAP_ENABLED` in the shader code
-     * @param  {string} symbol
-     */
-    enableTexture: function (symbol) {
-        if (Array.isArray(symbol)) {
-            for (var i = 0; i < symbol.length; i++) {
-                this.enableTexture(symbol[i]);
-            }
-            return;
-        }
-
-        var status = this._textureStatus[symbol];
-        if (status) {
-            var isEnabled = status.enabled;
-            if (!isEnabled) {
-                status.enabled = true;
-                this._programKey = '';
-            }
-        }
-    },
-    /**
-     * Enable all textures used in the shader
-     */
-    enableTexturesAll: function () {
-        var textureStatus = this._textureStatus;
-        for (var symbol in textureStatus) {
-            textureStatus[symbol].enabled = true;
-        }
-
-        this._programKey = '';
-    },
-    /**
-     * Disable a texture, it remove a #define macro in the shader
-     * @param  {string} symbol
-     */
-    disableTexture: function (symbol) {
-        if (Array.isArray(symbol)) {
-            for (var i = 0; i < symbol.length; i++) {
-                this.disableTexture(symbol[i]);
-            }
-            return;
-        }
-
-        var status = this._textureStatus[symbol];
-        if (status) {
-            var isDisabled = ! status.enabled;
-            if (!isDisabled) {
-                status.enabled = false;
-                this._programKey = '';
-            }
-        }
-    },
-    /**
-     * Disable all textures used in the shader
-     */
-    disableTexturesAll: function () {
-        var textureStatus = this._textureStatus;
-        for (var symbol in textureStatus) {
-            textureStatus[symbol].enabled = false;
-        }
-
-        this._programKey = '';
-    },
-    /**
-     * If texture of given type is enabled.
-     * @param  {string}  symbol
-     * @return {boolean}
-     */
-    isTextureEnabled: function (symbol) {
-        var textureStatus = this._textureStatus;
-        return !!textureStatus[symbol]
-            && textureStatus[symbol].enabled;
-    },
-
-    /**
-     * Get all enabled textures
-     * @return {string[]}
-     */
-    getEnabledTextures: function () {
-        var enabledTextures = [];
-        var textureStatus = this._textureStatus;
-        for (var symbol in textureStatus) {
-            if (textureStatus[symbol].enabled) {
-                enabledTextures.push(symbol);
-            }
-        }
-        return enabledTextures;
-    },
-
-    /**
-     * Mark defines are updated.
-     */
-    dirtyDefines: function () {
-        this._programKey = '';
-    },
-
-    getProgramKey: function () {
-        if (!this._programKey) {
-            this._programKey = getProgramKey(
-                this.vertexDefines, this.fragmentDefines, this.getEnabledTextures()
-            );
-        }
-        return this._programKey;
-    }
-});
-
-/* harmony default export */ const src_Material = (Material);
-
 ;// CONCATENATED MODULE: ./node_modules/claygl/src/glmatrix/common.js
 
 var GLMAT_EPSILON = 0.000001;
@@ -2581,3412 +581,6 @@ var GLMAT_ARRAY_TYPE = Array;
 
 var common_GLMAT_RANDOM = Math.random;
 
-;// CONCATENATED MODULE: ./node_modules/claygl/src/glmatrix/vec2.js
-
-/* Copyright (c) 2013, Brandon Jones, Colin MacKenzie IV. All rights reserved.
-
-Redistribution and use in source and binary forms, with or without modification,
-are permitted provided that the following conditions are met:
-
-  * Redistributions of source code must retain the above copyright notice, this
-    list of conditions and the following disclaimer.
-  * Redistributions in binary form must reproduce the above copyright notice,
-    this list of conditions and the following disclaimer in the documentation
-    and/or other materials provided with the distribution.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
-ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
-
-
-
-/**
- * @class 2 Dimensional Vector
- * @name vec2
- */
-
-var vec2 = {};
-
-/**
- * Creates a new, empty vec2
- *
- * @returns {vec2} a new 2D vector
- */
-vec2.create = function() {
-    var out = new GLMAT_ARRAY_TYPE(2);
-    out[0] = 0;
-    out[1] = 0;
-    return out;
-};
-
-/**
- * Creates a new vec2 initialized with values from an existing vector
- *
- * @param {vec2} a vector to clone
- * @returns {vec2} a new 2D vector
- */
-vec2.clone = function(a) {
-    var out = new GLMAT_ARRAY_TYPE(2);
-    out[0] = a[0];
-    out[1] = a[1];
-    return out;
-};
-
-/**
- * Creates a new vec2 initialized with the given values
- *
- * @param {Number} x X component
- * @param {Number} y Y component
- * @returns {vec2} a new 2D vector
- */
-vec2.fromValues = function(x, y) {
-    var out = new GLMAT_ARRAY_TYPE(2);
-    out[0] = x;
-    out[1] = y;
-    return out;
-};
-
-/**
- * Copy the values from one vec2 to another
- *
- * @param {vec2} out the receiving vector
- * @param {vec2} a the source vector
- * @returns {vec2} out
- */
-vec2.copy = function(out, a) {
-    out[0] = a[0];
-    out[1] = a[1];
-    return out;
-};
-
-/**
- * Set the components of a vec2 to the given values
- *
- * @param {vec2} out the receiving vector
- * @param {Number} x X component
- * @param {Number} y Y component
- * @returns {vec2} out
- */
-vec2.set = function(out, x, y) {
-    out[0] = x;
-    out[1] = y;
-    return out;
-};
-
-/**
- * Adds two vec2's
- *
- * @param {vec2} out the receiving vector
- * @param {vec2} a the first operand
- * @param {vec2} b the second operand
- * @returns {vec2} out
- */
-vec2.add = function(out, a, b) {
-    out[0] = a[0] + b[0];
-    out[1] = a[1] + b[1];
-    return out;
-};
-
-/**
- * Subtracts vector b from vector a
- *
- * @param {vec2} out the receiving vector
- * @param {vec2} a the first operand
- * @param {vec2} b the second operand
- * @returns {vec2} out
- */
-vec2.subtract = function(out, a, b) {
-    out[0] = a[0] - b[0];
-    out[1] = a[1] - b[1];
-    return out;
-};
-
-/**
- * Alias for {@link vec2.subtract}
- * @function
- */
-vec2.sub = vec2.subtract;
-
-/**
- * Multiplies two vec2's
- *
- * @param {vec2} out the receiving vector
- * @param {vec2} a the first operand
- * @param {vec2} b the second operand
- * @returns {vec2} out
- */
-vec2.multiply = function(out, a, b) {
-    out[0] = a[0] * b[0];
-    out[1] = a[1] * b[1];
-    return out;
-};
-
-/**
- * Alias for {@link vec2.multiply}
- * @function
- */
-vec2.mul = vec2.multiply;
-
-/**
- * Divides two vec2's
- *
- * @param {vec2} out the receiving vector
- * @param {vec2} a the first operand
- * @param {vec2} b the second operand
- * @returns {vec2} out
- */
-vec2.divide = function(out, a, b) {
-    out[0] = a[0] / b[0];
-    out[1] = a[1] / b[1];
-    return out;
-};
-
-/**
- * Alias for {@link vec2.divide}
- * @function
- */
-vec2.div = vec2.divide;
-
-/**
- * Returns the minimum of two vec2's
- *
- * @param {vec2} out the receiving vector
- * @param {vec2} a the first operand
- * @param {vec2} b the second operand
- * @returns {vec2} out
- */
-vec2.min = function(out, a, b) {
-    out[0] = Math.min(a[0], b[0]);
-    out[1] = Math.min(a[1], b[1]);
-    return out;
-};
-
-/**
- * Returns the maximum of two vec2's
- *
- * @param {vec2} out the receiving vector
- * @param {vec2} a the first operand
- * @param {vec2} b the second operand
- * @returns {vec2} out
- */
-vec2.max = function(out, a, b) {
-    out[0] = Math.max(a[0], b[0]);
-    out[1] = Math.max(a[1], b[1]);
-    return out;
-};
-
-/**
- * Scales a vec2 by a scalar number
- *
- * @param {vec2} out the receiving vector
- * @param {vec2} a the vector to scale
- * @param {Number} b amount to scale the vector by
- * @returns {vec2} out
- */
-vec2.scale = function(out, a, b) {
-    out[0] = a[0] * b;
-    out[1] = a[1] * b;
-    return out;
-};
-
-/**
- * Adds two vec2's after scaling the second operand by a scalar value
- *
- * @param {vec2} out the receiving vector
- * @param {vec2} a the first operand
- * @param {vec2} b the second operand
- * @param {Number} scale the amount to scale b by before adding
- * @returns {vec2} out
- */
-vec2.scaleAndAdd = function(out, a, b, scale) {
-    out[0] = a[0] + (b[0] * scale);
-    out[1] = a[1] + (b[1] * scale);
-    return out;
-};
-
-/**
- * Calculates the euclidian distance between two vec2's
- *
- * @param {vec2} a the first operand
- * @param {vec2} b the second operand
- * @returns {Number} distance between a and b
- */
-vec2.distance = function(a, b) {
-    var x = b[0] - a[0],
-        y = b[1] - a[1];
-    return Math.sqrt(x*x + y*y);
-};
-
-/**
- * Alias for {@link vec2.distance}
- * @function
- */
-vec2.dist = vec2.distance;
-
-/**
- * Calculates the squared euclidian distance between two vec2's
- *
- * @param {vec2} a the first operand
- * @param {vec2} b the second operand
- * @returns {Number} squared distance between a and b
- */
-vec2.squaredDistance = function(a, b) {
-    var x = b[0] - a[0],
-        y = b[1] - a[1];
-    return x*x + y*y;
-};
-
-/**
- * Alias for {@link vec2.squaredDistance}
- * @function
- */
-vec2.sqrDist = vec2.squaredDistance;
-
-/**
- * Calculates the length of a vec2
- *
- * @param {vec2} a vector to calculate length of
- * @returns {Number} length of a
- */
-vec2.length = function (a) {
-    var x = a[0],
-        y = a[1];
-    return Math.sqrt(x*x + y*y);
-};
-
-/**
- * Alias for {@link vec2.length}
- * @function
- */
-vec2.len = vec2.length;
-
-/**
- * Calculates the squared length of a vec2
- *
- * @param {vec2} a vector to calculate squared length of
- * @returns {Number} squared length of a
- */
-vec2.squaredLength = function (a) {
-    var x = a[0],
-        y = a[1];
-    return x*x + y*y;
-};
-
-/**
- * Alias for {@link vec2.squaredLength}
- * @function
- */
-vec2.sqrLen = vec2.squaredLength;
-
-/**
- * Negates the components of a vec2
- *
- * @param {vec2} out the receiving vector
- * @param {vec2} a vector to negate
- * @returns {vec2} out
- */
-vec2.negate = function(out, a) {
-    out[0] = -a[0];
-    out[1] = -a[1];
-    return out;
-};
-
-/**
- * Returns the inverse of the components of a vec2
- *
- * @param {vec2} out the receiving vector
- * @param {vec2} a vector to invert
- * @returns {vec2} out
- */
-vec2.inverse = function(out, a) {
-  out[0] = 1.0 / a[0];
-  out[1] = 1.0 / a[1];
-  return out;
-};
-
-/**
- * Normalize a vec2
- *
- * @param {vec2} out the receiving vector
- * @param {vec2} a vector to normalize
- * @returns {vec2} out
- */
-vec2.normalize = function(out, a) {
-    var x = a[0],
-        y = a[1];
-    var len = x*x + y*y;
-    if (len > 0) {
-        //TODO: evaluate use of glm_invsqrt here?
-        len = 1 / Math.sqrt(len);
-        out[0] = a[0] * len;
-        out[1] = a[1] * len;
-    }
-    return out;
-};
-
-/**
- * Calculates the dot product of two vec2's
- *
- * @param {vec2} a the first operand
- * @param {vec2} b the second operand
- * @returns {Number} dot product of a and b
- */
-vec2.dot = function (a, b) {
-    return a[0] * b[0] + a[1] * b[1];
-};
-
-/**
- * Computes the cross product of two vec2's
- * Note that the cross product must by definition produce a 3D vector
- *
- * @param {vec3} out the receiving vector
- * @param {vec2} a the first operand
- * @param {vec2} b the second operand
- * @returns {vec3} out
- */
-vec2.cross = function(out, a, b) {
-    var z = a[0] * b[1] - a[1] * b[0];
-    out[0] = out[1] = 0;
-    out[2] = z;
-    return out;
-};
-
-/**
- * Performs a linear interpolation between two vec2's
- *
- * @param {vec2} out the receiving vector
- * @param {vec2} a the first operand
- * @param {vec2} b the second operand
- * @param {Number} t interpolation amount between the two inputs
- * @returns {vec2} out
- */
-vec2.lerp = function (out, a, b, t) {
-    var ax = a[0],
-        ay = a[1];
-    out[0] = ax + t * (b[0] - ax);
-    out[1] = ay + t * (b[1] - ay);
-    return out;
-};
-
-/**
- * Generates a random vector with the given scale
- *
- * @param {vec2} out the receiving vector
- * @param {Number} [scale] Length of the resulting vector. If ommitted, a unit vector will be returned
- * @returns {vec2} out
- */
-vec2.random = function (out, scale) {
-    scale = scale || 1.0;
-    var r = GLMAT_RANDOM() * 2.0 * Math.PI;
-    out[0] = Math.cos(r) * scale;
-    out[1] = Math.sin(r) * scale;
-    return out;
-};
-
-/**
- * Transforms the vec2 with a mat2
- *
- * @param {vec2} out the receiving vector
- * @param {vec2} a the vector to transform
- * @param {mat2} m matrix to transform with
- * @returns {vec2} out
- */
-vec2.transformMat2 = function(out, a, m) {
-    var x = a[0],
-        y = a[1];
-    out[0] = m[0] * x + m[2] * y;
-    out[1] = m[1] * x + m[3] * y;
-    return out;
-};
-
-/**
- * Transforms the vec2 with a mat2d
- *
- * @param {vec2} out the receiving vector
- * @param {vec2} a the vector to transform
- * @param {mat2d} m matrix to transform with
- * @returns {vec2} out
- */
-vec2.transformMat2d = function(out, a, m) {
-    var x = a[0],
-        y = a[1];
-    out[0] = m[0] * x + m[2] * y + m[4];
-    out[1] = m[1] * x + m[3] * y + m[5];
-    return out;
-};
-
-/**
- * Transforms the vec2 with a mat3
- * 3rd vector component is implicitly '1'
- *
- * @param {vec2} out the receiving vector
- * @param {vec2} a the vector to transform
- * @param {mat3} m matrix to transform with
- * @returns {vec2} out
- */
-vec2.transformMat3 = function(out, a, m) {
-    var x = a[0],
-        y = a[1];
-    out[0] = m[0] * x + m[3] * y + m[6];
-    out[1] = m[1] * x + m[4] * y + m[7];
-    return out;
-};
-
-/**
- * Transforms the vec2 with a mat4
- * 3rd vector component is implicitly '0'
- * 4th vector component is implicitly '1'
- *
- * @param {vec2} out the receiving vector
- * @param {vec2} a the vector to transform
- * @param {mat4} m matrix to transform with
- * @returns {vec2} out
- */
-vec2.transformMat4 = function(out, a, m) {
-    var x = a[0],
-        y = a[1];
-    out[0] = m[0] * x + m[4] * y + m[12];
-    out[1] = m[1] * x + m[5] * y + m[13];
-    return out;
-};
-
-/**
- * Perform some operation over an array of vec2s.
- *
- * @param {Array} a the array of vectors to iterate over
- * @param {Number} stride Number of elements between the start of each vec2. If 0 assumes tightly packed
- * @param {Number} offset Number of elements to skip at the beginning of the array
- * @param {Number} count Number of vec2s to iterate over. If 0 iterates over entire array
- * @param {Function} fn Function to call for each vector in the array
- * @param {Object} [arg] additional argument to pass to fn
- * @returns {Array} a
- * @function
- */
-vec2.forEach = (function() {
-    var vec = vec2.create();
-
-    return function(a, stride, offset, count, fn, arg) {
-        var i, l;
-        if(!stride) {
-            stride = 2;
-        }
-
-        if(!offset) {
-            offset = 0;
-        }
-
-        if(count) {
-            l = Math.min((count * stride) + offset, a.length);
-        } else {
-            l = a.length;
-        }
-
-        for(i = offset; i < l; i += stride) {
-            vec[0] = a[i]; vec[1] = a[i+1];
-            fn(vec, vec, arg);
-            a[i] = vec[0]; a[i+1] = vec[1];
-        }
-
-        return a;
-    };
-})();
-
-/* harmony default export */ const glmatrix_vec2 = (vec2);
-;// CONCATENATED MODULE: ./node_modules/claygl/src/math/Vector2.js
-
-
-/**
- * @constructor
- * @alias clay.Vector2
- * @param {number} x
- * @param {number} y
- */
-var Vector2 = function(x, y) {
-
-    x = x || 0;
-    y = y || 0;
-
-    /**
-     * Storage of Vector2, read and write of x, y will change the values in array
-     * All methods also operate on the array instead of x, y components
-     * @name array
-     * @type {Float32Array}
-     * @memberOf clay.Vector2#
-     */
-    this.array = glmatrix_vec2.fromValues(x, y);
-
-    /**
-     * Dirty flag is used by the Node to determine
-     * if the matrix is updated to latest
-     * @name _dirty
-     * @type {boolean}
-     * @memberOf clay.Vector2#
-     */
-    this._dirty = true;
-};
-
-Vector2.prototype = {
-
-    constructor: Vector2,
-
-    /**
-     * Add b to self
-     * @param  {clay.Vector2} b
-     * @return {clay.Vector2}
-     */
-    add: function(b) {
-        glmatrix_vec2.add(this.array, this.array, b.array);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Set x and y components
-     * @param  {number}  x
-     * @param  {number}  y
-     * @return {clay.Vector2}
-     */
-    set: function(x, y) {
-        this.array[0] = x;
-        this.array[1] = y;
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Set x and y components from array
-     * @param  {Float32Array|number[]} arr
-     * @return {clay.Vector2}
-     */
-    setArray: function(arr) {
-        this.array[0] = arr[0];
-        this.array[1] = arr[1];
-
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Clone a new Vector2
-     * @return {clay.Vector2}
-     */
-    clone: function() {
-        return new Vector2(this.x, this.y);
-    },
-
-    /**
-     * Copy x, y from b
-     * @param  {clay.Vector2} b
-     * @return {clay.Vector2}
-     */
-    copy: function(b) {
-        glmatrix_vec2.copy(this.array, b.array);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Cross product of self and b, written to a Vector3 out
-     * @param  {clay.Vector3} out
-     * @param  {clay.Vector2} b
-     * @return {clay.Vector2}
-     */
-    cross: function(out, b) {
-        glmatrix_vec2.cross(out.array, this.array, b.array);
-        out._dirty = true;
-        return this;
-    },
-
-    /**
-     * Alias for distance
-     * @param  {clay.Vector2} b
-     * @return {number}
-     */
-    dist: function(b) {
-        return glmatrix_vec2.dist(this.array, b.array);
-    },
-
-    /**
-     * Distance between self and b
-     * @param  {clay.Vector2} b
-     * @return {number}
-     */
-    distance: function(b) {
-        return glmatrix_vec2.distance(this.array, b.array);
-    },
-
-    /**
-     * Alias for divide
-     * @param  {clay.Vector2} b
-     * @return {clay.Vector2}
-     */
-    div: function(b) {
-        glmatrix_vec2.div(this.array, this.array, b.array);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Divide self by b
-     * @param  {clay.Vector2} b
-     * @return {clay.Vector2}
-     */
-    divide: function(b) {
-        glmatrix_vec2.divide(this.array, this.array, b.array);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Dot product of self and b
-     * @param  {clay.Vector2} b
-     * @return {number}
-     */
-    dot: function(b) {
-        return glmatrix_vec2.dot(this.array, b.array);
-    },
-
-    /**
-     * Alias of length
-     * @return {number}
-     */
-    len: function() {
-        return glmatrix_vec2.len(this.array);
-    },
-
-    /**
-     * Calculate the length
-     * @return {number}
-     */
-    length: function() {
-        return glmatrix_vec2.length(this.array);
-    },
-
-    /**
-     * Linear interpolation between a and b
-     * @param  {clay.Vector2} a
-     * @param  {clay.Vector2} b
-     * @param  {number}  t
-     * @return {clay.Vector2}
-     */
-    lerp: function(a, b, t) {
-        glmatrix_vec2.lerp(this.array, a.array, b.array, t);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Minimum of self and b
-     * @param  {clay.Vector2} b
-     * @return {clay.Vector2}
-     */
-    min: function(b) {
-        glmatrix_vec2.min(this.array, this.array, b.array);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Maximum of self and b
-     * @param  {clay.Vector2} b
-     * @return {clay.Vector2}
-     */
-    max: function(b) {
-        glmatrix_vec2.max(this.array, this.array, b.array);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Alias for multiply
-     * @param  {clay.Vector2} b
-     * @return {clay.Vector2}
-     */
-    mul: function(b) {
-        glmatrix_vec2.mul(this.array, this.array, b.array);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Mutiply self and b
-     * @param  {clay.Vector2} b
-     * @return {clay.Vector2}
-     */
-    multiply: function(b) {
-        glmatrix_vec2.multiply(this.array, this.array, b.array);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Negate self
-     * @return {clay.Vector2}
-     */
-    negate: function() {
-        glmatrix_vec2.negate(this.array, this.array);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Normalize self
-     * @return {clay.Vector2}
-     */
-    normalize: function() {
-        glmatrix_vec2.normalize(this.array, this.array);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Generate random x, y components with a given scale
-     * @param  {number} scale
-     * @return {clay.Vector2}
-     */
-    random: function(scale) {
-        glmatrix_vec2.random(this.array, scale);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Scale self
-     * @param  {number}  scale
-     * @return {clay.Vector2}
-     */
-    scale: function(s) {
-        glmatrix_vec2.scale(this.array, this.array, s);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Scale b and add to self
-     * @param  {clay.Vector2} b
-     * @param  {number}  scale
-     * @return {clay.Vector2}
-     */
-    scaleAndAdd: function(b, s) {
-        glmatrix_vec2.scaleAndAdd(this.array, this.array, b.array, s);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Alias for squaredDistance
-     * @param  {clay.Vector2} b
-     * @return {number}
-     */
-    sqrDist: function(b) {
-        return glmatrix_vec2.sqrDist(this.array, b.array);
-    },
-
-    /**
-     * Squared distance between self and b
-     * @param  {clay.Vector2} b
-     * @return {number}
-     */
-    squaredDistance: function(b) {
-        return glmatrix_vec2.squaredDistance(this.array, b.array);
-    },
-
-    /**
-     * Alias for squaredLength
-     * @return {number}
-     */
-    sqrLen: function() {
-        return glmatrix_vec2.sqrLen(this.array);
-    },
-
-    /**
-     * Squared length of self
-     * @return {number}
-     */
-    squaredLength: function() {
-        return glmatrix_vec2.squaredLength(this.array);
-    },
-
-    /**
-     * Alias for subtract
-     * @param  {clay.Vector2} b
-     * @return {clay.Vector2}
-     */
-    sub: function(b) {
-        glmatrix_vec2.sub(this.array, this.array, b.array);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Subtract b from self
-     * @param  {clay.Vector2} b
-     * @return {clay.Vector2}
-     */
-    subtract: function(b) {
-        glmatrix_vec2.subtract(this.array, this.array, b.array);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Transform self with a Matrix2 m
-     * @param  {clay.Matrix2} m
-     * @return {clay.Vector2}
-     */
-    transformMat2: function(m) {
-        glmatrix_vec2.transformMat2(this.array, this.array, m.array);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Transform self with a Matrix2d m
-     * @param  {clay.Matrix2d} m
-     * @return {clay.Vector2}
-     */
-    transformMat2d: function(m) {
-        glmatrix_vec2.transformMat2d(this.array, this.array, m.array);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Transform self with a Matrix3 m
-     * @param  {clay.Matrix3} m
-     * @return {clay.Vector2}
-     */
-    transformMat3: function(m) {
-        glmatrix_vec2.transformMat3(this.array, this.array, m.array);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Transform self with a Matrix4 m
-     * @param  {clay.Matrix4} m
-     * @return {clay.Vector2}
-     */
-    transformMat4: function(m) {
-        glmatrix_vec2.transformMat4(this.array, this.array, m.array);
-        this._dirty = true;
-        return this;
-    },
-
-    toString: function() {
-        return '[' + Array.prototype.join.call(this.array, ',') + ']';
-    },
-
-    toArray: function () {
-        return Array.prototype.slice.call(this.array);
-    }
-};
-
-// Getter and Setter
-if (Object.defineProperty) {
-
-    var proto = Vector2.prototype;
-    /**
-     * @name x
-     * @type {number}
-     * @memberOf clay.Vector2
-     * @instance
-     */
-    Object.defineProperty(proto, 'x', {
-        get: function () {
-            return this.array[0];
-        },
-        set: function (value) {
-            this.array[0] = value;
-            this._dirty = true;
-        }
-    });
-
-    /**
-     * @name y
-     * @type {number}
-     * @memberOf clay.Vector2
-     * @instance
-     */
-    Object.defineProperty(proto, 'y', {
-        get: function () {
-            return this.array[1];
-        },
-        set: function (value) {
-            this.array[1] = value;
-            this._dirty = true;
-        }
-    });
-}
-
-// Supply methods that are not in place
-
-/**
- * @param  {clay.Vector2} out
- * @param  {clay.Vector2} a
- * @param  {clay.Vector2} b
- * @return {clay.Vector2}
- */
-Vector2.add = function(out, a, b) {
-    glmatrix_vec2.add(out.array, a.array, b.array);
-    out._dirty = true;
-    return out;
-};
-
-/**
- * @param  {clay.Vector2} out
- * @param  {number}  x
- * @param  {number}  y
- * @return {clay.Vector2}
- */
-Vector2.set = function(out, x, y) {
-    glmatrix_vec2.set(out.array, x, y);
-    out._dirty = true;
-    return out;
-};
-
-/**
- * @param  {clay.Vector2} out
- * @param  {clay.Vector2} b
- * @return {clay.Vector2}
- */
-Vector2.copy = function(out, b) {
-    glmatrix_vec2.copy(out.array, b.array);
-    out._dirty = true;
-    return out;
-};
-
-/**
- * @param  {clay.Vector3} out
- * @param  {clay.Vector2} a
- * @param  {clay.Vector2} b
- * @return {clay.Vector2}
- */
-Vector2.cross = function(out, a, b) {
-    glmatrix_vec2.cross(out.array, a.array, b.array);
-    out._dirty = true;
-    return out;
-};
-/**
- * @param  {clay.Vector2} a
- * @param  {clay.Vector2} b
- * @return {number}
- */
-Vector2.dist = function(a, b) {
-    return glmatrix_vec2.distance(a.array, b.array);
-};
-/**
- * @function
- * @param  {clay.Vector2} a
- * @param  {clay.Vector2} b
- * @return {number}
- */
-Vector2.distance = Vector2.dist;
-/**
- * @param  {clay.Vector2} out
- * @param  {clay.Vector2} a
- * @param  {clay.Vector2} b
- * @return {clay.Vector2}
- */
-Vector2.div = function(out, a, b) {
-    glmatrix_vec2.divide(out.array, a.array, b.array);
-    out._dirty = true;
-    return out;
-};
-/**
- * @function
- * @param  {clay.Vector2} out
- * @param  {clay.Vector2} a
- * @param  {clay.Vector2} b
- * @return {clay.Vector2}
- */
-Vector2.divide = Vector2.div;
-/**
- * @param  {clay.Vector2} a
- * @param  {clay.Vector2} b
- * @return {number}
- */
-Vector2.dot = function(a, b) {
-    return glmatrix_vec2.dot(a.array, b.array);
-};
-
-/**
- * @param  {clay.Vector2} a
- * @return {number}
- */
-Vector2.len = function(b) {
-    return glmatrix_vec2.length(b.array);
-};
-
-// Vector2.length = Vector2.len;
-
-/**
- * @param  {clay.Vector2} out
- * @param  {clay.Vector2} a
- * @param  {clay.Vector2} b
- * @param  {number}  t
- * @return {clay.Vector2}
- */
-Vector2.lerp = function(out, a, b, t) {
-    glmatrix_vec2.lerp(out.array, a.array, b.array, t);
-    out._dirty = true;
-    return out;
-};
-/**
- * @param  {clay.Vector2} out
- * @param  {clay.Vector2} a
- * @param  {clay.Vector2} b
- * @return {clay.Vector2}
- */
-Vector2.min = function(out, a, b) {
-    glmatrix_vec2.min(out.array, a.array, b.array);
-    out._dirty = true;
-    return out;
-};
-
-/**
- * @param  {clay.Vector2} out
- * @param  {clay.Vector2} a
- * @param  {clay.Vector2} b
- * @return {clay.Vector2}
- */
-Vector2.max = function(out, a, b) {
-    glmatrix_vec2.max(out.array, a.array, b.array);
-    out._dirty = true;
-    return out;
-};
-/**
- * @param  {clay.Vector2} out
- * @param  {clay.Vector2} a
- * @param  {clay.Vector2} b
- * @return {clay.Vector2}
- */
-Vector2.mul = function(out, a, b) {
-    glmatrix_vec2.multiply(out.array, a.array, b.array);
-    out._dirty = true;
-    return out;
-};
-/**
- * @function
- * @param  {clay.Vector2} out
- * @param  {clay.Vector2} a
- * @param  {clay.Vector2} b
- * @return {clay.Vector2}
- */
-Vector2.multiply = Vector2.mul;
-/**
- * @param  {clay.Vector2} out
- * @param  {clay.Vector2} a
- * @return {clay.Vector2}
- */
-Vector2.negate = function(out, a) {
-    glmatrix_vec2.negate(out.array, a.array);
-    out._dirty = true;
-    return out;
-};
-/**
- * @param  {clay.Vector2} out
- * @param  {clay.Vector2} a
- * @return {clay.Vector2}
- */
-Vector2.normalize = function(out, a) {
-    glmatrix_vec2.normalize(out.array, a.array);
-    out._dirty = true;
-    return out;
-};
-/**
- * @param  {clay.Vector2} out
- * @param  {number}  scale
- * @return {clay.Vector2}
- */
-Vector2.random = function(out, scale) {
-    glmatrix_vec2.random(out.array, scale);
-    out._dirty = true;
-    return out;
-};
-/**
- * @param  {clay.Vector2} out
- * @param  {clay.Vector2} a
- * @param  {number}  scale
- * @return {clay.Vector2}
- */
-Vector2.scale = function(out, a, scale) {
-    glmatrix_vec2.scale(out.array, a.array, scale);
-    out._dirty = true;
-    return out;
-};
-/**
- * @param  {clay.Vector2} out
- * @param  {clay.Vector2} a
- * @param  {clay.Vector2} b
- * @param  {number}  scale
- * @return {clay.Vector2}
- */
-Vector2.scaleAndAdd = function(out, a, b, scale) {
-    glmatrix_vec2.scaleAndAdd(out.array, a.array, b.array, scale);
-    out._dirty = true;
-    return out;
-};
-/**
- * @param  {clay.Vector2} a
- * @param  {clay.Vector2} b
- * @return {number}
- */
-Vector2.sqrDist = function(a, b) {
-    return glmatrix_vec2.sqrDist(a.array, b.array);
-};
-/**
- * @function
- * @param  {clay.Vector2} a
- * @param  {clay.Vector2} b
- * @return {number}
- */
-Vector2.squaredDistance = Vector2.sqrDist;
-
-/**
- * @param  {clay.Vector2} a
- * @return {number}
- */
-Vector2.sqrLen = function(a) {
-    return glmatrix_vec2.sqrLen(a.array);
-};
-/**
- * @function
- * @param  {clay.Vector2} a
- * @return {number}
- */
-Vector2.squaredLength = Vector2.sqrLen;
-
-/**
- * @param  {clay.Vector2} out
- * @param  {clay.Vector2} a
- * @param  {clay.Vector2} b
- * @return {clay.Vector2}
- */
-Vector2.sub = function(out, a, b) {
-    glmatrix_vec2.subtract(out.array, a.array, b.array);
-    out._dirty = true;
-    return out;
-};
-/**
- * @function
- * @param  {clay.Vector2} out
- * @param  {clay.Vector2} a
- * @param  {clay.Vector2} b
- * @return {clay.Vector2}
- */
-Vector2.subtract = Vector2.sub;
-/**
- * @param  {clay.Vector2} out
- * @param  {clay.Vector2} a
- * @param  {clay.Matrix2} m
- * @return {clay.Vector2}
- */
-Vector2.transformMat2 = function(out, a, m) {
-    glmatrix_vec2.transformMat2(out.array, a.array, m.array);
-    out._dirty = true;
-    return out;
-};
-/**
- * @param  {clay.Vector2}  out
- * @param  {clay.Vector2}  a
- * @param  {clay.Matrix2d} m
- * @return {clay.Vector2}
- */
-Vector2.transformMat2d = function(out, a, m) {
-    glmatrix_vec2.transformMat2d(out.array, a.array, m.array);
-    out._dirty = true;
-    return out;
-};
-/**
- * @param  {clay.Vector2} out
- * @param  {clay.Vector2} a
- * @param  {Matrix3} m
- * @return {clay.Vector2}
- */
-Vector2.transformMat3 = function(out, a, m) {
-    glmatrix_vec2.transformMat3(out.array, a.array, m.array);
-    out._dirty = true;
-    return out;
-};
-/**
- * @param  {clay.Vector2} out
- * @param  {clay.Vector2} a
- * @param  {clay.Matrix4} m
- * @return {clay.Vector2}
- */
-Vector2.transformMat4 = function(out, a, m) {
-    glmatrix_vec2.transformMat4(out.array, a.array, m.array);
-    out._dirty = true;
-    return out;
-};
-
-/* harmony default export */ const math_Vector2 = (Vector2);
-
-;// CONCATENATED MODULE: ./node_modules/claygl/src/gpu/GLProgram.js
-
-
-
-var SHADER_STATE_TO_ENABLE = 1;
-var SHADER_STATE_KEEP_ENABLE = 2;
-var SHADER_STATE_PENDING = 3;
-
-// Enable attribute operation is global to all programs
-// Here saved the list of all enabled attribute index
-// http://www.mjbshaw.com/2013/03/webgl-fixing-invalidoperation.html
-var enabledAttributeList = {};
-
-// some util functions
-function addLineNumbers(string) {
-    var chunks = string.split('\n');
-    for (var i = 0, il = chunks.length; i < il; i ++) {
-        // Chrome reports shader errors on lines
-        // starting counting from 1
-        chunks[i] = (i + 1) + ': ' + chunks[i];
-    }
-    return chunks.join('\n');
-}
-
-// Return true or error msg if error happened
-function checkShaderErrorMsg(_gl, shader, shaderString) {
-    if (!_gl.getShaderParameter(shader, _gl.COMPILE_STATUS)) {
-        return [_gl.getShaderInfoLog(shader), addLineNumbers(shaderString)].join('\n');
-    }
-}
-
-var tmpFloat32Array16 = new core_vendor.Float32Array(16);
-
-var GLProgram = core_Base.extend({
-
-    uniformSemantics: {},
-    attributes: {}
-
-}, function () {
-    this._locations = {};
-
-    this._textureSlot = 0;
-
-    this._program = null;
-}, {
-
-    bind: function (renderer) {
-        this._textureSlot = 0;
-        renderer.gl.useProgram(this._program);
-    },
-
-    hasUniform: function (symbol) {
-        var location = this._locations[symbol];
-        return location !== null && location !== undefined;
-    },
-
-    useTextureSlot: function (renderer, texture, slot) {
-        if (texture) {
-            renderer.gl.activeTexture(renderer.gl.TEXTURE0 + slot);
-            // Maybe texture is not loaded yet;
-            if (texture.isRenderable()) {
-                texture.bind(renderer);
-            }
-            else {
-                // Bind texture to null
-                texture.unbind(renderer);
-            }
-        }
-    },
-
-    currentTextureSlot: function () {
-        return this._textureSlot;
-    },
-
-    resetTextureSlot: function (slot) {
-        this._textureSlot = slot || 0;
-    },
-
-    takeCurrentTextureSlot: function (renderer, texture) {
-        var textureSlot = this._textureSlot;
-
-        this.useTextureSlot(renderer, texture, textureSlot);
-
-        this._textureSlot++;
-
-        return textureSlot;
-    },
-
-    setUniform: function (_gl, type, symbol, value) {
-        var locationMap = this._locations;
-        var location = locationMap[symbol];
-        // Uniform is not existed in the shader
-        if (location === null || location === undefined) {
-            return false;
-        }
-
-        switch (type) {
-            case 'm4':
-                if (!(value instanceof Float32Array)) {
-                    // Use Float32Array is much faster than array when uniformMatrix4fv.
-                    for (var i = 0; i < value.length; i++) {
-                        tmpFloat32Array16[i] = value[i];
-                    }
-                    value = tmpFloat32Array16;
-                }
-                _gl.uniformMatrix4fv(location, false, value);
-                break;
-            case '2i':
-                _gl.uniform2i(location, value[0], value[1]);
-                break;
-            case '2f':
-                _gl.uniform2f(location, value[0], value[1]);
-                break;
-            case '3i':
-                _gl.uniform3i(location, value[0], value[1], value[2]);
-                break;
-            case '3f':
-                _gl.uniform3f(location, value[0], value[1], value[2]);
-                break;
-            case '4i':
-                _gl.uniform4i(location, value[0], value[1], value[2], value[3]);
-                break;
-            case '4f':
-                _gl.uniform4f(location, value[0], value[1], value[2], value[3]);
-                break;
-            case '1i':
-                _gl.uniform1i(location, value);
-                break;
-            case '1f':
-                _gl.uniform1f(location, value);
-                break;
-            case '1fv':
-                _gl.uniform1fv(location, value);
-                break;
-            case '1iv':
-                _gl.uniform1iv(location, value);
-                break;
-            case '2iv':
-                _gl.uniform2iv(location, value);
-                break;
-            case '2fv':
-                _gl.uniform2fv(location, value);
-                break;
-            case '3iv':
-                _gl.uniform3iv(location, value);
-                break;
-            case '3fv':
-                _gl.uniform3fv(location, value);
-                break;
-            case '4iv':
-                _gl.uniform4iv(location, value);
-                break;
-            case '4fv':
-                _gl.uniform4fv(location, value);
-                break;
-            case 'm2':
-            case 'm2v':
-                _gl.uniformMatrix2fv(location, false, value);
-                break;
-            case 'm3':
-            case 'm3v':
-                _gl.uniformMatrix3fv(location, false, value);
-                break;
-            case 'm4v':
-                // Raw value
-                if (Array.isArray(value) && Array.isArray(value[0])) {
-                    var array = new core_vendor.Float32Array(value.length * 16);
-                    var cursor = 0;
-                    for (var i = 0; i < value.length; i++) {
-                        var item = value[i];
-                        for (var j = 0; j < 16; j++) {
-                            array[cursor++] = item[j];
-                        }
-                    }
-                    _gl.uniformMatrix4fv(location, false, array);
-                }
-                else {   // ArrayBufferView
-                    _gl.uniformMatrix4fv(location, false, value);
-                }
-                break;
-        }
-        return true;
-    },
-
-    setUniformOfSemantic: function (_gl, semantic, val) {
-        var semanticInfo = this.uniformSemantics[semantic];
-        if (semanticInfo) {
-            return this.setUniform(_gl, semanticInfo.type, semanticInfo.symbol, val);
-        }
-        return false;
-    },
-
-    // Used for creating VAO
-    // Enable the attributes passed in and disable the rest
-    // Example Usage:
-    // enableAttributes(renderer, ["position", "texcoords"])
-    enableAttributes: function (renderer, attribList, vao) {
-        var _gl = renderer.gl;
-        var program = this._program;
-
-        var locationMap = this._locations;
-
-        var enabledAttributeListInContext;
-        if (vao) {
-            enabledAttributeListInContext = vao.__enabledAttributeList;
-        }
-        else {
-            enabledAttributeListInContext = enabledAttributeList[renderer.__uid__];
-        }
-        if (!enabledAttributeListInContext) {
-            // In vertex array object context
-            // PENDING Each vao object needs to enable attributes again?
-            if (vao) {
-                enabledAttributeListInContext
-                    = vao.__enabledAttributeList
-                    = [];
-            }
-            else {
-                enabledAttributeListInContext
-                    = enabledAttributeList[renderer.__uid__]
-                    = [];
-            }
-        }
-        var locationList = [];
-        for (var i = 0; i < attribList.length; i++) {
-            var symbol = attribList[i];
-            if (!this.attributes[symbol]) {
-                locationList[i] = -1;
-                continue;
-            }
-            var location = locationMap[symbol];
-            if (location == null) {
-                location = _gl.getAttribLocation(program, symbol);
-                // Attrib location is a number from 0 to ...
-                if (location === -1) {
-                    locationList[i] = -1;
-                    continue;
-                }
-                locationMap[symbol] = location;
-            }
-            locationList[i] = location;
-
-            if (!enabledAttributeListInContext[location]) {
-                enabledAttributeListInContext[location] = SHADER_STATE_TO_ENABLE;
-            }
-            else {
-                enabledAttributeListInContext[location] = SHADER_STATE_KEEP_ENABLE;
-            }
-        }
-
-        for (var i = 0; i < enabledAttributeListInContext.length; i++) {
-            switch(enabledAttributeListInContext[i]){
-                case SHADER_STATE_TO_ENABLE:
-                    _gl.enableVertexAttribArray(i);
-                    enabledAttributeListInContext[i] = SHADER_STATE_PENDING;
-                    break;
-                case SHADER_STATE_KEEP_ENABLE:
-                    enabledAttributeListInContext[i] = SHADER_STATE_PENDING;
-                    break;
-                // Expired
-                case SHADER_STATE_PENDING:
-                    _gl.disableVertexAttribArray(i);
-                    enabledAttributeListInContext[i] = 0;
-                    break;
-            }
-        }
-
-        return locationList;
-    },
-
-    getAttribLocation: function (_gl, symbol) {
-        var locationMap = this._locations;
-
-        var location = locationMap[symbol];
-        if (location == null) {
-            location = _gl.getAttribLocation(this._program, symbol);
-            locationMap[symbol] = location;
-        }
-
-        return location;
-    },
-
-    buildProgram: function (_gl, shader, vertexShaderCode, fragmentShaderCode) {
-        var vertexShader = _gl.createShader(_gl.VERTEX_SHADER);
-        var program = _gl.createProgram();
-
-        _gl.shaderSource(vertexShader, vertexShaderCode);
-        _gl.compileShader(vertexShader);
-
-        var fragmentShader = _gl.createShader(_gl.FRAGMENT_SHADER);
-        _gl.shaderSource(fragmentShader, fragmentShaderCode);
-        _gl.compileShader(fragmentShader);
-
-        var msg = checkShaderErrorMsg(_gl, vertexShader, vertexShaderCode);
-        if (msg) {
-            return msg;
-        }
-        msg = checkShaderErrorMsg(_gl, fragmentShader, fragmentShaderCode);
-        if (msg) {
-            return msg;
-        }
-
-        _gl.attachShader(program, vertexShader);
-        _gl.attachShader(program, fragmentShader);
-        // Force the position bind to location 0;
-        if (shader.attributeSemantics['POSITION']) {
-            _gl.bindAttribLocation(program, 0, shader.attributeSemantics['POSITION'].symbol);
-        }
-        else {
-            // Else choose an attribute and bind to location 0;
-            var keys = Object.keys(this.attributes);
-            _gl.bindAttribLocation(program, 0, keys[0]);
-        }
-
-        _gl.linkProgram(program);
-
-        _gl.deleteShader(vertexShader);
-        _gl.deleteShader(fragmentShader);
-
-        this._program = program;
-
-        // Save code.
-        this.vertexCode = vertexShaderCode;
-        this.fragmentCode = fragmentShaderCode;
-
-        if (!_gl.getProgramParameter(program, _gl.LINK_STATUS)) {
-            return 'Could not link program\n' + _gl.getProgramInfoLog(program);
-        }
-
-        // Cache uniform locations
-        for (var i = 0; i < shader.uniforms.length; i++) {
-            var uniformSymbol = shader.uniforms[i];
-            this._locations[uniformSymbol] = _gl.getUniformLocation(program, uniformSymbol);
-        }
-
-    }
-});
-
-/* harmony default export */ const gpu_GLProgram = (GLProgram);
-;// CONCATENATED MODULE: ./node_modules/claygl/src/gpu/ProgramManager.js
-
-
-var loopRegex = /for\s*?\(int\s*?_idx_\s*\=\s*([\w-]+)\;\s*_idx_\s*<\s*([\w-]+);\s*_idx_\s*\+\+\s*\)\s*\{\{([\s\S]+?)(?=\}\})\}\}/g;
-
-function unrollLoop(shaderStr, defines, lightsNumbers) {
-    // Loop unroll from three.js, https://github.com/mrdoob/three.js/blob/master/src/renderers/webgl/WebGLProgram.js#L175
-    // In some case like shadowMap in loop use 'i' to index value much slower.
-
-    // Loop use _idx_ and increased with _idx_++ will be unrolled
-    // Use {{ }} to match the pair so the if statement will not be affected
-    // Write like following
-    // for (int _idx_ = 0; _idx_ < 4; _idx_++) {{
-    //     vec3 color = texture2D(textures[_idx_], uv).rgb;
-    // }}
-    function replace(match, start, end, snippet) {
-        var unroll = '';
-        // Try to treat as define
-        if (isNaN(start)) {
-            if (start in defines) {
-                start = defines[start];
-            }
-            else {
-                start = lightNumberDefines[start];
-            }
-        }
-        if (isNaN(end)) {
-            if (end in defines) {
-                end = defines[end];
-            }
-            else {
-                end = lightNumberDefines[end];
-            }
-        }
-        // TODO Error checking
-
-        for (var idx = parseInt(start); idx < parseInt(end); idx++) {
-            // PENDING Add scope?
-            unroll += '{'
-                + snippet
-                    .replace(/float\s*\(\s*_idx_\s*\)/g, idx.toFixed(1))
-                    .replace(/_idx_/g, idx)
-            + '}';
-        }
-
-        return unroll;
-    }
-
-    var lightNumberDefines = {};
-    for (var lightType in lightsNumbers) {
-        lightNumberDefines[lightType + '_COUNT'] = lightsNumbers[lightType];
-    }
-    return shaderStr.replace(loopRegex, replace);
-}
-
-function ProgramManager_getDefineCode(defines, lightsNumbers, enabledTextures) {
-    var defineStr = [];
-    if (lightsNumbers) {
-        for (var lightType in lightsNumbers) {
-            var count = lightsNumbers[lightType];
-            if (count > 0) {
-                defineStr.push('#define ' + lightType.toUpperCase() + '_COUNT ' + count);
-            }
-        }
-    }
-    if (enabledTextures) {
-        for (var i = 0; i < enabledTextures.length; i++) {
-            var symbol = enabledTextures[i];
-            defineStr.push('#define ' + symbol.toUpperCase() + '_ENABLED');
-        }
-    }
-    // Custom Defines
-    for (var symbol in defines) {
-        var value = defines[symbol];
-        if (value === null) {
-            defineStr.push('#define ' + symbol);
-        }
-        else{
-            defineStr.push('#define ' + symbol + ' ' + value.toString());
-        }
-    }
-    return defineStr.join('\n');
-}
-
-function getExtensionCode(exts) {
-    // Extension declaration must before all non-preprocessor codes
-    // TODO vertex ? extension enum ?
-    var extensionStr = [];
-    for (var i = 0; i < exts.length; i++) {
-        extensionStr.push('#extension GL_' + exts[i] + ' : enable');
-    }
-    return extensionStr.join('\n');
-}
-
-function getPrecisionCode(precision) {
-    return ['precision', precision, 'float'].join(' ') + ';\n'
-        + ['precision', precision, 'int'].join(' ') + ';\n'
-        // depth texture may have precision problem on iOS device.
-        + ['precision', precision, 'sampler2D'].join(' ') + ';\n';
-}
-
-function ProgramManager(renderer) {
-    this._renderer = renderer;
-    this._cache = {};
-}
-
-ProgramManager.prototype.getProgram = function (renderable, material, scene) {
-    var cache = this._cache;
-
-    var isSkinnedMesh = renderable.isSkinnedMesh && renderable.isSkinnedMesh();
-    var isInstancedMesh = renderable.isInstancedMesh && renderable.isInstancedMesh();
-    var key = 's' + material.shader.shaderID + 'm' + material.getProgramKey();
-    if (scene) {
-        key += 'se' + scene.getProgramKey(renderable.lightGroup);
-    }
-    if (isSkinnedMesh) {
-        key += ',sk' + renderable.joints.length;
-    }
-    if (isInstancedMesh) {
-        key += ',is';
-    }
-    var program = cache[key];
-
-    if (program) {
-        return program;
-    }
-
-    var lightsNumbers = scene ? scene.getLightsNumbers(renderable.lightGroup) : {};
-    var renderer = this._renderer;
-    var _gl = renderer.gl;
-    var enabledTextures = material.getEnabledTextures();
-    var extraDefineCode = '';
-    if (isSkinnedMesh) {
-        var skinDefines = {
-            SKINNING: null,
-            JOINT_COUNT: renderable.joints.length
-        };
-        if (renderable.joints.length > renderer.getMaxJointNumber()) {
-            skinDefines.USE_SKIN_MATRICES_TEXTURE = null;
-        }
-        // TODO Add skinning code?
-        extraDefineCode += '\n' + ProgramManager_getDefineCode(skinDefines) + '\n';
-    }
-    if (isInstancedMesh) {
-        extraDefineCode += '\n#define INSTANCING\n';
-    }
-    // TODO Optimize key generation
-    // VERTEX
-    var vertexDefineStr = extraDefineCode + ProgramManager_getDefineCode(material.vertexDefines, lightsNumbers, enabledTextures);
-    // FRAGMENT
-    var fragmentDefineStr = extraDefineCode + ProgramManager_getDefineCode(material.fragmentDefines, lightsNumbers, enabledTextures);
-
-    var vertexCode = vertexDefineStr + '\n' + material.shader.vertex;
-
-    var extensions = [
-        'OES_standard_derivatives',
-        'EXT_shader_texture_lod'
-    ].filter(function (ext) {
-        return renderer.getGLExtension(ext) != null;
-    });
-
-    if (extensions.indexOf('EXT_shader_texture_lod') >= 0) {
-        fragmentDefineStr += '\n#define SUPPORT_TEXTURE_LOD';
-    }
-    if (extensions.indexOf('OES_standard_derivatives') >= 0) {
-        fragmentDefineStr += '\n#define SUPPORT_STANDARD_DERIVATIVES';
-    }
-
-    var fragmentCode = getExtensionCode(extensions) + '\n'
-        + getPrecisionCode(material.precision) + '\n'
-        + fragmentDefineStr + '\n'
-        + material.shader.fragment;
-
-    var finalVertexCode = unrollLoop(vertexCode, material.vertexDefines, lightsNumbers);
-    var finalFragmentCode = unrollLoop(fragmentCode, material.fragmentDefines, lightsNumbers);
-
-    var program = new gpu_GLProgram();
-    program.uniformSemantics = material.shader.uniformSemantics;
-    program.attributes = material.shader.attributes;
-    var errorMsg = program.buildProgram(_gl, material.shader, finalVertexCode, finalFragmentCode);
-    program.__error = errorMsg;
-
-    cache[key] = program;
-
-    return program;
-};
-
-/* harmony default export */ const gpu_ProgramManager = (ProgramManager);
-;// CONCATENATED MODULE: ./node_modules/claygl/src/Shader.js
-/**
- * Mainly do the parse and compile of shader string
- * Support shader code chunk import and export
- * Support shader semantics
- * http://www.nvidia.com/object/using_sas.html
- * https://github.com/KhronosGroup/collada2json/issues/45
- */
-
-
-
-var uniformRegex = /uniform\s+(bool|float|int|vec2|vec3|vec4|ivec2|ivec3|ivec4|mat2|mat3|mat4|sampler2D|samplerCube)\s+([\s\S]*?);/g;
-var attributeRegex = /attribute\s+(float|int|vec2|vec3|vec4)\s+([\s\S]*?);/g;
-// Only parse number define.
-var defineRegex = /#define\s+(\w+)?(\s+[\d-.]+)?\s*;?\s*\n/g;
-
-var uniformTypeMap = {
-    'bool': '1i',
-    'int': '1i',
-    'sampler2D': 't',
-    'samplerCube': 't',
-    'float': '1f',
-    'vec2': '2f',
-    'vec3': '3f',
-    'vec4': '4f',
-    'ivec2': '2i',
-    'ivec3': '3i',
-    'ivec4': '4i',
-    'mat2': 'm2',
-    'mat3': 'm3',
-    'mat4': 'm4'
-};
-
-function createZeroArray(len) {
-    var arr = [];
-    for (var i = 0; i < len; i++) {
-        arr[i] = 0;
-    }
-    return arr;
-}
-
-var uniformValueConstructor = {
-    'bool': function () { return true; },
-    'int': function () { return 0; },
-    'float': function () { return 0; },
-    'sampler2D': function () { return null; },
-    'samplerCube': function () { return null; },
-
-    'vec2': function () { return createZeroArray(2); },
-    'vec3': function () { return createZeroArray(3); },
-    'vec4': function () { return createZeroArray(4); },
-
-    'ivec2': function () { return createZeroArray(2); },
-    'ivec3': function () { return createZeroArray(3); },
-    'ivec4': function () { return createZeroArray(4); },
-
-    'mat2': function () { return createZeroArray(4); },
-    'mat3': function () { return createZeroArray(9); },
-    'mat4': function () { return createZeroArray(16); },
-
-    'array': function () { return []; }
-};
-
-var attributeSemantics = [
-    'POSITION',
-    'NORMAL',
-    'BINORMAL',
-    'TANGENT',
-    'TEXCOORD',
-    'TEXCOORD_0',
-    'TEXCOORD_1',
-    'COLOR',
-    // Skinning
-    // https://github.com/KhronosGroup/glTF/blob/master/specification/README.md#semantics
-    'JOINT',
-    'WEIGHT'
-];
-var uniformSemantics = [
-    'SKIN_MATRIX',
-    // Information about viewport
-    'VIEWPORT_SIZE',
-    'VIEWPORT',
-    'DEVICEPIXELRATIO',
-    // Window size for window relative coordinate
-    // https://www.opengl.org/sdk/docs/man/html/gl_FragCoord.xhtml
-    'WINDOW_SIZE',
-    // Infomation about camera
-    'NEAR',
-    'FAR',
-    // Time
-    'TIME'
-];
-var matrixSemantics = [
-    'WORLD',
-    'VIEW',
-    'PROJECTION',
-    'WORLDVIEW',
-    'VIEWPROJECTION',
-    'WORLDVIEWPROJECTION',
-    'WORLDINVERSE',
-    'VIEWINVERSE',
-    'PROJECTIONINVERSE',
-    'WORLDVIEWINVERSE',
-    'VIEWPROJECTIONINVERSE',
-    'WORLDVIEWPROJECTIONINVERSE',
-    'WORLDTRANSPOSE',
-    'VIEWTRANSPOSE',
-    'PROJECTIONTRANSPOSE',
-    'WORLDVIEWTRANSPOSE',
-    'VIEWPROJECTIONTRANSPOSE',
-    'WORLDVIEWPROJECTIONTRANSPOSE',
-    'WORLDINVERSETRANSPOSE',
-    'VIEWINVERSETRANSPOSE',
-    'PROJECTIONINVERSETRANSPOSE',
-    'WORLDVIEWINVERSETRANSPOSE',
-    'VIEWPROJECTIONINVERSETRANSPOSE',
-    'WORLDVIEWPROJECTIONINVERSETRANSPOSE'
-];
-
-var attributeSizeMap = {
-    // WebGL does not support integer attributes
-    'vec4': 4,
-    'vec3': 3,
-    'vec2': 2,
-    'float': 1
-};
-
-
-var shaderIDCache = {};
-var shaderCodeCache = {};
-
-function getShaderID(vertex, fragment) {
-    var key = 'vertex:' + vertex + 'fragment:' + fragment;
-    if (shaderIDCache[key]) {
-        return shaderIDCache[key];
-    }
-    var id = core_util.genGUID();
-    shaderIDCache[key] = id;
-
-    shaderCodeCache[id] = {
-        vertex: vertex,
-        fragment: fragment
-    };
-
-    return id;
-}
-
-function removeComment(code) {
-    return code.replace(/[ \t]*\/\/.*\n/g, '' )   // remove //
-        .replace(/[ \t]*\/\*[\s\S]*?\*\//g, '' ); // remove /* */
-}
-
-function logSyntaxError() {
-    console.error('Wrong uniform/attributes syntax');
-}
-
-function parseDeclarations(type, line) {
-    var speratorsRegexp = /[,=\(\):]/;
-    var tokens = line
-        // Convert `symbol: [1,2,3]` to `symbol: vec3(1,2,3)`
-        .replace(/:\s*\[\s*(.*)\s*\]/g, '=' + type + '($1)')
-        .replace(/\s+/g, '')
-        .split(/(?=[,=\(\):])/g);
-
-    var newTokens = [];
-    for (var i = 0; i < tokens.length; i++) {
-        if (tokens[i].match(speratorsRegexp)) {
-            newTokens.push(
-                tokens[i].charAt(0),
-                tokens[i].slice(1)
-            );
-        }
-        else {
-            newTokens.push(tokens[i]);
-        }
-    }
-    tokens = newTokens;
-
-    var TYPE_SYMBOL = 0;
-    var TYPE_ASSIGN = 1;
-    var TYPE_VEC = 2;
-    var TYPE_ARR = 3;
-    var TYPE_SEMANTIC = 4;
-    var TYPE_NORMAL = 5;
-
-    var opType = TYPE_SYMBOL;
-    var declarations = {};
-    var declarationValue = null;
-    var currentDeclaration;
-
-    addSymbol(tokens[0]);
-
-    function addSymbol(symbol) {
-        if (!symbol) {
-            logSyntaxError();
-        }
-        var arrResult = symbol.match(/\[(.*?)\]/);
-        currentDeclaration = symbol.replace(/\[(.*?)\]/, '');
-        declarations[currentDeclaration] = {};
-        if (arrResult) {
-            declarations[currentDeclaration].isArray = true;
-            declarations[currentDeclaration].arraySize = arrResult[1];
-        }
-    }
-
-    for (var i = 1; i < tokens.length; i++) {
-        var token = tokens[i];
-        if (!token) {   // Empty token;
-            continue;
-        }
-        if (token === '=') {
-            if (opType !== TYPE_SYMBOL
-            && opType !== TYPE_ARR) {
-                logSyntaxError();
-                break;
-            }
-            opType = TYPE_ASSIGN;
-
-            continue;
-        }
-        else if (token === ':') {
-            opType = TYPE_SEMANTIC;
-
-            continue;
-        }
-        else if (token === ',') {
-            if (opType === TYPE_VEC) {
-                if (!(declarationValue instanceof Array)) {
-                    logSyntaxError();
-                    break;
-                }
-                declarationValue.push(+tokens[++i]);
-            }
-            else {
-                opType = TYPE_NORMAL;
-            }
-
-            continue;
-        }
-        else if (token === ')') {
-            declarations[currentDeclaration].value = new core_vendor.Float32Array(declarationValue);
-            declarationValue = null;
-            opType = TYPE_NORMAL;
-            continue;
-        }
-        else if (token === '(') {
-            if (opType !== TYPE_VEC) {
-                logSyntaxError();
-                break;
-            }
-            if (!(declarationValue instanceof Array)) {
-                logSyntaxError();
-                break;
-            }
-            declarationValue.push(+tokens[++i]);
-            continue;
-        }
-        else if (token.indexOf('vec') >= 0) {
-            if (opType !== TYPE_ASSIGN
-            // Compatitable with old syntax `symbol: [1,2,3]`
-            && opType !== TYPE_SEMANTIC) {
-                logSyntaxError();
-                break;
-            }
-            opType = TYPE_VEC;
-            declarationValue = [];
-            continue;
-        }
-        else if (opType === TYPE_ASSIGN) {
-            if (type === 'bool') {
-                declarations[currentDeclaration].value = token === 'true';
-            }
-            else {
-                declarations[currentDeclaration].value = parseFloat(token);
-            }
-            declarationValue = null;
-            continue;
-        }
-        else if (opType === TYPE_SEMANTIC) {
-            var semantic = token;
-            if (attributeSemantics.indexOf(semantic) >= 0
-                || uniformSemantics.indexOf(semantic) >= 0
-                || matrixSemantics.indexOf(semantic) >= 0
-            ) {
-                declarations[currentDeclaration].semantic = semantic;
-            }
-            else if (semantic === 'ignore' || semantic === 'unconfigurable') {
-                declarations[currentDeclaration].ignore = true;
-            }
-            else {
-                // Try to parse as a default tvalue.
-                if (type === 'bool') {
-                    declarations[currentDeclaration].value = semantic === 'true';
-                }
-                else {
-                    declarations[currentDeclaration].value = parseFloat(semantic);
-                }
-            }
-            continue;
-        }
-
-        // treat as symbol.
-        addSymbol(token);
-        opType = TYPE_SYMBOL;
-    }
-
-    return declarations;
-}
-
-
-/**
- * @constructor
- * @extends clay.core.Base
- * @alias clay.Shader
- * @param {string} vertex
- * @param {string} fragment
- * @example
- * // Create a phong shader
- * var shader = new clay.Shader(
- *      clay.Shader.source('clay.standard.vertex'),
- *      clay.Shader.source('clay.standard.fragment')
- * );
- */
-function Shader(vertex, fragment) {
-    // First argument can be { vertex, fragment }
-    if (typeof vertex === 'object') {
-        fragment = vertex.fragment;
-        vertex = vertex.vertex;
-    }
-
-    vertex = removeComment(vertex);
-    fragment = removeComment(fragment);
-
-    this._shaderID = getShaderID(vertex, fragment);
-
-    this._vertexCode = Shader.parseImport(vertex);
-    this._fragmentCode = Shader.parseImport(fragment);
-
-    /**
-     * @readOnly
-     */
-    this.attributeSemantics = {};
-    /**
-     * @readOnly
-     */
-    this.matrixSemantics = {};
-    /**
-     * @readOnly
-     */
-    this.uniformSemantics = {};
-    /**
-     * @readOnly
-     */
-    this.matrixSemanticKeys = [];
-    /**
-     * @readOnly
-     */
-    this.uniformTemplates = {};
-    /**
-     * @readOnly
-     */
-    this.attributes = {};
-    /**
-     * @readOnly
-     */
-    this.textures = {};
-    /**
-     * @readOnly
-     */
-    this.vertexDefines = {};
-    /**
-     * @readOnly
-     */
-    this.fragmentDefines = {};
-
-    this._parseAttributes();
-    this._parseUniforms();
-    this._parseDefines();
-}
-
-Shader.prototype = {
-
-    constructor: Shader,
-
-    // Create a new uniform instance for material
-    createUniforms: function () {
-        var uniforms = {};
-
-        for (var symbol in this.uniformTemplates){
-            var uniformTpl = this.uniformTemplates[symbol];
-            uniforms[symbol] = {
-                type: uniformTpl.type,
-                value: uniformTpl.value()
-            };
-        }
-
-        return uniforms;
-    },
-
-    _parseImport: function () {
-        this._vertexCode = Shader.parseImport(this.vertex);
-        this._fragmentCode = Shader.parseImport(this.fragment);
-    },
-
-    _addSemanticUniform: function (symbol, uniformType, semantic) {
-        // This case is only for SKIN_MATRIX
-        // TODO
-        if (attributeSemantics.indexOf(semantic) >= 0) {
-            this.attributeSemantics[semantic] = {
-                symbol: symbol,
-                type: uniformType
-            };
-        }
-        else if (matrixSemantics.indexOf(semantic) >= 0) {
-            var isTranspose = false;
-            var semanticNoTranspose = semantic;
-            if (semantic.match(/TRANSPOSE$/)) {
-                isTranspose = true;
-                semanticNoTranspose = semantic.slice(0, -9);
-            }
-            this.matrixSemantics[semantic] = {
-                symbol: symbol,
-                type: uniformType,
-                isTranspose: isTranspose,
-                semanticNoTranspose: semanticNoTranspose
-            };
-        }
-        else if (uniformSemantics.indexOf(semantic) >= 0) {
-            this.uniformSemantics[semantic] = {
-                symbol: symbol,
-                type: uniformType
-            };
-        }
-    },
-
-    _addMaterialUniform: function (symbol, type, uniformType, defaultValueFunc, isArray, materialUniforms) {
-        materialUniforms[symbol] = {
-            type: uniformType,
-            value: isArray ? uniformValueConstructor['array'] : (defaultValueFunc || uniformValueConstructor[type]),
-            semantic: null
-        };
-    },
-
-    _parseUniforms: function () {
-        var uniforms = {};
-        var self = this;
-        var shaderType = 'vertex';
-        this._uniformList = [];
-
-        this._vertexCode = this._vertexCode.replace(uniformRegex, _uniformParser);
-        shaderType = 'fragment';
-        this._fragmentCode = this._fragmentCode.replace(uniformRegex, _uniformParser);
-
-        self.matrixSemanticKeys = Object.keys(this.matrixSemantics);
-
-        function makeDefaultValueFunc(value) {
-            return value != null ? function () { return value; } : null;
-        }
-
-        function _uniformParser(str, type, content) {
-            var declaredUniforms = parseDeclarations(type, content);
-            var uniformMainStr = [];
-            for (var symbol in declaredUniforms) {
-
-                var uniformInfo = declaredUniforms[symbol];
-                var semantic = uniformInfo.semantic;
-                var tmpStr = symbol;
-                var uniformType = uniformTypeMap[type];
-                var defaultValueFunc = makeDefaultValueFunc(declaredUniforms[symbol].value);
-                if (declaredUniforms[symbol].isArray) {
-                    tmpStr += '[' + declaredUniforms[symbol].arraySize + ']';
-                    uniformType += 'v';
-                }
-
-                uniformMainStr.push(tmpStr);
-
-                self._uniformList.push(symbol);
-
-                if (!uniformInfo.ignore) {
-                    if (type === 'sampler2D' || type === 'samplerCube') {
-                        // Texture is default disabled
-                        self.textures[symbol] = {
-                            shaderType: shaderType,
-                            type: type
-                        };
-                    }
-
-                    if (semantic) {
-                        // TODO Should not declare multiple symbols if have semantic.
-                        self._addSemanticUniform(symbol, uniformType, semantic);
-                    }
-                    else {
-                        self._addMaterialUniform(
-                            symbol, type, uniformType, defaultValueFunc,
-                            declaredUniforms[symbol].isArray, uniforms
-                        );
-                    }
-                }
-            }
-            return uniformMainStr.length > 0
-                ? 'uniform ' + type + ' ' + uniformMainStr.join(',') + ';\n' : '';
-        }
-
-        this.uniformTemplates = uniforms;
-    },
-
-    _parseAttributes: function () {
-        var attributes = {};
-        var self = this;
-        this._vertexCode = this._vertexCode.replace(attributeRegex, _attributeParser);
-
-        function _attributeParser(str, type, content) {
-            var declaredAttributes = parseDeclarations(type, content);
-
-            var size = attributeSizeMap[type] || 1;
-            var attributeMainStr = [];
-            for (var symbol in declaredAttributes) {
-                var semantic = declaredAttributes[symbol].semantic;
-                attributes[symbol] = {
-                    // TODO Can only be float
-                    type: 'float',
-                    size: size,
-                    semantic: semantic || null
-                };
-                // TODO Should not declare multiple symbols if have semantic.
-                if (semantic) {
-                    if (attributeSemantics.indexOf(semantic) < 0) {
-                        throw new Error('Unkown semantic "' + semantic + '"');
-                    }
-                    else {
-                        self.attributeSemantics[semantic] = {
-                            symbol: symbol,
-                            type: type
-                        };
-                    }
-                }
-                attributeMainStr.push(symbol);
-            }
-
-            return 'attribute ' + type + ' ' + attributeMainStr.join(',') + ';\n';
-        }
-
-        this.attributes = attributes;
-    },
-
-    _parseDefines: function () {
-        var self = this;
-        var shaderType = 'vertex';
-        this._vertexCode = this._vertexCode.replace(defineRegex, _defineParser);
-        shaderType = 'fragment';
-        this._fragmentCode = this._fragmentCode.replace(defineRegex, _defineParser);
-
-        function _defineParser(str, symbol, value) {
-            var defines = shaderType === 'vertex' ? self.vertexDefines : self.fragmentDefines;
-            if (!defines[symbol]) { // Haven't been defined by user
-                if (value === 'false') {
-                    defines[symbol] = false;
-                }
-                else if (value === 'true') {
-                    defines[symbol] = true;
-                }
-                else {
-                    defines[symbol] = value
-                        // If can parse to float
-                        ? (isNaN(parseFloat(value)) ? value.trim() : parseFloat(value))
-                        : null;
-                }
-            }
-            return '';
-        }
-    },
-
-    /**
-     * Clone a new shader
-     * @return {clay.Shader}
-     */
-    clone: function () {
-        var code = shaderCodeCache[this._shaderID];
-        var shader = new Shader(code.vertex, code.fragment);
-        return shader;
-    }
-};
-
-if (Object.defineProperty) {
-    Object.defineProperty(Shader.prototype, 'shaderID', {
-        get: function () {
-            return this._shaderID;
-        }
-    });
-    Object.defineProperty(Shader.prototype, 'vertex', {
-        get: function () {
-            return this._vertexCode;
-        }
-    });
-    Object.defineProperty(Shader.prototype, 'fragment', {
-        get: function () {
-            return this._fragmentCode;
-        }
-    });
-    Object.defineProperty(Shader.prototype, 'uniforms', {
-        get: function () {
-            return this._uniformList;
-        }
-    });
-}
-
-var importRegex = /(@import)\s*([0-9a-zA-Z_\-\.]*)/g;
-Shader.parseImport = function (shaderStr) {
-    shaderStr = shaderStr.replace(importRegex, function (str, importSymbol, importName) {
-        var str = Shader.source(importName);
-        if (str) {
-            // Recursively parse
-            return Shader.parseImport(str);
-        }
-        else {
-            console.error('Shader chunk "' + importName + '" not existed in library');
-            return '';
-        }
-    });
-    return shaderStr;
-};
-
-var exportRegex = /(@export)\s*([0-9a-zA-Z_\-\.]*)\s*\n([\s\S]*?)@end/g;
-
-/**
- * Import shader source
- * @param  {string} shaderStr
- * @memberOf clay.Shader
- */
-Shader['import'] = function (shaderStr) {
-    shaderStr.replace(exportRegex, function (str, exportSymbol, exportName, code) {
-        var code = code.replace(/(^[\s\t\xa0\u3000]+)|([\u3000\xa0\s\t]+\x24)/g, '');
-        if (code) {
-            var parts = exportName.split('.');
-            var obj = Shader.codes;
-            var i = 0;
-            var key;
-            while (i < parts.length - 1) {
-                key = parts[i++];
-                if (!obj[key]) {
-                    obj[key] = {};
-                }
-                obj = obj[key];
-            }
-            key = parts[i];
-            obj[key] = code;
-        }
-        return code;
-    });
-};
-
-/**
- * Library to store all the loaded shader codes
- * @type {Object}
- * @readOnly
- * @memberOf clay.Shader
- */
-Shader.codes = {};
-
-/**
- * Get shader source
- * @param  {string} name
- * @return {string}
- */
-Shader.source = function (name) {
-    var parts = name.split('.');
-    var obj = Shader.codes;
-    var i = 0;
-    while (obj && i < parts.length) {
-        var key = parts[i++];
-        obj = obj[key];
-    }
-    if (typeof obj !== 'string') {
-        // FIXME Use default instead
-        console.error('Shader "' + name + '" not existed in library');
-        return '';
-    }
-    return obj;
-};
-
-/* harmony default export */ const src_Shader = (Shader);
-
-;// CONCATENATED MODULE: ./node_modules/claygl/src/shader/source/prez.glsl.js
-/* harmony default export */ const prez_glsl = ("@export clay.prez.vertex\nuniform mat4 WVP : WORLDVIEWPROJECTION;\nattribute vec3 pos : POSITION;\nattribute vec2 uv : TEXCOORD_0;\nuniform vec2 uvRepeat : [1.0, 1.0];\nuniform vec2 uvOffset : [0.0, 0.0];\n@import clay.chunk.skinning_header\n@import clay.chunk.instancing_header\nvarying vec2 v_Texcoord;\nvoid main()\n{\n vec4 P = vec4(pos, 1.0);\n#ifdef SKINNING\n @import clay.chunk.skin_matrix\n P = skinMatrixWS * P;\n#endif\n#ifdef INSTANCING\n @import clay.chunk.instancing_matrix\n P = instanceMat * P;\n#endif\n gl_Position = WVP * P;\n v_Texcoord = uv * uvRepeat + uvOffset;\n}\n@end\n@export clay.prez.fragment\nuniform sampler2D alphaMap;\nuniform float alphaCutoff: 0.0;\nvarying vec2 v_Texcoord;\nvoid main()\n{\n if (alphaCutoff > 0.0) {\n if (texture2D(alphaMap, v_Texcoord).a <= alphaCutoff) {\n discard;\n }\n }\n gl_FragColor = vec4(0.0,0.0,0.0,1.0);\n}\n@end");
-
-;// CONCATENATED MODULE: ./node_modules/claygl/src/glmatrix/mat4.js
-
-/* Copyright (c) 2013, Brandon Jones, Colin MacKenzie IV. All rights reserved.
-
-Redistribution and use in source and binary forms, with or without modification,
-are permitted provided that the following conditions are met:
-
-  * Redistributions of source code must retain the above copyright notice, this
-    list of conditions and the following disclaimer.
-  * Redistributions in binary form must reproduce the above copyright notice,
-    this list of conditions and the following disclaimer in the documentation
-    and/or other materials provided with the distribution.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
-ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
-
-
-
-/**
- * @class 4x4 Matrix
- * @name mat4
- */
-
-var mat4 = {};
-
-/**
- * Creates a new identity mat4
- *
- * @returns {mat4} a new 4x4 matrix
- */
-mat4.create = function() {
-    var out = new GLMAT_ARRAY_TYPE(16);
-    out[0] = 1;
-    out[1] = 0;
-    out[2] = 0;
-    out[3] = 0;
-    out[4] = 0;
-    out[5] = 1;
-    out[6] = 0;
-    out[7] = 0;
-    out[8] = 0;
-    out[9] = 0;
-    out[10] = 1;
-    out[11] = 0;
-    out[12] = 0;
-    out[13] = 0;
-    out[14] = 0;
-    out[15] = 1;
-    return out;
-};
-
-/**
- * Creates a new mat4 initialized with values from an existing matrix
- *
- * @param {mat4} a matrix to clone
- * @returns {mat4} a new 4x4 matrix
- */
-mat4.clone = function(a) {
-    var out = new GLMAT_ARRAY_TYPE(16);
-    out[0] = a[0];
-    out[1] = a[1];
-    out[2] = a[2];
-    out[3] = a[3];
-    out[4] = a[4];
-    out[5] = a[5];
-    out[6] = a[6];
-    out[7] = a[7];
-    out[8] = a[8];
-    out[9] = a[9];
-    out[10] = a[10];
-    out[11] = a[11];
-    out[12] = a[12];
-    out[13] = a[13];
-    out[14] = a[14];
-    out[15] = a[15];
-    return out;
-};
-
-/**
- * Copy the values from one mat4 to another
- *
- * @param {mat4} out the receiving matrix
- * @param {mat4} a the source matrix
- * @returns {mat4} out
- */
-mat4.copy = function(out, a) {
-    out[0] = a[0];
-    out[1] = a[1];
-    out[2] = a[2];
-    out[3] = a[3];
-    out[4] = a[4];
-    out[5] = a[5];
-    out[6] = a[6];
-    out[7] = a[7];
-    out[8] = a[8];
-    out[9] = a[9];
-    out[10] = a[10];
-    out[11] = a[11];
-    out[12] = a[12];
-    out[13] = a[13];
-    out[14] = a[14];
-    out[15] = a[15];
-    return out;
-};
-
-/**
- * Set a mat4 to the identity matrix
- *
- * @param {mat4} out the receiving matrix
- * @returns {mat4} out
- */
-mat4.identity = function(out) {
-    out[0] = 1;
-    out[1] = 0;
-    out[2] = 0;
-    out[3] = 0;
-    out[4] = 0;
-    out[5] = 1;
-    out[6] = 0;
-    out[7] = 0;
-    out[8] = 0;
-    out[9] = 0;
-    out[10] = 1;
-    out[11] = 0;
-    out[12] = 0;
-    out[13] = 0;
-    out[14] = 0;
-    out[15] = 1;
-    return out;
-};
-
-/**
- * Transpose the values of a mat4
- *
- * @param {mat4} out the receiving matrix
- * @param {mat4} a the source matrix
- * @returns {mat4} out
- */
-mat4.transpose = function(out, a) {
-    // If we are transposing ourselves we can skip a few steps but have to cache some values
-    if (out === a) {
-        var a01 = a[1], a02 = a[2], a03 = a[3],
-            a12 = a[6], a13 = a[7],
-            a23 = a[11];
-
-        out[1] = a[4];
-        out[2] = a[8];
-        out[3] = a[12];
-        out[4] = a01;
-        out[6] = a[9];
-        out[7] = a[13];
-        out[8] = a02;
-        out[9] = a12;
-        out[11] = a[14];
-        out[12] = a03;
-        out[13] = a13;
-        out[14] = a23;
-    } else {
-        out[0] = a[0];
-        out[1] = a[4];
-        out[2] = a[8];
-        out[3] = a[12];
-        out[4] = a[1];
-        out[5] = a[5];
-        out[6] = a[9];
-        out[7] = a[13];
-        out[8] = a[2];
-        out[9] = a[6];
-        out[10] = a[10];
-        out[11] = a[14];
-        out[12] = a[3];
-        out[13] = a[7];
-        out[14] = a[11];
-        out[15] = a[15];
-    }
-
-    return out;
-};
-
-/**
- * Inverts a mat4
- *
- * @param {mat4} out the receiving matrix
- * @param {mat4} a the source matrix
- * @returns {mat4} out
- */
-mat4.invert = function(out, a) {
-    var a00 = a[0], a01 = a[1], a02 = a[2], a03 = a[3],
-        a10 = a[4], a11 = a[5], a12 = a[6], a13 = a[7],
-        a20 = a[8], a21 = a[9], a22 = a[10], a23 = a[11],
-        a30 = a[12], a31 = a[13], a32 = a[14], a33 = a[15],
-
-        b00 = a00 * a11 - a01 * a10,
-        b01 = a00 * a12 - a02 * a10,
-        b02 = a00 * a13 - a03 * a10,
-        b03 = a01 * a12 - a02 * a11,
-        b04 = a01 * a13 - a03 * a11,
-        b05 = a02 * a13 - a03 * a12,
-        b06 = a20 * a31 - a21 * a30,
-        b07 = a20 * a32 - a22 * a30,
-        b08 = a20 * a33 - a23 * a30,
-        b09 = a21 * a32 - a22 * a31,
-        b10 = a21 * a33 - a23 * a31,
-        b11 = a22 * a33 - a23 * a32,
-
-        // Calculate the determinant
-        det = b00 * b11 - b01 * b10 + b02 * b09 + b03 * b08 - b04 * b07 + b05 * b06;
-
-    if (!det) {
-        return null;
-    }
-    det = 1.0 / det;
-
-    out[0] = (a11 * b11 - a12 * b10 + a13 * b09) * det;
-    out[1] = (a02 * b10 - a01 * b11 - a03 * b09) * det;
-    out[2] = (a31 * b05 - a32 * b04 + a33 * b03) * det;
-    out[3] = (a22 * b04 - a21 * b05 - a23 * b03) * det;
-    out[4] = (a12 * b08 - a10 * b11 - a13 * b07) * det;
-    out[5] = (a00 * b11 - a02 * b08 + a03 * b07) * det;
-    out[6] = (a32 * b02 - a30 * b05 - a33 * b01) * det;
-    out[7] = (a20 * b05 - a22 * b02 + a23 * b01) * det;
-    out[8] = (a10 * b10 - a11 * b08 + a13 * b06) * det;
-    out[9] = (a01 * b08 - a00 * b10 - a03 * b06) * det;
-    out[10] = (a30 * b04 - a31 * b02 + a33 * b00) * det;
-    out[11] = (a21 * b02 - a20 * b04 - a23 * b00) * det;
-    out[12] = (a11 * b07 - a10 * b09 - a12 * b06) * det;
-    out[13] = (a00 * b09 - a01 * b07 + a02 * b06) * det;
-    out[14] = (a31 * b01 - a30 * b03 - a32 * b00) * det;
-    out[15] = (a20 * b03 - a21 * b01 + a22 * b00) * det;
-
-    return out;
-};
-
-/**
- * Calculates the adjugate of a mat4
- *
- * @param {mat4} out the receiving matrix
- * @param {mat4} a the source matrix
- * @returns {mat4} out
- */
-mat4.adjoint = function(out, a) {
-    var a00 = a[0], a01 = a[1], a02 = a[2], a03 = a[3],
-        a10 = a[4], a11 = a[5], a12 = a[6], a13 = a[7],
-        a20 = a[8], a21 = a[9], a22 = a[10], a23 = a[11],
-        a30 = a[12], a31 = a[13], a32 = a[14], a33 = a[15];
-
-    out[0]  =  (a11 * (a22 * a33 - a23 * a32) - a21 * (a12 * a33 - a13 * a32) + a31 * (a12 * a23 - a13 * a22));
-    out[1]  = -(a01 * (a22 * a33 - a23 * a32) - a21 * (a02 * a33 - a03 * a32) + a31 * (a02 * a23 - a03 * a22));
-    out[2]  =  (a01 * (a12 * a33 - a13 * a32) - a11 * (a02 * a33 - a03 * a32) + a31 * (a02 * a13 - a03 * a12));
-    out[3]  = -(a01 * (a12 * a23 - a13 * a22) - a11 * (a02 * a23 - a03 * a22) + a21 * (a02 * a13 - a03 * a12));
-    out[4]  = -(a10 * (a22 * a33 - a23 * a32) - a20 * (a12 * a33 - a13 * a32) + a30 * (a12 * a23 - a13 * a22));
-    out[5]  =  (a00 * (a22 * a33 - a23 * a32) - a20 * (a02 * a33 - a03 * a32) + a30 * (a02 * a23 - a03 * a22));
-    out[6]  = -(a00 * (a12 * a33 - a13 * a32) - a10 * (a02 * a33 - a03 * a32) + a30 * (a02 * a13 - a03 * a12));
-    out[7]  =  (a00 * (a12 * a23 - a13 * a22) - a10 * (a02 * a23 - a03 * a22) + a20 * (a02 * a13 - a03 * a12));
-    out[8]  =  (a10 * (a21 * a33 - a23 * a31) - a20 * (a11 * a33 - a13 * a31) + a30 * (a11 * a23 - a13 * a21));
-    out[9]  = -(a00 * (a21 * a33 - a23 * a31) - a20 * (a01 * a33 - a03 * a31) + a30 * (a01 * a23 - a03 * a21));
-    out[10] =  (a00 * (a11 * a33 - a13 * a31) - a10 * (a01 * a33 - a03 * a31) + a30 * (a01 * a13 - a03 * a11));
-    out[11] = -(a00 * (a11 * a23 - a13 * a21) - a10 * (a01 * a23 - a03 * a21) + a20 * (a01 * a13 - a03 * a11));
-    out[12] = -(a10 * (a21 * a32 - a22 * a31) - a20 * (a11 * a32 - a12 * a31) + a30 * (a11 * a22 - a12 * a21));
-    out[13] =  (a00 * (a21 * a32 - a22 * a31) - a20 * (a01 * a32 - a02 * a31) + a30 * (a01 * a22 - a02 * a21));
-    out[14] = -(a00 * (a11 * a32 - a12 * a31) - a10 * (a01 * a32 - a02 * a31) + a30 * (a01 * a12 - a02 * a11));
-    out[15] =  (a00 * (a11 * a22 - a12 * a21) - a10 * (a01 * a22 - a02 * a21) + a20 * (a01 * a12 - a02 * a11));
-    return out;
-};
-
-/**
- * Calculates the determinant of a mat4
- *
- * @param {mat4} a the source matrix
- * @returns {Number} determinant of a
- */
-mat4.determinant = function (a) {
-    var a00 = a[0], a01 = a[1], a02 = a[2], a03 = a[3],
-        a10 = a[4], a11 = a[5], a12 = a[6], a13 = a[7],
-        a20 = a[8], a21 = a[9], a22 = a[10], a23 = a[11],
-        a30 = a[12], a31 = a[13], a32 = a[14], a33 = a[15],
-
-        b00 = a00 * a11 - a01 * a10,
-        b01 = a00 * a12 - a02 * a10,
-        b02 = a00 * a13 - a03 * a10,
-        b03 = a01 * a12 - a02 * a11,
-        b04 = a01 * a13 - a03 * a11,
-        b05 = a02 * a13 - a03 * a12,
-        b06 = a20 * a31 - a21 * a30,
-        b07 = a20 * a32 - a22 * a30,
-        b08 = a20 * a33 - a23 * a30,
-        b09 = a21 * a32 - a22 * a31,
-        b10 = a21 * a33 - a23 * a31,
-        b11 = a22 * a33 - a23 * a32;
-
-    // Calculate the determinant
-    return b00 * b11 - b01 * b10 + b02 * b09 + b03 * b08 - b04 * b07 + b05 * b06;
-};
-
-/**
- * Multiplies two mat4's
- *
- * @param {mat4} out the receiving matrix
- * @param {mat4} a the first operand
- * @param {mat4} b the second operand
- * @returns {mat4} out
- */
-mat4.multiply = function (out, a, b) {
-    var a00 = a[0], a01 = a[1], a02 = a[2], a03 = a[3],
-        a10 = a[4], a11 = a[5], a12 = a[6], a13 = a[7],
-        a20 = a[8], a21 = a[9], a22 = a[10], a23 = a[11],
-        a30 = a[12], a31 = a[13], a32 = a[14], a33 = a[15];
-
-    // Cache only the current line of the second matrix
-    var b0  = b[0], b1 = b[1], b2 = b[2], b3 = b[3];
-    out[0] = b0*a00 + b1*a10 + b2*a20 + b3*a30;
-    out[1] = b0*a01 + b1*a11 + b2*a21 + b3*a31;
-    out[2] = b0*a02 + b1*a12 + b2*a22 + b3*a32;
-    out[3] = b0*a03 + b1*a13 + b2*a23 + b3*a33;
-
-    b0 = b[4]; b1 = b[5]; b2 = b[6]; b3 = b[7];
-    out[4] = b0*a00 + b1*a10 + b2*a20 + b3*a30;
-    out[5] = b0*a01 + b1*a11 + b2*a21 + b3*a31;
-    out[6] = b0*a02 + b1*a12 + b2*a22 + b3*a32;
-    out[7] = b0*a03 + b1*a13 + b2*a23 + b3*a33;
-
-    b0 = b[8]; b1 = b[9]; b2 = b[10]; b3 = b[11];
-    out[8] = b0*a00 + b1*a10 + b2*a20 + b3*a30;
-    out[9] = b0*a01 + b1*a11 + b2*a21 + b3*a31;
-    out[10] = b0*a02 + b1*a12 + b2*a22 + b3*a32;
-    out[11] = b0*a03 + b1*a13 + b2*a23 + b3*a33;
-
-    b0 = b[12]; b1 = b[13]; b2 = b[14]; b3 = b[15];
-    out[12] = b0*a00 + b1*a10 + b2*a20 + b3*a30;
-    out[13] = b0*a01 + b1*a11 + b2*a21 + b3*a31;
-    out[14] = b0*a02 + b1*a12 + b2*a22 + b3*a32;
-    out[15] = b0*a03 + b1*a13 + b2*a23 + b3*a33;
-    return out;
-};
-
-/**
- * Multiplies two affine mat4's
- * Add by https://github.com/pissang
- * @param {mat4} out the receiving matrix
- * @param {mat4} a the first operand
- * @param {mat4} b the second operand
- * @returns {mat4} out
- */
-mat4.multiplyAffine = function (out, a, b) {
-    var a00 = a[0], a01 = a[1], a02 = a[2],
-        a10 = a[4], a11 = a[5], a12 = a[6],
-        a20 = a[8], a21 = a[9], a22 = a[10],
-        a30 = a[12], a31 = a[13], a32 = a[14];
-
-    // Cache only the current line of the second matrix
-    var b0  = b[0], b1 = b[1], b2 = b[2];
-    out[0] = b0*a00 + b1*a10 + b2*a20;
-    out[1] = b0*a01 + b1*a11 + b2*a21;
-    out[2] = b0*a02 + b1*a12 + b2*a22;
-    // out[3] = 0;
-
-    b0 = b[4]; b1 = b[5]; b2 = b[6];
-    out[4] = b0*a00 + b1*a10 + b2*a20;
-    out[5] = b0*a01 + b1*a11 + b2*a21;
-    out[6] = b0*a02 + b1*a12 + b2*a22;
-    // out[7] = 0;
-
-    b0 = b[8]; b1 = b[9]; b2 = b[10];
-    out[8] = b0*a00 + b1*a10 + b2*a20;
-    out[9] = b0*a01 + b1*a11 + b2*a21;
-    out[10] = b0*a02 + b1*a12 + b2*a22;
-    // out[11] = 0;
-
-    b0 = b[12]; b1 = b[13]; b2 = b[14];
-    out[12] = b0*a00 + b1*a10 + b2*a20 + a30;
-    out[13] = b0*a01 + b1*a11 + b2*a21 + a31;
-    out[14] = b0*a02 + b1*a12 + b2*a22 + a32;
-    // out[15] = 1;
-    return out;
-};
-
-/**
- * Alias for {@link mat4.multiply}
- * @function
- */
-mat4.mul = mat4.multiply;
-
-/**
- * Alias for {@link mat4.multiplyAffine}
- * @function
- */
-mat4.mulAffine = mat4.multiplyAffine;
-/**
- * Translate a mat4 by the given vector
- *
- * @param {mat4} out the receiving matrix
- * @param {mat4} a the matrix to translate
- * @param {vec3} v vector to translate by
- * @returns {mat4} out
- */
-mat4.translate = function (out, a, v) {
-    var x = v[0], y = v[1], z = v[2],
-        a00, a01, a02, a03,
-        a10, a11, a12, a13,
-        a20, a21, a22, a23;
-
-    if (a === out) {
-        out[12] = a[0] * x + a[4] * y + a[8] * z + a[12];
-        out[13] = a[1] * x + a[5] * y + a[9] * z + a[13];
-        out[14] = a[2] * x + a[6] * y + a[10] * z + a[14];
-        out[15] = a[3] * x + a[7] * y + a[11] * z + a[15];
-    } else {
-        a00 = a[0]; a01 = a[1]; a02 = a[2]; a03 = a[3];
-        a10 = a[4]; a11 = a[5]; a12 = a[6]; a13 = a[7];
-        a20 = a[8]; a21 = a[9]; a22 = a[10]; a23 = a[11];
-
-        out[0] = a00; out[1] = a01; out[2] = a02; out[3] = a03;
-        out[4] = a10; out[5] = a11; out[6] = a12; out[7] = a13;
-        out[8] = a20; out[9] = a21; out[10] = a22; out[11] = a23;
-
-        out[12] = a00 * x + a10 * y + a20 * z + a[12];
-        out[13] = a01 * x + a11 * y + a21 * z + a[13];
-        out[14] = a02 * x + a12 * y + a22 * z + a[14];
-        out[15] = a03 * x + a13 * y + a23 * z + a[15];
-    }
-
-    return out;
-};
-
-/**
- * Scales the mat4 by the dimensions in the given vec3
- *
- * @param {mat4} out the receiving matrix
- * @param {mat4} a the matrix to scale
- * @param {vec3} v the vec3 to scale the matrix by
- * @returns {mat4} out
- **/
-mat4.scale = function(out, a, v) {
-    var x = v[0], y = v[1], z = v[2];
-
-    out[0] = a[0] * x;
-    out[1] = a[1] * x;
-    out[2] = a[2] * x;
-    out[3] = a[3] * x;
-    out[4] = a[4] * y;
-    out[5] = a[5] * y;
-    out[6] = a[6] * y;
-    out[7] = a[7] * y;
-    out[8] = a[8] * z;
-    out[9] = a[9] * z;
-    out[10] = a[10] * z;
-    out[11] = a[11] * z;
-    out[12] = a[12];
-    out[13] = a[13];
-    out[14] = a[14];
-    out[15] = a[15];
-    return out;
-};
-
-/**
- * Rotates a mat4 by the given angle
- *
- * @param {mat4} out the receiving matrix
- * @param {mat4} a the matrix to rotate
- * @param {Number} rad the angle to rotate the matrix by
- * @param {vec3} axis the axis to rotate around
- * @returns {mat4} out
- */
-mat4.rotate = function (out, a, rad, axis) {
-    var x = axis[0], y = axis[1], z = axis[2],
-        len = Math.sqrt(x * x + y * y + z * z),
-        s, c, t,
-        a00, a01, a02, a03,
-        a10, a11, a12, a13,
-        a20, a21, a22, a23,
-        b00, b01, b02,
-        b10, b11, b12,
-        b20, b21, b22;
-
-    if (Math.abs(len) < GLMAT_EPSILON) { return null; }
-
-    len = 1 / len;
-    x *= len;
-    y *= len;
-    z *= len;
-
-    s = Math.sin(rad);
-    c = Math.cos(rad);
-    t = 1 - c;
-
-    a00 = a[0]; a01 = a[1]; a02 = a[2]; a03 = a[3];
-    a10 = a[4]; a11 = a[5]; a12 = a[6]; a13 = a[7];
-    a20 = a[8]; a21 = a[9]; a22 = a[10]; a23 = a[11];
-
-    // Construct the elements of the rotation matrix
-    b00 = x * x * t + c; b01 = y * x * t + z * s; b02 = z * x * t - y * s;
-    b10 = x * y * t - z * s; b11 = y * y * t + c; b12 = z * y * t + x * s;
-    b20 = x * z * t + y * s; b21 = y * z * t - x * s; b22 = z * z * t + c;
-
-    // Perform rotation-specific matrix multiplication
-    out[0] = a00 * b00 + a10 * b01 + a20 * b02;
-    out[1] = a01 * b00 + a11 * b01 + a21 * b02;
-    out[2] = a02 * b00 + a12 * b01 + a22 * b02;
-    out[3] = a03 * b00 + a13 * b01 + a23 * b02;
-    out[4] = a00 * b10 + a10 * b11 + a20 * b12;
-    out[5] = a01 * b10 + a11 * b11 + a21 * b12;
-    out[6] = a02 * b10 + a12 * b11 + a22 * b12;
-    out[7] = a03 * b10 + a13 * b11 + a23 * b12;
-    out[8] = a00 * b20 + a10 * b21 + a20 * b22;
-    out[9] = a01 * b20 + a11 * b21 + a21 * b22;
-    out[10] = a02 * b20 + a12 * b21 + a22 * b22;
-    out[11] = a03 * b20 + a13 * b21 + a23 * b22;
-
-    if (a !== out) { // If the source and destination differ, copy the unchanged last row
-        out[12] = a[12];
-        out[13] = a[13];
-        out[14] = a[14];
-        out[15] = a[15];
-    }
-    return out;
-};
-
-/**
- * Rotates a matrix by the given angle around the X axis
- *
- * @param {mat4} out the receiving matrix
- * @param {mat4} a the matrix to rotate
- * @param {Number} rad the angle to rotate the matrix by
- * @returns {mat4} out
- */
-mat4.rotateX = function (out, a, rad) {
-    var s = Math.sin(rad),
-        c = Math.cos(rad),
-        a10 = a[4],
-        a11 = a[5],
-        a12 = a[6],
-        a13 = a[7],
-        a20 = a[8],
-        a21 = a[9],
-        a22 = a[10],
-        a23 = a[11];
-
-    if (a !== out) { // If the source and destination differ, copy the unchanged rows
-        out[0]  = a[0];
-        out[1]  = a[1];
-        out[2]  = a[2];
-        out[3]  = a[3];
-        out[12] = a[12];
-        out[13] = a[13];
-        out[14] = a[14];
-        out[15] = a[15];
-    }
-
-    // Perform axis-specific matrix multiplication
-    out[4] = a10 * c + a20 * s;
-    out[5] = a11 * c + a21 * s;
-    out[6] = a12 * c + a22 * s;
-    out[7] = a13 * c + a23 * s;
-    out[8] = a20 * c - a10 * s;
-    out[9] = a21 * c - a11 * s;
-    out[10] = a22 * c - a12 * s;
-    out[11] = a23 * c - a13 * s;
-    return out;
-};
-
-/**
- * Rotates a matrix by the given angle around the Y axis
- *
- * @param {mat4} out the receiving matrix
- * @param {mat4} a the matrix to rotate
- * @param {Number} rad the angle to rotate the matrix by
- * @returns {mat4} out
- */
-mat4.rotateY = function (out, a, rad) {
-    var s = Math.sin(rad),
-        c = Math.cos(rad),
-        a00 = a[0],
-        a01 = a[1],
-        a02 = a[2],
-        a03 = a[3],
-        a20 = a[8],
-        a21 = a[9],
-        a22 = a[10],
-        a23 = a[11];
-
-    if (a !== out) { // If the source and destination differ, copy the unchanged rows
-        out[4]  = a[4];
-        out[5]  = a[5];
-        out[6]  = a[6];
-        out[7]  = a[7];
-        out[12] = a[12];
-        out[13] = a[13];
-        out[14] = a[14];
-        out[15] = a[15];
-    }
-
-    // Perform axis-specific matrix multiplication
-    out[0] = a00 * c - a20 * s;
-    out[1] = a01 * c - a21 * s;
-    out[2] = a02 * c - a22 * s;
-    out[3] = a03 * c - a23 * s;
-    out[8] = a00 * s + a20 * c;
-    out[9] = a01 * s + a21 * c;
-    out[10] = a02 * s + a22 * c;
-    out[11] = a03 * s + a23 * c;
-    return out;
-};
-
-/**
- * Rotates a matrix by the given angle around the Z axis
- *
- * @param {mat4} out the receiving matrix
- * @param {mat4} a the matrix to rotate
- * @param {Number} rad the angle to rotate the matrix by
- * @returns {mat4} out
- */
-mat4.rotateZ = function (out, a, rad) {
-    var s = Math.sin(rad),
-        c = Math.cos(rad),
-        a00 = a[0],
-        a01 = a[1],
-        a02 = a[2],
-        a03 = a[3],
-        a10 = a[4],
-        a11 = a[5],
-        a12 = a[6],
-        a13 = a[7];
-
-    if (a !== out) { // If the source and destination differ, copy the unchanged last row
-        out[8]  = a[8];
-        out[9]  = a[9];
-        out[10] = a[10];
-        out[11] = a[11];
-        out[12] = a[12];
-        out[13] = a[13];
-        out[14] = a[14];
-        out[15] = a[15];
-    }
-
-    // Perform axis-specific matrix multiplication
-    out[0] = a00 * c + a10 * s;
-    out[1] = a01 * c + a11 * s;
-    out[2] = a02 * c + a12 * s;
-    out[3] = a03 * c + a13 * s;
-    out[4] = a10 * c - a00 * s;
-    out[5] = a11 * c - a01 * s;
-    out[6] = a12 * c - a02 * s;
-    out[7] = a13 * c - a03 * s;
-    return out;
-};
-
-/**
- * Creates a matrix from a quaternion rotation and vector translation
- * This is equivalent to (but much faster than):
- *
- *     mat4.identity(dest);
- *     mat4.translate(dest, vec);
- *     var quatMat = mat4.create();
- *     quat4.toMat4(quat, quatMat);
- *     mat4.multiply(dest, quatMat);
- *
- * @param {mat4} out mat4 receiving operation result
- * @param {quat4} q Rotation quaternion
- * @param {vec3} v Translation vector
- * @returns {mat4} out
- */
-mat4.fromRotationTranslation = function (out, q, v) {
-    // Quaternion math
-    var x = q[0], y = q[1], z = q[2], w = q[3],
-        x2 = x + x,
-        y2 = y + y,
-        z2 = z + z,
-
-        xx = x * x2,
-        xy = x * y2,
-        xz = x * z2,
-        yy = y * y2,
-        yz = y * z2,
-        zz = z * z2,
-        wx = w * x2,
-        wy = w * y2,
-        wz = w * z2;
-
-    out[0] = 1 - (yy + zz);
-    out[1] = xy + wz;
-    out[2] = xz - wy;
-    out[3] = 0;
-    out[4] = xy - wz;
-    out[5] = 1 - (xx + zz);
-    out[6] = yz + wx;
-    out[7] = 0;
-    out[8] = xz + wy;
-    out[9] = yz - wx;
-    out[10] = 1 - (xx + yy);
-    out[11] = 0;
-    out[12] = v[0];
-    out[13] = v[1];
-    out[14] = v[2];
-    out[15] = 1;
-
-    return out;
-};
-
-mat4.fromQuat = function (out, q) {
-    var x = q[0], y = q[1], z = q[2], w = q[3],
-        x2 = x + x,
-        y2 = y + y,
-        z2 = z + z,
-
-        xx = x * x2,
-        yx = y * x2,
-        yy = y * y2,
-        zx = z * x2,
-        zy = z * y2,
-        zz = z * z2,
-        wx = w * x2,
-        wy = w * y2,
-        wz = w * z2;
-
-    out[0] = 1 - yy - zz;
-    out[1] = yx + wz;
-    out[2] = zx - wy;
-    out[3] = 0;
-
-    out[4] = yx - wz;
-    out[5] = 1 - xx - zz;
-    out[6] = zy + wx;
-    out[7] = 0;
-
-    out[8] = zx + wy;
-    out[9] = zy - wx;
-    out[10] = 1 - xx - yy;
-    out[11] = 0;
-
-    out[12] = 0;
-    out[13] = 0;
-    out[14] = 0;
-    out[15] = 1;
-
-    return out;
-};
-
-/**
- * Generates a frustum matrix with the given bounds
- *
- * @param {mat4} out mat4 frustum matrix will be written into
- * @param {Number} left Left bound of the frustum
- * @param {Number} right Right bound of the frustum
- * @param {Number} bottom Bottom bound of the frustum
- * @param {Number} top Top bound of the frustum
- * @param {Number} near Near bound of the frustum
- * @param {Number} far Far bound of the frustum
- * @returns {mat4} out
- */
-mat4.frustum = function (out, left, right, bottom, top, near, far) {
-    var rl = 1 / (right - left),
-        tb = 1 / (top - bottom),
-        nf = 1 / (near - far);
-    out[0] = (near * 2) * rl;
-    out[1] = 0;
-    out[2] = 0;
-    out[3] = 0;
-    out[4] = 0;
-    out[5] = (near * 2) * tb;
-    out[6] = 0;
-    out[7] = 0;
-    out[8] = (right + left) * rl;
-    out[9] = (top + bottom) * tb;
-    out[10] = (far + near) * nf;
-    out[11] = -1;
-    out[12] = 0;
-    out[13] = 0;
-    out[14] = (far * near * 2) * nf;
-    out[15] = 0;
-    return out;
-};
-
-/**
- * Generates a perspective projection matrix with the given bounds
- *
- * @param {mat4} out mat4 frustum matrix will be written into
- * @param {number} fovy Vertical field of view in radians
- * @param {number} aspect Aspect ratio. typically viewport width/height
- * @param {number} near Near bound of the frustum
- * @param {number} far Far bound of the frustum
- * @returns {mat4} out
- */
-mat4.perspective = function (out, fovy, aspect, near, far) {
-    var f = 1.0 / Math.tan(fovy / 2),
-        nf = 1 / (near - far);
-    out[0] = f / aspect;
-    out[1] = 0;
-    out[2] = 0;
-    out[3] = 0;
-    out[4] = 0;
-    out[5] = f;
-    out[6] = 0;
-    out[7] = 0;
-    out[8] = 0;
-    out[9] = 0;
-    out[10] = (far + near) * nf;
-    out[11] = -1;
-    out[12] = 0;
-    out[13] = 0;
-    out[14] = (2 * far * near) * nf;
-    out[15] = 0;
-    return out;
-};
-
-/**
- * Generates a orthogonal projection matrix with the given bounds
- *
- * @param {mat4} out mat4 frustum matrix will be written into
- * @param {number} left Left bound of the frustum
- * @param {number} right Right bound of the frustum
- * @param {number} bottom Bottom bound of the frustum
- * @param {number} top Top bound of the frustum
- * @param {number} near Near bound of the frustum
- * @param {number} far Far bound of the frustum
- * @returns {mat4} out
- */
-mat4.ortho = function (out, left, right, bottom, top, near, far) {
-    var lr = 1 / (left - right),
-        bt = 1 / (bottom - top),
-        nf = 1 / (near - far);
-    out[0] = -2 * lr;
-    out[1] = 0;
-    out[2] = 0;
-    out[3] = 0;
-    out[4] = 0;
-    out[5] = -2 * bt;
-    out[6] = 0;
-    out[7] = 0;
-    out[8] = 0;
-    out[9] = 0;
-    out[10] = 2 * nf;
-    out[11] = 0;
-    out[12] = (left + right) * lr;
-    out[13] = (top + bottom) * bt;
-    out[14] = (far + near) * nf;
-    out[15] = 1;
-    return out;
-};
-
-/**
- * Generates a look-at matrix with the given eye position, focal point, and up axis
- *
- * @param {mat4} out mat4 frustum matrix will be written into
- * @param {vec3} eye Position of the viewer
- * @param {vec3} center Point the viewer is looking at
- * @param {vec3} up vec3 pointing up
- * @returns {mat4} out
- */
-mat4.lookAt = function (out, eye, center, up) {
-    var x0, x1, x2, y0, y1, y2, z0, z1, z2, len,
-        eyex = eye[0],
-        eyey = eye[1],
-        eyez = eye[2],
-        upx = up[0],
-        upy = up[1],
-        upz = up[2],
-        centerx = center[0],
-        centery = center[1],
-        centerz = center[2];
-
-    if (Math.abs(eyex - centerx) < GLMAT_EPSILON &&
-        Math.abs(eyey - centery) < GLMAT_EPSILON &&
-        Math.abs(eyez - centerz) < GLMAT_EPSILON) {
-        return mat4.identity(out);
-    }
-
-    z0 = eyex - centerx;
-    z1 = eyey - centery;
-    z2 = eyez - centerz;
-
-    len = 1 / Math.sqrt(z0 * z0 + z1 * z1 + z2 * z2);
-    z0 *= len;
-    z1 *= len;
-    z2 *= len;
-
-    x0 = upy * z2 - upz * z1;
-    x1 = upz * z0 - upx * z2;
-    x2 = upx * z1 - upy * z0;
-    len = Math.sqrt(x0 * x0 + x1 * x1 + x2 * x2);
-    if (!len) {
-        x0 = 0;
-        x1 = 0;
-        x2 = 0;
-    } else {
-        len = 1 / len;
-        x0 *= len;
-        x1 *= len;
-        x2 *= len;
-    }
-
-    y0 = z1 * x2 - z2 * x1;
-    y1 = z2 * x0 - z0 * x2;
-    y2 = z0 * x1 - z1 * x0;
-
-    len = Math.sqrt(y0 * y0 + y1 * y1 + y2 * y2);
-    if (!len) {
-        y0 = 0;
-        y1 = 0;
-        y2 = 0;
-    } else {
-        len = 1 / len;
-        y0 *= len;
-        y1 *= len;
-        y2 *= len;
-    }
-
-    out[0] = x0;
-    out[1] = y0;
-    out[2] = z0;
-    out[3] = 0;
-    out[4] = x1;
-    out[5] = y1;
-    out[6] = z1;
-    out[7] = 0;
-    out[8] = x2;
-    out[9] = y2;
-    out[10] = z2;
-    out[11] = 0;
-    out[12] = -(x0 * eyex + x1 * eyey + x2 * eyez);
-    out[13] = -(y0 * eyex + y1 * eyey + y2 * eyez);
-    out[14] = -(z0 * eyex + z1 * eyey + z2 * eyez);
-    out[15] = 1;
-
-    return out;
-};
-
-/**
- * Returns Frobenius norm of a mat4
- *
- * @param {mat4} a the matrix to calculate Frobenius norm of
- * @returns {Number} Frobenius norm
- */
-mat4.frob = function (a) {
-    return(Math.sqrt(Math.pow(a[0], 2) + Math.pow(a[1], 2) + Math.pow(a[2], 2) + Math.pow(a[3], 2) + Math.pow(a[4], 2) + Math.pow(a[5], 2) + Math.pow(a[6], 2) + Math.pow(a[7], 2) + Math.pow(a[8], 2) + Math.pow(a[9], 2) + Math.pow(a[10], 2) + Math.pow(a[11], 2) + Math.pow(a[12], 2) + Math.pow(a[13], 2) + Math.pow(a[14], 2) + Math.pow(a[15], 2) ))
-};
-
-/* harmony default export */ const glmatrix_mat4 = (mat4);
 ;// CONCATENATED MODULE: ./node_modules/claygl/src/glmatrix/vec3.js
 
 /* Copyright (c) 2013, Brandon Jones, Colin MacKenzie IV. All rights reserved.
@@ -6639,1416 +1233,6 @@ vec3.angle = function(a, b) {
 };
 
 /* harmony default export */ const glmatrix_vec3 = (vec3);
-;// CONCATENATED MODULE: ./node_modules/claygl/src/Renderer.js
-// TODO Resources like shader, texture, geometry reference management
-// Trace and find out which shader, texture, geometry can be destroyed
-
-
-
-
-
-
-
-
-
-// Light header
-
-
-
-src_Shader.import(prez_glsl);
-
-
-
-
-var mat4Create = glmatrix_mat4.create;
-
-var errorShader = {};
-
-function defaultGetMaterial(renderable) {
-    return renderable.material;
-}
-function defaultGetUniform(renderable, material, symbol) {
-    return material.uniforms[symbol].value;
-}
-function defaultIsMaterialChanged(renderabled, prevRenderable, material, prevMaterial) {
-    return material !== prevMaterial;
-}
-function defaultIfRender(renderable) {
-    return true;
-}
-
-function noop() {}
-
-var attributeBufferTypeMap = {
-    float: glenum.FLOAT,
-    byte: glenum.BYTE,
-    ubyte: glenum.UNSIGNED_BYTE,
-    short: glenum.SHORT,
-    ushort: glenum.UNSIGNED_SHORT
-};
-
-function VertexArrayObject(availableAttributes, availableAttributeSymbols, indicesBuffer) {
-    this.availableAttributes = availableAttributes;
-    this.availableAttributeSymbols = availableAttributeSymbols;
-    this.indicesBuffer = indicesBuffer;
-
-    this.vao = null;
-}
-
-function PlaceHolderTexture(renderer) {
-    var blankCanvas;
-    var webglTexture;
-    this.bind = function (renderer) {
-        if (!blankCanvas) {
-            // TODO Environment not support createCanvas.
-            blankCanvas = core_vendor.createCanvas();
-            blankCanvas.width = blankCanvas.height = 1;
-            blankCanvas.getContext('2d');
-        }
-
-        var gl = renderer.gl;
-        var firstBind = !webglTexture;
-        if (firstBind) {
-            webglTexture = gl.createTexture();
-        }
-        gl.bindTexture(gl.TEXTURE_2D, webglTexture);
-        if (firstBind) {
-            gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, blankCanvas);
-        }
-    };
-    this.unbind = function (renderer) {
-        renderer.gl.bindTexture(renderer.gl.TEXTURE_2D, null);
-    };
-    this.isRenderable = function () {
-        return true;
-    };
-}
-/**
- * @constructor clay.Renderer
- * @extends clay.core.Base
- */
-var Renderer = core_Base.extend(function () {
-    return /** @lends clay.Renderer# */ {
-
-        /**
-         * @type {HTMLCanvasElement}
-         * @readonly
-         */
-        canvas: null,
-
-        /**
-         * Canvas width, set by resize method
-         * @type {number}
-         * @private
-         */
-        _width: 100,
-
-        /**
-         * Canvas width, set by resize method
-         * @type {number}
-         * @private
-         */
-        _height: 100,
-
-        /**
-         * Device pixel ratio, set by setDevicePixelRatio method
-         * Specially for high defination display
-         * @see http://www.khronos.org/webgl/wiki/HandlingHighDPI
-         * @type {number}
-         * @private
-         */
-        devicePixelRatio: (typeof window !== 'undefined' && window.devicePixelRatio) || 1.0,
-
-        /**
-         * Clear color
-         * @type {number[]}
-         */
-        clearColor: [0.0, 0.0, 0.0, 0.0],
-
-        /**
-         * Default:
-         *     _gl.COLOR_BUFFER_BIT | _gl.DEPTH_BUFFER_BIT | _gl.STENCIL_BUFFER_BIT
-         * @type {number}
-         */
-        clearBit: 17664,
-
-        // Settings when getting context
-        // http://www.khronos.org/registry/webgl/specs/latest/#2.4
-
-        /**
-         * If enable alpha, default true
-         * @type {boolean}
-         */
-        alpha: true,
-        /**
-         * If enable depth buffer, default true
-         * @type {boolean}
-         */
-        depth: true,
-        /**
-         * If enable stencil buffer, default false
-         * @type {boolean}
-         */
-        stencil: false,
-        /**
-         * If enable antialias, default true
-         * @type {boolean}
-         */
-        antialias: true,
-        /**
-         * If enable premultiplied alpha, default true
-         * @type {boolean}
-         */
-        premultipliedAlpha: true,
-        /**
-         * If preserve drawing buffer, default false
-         * @type {boolean}
-         */
-        preserveDrawingBuffer: false,
-        /**
-         * If throw context error, usually turned on in debug mode
-         * @type {boolean}
-         */
-        throwError: true,
-        /**
-         * WebGL Context created from given canvas
-         * @type {WebGLRenderingContext}
-         */
-        gl: null,
-        /**
-         * Renderer viewport, read-only, can be set by setViewport method
-         * @type {Object}
-         */
-        viewport: {},
-
-        /**
-         * Max joint number
-         * @type {number}
-         */
-        maxJointNumber: 20,
-
-        // Set by FrameBuffer#bind
-        __currentFrameBuffer: null,
-
-        _viewportStack: [],
-        _clearStack: [],
-
-        _sceneRendering: null
-    };
-}, function () {
-
-    if (!this.canvas) {
-        this.canvas = core_vendor.createCanvas();
-    }
-    var canvas = this.canvas;
-    try {
-        var opts = {
-            alpha: this.alpha,
-            depth: this.depth,
-            stencil: this.stencil,
-            antialias: this.antialias,
-            premultipliedAlpha: this.premultipliedAlpha,
-            preserveDrawingBuffer: this.preserveDrawingBuffer
-        };
-
-        this.gl = canvas.getContext('webgl', opts)
-            || canvas.getContext('experimental-webgl', opts);
-
-        if (!this.gl) {
-            throw new Error();
-        }
-
-        this._glinfo = new core_GLInfo(this.gl);
-
-        if (this.gl.targetRenderer) {
-            console.error('Already created a renderer');
-        }
-        this.gl.targetRenderer = this;
-
-        this.resize();
-    }
-    catch (e) {
-        throw 'Error creating WebGL Context ' + e;
-    }
-
-    // Init managers
-    this._programMgr = new gpu_ProgramManager(this);
-
-    this._placeholderTexture = new PlaceHolderTexture(this);
-},
-/** @lends clay.Renderer.prototype. **/
-{
-    /**
-     * Resize the canvas
-     * @param {number} width
-     * @param {number} height
-     */
-    resize: function(width, height) {
-        var canvas = this.canvas;
-        // http://www.khronos.org/webgl/wiki/HandlingHighDPI
-        // set the display size of the canvas.
-        var dpr = this.devicePixelRatio;
-        if (width != null) {
-            if (canvas.style) {
-                canvas.style.width = width + 'px';
-                canvas.style.height = height + 'px';
-            }
-            // set the size of the drawingBuffer
-            canvas.width = width * dpr;
-            canvas.height = height * dpr;
-
-            this._width = width;
-            this._height = height;
-        }
-        else {
-            this._width = canvas.width / dpr;
-            this._height = canvas.height / dpr;
-        }
-
-        this.setViewport(0, 0, this._width, this._height);
-    },
-
-    /**
-     * Get renderer width
-     * @return {number}
-     */
-    getWidth: function () {
-        return this._width;
-    },
-
-    /**
-     * Get renderer height
-     * @return {number}
-     */
-    getHeight: function () {
-        return this._height;
-    },
-
-    /**
-     * Get viewport aspect,
-     * @return {number}
-     */
-    getViewportAspect: function () {
-        var viewport = this.viewport;
-        return viewport.width / viewport.height;
-    },
-
-    /**
-     * Set devicePixelRatio
-     * @param {number} devicePixelRatio
-     */
-    setDevicePixelRatio: function(devicePixelRatio) {
-        this.devicePixelRatio = devicePixelRatio;
-        this.resize(this._width, this._height);
-    },
-
-    /**
-     * Get devicePixelRatio
-     * @param {number} devicePixelRatio
-     */
-    getDevicePixelRatio: function () {
-        return this.devicePixelRatio;
-    },
-
-    /**
-     * Get WebGL extension
-     * @param {string} name
-     * @return {object}
-     */
-    getGLExtension: function (name) {
-        return this._glinfo.getExtension(name);
-    },
-
-    /**
-     * Get WebGL parameter
-     * @param {string} name
-     * @return {*}
-     */
-    getGLParameter: function (name) {
-        return this._glinfo.getParameter(name);
-    },
-
-    /**
-     * Set rendering viewport
-     * @param {number|Object} x
-     * @param {number} [y]
-     * @param {number} [width]
-     * @param {number} [height]
-     * @param {number} [devicePixelRatio]
-     *        Defaultly use the renderere devicePixelRatio
-     *        It needs to be 1 when setViewport is called by frameBuffer
-     *
-     * @example
-     *  setViewport(0,0,width,height,1)
-     *  setViewport({
-     *      x: 0,
-     *      y: 0,
-     *      width: width,
-     *      height: height,
-     *      devicePixelRatio: 1
-     *  })
-     */
-    setViewport: function (x, y, width, height, dpr) {
-
-        if (typeof x === 'object') {
-            var obj = x;
-
-            x = obj.x;
-            y = obj.y;
-            width = obj.width;
-            height = obj.height;
-            dpr = obj.devicePixelRatio;
-        }
-        dpr = dpr || this.devicePixelRatio;
-
-        this.gl.viewport(
-            x * dpr, y * dpr, width * dpr, height * dpr
-        );
-        // Use a fresh new object, not write property.
-        this.viewport = {
-            x: x,
-            y: y,
-            width: width,
-            height: height,
-            devicePixelRatio: dpr
-        };
-    },
-
-    /**
-     * Push current viewport into a stack
-     */
-    saveViewport: function () {
-        this._viewportStack.push(this.viewport);
-    },
-
-    /**
-     * Pop viewport from stack, restore in the renderer
-     */
-    restoreViewport: function () {
-        if (this._viewportStack.length > 0) {
-            this.setViewport(this._viewportStack.pop());
-        }
-    },
-
-    /**
-     * Push current clear into a stack
-     */
-    saveClear: function () {
-        this._clearStack.push({
-            clearBit: this.clearBit,
-            clearColor: this.clearColor
-        });
-    },
-
-    /**
-     * Pop clear from stack, restore in the renderer
-     */
-    restoreClear: function () {
-        if (this._clearStack.length > 0) {
-            var opt = this._clearStack.pop();
-            this.clearColor = opt.clearColor;
-            this.clearBit = opt.clearBit;
-        }
-    },
-
-    bindSceneRendering: function (scene) {
-        this._sceneRendering = scene;
-    },
-
-    /**
-     * Render the scene in camera to the screen or binded offline framebuffer
-     * @param  {clay.Scene}       scene
-     * @param  {clay.Camera}      camera
-     * @param  {boolean}     [notUpdateScene] If not call the scene.update methods in the rendering, default true
-     * @param  {boolean}     [preZ]           If use preZ optimization, default false
-     * @return {IRenderInfo}
-     */
-    render: function(scene, camera, notUpdateScene, preZ) {
-        var _gl = this.gl;
-
-        var clearColor = this.clearColor;
-
-        if (this.clearBit) {
-
-            // Must set depth and color mask true before clear
-            _gl.colorMask(true, true, true, true);
-            _gl.depthMask(true);
-            var viewport = this.viewport;
-            var needsScissor = false;
-            var viewportDpr = viewport.devicePixelRatio;
-            if (viewport.width !== this._width || viewport.height !== this._height
-                || (viewportDpr && viewportDpr !== this.devicePixelRatio)
-                || viewport.x || viewport.y
-            ) {
-                needsScissor = true;
-                // http://stackoverflow.com/questions/11544608/how-to-clear-a-rectangle-area-in-webgl
-                // Only clear the viewport
-                _gl.enable(_gl.SCISSOR_TEST);
-                _gl.scissor(viewport.x * viewportDpr, viewport.y * viewportDpr, viewport.width * viewportDpr, viewport.height * viewportDpr);
-            }
-            _gl.clearColor(clearColor[0], clearColor[1], clearColor[2], clearColor[3]);
-            _gl.clear(this.clearBit);
-            if (needsScissor) {
-                _gl.disable(_gl.SCISSOR_TEST);
-            }
-        }
-
-        // If the scene have been updated in the prepass like shadow map
-        // There is no need to update it again
-        if (!notUpdateScene) {
-            scene.update(false);
-        }
-        scene.updateLights();
-
-        camera = camera || scene.getMainCamera();
-        if (!camera) {
-            console.error('Can\'t find camera in the scene.');
-            return;
-        }
-        camera.update();
-        var renderList = scene.updateRenderList(camera, true);
-
-        this._sceneRendering = scene;
-
-        var opaqueList = renderList.opaque;
-        var transparentList = renderList.transparent;
-        var sceneMaterial = scene.material;
-
-        scene.trigger('beforerender', this, scene, camera, renderList);
-
-        // Render pre z
-        if (preZ) {
-            this.renderPreZ(opaqueList, scene, camera);
-            _gl.depthFunc(_gl.LEQUAL);
-        }
-        else {
-            _gl.depthFunc(_gl.LESS);
-        }
-
-        // Update the depth of transparent list.
-        var worldViewMat = mat4Create();
-        var posViewSpace = glmatrix_vec3.create();
-        for (var i = 0; i < transparentList.length; i++) {
-            var renderable = transparentList[i];
-            glmatrix_mat4.multiplyAffine(worldViewMat, camera.viewMatrix.array, renderable.worldTransform.array);
-            glmatrix_vec3.transformMat4(posViewSpace, renderable.position.array, worldViewMat);
-            renderable.__depth = posViewSpace[2];
-        }
-
-        // Render opaque list
-        this.renderPass(opaqueList, camera, {
-            getMaterial: function (renderable) {
-                return sceneMaterial || renderable.material;
-            },
-            sortCompare: this.opaqueSortCompare
-        });
-
-        this.renderPass(transparentList, camera, {
-            getMaterial: function (renderable) {
-                return sceneMaterial || renderable.material;
-            },
-            sortCompare: this.transparentSortCompare
-        });
-
-        scene.trigger('afterrender', this, scene, camera, renderList);
-
-        // Cleanup
-        this._sceneRendering = null;
-    },
-
-    getProgram: function (renderable, renderMaterial, scene) {
-        renderMaterial = renderMaterial || renderable.material;
-        return this._programMgr.getProgram(renderable, renderMaterial, scene);
-    },
-
-    validateProgram: function (program) {
-        if (program.__error) {
-            var errorMsg = program.__error;
-            if (errorShader[program.__uid__]) {
-                return;
-            }
-            errorShader[program.__uid__] = true;
-
-            if (this.throwError) {
-                throw new Error(errorMsg);
-            }
-            else {
-                this.trigger('error', errorMsg);
-            }
-
-        }
-
-    },
-
-    updatePrograms: function (list, scene, passConfig) {
-        var getMaterial = (passConfig && passConfig.getMaterial) || defaultGetMaterial;
-        scene = scene || null;
-        for (var i = 0; i < list.length; i++) {
-            var renderable = list[i];
-            var renderMaterial = getMaterial.call(this, renderable);
-            if (i > 0) {
-                var prevRenderable = list[i - 1];
-                var prevJointsLen = prevRenderable.joints ? prevRenderable.joints.length : 0;
-                var jointsLen = renderable.joints ? renderable.joints.length : 0;
-                // Keep program not change if joints, material, lightGroup are same of two renderables.
-                if (jointsLen === prevJointsLen
-                    && renderable.material === prevRenderable.material
-                    && renderable.lightGroup === prevRenderable.lightGroup
-                ) {
-                    renderable.__program = prevRenderable.__program;
-                    continue;
-                }
-            }
-
-            var program = this._programMgr.getProgram(renderable, renderMaterial, scene);
-
-            this.validateProgram(program);
-
-            renderable.__program = program;
-        }
-    },
-
-    /**
-     * Render a single renderable list in camera in sequence
-     * @param {clay.Renderable[]} list List of all renderables.
-     * @param {clay.Camera} [camera] Camera provide view matrix and porjection matrix. It can be null.
-     * @param {Object} [passConfig]
-     * @param {Function} [passConfig.getMaterial] Get renderable material.
-     * @param {Function} [passConfig.getUniform] Get material uniform value.
-     * @param {Function} [passConfig.isMaterialChanged] If material changed.
-     * @param {Function} [passConfig.beforeRender] Before render each renderable.
-     * @param {Function} [passConfig.afterRender] After render each renderable
-     * @param {Function} [passConfig.ifRender] If render the renderable.
-     * @param {Function} [passConfig.sortCompare] Sort compare function.
-     * @return {IRenderInfo}
-     */
-    renderPass: function(list, camera, passConfig) {
-        this.trigger('beforerenderpass', this, list, camera, passConfig);
-
-        passConfig = passConfig || {};
-        passConfig.getMaterial = passConfig.getMaterial || defaultGetMaterial;
-        passConfig.getUniform = passConfig.getUniform || defaultGetUniform;
-        // PENDING Better solution?
-        passConfig.isMaterialChanged = passConfig.isMaterialChanged || defaultIsMaterialChanged;
-        passConfig.beforeRender = passConfig.beforeRender || noop;
-        passConfig.afterRender = passConfig.afterRender || noop;
-
-        var ifRenderObject = passConfig.ifRender || defaultIfRender;
-
-        this.updatePrograms(list, this._sceneRendering, passConfig);
-        if (passConfig.sortCompare) {
-            list.sort(passConfig.sortCompare);
-        }
-
-        // Some common builtin uniforms
-        var viewport = this.viewport;
-        var vDpr = viewport.devicePixelRatio;
-        var viewportUniform = [
-            viewport.x * vDpr, viewport.y * vDpr,
-            viewport.width * vDpr, viewport.height * vDpr
-        ];
-        var windowDpr = this.devicePixelRatio;
-        var windowSizeUniform = this.__currentFrameBuffer
-            ? [this.__currentFrameBuffer.getTextureWidth(), this.__currentFrameBuffer.getTextureHeight()]
-            : [this._width * windowDpr, this._height * windowDpr];
-        // DEPRECATED
-        var viewportSizeUniform = [
-            viewportUniform[2], viewportUniform[3]
-        ];
-        var time = Date.now();
-
-        // Calculate view and projection matrix
-        if (camera) {
-            glmatrix_mat4.copy(matrices.VIEW, camera.viewMatrix.array);
-            glmatrix_mat4.copy(matrices.PROJECTION, camera.projectionMatrix.array);
-            glmatrix_mat4.copy(matrices.VIEWINVERSE, camera.worldTransform.array);
-        }
-        else {
-            glmatrix_mat4.identity(matrices.VIEW);
-            glmatrix_mat4.identity(matrices.PROJECTION);
-            glmatrix_mat4.identity(matrices.VIEWINVERSE);
-        }
-        glmatrix_mat4.multiply(matrices.VIEWPROJECTION, matrices.PROJECTION, matrices.VIEW);
-        glmatrix_mat4.invert(matrices.PROJECTIONINVERSE, matrices.PROJECTION);
-        glmatrix_mat4.invert(matrices.VIEWPROJECTIONINVERSE, matrices.VIEWPROJECTION);
-
-        var _gl = this.gl;
-        var scene = this._sceneRendering;
-
-        var prevMaterial;
-        var prevProgram;
-        var prevRenderable;
-
-        // Status
-        var depthTest, depthMask;
-        var culling, cullFace, frontFace;
-        var transparent;
-        var drawID;
-        var currentVAO;
-        var materialTakesTextureSlot;
-
-        // var vaoExt = this.getGLExtension('OES_vertex_array_object');
-        // not use vaoExt, some platforms may mess it up.
-        var vaoExt = null;
-
-        for (var i = 0; i < list.length; i++) {
-            var renderable = list[i];
-            var isSceneNode = renderable.worldTransform != null;
-            var worldM;
-
-            if (!ifRenderObject(renderable)) {
-                continue;
-            }
-
-            // Skinned mesh will transformed to joint space. Ignore the mesh transform
-            if (isSceneNode) {
-                worldM = (renderable.isSkinnedMesh && renderable.isSkinnedMesh())
-                    // TODO
-                    ? (renderable.offsetMatrix ? renderable.offsetMatrix.array :matrices.IDENTITY)
-                    : renderable.worldTransform.array;
-            }
-            var geometry = renderable.geometry;
-            var material = passConfig.getMaterial.call(this, renderable);
-
-            var program = renderable.__program;
-            var shader = material.shader;
-
-            var currentDrawID = geometry.__uid__ + '-' + program.__uid__;
-            var drawIDChanged = currentDrawID !== drawID;
-            drawID = currentDrawID;
-            if (drawIDChanged && vaoExt) {
-                // TODO Seems need to be bound to null immediately (or before bind another program?) if vao is changed
-                vaoExt.bindVertexArrayOES(null);
-            }
-            if (isSceneNode) {
-                glmatrix_mat4.copy(matrices.WORLD, worldM);
-                glmatrix_mat4.multiply(matrices.WORLDVIEWPROJECTION, matrices.VIEWPROJECTION, worldM);
-                glmatrix_mat4.multiplyAffine(matrices.WORLDVIEW, matrices.VIEW, worldM);
-                if (shader.matrixSemantics.WORLDINVERSE ||
-                    shader.matrixSemantics.WORLDINVERSETRANSPOSE) {
-                    glmatrix_mat4.invert(matrices.WORLDINVERSE, worldM);
-                }
-                if (shader.matrixSemantics.WORLDVIEWINVERSE ||
-                    shader.matrixSemantics.WORLDVIEWINVERSETRANSPOSE) {
-                    glmatrix_mat4.invert(matrices.WORLDVIEWINVERSE, matrices.WORLDVIEW);
-                }
-                if (shader.matrixSemantics.WORLDVIEWPROJECTIONINVERSE ||
-                    shader.matrixSemantics.WORLDVIEWPROJECTIONINVERSETRANSPOSE) {
-                    glmatrix_mat4.invert(matrices.WORLDVIEWPROJECTIONINVERSE, matrices.WORLDVIEWPROJECTION);
-                }
-            }
-
-            // Before render hook
-            renderable.beforeRender && renderable.beforeRender(this);
-            passConfig.beforeRender.call(this, renderable, material, prevMaterial);
-
-            var programChanged = program !== prevProgram;
-            if (programChanged) {
-                // Set lights number
-                program.bind(this);
-                // Set some common uniforms
-                program.setUniformOfSemantic(_gl, 'VIEWPORT', viewportUniform);
-                program.setUniformOfSemantic(_gl, 'WINDOW_SIZE', windowSizeUniform);
-                if (camera) {
-                    program.setUniformOfSemantic(_gl, 'NEAR', camera.near);
-                    program.setUniformOfSemantic(_gl, 'FAR', camera.far);
-                }
-                program.setUniformOfSemantic(_gl, 'DEVICEPIXELRATIO', vDpr);
-                program.setUniformOfSemantic(_gl, 'TIME', time);
-                // DEPRECATED
-                program.setUniformOfSemantic(_gl, 'VIEWPORT_SIZE', viewportSizeUniform);
-
-                // Set lights uniforms
-                // TODO needs optimized
-                if (scene) {
-                    scene.setLightUniforms(program, renderable.lightGroup, this);
-                }
-            }
-            else {
-                program = prevProgram;
-            }
-
-            // Program changes also needs reset the materials.
-            if (programChanged || passConfig.isMaterialChanged(
-                renderable, prevRenderable, material, prevMaterial
-            )) {
-                if (material.depthTest !== depthTest) {
-                    material.depthTest ? _gl.enable(_gl.DEPTH_TEST) : _gl.disable(_gl.DEPTH_TEST);
-                    depthTest = material.depthTest;
-                }
-                if (material.depthMask !== depthMask) {
-                    _gl.depthMask(material.depthMask);
-                    depthMask = material.depthMask;
-                }
-                if (material.transparent !== transparent) {
-                    material.transparent ? _gl.enable(_gl.BLEND) : _gl.disable(_gl.BLEND);
-                    transparent = material.transparent;
-                }
-                // TODO cache blending
-                if (material.transparent) {
-                    if (material.blend) {
-                        material.blend(_gl);
-                    }
-                    else {
-                        // Default blend function
-                        _gl.blendEquationSeparate(_gl.FUNC_ADD, _gl.FUNC_ADD);
-                        _gl.blendFuncSeparate(_gl.SRC_ALPHA, _gl.ONE_MINUS_SRC_ALPHA, _gl.ONE, _gl.ONE_MINUS_SRC_ALPHA);
-                    }
-                }
-
-                materialTakesTextureSlot = this._bindMaterial(
-                    renderable, material, program,
-                    prevRenderable || null, prevMaterial || null, prevProgram || null,
-                    passConfig.getUniform
-                );
-                prevMaterial = material;
-            }
-
-            var matrixSemanticKeys = shader.matrixSemanticKeys;
-
-            if (isSceneNode) {
-                for (var k = 0; k < matrixSemanticKeys.length; k++) {
-                    var semantic = matrixSemanticKeys[k];
-                    var semanticInfo = shader.matrixSemantics[semantic];
-                    var matrix = matrices[semantic];
-                    if (semanticInfo.isTranspose) {
-                        var matrixNoTranspose = matrices[semanticInfo.semanticNoTranspose];
-                        glmatrix_mat4.transpose(matrix, matrixNoTranspose);
-                    }
-                    program.setUniform(_gl, semanticInfo.type, semanticInfo.symbol, matrix);
-                }
-            }
-
-            if (renderable.cullFace !== cullFace) {
-                cullFace = renderable.cullFace;
-                _gl.cullFace(cullFace);
-            }
-            if (renderable.frontFace !== frontFace) {
-                frontFace = renderable.frontFace;
-                _gl.frontFace(frontFace);
-            }
-            if (renderable.culling !== culling) {
-                culling = renderable.culling;
-                culling ? _gl.enable(_gl.CULL_FACE) : _gl.disable(_gl.CULL_FACE);
-            }
-            // TODO Not update skeleton in each renderable.
-            this._updateSkeleton(renderable, program, materialTakesTextureSlot);
-            if (drawIDChanged) {
-                currentVAO = this._bindVAO(vaoExt, shader, geometry, program);
-            }
-            this._renderObject(renderable, currentVAO, program);
-
-            // After render hook
-            passConfig.afterRender(this, renderable);
-            renderable.afterRender && renderable.afterRender(this);
-
-            prevProgram = program;
-            prevRenderable = renderable;
-        }
-
-        // TODO Seems need to be bound to null immediately if vao is changed?
-        if (vaoExt) {
-            vaoExt.bindVertexArrayOES(null);
-        }
-
-        this.trigger('afterrenderpass', this, list, camera, passConfig);
-    },
-
-    getMaxJointNumber: function () {
-        return this.maxJointNumber;
-    },
-
-    _updateSkeleton: function (object, program, slot) {
-        var _gl = this.gl;
-        var skeleton = object.skeleton;
-        // Set pose matrices of skinned mesh
-        if (skeleton) {
-            // TODO Update before culling.
-            skeleton.update();
-            if (object.joints.length > this.getMaxJointNumber()) {
-                var skinMatricesTexture = skeleton.getSubSkinMatricesTexture(object.__uid__, object.joints);
-                program.useTextureSlot(this, skinMatricesTexture, slot);
-                program.setUniform(_gl, '1i', 'skinMatricesTexture', slot);
-                program.setUniform(_gl, '1f', 'skinMatricesTextureSize', skinMatricesTexture.width);
-            }
-            else {
-                var skinMatricesArray = skeleton.getSubSkinMatrices(object.__uid__, object.joints);
-                program.setUniformOfSemantic(_gl, 'SKIN_MATRIX', skinMatricesArray);
-            }
-        }
-    },
-
-    _renderObject: function (renderable, vao, program) {
-        var _gl = this.gl;
-        var geometry = renderable.geometry;
-
-        var glDrawMode = renderable.mode;
-        if (glDrawMode == null) {
-            glDrawMode = 0x0004;
-        }
-
-        var ext = null;
-        var isInstanced = renderable.isInstancedMesh && renderable.isInstancedMesh();
-        if (isInstanced) {
-            ext = this.getGLExtension('ANGLE_instanced_arrays');
-            if (!ext) {
-                console.warn('Device not support ANGLE_instanced_arrays extension');
-                return;
-            }
-        }
-
-        var instancedAttrLocations;
-        if (isInstanced) {
-            instancedAttrLocations = this._bindInstancedAttributes(renderable, program, ext);
-        }
-
-        if (vao.indicesBuffer) {
-            var uintExt = this.getGLExtension('OES_element_index_uint');
-            var useUintExt = uintExt && (geometry.indices instanceof Uint32Array);
-            var indicesType = useUintExt ? _gl.UNSIGNED_INT : _gl.UNSIGNED_SHORT;
-
-            if (isInstanced) {
-                ext.drawElementsInstancedANGLE(
-                    glDrawMode, vao.indicesBuffer.count, indicesType, 0, renderable.getInstanceCount()
-                );
-            }
-            else {
-                _gl.drawElements(glDrawMode, vao.indicesBuffer.count, indicesType, 0);
-            }
-        }
-        else {
-            if (isInstanced) {
-                ext.drawArraysInstancedANGLE(glDrawMode, 0, geometry.vertexCount, renderable.getInstanceCount());
-            }
-            else {
-                // FIXME Use vertex number in buffer
-                // vertexCount may get the wrong value when geometry forget to mark dirty after update
-                _gl.drawArrays(glDrawMode, 0, geometry.vertexCount);
-            }
-        }
-
-        if (isInstanced) {
-            for (var i = 0; i < instancedAttrLocations.length; i++) {
-                _gl.disableVertexAttribArray(instancedAttrLocations[i]);
-            }
-        }
-    },
-
-    _bindInstancedAttributes: function (renderable, program, ext) {
-        var _gl = this.gl;
-        var instancedBuffers = renderable.getInstancedAttributesBuffers(this);
-        var locations = [];
-
-        for (var i = 0; i < instancedBuffers.length; i++) {
-            var bufferObj = instancedBuffers[i];
-            var location = program.getAttribLocation(_gl, bufferObj.symbol);
-            if (location < 0) {
-                continue;
-            }
-
-            var glType = attributeBufferTypeMap[bufferObj.type] || _gl.FLOAT;;
-            _gl.enableVertexAttribArray(location);  // TODO
-            _gl.bindBuffer(_gl.ARRAY_BUFFER, bufferObj.buffer);
-            _gl.vertexAttribPointer(location, bufferObj.size, glType, false, 0, 0);
-            ext.vertexAttribDivisorANGLE(location, bufferObj.divisor);
-
-            locations.push(location);
-        }
-
-        return locations;
-    },
-
-    _bindMaterial: function (renderable, material, program, prevRenderable, prevMaterial, prevProgram, getUniformValue) {
-        var _gl = this.gl;
-        // PENDING Same texture in different material take different slot?
-
-        // May use shader of other material if shader code are same
-        var sameProgram = prevProgram === program;
-
-        var currentTextureSlot = program.currentTextureSlot();
-        var enabledUniforms = material.getEnabledUniforms();
-        var textureUniforms = material.getTextureUniforms();
-        var placeholderTexture = this._placeholderTexture;
-
-        for (var u = 0; u < textureUniforms.length; u++) {
-            var symbol = textureUniforms[u];
-            var uniformValue = getUniformValue(renderable, material, symbol);
-            var uniformType = material.uniforms[symbol].type;
-            // Not use `instanceof` to determine if a value is texture in Material#bind.
-            // Use type instead, in some case texture may be in different namespaces.
-            // TODO Duck type validate.
-            if (uniformType === 't' && uniformValue) {
-                // Reset slot
-                uniformValue.__slot = -1;
-            }
-            else if (uniformType === 'tv') {
-                for (var i = 0; i < uniformValue.length; i++) {
-                    if (uniformValue[i]) {
-                        uniformValue[i].__slot = -1;
-                    }
-                }
-            }
-        }
-
-        placeholderTexture.__slot = -1;
-
-        // Set uniforms
-        for (var u = 0; u < enabledUniforms.length; u++) {
-            var symbol = enabledUniforms[u];
-            var uniform = material.uniforms[symbol];
-            var uniformValue = getUniformValue(renderable, material, symbol);
-            var uniformType = uniform.type;
-            var isTexture = uniformType === 't';
-
-            if (isTexture) {
-                if (!uniformValue || !uniformValue.isRenderable()) {
-                    uniformValue = placeholderTexture;
-                }
-            }
-            // PENDING
-            // When binding two materials with the same shader
-            // Many uniforms will be be set twice even if they have the same value
-            // So add a evaluation to see if the uniform is really needed to be set
-            if (prevMaterial && sameProgram) {
-                var prevUniformValue = getUniformValue(prevRenderable, prevMaterial, symbol);
-                if (isTexture) {
-                    if (!prevUniformValue || !prevUniformValue.isRenderable()) {
-                        prevUniformValue = placeholderTexture;
-                    }
-                }
-
-                if (prevUniformValue === uniformValue) {
-                    if (isTexture) {
-                        // Still take the slot to make sure same texture in different materials have same slot.
-                        program.takeCurrentTextureSlot(this, null);
-                    }
-                    else if (uniformType === 'tv' && uniformValue) {
-                        for (var i = 0; i < uniformValue.length; i++) {
-                            program.takeCurrentTextureSlot(this, null);
-                        }
-                    }
-                    continue;
-                }
-            }
-
-            if (uniformValue == null) {
-                continue;
-            }
-            else if (isTexture) {
-                if (uniformValue.__slot < 0) {
-                    var slot = program.currentTextureSlot();
-                    var res = program.setUniform(_gl, '1i', symbol, slot);
-                    if (res) { // Texture uniform is enabled
-                        program.takeCurrentTextureSlot(this, uniformValue);
-                        uniformValue.__slot = slot;
-                    }
-                }
-                // Multiple uniform use same texture..
-                else {
-                    program.setUniform(_gl, '1i', symbol, uniformValue.__slot);
-                }
-            }
-            else if (Array.isArray(uniformValue)) {
-                if (uniformValue.length === 0) {
-                    continue;
-                }
-                // Texture Array
-                if (uniformType === 'tv') {
-                    if (!program.hasUniform(symbol)) {
-                        continue;
-                    }
-
-                    var arr = [];
-                    for (var i = 0; i < uniformValue.length; i++) {
-                        var texture = uniformValue[i];
-
-                        if (texture.__slot < 0) {
-                            var slot = program.currentTextureSlot();
-                            arr.push(slot);
-                            program.takeCurrentTextureSlot(this, texture);
-                            texture.__slot = slot;
-                        }
-                        else {
-                            arr.push(texture.__slot);
-                        }
-                    }
-
-                    program.setUniform(_gl, '1iv', symbol, arr);
-                }
-                else {
-                    program.setUniform(_gl, uniform.type, symbol, uniformValue);
-                }
-            }
-            else{
-                program.setUniform(_gl, uniform.type, symbol, uniformValue);
-            }
-        }
-        var newSlot = program.currentTextureSlot();
-        // Texture slot maybe used out of material.
-        program.resetTextureSlot(currentTextureSlot);
-        return newSlot;
-    },
-
-    _bindVAO: function (vaoExt, shader, geometry, program) {
-        var isStatic = !geometry.dynamic;
-        var _gl = this.gl;
-
-        var vaoId = this.__uid__ + '-' + program.__uid__;
-        var vao = geometry.__vaoCache[vaoId];
-        if (!vao) {
-            var chunks = geometry.getBufferChunks(this);
-            if (!chunks || !chunks.length) {  // Empty mesh
-                return;
-            }
-            var chunk = chunks[0];
-            var attributeBuffers = chunk.attributeBuffers;
-            var indicesBuffer = chunk.indicesBuffer;
-
-            var availableAttributes = [];
-            var availableAttributeSymbols = [];
-            for (var a = 0; a < attributeBuffers.length; a++) {
-                var attributeBufferInfo = attributeBuffers[a];
-                var name = attributeBufferInfo.name;
-                var semantic = attributeBufferInfo.semantic;
-                var symbol;
-                if (semantic) {
-                    var semanticInfo = shader.attributeSemantics[semantic];
-                    symbol = semanticInfo && semanticInfo.symbol;
-                }
-                else {
-                    symbol = name;
-                }
-                if (symbol && program.attributes[symbol]) {
-                    availableAttributes.push(attributeBufferInfo);
-                    availableAttributeSymbols.push(symbol);
-                }
-            }
-
-            vao = new VertexArrayObject(
-                availableAttributes,
-                availableAttributeSymbols,
-                indicesBuffer
-            );
-
-            if (isStatic) {
-                geometry.__vaoCache[vaoId] = vao;
-            }
-        }
-
-        var needsBindAttributes = true;
-
-        // Create vertex object array cost a lot
-        // So we don't use it on the dynamic object
-        if (vaoExt && isStatic) {
-            // Use vertex array object
-            // http://blog.tojicode.com/2012/10/oesvertexarrayobject-extension.html
-            if (vao.vao == null) {
-                vao.vao = vaoExt.createVertexArrayOES();
-            }
-            else {
-                needsBindAttributes = false;
-            }
-            vaoExt.bindVertexArrayOES(vao.vao);
-        }
-
-        var availableAttributes = vao.availableAttributes;
-        var indicesBuffer = vao.indicesBuffer;
-
-        if (needsBindAttributes) {
-            var locationList = program.enableAttributes(this, vao.availableAttributeSymbols, (vaoExt && isStatic && vao));
-            // Setting attributes;
-            for (var a = 0; a < availableAttributes.length; a++) {
-                var location = locationList[a];
-                if (location === -1) {
-                    continue;
-                }
-                var attributeBufferInfo = availableAttributes[a];
-                var buffer = attributeBufferInfo.buffer;
-                var size = attributeBufferInfo.size;
-                var glType = attributeBufferTypeMap[attributeBufferInfo.type] || _gl.FLOAT;
-
-                _gl.bindBuffer(_gl.ARRAY_BUFFER, buffer);
-                _gl.vertexAttribPointer(location, size, glType, false, 0, 0);
-            }
-
-            if (geometry.isUseIndices()) {
-                _gl.bindBuffer(_gl.ELEMENT_ARRAY_BUFFER, indicesBuffer.buffer);
-            }
-        }
-
-        return vao;
-    },
-
-    renderPreZ: function (list, scene, camera) {
-        var _gl = this.gl;
-        var preZPassMaterial = this._prezMaterial || new src_Material({
-            shader: new src_Shader(src_Shader.source('clay.prez.vertex'), src_Shader.source('clay.prez.fragment'))
-        });
-        this._prezMaterial = preZPassMaterial;
-
-        _gl.colorMask(false, false, false, false);
-        _gl.depthMask(true);
-
-        // Status
-        this.renderPass(list, camera, {
-            ifRender: function (renderable) {
-                return !renderable.ignorePreZ;
-            },
-            isMaterialChanged: function (renderable, prevRenderable) {
-                var matA = renderable.material;
-                var matB = prevRenderable.material;
-                return matA.get('diffuseMap') !== matB.get('diffuseMap')
-                    || (matA.get('alphaCutoff') || 0) !== (matB.get('alphaCutoff') || 0);
-            },
-            getUniform: function (renderable, depthMaterial, symbol) {
-                if (symbol === 'alphaMap') {
-                    return renderable.material.get('diffuseMap');
-                }
-                else if (symbol === 'alphaCutoff') {
-                    if (renderable.material.isDefined('fragment', 'ALPHA_TEST')
-                        && renderable.material.get('diffuseMap')
-                    ) {
-                        var alphaCutoff = renderable.material.get('alphaCutoff');
-                        return alphaCutoff || 0;
-                    }
-                    return 0;
-                }
-                else if (symbol === 'uvRepeat') {
-                    return renderable.material.get('uvRepeat');
-                }
-                else if (symbol === 'uvOffset') {
-                    return renderable.material.get('uvOffset');
-                }
-                else {
-                    return depthMaterial.get(symbol);
-                }
-            },
-            getMaterial: function () {
-                return preZPassMaterial;
-            },
-            sort: this.opaqueSortCompare
-        });
-
-        _gl.colorMask(true, true, true, true);
-        _gl.depthMask(true);
-    },
-
-    /**
-     * Dispose given scene, including all geometris, textures and shaders in the scene
-     * @param {clay.Scene} scene
-     */
-    disposeScene: function(scene) {
-        this.disposeNode(scene, true, true);
-        scene.dispose();
-    },
-
-    /**
-     * Dispose given node, including all geometries, textures and shaders attached on it or its descendant
-     * @param {clay.Node} node
-     * @param {boolean} [disposeGeometry=false] If dispose the geometries used in the descendant mesh
-     * @param {boolean} [disposeTexture=false] If dispose the textures used in the descendant mesh
-     */
-    disposeNode: function(root, disposeGeometry, disposeTexture) {
-        // Dettached from parent
-        if (root.getParent()) {
-            root.getParent().remove(root);
-        }
-        var disposedMap = {};
-        root.traverse(function(node) {
-            var material = node.material;
-            if (node.geometry && disposeGeometry) {
-                node.geometry.dispose(this);
-            }
-            if (disposeTexture && material && !disposedMap[material.__uid__]) {
-                var textureUniforms = material.getTextureUniforms();
-                for (var u = 0; u < textureUniforms.length; u++) {
-                    var uniformName = textureUniforms[u];
-                    var val = material.uniforms[uniformName].value;
-                    var uniformType = material.uniforms[uniformName].type;
-                    if (!val) {
-                        continue;
-                    }
-                    if (uniformType === 't') {
-                        val.dispose && val.dispose(this);
-                    }
-                    else if (uniformType === 'tv') {
-                        for (var k = 0; k < val.length; k++) {
-                            if (val[k]) {
-                                val[k].dispose && val[k].dispose(this);
-                            }
-                        }
-                    }
-                }
-                disposedMap[material.__uid__] = true;
-            }
-            // Particle system and AmbientCubemap light need to dispose
-            if (node.dispose) {
-                node.dispose(this);
-            }
-        }, this);
-    },
-
-    /**
-     * Dispose given geometry
-     * @param {clay.Geometry} geometry
-     */
-    disposeGeometry: function(geometry) {
-        geometry.dispose(this);
-    },
-
-    /**
-     * Dispose given texture
-     * @param {clay.Texture} texture
-     */
-    disposeTexture: function(texture) {
-        texture.dispose(this);
-    },
-
-    /**
-     * Dispose given frame buffer
-     * @param {clay.FrameBuffer} frameBuffer
-     */
-    disposeFrameBuffer: function(frameBuffer) {
-        frameBuffer.dispose(this);
-    },
-
-    /**
-     * Dispose renderer
-     */
-    dispose: function () {},
-
-    /**
-     * Convert screen coords to normalized device coordinates(NDC)
-     * Screen coords can get from mouse event, it is positioned relative to canvas element
-     * NDC can be used in ray casting with Camera.prototype.castRay methods
-     *
-     * @param  {number}       x
-     * @param  {number}       y
-     * @param  {clay.Vector2} [out]
-     * @return {clay.Vector2}
-     */
-    screenToNDC: function(x, y, out) {
-        if (!out) {
-            out = new math_Vector2();
-        }
-        // Invert y;
-        y = this._height - y;
-
-        var viewport = this.viewport;
-        var arr = out.array;
-        arr[0] = (x - viewport.x) / viewport.width;
-        arr[0] = arr[0] * 2 - 1;
-        arr[1] = (y - viewport.y) / viewport.height;
-        arr[1] = arr[1] * 2 - 1;
-
-        return out;
-    }
-});
-
-/**
- * Opaque renderables compare function
- * @param  {clay.Renderable} x
- * @param  {clay.Renderable} y
- * @return {boolean}
- * @static
- */
-Renderer.opaqueSortCompare = Renderer.prototype.opaqueSortCompare = function(x, y) {
-    // Priority renderOrder -> program -> material -> geometry
-    if (x.renderOrder === y.renderOrder) {
-        if (x.__program === y.__program) {
-            if (x.material === y.material) {
-                return x.geometry.__uid__ - y.geometry.__uid__;
-            }
-            return x.material.__uid__ - y.material.__uid__;
-        }
-        if (x.__program && y.__program) {
-            return x.__program.__uid__ - y.__program.__uid__;
-        }
-        return 0;
-    }
-    return x.renderOrder - y.renderOrder;
-};
-
-/**
- * Transparent renderables compare function
- * @param  {clay.Renderable} a
- * @param  {clay.Renderable} b
- * @return {boolean}
- * @static
- */
-Renderer.transparentSortCompare = Renderer.prototype.transparentSortCompare = function(x, y) {
-    // Priority renderOrder -> depth -> program -> material -> geometry
-
-    if (x.renderOrder === y.renderOrder) {
-        if (x.__depth === y.__depth) {
-            if (x.__program === y.__program) {
-                if (x.material === y.material) {
-                    return x.geometry.__uid__ - y.geometry.__uid__;
-                }
-                return x.material.__uid__ - y.material.__uid__;
-            }
-            if (x.__program  && y.__program) {
-                return x.__program.__uid__ - y.__program.__uid__;
-            }
-            return 0;
-        }
-        // Depth is negative
-        // So farther object has smaller depth value
-        return x.__depth - y.__depth;
-    }
-    return x.renderOrder - y.renderOrder;
-};
-
-// Temporary variables
-var matrices = {
-    IDENTITY: mat4Create(),
-
-    WORLD: mat4Create(),
-    VIEW: mat4Create(),
-    PROJECTION: mat4Create(),
-    WORLDVIEW: mat4Create(),
-    VIEWPROJECTION: mat4Create(),
-    WORLDVIEWPROJECTION: mat4Create(),
-
-    WORLDINVERSE: mat4Create(),
-    VIEWINVERSE: mat4Create(),
-    PROJECTIONINVERSE: mat4Create(),
-    WORLDVIEWINVERSE: mat4Create(),
-    VIEWPROJECTIONINVERSE: mat4Create(),
-    WORLDVIEWPROJECTIONINVERSE: mat4Create(),
-
-    WORLDTRANSPOSE: mat4Create(),
-    VIEWTRANSPOSE: mat4Create(),
-    PROJECTIONTRANSPOSE: mat4Create(),
-    WORLDVIEWTRANSPOSE: mat4Create(),
-    VIEWPROJECTIONTRANSPOSE: mat4Create(),
-    WORLDVIEWPROJECTIONTRANSPOSE: mat4Create(),
-    WORLDINVERSETRANSPOSE: mat4Create(),
-    VIEWINVERSETRANSPOSE: mat4Create(),
-    PROJECTIONINVERSETRANSPOSE: mat4Create(),
-    WORLDVIEWINVERSETRANSPOSE: mat4Create(),
-    VIEWPROJECTIONINVERSETRANSPOSE: mat4Create(),
-    WORLDVIEWPROJECTIONINVERSETRANSPOSE: mat4Create()
-};
-
-/**
- * @name clay.Renderer.COLOR_BUFFER_BIT
- * @type {number}
- */
-Renderer.COLOR_BUFFER_BIT = glenum.COLOR_BUFFER_BIT;
-/**
- * @name clay.Renderer.DEPTH_BUFFER_BIT
- * @type {number}
- */
-Renderer.DEPTH_BUFFER_BIT = glenum.DEPTH_BUFFER_BIT;
-/**
- * @name clay.Renderer.STENCIL_BUFFER_BIT
- * @type {number}
- */
-Renderer.STENCIL_BUFFER_BIT = glenum.STENCIL_BUFFER_BIT;
-
-/* harmony default export */ const src_Renderer = (Renderer);
-
 ;// CONCATENATED MODULE: ./node_modules/claygl/src/math/Vector3.js
 
 
@@ -8469,14 +1653,14 @@ var defineProperty = Object.defineProperty;
 // Getter and Setter
 if (defineProperty) {
 
-    var Vector3_proto = Vector3.prototype;
+    var proto = Vector3.prototype;
     /**
      * @name x
      * @type {number}
      * @memberOf clay.Vector3
      * @instance
      */
-    defineProperty(Vector3_proto, 'x', {
+    defineProperty(proto, 'x', {
         get: function () {
             return this.array[0];
         },
@@ -8492,7 +1676,7 @@ if (defineProperty) {
      * @memberOf clay.Vector3
      * @instance
      */
-    defineProperty(Vector3_proto, 'y', {
+    defineProperty(proto, 'y', {
         get: function () {
             return this.array[1];
         },
@@ -8508,7 +1692,7 @@ if (defineProperty) {
      * @memberOf clay.Vector3
      * @instance
      */
-    defineProperty(Vector3_proto, 'z', {
+    defineProperty(proto, 'z', {
         get: function () {
             return this.array[2];
         },
@@ -9050,327 +2234,6 @@ Object.defineProperties(Vector3, {
 });
 
 /* harmony default export */ const math_Vector3 = (Vector3);
-
-;// CONCATENATED MODULE: ./node_modules/claygl/src/math/Ray.js
-
-
-
-var EPSILON = 1e-5;
-
-/**
- * @constructor
- * @alias clay.Ray
- * @param {clay.Vector3} [origin]
- * @param {clay.Vector3} [direction]
- */
-var Ray = function (origin, direction) {
-    /**
-     * @type {clay.Vector3}
-     */
-    this.origin = origin || new math_Vector3();
-    /**
-     * @type {clay.Vector3}
-     */
-    this.direction = direction || new math_Vector3();
-};
-
-Ray.prototype = {
-
-    constructor: Ray,
-
-    // http://www.siggraph.org/education/materials/HyperGraph/raytrace/rayplane_intersection.htm
-    /**
-     * Calculate intersection point between ray and a give plane
-     * @param  {clay.Plane} plane
-     * @param  {clay.Vector3} [out]
-     * @return {clay.Vector3}
-     */
-    intersectPlane: function (plane, out) {
-        var pn = plane.normal.array;
-        var d = plane.distance;
-        var ro = this.origin.array;
-        var rd = this.direction.array;
-
-        var divider = glmatrix_vec3.dot(pn, rd);
-        // ray is parallel to the plane
-        if (divider === 0) {
-            return null;
-        }
-        if (!out) {
-            out = new math_Vector3();
-        }
-        var t = (glmatrix_vec3.dot(pn, ro) - d) / divider;
-        glmatrix_vec3.scaleAndAdd(out.array, ro, rd, -t);
-        out._dirty = true;
-        return out;
-    },
-
-    /**
-     * Mirror the ray against plane
-     * @param  {clay.Plane} plane
-     */
-    mirrorAgainstPlane: function (plane) {
-        // Distance to plane
-        var d = glmatrix_vec3.dot(plane.normal.array, this.direction.array);
-        glmatrix_vec3.scaleAndAdd(this.direction.array, this.direction.array, plane.normal.array, -d * 2);
-        this.direction._dirty = true;
-    },
-
-    distanceToPoint: (function () {
-        var v = glmatrix_vec3.create();
-        return function (point) {
-            glmatrix_vec3.sub(v, point, this.origin.array);
-            // Distance from projection point to origin
-            var b = glmatrix_vec3.dot(v, this.direction.array);
-            if (b < 0) {
-                return glmatrix_vec3.distance(this.origin.array, point);
-            }
-            // Squared distance from center to origin
-            var c2 = glmatrix_vec3.lenSquared(v);
-            // Squared distance from center to projection point
-            return Math.sqrt(c2 - b * b);
-        };
-    })(),
-
-    /**
-     * Calculate intersection point between ray and sphere
-     * @param  {clay.Vector3} center
-     * @param  {number} radius
-     * @param  {clay.Vector3} out
-     * @return {clay.Vector3}
-     */
-    intersectSphere: (function () {
-        var v = glmatrix_vec3.create();
-        return function (center, radius, out) {
-            var origin = this.origin.array;
-            var direction = this.direction.array;
-            center = center.array;
-            glmatrix_vec3.sub(v, center, origin);
-            // Distance from projection point to origin
-            var b = glmatrix_vec3.dot(v, direction);
-            // Squared distance from center to origin
-            var c2 = glmatrix_vec3.squaredLength(v);
-            // Squared distance from center to projection point
-            var d2 = c2 - b * b;
-
-            var r2 = radius * radius;
-            // No intersection
-            if (d2 > r2) {
-                return;
-            }
-
-            var a = Math.sqrt(r2 - d2);
-            // First intersect point
-            var t0 = b - a;
-            // Second intersect point
-            var t1 = b + a;
-
-            if (!out) {
-                out = new math_Vector3();
-            }
-            if (t0 < 0) {
-                if (t1 < 0) {
-                    return null;
-                }
-                else {
-                    glmatrix_vec3.scaleAndAdd(out.array, origin, direction, t1);
-                    return out;
-                }
-            }
-            else {
-                glmatrix_vec3.scaleAndAdd(out.array, origin, direction, t0);
-                return out;
-            }
-        };
-    })(),
-
-    // http://www.scratchapixel.com/lessons/3d-basic-lessons/lesson-7-intersecting-simple-shapes/ray-box-intersection/
-    /**
-     * Calculate intersection point between ray and bounding box
-     * @param {clay.BoundingBox} bbox
-     * @param {clay.Vector3}
-     * @return {clay.Vector3}
-     */
-    intersectBoundingBox: function (bbox, out) {
-        var dir = this.direction.array;
-        var origin = this.origin.array;
-        var min = bbox.min.array;
-        var max = bbox.max.array;
-
-        var invdirx = 1 / dir[0];
-        var invdiry = 1 / dir[1];
-        var invdirz = 1 / dir[2];
-
-        var tmin, tmax, tymin, tymax, tzmin, tzmax;
-        if (invdirx >= 0) {
-            tmin = (min[0] - origin[0]) * invdirx;
-            tmax = (max[0] - origin[0]) * invdirx;
-        }
-        else {
-            tmax = (min[0] - origin[0]) * invdirx;
-            tmin = (max[0] - origin[0]) * invdirx;
-        }
-        if (invdiry >= 0) {
-            tymin = (min[1] - origin[1]) * invdiry;
-            tymax = (max[1] - origin[1]) * invdiry;
-        }
-        else {
-            tymax = (min[1] - origin[1]) * invdiry;
-            tymin = (max[1] - origin[1]) * invdiry;
-        }
-
-        if ((tmin > tymax) || (tymin > tmax)) {
-            return null;
-        }
-
-        if (tymin > tmin || tmin !== tmin) {
-            tmin = tymin;
-        }
-        if (tymax < tmax || tmax !== tmax) {
-            tmax = tymax;
-        }
-
-        if (invdirz >= 0) {
-            tzmin = (min[2] - origin[2]) * invdirz;
-            tzmax = (max[2] - origin[2]) * invdirz;
-        }
-        else {
-            tzmax = (min[2] - origin[2]) * invdirz;
-            tzmin = (max[2] - origin[2]) * invdirz;
-        }
-
-        if ((tmin > tzmax) || (tzmin > tmax)) {
-            return null;
-        }
-
-        if (tzmin > tmin || tmin !== tmin) {
-            tmin = tzmin;
-        }
-        if (tzmax < tmax || tmax !== tmax) {
-            tmax = tzmax;
-        }
-        if (tmax < 0) {
-            return null;
-        }
-
-        var t = tmin >= 0 ? tmin : tmax;
-
-        if (!out) {
-            out = new math_Vector3();
-        }
-        glmatrix_vec3.scaleAndAdd(out.array, origin, dir, t);
-        return out;
-    },
-
-    // http://en.wikipedia.org/wiki/M%C3%B6ller%E2%80%93Trumbore_intersection_algorithm
-    /**
-     * Calculate intersection point between ray and three triangle vertices
-     * @param {clay.Vector3} a
-     * @param {clay.Vector3} b
-     * @param {clay.Vector3} c
-     * @param {boolean}           singleSided, CW triangle will be ignored
-     * @param {clay.Vector3} [out]
-     * @param {clay.Vector3} [barycenteric] barycentric coords
-     * @return {clay.Vector3}
-     */
-    intersectTriangle: (function () {
-
-        var eBA = glmatrix_vec3.create();
-        var eCA = glmatrix_vec3.create();
-        var AO = glmatrix_vec3.create();
-        var vCross = glmatrix_vec3.create();
-
-        return function (a, b, c, singleSided, out, barycenteric) {
-            var dir = this.direction.array;
-            var origin = this.origin.array;
-            a = a.array;
-            b = b.array;
-            c = c.array;
-
-            glmatrix_vec3.sub(eBA, b, a);
-            glmatrix_vec3.sub(eCA, c, a);
-
-            glmatrix_vec3.cross(vCross, eCA, dir);
-
-            var det = glmatrix_vec3.dot(eBA, vCross);
-
-            if (singleSided) {
-                if (det > -EPSILON) {
-                    return null;
-                }
-            }
-            else {
-                if (det > -EPSILON && det < EPSILON) {
-                    return null;
-                }
-            }
-
-            glmatrix_vec3.sub(AO, origin, a);
-            var u = glmatrix_vec3.dot(vCross, AO) / det;
-            if (u < 0 || u > 1) {
-                return null;
-            }
-
-            glmatrix_vec3.cross(vCross, eBA, AO);
-            var v = glmatrix_vec3.dot(dir, vCross) / det;
-
-            if (v < 0 || v > 1 || (u + v > 1)) {
-                return null;
-            }
-
-            glmatrix_vec3.cross(vCross, eBA, eCA);
-            var t = -glmatrix_vec3.dot(AO, vCross) / det;
-
-            if (t < 0) {
-                return null;
-            }
-
-            if (!out) {
-                out = new math_Vector3();
-            }
-            if (barycenteric) {
-                math_Vector3.set(barycenteric, (1 - u - v), u, v);
-            }
-            glmatrix_vec3.scaleAndAdd(out.array, origin, dir, t);
-
-            return out;
-        };
-    })(),
-
-    /**
-     * Apply an affine transform matrix to the ray
-     * @return {clay.Matrix4} matrix
-     */
-    applyTransform: function (matrix) {
-        math_Vector3.add(this.direction, this.direction, this.origin);
-        math_Vector3.transformMat4(this.origin, this.origin, matrix);
-        math_Vector3.transformMat4(this.direction, this.direction, matrix);
-
-        math_Vector3.sub(this.direction, this.direction, this.origin);
-        math_Vector3.normalize(this.direction, this.direction);
-    },
-
-    /**
-     * Copy values from another ray
-     * @param {clay.Ray} ray
-     */
-    copy: function (ray) {
-        math_Vector3.copy(this.origin, ray.origin);
-        math_Vector3.copy(this.direction, ray.direction);
-    },
-
-    /**
-     * Clone a new ray
-     * @return {clay.Ray}
-     */
-    clone: function () {
-        var ray = new Ray();
-        ray.copy(this);
-        return ray;
-    }
-};
-
-/* harmony default export */ const math_Ray = (Ray);
 
 ;// CONCATENATED MODULE: ./node_modules/claygl/src/glmatrix/vec4.js
 
@@ -10909,727 +3772,6 @@ quat.fromMat3 = function(out, m) {
 };
 
 /* harmony default export */ const glmatrix_quat = (quat);
-;// CONCATENATED MODULE: ./node_modules/claygl/src/math/Matrix4.js
-
-
-
-
-
-
-/**
- * @constructor
- * @alias clay.Matrix4
- */
-var Matrix4 = function() {
-
-    this._axisX = new math_Vector3();
-    this._axisY = new math_Vector3();
-    this._axisZ = new math_Vector3();
-
-    /**
-     * Storage of Matrix4
-     * @name array
-     * @type {Float32Array}
-     * @memberOf clay.Matrix4#
-     */
-    this.array = glmatrix_mat4.create();
-
-    /**
-     * @name _dirty
-     * @type {boolean}
-     * @memberOf clay.Matrix4#
-     */
-    this._dirty = true;
-};
-
-Matrix4.prototype = {
-
-    constructor: Matrix4,
-
-    /**
-     * Set components from array
-     * @param  {Float32Array|number[]} arr
-     */
-    setArray: function (arr) {
-        for (var i = 0; i < this.array.length; i++) {
-            this.array[i] = arr[i];
-        }
-        this._dirty = true;
-        return this;
-    },
-    /**
-     * Calculate the adjugate of self, in-place
-     * @return {clay.Matrix4}
-     */
-    adjoint: function() {
-        glmatrix_mat4.adjoint(this.array, this.array);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Clone a new Matrix4
-     * @return {clay.Matrix4}
-     */
-    clone: function() {
-        return (new Matrix4()).copy(this);
-    },
-
-    /**
-     * Copy from b
-     * @param  {clay.Matrix4} b
-     * @return {clay.Matrix4}
-     */
-    copy: function(a) {
-        glmatrix_mat4.copy(this.array, a.array);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Calculate matrix determinant
-     * @return {number}
-     */
-    determinant: function() {
-        return glmatrix_mat4.determinant(this.array);
-    },
-
-    /**
-     * Set upper 3x3 part from quaternion
-     * @param  {clay.Quaternion} q
-     * @return {clay.Matrix4}
-     */
-    fromQuat: function(q) {
-        glmatrix_mat4.fromQuat(this.array, q.array);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Set from a quaternion rotation and a vector translation
-     * @param  {clay.Quaternion} q
-     * @param  {clay.Vector3} v
-     * @return {clay.Matrix4}
-     */
-    fromRotationTranslation: function(q, v) {
-        glmatrix_mat4.fromRotationTranslation(this.array, q.array, v.array);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Set from Matrix2d, it is used when converting a 2d shape to 3d space.
-     * In 3d space it is equivalent to ranslate on xy plane and rotate about z axis
-     * @param  {clay.Matrix2d} m2d
-     * @return {clay.Matrix4}
-     */
-    fromMat2d: function(m2d) {
-        Matrix4.fromMat2d(this, m2d);
-        return this;
-    },
-
-    /**
-     * Set from frustum bounds
-     * @param  {number} left
-     * @param  {number} right
-     * @param  {number} bottom
-     * @param  {number} top
-     * @param  {number} near
-     * @param  {number} far
-     * @return {clay.Matrix4}
-     */
-    frustum: function (left, right, bottom, top, near, far) {
-        glmatrix_mat4.frustum(this.array, left, right, bottom, top, near, far);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Set to a identity matrix
-     * @return {clay.Matrix4}
-     */
-    identity: function() {
-        glmatrix_mat4.identity(this.array);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Invert self
-     * @return {clay.Matrix4}
-     */
-    invert: function() {
-        glmatrix_mat4.invert(this.array, this.array);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Set as a matrix with the given eye position, focal point, and up axis
-     * @param  {clay.Vector3} eye
-     * @param  {clay.Vector3} center
-     * @param  {clay.Vector3} up
-     * @return {clay.Matrix4}
-     */
-    lookAt: function(eye, center, up) {
-        glmatrix_mat4.lookAt(this.array, eye.array, center.array, up.array);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Alias for mutiply
-     * @param  {clay.Matrix4} b
-     * @return {clay.Matrix4}
-     */
-    mul: function(b) {
-        glmatrix_mat4.mul(this.array, this.array, b.array);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Alias for multiplyLeft
-     * @param  {clay.Matrix4} a
-     * @return {clay.Matrix4}
-     */
-    mulLeft: function(a) {
-        glmatrix_mat4.mul(this.array, a.array, this.array);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Multiply self and b
-     * @param  {clay.Matrix4} b
-     * @return {clay.Matrix4}
-     */
-    multiply: function(b) {
-        glmatrix_mat4.multiply(this.array, this.array, b.array);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Multiply a and self, a is on the left
-     * @param  {clay.Matrix3} a
-     * @return {clay.Matrix3}
-     */
-    multiplyLeft: function(a) {
-        glmatrix_mat4.multiply(this.array, a.array, this.array);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Set as a orthographic projection matrix
-     * @param  {number} left
-     * @param  {number} right
-     * @param  {number} bottom
-     * @param  {number} top
-     * @param  {number} near
-     * @param  {number} far
-     * @return {clay.Matrix4}
-     */
-    ortho: function(left, right, bottom, top, near, far) {
-        glmatrix_mat4.ortho(this.array, left, right, bottom, top, near, far);
-        this._dirty = true;
-        return this;
-    },
-    /**
-     * Set as a perspective projection matrix
-     * @param  {number} fovy
-     * @param  {number} aspect
-     * @param  {number} near
-     * @param  {number} far
-     * @return {clay.Matrix4}
-     */
-    perspective: function(fovy, aspect, near, far) {
-        glmatrix_mat4.perspective(this.array, fovy, aspect, near, far);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Rotate self by rad about axis.
-     * Equal to right-multiply a rotaion matrix
-     * @param  {number}   rad
-     * @param  {clay.Vector3} axis
-     * @return {clay.Matrix4}
-     */
-    rotate: function(rad, axis) {
-        glmatrix_mat4.rotate(this.array, this.array, rad, axis.array);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Rotate self by a given radian about X axis.
-     * Equal to right-multiply a rotaion matrix
-     * @param {number} rad
-     * @return {clay.Matrix4}
-     */
-    rotateX: function(rad) {
-        glmatrix_mat4.rotateX(this.array, this.array, rad);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Rotate self by a given radian about Y axis.
-     * Equal to right-multiply a rotaion matrix
-     * @param {number} rad
-     * @return {clay.Matrix4}
-     */
-    rotateY: function(rad) {
-        glmatrix_mat4.rotateY(this.array, this.array, rad);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Rotate self by a given radian about Z axis.
-     * Equal to right-multiply a rotaion matrix
-     * @param {number} rad
-     * @return {clay.Matrix4}
-     */
-    rotateZ: function(rad) {
-        glmatrix_mat4.rotateZ(this.array, this.array, rad);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Scale self by s
-     * Equal to right-multiply a scale matrix
-     * @param  {clay.Vector3}  s
-     * @return {clay.Matrix4}
-     */
-    scale: function(v) {
-        glmatrix_mat4.scale(this.array, this.array, v.array);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Translate self by v.
-     * Equal to right-multiply a translate matrix
-     * @param  {clay.Vector3}  v
-     * @return {clay.Matrix4}
-     */
-    translate: function(v) {
-        glmatrix_mat4.translate(this.array, this.array, v.array);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Transpose self, in-place.
-     * @return {clay.Matrix2}
-     */
-    transpose: function() {
-        glmatrix_mat4.transpose(this.array, this.array);
-        this._dirty = true;
-        return this;
-    },
-
-    /**
-     * Decompose a matrix to SRT
-     * @param {clay.Vector3} [scale]
-     * @param {clay.Quaternion} rotation
-     * @param {clay.Vector} position
-     * @see http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.matrix.decompose.aspx
-     */
-    decomposeMatrix: (function() {
-
-        var x = glmatrix_vec3.create();
-        var y = glmatrix_vec3.create();
-        var z = glmatrix_vec3.create();
-
-        var m3 = glmatrix_mat3.create();
-
-        return function(scale, rotation, position) {
-
-            var el = this.array;
-            glmatrix_vec3.set(x, el[0], el[1], el[2]);
-            glmatrix_vec3.set(y, el[4], el[5], el[6]);
-            glmatrix_vec3.set(z, el[8], el[9], el[10]);
-
-            var sx = glmatrix_vec3.length(x);
-            var sy = glmatrix_vec3.length(y);
-            var sz = glmatrix_vec3.length(z);
-
-            // if determine is negative, we need to invert one scale
-            var det = this.determinant();
-            if (det < 0) {
-                sx = -sx;
-            }
-
-            if (scale) {
-                scale.set(sx, sy, sz);
-            }
-
-            position.set(el[12], el[13], el[14]);
-
-            glmatrix_mat3.fromMat4(m3, el);
-            // Not like mat4, mat3 in glmatrix seems to be row-based
-            // Seems fixed in gl-matrix 2.2.2
-            // https://github.com/toji/gl-matrix/issues/114
-            // mat3.transpose(m3, m3);
-
-            m3[0] /= sx;
-            m3[1] /= sx;
-            m3[2] /= sx;
-
-            m3[3] /= sy;
-            m3[4] /= sy;
-            m3[5] /= sy;
-
-            m3[6] /= sz;
-            m3[7] /= sz;
-            m3[8] /= sz;
-
-            glmatrix_quat.fromMat3(rotation.array, m3);
-            glmatrix_quat.normalize(rotation.array, rotation.array);
-
-            rotation._dirty = true;
-            position._dirty = true;
-        };
-    })(),
-
-    toString: function() {
-        return '[' + Array.prototype.join.call(this.array, ',') + ']';
-    },
-
-    toArray: function () {
-        return Array.prototype.slice.call(this.array);
-    }
-};
-
-var Matrix4_defineProperty = Object.defineProperty;
-
-if (Matrix4_defineProperty) {
-    var Matrix4_proto = Matrix4.prototype;
-    /**
-     * Z Axis of local transform
-     * @name z
-     * @type {clay.Vector3}
-     * @memberOf clay.Matrix4
-     * @instance
-     */
-    Matrix4_defineProperty(Matrix4_proto, 'z', {
-        get: function () {
-            var el = this.array;
-            this._axisZ.set(el[8], el[9], el[10]);
-            return this._axisZ;
-        },
-        set: function (v) {
-            // TODO Here has a problem
-            // If only set an item of vector will not work
-            var el = this.array;
-            v = v.array;
-            el[8] = v[0];
-            el[9] = v[1];
-            el[10] = v[2];
-
-            this._dirty = true;
-        }
-    });
-
-    /**
-     * Y Axis of local transform
-     * @name y
-     * @type {clay.Vector3}
-     * @memberOf clay.Matrix4
-     * @instance
-     */
-    Matrix4_defineProperty(Matrix4_proto, 'y', {
-        get: function () {
-            var el = this.array;
-            this._axisY.set(el[4], el[5], el[6]);
-            return this._axisY;
-        },
-        set: function (v) {
-            var el = this.array;
-            v = v.array;
-            el[4] = v[0];
-            el[5] = v[1];
-            el[6] = v[2];
-
-            this._dirty = true;
-        }
-    });
-
-    /**
-     * X Axis of local transform
-     * @name x
-     * @type {clay.Vector3}
-     * @memberOf clay.Matrix4
-     * @instance
-     */
-    Matrix4_defineProperty(Matrix4_proto, 'x', {
-        get: function () {
-            var el = this.array;
-            this._axisX.set(el[0], el[1], el[2]);
-            return this._axisX;
-        },
-        set: function (v) {
-            var el = this.array;
-            v = v.array;
-            el[0] = v[0];
-            el[1] = v[1];
-            el[2] = v[2];
-
-            this._dirty = true;
-        }
-    })
-}
-
-/**
- * @param  {clay.Matrix4} out
- * @param  {clay.Matrix4} a
- * @return {clay.Matrix4}
- */
-Matrix4.adjoint = function(out, a) {
-    glmatrix_mat4.adjoint(out.array, a.array);
-    out._dirty = true;
-    return out;
-};
-
-/**
- * @param  {clay.Matrix4} out
- * @param  {clay.Matrix4} a
- * @return {clay.Matrix4}
- */
-Matrix4.copy = function(out, a) {
-    glmatrix_mat4.copy(out.array, a.array);
-    out._dirty = true;
-    return out;
-};
-
-/**
- * @param  {clay.Matrix4} a
- * @return {number}
- */
-Matrix4.determinant = function(a) {
-    return glmatrix_mat4.determinant(a.array);
-};
-
-/**
- * @param  {clay.Matrix4} out
- * @return {clay.Matrix4}
- */
-Matrix4.identity = function(out) {
-    glmatrix_mat4.identity(out.array);
-    out._dirty = true;
-    return out;
-};
-
-/**
- * @param  {clay.Matrix4} out
- * @param  {number}  left
- * @param  {number}  right
- * @param  {number}  bottom
- * @param  {number}  top
- * @param  {number}  near
- * @param  {number}  far
- * @return {clay.Matrix4}
- */
-Matrix4.ortho = function(out, left, right, bottom, top, near, far) {
-    glmatrix_mat4.ortho(out.array, left, right, bottom, top, near, far);
-    out._dirty = true;
-    return out;
-};
-
-/**
- * @param  {clay.Matrix4} out
- * @param  {number}  fovy
- * @param  {number}  aspect
- * @param  {number}  near
- * @param  {number}  far
- * @return {clay.Matrix4}
- */
-Matrix4.perspective = function(out, fovy, aspect, near, far) {
-    glmatrix_mat4.perspective(out.array, fovy, aspect, near, far);
-    out._dirty = true;
-    return out;
-};
-
-/**
- * @param  {clay.Matrix4} out
- * @param  {clay.Vector3} eye
- * @param  {clay.Vector3} center
- * @param  {clay.Vector3} up
- * @return {clay.Matrix4}
- */
-Matrix4.lookAt = function(out, eye, center, up) {
-    glmatrix_mat4.lookAt(out.array, eye.array, center.array, up.array);
-    out._dirty = true;
-    return out;
-};
-
-/**
- * @param  {clay.Matrix4} out
- * @param  {clay.Matrix4} a
- * @return {clay.Matrix4}
- */
-Matrix4.invert = function(out, a) {
-    glmatrix_mat4.invert(out.array, a.array);
-    out._dirty = true;
-    return out;
-};
-
-/**
- * @param  {clay.Matrix4} out
- * @param  {clay.Matrix4} a
- * @param  {clay.Matrix4} b
- * @return {clay.Matrix4}
- */
-Matrix4.mul = function(out, a, b) {
-    glmatrix_mat4.mul(out.array, a.array, b.array);
-    out._dirty = true;
-    return out;
-};
-
-/**
- * @function
- * @param  {clay.Matrix4} out
- * @param  {clay.Matrix4} a
- * @param  {clay.Matrix4} b
- * @return {clay.Matrix4}
- */
-Matrix4.multiply = Matrix4.mul;
-
-/**
- * @param  {clay.Matrix4}    out
- * @param  {clay.Quaternion} q
- * @return {clay.Matrix4}
- */
-Matrix4.fromQuat = function(out, q) {
-    glmatrix_mat4.fromQuat(out.array, q.array);
-    out._dirty = true;
-    return out;
-};
-
-/**
- * @param  {clay.Matrix4}    out
- * @param  {clay.Quaternion} q
- * @param  {clay.Vector3}    v
- * @return {clay.Matrix4}
- */
-Matrix4.fromRotationTranslation = function(out, q, v) {
-    glmatrix_mat4.fromRotationTranslation(out.array, q.array, v.array);
-    out._dirty = true;
-    return out;
-};
-
-/**
- * @param  {clay.Matrix4} m4
- * @param  {clay.Matrix2d} m2d
- * @return {clay.Matrix4}
- */
-Matrix4.fromMat2d = function(m4, m2d) {
-    m4._dirty = true;
-    var m2d = m2d.array;
-    var m4 = m4.array;
-
-    m4[0] = m2d[0];
-    m4[4] = m2d[2];
-    m4[12] = m2d[4];
-
-    m4[1] = m2d[1];
-    m4[5] = m2d[3];
-    m4[13] = m2d[5];
-
-    return m4;
-};
-
-/**
- * @param  {clay.Matrix4} out
- * @param  {clay.Matrix4} a
- * @param  {number}  rad
- * @param  {clay.Vector3} axis
- * @return {clay.Matrix4}
- */
-Matrix4.rotate = function(out, a, rad, axis) {
-    glmatrix_mat4.rotate(out.array, a.array, rad, axis.array);
-    out._dirty = true;
-    return out;
-};
-
-/**
- * @param  {clay.Matrix4} out
- * @param  {clay.Matrix4} a
- * @param  {number}  rad
- * @return {clay.Matrix4}
- */
-Matrix4.rotateX = function(out, a, rad) {
-    glmatrix_mat4.rotateX(out.array, a.array, rad);
-    out._dirty = true;
-    return out;
-};
-
-/**
- * @param  {clay.Matrix4} out
- * @param  {clay.Matrix4} a
- * @param  {number}  rad
- * @return {clay.Matrix4}
- */
-Matrix4.rotateY = function(out, a, rad) {
-    glmatrix_mat4.rotateY(out.array, a.array, rad);
-    out._dirty = true;
-    return out;
-};
-
-/**
- * @param  {clay.Matrix4} out
- * @param  {clay.Matrix4} a
- * @param  {number}  rad
- * @return {clay.Matrix4}
- */
-Matrix4.rotateZ = function(out, a, rad) {
-    glmatrix_mat4.rotateZ(out.array, a.array, rad);
-    out._dirty = true;
-    return out;
-};
-
-/**
- * @param  {clay.Matrix4} out
- * @param  {clay.Matrix4} a
- * @param  {clay.Vector3} v
- * @return {clay.Matrix4}
- */
-Matrix4.scale = function(out, a, v) {
-    glmatrix_mat4.scale(out.array, a.array, v.array);
-    out._dirty = true;
-    return out;
-};
-
-/**
- * @param  {clay.Matrix4} out
- * @param  {clay.Matrix4} a
- * @return {clay.Matrix4}
- */
-Matrix4.transpose = function(out, a) {
-    glmatrix_mat4.transpose(out.array, a.array);
-    out._dirty = true;
-    return out;
-};
-
-/**
- * @param  {clay.Matrix4} out
- * @param  {clay.Matrix4} a
- * @param  {clay.Vector3} v
- * @return {clay.Matrix4}
- */
-Matrix4.translate = function(out, a, v) {
-    glmatrix_mat4.translate(out.array, a.array, v.array);
-    out._dirty = true;
-    return out;
-};
-
-/* harmony default export */ const math_Matrix4 = (Matrix4);
-
 ;// CONCATENATED MODULE: ./node_modules/claygl/src/math/Quaternion.js
 
 
@@ -12405,6 +4547,1672 @@ Quaternion.fromEuler = function (out, v, order) {
 };
 
 /* harmony default export */ const math_Quaternion = (Quaternion);
+
+;// CONCATENATED MODULE: ./node_modules/claygl/src/glmatrix/mat4.js
+
+/* Copyright (c) 2013, Brandon Jones, Colin MacKenzie IV. All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
+
+  * Redistributions of source code must retain the above copyright notice, this
+    list of conditions and the following disclaimer.
+  * Redistributions in binary form must reproduce the above copyright notice,
+    this list of conditions and the following disclaimer in the documentation
+    and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
+
+
+
+/**
+ * @class 4x4 Matrix
+ * @name mat4
+ */
+
+var mat4 = {};
+
+/**
+ * Creates a new identity mat4
+ *
+ * @returns {mat4} a new 4x4 matrix
+ */
+mat4.create = function() {
+    var out = new GLMAT_ARRAY_TYPE(16);
+    out[0] = 1;
+    out[1] = 0;
+    out[2] = 0;
+    out[3] = 0;
+    out[4] = 0;
+    out[5] = 1;
+    out[6] = 0;
+    out[7] = 0;
+    out[8] = 0;
+    out[9] = 0;
+    out[10] = 1;
+    out[11] = 0;
+    out[12] = 0;
+    out[13] = 0;
+    out[14] = 0;
+    out[15] = 1;
+    return out;
+};
+
+/**
+ * Creates a new mat4 initialized with values from an existing matrix
+ *
+ * @param {mat4} a matrix to clone
+ * @returns {mat4} a new 4x4 matrix
+ */
+mat4.clone = function(a) {
+    var out = new GLMAT_ARRAY_TYPE(16);
+    out[0] = a[0];
+    out[1] = a[1];
+    out[2] = a[2];
+    out[3] = a[3];
+    out[4] = a[4];
+    out[5] = a[5];
+    out[6] = a[6];
+    out[7] = a[7];
+    out[8] = a[8];
+    out[9] = a[9];
+    out[10] = a[10];
+    out[11] = a[11];
+    out[12] = a[12];
+    out[13] = a[13];
+    out[14] = a[14];
+    out[15] = a[15];
+    return out;
+};
+
+/**
+ * Copy the values from one mat4 to another
+ *
+ * @param {mat4} out the receiving matrix
+ * @param {mat4} a the source matrix
+ * @returns {mat4} out
+ */
+mat4.copy = function(out, a) {
+    out[0] = a[0];
+    out[1] = a[1];
+    out[2] = a[2];
+    out[3] = a[3];
+    out[4] = a[4];
+    out[5] = a[5];
+    out[6] = a[6];
+    out[7] = a[7];
+    out[8] = a[8];
+    out[9] = a[9];
+    out[10] = a[10];
+    out[11] = a[11];
+    out[12] = a[12];
+    out[13] = a[13];
+    out[14] = a[14];
+    out[15] = a[15];
+    return out;
+};
+
+/**
+ * Set a mat4 to the identity matrix
+ *
+ * @param {mat4} out the receiving matrix
+ * @returns {mat4} out
+ */
+mat4.identity = function(out) {
+    out[0] = 1;
+    out[1] = 0;
+    out[2] = 0;
+    out[3] = 0;
+    out[4] = 0;
+    out[5] = 1;
+    out[6] = 0;
+    out[7] = 0;
+    out[8] = 0;
+    out[9] = 0;
+    out[10] = 1;
+    out[11] = 0;
+    out[12] = 0;
+    out[13] = 0;
+    out[14] = 0;
+    out[15] = 1;
+    return out;
+};
+
+/**
+ * Transpose the values of a mat4
+ *
+ * @param {mat4} out the receiving matrix
+ * @param {mat4} a the source matrix
+ * @returns {mat4} out
+ */
+mat4.transpose = function(out, a) {
+    // If we are transposing ourselves we can skip a few steps but have to cache some values
+    if (out === a) {
+        var a01 = a[1], a02 = a[2], a03 = a[3],
+            a12 = a[6], a13 = a[7],
+            a23 = a[11];
+
+        out[1] = a[4];
+        out[2] = a[8];
+        out[3] = a[12];
+        out[4] = a01;
+        out[6] = a[9];
+        out[7] = a[13];
+        out[8] = a02;
+        out[9] = a12;
+        out[11] = a[14];
+        out[12] = a03;
+        out[13] = a13;
+        out[14] = a23;
+    } else {
+        out[0] = a[0];
+        out[1] = a[4];
+        out[2] = a[8];
+        out[3] = a[12];
+        out[4] = a[1];
+        out[5] = a[5];
+        out[6] = a[9];
+        out[7] = a[13];
+        out[8] = a[2];
+        out[9] = a[6];
+        out[10] = a[10];
+        out[11] = a[14];
+        out[12] = a[3];
+        out[13] = a[7];
+        out[14] = a[11];
+        out[15] = a[15];
+    }
+
+    return out;
+};
+
+/**
+ * Inverts a mat4
+ *
+ * @param {mat4} out the receiving matrix
+ * @param {mat4} a the source matrix
+ * @returns {mat4} out
+ */
+mat4.invert = function(out, a) {
+    var a00 = a[0], a01 = a[1], a02 = a[2], a03 = a[3],
+        a10 = a[4], a11 = a[5], a12 = a[6], a13 = a[7],
+        a20 = a[8], a21 = a[9], a22 = a[10], a23 = a[11],
+        a30 = a[12], a31 = a[13], a32 = a[14], a33 = a[15],
+
+        b00 = a00 * a11 - a01 * a10,
+        b01 = a00 * a12 - a02 * a10,
+        b02 = a00 * a13 - a03 * a10,
+        b03 = a01 * a12 - a02 * a11,
+        b04 = a01 * a13 - a03 * a11,
+        b05 = a02 * a13 - a03 * a12,
+        b06 = a20 * a31 - a21 * a30,
+        b07 = a20 * a32 - a22 * a30,
+        b08 = a20 * a33 - a23 * a30,
+        b09 = a21 * a32 - a22 * a31,
+        b10 = a21 * a33 - a23 * a31,
+        b11 = a22 * a33 - a23 * a32,
+
+        // Calculate the determinant
+        det = b00 * b11 - b01 * b10 + b02 * b09 + b03 * b08 - b04 * b07 + b05 * b06;
+
+    if (!det) {
+        return null;
+    }
+    det = 1.0 / det;
+
+    out[0] = (a11 * b11 - a12 * b10 + a13 * b09) * det;
+    out[1] = (a02 * b10 - a01 * b11 - a03 * b09) * det;
+    out[2] = (a31 * b05 - a32 * b04 + a33 * b03) * det;
+    out[3] = (a22 * b04 - a21 * b05 - a23 * b03) * det;
+    out[4] = (a12 * b08 - a10 * b11 - a13 * b07) * det;
+    out[5] = (a00 * b11 - a02 * b08 + a03 * b07) * det;
+    out[6] = (a32 * b02 - a30 * b05 - a33 * b01) * det;
+    out[7] = (a20 * b05 - a22 * b02 + a23 * b01) * det;
+    out[8] = (a10 * b10 - a11 * b08 + a13 * b06) * det;
+    out[9] = (a01 * b08 - a00 * b10 - a03 * b06) * det;
+    out[10] = (a30 * b04 - a31 * b02 + a33 * b00) * det;
+    out[11] = (a21 * b02 - a20 * b04 - a23 * b00) * det;
+    out[12] = (a11 * b07 - a10 * b09 - a12 * b06) * det;
+    out[13] = (a00 * b09 - a01 * b07 + a02 * b06) * det;
+    out[14] = (a31 * b01 - a30 * b03 - a32 * b00) * det;
+    out[15] = (a20 * b03 - a21 * b01 + a22 * b00) * det;
+
+    return out;
+};
+
+/**
+ * Calculates the adjugate of a mat4
+ *
+ * @param {mat4} out the receiving matrix
+ * @param {mat4} a the source matrix
+ * @returns {mat4} out
+ */
+mat4.adjoint = function(out, a) {
+    var a00 = a[0], a01 = a[1], a02 = a[2], a03 = a[3],
+        a10 = a[4], a11 = a[5], a12 = a[6], a13 = a[7],
+        a20 = a[8], a21 = a[9], a22 = a[10], a23 = a[11],
+        a30 = a[12], a31 = a[13], a32 = a[14], a33 = a[15];
+
+    out[0]  =  (a11 * (a22 * a33 - a23 * a32) - a21 * (a12 * a33 - a13 * a32) + a31 * (a12 * a23 - a13 * a22));
+    out[1]  = -(a01 * (a22 * a33 - a23 * a32) - a21 * (a02 * a33 - a03 * a32) + a31 * (a02 * a23 - a03 * a22));
+    out[2]  =  (a01 * (a12 * a33 - a13 * a32) - a11 * (a02 * a33 - a03 * a32) + a31 * (a02 * a13 - a03 * a12));
+    out[3]  = -(a01 * (a12 * a23 - a13 * a22) - a11 * (a02 * a23 - a03 * a22) + a21 * (a02 * a13 - a03 * a12));
+    out[4]  = -(a10 * (a22 * a33 - a23 * a32) - a20 * (a12 * a33 - a13 * a32) + a30 * (a12 * a23 - a13 * a22));
+    out[5]  =  (a00 * (a22 * a33 - a23 * a32) - a20 * (a02 * a33 - a03 * a32) + a30 * (a02 * a23 - a03 * a22));
+    out[6]  = -(a00 * (a12 * a33 - a13 * a32) - a10 * (a02 * a33 - a03 * a32) + a30 * (a02 * a13 - a03 * a12));
+    out[7]  =  (a00 * (a12 * a23 - a13 * a22) - a10 * (a02 * a23 - a03 * a22) + a20 * (a02 * a13 - a03 * a12));
+    out[8]  =  (a10 * (a21 * a33 - a23 * a31) - a20 * (a11 * a33 - a13 * a31) + a30 * (a11 * a23 - a13 * a21));
+    out[9]  = -(a00 * (a21 * a33 - a23 * a31) - a20 * (a01 * a33 - a03 * a31) + a30 * (a01 * a23 - a03 * a21));
+    out[10] =  (a00 * (a11 * a33 - a13 * a31) - a10 * (a01 * a33 - a03 * a31) + a30 * (a01 * a13 - a03 * a11));
+    out[11] = -(a00 * (a11 * a23 - a13 * a21) - a10 * (a01 * a23 - a03 * a21) + a20 * (a01 * a13 - a03 * a11));
+    out[12] = -(a10 * (a21 * a32 - a22 * a31) - a20 * (a11 * a32 - a12 * a31) + a30 * (a11 * a22 - a12 * a21));
+    out[13] =  (a00 * (a21 * a32 - a22 * a31) - a20 * (a01 * a32 - a02 * a31) + a30 * (a01 * a22 - a02 * a21));
+    out[14] = -(a00 * (a11 * a32 - a12 * a31) - a10 * (a01 * a32 - a02 * a31) + a30 * (a01 * a12 - a02 * a11));
+    out[15] =  (a00 * (a11 * a22 - a12 * a21) - a10 * (a01 * a22 - a02 * a21) + a20 * (a01 * a12 - a02 * a11));
+    return out;
+};
+
+/**
+ * Calculates the determinant of a mat4
+ *
+ * @param {mat4} a the source matrix
+ * @returns {Number} determinant of a
+ */
+mat4.determinant = function (a) {
+    var a00 = a[0], a01 = a[1], a02 = a[2], a03 = a[3],
+        a10 = a[4], a11 = a[5], a12 = a[6], a13 = a[7],
+        a20 = a[8], a21 = a[9], a22 = a[10], a23 = a[11],
+        a30 = a[12], a31 = a[13], a32 = a[14], a33 = a[15],
+
+        b00 = a00 * a11 - a01 * a10,
+        b01 = a00 * a12 - a02 * a10,
+        b02 = a00 * a13 - a03 * a10,
+        b03 = a01 * a12 - a02 * a11,
+        b04 = a01 * a13 - a03 * a11,
+        b05 = a02 * a13 - a03 * a12,
+        b06 = a20 * a31 - a21 * a30,
+        b07 = a20 * a32 - a22 * a30,
+        b08 = a20 * a33 - a23 * a30,
+        b09 = a21 * a32 - a22 * a31,
+        b10 = a21 * a33 - a23 * a31,
+        b11 = a22 * a33 - a23 * a32;
+
+    // Calculate the determinant
+    return b00 * b11 - b01 * b10 + b02 * b09 + b03 * b08 - b04 * b07 + b05 * b06;
+};
+
+/**
+ * Multiplies two mat4's
+ *
+ * @param {mat4} out the receiving matrix
+ * @param {mat4} a the first operand
+ * @param {mat4} b the second operand
+ * @returns {mat4} out
+ */
+mat4.multiply = function (out, a, b) {
+    var a00 = a[0], a01 = a[1], a02 = a[2], a03 = a[3],
+        a10 = a[4], a11 = a[5], a12 = a[6], a13 = a[7],
+        a20 = a[8], a21 = a[9], a22 = a[10], a23 = a[11],
+        a30 = a[12], a31 = a[13], a32 = a[14], a33 = a[15];
+
+    // Cache only the current line of the second matrix
+    var b0  = b[0], b1 = b[1], b2 = b[2], b3 = b[3];
+    out[0] = b0*a00 + b1*a10 + b2*a20 + b3*a30;
+    out[1] = b0*a01 + b1*a11 + b2*a21 + b3*a31;
+    out[2] = b0*a02 + b1*a12 + b2*a22 + b3*a32;
+    out[3] = b0*a03 + b1*a13 + b2*a23 + b3*a33;
+
+    b0 = b[4]; b1 = b[5]; b2 = b[6]; b3 = b[7];
+    out[4] = b0*a00 + b1*a10 + b2*a20 + b3*a30;
+    out[5] = b0*a01 + b1*a11 + b2*a21 + b3*a31;
+    out[6] = b0*a02 + b1*a12 + b2*a22 + b3*a32;
+    out[7] = b0*a03 + b1*a13 + b2*a23 + b3*a33;
+
+    b0 = b[8]; b1 = b[9]; b2 = b[10]; b3 = b[11];
+    out[8] = b0*a00 + b1*a10 + b2*a20 + b3*a30;
+    out[9] = b0*a01 + b1*a11 + b2*a21 + b3*a31;
+    out[10] = b0*a02 + b1*a12 + b2*a22 + b3*a32;
+    out[11] = b0*a03 + b1*a13 + b2*a23 + b3*a33;
+
+    b0 = b[12]; b1 = b[13]; b2 = b[14]; b3 = b[15];
+    out[12] = b0*a00 + b1*a10 + b2*a20 + b3*a30;
+    out[13] = b0*a01 + b1*a11 + b2*a21 + b3*a31;
+    out[14] = b0*a02 + b1*a12 + b2*a22 + b3*a32;
+    out[15] = b0*a03 + b1*a13 + b2*a23 + b3*a33;
+    return out;
+};
+
+/**
+ * Multiplies two affine mat4's
+ * Add by https://github.com/pissang
+ * @param {mat4} out the receiving matrix
+ * @param {mat4} a the first operand
+ * @param {mat4} b the second operand
+ * @returns {mat4} out
+ */
+mat4.multiplyAffine = function (out, a, b) {
+    var a00 = a[0], a01 = a[1], a02 = a[2],
+        a10 = a[4], a11 = a[5], a12 = a[6],
+        a20 = a[8], a21 = a[9], a22 = a[10],
+        a30 = a[12], a31 = a[13], a32 = a[14];
+
+    // Cache only the current line of the second matrix
+    var b0  = b[0], b1 = b[1], b2 = b[2];
+    out[0] = b0*a00 + b1*a10 + b2*a20;
+    out[1] = b0*a01 + b1*a11 + b2*a21;
+    out[2] = b0*a02 + b1*a12 + b2*a22;
+    // out[3] = 0;
+
+    b0 = b[4]; b1 = b[5]; b2 = b[6];
+    out[4] = b0*a00 + b1*a10 + b2*a20;
+    out[5] = b0*a01 + b1*a11 + b2*a21;
+    out[6] = b0*a02 + b1*a12 + b2*a22;
+    // out[7] = 0;
+
+    b0 = b[8]; b1 = b[9]; b2 = b[10];
+    out[8] = b0*a00 + b1*a10 + b2*a20;
+    out[9] = b0*a01 + b1*a11 + b2*a21;
+    out[10] = b0*a02 + b1*a12 + b2*a22;
+    // out[11] = 0;
+
+    b0 = b[12]; b1 = b[13]; b2 = b[14];
+    out[12] = b0*a00 + b1*a10 + b2*a20 + a30;
+    out[13] = b0*a01 + b1*a11 + b2*a21 + a31;
+    out[14] = b0*a02 + b1*a12 + b2*a22 + a32;
+    // out[15] = 1;
+    return out;
+};
+
+/**
+ * Alias for {@link mat4.multiply}
+ * @function
+ */
+mat4.mul = mat4.multiply;
+
+/**
+ * Alias for {@link mat4.multiplyAffine}
+ * @function
+ */
+mat4.mulAffine = mat4.multiplyAffine;
+/**
+ * Translate a mat4 by the given vector
+ *
+ * @param {mat4} out the receiving matrix
+ * @param {mat4} a the matrix to translate
+ * @param {vec3} v vector to translate by
+ * @returns {mat4} out
+ */
+mat4.translate = function (out, a, v) {
+    var x = v[0], y = v[1], z = v[2],
+        a00, a01, a02, a03,
+        a10, a11, a12, a13,
+        a20, a21, a22, a23;
+
+    if (a === out) {
+        out[12] = a[0] * x + a[4] * y + a[8] * z + a[12];
+        out[13] = a[1] * x + a[5] * y + a[9] * z + a[13];
+        out[14] = a[2] * x + a[6] * y + a[10] * z + a[14];
+        out[15] = a[3] * x + a[7] * y + a[11] * z + a[15];
+    } else {
+        a00 = a[0]; a01 = a[1]; a02 = a[2]; a03 = a[3];
+        a10 = a[4]; a11 = a[5]; a12 = a[6]; a13 = a[7];
+        a20 = a[8]; a21 = a[9]; a22 = a[10]; a23 = a[11];
+
+        out[0] = a00; out[1] = a01; out[2] = a02; out[3] = a03;
+        out[4] = a10; out[5] = a11; out[6] = a12; out[7] = a13;
+        out[8] = a20; out[9] = a21; out[10] = a22; out[11] = a23;
+
+        out[12] = a00 * x + a10 * y + a20 * z + a[12];
+        out[13] = a01 * x + a11 * y + a21 * z + a[13];
+        out[14] = a02 * x + a12 * y + a22 * z + a[14];
+        out[15] = a03 * x + a13 * y + a23 * z + a[15];
+    }
+
+    return out;
+};
+
+/**
+ * Scales the mat4 by the dimensions in the given vec3
+ *
+ * @param {mat4} out the receiving matrix
+ * @param {mat4} a the matrix to scale
+ * @param {vec3} v the vec3 to scale the matrix by
+ * @returns {mat4} out
+ **/
+mat4.scale = function(out, a, v) {
+    var x = v[0], y = v[1], z = v[2];
+
+    out[0] = a[0] * x;
+    out[1] = a[1] * x;
+    out[2] = a[2] * x;
+    out[3] = a[3] * x;
+    out[4] = a[4] * y;
+    out[5] = a[5] * y;
+    out[6] = a[6] * y;
+    out[7] = a[7] * y;
+    out[8] = a[8] * z;
+    out[9] = a[9] * z;
+    out[10] = a[10] * z;
+    out[11] = a[11] * z;
+    out[12] = a[12];
+    out[13] = a[13];
+    out[14] = a[14];
+    out[15] = a[15];
+    return out;
+};
+
+/**
+ * Rotates a mat4 by the given angle
+ *
+ * @param {mat4} out the receiving matrix
+ * @param {mat4} a the matrix to rotate
+ * @param {Number} rad the angle to rotate the matrix by
+ * @param {vec3} axis the axis to rotate around
+ * @returns {mat4} out
+ */
+mat4.rotate = function (out, a, rad, axis) {
+    var x = axis[0], y = axis[1], z = axis[2],
+        len = Math.sqrt(x * x + y * y + z * z),
+        s, c, t,
+        a00, a01, a02, a03,
+        a10, a11, a12, a13,
+        a20, a21, a22, a23,
+        b00, b01, b02,
+        b10, b11, b12,
+        b20, b21, b22;
+
+    if (Math.abs(len) < GLMAT_EPSILON) { return null; }
+
+    len = 1 / len;
+    x *= len;
+    y *= len;
+    z *= len;
+
+    s = Math.sin(rad);
+    c = Math.cos(rad);
+    t = 1 - c;
+
+    a00 = a[0]; a01 = a[1]; a02 = a[2]; a03 = a[3];
+    a10 = a[4]; a11 = a[5]; a12 = a[6]; a13 = a[7];
+    a20 = a[8]; a21 = a[9]; a22 = a[10]; a23 = a[11];
+
+    // Construct the elements of the rotation matrix
+    b00 = x * x * t + c; b01 = y * x * t + z * s; b02 = z * x * t - y * s;
+    b10 = x * y * t - z * s; b11 = y * y * t + c; b12 = z * y * t + x * s;
+    b20 = x * z * t + y * s; b21 = y * z * t - x * s; b22 = z * z * t + c;
+
+    // Perform rotation-specific matrix multiplication
+    out[0] = a00 * b00 + a10 * b01 + a20 * b02;
+    out[1] = a01 * b00 + a11 * b01 + a21 * b02;
+    out[2] = a02 * b00 + a12 * b01 + a22 * b02;
+    out[3] = a03 * b00 + a13 * b01 + a23 * b02;
+    out[4] = a00 * b10 + a10 * b11 + a20 * b12;
+    out[5] = a01 * b10 + a11 * b11 + a21 * b12;
+    out[6] = a02 * b10 + a12 * b11 + a22 * b12;
+    out[7] = a03 * b10 + a13 * b11 + a23 * b12;
+    out[8] = a00 * b20 + a10 * b21 + a20 * b22;
+    out[9] = a01 * b20 + a11 * b21 + a21 * b22;
+    out[10] = a02 * b20 + a12 * b21 + a22 * b22;
+    out[11] = a03 * b20 + a13 * b21 + a23 * b22;
+
+    if (a !== out) { // If the source and destination differ, copy the unchanged last row
+        out[12] = a[12];
+        out[13] = a[13];
+        out[14] = a[14];
+        out[15] = a[15];
+    }
+    return out;
+};
+
+/**
+ * Rotates a matrix by the given angle around the X axis
+ *
+ * @param {mat4} out the receiving matrix
+ * @param {mat4} a the matrix to rotate
+ * @param {Number} rad the angle to rotate the matrix by
+ * @returns {mat4} out
+ */
+mat4.rotateX = function (out, a, rad) {
+    var s = Math.sin(rad),
+        c = Math.cos(rad),
+        a10 = a[4],
+        a11 = a[5],
+        a12 = a[6],
+        a13 = a[7],
+        a20 = a[8],
+        a21 = a[9],
+        a22 = a[10],
+        a23 = a[11];
+
+    if (a !== out) { // If the source and destination differ, copy the unchanged rows
+        out[0]  = a[0];
+        out[1]  = a[1];
+        out[2]  = a[2];
+        out[3]  = a[3];
+        out[12] = a[12];
+        out[13] = a[13];
+        out[14] = a[14];
+        out[15] = a[15];
+    }
+
+    // Perform axis-specific matrix multiplication
+    out[4] = a10 * c + a20 * s;
+    out[5] = a11 * c + a21 * s;
+    out[6] = a12 * c + a22 * s;
+    out[7] = a13 * c + a23 * s;
+    out[8] = a20 * c - a10 * s;
+    out[9] = a21 * c - a11 * s;
+    out[10] = a22 * c - a12 * s;
+    out[11] = a23 * c - a13 * s;
+    return out;
+};
+
+/**
+ * Rotates a matrix by the given angle around the Y axis
+ *
+ * @param {mat4} out the receiving matrix
+ * @param {mat4} a the matrix to rotate
+ * @param {Number} rad the angle to rotate the matrix by
+ * @returns {mat4} out
+ */
+mat4.rotateY = function (out, a, rad) {
+    var s = Math.sin(rad),
+        c = Math.cos(rad),
+        a00 = a[0],
+        a01 = a[1],
+        a02 = a[2],
+        a03 = a[3],
+        a20 = a[8],
+        a21 = a[9],
+        a22 = a[10],
+        a23 = a[11];
+
+    if (a !== out) { // If the source and destination differ, copy the unchanged rows
+        out[4]  = a[4];
+        out[5]  = a[5];
+        out[6]  = a[6];
+        out[7]  = a[7];
+        out[12] = a[12];
+        out[13] = a[13];
+        out[14] = a[14];
+        out[15] = a[15];
+    }
+
+    // Perform axis-specific matrix multiplication
+    out[0] = a00 * c - a20 * s;
+    out[1] = a01 * c - a21 * s;
+    out[2] = a02 * c - a22 * s;
+    out[3] = a03 * c - a23 * s;
+    out[8] = a00 * s + a20 * c;
+    out[9] = a01 * s + a21 * c;
+    out[10] = a02 * s + a22 * c;
+    out[11] = a03 * s + a23 * c;
+    return out;
+};
+
+/**
+ * Rotates a matrix by the given angle around the Z axis
+ *
+ * @param {mat4} out the receiving matrix
+ * @param {mat4} a the matrix to rotate
+ * @param {Number} rad the angle to rotate the matrix by
+ * @returns {mat4} out
+ */
+mat4.rotateZ = function (out, a, rad) {
+    var s = Math.sin(rad),
+        c = Math.cos(rad),
+        a00 = a[0],
+        a01 = a[1],
+        a02 = a[2],
+        a03 = a[3],
+        a10 = a[4],
+        a11 = a[5],
+        a12 = a[6],
+        a13 = a[7];
+
+    if (a !== out) { // If the source and destination differ, copy the unchanged last row
+        out[8]  = a[8];
+        out[9]  = a[9];
+        out[10] = a[10];
+        out[11] = a[11];
+        out[12] = a[12];
+        out[13] = a[13];
+        out[14] = a[14];
+        out[15] = a[15];
+    }
+
+    // Perform axis-specific matrix multiplication
+    out[0] = a00 * c + a10 * s;
+    out[1] = a01 * c + a11 * s;
+    out[2] = a02 * c + a12 * s;
+    out[3] = a03 * c + a13 * s;
+    out[4] = a10 * c - a00 * s;
+    out[5] = a11 * c - a01 * s;
+    out[6] = a12 * c - a02 * s;
+    out[7] = a13 * c - a03 * s;
+    return out;
+};
+
+/**
+ * Creates a matrix from a quaternion rotation and vector translation
+ * This is equivalent to (but much faster than):
+ *
+ *     mat4.identity(dest);
+ *     mat4.translate(dest, vec);
+ *     var quatMat = mat4.create();
+ *     quat4.toMat4(quat, quatMat);
+ *     mat4.multiply(dest, quatMat);
+ *
+ * @param {mat4} out mat4 receiving operation result
+ * @param {quat4} q Rotation quaternion
+ * @param {vec3} v Translation vector
+ * @returns {mat4} out
+ */
+mat4.fromRotationTranslation = function (out, q, v) {
+    // Quaternion math
+    var x = q[0], y = q[1], z = q[2], w = q[3],
+        x2 = x + x,
+        y2 = y + y,
+        z2 = z + z,
+
+        xx = x * x2,
+        xy = x * y2,
+        xz = x * z2,
+        yy = y * y2,
+        yz = y * z2,
+        zz = z * z2,
+        wx = w * x2,
+        wy = w * y2,
+        wz = w * z2;
+
+    out[0] = 1 - (yy + zz);
+    out[1] = xy + wz;
+    out[2] = xz - wy;
+    out[3] = 0;
+    out[4] = xy - wz;
+    out[5] = 1 - (xx + zz);
+    out[6] = yz + wx;
+    out[7] = 0;
+    out[8] = xz + wy;
+    out[9] = yz - wx;
+    out[10] = 1 - (xx + yy);
+    out[11] = 0;
+    out[12] = v[0];
+    out[13] = v[1];
+    out[14] = v[2];
+    out[15] = 1;
+
+    return out;
+};
+
+mat4.fromQuat = function (out, q) {
+    var x = q[0], y = q[1], z = q[2], w = q[3],
+        x2 = x + x,
+        y2 = y + y,
+        z2 = z + z,
+
+        xx = x * x2,
+        yx = y * x2,
+        yy = y * y2,
+        zx = z * x2,
+        zy = z * y2,
+        zz = z * z2,
+        wx = w * x2,
+        wy = w * y2,
+        wz = w * z2;
+
+    out[0] = 1 - yy - zz;
+    out[1] = yx + wz;
+    out[2] = zx - wy;
+    out[3] = 0;
+
+    out[4] = yx - wz;
+    out[5] = 1 - xx - zz;
+    out[6] = zy + wx;
+    out[7] = 0;
+
+    out[8] = zx + wy;
+    out[9] = zy - wx;
+    out[10] = 1 - xx - yy;
+    out[11] = 0;
+
+    out[12] = 0;
+    out[13] = 0;
+    out[14] = 0;
+    out[15] = 1;
+
+    return out;
+};
+
+/**
+ * Generates a frustum matrix with the given bounds
+ *
+ * @param {mat4} out mat4 frustum matrix will be written into
+ * @param {Number} left Left bound of the frustum
+ * @param {Number} right Right bound of the frustum
+ * @param {Number} bottom Bottom bound of the frustum
+ * @param {Number} top Top bound of the frustum
+ * @param {Number} near Near bound of the frustum
+ * @param {Number} far Far bound of the frustum
+ * @returns {mat4} out
+ */
+mat4.frustum = function (out, left, right, bottom, top, near, far) {
+    var rl = 1 / (right - left),
+        tb = 1 / (top - bottom),
+        nf = 1 / (near - far);
+    out[0] = (near * 2) * rl;
+    out[1] = 0;
+    out[2] = 0;
+    out[3] = 0;
+    out[4] = 0;
+    out[5] = (near * 2) * tb;
+    out[6] = 0;
+    out[7] = 0;
+    out[8] = (right + left) * rl;
+    out[9] = (top + bottom) * tb;
+    out[10] = (far + near) * nf;
+    out[11] = -1;
+    out[12] = 0;
+    out[13] = 0;
+    out[14] = (far * near * 2) * nf;
+    out[15] = 0;
+    return out;
+};
+
+/**
+ * Generates a perspective projection matrix with the given bounds
+ *
+ * @param {mat4} out mat4 frustum matrix will be written into
+ * @param {number} fovy Vertical field of view in radians
+ * @param {number} aspect Aspect ratio. typically viewport width/height
+ * @param {number} near Near bound of the frustum
+ * @param {number} far Far bound of the frustum
+ * @returns {mat4} out
+ */
+mat4.perspective = function (out, fovy, aspect, near, far) {
+    var f = 1.0 / Math.tan(fovy / 2),
+        nf = 1 / (near - far);
+    out[0] = f / aspect;
+    out[1] = 0;
+    out[2] = 0;
+    out[3] = 0;
+    out[4] = 0;
+    out[5] = f;
+    out[6] = 0;
+    out[7] = 0;
+    out[8] = 0;
+    out[9] = 0;
+    out[10] = (far + near) * nf;
+    out[11] = -1;
+    out[12] = 0;
+    out[13] = 0;
+    out[14] = (2 * far * near) * nf;
+    out[15] = 0;
+    return out;
+};
+
+/**
+ * Generates a orthogonal projection matrix with the given bounds
+ *
+ * @param {mat4} out mat4 frustum matrix will be written into
+ * @param {number} left Left bound of the frustum
+ * @param {number} right Right bound of the frustum
+ * @param {number} bottom Bottom bound of the frustum
+ * @param {number} top Top bound of the frustum
+ * @param {number} near Near bound of the frustum
+ * @param {number} far Far bound of the frustum
+ * @returns {mat4} out
+ */
+mat4.ortho = function (out, left, right, bottom, top, near, far) {
+    var lr = 1 / (left - right),
+        bt = 1 / (bottom - top),
+        nf = 1 / (near - far);
+    out[0] = -2 * lr;
+    out[1] = 0;
+    out[2] = 0;
+    out[3] = 0;
+    out[4] = 0;
+    out[5] = -2 * bt;
+    out[6] = 0;
+    out[7] = 0;
+    out[8] = 0;
+    out[9] = 0;
+    out[10] = 2 * nf;
+    out[11] = 0;
+    out[12] = (left + right) * lr;
+    out[13] = (top + bottom) * bt;
+    out[14] = (far + near) * nf;
+    out[15] = 1;
+    return out;
+};
+
+/**
+ * Generates a look-at matrix with the given eye position, focal point, and up axis
+ *
+ * @param {mat4} out mat4 frustum matrix will be written into
+ * @param {vec3} eye Position of the viewer
+ * @param {vec3} center Point the viewer is looking at
+ * @param {vec3} up vec3 pointing up
+ * @returns {mat4} out
+ */
+mat4.lookAt = function (out, eye, center, up) {
+    var x0, x1, x2, y0, y1, y2, z0, z1, z2, len,
+        eyex = eye[0],
+        eyey = eye[1],
+        eyez = eye[2],
+        upx = up[0],
+        upy = up[1],
+        upz = up[2],
+        centerx = center[0],
+        centery = center[1],
+        centerz = center[2];
+
+    if (Math.abs(eyex - centerx) < GLMAT_EPSILON &&
+        Math.abs(eyey - centery) < GLMAT_EPSILON &&
+        Math.abs(eyez - centerz) < GLMAT_EPSILON) {
+        return mat4.identity(out);
+    }
+
+    z0 = eyex - centerx;
+    z1 = eyey - centery;
+    z2 = eyez - centerz;
+
+    len = 1 / Math.sqrt(z0 * z0 + z1 * z1 + z2 * z2);
+    z0 *= len;
+    z1 *= len;
+    z2 *= len;
+
+    x0 = upy * z2 - upz * z1;
+    x1 = upz * z0 - upx * z2;
+    x2 = upx * z1 - upy * z0;
+    len = Math.sqrt(x0 * x0 + x1 * x1 + x2 * x2);
+    if (!len) {
+        x0 = 0;
+        x1 = 0;
+        x2 = 0;
+    } else {
+        len = 1 / len;
+        x0 *= len;
+        x1 *= len;
+        x2 *= len;
+    }
+
+    y0 = z1 * x2 - z2 * x1;
+    y1 = z2 * x0 - z0 * x2;
+    y2 = z0 * x1 - z1 * x0;
+
+    len = Math.sqrt(y0 * y0 + y1 * y1 + y2 * y2);
+    if (!len) {
+        y0 = 0;
+        y1 = 0;
+        y2 = 0;
+    } else {
+        len = 1 / len;
+        y0 *= len;
+        y1 *= len;
+        y2 *= len;
+    }
+
+    out[0] = x0;
+    out[1] = y0;
+    out[2] = z0;
+    out[3] = 0;
+    out[4] = x1;
+    out[5] = y1;
+    out[6] = z1;
+    out[7] = 0;
+    out[8] = x2;
+    out[9] = y2;
+    out[10] = z2;
+    out[11] = 0;
+    out[12] = -(x0 * eyex + x1 * eyey + x2 * eyez);
+    out[13] = -(y0 * eyex + y1 * eyey + y2 * eyez);
+    out[14] = -(z0 * eyex + z1 * eyey + z2 * eyez);
+    out[15] = 1;
+
+    return out;
+};
+
+/**
+ * Returns Frobenius norm of a mat4
+ *
+ * @param {mat4} a the matrix to calculate Frobenius norm of
+ * @returns {Number} Frobenius norm
+ */
+mat4.frob = function (a) {
+    return(Math.sqrt(Math.pow(a[0], 2) + Math.pow(a[1], 2) + Math.pow(a[2], 2) + Math.pow(a[3], 2) + Math.pow(a[4], 2) + Math.pow(a[5], 2) + Math.pow(a[6], 2) + Math.pow(a[7], 2) + Math.pow(a[8], 2) + Math.pow(a[9], 2) + Math.pow(a[10], 2) + Math.pow(a[11], 2) + Math.pow(a[12], 2) + Math.pow(a[13], 2) + Math.pow(a[14], 2) + Math.pow(a[15], 2) ))
+};
+
+/* harmony default export */ const glmatrix_mat4 = (mat4);
+;// CONCATENATED MODULE: ./node_modules/claygl/src/math/Matrix4.js
+
+
+
+
+
+
+/**
+ * @constructor
+ * @alias clay.Matrix4
+ */
+var Matrix4 = function() {
+
+    this._axisX = new math_Vector3();
+    this._axisY = new math_Vector3();
+    this._axisZ = new math_Vector3();
+
+    /**
+     * Storage of Matrix4
+     * @name array
+     * @type {Float32Array}
+     * @memberOf clay.Matrix4#
+     */
+    this.array = glmatrix_mat4.create();
+
+    /**
+     * @name _dirty
+     * @type {boolean}
+     * @memberOf clay.Matrix4#
+     */
+    this._dirty = true;
+};
+
+Matrix4.prototype = {
+
+    constructor: Matrix4,
+
+    /**
+     * Set components from array
+     * @param  {Float32Array|number[]} arr
+     */
+    setArray: function (arr) {
+        for (var i = 0; i < this.array.length; i++) {
+            this.array[i] = arr[i];
+        }
+        this._dirty = true;
+        return this;
+    },
+    /**
+     * Calculate the adjugate of self, in-place
+     * @return {clay.Matrix4}
+     */
+    adjoint: function() {
+        glmatrix_mat4.adjoint(this.array, this.array);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Clone a new Matrix4
+     * @return {clay.Matrix4}
+     */
+    clone: function() {
+        return (new Matrix4()).copy(this);
+    },
+
+    /**
+     * Copy from b
+     * @param  {clay.Matrix4} b
+     * @return {clay.Matrix4}
+     */
+    copy: function(a) {
+        glmatrix_mat4.copy(this.array, a.array);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Calculate matrix determinant
+     * @return {number}
+     */
+    determinant: function() {
+        return glmatrix_mat4.determinant(this.array);
+    },
+
+    /**
+     * Set upper 3x3 part from quaternion
+     * @param  {clay.Quaternion} q
+     * @return {clay.Matrix4}
+     */
+    fromQuat: function(q) {
+        glmatrix_mat4.fromQuat(this.array, q.array);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Set from a quaternion rotation and a vector translation
+     * @param  {clay.Quaternion} q
+     * @param  {clay.Vector3} v
+     * @return {clay.Matrix4}
+     */
+    fromRotationTranslation: function(q, v) {
+        glmatrix_mat4.fromRotationTranslation(this.array, q.array, v.array);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Set from Matrix2d, it is used when converting a 2d shape to 3d space.
+     * In 3d space it is equivalent to ranslate on xy plane and rotate about z axis
+     * @param  {clay.Matrix2d} m2d
+     * @return {clay.Matrix4}
+     */
+    fromMat2d: function(m2d) {
+        Matrix4.fromMat2d(this, m2d);
+        return this;
+    },
+
+    /**
+     * Set from frustum bounds
+     * @param  {number} left
+     * @param  {number} right
+     * @param  {number} bottom
+     * @param  {number} top
+     * @param  {number} near
+     * @param  {number} far
+     * @return {clay.Matrix4}
+     */
+    frustum: function (left, right, bottom, top, near, far) {
+        glmatrix_mat4.frustum(this.array, left, right, bottom, top, near, far);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Set to a identity matrix
+     * @return {clay.Matrix4}
+     */
+    identity: function() {
+        glmatrix_mat4.identity(this.array);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Invert self
+     * @return {clay.Matrix4}
+     */
+    invert: function() {
+        glmatrix_mat4.invert(this.array, this.array);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Set as a matrix with the given eye position, focal point, and up axis
+     * @param  {clay.Vector3} eye
+     * @param  {clay.Vector3} center
+     * @param  {clay.Vector3} up
+     * @return {clay.Matrix4}
+     */
+    lookAt: function(eye, center, up) {
+        glmatrix_mat4.lookAt(this.array, eye.array, center.array, up.array);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Alias for mutiply
+     * @param  {clay.Matrix4} b
+     * @return {clay.Matrix4}
+     */
+    mul: function(b) {
+        glmatrix_mat4.mul(this.array, this.array, b.array);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Alias for multiplyLeft
+     * @param  {clay.Matrix4} a
+     * @return {clay.Matrix4}
+     */
+    mulLeft: function(a) {
+        glmatrix_mat4.mul(this.array, a.array, this.array);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Multiply self and b
+     * @param  {clay.Matrix4} b
+     * @return {clay.Matrix4}
+     */
+    multiply: function(b) {
+        glmatrix_mat4.multiply(this.array, this.array, b.array);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Multiply a and self, a is on the left
+     * @param  {clay.Matrix3} a
+     * @return {clay.Matrix3}
+     */
+    multiplyLeft: function(a) {
+        glmatrix_mat4.multiply(this.array, a.array, this.array);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Set as a orthographic projection matrix
+     * @param  {number} left
+     * @param  {number} right
+     * @param  {number} bottom
+     * @param  {number} top
+     * @param  {number} near
+     * @param  {number} far
+     * @return {clay.Matrix4}
+     */
+    ortho: function(left, right, bottom, top, near, far) {
+        glmatrix_mat4.ortho(this.array, left, right, bottom, top, near, far);
+        this._dirty = true;
+        return this;
+    },
+    /**
+     * Set as a perspective projection matrix
+     * @param  {number} fovy
+     * @param  {number} aspect
+     * @param  {number} near
+     * @param  {number} far
+     * @return {clay.Matrix4}
+     */
+    perspective: function(fovy, aspect, near, far) {
+        glmatrix_mat4.perspective(this.array, fovy, aspect, near, far);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Rotate self by rad about axis.
+     * Equal to right-multiply a rotaion matrix
+     * @param  {number}   rad
+     * @param  {clay.Vector3} axis
+     * @return {clay.Matrix4}
+     */
+    rotate: function(rad, axis) {
+        glmatrix_mat4.rotate(this.array, this.array, rad, axis.array);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Rotate self by a given radian about X axis.
+     * Equal to right-multiply a rotaion matrix
+     * @param {number} rad
+     * @return {clay.Matrix4}
+     */
+    rotateX: function(rad) {
+        glmatrix_mat4.rotateX(this.array, this.array, rad);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Rotate self by a given radian about Y axis.
+     * Equal to right-multiply a rotaion matrix
+     * @param {number} rad
+     * @return {clay.Matrix4}
+     */
+    rotateY: function(rad) {
+        glmatrix_mat4.rotateY(this.array, this.array, rad);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Rotate self by a given radian about Z axis.
+     * Equal to right-multiply a rotaion matrix
+     * @param {number} rad
+     * @return {clay.Matrix4}
+     */
+    rotateZ: function(rad) {
+        glmatrix_mat4.rotateZ(this.array, this.array, rad);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Scale self by s
+     * Equal to right-multiply a scale matrix
+     * @param  {clay.Vector3}  s
+     * @return {clay.Matrix4}
+     */
+    scale: function(v) {
+        glmatrix_mat4.scale(this.array, this.array, v.array);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Translate self by v.
+     * Equal to right-multiply a translate matrix
+     * @param  {clay.Vector3}  v
+     * @return {clay.Matrix4}
+     */
+    translate: function(v) {
+        glmatrix_mat4.translate(this.array, this.array, v.array);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Transpose self, in-place.
+     * @return {clay.Matrix2}
+     */
+    transpose: function() {
+        glmatrix_mat4.transpose(this.array, this.array);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Decompose a matrix to SRT
+     * @param {clay.Vector3} [scale]
+     * @param {clay.Quaternion} rotation
+     * @param {clay.Vector} position
+     * @see http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.matrix.decompose.aspx
+     */
+    decomposeMatrix: (function() {
+
+        var x = glmatrix_vec3.create();
+        var y = glmatrix_vec3.create();
+        var z = glmatrix_vec3.create();
+
+        var m3 = glmatrix_mat3.create();
+
+        return function(scale, rotation, position) {
+
+            var el = this.array;
+            glmatrix_vec3.set(x, el[0], el[1], el[2]);
+            glmatrix_vec3.set(y, el[4], el[5], el[6]);
+            glmatrix_vec3.set(z, el[8], el[9], el[10]);
+
+            var sx = glmatrix_vec3.length(x);
+            var sy = glmatrix_vec3.length(y);
+            var sz = glmatrix_vec3.length(z);
+
+            // if determine is negative, we need to invert one scale
+            var det = this.determinant();
+            if (det < 0) {
+                sx = -sx;
+            }
+
+            if (scale) {
+                scale.set(sx, sy, sz);
+            }
+
+            position.set(el[12], el[13], el[14]);
+
+            glmatrix_mat3.fromMat4(m3, el);
+            // Not like mat4, mat3 in glmatrix seems to be row-based
+            // Seems fixed in gl-matrix 2.2.2
+            // https://github.com/toji/gl-matrix/issues/114
+            // mat3.transpose(m3, m3);
+
+            m3[0] /= sx;
+            m3[1] /= sx;
+            m3[2] /= sx;
+
+            m3[3] /= sy;
+            m3[4] /= sy;
+            m3[5] /= sy;
+
+            m3[6] /= sz;
+            m3[7] /= sz;
+            m3[8] /= sz;
+
+            glmatrix_quat.fromMat3(rotation.array, m3);
+            glmatrix_quat.normalize(rotation.array, rotation.array);
+
+            rotation._dirty = true;
+            position._dirty = true;
+        };
+    })(),
+
+    toString: function() {
+        return '[' + Array.prototype.join.call(this.array, ',') + ']';
+    },
+
+    toArray: function () {
+        return Array.prototype.slice.call(this.array);
+    }
+};
+
+var Matrix4_defineProperty = Object.defineProperty;
+
+if (Matrix4_defineProperty) {
+    var Matrix4_proto = Matrix4.prototype;
+    /**
+     * Z Axis of local transform
+     * @name z
+     * @type {clay.Vector3}
+     * @memberOf clay.Matrix4
+     * @instance
+     */
+    Matrix4_defineProperty(Matrix4_proto, 'z', {
+        get: function () {
+            var el = this.array;
+            this._axisZ.set(el[8], el[9], el[10]);
+            return this._axisZ;
+        },
+        set: function (v) {
+            // TODO Here has a problem
+            // If only set an item of vector will not work
+            var el = this.array;
+            v = v.array;
+            el[8] = v[0];
+            el[9] = v[1];
+            el[10] = v[2];
+
+            this._dirty = true;
+        }
+    });
+
+    /**
+     * Y Axis of local transform
+     * @name y
+     * @type {clay.Vector3}
+     * @memberOf clay.Matrix4
+     * @instance
+     */
+    Matrix4_defineProperty(Matrix4_proto, 'y', {
+        get: function () {
+            var el = this.array;
+            this._axisY.set(el[4], el[5], el[6]);
+            return this._axisY;
+        },
+        set: function (v) {
+            var el = this.array;
+            v = v.array;
+            el[4] = v[0];
+            el[5] = v[1];
+            el[6] = v[2];
+
+            this._dirty = true;
+        }
+    });
+
+    /**
+     * X Axis of local transform
+     * @name x
+     * @type {clay.Vector3}
+     * @memberOf clay.Matrix4
+     * @instance
+     */
+    Matrix4_defineProperty(Matrix4_proto, 'x', {
+        get: function () {
+            var el = this.array;
+            this._axisX.set(el[0], el[1], el[2]);
+            return this._axisX;
+        },
+        set: function (v) {
+            var el = this.array;
+            v = v.array;
+            el[0] = v[0];
+            el[1] = v[1];
+            el[2] = v[2];
+
+            this._dirty = true;
+        }
+    })
+}
+
+/**
+ * @param  {clay.Matrix4} out
+ * @param  {clay.Matrix4} a
+ * @return {clay.Matrix4}
+ */
+Matrix4.adjoint = function(out, a) {
+    glmatrix_mat4.adjoint(out.array, a.array);
+    out._dirty = true;
+    return out;
+};
+
+/**
+ * @param  {clay.Matrix4} out
+ * @param  {clay.Matrix4} a
+ * @return {clay.Matrix4}
+ */
+Matrix4.copy = function(out, a) {
+    glmatrix_mat4.copy(out.array, a.array);
+    out._dirty = true;
+    return out;
+};
+
+/**
+ * @param  {clay.Matrix4} a
+ * @return {number}
+ */
+Matrix4.determinant = function(a) {
+    return glmatrix_mat4.determinant(a.array);
+};
+
+/**
+ * @param  {clay.Matrix4} out
+ * @return {clay.Matrix4}
+ */
+Matrix4.identity = function(out) {
+    glmatrix_mat4.identity(out.array);
+    out._dirty = true;
+    return out;
+};
+
+/**
+ * @param  {clay.Matrix4} out
+ * @param  {number}  left
+ * @param  {number}  right
+ * @param  {number}  bottom
+ * @param  {number}  top
+ * @param  {number}  near
+ * @param  {number}  far
+ * @return {clay.Matrix4}
+ */
+Matrix4.ortho = function(out, left, right, bottom, top, near, far) {
+    glmatrix_mat4.ortho(out.array, left, right, bottom, top, near, far);
+    out._dirty = true;
+    return out;
+};
+
+/**
+ * @param  {clay.Matrix4} out
+ * @param  {number}  fovy
+ * @param  {number}  aspect
+ * @param  {number}  near
+ * @param  {number}  far
+ * @return {clay.Matrix4}
+ */
+Matrix4.perspective = function(out, fovy, aspect, near, far) {
+    glmatrix_mat4.perspective(out.array, fovy, aspect, near, far);
+    out._dirty = true;
+    return out;
+};
+
+/**
+ * @param  {clay.Matrix4} out
+ * @param  {clay.Vector3} eye
+ * @param  {clay.Vector3} center
+ * @param  {clay.Vector3} up
+ * @return {clay.Matrix4}
+ */
+Matrix4.lookAt = function(out, eye, center, up) {
+    glmatrix_mat4.lookAt(out.array, eye.array, center.array, up.array);
+    out._dirty = true;
+    return out;
+};
+
+/**
+ * @param  {clay.Matrix4} out
+ * @param  {clay.Matrix4} a
+ * @return {clay.Matrix4}
+ */
+Matrix4.invert = function(out, a) {
+    glmatrix_mat4.invert(out.array, a.array);
+    out._dirty = true;
+    return out;
+};
+
+/**
+ * @param  {clay.Matrix4} out
+ * @param  {clay.Matrix4} a
+ * @param  {clay.Matrix4} b
+ * @return {clay.Matrix4}
+ */
+Matrix4.mul = function(out, a, b) {
+    glmatrix_mat4.mul(out.array, a.array, b.array);
+    out._dirty = true;
+    return out;
+};
+
+/**
+ * @function
+ * @param  {clay.Matrix4} out
+ * @param  {clay.Matrix4} a
+ * @param  {clay.Matrix4} b
+ * @return {clay.Matrix4}
+ */
+Matrix4.multiply = Matrix4.mul;
+
+/**
+ * @param  {clay.Matrix4}    out
+ * @param  {clay.Quaternion} q
+ * @return {clay.Matrix4}
+ */
+Matrix4.fromQuat = function(out, q) {
+    glmatrix_mat4.fromQuat(out.array, q.array);
+    out._dirty = true;
+    return out;
+};
+
+/**
+ * @param  {clay.Matrix4}    out
+ * @param  {clay.Quaternion} q
+ * @param  {clay.Vector3}    v
+ * @return {clay.Matrix4}
+ */
+Matrix4.fromRotationTranslation = function(out, q, v) {
+    glmatrix_mat4.fromRotationTranslation(out.array, q.array, v.array);
+    out._dirty = true;
+    return out;
+};
+
+/**
+ * @param  {clay.Matrix4} m4
+ * @param  {clay.Matrix2d} m2d
+ * @return {clay.Matrix4}
+ */
+Matrix4.fromMat2d = function(m4, m2d) {
+    m4._dirty = true;
+    var m2d = m2d.array;
+    var m4 = m4.array;
+
+    m4[0] = m2d[0];
+    m4[4] = m2d[2];
+    m4[12] = m2d[4];
+
+    m4[1] = m2d[1];
+    m4[5] = m2d[3];
+    m4[13] = m2d[5];
+
+    return m4;
+};
+
+/**
+ * @param  {clay.Matrix4} out
+ * @param  {clay.Matrix4} a
+ * @param  {number}  rad
+ * @param  {clay.Vector3} axis
+ * @return {clay.Matrix4}
+ */
+Matrix4.rotate = function(out, a, rad, axis) {
+    glmatrix_mat4.rotate(out.array, a.array, rad, axis.array);
+    out._dirty = true;
+    return out;
+};
+
+/**
+ * @param  {clay.Matrix4} out
+ * @param  {clay.Matrix4} a
+ * @param  {number}  rad
+ * @return {clay.Matrix4}
+ */
+Matrix4.rotateX = function(out, a, rad) {
+    glmatrix_mat4.rotateX(out.array, a.array, rad);
+    out._dirty = true;
+    return out;
+};
+
+/**
+ * @param  {clay.Matrix4} out
+ * @param  {clay.Matrix4} a
+ * @param  {number}  rad
+ * @return {clay.Matrix4}
+ */
+Matrix4.rotateY = function(out, a, rad) {
+    glmatrix_mat4.rotateY(out.array, a.array, rad);
+    out._dirty = true;
+    return out;
+};
+
+/**
+ * @param  {clay.Matrix4} out
+ * @param  {clay.Matrix4} a
+ * @param  {number}  rad
+ * @return {clay.Matrix4}
+ */
+Matrix4.rotateZ = function(out, a, rad) {
+    glmatrix_mat4.rotateZ(out.array, a.array, rad);
+    out._dirty = true;
+    return out;
+};
+
+/**
+ * @param  {clay.Matrix4} out
+ * @param  {clay.Matrix4} a
+ * @param  {clay.Vector3} v
+ * @return {clay.Matrix4}
+ */
+Matrix4.scale = function(out, a, v) {
+    glmatrix_mat4.scale(out.array, a.array, v.array);
+    out._dirty = true;
+    return out;
+};
+
+/**
+ * @param  {clay.Matrix4} out
+ * @param  {clay.Matrix4} a
+ * @return {clay.Matrix4}
+ */
+Matrix4.transpose = function(out, a) {
+    glmatrix_mat4.transpose(out.array, a.array);
+    out._dirty = true;
+    return out;
+};
+
+/**
+ * @param  {clay.Matrix4} out
+ * @param  {clay.Matrix4} a
+ * @param  {clay.Vector3} v
+ * @return {clay.Matrix4}
+ */
+Matrix4.translate = function(out, a, v) {
+    glmatrix_mat4.translate(out.array, a.array, v.array);
+    out._dirty = true;
+    return out;
+};
+
+/* harmony default export */ const math_Matrix4 = (Matrix4);
 
 ;// CONCATENATED MODULE: ./node_modules/claygl/src/math/BoundingBox.js
 
@@ -13386,6 +7194,428 @@ var Node = core_Base.extend(/** @lends clay.Node# */{
 
 /* harmony default export */ const src_Node = (Node);
 
+;// CONCATENATED MODULE: ./node_modules/claygl/src/core/glenum.js
+/**
+ * @namespace clay.core.glenum
+ * @see http://www.khronos.org/registry/webgl/specs/latest/1.0/#5.14
+ */
+/* harmony default export */ const glenum = ({
+    /* ClearBufferMask */
+    DEPTH_BUFFER_BIT               : 0x00000100,
+    STENCIL_BUFFER_BIT             : 0x00000400,
+    COLOR_BUFFER_BIT               : 0x00004000,
+
+    /* BeginMode */
+    POINTS                         : 0x0000,
+    LINES                          : 0x0001,
+    LINE_LOOP                      : 0x0002,
+    LINE_STRIP                     : 0x0003,
+    TRIANGLES                      : 0x0004,
+    TRIANGLE_STRIP                 : 0x0005,
+    TRIANGLE_FAN                   : 0x0006,
+
+    /* AlphaFunction (not supported in ES20) */
+    /*      NEVER */
+    /*      LESS */
+    /*      EQUAL */
+    /*      LEQUAL */
+    /*      GREATER */
+    /*      NOTEQUAL */
+    /*      GEQUAL */
+    /*      ALWAYS */
+
+    /* BlendingFactorDest */
+    ZERO                           : 0,
+    ONE                            : 1,
+    SRC_COLOR                      : 0x0300,
+    ONE_MINUS_SRC_COLOR            : 0x0301,
+    SRC_ALPHA                      : 0x0302,
+    ONE_MINUS_SRC_ALPHA            : 0x0303,
+    DST_ALPHA                      : 0x0304,
+    ONE_MINUS_DST_ALPHA            : 0x0305,
+
+    /* BlendingFactorSrc */
+    /*      ZERO */
+    /*      ONE */
+    DST_COLOR                      : 0x0306,
+    ONE_MINUS_DST_COLOR            : 0x0307,
+    SRC_ALPHA_SATURATE             : 0x0308,
+    /*      SRC_ALPHA */
+    /*      ONE_MINUS_SRC_ALPHA */
+    /*      DST_ALPHA */
+    /*      ONE_MINUS_DST_ALPHA */
+
+    /* BlendEquationSeparate */
+    FUNC_ADD                       : 0x8006,
+    BLEND_EQUATION                 : 0x8009,
+    BLEND_EQUATION_RGB             : 0x8009, /* same as BLEND_EQUATION */
+    BLEND_EQUATION_ALPHA           : 0x883D,
+
+    /* BlendSubtract */
+    FUNC_SUBTRACT                  : 0x800A,
+    FUNC_REVERSE_SUBTRACT          : 0x800B,
+
+    /* Separate Blend Functions */
+    BLEND_DST_RGB                  : 0x80C8,
+    BLEND_SRC_RGB                  : 0x80C9,
+    BLEND_DST_ALPHA                : 0x80CA,
+    BLEND_SRC_ALPHA                : 0x80CB,
+    CONSTANT_COLOR                 : 0x8001,
+    ONE_MINUS_CONSTANT_COLOR       : 0x8002,
+    CONSTANT_ALPHA                 : 0x8003,
+    ONE_MINUS_CONSTANT_ALPHA       : 0x8004,
+    BLEND_COLOR                    : 0x8005,
+
+    /* Buffer Objects */
+    ARRAY_BUFFER                   : 0x8892,
+    ELEMENT_ARRAY_BUFFER           : 0x8893,
+    ARRAY_BUFFER_BINDING           : 0x8894,
+    ELEMENT_ARRAY_BUFFER_BINDING   : 0x8895,
+
+    STREAM_DRAW                    : 0x88E0,
+    STATIC_DRAW                    : 0x88E4,
+    DYNAMIC_DRAW                   : 0x88E8,
+
+    BUFFER_SIZE                    : 0x8764,
+    BUFFER_USAGE                   : 0x8765,
+
+    CURRENT_VERTEX_ATTRIB          : 0x8626,
+
+    /* CullFaceMode */
+    FRONT                          : 0x0404,
+    BACK                           : 0x0405,
+    FRONT_AND_BACK                 : 0x0408,
+
+    /* DepthFunction */
+    /*      NEVER */
+    /*      LESS */
+    /*      EQUAL */
+    /*      LEQUAL */
+    /*      GREATER */
+    /*      NOTEQUAL */
+    /*      GEQUAL */
+    /*      ALWAYS */
+
+    /* EnableCap */
+    /* TEXTURE_2D */
+    CULL_FACE                      : 0x0B44,
+    BLEND                          : 0x0BE2,
+    DITHER                         : 0x0BD0,
+    STENCIL_TEST                   : 0x0B90,
+    DEPTH_TEST                     : 0x0B71,
+    SCISSOR_TEST                   : 0x0C11,
+    POLYGON_OFFSET_FILL            : 0x8037,
+    SAMPLE_ALPHA_TO_COVERAGE       : 0x809E,
+    SAMPLE_COVERAGE                : 0x80A0,
+
+    /* ErrorCode */
+    NO_ERROR                       : 0,
+    INVALID_ENUM                   : 0x0500,
+    INVALID_VALUE                  : 0x0501,
+    INVALID_OPERATION              : 0x0502,
+    OUT_OF_MEMORY                  : 0x0505,
+
+    /* FrontFaceDirection */
+    CW                             : 0x0900,
+    CCW                            : 0x0901,
+
+    /* GetPName */
+    LINE_WIDTH                     : 0x0B21,
+    ALIASED_POINT_SIZE_RANGE       : 0x846D,
+    ALIASED_LINE_WIDTH_RANGE       : 0x846E,
+    CULL_FACE_MODE                 : 0x0B45,
+    FRONT_FACE                     : 0x0B46,
+    DEPTH_RANGE                    : 0x0B70,
+    DEPTH_WRITEMASK                : 0x0B72,
+    DEPTH_CLEAR_VALUE              : 0x0B73,
+    DEPTH_FUNC                     : 0x0B74,
+    STENCIL_CLEAR_VALUE            : 0x0B91,
+    STENCIL_FUNC                   : 0x0B92,
+    STENCIL_FAIL                   : 0x0B94,
+    STENCIL_PASS_DEPTH_FAIL        : 0x0B95,
+    STENCIL_PASS_DEPTH_PASS        : 0x0B96,
+    STENCIL_REF                    : 0x0B97,
+    STENCIL_VALUE_MASK             : 0x0B93,
+    STENCIL_WRITEMASK              : 0x0B98,
+    STENCIL_BACK_FUNC              : 0x8800,
+    STENCIL_BACK_FAIL              : 0x8801,
+    STENCIL_BACK_PASS_DEPTH_FAIL   : 0x8802,
+    STENCIL_BACK_PASS_DEPTH_PASS   : 0x8803,
+    STENCIL_BACK_REF               : 0x8CA3,
+    STENCIL_BACK_VALUE_MASK        : 0x8CA4,
+    STENCIL_BACK_WRITEMASK         : 0x8CA5,
+    VIEWPORT                       : 0x0BA2,
+    SCISSOR_BOX                    : 0x0C10,
+    /*      SCISSOR_TEST */
+    COLOR_CLEAR_VALUE              : 0x0C22,
+    COLOR_WRITEMASK                : 0x0C23,
+    UNPACK_ALIGNMENT               : 0x0CF5,
+    PACK_ALIGNMENT                 : 0x0D05,
+    MAX_TEXTURE_SIZE               : 0x0D33,
+    MAX_VIEWPORT_DIMS              : 0x0D3A,
+    SUBPIXEL_BITS                  : 0x0D50,
+    RED_BITS                       : 0x0D52,
+    GREEN_BITS                     : 0x0D53,
+    BLUE_BITS                      : 0x0D54,
+    ALPHA_BITS                     : 0x0D55,
+    DEPTH_BITS                     : 0x0D56,
+    STENCIL_BITS                   : 0x0D57,
+    POLYGON_OFFSET_UNITS           : 0x2A00,
+    /*      POLYGON_OFFSET_FILL */
+    POLYGON_OFFSET_FACTOR          : 0x8038,
+    TEXTURE_BINDING_2D             : 0x8069,
+    SAMPLE_BUFFERS                 : 0x80A8,
+    SAMPLES                        : 0x80A9,
+    SAMPLE_COVERAGE_VALUE          : 0x80AA,
+    SAMPLE_COVERAGE_INVERT         : 0x80AB,
+
+    /* GetTextureParameter */
+    /*      TEXTURE_MAG_FILTER */
+    /*      TEXTURE_MIN_FILTER */
+    /*      TEXTURE_WRAP_S */
+    /*      TEXTURE_WRAP_T */
+
+    COMPRESSED_TEXTURE_FORMATS     : 0x86A3,
+
+    /* HintMode */
+    DONT_CARE                      : 0x1100,
+    FASTEST                        : 0x1101,
+    NICEST                         : 0x1102,
+
+    /* HintTarget */
+    GENERATE_MIPMAP_HINT            : 0x8192,
+
+    /* DataType */
+    BYTE                           : 0x1400,
+    UNSIGNED_BYTE                  : 0x1401,
+    SHORT                          : 0x1402,
+    UNSIGNED_SHORT                 : 0x1403,
+    INT                            : 0x1404,
+    UNSIGNED_INT                   : 0x1405,
+    FLOAT                          : 0x1406,
+
+    /* PixelFormat */
+    DEPTH_COMPONENT                : 0x1902,
+    ALPHA                          : 0x1906,
+    RGB                            : 0x1907,
+    RGBA                           : 0x1908,
+    LUMINANCE                      : 0x1909,
+    LUMINANCE_ALPHA                : 0x190A,
+
+    /* PixelType */
+    /*      UNSIGNED_BYTE */
+    UNSIGNED_SHORT_4_4_4_4         : 0x8033,
+    UNSIGNED_SHORT_5_5_5_1         : 0x8034,
+    UNSIGNED_SHORT_5_6_5           : 0x8363,
+
+    /* Shaders */
+    FRAGMENT_SHADER                  : 0x8B30,
+    VERTEX_SHADER                    : 0x8B31,
+    MAX_VERTEX_ATTRIBS               : 0x8869,
+    MAX_VERTEX_UNIFORM_VECTORS       : 0x8DFB,
+    MAX_VARYING_VECTORS              : 0x8DFC,
+    MAX_COMBINED_TEXTURE_IMAGE_UNITS : 0x8B4D,
+    MAX_VERTEX_TEXTURE_IMAGE_UNITS   : 0x8B4C,
+    MAX_TEXTURE_IMAGE_UNITS          : 0x8872,
+    MAX_FRAGMENT_UNIFORM_VECTORS     : 0x8DFD,
+    SHADER_TYPE                      : 0x8B4F,
+    DELETE_STATUS                    : 0x8B80,
+    LINK_STATUS                      : 0x8B82,
+    VALIDATE_STATUS                  : 0x8B83,
+    ATTACHED_SHADERS                 : 0x8B85,
+    ACTIVE_UNIFORMS                  : 0x8B86,
+    ACTIVE_ATTRIBUTES                : 0x8B89,
+    SHADING_LANGUAGE_VERSION         : 0x8B8C,
+    CURRENT_PROGRAM                  : 0x8B8D,
+
+    /* StencilFunction */
+    NEVER                          : 0x0200,
+    LESS                           : 0x0201,
+    EQUAL                          : 0x0202,
+    LEQUAL                         : 0x0203,
+    GREATER                        : 0x0204,
+    NOTEQUAL                       : 0x0205,
+    GEQUAL                         : 0x0206,
+    ALWAYS                         : 0x0207,
+
+    /* StencilOp */
+    /*      ZERO */
+    KEEP                           : 0x1E00,
+    REPLACE                        : 0x1E01,
+    INCR                           : 0x1E02,
+    DECR                           : 0x1E03,
+    INVERT                         : 0x150A,
+    INCR_WRAP                      : 0x8507,
+    DECR_WRAP                      : 0x8508,
+
+    /* StringName */
+    VENDOR                         : 0x1F00,
+    RENDERER                       : 0x1F01,
+    VERSION                        : 0x1F02,
+
+    /* TextureMagFilter */
+    NEAREST                        : 0x2600,
+    LINEAR                         : 0x2601,
+
+    /* TextureMinFilter */
+    /*      NEAREST */
+    /*      LINEAR */
+    NEAREST_MIPMAP_NEAREST         : 0x2700,
+    LINEAR_MIPMAP_NEAREST          : 0x2701,
+    NEAREST_MIPMAP_LINEAR          : 0x2702,
+    LINEAR_MIPMAP_LINEAR           : 0x2703,
+
+    /* TextureParameterName */
+    TEXTURE_MAG_FILTER             : 0x2800,
+    TEXTURE_MIN_FILTER             : 0x2801,
+    TEXTURE_WRAP_S                 : 0x2802,
+    TEXTURE_WRAP_T                 : 0x2803,
+
+    /* TextureTarget */
+    TEXTURE_2D                     : 0x0DE1,
+    TEXTURE                        : 0x1702,
+
+    TEXTURE_CUBE_MAP               : 0x8513,
+    TEXTURE_BINDING_CUBE_MAP       : 0x8514,
+    TEXTURE_CUBE_MAP_POSITIVE_X    : 0x8515,
+    TEXTURE_CUBE_MAP_NEGATIVE_X    : 0x8516,
+    TEXTURE_CUBE_MAP_POSITIVE_Y    : 0x8517,
+    TEXTURE_CUBE_MAP_NEGATIVE_Y    : 0x8518,
+    TEXTURE_CUBE_MAP_POSITIVE_Z    : 0x8519,
+    TEXTURE_CUBE_MAP_NEGATIVE_Z    : 0x851A,
+    MAX_CUBE_MAP_TEXTURE_SIZE      : 0x851C,
+
+    /* TextureUnit */
+    TEXTURE0                       : 0x84C0,
+    TEXTURE1                       : 0x84C1,
+    TEXTURE2                       : 0x84C2,
+    TEXTURE3                       : 0x84C3,
+    TEXTURE4                       : 0x84C4,
+    TEXTURE5                       : 0x84C5,
+    TEXTURE6                       : 0x84C6,
+    TEXTURE7                       : 0x84C7,
+    TEXTURE8                       : 0x84C8,
+    TEXTURE9                       : 0x84C9,
+    TEXTURE10                      : 0x84CA,
+    TEXTURE11                      : 0x84CB,
+    TEXTURE12                      : 0x84CC,
+    TEXTURE13                      : 0x84CD,
+    TEXTURE14                      : 0x84CE,
+    TEXTURE15                      : 0x84CF,
+    TEXTURE16                      : 0x84D0,
+    TEXTURE17                      : 0x84D1,
+    TEXTURE18                      : 0x84D2,
+    TEXTURE19                      : 0x84D3,
+    TEXTURE20                      : 0x84D4,
+    TEXTURE21                      : 0x84D5,
+    TEXTURE22                      : 0x84D6,
+    TEXTURE23                      : 0x84D7,
+    TEXTURE24                      : 0x84D8,
+    TEXTURE25                      : 0x84D9,
+    TEXTURE26                      : 0x84DA,
+    TEXTURE27                      : 0x84DB,
+    TEXTURE28                      : 0x84DC,
+    TEXTURE29                      : 0x84DD,
+    TEXTURE30                      : 0x84DE,
+    TEXTURE31                      : 0x84DF,
+    ACTIVE_TEXTURE                 : 0x84E0,
+
+    /* TextureWrapMode */
+    REPEAT                         : 0x2901,
+    CLAMP_TO_EDGE                  : 0x812F,
+    MIRRORED_REPEAT                : 0x8370,
+
+    /* Uniform Types */
+    FLOAT_VEC2                     : 0x8B50,
+    FLOAT_VEC3                     : 0x8B51,
+    FLOAT_VEC4                     : 0x8B52,
+    INT_VEC2                       : 0x8B53,
+    INT_VEC3                       : 0x8B54,
+    INT_VEC4                       : 0x8B55,
+    BOOL                           : 0x8B56,
+    BOOL_VEC2                      : 0x8B57,
+    BOOL_VEC3                      : 0x8B58,
+    BOOL_VEC4                      : 0x8B59,
+    FLOAT_MAT2                     : 0x8B5A,
+    FLOAT_MAT3                     : 0x8B5B,
+    FLOAT_MAT4                     : 0x8B5C,
+    SAMPLER_2D                     : 0x8B5E,
+    SAMPLER_CUBE                   : 0x8B60,
+
+    /* Vertex Arrays */
+    VERTEX_ATTRIB_ARRAY_ENABLED        : 0x8622,
+    VERTEX_ATTRIB_ARRAY_SIZE           : 0x8623,
+    VERTEX_ATTRIB_ARRAY_STRIDE         : 0x8624,
+    VERTEX_ATTRIB_ARRAY_TYPE           : 0x8625,
+    VERTEX_ATTRIB_ARRAY_NORMALIZED     : 0x886A,
+    VERTEX_ATTRIB_ARRAY_POINTER        : 0x8645,
+    VERTEX_ATTRIB_ARRAY_BUFFER_BINDING : 0x889F,
+
+    /* Shader Source */
+    COMPILE_STATUS                 : 0x8B81,
+
+    /* Shader Precision-Specified Types */
+    LOW_FLOAT                      : 0x8DF0,
+    MEDIUM_FLOAT                   : 0x8DF1,
+    HIGH_FLOAT                     : 0x8DF2,
+    LOW_INT                        : 0x8DF3,
+    MEDIUM_INT                     : 0x8DF4,
+    HIGH_INT                       : 0x8DF5,
+
+    /* Framebuffer Object. */
+    FRAMEBUFFER                    : 0x8D40,
+    RENDERBUFFER                   : 0x8D41,
+
+    RGBA4                          : 0x8056,
+    RGB5_A1                        : 0x8057,
+    RGB565                         : 0x8D62,
+    DEPTH_COMPONENT16              : 0x81A5,
+    STENCIL_INDEX                  : 0x1901,
+    STENCIL_INDEX8                 : 0x8D48,
+    DEPTH_STENCIL                  : 0x84F9,
+
+    RENDERBUFFER_WIDTH             : 0x8D42,
+    RENDERBUFFER_HEIGHT            : 0x8D43,
+    RENDERBUFFER_INTERNAL_FORMAT   : 0x8D44,
+    RENDERBUFFER_RED_SIZE          : 0x8D50,
+    RENDERBUFFER_GREEN_SIZE        : 0x8D51,
+    RENDERBUFFER_BLUE_SIZE         : 0x8D52,
+    RENDERBUFFER_ALPHA_SIZE        : 0x8D53,
+    RENDERBUFFER_DEPTH_SIZE        : 0x8D54,
+    RENDERBUFFER_STENCIL_SIZE      : 0x8D55,
+
+    FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE           : 0x8CD0,
+    FRAMEBUFFER_ATTACHMENT_OBJECT_NAME           : 0x8CD1,
+    FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL         : 0x8CD2,
+    FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE : 0x8CD3,
+
+    COLOR_ATTACHMENT0              : 0x8CE0,
+    DEPTH_ATTACHMENT               : 0x8D00,
+    STENCIL_ATTACHMENT             : 0x8D20,
+    DEPTH_STENCIL_ATTACHMENT       : 0x821A,
+
+    NONE                           : 0,
+
+    FRAMEBUFFER_COMPLETE                      : 0x8CD5,
+    FRAMEBUFFER_INCOMPLETE_ATTACHMENT         : 0x8CD6,
+    FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT : 0x8CD7,
+    FRAMEBUFFER_INCOMPLETE_DIMENSIONS         : 0x8CD9,
+    FRAMEBUFFER_UNSUPPORTED                   : 0x8CDD,
+
+    FRAMEBUFFER_BINDING            : 0x8CA6,
+    RENDERBUFFER_BINDING           : 0x8CA7,
+    MAX_RENDERBUFFER_SIZE          : 0x84E8,
+
+    INVALID_FRAMEBUFFER_OPERATION  : 0x0506,
+
+    /* WebGL-specific enums */
+    UNPACK_FLIP_Y_WEBGL            : 0x9240,
+    UNPACK_PREMULTIPLY_ALPHA_WEBGL : 0x9241,
+    CONTEXT_LOST_WEBGL             : 0x9242,
+    UNPACK_COLORSPACE_CONVERSION_WEBGL : 0x9243,
+    BROWSER_DEFAULT_WEBGL          : 0x9244,
+});
+
 ;// CONCATENATED MODULE: ./node_modules/claygl/src/Renderable.js
 
 
@@ -13599,268 +7829,5519 @@ Renderable.CCW = glenum.CCW;
 
 /* harmony default export */ const src_Renderable = (Renderable);
 
-;// CONCATENATED MODULE: ./node_modules/claygl/src/picking/RayPicking.js
-
-
-
-
-
-
+;// CONCATENATED MODULE: ./node_modules/claygl/src/Mesh.js
 
 
 
 /**
- * @constructor clay.picking.RayPicking
- * @extends clay.core.Base
+ * @constructor clay.Mesh
+ * @extends clay.Renderable
  */
-var RayPicking = core_Base.extend(/** @lends clay.picking.RayPicking# */{
+var Mesh = src_Renderable.extend(/** @lends clay.Mesh# */ {
     /**
-     * Target scene
-     * @type {clay.Scene}
+     * Used when it is a skinned mesh
+     * @type {clay.Skeleton}
      */
-    scene: null,
+    skeleton: null,
     /**
-     * Target camera
-     * @type {clay.Camera}
+     * Joints indices Meshes can share the one skeleton instance and each mesh can use one part of joints. Joints indices indicate the index of joint in the skeleton instance
+     * @type {number[]}
      */
-    camera: null,
-    /**
-     * Target renderer
-     * @type {clay.Renderer}
-     */
-    renderer: null
+    joints: null
+
 }, function () {
-    this._ray = new math_Ray();
-    this._ndc = new math_Vector2();
-},
-/** @lends clay.picking.RayPicking.prototype */
-{
+    if (!this.joints) {
+        this.joints = [];
+    }
+}, {
 
     /**
-     * Pick the nearest intersection object in the scene
-     * @param  {number} x Mouse position x
-     * @param  {number} y Mouse position y
-     * @param  {boolean} [forcePickAll=false] ignore ignorePicking
-     * @return {clay.picking.RayPicking~Intersection}
+     * Offset matrix used for multiple skinned mesh clone sharing one skeleton
+     * @type {clay.Matrix4}
      */
-    pick: function (x, y, forcePickAll) {
-        var out = this.pickAll(x, y, [], forcePickAll);
-        return out[0] || null;
+    offsetMatrix: null,
+
+    isInstancedMesh: function () { return false; },
+
+    isSkinnedMesh: function () {
+        return !!(this.skeleton && this.joints && this.joints.length > 0);
     },
 
-    /**
-     * Pick all intersection objects, wich will be sorted from near to far
-     * @param  {number} x Mouse position x
-     * @param  {number} y Mouse position y
-     * @param  {Array} [output]
-     * @param  {boolean} [forcePickAll=false] ignore ignorePicking
-     * @return {Array.<clay.picking.RayPicking~Intersection>}
-     */
-    pickAll: function (x, y, output, forcePickAll) {
-        this.renderer.screenToNDC(x, y, this._ndc);
-        this.camera.castRay(this._ndc, this._ray);
-
-        output = output || [];
-
-        this._intersectNode(this.scene, output, forcePickAll || false);
-
-        output.sort(this._intersectionCompareFunc);
-
-        return output;
-    },
-
-    _intersectNode: function (node, out, forcePickAll) {
-        if ((node instanceof src_Renderable) && node.isRenderable()) {
-            if ((!node.ignorePicking || forcePickAll)
-                && (
-                    // Only triangle mesh support ray picking
-                    (node.mode === glenum.TRIANGLES && node.geometry.isUseIndices())
-                    // Or if geometry has it's own pickByRay, pick, implementation
-                    || node.geometry.pickByRay
-                    || node.geometry.pick
-                )
-            ) {
-                this._intersectRenderable(node, out);
-            }
+    clone: function () {
+        var mesh = src_Renderable.prototype.clone.call(this);
+        mesh.skeleton = this.skeleton;
+        if (this.joints) {
+            mesh.joints = this.joints.slice();
         }
-        for (var i = 0; i < node._children.length; i++) {
-            this._intersectNode(node._children[i], out, forcePickAll);
+        return mesh;
+    }
+});
+
+// Enums
+Mesh.POINTS = glenum.POINTS;
+Mesh.LINES = glenum.LINES;
+Mesh.LINE_LOOP = glenum.LINE_LOOP;
+Mesh.LINE_STRIP = glenum.LINE_STRIP;
+Mesh.TRIANGLES = glenum.TRIANGLES;
+Mesh.TRIANGLE_STRIP = glenum.TRIANGLE_STRIP;
+Mesh.TRIANGLE_FAN = glenum.TRIANGLE_FAN;
+
+Mesh.BACK = glenum.BACK;
+Mesh.FRONT = glenum.FRONT;
+Mesh.FRONT_AND_BACK = glenum.FRONT_AND_BACK;
+Mesh.CW = glenum.CW;
+Mesh.CCW = glenum.CCW;
+
+/* harmony default export */ const src_Mesh = (Mesh);
+
+;// CONCATENATED MODULE: ./node_modules/claygl/src/core/GLInfo.js
+var EXTENSION_LIST = [
+    'OES_texture_float',
+    'OES_texture_half_float',
+    'OES_texture_float_linear',
+    'OES_texture_half_float_linear',
+    'OES_standard_derivatives',
+    'OES_vertex_array_object',
+    'OES_element_index_uint',
+    'WEBGL_compressed_texture_s3tc',
+    'WEBGL_depth_texture',
+    'EXT_texture_filter_anisotropic',
+    'EXT_shader_texture_lod',
+    'WEBGL_draw_buffers',
+    'EXT_frag_depth',
+    'EXT_sRGB',
+    'ANGLE_instanced_arrays'
+];
+
+var PARAMETER_NAMES = [
+    'MAX_TEXTURE_SIZE',
+    'MAX_CUBE_MAP_TEXTURE_SIZE'
+];
+
+function GLInfo(_gl) {
+    var extensions = {};
+    var parameters = {};
+
+    // Get webgl extension
+    for (var i = 0; i < EXTENSION_LIST.length; i++) {
+        var extName = EXTENSION_LIST[i];
+        createExtension(extName);
+    }
+    // Get parameters
+    for (var i = 0; i < PARAMETER_NAMES.length; i++) {
+        var name = PARAMETER_NAMES[i];
+        parameters[name] = _gl.getParameter(_gl[name]);
+    }
+
+    this.getExtension = function (name) {
+        if (!(name in extensions)) {
+            createExtension(name);
         }
-    },
+        return extensions[name];
+    };
 
-    _intersectRenderable: (function () {
+    this.getParameter = function (name) {
+        return parameters[name];
+    };
 
-        var v1 = new math_Vector3();
-        var v2 = new math_Vector3();
-        var v3 = new math_Vector3();
-        var ray = new math_Ray();
-        var worldInverse = new math_Matrix4();
-
-        return function (renderable, out) {
-
-            var isSkinnedMesh = renderable.isSkinnedMesh();
-            ray.copy(this._ray);
-            math_Matrix4.invert(worldInverse, renderable.worldTransform);
-
-            // Skinned mesh will ignore the world transform.
-            if (!isSkinnedMesh) {
-                ray.applyTransform(worldInverse);
+    function createExtension(name) {
+        if (_gl.getExtension) {
+            var ext = _gl.getExtension(name);
+            if (!ext) {
+                ext = _gl.getExtension('MOZ_' + name);
             }
-
-            var geometry = renderable.geometry;
-
-            var bbox = isSkinnedMesh ? renderable.skeleton.boundingBox : geometry.boundingBox;
-
-            if (bbox && !ray.intersectBoundingBox(bbox)) {
-                return;
+            if (!ext) {
+                ext = _gl.getExtension('WEBKIT_' + name);
             }
-            // Use user defined picking algorithm
-            if (geometry.pick) {
-                geometry.pick(
-                    this._ndc.x, this._ndc.y,
-                    this.renderer,
-                    this.camera,
-                    renderable, out
-                );
-                return;
-            }
-            // Use user defined ray picking algorithm
-            else if (geometry.pickByRay) {
-                geometry.pickByRay(ray, renderable, out);
-                return;
-            }
+            extensions[name] = ext;
+        }
+    }
+}
 
-            var cullBack = (renderable.cullFace === glenum.BACK && renderable.frontFace === glenum.CCW)
-                        || (renderable.cullFace === glenum.FRONT && renderable.frontFace === glenum.CW);
+/* harmony default export */ const core_GLInfo = (GLInfo);
 
-            var point;
-            var indices = geometry.indices;
-            var positionAttr = geometry.attributes.position;
-            var weightAttr = geometry.attributes.weight;
-            var jointAttr = geometry.attributes.joint;
-            var skinMatricesArray;
-            var skinMatrices = [];
-            // Check if valid.
-            if (!positionAttr || !positionAttr.value || !indices) {
-                return;
+;// CONCATENATED MODULE: ./node_modules/claygl/src/core/request.js
+function get(options) {
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.open('get', options.url);
+    // With response type set browser can get and put binary data
+    // https://developer.mozilla.org/en-US/docs/DOM/XMLHttpRequest/Sending_and_Receiving_Binary_Data
+    // Default is text, and it can be set
+    // arraybuffer, blob, document, json, text
+    xhr.responseType = options.responseType || 'text';
+
+    if (options.onprogress) {
+        //https://developer.mozilla.org/en-US/docs/DOM/XMLHttpRequest/Using_XMLHttpRequest
+        xhr.onprogress = function(e) {
+            if (e.lengthComputable) {
+                var percent = e.loaded / e.total;
+                options.onprogress(percent, e.loaded, e.total);
             }
-            if (isSkinnedMesh) {
-                skinMatricesArray = renderable.skeleton.getSubSkinMatrices(renderable.__uid__, renderable.joints);
-                for (var i = 0; i < renderable.joints.length; i++) {
-                    skinMatrices[i] = skinMatrices[i] || [];
-                    for (var k = 0; k < 16; k++) {
-                        skinMatrices[i][k] = skinMatricesArray[i * 16 + k];
-                    }
-                }
-                var pos = [];
-                var weight = [];
-                var joint = [];
-                var skinnedPos = [];
-                var tmp = [];
-                var skinnedPositionAttr = geometry.attributes.skinnedPosition;
-                if (!skinnedPositionAttr || !skinnedPositionAttr.value) {
-                    geometry.createAttribute('skinnedPosition', 'f', 3);
-                    skinnedPositionAttr = geometry.attributes.skinnedPosition;
-                    skinnedPositionAttr.init(geometry.vertexCount);
-                }
-                for (var i = 0; i < geometry.vertexCount; i++) {
-                    positionAttr.get(i, pos);
-                    weightAttr.get(i, weight);
-                    jointAttr.get(i, joint);
-                    weight[3] = 1 - weight[0] - weight[1] - weight[2];
-                    glmatrix_vec3.set(skinnedPos, 0, 0, 0);
-                    for (var k = 0; k < 4; k++) {
-                        if (joint[k] >= 0 && weight[k] > 1e-4) {
-                            glmatrix_vec3.transformMat4(tmp, pos, skinMatrices[joint[k]]);
-                            glmatrix_vec3.scaleAndAdd(skinnedPos, skinnedPos, tmp, weight[k]);
-                        }
-                    }
-                    skinnedPositionAttr.set(i, skinnedPos);
-                }
-            }
-
-            for (var i = 0; i < indices.length; i += 3) {
-                var i1 = indices[i];
-                var i2 = indices[i + 1];
-                var i3 = indices[i + 2];
-                var finalPosAttr = isSkinnedMesh
-                    ? geometry.attributes.skinnedPosition
-                    : positionAttr;
-                finalPosAttr.get(i1, v1.array);
-                finalPosAttr.get(i2, v2.array);
-                finalPosAttr.get(i3, v3.array);
-
-                if (cullBack) {
-                    point = ray.intersectTriangle(v1, v2, v3, renderable.culling);
-                }
-                else {
-                    point = ray.intersectTriangle(v1, v3, v2, renderable.culling);
-                }
-                if (point) {
-                    var pointW = new math_Vector3();
-                    if (!isSkinnedMesh) {
-                        math_Vector3.transformMat4(pointW, point, renderable.worldTransform);
-                    }
-                    else {
-                        // TODO point maybe not right.
-                        math_Vector3.copy(pointW, point);
-                    }
-                    out.push(new RayPicking.Intersection(
-                        point, pointW, renderable, [i1, i2, i3], i / 3,
-                        math_Vector3.dist(pointW, this._ray.origin)
-                    ));
-                }
+            else {
+                options.onprogress(null);
             }
         };
-    })(),
+    }
+    xhr.onload = function(e) {
+        if (xhr.status >= 400) {
+            options.onerror && options.onerror();
+        }
+        else {
+            options.onload && options.onload(xhr.response);
+        }
+    };
+    if (options.onerror) {
+        xhr.onerror = options.onerror;
+    }
+    xhr.send(null);
+}
 
-    _intersectionCompareFunc: function (a, b) {
-        return a.distance - b.distance;
+/* harmony default export */ const request = ({
+    get: get
+});
+
+;// CONCATENATED MODULE: ./node_modules/claygl/src/core/vendor.js
+
+
+var supportWebGL;
+
+var vendor = {};
+
+/**
+ * If support WebGL
+ * @return {boolean}
+ */
+vendor.supportWebGL = function () {
+    if (supportWebGL == null) {
+        try {
+            var canvas = document.createElement('canvas');
+            var gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+            if (!gl) {
+                throw new Error();
+            }
+        }
+        catch (e) {
+            supportWebGL = false;
+        }
+
+    }
+    return supportWebGL;
+};
+
+vendor.Int8Array = typeof Int8Array === 'undefined' ? Array : Int8Array;
+
+vendor.Uint8Array = typeof Uint8Array === 'undefined' ? Array : Uint8Array;
+
+vendor.Uint16Array = typeof Uint16Array === 'undefined' ? Array : Uint16Array;
+
+vendor.Uint32Array = typeof Uint32Array === 'undefined' ? Array : Uint32Array;
+
+vendor.Int16Array = typeof Int16Array === 'undefined' ? Array : Int16Array;
+
+vendor.Float32Array = typeof Float32Array === 'undefined' ? Array : Float32Array;
+
+vendor.Float64Array = typeof Float64Array === 'undefined' ? Array : Float64Array;
+
+var g = {};
+if (typeof window !== 'undefined') {
+    g = window;
+}
+else if (typeof __webpack_require__.g !== 'undefined') {
+    g = __webpack_require__.g;
+}
+
+
+vendor.requestAnimationFrame = g.requestAnimationFrame
+    || g.msRequestAnimationFrame
+    || g.mozRequestAnimationFrame
+    || g.webkitRequestAnimationFrame
+    || function (func){ setTimeout(func, 16); };
+
+vendor.createCanvas = function () {
+    return document.createElement('canvas');
+};
+
+vendor.createImage = function () {
+    return new g.Image();
+};
+
+vendor.request = {
+    get: request.get
+};
+
+vendor.addEventListener = function (dom, type, func, useCapture) {
+    dom.addEventListener(type, func, useCapture);
+};
+
+vendor.removeEventListener = function (dom, type, func) {
+    dom.removeEventListener(type, func);
+};
+
+/* harmony default export */ const core_vendor = (vendor);
+
+;// CONCATENATED MODULE: ./node_modules/claygl/src/core/LinkedList.js
+/**
+ * Simple double linked list. Compared with array, it has O(1) remove operation.
+ * @constructor
+ * @alias clay.core.LinkedList
+ */
+var LinkedList = function () {
+
+    /**
+     * @type {clay.core.LinkedList.Entry}
+     */
+    this.head = null;
+
+    /**
+     * @type {clay.core.LinkedList.Entry}
+     */
+    this.tail = null;
+
+    this._length = 0;
+};
+
+/**
+ * Insert a new value at the tail
+ * @param  {} val
+ * @return {clay.core.LinkedList.Entry}
+ */
+LinkedList.prototype.insert = function (val) {
+    var entry = new LinkedList.Entry(val);
+    this.insertEntry(entry);
+    return entry;
+};
+
+/**
+ * Insert a new value at idx
+ * @param {number} idx
+ * @param  {} val
+ * @return {clay.core.LinkedList.Entry}
+ */
+LinkedList.prototype.insertAt = function (idx, val) {
+    if (idx < 0) {
+        return;
+    }
+    var next = this.head;
+    var cursor = 0;
+    while (next && cursor != idx) {
+        next = next.next;
+        cursor++;
+    }
+    if (next) {
+        var entry = new LinkedList.Entry(val);
+        var prev = next.prev;
+        if (!prev) { //next is head
+            this.head = entry;
+        }
+        else {
+            prev.next = entry;
+            entry.prev = prev;
+        }
+        entry.next = next;
+        next.prev = entry;
+    }
+    else {
+        this.insert(val);
+    }
+};
+
+LinkedList.prototype.insertBeforeEntry = function (val, next) {
+    var entry = new LinkedList.Entry(val);
+    var prev = next.prev;
+    if (!prev) { //next is head
+        this.head = entry;
+    }
+    else {
+        prev.next = entry;
+        entry.prev = prev;
+    }
+    entry.next = next;
+    next.prev = entry;
+
+    this._length++;
+};
+
+/**
+ * Insert an entry at the tail
+ * @param  {clay.core.LinkedList.Entry} entry
+ */
+LinkedList.prototype.insertEntry = function (entry) {
+    if (!this.head) {
+        this.head = this.tail = entry;
+    }
+    else {
+        this.tail.next = entry;
+        entry.prev = this.tail;
+        this.tail = entry;
+    }
+    this._length++;
+};
+
+/**
+ * Remove entry.
+ * @param  {clay.core.LinkedList.Entry} entry
+ */
+LinkedList.prototype.remove = function (entry) {
+    var prev = entry.prev;
+    var next = entry.next;
+    if (prev) {
+        prev.next = next;
+    }
+    else {
+        // Is head
+        this.head = next;
+    }
+    if (next) {
+        next.prev = prev;
+    }
+    else {
+        // Is tail
+        this.tail = prev;
+    }
+    entry.next = entry.prev = null;
+    this._length--;
+};
+
+/**
+ * Remove entry at index.
+ * @param  {number} idx
+ * @return {}
+ */
+LinkedList.prototype.removeAt = function (idx) {
+    if (idx < 0) {
+        return;
+    }
+    var curr = this.head;
+    var cursor = 0;
+    while (curr && cursor != idx) {
+        curr = curr.next;
+        cursor++;
+    }
+    if (curr) {
+        this.remove(curr);
+        return curr.value;
+    }
+};
+/**
+ * Get head value
+ * @return {}
+ */
+LinkedList.prototype.getHead = function () {
+    if (this.head) {
+        return this.head.value;
+    }
+};
+/**
+ * Get tail value
+ * @return {}
+ */
+LinkedList.prototype.getTail = function () {
+    if (this.tail) {
+        return this.tail.value;
+    }
+};
+/**
+ * Get value at idx
+ * @param {number} idx
+ * @return {}
+ */
+LinkedList.prototype.getAt = function (idx) {
+    if (idx < 0) {
+        return;
+    }
+    var curr = this.head;
+    var cursor = 0;
+    while (curr && cursor != idx) {
+        curr = curr.next;
+        cursor++;
+    }
+    return curr.value;
+};
+
+/**
+ * @param  {} value
+ * @return {number}
+ */
+LinkedList.prototype.indexOf = function (value) {
+    var curr = this.head;
+    var cursor = 0;
+    while (curr) {
+        if (curr.value === value) {
+            return cursor;
+        }
+        curr = curr.next;
+        cursor++;
+    }
+};
+
+/**
+ * @return {number}
+ */
+LinkedList.prototype.length = function () {
+    return this._length;
+};
+
+/**
+ * If list is empty
+ */
+LinkedList.prototype.isEmpty = function () {
+    return this._length === 0;
+};
+
+/**
+ * @param  {Function} cb
+ * @param  {} context
+ */
+LinkedList.prototype.forEach = function (cb, context) {
+    var curr = this.head;
+    var idx = 0;
+    var haveContext = typeof(context) != 'undefined';
+    while (curr) {
+        if (haveContext) {
+            cb.call(context, curr.value, idx);
+        }
+        else {
+            cb(curr.value, idx);
+        }
+        curr = curr.next;
+        idx++;
+    }
+};
+
+/**
+ * Clear the list
+ */
+LinkedList.prototype.clear = function () {
+    this.tail = this.head = null;
+    this._length = 0;
+};
+
+/**
+ * @constructor
+ * @param {} val
+ */
+LinkedList.Entry = function (val) {
+    /**
+     * @type {}
+     */
+    this.value = val;
+
+    /**
+     * @type {clay.core.LinkedList.Entry}
+     */
+    this.next = null;
+
+    /**
+     * @type {clay.core.LinkedList.Entry}
+     */
+    this.prev = null;
+};
+
+/* harmony default export */ const core_LinkedList = (LinkedList);
+
+;// CONCATENATED MODULE: ./node_modules/claygl/src/core/LRU.js
+
+
+/**
+ * LRU Cache
+ * @constructor
+ * @alias clay.core.LRU
+ */
+var LRU = function (maxSize) {
+
+    this._list = new core_LinkedList();
+
+    this._map = {};
+
+    this._maxSize = maxSize || 10;
+};
+
+/**
+ * Set cache max size
+ * @param {number} size
+ */
+LRU.prototype.setMaxSize = function (size) {
+    this._maxSize = size;
+};
+
+/**
+ * @param  {string} key
+ * @param  {} value
+ */
+LRU.prototype.put = function (key, value) {
+    if (!this._map.hasOwnProperty(key)) {
+        var len = this._list.length();
+        if (len >= this._maxSize && len > 0) {
+            // Remove the least recently used
+            var leastUsedEntry = this._list.head;
+            this._list.remove(leastUsedEntry);
+            delete this._map[leastUsedEntry.key];
+        }
+
+        var entry = this._list.insert(value);
+        entry.key = key;
+        this._map[key] = entry;
+    }
+};
+
+/**
+ * @param  {string} key
+ * @return {}
+ */
+LRU.prototype.get = function (key) {
+    var entry = this._map[key];
+    if (this._map.hasOwnProperty(key)) {
+        // Put the latest used entry in the tail
+        if (entry !== this._list.tail) {
+            this._list.remove(entry);
+            this._list.insertEntry(entry);
+        }
+
+        return entry.value;
+    }
+};
+
+/**
+ * @param {string} key
+ */
+LRU.prototype.remove = function (key) {
+    var entry = this._map[key];
+    if (typeof(entry) !== 'undefined') {
+        delete this._map[key];
+        this._list.remove(entry);
+    }
+};
+
+/**
+ * Clear the cache
+ */
+LRU.prototype.clear = function () {
+    this._list.clear();
+    this._map = {};
+};
+
+/* harmony default export */ const core_LRU = (LRU);
+
+;// CONCATENATED MODULE: ./node_modules/claygl/src/core/color.js
+/**
+ * @namespace clay.core.color
+ */
+
+
+var colorUtil = {};
+
+var kCSSColorTable = {
+    'transparent': [0,0,0,0], 'aliceblue': [240,248,255,1],
+    'antiquewhite': [250,235,215,1], 'aqua': [0,255,255,1],
+    'aquamarine': [127,255,212,1], 'azure': [240,255,255,1],
+    'beige': [245,245,220,1], 'bisque': [255,228,196,1],
+    'black': [0,0,0,1], 'blanchedalmond': [255,235,205,1],
+    'blue': [0,0,255,1], 'blueviolet': [138,43,226,1],
+    'brown': [165,42,42,1], 'burlywood': [222,184,135,1],
+    'cadetblue': [95,158,160,1], 'chartreuse': [127,255,0,1],
+    'chocolate': [210,105,30,1], 'coral': [255,127,80,1],
+    'cornflowerblue': [100,149,237,1], 'cornsilk': [255,248,220,1],
+    'crimson': [220,20,60,1], 'cyan': [0,255,255,1],
+    'darkblue': [0,0,139,1], 'darkcyan': [0,139,139,1],
+    'darkgoldenrod': [184,134,11,1], 'darkgray': [169,169,169,1],
+    'darkgreen': [0,100,0,1], 'darkgrey': [169,169,169,1],
+    'darkkhaki': [189,183,107,1], 'darkmagenta': [139,0,139,1],
+    'darkolivegreen': [85,107,47,1], 'darkorange': [255,140,0,1],
+    'darkorchid': [153,50,204,1], 'darkred': [139,0,0,1],
+    'darksalmon': [233,150,122,1], 'darkseagreen': [143,188,143,1],
+    'darkslateblue': [72,61,139,1], 'darkslategray': [47,79,79,1],
+    'darkslategrey': [47,79,79,1], 'darkturquoise': [0,206,209,1],
+    'darkviolet': [148,0,211,1], 'deeppink': [255,20,147,1],
+    'deepskyblue': [0,191,255,1], 'dimgray': [105,105,105,1],
+    'dimgrey': [105,105,105,1], 'dodgerblue': [30,144,255,1],
+    'firebrick': [178,34,34,1], 'floralwhite': [255,250,240,1],
+    'forestgreen': [34,139,34,1], 'fuchsia': [255,0,255,1],
+    'gainsboro': [220,220,220,1], 'ghostwhite': [248,248,255,1],
+    'gold': [255,215,0,1], 'goldenrod': [218,165,32,1],
+    'gray': [128,128,128,1], 'green': [0,128,0,1],
+    'greenyellow': [173,255,47,1], 'grey': [128,128,128,1],
+    'honeydew': [240,255,240,1], 'hotpink': [255,105,180,1],
+    'indianred': [205,92,92,1], 'indigo': [75,0,130,1],
+    'ivory': [255,255,240,1], 'khaki': [240,230,140,1],
+    'lavender': [230,230,250,1], 'lavenderblush': [255,240,245,1],
+    'lawngreen': [124,252,0,1], 'lemonchiffon': [255,250,205,1],
+    'lightblue': [173,216,230,1], 'lightcoral': [240,128,128,1],
+    'lightcyan': [224,255,255,1], 'lightgoldenrodyellow': [250,250,210,1],
+    'lightgray': [211,211,211,1], 'lightgreen': [144,238,144,1],
+    'lightgrey': [211,211,211,1], 'lightpink': [255,182,193,1],
+    'lightsalmon': [255,160,122,1], 'lightseagreen': [32,178,170,1],
+    'lightskyblue': [135,206,250,1], 'lightslategray': [119,136,153,1],
+    'lightslategrey': [119,136,153,1], 'lightsteelblue': [176,196,222,1],
+    'lightyellow': [255,255,224,1], 'lime': [0,255,0,1],
+    'limegreen': [50,205,50,1], 'linen': [250,240,230,1],
+    'magenta': [255,0,255,1], 'maroon': [128,0,0,1],
+    'mediumaquamarine': [102,205,170,1], 'mediumblue': [0,0,205,1],
+    'mediumorchid': [186,85,211,1], 'mediumpurple': [147,112,219,1],
+    'mediumseagreen': [60,179,113,1], 'mediumslateblue': [123,104,238,1],
+    'mediumspringgreen': [0,250,154,1], 'mediumturquoise': [72,209,204,1],
+    'mediumvioletred': [199,21,133,1], 'midnightblue': [25,25,112,1],
+    'mintcream': [245,255,250,1], 'mistyrose': [255,228,225,1],
+    'moccasin': [255,228,181,1], 'navajowhite': [255,222,173,1],
+    'navy': [0,0,128,1], 'oldlace': [253,245,230,1],
+    'olive': [128,128,0,1], 'olivedrab': [107,142,35,1],
+    'orange': [255,165,0,1], 'orangered': [255,69,0,1],
+    'orchid': [218,112,214,1], 'palegoldenrod': [238,232,170,1],
+    'palegreen': [152,251,152,1], 'paleturquoise': [175,238,238,1],
+    'palevioletred': [219,112,147,1], 'papayawhip': [255,239,213,1],
+    'peachpuff': [255,218,185,1], 'peru': [205,133,63,1],
+    'pink': [255,192,203,1], 'plum': [221,160,221,1],
+    'powderblue': [176,224,230,1], 'purple': [128,0,128,1],
+    'red': [255,0,0,1], 'rosybrown': [188,143,143,1],
+    'royalblue': [65,105,225,1], 'saddlebrown': [139,69,19,1],
+    'salmon': [250,128,114,1], 'sandybrown': [244,164,96,1],
+    'seagreen': [46,139,87,1], 'seashell': [255,245,238,1],
+    'sienna': [160,82,45,1], 'silver': [192,192,192,1],
+    'skyblue': [135,206,235,1], 'slateblue': [106,90,205,1],
+    'slategray': [112,128,144,1], 'slategrey': [112,128,144,1],
+    'snow': [255,250,250,1], 'springgreen': [0,255,127,1],
+    'steelblue': [70,130,180,1], 'tan': [210,180,140,1],
+    'teal': [0,128,128,1], 'thistle': [216,191,216,1],
+    'tomato': [255,99,71,1], 'turquoise': [64,224,208,1],
+    'violet': [238,130,238,1], 'wheat': [245,222,179,1],
+    'white': [255,255,255,1], 'whitesmoke': [245,245,245,1],
+    'yellow': [255,255,0,1], 'yellowgreen': [154,205,50,1]
+};
+
+function clampCssByte(i) {  // Clamp to integer 0 .. 255.
+    i = Math.round(i);  // Seems to be what Chrome does (vs truncation).
+    return i < 0 ? 0 : i > 255 ? 255 : i;
+}
+
+function clampCssAngle(i) {  // Clamp to integer 0 .. 360.
+    i = Math.round(i);  // Seems to be what Chrome does (vs truncation).
+    return i < 0 ? 0 : i > 360 ? 360 : i;
+}
+
+function clampCssFloat(f) {  // Clamp to float 0.0 .. 1.0.
+    return f < 0 ? 0 : f > 1 ? 1 : f;
+}
+
+function parseCssInt(str) {  // int or percentage.
+    if (str.length && str.charAt(str.length - 1) === '%') {
+        return clampCssByte(parseFloat(str) / 100 * 255);
+    }
+    return clampCssByte(parseInt(str, 10));
+}
+
+function parseCssFloat(str) {  // float or percentage.
+    if (str.length && str.charAt(str.length - 1) === '%') {
+        return clampCssFloat(parseFloat(str) / 100);
+    }
+    return clampCssFloat(parseFloat(str));
+}
+
+function cssHueToRgb(m1, m2, h) {
+    if (h < 0) {
+        h += 1;
+    }
+    else if (h > 1) {
+        h -= 1;
+    }
+
+    if (h * 6 < 1) {
+        return m1 + (m2 - m1) * h * 6;
+    }
+    if (h * 2 < 1) {
+        return m2;
+    }
+    if (h * 3 < 2) {
+        return m1 + (m2 - m1) * (2/3 - h) * 6;
+    }
+    return m1;
+}
+
+function lerpNumber(a, b, p) {
+    return a + (b - a) * p;
+}
+
+function setRgba(out, r, g, b, a) {
+    out[0] = r; out[1] = g; out[2] = b; out[3] = a;
+    return out;
+}
+function copyRgba(out, a) {
+    out[0] = a[0]; out[1] = a[1]; out[2] = a[2]; out[3] = a[3];
+    return out;
+}
+
+var colorCache = new core_LRU(20);
+var lastRemovedArr = null;
+
+function putToCache(colorStr, rgbaArr) {
+    // Reuse removed array
+    if (lastRemovedArr) {
+        copyRgba(lastRemovedArr, rgbaArr);
+    }
+    lastRemovedArr = colorCache.put(colorStr, lastRemovedArr || (rgbaArr.slice()));
+}
+
+/**
+ * @name clay.core.color.parse
+ * @param {string} colorStr
+ * @param {Array.<number>} out
+ * @return {Array.<number>}
+ */
+colorUtil.parse = function (colorStr, rgbaArr) {
+    if (!colorStr) {
+        return;
+    }
+    rgbaArr = rgbaArr || [];
+
+    var cached = colorCache.get(colorStr);
+    if (cached) {
+        return copyRgba(rgbaArr, cached);
+    }
+
+    // colorStr may be not string
+    colorStr = colorStr + '';
+    // Remove all whitespace, not compliant, but should just be more accepting.
+    var str = colorStr.replace(/ /g, '').toLowerCase();
+
+    // Color keywords (and transparent) lookup.
+    if (str in kCSSColorTable) {
+        copyRgba(rgbaArr, kCSSColorTable[str]);
+        putToCache(colorStr, rgbaArr);
+        return rgbaArr;
+    }
+
+    // #abc and #abc123 syntax.
+    if (str.charAt(0) === '#') {
+        if (str.length === 4) {
+            var iv = parseInt(str.substr(1), 16);  // TODO(deanm): Stricter parsing.
+            if (!(iv >= 0 && iv <= 0xfff)) {
+                setRgba(rgbaArr, 0, 0, 0, 1);
+                return;  // Covers NaN.
+            }
+            setRgba(rgbaArr,
+                ((iv & 0xf00) >> 4) | ((iv & 0xf00) >> 8),
+                (iv & 0xf0) | ((iv & 0xf0) >> 4),
+                (iv & 0xf) | ((iv & 0xf) << 4),
+                1
+            );
+            putToCache(colorStr, rgbaArr);
+            return rgbaArr;
+        }
+        else if (str.length === 7) {
+            var iv = parseInt(str.substr(1), 16);  // TODO(deanm): Stricter parsing.
+            if (!(iv >= 0 && iv <= 0xffffff)) {
+                setRgba(rgbaArr, 0, 0, 0, 1);
+                return;  // Covers NaN.
+            }
+            setRgba(rgbaArr,
+                (iv & 0xff0000) >> 16,
+                (iv & 0xff00) >> 8,
+                iv & 0xff,
+                1
+            );
+            putToCache(colorStr, rgbaArr);
+            return rgbaArr;
+        }
+
+        return;
+    }
+    var op = str.indexOf('('), ep = str.indexOf(')');
+    if (op !== -1 && ep + 1 === str.length) {
+        var fname = str.substr(0, op);
+        var params = str.substr(op + 1, ep - (op + 1)).split(',');
+        var alpha = 1;  // To allow case fallthrough.
+        switch (fname) {
+            case 'rgba':
+                if (params.length !== 4) {
+                    setRgba(rgbaArr, 0, 0, 0, 1);
+                    return;
+                }
+                alpha = parseCssFloat(params.pop()); // jshint ignore:line
+            // Fall through.
+            case 'rgb':
+                if (params.length !== 3) {
+                    setRgba(rgbaArr, 0, 0, 0, 1);
+                    return;
+                }
+                setRgba(rgbaArr,
+                    parseCssInt(params[0]),
+                    parseCssInt(params[1]),
+                    parseCssInt(params[2]),
+                    alpha
+                );
+                putToCache(colorStr, rgbaArr);
+                return rgbaArr;
+            case 'hsla':
+                if (params.length !== 4) {
+                    setRgba(rgbaArr, 0, 0, 0, 1);
+                    return;
+                }
+                params[3] = parseCssFloat(params[3]);
+                hsla2rgba(params, rgbaArr);
+                putToCache(colorStr, rgbaArr);
+                return rgbaArr;
+            case 'hsl':
+                if (params.length !== 3) {
+                    setRgba(rgbaArr, 0, 0, 0, 1);
+                    return;
+                }
+                hsla2rgba(params, rgbaArr);
+                putToCache(colorStr, rgbaArr);
+                return rgbaArr;
+            default:
+                return;
+        }
+    }
+
+    setRgba(rgbaArr, 0, 0, 0, 1);
+    return;
+};
+
+colorUtil.parseToFloat = function (colorStr, rgbaArr) {
+    rgbaArr = colorUtil.parse(colorStr, rgbaArr);
+    if (!rgbaArr) {
+        return;
+    }
+    rgbaArr[0] /= 255;
+    rgbaArr[1] /= 255;
+    rgbaArr[2] /= 255;
+    return rgbaArr;
+}
+
+/**
+ * @name clay.core.color.hsla2rgba
+ * @param {Array.<number>} hsla
+ * @param {Array.<number>} rgba
+ * @return {Array.<number>} rgba
+ */
+function hsla2rgba(hsla, rgba) {
+    var h = (((parseFloat(hsla[0]) % 360) + 360) % 360) / 360;  // 0 .. 1
+    // NOTE(deanm): According to the CSS spec s/l should only be
+    // percentages, but we don't bother and let float or percentage.
+    var s = parseCssFloat(hsla[1]);
+    var l = parseCssFloat(hsla[2]);
+    var m2 = l <= 0.5 ? l * (s + 1) : l + s - l * s;
+    var m1 = l * 2 - m2;
+
+    rgba = rgba || [];
+    setRgba(rgba,
+        clampCssByte(cssHueToRgb(m1, m2, h + 1 / 3) * 255),
+        clampCssByte(cssHueToRgb(m1, m2, h) * 255),
+        clampCssByte(cssHueToRgb(m1, m2, h - 1 / 3) * 255),
+        1
+    );
+
+    if (hsla.length === 4) {
+        rgba[3] = hsla[3];
+    }
+
+    return rgba;
+}
+
+/**
+ * @name clay.core.color.rgba2hsla
+ * @param {Array.<number>} rgba
+ * @return {Array.<number>} hsla
+ */
+function rgba2hsla(rgba) {
+    if (!rgba) {
+        return;
+    }
+
+    // RGB from 0 to 255
+    var R = rgba[0] / 255;
+    var G = rgba[1] / 255;
+    var B = rgba[2] / 255;
+
+    var vMin = Math.min(R, G, B); // Min. value of RGB
+    var vMax = Math.max(R, G, B); // Max. value of RGB
+    var delta = vMax - vMin; // Delta RGB value
+
+    var L = (vMax + vMin) / 2;
+    var H;
+    var S;
+    // HSL results from 0 to 1
+    if (delta === 0) {
+        H = 0;
+        S = 0;
+    }
+    else {
+        if (L < 0.5) {
+            S = delta / (vMax + vMin);
+        }
+        else {
+            S = delta / (2 - vMax - vMin);
+        }
+
+        var deltaR = (((vMax - R) / 6) + (delta / 2)) / delta;
+        var deltaG = (((vMax - G) / 6) + (delta / 2)) / delta;
+        var deltaB = (((vMax - B) / 6) + (delta / 2)) / delta;
+
+        if (R === vMax) {
+            H = deltaB - deltaG;
+        }
+        else if (G === vMax) {
+            H = (1 / 3) + deltaR - deltaB;
+        }
+        else if (B === vMax) {
+            H = (2 / 3) + deltaG - deltaR;
+        }
+
+        if (H < 0) {
+            H += 1;
+        }
+
+        if (H > 1) {
+            H -= 1;
+        }
+    }
+
+    var hsla = [H * 360, S, L];
+
+    if (rgba[3] != null) {
+        hsla.push(rgba[3]);
+    }
+
+    return hsla;
+}
+
+/**
+ * @name clay.core.color.lift
+ * @param {string} color
+ * @param {number} level
+ * @return {string}
+ */
+colorUtil.lift = function (color, level) {
+    var colorArr = colorUtil.parse(color);
+    if (colorArr) {
+        for (var i = 0; i < 3; i++) {
+            if (level < 0) {
+                colorArr[i] = colorArr[i] * (1 - level) | 0;
+            }
+            else {
+                colorArr[i] = ((255 - colorArr[i]) * level + colorArr[i]) | 0;
+            }
+        }
+        return colorUtil.stringify(colorArr, colorArr.length === 4 ? 'rgba' : 'rgb');
+    }
+}
+
+/**
+ * @name clay.core.color.toHex
+ * @param {string} color
+ * @return {string}
+ */
+colorUtil.toHex = function (color) {
+    var colorArr = colorUtil.parse(color);
+    if (colorArr) {
+        return ((1 << 24) + (colorArr[0] << 16) + (colorArr[1] << 8) + (+colorArr[2])).toString(16).slice(1);
+    }
+};
+
+/**
+ * Map value to color. Faster than lerp methods because color is represented by rgba array.
+ * @name clay.core.color
+ * @param {number} normalizedValue A float between 0 and 1.
+ * @param {Array.<Array.<number>>} colors List of rgba color array
+ * @param {Array.<number>} [out] Mapped gba color array
+ * @return {Array.<number>} will be null/undefined if input illegal.
+ */
+colorUtil.fastLerp = function (normalizedValue, colors, out) {
+    if (!(colors && colors.length)
+        || !(normalizedValue >= 0 && normalizedValue <= 1)
+    ) {
+        return;
+    }
+
+    out = out || [];
+
+    var value = normalizedValue * (colors.length - 1);
+    var leftIndex = Math.floor(value);
+    var rightIndex = Math.ceil(value);
+    var leftColor = colors[leftIndex];
+    var rightColor = colors[rightIndex];
+    var dv = value - leftIndex;
+    out[0] = clampCssByte(lerpNumber(leftColor[0], rightColor[0], dv));
+    out[1] = clampCssByte(lerpNumber(leftColor[1], rightColor[1], dv));
+    out[2] = clampCssByte(lerpNumber(leftColor[2], rightColor[2], dv));
+    out[3] = clampCssFloat(lerpNumber(leftColor[3], rightColor[3], dv));
+
+    return out;
+}
+
+colorUtil.fastMapToColor = colorUtil.fastLerp;
+
+/**
+ * @param {number} normalizedValue A float between 0 and 1.
+ * @param {Array.<string>} colors Color list.
+ * @param {boolean=} fullOutput Default false.
+ * @return {(string|Object)} Result color. If fullOutput,
+ *                           return {color: ..., leftIndex: ..., rightIndex: ..., value: ...},
+ */
+colorUtil.lerp = function (normalizedValue, colors, fullOutput) {
+    if (!(colors && colors.length)
+        || !(normalizedValue >= 0 && normalizedValue <= 1)
+    ) {
+        return;
+    }
+
+    var value = normalizedValue * (colors.length - 1);
+    var leftIndex = Math.floor(value);
+    var rightIndex = Math.ceil(value);
+    var leftColor = colorUtil.parse(colors[leftIndex]);
+    var rightColor = colorUtil.parse(colors[rightIndex]);
+    var dv = value - leftIndex;
+
+    var color = colorUtil.stringify(
+        [
+            clampCssByte(lerpNumber(leftColor[0], rightColor[0], dv)),
+            clampCssByte(lerpNumber(leftColor[1], rightColor[1], dv)),
+            clampCssByte(lerpNumber(leftColor[2], rightColor[2], dv)),
+            clampCssFloat(lerpNumber(leftColor[3], rightColor[3], dv))
+        ],
+        'rgba'
+    );
+
+    return fullOutput
+        ? {
+            color: color,
+            leftIndex: leftIndex,
+            rightIndex: rightIndex,
+            value: value
+        }
+        : color;
+}
+
+/**
+ * @deprecated
+ */
+colorUtil.mapToColor = colorUtil.lerp;
+
+/**
+ * @name clay.core.color
+ * @param {string} color
+ * @param {number=} h 0 ~ 360, ignore when null.
+ * @param {number=} s 0 ~ 1, ignore when null.
+ * @param {number=} l 0 ~ 1, ignore when null.
+ * @return {string} Color string in rgba format.
+ */
+colorUtil.modifyHSL = function (color, h, s, l) {
+    color = colorUtil.parse(color);
+
+    if (color) {
+        color = rgba2hsla(color);
+        h != null && (color[0] = clampCssAngle(h));
+        s != null && (color[1] = parseCssFloat(s));
+        l != null && (color[2] = parseCssFloat(l));
+
+        return colorUtil.stringify(hsla2rgba(color), 'rgba');
+    }
+}
+
+/**
+ * @param {string} color
+ * @param {number=} alpha 0 ~ 1
+ * @return {string} Color string in rgba format.
+ */
+colorUtil.modifyAlpha = function (color, alpha) {
+    color = colorUtil.parse(color);
+
+    if (color && alpha != null) {
+        color[3] = clampCssFloat(alpha);
+        return colorUtil.stringify(color, 'rgba');
+    }
+}
+
+/**
+ * @param {Array.<number>} arrColor like [12,33,44,0.4]
+ * @param {string} type 'rgba', 'hsva', ...
+ * @return {string} Result color. (If input illegal, return undefined).
+ */
+colorUtil.stringify = function (arrColor, type) {
+    if (!arrColor || !arrColor.length) {
+        return;
+    }
+    var colorStr = arrColor[0] + ',' + arrColor[1] + ',' + arrColor[2];
+    if (type === 'rgba' || type === 'hsva' || type === 'hsla') {
+        colorStr += ',' + arrColor[3];
+    }
+    return type + '(' + colorStr + ')';
+};
+
+
+
+/* harmony default export */ const color = (colorUtil);
+;// CONCATENATED MODULE: ./node_modules/claygl/src/Material.js
+
+
+
+var parseColor = color.parseToFloat;
+
+var programKeyCache = {};
+
+function getDefineCode(defines) {
+    var defineKeys = Object.keys(defines);
+    defineKeys.sort();
+    var defineStr = [];
+    // Custom Defines
+    for (var i = 0; i < defineKeys.length; i++) {
+        var key = defineKeys[i];
+        var value = defines[key];
+        if (value === null) {
+            defineStr.push(key);
+        }
+        else{
+            defineStr.push(key + ' ' + value.toString());
+        }
+    }
+    return defineStr.join('\n');
+}
+
+function getProgramKey(vertexDefines, fragmentDefines, enabledTextures) {
+    enabledTextures.sort();
+    var defineStr = [];
+    for (var i = 0; i < enabledTextures.length; i++) {
+        var symbol = enabledTextures[i];
+        defineStr.push(symbol);
+    }
+    var key = getDefineCode(vertexDefines) + '\n'
+        + getDefineCode(fragmentDefines) + '\n'
+        + defineStr.join('\n');
+
+    if (programKeyCache[key]) {
+        return programKeyCache[key];
+    }
+
+    var id = core_util.genGUID();
+    programKeyCache[key] = id;
+    return id;
+}
+
+/**
+ * Material defines the appearance of mesh surface, like `color`, `roughness`, `metalness`, etc.
+ * It contains a {@link clay.Shader} and corresponding uniforms.
+ *
+ * Here is a basic example to create a standard material
+```js
+var material = new clay.Material({
+    shader: new clay.Shader(
+        clay.Shader.source('clay.vertex'),
+        clay.Shader.source('clay.fragment')
+    )
+});
+```
+ * @constructor clay.Material
+ * @extends clay.core.Base
+ */
+var Material = core_Base.extend(function () {
+    return /** @lends clay.Material# */ {
+        /**
+         * @type {string}
+         */
+        name: '',
+
+        /**
+         * @type {Object}
+         */
+        // uniforms: null,
+
+        /**
+         * @type {clay.Shader}
+         */
+        // shader: null,
+
+        /**
+         * @type {boolean}
+         */
+        depthTest: true,
+
+        /**
+         * @type {boolean}
+         */
+        depthMask: true,
+
+        /**
+         * @type {boolean}
+         */
+        transparent: false,
+        /**
+         * Blend func is a callback function when the material
+         * have custom blending
+         * The gl context will be the only argument passed in tho the
+         * blend function
+         * Detail of blend function in WebGL:
+         * http://www.khronos.org/registry/gles/specs/2.0/es_full_spec_2.0.25.pdf
+         *
+         * Example :
+         * function(_gl) {
+         *  _gl.blendEquation(_gl.FUNC_ADD);
+         *  _gl.blendFunc(_gl.SRC_ALPHA, _gl.ONE_MINUS_SRC_ALPHA);
+         * }
+         */
+        blend: null,
+
+        /**
+         * If update texture status automatically.
+         */
+        autoUpdateTextureStatus: true,
+
+        uniforms: {},
+        vertexDefines: {},
+        fragmentDefines: {},
+        _textureStatus: {},
+
+        // shadowTransparentMap : null
+
+        // PENDING enable the uniform that only used in shader.
+        _enabledUniforms: null,
+    };
+}, function () {
+    if (!this.name) {
+        this.name = 'MATERIAL_' + this.__uid__;
+    }
+
+    if (this.shader) {
+        // Keep status, mainly preset uniforms, vertexDefines and fragmentDefines
+        this.attachShader(this.shader, true);
+    }
+},
+/** @lends clay.Material.prototype */
+{
+    precision: 'highp',
+
+    /**
+     * Set material uniform
+     * @example
+     *  mat.setUniform('color', [1, 1, 1, 1]);
+     * @param {string} symbol
+     * @param {number|array|clay.Texture|ArrayBufferView} value
+     */
+    setUniform: function (symbol, value) {
+        if (value === undefined) {
+            console.warn('Uniform value "' + symbol + '" is undefined');
+        }
+        var uniform = this.uniforms[symbol];
+        if (uniform) {
+
+            if (typeof value === 'string') {
+                // Try to parse as a color. Invalid color string will return null.
+                value = parseColor(value) || value;
+            }
+
+            uniform.value = value;
+
+            if (this.autoUpdateTextureStatus && uniform.type === 't') {
+                if (value) {
+                    this.enableTexture(symbol);
+                }
+                else {
+                    this.disableTexture(symbol);
+                }
+            }
+        }
+    },
+
+    /**
+     * @param {Object} obj
+     */
+    setUniforms: function(obj) {
+        for (var key in obj) {
+            var val = obj[key];
+            this.setUniform(key, val);
+        }
+    },
+
+    /**
+     * @param  {string}  symbol
+     * @return {boolean}
+     */
+    isUniformEnabled: function (symbol) {
+        return this._enabledUniforms.indexOf(symbol) >= 0;
+    },
+
+    getEnabledUniforms: function () {
+        return this._enabledUniforms;
+    },
+    getTextureUniforms: function () {
+        return this._textureUniforms;
+    },
+
+    /**
+     * Alias of setUniform and setUniforms
+     * @param {object|string} symbol
+     * @param {number|array|clay.Texture|ArrayBufferView} [value]
+     */
+    set: function (symbol, value) {
+        if (typeof(symbol) === 'object') {
+            for (var key in symbol) {
+                var val = symbol[key];
+                this.setUniform(key, val);
+            }
+        }
+        else {
+            this.setUniform(symbol, value);
+        }
+    },
+    /**
+     * Get uniform value
+     * @param  {string} symbol
+     * @return {number|array|clay.Texture|ArrayBufferView}
+     */
+    get: function (symbol) {
+        var uniform = this.uniforms[symbol];
+        if (uniform) {
+            return uniform.value;
+        }
+    },
+    /**
+     * Attach a shader instance
+     * @param  {clay.Shader} shader
+     * @param  {boolean} keepStatus If try to keep uniform and texture
+     */
+    attachShader: function(shader, keepStatus) {
+        var originalUniforms = this.uniforms;
+
+        // Ignore if uniform can use in shader.
+        this.uniforms = shader.createUniforms();
+        this.shader = shader;
+
+        var uniforms = this.uniforms;
+        this._enabledUniforms = Object.keys(uniforms);
+        // Make sure uniforms are set in same order to avoid texture slot wrong
+        this._enabledUniforms.sort();
+        this._textureUniforms = this._enabledUniforms.filter(function (uniformName) {
+            var type = this.uniforms[uniformName].type;
+            return type === 't' || type === 'tv';
+        }, this);
+
+        var originalVertexDefines = this.vertexDefines;
+        var originalFragmentDefines = this.fragmentDefines;
+
+        this.vertexDefines = core_util.clone(shader.vertexDefines);
+        this.fragmentDefines = core_util.clone(shader.fragmentDefines);
+
+        if (keepStatus) {
+            for (var symbol in originalUniforms) {
+                if (uniforms[symbol]) {
+                    uniforms[symbol].value = originalUniforms[symbol].value;
+                }
+            }
+
+            core_util.defaults(this.vertexDefines, originalVertexDefines);
+            core_util.defaults(this.fragmentDefines, originalFragmentDefines);
+        }
+
+        var textureStatus = {};
+        for (var key in shader.textures) {
+            textureStatus[key] = {
+                shaderType: shader.textures[key].shaderType,
+                type: shader.textures[key].type,
+                enabled: (keepStatus && this._textureStatus[key]) ? this._textureStatus[key].enabled : false
+            };
+        }
+
+        this._textureStatus = textureStatus;
+
+        this._programKey = '';
+    },
+
+    /**
+     * Clone a new material and keep uniforms, shader will not be cloned
+     * @return {clay.Material}
+     */
+    clone: function () {
+        var material = new this.constructor({
+            name: this.name,
+            shader: this.shader
+        });
+        for (var symbol in this.uniforms) {
+            material.uniforms[symbol].value = this.uniforms[symbol].value;
+        }
+        material.depthTest = this.depthTest;
+        material.depthMask = this.depthMask;
+        material.transparent = this.transparent;
+        material.blend = this.blend;
+
+        material.vertexDefines = core_util.clone(this.vertexDefines);
+        material.fragmentDefines = core_util.clone(this.fragmentDefines);
+        material.enableTexture(this.getEnabledTextures());
+        material.precision = this.precision;
+
+        return material;
+    },
+
+    /**
+     * Add a #define macro in shader code
+     * @param  {string} shaderType Can be vertex, fragment or both
+     * @param  {string} symbol
+     * @param  {number} [val]
+     */
+    define: function (shaderType, symbol, val) {
+        var vertexDefines = this.vertexDefines;
+        var fragmentDefines = this.fragmentDefines;
+        if (shaderType !== 'vertex' && shaderType !== 'fragment' && shaderType !== 'both'
+            && arguments.length < 3
+        ) {
+            // shaderType default to be 'both'
+            val = symbol;
+            symbol = shaderType;
+            shaderType = 'both';
+        }
+        val = val != null ? val : null;
+        if (shaderType === 'vertex' || shaderType === 'both') {
+            if (vertexDefines[symbol] !== val) {
+                vertexDefines[symbol] = val;
+                // Mark as dirty
+                this._programKey = '';
+            }
+        }
+        if (shaderType === 'fragment' || shaderType === 'both') {
+            if (fragmentDefines[symbol] !== val) {
+                fragmentDefines[symbol] = val;
+                if (shaderType !== 'both') {
+                    this._programKey = '';
+                }
+            }
+        }
+    },
+
+    /**
+     * Remove a #define macro in shader code
+     * @param  {string} shaderType Can be vertex, fragment or both
+     * @param  {string} symbol
+     */
+    undefine: function (shaderType, symbol) {
+        if (shaderType !== 'vertex' && shaderType !== 'fragment' && shaderType !== 'both'
+            && arguments.length < 2
+        ) {
+            // shaderType default to be 'both'
+            symbol = shaderType;
+            shaderType = 'both';
+        }
+        if (shaderType === 'vertex' || shaderType === 'both') {
+            if (this.isDefined('vertex', symbol)) {
+                delete this.vertexDefines[symbol];
+                // Mark as dirty
+                this._programKey = '';
+            }
+        }
+        if (shaderType === 'fragment' || shaderType === 'both') {
+            if (this.isDefined('fragment', symbol)) {
+                delete this.fragmentDefines[symbol];
+                if (shaderType !== 'both') {
+                    this._programKey = '';
+                }
+            }
+        }
+    },
+
+    /**
+     * If macro is defined in shader.
+     * @param  {string} shaderType Can be vertex, fragment or both
+     * @param  {string} symbol
+     */
+    isDefined: function (shaderType, symbol) {
+        // PENDING hasOwnProperty ?
+        switch (shaderType) {
+            case 'vertex':
+                return this.vertexDefines[symbol] !== undefined;
+            case 'fragment':
+                return this.fragmentDefines[symbol] !== undefined;
+        }
+    },
+    /**
+     * Get macro value defined in shader.
+     * @param  {string} shaderType Can be vertex, fragment or both
+     * @param  {string} symbol
+     */
+    getDefine: function (shaderType, symbol) {
+        switch(shaderType) {
+            case 'vertex':
+                return this.vertexDefines[symbol];
+            case 'fragment':
+                return this.fragmentDefines[symbol];
+        }
+    },
+    /**
+     * Enable a texture, actually it will add a #define macro in the shader code
+     * For example, if texture symbol is diffuseMap, it will add a line `#define DIFFUSEMAP_ENABLED` in the shader code
+     * @param  {string} symbol
+     */
+    enableTexture: function (symbol) {
+        if (Array.isArray(symbol)) {
+            for (var i = 0; i < symbol.length; i++) {
+                this.enableTexture(symbol[i]);
+            }
+            return;
+        }
+
+        var status = this._textureStatus[symbol];
+        if (status) {
+            var isEnabled = status.enabled;
+            if (!isEnabled) {
+                status.enabled = true;
+                this._programKey = '';
+            }
+        }
+    },
+    /**
+     * Enable all textures used in the shader
+     */
+    enableTexturesAll: function () {
+        var textureStatus = this._textureStatus;
+        for (var symbol in textureStatus) {
+            textureStatus[symbol].enabled = true;
+        }
+
+        this._programKey = '';
+    },
+    /**
+     * Disable a texture, it remove a #define macro in the shader
+     * @param  {string} symbol
+     */
+    disableTexture: function (symbol) {
+        if (Array.isArray(symbol)) {
+            for (var i = 0; i < symbol.length; i++) {
+                this.disableTexture(symbol[i]);
+            }
+            return;
+        }
+
+        var status = this._textureStatus[symbol];
+        if (status) {
+            var isDisabled = ! status.enabled;
+            if (!isDisabled) {
+                status.enabled = false;
+                this._programKey = '';
+            }
+        }
+    },
+    /**
+     * Disable all textures used in the shader
+     */
+    disableTexturesAll: function () {
+        var textureStatus = this._textureStatus;
+        for (var symbol in textureStatus) {
+            textureStatus[symbol].enabled = false;
+        }
+
+        this._programKey = '';
+    },
+    /**
+     * If texture of given type is enabled.
+     * @param  {string}  symbol
+     * @return {boolean}
+     */
+    isTextureEnabled: function (symbol) {
+        var textureStatus = this._textureStatus;
+        return !!textureStatus[symbol]
+            && textureStatus[symbol].enabled;
+    },
+
+    /**
+     * Get all enabled textures
+     * @return {string[]}
+     */
+    getEnabledTextures: function () {
+        var enabledTextures = [];
+        var textureStatus = this._textureStatus;
+        for (var symbol in textureStatus) {
+            if (textureStatus[symbol].enabled) {
+                enabledTextures.push(symbol);
+            }
+        }
+        return enabledTextures;
+    },
+
+    /**
+     * Mark defines are updated.
+     */
+    dirtyDefines: function () {
+        this._programKey = '';
+    },
+
+    getProgramKey: function () {
+        if (!this._programKey) {
+            this._programKey = getProgramKey(
+                this.vertexDefines, this.fragmentDefines, this.getEnabledTextures()
+            );
+        }
+        return this._programKey;
+    }
+});
+
+/* harmony default export */ const src_Material = (Material);
+
+;// CONCATENATED MODULE: ./node_modules/claygl/src/glmatrix/vec2.js
+
+/* Copyright (c) 2013, Brandon Jones, Colin MacKenzie IV. All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
+
+  * Redistributions of source code must retain the above copyright notice, this
+    list of conditions and the following disclaimer.
+  * Redistributions in binary form must reproduce the above copyright notice,
+    this list of conditions and the following disclaimer in the documentation
+    and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
+
+
+
+/**
+ * @class 2 Dimensional Vector
+ * @name vec2
+ */
+
+var vec2 = {};
+
+/**
+ * Creates a new, empty vec2
+ *
+ * @returns {vec2} a new 2D vector
+ */
+vec2.create = function() {
+    var out = new GLMAT_ARRAY_TYPE(2);
+    out[0] = 0;
+    out[1] = 0;
+    return out;
+};
+
+/**
+ * Creates a new vec2 initialized with values from an existing vector
+ *
+ * @param {vec2} a vector to clone
+ * @returns {vec2} a new 2D vector
+ */
+vec2.clone = function(a) {
+    var out = new GLMAT_ARRAY_TYPE(2);
+    out[0] = a[0];
+    out[1] = a[1];
+    return out;
+};
+
+/**
+ * Creates a new vec2 initialized with the given values
+ *
+ * @param {Number} x X component
+ * @param {Number} y Y component
+ * @returns {vec2} a new 2D vector
+ */
+vec2.fromValues = function(x, y) {
+    var out = new GLMAT_ARRAY_TYPE(2);
+    out[0] = x;
+    out[1] = y;
+    return out;
+};
+
+/**
+ * Copy the values from one vec2 to another
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a the source vector
+ * @returns {vec2} out
+ */
+vec2.copy = function(out, a) {
+    out[0] = a[0];
+    out[1] = a[1];
+    return out;
+};
+
+/**
+ * Set the components of a vec2 to the given values
+ *
+ * @param {vec2} out the receiving vector
+ * @param {Number} x X component
+ * @param {Number} y Y component
+ * @returns {vec2} out
+ */
+vec2.set = function(out, x, y) {
+    out[0] = x;
+    out[1] = y;
+    return out;
+};
+
+/**
+ * Adds two vec2's
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a the first operand
+ * @param {vec2} b the second operand
+ * @returns {vec2} out
+ */
+vec2.add = function(out, a, b) {
+    out[0] = a[0] + b[0];
+    out[1] = a[1] + b[1];
+    return out;
+};
+
+/**
+ * Subtracts vector b from vector a
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a the first operand
+ * @param {vec2} b the second operand
+ * @returns {vec2} out
+ */
+vec2.subtract = function(out, a, b) {
+    out[0] = a[0] - b[0];
+    out[1] = a[1] - b[1];
+    return out;
+};
+
+/**
+ * Alias for {@link vec2.subtract}
+ * @function
+ */
+vec2.sub = vec2.subtract;
+
+/**
+ * Multiplies two vec2's
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a the first operand
+ * @param {vec2} b the second operand
+ * @returns {vec2} out
+ */
+vec2.multiply = function(out, a, b) {
+    out[0] = a[0] * b[0];
+    out[1] = a[1] * b[1];
+    return out;
+};
+
+/**
+ * Alias for {@link vec2.multiply}
+ * @function
+ */
+vec2.mul = vec2.multiply;
+
+/**
+ * Divides two vec2's
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a the first operand
+ * @param {vec2} b the second operand
+ * @returns {vec2} out
+ */
+vec2.divide = function(out, a, b) {
+    out[0] = a[0] / b[0];
+    out[1] = a[1] / b[1];
+    return out;
+};
+
+/**
+ * Alias for {@link vec2.divide}
+ * @function
+ */
+vec2.div = vec2.divide;
+
+/**
+ * Returns the minimum of two vec2's
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a the first operand
+ * @param {vec2} b the second operand
+ * @returns {vec2} out
+ */
+vec2.min = function(out, a, b) {
+    out[0] = Math.min(a[0], b[0]);
+    out[1] = Math.min(a[1], b[1]);
+    return out;
+};
+
+/**
+ * Returns the maximum of two vec2's
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a the first operand
+ * @param {vec2} b the second operand
+ * @returns {vec2} out
+ */
+vec2.max = function(out, a, b) {
+    out[0] = Math.max(a[0], b[0]);
+    out[1] = Math.max(a[1], b[1]);
+    return out;
+};
+
+/**
+ * Scales a vec2 by a scalar number
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a the vector to scale
+ * @param {Number} b amount to scale the vector by
+ * @returns {vec2} out
+ */
+vec2.scale = function(out, a, b) {
+    out[0] = a[0] * b;
+    out[1] = a[1] * b;
+    return out;
+};
+
+/**
+ * Adds two vec2's after scaling the second operand by a scalar value
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a the first operand
+ * @param {vec2} b the second operand
+ * @param {Number} scale the amount to scale b by before adding
+ * @returns {vec2} out
+ */
+vec2.scaleAndAdd = function(out, a, b, scale) {
+    out[0] = a[0] + (b[0] * scale);
+    out[1] = a[1] + (b[1] * scale);
+    return out;
+};
+
+/**
+ * Calculates the euclidian distance between two vec2's
+ *
+ * @param {vec2} a the first operand
+ * @param {vec2} b the second operand
+ * @returns {Number} distance between a and b
+ */
+vec2.distance = function(a, b) {
+    var x = b[0] - a[0],
+        y = b[1] - a[1];
+    return Math.sqrt(x*x + y*y);
+};
+
+/**
+ * Alias for {@link vec2.distance}
+ * @function
+ */
+vec2.dist = vec2.distance;
+
+/**
+ * Calculates the squared euclidian distance between two vec2's
+ *
+ * @param {vec2} a the first operand
+ * @param {vec2} b the second operand
+ * @returns {Number} squared distance between a and b
+ */
+vec2.squaredDistance = function(a, b) {
+    var x = b[0] - a[0],
+        y = b[1] - a[1];
+    return x*x + y*y;
+};
+
+/**
+ * Alias for {@link vec2.squaredDistance}
+ * @function
+ */
+vec2.sqrDist = vec2.squaredDistance;
+
+/**
+ * Calculates the length of a vec2
+ *
+ * @param {vec2} a vector to calculate length of
+ * @returns {Number} length of a
+ */
+vec2.length = function (a) {
+    var x = a[0],
+        y = a[1];
+    return Math.sqrt(x*x + y*y);
+};
+
+/**
+ * Alias for {@link vec2.length}
+ * @function
+ */
+vec2.len = vec2.length;
+
+/**
+ * Calculates the squared length of a vec2
+ *
+ * @param {vec2} a vector to calculate squared length of
+ * @returns {Number} squared length of a
+ */
+vec2.squaredLength = function (a) {
+    var x = a[0],
+        y = a[1];
+    return x*x + y*y;
+};
+
+/**
+ * Alias for {@link vec2.squaredLength}
+ * @function
+ */
+vec2.sqrLen = vec2.squaredLength;
+
+/**
+ * Negates the components of a vec2
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a vector to negate
+ * @returns {vec2} out
+ */
+vec2.negate = function(out, a) {
+    out[0] = -a[0];
+    out[1] = -a[1];
+    return out;
+};
+
+/**
+ * Returns the inverse of the components of a vec2
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a vector to invert
+ * @returns {vec2} out
+ */
+vec2.inverse = function(out, a) {
+  out[0] = 1.0 / a[0];
+  out[1] = 1.0 / a[1];
+  return out;
+};
+
+/**
+ * Normalize a vec2
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a vector to normalize
+ * @returns {vec2} out
+ */
+vec2.normalize = function(out, a) {
+    var x = a[0],
+        y = a[1];
+    var len = x*x + y*y;
+    if (len > 0) {
+        //TODO: evaluate use of glm_invsqrt here?
+        len = 1 / Math.sqrt(len);
+        out[0] = a[0] * len;
+        out[1] = a[1] * len;
+    }
+    return out;
+};
+
+/**
+ * Calculates the dot product of two vec2's
+ *
+ * @param {vec2} a the first operand
+ * @param {vec2} b the second operand
+ * @returns {Number} dot product of a and b
+ */
+vec2.dot = function (a, b) {
+    return a[0] * b[0] + a[1] * b[1];
+};
+
+/**
+ * Computes the cross product of two vec2's
+ * Note that the cross product must by definition produce a 3D vector
+ *
+ * @param {vec3} out the receiving vector
+ * @param {vec2} a the first operand
+ * @param {vec2} b the second operand
+ * @returns {vec3} out
+ */
+vec2.cross = function(out, a, b) {
+    var z = a[0] * b[1] - a[1] * b[0];
+    out[0] = out[1] = 0;
+    out[2] = z;
+    return out;
+};
+
+/**
+ * Performs a linear interpolation between two vec2's
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a the first operand
+ * @param {vec2} b the second operand
+ * @param {Number} t interpolation amount between the two inputs
+ * @returns {vec2} out
+ */
+vec2.lerp = function (out, a, b, t) {
+    var ax = a[0],
+        ay = a[1];
+    out[0] = ax + t * (b[0] - ax);
+    out[1] = ay + t * (b[1] - ay);
+    return out;
+};
+
+/**
+ * Generates a random vector with the given scale
+ *
+ * @param {vec2} out the receiving vector
+ * @param {Number} [scale] Length of the resulting vector. If ommitted, a unit vector will be returned
+ * @returns {vec2} out
+ */
+vec2.random = function (out, scale) {
+    scale = scale || 1.0;
+    var r = GLMAT_RANDOM() * 2.0 * Math.PI;
+    out[0] = Math.cos(r) * scale;
+    out[1] = Math.sin(r) * scale;
+    return out;
+};
+
+/**
+ * Transforms the vec2 with a mat2
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a the vector to transform
+ * @param {mat2} m matrix to transform with
+ * @returns {vec2} out
+ */
+vec2.transformMat2 = function(out, a, m) {
+    var x = a[0],
+        y = a[1];
+    out[0] = m[0] * x + m[2] * y;
+    out[1] = m[1] * x + m[3] * y;
+    return out;
+};
+
+/**
+ * Transforms the vec2 with a mat2d
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a the vector to transform
+ * @param {mat2d} m matrix to transform with
+ * @returns {vec2} out
+ */
+vec2.transformMat2d = function(out, a, m) {
+    var x = a[0],
+        y = a[1];
+    out[0] = m[0] * x + m[2] * y + m[4];
+    out[1] = m[1] * x + m[3] * y + m[5];
+    return out;
+};
+
+/**
+ * Transforms the vec2 with a mat3
+ * 3rd vector component is implicitly '1'
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a the vector to transform
+ * @param {mat3} m matrix to transform with
+ * @returns {vec2} out
+ */
+vec2.transformMat3 = function(out, a, m) {
+    var x = a[0],
+        y = a[1];
+    out[0] = m[0] * x + m[3] * y + m[6];
+    out[1] = m[1] * x + m[4] * y + m[7];
+    return out;
+};
+
+/**
+ * Transforms the vec2 with a mat4
+ * 3rd vector component is implicitly '0'
+ * 4th vector component is implicitly '1'
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a the vector to transform
+ * @param {mat4} m matrix to transform with
+ * @returns {vec2} out
+ */
+vec2.transformMat4 = function(out, a, m) {
+    var x = a[0],
+        y = a[1];
+    out[0] = m[0] * x + m[4] * y + m[12];
+    out[1] = m[1] * x + m[5] * y + m[13];
+    return out;
+};
+
+/**
+ * Perform some operation over an array of vec2s.
+ *
+ * @param {Array} a the array of vectors to iterate over
+ * @param {Number} stride Number of elements between the start of each vec2. If 0 assumes tightly packed
+ * @param {Number} offset Number of elements to skip at the beginning of the array
+ * @param {Number} count Number of vec2s to iterate over. If 0 iterates over entire array
+ * @param {Function} fn Function to call for each vector in the array
+ * @param {Object} [arg] additional argument to pass to fn
+ * @returns {Array} a
+ * @function
+ */
+vec2.forEach = (function() {
+    var vec = vec2.create();
+
+    return function(a, stride, offset, count, fn, arg) {
+        var i, l;
+        if(!stride) {
+            stride = 2;
+        }
+
+        if(!offset) {
+            offset = 0;
+        }
+
+        if(count) {
+            l = Math.min((count * stride) + offset, a.length);
+        } else {
+            l = a.length;
+        }
+
+        for(i = offset; i < l; i += stride) {
+            vec[0] = a[i]; vec[1] = a[i+1];
+            fn(vec, vec, arg);
+            a[i] = vec[0]; a[i+1] = vec[1];
+        }
+
+        return a;
+    };
+})();
+
+/* harmony default export */ const glmatrix_vec2 = (vec2);
+;// CONCATENATED MODULE: ./node_modules/claygl/src/math/Vector2.js
+
+
+/**
+ * @constructor
+ * @alias clay.Vector2
+ * @param {number} x
+ * @param {number} y
+ */
+var Vector2 = function(x, y) {
+
+    x = x || 0;
+    y = y || 0;
+
+    /**
+     * Storage of Vector2, read and write of x, y will change the values in array
+     * All methods also operate on the array instead of x, y components
+     * @name array
+     * @type {Float32Array}
+     * @memberOf clay.Vector2#
+     */
+    this.array = glmatrix_vec2.fromValues(x, y);
+
+    /**
+     * Dirty flag is used by the Node to determine
+     * if the matrix is updated to latest
+     * @name _dirty
+     * @type {boolean}
+     * @memberOf clay.Vector2#
+     */
+    this._dirty = true;
+};
+
+Vector2.prototype = {
+
+    constructor: Vector2,
+
+    /**
+     * Add b to self
+     * @param  {clay.Vector2} b
+     * @return {clay.Vector2}
+     */
+    add: function(b) {
+        glmatrix_vec2.add(this.array, this.array, b.array);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Set x and y components
+     * @param  {number}  x
+     * @param  {number}  y
+     * @return {clay.Vector2}
+     */
+    set: function(x, y) {
+        this.array[0] = x;
+        this.array[1] = y;
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Set x and y components from array
+     * @param  {Float32Array|number[]} arr
+     * @return {clay.Vector2}
+     */
+    setArray: function(arr) {
+        this.array[0] = arr[0];
+        this.array[1] = arr[1];
+
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Clone a new Vector2
+     * @return {clay.Vector2}
+     */
+    clone: function() {
+        return new Vector2(this.x, this.y);
+    },
+
+    /**
+     * Copy x, y from b
+     * @param  {clay.Vector2} b
+     * @return {clay.Vector2}
+     */
+    copy: function(b) {
+        glmatrix_vec2.copy(this.array, b.array);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Cross product of self and b, written to a Vector3 out
+     * @param  {clay.Vector3} out
+     * @param  {clay.Vector2} b
+     * @return {clay.Vector2}
+     */
+    cross: function(out, b) {
+        glmatrix_vec2.cross(out.array, this.array, b.array);
+        out._dirty = true;
+        return this;
+    },
+
+    /**
+     * Alias for distance
+     * @param  {clay.Vector2} b
+     * @return {number}
+     */
+    dist: function(b) {
+        return glmatrix_vec2.dist(this.array, b.array);
+    },
+
+    /**
+     * Distance between self and b
+     * @param  {clay.Vector2} b
+     * @return {number}
+     */
+    distance: function(b) {
+        return glmatrix_vec2.distance(this.array, b.array);
+    },
+
+    /**
+     * Alias for divide
+     * @param  {clay.Vector2} b
+     * @return {clay.Vector2}
+     */
+    div: function(b) {
+        glmatrix_vec2.div(this.array, this.array, b.array);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Divide self by b
+     * @param  {clay.Vector2} b
+     * @return {clay.Vector2}
+     */
+    divide: function(b) {
+        glmatrix_vec2.divide(this.array, this.array, b.array);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Dot product of self and b
+     * @param  {clay.Vector2} b
+     * @return {number}
+     */
+    dot: function(b) {
+        return glmatrix_vec2.dot(this.array, b.array);
+    },
+
+    /**
+     * Alias of length
+     * @return {number}
+     */
+    len: function() {
+        return glmatrix_vec2.len(this.array);
+    },
+
+    /**
+     * Calculate the length
+     * @return {number}
+     */
+    length: function() {
+        return glmatrix_vec2.length(this.array);
+    },
+
+    /**
+     * Linear interpolation between a and b
+     * @param  {clay.Vector2} a
+     * @param  {clay.Vector2} b
+     * @param  {number}  t
+     * @return {clay.Vector2}
+     */
+    lerp: function(a, b, t) {
+        glmatrix_vec2.lerp(this.array, a.array, b.array, t);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Minimum of self and b
+     * @param  {clay.Vector2} b
+     * @return {clay.Vector2}
+     */
+    min: function(b) {
+        glmatrix_vec2.min(this.array, this.array, b.array);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Maximum of self and b
+     * @param  {clay.Vector2} b
+     * @return {clay.Vector2}
+     */
+    max: function(b) {
+        glmatrix_vec2.max(this.array, this.array, b.array);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Alias for multiply
+     * @param  {clay.Vector2} b
+     * @return {clay.Vector2}
+     */
+    mul: function(b) {
+        glmatrix_vec2.mul(this.array, this.array, b.array);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Mutiply self and b
+     * @param  {clay.Vector2} b
+     * @return {clay.Vector2}
+     */
+    multiply: function(b) {
+        glmatrix_vec2.multiply(this.array, this.array, b.array);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Negate self
+     * @return {clay.Vector2}
+     */
+    negate: function() {
+        glmatrix_vec2.negate(this.array, this.array);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Normalize self
+     * @return {clay.Vector2}
+     */
+    normalize: function() {
+        glmatrix_vec2.normalize(this.array, this.array);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Generate random x, y components with a given scale
+     * @param  {number} scale
+     * @return {clay.Vector2}
+     */
+    random: function(scale) {
+        glmatrix_vec2.random(this.array, scale);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Scale self
+     * @param  {number}  scale
+     * @return {clay.Vector2}
+     */
+    scale: function(s) {
+        glmatrix_vec2.scale(this.array, this.array, s);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Scale b and add to self
+     * @param  {clay.Vector2} b
+     * @param  {number}  scale
+     * @return {clay.Vector2}
+     */
+    scaleAndAdd: function(b, s) {
+        glmatrix_vec2.scaleAndAdd(this.array, this.array, b.array, s);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Alias for squaredDistance
+     * @param  {clay.Vector2} b
+     * @return {number}
+     */
+    sqrDist: function(b) {
+        return glmatrix_vec2.sqrDist(this.array, b.array);
+    },
+
+    /**
+     * Squared distance between self and b
+     * @param  {clay.Vector2} b
+     * @return {number}
+     */
+    squaredDistance: function(b) {
+        return glmatrix_vec2.squaredDistance(this.array, b.array);
+    },
+
+    /**
+     * Alias for squaredLength
+     * @return {number}
+     */
+    sqrLen: function() {
+        return glmatrix_vec2.sqrLen(this.array);
+    },
+
+    /**
+     * Squared length of self
+     * @return {number}
+     */
+    squaredLength: function() {
+        return glmatrix_vec2.squaredLength(this.array);
+    },
+
+    /**
+     * Alias for subtract
+     * @param  {clay.Vector2} b
+     * @return {clay.Vector2}
+     */
+    sub: function(b) {
+        glmatrix_vec2.sub(this.array, this.array, b.array);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Subtract b from self
+     * @param  {clay.Vector2} b
+     * @return {clay.Vector2}
+     */
+    subtract: function(b) {
+        glmatrix_vec2.subtract(this.array, this.array, b.array);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Transform self with a Matrix2 m
+     * @param  {clay.Matrix2} m
+     * @return {clay.Vector2}
+     */
+    transformMat2: function(m) {
+        glmatrix_vec2.transformMat2(this.array, this.array, m.array);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Transform self with a Matrix2d m
+     * @param  {clay.Matrix2d} m
+     * @return {clay.Vector2}
+     */
+    transformMat2d: function(m) {
+        glmatrix_vec2.transformMat2d(this.array, this.array, m.array);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Transform self with a Matrix3 m
+     * @param  {clay.Matrix3} m
+     * @return {clay.Vector2}
+     */
+    transformMat3: function(m) {
+        glmatrix_vec2.transformMat3(this.array, this.array, m.array);
+        this._dirty = true;
+        return this;
+    },
+
+    /**
+     * Transform self with a Matrix4 m
+     * @param  {clay.Matrix4} m
+     * @return {clay.Vector2}
+     */
+    transformMat4: function(m) {
+        glmatrix_vec2.transformMat4(this.array, this.array, m.array);
+        this._dirty = true;
+        return this;
+    },
+
+    toString: function() {
+        return '[' + Array.prototype.join.call(this.array, ',') + ']';
+    },
+
+    toArray: function () {
+        return Array.prototype.slice.call(this.array);
+    }
+};
+
+// Getter and Setter
+if (Object.defineProperty) {
+
+    var Vector2_proto = Vector2.prototype;
+    /**
+     * @name x
+     * @type {number}
+     * @memberOf clay.Vector2
+     * @instance
+     */
+    Object.defineProperty(Vector2_proto, 'x', {
+        get: function () {
+            return this.array[0];
+        },
+        set: function (value) {
+            this.array[0] = value;
+            this._dirty = true;
+        }
+    });
+
+    /**
+     * @name y
+     * @type {number}
+     * @memberOf clay.Vector2
+     * @instance
+     */
+    Object.defineProperty(Vector2_proto, 'y', {
+        get: function () {
+            return this.array[1];
+        },
+        set: function (value) {
+            this.array[1] = value;
+            this._dirty = true;
+        }
+    });
+}
+
+// Supply methods that are not in place
+
+/**
+ * @param  {clay.Vector2} out
+ * @param  {clay.Vector2} a
+ * @param  {clay.Vector2} b
+ * @return {clay.Vector2}
+ */
+Vector2.add = function(out, a, b) {
+    glmatrix_vec2.add(out.array, a.array, b.array);
+    out._dirty = true;
+    return out;
+};
+
+/**
+ * @param  {clay.Vector2} out
+ * @param  {number}  x
+ * @param  {number}  y
+ * @return {clay.Vector2}
+ */
+Vector2.set = function(out, x, y) {
+    glmatrix_vec2.set(out.array, x, y);
+    out._dirty = true;
+    return out;
+};
+
+/**
+ * @param  {clay.Vector2} out
+ * @param  {clay.Vector2} b
+ * @return {clay.Vector2}
+ */
+Vector2.copy = function(out, b) {
+    glmatrix_vec2.copy(out.array, b.array);
+    out._dirty = true;
+    return out;
+};
+
+/**
+ * @param  {clay.Vector3} out
+ * @param  {clay.Vector2} a
+ * @param  {clay.Vector2} b
+ * @return {clay.Vector2}
+ */
+Vector2.cross = function(out, a, b) {
+    glmatrix_vec2.cross(out.array, a.array, b.array);
+    out._dirty = true;
+    return out;
+};
+/**
+ * @param  {clay.Vector2} a
+ * @param  {clay.Vector2} b
+ * @return {number}
+ */
+Vector2.dist = function(a, b) {
+    return glmatrix_vec2.distance(a.array, b.array);
+};
+/**
+ * @function
+ * @param  {clay.Vector2} a
+ * @param  {clay.Vector2} b
+ * @return {number}
+ */
+Vector2.distance = Vector2.dist;
+/**
+ * @param  {clay.Vector2} out
+ * @param  {clay.Vector2} a
+ * @param  {clay.Vector2} b
+ * @return {clay.Vector2}
+ */
+Vector2.div = function(out, a, b) {
+    glmatrix_vec2.divide(out.array, a.array, b.array);
+    out._dirty = true;
+    return out;
+};
+/**
+ * @function
+ * @param  {clay.Vector2} out
+ * @param  {clay.Vector2} a
+ * @param  {clay.Vector2} b
+ * @return {clay.Vector2}
+ */
+Vector2.divide = Vector2.div;
+/**
+ * @param  {clay.Vector2} a
+ * @param  {clay.Vector2} b
+ * @return {number}
+ */
+Vector2.dot = function(a, b) {
+    return glmatrix_vec2.dot(a.array, b.array);
+};
+
+/**
+ * @param  {clay.Vector2} a
+ * @return {number}
+ */
+Vector2.len = function(b) {
+    return glmatrix_vec2.length(b.array);
+};
+
+// Vector2.length = Vector2.len;
+
+/**
+ * @param  {clay.Vector2} out
+ * @param  {clay.Vector2} a
+ * @param  {clay.Vector2} b
+ * @param  {number}  t
+ * @return {clay.Vector2}
+ */
+Vector2.lerp = function(out, a, b, t) {
+    glmatrix_vec2.lerp(out.array, a.array, b.array, t);
+    out._dirty = true;
+    return out;
+};
+/**
+ * @param  {clay.Vector2} out
+ * @param  {clay.Vector2} a
+ * @param  {clay.Vector2} b
+ * @return {clay.Vector2}
+ */
+Vector2.min = function(out, a, b) {
+    glmatrix_vec2.min(out.array, a.array, b.array);
+    out._dirty = true;
+    return out;
+};
+
+/**
+ * @param  {clay.Vector2} out
+ * @param  {clay.Vector2} a
+ * @param  {clay.Vector2} b
+ * @return {clay.Vector2}
+ */
+Vector2.max = function(out, a, b) {
+    glmatrix_vec2.max(out.array, a.array, b.array);
+    out._dirty = true;
+    return out;
+};
+/**
+ * @param  {clay.Vector2} out
+ * @param  {clay.Vector2} a
+ * @param  {clay.Vector2} b
+ * @return {clay.Vector2}
+ */
+Vector2.mul = function(out, a, b) {
+    glmatrix_vec2.multiply(out.array, a.array, b.array);
+    out._dirty = true;
+    return out;
+};
+/**
+ * @function
+ * @param  {clay.Vector2} out
+ * @param  {clay.Vector2} a
+ * @param  {clay.Vector2} b
+ * @return {clay.Vector2}
+ */
+Vector2.multiply = Vector2.mul;
+/**
+ * @param  {clay.Vector2} out
+ * @param  {clay.Vector2} a
+ * @return {clay.Vector2}
+ */
+Vector2.negate = function(out, a) {
+    glmatrix_vec2.negate(out.array, a.array);
+    out._dirty = true;
+    return out;
+};
+/**
+ * @param  {clay.Vector2} out
+ * @param  {clay.Vector2} a
+ * @return {clay.Vector2}
+ */
+Vector2.normalize = function(out, a) {
+    glmatrix_vec2.normalize(out.array, a.array);
+    out._dirty = true;
+    return out;
+};
+/**
+ * @param  {clay.Vector2} out
+ * @param  {number}  scale
+ * @return {clay.Vector2}
+ */
+Vector2.random = function(out, scale) {
+    glmatrix_vec2.random(out.array, scale);
+    out._dirty = true;
+    return out;
+};
+/**
+ * @param  {clay.Vector2} out
+ * @param  {clay.Vector2} a
+ * @param  {number}  scale
+ * @return {clay.Vector2}
+ */
+Vector2.scale = function(out, a, scale) {
+    glmatrix_vec2.scale(out.array, a.array, scale);
+    out._dirty = true;
+    return out;
+};
+/**
+ * @param  {clay.Vector2} out
+ * @param  {clay.Vector2} a
+ * @param  {clay.Vector2} b
+ * @param  {number}  scale
+ * @return {clay.Vector2}
+ */
+Vector2.scaleAndAdd = function(out, a, b, scale) {
+    glmatrix_vec2.scaleAndAdd(out.array, a.array, b.array, scale);
+    out._dirty = true;
+    return out;
+};
+/**
+ * @param  {clay.Vector2} a
+ * @param  {clay.Vector2} b
+ * @return {number}
+ */
+Vector2.sqrDist = function(a, b) {
+    return glmatrix_vec2.sqrDist(a.array, b.array);
+};
+/**
+ * @function
+ * @param  {clay.Vector2} a
+ * @param  {clay.Vector2} b
+ * @return {number}
+ */
+Vector2.squaredDistance = Vector2.sqrDist;
+
+/**
+ * @param  {clay.Vector2} a
+ * @return {number}
+ */
+Vector2.sqrLen = function(a) {
+    return glmatrix_vec2.sqrLen(a.array);
+};
+/**
+ * @function
+ * @param  {clay.Vector2} a
+ * @return {number}
+ */
+Vector2.squaredLength = Vector2.sqrLen;
+
+/**
+ * @param  {clay.Vector2} out
+ * @param  {clay.Vector2} a
+ * @param  {clay.Vector2} b
+ * @return {clay.Vector2}
+ */
+Vector2.sub = function(out, a, b) {
+    glmatrix_vec2.subtract(out.array, a.array, b.array);
+    out._dirty = true;
+    return out;
+};
+/**
+ * @function
+ * @param  {clay.Vector2} out
+ * @param  {clay.Vector2} a
+ * @param  {clay.Vector2} b
+ * @return {clay.Vector2}
+ */
+Vector2.subtract = Vector2.sub;
+/**
+ * @param  {clay.Vector2} out
+ * @param  {clay.Vector2} a
+ * @param  {clay.Matrix2} m
+ * @return {clay.Vector2}
+ */
+Vector2.transformMat2 = function(out, a, m) {
+    glmatrix_vec2.transformMat2(out.array, a.array, m.array);
+    out._dirty = true;
+    return out;
+};
+/**
+ * @param  {clay.Vector2}  out
+ * @param  {clay.Vector2}  a
+ * @param  {clay.Matrix2d} m
+ * @return {clay.Vector2}
+ */
+Vector2.transformMat2d = function(out, a, m) {
+    glmatrix_vec2.transformMat2d(out.array, a.array, m.array);
+    out._dirty = true;
+    return out;
+};
+/**
+ * @param  {clay.Vector2} out
+ * @param  {clay.Vector2} a
+ * @param  {Matrix3} m
+ * @return {clay.Vector2}
+ */
+Vector2.transformMat3 = function(out, a, m) {
+    glmatrix_vec2.transformMat3(out.array, a.array, m.array);
+    out._dirty = true;
+    return out;
+};
+/**
+ * @param  {clay.Vector2} out
+ * @param  {clay.Vector2} a
+ * @param  {clay.Matrix4} m
+ * @return {clay.Vector2}
+ */
+Vector2.transformMat4 = function(out, a, m) {
+    glmatrix_vec2.transformMat4(out.array, a.array, m.array);
+    out._dirty = true;
+    return out;
+};
+
+/* harmony default export */ const math_Vector2 = (Vector2);
+
+;// CONCATENATED MODULE: ./node_modules/claygl/src/gpu/GLProgram.js
+
+
+
+var SHADER_STATE_TO_ENABLE = 1;
+var SHADER_STATE_KEEP_ENABLE = 2;
+var SHADER_STATE_PENDING = 3;
+
+// Enable attribute operation is global to all programs
+// Here saved the list of all enabled attribute index
+// http://www.mjbshaw.com/2013/03/webgl-fixing-invalidoperation.html
+var enabledAttributeList = {};
+
+// some util functions
+function addLineNumbers(string) {
+    var chunks = string.split('\n');
+    for (var i = 0, il = chunks.length; i < il; i ++) {
+        // Chrome reports shader errors on lines
+        // starting counting from 1
+        chunks[i] = (i + 1) + ': ' + chunks[i];
+    }
+    return chunks.join('\n');
+}
+
+// Return true or error msg if error happened
+function checkShaderErrorMsg(_gl, shader, shaderString) {
+    if (!_gl.getShaderParameter(shader, _gl.COMPILE_STATUS)) {
+        return [_gl.getShaderInfoLog(shader), addLineNumbers(shaderString)].join('\n');
+    }
+}
+
+var tmpFloat32Array16 = new core_vendor.Float32Array(16);
+
+var GLProgram = core_Base.extend({
+
+    uniformSemantics: {},
+    attributes: {}
+
+}, function () {
+    this._locations = {};
+
+    this._textureSlot = 0;
+
+    this._program = null;
+}, {
+
+    bind: function (renderer) {
+        this._textureSlot = 0;
+        renderer.gl.useProgram(this._program);
+    },
+
+    hasUniform: function (symbol) {
+        var location = this._locations[symbol];
+        return location !== null && location !== undefined;
+    },
+
+    useTextureSlot: function (renderer, texture, slot) {
+        if (texture) {
+            renderer.gl.activeTexture(renderer.gl.TEXTURE0 + slot);
+            // Maybe texture is not loaded yet;
+            if (texture.isRenderable()) {
+                texture.bind(renderer);
+            }
+            else {
+                // Bind texture to null
+                texture.unbind(renderer);
+            }
+        }
+    },
+
+    currentTextureSlot: function () {
+        return this._textureSlot;
+    },
+
+    resetTextureSlot: function (slot) {
+        this._textureSlot = slot || 0;
+    },
+
+    takeCurrentTextureSlot: function (renderer, texture) {
+        var textureSlot = this._textureSlot;
+
+        this.useTextureSlot(renderer, texture, textureSlot);
+
+        this._textureSlot++;
+
+        return textureSlot;
+    },
+
+    setUniform: function (_gl, type, symbol, value) {
+        var locationMap = this._locations;
+        var location = locationMap[symbol];
+        // Uniform is not existed in the shader
+        if (location === null || location === undefined) {
+            return false;
+        }
+
+        switch (type) {
+            case 'm4':
+                if (!(value instanceof Float32Array)) {
+                    // Use Float32Array is much faster than array when uniformMatrix4fv.
+                    for (var i = 0; i < value.length; i++) {
+                        tmpFloat32Array16[i] = value[i];
+                    }
+                    value = tmpFloat32Array16;
+                }
+                _gl.uniformMatrix4fv(location, false, value);
+                break;
+            case '2i':
+                _gl.uniform2i(location, value[0], value[1]);
+                break;
+            case '2f':
+                _gl.uniform2f(location, value[0], value[1]);
+                break;
+            case '3i':
+                _gl.uniform3i(location, value[0], value[1], value[2]);
+                break;
+            case '3f':
+                _gl.uniform3f(location, value[0], value[1], value[2]);
+                break;
+            case '4i':
+                _gl.uniform4i(location, value[0], value[1], value[2], value[3]);
+                break;
+            case '4f':
+                _gl.uniform4f(location, value[0], value[1], value[2], value[3]);
+                break;
+            case '1i':
+                _gl.uniform1i(location, value);
+                break;
+            case '1f':
+                _gl.uniform1f(location, value);
+                break;
+            case '1fv':
+                _gl.uniform1fv(location, value);
+                break;
+            case '1iv':
+                _gl.uniform1iv(location, value);
+                break;
+            case '2iv':
+                _gl.uniform2iv(location, value);
+                break;
+            case '2fv':
+                _gl.uniform2fv(location, value);
+                break;
+            case '3iv':
+                _gl.uniform3iv(location, value);
+                break;
+            case '3fv':
+                _gl.uniform3fv(location, value);
+                break;
+            case '4iv':
+                _gl.uniform4iv(location, value);
+                break;
+            case '4fv':
+                _gl.uniform4fv(location, value);
+                break;
+            case 'm2':
+            case 'm2v':
+                _gl.uniformMatrix2fv(location, false, value);
+                break;
+            case 'm3':
+            case 'm3v':
+                _gl.uniformMatrix3fv(location, false, value);
+                break;
+            case 'm4v':
+                // Raw value
+                if (Array.isArray(value) && Array.isArray(value[0])) {
+                    var array = new core_vendor.Float32Array(value.length * 16);
+                    var cursor = 0;
+                    for (var i = 0; i < value.length; i++) {
+                        var item = value[i];
+                        for (var j = 0; j < 16; j++) {
+                            array[cursor++] = item[j];
+                        }
+                    }
+                    _gl.uniformMatrix4fv(location, false, array);
+                }
+                else {   // ArrayBufferView
+                    _gl.uniformMatrix4fv(location, false, value);
+                }
+                break;
+        }
+        return true;
+    },
+
+    setUniformOfSemantic: function (_gl, semantic, val) {
+        var semanticInfo = this.uniformSemantics[semantic];
+        if (semanticInfo) {
+            return this.setUniform(_gl, semanticInfo.type, semanticInfo.symbol, val);
+        }
+        return false;
+    },
+
+    // Used for creating VAO
+    // Enable the attributes passed in and disable the rest
+    // Example Usage:
+    // enableAttributes(renderer, ["position", "texcoords"])
+    enableAttributes: function (renderer, attribList, vao) {
+        var _gl = renderer.gl;
+        var program = this._program;
+
+        var locationMap = this._locations;
+
+        var enabledAttributeListInContext;
+        if (vao) {
+            enabledAttributeListInContext = vao.__enabledAttributeList;
+        }
+        else {
+            enabledAttributeListInContext = enabledAttributeList[renderer.__uid__];
+        }
+        if (!enabledAttributeListInContext) {
+            // In vertex array object context
+            // PENDING Each vao object needs to enable attributes again?
+            if (vao) {
+                enabledAttributeListInContext
+                    = vao.__enabledAttributeList
+                    = [];
+            }
+            else {
+                enabledAttributeListInContext
+                    = enabledAttributeList[renderer.__uid__]
+                    = [];
+            }
+        }
+        var locationList = [];
+        for (var i = 0; i < attribList.length; i++) {
+            var symbol = attribList[i];
+            if (!this.attributes[symbol]) {
+                locationList[i] = -1;
+                continue;
+            }
+            var location = locationMap[symbol];
+            if (location == null) {
+                location = _gl.getAttribLocation(program, symbol);
+                // Attrib location is a number from 0 to ...
+                if (location === -1) {
+                    locationList[i] = -1;
+                    continue;
+                }
+                locationMap[symbol] = location;
+            }
+            locationList[i] = location;
+
+            if (!enabledAttributeListInContext[location]) {
+                enabledAttributeListInContext[location] = SHADER_STATE_TO_ENABLE;
+            }
+            else {
+                enabledAttributeListInContext[location] = SHADER_STATE_KEEP_ENABLE;
+            }
+        }
+
+        for (var i = 0; i < enabledAttributeListInContext.length; i++) {
+            switch(enabledAttributeListInContext[i]){
+                case SHADER_STATE_TO_ENABLE:
+                    _gl.enableVertexAttribArray(i);
+                    enabledAttributeListInContext[i] = SHADER_STATE_PENDING;
+                    break;
+                case SHADER_STATE_KEEP_ENABLE:
+                    enabledAttributeListInContext[i] = SHADER_STATE_PENDING;
+                    break;
+                // Expired
+                case SHADER_STATE_PENDING:
+                    _gl.disableVertexAttribArray(i);
+                    enabledAttributeListInContext[i] = 0;
+                    break;
+            }
+        }
+
+        return locationList;
+    },
+
+    getAttribLocation: function (_gl, symbol) {
+        var locationMap = this._locations;
+
+        var location = locationMap[symbol];
+        if (location == null) {
+            location = _gl.getAttribLocation(this._program, symbol);
+            locationMap[symbol] = location;
+        }
+
+        return location;
+    },
+
+    buildProgram: function (_gl, shader, vertexShaderCode, fragmentShaderCode) {
+        var vertexShader = _gl.createShader(_gl.VERTEX_SHADER);
+        var program = _gl.createProgram();
+
+        _gl.shaderSource(vertexShader, vertexShaderCode);
+        _gl.compileShader(vertexShader);
+
+        var fragmentShader = _gl.createShader(_gl.FRAGMENT_SHADER);
+        _gl.shaderSource(fragmentShader, fragmentShaderCode);
+        _gl.compileShader(fragmentShader);
+
+        var msg = checkShaderErrorMsg(_gl, vertexShader, vertexShaderCode);
+        if (msg) {
+            return msg;
+        }
+        msg = checkShaderErrorMsg(_gl, fragmentShader, fragmentShaderCode);
+        if (msg) {
+            return msg;
+        }
+
+        _gl.attachShader(program, vertexShader);
+        _gl.attachShader(program, fragmentShader);
+        // Force the position bind to location 0;
+        if (shader.attributeSemantics['POSITION']) {
+            _gl.bindAttribLocation(program, 0, shader.attributeSemantics['POSITION'].symbol);
+        }
+        else {
+            // Else choose an attribute and bind to location 0;
+            var keys = Object.keys(this.attributes);
+            _gl.bindAttribLocation(program, 0, keys[0]);
+        }
+
+        _gl.linkProgram(program);
+
+        _gl.deleteShader(vertexShader);
+        _gl.deleteShader(fragmentShader);
+
+        this._program = program;
+
+        // Save code.
+        this.vertexCode = vertexShaderCode;
+        this.fragmentCode = fragmentShaderCode;
+
+        if (!_gl.getProgramParameter(program, _gl.LINK_STATUS)) {
+            return 'Could not link program\n' + _gl.getProgramInfoLog(program);
+        }
+
+        // Cache uniform locations
+        for (var i = 0; i < shader.uniforms.length; i++) {
+            var uniformSymbol = shader.uniforms[i];
+            this._locations[uniformSymbol] = _gl.getUniformLocation(program, uniformSymbol);
+        }
+
+    }
+});
+
+/* harmony default export */ const gpu_GLProgram = (GLProgram);
+;// CONCATENATED MODULE: ./node_modules/claygl/src/gpu/ProgramManager.js
+
+
+var loopRegex = /for\s*?\(int\s*?_idx_\s*\=\s*([\w-]+)\;\s*_idx_\s*<\s*([\w-]+);\s*_idx_\s*\+\+\s*\)\s*\{\{([\s\S]+?)(?=\}\})\}\}/g;
+
+function unrollLoop(shaderStr, defines, lightsNumbers) {
+    // Loop unroll from three.js, https://github.com/mrdoob/three.js/blob/master/src/renderers/webgl/WebGLProgram.js#L175
+    // In some case like shadowMap in loop use 'i' to index value much slower.
+
+    // Loop use _idx_ and increased with _idx_++ will be unrolled
+    // Use {{ }} to match the pair so the if statement will not be affected
+    // Write like following
+    // for (int _idx_ = 0; _idx_ < 4; _idx_++) {{
+    //     vec3 color = texture2D(textures[_idx_], uv).rgb;
+    // }}
+    function replace(match, start, end, snippet) {
+        var unroll = '';
+        // Try to treat as define
+        if (isNaN(start)) {
+            if (start in defines) {
+                start = defines[start];
+            }
+            else {
+                start = lightNumberDefines[start];
+            }
+        }
+        if (isNaN(end)) {
+            if (end in defines) {
+                end = defines[end];
+            }
+            else {
+                end = lightNumberDefines[end];
+            }
+        }
+        // TODO Error checking
+
+        for (var idx = parseInt(start); idx < parseInt(end); idx++) {
+            // PENDING Add scope?
+            unroll += '{'
+                + snippet
+                    .replace(/float\s*\(\s*_idx_\s*\)/g, idx.toFixed(1))
+                    .replace(/_idx_/g, idx)
+            + '}';
+        }
+
+        return unroll;
+    }
+
+    var lightNumberDefines = {};
+    for (var lightType in lightsNumbers) {
+        lightNumberDefines[lightType + '_COUNT'] = lightsNumbers[lightType];
+    }
+    return shaderStr.replace(loopRegex, replace);
+}
+
+function ProgramManager_getDefineCode(defines, lightsNumbers, enabledTextures) {
+    var defineStr = [];
+    if (lightsNumbers) {
+        for (var lightType in lightsNumbers) {
+            var count = lightsNumbers[lightType];
+            if (count > 0) {
+                defineStr.push('#define ' + lightType.toUpperCase() + '_COUNT ' + count);
+            }
+        }
+    }
+    if (enabledTextures) {
+        for (var i = 0; i < enabledTextures.length; i++) {
+            var symbol = enabledTextures[i];
+            defineStr.push('#define ' + symbol.toUpperCase() + '_ENABLED');
+        }
+    }
+    // Custom Defines
+    for (var symbol in defines) {
+        var value = defines[symbol];
+        if (value === null) {
+            defineStr.push('#define ' + symbol);
+        }
+        else{
+            defineStr.push('#define ' + symbol + ' ' + value.toString());
+        }
+    }
+    return defineStr.join('\n');
+}
+
+function getExtensionCode(exts) {
+    // Extension declaration must before all non-preprocessor codes
+    // TODO vertex ? extension enum ?
+    var extensionStr = [];
+    for (var i = 0; i < exts.length; i++) {
+        extensionStr.push('#extension GL_' + exts[i] + ' : enable');
+    }
+    return extensionStr.join('\n');
+}
+
+function getPrecisionCode(precision) {
+    return ['precision', precision, 'float'].join(' ') + ';\n'
+        + ['precision', precision, 'int'].join(' ') + ';\n'
+        // depth texture may have precision problem on iOS device.
+        + ['precision', precision, 'sampler2D'].join(' ') + ';\n';
+}
+
+function ProgramManager(renderer) {
+    this._renderer = renderer;
+    this._cache = {};
+}
+
+ProgramManager.prototype.getProgram = function (renderable, material, scene) {
+    var cache = this._cache;
+
+    var isSkinnedMesh = renderable.isSkinnedMesh && renderable.isSkinnedMesh();
+    var isInstancedMesh = renderable.isInstancedMesh && renderable.isInstancedMesh();
+    var key = 's' + material.shader.shaderID + 'm' + material.getProgramKey();
+    if (scene) {
+        key += 'se' + scene.getProgramKey(renderable.lightGroup);
+    }
+    if (isSkinnedMesh) {
+        key += ',sk' + renderable.joints.length;
+    }
+    if (isInstancedMesh) {
+        key += ',is';
+    }
+    var program = cache[key];
+
+    if (program) {
+        return program;
+    }
+
+    var lightsNumbers = scene ? scene.getLightsNumbers(renderable.lightGroup) : {};
+    var renderer = this._renderer;
+    var _gl = renderer.gl;
+    var enabledTextures = material.getEnabledTextures();
+    var extraDefineCode = '';
+    if (isSkinnedMesh) {
+        var skinDefines = {
+            SKINNING: null,
+            JOINT_COUNT: renderable.joints.length
+        };
+        if (renderable.joints.length > renderer.getMaxJointNumber()) {
+            skinDefines.USE_SKIN_MATRICES_TEXTURE = null;
+        }
+        // TODO Add skinning code?
+        extraDefineCode += '\n' + ProgramManager_getDefineCode(skinDefines) + '\n';
+    }
+    if (isInstancedMesh) {
+        extraDefineCode += '\n#define INSTANCING\n';
+    }
+    // TODO Optimize key generation
+    // VERTEX
+    var vertexDefineStr = extraDefineCode + ProgramManager_getDefineCode(material.vertexDefines, lightsNumbers, enabledTextures);
+    // FRAGMENT
+    var fragmentDefineStr = extraDefineCode + ProgramManager_getDefineCode(material.fragmentDefines, lightsNumbers, enabledTextures);
+
+    var vertexCode = vertexDefineStr + '\n' + material.shader.vertex;
+
+    var extensions = [
+        'OES_standard_derivatives',
+        'EXT_shader_texture_lod'
+    ].filter(function (ext) {
+        return renderer.getGLExtension(ext) != null;
+    });
+
+    if (extensions.indexOf('EXT_shader_texture_lod') >= 0) {
+        fragmentDefineStr += '\n#define SUPPORT_TEXTURE_LOD';
+    }
+    if (extensions.indexOf('OES_standard_derivatives') >= 0) {
+        fragmentDefineStr += '\n#define SUPPORT_STANDARD_DERIVATIVES';
+    }
+
+    var fragmentCode = getExtensionCode(extensions) + '\n'
+        + getPrecisionCode(material.precision) + '\n'
+        + fragmentDefineStr + '\n'
+        + material.shader.fragment;
+
+    var finalVertexCode = unrollLoop(vertexCode, material.vertexDefines, lightsNumbers);
+    var finalFragmentCode = unrollLoop(fragmentCode, material.fragmentDefines, lightsNumbers);
+
+    var program = new gpu_GLProgram();
+    program.uniformSemantics = material.shader.uniformSemantics;
+    program.attributes = material.shader.attributes;
+    var errorMsg = program.buildProgram(_gl, material.shader, finalVertexCode, finalFragmentCode);
+    program.__error = errorMsg;
+
+    cache[key] = program;
+
+    return program;
+};
+
+/* harmony default export */ const gpu_ProgramManager = (ProgramManager);
+;// CONCATENATED MODULE: ./node_modules/claygl/src/Shader.js
+/**
+ * Mainly do the parse and compile of shader string
+ * Support shader code chunk import and export
+ * Support shader semantics
+ * http://www.nvidia.com/object/using_sas.html
+ * https://github.com/KhronosGroup/collada2json/issues/45
+ */
+
+
+
+var uniformRegex = /uniform\s+(bool|float|int|vec2|vec3|vec4|ivec2|ivec3|ivec4|mat2|mat3|mat4|sampler2D|samplerCube)\s+([\s\S]*?);/g;
+var attributeRegex = /attribute\s+(float|int|vec2|vec3|vec4)\s+([\s\S]*?);/g;
+// Only parse number define.
+var defineRegex = /#define\s+(\w+)?(\s+[\d-.]+)?\s*;?\s*\n/g;
+
+var uniformTypeMap = {
+    'bool': '1i',
+    'int': '1i',
+    'sampler2D': 't',
+    'samplerCube': 't',
+    'float': '1f',
+    'vec2': '2f',
+    'vec3': '3f',
+    'vec4': '4f',
+    'ivec2': '2i',
+    'ivec3': '3i',
+    'ivec4': '4i',
+    'mat2': 'm2',
+    'mat3': 'm3',
+    'mat4': 'm4'
+};
+
+function createZeroArray(len) {
+    var arr = [];
+    for (var i = 0; i < len; i++) {
+        arr[i] = 0;
+    }
+    return arr;
+}
+
+var uniformValueConstructor = {
+    'bool': function () { return true; },
+    'int': function () { return 0; },
+    'float': function () { return 0; },
+    'sampler2D': function () { return null; },
+    'samplerCube': function () { return null; },
+
+    'vec2': function () { return createZeroArray(2); },
+    'vec3': function () { return createZeroArray(3); },
+    'vec4': function () { return createZeroArray(4); },
+
+    'ivec2': function () { return createZeroArray(2); },
+    'ivec3': function () { return createZeroArray(3); },
+    'ivec4': function () { return createZeroArray(4); },
+
+    'mat2': function () { return createZeroArray(4); },
+    'mat3': function () { return createZeroArray(9); },
+    'mat4': function () { return createZeroArray(16); },
+
+    'array': function () { return []; }
+};
+
+var attributeSemantics = [
+    'POSITION',
+    'NORMAL',
+    'BINORMAL',
+    'TANGENT',
+    'TEXCOORD',
+    'TEXCOORD_0',
+    'TEXCOORD_1',
+    'COLOR',
+    // Skinning
+    // https://github.com/KhronosGroup/glTF/blob/master/specification/README.md#semantics
+    'JOINT',
+    'WEIGHT'
+];
+var uniformSemantics = [
+    'SKIN_MATRIX',
+    // Information about viewport
+    'VIEWPORT_SIZE',
+    'VIEWPORT',
+    'DEVICEPIXELRATIO',
+    // Window size for window relative coordinate
+    // https://www.opengl.org/sdk/docs/man/html/gl_FragCoord.xhtml
+    'WINDOW_SIZE',
+    // Infomation about camera
+    'NEAR',
+    'FAR',
+    // Time
+    'TIME'
+];
+var matrixSemantics = [
+    'WORLD',
+    'VIEW',
+    'PROJECTION',
+    'WORLDVIEW',
+    'VIEWPROJECTION',
+    'WORLDVIEWPROJECTION',
+    'WORLDINVERSE',
+    'VIEWINVERSE',
+    'PROJECTIONINVERSE',
+    'WORLDVIEWINVERSE',
+    'VIEWPROJECTIONINVERSE',
+    'WORLDVIEWPROJECTIONINVERSE',
+    'WORLDTRANSPOSE',
+    'VIEWTRANSPOSE',
+    'PROJECTIONTRANSPOSE',
+    'WORLDVIEWTRANSPOSE',
+    'VIEWPROJECTIONTRANSPOSE',
+    'WORLDVIEWPROJECTIONTRANSPOSE',
+    'WORLDINVERSETRANSPOSE',
+    'VIEWINVERSETRANSPOSE',
+    'PROJECTIONINVERSETRANSPOSE',
+    'WORLDVIEWINVERSETRANSPOSE',
+    'VIEWPROJECTIONINVERSETRANSPOSE',
+    'WORLDVIEWPROJECTIONINVERSETRANSPOSE'
+];
+
+var attributeSizeMap = {
+    // WebGL does not support integer attributes
+    'vec4': 4,
+    'vec3': 3,
+    'vec2': 2,
+    'float': 1
+};
+
+
+var shaderIDCache = {};
+var shaderCodeCache = {};
+
+function getShaderID(vertex, fragment) {
+    var key = 'vertex:' + vertex + 'fragment:' + fragment;
+    if (shaderIDCache[key]) {
+        return shaderIDCache[key];
+    }
+    var id = core_util.genGUID();
+    shaderIDCache[key] = id;
+
+    shaderCodeCache[id] = {
+        vertex: vertex,
+        fragment: fragment
+    };
+
+    return id;
+}
+
+function removeComment(code) {
+    return code.replace(/[ \t]*\/\/.*\n/g, '' )   // remove //
+        .replace(/[ \t]*\/\*[\s\S]*?\*\//g, '' ); // remove /* */
+}
+
+function logSyntaxError() {
+    console.error('Wrong uniform/attributes syntax');
+}
+
+function parseDeclarations(type, line) {
+    var speratorsRegexp = /[,=\(\):]/;
+    var tokens = line
+        // Convert `symbol: [1,2,3]` to `symbol: vec3(1,2,3)`
+        .replace(/:\s*\[\s*(.*)\s*\]/g, '=' + type + '($1)')
+        .replace(/\s+/g, '')
+        .split(/(?=[,=\(\):])/g);
+
+    var newTokens = [];
+    for (var i = 0; i < tokens.length; i++) {
+        if (tokens[i].match(speratorsRegexp)) {
+            newTokens.push(
+                tokens[i].charAt(0),
+                tokens[i].slice(1)
+            );
+        }
+        else {
+            newTokens.push(tokens[i]);
+        }
+    }
+    tokens = newTokens;
+
+    var TYPE_SYMBOL = 0;
+    var TYPE_ASSIGN = 1;
+    var TYPE_VEC = 2;
+    var TYPE_ARR = 3;
+    var TYPE_SEMANTIC = 4;
+    var TYPE_NORMAL = 5;
+
+    var opType = TYPE_SYMBOL;
+    var declarations = {};
+    var declarationValue = null;
+    var currentDeclaration;
+
+    addSymbol(tokens[0]);
+
+    function addSymbol(symbol) {
+        if (!symbol) {
+            logSyntaxError();
+        }
+        var arrResult = symbol.match(/\[(.*?)\]/);
+        currentDeclaration = symbol.replace(/\[(.*?)\]/, '');
+        declarations[currentDeclaration] = {};
+        if (arrResult) {
+            declarations[currentDeclaration].isArray = true;
+            declarations[currentDeclaration].arraySize = arrResult[1];
+        }
+    }
+
+    for (var i = 1; i < tokens.length; i++) {
+        var token = tokens[i];
+        if (!token) {   // Empty token;
+            continue;
+        }
+        if (token === '=') {
+            if (opType !== TYPE_SYMBOL
+            && opType !== TYPE_ARR) {
+                logSyntaxError();
+                break;
+            }
+            opType = TYPE_ASSIGN;
+
+            continue;
+        }
+        else if (token === ':') {
+            opType = TYPE_SEMANTIC;
+
+            continue;
+        }
+        else if (token === ',') {
+            if (opType === TYPE_VEC) {
+                if (!(declarationValue instanceof Array)) {
+                    logSyntaxError();
+                    break;
+                }
+                declarationValue.push(+tokens[++i]);
+            }
+            else {
+                opType = TYPE_NORMAL;
+            }
+
+            continue;
+        }
+        else if (token === ')') {
+            declarations[currentDeclaration].value = new core_vendor.Float32Array(declarationValue);
+            declarationValue = null;
+            opType = TYPE_NORMAL;
+            continue;
+        }
+        else if (token === '(') {
+            if (opType !== TYPE_VEC) {
+                logSyntaxError();
+                break;
+            }
+            if (!(declarationValue instanceof Array)) {
+                logSyntaxError();
+                break;
+            }
+            declarationValue.push(+tokens[++i]);
+            continue;
+        }
+        else if (token.indexOf('vec') >= 0) {
+            if (opType !== TYPE_ASSIGN
+            // Compatitable with old syntax `symbol: [1,2,3]`
+            && opType !== TYPE_SEMANTIC) {
+                logSyntaxError();
+                break;
+            }
+            opType = TYPE_VEC;
+            declarationValue = [];
+            continue;
+        }
+        else if (opType === TYPE_ASSIGN) {
+            if (type === 'bool') {
+                declarations[currentDeclaration].value = token === 'true';
+            }
+            else {
+                declarations[currentDeclaration].value = parseFloat(token);
+            }
+            declarationValue = null;
+            continue;
+        }
+        else if (opType === TYPE_SEMANTIC) {
+            var semantic = token;
+            if (attributeSemantics.indexOf(semantic) >= 0
+                || uniformSemantics.indexOf(semantic) >= 0
+                || matrixSemantics.indexOf(semantic) >= 0
+            ) {
+                declarations[currentDeclaration].semantic = semantic;
+            }
+            else if (semantic === 'ignore' || semantic === 'unconfigurable') {
+                declarations[currentDeclaration].ignore = true;
+            }
+            else {
+                // Try to parse as a default tvalue.
+                if (type === 'bool') {
+                    declarations[currentDeclaration].value = semantic === 'true';
+                }
+                else {
+                    declarations[currentDeclaration].value = parseFloat(semantic);
+                }
+            }
+            continue;
+        }
+
+        // treat as symbol.
+        addSymbol(token);
+        opType = TYPE_SYMBOL;
+    }
+
+    return declarations;
+}
+
+
+/**
+ * @constructor
+ * @extends clay.core.Base
+ * @alias clay.Shader
+ * @param {string} vertex
+ * @param {string} fragment
+ * @example
+ * // Create a phong shader
+ * var shader = new clay.Shader(
+ *      clay.Shader.source('clay.standard.vertex'),
+ *      clay.Shader.source('clay.standard.fragment')
+ * );
+ */
+function Shader(vertex, fragment) {
+    // First argument can be { vertex, fragment }
+    if (typeof vertex === 'object') {
+        fragment = vertex.fragment;
+        vertex = vertex.vertex;
+    }
+
+    vertex = removeComment(vertex);
+    fragment = removeComment(fragment);
+
+    this._shaderID = getShaderID(vertex, fragment);
+
+    this._vertexCode = Shader.parseImport(vertex);
+    this._fragmentCode = Shader.parseImport(fragment);
+
+    /**
+     * @readOnly
+     */
+    this.attributeSemantics = {};
+    /**
+     * @readOnly
+     */
+    this.matrixSemantics = {};
+    /**
+     * @readOnly
+     */
+    this.uniformSemantics = {};
+    /**
+     * @readOnly
+     */
+    this.matrixSemanticKeys = [];
+    /**
+     * @readOnly
+     */
+    this.uniformTemplates = {};
+    /**
+     * @readOnly
+     */
+    this.attributes = {};
+    /**
+     * @readOnly
+     */
+    this.textures = {};
+    /**
+     * @readOnly
+     */
+    this.vertexDefines = {};
+    /**
+     * @readOnly
+     */
+    this.fragmentDefines = {};
+
+    this._parseAttributes();
+    this._parseUniforms();
+    this._parseDefines();
+}
+
+Shader.prototype = {
+
+    constructor: Shader,
+
+    // Create a new uniform instance for material
+    createUniforms: function () {
+        var uniforms = {};
+
+        for (var symbol in this.uniformTemplates){
+            var uniformTpl = this.uniformTemplates[symbol];
+            uniforms[symbol] = {
+                type: uniformTpl.type,
+                value: uniformTpl.value()
+            };
+        }
+
+        return uniforms;
+    },
+
+    _parseImport: function () {
+        this._vertexCode = Shader.parseImport(this.vertex);
+        this._fragmentCode = Shader.parseImport(this.fragment);
+    },
+
+    _addSemanticUniform: function (symbol, uniformType, semantic) {
+        // This case is only for SKIN_MATRIX
+        // TODO
+        if (attributeSemantics.indexOf(semantic) >= 0) {
+            this.attributeSemantics[semantic] = {
+                symbol: symbol,
+                type: uniformType
+            };
+        }
+        else if (matrixSemantics.indexOf(semantic) >= 0) {
+            var isTranspose = false;
+            var semanticNoTranspose = semantic;
+            if (semantic.match(/TRANSPOSE$/)) {
+                isTranspose = true;
+                semanticNoTranspose = semantic.slice(0, -9);
+            }
+            this.matrixSemantics[semantic] = {
+                symbol: symbol,
+                type: uniformType,
+                isTranspose: isTranspose,
+                semanticNoTranspose: semanticNoTranspose
+            };
+        }
+        else if (uniformSemantics.indexOf(semantic) >= 0) {
+            this.uniformSemantics[semantic] = {
+                symbol: symbol,
+                type: uniformType
+            };
+        }
+    },
+
+    _addMaterialUniform: function (symbol, type, uniformType, defaultValueFunc, isArray, materialUniforms) {
+        materialUniforms[symbol] = {
+            type: uniformType,
+            value: isArray ? uniformValueConstructor['array'] : (defaultValueFunc || uniformValueConstructor[type]),
+            semantic: null
+        };
+    },
+
+    _parseUniforms: function () {
+        var uniforms = {};
+        var self = this;
+        var shaderType = 'vertex';
+        this._uniformList = [];
+
+        this._vertexCode = this._vertexCode.replace(uniformRegex, _uniformParser);
+        shaderType = 'fragment';
+        this._fragmentCode = this._fragmentCode.replace(uniformRegex, _uniformParser);
+
+        self.matrixSemanticKeys = Object.keys(this.matrixSemantics);
+
+        function makeDefaultValueFunc(value) {
+            return value != null ? function () { return value; } : null;
+        }
+
+        function _uniformParser(str, type, content) {
+            var declaredUniforms = parseDeclarations(type, content);
+            var uniformMainStr = [];
+            for (var symbol in declaredUniforms) {
+
+                var uniformInfo = declaredUniforms[symbol];
+                var semantic = uniformInfo.semantic;
+                var tmpStr = symbol;
+                var uniformType = uniformTypeMap[type];
+                var defaultValueFunc = makeDefaultValueFunc(declaredUniforms[symbol].value);
+                if (declaredUniforms[symbol].isArray) {
+                    tmpStr += '[' + declaredUniforms[symbol].arraySize + ']';
+                    uniformType += 'v';
+                }
+
+                uniformMainStr.push(tmpStr);
+
+                self._uniformList.push(symbol);
+
+                if (!uniformInfo.ignore) {
+                    if (type === 'sampler2D' || type === 'samplerCube') {
+                        // Texture is default disabled
+                        self.textures[symbol] = {
+                            shaderType: shaderType,
+                            type: type
+                        };
+                    }
+
+                    if (semantic) {
+                        // TODO Should not declare multiple symbols if have semantic.
+                        self._addSemanticUniform(symbol, uniformType, semantic);
+                    }
+                    else {
+                        self._addMaterialUniform(
+                            symbol, type, uniformType, defaultValueFunc,
+                            declaredUniforms[symbol].isArray, uniforms
+                        );
+                    }
+                }
+            }
+            return uniformMainStr.length > 0
+                ? 'uniform ' + type + ' ' + uniformMainStr.join(',') + ';\n' : '';
+        }
+
+        this.uniformTemplates = uniforms;
+    },
+
+    _parseAttributes: function () {
+        var attributes = {};
+        var self = this;
+        this._vertexCode = this._vertexCode.replace(attributeRegex, _attributeParser);
+
+        function _attributeParser(str, type, content) {
+            var declaredAttributes = parseDeclarations(type, content);
+
+            var size = attributeSizeMap[type] || 1;
+            var attributeMainStr = [];
+            for (var symbol in declaredAttributes) {
+                var semantic = declaredAttributes[symbol].semantic;
+                attributes[symbol] = {
+                    // TODO Can only be float
+                    type: 'float',
+                    size: size,
+                    semantic: semantic || null
+                };
+                // TODO Should not declare multiple symbols if have semantic.
+                if (semantic) {
+                    if (attributeSemantics.indexOf(semantic) < 0) {
+                        throw new Error('Unkown semantic "' + semantic + '"');
+                    }
+                    else {
+                        self.attributeSemantics[semantic] = {
+                            symbol: symbol,
+                            type: type
+                        };
+                    }
+                }
+                attributeMainStr.push(symbol);
+            }
+
+            return 'attribute ' + type + ' ' + attributeMainStr.join(',') + ';\n';
+        }
+
+        this.attributes = attributes;
+    },
+
+    _parseDefines: function () {
+        var self = this;
+        var shaderType = 'vertex';
+        this._vertexCode = this._vertexCode.replace(defineRegex, _defineParser);
+        shaderType = 'fragment';
+        this._fragmentCode = this._fragmentCode.replace(defineRegex, _defineParser);
+
+        function _defineParser(str, symbol, value) {
+            var defines = shaderType === 'vertex' ? self.vertexDefines : self.fragmentDefines;
+            if (!defines[symbol]) { // Haven't been defined by user
+                if (value === 'false') {
+                    defines[symbol] = false;
+                }
+                else if (value === 'true') {
+                    defines[symbol] = true;
+                }
+                else {
+                    defines[symbol] = value
+                        // If can parse to float
+                        ? (isNaN(parseFloat(value)) ? value.trim() : parseFloat(value))
+                        : null;
+                }
+            }
+            return '';
+        }
+    },
+
+    /**
+     * Clone a new shader
+     * @return {clay.Shader}
+     */
+    clone: function () {
+        var code = shaderCodeCache[this._shaderID];
+        var shader = new Shader(code.vertex, code.fragment);
+        return shader;
+    }
+};
+
+if (Object.defineProperty) {
+    Object.defineProperty(Shader.prototype, 'shaderID', {
+        get: function () {
+            return this._shaderID;
+        }
+    });
+    Object.defineProperty(Shader.prototype, 'vertex', {
+        get: function () {
+            return this._vertexCode;
+        }
+    });
+    Object.defineProperty(Shader.prototype, 'fragment', {
+        get: function () {
+            return this._fragmentCode;
+        }
+    });
+    Object.defineProperty(Shader.prototype, 'uniforms', {
+        get: function () {
+            return this._uniformList;
+        }
+    });
+}
+
+var importRegex = /(@import)\s*([0-9a-zA-Z_\-\.]*)/g;
+Shader.parseImport = function (shaderStr) {
+    shaderStr = shaderStr.replace(importRegex, function (str, importSymbol, importName) {
+        var str = Shader.source(importName);
+        if (str) {
+            // Recursively parse
+            return Shader.parseImport(str);
+        }
+        else {
+            console.error('Shader chunk "' + importName + '" not existed in library');
+            return '';
+        }
+    });
+    return shaderStr;
+};
+
+var exportRegex = /(@export)\s*([0-9a-zA-Z_\-\.]*)\s*\n([\s\S]*?)@end/g;
+
+/**
+ * Import shader source
+ * @param  {string} shaderStr
+ * @memberOf clay.Shader
+ */
+Shader['import'] = function (shaderStr) {
+    shaderStr.replace(exportRegex, function (str, exportSymbol, exportName, code) {
+        var code = code.replace(/(^[\s\t\xa0\u3000]+)|([\u3000\xa0\s\t]+\x24)/g, '');
+        if (code) {
+            var parts = exportName.split('.');
+            var obj = Shader.codes;
+            var i = 0;
+            var key;
+            while (i < parts.length - 1) {
+                key = parts[i++];
+                if (!obj[key]) {
+                    obj[key] = {};
+                }
+                obj = obj[key];
+            }
+            key = parts[i];
+            obj[key] = code;
+        }
+        return code;
+    });
+};
+
+/**
+ * Library to store all the loaded shader codes
+ * @type {Object}
+ * @readOnly
+ * @memberOf clay.Shader
+ */
+Shader.codes = {};
+
+/**
+ * Get shader source
+ * @param  {string} name
+ * @return {string}
+ */
+Shader.source = function (name) {
+    var parts = name.split('.');
+    var obj = Shader.codes;
+    var i = 0;
+    while (obj && i < parts.length) {
+        var key = parts[i++];
+        obj = obj[key];
+    }
+    if (typeof obj !== 'string') {
+        // FIXME Use default instead
+        console.error('Shader "' + name + '" not existed in library');
+        return '';
+    }
+    return obj;
+};
+
+/* harmony default export */ const src_Shader = (Shader);
+
+;// CONCATENATED MODULE: ./node_modules/claygl/src/shader/source/prez.glsl.js
+/* harmony default export */ const prez_glsl = ("@export clay.prez.vertex\nuniform mat4 WVP : WORLDVIEWPROJECTION;\nattribute vec3 pos : POSITION;\nattribute vec2 uv : TEXCOORD_0;\nuniform vec2 uvRepeat : [1.0, 1.0];\nuniform vec2 uvOffset : [0.0, 0.0];\n@import clay.chunk.skinning_header\n@import clay.chunk.instancing_header\nvarying vec2 v_Texcoord;\nvoid main()\n{\n vec4 P = vec4(pos, 1.0);\n#ifdef SKINNING\n @import clay.chunk.skin_matrix\n P = skinMatrixWS * P;\n#endif\n#ifdef INSTANCING\n @import clay.chunk.instancing_matrix\n P = instanceMat * P;\n#endif\n gl_Position = WVP * P;\n v_Texcoord = uv * uvRepeat + uvOffset;\n}\n@end\n@export clay.prez.fragment\nuniform sampler2D alphaMap;\nuniform float alphaCutoff: 0.0;\nvarying vec2 v_Texcoord;\nvoid main()\n{\n if (alphaCutoff > 0.0) {\n if (texture2D(alphaMap, v_Texcoord).a <= alphaCutoff) {\n discard;\n }\n }\n gl_FragColor = vec4(0.0,0.0,0.0,1.0);\n}\n@end");
+
+;// CONCATENATED MODULE: ./node_modules/claygl/src/Renderer.js
+// TODO Resources like shader, texture, geometry reference management
+// Trace and find out which shader, texture, geometry can be destroyed
+
+
+
+
+
+
+
+
+
+// Light header
+
+
+
+src_Shader.import(prez_glsl);
+
+
+
+
+var mat4Create = glmatrix_mat4.create;
+
+var errorShader = {};
+
+function defaultGetMaterial(renderable) {
+    return renderable.material;
+}
+function defaultGetUniform(renderable, material, symbol) {
+    return material.uniforms[symbol].value;
+}
+function defaultIsMaterialChanged(renderabled, prevRenderable, material, prevMaterial) {
+    return material !== prevMaterial;
+}
+function defaultIfRender(renderable) {
+    return true;
+}
+
+function noop() {}
+
+var attributeBufferTypeMap = {
+    float: glenum.FLOAT,
+    byte: glenum.BYTE,
+    ubyte: glenum.UNSIGNED_BYTE,
+    short: glenum.SHORT,
+    ushort: glenum.UNSIGNED_SHORT
+};
+
+function VertexArrayObject(availableAttributes, availableAttributeSymbols, indicesBuffer) {
+    this.availableAttributes = availableAttributes;
+    this.availableAttributeSymbols = availableAttributeSymbols;
+    this.indicesBuffer = indicesBuffer;
+
+    this.vao = null;
+}
+
+function PlaceHolderTexture(renderer) {
+    var blankCanvas;
+    var webglTexture;
+    this.bind = function (renderer) {
+        if (!blankCanvas) {
+            // TODO Environment not support createCanvas.
+            blankCanvas = core_vendor.createCanvas();
+            blankCanvas.width = blankCanvas.height = 1;
+            blankCanvas.getContext('2d');
+        }
+
+        var gl = renderer.gl;
+        var firstBind = !webglTexture;
+        if (firstBind) {
+            webglTexture = gl.createTexture();
+        }
+        gl.bindTexture(gl.TEXTURE_2D, webglTexture);
+        if (firstBind) {
+            gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, blankCanvas);
+        }
+    };
+    this.unbind = function (renderer) {
+        renderer.gl.bindTexture(renderer.gl.TEXTURE_2D, null);
+    };
+    this.isRenderable = function () {
+        return true;
+    };
+}
+/**
+ * @constructor clay.Renderer
+ * @extends clay.core.Base
+ */
+var Renderer = core_Base.extend(function () {
+    return /** @lends clay.Renderer# */ {
+
+        /**
+         * @type {HTMLCanvasElement}
+         * @readonly
+         */
+        canvas: null,
+
+        /**
+         * Canvas width, set by resize method
+         * @type {number}
+         * @private
+         */
+        _width: 100,
+
+        /**
+         * Canvas width, set by resize method
+         * @type {number}
+         * @private
+         */
+        _height: 100,
+
+        /**
+         * Device pixel ratio, set by setDevicePixelRatio method
+         * Specially for high defination display
+         * @see http://www.khronos.org/webgl/wiki/HandlingHighDPI
+         * @type {number}
+         * @private
+         */
+        devicePixelRatio: (typeof window !== 'undefined' && window.devicePixelRatio) || 1.0,
+
+        /**
+         * Clear color
+         * @type {number[]}
+         */
+        clearColor: [0.0, 0.0, 0.0, 0.0],
+
+        /**
+         * Default:
+         *     _gl.COLOR_BUFFER_BIT | _gl.DEPTH_BUFFER_BIT | _gl.STENCIL_BUFFER_BIT
+         * @type {number}
+         */
+        clearBit: 17664,
+
+        // Settings when getting context
+        // http://www.khronos.org/registry/webgl/specs/latest/#2.4
+
+        /**
+         * If enable alpha, default true
+         * @type {boolean}
+         */
+        alpha: true,
+        /**
+         * If enable depth buffer, default true
+         * @type {boolean}
+         */
+        depth: true,
+        /**
+         * If enable stencil buffer, default false
+         * @type {boolean}
+         */
+        stencil: false,
+        /**
+         * If enable antialias, default true
+         * @type {boolean}
+         */
+        antialias: true,
+        /**
+         * If enable premultiplied alpha, default true
+         * @type {boolean}
+         */
+        premultipliedAlpha: true,
+        /**
+         * If preserve drawing buffer, default false
+         * @type {boolean}
+         */
+        preserveDrawingBuffer: false,
+        /**
+         * If throw context error, usually turned on in debug mode
+         * @type {boolean}
+         */
+        throwError: true,
+        /**
+         * WebGL Context created from given canvas
+         * @type {WebGLRenderingContext}
+         */
+        gl: null,
+        /**
+         * Renderer viewport, read-only, can be set by setViewport method
+         * @type {Object}
+         */
+        viewport: {},
+
+        /**
+         * Max joint number
+         * @type {number}
+         */
+        maxJointNumber: 20,
+
+        // Set by FrameBuffer#bind
+        __currentFrameBuffer: null,
+
+        _viewportStack: [],
+        _clearStack: [],
+
+        _sceneRendering: null
+    };
+}, function () {
+
+    if (!this.canvas) {
+        this.canvas = core_vendor.createCanvas();
+    }
+    var canvas = this.canvas;
+    try {
+        var opts = {
+            alpha: this.alpha,
+            depth: this.depth,
+            stencil: this.stencil,
+            antialias: this.antialias,
+            premultipliedAlpha: this.premultipliedAlpha,
+            preserveDrawingBuffer: this.preserveDrawingBuffer
+        };
+
+        this.gl = canvas.getContext('webgl', opts)
+            || canvas.getContext('experimental-webgl', opts);
+
+        if (!this.gl) {
+            throw new Error();
+        }
+
+        this._glinfo = new core_GLInfo(this.gl);
+
+        if (this.gl.targetRenderer) {
+            console.error('Already created a renderer');
+        }
+        this.gl.targetRenderer = this;
+
+        this.resize();
+    }
+    catch (e) {
+        throw 'Error creating WebGL Context ' + e;
+    }
+
+    // Init managers
+    this._programMgr = new gpu_ProgramManager(this);
+
+    this._placeholderTexture = new PlaceHolderTexture(this);
+},
+/** @lends clay.Renderer.prototype. **/
+{
+    /**
+     * Resize the canvas
+     * @param {number} width
+     * @param {number} height
+     */
+    resize: function(width, height) {
+        var canvas = this.canvas;
+        // http://www.khronos.org/webgl/wiki/HandlingHighDPI
+        // set the display size of the canvas.
+        var dpr = this.devicePixelRatio;
+        if (width != null) {
+            if (canvas.style) {
+                canvas.style.width = width + 'px';
+                canvas.style.height = height + 'px';
+            }
+            // set the size of the drawingBuffer
+            canvas.width = width * dpr;
+            canvas.height = height * dpr;
+
+            this._width = width;
+            this._height = height;
+        }
+        else {
+            this._width = canvas.width / dpr;
+            this._height = canvas.height / dpr;
+        }
+
+        this.setViewport(0, 0, this._width, this._height);
+    },
+
+    /**
+     * Get renderer width
+     * @return {number}
+     */
+    getWidth: function () {
+        return this._width;
+    },
+
+    /**
+     * Get renderer height
+     * @return {number}
+     */
+    getHeight: function () {
+        return this._height;
+    },
+
+    /**
+     * Get viewport aspect,
+     * @return {number}
+     */
+    getViewportAspect: function () {
+        var viewport = this.viewport;
+        return viewport.width / viewport.height;
+    },
+
+    /**
+     * Set devicePixelRatio
+     * @param {number} devicePixelRatio
+     */
+    setDevicePixelRatio: function(devicePixelRatio) {
+        this.devicePixelRatio = devicePixelRatio;
+        this.resize(this._width, this._height);
+    },
+
+    /**
+     * Get devicePixelRatio
+     * @param {number} devicePixelRatio
+     */
+    getDevicePixelRatio: function () {
+        return this.devicePixelRatio;
+    },
+
+    /**
+     * Get WebGL extension
+     * @param {string} name
+     * @return {object}
+     */
+    getGLExtension: function (name) {
+        return this._glinfo.getExtension(name);
+    },
+
+    /**
+     * Get WebGL parameter
+     * @param {string} name
+     * @return {*}
+     */
+    getGLParameter: function (name) {
+        return this._glinfo.getParameter(name);
+    },
+
+    /**
+     * Set rendering viewport
+     * @param {number|Object} x
+     * @param {number} [y]
+     * @param {number} [width]
+     * @param {number} [height]
+     * @param {number} [devicePixelRatio]
+     *        Defaultly use the renderere devicePixelRatio
+     *        It needs to be 1 when setViewport is called by frameBuffer
+     *
+     * @example
+     *  setViewport(0,0,width,height,1)
+     *  setViewport({
+     *      x: 0,
+     *      y: 0,
+     *      width: width,
+     *      height: height,
+     *      devicePixelRatio: 1
+     *  })
+     */
+    setViewport: function (x, y, width, height, dpr) {
+
+        if (typeof x === 'object') {
+            var obj = x;
+
+            x = obj.x;
+            y = obj.y;
+            width = obj.width;
+            height = obj.height;
+            dpr = obj.devicePixelRatio;
+        }
+        dpr = dpr || this.devicePixelRatio;
+
+        this.gl.viewport(
+            x * dpr, y * dpr, width * dpr, height * dpr
+        );
+        // Use a fresh new object, not write property.
+        this.viewport = {
+            x: x,
+            y: y,
+            width: width,
+            height: height,
+            devicePixelRatio: dpr
+        };
+    },
+
+    /**
+     * Push current viewport into a stack
+     */
+    saveViewport: function () {
+        this._viewportStack.push(this.viewport);
+    },
+
+    /**
+     * Pop viewport from stack, restore in the renderer
+     */
+    restoreViewport: function () {
+        if (this._viewportStack.length > 0) {
+            this.setViewport(this._viewportStack.pop());
+        }
+    },
+
+    /**
+     * Push current clear into a stack
+     */
+    saveClear: function () {
+        this._clearStack.push({
+            clearBit: this.clearBit,
+            clearColor: this.clearColor
+        });
+    },
+
+    /**
+     * Pop clear from stack, restore in the renderer
+     */
+    restoreClear: function () {
+        if (this._clearStack.length > 0) {
+            var opt = this._clearStack.pop();
+            this.clearColor = opt.clearColor;
+            this.clearBit = opt.clearBit;
+        }
+    },
+
+    bindSceneRendering: function (scene) {
+        this._sceneRendering = scene;
+    },
+
+    /**
+     * Render the scene in camera to the screen or binded offline framebuffer
+     * @param  {clay.Scene}       scene
+     * @param  {clay.Camera}      camera
+     * @param  {boolean}     [notUpdateScene] If not call the scene.update methods in the rendering, default true
+     * @param  {boolean}     [preZ]           If use preZ optimization, default false
+     * @return {IRenderInfo}
+     */
+    render: function(scene, camera, notUpdateScene, preZ) {
+        var _gl = this.gl;
+
+        var clearColor = this.clearColor;
+
+        if (this.clearBit) {
+
+            // Must set depth and color mask true before clear
+            _gl.colorMask(true, true, true, true);
+            _gl.depthMask(true);
+            var viewport = this.viewport;
+            var needsScissor = false;
+            var viewportDpr = viewport.devicePixelRatio;
+            if (viewport.width !== this._width || viewport.height !== this._height
+                || (viewportDpr && viewportDpr !== this.devicePixelRatio)
+                || viewport.x || viewport.y
+            ) {
+                needsScissor = true;
+                // http://stackoverflow.com/questions/11544608/how-to-clear-a-rectangle-area-in-webgl
+                // Only clear the viewport
+                _gl.enable(_gl.SCISSOR_TEST);
+                _gl.scissor(viewport.x * viewportDpr, viewport.y * viewportDpr, viewport.width * viewportDpr, viewport.height * viewportDpr);
+            }
+            _gl.clearColor(clearColor[0], clearColor[1], clearColor[2], clearColor[3]);
+            _gl.clear(this.clearBit);
+            if (needsScissor) {
+                _gl.disable(_gl.SCISSOR_TEST);
+            }
+        }
+
+        // If the scene have been updated in the prepass like shadow map
+        // There is no need to update it again
+        if (!notUpdateScene) {
+            scene.update(false);
+        }
+        scene.updateLights();
+
+        camera = camera || scene.getMainCamera();
+        if (!camera) {
+            console.error('Can\'t find camera in the scene.');
+            return;
+        }
+        camera.update();
+        var renderList = scene.updateRenderList(camera, true);
+
+        this._sceneRendering = scene;
+
+        var opaqueList = renderList.opaque;
+        var transparentList = renderList.transparent;
+        var sceneMaterial = scene.material;
+
+        scene.trigger('beforerender', this, scene, camera, renderList);
+
+        // Render pre z
+        if (preZ) {
+            this.renderPreZ(opaqueList, scene, camera);
+            _gl.depthFunc(_gl.LEQUAL);
+        }
+        else {
+            _gl.depthFunc(_gl.LESS);
+        }
+
+        // Update the depth of transparent list.
+        var worldViewMat = mat4Create();
+        var posViewSpace = glmatrix_vec3.create();
+        for (var i = 0; i < transparentList.length; i++) {
+            var renderable = transparentList[i];
+            glmatrix_mat4.multiplyAffine(worldViewMat, camera.viewMatrix.array, renderable.worldTransform.array);
+            glmatrix_vec3.transformMat4(posViewSpace, renderable.position.array, worldViewMat);
+            renderable.__depth = posViewSpace[2];
+        }
+
+        // Render opaque list
+        this.renderPass(opaqueList, camera, {
+            getMaterial: function (renderable) {
+                return sceneMaterial || renderable.material;
+            },
+            sortCompare: this.opaqueSortCompare
+        });
+
+        this.renderPass(transparentList, camera, {
+            getMaterial: function (renderable) {
+                return sceneMaterial || renderable.material;
+            },
+            sortCompare: this.transparentSortCompare
+        });
+
+        scene.trigger('afterrender', this, scene, camera, renderList);
+
+        // Cleanup
+        this._sceneRendering = null;
+    },
+
+    getProgram: function (renderable, renderMaterial, scene) {
+        renderMaterial = renderMaterial || renderable.material;
+        return this._programMgr.getProgram(renderable, renderMaterial, scene);
+    },
+
+    validateProgram: function (program) {
+        if (program.__error) {
+            var errorMsg = program.__error;
+            if (errorShader[program.__uid__]) {
+                return;
+            }
+            errorShader[program.__uid__] = true;
+
+            if (this.throwError) {
+                throw new Error(errorMsg);
+            }
+            else {
+                this.trigger('error', errorMsg);
+            }
+
+        }
+
+    },
+
+    updatePrograms: function (list, scene, passConfig) {
+        var getMaterial = (passConfig && passConfig.getMaterial) || defaultGetMaterial;
+        scene = scene || null;
+        for (var i = 0; i < list.length; i++) {
+            var renderable = list[i];
+            var renderMaterial = getMaterial.call(this, renderable);
+            if (i > 0) {
+                var prevRenderable = list[i - 1];
+                var prevJointsLen = prevRenderable.joints ? prevRenderable.joints.length : 0;
+                var jointsLen = renderable.joints ? renderable.joints.length : 0;
+                // Keep program not change if joints, material, lightGroup are same of two renderables.
+                if (jointsLen === prevJointsLen
+                    && renderable.material === prevRenderable.material
+                    && renderable.lightGroup === prevRenderable.lightGroup
+                ) {
+                    renderable.__program = prevRenderable.__program;
+                    continue;
+                }
+            }
+
+            var program = this._programMgr.getProgram(renderable, renderMaterial, scene);
+
+            this.validateProgram(program);
+
+            renderable.__program = program;
+        }
+    },
+
+    /**
+     * Render a single renderable list in camera in sequence
+     * @param {clay.Renderable[]} list List of all renderables.
+     * @param {clay.Camera} [camera] Camera provide view matrix and porjection matrix. It can be null.
+     * @param {Object} [passConfig]
+     * @param {Function} [passConfig.getMaterial] Get renderable material.
+     * @param {Function} [passConfig.getUniform] Get material uniform value.
+     * @param {Function} [passConfig.isMaterialChanged] If material changed.
+     * @param {Function} [passConfig.beforeRender] Before render each renderable.
+     * @param {Function} [passConfig.afterRender] After render each renderable
+     * @param {Function} [passConfig.ifRender] If render the renderable.
+     * @param {Function} [passConfig.sortCompare] Sort compare function.
+     * @return {IRenderInfo}
+     */
+    renderPass: function(list, camera, passConfig) {
+        this.trigger('beforerenderpass', this, list, camera, passConfig);
+
+        passConfig = passConfig || {};
+        passConfig.getMaterial = passConfig.getMaterial || defaultGetMaterial;
+        passConfig.getUniform = passConfig.getUniform || defaultGetUniform;
+        // PENDING Better solution?
+        passConfig.isMaterialChanged = passConfig.isMaterialChanged || defaultIsMaterialChanged;
+        passConfig.beforeRender = passConfig.beforeRender || noop;
+        passConfig.afterRender = passConfig.afterRender || noop;
+
+        var ifRenderObject = passConfig.ifRender || defaultIfRender;
+
+        this.updatePrograms(list, this._sceneRendering, passConfig);
+        if (passConfig.sortCompare) {
+            list.sort(passConfig.sortCompare);
+        }
+
+        // Some common builtin uniforms
+        var viewport = this.viewport;
+        var vDpr = viewport.devicePixelRatio;
+        var viewportUniform = [
+            viewport.x * vDpr, viewport.y * vDpr,
+            viewport.width * vDpr, viewport.height * vDpr
+        ];
+        var windowDpr = this.devicePixelRatio;
+        var windowSizeUniform = this.__currentFrameBuffer
+            ? [this.__currentFrameBuffer.getTextureWidth(), this.__currentFrameBuffer.getTextureHeight()]
+            : [this._width * windowDpr, this._height * windowDpr];
+        // DEPRECATED
+        var viewportSizeUniform = [
+            viewportUniform[2], viewportUniform[3]
+        ];
+        var time = Date.now();
+
+        // Calculate view and projection matrix
+        if (camera) {
+            glmatrix_mat4.copy(matrices.VIEW, camera.viewMatrix.array);
+            glmatrix_mat4.copy(matrices.PROJECTION, camera.projectionMatrix.array);
+            glmatrix_mat4.copy(matrices.VIEWINVERSE, camera.worldTransform.array);
+        }
+        else {
+            glmatrix_mat4.identity(matrices.VIEW);
+            glmatrix_mat4.identity(matrices.PROJECTION);
+            glmatrix_mat4.identity(matrices.VIEWINVERSE);
+        }
+        glmatrix_mat4.multiply(matrices.VIEWPROJECTION, matrices.PROJECTION, matrices.VIEW);
+        glmatrix_mat4.invert(matrices.PROJECTIONINVERSE, matrices.PROJECTION);
+        glmatrix_mat4.invert(matrices.VIEWPROJECTIONINVERSE, matrices.VIEWPROJECTION);
+
+        var _gl = this.gl;
+        var scene = this._sceneRendering;
+
+        var prevMaterial;
+        var prevProgram;
+        var prevRenderable;
+
+        // Status
+        var depthTest, depthMask;
+        var culling, cullFace, frontFace;
+        var transparent;
+        var drawID;
+        var currentVAO;
+        var materialTakesTextureSlot;
+
+        // var vaoExt = this.getGLExtension('OES_vertex_array_object');
+        // not use vaoExt, some platforms may mess it up.
+        var vaoExt = null;
+
+        for (var i = 0; i < list.length; i++) {
+            var renderable = list[i];
+            var isSceneNode = renderable.worldTransform != null;
+            var worldM;
+
+            if (!ifRenderObject(renderable)) {
+                continue;
+            }
+
+            // Skinned mesh will transformed to joint space. Ignore the mesh transform
+            if (isSceneNode) {
+                worldM = (renderable.isSkinnedMesh && renderable.isSkinnedMesh())
+                    // TODO
+                    ? (renderable.offsetMatrix ? renderable.offsetMatrix.array :matrices.IDENTITY)
+                    : renderable.worldTransform.array;
+            }
+            var geometry = renderable.geometry;
+            var material = passConfig.getMaterial.call(this, renderable);
+
+            var program = renderable.__program;
+            var shader = material.shader;
+
+            var currentDrawID = geometry.__uid__ + '-' + program.__uid__;
+            var drawIDChanged = currentDrawID !== drawID;
+            drawID = currentDrawID;
+            if (drawIDChanged && vaoExt) {
+                // TODO Seems need to be bound to null immediately (or before bind another program?) if vao is changed
+                vaoExt.bindVertexArrayOES(null);
+            }
+            if (isSceneNode) {
+                glmatrix_mat4.copy(matrices.WORLD, worldM);
+                glmatrix_mat4.multiply(matrices.WORLDVIEWPROJECTION, matrices.VIEWPROJECTION, worldM);
+                glmatrix_mat4.multiplyAffine(matrices.WORLDVIEW, matrices.VIEW, worldM);
+                if (shader.matrixSemantics.WORLDINVERSE ||
+                    shader.matrixSemantics.WORLDINVERSETRANSPOSE) {
+                    glmatrix_mat4.invert(matrices.WORLDINVERSE, worldM);
+                }
+                if (shader.matrixSemantics.WORLDVIEWINVERSE ||
+                    shader.matrixSemantics.WORLDVIEWINVERSETRANSPOSE) {
+                    glmatrix_mat4.invert(matrices.WORLDVIEWINVERSE, matrices.WORLDVIEW);
+                }
+                if (shader.matrixSemantics.WORLDVIEWPROJECTIONINVERSE ||
+                    shader.matrixSemantics.WORLDVIEWPROJECTIONINVERSETRANSPOSE) {
+                    glmatrix_mat4.invert(matrices.WORLDVIEWPROJECTIONINVERSE, matrices.WORLDVIEWPROJECTION);
+                }
+            }
+
+            // Before render hook
+            renderable.beforeRender && renderable.beforeRender(this);
+            passConfig.beforeRender.call(this, renderable, material, prevMaterial);
+
+            var programChanged = program !== prevProgram;
+            if (programChanged) {
+                // Set lights number
+                program.bind(this);
+                // Set some common uniforms
+                program.setUniformOfSemantic(_gl, 'VIEWPORT', viewportUniform);
+                program.setUniformOfSemantic(_gl, 'WINDOW_SIZE', windowSizeUniform);
+                if (camera) {
+                    program.setUniformOfSemantic(_gl, 'NEAR', camera.near);
+                    program.setUniformOfSemantic(_gl, 'FAR', camera.far);
+                }
+                program.setUniformOfSemantic(_gl, 'DEVICEPIXELRATIO', vDpr);
+                program.setUniformOfSemantic(_gl, 'TIME', time);
+                // DEPRECATED
+                program.setUniformOfSemantic(_gl, 'VIEWPORT_SIZE', viewportSizeUniform);
+
+                // Set lights uniforms
+                // TODO needs optimized
+                if (scene) {
+                    scene.setLightUniforms(program, renderable.lightGroup, this);
+                }
+            }
+            else {
+                program = prevProgram;
+            }
+
+            // Program changes also needs reset the materials.
+            if (programChanged || passConfig.isMaterialChanged(
+                renderable, prevRenderable, material, prevMaterial
+            )) {
+                if (material.depthTest !== depthTest) {
+                    material.depthTest ? _gl.enable(_gl.DEPTH_TEST) : _gl.disable(_gl.DEPTH_TEST);
+                    depthTest = material.depthTest;
+                }
+                if (material.depthMask !== depthMask) {
+                    _gl.depthMask(material.depthMask);
+                    depthMask = material.depthMask;
+                }
+                if (material.transparent !== transparent) {
+                    material.transparent ? _gl.enable(_gl.BLEND) : _gl.disable(_gl.BLEND);
+                    transparent = material.transparent;
+                }
+                // TODO cache blending
+                if (material.transparent) {
+                    if (material.blend) {
+                        material.blend(_gl);
+                    }
+                    else {
+                        // Default blend function
+                        _gl.blendEquationSeparate(_gl.FUNC_ADD, _gl.FUNC_ADD);
+                        _gl.blendFuncSeparate(_gl.SRC_ALPHA, _gl.ONE_MINUS_SRC_ALPHA, _gl.ONE, _gl.ONE_MINUS_SRC_ALPHA);
+                    }
+                }
+
+                materialTakesTextureSlot = this._bindMaterial(
+                    renderable, material, program,
+                    prevRenderable || null, prevMaterial || null, prevProgram || null,
+                    passConfig.getUniform
+                );
+                prevMaterial = material;
+            }
+
+            var matrixSemanticKeys = shader.matrixSemanticKeys;
+
+            if (isSceneNode) {
+                for (var k = 0; k < matrixSemanticKeys.length; k++) {
+                    var semantic = matrixSemanticKeys[k];
+                    var semanticInfo = shader.matrixSemantics[semantic];
+                    var matrix = matrices[semantic];
+                    if (semanticInfo.isTranspose) {
+                        var matrixNoTranspose = matrices[semanticInfo.semanticNoTranspose];
+                        glmatrix_mat4.transpose(matrix, matrixNoTranspose);
+                    }
+                    program.setUniform(_gl, semanticInfo.type, semanticInfo.symbol, matrix);
+                }
+            }
+
+            if (renderable.cullFace !== cullFace) {
+                cullFace = renderable.cullFace;
+                _gl.cullFace(cullFace);
+            }
+            if (renderable.frontFace !== frontFace) {
+                frontFace = renderable.frontFace;
+                _gl.frontFace(frontFace);
+            }
+            if (renderable.culling !== culling) {
+                culling = renderable.culling;
+                culling ? _gl.enable(_gl.CULL_FACE) : _gl.disable(_gl.CULL_FACE);
+            }
+            // TODO Not update skeleton in each renderable.
+            this._updateSkeleton(renderable, program, materialTakesTextureSlot);
+            if (drawIDChanged) {
+                currentVAO = this._bindVAO(vaoExt, shader, geometry, program);
+            }
+            this._renderObject(renderable, currentVAO, program);
+
+            // After render hook
+            passConfig.afterRender(this, renderable);
+            renderable.afterRender && renderable.afterRender(this);
+
+            prevProgram = program;
+            prevRenderable = renderable;
+        }
+
+        // TODO Seems need to be bound to null immediately if vao is changed?
+        if (vaoExt) {
+            vaoExt.bindVertexArrayOES(null);
+        }
+
+        this.trigger('afterrenderpass', this, list, camera, passConfig);
+    },
+
+    getMaxJointNumber: function () {
+        return this.maxJointNumber;
+    },
+
+    _updateSkeleton: function (object, program, slot) {
+        var _gl = this.gl;
+        var skeleton = object.skeleton;
+        // Set pose matrices of skinned mesh
+        if (skeleton) {
+            // TODO Update before culling.
+            skeleton.update();
+            if (object.joints.length > this.getMaxJointNumber()) {
+                var skinMatricesTexture = skeleton.getSubSkinMatricesTexture(object.__uid__, object.joints);
+                program.useTextureSlot(this, skinMatricesTexture, slot);
+                program.setUniform(_gl, '1i', 'skinMatricesTexture', slot);
+                program.setUniform(_gl, '1f', 'skinMatricesTextureSize', skinMatricesTexture.width);
+            }
+            else {
+                var skinMatricesArray = skeleton.getSubSkinMatrices(object.__uid__, object.joints);
+                program.setUniformOfSemantic(_gl, 'SKIN_MATRIX', skinMatricesArray);
+            }
+        }
+    },
+
+    _renderObject: function (renderable, vao, program) {
+        var _gl = this.gl;
+        var geometry = renderable.geometry;
+
+        var glDrawMode = renderable.mode;
+        if (glDrawMode == null) {
+            glDrawMode = 0x0004;
+        }
+
+        var ext = null;
+        var isInstanced = renderable.isInstancedMesh && renderable.isInstancedMesh();
+        if (isInstanced) {
+            ext = this.getGLExtension('ANGLE_instanced_arrays');
+            if (!ext) {
+                console.warn('Device not support ANGLE_instanced_arrays extension');
+                return;
+            }
+        }
+
+        var instancedAttrLocations;
+        if (isInstanced) {
+            instancedAttrLocations = this._bindInstancedAttributes(renderable, program, ext);
+        }
+
+        if (vao.indicesBuffer) {
+            var uintExt = this.getGLExtension('OES_element_index_uint');
+            var useUintExt = uintExt && (geometry.indices instanceof Uint32Array);
+            var indicesType = useUintExt ? _gl.UNSIGNED_INT : _gl.UNSIGNED_SHORT;
+
+            if (isInstanced) {
+                ext.drawElementsInstancedANGLE(
+                    glDrawMode, vao.indicesBuffer.count, indicesType, 0, renderable.getInstanceCount()
+                );
+            }
+            else {
+                _gl.drawElements(glDrawMode, vao.indicesBuffer.count, indicesType, 0);
+            }
+        }
+        else {
+            if (isInstanced) {
+                ext.drawArraysInstancedANGLE(glDrawMode, 0, geometry.vertexCount, renderable.getInstanceCount());
+            }
+            else {
+                // FIXME Use vertex number in buffer
+                // vertexCount may get the wrong value when geometry forget to mark dirty after update
+                _gl.drawArrays(glDrawMode, 0, geometry.vertexCount);
+            }
+        }
+
+        if (isInstanced) {
+            for (var i = 0; i < instancedAttrLocations.length; i++) {
+                _gl.disableVertexAttribArray(instancedAttrLocations[i]);
+            }
+        }
+    },
+
+    _bindInstancedAttributes: function (renderable, program, ext) {
+        var _gl = this.gl;
+        var instancedBuffers = renderable.getInstancedAttributesBuffers(this);
+        var locations = [];
+
+        for (var i = 0; i < instancedBuffers.length; i++) {
+            var bufferObj = instancedBuffers[i];
+            var location = program.getAttribLocation(_gl, bufferObj.symbol);
+            if (location < 0) {
+                continue;
+            }
+
+            var glType = attributeBufferTypeMap[bufferObj.type] || _gl.FLOAT;;
+            _gl.enableVertexAttribArray(location);  // TODO
+            _gl.bindBuffer(_gl.ARRAY_BUFFER, bufferObj.buffer);
+            _gl.vertexAttribPointer(location, bufferObj.size, glType, false, 0, 0);
+            ext.vertexAttribDivisorANGLE(location, bufferObj.divisor);
+
+            locations.push(location);
+        }
+
+        return locations;
+    },
+
+    _bindMaterial: function (renderable, material, program, prevRenderable, prevMaterial, prevProgram, getUniformValue) {
+        var _gl = this.gl;
+        // PENDING Same texture in different material take different slot?
+
+        // May use shader of other material if shader code are same
+        var sameProgram = prevProgram === program;
+
+        var currentTextureSlot = program.currentTextureSlot();
+        var enabledUniforms = material.getEnabledUniforms();
+        var textureUniforms = material.getTextureUniforms();
+        var placeholderTexture = this._placeholderTexture;
+
+        for (var u = 0; u < textureUniforms.length; u++) {
+            var symbol = textureUniforms[u];
+            var uniformValue = getUniformValue(renderable, material, symbol);
+            var uniformType = material.uniforms[symbol].type;
+            // Not use `instanceof` to determine if a value is texture in Material#bind.
+            // Use type instead, in some case texture may be in different namespaces.
+            // TODO Duck type validate.
+            if (uniformType === 't' && uniformValue) {
+                // Reset slot
+                uniformValue.__slot = -1;
+            }
+            else if (uniformType === 'tv') {
+                for (var i = 0; i < uniformValue.length; i++) {
+                    if (uniformValue[i]) {
+                        uniformValue[i].__slot = -1;
+                    }
+                }
+            }
+        }
+
+        placeholderTexture.__slot = -1;
+
+        // Set uniforms
+        for (var u = 0; u < enabledUniforms.length; u++) {
+            var symbol = enabledUniforms[u];
+            var uniform = material.uniforms[symbol];
+            var uniformValue = getUniformValue(renderable, material, symbol);
+            var uniformType = uniform.type;
+            var isTexture = uniformType === 't';
+
+            if (isTexture) {
+                if (!uniformValue || !uniformValue.isRenderable()) {
+                    uniformValue = placeholderTexture;
+                }
+            }
+            // PENDING
+            // When binding two materials with the same shader
+            // Many uniforms will be be set twice even if they have the same value
+            // So add a evaluation to see if the uniform is really needed to be set
+            if (prevMaterial && sameProgram) {
+                var prevUniformValue = getUniformValue(prevRenderable, prevMaterial, symbol);
+                if (isTexture) {
+                    if (!prevUniformValue || !prevUniformValue.isRenderable()) {
+                        prevUniformValue = placeholderTexture;
+                    }
+                }
+
+                if (prevUniformValue === uniformValue) {
+                    if (isTexture) {
+                        // Still take the slot to make sure same texture in different materials have same slot.
+                        program.takeCurrentTextureSlot(this, null);
+                    }
+                    else if (uniformType === 'tv' && uniformValue) {
+                        for (var i = 0; i < uniformValue.length; i++) {
+                            program.takeCurrentTextureSlot(this, null);
+                        }
+                    }
+                    continue;
+                }
+            }
+
+            if (uniformValue == null) {
+                continue;
+            }
+            else if (isTexture) {
+                if (uniformValue.__slot < 0) {
+                    var slot = program.currentTextureSlot();
+                    var res = program.setUniform(_gl, '1i', symbol, slot);
+                    if (res) { // Texture uniform is enabled
+                        program.takeCurrentTextureSlot(this, uniformValue);
+                        uniformValue.__slot = slot;
+                    }
+                }
+                // Multiple uniform use same texture..
+                else {
+                    program.setUniform(_gl, '1i', symbol, uniformValue.__slot);
+                }
+            }
+            else if (Array.isArray(uniformValue)) {
+                if (uniformValue.length === 0) {
+                    continue;
+                }
+                // Texture Array
+                if (uniformType === 'tv') {
+                    if (!program.hasUniform(symbol)) {
+                        continue;
+                    }
+
+                    var arr = [];
+                    for (var i = 0; i < uniformValue.length; i++) {
+                        var texture = uniformValue[i];
+
+                        if (texture.__slot < 0) {
+                            var slot = program.currentTextureSlot();
+                            arr.push(slot);
+                            program.takeCurrentTextureSlot(this, texture);
+                            texture.__slot = slot;
+                        }
+                        else {
+                            arr.push(texture.__slot);
+                        }
+                    }
+
+                    program.setUniform(_gl, '1iv', symbol, arr);
+                }
+                else {
+                    program.setUniform(_gl, uniform.type, symbol, uniformValue);
+                }
+            }
+            else{
+                program.setUniform(_gl, uniform.type, symbol, uniformValue);
+            }
+        }
+        var newSlot = program.currentTextureSlot();
+        // Texture slot maybe used out of material.
+        program.resetTextureSlot(currentTextureSlot);
+        return newSlot;
+    },
+
+    _bindVAO: function (vaoExt, shader, geometry, program) {
+        var isStatic = !geometry.dynamic;
+        var _gl = this.gl;
+
+        var vaoId = this.__uid__ + '-' + program.__uid__;
+        var vao = geometry.__vaoCache[vaoId];
+        if (!vao) {
+            var chunks = geometry.getBufferChunks(this);
+            if (!chunks || !chunks.length) {  // Empty mesh
+                return;
+            }
+            var chunk = chunks[0];
+            var attributeBuffers = chunk.attributeBuffers;
+            var indicesBuffer = chunk.indicesBuffer;
+
+            var availableAttributes = [];
+            var availableAttributeSymbols = [];
+            for (var a = 0; a < attributeBuffers.length; a++) {
+                var attributeBufferInfo = attributeBuffers[a];
+                var name = attributeBufferInfo.name;
+                var semantic = attributeBufferInfo.semantic;
+                var symbol;
+                if (semantic) {
+                    var semanticInfo = shader.attributeSemantics[semantic];
+                    symbol = semanticInfo && semanticInfo.symbol;
+                }
+                else {
+                    symbol = name;
+                }
+                if (symbol && program.attributes[symbol]) {
+                    availableAttributes.push(attributeBufferInfo);
+                    availableAttributeSymbols.push(symbol);
+                }
+            }
+
+            vao = new VertexArrayObject(
+                availableAttributes,
+                availableAttributeSymbols,
+                indicesBuffer
+            );
+
+            if (isStatic) {
+                geometry.__vaoCache[vaoId] = vao;
+            }
+        }
+
+        var needsBindAttributes = true;
+
+        // Create vertex object array cost a lot
+        // So we don't use it on the dynamic object
+        if (vaoExt && isStatic) {
+            // Use vertex array object
+            // http://blog.tojicode.com/2012/10/oesvertexarrayobject-extension.html
+            if (vao.vao == null) {
+                vao.vao = vaoExt.createVertexArrayOES();
+            }
+            else {
+                needsBindAttributes = false;
+            }
+            vaoExt.bindVertexArrayOES(vao.vao);
+        }
+
+        var availableAttributes = vao.availableAttributes;
+        var indicesBuffer = vao.indicesBuffer;
+
+        if (needsBindAttributes) {
+            var locationList = program.enableAttributes(this, vao.availableAttributeSymbols, (vaoExt && isStatic && vao));
+            // Setting attributes;
+            for (var a = 0; a < availableAttributes.length; a++) {
+                var location = locationList[a];
+                if (location === -1) {
+                    continue;
+                }
+                var attributeBufferInfo = availableAttributes[a];
+                var buffer = attributeBufferInfo.buffer;
+                var size = attributeBufferInfo.size;
+                var glType = attributeBufferTypeMap[attributeBufferInfo.type] || _gl.FLOAT;
+
+                _gl.bindBuffer(_gl.ARRAY_BUFFER, buffer);
+                _gl.vertexAttribPointer(location, size, glType, false, 0, 0);
+            }
+
+            if (geometry.isUseIndices()) {
+                _gl.bindBuffer(_gl.ELEMENT_ARRAY_BUFFER, indicesBuffer.buffer);
+            }
+        }
+
+        return vao;
+    },
+
+    renderPreZ: function (list, scene, camera) {
+        var _gl = this.gl;
+        var preZPassMaterial = this._prezMaterial || new src_Material({
+            shader: new src_Shader(src_Shader.source('clay.prez.vertex'), src_Shader.source('clay.prez.fragment'))
+        });
+        this._prezMaterial = preZPassMaterial;
+
+        _gl.colorMask(false, false, false, false);
+        _gl.depthMask(true);
+
+        // Status
+        this.renderPass(list, camera, {
+            ifRender: function (renderable) {
+                return !renderable.ignorePreZ;
+            },
+            isMaterialChanged: function (renderable, prevRenderable) {
+                var matA = renderable.material;
+                var matB = prevRenderable.material;
+                return matA.get('diffuseMap') !== matB.get('diffuseMap')
+                    || (matA.get('alphaCutoff') || 0) !== (matB.get('alphaCutoff') || 0);
+            },
+            getUniform: function (renderable, depthMaterial, symbol) {
+                if (symbol === 'alphaMap') {
+                    return renderable.material.get('diffuseMap');
+                }
+                else if (symbol === 'alphaCutoff') {
+                    if (renderable.material.isDefined('fragment', 'ALPHA_TEST')
+                        && renderable.material.get('diffuseMap')
+                    ) {
+                        var alphaCutoff = renderable.material.get('alphaCutoff');
+                        return alphaCutoff || 0;
+                    }
+                    return 0;
+                }
+                else if (symbol === 'uvRepeat') {
+                    return renderable.material.get('uvRepeat');
+                }
+                else if (symbol === 'uvOffset') {
+                    return renderable.material.get('uvOffset');
+                }
+                else {
+                    return depthMaterial.get(symbol);
+                }
+            },
+            getMaterial: function () {
+                return preZPassMaterial;
+            },
+            sort: this.opaqueSortCompare
+        });
+
+        _gl.colorMask(true, true, true, true);
+        _gl.depthMask(true);
+    },
+
+    /**
+     * Dispose given scene, including all geometris, textures and shaders in the scene
+     * @param {clay.Scene} scene
+     */
+    disposeScene: function(scene) {
+        this.disposeNode(scene, true, true);
+        scene.dispose();
+    },
+
+    /**
+     * Dispose given node, including all geometries, textures and shaders attached on it or its descendant
+     * @param {clay.Node} node
+     * @param {boolean} [disposeGeometry=false] If dispose the geometries used in the descendant mesh
+     * @param {boolean} [disposeTexture=false] If dispose the textures used in the descendant mesh
+     */
+    disposeNode: function(root, disposeGeometry, disposeTexture) {
+        // Dettached from parent
+        if (root.getParent()) {
+            root.getParent().remove(root);
+        }
+        var disposedMap = {};
+        root.traverse(function(node) {
+            var material = node.material;
+            if (node.geometry && disposeGeometry) {
+                node.geometry.dispose(this);
+            }
+            if (disposeTexture && material && !disposedMap[material.__uid__]) {
+                var textureUniforms = material.getTextureUniforms();
+                for (var u = 0; u < textureUniforms.length; u++) {
+                    var uniformName = textureUniforms[u];
+                    var val = material.uniforms[uniformName].value;
+                    var uniformType = material.uniforms[uniformName].type;
+                    if (!val) {
+                        continue;
+                    }
+                    if (uniformType === 't') {
+                        val.dispose && val.dispose(this);
+                    }
+                    else if (uniformType === 'tv') {
+                        for (var k = 0; k < val.length; k++) {
+                            if (val[k]) {
+                                val[k].dispose && val[k].dispose(this);
+                            }
+                        }
+                    }
+                }
+                disposedMap[material.__uid__] = true;
+            }
+            // Particle system and AmbientCubemap light need to dispose
+            if (node.dispose) {
+                node.dispose(this);
+            }
+        }, this);
+    },
+
+    /**
+     * Dispose given geometry
+     * @param {clay.Geometry} geometry
+     */
+    disposeGeometry: function(geometry) {
+        geometry.dispose(this);
+    },
+
+    /**
+     * Dispose given texture
+     * @param {clay.Texture} texture
+     */
+    disposeTexture: function(texture) {
+        texture.dispose(this);
+    },
+
+    /**
+     * Dispose given frame buffer
+     * @param {clay.FrameBuffer} frameBuffer
+     */
+    disposeFrameBuffer: function(frameBuffer) {
+        frameBuffer.dispose(this);
+    },
+
+    /**
+     * Dispose renderer
+     */
+    dispose: function () {},
+
+    /**
+     * Convert screen coords to normalized device coordinates(NDC)
+     * Screen coords can get from mouse event, it is positioned relative to canvas element
+     * NDC can be used in ray casting with Camera.prototype.castRay methods
+     *
+     * @param  {number}       x
+     * @param  {number}       y
+     * @param  {clay.Vector2} [out]
+     * @return {clay.Vector2}
+     */
+    screenToNDC: function(x, y, out) {
+        if (!out) {
+            out = new math_Vector2();
+        }
+        // Invert y;
+        y = this._height - y;
+
+        var viewport = this.viewport;
+        var arr = out.array;
+        arr[0] = (x - viewport.x) / viewport.width;
+        arr[0] = arr[0] * 2 - 1;
+        arr[1] = (y - viewport.y) / viewport.height;
+        arr[1] = arr[1] * 2 - 1;
+
+        return out;
     }
 });
 
 /**
- * @constructor clay.picking.RayPicking~Intersection
- * @param {clay.Vector3} point
- * @param {clay.Vector3} pointWorld
- * @param {clay.Node} target
- * @param {Array.<number>} triangle
- * @param {number} triangleIndex
- * @param {number} distance
+ * Opaque renderables compare function
+ * @param  {clay.Renderable} x
+ * @param  {clay.Renderable} y
+ * @return {boolean}
+ * @static
  */
-RayPicking.Intersection = function (point, pointWorld, target, triangle, triangleIndex, distance) {
-    /**
-     * Intersection point in local transform coordinates
-     * @type {clay.Vector3}
-     */
-    this.point = point;
-    /**
-     * Intersection point in world transform coordinates
-     * @type {clay.Vector3}
-     */
-    this.pointWorld = pointWorld;
-    /**
-     * Intersection scene node
-     * @type {clay.Node}
-     */
-    this.target = target;
-    /**
-     * Intersection triangle, which is an array of vertex index
-     * @type {Array.<number>}
-     */
-    this.triangle = triangle;
-    /**
-     * Index of intersection triangle.
-     */
-    this.triangleIndex = triangleIndex;
-    /**
-     * Distance from intersection point to ray origin
-     * @type {number}
-     */
-    this.distance = distance;
+Renderer.opaqueSortCompare = Renderer.prototype.opaqueSortCompare = function(x, y) {
+    // Priority renderOrder -> program -> material -> geometry
+    if (x.renderOrder === y.renderOrder) {
+        if (x.__program === y.__program) {
+            if (x.material === y.material) {
+                return x.geometry.__uid__ - y.geometry.__uid__;
+            }
+            return x.material.__uid__ - y.material.__uid__;
+        }
+        if (x.__program && y.__program) {
+            return x.__program.__uid__ - y.__program.__uid__;
+        }
+        return 0;
+    }
+    return x.renderOrder - y.renderOrder;
 };
 
-/* harmony default export */ const picking_RayPicking = (RayPicking);
+/**
+ * Transparent renderables compare function
+ * @param  {clay.Renderable} a
+ * @param  {clay.Renderable} b
+ * @return {boolean}
+ * @static
+ */
+Renderer.transparentSortCompare = Renderer.prototype.transparentSortCompare = function(x, y) {
+    // Priority renderOrder -> depth -> program -> material -> geometry
+
+    if (x.renderOrder === y.renderOrder) {
+        if (x.__depth === y.__depth) {
+            if (x.__program === y.__program) {
+                if (x.material === y.material) {
+                    return x.geometry.__uid__ - y.geometry.__uid__;
+                }
+                return x.material.__uid__ - y.material.__uid__;
+            }
+            if (x.__program  && y.__program) {
+                return x.__program.__uid__ - y.__program.__uid__;
+            }
+            return 0;
+        }
+        // Depth is negative
+        // So farther object has smaller depth value
+        return x.__depth - y.__depth;
+    }
+    return x.renderOrder - y.renderOrder;
+};
+
+// Temporary variables
+var matrices = {
+    IDENTITY: mat4Create(),
+
+    WORLD: mat4Create(),
+    VIEW: mat4Create(),
+    PROJECTION: mat4Create(),
+    WORLDVIEW: mat4Create(),
+    VIEWPROJECTION: mat4Create(),
+    WORLDVIEWPROJECTION: mat4Create(),
+
+    WORLDINVERSE: mat4Create(),
+    VIEWINVERSE: mat4Create(),
+    PROJECTIONINVERSE: mat4Create(),
+    WORLDVIEWINVERSE: mat4Create(),
+    VIEWPROJECTIONINVERSE: mat4Create(),
+    WORLDVIEWPROJECTIONINVERSE: mat4Create(),
+
+    WORLDTRANSPOSE: mat4Create(),
+    VIEWTRANSPOSE: mat4Create(),
+    PROJECTIONTRANSPOSE: mat4Create(),
+    WORLDVIEWTRANSPOSE: mat4Create(),
+    VIEWPROJECTIONTRANSPOSE: mat4Create(),
+    WORLDVIEWPROJECTIONTRANSPOSE: mat4Create(),
+    WORLDINVERSETRANSPOSE: mat4Create(),
+    VIEWINVERSETRANSPOSE: mat4Create(),
+    PROJECTIONINVERSETRANSPOSE: mat4Create(),
+    WORLDVIEWINVERSETRANSPOSE: mat4Create(),
+    VIEWPROJECTIONINVERSETRANSPOSE: mat4Create(),
+    WORLDVIEWPROJECTIONINVERSETRANSPOSE: mat4Create()
+};
+
+/**
+ * @name clay.Renderer.COLOR_BUFFER_BIT
+ * @type {number}
+ */
+Renderer.COLOR_BUFFER_BIT = glenum.COLOR_BUFFER_BIT;
+/**
+ * @name clay.Renderer.DEPTH_BUFFER_BIT
+ * @type {number}
+ */
+Renderer.DEPTH_BUFFER_BIT = glenum.DEPTH_BUFFER_BIT;
+/**
+ * @name clay.Renderer.STENCIL_BUFFER_BIT
+ * @type {number}
+ */
+Renderer.STENCIL_BUFFER_BIT = glenum.STENCIL_BUFFER_BIT;
+
+/* harmony default export */ const src_Renderer = (Renderer);
 
 ;// CONCATENATED MODULE: ./node_modules/claygl/src/core/Cache.js
 var DIRTY_PREFIX = '__dt__';
@@ -14389,71 +13870,6 @@ Texture.MIRRORED_REPEAT = glenum.MIRRORED_REPEAT;
 
 
 /* harmony default export */ const src_Texture = (Texture);
-
-;// CONCATENATED MODULE: ./node_modules/claygl/src/Mesh.js
-
-
-
-/**
- * @constructor clay.Mesh
- * @extends clay.Renderable
- */
-var Mesh = src_Renderable.extend(/** @lends clay.Mesh# */ {
-    /**
-     * Used when it is a skinned mesh
-     * @type {clay.Skeleton}
-     */
-    skeleton: null,
-    /**
-     * Joints indices Meshes can share the one skeleton instance and each mesh can use one part of joints. Joints indices indicate the index of joint in the skeleton instance
-     * @type {number[]}
-     */
-    joints: null
-
-}, function () {
-    if (!this.joints) {
-        this.joints = [];
-    }
-}, {
-
-    /**
-     * Offset matrix used for multiple skinned mesh clone sharing one skeleton
-     * @type {clay.Matrix4}
-     */
-    offsetMatrix: null,
-
-    isInstancedMesh: function () { return false; },
-
-    isSkinnedMesh: function () {
-        return !!(this.skeleton && this.joints && this.joints.length > 0);
-    },
-
-    clone: function () {
-        var mesh = src_Renderable.prototype.clone.call(this);
-        mesh.skeleton = this.skeleton;
-        if (this.joints) {
-            mesh.joints = this.joints.slice();
-        }
-        return mesh;
-    }
-});
-
-// Enums
-Mesh.POINTS = glenum.POINTS;
-Mesh.LINES = glenum.LINES;
-Mesh.LINE_LOOP = glenum.LINE_LOOP;
-Mesh.LINE_STRIP = glenum.LINE_STRIP;
-Mesh.TRIANGLES = glenum.TRIANGLES;
-Mesh.TRIANGLE_STRIP = glenum.TRIANGLE_STRIP;
-Mesh.TRIANGLE_FAN = glenum.TRIANGLE_FAN;
-
-Mesh.BACK = glenum.BACK;
-Mesh.FRONT = glenum.FRONT;
-Mesh.FRONT_AND_BACK = glenum.FRONT_AND_BACK;
-Mesh.CW = glenum.CW;
-Mesh.CCW = glenum.CCW;
-
-/* harmony default export */ const src_Mesh = (Mesh);
 
 ;// CONCATENATED MODULE: ./node_modules/claygl/src/math/util.js
 var mathUtil = {};
@@ -16454,6 +15870,327 @@ Frustum.prototype = {
     }) ()
 };
 /* harmony default export */ const math_Frustum = (Frustum);
+
+;// CONCATENATED MODULE: ./node_modules/claygl/src/math/Ray.js
+
+
+
+var EPSILON = 1e-5;
+
+/**
+ * @constructor
+ * @alias clay.Ray
+ * @param {clay.Vector3} [origin]
+ * @param {clay.Vector3} [direction]
+ */
+var Ray = function (origin, direction) {
+    /**
+     * @type {clay.Vector3}
+     */
+    this.origin = origin || new math_Vector3();
+    /**
+     * @type {clay.Vector3}
+     */
+    this.direction = direction || new math_Vector3();
+};
+
+Ray.prototype = {
+
+    constructor: Ray,
+
+    // http://www.siggraph.org/education/materials/HyperGraph/raytrace/rayplane_intersection.htm
+    /**
+     * Calculate intersection point between ray and a give plane
+     * @param  {clay.Plane} plane
+     * @param  {clay.Vector3} [out]
+     * @return {clay.Vector3}
+     */
+    intersectPlane: function (plane, out) {
+        var pn = plane.normal.array;
+        var d = plane.distance;
+        var ro = this.origin.array;
+        var rd = this.direction.array;
+
+        var divider = glmatrix_vec3.dot(pn, rd);
+        // ray is parallel to the plane
+        if (divider === 0) {
+            return null;
+        }
+        if (!out) {
+            out = new math_Vector3();
+        }
+        var t = (glmatrix_vec3.dot(pn, ro) - d) / divider;
+        glmatrix_vec3.scaleAndAdd(out.array, ro, rd, -t);
+        out._dirty = true;
+        return out;
+    },
+
+    /**
+     * Mirror the ray against plane
+     * @param  {clay.Plane} plane
+     */
+    mirrorAgainstPlane: function (plane) {
+        // Distance to plane
+        var d = glmatrix_vec3.dot(plane.normal.array, this.direction.array);
+        glmatrix_vec3.scaleAndAdd(this.direction.array, this.direction.array, plane.normal.array, -d * 2);
+        this.direction._dirty = true;
+    },
+
+    distanceToPoint: (function () {
+        var v = glmatrix_vec3.create();
+        return function (point) {
+            glmatrix_vec3.sub(v, point, this.origin.array);
+            // Distance from projection point to origin
+            var b = glmatrix_vec3.dot(v, this.direction.array);
+            if (b < 0) {
+                return glmatrix_vec3.distance(this.origin.array, point);
+            }
+            // Squared distance from center to origin
+            var c2 = glmatrix_vec3.lenSquared(v);
+            // Squared distance from center to projection point
+            return Math.sqrt(c2 - b * b);
+        };
+    })(),
+
+    /**
+     * Calculate intersection point between ray and sphere
+     * @param  {clay.Vector3} center
+     * @param  {number} radius
+     * @param  {clay.Vector3} out
+     * @return {clay.Vector3}
+     */
+    intersectSphere: (function () {
+        var v = glmatrix_vec3.create();
+        return function (center, radius, out) {
+            var origin = this.origin.array;
+            var direction = this.direction.array;
+            center = center.array;
+            glmatrix_vec3.sub(v, center, origin);
+            // Distance from projection point to origin
+            var b = glmatrix_vec3.dot(v, direction);
+            // Squared distance from center to origin
+            var c2 = glmatrix_vec3.squaredLength(v);
+            // Squared distance from center to projection point
+            var d2 = c2 - b * b;
+
+            var r2 = radius * radius;
+            // No intersection
+            if (d2 > r2) {
+                return;
+            }
+
+            var a = Math.sqrt(r2 - d2);
+            // First intersect point
+            var t0 = b - a;
+            // Second intersect point
+            var t1 = b + a;
+
+            if (!out) {
+                out = new math_Vector3();
+            }
+            if (t0 < 0) {
+                if (t1 < 0) {
+                    return null;
+                }
+                else {
+                    glmatrix_vec3.scaleAndAdd(out.array, origin, direction, t1);
+                    return out;
+                }
+            }
+            else {
+                glmatrix_vec3.scaleAndAdd(out.array, origin, direction, t0);
+                return out;
+            }
+        };
+    })(),
+
+    // http://www.scratchapixel.com/lessons/3d-basic-lessons/lesson-7-intersecting-simple-shapes/ray-box-intersection/
+    /**
+     * Calculate intersection point between ray and bounding box
+     * @param {clay.BoundingBox} bbox
+     * @param {clay.Vector3}
+     * @return {clay.Vector3}
+     */
+    intersectBoundingBox: function (bbox, out) {
+        var dir = this.direction.array;
+        var origin = this.origin.array;
+        var min = bbox.min.array;
+        var max = bbox.max.array;
+
+        var invdirx = 1 / dir[0];
+        var invdiry = 1 / dir[1];
+        var invdirz = 1 / dir[2];
+
+        var tmin, tmax, tymin, tymax, tzmin, tzmax;
+        if (invdirx >= 0) {
+            tmin = (min[0] - origin[0]) * invdirx;
+            tmax = (max[0] - origin[0]) * invdirx;
+        }
+        else {
+            tmax = (min[0] - origin[0]) * invdirx;
+            tmin = (max[0] - origin[0]) * invdirx;
+        }
+        if (invdiry >= 0) {
+            tymin = (min[1] - origin[1]) * invdiry;
+            tymax = (max[1] - origin[1]) * invdiry;
+        }
+        else {
+            tymax = (min[1] - origin[1]) * invdiry;
+            tymin = (max[1] - origin[1]) * invdiry;
+        }
+
+        if ((tmin > tymax) || (tymin > tmax)) {
+            return null;
+        }
+
+        if (tymin > tmin || tmin !== tmin) {
+            tmin = tymin;
+        }
+        if (tymax < tmax || tmax !== tmax) {
+            tmax = tymax;
+        }
+
+        if (invdirz >= 0) {
+            tzmin = (min[2] - origin[2]) * invdirz;
+            tzmax = (max[2] - origin[2]) * invdirz;
+        }
+        else {
+            tzmax = (min[2] - origin[2]) * invdirz;
+            tzmin = (max[2] - origin[2]) * invdirz;
+        }
+
+        if ((tmin > tzmax) || (tzmin > tmax)) {
+            return null;
+        }
+
+        if (tzmin > tmin || tmin !== tmin) {
+            tmin = tzmin;
+        }
+        if (tzmax < tmax || tmax !== tmax) {
+            tmax = tzmax;
+        }
+        if (tmax < 0) {
+            return null;
+        }
+
+        var t = tmin >= 0 ? tmin : tmax;
+
+        if (!out) {
+            out = new math_Vector3();
+        }
+        glmatrix_vec3.scaleAndAdd(out.array, origin, dir, t);
+        return out;
+    },
+
+    // http://en.wikipedia.org/wiki/M%C3%B6ller%E2%80%93Trumbore_intersection_algorithm
+    /**
+     * Calculate intersection point between ray and three triangle vertices
+     * @param {clay.Vector3} a
+     * @param {clay.Vector3} b
+     * @param {clay.Vector3} c
+     * @param {boolean}           singleSided, CW triangle will be ignored
+     * @param {clay.Vector3} [out]
+     * @param {clay.Vector3} [barycenteric] barycentric coords
+     * @return {clay.Vector3}
+     */
+    intersectTriangle: (function () {
+
+        var eBA = glmatrix_vec3.create();
+        var eCA = glmatrix_vec3.create();
+        var AO = glmatrix_vec3.create();
+        var vCross = glmatrix_vec3.create();
+
+        return function (a, b, c, singleSided, out, barycenteric) {
+            var dir = this.direction.array;
+            var origin = this.origin.array;
+            a = a.array;
+            b = b.array;
+            c = c.array;
+
+            glmatrix_vec3.sub(eBA, b, a);
+            glmatrix_vec3.sub(eCA, c, a);
+
+            glmatrix_vec3.cross(vCross, eCA, dir);
+
+            var det = glmatrix_vec3.dot(eBA, vCross);
+
+            if (singleSided) {
+                if (det > -EPSILON) {
+                    return null;
+                }
+            }
+            else {
+                if (det > -EPSILON && det < EPSILON) {
+                    return null;
+                }
+            }
+
+            glmatrix_vec3.sub(AO, origin, a);
+            var u = glmatrix_vec3.dot(vCross, AO) / det;
+            if (u < 0 || u > 1) {
+                return null;
+            }
+
+            glmatrix_vec3.cross(vCross, eBA, AO);
+            var v = glmatrix_vec3.dot(dir, vCross) / det;
+
+            if (v < 0 || v > 1 || (u + v > 1)) {
+                return null;
+            }
+
+            glmatrix_vec3.cross(vCross, eBA, eCA);
+            var t = -glmatrix_vec3.dot(AO, vCross) / det;
+
+            if (t < 0) {
+                return null;
+            }
+
+            if (!out) {
+                out = new math_Vector3();
+            }
+            if (barycenteric) {
+                math_Vector3.set(barycenteric, (1 - u - v), u, v);
+            }
+            glmatrix_vec3.scaleAndAdd(out.array, origin, dir, t);
+
+            return out;
+        };
+    })(),
+
+    /**
+     * Apply an affine transform matrix to the ray
+     * @return {clay.Matrix4} matrix
+     */
+    applyTransform: function (matrix) {
+        math_Vector3.add(this.direction, this.direction, this.origin);
+        math_Vector3.transformMat4(this.origin, this.origin, matrix);
+        math_Vector3.transformMat4(this.direction, this.direction, matrix);
+
+        math_Vector3.sub(this.direction, this.direction, this.origin);
+        math_Vector3.normalize(this.direction, this.direction);
+    },
+
+    /**
+     * Copy values from another ray
+     * @param {clay.Ray} ray
+     */
+    copy: function (ray) {
+        math_Vector3.copy(this.origin, ray.origin);
+        math_Vector3.copy(this.direction, ray.direction);
+    },
+
+    /**
+     * Clone a new ray
+     * @return {clay.Ray}
+     */
+    clone: function () {
+        var ray = new Ray();
+        ray.copy(this);
+        return ray;
+    }
+};
+
+/* harmony default export */ const math_Ray = (Ray);
 
 ;// CONCATENATED MODULE: ./node_modules/claygl/src/Camera.js
 
@@ -19147,6 +18884,71 @@ var textureUtil = {
 
 /* harmony default export */ const util_texture = (textureUtil);
 
+;// CONCATENATED MODULE: ./src/util/compatHelper.js
+/**
+ * Compatibility helpers for echarts and zrender.
+ */
+
+/**
+ * In echarts 6, DataStore.initData unconditionally calls provider.getSource()
+ * on custom data providers. Custom providers that only define {count, getItem}
+ * (without getSource) will throw "provider.getSource is not a function".
+ *
+ * This helper wraps such providers so they are compatible with echarts 6.
+ *
+ * Ensure data passed to SeriesData.initData is compatible with echarts 6.
+ * If data is a custom provider object (has count/getItem but no getSource),
+ * add the required getSource method.
+ *
+ * @param {Array|Object} data - The data or custom provider.
+ * @returns {Array|Object} The data, possibly patched with getSource.
+ */
+function ensureDataProvider(data) {
+    if (
+        data
+        && typeof data === 'object'
+        && !Array.isArray(data)
+        && typeof data.count === 'function'
+        && typeof data.getItem === 'function'
+        && typeof data.getSource !== 'function'
+    ) {
+        data.getSource = function () {
+            return {
+                sourceFormat: 'original',
+                // Minimal Source-like shape expected by DataStore
+                seriesLayoutBy: 'column',
+                startIndex: 0,
+                dimensionsDefine: null
+            };
+        };
+        // DataStore may also check these properties
+        if (data.persistent == null) {
+            data.persistent = true;
+        }
+    }
+    return data;
+}
+
+/**
+ * NOTE: Keep this method idempotent.
+ */
+function zrRefreshMonkeyPatch(zr, afterZrRealRefresh) {
+    if (zr.__ECGLOnRefresh) {
+        return;
+    }
+    zr.__ECGLOnRefresh = true;
+
+    // Since zrender@6.1.0, a immediate refresh is performed if and only if `zr._refresh` is called,
+    // and no `zr._refresh` method.
+    // Otherwise, in previous zrender, it is performed if and only if `zr.refreshImmediately` is called.
+    var patchedMethodName = zr._refresh ? '_refresh' : 'refreshImmediately';
+    var oldZrMethod = zr[patchedMethodName];
+    zr[patchedMethodName] = function () {
+        oldZrMethod.apply(this, arguments);
+        afterZrRealRefresh();
+    };
+}
+
 ;// CONCATENATED MODULE: ./src/util/EChartsSurface.js
 /**
  * Surface texture in the 3D scene.
@@ -19155,6 +18957,7 @@ var textureUtil = {
  * @module echarts-gl/util/EChartsSurface
  * @author Yi Shen(http://github.com/pissang)
  */
+
 
 
 
@@ -19224,16 +19027,10 @@ EChartsSurface.prototype = {
         }
         else {
             var self = this;
-            // Wrap refreshImmediately
-            var zr = chart.getZr();
-            var oldRefreshImmediately = zr.__oldRefreshImmediately || zr.refreshImmediately;
-            zr.refreshImmediately = function () {
-                oldRefreshImmediately.call(this);
+            zrRefreshMonkeyPatch(chart.getZr(), function () {
                 self._texture.dirty();
-
                 self.onupdate && self.onupdate();
-            };
-            zr.__oldRefreshImmediately = oldRefreshImmediately;
+            });
         }
 
         this._texture.image = canvas;
@@ -25623,6 +25420,269 @@ graphicGL.updateVertexAnimation = function (
 
 /* harmony default export */ const util_graphicGL = (graphicGL);
 
+;// CONCATENATED MODULE: ./node_modules/claygl/src/picking/RayPicking.js
+
+
+
+
+
+
+
+
+
+/**
+ * @constructor clay.picking.RayPicking
+ * @extends clay.core.Base
+ */
+var RayPicking = core_Base.extend(/** @lends clay.picking.RayPicking# */{
+    /**
+     * Target scene
+     * @type {clay.Scene}
+     */
+    scene: null,
+    /**
+     * Target camera
+     * @type {clay.Camera}
+     */
+    camera: null,
+    /**
+     * Target renderer
+     * @type {clay.Renderer}
+     */
+    renderer: null
+}, function () {
+    this._ray = new math_Ray();
+    this._ndc = new math_Vector2();
+},
+/** @lends clay.picking.RayPicking.prototype */
+{
+
+    /**
+     * Pick the nearest intersection object in the scene
+     * @param  {number} x Mouse position x
+     * @param  {number} y Mouse position y
+     * @param  {boolean} [forcePickAll=false] ignore ignorePicking
+     * @return {clay.picking.RayPicking~Intersection}
+     */
+    pick: function (x, y, forcePickAll) {
+        var out = this.pickAll(x, y, [], forcePickAll);
+        return out[0] || null;
+    },
+
+    /**
+     * Pick all intersection objects, wich will be sorted from near to far
+     * @param  {number} x Mouse position x
+     * @param  {number} y Mouse position y
+     * @param  {Array} [output]
+     * @param  {boolean} [forcePickAll=false] ignore ignorePicking
+     * @return {Array.<clay.picking.RayPicking~Intersection>}
+     */
+    pickAll: function (x, y, output, forcePickAll) {
+        this.renderer.screenToNDC(x, y, this._ndc);
+        this.camera.castRay(this._ndc, this._ray);
+
+        output = output || [];
+
+        this._intersectNode(this.scene, output, forcePickAll || false);
+
+        output.sort(this._intersectionCompareFunc);
+
+        return output;
+    },
+
+    _intersectNode: function (node, out, forcePickAll) {
+        if ((node instanceof src_Renderable) && node.isRenderable()) {
+            if ((!node.ignorePicking || forcePickAll)
+                && (
+                    // Only triangle mesh support ray picking
+                    (node.mode === glenum.TRIANGLES && node.geometry.isUseIndices())
+                    // Or if geometry has it's own pickByRay, pick, implementation
+                    || node.geometry.pickByRay
+                    || node.geometry.pick
+                )
+            ) {
+                this._intersectRenderable(node, out);
+            }
+        }
+        for (var i = 0; i < node._children.length; i++) {
+            this._intersectNode(node._children[i], out, forcePickAll);
+        }
+    },
+
+    _intersectRenderable: (function () {
+
+        var v1 = new math_Vector3();
+        var v2 = new math_Vector3();
+        var v3 = new math_Vector3();
+        var ray = new math_Ray();
+        var worldInverse = new math_Matrix4();
+
+        return function (renderable, out) {
+
+            var isSkinnedMesh = renderable.isSkinnedMesh();
+            ray.copy(this._ray);
+            math_Matrix4.invert(worldInverse, renderable.worldTransform);
+
+            // Skinned mesh will ignore the world transform.
+            if (!isSkinnedMesh) {
+                ray.applyTransform(worldInverse);
+            }
+
+            var geometry = renderable.geometry;
+
+            var bbox = isSkinnedMesh ? renderable.skeleton.boundingBox : geometry.boundingBox;
+
+            if (bbox && !ray.intersectBoundingBox(bbox)) {
+                return;
+            }
+            // Use user defined picking algorithm
+            if (geometry.pick) {
+                geometry.pick(
+                    this._ndc.x, this._ndc.y,
+                    this.renderer,
+                    this.camera,
+                    renderable, out
+                );
+                return;
+            }
+            // Use user defined ray picking algorithm
+            else if (geometry.pickByRay) {
+                geometry.pickByRay(ray, renderable, out);
+                return;
+            }
+
+            var cullBack = (renderable.cullFace === glenum.BACK && renderable.frontFace === glenum.CCW)
+                        || (renderable.cullFace === glenum.FRONT && renderable.frontFace === glenum.CW);
+
+            var point;
+            var indices = geometry.indices;
+            var positionAttr = geometry.attributes.position;
+            var weightAttr = geometry.attributes.weight;
+            var jointAttr = geometry.attributes.joint;
+            var skinMatricesArray;
+            var skinMatrices = [];
+            // Check if valid.
+            if (!positionAttr || !positionAttr.value || !indices) {
+                return;
+            }
+            if (isSkinnedMesh) {
+                skinMatricesArray = renderable.skeleton.getSubSkinMatrices(renderable.__uid__, renderable.joints);
+                for (var i = 0; i < renderable.joints.length; i++) {
+                    skinMatrices[i] = skinMatrices[i] || [];
+                    for (var k = 0; k < 16; k++) {
+                        skinMatrices[i][k] = skinMatricesArray[i * 16 + k];
+                    }
+                }
+                var pos = [];
+                var weight = [];
+                var joint = [];
+                var skinnedPos = [];
+                var tmp = [];
+                var skinnedPositionAttr = geometry.attributes.skinnedPosition;
+                if (!skinnedPositionAttr || !skinnedPositionAttr.value) {
+                    geometry.createAttribute('skinnedPosition', 'f', 3);
+                    skinnedPositionAttr = geometry.attributes.skinnedPosition;
+                    skinnedPositionAttr.init(geometry.vertexCount);
+                }
+                for (var i = 0; i < geometry.vertexCount; i++) {
+                    positionAttr.get(i, pos);
+                    weightAttr.get(i, weight);
+                    jointAttr.get(i, joint);
+                    weight[3] = 1 - weight[0] - weight[1] - weight[2];
+                    glmatrix_vec3.set(skinnedPos, 0, 0, 0);
+                    for (var k = 0; k < 4; k++) {
+                        if (joint[k] >= 0 && weight[k] > 1e-4) {
+                            glmatrix_vec3.transformMat4(tmp, pos, skinMatrices[joint[k]]);
+                            glmatrix_vec3.scaleAndAdd(skinnedPos, skinnedPos, tmp, weight[k]);
+                        }
+                    }
+                    skinnedPositionAttr.set(i, skinnedPos);
+                }
+            }
+
+            for (var i = 0; i < indices.length; i += 3) {
+                var i1 = indices[i];
+                var i2 = indices[i + 1];
+                var i3 = indices[i + 2];
+                var finalPosAttr = isSkinnedMesh
+                    ? geometry.attributes.skinnedPosition
+                    : positionAttr;
+                finalPosAttr.get(i1, v1.array);
+                finalPosAttr.get(i2, v2.array);
+                finalPosAttr.get(i3, v3.array);
+
+                if (cullBack) {
+                    point = ray.intersectTriangle(v1, v2, v3, renderable.culling);
+                }
+                else {
+                    point = ray.intersectTriangle(v1, v3, v2, renderable.culling);
+                }
+                if (point) {
+                    var pointW = new math_Vector3();
+                    if (!isSkinnedMesh) {
+                        math_Vector3.transformMat4(pointW, point, renderable.worldTransform);
+                    }
+                    else {
+                        // TODO point maybe not right.
+                        math_Vector3.copy(pointW, point);
+                    }
+                    out.push(new RayPicking.Intersection(
+                        point, pointW, renderable, [i1, i2, i3], i / 3,
+                        math_Vector3.dist(pointW, this._ray.origin)
+                    ));
+                }
+            }
+        };
+    })(),
+
+    _intersectionCompareFunc: function (a, b) {
+        return a.distance - b.distance;
+    }
+});
+
+/**
+ * @constructor clay.picking.RayPicking~Intersection
+ * @param {clay.Vector3} point
+ * @param {clay.Vector3} pointWorld
+ * @param {clay.Node} target
+ * @param {Array.<number>} triangle
+ * @param {number} triangleIndex
+ * @param {number} distance
+ */
+RayPicking.Intersection = function (point, pointWorld, target, triangle, triangleIndex, distance) {
+    /**
+     * Intersection point in local transform coordinates
+     * @type {clay.Vector3}
+     */
+    this.point = point;
+    /**
+     * Intersection point in world transform coordinates
+     * @type {clay.Vector3}
+     */
+    this.pointWorld = pointWorld;
+    /**
+     * Intersection scene node
+     * @type {clay.Node}
+     */
+    this.target = target;
+    /**
+     * Intersection triangle, which is an array of vertex index
+     * @type {Array.<number>}
+     */
+    this.triangle = triangle;
+    /**
+     * Index of intersection triangle.
+     */
+    this.triangleIndex = triangleIndex;
+    /**
+     * Distance from intersection point to ray origin
+     * @type {number}
+     */
+    this.distance = distance;
+};
+
+/* harmony default export */ const picking_RayPicking = (RayPicking);
+
 ;// CONCATENATED MODULE: ./node_modules/zrender/lib/animation/requestAnimationFrame.js
 var requestAnimationFrame;
 requestAnimationFrame = (typeof window !== 'undefined'
@@ -26376,6 +26436,36 @@ function removeTextStyleInAxis(axesOpt) {
 
     convertNormalEmphasis(option.geo3D);
 };
+;// CONCATENATED MODULE: ./src/util/mountEChartsNamespace.js
+/**
+ * Best-effort property mount for echarts namespace objects.
+ * Avoid direct assignment to import namespace objects, which strict ESM
+ * toolchains may reject with ASSIGN_TO_IMPORT.
+ *
+ * @param {Object} target
+ * @param {string} key
+ * @param {*} value
+ * @return {boolean}
+ */
+function mountEChartsNamespace(target, key, value) {
+    try {
+        Object.defineProperty(target, key, {
+            value: value,
+            configurable: true,
+            writable: true
+        });
+        return true;
+    } catch (e) {
+    }
+
+    try {
+        return Reflect.set(target, key, value);
+    } catch (e) {
+    }
+
+    return false;
+}
+
 ;// CONCATENATED MODULE: ./src/echarts-gl.js
 /**
  * echarts-gl
@@ -26410,7 +26500,12 @@ function removeTextStyleInAxis(axesOpt) {
 
 
 
-function EChartsGL (zr) {
+
+
+var echarts = external_echarts_;
+mountEChartsNamespace(echarts, 'graphicGL', util_graphicGL);
+
+function EChartsGL(zr) {
     this._layers = {};
 
     this._zr = zr;
@@ -26433,8 +26528,7 @@ EChartsGL.prototype.update = function (ecModel, api) {
         // Host on coordinate system.
         if (model.coordinateSystem && model.coordinateSystem.model) {
             zlevel = model.get('zlevel');
-        }
-        else {
+        } else {
             zlevel = model.get('zlevel');
         }
 
@@ -26447,7 +26541,7 @@ EChartsGL.prototype.update = function (ecModel, api) {
                 layerGL.virtual = true;
                 // If container is canvas, use image to represent LayerGL
                 // FIXME Performance
-                var img = new external_echarts_.graphic.Image({
+                var img = new echarts.graphic.Image({
                     z: 1e4,
                     style: {
                         image: layerGL.renderer.canvas
@@ -26475,8 +26569,10 @@ EChartsGL.prototype.update = function (ecModel, api) {
         if (groupGL) {
             groupGL.traverse(function (mesh) {
                 if (mesh.isRenderable && mesh.isRenderable()) {
-                    mesh.ignorePicking = mesh.$ignorePicking != null
-                        ? mesh.$ignorePicking : silent;
+                    mesh.ignorePicking =
+                        mesh.$ignorePicking != null
+                            ? mesh.$ignorePicking
+                            : silent;
                 }
             });
         }
@@ -26495,14 +26591,19 @@ EChartsGL.prototype.update = function (ecModel, api) {
                 var viewGL;
                 if (coordSys) {
                     if (!coordSys.viewGL) {
-                        console.error('Can\'t find viewGL in coordinateSystem of component ' + componentModel.id);
+                        console.error(
+                            "Can't find viewGL in coordinateSystem of component " +
+                            componentModel.id
+                        );
                         return;
                     }
                     viewGL = coordSys.viewGL;
-                }
-                else {
+                } else {
                     if (!componentModel.viewGL) {
-                        console.error('Can\'t find viewGL of component ' + componentModel.id);
+                        console.error(
+                            "Can't find viewGL of component " +
+                            componentModel.id
+                        );
                         return;
                     }
                     viewGL = coordSys.viewGL;
@@ -26513,9 +26614,8 @@ EChartsGL.prototype.update = function (ecModel, api) {
 
                 layerGL.addView(viewGL);
 
-                view.afterRender && view.afterRender(
-                    componentModel, ecModel, api, layerGL
-                );
+                view.afterRender &&
+                    view.afterRender(componentModel, ecModel, api, layerGL);
 
                 setSilent(view.groupGL, componentModel.get('silent'));
             }
@@ -26526,8 +26626,8 @@ EChartsGL.prototype.update = function (ecModel, api) {
         var chartView = api.getViewOfSeriesModel(seriesModel);
         var coordSys = seriesModel.coordinateSystem;
         if (chartView.__ecgl__) {
-            if ((coordSys && !coordSys.viewGL) && !chartView.viewGL) {
-                console.error('Can\'t find viewGL of series ' + chartView.id);
+            if (coordSys && !coordSys.viewGL && !chartView.viewGL) {
+                console.error("Can't find viewGL of series " + chartView.id);
                 return;
             }
             var viewGL = (coordSys && coordSys.viewGL) || chartView.viewGL;
@@ -26535,21 +26635,21 @@ EChartsGL.prototype.update = function (ecModel, api) {
             var layerGL = getLayerGL(seriesModel);
             layerGL.addView(viewGL);
 
-            chartView.afterRender && chartView.afterRender(
-                seriesModel, ecModel, api, layerGL
-            );
+            chartView.afterRender &&
+                chartView.afterRender(seriesModel, ecModel, api, layerGL);
 
             setSilent(chartView.groupGL, seriesModel.get('silent'));
         }
     });
 };
 
-// Hack original getRenderedCanvas. Will removed after new echarts released
-// TODO
+// Ensure GL layers are properly disposed when the painter is torn down.
+// zrender 6's native getRenderedCanvas already handles non-builtin layers
+// (including LayerGL) via renderToCanvas, so we no longer need to override it.
 
-external_echarts_.registerPostInit(function (chart) {
+echarts.registerPostInit(function (chart) {
     var zr = chart.getZr();
-    var oldDispose = zr.painter.dispose;
+    var originalDispose = zr.painter.dispose;
 
     zr.painter.dispose = function () {
         if (typeof this.eachOtherLayer === 'function') {
@@ -26559,84 +26659,22 @@ external_echarts_.registerPostInit(function (chart) {
                 }
             });
         }
-        oldDispose.call(this);
-    }
-    zr.painter.getRenderedCanvas = function (opts) {
-        opts = opts || {};
-        if (this._singleCanvas) {
-            return this._layers[0].dom;
-        }
-
-        var canvas = document.createElement('canvas');
-        var dpr = opts.pixelRatio || this.dpr;
-        canvas.width = this.getWidth() * dpr;
-        canvas.height = this.getHeight() * dpr;
-        var ctx = canvas.getContext('2d');
-        ctx.dpr = dpr;
-
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        if (opts.backgroundColor) {
-            ctx.fillStyle = opts.backgroundColor;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-        }
-
-        var displayList = this.storage.getDisplayList(true);
-
-        var scope = {};
-        var zlevel;
-
-        var self = this;
-        function findAndDrawOtherLayer(smaller, larger) {
-            var zlevelList = self._zlevelList;
-            if (smaller == null) {
-                smaller = -Infinity;
-            }
-            var intermediateLayer;
-            for (var i = 0; i < zlevelList.length; i++) {
-                var z = zlevelList[i];
-                var layer = self._layers[z];
-                if (!layer.__builtin__ && z > smaller && z < larger) {
-                    intermediateLayer = layer;
-                    break;
-                }
-            }
-            if (intermediateLayer && intermediateLayer.renderToCanvas) {
-                ctx.save();
-                intermediateLayer.renderToCanvas(ctx);
-                ctx.restore();
-            }
-        }
-        var layer = {
-            ctx: ctx
-        };
-        for (var i = 0; i < displayList.length; i++) {
-            var el = displayList[i];
-
-            if (el.zlevel !== zlevel) {
-                findAndDrawOtherLayer(zlevel, el.zlevel);
-                zlevel = el.zlevel;
-            }
-            this._doPaintEl(el, layer, true, null, scope);
-        }
-
-        findAndDrawOtherLayer(zlevel, Infinity);
-
-        return canvas;
+        originalDispose.call(this);
     };
 });
 
-external_echarts_.registerPostUpdate(function (ecModel, api) {
+echarts.registerPostUpdate(function (ecModel, api) {
     var zr = api.getZr();
 
-    var egl = zr.__egl = zr.__egl || new EChartsGL(zr);
+    var egl = (zr.__egl = zr.__egl || new EChartsGL(zr));
 
     egl.update(ecModel, api);
 });
 
-external_echarts_.registerPreprocessor(backwardCompat);
-
+echarts.registerPreprocessor(backwardCompat);
 
 /* harmony default export */ const echarts_gl = (EChartsGL);
+
 ;// CONCATENATED MODULE: ./src/component/common/componentViewControlMixin.js
 /* harmony default export */ const componentViewControlMixin = ({
     defaultOption: {
@@ -40043,6 +40081,7 @@ external_echarts_.util.defaults(LinesGeometry.prototype, dynamicConvertMixin);
 
 
 
+
 function ZRTextureAtlasSurfaceNode(zr, offsetX, offsetY, width, height, gap, dpr) {
     this._zr = zr;
 
@@ -40228,12 +40267,11 @@ function ZRTextureAtlasSurface (opt) {
      * @type {zrender~ZRender}
      */
     this._zr = external_echarts_.zrender.init(canvas);
-    var oldRefreshImmediately = this._zr.refreshImmediately;
-    this._zr.refreshImmediately = function () {
-        oldRefreshImmediately.call(this);
+
+    zrRefreshMonkeyPatch(this._zr, function () {
         self._texture.dirty();
         self.onupdate && self.onupdate();
-    };
+    });
 
     this._dpr = opt.devicePixelRatio;
 
@@ -41170,7 +41208,9 @@ Grid3DAxis.prototype.update = function (
         var labels = axis.getViewLabels();
 
         for (var i = 0; i < labels.length; i++) {
-            var tickValue = labels[i].tickValue;
+            var tickValue = external_echarts_.util.isObject(labels[i].tick)
+                ? labels[i].tick.value // Since echarts@6.1.0 .
+                : labels[i].tickValue; // Otherwise, remain backward compatible.
             var formattedLabel = labels[i].formattedLabel;
             var rawLabel = labels[i].rawLabel;
 
@@ -52964,7 +53004,14 @@ var geo3DCreator = {
 
 
 
+var REGISTERED_TAG = '__ECGL_GEO3D_REGISTERED';
+
 function install_install(registers) {
+    if (registers[REGISTERED_TAG]) {
+        return;
+    }
+    registers[REGISTERED_TAG] = true;
+
     registers.registerComponentModel(geo3D_Geo3DModel);
     registers.registerComponentView(Geo3DView);
 
@@ -56618,7 +56665,17 @@ util_graphicGL.Shader.import(lines3D_glsl);
         lineMesh.off('mouseout');
         lineMesh.on('mousemove', function (e) {
             var value = coordSys.pointToData(e.point.array);
-            var dataIndex = data.indicesOfNearest('x', value[0])[0];
+
+            // Method `indicesOfNearest` was moved from `SeriesData` to `SeriesModel` since echarts@6.0.0.
+            var dataIndex;
+            if (seriesModel.indicesOfNearest) {
+                dataIndex = seriesModel.indicesOfNearest('x', 'x', value[0])[0];
+            }
+            else {
+                // For backward compatible with echarts@5.6.0 and earlier.
+                dataIndex = data.indicesOfNearest('x', value[0])[0];
+            }
+
             if (dataIndex !== lastDataIndex) {
                 // this._downplay(lastDataIndex);
                 // this._highlight(dataIndex);
@@ -58226,6 +58283,7 @@ function lines3DLayout(ecModel, api) {
 ;// CONCATENATED MODULE: ./src/chart/lines3D/Lines3DSeries.js
 
 
+
 /* harmony default export */ const Lines3DSeries = (external_echarts_.SeriesModel.extend({
 
     type: 'series.lines3D',
@@ -58238,7 +58296,7 @@ function lines3DLayout(ecModel, api) {
     getInitialData: function (option, ecModel) {
         var lineData = new external_echarts_.List(['value'], this);
         lineData.hasItemOption = false;
-        lineData.initData(option.data, [], function (dataItem, dimName, dataIndex, dimIndex) {
+        lineData.initData(ensureDataProvider(option.data), [], function (dataItem, dimName, dataIndex, dimIndex) {
             // dataItem is simply coords
             if (dataItem instanceof Array) {
                 return NaN;
@@ -58677,6 +58735,7 @@ function lines3D_install_install(registers) {
 
 
 
+
 function transformPolygon(coordSys, poly) {
     var ret = [];
     for (var i = 0; i < poly.length; i++) {
@@ -58720,7 +58779,7 @@ var Polygons3DSeries = external_echarts_.SeriesModel.extend({
     getInitialData: function (option) {
         var polygonsData = new external_echarts_.List(['value'], this);
         polygonsData.hasItemOption = false;
-        polygonsData.initData(option.data, [], function (dataItem, dimName, dataIndex, dimIndex) {
+        polygonsData.initData(ensureDataProvider(option.data), [], function (dataItem, dimName, dataIndex, dimIndex) {
             // dataItem is simply coords
             if (dataItem instanceof Array) {
                 return NaN;
@@ -59653,6 +59712,7 @@ function surface_install_install(registers) {
 
 
 
+
 function Map3DSeries_transformPolygon(mapbox3DCoordSys, poly) {
     var newPoly = [];
     for (var k = 0; k < poly.length; k++) {
@@ -59715,7 +59775,7 @@ var Map3DSeries = external_echarts_.SeriesModel.extend({
             coordDimensions: ['value']
         });
         var list = new external_echarts_.List(dimensions, this);
-        list.initData(option.data);
+        list.initData(ensureDataProvider(option.data));
 
         var regionModelMap = {};
         list.each(function (idx) {
@@ -64088,6 +64148,11 @@ var globalLayoutId = 1;
 
 
 
+
+
+
+var install_echarts = external_echarts_;
+
 function install_normalize(a) {
     if (!(a instanceof Array)) {
         a = [a, a];
@@ -64095,6 +64160,10 @@ function install_normalize(a) {
     return a;
 }
 function graphGL_install_install(registers) {
+
+    // Mount ForceAtlas2 to echarts namespace
+    mountEChartsNamespace(install_echarts, 'ForceAtlas2', graphGL_ForceAtlas2);
+    mountEChartsNamespace(install_echarts, 'ForceAtlas2GPU', graphGL_ForceAtlas2GPU);
 
     registers.registerChartView(GraphGLView);
     registers.registerSeriesModel(GraphGLSeries);
@@ -64142,7 +64211,7 @@ function graphGL_install_install(registers) {
 
                         var categoryStyle = categoriesData.getItemVisual(categoryIdx, 'style');
                         var style = data.ensureUniqueItemVisual(idx, 'style');
-                        external_echarts_.util.extend(style, categoryStyle);
+                        install_echarts.util.extend(style, categoryStyle);
 
                         var visualList = ['symbol', 'symbolSize', 'symbolKeepAspect'];
 
@@ -64187,7 +64256,7 @@ function graphGL_install_install(registers) {
                 var style = itemModel.getModel('lineStyle').getLineStyle();
 
                 var existsStyle = edgeData.ensureUniqueItemVisual(idx, 'style');
-                external_echarts_.util.extend(existsStyle, style);
+                install_echarts.util.extend(existsStyle, style);
 
                 switch (existsStyle.stroke) {
                     case 'source': {
@@ -64222,7 +64291,7 @@ function graphGL_install_install(registers) {
         });
     });
 
-    function noop() {}
+    function noop() { }
 
     registers.registerAction({
         type: 'graphGLStartLayout',
@@ -65217,6 +65286,7 @@ function flowGL_install_install(registers) {
 
 
 
+
 var LinesGLSeries = external_echarts_.SeriesModel.extend({
 
     type: 'series.linesGL',
@@ -65365,7 +65435,7 @@ var LinesGLSeries = external_echarts_.SeriesModel.extend({
         var lineData = new external_echarts_.List(['value'], this);
         lineData.hasItemOption = false;
 
-        lineData.initData(option.data, [], function (dataItem, dimName, dataIndex, dimIndex) {
+        lineData.initData(ensureDataProvider(option.data), [], function (dataItem, dimName, dataIndex, dimIndex) {
             // dataItem is simply coords
             if (dataItem instanceof Array) {
                 return NaN;

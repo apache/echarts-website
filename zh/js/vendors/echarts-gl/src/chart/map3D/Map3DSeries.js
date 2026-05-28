@@ -1,4 +1,5 @@
 import * as echarts from 'echarts/lib/echarts';
+import { ensureDataProvider } from '../../util/compatHelper';
 import componentViewControlMixin from '../../component/common/componentViewControlMixin';
 import componentPostEffectMixin from '../../component/common/componentPostEffectMixin';
 import componentLightMixin from '../../component/common/componentLightMixin';
@@ -70,7 +71,7 @@ var Map3DSeries = echarts.SeriesModel.extend({
             coordDimensions: ['value']
         });
         var list = new echarts.List(dimensions, this);
-        list.initData(option.data);
+        list.initData(ensureDataProvider(option.data));
 
         var regionModelMap = {};
         list.each(function (idx) {

@@ -1,4 +1,5 @@
 import * as echarts from 'echarts/lib/echarts';
+import { ensureDataProvider } from '../../util/compatHelper';
 import { concatArray } from 'zrender/lib/core/util';
 var LinesGLSeries = echarts.SeriesModel.extend({
   type: 'series.linesGL',
@@ -146,7 +147,7 @@ var LinesGLSeries = echarts.SeriesModel.extend({
   getInitialData: function (option, ecModel) {
     var lineData = new echarts.List(['value'], this);
     lineData.hasItemOption = false;
-    lineData.initData(option.data, [], function (dataItem, dimName, dataIndex, dimIndex) {
+    lineData.initData(ensureDataProvider(option.data), [], function (dataItem, dimName, dataIndex, dimIndex) {
       // dataItem is simply coords
       if (dataItem instanceof Array) {
         return NaN;

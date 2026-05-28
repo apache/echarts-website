@@ -9,6 +9,7 @@
 import Texture2D from 'claygl/src/Texture2D';
 import Vector3 from 'claygl/src/math/Vector3';
 import Vector2 from 'claygl/src/math/Vector2';
+import {zrRefreshMonkeyPatch} from './compatHelper';
 
 var events = ['mousedown', 'mouseup', 'mousemove', 'mouseover', 'mouseout', 'click', 'dblclick', 'contextmenu'];
 
@@ -74,16 +75,10 @@ EChartsSurface.prototype = {
         }
         else {
             var self = this;
-            // Wrap refreshImmediately
-            var zr = chart.getZr();
-            var oldRefreshImmediately = zr.__oldRefreshImmediately || zr.refreshImmediately;
-            zr.refreshImmediately = function () {
-                oldRefreshImmediately.call(this);
+            zrRefreshMonkeyPatch(chart.getZr(), function () {
                 self._texture.dirty();
-
                 self.onupdate && self.onupdate();
-            };
-            zr.__oldRefreshImmediately = oldRefreshImmediately;
+            });
         }
 
         this._texture.image = canvas;

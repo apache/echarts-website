@@ -1,4 +1,5 @@
 import * as echarts from 'echarts/lib/echarts';
+import { ensureDataProvider } from '../../util/compatHelper';
 import componentShadingMixin from '../../component/common/componentShadingMixin';
 
 function transformPolygon(coordSys, poly) {
@@ -44,7 +45,7 @@ var Polygons3DSeries = echarts.SeriesModel.extend({
     getInitialData: function (option) {
         var polygonsData = new echarts.List(['value'], this);
         polygonsData.hasItemOption = false;
-        polygonsData.initData(option.data, [], function (dataItem, dimName, dataIndex, dimIndex) {
+        polygonsData.initData(ensureDataProvider(option.data), [], function (dataItem, dimName, dataIndex, dimIndex) {
             // dataItem is simply coords
             if (dataItem instanceof Array) {
                 return NaN;

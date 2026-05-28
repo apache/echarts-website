@@ -7,6 +7,7 @@
 // TODO Expand.
 import * as echarts from 'echarts/lib/echarts';
 import Texture2D from 'claygl/src/Texture2D';
+import {zrRefreshMonkeyPatch} from './compatHelper';
 
 function ZRTextureAtlasSurfaceNode(zr, offsetX, offsetY, width, height, gap, dpr) {
     this._zr = zr;
@@ -193,12 +194,11 @@ function ZRTextureAtlasSurface (opt) {
      * @type {zrender~ZRender}
      */
     this._zr = echarts.zrender.init(canvas);
-    var oldRefreshImmediately = this._zr.refreshImmediately;
-    this._zr.refreshImmediately = function () {
-        oldRefreshImmediately.call(this);
+
+    zrRefreshMonkeyPatch(this._zr, function () {
         self._texture.dirty();
         self.onupdate && self.onupdate();
-    };
+    });
 
     this._dpr = opt.devicePixelRatio;
 
