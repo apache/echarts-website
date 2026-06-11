@@ -5286,6 +5286,12 @@ The children nodes defined recursively. The structure is the same as [series-sun
 
 tooltip settings in this series data.
 
+#### data.tooltip.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+Whether to show the tooltip.
+
 #### data.tooltip.position
 - **Type**: `string|Array`
 
@@ -5670,20 +5676,20 @@ The border width of tooltip's floating layer.
 
 > **Notice：**series.data.tooltip only works when [tooltip.trigger](option.tooltip.md#trigger) is `'item'`.  
 
-The floating layer of tooltip space around content. The unit is px. Default values for each position are 5. And they can be set to different values with left, right, top, and bottom.
+The spacing around the The floating layer of tooltip content, specified in pixels (`px`). The default value for each side is `5`. Supports a single value, a 2-value array, or a 4-value array to configure each side.
 
 Examples:
 
 ```
-// Set padding to be 5
+// Applies to all four sides
 padding: 5
-// Set the top and bottom paddings to be 5, and left and right paddings to be 10
+// [vertical, horizontal] -> top/bottom: 5, left/right: 10
 padding: [5, 10]
-// Set each of the four paddings separately
+// Clockwise order: [top, right, bottom, left]
 padding: [
-    5,  // up
+    5,  // top
     10, // right
-    5,  // down
+    5,  // bottom
     10, // left
 ]
 ```
@@ -15983,6 +15989,24 @@ Since `v5.3.0`:
 
 tooltip settings in this series.
 
+### tooltip.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+Whether to show the tooltip.
+
+### tooltip.trigger
+- **Type**: `string|boolean`
+- **Default**: `'item'`
+
+Override the tooltip trigger type for this series.
+
+Options:
+
+*   `'item'`
+*   `'axis'`
+*   `'none'` or `false`: Do not trigger tooltip in this series.
+
 ### tooltip.position
 - **Type**: `string|Array`
 
@@ -16367,20 +16391,20 @@ The border width of tooltip's floating layer.
 
 > **Notice：**series.tooltip only works when [tooltip.trigger](option.tooltip.md#trigger) is `'item'`.  
 
-The floating layer of tooltip space around content. The unit is px. Default values for each position are 5. And they can be set to different values with left, right, top, and bottom.
+The spacing around the The floating layer of tooltip content, specified in pixels (`px`). The default value for each side is `5`. Supports a single value, a 2-value array, or a 4-value array to configure each side.
 
 Examples:
 
 ```
-// Set padding to be 5
+// Applies to all four sides
 padding: 5
-// Set the top and bottom paddings to be 5, and left and right paddings to be 10
+// [vertical, horizontal] -> top/bottom: 5, left/right: 10
 padding: [5, 10]
-// Set each of the four paddings separately
+// Clockwise order: [top, right, bottom, left]
 padding: [
-    5,  // up
+    5,  // top
     10, // right
-    5,  // down
+    5,  // bottom
     10, // left
 ]
 ```

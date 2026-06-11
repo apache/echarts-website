@@ -5371,6 +5371,11 @@ Check this [example](https://echarts.apache.org/examples/en/editor.html?c=datase
 
 If [series.data](../option.md#series.data) is not specified, and [dataset](option.dataset.md) exists, the series will use `dataset`. `datasetIndex` specifies which dataset will be used.
 
+## datasetId
+- **Type**: `string|number`
+
+If [series.data](../option.md#series.data) is not specified, and [dataset](option.dataset.md) exists, the series will use `dataset`. `datasetId` specifies which dataset will be used by the `id` of the dataset.
+
 ## dimensions
 - **Type**: `Array`
 
@@ -5563,6 +5568,16 @@ var option = {
     }
 };
 ```
+
+### encode.label
+- **Type**: `string|number|Array`
+
+Specify the dimension or dimensions used for the default label content.
+
+### encode.itemName
+- **Type**: `string|number|Array`
+
+Specify the dimension used as the data item name. The name is used by default labels and tooltips. For series whose legend represents data items, such as `pie` and `funnel`, it is also used as the legend item name.
 
 ## data
 - **Type**: `Array`
@@ -10076,6 +10091,12 @@ Opacity of the component. Supports value from 0 to 1, and the component will not
 
 tooltip settings in this series data.
 
+#### data.tooltip.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+Whether to show the tooltip.
+
 #### data.tooltip.position
 - **Type**: `string|Array`
 
@@ -10460,20 +10481,20 @@ The border width of tooltip's floating layer.
 
 > **Notice：**series.data.tooltip only works when [tooltip.trigger](option.tooltip.md#trigger) is `'item'`.  
 
-The floating layer of tooltip space around content. The unit is px. Default values for each position are 5. And they can be set to different values with left, right, top, and bottom.
+The spacing around the The floating layer of tooltip content, specified in pixels (`px`). The default value for each side is `5`. Supports a single value, a 2-value array, or a 4-value array to configure each side.
 
 Examples:
 
 ```
-// Set padding to be 5
+// Applies to all four sides
 padding: 5
-// Set the top and bottom paddings to be 5, and left and right paddings to be 10
+// [vertical, horizontal] -> top/bottom: 5, left/right: 10
 padding: [5, 10]
-// Set each of the four paddings separately
+// Clockwise order: [top, right, bottom, left]
 padding: [
-    5,  // up
+    5,  // top
     10, // right
-    5,  // down
+    5,  // bottom
     10, // left
 ]
 ```
@@ -35007,6 +35028,24 @@ See [this example](https://echarts.apache.org/examples/en/editor.html?c=bar-anim
 
 tooltip settings in this series.
 
+### tooltip.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+Whether to show the tooltip.
+
+### tooltip.trigger
+- **Type**: `string|boolean`
+- **Default**: `'item'`
+
+Override the tooltip trigger type for this series.
+
+Options:
+
+*   `'item'`
+*   `'axis'`
+*   `'none'` or `false`: Do not trigger tooltip in this series.
+
 ### tooltip.position
 - **Type**: `string|Array`
 
@@ -35391,20 +35430,20 @@ The border width of tooltip's floating layer.
 
 > **Notice：**series.tooltip only works when [tooltip.trigger](option.tooltip.md#trigger) is `'item'`.  
 
-The floating layer of tooltip space around content. The unit is px. Default values for each position are 5. And they can be set to different values with left, right, top, and bottom.
+The spacing around the The floating layer of tooltip content, specified in pixels (`px`). The default value for each side is `5`. Supports a single value, a 2-value array, or a 4-value array to configure each side.
 
 Examples:
 
 ```
-// Set padding to be 5
+// Applies to all four sides
 padding: 5
-// Set the top and bottom paddings to be 5, and left and right paddings to be 10
+// [vertical, horizontal] -> top/bottom: 5, left/right: 10
 padding: [5, 10]
-// Set each of the four paddings separately
+// Clockwise order: [top, right, bottom, left]
 padding: [
-    5,  // up
+    5,  // top
     10, // right
-    5,  // down
+    5,  // bottom
     10, // left
 ]
 ```

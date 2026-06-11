@@ -2253,6 +2253,11 @@ When [overflow](option.graphic.md#elements-text.style.overflow) is set to `'trun
 
 Text vertical alignment. Optional values: `'top'`, `'middle'`, `'bottom'`.
 
+#### elements-text.style.rich
+- **Type**: `Object`
+
+Rich text styles. The key is the style name, and the value is the style definition for that rich text fragment.
+
 More attributes in `style` (for example, [rich text](tutorial.html#Rich%20Text)), see the `style` related attributes in [zrender/graphic/Displayable](https://ecomfe.github.io/zrender-doc/public/api.html#zrenderdisplayable).
 
 Notice, the attribute names of the `style` of graphic elements is derived from `zrender`, which may be different from the attribute names in `echarts label`, `echarts itemStyle`, etc., although they have the same meaning. For example:

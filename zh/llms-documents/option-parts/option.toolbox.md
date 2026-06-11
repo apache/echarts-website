@@ -11,6 +11,59 @@
 
 是否显示工具栏组件。
 
+## backgroundColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+工具栏组件的背景色。
+
+## padding
+- **Type**: `number|Array`
+- **Default**: `15`
+
+toolbox的内边距（内容周围的留白区域），单位为像素 (`px`)。每个方向的默认值为 `15`。支持传入单个数值、双值数组或四值数组来灵活配置。
+
+使用示例：
+
+```
+// 同时应用于上下左右四个方向
+padding: 5
+// [上下, 左右] -> 上下内边距为 5，左右内边距为 10
+padding: [5, 10]
+// 顺时针方向：[上, 右, 下, 左]
+padding: [
+    5,  // 上
+    10, // 右
+    5,  // 下
+    10, // 左
+]
+```
+
+## borderColor
+- **Type**: `Color`
+- **Default**: `'#b7b9be'`
+
+工具栏组件的边框颜色。
+
+## borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+工具栏组件的边框线宽，单位为像素 (`px`)。
+
+## borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+圆角半径，单位为像素 (px)。支持传入单个数值或数组。传入数组时，可按顺时针方向分别指定四个角的半径。
+
+例如：
+
+```
+borderRadius: 5, // 统一设置四个角的圆角大小
+borderRadius: [5, 5, 0, 0] // 顺时针方向：[左上, 右上, 右下, 左下]
+```
+
 ## orient
 - **Type**: `string`
 - **Default**: `'horizontal'`
@@ -30,7 +83,7 @@
 
 ## itemGap
 - **Type**: `number`
-- **Default**: `8`
+- **Default**: `10`
 
 工具栏 icon 每项之间的间隔。横向布局时为水平间隔，纵向布局时为纵向间隔。
 
@@ -161,7 +214,7 @@ URL 为 `dataURI` 例如：
 
 ##### feature.saveAsImage.iconStyle.borderColor
 - **Type**: `Color`
-- **Default**: `#666`
+- **Default**: `#6578ba`
 
 图形的描边颜色。支持的颜色格式同 `color`，不支持回调函数。
 
@@ -287,7 +340,7 @@ borderDashOffset: 5
 
 ###### feature.saveAsImage.emphasis.iconStyle.color
 - **Type**: `Color`
-- **Default**: `自适应`
+- **Default**: `none`
 
 图形的颜色。
 
@@ -295,13 +348,13 @@ borderDashOffset: 5
 
 ###### feature.saveAsImage.emphasis.iconStyle.borderColor
 - **Type**: `Color`
-- **Default**: `'#000'`
+- **Default**: `#404c76`
 
 图形的描边颜色。支持的颜色格式同 `color`，不支持回调函数。
 
 ###### feature.saveAsImage.emphasis.iconStyle.borderWidth
 - **Type**: `number`
-- **Default**: `0`
+- **Default**: `1`
 
 描边线宽。为 0 时无描边。
 
@@ -509,7 +562,7 @@ URL 为 `dataURI` 例如：
 
 ##### feature.restore.iconStyle.borderColor
 - **Type**: `Color`
-- **Default**: `#666`
+- **Default**: `#6578ba`
 
 图形的描边颜色。支持的颜色格式同 `color`，不支持回调函数。
 
@@ -635,7 +688,7 @@ borderDashOffset: 5
 
 ###### feature.restore.emphasis.iconStyle.color
 - **Type**: `Color`
-- **Default**: `自适应`
+- **Default**: `none`
 
 图形的颜色。
 
@@ -643,13 +696,13 @@ borderDashOffset: 5
 
 ###### feature.restore.emphasis.iconStyle.borderColor
 - **Type**: `Color`
-- **Default**: `'#000'`
+- **Default**: `#404c76`
 
 图形的描边颜色。支持的颜色格式同 `color`，不支持回调函数。
 
 ###### feature.restore.emphasis.iconStyle.borderWidth
 - **Type**: `number`
-- **Default**: `0`
+- **Default**: `1`
 
 描边线宽。为 0 时无描边。
 
@@ -857,7 +910,7 @@ URL 为 `dataURI` 例如：
 
 ##### feature.dataView.iconStyle.borderColor
 - **Type**: `Color`
-- **Default**: `#666`
+- **Default**: `#6578ba`
 
 图形的描边颜色。支持的颜色格式同 `color`，不支持回调函数。
 
@@ -983,7 +1036,7 @@ borderDashOffset: 5
 
 ###### feature.dataView.emphasis.iconStyle.color
 - **Type**: `Color`
-- **Default**: `自适应`
+- **Default**: `none`
 
 图形的颜色。
 
@@ -991,13 +1044,13 @@ borderDashOffset: 5
 
 ###### feature.dataView.emphasis.iconStyle.borderColor
 - **Type**: `Color`
-- **Default**: `'#000'`
+- **Default**: `#404c76`
 
 图形的描边颜色。支持的颜色格式同 `color`，不支持回调函数。
 
 ###### feature.dataView.emphasis.iconStyle.borderWidth
 - **Type**: `number`
-- **Default**: `0`
+- **Default**: `1`
 
 描边线宽。为 0 时无描边。
 
@@ -1327,7 +1380,7 @@ URL 为 `dataURI` 例如：
 
 ##### feature.dataZoom.iconStyle.borderColor
 - **Type**: `Color`
-- **Default**: `#666`
+- **Default**: `#6578ba`
 
 图形的描边颜色。支持的颜色格式同 `color`，不支持回调函数。
 
@@ -1453,7 +1506,7 @@ borderDashOffset: 5
 
 ###### feature.dataZoom.emphasis.iconStyle.color
 - **Type**: `Color`
-- **Default**: `自适应`
+- **Default**: `none`
 
 图形的颜色。
 
@@ -1461,13 +1514,13 @@ borderDashOffset: 5
 
 ###### feature.dataZoom.emphasis.iconStyle.borderColor
 - **Type**: `Color`
-- **Default**: `'#000'`
+- **Default**: `#404c76`
 
 图形的描边颜色。支持的颜色格式同 `color`，不支持回调函数。
 
 ###### feature.dataZoom.emphasis.iconStyle.borderWidth
 - **Type**: `number`
-- **Default**: `0`
+- **Default**: `1`
 
 描边线宽。为 0 时无描边。
 
@@ -1897,7 +1950,7 @@ URL 为 `dataURI` 例如：
 
 ##### feature.magicType.iconStyle.borderColor
 - **Type**: `Color`
-- **Default**: `#666`
+- **Default**: `#6578ba`
 
 图形的描边颜色。支持的颜色格式同 `color`，不支持回调函数。
 
@@ -2023,7 +2076,7 @@ borderDashOffset: 5
 
 ###### feature.magicType.emphasis.iconStyle.color
 - **Type**: `Color`
-- **Default**: `自适应`
+- **Default**: `none`
 
 图形的颜色。
 
@@ -2031,13 +2084,13 @@ borderDashOffset: 5
 
 ###### feature.magicType.emphasis.iconStyle.borderColor
 - **Type**: `Color`
-- **Default**: `'#000'`
+- **Default**: `#404c76`
 
 图形的描边颜色。支持的颜色格式同 `color`，不支持回调函数。
 
 ###### feature.magicType.emphasis.iconStyle.borderWidth
 - **Type**: `number`
-- **Default**: `0`
+- **Default**: `1`
 
 描边线宽。为 0 时无描边。
 
@@ -2392,7 +2445,7 @@ URL 为 `dataURI` 例如：
 
 ### iconStyle.borderColor
 - **Type**: `Color`
-- **Default**: `#666`
+- **Default**: `#6578ba`
 
 图形的描边颜色。支持的颜色格式同 `color`，不支持回调函数。
 
@@ -2518,7 +2571,7 @@ borderDashOffset: 5
 
 #### emphasis.iconStyle.color
 - **Type**: `Color`
-- **Default**: `自适应`
+- **Default**: `none`
 
 图形的颜色。
 
@@ -2526,13 +2579,13 @@ borderDashOffset: 5
 
 #### emphasis.iconStyle.borderColor
 - **Type**: `Color`
-- **Default**: `'#000'`
+- **Default**: `#404c76`
 
 图形的描边颜色。支持的颜色格式同 `color`，不支持回调函数。
 
 #### emphasis.iconStyle.borderWidth
 - **Type**: `number`
-- **Default**: `0`
+- **Default**: `1`
 
 描边线宽。为 0 时无描边。
 

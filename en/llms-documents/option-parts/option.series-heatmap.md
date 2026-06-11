@@ -1349,13 +1349,13 @@ Opacity of the component. Supports value from 0 to 1, and the component will not
 
 Since `v5.3.1`
 
-The radius of rounded corner. Its unit is px. And it supports use array to respectively specify the 4 corner radiuses.
+The radius of the rounded corners, specified in pixels (px). Supports an array to define each of the four corners individually.
 
 For example:
 
 ```
-borderRadius: 5, // consistently set the size of 4 rounded corners
-borderRadius: [5, 5, 0, 0] // (clockwise upper left, upper right, bottom right and bottom left)
+borderRadius: 5, // Applies to all four corners
+borderRadius: [5, 5, 0, 0] // Clockwise from top-left: [top-left, top-right, bottom-right, bottom-left]
 ```
 
 ## emphasis
@@ -4380,6 +4380,72 @@ var option = {
 };
 ```
 
+### encode.label
+- **Type**: `string|number|Array`
+
+Specify the dimension or dimensions used for the default label content.
+
+### encode.itemName
+- **Type**: `string|number|Array`
+
+Specify the dimension used as the data item name. The name is used by default labels and tooltips. For series whose legend represents data items, such as `pie` and `funnel`, it is also used as the legend item name.
+
+## dimensions
+- **Type**: `Array`
+
+`dimensions` can be used to define dimension info for `series.data` or `dataset.source`.
+
+Notice: if [dataset](option.dataset.md) is used, we can definite dimensions in [dataset.dimensions](option.dataset.md#dimensions), or provide dimension names in the first column/row of [dataset.source](option.dataset.md#source), and not need to specify `dimensions` here. But if `dimensions` is specified here, it will be used despite the dimension definitions in dataset.
+
+For example:
+
+```
+option = {
+    dataset: {
+        source: [
+            // 'date', 'open', 'close', 'highest', 'lowest'
+            [12, 44, 55, 66, 2],
+            [23, 6, 16, 23, 1],
+            ...
+        ]
+    },
+    series: {
+        type: 'xxx',
+        // Specify name for each dimensions, which will be displayed in tooltip.
+        dimensions: ['date', 'open', 'close', 'highest', 'lowest']
+    }
+}
+```
+
+```
+series: {
+    type: 'xxx',
+    dimensions: [
+        null,                // If you do not intent to defined this dimension, use null is fine.
+        {type: 'ordinal'},   // Specify type of this dimension.
+                             // 'ordinal' is always used in string.
+                             // If type is not specified, echarts will guess type by data.
+        {name: 'good', type: 'number'},
+        'bad'                // Equals to {name: 'bad'}.
+    ]
+}
+```
+
+Each data item of `dimensions` can be:
+
+*   `string`, for example, `'someName'`, which equals to `{name: 'someName'}`.
+*   `Object`, where the attributes can be:
+    *   name: `string`.
+    *   type: `string`, supports:
+        *   `number`
+        *   `float`, that is, [Float64Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array)
+        *   `int`, that is, [Int32Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array)
+        *   `ordinal`, discrete value, which represents string generally.
+        *   `time`, time value, see [data](../option.md#series.data) to check the format of time value.
+    *   displayName: `string`, generally used in tooltip for dimension display. If not specified, use `name` by default.
+
+When `dimensions` is specified, the default `tooltip` will be displayed vertically, which is better to show dimension names. Otherwise, `tooltip` will displayed only value horizontally.
+
 ## seriesLayoutBy
 - **Type**: `string`
 - **Default**: `'column'`
@@ -4396,6 +4462,11 @@ Check this [example](https://echarts.apache.org/examples/en/editor.html?c=datase
 - **Default**: `0`
 
 If [series.data](../option.md#series.data) is not specified, and [dataset](option.dataset.md) exists, the series will use `dataset`. `datasetIndex` specifies which dataset will be used.
+
+## datasetId
+- **Type**: `string|number`
+
+If [series.data](../option.md#series.data) is not specified, and [dataset](option.dataset.md) exists, the series will use `dataset`. `datasetId` specifies which dataset will be used by the `id` of the dataset.
 
 ## dataGroupId
 - **Type**: `string`
@@ -5569,13 +5640,13 @@ Opacity of the component. Supports value from 0 to 1, and the component will not
 
 Since `v5.3.1`
 
-The radius of rounded corner. Its unit is px. And it supports use array to respectively specify the 4 corner radiuses.
+The radius of the rounded corners, specified in pixels (px). Supports an array to define each of the four corners individually.
 
 For example:
 
 ```
-borderRadius: 5, // consistently set the size of 4 rounded corners
-borderRadius: [5, 5, 0, 0] // (clockwise upper left, upper right, bottom right and bottom left)
+borderRadius: 5, // Applies to all four corners
+borderRadius: [5, 5, 0, 0] // Clockwise from top-left: [top-left, top-right, bottom-right, bottom-left]
 ```
 
 #### data.emphasis.disabled
@@ -30441,6 +30512,24 @@ Whether to ignore user interactions (typically, mouse or touch events).
 
 tooltip settings in this series.
 
+### tooltip.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+Whether to show the tooltip.
+
+### tooltip.trigger
+- **Type**: `string|boolean`
+- **Default**: `'item'`
+
+Override the tooltip trigger type for this series.
+
+Options:
+
+*   `'item'`
+*   `'axis'`
+*   `'none'` or `false`: Do not trigger tooltip in this series.
+
 ### tooltip.position
 - **Type**: `string|Array`
 
@@ -30825,20 +30914,20 @@ The border width of tooltip's floating layer.
 
 > **Notice：**series.tooltip only works when [tooltip.trigger](option.tooltip.md#trigger) is `'item'`.  
 
-The floating layer of tooltip space around content. The unit is px. Default values for each position are 5. And they can be set to different values with left, right, top, and bottom.
+The spacing around the The floating layer of tooltip content, specified in pixels (`px`). The default value for each side is `5`. Supports a single value, a 2-value array, or a 4-value array to configure each side.
 
 Examples:
 
 ```
-// Set padding to be 5
+// Applies to all four sides
 padding: 5
-// Set the top and bottom paddings to be 5, and left and right paddings to be 10
+// [vertical, horizontal] -> top/bottom: 5, left/right: 10
 padding: [5, 10]
-// Set each of the four paddings separately
+// Clockwise order: [top, right, bottom, left]
 padding: [
-    5,  // up
+    5,  // top
     10, // right
-    5,  // down
+    5,  // bottom
     10, // left
 ]
 ```

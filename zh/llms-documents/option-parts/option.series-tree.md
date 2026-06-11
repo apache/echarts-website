@@ -9058,6 +9058,11 @@ textBorderDashOffset: 5
 
 节点的值，在 tooltip 中显示。
 
+### data.children
+- **Type**: `Array`
+
+递归定义的子节点，结构同 [series-tree.data](option.series-tree.md#data)。
+
 ### data.collapsed
 - **Type**: `boolean`
 
@@ -13022,6 +13027,12 @@ textBorderDashOffset: 5
 
 本系列每个数据项中特定的 tooltip 设定。
 
+#### data.tooltip.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+是否显示提示框。
+
 #### data.tooltip.position
 - **Type**: `string|Array|Function`
 
@@ -13403,16 +13414,16 @@ valueFormatter: (value) => '$' + value.toFixed(2)
 
 > **注意：**`series.data.tooltip` 仅在 [tooltip.trigger](option.tooltip.md#trigger) 为 `'item'` 时有效。  
 
-提示框浮层内边距，单位px，默认各方向内边距为5，接受数组分别设定上右下左边距。
+提示框浮层的内边距（内容周围的留白区域），单位为像素 (`px`)。每个方向的默认值为 `5`。支持传入单个数值、双值数组或四值数组来灵活配置。
 
 使用示例：
 
 ```
-// 设置内边距为 5
+// 同时应用于上下左右四个方向
 padding: 5
-// 设置上下的内边距为 5，左右的内边距为 10
+// [上下, 左右] -> 上下内边距为 5，左右内边距为 10
 padding: [5, 10]
-// 分别设置四个方向的内边距
+// 顺时针方向：[上, 右, 下, 左]
 padding: [
     5,  // 上
     10, // 右
@@ -13690,6 +13701,24 @@ animationDelayUpdate: function (idx) {
 - **Type**: `Object`
 
 本系列特定的 tooltip 设定。
+
+### tooltip.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+是否显示提示框。
+
+### tooltip.trigger
+- **Type**: `string|boolean`
+- **Default**: `'item'`
+
+覆盖本系列的提示框触发类型。
+
+可选值：
+
+*   `'item'`
+*   `'axis'`
+*   `'none'` 或 `false`：不触发本系列提示框。
 
 ### tooltip.position
 - **Type**: `string|Array|Function`
@@ -14072,16 +14101,16 @@ valueFormatter: (value) => '$' + value.toFixed(2)
 
 > **注意：**`series.tooltip` 仅在 [tooltip.trigger](option.tooltip.md#trigger) 为 `'item'` 时有效。  
 
-提示框浮层内边距，单位px，默认各方向内边距为5，接受数组分别设定上右下左边距。
+提示框浮层的内边距（内容周围的留白区域），单位为像素 (`px`)。每个方向的默认值为 `5`。支持传入单个数值、双值数组或四值数组来灵活配置。
 
 使用示例：
 
 ```
-// 设置内边距为 5
+// 同时应用于上下左右四个方向
 padding: 5
-// 设置上下的内边距为 5，左右的内边距为 10
+// [上下, 左右] -> 上下内边距为 5，左右内边距为 10
 padding: [5, 10]
-// 分别设置四个方向的内边距
+// 顺时针方向：[上, 右, 下, 左]
 padding: [
     5,  // 上
     10, // 右

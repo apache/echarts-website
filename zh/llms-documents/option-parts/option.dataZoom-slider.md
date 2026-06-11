@@ -411,11 +411,13 @@ dashOffset: 5
 - **Type**: `number|Array`
 - **Default**: `3`
 
-圆角半径，单位px，支持传入数组分别指定 4 个圆角半径。 如:
+圆角半径，单位为像素 (px)。支持传入单个数值或数组。传入数组时，可按顺时针方向分别指定四个角的半径。
+
+例如：
 
 ```
 borderRadius: 5, // 统一设置四个角的圆角大小
-borderRadius: [5, 5, 0, 0] //（顺时针左上，右上，右下，左下）
+borderRadius: [5, 5, 0, 0] // 顺时针方向：[左上, 右上, 右下, 左下]
 ```
 
 ## handleIcon
@@ -900,6 +902,116 @@ dataZoom 文字的字体大小。
     }
 }
 ```
+
+### textStyle.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+文字块背景色。
+
+可以使用颜色值，例如：`'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`。
+
+也可以直接使用图片，例如：
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // 这里可以是图片的 URL，
+    // 或者图片的 dataURI，
+    // 或者 HTMLImageElement 对象，
+    // 或者 HTMLCanvasElement 对象。
+}
+```
+
+当使用图片的时候，可以使用 `width` 或 `height` 指定高宽，也可以不指定自适应。
+
+### textStyle.borderColor
+- **Type**: `Color`
+
+文字块边框颜色。
+
+### textStyle.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+文字块边框宽度。
+
+### textStyle.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字块边框描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `borderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+### textStyle.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `borderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+### textStyle.borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的圆角。
+
+### textStyle.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+文字块的内边距。例如：
+
+*   `padding: [3, 4, 5, 6]`：表示 `[上, 右, 下, 左]` 的边距。
+*   `padding: 4`：表示 `padding: [4, 4, 4, 4]`。
+*   `padding: [3, 4]`：表示 `padding: [3, 4, 3, 4]`。
+
+注意，文字块的 `width` 和 `height` 指定的是内容高宽，不包含 `padding`。
+
+### textStyle.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字块的背景阴影颜色。
+
+### textStyle.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影长度。
+
+### textStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 X 偏移。
+
+### textStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字块的背景阴影 Y 偏移。
 
 ### textStyle.width
 - **Type**: `number`

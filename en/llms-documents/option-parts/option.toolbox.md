@@ -11,6 +11,59 @@ Component ID, not specified by default. If specified, it can be used to refer th
 
 Whether to show toolbox component.
 
+## backgroundColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+Background color of toolbox component.
+
+## padding
+- **Type**: `number|Array`
+- **Default**: `15`
+
+The spacing around the toolbox content, specified in pixels (`px`). The default value for each side is `15`. Supports a single value, a 2-value array, or a 4-value array to configure each side.
+
+Examples:
+
+```
+// Applies to all four sides
+padding: 5
+// [vertical, horizontal] -> top/bottom: 5, left/right: 10
+padding: [5, 10]
+// Clockwise order: [top, right, bottom, left]
+padding: [
+    5,  // top
+    10, // right
+    5,  // bottom
+    10, // left
+]
+```
+
+## borderColor
+- **Type**: `Color`
+- **Default**: `'#b7b9be'`
+
+The border color of the toolbox component.
+
+## borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+The border width in pixel (`px`) of the toolbox component.
+
+## borderRadius
+- **Type**: `number|Array`
+- **Default**: `0`
+
+The radius of the rounded corners, specified in pixels (px). Supports an array to define each of the four corners individually.
+
+For example:
+
+```
+borderRadius: 5, // Applies to all four corners
+borderRadius: [5, 5, 0, 0] // Clockwise from top-left: [top-left, top-right, bottom-right, bottom-left]
+```
+
 ## orient
 - **Type**: `string`
 - **Default**: `'horizontal'`
@@ -30,7 +83,7 @@ The size of toolbox's icon.
 
 ## itemGap
 - **Type**: `number`
-- **Default**: `8`
+- **Default**: `10`
 
 The gap between each icon of toolbox. It is horizontal gap in horizontal layout, while vertical gap in vertical layout.
 
@@ -161,7 +214,7 @@ color.
 
 ##### feature.saveAsImage.iconStyle.borderColor
 - **Type**: `Color`
-- **Default**: `#666`
+- **Default**: `#6578ba`
 
 border color, whose format is similar to that of `color`.
 
@@ -288,6 +341,7 @@ Opacity of the component. Supports value from 0 to 1, and the component will not
 
 ###### feature.saveAsImage.emphasis.iconStyle.color
 - **Type**: `Color`
+- **Default**: `none`
 
 color.
 
@@ -295,13 +349,13 @@ color.
 
 ###### feature.saveAsImage.emphasis.iconStyle.borderColor
 - **Type**: `Color`
-- **Default**: `'#000'`
+- **Default**: `#404c76`
 
 border color, whose format is similar to that of `color`.
 
 ###### feature.saveAsImage.emphasis.iconStyle.borderWidth
 - **Type**: `number`
-- **Default**: `0`
+- **Default**: `1`
 
 border width. No border when it is set to be 0.
 
@@ -510,7 +564,7 @@ color.
 
 ##### feature.restore.iconStyle.borderColor
 - **Type**: `Color`
-- **Default**: `#666`
+- **Default**: `#6578ba`
 
 border color, whose format is similar to that of `color`.
 
@@ -637,6 +691,7 @@ Opacity of the component. Supports value from 0 to 1, and the component will not
 
 ###### feature.restore.emphasis.iconStyle.color
 - **Type**: `Color`
+- **Default**: `none`
 
 color.
 
@@ -644,13 +699,13 @@ color.
 
 ###### feature.restore.emphasis.iconStyle.borderColor
 - **Type**: `Color`
-- **Default**: `'#000'`
+- **Default**: `#404c76`
 
 border color, whose format is similar to that of `color`.
 
 ###### feature.restore.emphasis.iconStyle.borderWidth
 - **Type**: `number`
-- **Default**: `0`
+- **Default**: `1`
 
 border width. No border when it is set to be 0.
 
@@ -859,7 +914,7 @@ color.
 
 ##### feature.dataView.iconStyle.borderColor
 - **Type**: `Color`
-- **Default**: `#666`
+- **Default**: `#6578ba`
 
 border color, whose format is similar to that of `color`.
 
@@ -986,6 +1041,7 @@ Opacity of the component. Supports value from 0 to 1, and the component will not
 
 ###### feature.dataView.emphasis.iconStyle.color
 - **Type**: `Color`
+- **Default**: `none`
 
 color.
 
@@ -993,13 +1049,13 @@ color.
 
 ###### feature.dataView.emphasis.iconStyle.borderColor
 - **Type**: `Color`
-- **Default**: `'#000'`
+- **Default**: `#404c76`
 
 border color, whose format is similar to that of `color`.
 
 ###### feature.dataView.emphasis.iconStyle.borderWidth
 - **Type**: `number`
-- **Default**: `0`
+- **Default**: `1`
 
 border width. No border when it is set to be 0.
 
@@ -1330,7 +1386,7 @@ color.
 
 ##### feature.dataZoom.iconStyle.borderColor
 - **Type**: `Color`
-- **Default**: `#666`
+- **Default**: `#6578ba`
 
 border color, whose format is similar to that of `color`.
 
@@ -1457,6 +1513,7 @@ Opacity of the component. Supports value from 0 to 1, and the component will not
 
 ###### feature.dataZoom.emphasis.iconStyle.color
 - **Type**: `Color`
+- **Default**: `none`
 
 color.
 
@@ -1464,13 +1521,13 @@ color.
 
 ###### feature.dataZoom.emphasis.iconStyle.borderColor
 - **Type**: `Color`
-- **Default**: `'#000'`
+- **Default**: `#404c76`
 
 border color, whose format is similar to that of `color`.
 
 ###### feature.dataZoom.emphasis.iconStyle.borderWidth
 - **Type**: `number`
-- **Default**: `0`
+- **Default**: `1`
 
 border width. No border when it is set to be 0.
 
@@ -1901,7 +1958,7 @@ color.
 
 ##### feature.magicType.iconStyle.borderColor
 - **Type**: `Color`
-- **Default**: `#666`
+- **Default**: `#6578ba`
 
 border color, whose format is similar to that of `color`.
 
@@ -2028,6 +2085,7 @@ Opacity of the component. Supports value from 0 to 1, and the component will not
 
 ###### feature.magicType.emphasis.iconStyle.color
 - **Type**: `Color`
+- **Default**: `none`
 
 color.
 
@@ -2035,13 +2093,13 @@ color.
 
 ###### feature.magicType.emphasis.iconStyle.borderColor
 - **Type**: `Color`
-- **Default**: `'#000'`
+- **Default**: `#404c76`
 
 border color, whose format is similar to that of `color`.
 
 ###### feature.magicType.emphasis.iconStyle.borderWidth
 - **Type**: `number`
-- **Default**: `0`
+- **Default**: `1`
 
 border width. No border when it is set to be 0.
 
@@ -2397,7 +2455,7 @@ color.
 
 ### iconStyle.borderColor
 - **Type**: `Color`
-- **Default**: `#666`
+- **Default**: `#6578ba`
 
 border color, whose format is similar to that of `color`.
 
@@ -2524,6 +2582,7 @@ Opacity of the component. Supports value from 0 to 1, and the component will not
 
 #### emphasis.iconStyle.color
 - **Type**: `Color`
+- **Default**: `none`
 
 color.
 
@@ -2531,13 +2590,13 @@ color.
 
 #### emphasis.iconStyle.borderColor
 - **Type**: `Color`
-- **Default**: `'#000'`
+- **Default**: `#404c76`
 
 border color, whose format is similar to that of `color`.
 
 #### emphasis.iconStyle.borderWidth
 - **Type**: `number`
-- **Default**: `0`
+- **Default**: `1`
 
 border width. No border when it is set to be 0.
 

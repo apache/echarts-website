@@ -1240,20 +1240,20 @@ The parameters of the event:
 - **Type**: `number|Array`
 - **Default**: `5`
 
-title space around content. The unit is px. Default values for each position are 5. And they can be set to different values with left, right, top, and bottom.
+The spacing around the title content, specified in pixels (`px`). The default value for each side is `5`. Supports a single value, a 2-value array, or a 4-value array to configure each side.
 
 Examples:
 
 ```
-// Set padding to be 5
+// Applies to all four sides
 padding: 5
-// Set the top and bottom paddings to be 5, and left and right paddings to be 10
+// [vertical, horizontal] -> top/bottom: 5, left/right: 10
 padding: [5, 10]
-// Set each of the four paddings separately
+// Clockwise order: [top, right, bottom, left]
 padding: [
-    5,  // up
+    5,  // top
     10, // right
-    5,  // down
+    5,  // bottom
     10, // left
 ]
 ```
@@ -1485,13 +1485,13 @@ Border width of title.
 - **Type**: `number|Array`
 - **Default**: `0`
 
-The radius of rounded corner. Its unit is px. And it supports use array to respectively specify the 4 corner radiuses.
+The radius of the rounded corners, specified in pixels (px). Supports an array to define each of the four corners individually.
 
 For example:
 
 ```
-borderRadius: 5, // consistently set the size of 4 rounded corners
-borderRadius: [5, 5, 0, 0] // (clockwise upper left, upper right, bottom right and bottom left)
+borderRadius: 5, // Applies to all four corners
+borderRadius: [5, 5, 0, 0] // Clockwise from top-left: [top-left, top-right, bottom-right, bottom-left]
 ```
 
 ## shadowBlur

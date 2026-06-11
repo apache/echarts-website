@@ -10032,13 +10032,13 @@ The upper limit of the height of the generated pattern before it repeats. This v
 
 Since `v5.5.1`
 
-The radius of rounded corner. Its unit is px. And it supports use array to respectively specify the 4 corner radiuses.
+The radius of the rounded corners, specified in pixels (px). Supports an array to define each of the four corners individually.
 
 For example:
 
 ```
-borderRadius: 5, // consistently set the size of 4 rounded corners
-borderRadius: [5, 5, 0, 0] // (clockwise upper left, upper right, bottom right and bottom left)
+borderRadius: 5, // Applies to all four corners
+borderRadius: [5, 5, 0, 0] // Clockwise from top-left: [top-left, top-right, bottom-right, bottom-left]
 ```
 
 ## lineStyle
@@ -16275,13 +16275,13 @@ The upper limit of the height of the generated pattern before it repeats. This v
 
 Since `v5.5.1`
 
-The radius of rounded corner. Its unit is px. And it supports use array to respectively specify the 4 corner radiuses.
+The radius of the rounded corners, specified in pixels (px). Supports an array to define each of the four corners individually.
 
 For example:
 
 ```
-borderRadius: 5, // consistently set the size of 4 rounded corners
-borderRadius: [5, 5, 0, 0] // (clockwise upper left, upper right, bottom right and bottom left)
+borderRadius: 5, // Applies to all four corners
+borderRadius: [5, 5, 0, 0] // Clockwise from top-left: [top-left, top-right, bottom-right, bottom-left]
 ```
 
 ### data.label
@@ -16395,6 +16395,115 @@ Minimal margin between labels. Used when label has [layout](../option.md#series.
 >     *   `minMargin`: first rotate the label, forming a new rect by the min/max of x/y from the four corner points (that is a expanded bounding rect), and finally `minMargin` is applied on the new rect.
 >     *   `textMargin`: first applied on the label's local bounding rect, and then rotate.
 > *   Data type: `minMargin` should be only `number`, `textMargin` can be `number | number[]` (follow CSS margin).
+
+#### data.label.formatter
+- **Type**: `string|Function`
+
+Data label formatter, which supports string template and callback function. In either form, `\n` is supported to represent a new line.
+
+**String template**
+
+Model variation includes:
+
+*   `{a}`: series name.
+*   `{b}`: the name of a data item.
+*   `{c}`: the value of a data item.
+*   `{d}`: the percent.
+*   `{@xxx}`: the value of a dimension named `'xxx'`, for example, `{@product}` refers the value of `'product'` dimension.
+*   `{@[n]}`: the value of a dimension at the index of `n`, for example, `{@[3]}` refers the value at dimensions\[3\].
+
+**example:**
+
+```
+formatter: '{b}: {d}'
+```
+
+**Callback function**
+
+Callback function is in form of:
+
+```
+(params: Object|Array) => string
+```
+
+where `params` is the single dataset needed by formatter, which is formed as:
+
+```
+{
+    componentType: 'series',
+    // Series type
+    seriesType: string,
+    // Series index in option.series
+    seriesIndex: number,
+    // Series name
+    seriesName: string,
+    // Data name, or category name
+    name: string,
+    // Data index in input data array
+    dataIndex: number,
+    // Original data as input
+    data: Object,
+    // Value of data. In most series it is the same as data.
+    // But in some series it is some part of the data (e.g., in map, radar)
+    value: number|Array|Object,
+    // encoding info of coordinate system
+    // Key: coord, like ('x' 'y' 'radius' 'angle')
+    // value: Must be an array, not null/undefined. Contain dimension indices, like:
+    // {
+    //     x: [2] // values on dimension index 2 are mapped to x axis.
+    //     y: [0] // values on dimension index 0 are mapped to y axis.
+    // }
+    encode: Object,
+    // dimension names list
+    dimensionNames: Array<String>,
+    // data dimension index, for example 0 or 1 or 2 ...
+    // Only work in `radar` series.
+    dimensionIndex: number,
+    // Color of data
+    color: string
+}
+```
+
+**How to use `encode` and `dimensionNames`?**
+
+When the dataset is like
+
+```
+dataset: {
+    source: [
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+    ]
+}
+```
+
+We can get the value of the y-axis via
+
+```
+params.value[params.encode.y[0]]
+```
+
+When the dataset is like
+
+```
+dataset: {
+    dimensions: ['product', '2015', '2016', '2017'],
+    source: [
+        {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+        {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+        {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+        {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+    ]
+}
+```
+
+We can get the value of the y-axis via
+
+```
+params.value[params.dimensionNames[params.encode.y[0]]]
+```
 
 #### data.label.color
 - **Type**: `Color`
@@ -20224,6 +20333,12 @@ The upper limit of the height of the generated pattern before it repeats. This v
 
 tooltip settings in this series data.
 
+#### data.tooltip.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+Whether to show the tooltip.
+
 #### data.tooltip.position
 - **Type**: `string|Array`
 
@@ -20608,20 +20723,20 @@ The border width of tooltip's floating layer.
 
 > **Notice：**series.data.tooltip only works when [tooltip.trigger](option.tooltip.md#trigger) is `'item'`.  
 
-The floating layer of tooltip space around content. The unit is px. Default values for each position are 5. And they can be set to different values with left, right, top, and bottom.
+The spacing around the The floating layer of tooltip content, specified in pixels (`px`). The default value for each side is `5`. Supports a single value, a 2-value array, or a 4-value array to configure each side.
 
 Examples:
 
 ```
-// Set padding to be 5
+// Applies to all four sides
 padding: 5
-// Set the top and bottom paddings to be 5, and left and right paddings to be 10
+// [vertical, horizontal] -> top/bottom: 5, left/right: 10
 padding: [5, 10]
-// Set each of the four paddings separately
+// Clockwise order: [top, right, bottom, left]
 padding: [
-    5,  // up
+    5,  // top
     10, // right
-    5,  // down
+    5,  // bottom
     10, // left
 ]
 ```
@@ -24530,6 +24645,600 @@ Offset distance on the horizontal direction of shadow.
 
 Offset distance on the vertical direction of shadow.
 
+### links.tooltip
+- **Type**: `Object`
+
+tooltip settings in this series data.
+
+#### links.tooltip.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+Whether to show the tooltip.
+
+#### links.tooltip.position
+- **Type**: `string|Array`
+
+> **Notice：**series.data.tooltip only works when [tooltip.trigger](option.tooltip.md#trigger) is `'item'`.  
+
+The position of the tooltip's floating layer, which would follow the position of mouse by default.
+
+Options:
+
+*   `Array`
+    
+    Display the position of tooltip's floating layer through array, which supports absolute position and relative percentage.
+    
+    Example:
+    
+    ```
+      // absolute position, which is 10px to the left side and 10px to the top side of the container
+      position: [10, 10]
+      // relative position, in the exact center of the container
+      position: ['50%', '50%']
+    ```
+    
+*   `Function`
+    
+    Callback function in the following form:
+    
+    ```
+      (point: Array, params: Object|Array.<Object>, dom: HTMLDomElement, rect: Object, size: Object) => Array
+    ```
+    
+    **Parameters:**  
+    point: Mouse position.  
+    param: The same as formatter.  
+    dom: The DOM object of tooltip.  
+    rect: It is valid only when mouse is on graphic elements, which stands for a bounding box with `x`, `y`, `width`, and `height`.  
+    size: The size of dom echarts container. For example: `{contentSize: [width, height], viewSize: [width, height]}`.  
+    
+    **Return:**  
+    Return value is an array standing for tooltip position, which can be absolute pixels, or relative percentage.  
+    Or can be an object, like `{left: 10, top: 30}`, or `{right: '20%', bottom: 40}`.  
+    
+    For example:
+    
+    ```
+      position: function (point, params, dom, rect, size) {
+          // fixed at top
+          return [point[0], '10%'];
+      }
+    ```
+    
+    Or:
+    
+    ```
+      position: function (pos, params, dom, rect, size) {
+          // tooltip will be fixed on the right if mouse hovering on the left,
+          // and on the left if hovering on the right.
+          var obj = {top: 60};
+          obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
+          return obj;
+      }
+    ```
+    
+*   `'inside'`
+    
+    Center position of the graphic element where the mouse is in, which is only valid when [trigger](option.tooltip.md#trigger) is `'item'`.
+    
+*   `'top'`
+    
+    Top position of the graphic element where the mouse is in, which is only valid when [trigger](option.tooltip.md#trigger) is `'item'`.
+    
+*   `'left'`
+    
+    Left position of the graphic element where the mouse is in, which is only valid when [trigger](option.tooltip.md#trigger) is `'item'`.
+    
+*   `'right'`
+    
+    Right position of the graphic element where the mouse is in, which is only valid when [trigger](option.tooltip.md#trigger) is `'item'`.
+    
+*   `'bottom'`
+    
+    Bottom position of the graphic element where the mouse is in, which is only valid when [trigger](option.tooltip.md#trigger) is `'item'`.
+
+#### links.tooltip.formatter
+- **Type**: `string|Function`
+
+> **Notice：**series.data.tooltip only works when [tooltip.trigger](option.tooltip.md#trigger) is `'item'`.  
+
+The content formatter of tooltip's floating layer which supports string template and callback function.
+
+**1\. String template**
+
+The template variables are `{a}`, `{b}`, `{c}`, `{d}` and `{e}`, which stands for series name, data name and data value and ect. When [trigger](option.tooltip.md#trigger) is set to be `'axis'`, there may be data from multiple series. In this time, series index can be referred as `{a0}`, `{a1}`, or `{a2}`.
+
+`{a}`, `{b}`, `{c}`, `{d}` have different meanings for different series types:
+
+*   Line (area) charts, bar (column) charts, K charts: `{a}` for series name, `{b}` for category name, `{c}` for data value, `{d}` for none;
+    
+*   Scatter (bubble) charts: `{a}` for series name, `{b}` for data name, `{c}` for data value, `{d}` for none;
+    
+*   Map: `{a}` for series name, `{b}` for area name, `{c}` for merging data, `{d}` for none;
+    
+*   Pie charts, gauge charts, funnel charts: `{a}` for series name, `{b}` for data item name, `{c}` for data value, `{d}` for percentage.
+    
+
+**Example:**
+
+```
+formatter: '{b0}: {c0}<br />{b1}: {c1}'
+```
+
+**2\. Callback function**
+
+The format of callback function:
+
+```
+(params: Object|Array, ticket: string, callback: (ticket: string, html: string | HTMLElement | HTMLElement[])) => string | HTMLElement | HTMLElement[]
+```
+
+\[WARNING\]: `tooltip` is implemented in HTML (unless [tooltip.renderMode](option.tooltip.md#renderMode) is set as `richText`), allowing users to customize the HTML in this way. The content in the HTML must be properly escaped before being passed in. **Security risks** must be considered when using it. See document ["Security Guidelines"](https://echarts.apache.org/handbook/en/best-practices/security) for recommendations on safe usage.
+
+**HTML-escaping must be enforced** before passing the HTML to ECharts. For example,
+
+```
+{
+    tooltip: {
+        formatter: params => {
+            const { name, value } = params;
+            // HTML-escaping must be performed.
+            // Otherwise, the rendering may be incorrect if `name` or
+            // `value` contain special charactors like '<', '>', etc.
+            // Additionally, unescaped strings may introduces XSS risks
+            // if `name` or `value` come from untrusted sources, where
+            // malicious code may be injected into that strings.
+            return echarts.format.encodeHTML(name)
+                + '<b>' + echarts.format.encodeHTML(value) + '</b>';
+            // NOTE: `echarts.format.encodeHTML` is an utility that converts special
+            //  characters ('&', '<', '>', '"', "'") to their corresponding HTML entities.
+            //  This is just an example -- any HTML-escaping utility can be used.
+        }
+    }
+}
+```
+
+The first parameter `params` is the data that the formatter needs. Its format is shown as follows:
+
+```
+{
+    componentType: 'series',
+    // Series type
+    seriesType: string,
+    // Series index in option.series
+    seriesIndex: number,
+    // Series name
+    seriesName: string,
+    // Data name, or category name
+    name: string,
+    // Data index in input data array
+    dataIndex: number,
+    // Original data as input
+    data: Object,
+    // Value of data. In most series it is the same as data.
+    // But in some series it is some part of the data (e.g., in map, radar)
+    value: number|Array|Object,
+    // encoding info of coordinate system
+    // Key: coord, like ('x' 'y' 'radius' 'angle')
+    // value: Must be an array, not null/undefined. Contain dimension indices, like:
+    // {
+    //     x: [2] // values on dimension index 2 are mapped to x axis.
+    //     y: [0] // values on dimension index 0 are mapped to y axis.
+    // }
+    encode: Object,
+    // dimension names list
+    dimensionNames: Array<String>,
+    // data dimension index, for example 0 or 1 or 2 ...
+    // Only work in `radar` series.
+    dimensionIndex: number,
+    // Color of data
+    color: string,
+    // The percentage of current data item in the pie/funnel series
+    percent: number,
+    // The ancestors of current node in the sunburst series (including self)
+    treePathInfo: Array,
+    // The ancestors of current node in the tree/treemap series (including self)
+    treeAncestors: Array,
+    // A function that returns a boolean value to flag if the axis label is truncated
+    isTruncated: Function,
+    // Current index of the axis label tick
+    tickIndex: number
+}
+```
+
+**How to use `encode` and `dimensionNames`?**
+
+When the dataset is like
+
+```
+dataset: {
+    source: [
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+    ]
+}
+```
+
+We can get the value of the y-axis via
+
+```
+params.value[params.encode.y[0]]
+```
+
+When the dataset is like
+
+```
+dataset: {
+    dimensions: ['product', '2015', '2016', '2017'],
+    source: [
+        {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+        {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+        {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+        {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+    ]
+}
+```
+
+We can get the value of the y-axis via
+
+```
+params.value[params.dimensionNames[params.encode.y[0]]]
+```
+
+When [trigger](option.tooltip.md#trigger) is `'axis'`, or when tooltip is triggered by [axisPointer](option.xAxis.md#axisPointer), `params` is the data array of multiple series. The content of each item of the array is the same as above. Besides,
+
+```
+{
+    componentType: 'series',
+    // Series type
+    seriesType: string,
+    // Series index in option.series
+    seriesIndex: number,
+    // Series name
+    seriesName: string,
+    // Data name, or category name
+    name: string,
+    // Data index in input data array
+    dataIndex: number,
+    // Original data as input
+    data: Object,
+    // Value of data. In most series it is the same as data.
+    // But in some series it is some part of the data (e.g., in map, radar)
+    value: number|Array|Object,
+    // encoding info of coordinate system
+    // Key: coord, like ('x' 'y' 'radius' 'angle')
+    // value: Must be an array, not null/undefined. Contain dimension indices, like:
+    // {
+    //     x: [2] // values on dimension index 2 are mapped to x axis.
+    //     y: [0] // values on dimension index 0 are mapped to y axis.
+    // }
+    encode: Object,
+    // dimension names list
+    dimensionNames: Array<String>,
+    // data dimension index, for example 0 or 1 or 2 ...
+    // Only work in `radar` series.
+    dimensionIndex: number,
+    // Color of data
+    color: string
+}
+```
+
+**How to use `encode` and `dimensionNames`?**
+
+When the dataset is like
+
+```
+dataset: {
+    source: [
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+    ]
+}
+```
+
+We can get the value of the y-axis via
+
+```
+params.value[params.encode.y[0]]
+```
+
+When the dataset is like
+
+```
+dataset: {
+    dimensions: ['product', '2015', '2016', '2017'],
+    source: [
+        {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+        {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+        {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+        {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+    ]
+}
+```
+
+We can get the value of the y-axis via
+
+```
+params.value[params.dimensionNames[params.encode.y[0]]]
+```
+
+**Note:** Using array to present all the parameters in ECharts 2.x is not supported anymore.
+
+The second parameter `ticket` is the asynchronous callback flag which should be used along with the third parameter `callback` when it is used.
+
+The third parameter `callback` is asynchronous callback. When the content of tooltip is acquired asynchronously, `ticket` and `htm` as introduced above can be used to update tooltip with callback.
+
+Example:
+
+```
+formatter: function (params, ticket, callback) {
+    $.get('detail?name=' + params.name, function (content) {
+        callback(ticket, toHTML(content));
+    });
+    return 'Loading';
+}
+```
+
+#### links.tooltip.valueFormatter
+- **Type**: `string`
+
+Since `v5.3.0`
+
+Callback function for formatting the value section in tooltip.
+
+Interface:
+
+```
+(value: number | string, dataIndex: number) => string
+```
+
+Since `v5.5.0` `dataIndex` is provided; but not reasonable when `dataZoom` exists, since it is the index after dataZoom filtering.
+
+Since `v6.1.0` `dataIndex` is corrected to the index before `dataZoom` filtering.
+
+Example:
+
+```
+// Add $ prefix
+valueFormatter: (value) => '$' + value.toFixed(2)
+```
+
+> **\[NOTE\]:** Different from [tooltip.formater](option.tooltip.md#formatter), raw HTML is NOT accepted in this approach -- the returned content will be escaped internally before rendering.
+
+#### links.tooltip.backgroundColor
+- **Type**: `Color`
+- **Default**: `'rgba(50,50,50,0.7)'`
+
+> **Notice：**series.data.tooltip only works when [tooltip.trigger](option.tooltip.md#trigger) is `'item'`.  
+
+The background color of tooltip's floating layer.
+
+#### links.tooltip.borderColor
+- **Type**: `Color`
+- **Default**: `'#333'`
+
+> **Notice：**series.data.tooltip only works when [tooltip.trigger](option.tooltip.md#trigger) is `'item'`.  
+
+The border color of tooltip's floating layer.
+
+#### links.tooltip.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+> **Notice：**series.data.tooltip only works when [tooltip.trigger](option.tooltip.md#trigger) is `'item'`.  
+
+The border width of tooltip's floating layer.
+
+#### links.tooltip.padding
+- **Type**: `number`
+- **Default**: `5`
+
+> **Notice：**series.data.tooltip only works when [tooltip.trigger](option.tooltip.md#trigger) is `'item'`.  
+
+The spacing around the The floating layer of tooltip content, specified in pixels (`px`). The default value for each side is `5`. Supports a single value, a 2-value array, or a 4-value array to configure each side.
+
+Examples:
+
+```
+// Applies to all four sides
+padding: 5
+// [vertical, horizontal] -> top/bottom: 5, left/right: 10
+padding: [5, 10]
+// Clockwise order: [top, right, bottom, left]
+padding: [
+    5,  // top
+    10, // right
+    5,  // bottom
+    10, // left
+]
+```
+
+#### links.tooltip.textStyle
+- **Type**: `Object`
+
+> **Notice：**series.data.tooltip only works when [tooltip.trigger](option.tooltip.md#trigger) is `'item'`.  
+
+The text style of tooltip's floating layer.
+
+##### links.tooltip.textStyle.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+text color.
+
+##### links.tooltip.textStyle.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+font style.
+
+Options are:
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+##### links.tooltip.textStyle.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+font thick weight.
+
+Options are:
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+##### links.tooltip.textStyle.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+font family.
+
+Can also be 'serif' , 'monospace', ...
+
+##### links.tooltip.textStyle.fontSize
+- **Type**: `number`
+- **Default**: `14`
+
+font size.
+
+##### links.tooltip.textStyle.lineHeight
+- **Type**: `number`
+
+Line height of the text fragment.
+
+If `lineHeight` is not set in `rich`, `lineHeight` in parent level will be used. For example:
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // `lineHeight` is not set, then it will be 56
+        }
+    }
+}
+```
+
+##### links.tooltip.textStyle.width
+- **Type**: `number`
+
+Width of text block.
+
+##### links.tooltip.textStyle.height
+- **Type**: `number`
+
+Height of text block.
+
+##### links.tooltip.textStyle.textBorderColor
+- **Type**: `Color`
+
+Stroke color of the text.
+
+##### links.tooltip.textStyle.textBorderWidth
+- **Type**: `number`
+
+Stroke line width of the text.
+
+##### links.tooltip.textStyle.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+Stroke line type of the text.
+
+Possible values are:
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+Since `v5.0.0`, it can also be a number or a number array to specify the [dash array](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray) of the line. With `textBorderDashOffset` , we can make the line style more flexible.
+
+For example：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+##### links.tooltip.textStyle.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+Since `v5.0.0`
+
+To set the line dash offset. With `textBorderType` , we can make the line style more flexible.
+
+Refer to MDN [lineDashOffset](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineDashOffset) for more details.
+
+##### links.tooltip.textStyle.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+Shadow color of the text itself.
+
+##### links.tooltip.textStyle.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+Shadow blue of the text itself.
+
+##### links.tooltip.textStyle.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+Shadow X offset of the text itself.
+
+##### links.tooltip.textStyle.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+Shadow Y offset of the text itself.
+
+##### links.tooltip.textStyle.overflow
+- **Type**: `string`
+- **Default**: `'none'`
+
+Determine how to display the text when it's overflow. Available when `width` is set.
+
+*   `'truncate'` Truncate the text and trailing with `ellipsis`.
+*   `'break'` Break by word
+*   `'breakAll'` Break by character.
+
+##### links.tooltip.textStyle.ellipsis
+- **Type**: `string`
+- **Default**: `'...'`
+
+Ellipsis to be displayed when `overflow` is set to `truncate`.
+
+*   `'truncate'` Truncate the overflow lines.
+
+#### links.tooltip.extraCssText
+- **Type**: `string`
+
+> **Notice：**series.data.tooltip only works when [tooltip.trigger](option.tooltip.md#trigger) is `'item'`.  
+
+Extra CSS style for floating layer. The following is an example for adding shadow.
+
+```
+extraCssText: 'box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);'
+```
+
+\[WARNING\]: `tooltip` is implemented in HTML (unless [tooltip.renderMode](option.tooltip.md#renderMode) is set as `richText`), allowing users to customize the CSS text of the box in this way. **Security risks** must be considered if the CSS text comes from untrusted sources. See document ["Security Guidelines"](https://echarts.apache.org/handbook/en/best-practices/security) for recommendations on safe usage.
+
 ## edges
 - **Type**: `Array`
 
@@ -24636,6 +25345,24 @@ See [this example](https://echarts.apache.org/examples/en/editor.html?c=bar-anim
 - **Type**: `Object`
 
 tooltip settings in this series.
+
+### tooltip.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+Whether to show the tooltip.
+
+### tooltip.trigger
+- **Type**: `string|boolean`
+- **Default**: `'item'`
+
+Override the tooltip trigger type for this series.
+
+Options:
+
+*   `'item'`
+*   `'axis'`
+*   `'none'` or `false`: Do not trigger tooltip in this series.
 
 ### tooltip.position
 - **Type**: `string|Array`
@@ -25021,20 +25748,20 @@ The border width of tooltip's floating layer.
 
 > **Notice：**series.tooltip only works when [tooltip.trigger](option.tooltip.md#trigger) is `'item'`.  
 
-The floating layer of tooltip space around content. The unit is px. Default values for each position are 5. And they can be set to different values with left, right, top, and bottom.
+The spacing around the The floating layer of tooltip content, specified in pixels (`px`). The default value for each side is `5`. Supports a single value, a 2-value array, or a 4-value array to configure each side.
 
 Examples:
 
 ```
-// Set padding to be 5
+// Applies to all four sides
 padding: 5
-// Set the top and bottom paddings to be 5, and left and right paddings to be 10
+// [vertical, horizontal] -> top/bottom: 5, left/right: 10
 padding: [5, 10]
-// Set each of the four paddings separately
+// Clockwise order: [top, right, bottom, left]
 padding: [
-    5,  // up
+    5,  // top
     10, // right
-    5,  // down
+    5,  // bottom
     10, // left
 ]
 ```

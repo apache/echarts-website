@@ -1345,11 +1345,13 @@ borderDashOffset: 5
 
 从 `v5.3.1` 开始支持
 
-圆角半径，单位px，支持传入数组分别指定 4 个圆角半径。 如:
+圆角半径，单位为像素 (px)。支持传入单个数值或数组。传入数组时，可按顺时针方向分别指定四个角的半径。
+
+例如：
 
 ```
 borderRadius: 5, // 统一设置四个角的圆角大小
-borderRadius: [5, 5, 0, 0] //（顺时针左上，右上，右下，左下）
+borderRadius: [5, 5, 0, 0] // 顺时针方向：[左上, 右上, 右下, 左下]
 ```
 
 ## emphasis
@@ -4351,6 +4353,73 @@ var option = {
 };
 ```
 
+### encode.label
+- **Type**: `string|number|Array`
+
+指定默认标签内容使用的维度。
+
+### encode.itemName
+- **Type**: `string|number|Array`
+
+指定作为数据项名称的维度。该名称会用于默认标签和提示框。对于饼图、漏斗图等图例项表示数据项的系列，该名称也会作为图例项名称。
+
+## dimensions
+- **Type**: `Array`
+
+使用 dimensions 定义 `series.data` 或者 `dataset.source` 的每个维度的信息。
+
+注意：如果使用了 [dataset](option.dataset.md)，那么可以在 [dataset.dimensions](option.dataset.md#dimensions) 中定义 dimension ，或者在 [dataset.source](option.dataset.md#source) 的第一行/列中给出 dimension 名称。于是就不用在这里指定 dimension。但如果在这里指定了 `dimensions`，那么优先使用这里的。
+
+例如：
+
+```
+option = {
+    dataset: {
+        source: [
+            // 有了上面 dimensions 定义后，下面这五个维度的名称分别为：
+            // 'date', 'open', 'close', 'highest', 'lowest'
+            [12, 44, 55, 66, 2],
+            [23, 6, 16, 23, 1],
+            ...
+        ]
+    },
+    series: {
+        type: 'xxx',
+        // 定义了每个维度的名称。这个名称会被显示到默认的 tooltip 中。
+        dimensions: ['date', 'open', 'close', 'highest', 'lowest']
+    }
+}
+```
+
+```
+series: {
+    type: 'xxx',
+    dimensions: [
+        null,                // 如果此维度不想给出定义，则使用 null 即可
+        {type: 'ordinal'},   // 只定义此维度的类型。
+                             // 'ordinal' 表示离散型，一般文本使用这种类型。
+                             // 如果类型没有被定义，会自动猜测类型。
+        {name: 'good', type: 'number'},
+        'bad'                // 等同于 {name: 'bad'}
+    ]
+}
+```
+
+`dimensions` 数组中的每一项可以是：
+
+*   `string`，如 `'someName'`，等同于 `{name: 'someName'}`
+*   `Object`，属性可以有：
+    *   name: `string`。
+    *   type: `string`，支持
+        *   `number`，默认，表示普通数据。
+        *   `ordinal`，对于类目、文本这些 string 类型的数据，如果需要能在数轴上使用，须是 'ordinal' 类型。ECharts 默认会自动判断这个类型。但是自动判断也是不可能很完备的，所以使用者也可以手动强制指定。
+        *   `float`，即 [Float64Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array)。
+        *   `int`，即 [Int32Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array)。
+        *   `time`，表示时间类型。设置成 'time' 则能支持自动解析数据成时间戳（timestamp），比如该维度的数据是 '2017-05-10'，会自动被解析。时间类型的支持参见 [data](../option.md#series.data)。
+    *   displayName: 一般用于 tooltip 中维度名的展示。`string` 如果没有指定，默认使用 name 来展示。
+
+值得一提的是，当定义了 `dimensions` 后，默认 `tooltip` 中对个维度的显示，会变为『竖排』，从而方便显示每个维度的名称。如果没有定义 `dimensions`，则默认 `tooltip` 会横排显示，且只显示数值没有维度名称可显示。
+
 ## seriesLayoutBy
 - **Type**: `string`
 - **Default**: `'column'`
@@ -4367,6 +4436,11 @@ var option = {
 - **Default**: `0`
 
 如果 [series.data](../option.md#series.data) 没有指定，并且 [dataset](option.dataset.md) 存在，那么就会使用 [dataset](option.dataset.md)。`datasetIndex` 指定本系列使用哪个 [dataset](option.dataset.md)。
+
+## datasetId
+- **Type**: `string|number`
+
+如果 [series.data](../option.md#series.data) 没有指定，并且 [dataset](option.dataset.md) 存在，那么就会使用 [dataset](option.dataset.md)。`datasetId` 通过 dataset 的 `id` 指定本系列使用哪个 [dataset](option.dataset.md)。
 
 ## dataGroupId
 - **Type**: `string`
@@ -5527,11 +5601,13 @@ borderDashOffset: 5
 
 从 `v5.3.1` 开始支持
 
-圆角半径，单位px，支持传入数组分别指定 4 个圆角半径。 如:
+圆角半径，单位为像素 (px)。支持传入单个数值或数组。传入数组时，可按顺时针方向分别指定四个角的半径。
+
+例如：
 
 ```
 borderRadius: 5, // 统一设置四个角的圆角大小
-borderRadius: [5, 5, 0, 0] //（顺时针左上，右上，右下，左下）
+borderRadius: [5, 5, 0, 0] // 顺时针方向：[左上, 右上, 右下, 左下]
 ```
 
 #### data.emphasis.disabled
@@ -30294,6 +30370,24 @@ animationDelayUpdate: function (idx) {
 
 本系列特定的 tooltip 设定。
 
+### tooltip.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+是否显示提示框。
+
+### tooltip.trigger
+- **Type**: `string|boolean`
+- **Default**: `'item'`
+
+覆盖本系列的提示框触发类型。
+
+可选值：
+
+*   `'item'`
+*   `'axis'`
+*   `'none'` 或 `false`：不触发本系列提示框。
+
 ### tooltip.position
 - **Type**: `string|Array|Function`
 
@@ -30675,16 +30769,16 @@ valueFormatter: (value) => '$' + value.toFixed(2)
 
 > **注意：**`series.tooltip` 仅在 [tooltip.trigger](option.tooltip.md#trigger) 为 `'item'` 时有效。  
 
-提示框浮层内边距，单位px，默认各方向内边距为5，接受数组分别设定上右下左边距。
+提示框浮层的内边距（内容周围的留白区域），单位为像素 (`px`)。每个方向的默认值为 `5`。支持传入单个数值、双值数组或四值数组来灵活配置。
 
 使用示例：
 
 ```
-// 设置内边距为 5
+// 同时应用于上下左右四个方向
 padding: 5
-// 设置上下的内边距为 5，左右的内边距为 10
+// [上下, 左右] -> 上下内边距为 5，左右内边距为 10
 padding: [5, 10]
-// 分别设置四个方向的内边距
+// 顺时针方向：[上, 右, 下, 左]
 padding: [
     5,  // 上
     10, // 右

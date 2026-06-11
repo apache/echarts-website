@@ -409,13 +409,13 @@ The color of border.
 - **Type**: `number|Array`
 - **Default**: `3`
 
-The radius of rounded corner. Its unit is px. And it supports use array to respectively specify the 4 corner radiuses.
+The radius of the rounded corners, specified in pixels (px). Supports an array to define each of the four corners individually.
 
 For example:
 
 ```
-borderRadius: 5, // consistently set the size of 4 rounded corners
-borderRadius: [5, 5, 0, 0] // (clockwise upper left, upper right, bottom right and bottom left)
+borderRadius: 5, // Applies to all four corners
+borderRadius: [5, 5, 0, 0] // Clockwise from top-left: [top-left, top-right, bottom-right, bottom-left]
 ```
 
 ## handleIcon
@@ -903,6 +903,116 @@ If `lineHeight` is not set in `rich`, `lineHeight` in parent level will be used.
     }
 }
 ```
+
+### textStyle.backgroundColor
+- **Type**: `string|Object`
+- **Default**: `'transparent'`
+
+Background color of the text fragment.
+
+Can be color string, like `'#123234'`, `'red'`, `'rgba(0,23,11,0.3)'`.
+
+Or image can be used, for example:
+
+```
+backgroundColor: {
+    image: 'xxx/xxx.png'
+    // It can be URL of a image,
+    // or dataURI,
+    // or HTMLImageElement,
+    // or HTMLCanvasElement.
+}
+```
+
+`width` or `height` can be specified when using background image, or auto adapted by default.
+
+### textStyle.borderColor
+- **Type**: `Color`
+
+Border color of the text fragment.
+
+### textStyle.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+Border width of the text fragment.
+
+### textStyle.borderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+the text fragment border type.
+
+Possible values are:
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+Since `v5.0.0`, it can also be a number or a number array to specify the [dash array](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray) of the line. With `borderDashOffset` , we can make the line style more flexible.
+
+For example：
+
+```
+{
+
+borderType: [5, 10],
+
+borderDashOffset: 5
+}
+```
+
+### textStyle.borderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+Since `v5.0.0`
+
+To set the line dash offset. With `borderType` , we can make the line style more flexible.
+
+Refer to MDN [lineDashOffset](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineDashOffset) for more details.
+
+### textStyle.borderRadius
+- **Type**: `number`
+- **Default**: `0`
+
+Border radius of the text fragment.
+
+### textStyle.padding
+- **Type**: `number|Array`
+- **Default**: `0`
+
+Padding of the text fragment, for example:
+
+*   `padding: [3, 4, 5, 6]`: represents padding of `[top, right, bottom, left]`.
+*   `padding: 4`: represents `padding: [4, 4, 4, 4]`.
+*   `padding: [3, 4]`: represents `padding: [3, 4, 3, 4]`.
+
+Notice, `width` and `height` specifies the width and height of the content, without `padding`.
+
+### textStyle.shadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+Shadow color of the text block.
+
+### textStyle.shadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+Show blur of the text block.
+
+### textStyle.shadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+Shadow X offset of the text block.
+
+### textStyle.shadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+Shadow Y offset of the text block.
 
 ### textStyle.width
 - **Type**: `number`

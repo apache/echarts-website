@@ -2214,6 +2214,11 @@ font: 'bolder 2em "Microsoft YaHei", sans-serif'
 
 垂直对齐方式，取值：`'top'`, `'middle'`, `'bottom'`。
 
+#### elements-text.style.rich
+- **Type**: `Object`
+
+富文本样式。键名为样式名，值为对应富文本片段的样式定义。
+
 注：关于图形元素中更多的样式设置（例如 [富文本标签](tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE)），参见 [zrender/graphic/Displayable](https://ecomfe.github.io/zrender-doc/public/api.html#zrenderdisplayable) 中的 style 相关属性。
 
 注意，这里图形元素的样式属性名称直接源于 zrender，和 `echarts label`、`echarts itemStyle` 等处同样含义的样式属性名称或有不同。例如，有如下对应：

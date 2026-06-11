@@ -16425,6 +16425,12 @@ textBorderDashOffset: 5
 
 本系列每个数据项中特定的 tooltip 设定。
 
+#### data.tooltip.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+是否显示提示框。
+
 #### data.tooltip.position
 - **Type**: `string|Array|Function`
 
@@ -16806,16 +16812,16 @@ valueFormatter: (value) => '$' + value.toFixed(2)
 
 > **注意：**`series.data.tooltip` 仅在 [tooltip.trigger](option.tooltip.md#trigger) 为 `'item'` 时有效。  
 
-提示框浮层内边距，单位px，默认各方向内边距为5，接受数组分别设定上右下左边距。
+提示框浮层的内边距（内容周围的留白区域），单位为像素 (`px`)。每个方向的默认值为 `5`。支持传入单个数值、双值数组或四值数组来灵活配置。
 
 使用示例：
 
 ```
-// 设置内边距为 5
+// 同时应用于上下左右四个方向
 padding: 5
-// 设置上下的内边距为 5，左右的内边距为 10
+// [上下, 左右] -> 上下内边距为 5，左右内边距为 10
 padding: [5, 10]
-// 分别设置四个方向的内边距
+// 顺时针方向：[上, 右, 下, 左]
 padding: [
     5,  // 上
     10, // 右
@@ -20760,6 +20766,595 @@ textBorderDashOffset: 5
 >     }
 > }
 > ```
+
+### links.tooltip
+- **Type**: `Object`
+
+本系列每个数据项中特定的 tooltip 设定。
+
+#### links.tooltip.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+是否显示提示框。
+
+#### links.tooltip.position
+- **Type**: `string|Array|Function`
+
+> **注意：**`series.data.tooltip` 仅在 [tooltip.trigger](option.tooltip.md#trigger) 为 `'item'` 时有效。  
+
+提示框浮层的位置，默认不设置时位置会跟随鼠标的位置。
+
+可选：
+
+*   `Array`
+    
+    通过数组表示提示框浮层的位置，支持数字设置绝对位置，百分比设置相对位置。
+    
+    示例:
+    
+    ```
+      // 绝对位置，相对于容器左侧 10px, 上侧 10 px
+      position: [10, 10]
+      // 相对位置，放置在容器正中间
+      position: ['50%', '50%']
+    ```
+    
+*   `Function`
+    
+    回调函数，格式如下：
+    
+    ```
+      (point: Array, params: Object|Array.<Object>, dom: HTMLDomElement, rect: Object, size: Object) => Array
+    ```
+    
+    **参数：**  
+    point: 鼠标位置，如 \[20, 40\]。  
+    params: 同 formatter 的参数相同。  
+    dom: tooltip 的 dom 对象。  
+    rect: 只有鼠标在图形上时有效，是一个用`x`, `y`, `width`, `height`四个属性表达的图形包围盒。  
+    size: 包括 dom 的尺寸和 echarts 容器的当前尺寸，例如：`{contentSize: [width, height], viewSize: [width, height]}`。  
+    
+    **返回值：**  
+    可以是一个表示 tooltip 位置的数组，数组值可以是绝对的像素值，也可以是相 百分比。  
+    也可以是一个对象，如：`{left: 10, top: 30}`，或者 `{right: '20%', bottom: 40}`。  
+    
+    如下示例：
+    
+    ```
+      position: function (point, params, dom, rect, size) {
+          // 固定在顶部
+          return [point[0], '10%'];
+      }
+    ```
+    
+    或者：
+    
+    ```
+      position: function (pos, params, dom, rect, size) {
+          // 鼠标在左侧时 tooltip 显示到右侧，鼠标在右侧时 tooltip 显示到左侧。
+          var obj = {top: 60};
+          obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
+          return obj;
+      }
+    ```
+    
+
+*   `'inside'`
+    
+    鼠标所在图形的内部中心位置，只在 [trigger](option.tooltip.md#trigger) 为`'item'`的时候有效。
+    
+*   `'top'`
+    
+    鼠标所在图形上侧，只在 [trigger](option.tooltip.md#trigger) 为`'item'`的时候有效。
+    
+*   `'left'`
+    
+    鼠标所在图形左侧，只在 [trigger](option.tooltip.md#trigger) 为`'item'`的时候有效。
+    
+*   `'right'`
+    
+    鼠标所在图形右侧，只在 [trigger](option.tooltip.md#trigger) 为`'item'`的时候有效。
+    
+*   `'bottom'`
+    
+    鼠标所在图形底侧，只在 [trigger](option.tooltip.md#trigger) 为`'item'`的时候有效。
+
+#### links.tooltip.formatter
+- **Type**: `string|Function`
+
+> **注意：**`series.data.tooltip` 仅在 [tooltip.trigger](option.tooltip.md#trigger) 为 `'item'` 时有效。  
+
+提示框浮层内容格式器，支持字符串模板和回调函数两种形式。
+
+**1\. 字符串模板**
+
+模板变量有 `{a}`, `{b}`，`{c}`，`{d}`，`{e}`，分别表示系列名，数据名，数据值等。 在 [trigger](option.tooltip.md#trigger) 为 `'axis'` 的时候，会有多个系列的数据，此时可以通过 `{a0}`, `{a1}`, `{a2}` 这种后面加索引的方式表示系列的索引。 不同图表类型下的 `{a}`，`{b}`，`{c}`，`{d}` 含义不一样。 其中变量`{a}`, `{b}`, `{c}`, `{d}`在不同图表类型下代表数据含义为：
+
+*   折线（区域）图、柱状（条形）图、K线图 : `{a}`（系列名称），`{b}`（类目值），`{c}`（数值）, `{d}`（无）
+    
+*   散点图（气泡）图 : `{a}`（系列名称），`{b}`（数据名称），`{c}`（数值数组）, `{d}`（无）
+    
+*   地图 : `{a}`（系列名称），`{b}`（区域名称），`{c}`（合并数值）, `{d}`（无）
+    
+*   饼图、仪表盘、漏斗图: `{a}`（系列名称），`{b}`（数据项名称），`{c}`（数值）, `{d}`（百分比）
+    
+
+更多其它图表模板变量的含义可以见相应的图表的 label.formatter 配置项。
+
+**示例：**
+
+```
+formatter: '{b0}: {c0}<br />{b1}: {c1}'
+```
+
+**2\. 回调函数**
+
+回调函数格式：
+
+```
+(params: Object|Array, ticket: string, callback: (ticket: string, html: string | HTMLElement | HTMLElement[])) => string | HTMLElement | HTMLElement[]
+```
+
+支持返回 HTML 字符串或者创建的 DOM 实例。
+
+\[警告\]: tooltip 是用 HTML 实现的（除非 [tooltip.renderMode](option.tooltip.md#renderMode) 设为 `richText`）。允许用此方式定制 HTML。传入 HTML 前须要对其内容进行正确转义。 使用时必须考虑 **安全风险**。文档 [“安全指南”](https://echarts.apache.org/handbook/zh/best-practices/security) 给出了安全使用建议。
+
+组装 HTML 字符串时，**必须进行 HTML 转义（HTML-escaping）**。例如：
+
+```
+{
+    tooltip: {
+        formatter: params => {
+            const { name, value } = params;
+            // 必须进行 HTML 转义。
+            // 否则，如果 name 或 value 中含有功能性字符，如 '<' '>' 等，
+            // 则可能渲染不正确。
+            // 同时，如果 name 或 value 的值来自于“非受信任”的来源，则可能被注入恶意代码；
+            // 如果未被转义，则会被运行。
+            return echarts.format.encodeHTML(name)
+                + '<b>' + echarts.format.encodeHTML(value) + '</b>';
+            // 注：`echarts.format.encodeHTML` 是个工具函数，把特殊字符
+            //  （'&'、'<'、'>'、'"'、"'"）转换成他们对应的 HTML entities.
+            //  这只是个例子，任何 HTML 转义工具函数都可使用。
+        }
+    }
+}
+```
+
+第一个参数 `params` 是 formatter 需要的数据集。格式如下：
+
+```
+{
+    componentType: 'series',
+    // 系列类型
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index
+    seriesIndex: number,
+    // 系列名称
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // 传入的数据值。在多数系列下它和 data 相同。在一些系列下是 data 中的分量（如 map、radar 中）
+    value: number|Array|Object,
+    // 坐标轴 encode 映射信息，
+    // key 为坐标轴（如 'x' 'y' 'radius' 'angle' 等）
+    // value 必然为数组，不会为 null/undefined，表示 dimension index 。
+    // 其内容如：
+    // {
+    //     x: [2] // dimension index 为 2 的数据映射到 x 轴
+    //     y: [0] // dimension index 为 0 的数据映射到 y 轴
+    // }
+    encode: Object,
+    // 维度名列表
+    dimensionNames: Array<String>,
+    // 数据的维度 index，如 0 或 1 或 2 ...
+    // 仅在雷达图中使用。
+    dimensionIndex: number,
+    // 数据图形的颜色
+    color: string,
+    // 饼图/漏斗图的百分比
+    percent: number,
+    // 旭日图中当前节点的祖先节点（包括自身）
+    treePathInfo: Array,
+    // 树图/矩形树图中当前节点的祖先节点（包括自身）
+    treeAncestors: Array,
+    // 坐标轴标签文本是否溢出隐藏，可以使用此函数判断是否需要弹出提示框
+    isTruncated: Function,
+    // 当前坐标轴标签刻度索引
+    tickIndex: number
+}
+```
+
+注：encode 和 dimensionNames 的使用方式，例如：
+
+如果数据为：
+
+```
+dataset: {
+    source: [
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.encode.y[0]]
+```
+
+如果数据为：
+
+```
+dataset: {
+    dimensions: ['product', '2015', '2016', '2017'],
+    source: [
+        {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+        {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+        {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+        {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.dimensionNames[params.encode.y[0]]]
+```
+
+在 [trigger](option.tooltip.md#trigger) 为 `'axis'` 的时候，或者 tooltip 被 [axisPointer](option.xAxis.md#axisPointer) 触发的时候，`params` 是多个系列的数据数组。其中每项内容格式同上，并且，
+
+```
+{
+    componentType: 'series',
+    // 系列类型
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index
+    seriesIndex: number,
+    // 系列名称
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // 传入的数据值。在多数系列下它和 data 相同。在一些系列下是 data 中的分量（如 map、radar 中）
+    value: number|Array|Object,
+    // 坐标轴 encode 映射信息，
+    // key 为坐标轴（如 'x' 'y' 'radius' 'angle' 等）
+    // value 必然为数组，不会为 null/undefined，表示 dimension index 。
+    // 其内容如：
+    // {
+    //     x: [2] // dimension index 为 2 的数据映射到 x 轴
+    //     y: [0] // dimension index 为 0 的数据映射到 y 轴
+    // }
+    encode: Object,
+    // 维度名列表
+    dimensionNames: Array<String>,
+    // 数据的维度 index，如 0 或 1 或 2 ...
+    // 仅在雷达图中使用。
+    dimensionIndex: number,
+    // 数据图形的颜色
+    color: string
+}
+```
+
+注：encode 和 dimensionNames 的使用方式，例如：
+
+如果数据为：
+
+```
+dataset: {
+    source: [
+        ['Matcha Latte', 43.3, 85.8, 93.7],
+        ['Milk Tea', 83.1, 73.4, 55.1],
+        ['Cheese Cocoa', 86.4, 65.2, 82.5],
+        ['Walnut Brownie', 72.4, 53.9, 39.1]
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.encode.y[0]]
+```
+
+如果数据为：
+
+```
+dataset: {
+    dimensions: ['product', '2015', '2016', '2017'],
+    source: [
+        {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+        {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+        {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+        {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+    ]
+}
+```
+
+则可这样得到 y 轴对应的 value：
+
+```
+params.value[params.dimensionNames[params.encode.y[0]]]
+```
+
+第二个参数 `ticket` 是异步回调标识，配合第三个参数 `callback` 使用。 第三个参数 `callback` 是异步回调，在提示框浮层内容是异步获取的时候，可以通过 callback 传入上述的 `ticket` 和 `html` 更新提示框浮层内容。
+
+示例：
+
+```
+formatter: function (params, ticket, callback) {
+    $.get('detail?name=' + params.name, function (content) {
+        callback(ticket, toHTML(content));
+    });
+    return 'Loading';
+}
+```
+
+#### links.tooltip.valueFormatter
+- **Type**: `string`
+
+从 `v5.3.0` 开始支持
+
+tooltip 中数值显示部分的格式化回调函数。
+
+回调函数格式：
+
+```
+(value: number | string, dataIndex: number) => string
+```
+
+从 `v5.5.0` 开始支持`dataIndex` 参数。但是其值当 `dataZoom` 存在时不合理，因为所取的值是数据被 `dataZoom` 过滤后的 index。
+
+从 `v6.1.0` 开始支持`dataIndex` 参数修正 `dataZoom` 过滤前的 index
+
+示例：
+
+```
+// 添加 $ 前缀
+valueFormatter: (value) => '$' + value.toFixed(2)
+```
+
+> **\[注\]:** 不同于 [tooltip.formater](option.tooltip.md#formatter)，本方式不支持返回原始 HTML。返回内容渲染前会被自动按需转义。
+
+#### links.tooltip.backgroundColor
+- **Type**: `Color`
+- **Default**: `'rgba(50,50,50,0.7)'`
+
+> **注意：**`series.data.tooltip` 仅在 [tooltip.trigger](option.tooltip.md#trigger) 为 `'item'` 时有效。  
+
+提示框浮层的背景颜色。
+
+#### links.tooltip.borderColor
+- **Type**: `Color`
+- **Default**: `'#333'`
+
+> **注意：**`series.data.tooltip` 仅在 [tooltip.trigger](option.tooltip.md#trigger) 为 `'item'` 时有效。  
+
+提示框浮层的边框颜色。
+
+#### links.tooltip.borderWidth
+- **Type**: `number`
+- **Default**: `0`
+
+> **注意：**`series.data.tooltip` 仅在 [tooltip.trigger](option.tooltip.md#trigger) 为 `'item'` 时有效。  
+
+提示框浮层的边框宽。
+
+#### links.tooltip.padding
+- **Type**: `number`
+- **Default**: `5`
+
+> **注意：**`series.data.tooltip` 仅在 [tooltip.trigger](option.tooltip.md#trigger) 为 `'item'` 时有效。  
+
+提示框浮层的内边距（内容周围的留白区域），单位为像素 (`px`)。每个方向的默认值为 `5`。支持传入单个数值、双值数组或四值数组来灵活配置。
+
+使用示例：
+
+```
+// 同时应用于上下左右四个方向
+padding: 5
+// [上下, 左右] -> 上下内边距为 5，左右内边距为 10
+padding: [5, 10]
+// 顺时针方向：[上, 右, 下, 左]
+padding: [
+    5,  // 上
+    10, // 右
+    5,  // 下
+    10, // 左
+]
+```
+
+#### links.tooltip.textStyle
+- **Type**: `Object`
+
+> **注意：**`series.data.tooltip` 仅在 [tooltip.trigger](option.tooltip.md#trigger) 为 `'item'` 时有效。  
+
+提示框浮层的文本样式。
+
+##### links.tooltip.textStyle.color
+- **Type**: `Color`
+- **Default**: `'#fff'`
+
+文字的颜色。
+
+##### links.tooltip.textStyle.fontStyle
+- **Type**: `string`
+- **Default**: `'normal'`
+
+文字字体的风格。
+
+可选：
+
+*   `'normal'`
+*   `'italic'`
+*   `'oblique'`
+
+##### links.tooltip.textStyle.fontWeight
+- **Type**: `string|number`
+- **Default**: `'normal'`
+
+文字字体的粗细。
+
+可选：
+
+*   `'normal'`
+*   `'bold'`
+*   `'bolder'`
+*   `'lighter'`
+*   100 | 200 | 300 | 400...
+
+##### links.tooltip.textStyle.fontFamily
+- **Type**: `string`
+- **Default**: `'sans-serif'`
+
+文字的字体系列。
+
+还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+
+##### links.tooltip.textStyle.fontSize
+- **Type**: `number`
+- **Default**: `14`
+
+文字的字体大小。
+
+##### links.tooltip.textStyle.lineHeight
+- **Type**: `number`
+
+行高。
+
+`rich` 中如果没有设置 `lineHeight`，则会取父层级的 `lineHeight`。例如：
+
+```
+{
+    lineHeight: 56,
+    rich: {
+        a: {
+            // 没有设置 `lineHeight`，则 `lineHeight` 为 56
+        }
+    }
+}
+```
+
+##### links.tooltip.textStyle.width
+- **Type**: `number`
+
+文本显示宽度。
+
+##### links.tooltip.textStyle.height
+- **Type**: `number`
+
+文本显示高度。
+
+##### links.tooltip.textStyle.textBorderColor
+- **Type**: `Color`
+
+文字本身的描边颜色。
+
+##### links.tooltip.textStyle.textBorderWidth
+- **Type**: `number`
+
+文字本身的描边宽度。
+
+##### links.tooltip.textStyle.textBorderType
+- **Type**: `string|number|Array`
+- **Default**: `'solid'`
+
+文字本身的描边类型。
+
+可选：
+
+*   `'solid'`
+*   `'dashed'`
+*   `'dotted'`
+
+自 `v5.0.0` 开始，也可以是 `number` 或者 `number` 数组，用以指定线条的 [dash array](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/stroke-dasharray)，配合 `textBorderDashOffset` 可实现更灵活的虚线效果。
+
+例如：
+
+```
+{
+
+textBorderType: [5, 10],
+
+textBorderDashOffset: 5
+}
+```
+
+##### links.tooltip.textStyle.textBorderDashOffset
+- **Type**: `number`
+- **Default**: `0`
+
+从 `v5.0.0` 开始支持
+
+用于设置虚线的偏移量，可搭配 `textBorderType` 指定 dash array 实现灵活的虚线效果。
+
+更多详情可以参考 MDN [lineDashOffset](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)。
+
+##### links.tooltip.textStyle.textShadowColor
+- **Type**: `Color`
+- **Default**: `'transparent'`
+
+文字本身的阴影颜色。
+
+##### links.tooltip.textStyle.textShadowBlur
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影长度。
+
+##### links.tooltip.textStyle.textShadowOffsetX
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 X 偏移。
+
+##### links.tooltip.textStyle.textShadowOffsetY
+- **Type**: `number`
+- **Default**: `0`
+
+文字本身的阴影 Y 偏移。
+
+##### links.tooltip.textStyle.overflow
+- **Type**: `string`
+- **Default**: `'none'`
+
+文字超出宽度是否截断或者换行。配置`width`时有效
+
+*   `'truncate'` 截断，并在末尾显示`ellipsis`配置的文本，默认为`...`
+*   `'break'` 换行
+*   `'breakAll'` 换行，跟`'break'`不同的是，在英语等拉丁文中，`'breakAll'`还会强制单词内换行
+
+##### links.tooltip.textStyle.ellipsis
+- **Type**: `string`
+- **Default**: `'...'`
+
+在`overflow`配置为`'truncate'`的时候，可以通过该属性配置末尾显示的文本。
+
+#### links.tooltip.extraCssText
+- **Type**: `string`
+
+> **注意：**`series.data.tooltip` 仅在 [tooltip.trigger](option.tooltip.md#trigger) 为 `'item'` 时有效。  
+
+额外附加到浮层的 css 样式。如下为浮层添加阴影的示例：
+
+```
+extraCssText: 'box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);'
+```
+
+\[警告\]: tooltip 是用 HTML 实现的（除非 [tooltip.renderMode](option.tooltip.md#renderMode) 设为 `richText`）。允许用此方式定制 toolbox 外壳的 CSS text。 如果此 CSS text 来自于“不受信任”的来源，必须考虑 **安全风险**。文档 [“安全指南”](https://echarts.apache.org/handbook/zh/best-practices/security) 给出了安全使用建议。
 
 ### links.symbol
 - **Type**: `Array|string`
@@ -45146,6 +45741,24 @@ animationDelayUpdate: function (idx) {
 
 本系列特定的 tooltip 设定。
 
+### tooltip.show
+- **Type**: `boolean`
+- **Default**: `true`
+
+是否显示提示框。
+
+### tooltip.trigger
+- **Type**: `string|boolean`
+- **Default**: `'item'`
+
+覆盖本系列的提示框触发类型。
+
+可选值：
+
+*   `'item'`
+*   `'axis'`
+*   `'none'` 或 `false`：不触发本系列提示框。
+
 ### tooltip.position
 - **Type**: `string|Array|Function`
 
@@ -45527,16 +46140,16 @@ valueFormatter: (value) => '$' + value.toFixed(2)
 
 > **注意：**`series.tooltip` 仅在 [tooltip.trigger](option.tooltip.md#trigger) 为 `'item'` 时有效。  
 
-提示框浮层内边距，单位px，默认各方向内边距为5，接受数组分别设定上右下左边距。
+提示框浮层的内边距（内容周围的留白区域），单位为像素 (`px`)。每个方向的默认值为 `5`。支持传入单个数值、双值数组或四值数组来灵活配置。
 
 使用示例：
 
 ```
-// 设置内边距为 5
+// 同时应用于上下左右四个方向
 padding: 5
-// 设置上下的内边距为 5，左右的内边距为 10
+// [上下, 左右] -> 上下内边距为 5，左右内边距为 10
 padding: [5, 10]
-// 分别设置四个方向的内边距
+// 顺时针方向：[上, 右, 下, 左]
 padding: [
     5,  // 上
     10, // 右
