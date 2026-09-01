@@ -122,7 +122,7 @@ Since `v5.0.1`
 
 Use components. Used with the new tree-shaking API.
 
-NOTE: `echarts.use` must be used before `eharts.init`
+NOTE: `echarts.use` must be used before `echarts.init`
 
 ```
 // Import the echarts core module, which provides the necessary interfaces for using echarts.

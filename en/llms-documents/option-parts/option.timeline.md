@@ -756,13 +756,13 @@ xAxis: {
 - **Type**: `Color`
 - **Default**: `'#A4B1D7'`
 
-timeline.lable text color.
+timeline.label text color.
 
 ### label.fontStyle
 - **Type**: `string`
 - **Default**: `'normal'`
 
-timeline.lable font style.
+timeline.label font style.
 
 Options are:
 
@@ -774,7 +774,7 @@ Options are:
 - **Type**: `string|number`
 - **Default**: `'normal'`
 
-timeline.lable font thick weight.
+timeline.label font thick weight.
 
 Options are:
 
@@ -788,7 +788,7 @@ Options are:
 - **Type**: `string`
 - **Default**: `'sans-serif'`
 
-timeline.lable font family.
+timeline.label font family.
 
 Can also be 'serif' , 'monospace', ...
 
@@ -796,7 +796,7 @@ Can also be 'serif' , 'monospace', ...
 - **Type**: `number`
 - **Default**: `12`
 
-timeline.lable font size.
+timeline.label font size.
 
 ### label.align
 - **Type**: `string`
@@ -2597,13 +2597,13 @@ xAxis: {
 - **Type**: `Color`
 - **Default**: `'#6f778d'`
 
-timeline.lable text color.
+timeline.label text color.
 
 #### progress.label.fontStyle
 - **Type**: `string`
 - **Default**: `'normal'`
 
-timeline.lable font style.
+timeline.label font style.
 
 Options are:
 
@@ -2615,7 +2615,7 @@ Options are:
 - **Type**: `string|number`
 - **Default**: `'normal'`
 
-timeline.lable font thick weight.
+timeline.label font thick weight.
 
 Options are:
 
@@ -2629,7 +2629,7 @@ Options are:
 - **Type**: `string`
 - **Default**: `'sans-serif'`
 
-timeline.lable font family.
+timeline.label font family.
 
 Can also be 'serif' , 'monospace', ...
 
@@ -2637,7 +2637,7 @@ Can also be 'serif' , 'monospace', ...
 - **Type**: `number`
 - **Default**: `12`
 
-timeline.lable font size.
+timeline.label font size.
 
 #### progress.label.align
 - **Type**: `string`
@@ -3520,13 +3520,13 @@ xAxis: {
 - **Type**: `Color`
 - **Default**: `'#6f778d'`
 
-timeline.lable.emphasis text color.
+timeline.label.emphasis text color.
 
 #### emphasis.label.fontStyle
 - **Type**: `string`
 - **Default**: `'normal'`
 
-timeline.lable.emphasis font style.
+timeline.label.emphasis font style.
 
 Options are:
 
@@ -3538,7 +3538,7 @@ Options are:
 - **Type**: `string|number`
 - **Default**: `'normal'`
 
-timeline.lable.emphasis font thick weight.
+timeline.label.emphasis font thick weight.
 
 Options are:
 
@@ -3552,7 +3552,7 @@ Options are:
 - **Type**: `string`
 - **Default**: `'sans-serif'`
 
-timeline.lable.emphasis font family.
+timeline.label.emphasis font family.
 
 Can also be 'serif' , 'monospace', ...
 
@@ -3560,7 +3560,7 @@ Can also be 'serif' , 'monospace', ...
 - **Type**: `number`
 - **Default**: `12`
 
-timeline.lable.emphasis font size.
+timeline.label.emphasis font size.
 
 #### emphasis.label.align
 - **Type**: `string`

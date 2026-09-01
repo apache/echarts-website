@@ -756,13 +756,13 @@ xAxis: {
 - **Type**: `Color`
 - **Default**: `'#A4B1D7'`
 
-timeline.lable文字的颜色。
+timeline.label文字的颜色。
 
 ### label.fontStyle
 - **Type**: `string`
 - **Default**: `'normal'`
 
-timeline.lable文字字体的风格。
+timeline.label文字字体的风格。
 
 可选：
 
@@ -774,7 +774,7 @@ timeline.lable文字字体的风格。
 - **Type**: `string|number`
 - **Default**: `'normal'`
 
-timeline.lable文字字体的粗细。
+timeline.label文字字体的粗细。
 
 可选：
 
@@ -788,7 +788,7 @@ timeline.lable文字字体的粗细。
 - **Type**: `string`
 - **Default**: `'sans-serif'`
 
-timeline.lable文字的字体系列。
+timeline.label文字的字体系列。
 
 还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
 
@@ -796,7 +796,7 @@ timeline.lable文字的字体系列。
 - **Type**: `number`
 - **Default**: `12`
 
-timeline.lable文字的字体大小。
+timeline.label文字的字体大小。
 
 ### label.align
 - **Type**: `string`
@@ -2591,13 +2591,13 @@ xAxis: {
 - **Type**: `Color`
 - **Default**: `'#6f778d'`
 
-timeline.lable文字的颜色。
+timeline.label文字的颜色。
 
 #### progress.label.fontStyle
 - **Type**: `string`
 - **Default**: `'normal'`
 
-timeline.lable文字字体的风格。
+timeline.label文字字体的风格。
 
 可选：
 
@@ -2609,7 +2609,7 @@ timeline.lable文字字体的风格。
 - **Type**: `string|number`
 - **Default**: `'normal'`
 
-timeline.lable文字字体的粗细。
+timeline.label文字字体的粗细。
 
 可选：
 
@@ -2623,7 +2623,7 @@ timeline.lable文字字体的粗细。
 - **Type**: `string`
 - **Default**: `'sans-serif'`
 
-timeline.lable文字的字体系列。
+timeline.label文字的字体系列。
 
 还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
 
@@ -2631,7 +2631,7 @@ timeline.lable文字的字体系列。
 - **Type**: `number`
 - **Default**: `12`
 
-timeline.lable文字的字体大小。
+timeline.label文字的字体大小。
 
 #### progress.label.align
 - **Type**: `string`
@@ -3511,13 +3511,13 @@ xAxis: {
 - **Type**: `Color`
 - **Default**: `'#6f778d'`
 
-timeline.lable.emphasis文字的颜色。
+timeline.label.emphasis文字的颜色。
 
 #### emphasis.label.fontStyle
 - **Type**: `string`
 - **Default**: `'normal'`
 
-timeline.lable.emphasis文字字体的风格。
+timeline.label.emphasis文字字体的风格。
 
 可选：
 
@@ -3529,7 +3529,7 @@ timeline.lable.emphasis文字字体的风格。
 - **Type**: `string|number`
 - **Default**: `'normal'`
 
-timeline.lable.emphasis文字字体的粗细。
+timeline.label.emphasis文字字体的粗细。
 
 可选：
 
@@ -3543,7 +3543,7 @@ timeline.lable.emphasis文字字体的粗细。
 - **Type**: `string`
 - **Default**: `'sans-serif'`
 
-timeline.lable.emphasis文字的字体系列。
+timeline.label.emphasis文字的字体系列。
 
 还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
 
@@ -3551,7 +3551,7 @@ timeline.lable.emphasis文字的字体系列。
 - **Type**: `number`
 - **Default**: `12`
 
-timeline.lable.emphasis文字的字体大小。
+timeline.label.emphasis文字的字体大小。
 
 #### emphasis.label.align
 - **Type**: `string`
